@@ -1,0 +1,18 @@
+product_id,fee_name,amount,unit,notes
+PCK,monthly maintenance,0.00,USD,no minimum balance
+PCK,overdraft (first per cycle),0.00,USD,
+PCK,overdraft (each thereafter),35.00,USD,capped at 4 per day
+PCK,domestic outgoing wire,30.00,USD,
+PCK,domestic incoming wire,0.00,USD,
+PCK,international outgoing wire,45.00,USD,
+TRV,monthly maintenance,12.00,USD,waived with $5000 minimum balance
+TRV,international ATM,5.00,USD,plus 1% of withdrawal amount
+TRV,domestic ATM (out-of-network),2.50,USD,
+SAV,monthly maintenance,5.00,USD,waived with $300 minimum balance
+SAV,excessive transaction fee,10.00,USD,after 6 transactions per cycle
+CCB,annual fee,0.00,USD,
+CCB,foreign transaction,0.00,USD,
+CCB,late payment,40.00,USD,maximum
+TRC,annual fee,95.00,USD,waived first year
+TRC,foreign transaction,0.00,USD,
+HLN,early closure,500.00,USD,if closed within 36 months

@@ -1,0 +1,13 @@
+product_id,name,type,available_states,notes
+CD12,12-Month CD,deposit,all,minimum opening deposit $500
+CD24,24-Month CD,deposit,all,minimum opening deposit $1000
+HYS,High-Yield Savings,deposit,all,no minimum balance; compounded daily
+PMM,Premier Money Market,deposit,all,tiered rate by balance
+PCK,Premier Checking,checking,all,no monthly maintenance fee; no minimum balance
+TRV,Premier Travel Account,checking,"excl. CA, NY",international ATM fees apply
+CCB,Cashback Visa,credit,all,2% cashback on all purchases
+TRC,Travel Rewards Visa,credit,all,3x points on travel and dining
+HLN,Home Equity Line of Credit,loan,all,variable APR
+AUL,Auto Loan,loan,all,fixed APR
+SAV,Basic Savings,deposit,all,minimum balance $0
+IRA,IRA Savings,deposit,all,traditional and Roth available

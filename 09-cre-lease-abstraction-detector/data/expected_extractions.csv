@@ -1,0 +1,7 @@
+lease_id,tenant_name,premises_sf,base_rent_psf,lease_term_months,commencement_date,escalation_type,escalation_value,cam_cap_psf,cam_base_year,kickout_clause,exclusivity_clause,ROFO_present
+lease_01,"Brewmoor Coffee Roasters, Inc.",2400,40.00,60,2025-04-01,fixed_pct,3.0,12.00,2025,none,none,No
+lease_02,"Argent Capital Advisors, LLC",11800,85.00,120,2025-07-01,stepped,"step_schedule_yr2_thru_yr10",none,2025,none,none,No
+lease_03,"MeridianFlow Distribution, Inc.",148700,blended_warehouse_office,84,2025-09-15,cpi_with_floor_and_cap,"floor_2.0_cap_4.5",7.00,2025,none,none,Yes
+lease_04,"Sundara Apparel Group, Inc.",5150,42.50,84,2025-11-01,cpi_with_floor_and_cap,"floor_1.5_cap_4.0",8.50,2025,co_tenancy_kickout,women_apparel_50_to_150,No
+lease_05,"Veridian Health Analytics, Inc.",38200,46.00,96,2026-02-01,fixed_pct,2.5,opex_cap_5pct_compounding,2026,none,none,Yes
+lease_06,"HomeWorks Hardware Co.",92400,16.00,180,2026-03-01,stepped,"10pct_yr6_and_yr11",5.75,2026,co_tenancy_and_sales_based,hardware_home_paint_lumber,No

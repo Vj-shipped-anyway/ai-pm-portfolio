@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drift Sentinel — Production Model Drift Dashboard · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of Drift Sentinel: a continuous-monitoring product for production ML and GenAI models in BFSI, with three-loop diagnosis and auto-assembled MRM evidence bundles.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #378ADD; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 220px;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #0C447C;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #0C447C; }
+  .meta { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+  .driver-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; }
+  .progress-bar { height: 4px; background: var(--bg-tertiary); border-radius: 999px; overflow: hidden; margin-top: 8px; }
+  .progress-fill { height: 100%; transition: width 0.3s; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .status-strip {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 500; margin-left: 8px;
+  }
+  .status-red { background: #FCEBEB; color: #791F1F; }
+  .status-yellow { background: #FAEEDA; color: #633806; }
+  .status-green { background: #EAF3DE; color: #27500A; }
+  .model-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .model-meta b { color: var(--text-primary); font-weight: 500; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>Drift Sentinel — production model drift dashboard</h1>
+    <p class="tagline">Pick a model. See how it's monitored at three maturity levels: quarterly attestation, basic PSI/KS, and Drift Sentinel three-loop.</p>
+    <p class="author">Project 01 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">8-model production fleet</span>
+      <span class="badge">5 named deficiencies</span>
+      <span class="badge">SR 11-7 aligned</span>
+      <span class="badge">90-day inference replay</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Fleet health summary">
+    <div class="stat"><p class="stat-label">Models monitored</p><p class="stat-value" id="stat-total">8</p></div>
+    <div class="stat"><p class="stat-label">Drift events caught</p><p class="stat-value" id="stat-caught">0</p></div>
+    <div class="stat"><p class="stat-label">SOTA basic detector</p><p class="stat-value" id="stat-sota">0</p></div>
+    <div class="stat"><p class="stat-label">MTTD (days)</p><p class="stat-value" id="stat-mttd">— / —</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="model-select">Production model</label>
+    <select id="model-select"></select>
+  </div>
+
+  <div class="model-meta" id="model-meta"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next model</button>
+    <button id="runall-btn">Run all 8 models</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage monitoring comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Quarterly attestation</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>SOTA — Basic PSI/KS</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With Drift Sentinel</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (basic-detector MTTD − Drift Sentinel MTTD) × production model fleet</p>
+    <p style="margin: 8px 0 0;">Per-model lift: <b>69 days</b> of decay caught earlier (78d basic → 9d Drift Sentinel). Annualized at fleet scale (~1,200 production models for a Tier-1 BFSI shop): <b>~83,000 model-decay-days prevented per year</b>. Modeled prevented loss at the partner-bank shape: <b>$14M/yr</b>. At Tier-1 fleet scale: <b>~$45-90M/yr modeled</b>. Cost per dollar of prevented loss: under one cent.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./CHANGELOG.md">Build changelog</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./diagrams/architecture.md">Architecture</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const MODELS = [
+  {
+    id: "credit_pd_v3", name: "Credit PD (personal lending)", family: "credit", tier: 1, vendor: "in-house", owner: "risk_team",
+    snapshot: "sha-a4f2", driftStatus: "RED",
+    before: { attested: true, ksAtAttestation: 0.06, daysSinceLook: 84,
+              note: "Attested clean at end of Q1 on the day-0-30 reference window. Drift began on day 60. Validator next looks: Q2 (June 30). 30+ days of mispricing already." },
+    sota: { drifted: true, feature: "feature_dti", psi: 0.42, severity: "RED", false_positives: 4,
+            note: "PSI=0.42 RED on feature_dti. Three other false-positive alerts paged the validator this week. No diagnosis — what segment? what action? — provided." },
+    shield: { driver: "feature_dti (DTI)", segment: "subprime FICO<660 PSI=0.71",
+              lineage: "no upstream pipeline change in 48h",
+              rootCause: "exogenous: rate-cycle DTI shift (Fed +50 bps Feb 12)",
+              recommendation: "SHADOW with retrain candidate spec",
+              envelope: "+0.4% expected default rate if retain · +0.1% if shadow",
+              bundleSeconds: 3.2 }
+  },
+  {
+    id: "credit_loss_v2", name: "Credit LGD (personal lending)", family: "credit", tier: 1, vendor: "in-house", owner: "risk_team",
+    snapshot: "sha-b8c1", driftStatus: "RED",
+    before: { attested: true, ksAtAttestation: 0.04, daysSinceLook: 84,
+              note: "Same quarterly cycle. Same blind spot. Day 60 shift invisible." },
+    sota: { drifted: true, feature: "feature_dti", psi: 0.39, severity: "RED", false_positives: 2,
+            note: "PSI=0.39 RED on feature_dti. Same root cause as credit_pd_v3 but flagged as a separate alert." },
+    shield: { driver: "feature_dti (DTI)", segment: "subprime FICO<660 PSI=0.68",
+              lineage: "co-correlated with credit_pd_v3 (same population shift)",
+              rootCause: "exogenous: rate-cycle DTI shift (Fed +50 bps Feb 12)",
+              recommendation: "SHADOW with retrain candidate spec",
+              envelope: "+0.3% expected loss-given-default if retain · +0.1% if shadow",
+              bundleSeconds: 2.9 }
+  },
+  {
+    id: "heloc_pd_v1", name: "HELOC PD", family: "credit", tier: 2, vendor: "in-house", owner: "mortgage_team",
+    snapshot: "sha-c3d9", driftStatus: "GREEN",
+    before: { attested: true, ksAtAttestation: 0.05, daysSinceLook: 84,
+              note: "Attested. No real signal of drift. HELOC underwriting pool didn't move with the rate cycle the same way personal lending did." },
+    sota: { drifted: false, feature: "—", psi: 0.07, severity: "GREEN", false_positives: 0,
+            note: "All features within attested envelope." },
+    shield: { driver: "—", segment: "—", lineage: "—",
+              rootCause: "stable population", recommendation: "RETAIN",
+              envelope: "within attested envelope", bundleSeconds: 1.4 }
+  },
+  {
+    id: "auto_pd_v4", name: "Auto PD", family: "credit", tier: 2, vendor: "in-house", owner: "auto_team",
+    snapshot: "sha-d7e3", driftStatus: "GREEN",
+    before: { attested: true, ksAtAttestation: 0.07, daysSinceLook: 84,
+              note: "Attested." },
+    sota: { drifted: false, feature: "—", psi: 0.08, severity: "GREEN", false_positives: 1,
+            note: "One false-positive alert on feature_ltv (PSI=0.13) cleared on review — seasonal new-car-launch effect, not drift." },
+    shield: { driver: "—", segment: "—", lineage: "seasonal — new-model-year cohort",
+              rootCause: "stable population, seasonal LTV variation",
+              recommendation: "RETAIN", envelope: "within attested envelope",
+              bundleSeconds: 1.2 }
+  },
+  {
+    id: "fraud_card_v7", name: "Card-present fraud", family: "fraud", tier: 1, vendor: "in-house", owner: "fincrime_team",
+    snapshot: "sha-e2f5", driftStatus: "YELLOW",
+    before: { attested: true, ksAtAttestation: 0.03, daysSinceLook: 84,
+              note: "Attested. Fraud labels are delayed 30-60 days — quarterly attestation can't see recall slides this fast." },
+    sota: { drifted: false, feature: "prediction", psi: 0.18, severity: "YELLOW", false_positives: 0,
+            note: "Prediction-distribution drift YELLOW. Basic detector can't tell whether this is a real recall slide or normal seasonality." },
+    shield: { driver: "prediction distribution", segment: "high-velocity card-not-present",
+              lineage: "delayed ground truth — using NannyML performance estimator",
+              rootCause: "likely adversary tactic shift on CNP — recall estimated -3.1pp vs attested",
+              recommendation: "WATCH — second confirmation in 14 days",
+              envelope: "if confirmed: SHADOW + retrain on last 90 days",
+              bundleSeconds: 4.1 }
+  },
+  {
+    id: "fraud_ach_v3", name: "ACH fraud", family: "fraud", tier: 2, vendor: "in-house", owner: "fincrime_team",
+    snapshot: "sha-f6a8", driftStatus: "GREEN",
+    before: { attested: true, ksAtAttestation: 0.04, daysSinceLook: 84,
+              note: "Attested." },
+    sota: { drifted: false, feature: "—", psi: 0.06, severity: "GREEN", false_positives: 0,
+            note: "All features within envelope." },
+    shield: { driver: "—", segment: "—", lineage: "—",
+              rootCause: "stable", recommendation: "RETAIN",
+              envelope: "within attested envelope", bundleSeconds: 1.1 }
+  },
+  {
+    id: "aml_sar_v2", name: "AML SAR alerting", family: "aml", tier: 1, vendor: "in-house", owner: "aml_team",
+    snapshot: "sha-g9b4", driftStatus: "GREEN",
+    before: { attested: true, ksAtAttestation: 0.05, daysSinceLook: 84,
+              note: "Attested. AML model performance is hardest to attest — SAR conversion is delayed 60-180 days." },
+    sota: { drifted: false, feature: "—", psi: 0.09, severity: "GREEN", false_positives: 0,
+            note: "Within envelope on the prediction distribution. Ground truth gap remains." },
+    shield: { driver: "—", segment: "—",
+              lineage: "180-day delayed ground truth — proxy metric portfolio active",
+              rootCause: "stable proxy signals", recommendation: "RETAIN — re-evaluate at 180-day GT cycle",
+              envelope: "within attested envelope on proxy portfolio",
+              bundleSeconds: 1.6 }
+  },
+  {
+    id: "support_qa_v2", name: "Customer support Q&A (GenAI)", family: "genai", tier: 1, vendor: "anthropic", owner: "cx_team",
+    snapshot: "claude-sonnet-4-20260224", driftStatus: "RED",
+    before: { attested: true, ksAtAttestation: 0.06, daysSinceLook: 84,
+              note: "Quarterly attestation has no GenAI drift methodology. PSI on feature placeholder slots is 0.07. Looks fine. Is not." },
+    sota: { drifted: false, feature: "feature placeholders", psi: 0.07, severity: "GREEN", false_positives: 0,
+            note: "Basic detector reports GREEN. No GenAI proxy metrics in pipeline. No vendor snapshot diff." },
+    shield: { driver: "refusal-rate distribution", segment: "—",
+              lineage: "Anthropic snapshot changed Feb 24 (claude-sonnet-4-20260224 vs prior claude-sonnet-4-20260214) — silent minor update",
+              rootCause: "vendor silent update — refusal rate jumped from 4.1% to 11.3%",
+              recommendation: "ROLLBACK to pre-Feb-24 snapshot pin until validated",
+              envelope: "deflection rate dropped 3pp — material customer impact",
+              bundleSeconds: 5.4 }
+  }
+];
+
+let seenIds = new Set();
+let stats = { caughtByShield: 0, caughtBySota: 0 };
+
+function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function statusPill(status) {
+  if (status === 'RED') return '<span class="status-strip status-red">RED</span>';
+  if (status === 'YELLOW') return '<span class="status-strip status-yellow">YELLOW</span>';
+  return '<span class="status-strip status-green">GREEN</span>';
+}
+
+function render(idx) {
+  const m = MODELS[idx];
+  document.getElementById('model-meta').innerHTML =
+    '<b>' + escapeHtml(m.name) + '</b> · ' + escapeHtml(m.id) +
+    ' · Tier ' + m.tier + ' · ' + escapeHtml(m.family) +
+    ' · vendor: ' + escapeHtml(m.vendor) +
+    ' · snapshot: <code>' + escapeHtml(m.snapshot) + '</code>' +
+    ' · status: ' + statusPill(m.driftStatus);
+
+  // Card 1 — Before (quarterly attestation)
+  const beforeBody = document.getElementById('card-before');
+  let beforeHtml = '<div>' + escapeHtml(m.before.note) + '</div>';
+  beforeHtml += '<div class="meta">Last attestation KS: ' + m.before.ksAtAttestation.toFixed(2) +
+                ' · Days since validator look: ' + m.before.daysSinceLook + '</div>';
+  if (m.driftStatus === 'GREEN') {
+    beforeHtml += '<div class="pill pill-info">Quietly attested — no drift event</div>';
+  } else {
+    beforeHtml += '<div class="pill pill-bad">Quietly attested — drift in flight, invisible</div>';
+  }
+  beforeBody.innerHTML = beforeHtml;
+
+  // Card 2 — SOTA
+  const sotaBody = document.getElementById('card-sota');
+  let sotaHtml = '<div>' + escapeHtml(m.sota.note) + '</div>';
+  sotaHtml += '<div class="driver-row"><span class="driver-label">Top feature</span><span class="driver-value">' + escapeHtml(m.sota.feature) + '</span></div>';
+  sotaHtml += '<div class="driver-row"><span class="driver-label">PSI</span><span class="driver-value">' + m.sota.psi.toFixed(2) + '</span></div>';
+  sotaHtml += '<div class="driver-row"><span class="driver-label">Status</span><span class="driver-value">' + escapeHtml(m.sota.severity) + '</span></div>';
+  sotaHtml += '<div class="driver-row"><span class="driver-label">False positives this week</span><span class="driver-value">' + m.sota.false_positives + '</span></div>';
+  if (m.sota.drifted) {
+    sotaHtml += '<div class="pill pill-bad">Detected — no diagnosis, no action</div>';
+  } else if (m.driftStatus === 'RED' || m.driftStatus === 'YELLOW') {
+    sotaHtml += '<div class="pill pill-warn">Missed — basic detector has no signal here</div>';
+  } else {
+    sotaHtml += '<div class="pill pill-ok">Clean</div>';
+  }
+  sotaBody.innerHTML = sotaHtml;
+
+  // Card 3 — Drift Sentinel
+  const shieldBody = document.getElementById('card-shield');
+  let shieldHtml = '';
+  shieldHtml += '<div class="driver-row"><span class="driver-label">Driver</span><span class="driver-value">' + escapeHtml(m.shield.driver) + '</span></div>';
+  if (m.shield.segment && m.shield.segment !== '—') {
+    shieldHtml += '<div class="driver-row"><span class="driver-label">Segment</span><span class="driver-value">' + escapeHtml(m.shield.segment) + '</span></div>';
+  }
+  shieldHtml += '<div class="driver-row"><span class="driver-label">Lineage</span><span class="driver-value" style="text-align:right; max-width:55%;">' + escapeHtml(m.shield.lineage) + '</span></div>';
+  shieldHtml += '<div class="meta"><b>Root cause:</b> ' + escapeHtml(m.shield.rootCause) + '</div>';
+  shieldHtml += '<div class="meta"><b>Risk envelope:</b> ' + escapeHtml(m.shield.envelope) + '</div>';
+
+  if (m.shield.recommendation === 'RETAIN') {
+    shieldHtml += '<div class="pill pill-ok">RETAIN — within attested envelope</div>';
+  } else if (m.shield.recommendation.startsWith('SHADOW')) {
+    shieldHtml += '<div class="pill pill-warn">' + escapeHtml(m.shield.recommendation) + '</div>';
+  } else if (m.shield.recommendation.startsWith('ROLLBACK')) {
+    shieldHtml += '<div class="pill pill-bad">' + escapeHtml(m.shield.recommendation) + '</div>';
+  } else if (m.shield.recommendation.startsWith('WATCH')) {
+    shieldHtml += '<div class="pill pill-info">' + escapeHtml(m.shield.recommendation) + '</div>';
+  } else {
+    shieldHtml += '<div class="pill pill-info">' + escapeHtml(m.shield.recommendation) + '</div>';
+  }
+  shieldHtml += '<div class="meta">MRM evidence bundle assembled in ' + m.shield.bundleSeconds.toFixed(1) + 's. Validator attestation in ~1 day instead of 3 weeks.</div>';
+  shieldBody.innerHTML = shieldHtml;
+
+  if (!seenIds.has(m.id)) {
+    seenIds.add(m.id);
+    if (m.driftStatus === 'RED' || m.driftStatus === 'YELLOW') {
+      stats.caughtByShield++;
+      if (m.sota.drifted) stats.caughtBySota++;
+    }
+    updateStats();
+  }
+}
+
+function updateStats() {
+  document.getElementById('stat-caught').textContent = stats.caughtByShield;
+  document.getElementById('stat-sota').textContent = stats.caughtBySota;
+  if (stats.caughtByShield > 0) {
+    document.getElementById('stat-mttd').textContent = '9d / 78d';
+  } else {
+    document.getElementById('stat-mttd').textContent = '— / —';
+  }
+}
+
+function init() {
+  const sel = document.getElementById('model-select');
+  MODELS.forEach((m, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = m.id + ' — ' + m.name + ' (' + m.driftStatus + ')';
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => render(parseInt(sel.value)));
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i - 1 + MODELS.length) % MODELS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i + 1) % MODELS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('runall-btn').addEventListener('click', () => {
+    let i = 0;
+    const tick = () => {
+      if (i >= MODELS.length) return;
+      sel.value = i;
+      render(i);
+      i++;
+      setTimeout(tick, 350);
+    };
+    tick();
+  });
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    seenIds = new Set();
+    stats = { caughtByShield: 0, caughtBySota: 0 };
+    updateStats();
+    sel.value = 0;
+    render(0);
+  });
+  render(0);
+}
+
+init();
+</script>
+</body>
+</html>

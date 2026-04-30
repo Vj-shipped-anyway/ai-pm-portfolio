@@ -1,0 +1,9 @@
+model_id,name,family,tier,owner,deployed_date,last_attested,vendor,snapshot_id
+credit_pd_v3,Consumer Credit PD,credit,1,line1.credit-risk,2025-09-12,2026-01-15,internal,internal-xgb-2.0.1
+credit_loss_v2,Credit Loss Severity,credit,1,line1.credit-risk,2025-07-04,2026-01-15,internal,internal-lgbm-1.4.0
+heloc_pd_v1,HELOC Default Probability,credit,2,line1.credit-risk,2025-11-21,2026-01-15,internal,internal-xgb-1.2.3
+auto_pd_v4,Auto Loan PD,credit,2,line1.auto-lending,2025-08-30,2026-01-15,internal,internal-xgb-2.1.0
+fraud_card_v7,Card-Present Fraud,fraud,1,line1.fraud-ops,2025-10-02,2026-02-01,internal,internal-lgbm-3.2.1
+fraud_ach_v3,ACH Fraud Detection,fraud,1,line1.fraud-ops,2025-06-15,2026-01-15,internal,internal-rf-2.0.0
+aml_sar_v2,AML SAR Triage,aml,1,line1.financial-crimes,2025-05-10,2026-01-15,internal,internal-xgb-3.0.2
+support_qa_v2,Customer Support Q&A GenAI,genai,1,line1.servicing,2025-12-01,2026-01-15,anthropic,claude-sonnet-4-20250215

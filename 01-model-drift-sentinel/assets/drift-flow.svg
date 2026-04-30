@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" role="img" aria-labelledby="title desc">
+  <title id="title">Drift Sentinel: drift event flowing from detection through diagnosis to a bounded MRM-routed decision</title>
+  <desc id="desc">Five-stage horizontal flow showing how a credit model drift event on day 64 moves through Detect, Diagnose, Decide, Bundle, and MRM Validator. Each stage has a one-line description and a dwell time annotation showing the speedup vs the legacy quarterly process.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #4338ca; stroke-width: 1.5; }
+      .stage-box-shield { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-mrm { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #0C447C; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #0C447C; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">Drift Sentinel — call flow for one drift event</text>
+  <text x="20" y="52" class="subheader">credit_pd_v3 trips on day 64. Validator attestation in 1 day, not 3 weeks.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="160" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: feature_dti PSI = 0.42</text>
+
+  <!-- Stage 1: DETECT -->
+  <rect x="20" y="120" width="155" height="110" rx="8" class="stage-box-shield"/>
+  <text x="32" y="140" class="stage-num">1 · DETECT</text>
+  <text x="32" y="162" class="stage-title">PSI/KS sweep</text>
+  <text x="32" y="180" class="stage-sub">feature_dti</text>
+  <text x="32" y="195" class="stage-sub">PSI = 0.42 RED</text>
+  <text x="32" y="218" class="meta-text">+ vendor snapshot diff</text>
+
+  <!-- Arrow 1 -->
+  <line x1="180" y1="175" x2="222" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: DIAGNOSE -->
+  <rect x="225" y="120" width="200" height="110" rx="8" class="stage-box-shield"/>
+  <text x="237" y="140" class="stage-num">2 · DIAGNOSE</text>
+  <text x="237" y="162" class="stage-title">Bisect · slice · lineage</text>
+  <text x="237" y="180" class="stage-sub">subprime FICO&lt;660 PSI=0.71</text>
+  <text x="237" y="195" class="stage-sub">no upstream change in 48h</text>
+  <text x="237" y="210" class="stage-sub">macro: Fed +50 bps Feb 12</text>
+  <text x="237" y="225" class="meta-strong">root cause: exogenous DTI shift</text>
+
+  <!-- Arrow 2 -->
+  <line x1="430" y1="175" x2="472" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: DECIDE -->
+  <rect x="475" y="120" width="180" height="110" rx="8" class="stage-box-shield"/>
+  <text x="487" y="140" class="stage-num">3 · DECIDE</text>
+  <text x="487" y="162" class="stage-title">Recommendation engine</text>
+  <text x="487" y="180" class="stage-sub">SHADOW + retrain spec</text>
+  <text x="487" y="195" class="stage-sub">+0.4% if retain</text>
+  <text x="487" y="210" class="stage-sub">+0.1% if shadow</text>
+  <text x="487" y="225" class="meta-strong">bounded risk envelope</text>
+
+  <!-- Arrow 3 -->
+  <line x1="660" y1="175" x2="702" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: BUNDLE -->
+  <rect x="705" y="120" width="155" height="110" rx="8" class="stage-box-mrm"/>
+  <text x="717" y="140" class="stage-num">4 · BUNDLE</text>
+  <text x="717" y="162" class="stage-title">Auto-assembly</text>
+  <text x="717" y="180" class="stage-sub">PSI/KS + slice plots</text>
+  <text x="717" y="195" class="stage-sub">+ lineage + macro</text>
+  <text x="717" y="210" class="stage-sub">+ recommendation</text>
+  <text x="717" y="225" class="timer-fast">in 3.2 seconds</text>
+
+  <!-- Arrow 4 (down) -->
+  <path d="M 782 230 L 782 256 L 360 256 L 360 286" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: MRM VALIDATOR -->
+  <rect x="240" y="290" width="320" height="80" rx="8" class="stage-box-mrm"/>
+  <text x="252" y="310" class="stage-num">5 · MRM VALIDATOR (human)</text>
+  <text x="252" y="330" class="stage-title">Reviews bundle, edits if needed, attests</text>
+  <text x="252" y="352" class="stage-sub">never auto-attested · always human edit before sign-off</text>
+  <text x="252" y="365" class="timer-fast">attestation in ~1 day (legacy: 3 weeks)</text>
+
+  <!-- Arrow 5 (back to model) -->
+  <path d="M 240 330 L 100 330 L 100 380" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Final: MODEL ACTION -->
+  <rect x="20" y="385" width="160" height="55" rx="8" class="stage-box"/>
+  <text x="32" y="405" class="stage-title">credit_pd_v3</text>
+  <text x="32" y="423" class="stage-sub">shadow candidate live</text>
+  <text x="32" y="436" class="meta-strong">N+1 trained in parallel</text>
+
+  <!-- Bottom legend -->
+  <line x1="20" y1="265" x2="20" y2="275" stroke="#ddd" stroke-width="0.5"/>
+
+  <!-- Comparison strip -->
+  <rect x="600" y="290" width="260" height="80" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="612" y="310" class="stage-title">Total wall time</text>
+  <text x="612" y="332" class="timer">Legacy quarterly: 78 days MTTD + 3w bundle = ~99 days</text>
+  <text x="612" y="350" class="timer-fast">Drift Sentinel: 9 days MTTD + 1 day attest = ~10 days</text>
+  <text x="612" y="365" class="meta-strong">~89% reduction · ~83,000 model-decay-days/yr saved at fleet scale</text>
+</svg>

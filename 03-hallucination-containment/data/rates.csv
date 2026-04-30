@@ -1,0 +1,15 @@
+product_id,rate_type,tier,rate,unit,effective_date
+CD12,APY,flat,4.10,percent,2026-04-14
+CD24,APY,flat,4.30,percent,2026-04-14
+HYS,APY,flat,4.35,percent,2026-04-14
+PMM,APY,balance >= $25k,4.85,percent,2026-04-14
+PMM,APY,balance < $25k,3.50,percent,2026-04-14
+SAV,APY,flat,0.40,percent,2026-04-14
+IRA,APY,flat,4.20,percent,2026-04-14
+CCB,intro APR,first 15 months,0.00,percent,2026-04-14
+CCB,post-intro APR,variable,19.99-26.99,percent,2026-04-14
+TRC,intro APR,first 12 months,0.00,percent,2026-04-14
+TRC,post-intro APR,variable,21.49-28.49,percent,2026-04-14
+HLN,APR,prime + 1.5,9.00,percent,2026-04-14
+AUL,APR,60-month new,6.49,percent,2026-04-14
+AUL,APR,60-month used,7.49,percent,2026-04-14

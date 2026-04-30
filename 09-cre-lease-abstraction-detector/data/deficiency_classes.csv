@@ -1,0 +1,7 @@
+lease_id,lease_label,is_standard,deficiencies_triggered,notes
+lease_01,standard_retail,True,none,"Clean ICSC retail. Primary NLP gets all 12 fields right. Baseline."
+lease_02,standard_office,True,none,"Clean BOMA office. Stepped escalation table renders fine on this template; 12/12 fields correct."
+lease_03,non_standard_industrial,False,"escalation_clause_variance;cam_cap_omission","CPI-with-floor-and-cap collapses to ""3% annual"" default. CAM cap buried in section 4.3 amendment, missed."
+lease_04,redlined_retail,False,"redline_blindness;escalation_clause_variance;cam_cap_omission;kickout_clause_missed;exclusivity_buried;boilerplate_paraphrase","The whole lease. STRIKE/INSERT markup defeats OCR + extractor. Co-tenancy kick-out, exclusivity, and CPI escalation all in [INSERT] blocks."
+lease_05,office_with_side_letter,False,"tenant_rights_buried_in_side_letter","ROFO sits in a side letter document the primary pipeline never ingested. Main lease body looks clean."
+lease_06,anchor_tenant_complex,False,"escalation_clause_variance;kickout_clause_missed;exclusivity_buried","Stepped escalation (10% in Yr 6, 10% in Yr 11) defaults to ""10% annual."" Co-tenancy AND sales-based kickout both present. Exclusivity covers four product categories."

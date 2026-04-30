@@ -1,0 +1,9 @@
+model_id,name,tier,last_attested,days_since_attestation,monitoring_signal_in_window,stale_over_30d
+credit_pd_v3,Consumer Credit PD,1,2026-01-15,103,none — quarterly review only,True
+credit_loss_v2,Credit Loss Severity,1,2026-01-15,103,none — quarterly review only,True
+heloc_pd_v1,HELOC Default Probability,2,2026-01-15,103,none — quarterly review only,True
+auto_pd_v4,Auto Loan PD,2,2026-01-15,103,none — quarterly review only,True
+fraud_card_v7,Card-Present Fraud,1,2026-02-01,86,none — quarterly review only,True
+fraud_ach_v3,ACH Fraud Detection,1,2026-01-15,103,none — quarterly review only,True
+aml_sar_v2,AML SAR Triage,1,2026-01-15,103,none — quarterly review only,True
+support_qa_v2,Customer Support Q&A GenAI,1,2026-01-15,103,none — quarterly review only,True

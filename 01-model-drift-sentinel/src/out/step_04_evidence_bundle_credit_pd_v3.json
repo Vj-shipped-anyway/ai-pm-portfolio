@@ -1,0 +1,68 @@
+{
+  "bundle_version": "1.0",
+  "assembled_at": "2026-04-28T09:00:00",
+  "model": {
+    "model_id": "credit_pd_v3",
+    "name": "Consumer Credit PD",
+    "tier": 1,
+    "owner_line1": "line1.credit-risk",
+    "vendor": "internal",
+    "snapshot_id": "internal-xgb-2.0.1",
+    "deployed_date": "2025-09-12",
+    "last_attested": "2026-01-15"
+  },
+  "detect": {
+    "classical_drift": [
+      {
+        "feature": "feature_dti",
+        "psi": 0.2204,
+        "ks": 0.0956
+      },
+      {
+        "feature": "feature_fico",
+        "psi": 0.0247,
+        "ks": 0.0278
+      },
+      {
+        "feature": "feature_ltv",
+        "psi": 0.0181,
+        "ks": 0.0478
+      },
+      {
+        "feature": "prediction",
+        "psi": 0.1554,
+        "ks": 0.0978
+      }
+    ],
+    "genai_proxies": null,
+    "vendor_silent_updates": []
+  },
+  "diagnose": {
+    "segment_breakdown": [
+      {
+        "segment": "subprime_650_680",
+        "n_ref": 150,
+        "n_cur": 155,
+        "psi": 2.3679,
+        "ks": 0.454
+      },
+      {
+        "segment": "prime_720_plus",
+        "n_ref": 750,
+        "n_cur": 745,
+        "psi": 0.0366,
+        "ks": 0.0251
+      }
+    ],
+    "upstream_lineage": "feature_pipeline.dti_v2025_11 deployed Day 58 \u2014 dti normalization changed from log1p to standard scale; correlates with drift onset Day 60."
+  },
+  "decide": {
+    "decision": "SHADOW",
+    "reason": "Aggregate PSI 0.220 is within attested envelope but slice PSI 2.368 crosses red. Deploy candidate alongside, monitor slice for 14 days.",
+    "risk_envelope": "If slice PSI > 0.40 sustained for 7 days, escalate to RETRAIN."
+  },
+  "validator_routing": "MRM L2 \u2014 Tier-1 queue",
+  "audit_trail_handoff": "Project 08 \u2014 lineage event emitted",
+  "attestation_template_prefilled": true,
+  "human_edit_before_signoff": true
+}

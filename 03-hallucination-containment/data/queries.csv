@@ -1,0 +1,31 @@
+query_id,question,correct_answer,deficiency_class
+Q01,Roughly what can I expect to earn on a 12-month CD right now?,4.1% APY,paraphrase_blindness
+Q02,Does the Premier Checking account have a monthly maintenance fee?,No,negation_flip
+Q03,Is there a fee for the first overdraft each statement period?,"No, $0 for the first",negation_flip
+Q04,Can a California resident open a Premier Travel Account?,"No, not available in CA",jurisdiction
+Q05,Under what regulation are you required to disclose APY?,Regulation DD (TISA / 12 CFR 1030),citation_fabrication
+Q06,Is the Premier Money Market paying close to 5%?,"Yes at $25k+ tier, 4.85% APY",paraphrase_blindness
+Q07,Are international ATM withdrawal fees waived on the Premier Travel account?,"No, $5 + 1% applies",negation_flip
+Q08,Approximately when does the introductory APR end on the Cashback card?,After 15 months,paraphrase_blindness
+Q09,What is the rate on a Home Equity Line of Credit if prime is 7.5%?,9.00% APR (prime + 1.5),multihop
+Q10,Which federal regulation governs error resolution for an EFT dispute?,Regulation E (EFTA / 12 CFR 1005),citation_fabrication
+Q11,Roughly how much would the wire fee run me?,$30 for domestic outgoing,paraphrase_blindness
+Q12,Can a New York resident open the Premier Travel Account?,"No, not available in NY",jurisdiction
+Q13,Is mobile check deposit available 24/7?,"No, cutoff is 9 PM ET",negation_flip
+Q14,If I have $30000 in the Premier Money Market what APY do I earn?,4.85% APY,multihop
+Q15,If I have $5000 in the Premier Money Market what APY do I earn?,3.50% APY,multihop
+Q16,Does the Cashback Visa have an annual fee?,"No, $0",negation_flip
+Q17,If the Fed raises rates 25 bps will my CD rate change?,"Existing CDs are fixed; new CDs may reprice",currency_unit
+Q18,Approximately how much will I earn on a $10000 high yield savings deposit over a year?,~$435 (4.35% APY),paraphrase_blindness
+Q19,What rule covers the credit card billing dispute timeline?,Regulation Z (FCBA / 12 CFR 1026),citation_fabrication
+Q20,Is the rate on the Travel Rewards card the same as the Cashback?,"No, 21.49-28.49% vs 19.99-26.99%",multihop
+Q21,Are there any monthly fees on the Premier Checking?,"No, $0 monthly maintenance",negation_flip
+Q22,How much is the foreign transaction fee on the Travel Rewards card?,$0,negation_flip
+Q23,Is the High-Yield Savings rate above the IRA Savings rate?,"Yes, 4.35% vs 4.20%",multihop
+Q24,Can a Texas resident open a Premier Travel Account?,"Yes, available in Texas",jurisdiction
+Q25,If I close my HELOC after 12 months what fee applies?,"$500 early closure fee",multihop
+Q26,Is there a foreign transaction fee on the Cashback Visa?,$0,negation_flip
+Q27,Is the auto loan rate for a used car higher than for a new car?,"Yes, 7.49% vs 6.49%",multihop
+Q28,What rule requires us to send periodic statements on a deposit account?,Regulation DD (12 CFR 1030.9),citation_fabrication
+Q29,How long is the Cashback Visa intro promotional period?,15 months,paraphrase_blindness
+Q30,The Fed cut rates 50 basis points; does my variable HELOC rate change?,"Yes, by 0.50 percentage points",currency_unit

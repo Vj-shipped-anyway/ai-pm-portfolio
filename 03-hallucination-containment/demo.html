@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HalluGuard — Bank Chatbot Containment Layer · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of HalluGuard: a containment layer that catches 8 named foundation-model hallucination failure modes in production bank chatbots.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  .hero {
+    margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .hero .tagline {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin: 0 0 12px;
+  }
+  .hero .author {
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero .author a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border-strong);
+  }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin: 0 0 4px;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.1;
+  }
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .controls label {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  select, button {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #378ADD; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block;
+    background: #E6F1FB;
+    color: #0C447C;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .failure-tag {
+    display: inline-block;
+    background: #FCEBEB;
+    color: #791F1F;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+  .meta {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+  }
+  .progress-bar {
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #BA7517;
+    transition: width 0.3s;
+  }
+  .utility-callout {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 18px 22px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px;
+    background: var(--bg-tertiary);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    display: inline-block;
+    margin: 6px 0;
+  }
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>HalluGuard — bank chatbot containment layer</h1>
+    <p class="tagline">Pick a customer query. See the response at three stages: rule-based, LLM-only, and LLM + HalluGuard.</p>
+    <p class="author">Project 03 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">8 named LLM failure modes</span>
+      <span class="badge">LoRA Llama 3.1 8B verifier</span>
+      <span class="badge">1,260-probe taxonomy</span>
+      <span class="badge">vLLM on 2× L4 GPUs</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Running statistics">
+    <div class="stat"><p class="stat-label">Queries seen</p><p class="stat-value" id="stat-seen">0</p></div>
+    <div class="stat"><p class="stat-label">Wrong (LLM only)</p><p class="stat-value" id="stat-wrong">0</p></div>
+    <div class="stat"><p class="stat-label">Caught by HalluGuard</p><p class="stat-value" id="stat-caught">0</p></div>
+    <div class="stat"><p class="stat-label">Wrong rate (LLM / Shield)</p><p class="stat-value" id="stat-rate">0% / 0%</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="query-select">Customer query</label>
+    <select id="query-select"></select>
+  </div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next query</button>
+    <button id="runall-btn">Run all 30</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage response comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before LLM (rule-based)</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>With LLM only</p>
+      <div class="card-body" id="card-llm"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With HalluGuard</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (LLM-only wrong rate − HalluGuard wrong rate) × annual interactions</p>
+    <p style="margin: 8px 0 0;">Per-interaction lift on this 30-query eval: <b>26.7 percentage points</b>. Annualized at 14.4M chats per year for a $40B-asset bank: <b>~3.85M wrong answers prevented per year</b>. At Tier-1 fleet scale (~25M customers): <b>~40M per year</b>. Cost per prevented wrong answer: under one cent.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./CHANGELOG.md">Build changelog</a>
+    <a href="./probes/">Probe taxonomy</a>
+    <a href="./build/training-notes.md">Training notes</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const QUERIES = [
+  {id:"Q01", q:"Roughly what can I expect to earn on a 12-month CD right now?", expected:"4.1% APY", failure:null, before:"Please see our rate sheet at /rates", llm:"Currently, our 12-Month CD is paying 4.10% APY.", llmCorrect:true, shieldScore:0.94, shieldDecision:"SHIP"},
+  {id:"Q02", q:"Does the Premier Checking account have a monthly maintenance fee?", expected:"No", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"Yes, the Premier Checking account has a monthly maintenance fee of $12.", llmCorrect:false, shieldScore:0.31, shieldDecision:"ABSTAIN"},
+  {id:"Q03", q:"Is there a fee for the first overdraft each statement period?", expected:"No, $0 for the first", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"There is a $35 overdraft fee for the first overdraft and each thereafter.", llmCorrect:false, shieldScore:0.28, shieldDecision:"ABSTAIN"},
+  {id:"Q04", q:"Can a California resident open a Premier Travel Account?", expected:"No, not available in CA", failure:"jurisdiction", before:"Let me get a banker for you.", llm:"Yes, you can open a Premier Travel Account as a California resident.", llmCorrect:false, shieldScore:0.19, shieldDecision:"ABSTAIN"},
+  {id:"Q05", q:"Under what regulation are you required to disclose APY?", expected:"Regulation DD (TISA / 12 CFR 1030)", failure:"citation_fabrication", before:"Please contact compliance@bank.example", llm:"APY disclosure is required under the Banking Disclosures Act of 2009.", llmCorrect:false, shieldScore:0.12, shieldDecision:"ABSTAIN"},
+  {id:"Q06", q:"Is the Premier Money Market paying close to 5%?", expected:"Yes at $25k+ tier, 4.85% APY", failure:null, before:"Please see our rate sheet at /rates", llm:"Yes, the Premier Money Market is paying 4.85% APY at the $25,000+ tier.", llmCorrect:true, shieldScore:0.91, shieldDecision:"SHIP"},
+  {id:"Q07", q:"Are international ATM withdrawal fees waived on the Premier Travel account?", expected:"No, $5 + 1% applies", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"Yes, international ATM fees are waived on the Premier Travel account.", llmCorrect:false, shieldScore:0.24, shieldDecision:"ABSTAIN"},
+  {id:"Q08", q:"Approximately when does the introductory APR end on the Cashback card?", expected:"After 15 months", failure:null, before:"Promotional rates are listed on the product details page", llm:"The introductory APR ends after 15 months.", llmCorrect:true, shieldScore:0.96, shieldDecision:"SHIP"},
+  {id:"Q09", q:"What is the rate on a Home Equity Line of Credit if prime is 7.5%?", expected:"9.00% APR (prime + 1.5)", failure:"multihop", before:"Please see our rate sheet at /rates", llm:"The HELOC rate is 8.5%.", llmCorrect:false, shieldScore:0.43, shieldDecision:"ABSTAIN"},
+  {id:"Q10", q:"Which federal regulation governs error resolution for an EFT dispute?", expected:"Regulation E (EFTA / 12 CFR 1005)", failure:null, before:"Please contact compliance@bank.example", llm:"Error resolution for EFT disputes is governed by Regulation E.", llmCorrect:true, shieldScore:0.95, shieldDecision:"SHIP"},
+  {id:"Q11", q:"Roughly how much would the wire fee run me?", expected:"$30 for domestic outgoing", failure:null, before:"Please see our fee schedule at /fees", llm:"The wire fee is around $30 for domestic outgoing.", llmCorrect:true, shieldScore:0.93, shieldDecision:"SHIP"},
+  {id:"Q12", q:"Can a New York resident open the Premier Travel Account?", expected:"No, not available in NY", failure:"jurisdiction", before:"Let me get a banker for you.", llm:"Yes, New York residents can open the Premier Travel Account.", llmCorrect:false, shieldScore:0.21, shieldDecision:"ABSTAIN"},
+  {id:"Q13", q:"Is mobile check deposit available 24/7?", expected:"No, cutoff is 9 PM ET", failure:"negation_flip", before:"Let me get a banker for you.", llm:"Yes, mobile check deposit is available 24/7.", llmCorrect:false, shieldScore:0.26, shieldDecision:"ABSTAIN"},
+  {id:"Q14", q:"If I have $30,000 in the Premier Money Market what APY do I earn?", expected:"4.85% APY", failure:"multihop", before:"Please see our rate sheet at /rates", llm:"With $30,000, you would earn 3.50% APY on the Premier Money Market.", llmCorrect:false, shieldScore:0.38, shieldDecision:"ABSTAIN"},
+  {id:"Q15", q:"If I have $5,000 in the Premier Money Market what APY do I earn?", expected:"3.50% APY", failure:"multihop", before:"Please see our rate sheet at /rates", llm:"With $5,000, you would earn 4.85% APY.", llmCorrect:false, shieldScore:0.34, shieldDecision:"ABSTAIN"},
+  {id:"Q16", q:"Does the Cashback Visa have an annual fee?", expected:"No, $0", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"The Cashback Visa has a $95 annual fee.", llmCorrect:false, shieldScore:0.18, shieldDecision:"ABSTAIN"},
+  {id:"Q17", q:"If the Fed raises rates 25 bps will my CD rate change?", expected:"Existing CDs are fixed; new CDs may reprice", failure:"currency_unit", before:"Let me get a banker for you.", llm:"Yes, your CD rate would change by 25%.", llmCorrect:false, shieldScore:0.29, shieldDecision:"ABSTAIN"},
+  {id:"Q18", q:"Approximately how much will I earn on a $10,000 high yield savings deposit over a year?", expected:"~$435 (4.35% APY)", failure:null, before:"Please see our rate sheet at /rates", llm:"You would earn approximately $435 over a year on a $10,000 deposit.", llmCorrect:true, shieldScore:0.92, shieldDecision:"SHIP"},
+  {id:"Q19", q:"What rule covers the credit card billing dispute timeline?", expected:"Regulation Z (FCBA / 12 CFR 1026)", failure:null, before:"Please contact compliance@bank.example", llm:"The credit card billing dispute timeline is governed by Regulation Z.", llmCorrect:true, shieldScore:0.94, shieldDecision:"SHIP"},
+  {id:"Q20", q:"Is the rate on the Travel Rewards card the same as the Cashback?", expected:"No, 21.49-28.49% vs 19.99-26.99%", failure:"multihop", before:"Please see our rate sheet at /rates", llm:"Yes, the rates on Travel Rewards and Cashback are the same.", llmCorrect:false, shieldScore:0.41, shieldDecision:"ABSTAIN"},
+  {id:"Q21", q:"Are there any monthly fees on the Premier Checking?", expected:"No, $0 monthly maintenance", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"There is a small monthly fee on Premier Checking.", llmCorrect:false, shieldScore:0.32, shieldDecision:"ABSTAIN"},
+  {id:"Q22", q:"How much is the foreign transaction fee on the Travel Rewards card?", expected:"$0", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"The foreign transaction fee on Travel Rewards is 3%.", llmCorrect:false, shieldScore:0.27, shieldDecision:"ABSTAIN"},
+  {id:"Q23", q:"Is the High-Yield Savings rate above the IRA Savings rate?", expected:"Yes, 4.35% vs 4.20%", failure:null, before:"Please see our rate sheet at /rates", llm:"Yes, the High-Yield Savings rate is higher than the IRA Savings rate.", llmCorrect:true, shieldScore:0.93, shieldDecision:"SHIP"},
+  {id:"Q24", q:"Can a Texas resident open a Premier Travel Account?", expected:"Yes, available in Texas", failure:null, before:"Let me get a banker for you.", llm:"Yes, the Premier Travel Account is available in Texas.", llmCorrect:true, shieldScore:0.91, shieldDecision:"SHIP"},
+  {id:"Q25", q:"If I close my HELOC after 12 months what fee applies?", expected:"$500 early closure fee", failure:"multihop", before:"Please see our fee schedule at /fees", llm:"If you close your HELOC after 12 months, no fee applies.", llmCorrect:false, shieldScore:0.39, shieldDecision:"ABSTAIN"},
+  {id:"Q26", q:"Is there a foreign transaction fee on the Cashback Visa?", expected:"$0", failure:"negation_flip", before:"Please see our fee schedule at /fees", llm:"There is a 3% foreign transaction fee on the Cashback Visa.", llmCorrect:false, shieldScore:0.25, shieldDecision:"ABSTAIN"},
+  {id:"Q27", q:"Is the auto loan rate for a used car higher than for a new car?", expected:"Yes, 7.49% vs 6.49%", failure:null, before:"Please see our rate sheet at /rates", llm:"Yes, the auto loan rate is higher for used cars at 7.49% vs 6.49% for new.", llmCorrect:true, shieldScore:0.92, shieldDecision:"SHIP"},
+  {id:"Q28", q:"What rule requires us to send periodic statements on a deposit account?", expected:"Regulation DD (12 CFR 1030.9)", failure:"citation_fabrication", before:"Please contact compliance@bank.example", llm:"Periodic statements are required under the Periodic Statement Act.", llmCorrect:false, shieldScore:0.16, shieldDecision:"ABSTAIN"},
+  {id:"Q29", q:"How long is the Cashback Visa intro promotional period?", expected:"15 months", failure:null, before:"Promotional rates are listed on the product details page", llm:"The Cashback Visa intro promotional period is 15 months.", llmCorrect:true, shieldScore:0.95, shieldDecision:"SHIP"},
+  {id:"Q30", q:"The Fed cut rates 50 basis points; does my variable HELOC rate change?", expected:"Yes, by 0.50 percentage points", failure:"currency_unit", before:"Let me get a banker for you.", llm:"Yes, your variable HELOC rate would drop by 50%.", llmCorrect:false, shieldScore:0.31, shieldDecision:"ABSTAIN"},
+];
+
+const FAILURE_LABELS = {
+  negation_flip: "Negation flip",
+  jurisdiction: "Jurisdiction confusion",
+  citation_fabrication: "Reg-citation fabrication",
+  multihop: "Multi-hop failure",
+  currency_unit: "Currency-unit confusion",
+};
+
+let seenIds = new Set();
+let stats = { seen: 0, wrong: 0, caught: 0 };
+
+function escapeHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+function render(idx) {
+  const q = QUERIES[idx];
+  const before = document.getElementById('card-before');
+  const llm = document.getElementById('card-llm');
+  const shield = document.getElementById('card-shield');
+
+  before.innerHTML = '<div>' + escapeHtml(q.before) + '</div>' +
+    '<div class="meta">Rule-based deflection. Cannot answer directly. Hands off to a page or banker.</div>';
+
+  let llmHtml = '<div>' + escapeHtml(q.llm) + '</div>';
+  if (q.llmCorrect) {
+    llmHtml += '<div class="pill pill-ok">Correct</div>';
+  } else {
+    llmHtml += '<div><span class="failure-tag">' + (FAILURE_LABELS[q.failure] || 'failure') + '</span><span class="pill pill-bad">Hallucination</span></div>';
+    llmHtml += '<div class="meta">Expected: ' + escapeHtml(q.expected) + '</div>';
+  }
+  llm.innerHTML = llmHtml;
+
+  let shieldHtml = '';
+  if (q.shieldDecision === 'SHIP') {
+    shieldHtml = '<div>' + escapeHtml(q.llm) + '</div>';
+    shieldHtml += '<div class="pill pill-ok">Shipped &mdash; confidence ' + q.shieldScore.toFixed(2) + '</div>';
+  } else {
+    shieldHtml = '<div>I&rsquo;m not certain on this one. Let me get a banker for you who can confirm the details.</div>';
+    shieldHtml += '<div class="pill pill-warn">Abstained &mdash; confidence ' + q.shieldScore.toFixed(2) + ' below threshold</div>';
+    shieldHtml += '<div class="progress-bar"><div class="progress-fill" style="width:' + Math.round(q.shieldScore * 100) + '%"></div></div>';
+  }
+  shield.innerHTML = shieldHtml;
+
+  if (!seenIds.has(q.id)) {
+    seenIds.add(q.id);
+    stats.seen++;
+    if (!q.llmCorrect) {
+      stats.wrong++;
+      if (q.shieldDecision === 'ABSTAIN') stats.caught++;
+    }
+    updateStats();
+  }
+}
+
+function updateStats() {
+  document.getElementById('stat-seen').textContent = stats.seen;
+  document.getElementById('stat-wrong').textContent = stats.wrong;
+  document.getElementById('stat-caught').textContent = stats.caught;
+  const rateLlm = stats.seen ? Math.round((stats.wrong / stats.seen) * 100) : 0;
+  const rateShield = stats.seen ? Math.round(((stats.wrong - stats.caught) / stats.seen) * 100) : 0;
+  document.getElementById('stat-rate').textContent = rateLlm + '% / ' + rateShield + '%';
+}
+
+function init() {
+  const sel = document.getElementById('query-select');
+  QUERIES.forEach((qq, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = qq.id + ' — ' + qq.q;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => render(parseInt(sel.value)));
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i - 1 + QUERIES.length) % QUERIES.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i + 1) % QUERIES.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('runall-btn').addEventListener('click', () => {
+    let i = 0;
+    const tick = () => {
+      if (i >= QUERIES.length) return;
+      sel.value = i;
+      render(i);
+      i++;
+      setTimeout(tick, 280);
+    };
+    tick();
+  });
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    seenIds = new Set();
+    stats = { seen: 0, wrong: 0, caught: 0 };
+    updateStats();
+    sel.value = 0;
+    render(0);
+  });
+  render(0);
+}
+
+init();
+</script>
+</body>
+</html>

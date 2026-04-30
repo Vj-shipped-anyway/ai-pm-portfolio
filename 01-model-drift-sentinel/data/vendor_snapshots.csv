@@ -1,0 +1,7 @@
+snapshot_date,vendor,model_family,snapshot_id,observed_in_fleet,announcement_status,notes
+2025-12-01,anthropic,claude-sonnet-4,claude-sonnet-4-20251101,support_qa_v2,announced,Initial pinned deployment.
+2026-01-08,azure_openai,gpt-4o,gpt-4o-2024-11-20,offline_eval_only,announced,Cross-judge candidate.
+2026-01-22,bedrock,claude-sonnet-4,claude-sonnet-4-20251101,offline_eval_only,announced,Bedrock parity check.
+2026-02-14,anthropic,claude-sonnet-4,claude-sonnet-4-20260214,support_qa_v2,silent_minor_update,API contract identical; refusal-rate distribution shifted +6pp; flagged by Sentinel vendor-version diff.
+2026-02-19,anthropic,claude-sonnet-4,claude-sonnet-4-20260214,support_qa_v2,acknowledged_post_hoc,Anthropic confirmed minor weights update after escalation.
+2026-03-03,azure_openai,gpt-4o,gpt-4o-2025-02-28,offline_eval_only,announced,Tracked but not in production path.

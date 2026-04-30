@@ -1,0 +1,11 @@
+event_id,detected_date,model_id,feature_or_signal,psi,ks,segment,deficiency_class,sota_caught,sentinel_caught,recommendation
+DE001,2026-03-03,credit_pd_v3,dti,0.34,0.21,subprime_650_680,aggregate_psi_hides_slice,partial,yes,SHADOW
+DE002,2026-03-03,credit_pd_v3,dti,0.11,0.08,prime_720_plus,aggregate_psi_hides_slice,no,yes,RETAIN
+DE003,2026-03-04,credit_pd_v3,fico,0.06,0.04,all,no_diagnosis_routing,no,no,RETAIN
+DE004,2026-02-14,support_qa_v2,refusal_rate,N/A,N/A,all,genai_proxy_gap,no,yes,ROLLBACK
+DE005,2026-02-14,support_qa_v2,response_length,N/A,N/A,all,genai_proxy_gap,no,yes,ROLLBACK
+DE006,2026-02-14,support_qa_v2,vendor_snapshot_id,N/A,N/A,all,vendor_version_blindness,no,yes,ROLLBACK
+DE007,2026-03-03,credit_pd_v3,pred_pd,0.19,0.14,subprime_650_680,no_bounded_recommendation,partial,yes,SHADOW
+DE008,2026-02-28,fraud_card_v7,velocity,0.27,0.18,card_present_pos,no_diagnosis_routing,partial,yes,RETRAIN
+DE009,2026-03-05,fraud_ach_v3,txn_amt,0.08,0.05,all,no_bounded_recommendation,partial,no,RETAIN
+DE010,2026-02-14,support_qa_v2,groundedness,N/A,N/A,all,genai_proxy_gap,no,yes,ROLLBACK

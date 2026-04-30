@@ -1,0 +1,9 @@
+model_id,name,tier,decision,reason,risk_envelope,top_feature_psi,worst_segment_psi,vendor_silent_update
+credit_pd_v3,Consumer Credit PD,1,SHADOW,"Aggregate PSI 0.220 is within attested envelope but slice PSI 2.368 crosses red. Deploy candidate alongside, monitor slice for 14 days.","If slice PSI > 0.40 sustained for 7 days, escalate to RETRAIN.",0.2204,2.3679,no
+credit_loss_v2,Credit Loss Severity,1,RETAIN,Aggregate PSI nan within attested envelope.,Continue continuous monitoring; re-evaluate at next window.,nan,nan,no
+heloc_pd_v1,HELOC Default Probability,2,RETAIN,Aggregate PSI 0.226 within attested envelope.,Continue continuous monitoring; re-evaluate at next window.,0.2257,0.2257,no
+auto_pd_v4,Auto Loan PD,2,RETAIN,Aggregate PSI 0.095 within attested envelope.,Continue continuous monitoring; re-evaluate at next window.,0.0946,0.0946,no
+fraud_card_v7,Card-Present Fraud,1,RETRAIN,Aggregate PSI 0.418 crosses red; performance proxy regressing.,"Candidate must hold AUC within -0.5pp of incumbent on backtest before promotion. If not, ROLLBACK to N-1.",0.4183,0.4183,no
+fraud_ach_v3,ACH Fraud Detection,1,RETAIN,Aggregate PSI 0.136 within attested envelope.,Continue continuous monitoring; re-evaluate at next window.,0.1363,0.1363,no
+aml_sar_v2,AML SAR Triage,1,RETAIN,Aggregate PSI 0.116 within attested envelope.,Continue continuous monitoring; re-evaluate at next window.,0.1156,0.1156,no
+support_qa_v2,Customer Support Q&A GenAI,1,ROLLBACK,"Vendor snapshot changed silently to claude-sonnet-4-20260214 and proxy portfolio (refusal +6pp, length distribution shifted, groundedness -0.07) confirms behavior shift. Pin to previous snapshot until probe suite re-runs clean.","If pinned snapshot fails probe re-run, escalate to RETRAIN of downstream RAG layer.",,,yes
