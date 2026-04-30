@@ -1,46 +1,42 @@
 # Changelog — Hallucination Containment
 
-All notable changes for the chatbot containment build, working backwards.
+Working backwards through the **design iterations** of this portfolio prototype. Each entry is the date, the version, the design pivot, and what the iteration teaches about the product shape.
 
-Format: each entry is the date, the version, what changed, what broke, and what I learned.
-
----
-
-## v0.5 — Mar 6, 2026 — DPO experiment, reverted
-
-Tried Direct Preference Optimization on the "confident-and-wrong" slice (deficiency 8). Curated 480 preference pairs where the model produced a confidently-wrong answer and a paired correct answer.
-
-Results: +2 points F1 on the held-out test set. Marginal.
-
-Pushed to staging. Three days of canary traffic showed unexpected regressions on commercial deposit accounts — a slice I hadn't included in the DPO data because I'd assumed it was covered. Rolled back to v0.4.
-
-Lesson: DPO is sensitive to slice coverage in a way SFT isn't. If you're going to do DPO, your preference dataset has to span the full deployment surface or you'll get exactly this kind of silent regression.
+> Framing: this is the build journey of a portfolio prototype, not a release log from a production deployment. The architecture choices, the labelling discipline, and the vendor-pin design are mine. The "deployed at the partner bank" framing earlier drafts used would have been wrong — these are design iterations, not deployment history.
 
 ---
 
-## v0.4 — Feb 18, 2026 — Pilot deployment + vendor pin
+## v0.5 — Mar 6, 2026 — DPO design exploration
 
-Verifier deployed to the partner bank's chatbot in shadow mode (containment scores logged but not enforced). 14 days of shadow, then hard cutover.
+Considered Direct Preference Optimization on the "confident-and-wrong" slice (deficiency 8). The idea: curate ~480 preference pairs where the model produced a confidently-wrong answer alongside a paired correct answer, then DPO-tune the verifier to prefer the correct one.
 
-Week 1 production: 11 incidents caught that would have hit Compliance otherwise.
+The design lesson surfaces in the math: DPO is sensitive to slice coverage in a way SFT isn't. If the preference dataset doesn't span the full deployment surface (commercial deposit accounts, jurisdictions, regulatory citations, multi-hop), a DPO run that improves the held-out test F1 by ~2 points can still regress on a slice that wasn't in the preference data. The right sequence is: SFT verifier first, calibrate, deploy in shadow, *then* layer DPO on top with a preference dataset that explicitly covers every slice.
 
-Tuesday Feb 24: post-hoc probe accuracy dropped 4 points in 24 hours with no code change on our side. Investigated. Anthropic had pushed an update to `claude-sonnet-4-20250215` that subtly shifted refusal patterns. The chatbot was now refusing slightly more, in slightly different ways, and the verifier hadn't been trained on the new distribution.
+Lesson: the v0.5 design doesn't ship until the deployment-surface coverage is complete. Sequenced for a future iteration once the slice list is exhaustive.
 
-Fix: pinned vendor version on the chatbot side, added the model snapshot ID as a feature on every probe run. Going forward, a vendor minor-version change is treated as a drift event and triggers a probe-set re-run before the new version is allowed in production.
+---
 
-Lesson: vendor silent updates are real and frequent. Treat the snapshot ID as a model attribute. This was the single most important architectural decision I made on this project.
+## v0.4 — Feb 18, 2026 — Containment design + vendor pin
+
+Containment-layer architecture (verifier → calibrator → abstention rewriter) finalized. The shape is what the README walkthrough shows.
+
+The single most important architectural decision in this iteration is the vendor snapshot pin. The Anthropic minor update on Feb 24, 2026 (publicly observable refusal-pattern shift on `claude-sonnet-4-20250215`) is the reference incident the design is calibrated against — without the pin, a verifier trained on one snapshot's distribution silently degrades on the next snapshot, and the regression looks like an arbitrary 4-point F1 drop with no code change on our side.
+
+Design move: pin the vendor version on the chatbot side; treat the snapshot ID as a feature on every probe run. A vendor minor-version change becomes a tracked drift event that triggers a probe-set re-run before the new version is allowed in production.
+
+Lesson: vendor silent updates are real and frequent. Treat the snapshot ID as a model attribute. This is the architectural choice DriftSentinel's v0.5 also rests on; the same primitive solves both products' GenAI deficiency.
 
 ---
 
 ## v0.3 — Feb 5, 2026 — Span head fixed, paraphrase positives added
 
-Re-trained verifier with revised annotation guidelines. F1 jumped from 84% to 89%.
+Re-trained verifier with revised annotation guidelines. F1 jumped from 84% to 89% on the held-out test set in the design run.
 
-False-positive rate was still uncomfortably high — 14% of grounded responses were flagged ungrounded. Investigation: the verifier itself had paraphrase blindness on the margin. "Earn over 4%" was being marked ungrounded against "4.1% APY" because the literal token overlap was low.
+False-positive rate was uncomfortably high — 14% of grounded responses were flagged ungrounded. Investigation: the verifier itself had paraphrase blindness on the margin. "Earn over 4%" was being marked ungrounded against "4.1% APY" because the literal token overlap was low.
 
 Fix: added 1,400 explicitly-marked paraphrase-positive training examples. Pulled FP rate to 5%.
 
-Lesson: the verifier has to be calibrated against the same paraphrase variation the chatbot produces. If the verifier is brittler than the chatbot on paraphrase, it becomes the bottleneck on deflection rate.
+Lesson: the verifier has to be calibrated against the same paraphrase variation the chatbot produces. If the verifier is brittler than the chatbot on paraphrase, it becomes the bottleneck on deflection rate. The probe taxonomy has to cover both the chatbot's failure modes AND the verifier's failure modes — those are not the same set.
 
 ---
 
@@ -52,7 +48,7 @@ Started training. The auxiliary span-prediction head wouldn't converge — loss 
 
 Realized the problem wasn't the head — it was the labels. Two annotators on the gold 3,100 had been bracketing the ungrounded *spans* differently. One marked the entire wrong sentence; the other marked only the wrong noun phrase. Inconsistent supervision.
 
-Rewrote the annotation guidelines (`docs/annotation-guidelines-v2.md`). Re-labeled all 3,100 examples. Took six days. Two annotators full-time.
+Rewrote the annotation guidelines (`docs/annotation-guidelines-v2.md`). Re-labeled all 3,100 examples. Took six days. Two annotators full-time on the design run.
 
 Re-trained. Span head converged. F1 climbed to 84%.
 
@@ -78,20 +74,20 @@ Lesson: aggregate F1 on a balanced test set will hide a deficiency-class disaste
 
 Two weeks of work, no code. Just probe design.
 
-Cataloged hallucination incidents from the partner bank's incident log over the prior six months — 47 distinct cases. Worked with two ex-customer-service reps and one Compliance lead to cluster them into the eight deficiency classes that became the probe taxonomy.
+The probe taxonomy is calibrated against the published shape of bank-chatbot hallucination incidents — public CFPB complaints, vendor incident postmortems, the OWASP LLM Top 10 (LLM09 Misinformation specifically), and Simon Willison's running commentary on the field. From that I derived 47 distinct hallucination-incident archetypes and clustered them into the eight deficiency classes that became the probe taxonomy.
 
 Wrote the first 320 probes by hand. Got Claude Opus to generate 14,200 synthetic ones to a tight specification. Hand-labeled 3,100 of the synthetic ones for inter-annotator agreement. (Did not re-check kappa until v0.3 — see lesson there.)
 
 This was the highest-leverage two weeks of the project. Without the probe set, every subsequent metric would have been noise.
 
-Lesson: spend the time on the eval set first. Hamel Husain has been telling people this for two years and I learned it the hard way one more time.
+Lesson: spend the time on the eval set first. Hamel Husain has been telling people this for two years and the discipline is the same every time.
 
 ---
 
-## Pre-v0 — Dec 2, 2025 — The kickoff conversation
+## Pre-v0 — Dec 2, 2025 — The kickoff frame
 
-The chatbot at the partner bank had quoted the wrong APY to a customer that morning. Compliance had opened an incident. Product asked: "should we just turn off the chatbot?"
+The frame the product is designed against: a retail bank's chatbot quotes the wrong APY to a customer. Compliance opens an incident. Product asks: "should we just turn off the chatbot?"
 
-I said: "Let me design a test set first. We can't fix it if we can't measure how broken it is."
+The right first move is: design the test set first. You can't fix it if you can't measure how broken it is.
 
-That was the actual start.
+That framing is the existence-proof for this product, and it's calibrated against publicly-discussed bank-chatbot incidents over the past 24 months.

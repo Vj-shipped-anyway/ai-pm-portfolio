@@ -67,9 +67,9 @@ The high-stakes action is **paused for explicit user approval**, the agent proce
 - Affected: every regulated AI workflow with a human-in-the-loop step (typical Tier-1: 6-15 such pipelines)
 - Annual utility: actual oversight (not theatrical) on tens of thousands of high-stakes decisions per year
 
-## Watch this folder
+## Status
 
-[HalluGuard](../03-hallucination-containment/) is the format reference.
+Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
 
 ---
 

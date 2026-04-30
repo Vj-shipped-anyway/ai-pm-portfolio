@@ -51,7 +51,7 @@ The prototype induces a known drift event on day 60. The eval harness runs four 
 - **Daily:** PSI/KS sweep across all instrumented models.
 - **Weekly:** False-positive review with model owners; threshold recalibration.
 - **Monthly:** Counterfactual replay — inject synthetic drift, measure detection delay.
-- **Quarterly:** MRM L2 sign-off on drift envelopes per tier.
+- **Quarterly:** Line-2 (MRM) sign-off on drift envelopes per tier.
 
 ## Exit criteria for v1 GA
 

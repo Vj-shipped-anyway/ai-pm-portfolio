@@ -1,11 +1,13 @@
 # 🛰️ DriftSentinel — Production Model Drift, Diagnosed and Routed
 
-**Production AI caught decaying 69 days earlier. SR 11-7 compliance at a fraction of the validator headcount.**
+**A portfolio prototype for catching production AI decay 69 days earlier — modeled against SR 11-7 ongoing-monitoring expectations.**
 
-[![Pilot: 8 models](https://img.shields.io/badge/pilot-8%20synthetic%20models-blue)](#)
+> **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, architecture, and walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (MRM committee read, OCC exam, validator co-design) is what the next role does.
+
+[![Modeled fleet: 8 models](https://img.shields.io/badge/modeled--fleet-8%20synthetic%20models-blue)](#)
 [![FP rate: 7%](https://img.shields.io/badge/false--positive%20rate-7%25-brightgreen)](#)
 [![MTTD: 9d vs 78d](https://img.shields.io/badge/MTTD-9d%20vs%2078d%20SOTA-success)](#)
-[![Validator hours saved: 2d/wk](https://img.shields.io/badge/validator%20hours%20saved-2d%2Fwk-orange)](#)
+[![Modeled validator hours saved: 2d/wk](https://img.shields.io/badge/modeled--validator%20hours%20saved-2d%2Fwk-orange)](#)
 [![SR 11-7 aligned](https://img.shields.io/badge/SR%2011--7-aligned-lightgrey)](#)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
@@ -51,11 +53,11 @@ The drift-monitoring space has two well-known incumbents (Evidently AI, Arize). 
 
 ## The honest version (why this exists)
 
-I saw this break in real professional life — a credit decisioning model at a bank I worked with decayed for 11 weeks before anyone noticed. The MRM team kept attesting on a quarterly Word doc. The OCC came calling. Validators were drowning in alerts they couldn't act on. From where I sat, I couldn't fix it the way I thought it needed to be fixed.
+The failure mode this product is designed against — a credit decisioning model decaying for weeks while quarterly Word-doc attestation stays clean, and an OCC finding eventually surfacing it — is the published shape of what SR 11-7 ongoing-monitoring expectations are increasingly catching at Tier-1 BFSI shops. It's the kind of failure I track closely in industry research and the kind of product I want to own as a Sr / Principal PM.
 
-So I built this one on the side over weekends to replicate the pattern and prove it works. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point was to put the four-step product on disk in a form anyone could clone, run, and walk through their own CRO with.
+I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk through their own CRO with — to show how I'd reason about the problem, not to claim a deployment I haven't done.
 
-If you've watched a model decay in production and felt the same itch, this is the thing I built. Fork it.
+If you've watched a model decay in production and felt the same itch, fork this. The taxonomy, the architecture, and the backlog are the parts you're welcome to lift; the production validation is what the seat I'm pursuing actually delivers.
 
 ---
 
@@ -77,26 +79,26 @@ You don't need a cluster. You don't need a job at a bank. You need:
 
 About 60 minutes from `git clone` to seeing the four-step walkthrough run end-to-end. The Streamlit prototype runs on the same setup. The clickable `demo.html` runs in any browser with zero install.
 
-I'm not a CTO. I'm a PM who got tired of watching this specific failure mode go uncaught. The point of the prereq list above is to make sure that anyone who's curious — engineer, PM, validator, CRO who codes in their spare time — can replicate the result on a laptop in an afternoon. If you can't, that's a bug in the README. Open an issue.
+I'm a PM who follows this specific failure mode in industry research. The point of the prereq list above is to make sure that anyone who's curious — engineer, PM, validator, CRO who codes in their spare time — can replicate the result on a laptop in an afternoon. If you can't, that's a bug in the README. Open an issue.
 
 ---
 
 ## Executive summary (90 seconds)
 
-**Problem.** A Tier-1 retail bank caught a draft OCC exam finding for inadequate ongoing monitoring under SR 11-7. Validators were attesting 8 production models with quarterly Word docs. A credit model decayed for 11 weeks before a complaint volume report surfaced it. Modeled exposure: **$14M/yr** in mispriced risk plus regulatory tail.
+**Problem.** A Tier-1 retail bank receives a draft OCC exam finding for inadequate ongoing monitoring under SR 11-7. Validators are attesting 8 production models with quarterly Word docs. A credit model decays for 11 weeks before a complaint volume report surfaces it. Modeled exposure: **$14M/yr** in mispriced risk plus regulatory tail. This is the framing this prototype is designed against — calibrated against published SR 11-7 expectations and the public shape of recent OCC and FRB supervisory letters on AI/ML ongoing monitoring.
 
 **Product.** DriftSentinel — a three-loop monitoring layer that sits on top of the existing model registry and feature store. **Detect** (PSI/KS plus GenAI proxy metrics plus vendor-snapshot diff) → **Diagnose** (feature bisect, segment slicer, upstream lineage, root-cause attribution) → **Decide** (RETAIN / SHADOW / RETRAIN / ROLLBACK with bounded risk envelope and auto-assembled MRM evidence bundle).
 
-**Proof (90-day pilot, partner bank, 8-model fleet).**
+**Modeled performance (90-day pilot design, 8-model synthetic fleet).**
 
 - **MTTD: 78 days → 9 days** (-89%) on Tier-1 models
-- **False-positive rate: 31% → 7%** — validator pager went from "muted" to "real signal"
+- **False-positive rate: 31% → 7%** — validator pager moves from "muted" to "real signal"
 - **MRM evidence-bundle assembly: 3 weeks → 3.2 seconds** (with human edit before sign-off)
-- **Validator capacity reclaimed: ~2 days/week per validator** = ~16 person-days/week at fleet scale
-- **Vendor silent updates caught:** Anthropic Feb-24 snapshot drift detected within 24h (would have been invisible to legacy tooling)
-- **Modeled prevented loss:** $14M/yr at the partner-bank shape; ~$45-90M/yr at Tier-1 fleet scale
+- **Modeled validator capacity reclaimed:** ~2 days/week per validator = ~16 person-days/week at fleet scale
+- **Vendor silent updates caught:** the Anthropic Feb-24 minor snapshot update is the public reference incident the design is calibrated against; the snapshot-pin design surfaces this class of change within 24h
+- **Modeled prevented loss:** $14M/yr at the $50B-asset retail-bank shape; ~$45-90M/yr at Tier-1 fleet scale
 
-**Cost to ship.** ~$280k for the 90-day pilot (compute + 1 PM + 0.5 FTE engineer + MRM partner time). Per dollar of modeled prevented loss: **under one cent**.
+**Modeled cost.** ~$280k for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE engineer + line-2 partner time). Per dollar of modeled prevented loss: **under one cent**.
 
 **Call to action.** Fork this repo. Swap the synthetic data in `data/` for your fleet's inference logs. The four step scripts and the Streamlit prototype run on a laptop in 10 minutes. Walk it through your CRO.
 
@@ -112,7 +114,7 @@ I'm not a CTO. I'm a PM who got tired of watching this specific failure mode go 
 6. **Step 4 — The fix (DriftSentinel)** — Detect → Diagnose → Decide
 7. **Utility delivered** — multiplied number, not the percentage
 8. **Architecture & call flow** — Mermaid topology + per-event sequence
-9. **PM proof artifacts** — RICE backlog, 1-page PRD, validator quotes
+9. **PM artifacts** — RICE backlog, 1-page PRD, stakeholder map, six product principles
 
 > Non-technical reader: skip the code blocks. The plain-English explanation and the metric callouts tell the story.
 > Technical reader: every code block runs. `cd src && python step_NN_*.py` and you'll see the same output.
@@ -123,11 +125,11 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case
 
-A Tier-1 US retail bank ($50B-asset). 8 production ML models across credit, fraud, AML, and one customer-facing GenAI use case on Anthropic Claude Sonnet. SR 11-7 ongoing-monitoring requirement met today via quarterly Word docs. Between attestations, drift is invisible. By the time a business KPI moves, two quarters have leaked.
+A modeled Tier-1 US retail bank ($50B-asset). 8 production ML models across credit, fraud, AML, and one customer-facing GenAI use case on Anthropic Claude Sonnet. SR 11-7 ongoing-monitoring requirement met today via quarterly Word docs. Between attestations, drift is invisible. By the time a business KPI moves, two quarters have leaked.
 
-The catalyst was an OCC draft finding, not a Slack thread. The MRM committee had four weeks to show a remediation plan before the formal exam letter.
+The design is anchored against an OCC draft finding pattern (not a Slack thread). The MRM committee has four weeks to show a remediation plan before the formal exam letter — that's the timebox the product is calibrated against.
 
-The fleet (synthetic but modeled on what a real $50B bank actually runs):
+The fleet (synthetic but modeled on what a real $50B bank typically runs):
 
 - **4 credit models** — PD/LGD across personal lending, HELOC, auto
 - **2 fraud models** — card-present, ACH
@@ -254,9 +256,9 @@ Reducing MTTD by 89% is not an outcome. *Reducing MTTD by 89% across 1,200 produ
 | Per-model lift | **69 days** of decay caught earlier |
 | Affected fleet (typical Tier-1 BFSI) | ~1,200 production models |
 | **Annual model-decay-days prevented** | **~83,000** at fleet scale |
-| Modeled prevented loss (partner-bank shape) | **$14M/yr** |
+| Modeled prevented loss ($50B-asset bank shape) | **$14M/yr** |
 | Modeled prevented loss (Tier-1 fleet shape) | **~$45-90M/yr** |
-| Validator capacity reclaimed | **~2 days/week per validator · ~16 person-days/week at fleet scale** |
+| Modeled validator capacity reclaimed | **~2 days/week per validator · ~16 person-days/week at fleet scale** |
 | Cost per dollar of prevented loss | **< $0.01** |
 
 ---
@@ -322,13 +324,13 @@ See [`assets/drift-flow.svg`](./assets/drift-flow.svg) for a static visual of th
 
 ---
 
-## 📋 PM Proof
+## 📋 PM Artifacts
 
-The PM artifacts that show this was shipped, not just sketched:
+The PM artifacts that show how I'd run this product if I owned the seat:
 
-- [`PM_PROOF.md`](./PM_PROOF.md) — 1-page PRD stub, RICE-prioritized backlog, validator interview quotes, success metrics
-- [`CHANGELOG.md`](./CHANGELOG.md) — six iterations from kickoff through v0.5, framed as pivots and shipped impact (not "what broke")
-- [`PRD.md`](./PRD.md) — full pre-MRM-committee PRD
+- [`PM_PROOF.md`](./PM_PROOF.md) — 1-page PRD stub, RICE-prioritized backlog, stakeholder map, six product principles
+- [`CHANGELOG.md`](./CHANGELOG.md) — six design iterations from kickoff through v0.5, framed as design pivots and product-shape changes
+- [`PRD.md`](./PRD.md) — full PRD designed for a pre-MRM-committee read in a real engagement
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — full systems doc: databases, runtime topology, encryption, IdP/RBAC, network controls, DR/RTO/RPO, compliance posture
 
 ---
@@ -360,9 +362,9 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE Investment
+**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
-[LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Ships compliant AI · DriftSentinel → MRM win*
+[LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Designs compliant AI under regulated constraint*
 
 ---
 

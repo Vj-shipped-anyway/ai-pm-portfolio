@@ -1,8 +1,10 @@
 # PRD · Hallucination Containment for Bank Chatbots
 
 **Author:** Vijay Saharan, Sr PM
-**Stage:** Draft v1.0 — pre-Trust & Safety Council read
+**Stage:** Portfolio prototype — designed for a pre-Trust-&-Safety-Council read in a real engagement
 **Date:** 2026-Q2
+
+> **Framing:** This PRD is the product I'd bring to a Trust & Safety council in the seat. It is not a record of a PRD landed at a named bank. The architecture, the three-guard design, and the rollout plan are mine; the production validation is what the next role does.
 
 ---
 
@@ -10,7 +12,7 @@
 
 Bank chatbots in production confidently misstate rates, fees, account terms, and regulations. The model is not the lever. Vendor models change underneath us, hallucination is structurally unsolved, and BFSI cannot wait on the research frontier. The lever is a containment layer that wraps the deployed chatbot and refuses to pass an ungrounded claim to a customer. Today, that layer is a thin disclaimer in the footer. The result is incident-after-incident, each handled as a one-off remediation while the underlying posture stays unchanged.
 
-I've watched this pattern at three different shops. The remediation cost adds up. The brand cost adds up faster.
+The pattern is well-documented across published BFSI incidents and CFPB complaint trends. The remediation cost adds up. The brand cost adds up faster. The product gap — a containment layer with a calibrated abstention threshold per intent — is what this PRD is designed against.
 
 **Primary user:** Head of Digital Customer Experience (line 1, business owner).
 **Secondary user:** Trust & Safety / AI Risk lead (line 2).

@@ -28,9 +28,9 @@ Cost-as-a-deficiency is the AI-PM-specific framing. Without visibility, model se
 - Affected: typical mid-tier Tier-1 GenAI portfolio runs $8-30M/yr in inference today; growing 3-4x annually
 - Annual utility: ~25-30% spend reduction modeled on cheaper-model substitution and dead-feature pruning, plus prevention of single-feature runaways
 
-## Watch this folder
+## Status
 
-[HalluGuard](../03-hallucination-containment/) is the format reference.
+Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
 
 ---
 

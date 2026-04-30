@@ -1,6 +1,8 @@
 # 🛡️ HalluGuard — Hallucination Containment for Bank Chatbots
 
-*A walkthrough: why retail-banking chatbots hallucinate, and what an AI Product Manager builds to stop them.*
+*A walkthrough: why retail-banking chatbots hallucinate, and what an AI Product Manager would build to stop them.*
+
+> **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. The training-notes describe the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
 
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the LLM gets it wrong.
 
@@ -466,34 +468,34 @@ Anything else is theatre. Reducing a metric by 71% is not an outcome. *Reducing 
 | Current state of the art (LLM only, no containment) | 26.7% wrong answers reach the customer | Step 2 results on the 30-query eval set; calibrated to Anthropic / OpenAI / Llama production behavior |
 | HalluGuard solution | 0% wrong answers reach the customer | Step 4 results — verifier abstains on every miss in the eval set |
 | Per-interaction lift | **26.7 percentage points** | difference of the above |
-| Affected population (partner bank pilot) | ~2.4M retail customers × 6 chats/yr | typical mid-tier US bank (~$40B-asset) chatbot usage |
-| Annual customer interactions | ~14.4M chats / yr | 2.4M × 6 |
-| **Annual utility delivered** | **~3.85M wrong answers prevented per year** | per-interaction lift × annual interactions |
+| Modeled affected population (mid-tier US bank shape, ~$40B-asset) | ~2.4M retail customers × 6 chats/yr | typical mid-tier US bank chatbot usage from public industry benchmarks |
+| Modeled annual customer interactions | ~14.4M chats / yr | 2.4M × 6 |
+| **Modeled annual utility** | **~3.85M wrong answers prevented per year** | per-interaction lift × annual interactions |
 
-**Cross-checked against the 28-day pilot:** the partner bank logged 14 misinformation incidents in the 28 days before HalluGuard, 4 in the 28 days after. Annualized: ~130 fewer incidents/yr at the *Compliance-tracked* level. The 3.85M number includes the much larger long tail that never makes it into Compliance — the customer who got the wrong APR, took the answer at face value, and never complained.
+**Modeled 28-day shape (the design target).** A mid-tier US bank running this containment layer would expect roughly 14 Compliance-tracked misinformation incidents per 28-day pre-window to drop to ~4 in the 28-day post-window — annualizing to ~130 fewer incidents/yr at the *Compliance-tracked* level. The 3.85M number above includes the much larger long tail that never reaches Compliance — the customer who gets the wrong APR, takes the answer at face value, and never complains.
 
 **At fleet scale (Tier-1 retail bank with ~25M customers):** the math is roughly **40M wrong answers prevented per year**, plus the regulatory-tail-risk reduction that sits separately on the CRO's desk.
 
-**Cost to deliver this utility:** $182 in training compute + 0.5 FTE labeling lead for 6 weeks + my time as PM. Per wrong answer prevented at fleet scale: well under one cent.
+**Modeled cost to deliver this utility:** ~$182 in training compute (the LoRA hyperparameters and run-cost in `build/training-notes.md` reflect the approach I'd take, not a deployed model) + 0.5 FTE labeling lead for 6 weeks + my time as PM. Per wrong answer prevented at fleet scale: well under one cent.
 
 That ratio — utility delivered divided by cost — is the number I lead with in any AI investment conversation.
 
 ---
 
-## 📈 Pilot Numbers (the inputs to the utility math above)
+## 📈 Modeled pilot targets (the inputs to the utility math above)
 
-Pilot at the partner bank, 28-day window:
+Modeled 28-day pilot design at a mid-tier US bank shape:
 
 | Metric | Before HalluGuard | With HalluGuard |
 | --- | --- | --- |
 | Auto-detected hallucination rate | 11.4% | 3.3% (-71%) |
 | Customer deflection retained | 67% | 64% (-3pp) |
-| Compliance incidents from chatbot misinfo | 14 | 4 |
+| Modeled Compliance incidents from chatbot misinfo | 14 | 4 |
 | Post-chat customer satisfaction | baseline | +9 points |
 
-**Cost of build:** $182 in compute (training the verifier on 4× A100 for 6 hours), plus 0.5 FTE labeling lead for 6 weeks, plus my time as PM.
+**Modeled cost of build:** ~$182 in compute (the LoRA training shape — 4× A100 for 6 hours — is the cost of the run I'd execute), plus 0.5 FTE labeling lead for 6 weeks, plus my time as PM. The training-notes describe the approach; the production verifier is what the next role trains.
 
-**What's next** — DPO with full deployment-surface coverage (the v0.5 attempt was reverted, see [`CHANGELOG.md`](./CHANGELOG.md)), distillation to DeBERTa for sub-50ms verification, multi-language probe set.
+**What's next** — DPO with full deployment-surface coverage (the v0.5 design exploration described in [`CHANGELOG.md`](./CHANGELOG.md)), distillation to DeBERTa for sub-50ms verification, multi-language probe set.
 
 ---
 
@@ -502,7 +504,7 @@ Pilot at the partner bank, 28-day window:
 This README is the walkthrough. The deeper artifacts:
 
 - [`CHANGELOG.md`](./CHANGELOG.md) — dated build journey from v0.0 (probe design, before any code) to v0.5 (DPO experiment, reverted). Includes the worst week of the project, where I lost six days to inconsistent annotation.
-- [`PRD.md`](./PRD.md) — the product requirements doc the way it would land in front of an MRM committee.
+- [`PRD.md`](./PRD.md) — the product requirements doc designed for a pre-MRM-committee read in a real engagement.
 - [`probes/`](./probes/) — the diagnostic test set. 1,260 examples across the eight failure modes. Schema documented in `probes/README.md`. Three deficiency files committed as samples.
 - [`build/training-notes.md`](./build/training-notes.md) — LoRA hyperparameters (rank 16, alpha 32, target modules), training cost ($182), inter-annotator kappa (0.71, measured retroactively as a mistake), what didn't work.
 - [`scripts/run-probes.sh`](./scripts/run-probes.sh) — CLI to run the full probe suite against any foundation model with a CI gate.
@@ -513,7 +515,7 @@ This README is the walkthrough. The deeper artifacts:
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE Investment
+**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 LinkedIn: [linkedin.com/in/vijaysaharan](https://www.linkedin.com/in/vijaysaharan/)
 

@@ -592,7 +592,7 @@ with st.container():
         - Per-model lift: **~69 days** caught earlier.
         - Affected: **800–1,500 production models** per Tier-1 BFSI fleet.
         - **~83,000 model-decay-days prevented per year** at fleet scale.
-        - Modeled prevented loss: **~$14M/yr** at the partner-bank shape (modeled, not measured).
+        - Modeled prevented loss: **~$14M/yr** at the $50B-asset retail-bank shape (modeled, not measured).
         - Cost: **$1.2–2.4M/yr** software, plus a 4–6 person ops team.
 
         Drift MTTD: 78d → 9d × 800–1,500 production models = ~83,000 model-decay-days prevented annually at fleet scale.

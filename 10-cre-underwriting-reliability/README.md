@@ -2,6 +2,8 @@
 
 **Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../03-hallucination-containment/) for the format this folder will follow when built.
 
+> **Framing:** This is a roadmap placeholder for a portfolio prototype. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency framing and utility math below reflect how I'd apply PM rigor to a domain I follow as a learner.
+
 ---
 
 ## The bleed
@@ -28,9 +30,9 @@ The CRE-specific instance of "confident-and-wrong" — foundation models trained
 - Affected: a typical national CRE operator screens 800-1,200 deals/yr through AI underwriting
 - Annual utility: prevents 3-5 bad bids per year (modeled at average $1.8M each in misallocated capital), plus the bigger uncounted benefit of trust restoration in the AI underwriting tool itself
 
-## Watch this folder
+## Status
 
-[HalluGuard](../03-hallucination-containment/) is the format reference.
+Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
 
 ---
 

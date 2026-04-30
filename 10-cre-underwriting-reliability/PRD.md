@@ -1,8 +1,10 @@
 # PRD · CRE AI Underwriting Reliability Sentinel
 
 **Author:** Vijay Saharan, Sr PM
-**Stage:** Draft v1.1 — pre-IC steering read
+**Stage:** Portfolio prototype — designed for a pre-IC-steering read in a real engagement
 **Date:** 2026-Q2
+
+> **Framing:** This PRD applies the PM rigor I bring to enterprise AI to a domain I follow as a personal study interest. I am not an LP in a CRE portfolio; CRE is something I read deeply on. The architecture, the three-check sentinel design, and the rollout plan are mine; the production validation is what the next role does.
 
 ---
 

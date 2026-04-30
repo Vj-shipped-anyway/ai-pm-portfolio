@@ -30,9 +30,9 @@ Mirroring the HalluGuard walkthrough format:
 - Affected: ~12-20 GenAI features per Tier-1 BFSI shop, each averaging tens of thousands of customer interactions per day
 - Annual utility: thousands of bad responses caught before customer impact, plus the audit-readiness uplift
 
-## Watch this folder
+## Status
 
-When this gets built, it'll look like [HalluGuard](../03-hallucination-containment/) — walkthrough README, sample data, four step scripts, polished Streamlit demo, utility math, CHANGELOG, PRD.
+Roadmap. When built, it'll follow the [HalluGuard](../03-hallucination-containment/) format — walkthrough README, sample data, four step scripts, Streamlit demo, utility math, CHANGELOG, PRD.
 
 ---
 

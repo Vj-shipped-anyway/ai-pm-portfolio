@@ -62,9 +62,9 @@ Defense-in-depth controls: **Model Armor** scrubs prompts at the gateway (prompt
 - Affected: every deployed agent in the fleet (typical Tier-1 BFSI: 8-20 agents in 18 months)
 - Annual utility: tens of prevented runaway incidents + reliability-SLO uplift from "unmeasured" to 99.4%
 
-## Watch this folder
+## Status
 
-[HalluGuard](../03-hallucination-containment/) is the format reference.
+Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
 
 ---
 

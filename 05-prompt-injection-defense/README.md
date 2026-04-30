@@ -50,9 +50,9 @@ PromptShield directly maps to layer 1 (input sanitization), layer 4 (egress filt
 - Affected: every deployed copilot in the bank — typical Tier-1: 4-12 internal copilots over confidential data
 - Annual utility: data-egress incidents → 0; the cost of one prevented exfiltration covers the build many times over
 
-## Watch this folder
+## Status
 
-[HalluGuard](../03-hallucination-containment/) is the format reference.
+Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
 
 ---
 

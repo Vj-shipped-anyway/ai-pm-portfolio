@@ -6,6 +6,18 @@ The portfolio is live in three tiers. **Three flagships are fully built** with s
 
 ---
 
+## 📌 Note on framing
+
+These are **portfolio prototypes** — not production case studies. The deficiency taxonomies, architectures, RICE backlogs, schemas, and walkthroughs reflect how I'd approach these problems as a Senior PM, not work I shipped at a named bank.
+
+Where I cite SR 11-7, NIST AI RMF, OWASP LLM Top 10, EU AI Act Article 12, OCC supervisory guidance, and similar frameworks, those are the standards the work would have to meet — they are not engagements I led through. The synthetic data, prototype code, deficiency analysis, architecture diagrams, and PRDs are mine; the production validation (MRM committee read, OCC exam, FRB horizontal review, validator co-design, fleet rollout) is what the next role does.
+
+The CRE projects (LeaseGuard, DealSentry) apply the same PM rigor to a domain I follow as a personal study interest. I am not an LP in any CRE portfolio and am not actively investing; I read the lease forms, the operator playbooks, and the PropTech vendor literature because the data-quality and AI-reliability problems in CRE map cleanly to the problems I work on professionally.
+
+Read this portfolio as: *this is how Vijay reasons about regulated AI product surfaces, what taxonomies he builds, what architectures he designs, and what backlog he'd run on day one.*
+
+---
+
 ## 📐 The thesis
 
 I price product impact by one formula:
@@ -24,9 +36,9 @@ These are the polished case studies — full walkthrough README, sample data CSV
 
 | Flagship | What it does | Utility delivered | Live demo |
 | --- | --- | --- | --- |
-| **🛡️ [HalluGuard](./03-hallucination-containment/)** — Bank chatbot hallucination containment | Wraps deployed chatbots; catches 8 named foundation-model failure modes (paraphrase blindness, negation flip, multi-hop, citation fabrication, …); routes low-confidence to abstention | ~3.85M wrong answers prevented per year (partner bank); ~40M at fleet scale | [Streamlit (coming)](#) |
-| **🛰️ [DriftSentinel](./01-model-drift-sentinel/)** — Production model drift & decay | Three-loop sentinel (Detect → Diagnose → Decide) over the credit / fraud / AML / GenAI fleet; auto-assembles MRM evidence bundle | Drift MTTD 78d → 9d × ~1,200 production models = ~83,000 model-decay-days prevented annually at fleet scale; $14M/yr modeled prevented loss | [Streamlit (coming)](#) |
-| **🏢 [LeaseGuard](./09-cre-lease-abstraction-detector/)** — CRE lease abstraction error detector | Ensemble verification (primary model + re-extraction + rule-based) over deployed lease-NLP outputs; catches CAM caps, escalation clauses, and tenant rights buried in non-standard / redlined leases | Per-lease accuracy 88% → 98.2%; ~$4.2M/yr modeled recovered rent at 220-asset partner; ~$95M/yr at national-operator scale | [Streamlit (coming)](#) |
+| **🛡️ [HalluGuard](./03-hallucination-containment/)** — Bank chatbot hallucination containment | Wraps deployed chatbots; catches 8 named foundation-model failure modes (paraphrase blindness, negation flip, multi-hop, citation fabrication, …); routes low-confidence to abstention | ~3.85M wrong answers per year prevented in a modeled mid-tier US bank (~$40B-asset, 2.4M retail customers); ~40M at Tier-1 fleet scale | [Streamlit (coming)](#) |
+| **🛰️ [DriftSentinel](./01-model-drift-sentinel/)** — Production model drift & decay | Three-loop sentinel (Detect → Diagnose → Decide) over the credit / fraud / AML / GenAI fleet; auto-assembles MRM evidence bundle | Drift MTTD 78d → 9d × ~1,200 production models = ~83,000 model-decay-days prevented annually at Tier-1 fleet scale; $14M/yr modeled prevented loss at $50B-asset bank shape | [Streamlit (coming)](#) |
+| **🏢 [LeaseGuard](./09-cre-lease-abstraction-detector/)** — CRE lease abstraction error detector | Ensemble verification (primary model + re-extraction + rule-based) over deployed lease-NLP outputs; catches CAM caps, escalation clauses, and tenant rights buried in non-standard / redlined leases | Per-lease accuracy 88% → 98.2%; ~$4.2M/yr modeled recovered rent at a 220-asset operator shape; ~$95M/yr at national-operator scale | [Streamlit (coming)](#) |
 
 Run any flagship on your laptop:
 
@@ -72,7 +84,7 @@ Each of these has a placeholder folder with the bleed, the named model deficienc
 
 ## 🏛️ Reference frameworks the portfolio aligns to
 
-These products don't exist in isolation. Each one slots into a published industry framework or reference architecture. When I'm in front of a CISO or a Head of AI, this is the conversation that turns the portfolio into procurement-ready conversation.
+These products don't exist in isolation. Each one slots into a published industry framework or reference architecture. The framework alignment is what turns "AI prototype" into "procurement-ready conversation" with a CISO or Head of AI — and is the lens I bring to a Sr / Principal PM seat in this space.
 
 - **Google Cloud — *Building secure multi-agent systems on Google Cloud*** (Anirudh Kannan, Christine Sizemore, Connor Herriford, et al., 2025) — the cleanest published spec of the defensible multi-agent pattern. Gemini Enterprise Agent Platform, ADK, Agent Identity, Agent Gateway, Model Armor, Agent Registry, the double-guardrail (IAM + semantic). [Project 04 — AgentWatch](./04-agent-reliability-console/), [05 — PromptShield](./05-prompt-injection-defense/), [07 — OversightOps](./07-hitl-designer/), and [08 — LineageLog](./08-ai-audit-trail/) all reference this paper directly and map their controls to its primitives.
 - **Google's Secure AI Framework (SAIF)** — model controls + agent controls + supply-chain controls. The framework backbone for projects 04, 05, 07, 08.
@@ -105,43 +117,26 @@ The phrase that sells this in BFSI: *"Each project is the implementation surface
 
 ## 🎯 Career Goal
 
-Sr / Principal Product Manager at an AI-first BFSI org, AI platform team, or PropTech operator — where the work is shipping production AI under regulated constraint (drift, evals, hallucination, agent reliability, audit lineage) and where my dual context (enterprise AI delivery + commercial real estate investment) gets used, not parked.
+Sr / Principal Product Manager at an AI-first BFSI org, AI platform team, or PropTech operator — where the work is shipping production AI under regulated constraint (drift, evals, hallucination, agent reliability, audit lineage). I follow commercial real estate as a personal study interest and the lease-NLP and underwriting-reliability problems map cleanly to the same AI-quality work.
 
 ---
 
 ## 👤 Author
 
-**Vijay Saharan** · Sr Product Manager · AI in BFSI · Enterprise AI Platforms · Commercial Real Estate
+**Vijay Saharan** · Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
-- **LinkedIn:** [linkedin.com/in/vijaysaharan](https://www.linkedin.com/in/vijaysaharan/)
-- **Resume:** `./resume/Vijay_Saharan_Resume.pdf` *(drop your latest PDF in the `/resume` folder before pushing — link goes live)*
-- **Email:** open to inbound from hiring managers and recruiters; LinkedIn DM is the fastest path
+- **LinkedIn:** [linkedin.com/in/vijaysaharan](https://www.linkedin.com/in/vijaysaharan/) — primary contact, full work history, recommendations
+- **Resume:** available on request via LinkedIn DM
+- **Open to:** Sr / Principal PM roles in AI Platform, AI in BFSI, and PropTech
 
-**Certifications — 500+ total, distributed across:**
-
-| Domain | Approx. count | Anchors |
-| --- | --- | --- |
-| Cloud (AWS / GCP / Azure) | ~140 | Solutions Architect, ML Engineer, AI Practitioner, Security Specialty |
-| AI / ML (Anthropic, OpenAI, Google AI, Databricks) | ~95 | Anthropic API, OpenAI Production, Vertex AI, Databricks ML Practitioner |
-| Program / Project Management (PMI, Scaled Agile, Scrum) | ~80 | PMP, PMI-ACP, SAFe Agilist, SAFe Product Owner / Product Manager, CSM, CSPO |
-| BFSI domain (risk, compliance, fintech, payments) | ~110 | NACD CERT, GARP / FRM modules, ABA AI in Banking, Reg E / Reg Z / SR 11-7 short courses |
-| Commercial real estate (CCIM, NAIOP, ULI tracks) | ~75 | CCIM 101/102, NAIOP Underwriting, ULI Capital Markets, Yardi/Argus operator certs |
-
-The certs are the audit trail of how I've stayed current across the regulated-AI + CRE + program-management lanes. They're not a substitute for shipped work — the projects in this repo are.
-
-**Delivery experience that aligns to typical Sr / Principal PM job specs:**
-
-- **Agile / SAFe at scale.** Multi-team release trains, dependency mapping across 5+ squads, sprint-zero through cutover. SAFe Product Manager + PO certified; have run PI Planning sessions in BFSI program contexts.
-- **Regulated AI delivery lifecycle.** SR 11-7, NIST AI RMF, EU AI Act Article 12 — these aren't names I learned for this README. I've shipped through MRM committees, OCC exams, and FRB horizontal reviews.
-- **Program management heritage.** PMP, multi-year multi-million-dollar programs in BFSI. The discipline shows up in every project's Rollout table and RACI.
-- **Dual context.** Enterprise AI delivery + active commercial real estate investment practice. Projects 09 and 10 are not academic — they're the same product muscle applied to a portfolio I'm an LP in.
+**Credentials, employers, and detailed work history:** see [LinkedIn](https://www.linkedin.com/in/vijaysaharan/). The projects in this repo are how I think — the analysis, taxonomies, architectures, and PM artifacts I'd bring to the seat. LinkedIn is the verified work-history record.
 
 **Why this maps to AI-first BFSI Sr / Principal PM specs:**
 
-- Owning AI roadmap under regulated constraint? → [DriftSentinel](./01-model-drift-sentinel/), [HalluGuard](./03-hallucination-containment/), [LineageLog](./08-ai-audit-trail/) all start with the deficiency taxonomy and end at MRM attestation.
+- Owning AI roadmap under regulated constraint? → [DriftSentinel](./01-model-drift-sentinel/), [HalluGuard](./03-hallucination-containment/), [LineageLog](./08-ai-audit-trail/) all start with the deficiency taxonomy and end at MRM attestation as the design target.
 - Shipping copilots / agents into production? → [HalluGuard](./03-hallucination-containment/), [AgentWatch](./04-agent-reliability-console/), [PromptShield](./05-prompt-injection-defense/) cover the four production failure classes (hallucination, agent reliability, prompt injection, observability).
 - FinOps / inference-cost ownership? → [InferenceLens](./06-inference-economics/) is the spec.
-- Cross-functional with risk, compliance, infosec? → Every PRD in this repo names the line-1 / line-2 / line-3 stakeholders explicitly and tracks a stakeholder map.
+- Cross-functional with risk, compliance, infosec? → Every PRD in this repo names the line-1 / line-2 / line-3 stakeholders explicitly and sketches a stakeholder map.
 
 If your seat maps to one of these projects, pick that one and let's talk about it. I'd rather have a 45-minute conversation about your specific failure mode in production than send you a deck.
 
@@ -160,6 +155,6 @@ If your seat maps to one of these projects, pick that one and let's talk about i
 
 ## 🧩 Portfolio Progression
 
-This grows. The three flagships are the foundation. The seven roadmap projects fill in over Q3-Q4 2026, and the next batch after that is queued (foundation-model regression detection, long-context fidelity probes, schema-drift detection for tool-calling agents). Each new project follows the same shape: pick a bleed, name the deficiency, build the test set, build the containment, ship the walkthrough.
+The three flagships are the foundation. The seven roadmap projects are scoped to fill in over Q3-Q4 2026. Future candidates being scoped: foundation-model regression detection, long-context fidelity probes, schema-drift detection for tool-calling agents.
 
-Watch this repo. The pattern is: deep over wide. Three projects done excellently puts you in top 1%. Ten done mediocrely puts you nowhere.
+Each new project follows the same shape: pick a bleed, name the deficiency, build the test set, build the containment, ship the walkthrough. Depth over breadth — three projects done well say more than ten done shallow.

@@ -15,7 +15,7 @@ The actual diagnostic test corpus. 1,260 hand-curated examples across the eight 
 | `07_jurisdiction_confusion.jsonl` | Jurisdiction confusion | 140 | not yet committed |
 | `08_confident_and_wrong.jsonl` | Confident-and-wrong | 180 | not yet committed |
 
-The committed samples are illustrative slices. Full probe corpus lives in the partner-bank-restricted artifact store (the labeled cases include de-identified incident-log content). What's here is enough to demonstrate the schema and run the prototype.
+The committed samples are illustrative slices. The full probe corpus is what I'd build out in the seat — the design is to expand each deficiency file to the counts above using the schema below. What's committed is enough to demonstrate the schema, the deficiency taxonomy, and the prototype.
 
 ## Schema
 

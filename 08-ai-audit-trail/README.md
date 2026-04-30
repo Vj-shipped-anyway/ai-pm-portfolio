@@ -58,9 +58,9 @@ Google Cloud's *Building secure multi-agent systems on Google Cloud* (Kannan, Si
 - Affected: every regulated AI decision the bank produces — for a Tier-1 retail bank that's 50-200M decisions per year
 - Annual utility: continuous exam-readiness instead of annual fire drills, plus the second-order benefit of internal model improvement when teams can trace bad outcomes to specific contributing decisions
 
-## Watch this folder
+## Status
 
-[HalluGuard](../03-hallucination-containment/) is the format reference.
+Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
 
 ---
 

@@ -1,8 +1,10 @@
 # PRD · Production Model DriftSentinel
 
 **Author:** Vijay Saharan, Sr PM
-**Stage:** Draft v1.2 — pre-MRM committee read
+**Stage:** Portfolio prototype — designed for a pre-MRM-committee read in a real engagement
 **Date:** 2026-Q2
+
+> **Framing:** This PRD is the product I'd bring to an MRM committee in the seat. It is not a record of a PRD landed at a named bank. The deficiency taxonomy, the architecture, and the rollout plan are mine; the production validation is what the next role does.
 
 ---
 
@@ -10,7 +12,7 @@
 
 Production ML and GenAI models silently decay. Across the BFSI fleet — credit, fraud, AML, customer-facing GenAI — ground truth is delayed 30 to 180 days, vendor models update without notice, and the SR 11-7 ongoing-monitoring requirement is met today with quarterly Word docs. The result is structural blindness. By the time decay surfaces in a business KPI, two quarters of value have leaked.
 
-I've watched this happen. The credit model that drifted for 11 weeks before anyone noticed. The fraud model that lost two recall points across a tactic shift and got blamed on "campaign noise." The GenAI Q&A use case where the vendor pushed a minor update and the refusal rate doubled overnight. None of these were exotic. All of them were invisible to the existing tooling.
+The pattern is well-documented in industry research and recent supervisory writing. A credit model that drifts for 11 weeks before anyone notices. A fraud model that loses two recall points across a tactic shift and gets blamed on "campaign noise." A GenAI Q&A use case where the vendor pushes a minor update and the refusal rate doubles overnight (the Anthropic Feb-24 minor snapshot update is the public reference for this last one). None of these are exotic. All of them are invisible to legacy MRM tooling.
 
 **Primary user:** Production ML/AI Operations Lead (line 1).
 **Secondary user:** Model Validator (line 2).
@@ -18,9 +20,9 @@ I've watched this happen. The credit model that drifted for 11 weeks before anyo
 
 ## 2. Why now
 
-- GenAI is in production at every Tier-1 US bank. None I've seen have a unified drift surface that covers it.
-- OCC, Fed, and CFPB are signaling sharper expectations on ongoing monitoring of AI/ML. The next exam cycle is when this becomes a finding.
-- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock are now a quarterly occurrence. Legacy MRM tooling does not see them.
+- GenAI is in production at every Tier-1 US bank, with a unified drift surface that covers it remaining a published gap across the major MRM tool vendors.
+- OCC, Fed, and CFPB are signaling sharper expectations on ongoing monitoring of AI/ML in their published supervisory letters. The next exam cycle is where this becomes a finding.
+- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock are now a quarterly occurrence (Anthropic's Feb-24, 2026 minor update on `claude-sonnet-4-20250215` is the public reference). Legacy MRM tooling does not see them.
 - The open-source drift primitives (Evidently, NannyML, Whylogs) are mature enough that the build is now about diagnosis and routing, not detection math.
 
 ## 3. Goals (12-month horizon)
@@ -75,7 +77,7 @@ A three-loop product.
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | Alert fatigue (PSI false positives) | High | High | Segment-aware noise floor; 2-of-3 signal rule before paging; tunable thresholds per use-case archetype |
-| Validator rejects auto-bundle | Med | High | Co-design rubric with MRM L2 from week one; bundle is editable, not auto-attested |
+| Validator rejects auto-bundle | Med | High | Co-design rubric with line-2 from week one; bundle is editable, not auto-attested |
 | GenAI ground-truth latency | High | Med | Proxy metric portfolio (groundedness, refusal, length, judge drift); calibrate offline |
 | Vendor model silent updates | High | High | Vendor-version pinning; canary diff on snapshot change; treat snapshot ID as a model attribute |
 | Performance regression on shadow rollout | Med | High | Always shadow first; never auto-promote |
@@ -139,7 +141,7 @@ A three-loop product.
 - If they're on quarterly Word docs only: greenfield. The 5-pilot foundation phase is non-negotiable. Don't try to boil the fleet.
 
 **Org dependencies.**
-- MRM L2 co-signs the diagnosis rubric, the bundle template, and the recommendation thresholds. Without this, the product is dead on arrival.
+- Line-2 (MRM) co-signs the diagnosis rubric, the bundle template, and the recommendation thresholds. Without this, the product is dead on arrival.
 - Model owners (line 1) sign the per-model attestation envelope.
 - Internal Audit (line 3) gets read-only access and an audit-trail interlock with Project 08.
 - The data platform team owns the feature-store and lineage interfaces. Get this commitment in writing before phase 0.

@@ -78,7 +78,7 @@ m2.metric("LeaseGuard accuracy (after triage)", "98.2%", "+10.2 pp")
 m3.metric("Field errors caught / yr (220 leases)", "~270",
           help="Modeled, not measured.")
 m4.metric("Modeled rent recovered / yr", "$4.2M",
-          help="Modeled at the partner portfolio. Every portfolio is different.")
+          help="Modeled at a 220-asset retail-and-office portfolio shape. Every portfolio is different.")
 
 st.markdown("---")
 

@@ -1,8 +1,8 @@
 """
 Step 2 — With deployed lease-NLP: a Claude-Sonnet-over-OCR pipeline.
 
-This is the SOTA approach the partner CRE owner-operator was running before
-LeaseGuard. The pipeline:
+This is the SOTA approach an institutional CRE owner-operator runs today,
+matching the public Cherre / Lev / ProDeal / Yardi Aspire pattern. The pipeline:
     1. Tesseract / AWS Textract OCRs the lease PDF.
     2. A LangChain extraction chain prompts Claude Sonnet to fill 12 fields.
     3. Output lands in the lease abstraction database (Yardi / MRI / Argus).
