@@ -2,6 +2,8 @@
 
 **A portfolio prototype for catching production AI decay 69 days earlier — modeled against SR 11-7 ongoing-monitoring expectations.**
 
+**▶ Live demo: [driftsentinel-bfsi.streamlit.app](https://driftsentinel-bfsi.streamlit.app)**
+
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, architecture, and walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (MRM committee read, OCC exam, validator co-design) is what the next role does.
 
 [![Modeled fleet: 8 models](https://img.shields.io/badge/modeled--fleet-8%20synthetic%20models-blue)](#)
