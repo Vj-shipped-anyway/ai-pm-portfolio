@@ -2,6 +2,8 @@
 
 *A walkthrough: why retail-banking chatbots hallucinate, and what an AI Product Manager would build to stop them.*
 
+**▶ Live demo: [halluguard-bfsi.streamlit.app](https://halluguard-bfsi.streamlit.app)**
+
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. The training-notes describe the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
 
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the LLM gets it wrong.
