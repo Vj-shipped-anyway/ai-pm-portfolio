@@ -68,8 +68,6 @@ Each of these has a placeholder folder with the bleed, the named model deficienc
 
 **If you're triaging the 7 roadmap projects:** each placeholder has the bleed paragraph, the named deficiency, and the utility-math formula. Pick the one closest to your problem and ask me to prioritize building it.
 
-**Want the demos live?** [DEPLOY.md](./DEPLOY.md) walks through GitHub Pages (static HTML demos), Streamlit Community Cloud (interactive prototypes), Hugging Face Spaces, and Vercel — about 90 minutes end-to-end to get six live demo URLs.
-
 ---
 
 ## 🏛️ Reference frameworks the portfolio aligns to

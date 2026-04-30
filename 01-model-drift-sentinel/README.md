@@ -9,12 +9,10 @@
 [![SR 11-7 aligned](https://img.shields.io/badge/SR%2011--7-aligned-lightgrey)](#)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
-[![Streamlit Cloud](https://img.shields.io/badge/Streamlit%20Cloud-deploy-red)](../DEPLOY.md)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-deploy-black)](../DEPLOY.md)
 
 ![Hero — DriftSentinel four-tab dashboard](./assets/drift-flow.svg)
 
-> **▶ 30-second demo (Loom):** *placeholder — record once `demo.html` is deployed; see [DEPLOY.md → Path E](../DEPLOY.md) for the recording script.* Until then, the [clickable demo](./demo.html) gets you the same story in 30 seconds with no install.
+> **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
 
 ---
 
@@ -332,7 +330,6 @@ The PM artifacts that show this was shipped, not just sketched:
 - [`CHANGELOG.md`](./CHANGELOG.md) — six iterations from kickoff through v0.5, framed as pivots and shipped impact (not "what broke")
 - [`PRD.md`](./PRD.md) — full pre-MRM-committee PRD
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — full systems doc: databases, runtime topology, encryption, IdP/RBAC, network controls, DR/RTO/RPO, compliance posture
-- [`linkedin_post.md`](./linkedin_post.md) — launch post template
 
 ---
 

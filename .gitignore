@@ -1,0 +1,174 @@
+# =============================================================================
+# Python
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# =============================================================================
+# Secrets & credentials — NEVER commit these
+# =============================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.toml
+.streamlit/secrets.toml
+**/secrets/
+credentials.json
+service-account*.json
+.aws/
+.anthropic/
+api_keys.txt
+
+# =============================================================================
+# Streamlit
+# =============================================================================
+.streamlit/secrets.toml
+.streamlit/cache/
+
+# =============================================================================
+# Jupyter / data science
+# =============================================================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+.jupyter/
+
+# =============================================================================
+# Data files (uncomment if you want to keep large data out of git)
+# Synthetic CSVs in this portfolio are <1MB each, so we KEEP them tracked.
+# If you ever add real production data, uncomment the lines below.
+# =============================================================================
+# *.parquet
+# *.feather
+# data/raw/
+# data/processed/
+
+# Large binary outputs that don't belong in git
+*.h5
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.bin
+*.onnx
+models/checkpoints/
+
+# =============================================================================
+# Logs & runtime
+# =============================================================================
+*.log
+logs/
+*.log.*
+
+# =============================================================================
+# Testing & coverage
+# =============================================================================
+.coverage
+.coverage.*
+.cache/
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+.hypothesis/
+coverage.xml
+*.cover
+nosetests.xml
+
+# =============================================================================
+# IDEs & editors
+# =============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.spyderproject
+.spyproject
+.ropeproject
+
+# =============================================================================
+# macOS
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.DocumentRevisions-V100
+.TemporaryItems
+.VolumeIcon.icns
+
+# =============================================================================
+# Windows
+# =============================================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =============================================================================
+# Linux
+# =============================================================================
+*~
+.directory
+.Trash-*
+
+# =============================================================================
+# Node (if you ever add a Vercel landing page or React frontend)
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.next/
+out/
+.vercel/
+
+# =============================================================================
+# Portfolio-specific
+# =============================================================================
+# Loom video drafts — link them via README, don't commit raw files
+*.mov
+*.mp4
+*.mkv
+recordings/
+
+# Local notes / scratch
+NOTES.md
+TODO.local.md
+scratch/
+.scratch/
