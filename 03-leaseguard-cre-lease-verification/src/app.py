@@ -597,6 +597,6 @@ if st.session_state.step >= 4:
         st.dataframe(glossary_df, use_container_width=True, hide_index=True)
 
     st.markdown(
-        "<div class='lg-card muted'>Built as a portfolio prototype. Production architecture in <code>README.md</code>.</div>",
+        "<div class='lg-card muted'>Built as a portfolio prototype. Production architecture in <a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/README.md' target='_blank'><code>README.md</code></a>.</div>",
         unsafe_allow_html=True,
     )

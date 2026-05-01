@@ -431,6 +431,6 @@ if st.session_state.step >= 4:
         )
 
     st.markdown(
-        "<div class='dl-card muted'>Built as a portfolio prototype. Production architecture in <code>README.md</code>.</div>",
+        "<div class='dl-card muted'>Built as a portfolio prototype. Production architecture in <a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/10-dealsentry-cre-underwriting/README.md' target='_blank'><code>README.md</code></a>.</div>",
         unsafe_allow_html=True,
     )

@@ -200,7 +200,7 @@ st.markdown(
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
-    <span class='pill'>SR 11-7 aligned</span>
+    <span class='pill'><a href='https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm' target='_blank'>SR 11-7 aligned</a></span>
     <span class='pill'>Built 2026</span>
   </div>
 </div>
@@ -347,7 +347,7 @@ if st.session_state.step >= 3:
     <li>The 90-day reference window is representative of "stable" behavior.</li>
     <li>Slice cuts (subprime_650_680, card_present_pos, etc.) reflect the bank's actual operating segments.</li>
     <li>For GenAI proxy metrics (refusal-rate, response-length, judge-drift), the human label set is balanced.</li>
-    <li>SR 11-7 (Federal Reserve's 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring) ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
+    <li><a href='https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm' target='_blank'>SR 11-7</a> (Federal Reserve's 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring) ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='confidence-high'>{confidence}</div>
@@ -448,8 +448,8 @@ if st.session_state.step >= 5:
             f"- **Reference window:** 90 days, `inference_logs.csv`\n"
             f"- **Vendor snapshot pin:** {mrow['snapshot_id']}\n"
             f"- **Telemetry stack:** OpenTelemetry -> ClickHouse (drift events) + Datadog + Langfuse\n"
-            f"- **SR 11-7 mapping:** ongoing monitoring + change management + escalation routing. "
-            f"OCC (Office of the Comptroller of the Currency) and FRB (Federal Reserve Board) co-issued the rule.\n"
+            f"- **[SR 11-7](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm) mapping:** ongoing monitoring + change management + escalation routing. "
+            f"[OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) (Office of the Comptroller of the Currency) and [FRB](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm) (Federal Reserve Board) co-issued the rule.\n"
             f"- **Validator workflow:** auto-routes to {mrow['owner']} (the line-2 validator - independent reviewer "
             f"who must approve a model before launch) with the bounded recommendation pre-filled"
         )
@@ -481,7 +481,16 @@ if st.session_state.step >= 5:
         )
         st.dataframe(glossary_df, use_container_width=True, hide_index=True)
 
+        st.markdown("**Official references** (click to read the source documents):")
+        st.markdown(
+            "- [SR 11-7 — Federal Reserve Supervisory Letter on Model Risk Management (2011)](https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm)\n"
+            "- [OCC Bulletin 2011-12 — Supervisory Guidance on Model Risk Management](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)\n"
+            "- [Federal Reserve Board — model risk supervision](https://www.federalreserve.gov/supervisionreg/topics/model_risk_management.htm)\n"
+            "- [OCC — Model Risk Management resource center](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html)\n"
+            "- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework)"
+        )
+
     st.markdown(
-        "<div class='ds-card muted'>Built as a portfolio prototype. Production architecture in <code>README.md</code>.</div>",
+        "<div class='ds-card muted'>Built as a portfolio prototype. Production architecture in <a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/02-driftsentinel-model-drift-monitoring/README.md' target='_blank'><code>README.md</code></a>.</div>",
         unsafe_allow_html=True,
     )
