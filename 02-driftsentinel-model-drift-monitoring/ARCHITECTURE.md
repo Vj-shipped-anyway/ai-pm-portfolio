@@ -348,7 +348,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 | `drift-sentinel-api` REST | OpenAPI 3.1 over HTTPS | OIDC bearer, role-checked via OPA | UI, CLI, MRM workbench iframes, GRC tool integrations |
 | `drift-sentinel-api` gRPC (internal only) | gRPC + protobuf | mTLS via service mesh (SPIFFE) | Worker, scheduler, events |
 | **Webhooks (outbound)** | HTTPS POST + HMAC-SHA256 signature | Pre-shared HMAC secret per consumer | Bank's incident management, Compliance dashboard |
-| **MCP server (optional, GCP-native deployments)** | Anthropic Model Context Protocol | OIDC + Agent Identity | Allows the bank's agents to query drift status as a tool — interlocks with [Project 04 — AgentWatch](../05-agentwatch/) |
+| **MCP server (optional, GCP-native deployments)** | Anthropic Model Context Protocol | OIDC + Agent Identity | Allows the bank's agents to query drift status as a tool — interlocks with [Project 04 — AgentWatch](../05-agentwatch-agent-observability/) |
 | **OpenAPI spec endpoint** | `/openapi.json` | Public (no auth) | Discovery for the CLI, UI, integration tools |
 
 ### API-design opinions (the choices a reviewer will ask about)

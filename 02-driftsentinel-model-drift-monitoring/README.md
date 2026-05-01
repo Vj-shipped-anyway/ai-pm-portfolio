@@ -393,6 +393,23 @@ Streamlit was the right tool for this prototype. It would be the wrong tool for 
 
 The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
 
+### What this would look like as a client-facing SaaS
+
+> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
+
+If DriftSentinel were a real product shipping to a bank's MRM organization:
+
+- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system, e.g., Capital One's Cube, JPMorgan's Glaze) — embedded as a panel inside the validator's existing MRM workbench, not a standalone app.
+- **Auth:** SAML / OIDC integration with the bank's IdP (Okta, ForgeRock, PingFederate); RBAC mapping line-1 model owner / line-2 validator / line-3 audit roles.
+- **Backend:** FastAPI or NestJS on the bank's existing K8s cluster (EKS or GKE); microservice per check (drift detector, slice analyzer, vendor-snapshot diff, recommendation engine).
+- **Data plane:** ClickHouse for high-cardinality drift events (slice × feature × day matrix can hit 10M rows/day on a Tier-1 fleet); Snowflake / Databricks as the analytics warehouse the bank already runs; Postgres for the model registry side-channel.
+- **Observability:** OpenTelemetry → Datadog (the bank's standard) for system traces; Langfuse for GenAI proxy-metric traces; PagerDuty for SLO breaches and drift-event escalation routing.
+- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate if federal counterparty work; data residency configurable per region (US East, EU West, India for RBI compliance).
+- **Governance:** Native integration with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream); each drift event auto-files an evidence bundle and routes to the correct validator workflow.
+- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on false-positive rate breach.
+
+The Streamlit prototype here proves the *product mechanic* — that slice-aware + vendor-aware drift detection can compress MTTD from 78 days to 9 days. The production architecture above is what the seat I'm pursuing actually delivers.
+
 ---
 
 ## 👤 Author

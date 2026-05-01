@@ -541,6 +541,24 @@ Streamlit was the right tool for this prototype. It would be the wrong tool for 
 
 The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
 
+### What this would look like as a client-facing SaaS
+
+> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
+
+If HalluGuard were a real product shipping to a bank's chatbot oversight team:
+
+- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system, e.g., Capital One's Cube, JPMorgan's Glaze) — embedded as a React component inside the existing chatbot console, not a standalone app.
+- **Auth:** SAML / OIDC integration with the bank's IdP (Okta, ForgeRock, PingFederate); RBAC mapping line-1 chatbot owner / line-2 model risk / line-3 audit roles.
+- **Backend:** FastAPI on the bank's existing K8s cluster (typically EKS or GKE); microservice per check (verifier, abstention rewriter, probe runner). The LoRA Llama 3.1 8B verifier served via vLLM on 2× L4 GPUs with autoscaling on QPS.
+- **Vendor pinning:** Anthropic snapshot pinning enforced at gateway (model_id + snapshot_date locked); diffs surface as drift events.
+- **Data plane:** Postgres + pgvector for the verifier index and probe corpus; Snowflake / Databricks (whichever the bank already runs) for the analytics warehouse.
+- **Observability:** OpenTelemetry → Datadog (the bank's standard) for system traces; Langfuse for LLM-specific verifier traces; PagerDuty for SLO breaches (nightly probe regression).
+- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate if federal counterparty work; data residency configurable per region (US East, EU West, India for RBI compliance).
+- **Governance:** Native integration with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream); each abstention event auto-files a Compliance disposition record.
+- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; canary rollout 1% → 10% → 50% → 100% over 14 days, with auto-rollback on probe regression.
+
+The Streamlit prototype here proves the *product mechanic* — that an ensemble verifier can catch the eight named failure modes on a calibrated probe set. The production architecture above is what the seat I'm pursuing actually delivers.
+
 ---
 
 ## 👤 Author

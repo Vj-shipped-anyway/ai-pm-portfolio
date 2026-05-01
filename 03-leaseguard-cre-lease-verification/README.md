@@ -401,6 +401,25 @@ Streamlit was the right tool for this prototype. It would be the wrong tool for 
 
 The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
 
+### What this would look like as a client-facing SaaS
+
+> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
+
+If LeaseGuard were a real product shipping to a CRE owner-operator's asset management team:
+
+- **Frontend:** Next.js 15 + Tailwind + shadcn/ui — a per-lease verification panel that lives inside the operator's existing system of record (Yardi Voyager, MRI, JD Edwards), not a standalone app. Asset managers approve/reject from where they already work.
+- **Auth:** SAML / OIDC with the operator's IdP (Okta, Azure AD); RBAC mapping abstraction analyst / senior abstraction lead / asset manager / acquisitions roles.
+- **Backend:** FastAPI on the operator's K8s footprint (EKS or AKS most common in CRE shops); microservice per check (primary extractor, ensemble verifier, symbolic clause-engine, side-letter ingestor).
+- **Data plane:** Postgres for the lease-record table (mirroring Yardi's lease ID schema); object storage (S3 / Azure Blob) for the redlined PDFs and OCR artifacts; Snowflake for the analytics warehouse the acquisitions team already queries.
+- **Integrations:** Yardi Voyager and MRI write-back via their published REST APIs; Argus Enterprise import for the cash-flow side; CoStar / CompStak / Cherre as auxiliary feeds for benchmark comps; ProDeal / Lev / VTS for transaction-management bridges.
+- **OCR layer:** Textract for the harder scans, Tesseract for clean PDFs, document-AI fallback (Anthropic Claude Vision) for the redlined edge cases.
+- **Observability:** OpenTelemetry → Datadog; Langfuse for the LLM extraction traces; per-lease confidence scores logged for the asset-management ops view.
+- **Compliance:** SOC 2 Type II baseline (CRE LPs increasingly ask for it); audit log of every field decision retained for 7 years to match REIT data-retention requirements.
+- **Governance:** Every disagreement between primary extractor and ensemble verifier auto-routes to the senior abstraction lead with the diff pre-rendered.
+- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; rollout to one asset book at a time (start with the redlined-retail subset where the lift is biggest).
+
+The Streamlit prototype here proves the *product mechanic* — that an ensemble verifier can catch the six named lease-NLP failure modes on the 6-lease eval set. The production architecture above is what the seat I'm pursuing actually delivers.
+
 ---
 
 ## 👤 Author

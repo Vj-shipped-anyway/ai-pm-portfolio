@@ -48,9 +48,9 @@ These are the polished case studies — full walkthrough README, sample data CSV
 
 | Flagship | What it does | Utility delivered | Live demo |
 | --- | --- | --- | --- |
-| **🛡️ [HalluGuard](./01-halluguard/)** — Bank chatbot hallucination containment | Wraps deployed chatbots; catches 8 named foundation-model failure modes (paraphrase blindness, negation flip, multi-hop, citation fabrication, …); routes low-confidence to abstention | 🟢 100% wrong-answer cut on the 80-probe synthetic stress test in this repo · 🟡 ~3.85M wrong answers/yr prevented at a modeled mid-tier US bank shape (~$40B-asset, ~2.4M retail customers, ~6 chats/customer/yr); ~40M at Tier-1 fleet scale | **▶ [Live demo](https://halluguard-bfsi.streamlit.app)** |
-| **🛰️ [DriftSentinel](./02-driftsentinel/)** — Production model drift & decay | Three-loop sentinel (Detect → Diagnose → Decide) over the credit / fraud / AML / GenAI fleet; auto-assembles MRM evidence bundle | 🟡 Drift MTTD 78d → 9d (modeled — assumes the synthetic 90-day shipped data and a Tier-1-style fleet) × ~1,200 production models = ~83,000 model-decay-days/yr prevented at Tier-1 fleet scale; 🟡 ~$14M/yr modeled prevented loss at the $50B-asset bank shape (assumes 8-model fleet, MTTD compression, published loss-per-quarter-of-decay benchmarks) | **▶ [Live demo](https://driftsentinel-bfsi.streamlit.app)** |
-| **🏢 [LeaseGuard](./03-leaseguard/)** — CRE lease abstraction error detector | Ensemble verification (primary model + re-extraction + rule-based) over deployed lease-NLP outputs; catches CAM caps, escalation clauses, and tenant rights buried in non-standard / redlined leases | 🟢 6/6 hard-case leases caught in the synthetic eval set · 🟡 88% → 98.2% per-lease accuracy projected at portfolio scale (assumes 220-asset retail-and-office mix, paralegal triage clears flagged fields); 🟡 ~$4.2M/yr modeled recovered rent at the 220-asset shape; ~$95M/yr at national-operator scale | [Streamlit (coming)](#) |
+| **🛡️ [HalluGuard](./01-halluguard-bank-chatbot-safety/)** — Bank chatbot hallucination containment | Wraps deployed chatbots; catches 8 named foundation-model failure modes (paraphrase blindness, negation flip, multi-hop, citation fabrication, …); routes low-confidence to abstention | 🟢 100% wrong-answer cut on the 80-probe synthetic stress test in this repo · 🟡 ~3.85M wrong answers/yr prevented at a modeled mid-tier US bank shape (~$40B-asset, ~2.4M retail customers, ~6 chats/customer/yr); ~40M at Tier-1 fleet scale | **▶ [Live demo](https://halluguard-bfsi.streamlit.app)** |
+| **🛰️ [DriftSentinel](./02-driftsentinel-model-drift-monitoring/)** — Production model drift & decay | Three-loop sentinel (Detect → Diagnose → Decide) over the credit / fraud / AML / GenAI fleet; auto-assembles MRM evidence bundle | 🟡 Drift MTTD 78d → 9d (modeled — assumes the synthetic 90-day shipped data and a Tier-1-style fleet) × ~1,200 production models = ~83,000 model-decay-days/yr prevented at Tier-1 fleet scale; 🟡 ~$14M/yr modeled prevented loss at the $50B-asset bank shape (assumes 8-model fleet, MTTD compression, published loss-per-quarter-of-decay benchmarks) | **▶ [Live demo](https://driftsentinel-bfsi.streamlit.app)** |
+| **🏢 [LeaseGuard](./03-leaseguard-cre-lease-verification/)** — CRE lease abstraction error detector | Ensemble verification (primary model + re-extraction + rule-based) over deployed lease-NLP outputs; catches CAM caps, escalation clauses, and tenant rights buried in non-standard / redlined leases | 🟢 6/6 hard-case leases caught in the synthetic eval set · 🟡 88% → 98.2% per-lease accuracy projected at portfolio scale (assumes 220-asset retail-and-office mix, paralegal triage clears flagged fields); 🟡 ~$4.2M/yr modeled recovered rent at the 220-asset shape; ~$95M/yr at national-operator scale | [Streamlit (coming)](#) |
 
 Run any flagship on your laptop:
 
@@ -71,19 +71,19 @@ Each of these has a placeholder folder with the bleed, the named model deficienc
 
 | # | Project | Domain | Scoped utility | Target |
 | --- | --- | --- | --- | --- |
-| 04 | **🧪 [EvalForge](./04-evalforge/)** — Eval-First Console for Regulated AI | AI Platform / QA | 🟡 < 2% post-deployment regression vs. ~14% SOTA × 12-20 GenAI features per Tier-1 BFSI shop | Q3 2026 |
-| 05 | **🤖 [AgentWatch](./05-agentwatch/)** — Agent Reliability & Tool-Use Observability | AI Platform / Ops | 🔴 Runaway $/incident → 0; 🟡 MTTR 4h → 10min × every deployed agent | Q3 2026 |
-| 06 | **🛡️ [PromptShield](./06-promptshield/)** — Prompt-Injection & Egress Defense | AI Platform / Security | 🟡 Detection 30-50% → 96%+ × every internal copilot over confidential data | Q3 2026 |
-| 07 | **💰 [InferenceLens](./07-inferencelens/)** — Inference Economics Dashboard | AI Platform / FinOps | 🟡 0% → 100% per-feature cost visibility; ~25-30% modeled spend reduction | Q4 2026 |
-| 08 | **👥 [OversightOps](./08-oversightops/)** — HITL Workflow Designer | AI Platform / Governance | 🟡 Rubber-stamp rate ~94% → ≤4%; review SLA 24h+ → 35min × every HITL pipeline | Q4 2026 |
-| 09 | **📜 [LineageLog](./09-lineagelog/)** — AI Audit Trail & Decision Lineage | BFSI / Compliance | 🔴 Time-to-audit-evidence 14d → 12min target × every regulated AI decision (🟡 50-200M/yr at Tier-1 retail bank) | Q4 2026 |
-| 10 | **🏗️ [DealSentry](./10-dealsentry/)** — CRE AI Underwriting Reliability | CRE / PropTech | 🟡 Comp-fabrication 12-18% → <1% × 800-1,200 deals/yr screened | Q4 2026 |
+| 04 | **🧪 [EvalForge](./04-evalforge-llm-eval-platform/)** — Eval-First Console for Regulated AI | AI Platform / QA | 🟡 < 2% post-deployment regression vs. ~14% SOTA × 12-20 GenAI features per Tier-1 BFSI shop | Q3 2026 |
+| 05 | **🤖 [AgentWatch](./05-agentwatch-agent-observability/)** — Agent Reliability & Tool-Use Observability | AI Platform / Ops | 🔴 Runaway $/incident → 0; 🟡 MTTR 4h → 10min × every deployed agent | Q3 2026 |
+| 06 | **🛡️ [PromptShield](./06-promptshield-prompt-injection-defense/)** — Prompt-Injection & Egress Defense | AI Platform / Security | 🟡 Detection 30-50% → 96%+ × every internal copilot over confidential data | Q3 2026 |
+| 07 | **💰 [InferenceLens](./07-inferencelens-inference-finops/)** — Inference Economics Dashboard | AI Platform / FinOps | 🟡 0% → 100% per-feature cost visibility; ~25-30% modeled spend reduction | Q4 2026 |
+| 08 | **👥 [OversightOps](./08-oversightops-hitl-workflow/)** — HITL Workflow Designer | AI Platform / Governance | 🟡 Rubber-stamp rate ~94% → ≤4%; review SLA 24h+ → 35min × every HITL pipeline | Q4 2026 |
+| 09 | **📜 [LineageLog](./09-lineagelog-ai-decision-audit/)** — AI Audit Trail & Decision Lineage | BFSI / Compliance | 🔴 Time-to-audit-evidence 14d → 12min target × every regulated AI decision (🟡 50-200M/yr at Tier-1 retail bank) | Q4 2026 |
+| 10 | **🏗️ [DealSentry](./10-dealsentry-cre-underwriting/)** — CRE AI Underwriting Reliability | CRE / PropTech | 🟡 Comp-fabrication 12-18% → <1% × 800-1,200 deals/yr screened | Q4 2026 |
 
 ---
 
 ## 💡 How to Navigate
 
-**If you're a hiring manager who wants the punchline:** read the master flagship — [HalluGuard](./01-halluguard/) — top to bottom. It's a 15-minute read with the walkthrough format, the 8-deficiency taxonomy, the LoRA training trail, and the utility math.
+**If you're a hiring manager who wants the punchline:** read the master flagship — [HalluGuard](./01-halluguard-bank-chatbot-safety/) — top to bottom. It's a 15-minute read with the walkthrough format, the 8-deficiency taxonomy, the LoRA training trail, and the utility math.
 
 **If you're a technical reviewer:** pick any flagship, `cd <folder>/src`, install requirements, run the four step scripts in order. Each writes a CSV to `out/`.
 
@@ -97,12 +97,12 @@ Each of these has a placeholder folder with the bleed, the named model deficienc
 
 These products don't exist in isolation. Each one slots into a published industry framework or reference architecture. The framework alignment is what turns "AI prototype" into "procurement-ready conversation" with a CISO or Head of AI — and is the lens I bring to a Sr / Principal PM seat in this space.
 
-- **Google Cloud — *Building secure multi-agent systems on Google Cloud*** (Anirudh Kannan, Christine Sizemore, Connor Herriford, et al., 2025) — the cleanest published spec of the defensible multi-agent pattern. Gemini Enterprise Agent Platform, ADK, Agent Identity, Agent Gateway, Model Armor, Agent Registry, the double-guardrail (IAM + semantic). [Project 05 — AgentWatch](./05-agentwatch/), [06 — PromptShield](./06-promptshield/), [08 — OversightOps](./08-oversightops/), and [09 — LineageLog](./09-lineagelog/) all reference this paper directly and map their controls to its primitives.
+- **Google Cloud — *Building secure multi-agent systems on Google Cloud*** (Anirudh Kannan, Christine Sizemore, Connor Herriford, et al., 2025) — the cleanest published spec of the defensible multi-agent pattern. Gemini Enterprise Agent Platform, ADK, Agent Identity, Agent Gateway, Model Armor, Agent Registry, the double-guardrail (IAM + semantic). [Project 05 — AgentWatch](./05-agentwatch-agent-observability/), [06 — PromptShield](./06-promptshield-prompt-injection-defense/), [08 — OversightOps](./08-oversightops-hitl-workflow/), and [09 — LineageLog](./09-lineagelog-ai-decision-audit/) all reference this paper directly and map their controls to its primitives.
 - **Google's Secure AI Framework (SAIF)** — model controls + agent controls + supply-chain controls. The framework backbone for projects 05, 06, 08, 09.
-- **OWASP LLM Top 10** — LLM01 Prompt Injection, LLM09 Misinformation, LLM06 Sensitive Information Disclosure. [Project 01 — HalluGuard](./01-halluguard/) and [06 — PromptShield](./06-promptshield/) anchor here.
-- **NIST AI RMF + EU AI Act Article 12** — decision-grain lineage requirements. [Project 09 — LineageLog](./09-lineagelog/) is the implementation surface.
-- **SR 11-7 (Federal Reserve Supervisory Letter on Model Risk Management)** — ongoing-monitoring requirement. [Project 02 — DriftSentinel](./02-driftsentinel/) is the implementation surface.
-- **The eval-first thesis** — Hamel Husain, Karpathy, Greg Kamradt's needle-in-haystack work, Lilian Weng on LLM patterns. Cited in [Project 04 — EvalForge](./04-evalforge/) and the [HalluGuard probe taxonomy](./01-halluguard/probes/).
+- **OWASP LLM Top 10** — LLM01 Prompt Injection, LLM09 Misinformation, LLM06 Sensitive Information Disclosure. [Project 01 — HalluGuard](./01-halluguard-bank-chatbot-safety/) and [06 — PromptShield](./06-promptshield-prompt-injection-defense/) anchor here.
+- **NIST AI RMF + EU AI Act Article 12** — decision-grain lineage requirements. [Project 09 — LineageLog](./09-lineagelog-ai-decision-audit/) is the implementation surface.
+- **SR 11-7 (Federal Reserve Supervisory Letter on Model Risk Management)** — ongoing-monitoring requirement. [Project 02 — DriftSentinel](./02-driftsentinel-model-drift-monitoring/) is the implementation surface.
+- **The eval-first thesis** — Hamel Husain, Karpathy, Greg Kamradt's needle-in-haystack work, Lilian Weng on LLM patterns. Cited in [Project 04 — EvalForge](./04-evalforge-llm-eval-platform/) and the [HalluGuard probe taxonomy](./01-halluguard-bank-chatbot-safety/probes/).
 
 The phrase that sells this in BFSI: *"Each project is the implementation surface for a published framework regulators and Google have already endorsed."* The portfolio isn't proposing new compliance; it's the missing product layer between the framework and the production system.
 
@@ -174,9 +174,9 @@ Sr / Principal Product Manager at an AI-first BFSI org, AI platform team, or Pro
 
 **Why this maps to AI-first BFSI Sr / Principal PM specs:**
 
-- Owning AI roadmap under regulated constraint? → [DriftSentinel](./02-driftsentinel/), [HalluGuard](./01-halluguard/), [LineageLog](./09-lineagelog/) all start with the deficiency taxonomy and end at MRM attestation as the design target.
-- Shipping copilots / agents into production? → [HalluGuard](./01-halluguard/), [AgentWatch](./05-agentwatch/), [PromptShield](./06-promptshield/) cover the four production failure classes (hallucination, agent reliability, prompt injection, observability).
-- FinOps / inference-cost ownership? → [InferenceLens](./07-inferencelens/) is the spec.
+- Owning AI roadmap under regulated constraint? → [DriftSentinel](./02-driftsentinel-model-drift-monitoring/), [HalluGuard](./01-halluguard-bank-chatbot-safety/), [LineageLog](./09-lineagelog-ai-decision-audit/) all start with the deficiency taxonomy and end at MRM attestation as the design target.
+- Shipping copilots / agents into production? → [HalluGuard](./01-halluguard-bank-chatbot-safety/), [AgentWatch](./05-agentwatch-agent-observability/), [PromptShield](./06-promptshield-prompt-injection-defense/) cover the four production failure classes (hallucination, agent reliability, prompt injection, observability).
+- FinOps / inference-cost ownership? → [InferenceLens](./07-inferencelens-inference-finops/) is the spec.
 - Cross-functional with risk, compliance, infosec? → Every PRD in this repo names the line-1 / line-2 / line-3 stakeholders explicitly and sketches a stakeholder map.
 
 If your seat maps to one of these projects, pick that one and let's talk about it. I'd rather have a 45-minute conversation about your specific failure mode in production than send you a deck.

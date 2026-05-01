@@ -1,6 +1,6 @@
 # 🛡️ PromptShield — Prompt-Injection & Egress Defense
 
-**Status:** Roadmap · Targeted Q3 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q3 2026 · See [HalluGuard](../01-halluguard-bank-chatbot-safety/) for the format this folder will follow when built.
 
 ---
 
@@ -52,7 +52,7 @@ PromptShield directly maps to layer 1 (input sanitization), layer 4 (egress filt
 
 ## Status
 
-Roadmap. [HalluGuard](../01-halluguard/) is the format reference for when this gets built.
+Roadmap. [HalluGuard](../01-halluguard-bank-chatbot-safety/) is the format reference for when this gets built.
 
 ---
 

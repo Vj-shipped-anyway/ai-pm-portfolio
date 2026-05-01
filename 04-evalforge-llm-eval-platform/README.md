@@ -1,6 +1,6 @@
 # 🧪 EvalForge — Eval-First Console for Regulated AI
 
-**Status:** Roadmap · Targeted Q3 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q3 2026 · See [HalluGuard](../01-halluguard-bank-chatbot-safety/) for the format this folder will follow when built.
 
 ---
 
@@ -32,7 +32,7 @@ Mirroring the HalluGuard walkthrough format:
 
 ## Status
 
-Roadmap. When built, it'll follow the [HalluGuard](../01-halluguard/) format — walkthrough README, sample data, four step scripts, Streamlit demo, utility math, CHANGELOG, PRD.
+Roadmap. When built, it'll follow the [HalluGuard](../01-halluguard-bank-chatbot-safety/) format — walkthrough README, sample data, four step scripts, Streamlit demo, utility math, CHANGELOG, PRD.
 
 ---
 
