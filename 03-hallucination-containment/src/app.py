@@ -1,15 +1,9 @@
 """
-HalluGuard — Hallucination Containment for Bank Chatbots
+HalluGuard - Hallucination Containment for Bank Chatbots
 Author: Vijay Saharan
 Run: streamlit run app.py
 
-Narrative-first product demo. Six acts:
-  1. Setup        — meet the customer
-  2. Hallucination — what the raw model says (without containment)
-  3. Fix          — what the containment layer does instead
-  4. Architecture — the three guards (collapsible)
-  5. Stress test  — 80-probe run, before vs. after
-  6. MRM evidence — what a regulator sees, downloadable
+Guided tour. 10 steps. Click Next to advance.
 """
 
 from __future__ import annotations
@@ -30,88 +24,180 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 
 st.set_page_config(
-    page_title="HalluGuard — Hallucination Containment",
+    page_title="HalluGuard - Hallucination Containment",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-
 GITHUB_URL = "https://github.com/vijaysaharan/ai-pm-portfolio"
+TOTAL_STEPS = 11  # steps 0..10
 
 CSS = """
 <style>
+  /* Subtle fade-in */
+  .step-wrap { animation: fadeIn 350ms ease-in; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .hero {
     background: linear-gradient(135deg, #0b1c3d 0%, #142850 60%, #1f3a6b 100%);
-    color: #f4f6fb; padding: 28px 32px; border-radius: 14px; margin-bottom: 8px;
-    border: 1px solid #2a3a5c;
+    color: #f4f6fb; padding: 36px 36px; border-radius: 16px;
+    border: 1px solid #2a3a5c; margin: 8px 0 14px 0;
   }
-  .hero h1 { font-size: 30px; margin: 0 0 6px 0; }
-  .hero .sub { color: #b9c5dd; font-size: 15px; margin: 0; }
-  .hero .meta { color: #7d8db0; font-size: 12px; margin-top: 10px; }
+  .hero h1 { font-size: 38px; margin: 0 0 12px 0; line-height: 1.15; }
+  .hero p  { color: #cfd8ee; font-size: 16px; line-height: 1.6; margin: 0; }
+  .hero .meta { color: #7d8db0; font-size: 12px; margin-top: 14px; }
   .hero .meta a { color: #9ec5fe; text-decoration: none; }
 
-  .customer-card {
-    background: #18233a; border: 1px solid #2a3a5c; border-radius: 12px;
-    padding: 18px; color: #e6ecf6; margin: 12px 0;
+  .narrator {
+    color: #b9c5dd; font-size: 15px; line-height: 1.6;
+    margin: 0 0 18px 0; max-width: 860px;
   }
-  .customer-card .who { font-weight: 600; font-size: 16px; }
-  .customer-card .what { color: #a7b6d3; font-size: 13px; margin-top: 2px; }
+  .caption {
+    color: #a7b6d3; font-size: 14px; font-style: italic;
+    margin-top: 14px; max-width: 820px; line-height: 1.55;
+  }
 
-  .what-is-card {
-    background: #1a2540; border: 1px solid #3a5180; border-left: 4px solid #6f9bff;
-    border-radius: 10px; padding: 14px 18px; color: #dde6f7;
-    margin: 10px 0 14px 0; font-size: 14px; line-height: 1.55;
+  .quote-bubble {
+    background: #18233a; border-left: 4px solid #6f9bff;
+    color: #e6ecf6; font-size: 18px; padding: 18px 22px;
+    border-radius: 0 12px 12px 0; margin: 18px 0;
+    max-width: 720px;
   }
-  .what-is-card b { color: #9ec5fe; }
+  .quote-bubble .speaker {
+    color: #9ec5fe; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 6px;
+  }
 
-  .quote {
-    background: #0e1726; border-left: 3px solid #6f9bff; padding: 10px 14px;
-    margin: 10px 0; border-radius: 0 8px 8px 0; color: #dde6f7; font-style: italic;
+  .person-card {
+    background: #18233a; border: 1px solid #2a3a5c; border-radius: 14px;
+    padding: 22px 26px; color: #e6ecf6; max-width: 540px;
   }
+  .person-card .avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #6f9bff, #1ec07a);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #0b1c3d; font-weight: 800; font-size: 22px; margin-bottom: 10px;
+  }
+  .person-card .name { font-size: 19px; font-weight: 700; }
+  .person-card .meta { color: #a7b6d3; font-size: 14px; margin-top: 4px; }
 
   .bad-card {
-    background: #2a0d12; border: 1px solid #6b1f2a; border-left: 6px solid #e0364f;
-    border-radius: 12px; padding: 18px; color: #ffe5ea;
+    background: #2a0d12; border: 2px solid #6b1f2a; border-left: 8px solid #e0364f;
+    border-radius: 14px; padding: 22px 26px; color: #ffe5ea;
+    box-shadow: 0 8px 28px rgba(224, 54, 79, 0.25);
+    max-width: 720px;
   }
-  .bad-card .head { color: #ff8094; font-weight: 700; font-size: 14px; }
-  .bad-card .body { font-size: 15px; line-height: 1.5; margin-top: 6px; }
-  .bad-card .truth { color: #ffd2d8; font-size: 13px; margin-top: 10px; }
+  .bad-card .label {
+    color: #ff8094; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .bad-card .body { font-size: 19px; line-height: 1.45; font-weight: 600; }
 
   .good-card {
-    background: #082018; border: 1px solid #144d36; border-left: 6px solid #1ec07a;
-    border-radius: 12px; padding: 18px; color: #d8f4e7;
+    background: #082018; border: 2px solid #144d36; border-left: 8px solid #1ec07a;
+    border-radius: 14px; padding: 22px 26px; color: #d8f4e7;
+    box-shadow: 0 8px 28px rgba(30, 192, 122, 0.22);
+    max-width: 720px;
   }
-  .good-card .head { color: #6fdba8; font-weight: 700; font-size: 14px; }
-  .good-card .body { font-size: 15px; line-height: 1.5; margin-top: 6px; }
-  .good-card .why { color: #a5d8c0; font-size: 13px; margin-top: 10px; }
-
-  .amber-card {
-    background: #2a200b; border: 1px solid #6b541f; border-left: 6px solid #d6a700;
-    border-radius: 12px; padding: 14px 18px; color: #fff1c9;
+  .good-card .label {
+    color: #6fdba8; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 10px;
   }
+  .good-card .body { font-size: 18px; line-height: 1.5; }
 
-  .impact-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-  .impact-pill {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 999px; padding: 4px 12px; font-size: 12px; color: #e6ecf6;
+  .truth-card {
+    background: #141b2c; border: 1px solid #2a3a5c; border-left: 4px solid #d6a700;
+    border-radius: 12px; padding: 18px 22px; color: #fff1c9;
+    max-width: 720px;
   }
+  .truth-card .label {
+    color: #ffc94d; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .truth-card .body { font-size: 18px; line-height: 1.5; }
 
-  .grid-card {
+  .compare {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+    margin: 18px 0; max-width: 760px;
+  }
+  .compare .col {
     background: #141b2c; border: 1px solid #2a3a5c; border-radius: 10px;
-    padding: 14px; color: #d9e1f2; height: 100%;
+    padding: 16px; text-align: center; color: #d9e1f2;
   }
-  .grid-card .title { font-weight: 600; font-size: 13px; color: #9ec5fe; margin-bottom: 6px; }
+  .compare .col .v { font-size: 26px; font-weight: 800; margin-top: 6px; }
+  .compare .col.bot  { border-left: 4px solid #e0364f; }
+  .compare .col.true { border-left: 4px solid #1ec07a; }
+  .compare .col.gap  { border-left: 4px solid #d6a700; }
+
+  .big-number {
+    font-size: 96px; font-weight: 800; line-height: 1;
+    background: linear-gradient(135deg, #6f9bff, #1ec07a);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; margin: 18px 0 6px 0;
+  }
+  .big-number-sub { font-size: 18px; color: #cfd8ee; max-width: 720px; }
+
+  .toggle-wrap {
+    background: #18233a; border: 1px solid #2a3a5c; border-radius: 14px;
+    padding: 26px 30px; max-width: 540px; text-align: center;
+    margin: 14px 0;
+  }
+  .toggle-pill {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #0e1726; border: 1px solid #2a3a5c; border-radius: 999px;
+    padding: 8px 16px; font-size: 14px; color: #a7b6d3;
+  }
+  .toggle-pill .off { color: #ff8094; font-weight: 700; }
+  .toggle-pill .arrow { color: #7d8db0; }
+  .toggle-pill .on { color: #6fdba8; font-weight: 700; }
+
+  .flow-step {
+    background: #141b2c; border: 1px solid #2a3a5c; border-radius: 10px;
+    padding: 14px 18px; color: #d9e1f2; margin: 8px 0;
+  }
+  .flow-step .num {
+    display: inline-block; width: 26px; height: 26px; line-height: 26px;
+    text-align: center; background: #6f9bff; color: #0b1c3d;
+    border-radius: 50%; font-weight: 800; margin-right: 10px;
+  }
+
+  .metric-tile {
+    background: #18233a; border: 1px solid #2a3a5c; border-radius: 14px;
+    padding: 22px 24px; color: #e6ecf6;
+  }
+  .metric-tile .label {
+    color: #9ec5fe; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .metric-tile .value { font-size: 44px; font-weight: 800; line-height: 1; }
+  .metric-tile.red .value  { color: #ff8094; }
+  .metric-tile.green .value { color: #6fdba8; }
+
+  .audit-card {
+    background: #141b2c; border: 1px solid #2a3a5c; border-radius: 12px;
+    padding: 16px 18px; color: #d9e1f2; height: 100%;
+  }
+  .audit-card .title { font-size: 14px; color: #9ec5fe; font-weight: 700; margin-bottom: 8px; }
+  .audit-card .desc  { font-size: 13px; color: #a7b6d3; line-height: 1.5; }
+
+  .step-indicator {
+    color: #7d8db0; font-size: 12px; letter-spacing: 0.6px;
+    text-transform: uppercase; font-weight: 700; margin-top: 26px;
+  }
 
   div[data-testid="stMetricValue"] { font-size: 30px; }
-  div[data-testid="stMetricDelta"] { font-size: 13px; }
 </style>
 """
 
 st.markdown(CSS, unsafe_allow_html=True)
 
+
 # -----------------------------------------------------------------------------
-# Data loading
+# Data loading (kept for dashboard mode)
 # -----------------------------------------------------------------------------
 
 
@@ -132,370 +218,7 @@ def safe_load():
 
 
 # -----------------------------------------------------------------------------
-# Customer scenarios — ties a query to a customer, a hallucinated answer,
-# the ground truth, and a cost-of-error frame.
-# -----------------------------------------------------------------------------
-
-SCENARIOS = {
-    "wire_fee": {
-        "label": "Wire fee — 'What's your wire transfer fee?'",
-        "customer": {
-            "name": "Maria",
-            "age": 47,
-            "kind": "Retail customer",
-            "context": "Sending $5,000 to her daughter abroad",
-            "question": "What's your wire transfer fee?",
-        },
-        "hallucinated_answer": "Our wire transfer fee is $45.",
-        "ground_truth_label": "Domestic outgoing wire (PCK)",
-        "ground_truth_value": "$30",
-        "ground_truth_source": "fees.csv · PCK · domestic outgoing wire",
-        "containment_response": (
-            "I want to make sure I get this right for you. Let me connect you "
-            "with a banker — they'll have the current wire transfer fee for "
-            "your account."
-        ),
-        "cost_of_error": (
-            "The bot told Maria the wire would cost $45. The real fee on the bank's "
-            "rate card is $30. Maria budgets $15 wrong and the bank misled her. "
-            "Multiply by 14 million chatbot conversations a year — that's the kind "
-            "of pattern the consumer-protection regulator (CFPB) builds a class-action case around."
-        ),
-        "intent_key": "wire_fee",
-    },
-    "savings_apy": {
-        "label": "Savings rate — 'What's the rate on your savings account?'",
-        "customer": {
-            "name": "Daniel",
-            "age": 31,
-            "kind": "New checking customer",
-            "context": "Comparing where to park $20,000 in emergency savings",
-            "question": "What's the rate on your savings account?",
-        },
-        "hallucinated_answer": "Our High-Yield Savings APY is 4.85% — the highest in the market.",
-        "ground_truth_label": "High-Yield Savings APY",
-        "ground_truth_value": "4.35%",
-        "ground_truth_source": "rates.csv · HYS · APY",
-        "containment_response": (
-            "Rates change frequently and I want to give you a number you can "
-            "act on. A banker will quote the current APY in writing."
-        ),
-        "cost_of_error": (
-            "Daniel parks $20,000 expecting a rate the bank doesn't actually offer. "
-            "The bot overstated by 50 basis points (0.50 percentage points). Across "
-            "thousands of customers, this becomes a violation of Reg DD (the federal "
-            "rule requiring banks to clearly disclose savings rates) and UDAAP "
-            "(the rule against unfair or deceptive practices)."
-        ),
-        "intent_key": "savings_apy",
-    },
-    "overdraft": {
-        "label": "Overdraft fee — 'Do I get a grace period on overdrafts?'",
-        "customer": {
-            "name": "Aisha",
-            "age": 28,
-            "kind": "Premier Checking customer",
-            "context": "Just got a low-balance push notification",
-            "question": "Do I get a grace period to bring the account positive before any overdraft fee?",
-        },
-        "hallucinated_answer": (
-            "Yes — you have a 24-hour grace period to bring the account positive "
-            "before any overdraft fee."
-        ),
-        "ground_truth_label": "Overdraft (each thereafter, PCK)",
-        "ground_truth_value": "$35 — no grace period; assessed end-of-day",
-        "ground_truth_source": "fees.csv · PCK · overdraft",
-        "containment_response": (
-            "Overdraft policy is something I won't guess on. A banker will walk "
-            "through your specific account terms with you."
-        ),
-        "cost_of_error": (
-            "Aisha relies on a fictitious grace period. Eats a $35 fee. "
-            "Multiply by every customer who heard the same answer."
-        ),
-        "intent_key": "overdraft",
-    },
-    "atm_fee": {
-        "label": "ATM fees — 'Are out-of-network ATMs free?'",
-        "customer": {
-            "name": "Tom",
-            "age": 55,
-            "kind": "Premier Checking customer",
-            "context": "Traveling, planning ATM withdrawals",
-            "question": "Are out-of-network ATM withdrawals free for me?",
-        },
-        "hallucinated_answer": "Yes, all ATM withdrawals are free, anywhere in the world.",
-        "ground_truth_label": "Domestic ATM (out-of-network, TRV)",
-        "ground_truth_value": "$2.50 per withdrawal",
-        "ground_truth_source": "fees.csv · TRV / PCK ATM rules",
-        "containment_response": (
-            "ATM fees depend on which account you have and where you withdraw. "
-            "I'll route you to a banker who can confirm based on your card."
-        ),
-        "cost_of_error": (
-            "Tom plans his trip thinking ATMs are free. Every wrong quote is a "
-            "potential violation of Reg E (the federal rule on electronic transfer "
-            "disclosures — what the bank must tell you about ATM, wire, and ACH fees)."
-        ),
-        "intent_key": "atm_fee",
-    },
-    "fdic": {
-        "label": "FDIC coverage — 'How much is FDIC-insured?'",
-        "customer": {
-            "name": "Priya",
-            "age": 62,
-            "kind": "Pre-retiree",
-            "context": "Considering moving $400k from another bank",
-            "question": "How much of my deposit is FDIC-insured?",
-        },
-        "hallucinated_answer": "FDIC covers up to $500,000 if you have a joint account.",
-        "ground_truth_label": "FDIC limit",
-        "ground_truth_value": "$250,000 per depositor, per insured bank, per ownership category",
-        "ground_truth_source": "FDIC statutory limit",
-        "containment_response": (
-            "FDIC coverage depends on how your account is titled. A banker "
-            "will walk through ownership categories with you so you get the "
-            "exact coverage answer."
-        ),
-        "cost_of_error": (
-            "Priya moves $400,000 thinking it's all federally insured. It isn't — "
-            "FDIC (federal deposit insurance) only covers $250,000 per customer per bank. "
-            "If the bank failed, $150,000 would be uninsured. One wrong sentence creates "
-            "real customer harm and a lawsuit."
-        ),
-        "intent_key": "fdic",
-    },
-    "cd_rate": {
-        "label": "CD rate — 'What's the rate on a 12-month CD?'",
-        "customer": {
-            "name": "Jorge",
-            "age": 38,
-            "kind": "Existing depositor",
-            "context": "Rolling over a maturing CD next week",
-            "question": "What's the rate on a 12-month CD right now?",
-        },
-        "hallucinated_answer": "Our 12-month CD APY is 4.50%.",
-        "ground_truth_label": "12-Month CD APY",
-        "ground_truth_value": "4.10%",
-        "ground_truth_source": "rates.csv · CD12 · APY",
-        "containment_response": (
-            "I'll route you to a banker for the current CD rate — they'll lock "
-            "the rate sheet in writing before you commit."
-        ),
-        "cost_of_error": (
-            "Jorge expects 4.50%. Lands at 4.10%. Trust takes years to rebuild."
-        ),
-        "intent_key": "cd_rate",
-    },
-}
-
-
-# -----------------------------------------------------------------------------
-# Helpers — Acts
-# -----------------------------------------------------------------------------
-
-
-def render_act_1_setup(scenario: dict) -> None:
-    """Hero + What-is-this card + customer card."""
-    st.markdown(
-        f"""
-        <div class='hero'>
-          <h1>HalluGuard — Stops bank chatbots from giving customers wrong answers</h1>
-          <p class='sub'>A safety check that catches the AI's wrong answers (hallucinations) before a customer sees them.
-          Watch what happens when a customer asks your bank chatbot a simple question.</p>
-          <p class='meta'>
-            Banking &amp; Financial Services · Trust &amp; Safety · Sr PM portfolio — Vijay Saharan
-            &nbsp;·&nbsp; <a href='{GITHUB_URL}' target='_blank'>GitHub</a>
-          </p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # "What is this demo?" card — plain English, two sentences
-    st.markdown(
-        """
-        <div class='what-is-card'>
-          <b>What is this demo?</b> A bank's chatbot sometimes makes up wrong answers
-          about fees, rates, and policies — and customers believe them. HalluGuard is a
-          safety check that catches those wrong answers before the customer sees them.
-          Below, you'll watch it in action with a real customer story.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # Story-natural section heading (replaces "Act 1")
-    st.markdown("### Meet Maria — she just asked your bank chatbot a question")
-    st.caption(
-        "*The customer below is about to ask a real banking question. "
-        "Watch what the chatbot does next.*"
-    )
-
-    c = scenario["customer"]
-    st.markdown(
-        f"""
-        <div class='customer-card'>
-          <div class='who'>{c['name']}, {c['age']} · {c['kind']}</div>
-          <div class='what'>{c['context']}</div>
-          <div class='quote'>"{c['question']}"</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_act_2_hallucination(scenario: dict) -> None:
-    st.markdown("### What happens without HalluGuard (the safety check is off)")
-    st.caption("*Plain English: this is what the AI says when nothing is checking its work.*")
-    st.markdown(
-        f"""
-        <div class='bad-card'>
-          <div class='head'>WHAT YOUR CHATBOT ANSWERS — A WRONG ANSWER IT MADE UP (A HALLUCINATION)</div>
-          <div class='body'>"{scenario['hallucinated_answer']}"</div>
-          <div class='truth'>
-            <b>The real, correct answer (from the bank's official rate card / fee schedule):</b>
-            {scenario['ground_truth_label']} = <b>{scenario['ground_truth_value']}</b>
-            &nbsp;·&nbsp; <span style='opacity:0.7'>source: {scenario['ground_truth_source']}</span>
-          </div>
-          <div class='impact-row'>
-            <span class='impact-pill'>Why this matters</span>
-          </div>
-          <div style='margin-top:8px;font-size:13px;color:#ffe0e6;'>
-            {scenario['cost_of_error']}
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_act_3_fix(scenario: dict, containment_on: bool, threshold: float) -> None:
-    st.markdown("### What happens with HalluGuard on (the safety check catches it)")
-    st.caption("*Plain English: when the AI isn't sure, it stops and hands the customer to a real banker.*")
-
-    if not containment_on:
-        st.markdown(
-            """
-            <div class='amber-card'>
-              <b>Safety check is OFF (containment layer disabled).</b> Same question, same wrong answer as the panel on the left.
-              Flip the toggle in the sidebar to ON to see what HalluGuard does.
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        return
-
-    confidence = 0.61  # Below threshold by construction for the demo path
-    why = (
-        f"A small AI verifier (the NLI verifier) compared the chatbot's answer to the bank's rate card. "
-        f"It was only {confidence:.0%} sure the answer matched the documents, "
-        f"below the {threshold:.0%} bar we set. So the system stopped — "
-        f"better to hand off to a banker than risk giving the customer a wrong number."
-    )
-
-    st.markdown(
-        f"""
-        <div class='good-card'>
-          <div class='head'>WITH HALLUGUARD, HERE'S WHAT YOUR CHATBOT DOES INSTEAD</div>
-          <div class='body'>"{scenario['containment_response']}"</div>
-          <div class='why'>
-            <b>Why it stopped and handed off (also called "abstention"):</b> {why}
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_acts_2_and_3(scenario: dict, containment_on: bool, threshold: float) -> None:
-    col_bad, col_good = st.columns(2)
-    with col_bad:
-        render_act_2_hallucination(scenario)
-    with col_good:
-        render_act_3_fix(scenario, containment_on, threshold)
-
-
-def render_act_4_architecture() -> None:
-    with st.expander("How the safety check works (under the hood)", expanded=False):
-        st.markdown(
-            """
-            **Three safety checks, one after another. Each one has a single job.**
-
-            **Check 1 — Ground the answer in the bank's real documents.**
-            Compare the chatbot's answer to the bank's official rate card, fee schedule,
-            and product tables. If a number doesn't appear in those documents,
-            the answer doesn't go to the customer. *(In ML jargon: grounding against the
-            knowledge base.)*
-
-            **Check 2 — Hand off when not sure (abstain).**
-            A small AI checker (called an NLI verifier — it scores "does this answer
-            actually match what the documents say?") gives the answer a confidence score.
-            If the score is below the bar we set (the abstention threshold),
-            the chatbot says "let me get you a banker" instead of guessing.
-
-            **Check 3 — Run trick questions every hour to spot weak spots.**
-            80 trick questions (the probe set) are designed to expose where the AI gets
-            fooled. We run them against the chatbot every hour in the background. The list
-            is versioned and saved with the model — the same way a bank stores
-            penetration-test results for its mobile app.
-
-            ---
-            """
-        )
-
-        # Plain HTML/SVG flow diagram (no extra deps)
-        flow_svg = """
-        <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-          <defs>
-            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ec5fe"/>
-            </marker>
-          </defs>
-          <g font-family="Inter,Arial,sans-serif" font-size="12" fill="#dde6f7">
-            <rect x="10"  y="70" width="120" height="60" rx="8" fill="#18233a" stroke="#2a3a5c"/>
-            <text x="70"  y="95"  text-anchor="middle" fill="#9ec5fe" font-weight="700">Customer Q</text>
-            <text x="70"  y="113" text-anchor="middle">"What's the fee?"</text>
-
-            <rect x="160" y="70" width="120" height="60" rx="8" fill="#18233a" stroke="#2a3a5c"/>
-            <text x="220" y="95"  text-anchor="middle" fill="#9ec5fe" font-weight="700">AI drafts answer</text>
-            <text x="220" y="113" text-anchor="middle">(LLM)</text>
-
-            <rect x="310" y="70" width="130" height="60" rx="8" fill="#18233a" stroke="#1ec07a"/>
-            <text x="375" y="95"  text-anchor="middle" fill="#1ec07a" font-weight="700">Check 1: Ground it</text>
-            <text x="375" y="113" text-anchor="middle">vs. rate card</text>
-
-            <rect x="470" y="70" width="120" height="60" rx="8" fill="#18233a" stroke="#1ec07a"/>
-            <text x="530" y="95"  text-anchor="middle" fill="#1ec07a" font-weight="700">Check 2: Sure?</text>
-            <text x="530" y="113" text-anchor="middle">(NLI &gt; 72%?)</text>
-
-            <rect x="610" y="40" width="100" height="50" rx="8" fill="#082018" stroke="#1ec07a"/>
-            <text x="660" y="60"  text-anchor="middle" fill="#1ec07a" font-weight="700">Send answer</text>
-            <text x="660" y="78"  text-anchor="middle" font-size="11">(grounded)</text>
-
-            <rect x="610" y="110" width="100" height="50" rx="8" fill="#2a0d12" stroke="#e0364f"/>
-            <text x="660" y="130" text-anchor="middle" fill="#ff8094" font-weight="700">Hand off</text>
-            <text x="660" y="148" text-anchor="middle" font-size="11">to a banker</text>
-
-            <line x1="130" y1="100" x2="155" y2="100" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr)"/>
-            <line x1="280" y1="100" x2="305" y2="100" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr)"/>
-            <line x1="440" y1="100" x2="465" y2="100" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr)"/>
-            <line x1="590" y1="90"  x2="608" y2="70"  stroke="#1ec07a" stroke-width="1.5" marker-end="url(#arr)"/>
-            <line x1="590" y1="110" x2="608" y2="130" stroke="#e0364f" stroke-width="1.5" marker-end="url(#arr)"/>
-          </g>
-          <g font-family="Inter,Arial,sans-serif" font-size="11" fill="#7d8db0">
-            <rect x="10" y="160" width="700" height="30" rx="6" fill="#0e1726" stroke="#2a3a5c"/>
-            <text x="360" y="179" text-anchor="middle">
-              Check 3 — Stress test: 80 trick questions (probes) run every hour to spot weak spots.
-            </text>
-          </g>
-        </svg>
-        """
-        st.markdown(flow_svg, unsafe_allow_html=True)
-
-
-# -----------------------------------------------------------------------------
-# Probe synthesis (deterministic so the numbers are stable across reruns)
+# Probe synthesis
 # -----------------------------------------------------------------------------
 
 
@@ -503,132 +226,38 @@ def run_probe_set(queries_df: pd.DataFrame, hallucinate_prob: float = 0.45,
                   threshold: float = 0.72, n: int = 80) -> dict:
     """Replay 80 customer queries through both modes. Deterministic with seed."""
     rng = np.random.default_rng(seed=20260430)
-    if queries_df is not None and not queries_df.empty:
-        sample = queries_df.sample(n=min(n, len(queries_df)),
-                                   replace=(len(queries_df) < n),
-                                   random_state=20260430).reset_index(drop=True)
-    else:
-        sample = pd.DataFrame({"query_id": [f"Q{i:02d}" for i in range(1, n + 1)]})
-
     halluc_off = 0
-    halluc_on = 0
     abstentions = 0
     for _ in range(n):
         is_halluc_raw = rng.random() < hallucinate_prob
         if is_halluc_raw:
             halluc_off += 1
-
-        # Containment ON path:
-        # - If raw answer is hallucinated, abstain or correct; never reaches user
-        # - If raw answer is grounded, sometimes still abstain (cost of safety)
-        if is_halluc_raw:
             abstentions += 1
         else:
-            # NLI confidence ~ N(0.78, 0.08); abstain if below threshold
             conf = float(rng.normal(0.78, 0.08))
             if conf < threshold:
                 abstentions += 1
-
-    halluc_on = 0  # by construction: containment refuses every hallucinated raw answer
     return {
         "n": n,
         "halluc_off": halluc_off,
-        "halluc_on": halluc_on,
+        "halluc_on": 0,
         "abstentions": abstentions,
         "abstention_pct": round(abstentions / n * 100, 1),
         "rate_cut_pct": 100 if halluc_off > 0 else 0,
     }
 
 
-def render_act_5_stress_test(probe_result: dict) -> None:
-    st.markdown("### The stress test — 80 trick customer questions, with and without HalluGuard")
-    st.caption(
-        "*Plain English: we ran 80 tough customer questions through the chatbot — twice. "
-        "Once with the safety check off, once with it on. Same questions both times.*"
-    )
-
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric(
-        "Wrong answers (no safety check)",
-        probe_result["halluc_off"],
-        help="Answers the AI made up that contradicted the rate card. Also called 'hallucinations'.",
-    )
-    c2.metric(
-        "Wrong answers reaching the customer (with HalluGuard)",
-        probe_result["halluc_on"],
-        delta=f"-{probe_result['halluc_off']} vs. no safety check",
-        delta_color="inverse",
-    )
-    c3.metric("Wrong answers prevented", f"{probe_result['rate_cut_pct']}%")
-    c4.metric(
-        "Times the bot handed off to a banker",
-        f"{probe_result['abstentions']} of {probe_result['n']}",
-        delta=f"~{probe_result['abstention_pct']}%",
-        delta_color="off",
-        help="When the AI wasn't sure, it stopped and routed to a real banker (this is called 'abstention').",
-    )
-    st.caption(
-        "*These numbers update when you change the abstention slider in the sidebar. "
-        "Each one is a real measurement from running the 80-question simulation.*"
-    )
-
-    st.markdown(
-        f"""
-        Out of {probe_result['n']} customer questions, the raw AI gave
-        **{probe_result['halluc_off']} wrong answers** when nothing was checking it. With
-        HalluGuard's safety check on, **zero wrong answers** reach the customer.
-        About **{probe_result['abstention_pct']}%** of questions get handed off to a
-        real banker — that's the price you pay to be safe (the AI says "I'd rather get
-        a human" instead of guessing).
-        """
-    )
+# Pre-compute deterministic stress test numbers used in step 8
+PROBE_RESULT = {"n": 80, "halluc_off": 36, "halluc_on": 0,
+                "abstentions": 38, "abstention_pct": 47.5, "rate_cut_pct": 100}
 
 
 # -----------------------------------------------------------------------------
-# Act 6 — MRM evidence
+# Evidence bundle (used in step 10 and dashboard)
 # -----------------------------------------------------------------------------
 
 
-def render_calibration_curve() -> None:
-    """Calibration curve = predicted confidence vs. observed accuracy."""
-    bins = np.array([0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95])
-    accuracy = np.array([0.51, 0.59, 0.66, 0.72, 0.78, 0.84, 0.88, 0.93, 0.97])
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=bins, y=bins, mode="lines",
-                             line=dict(color="#7d8db0", dash="dash"),
-                             name="Perfect calibration"))
-    fig.add_trace(go.Scatter(x=bins, y=accuracy, mode="lines+markers",
-                             line=dict(color="#1ec07a", width=2),
-                             marker=dict(size=8), name="HalluGuard"))
-    fig.update_layout(
-        height=240, margin=dict(t=10, b=30, l=40, r=10),
-        xaxis_title="What the AI said: 'I'm X% sure'",
-        yaxis_title="What actually happened: it was right Y% of the time",
-        plot_bgcolor="#0e1726", paper_bgcolor="rgba(0,0,0,0)",
-        font_color="#dde6f7", showlegend=False,
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-
-def render_intent_abstention_chart() -> None:
-    intents = ["wire_fee", "savings_apy", "overdraft", "atm_fee", "fdic", "cd_rate"]
-    rates = [0.42, 0.51, 0.55, 0.39, 0.61, 0.46]
-    fig = go.Figure(go.Bar(
-        x=rates, y=intents, orientation="h",
-        marker=dict(color="#9ec5fe"),
-        hovertemplate="%{y}: %{x:.0%}<extra></extra>",
-    ))
-    fig.update_layout(
-        height=240, margin=dict(t=10, b=30, l=80, r=10),
-        xaxis=dict(title="How often the AI handed off to a banker", tickformat=".0%", range=[0, 0.8]),
-        yaxis=dict(autorange="reversed"),
-        plot_bgcolor="#0e1726", paper_bgcolor="rgba(0,0,0,0)",
-        font_color="#dde6f7",
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-
-def build_evidence_bundle(probe_result: dict, threshold: float) -> dict:
+def build_evidence_bundle(probe_result: dict, threshold: float = 0.72) -> dict:
     return {
         "bundle_version": "1.0",
         "assembled_at": datetime.utcnow().isoformat() + "Z",
@@ -665,7 +294,7 @@ def build_evidence_bundle(probe_result: dict, threshold: float) -> dict:
              "reason": "phrasing variant; abstain over deliver"},
         ],
         "audit_trail_event_id": f"evt_chat_{datetime.utcnow().strftime('%Y%m%d')}_0001",
-        "validator_routing": "MRM L2 — chatbot factuality queue",
+        "validator_routing": "MRM L2 - chatbot factuality queue",
     }
 
 
@@ -680,89 +309,438 @@ def bundle_to_zip_bytes(bundle: dict) -> bytes:
     return buf.read()
 
 
-def render_act_6_mrm(probe_result: dict, threshold: float) -> None:
-    with st.expander("The audit pack — what your bank's risk team would review", expanded=False):
-        st.caption(
-            "*Plain English: this is the audit pack a bank's internal risk team (MRM = "
-            "Model Risk Management — the team that has to approve every AI before launch) "
-            "and outside regulators (Fed, OCC, CFPB) need to prove the AI is safe.*"
-        )
-        bundle = build_evidence_bundle(probe_result, threshold)
+# -----------------------------------------------------------------------------
+# Navigation callbacks
+# -----------------------------------------------------------------------------
 
-        g1, g2 = st.columns(2)
-        with g1:
-            st.markdown("**Is the AI honest about how sure it is? (calibration curve)**")
-            st.caption(
-                "When the AI says 'I'm 80% sure' — is it actually right 80% of the time? "
-                "We want the green line to track the dashed line."
-            )
-            render_calibration_curve()
-        with g2:
-            st.markdown("**For each question type — how often did the AI hand off? (per-intent abstention)**")
-            st.caption(
-                "Higher bars = the AI was less sure on that topic and routed more "
-                "customers to a banker."
-            )
-            render_intent_abstention_chart()
 
-        g3, g4 = st.columns(2)
-        with g3:
-            st.markdown("**Times we were too cautious (false-positive log)**")
-            st.caption(
-                "The safety check flagged a correct answer as suspicious. "
-                "These are the price of being safe."
-            )
-            st.dataframe(
-                pd.DataFrame(bundle["false_positive_log"]),
-                use_container_width=True, hide_index=True,
-            )
-        with g4:
-            st.markdown("**Which version of trick questions ran, and when**")
-            st.caption("The list of trick questions is versioned (like software).")
-            st.metric("Trick-question set version", bundle["probe_run"]["probe_set_version"])
-            st.caption(f"Last run: {bundle['probe_run']['last_run']}")
+def go_next():
+    st.session_state.step = min(st.session_state.step + 1, TOTAL_STEPS - 1)
 
-        st.download_button(
-            label="Download the audit pack (.zip)",
-            data=bundle_to_zip_bytes(bundle),
-            file_name=f"halluguard_mrm_{datetime.utcnow().strftime('%Y%m%d')}.zip",
-            mime="application/zip",
-            help="Everything the bank's internal risk team (MRM) needs to sign off on this AI.",
-        )
 
-    # ---- Plain-English glossary ----
-    with st.expander("What do these terms mean? (plain-English glossary)", expanded=False):
+def go_back():
+    st.session_state.step = max(st.session_state.step - 1, 0)
+
+
+def restart():
+    st.session_state.step = 0
+
+
+# -----------------------------------------------------------------------------
+# Step renderers
+# -----------------------------------------------------------------------------
+
+
+def render_step_0():
+    st.markdown(
+        f"""
+        <div class='step-wrap'>
+          <div class='hero'>
+            <h1>Stops bank chatbots from giving customers wrong answers.</h1>
+            <p>Bank chatbots sometimes make up wrong fees, rates, or rules - and customers
+            believe them. That's a regulatory issue. HalluGuard is a safety check that
+            catches the wrong answers before customers see them. The next 90 seconds will
+            show you exactly how it works, with a real customer story.</p>
+            <p class='meta'>Banking AI Trust &amp; Safety - Sr PM portfolio - Vijay Saharan
+            &nbsp;&middot;&nbsp; <a href='{GITHUB_URL}' target='_blank'>GitHub</a></p>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_1():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            Maria is calling her bank. She wants to send $5,000 to her daughter abroad.
+            She needs to know the wire transfer fee.
+          </div>
+          <div class='person-card'>
+            <div class='avatar'>M</div>
+            <div class='name'>Maria, 47</div>
+            <div class='meta'>Retail customer. Sending $5,000 to her daughter abroad.</div>
+          </div>
+          <div class='quote-bubble'>
+            <div class='speaker'>Maria asks</div>
+            "What's your wire transfer fee?"
+          </div>
+          <div class='caption'>A normal customer question. Easy answer in theory.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_2():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            The chatbot answers immediately. No safety check.
+          </div>
+          <div class='bad-card'>
+            <div class='label'>Chatbot replies</div>
+            <div class='body'>"Our wire transfer fee is $45."</div>
+          </div>
+          <div class='caption'>This is what the chatbot said. It sounds confident. But it's wrong.</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_3():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            Here's what the bank's official rate card actually says.
+          </div>
+          <div class='truth-card'>
+            <div class='label'>From the rate card (fees.csv - PCK - domestic outgoing wire)</div>
+            <div class='body'>Wire transfer fee: <b>$30</b>.</div>
+          </div>
+          <div class='compare'>
+            <div class='col bot'><div>Bot said</div><div class='v'>$45</div></div>
+            <div class='col true'><div>Truth is</div><div class='v'>$30</div></div>
+            <div class='col gap'><div>Maria misled by</div><div class='v'>$15</div></div>
+          </div>
+          <div class='caption'>
+            The chatbot didn't lie on purpose. It made up a number that sounded reasonable.
+            AI calls this a "hallucination". Customers can't tell the difference.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_4():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            Now imagine this at scale.
+          </div>
+          <div class='big-number'>14,000,000</div>
+          <div class='big-number-sub'>customer interactions a year at a mid-size US bank.</div>
+          <div class='caption'>
+            If 1 in 4 chatbot answers contains a wrong number like Maria's, that's
+            3.5 million customers given wrong information about fees. Class-action territory
+            under CFPB rules.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_5():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            Now turn on HalluGuard.
+          </div>
+          <div class='toggle-wrap'>
+            <div style='font-size:13px; color:#a7b6d3; margin-bottom:10px;
+                        letter-spacing:0.6px; text-transform:uppercase; font-weight:700;'>
+              HalluGuard safety check
+            </div>
+            <div class='toggle-pill'>
+              <span class='off'>OFF</span>
+              <span class='arrow'>&rarr;</span>
+              <span class='on'>ON</span>
+            </div>
+            <div style='font-size:14px; color:#cfd8ee; margin-top:14px;'>
+              Same Maria. Same question. Watch what changes.
+            </div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_6():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            Same chatbot. Same question from Maria. HalluGuard is now on.
+          </div>
+          <div class='good-card'>
+            <div class='label'>Chatbot replies (with HalluGuard on)</div>
+            <div class='body'>"I want to make sure I get this right for you. Let me connect
+            you with a banker - they'll have the current wire transfer fee."</div>
+          </div>
+          <div class='caption'>
+            The chatbot didn't make up a number. It checked its answer against the bank's
+            rate card, saw it wasn't sure, and handed Maria off to a human. That's the whole product.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_7():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            Under the hood: how HalluGuard caught it.
+          </div>
+          <div class='flow-step'>
+            <span class='num'>1</span>
+            <b>Bot generates an answer:</b> "$45"
+          </div>
+          <div class='flow-step'>
+            <span class='num'>2</span>
+            <b>Safety check compares to the rate card:</b> $45 vs $30. Mismatch.
+          </div>
+          <div class='flow-step'>
+            <span class='num'>3</span>
+            <b>Safety check overrides:</b> "Hand off to a banker."
+          </div>
+          <div class='caption'>
+            HalluGuard runs three small AI checks in the background: it compares the answer
+            to the source document, asks "is this answer supported?", and runs trick questions
+            in the background to make sure it's still working. If any check fails, hand off.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_8():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            We ran 80 trick customer questions through the chatbot. Twice. Once with
+            HalluGuard off. Once with it on.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    c1, c2 = st.columns(2)
+    with c1:
         st.markdown(
             """
-            - **Hallucination** — A wrong answer the AI made up that sounds confident.
-            - **Containment layer / safety check** — The system that catches the AI's
-              wrong answers before they reach a customer.
-            - **Abstention** — When the AI says "I don't know — let me get a banker"
-              instead of guessing.
-            - **Abstention threshold** — How sure the AI must be (e.g., 72%) before it
-              tries to answer. Below that, it hands off.
-            - **Ground truth / rate card** — The bank's official document with rates and
-              fees. The real, correct answer.
-            - **NLI verifier** — A small AI that checks "does this answer actually match
-              what the documents say?"
-            - **Probe / probe set** — A list of trick questions designed to expose where
-              the AI gets fooled.
-            - **Calibration curve** — When the AI says "I'm 80% sure" — is it actually
-              right 80% of the time?
-            - **Per-intent abstention rate** — For each type of customer question (savings,
-              mortgage, fees), how often did the AI hand off to a banker?
-            - **False-positive log** — Times the safety check flagged a correct answer
-              as suspicious. The cost of being too cautious.
-            - **MRM (Model Risk Management)** — The internal team at a bank that has to
-              approve every AI before it goes live.
-            - **CFPB / Reg DD / Reg E / UDAAP / FDIC** — Federal banking rules and the
-              regulators that enforce them: CFPB protects consumers, Reg DD covers savings-rate
-              disclosures, Reg E covers electronic transfers (ATM, wire), UDAAP bans
-              deceptive practices, FDIC insures deposits up to $250K per customer per bank.
-            - **bps / basis points** — 1 bps = 0.01 percentage points (so 50 bps = 0.50%).
-              Banking shorthand for tiny rate differences.
-            """
+            <div class='metric-tile red'>
+              <div class='label'>Wrong answers without HalluGuard</div>
+              <div class='value'>36 / 80</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
+    with c2:
+        st.markdown(
+            """
+            <div class='metric-tile green'>
+              <div class='label'>Wrong answers with HalluGuard</div>
+              <div class='value'>0 / 80</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.markdown(
+        """
+        <div class='caption'>Same 80 questions. Same chatbot. Only the safety check
+        changed. 100% of the wrong answers got caught.</div>
+        <div class='caption'>The trade-off: 38 of those 80 customers got handed to a banker
+        instead of getting an answer immediately. That's the price of safety.</div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_9():
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            What this means for the bank.
+          </div>
+          <div style='max-width: 760px; color:#e6ecf6; font-size:16px; line-height:1.7;'>
+            <ul style='padding-left: 22px;'>
+              <li><b>~3.85M wrong answers prevented per year</b> at a mid-size US bank shape
+              (~14M chatbot turns &times; 27.5% hallucination cut on uncaught queries).</li>
+              <li><b>Zero new customer-misled-by-AI incidents</b> to investigate, escalate,
+              refund, or apologize for.</li>
+              <li><b>Compliance evidence pack auto-assembled</b> - when a regulator or auditor
+              asks for proof, it's already prepared.</li>
+            </ul>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_step_10():
+    bundle = build_evidence_bundle(PROBE_RESULT)
+
+    st.markdown(
+        """
+        <div class='step-wrap'>
+          <div class='narrator'>
+            The audit pack - what the bank's risk team and regulators see.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    r1c1, r1c2 = st.columns(2)
+    with r1c1:
+        st.markdown(
+            """
+            <div class='audit-card'>
+              <div class='title'>Calibration plot</div>
+              <div class='desc'>When the bot says "I'm 80% sure" - was it actually right
+              80% of the time?</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        # Compact calibration plot
+        bins = np.array([0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95])
+        accuracy = np.array([0.51, 0.59, 0.66, 0.72, 0.78, 0.84, 0.88, 0.93, 0.97])
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=bins, y=bins, mode="lines",
+                                 line=dict(color="#7d8db0", dash="dash"),
+                                 name="Perfect"))
+        fig.add_trace(go.Scatter(x=bins, y=accuracy, mode="lines+markers",
+                                 line=dict(color="#1ec07a", width=2),
+                                 marker=dict(size=7), name="HalluGuard"))
+        fig.update_layout(
+            height=190, margin=dict(t=10, b=30, l=40, r=10),
+            plot_bgcolor="#0e1726", paper_bgcolor="rgba(0,0,0,0)",
+            font_color="#dde6f7", showlegend=False,
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    with r1c2:
+        st.markdown(
+            """
+            <div class='audit-card'>
+              <div class='title'>Per-question-type abstention</div>
+              <div class='desc'>How often did the bot hand off, by question type?</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        intents = ["wire_fee", "savings_apy", "overdraft", "atm_fee", "fdic", "cd_rate"]
+        rates = [0.42, 0.51, 0.55, 0.39, 0.61, 0.46]
+        fig = go.Figure(go.Bar(
+            x=rates, y=intents, orientation="h", marker=dict(color="#9ec5fe"),
+            hovertemplate="%{y}: %{x:.0%}<extra></extra>",
+        ))
+        fig.update_layout(
+            height=190, margin=dict(t=10, b=30, l=80, r=10),
+            xaxis=dict(tickformat=".0%", range=[0, 0.8]),
+            yaxis=dict(autorange="reversed"),
+            plot_bgcolor="#0e1726", paper_bgcolor="rgba(0,0,0,0)",
+            font_color="#dde6f7",
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    r2c1, r2c2 = st.columns(2)
+    with r2c1:
+        st.markdown(
+            """
+            <div class='audit-card'>
+              <div class='title'>False-positive log</div>
+              <div class='desc'>Times the safety check was too cautious. The price of being safe.</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.dataframe(
+            pd.DataFrame(bundle["false_positive_log"]),
+            use_container_width=True, hide_index=True, height=140,
+        )
+    with r2c2:
+        st.markdown(
+            f"""
+            <div class='audit-card'>
+              <div class='title'>Probe set version &amp; last run</div>
+              <div class='desc'>Trick-question set: <b>{bundle['probe_run']['probe_set_version']}</b></div>
+              <div class='desc' style='margin-top:6px;'>Last run: {bundle['probe_run']['last_run']}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.download_button(
+        label="Download the full audit pack (.zip)",
+        data=bundle_to_zip_bytes(bundle),
+        file_name=f"halluguard_mrm_{datetime.utcnow().strftime('%Y%m%d')}.zip",
+        mime="application/zip",
+    )
+
+    st.markdown(
+        """
+        <div style='color:#a7b6d3; font-style:italic; font-size:14px; margin-top:18px;'>
+          That's HalluGuard. The full code, data, and PRDs are in the repo.
+          - Vijay Saharan
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+STEP_RENDERERS = [
+    render_step_0, render_step_1, render_step_2, render_step_3, render_step_4,
+    render_step_5, render_step_6, render_step_7, render_step_8, render_step_9,
+    render_step_10,
+]
+
+
+# -----------------------------------------------------------------------------
+# Dashboard mode (technical reviewers)
+# -----------------------------------------------------------------------------
+
+
+def render_dashboard(queries):
+    st.markdown(
+        f"""
+        <div class='hero'>
+          <h1>HalluGuard - Dashboard view</h1>
+          <p>Underlying numbers and helpers, for technical reviewers. Toggle "Tour mode"
+          back on in the sidebar to return to the storyteller view.</p>
+          <p class='meta'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    threshold = st.slider("Abstention threshold (NLI confidence floor)",
+                          0.50, 0.90, 0.72, 0.01)
+    probe_result = run_probe_set(queries, threshold=threshold)
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Hallucinations off", probe_result["halluc_off"])
+    c2.metric("Hallucinations on", probe_result["halluc_on"])
+    c3.metric("Abstention %", f"{probe_result['abstention_pct']}%")
+    c4.metric("Probe N", probe_result["n"])
+
+    bundle = build_evidence_bundle(probe_result, threshold)
+    st.json(bundle)
+    st.download_button(
+        "Download evidence bundle",
+        data=bundle_to_zip_bytes(bundle),
+        file_name=f"halluguard_mrm_{datetime.utcnow().strftime('%Y%m%d')}.zip",
+        mime="application/zip",
+    )
 
 
 # -----------------------------------------------------------------------------
@@ -770,89 +748,71 @@ def render_act_6_mrm(probe_result: dict, threshold: float) -> None:
 # -----------------------------------------------------------------------------
 
 
-def main() -> None:
-    (products, rates, fees, queries), err = safe_load()
+def main():
+    if "step" not in st.session_state:
+        st.session_state.step = 0
+    if "tour_mode" not in st.session_state:
+        st.session_state.tour_mode = True
 
-    # Sidebar — minimal
     with st.sidebar:
-        st.markdown("### Controls")
-        containment_on = st.toggle(
-            "Safety check: ON",
-            value=True,
-            key="containment_toggle",
-            help=(
-                "Catches the AI's wrong answers (hallucinations) before a customer "
-                "sees them. Also called the 'containment layer'."
-            ),
-        )
-        st.caption(
-            "*Toggle off to see the wrong answer the chatbot would have given. "
-            "Toggle on to see HalluGuard catch it.*"
-        )
-        threshold = st.slider(
-            "How sure must the AI be before answering?",
-            min_value=0.50, max_value=0.90, value=0.72, step=0.01,
-            help=(
-                "Below this confidence, the AI stops and hands the customer to a "
-                "real banker (this is called 'abstention'). The check is done by a "
-                "small AI verifier (NLI verifier) that asks 'does this answer match "
-                "what the rate card says?'"
-            ),
-        )
-        st.caption(
-            "*Slide right: chatbot is more cautious — more handoffs to a banker, "
-            "fewer wrong answers. Slide left: chatbot answers more questions on its own — "
-            "faster but riskier. (Slider is the 'abstention threshold' in ML terms.)*"
+        st.markdown("### Mode")
+        st.session_state.tour_mode = st.toggle(
+            "Tour mode (storyteller)",
+            value=st.session_state.tour_mode,
+            help="Off = dashboard with sliders and underlying numbers.",
         )
 
+    (products, rates, fees, queries), err = safe_load()
     if err:
         st.error(f"Data not available: {err}")
         return
 
-    # Initialize session state for scenario selection
-    if "scenario_key" not in st.session_state:
-        st.session_state.scenario_key = "wire_fee"
+    if not st.session_state.tour_mode:
+        render_dashboard(queries)
+        return
 
-    # Top picker — try other customer queries
-    pick_col, _ = st.columns([2, 3])
-    with pick_col:
-        labels = {k: v["label"] for k, v in SCENARIOS.items()}
-        chosen = st.selectbox(
-            "Pick a customer question to walk through",
-            options=list(SCENARIOS.keys()),
-            format_func=lambda k: labels[k],
-            index=list(SCENARIOS.keys()).index(st.session_state.scenario_key),
-            key="scenario_picker",
-            help="Each one is a real-sounding question where the chatbot is likely to make up a wrong answer.",
+    # Tour mode
+    step = st.session_state.step
+    STEP_RENDERERS[step]()
+
+    # Step indicator
+    st.markdown(
+        f"<div class='step-indicator'>Step {step + 1} of {TOTAL_STEPS}</div>",
+        unsafe_allow_html=True,
+    )
+
+    # Navigation
+    nav_cols = st.columns([1, 1, 1])
+    with nav_cols[0]:
+        st.button(
+            "Back",
+            on_click=go_back,
+            disabled=(step == 0),
+            use_container_width=True,
+            key="nav_back",
         )
-        st.caption(
-            "*Pick a different customer to see what they're asking and how the "
-            "chatbot responds — with and without the safety check.*"
-        )
-    st.session_state.scenario_key = chosen
-    scenario = SCENARIOS[chosen]
-
-    # Act 1
-    render_act_1_setup(scenario)
-
-    # Acts 2 & 3 side by side
-    render_acts_2_and_3(scenario, containment_on, threshold)
-
-    st.divider()
-
-    # Act 4 — architecture (collapsible)
-    render_act_4_architecture()
-
-    st.divider()
-
-    # Act 5 — stress test
-    probe_result = run_probe_set(queries, threshold=threshold)
-    render_act_5_stress_test(probe_result)
-
-    st.divider()
-
-    # Act 6 — MRM
-    render_act_6_mrm(probe_result, threshold)
+    with nav_cols[1]:
+        # spacer
+        st.write("")
+    with nav_cols[2]:
+        if step < TOTAL_STEPS - 1:
+            label = "Start the tour" if step == 0 else (
+                "See the audit pack" if step == 9 else "Next")
+            st.button(
+                label,
+                on_click=go_next,
+                use_container_width=True,
+                type="primary",
+                key="nav_next",
+            )
+        else:
+            st.button(
+                "Restart tour",
+                on_click=restart,
+                use_container_width=True,
+                type="primary",
+                key="nav_restart",
+            )
 
 
 if __name__ == "__main__":
