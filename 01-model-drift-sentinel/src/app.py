@@ -3,7 +3,8 @@ DriftSentinel - Production AI Drift, Diagnosed and Routed
 Author: Vijay Saharan
 Run: streamlit run app.py
 
-Guided tour. 9 steps. Click Next to advance.
+One-page scrollable narrative. No tour scaffolding. One interactive element
+(the model dropdown in Section 4).
 """
 
 from __future__ import annotations
@@ -30,152 +31,162 @@ st.set_page_config(
 )
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-GITHUB_URL = "https://github.com/vijaysaharan/ai-pm-portfolio"
-TOTAL_STEPS = 10  # steps 0..9
+GITHUB_URL = "https://github.com/Vj-shipped-anyway/ai-pm-portfolio"
+DEMO_URL = "https://driftsentinel.streamlit.app"
+LINKEDIN_URL = "https://www.linkedin.com/in/vijay-saharan/"
 
 CSS = """
 <style>
-  .step-wrap { animation: fadeIn 350ms ease-in; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .block-container { padding-top: 2rem; padding-bottom: 4rem; max-width: 1100px; }
+
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 18px 0; }
+  .pill {
+    display: inline-block; background: #18233a; border: 1px solid #2a3a5c;
+    color: #cfd8ee; border-radius: 999px; padding: 6px 14px; font-size: 13px;
+    text-decoration: none;
   }
+  .pill a { color: #9ec5fe; text-decoration: none; }
+  .pill.author { border-color: #6f9bff; color: #9ec5fe; }
 
   .hero {
     background: linear-gradient(135deg, #0b1c3d 0%, #142850 60%, #1f3a6b 100%);
     color: #f4f6fb; padding: 36px 36px; border-radius: 16px;
-    border: 1px solid #2a3a5c; margin: 8px 0 14px 0;
+    border: 1px solid #2a3a5c; margin: 0 0 14px 0;
   }
-  .hero h1 { font-size: 38px; margin: 0 0 12px 0; line-height: 1.15; }
-  .hero p  { color: #cfd8ee; font-size: 16px; line-height: 1.6; margin: 0; }
-  .hero .meta { color: #7d8db0; font-size: 12px; margin-top: 14px; }
-  .hero .meta a { color: #9ec5fe; text-decoration: none; }
+  .hero h1 { font-size: 38px; margin: 0 0 10px 0; line-height: 1.15; }
+  .hero .subtitle { color: #cfd8ee; font-size: 18px; margin: 0 0 18px 0; }
+  .hero .hook { color: #b9c5dd; font-size: 15px; line-height: 1.6; margin: 0 0 14px 0; max-width: 820px; }
+  .hero .scroll-cue { color: #7d8db0; font-size: 13px; font-style: italic; margin-top: 10px; }
 
-  .narrator {
-    color: #b9c5dd; font-size: 15px; line-height: 1.6;
-    margin: 0 0 18px 0; max-width: 860px;
+  .section-h {
+    font-size: 28px; font-weight: 700; color: #e6ecf6;
+    margin: 8px 0 14px 0; line-height: 1.2;
+  }
+  .section-lede {
+    color: #cfd8ee; font-size: 16px; line-height: 1.65;
+    max-width: 860px; margin: 0 0 18px 0;
   }
   .caption {
     color: #a7b6d3; font-size: 14px; font-style: italic;
-    margin-top: 14px; max-width: 820px; line-height: 1.55;
+    margin-top: 14px; max-width: 860px; line-height: 1.55;
   }
 
-  .bank-card {
+  .person-card {
     background: #18233a; border: 1px solid #2a3a5c; border-radius: 14px;
-    padding: 22px 26px; color: #e6ecf6; max-width: 720px;
+    padding: 22px 26px; color: #e6ecf6; max-width: 720px; margin: 0 0 14px 0;
   }
-  .bank-card .head {
-    font-size: 13px; color: #9ec5fe; font-weight: 700;
-    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 10px;
+  .person-card .avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #6f9bff, #1ec07a);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #0b1c3d; font-weight: 800; font-size: 22px; margin-bottom: 10px;
   }
-  .bank-card .row { font-size: 16px; line-height: 1.6; }
-  .bank-card .pill {
-    display: inline-block; background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 999px;
-    padding: 4px 12px; margin: 4px 6px 4px 0; font-size: 13px;
+  .person-card .name { font-size: 19px; font-weight: 700; }
+  .person-card .meta { color: #a7b6d3; font-size: 14px; margin-top: 4px; }
+  .person-card .scenario {
+    color: #cfd8ee; margin-top: 14px; font-size: 15px; line-height: 1.6;
   }
-
-  .day-counter {
-    background: #18233a; border: 1px solid #2a3a5c; border-radius: 14px;
-    padding: 28px; text-align: center; max-width: 540px;
+  .person-card .harm {
+    color: #ff8094; margin-top: 10px; font-size: 14px; font-weight: 600;
   }
-  .day-counter .lbl {
-    color: #9ec5fe; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 10px;
-  }
-  .day-counter .v {
-    font-size: 56px; font-weight: 800; color: #6fdba8; line-height: 1;
-  }
-  .day-counter .sub {
-    color: #cfd8ee; margin-top: 14px; font-size: 14px;
+  .impact-line {
+    color: #ffc94d; font-size: 15px; font-weight: 600;
+    margin: 14px 0; max-width: 860px;
   }
 
-  .status-row {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px;
-    justify-content: center;
+  .mechanic-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+    margin: 18px 0; max-width: 980px;
   }
-  .status-dot {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: #1ec07a; box-shadow: 0 0 8px rgba(30,192,122,0.5);
+  .mechanic-step {
+    background: #18233a; border: 1px solid #2a3a5c; border-radius: 12px;
+    padding: 18px 20px; color: #e6ecf6;
   }
-  .status-dot.fail {
-    background: #e0364f; box-shadow: 0 0 12px rgba(224,54,79,0.7);
-    animation: pulse 1.5s infinite;
+  .mechanic-step .num {
+    display: inline-block; width: 28px; height: 28px; line-height: 28px;
+    text-align: center; background: #6f9bff; color: #0b1c3d;
+    border-radius: 50%; font-weight: 800; margin-bottom: 10px;
   }
-  @keyframes pulse {
-    0%   { opacity: 1; }
-    50%  { opacity: 0.5; }
-    100% { opacity: 1; }
-  }
+  .mechanic-step .title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .mechanic-step .desc { color: #cfd8ee; font-size: 14px; line-height: 1.5; }
 
-  .alert-card {
-    background: #2a0d12; border: 2px solid #6b1f2a; border-left: 8px solid #e0364f;
-    border-radius: 14px; padding: 22px 26px; color: #ffe5ea;
-    box-shadow: 0 8px 28px rgba(224, 54, 79, 0.25);
-    max-width: 720px;
+  .compare-card {
+    border-radius: 14px; padding: 20px 22px; height: 100%;
+    color: #e6ecf6; min-height: 260px;
   }
-  .alert-card .label {
-    color: #ff8094; font-weight: 700; font-size: 12px;
-    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 10px;
+  .compare-card .label {
+    font-weight: 700; font-size: 11px; letter-spacing: 0.6px;
+    text-transform: uppercase; margin-bottom: 10px;
   }
-  .alert-card .body { font-size: 17px; line-height: 1.55; }
+  .compare-card .what { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+  .compare-card .body { font-size: 14px; line-height: 1.55; color: #cfd8ee; }
+  .compare-card .stat-row {
+    background: rgba(0,0,0,0.20); border-radius: 8px;
+    padding: 10px 12px; margin: 10px 0; font-size: 14px;
+    display: flex; justify-content: space-between;
+  }
+  .compare-card .stat-row .k { color: #a7b6d3; }
+  .compare-card .stat-row .v { font-weight: 700; }
+  .red-card {
+    background: #2a0d12; border: 2px solid #d32f2f; border-left: 8px solid #e0364f;
+  }
+  .red-card .label { color: #ff8094; }
+  .amber-card {
+    background: #2a200b; border: 2px solid #f57c00; border-left: 8px solid #d6a700;
+  }
+  .amber-card .label { color: #ffc94d; }
+  .green-card {
+    background: #082018; border: 2px solid #2e7d32; border-left: 8px solid #1ec07a;
+  }
+  .green-card .label { color: #6fdba8; }
 
-  .door-card {
-    background: #141b2c; border: 1px solid #2a3a5c; border-radius: 14px;
-    padding: 28px 30px; color: #d9e1f2; max-width: 720px;
+  .summary-line {
+    color: #b9c5dd; font-size: 15px; font-style: italic;
+    margin: 18px 0 0 0; max-width: 860px; line-height: 1.6;
+    border-left: 3px solid #6f9bff; padding-left: 14px;
   }
-  .door-card .door-num {
-    color: #9ec5fe; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 8px;
-  }
-  .door-card .door-title { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
-  .door-card .stat {
-    display: flex; justify-content: space-between; padding: 10px 0;
-    border-top: 1px solid #2a3a5c; font-size: 15px;
-  }
-  .door-card .stat:first-of-type { border-top: 0; }
-  .door-card .stat .k { color: #a7b6d3; }
-  .door-card .stat .v { color: #e6ecf6; font-weight: 700; }
-
-  .red-door   { border-left: 8px solid #e0364f;
-                box-shadow: 0 6px 22px rgba(224,54,79,0.18); }
-  .amber-door { border-left: 8px solid #d6a700;
-                box-shadow: 0 6px 22px rgba(214,167,0,0.18); }
-  .green-door { border-left: 8px solid #1ec07a;
-                box-shadow: 0 6px 22px rgba(30,192,122,0.22); }
-
-  .vendor-card {
-    background: #141b2c; border: 1px solid #2a3a5c; border-radius: 14px;
-    padding: 22px 26px; color: #d9e1f2; height: 100%;
-  }
-  .vendor-card.bad   { border-left: 8px solid #e0364f; }
-  .vendor-card.good  { border-left: 8px solid #1ec07a; }
-  .vendor-card .head {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.6px;
-    text-transform: uppercase; margin-bottom: 8px;
-  }
-  .vendor-card.bad  .head { color: #ff8094; }
-  .vendor-card.good .head { color: #6fdba8; }
-  .vendor-card .what { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #e6ecf6; }
-  .vendor-card .body { font-size: 14px; line-height: 1.55; color: #cfd8ee; }
 
   .metric-tile {
     background: #18233a; border: 1px solid #2a3a5c; border-radius: 14px;
     padding: 22px 24px; color: #e6ecf6; height: 100%;
   }
-  .metric-tile .label {
+  .metric-tile .mlabel {
     color: #9ec5fe; font-size: 12px; font-weight: 700;
     letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px;
   }
-  .metric-tile .value { font-size: 32px; font-weight: 800; line-height: 1.1; color: #6fdba8; }
-  .metric-tile .delta { color: #a7b6d3; font-size: 13px; margin-top: 6px; }
+  .metric-tile .mvalue { font-size: 30px; font-weight: 800; line-height: 1.1; color: #6fdba8; }
+  .metric-tile .mdelta { color: #a7b6d3; font-size: 13px; margin-top: 8px; }
 
-  .step-indicator {
-    color: #7d8db0; font-size: 12px; letter-spacing: 0.6px;
-    text-transform: uppercase; font-weight: 700; margin-top: 26px;
+  .bullet-list {
+    color: #e6ecf6; font-size: 16px; line-height: 1.75;
+    max-width: 880px; padding-left: 22px;
+  }
+  .bullet-list li { margin-bottom: 8px; }
+  .bullet-list b { color: #9ec5fe; }
+
+  .second-order {
+    color: #ffc94d; font-size: 15px; font-style: italic;
+    margin-top: 14px; max-width: 860px;
+    border-left: 3px solid #d6a700; padding-left: 14px; line-height: 1.6;
   }
 
+  .audit-card {
+    background: #141b2c; border: 1px solid #2a3a5c; border-radius: 12px;
+    padding: 16px 18px; color: #d9e1f2; height: 100%;
+  }
+  .audit-card .title { font-size: 14px; color: #9ec5fe; font-weight: 700; margin-bottom: 8px; }
+  .audit-card .desc  { font-size: 13px; color: #a7b6d3; line-height: 1.5; }
+
+  .footer {
+    color: #7d8db0; font-size: 13px; font-style: italic;
+    margin: 36px 0 0 0; text-align: center; padding-top: 18px;
+    border-top: 1px solid #2a3a5c;
+  }
+  .footer a { color: #9ec5fe; text-decoration: none; }
+
   div[data-testid="stMetricValue"] { font-size: 30px; }
+
+  hr { border-color: #2a3a5c; margin: 32px 0; }
 </style>
 """
 
@@ -183,7 +194,7 @@ st.markdown(CSS, unsafe_allow_html=True)
 
 
 # -----------------------------------------------------------------------------
-# Data loading (kept for dashboard mode)
+# Data loading
 # -----------------------------------------------------------------------------
 
 
@@ -206,7 +217,7 @@ def safe_load():
 
 
 # -----------------------------------------------------------------------------
-# Helpers (also used by dashboard mode)
+# Helpers
 # -----------------------------------------------------------------------------
 
 
@@ -277,366 +288,6 @@ def bundle_to_zip_bytes(bundle: dict) -> bytes:
     return buf.read()
 
 
-# -----------------------------------------------------------------------------
-# Navigation callbacks
-# -----------------------------------------------------------------------------
-
-
-def go_next():
-    st.session_state.step = min(st.session_state.step + 1, TOTAL_STEPS - 1)
-
-
-def go_back():
-    st.session_state.step = max(st.session_state.step - 1, 0)
-
-
-def restart():
-    st.session_state.step = 0
-
-
-# -----------------------------------------------------------------------------
-# Step renderers
-# -----------------------------------------------------------------------------
-
-
-def render_step_0():
-    st.markdown(
-        f"""
-        <div class='step-wrap'>
-          <div class='hero'>
-            <h1>Catches AI models when they quietly stop working.</h1>
-            <p>Banks run hundreds of AI models - for fraud, credit decisions,
-            anti-money-laundering, customer service. These models quietly stop working as
-            the world changes ("drift"). Most banks only check on them every 3 months. By
-            then, two quarters of value have leaked. DriftSentinel watches every model
-            continuously. The next 90 seconds will walk you through what that looks like.</p>
-            <p class='meta'>Banking AI Model Risk - Sr PM portfolio - Vijay Saharan
-            &nbsp;&middot;&nbsp; <a href='{GITHUB_URL}' target='_blank'>GitHub</a></p>
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_1():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Meet the bank.
-          </div>
-          <div class='bank-card'>
-            <div class='head'>$50 billion-asset US retail bank</div>
-            <div class='row'>8 production AI models running today:</div>
-            <div style='margin-top:12px;'>
-              <span class='pill'>3 fraud</span>
-              <span class='pill'>2 credit</span>
-              <span class='pill'>1 anti-money-laundering</span>
-              <span class='pill'>1 customer service GenAI assistant</span>
-              <span class='pill'>1 collections</span>
-            </div>
-          </div>
-          <div class='caption'>This is a typical mid-sized US bank's AI footprint. Yours likely has more.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_2():
-    dots = "".join("<div class='status-dot'></div>" for _ in range(8))
-    st.markdown(
-        f"""
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Day 1 to Day 59. Everything looks fine.
-          </div>
-          <div class='day-counter'>
-            <div class='lbl'>Today is</div>
-            <div class='v'>Day 59</div>
-            <div class='sub'>All 8 models GREEN. Standard quarterly check is scheduled for Day 90.</div>
-            <div class='status-row'>{dots}</div>
-          </div>
-          <div class='caption'>Models are running. Customers are happy. The next compliance
-          review is in a month. This is the comfortable state most banks live in.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_3():
-    dots = "".join(
-        f"<div class='status-dot{ ' fail' if i == 0 else ''}'></div>"
-        for i in range(8)
-    )
-    st.markdown(
-        f"""
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Day 60. Something just broke.
-          </div>
-          <div class='alert-card'>
-            <div class='label'>Day 60 - silent decay begins</div>
-            <div class='body'>The fraud model's accuracy started decaying. Why? Customers'
-            fraud patterns changed (a new card-skimming technique went viral). The model
-            was trained on old patterns. It's now missing 15% of fraud it used to catch.</div>
-          </div>
-          <div class='status-row' style='justify-content:flex-start; max-width:540px;'>{dots}</div>
-          <div class='caption'>The bank doesn't know yet. The model isn't throwing errors.
-          It's just quietly being wrong. This is called "silent decay".</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_4():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Day 90. Time for the quarterly review.
-          </div>
-          <div style='font-size:18px; color:#cfd8ee; max-width:760px; line-height:1.7;'>
-            Three different banks would run their oversight three different ways. Let's
-            walk through each.
-          </div>
-          <div style='display:flex; gap:14px; margin-top:22px; max-width:760px;'>
-            <div style='flex:1; background:#2a0d12; border:1px solid #6b1f2a; border-radius:12px;
-                        padding:18px; text-align:center; color:#ffe5ea;'>
-              <div style='font-size:12px; font-weight:700; letter-spacing:0.6px;'>DOOR 1</div>
-              <div style='font-size:16px; font-weight:600; margin-top:6px;'>The old way</div>
-            </div>
-            <div style='flex:1; background:#2a200b; border:1px solid #6b541f; border-radius:12px;
-                        padding:18px; text-align:center; color:#fff1c9;'>
-              <div style='font-size:12px; font-weight:700; letter-spacing:0.6px;'>DOOR 2</div>
-              <div style='font-size:16px; font-weight:600; margin-top:6px;'>Open-source tool</div>
-            </div>
-            <div style='flex:1; background:#082018; border:1px solid #144d36; border-radius:12px;
-                        padding:18px; text-align:center; color:#d8f4e7;'>
-              <div style='font-size:12px; font-weight:700; letter-spacing:0.6px;'>DOOR 3</div>
-              <div style='font-size:16px; font-weight:600; margin-top:6px;'>DriftSentinel</div>
-            </div>
-          </div>
-          <div class='caption'>Click forward to open each door, one at a time.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_5():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Door 1: the old way. A Word doc every 3 months.
-          </div>
-          <div class='door-card red-door'>
-            <div class='door-num'>Door 1</div>
-            <div class='door-title'>Quarterly attestation. Word document signed by the model owner.</div>
-            <div class='stat'><span class='k'>Catches</span><span class='v'>0 of 8 problems</span></div>
-            <div class='stat'><span class='k'>Days late</span><span class='v'>78</span></div>
-            <div class='stat'><span class='k'>Cost to the bank</span><span class='v'>2 quarters of fraud loss</span></div>
-          </div>
-          <div class='caption'>This is what most US banks do today. Form-over-substance.
-          The model owner certifies the model is fine, then drafts a paragraph explaining
-          why. Nothing in this process actually inspects the model.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_6():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Door 2: open-source data-shift detection.
-          </div>
-          <div class='door-card amber-door'>
-            <div class='door-num'>Door 2</div>
-            <div class='door-title'>Open-source PSI tool (basic data-shift detector).</div>
-            <div class='stat'><span class='k'>Catches</span><span class='v'>3 of 8 problems</span></div>
-            <div class='stat'><span class='k'>False alarms</span><span class='v'>31% of detections turn out to be noise</span></div>
-            <div class='stat'><span class='k'>Days late</span><span class='v'>41 average</span></div>
-          </div>
-          <div class='caption'>Better than nothing. Catches the obvious shifts. Misses the
-          subtle ones - including the worst kind: when an outside AI vendor silently
-          updates their model overnight.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_7():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            Door 3: DriftSentinel.
-          </div>
-          <div class='door-card green-door'>
-            <div class='door-num'>Door 3</div>
-            <div class='door-title'>DriftSentinel - continuous monitoring across the fleet.</div>
-            <div class='stat'><span class='k'>Catches</span><span class='v'>8 of 8 problems</span></div>
-            <div class='stat'><span class='k'>False alarms</span><span class='v'>7%</span></div>
-            <div class='stat'><span class='k'>Days late</span><span class='v'>9 average</span></div>
-            <div class='stat'><span class='k'>Audit pack assembled in</span><span class='v'>3.2 seconds</span></div>
-          </div>
-          <div class='caption'>Continuous monitoring. Cause-of-failure diagnosis.
-          Auto-assembled evidence the bank's risk team can review in 12 minutes instead
-          of 3 weeks.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_8():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            But wait - there's a worse problem. The vendor surprise.
-          </div>
-          <div style='font-size:17px; color:#e6ecf6; margin: 12px 0 18px 0; max-width: 760px;'>
-            On February 24, Anthropic silently updated their AI model overnight.
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown(
-            """
-            <div class='vendor-card bad'>
-              <div class='head'>Without snapshot pin</div>
-              <div class='what'>0 detection signal.</div>
-              <div class='body'>The bank's GenAI assistant is now using a different model.
-              Nobody at the bank knows. Customer answers shift. Refusal rate jumps 6%.
-              Groundedness drops 10%. The basic data-shift detector sees nothing - the
-              customer questions didn't change, only the AI behind them did.</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    with c2:
-        st.markdown(
-            """
-            <div class='vendor-card good'>
-              <div class='head'>With snapshot pin</div>
-              <div class='what'>Version diff IS the alert.</div>
-              <div class='body'>DriftSentinel watches the exact vendor version ID on every
-              model. When it changes, that IS the signal. Notification fired within the
-              hour. Validator paged. Audit pack assembled. Anthropic acknowledged the
-              change five days later - DriftSentinel had already caught it.</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        """
-        <div class='caption'>This is the worst kind of failure: an outside AI vendor
-        changes their model and you have no signal. The fix is to pin the version of the
-        model you're using and watch for any change. DriftSentinel does this automatically.</div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def render_step_9():
-    st.markdown(
-        """
-        <div class='step-wrap'>
-          <div class='narrator'>
-            What this prevents at full scale.
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    r1c1, r1c2 = st.columns(2)
-    with r1c1:
-        st.markdown(
-            """
-            <div class='metric-tile'>
-              <div class='label'>Days to notice a model went bad</div>
-              <div class='value'>78 &rarr; 9</div>
-              <div class='delta'>69 days earlier than the industry baseline</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    with r1c2:
-        st.markdown(
-            """
-            <div class='metric-tile'>
-              <div class='label'>False alarms</div>
-              <div class='value'>31% &rarr; 7%</div>
-              <div class='delta'>24 percentage points cleaner than basic tools</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    r2c1, r2c2 = st.columns(2)
-    with r2c1:
-        st.markdown(
-            """
-            <div class='metric-tile'>
-              <div class='label'>Audit pack assembly</div>
-              <div class='value'>3 weeks &rarr; 3 seconds</div>
-              <div class='delta'>From "we noticed" to "validator has the pack"</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    with r2c2:
-        st.markdown(
-            """
-            <div class='metric-tile'>
-              <div class='label'>Model coverage</div>
-              <div class='value'>22% &rarr; 100%</div>
-              <div class='delta'>Every model watched, not just the riskiest fifth</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown(
-        """
-        <div class='caption'>At a Tier-1 US retail bank running ~1,200 production models,
-        this prevents ~$45-90 million per year in modeled fraud and credit losses. About
-        the size of a small acquisition.</div>
-        <div style='color:#a7b6d3; font-style:italic; font-size:14px; margin-top:18px;'>
-          That's DriftSentinel. The full code, data, and PRDs are in the repo.
-          - Vijay Saharan
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-STEP_RENDERERS = [
-    render_step_0, render_step_1, render_step_2, render_step_3, render_step_4,
-    render_step_5, render_step_6, render_step_7, render_step_8, render_step_9,
-]
-
-
-# -----------------------------------------------------------------------------
-# Dashboard mode (technical reviewers)
-# -----------------------------------------------------------------------------
-
-
 def render_segment_noise_floor():
     segments = ["prime_720_plus", "near_prime_680_720", "subprime_650_680",
                 "thin_file", "card_present_pos", "ach_b2b"]
@@ -656,51 +307,401 @@ def render_segment_noise_floor():
     st.plotly_chart(fig, use_container_width=True)
 
 
-def render_dashboard(events_df, snaps_df, models_df):
+# -----------------------------------------------------------------------------
+# Model dropdown options
+# -----------------------------------------------------------------------------
+
+MODELS = {
+    "Fraud detection (credit-card transactions)": {
+        "kind": "Card-Present Fraud (LightGBM, Tier-1)",
+        "what_broke": "Silent decay starting day 60. A new card-skimming pattern emerged in retail POS terminals. The model was trained on older patterns and started missing about 15% of fraud it used to catch.",
+        "old_way_status": "GREEN",
+        "old_way_note": "Quarterly Word doc, signed and filed on day 45.",
+        "ai_alone_days": 41,
+        "ai_alone_caught": "Partial - PSI on velocity tripped, but no diagnosis or routing. False alarm rate 31%.",
+        "driftsentinel_days": 9,
+        "driftsentinel_caught": "Caught. Velocity PSI = 0.27 in card_present_pos segment. Recommendation: RETRAIN. Auto-routed to fraud-ops.",
+        "loss_avoided": "~$8M in undetected fraud losses prevented in the gap between day 9 and day 41.",
+        "summary": "DriftSentinel didn't fix the model. It told the bank what broke, where, and what to do next - 32 days earlier than the basic open-source detector would have.",
+    },
+    "Credit risk (consumer loans)": {
+        "kind": "Consumer Credit PD (XGBoost, Tier-1)",
+        "what_broke": "DTI distributions shifted as the economy changed. The model still looked fine in aggregate - but the subprime 650-680 segment had drifted hard. Aggregate PSI stayed at 0.06; segment PSI was 0.34.",
+        "old_way_status": "GREEN",
+        "old_way_note": "Aggregate PSI was below threshold. Owner attested green.",
+        "ai_alone_days": 41,
+        "ai_alone_caught": "Aggregate PSI tools missed it - the slice-level shift was hidden by the average. False alarm on a different feature.",
+        "driftsentinel_days": 9,
+        "driftsentinel_caught": "Caught. dti PSI = 0.34 in subprime_650_680. Recommendation: SHADOW the new vintage. Auto-routed to credit-risk.",
+        "loss_avoided": "~$6M in mispriced credit risk over the lag window.",
+        "summary": "Aggregate health hides slice-level rot. DriftSentinel slices first. The credit risk team got a specific actionable signal, not a vague green checkmark.",
+    },
+    "Anti-money-laundering (AML)": {
+        "kind": "AML SAR Triage (XGBoost, Tier-1)",
+        "what_broke": "OFAC added 200K entities to the watchlist after a new sanctions regime. The triage model started generating spurious 'low risk' signals on entities that should now alert. Behavior space shifted overnight.",
+        "old_way_status": "GREEN",
+        "old_way_note": "Quarterly attestation didn't catch the watchlist update.",
+        "ai_alone_days": 60,
+        "ai_alone_caught": "PSI on input features didn't move - the inputs were the same, only the truth labels changed. Open-source detectors saw nothing.",
+        "driftsentinel_days": 7,
+        "driftsentinel_caught": "Caught via reference-data version check. Recommendation: RETRAIN with new watchlist. Auto-routed to financial-crimes.",
+        "loss_avoided": "Avoided regulatory exposure on potentially missed SARs - a single missed SAR can run $1-10M in penalties.",
+        "summary": "The model didn't drift - the world it lived in did. DriftSentinel watches reference data versions, not just inputs. That's the catch.",
+    },
+    "GenAI customer-service assistant (Anthropic Claude)": {
+        "kind": "Customer Support Q&A GenAI (Anthropic Claude, Tier-1)",
+        "what_broke": "On Feb 24, the vendor silently updated the model overnight. Same API, different behavior. Refusal rate jumped 6%. Groundedness dropped 10%. Customer transcripts shifted in tone.",
+        "old_way_status": "GREEN",
+        "old_way_note": "No quarterly review until day 90. The bank had no signal.",
+        "ai_alone_days": 78,
+        "ai_alone_caught": "Open-source PSI tools saw zero - the input distribution was the same, customers asked the same questions. The change was downstream of input.",
+        "driftsentinel_days": 1,
+        "driftsentinel_caught": "Caught within an hour. Vendor snapshot ID changed - that IS the alert. Recommendation: ROLLBACK. Anthropic acknowledged the change five days later.",
+        "loss_avoided": "Avoided a 5-day exposure window with a behaving-differently model serving customer disclosures.",
+        "summary": "Vendor version pinning trades a 4-8 week update lag for governance signal. For a regulated bank, that's the right trade. DriftSentinel saw it before the vendor announced it.",
+    },
+    "Collections optimization": {
+        "kind": "Collections Routing (Internal, Tier-2)",
+        "what_broke": "A state law capped collection-call frequency at 7 per week per debtor. The model's optimal-call-time outputs started clustering around bounded values. Behavior changed but accuracy metrics still looked fine.",
+        "old_way_status": "GREEN",
+        "old_way_note": "Outcome metrics held steady. No quarterly review flag.",
+        "ai_alone_days": 50,
+        "ai_alone_caught": "Output PSI moved slightly but stayed below 0.10 threshold. Generic open-source tools missed it.",
+        "driftsentinel_days": 11,
+        "driftsentinel_caught": "Caught via output-bound monitoring. Recommendation: RETRAIN with new constraint. Auto-routed to collections-ops.",
+        "loss_avoided": "Avoided a regulatory exposure of $500K-$2M in fines under FDCPA-equivalent state rules.",
+        "summary": "Behavior-bounded drift is invisible to noise-floor PSI. DriftSentinel watches output distributions against policy bounds, not just statistical thresholds.",
+    },
+    "Marketing model": {
+        "kind": "Marketing Propensity (Internal, Tier-2)",
+        "what_broke": "Seasonal change in conversion patterns - the model was retrained on summer data and started misfiring on holiday traffic. Not catastrophic, but ROI on campaigns dropped 18%.",
+        "old_way_status": "GREEN",
+        "old_way_note": "Tier-2 model, semi-annual review. Drift wasn't on the radar.",
+        "ai_alone_days": 35,
+        "ai_alone_caught": "Open-source tool flagged it correctly but with high false-alarm rate - tier-2 noise vs signal was hard to separate.",
+        "driftsentinel_days": 12,
+        "driftsentinel_caught": "Caught with segment-aware noise floor. Recommendation: RETAIN but monitor; recommend retrain in 30 days. Routed to marketing.",
+        "loss_avoided": "~$1.2M in wasted marketing spend over the gap window.",
+        "summary": "Not every drift is a fire. DriftSentinel separates 'monitor and revisit' from 'pull the model now.' Tier-2 drift gets tier-2 routing.",
+    },
+}
+
+MODEL_NAMES = list(MODELS.keys())
+
+
+# -----------------------------------------------------------------------------
+# Sidebar
+# -----------------------------------------------------------------------------
+
+
+def render_sidebar():
+    with st.sidebar:
+        with st.expander("About this demo", expanded=False):
+            st.markdown(
+                f"""
+Vijay Saharan, AI PM portfolio prototype.
+[GitHub]({GITHUB_URL}) - [LinkedIn]({LINKEDIN_URL})
+
+Banking AI Model Risk. One of three demos in the portfolio.
+""",
+            )
+
+
+# -----------------------------------------------------------------------------
+# Section renderers
+# -----------------------------------------------------------------------------
+
+
+def render_hero():
     st.markdown(
         f"""
-        <div class='hero'>
-          <h1>DriftSentinel - Dashboard view</h1>
-          <p>Underlying numbers and ledgers, for technical reviewers. Toggle "Tour mode"
-          back on in the sidebar to return to the storyteller view.</p>
-          <p class='meta'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></p>
-        </div>
-        """,
+<div class='pill-row'>
+  <a class='pill' href='{DEMO_URL}' target='_blank'>Live demo</a>
+  <a class='pill' href='{GITHUB_URL}' target='_blank'>GitHub</a>
+  <span class='pill author'>Vijay Saharan</span>
+</div>
+<div class='hero'>
+  <h1>DriftSentinel</h1>
+  <div class='subtitle'>Catches AI models when they quietly stop working.</div>
+  <div class='hook'>Watch what happens when a fraud model quietly decays - same code, same API, but the world moved.
+  Most banks won't notice for 78 days. The compliance audit will find it the quarter after that.
+  Now watch what changes with continuous monitoring across the full model fleet.</div>
+  <div class='scroll-cue'>Scroll to read.</div>
+</div>
+""",
         unsafe_allow_html=True,
     )
 
+
+def render_section_problem():
+    st.markdown(
+        """
+<div class='section-h'>What's the problem?</div>
+<div class='section-lede'>Banks run hundreds of AI models - for fraud, credit decisions, anti-money-laundering, customer service, collections.
+These models quietly stop working as the world changes. Customers' fraud patterns shift. The economy moves. A vendor updates their model overnight.
+The model isn't broken - it isn't throwing errors - it's just been quietly wrong for a while. Most banks check on each model every 3 months. By then, two quarters of value have leaked.</div>
+<div class='person-card'>
+  <div class='avatar'>F</div>
+  <div class='name'>Fraud model, day 60</div>
+  <div class='meta'>$50B-asset US retail bank. 8 production AI models. Fraud model is Tier-1.</div>
+  <div class='scenario'>A new card-skimming pattern emerges at retail POS terminals. The model was trained on older patterns. It starts missing about <b>15% of the fraud</b> it used to catch.
+  No errors. No alarms. The model owner's quarterly attestation - signed on day 45 - says "GREEN."</div>
+  <div class='harm'>Average time before anyone notices: 78 days. Two full quarters of fraud losses leak through before the bank sees it.</div>
+</div>
+<div class='impact-line'>At a Tier-1 US bank running ~1,200 production models, undetected drift modeled to bleed $45-90M per year - the size of a small acquisition, recurring annually.</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_solution():
+    st.markdown(
+        """
+<div class='section-h'>What's the solution?</div>
+<div class='section-lede'>DriftSentinel watches every model continuously, not quarterly. When a model's behavior starts changing,
+DriftSentinel detects it, diagnoses what kind of drift it is (input shift, output shift, vendor update, reference-data change),
+and routes the right alert to the right team with the evidence pre-assembled. The bank gets a 9-day signal instead of a 78-day one.</div>
+<div class='mechanic-row'>
+  <div class='mechanic-step'>
+    <div class='num'>1</div>
+    <div class='title'>Watch the fleet, continuously</div>
+    <div class='desc'>Every model in production gets sampled and statistically tested every day. PSI, KS, segment-level, plus vendor snapshot IDs.</div>
+  </div>
+  <div class='mechanic-step'>
+    <div class='num'>2</div>
+    <div class='title'>Diagnose the drift class</div>
+    <div class='desc'>Not all drift is equal. Aggregate vs slice. Input vs output. Vendor vs internal. The diagnosis tells you what to do.</div>
+  </div>
+  <div class='mechanic-step'>
+    <div class='num'>3</div>
+    <div class='title'>Route with evidence</div>
+    <div class='desc'>Alert routes to the right team (credit-risk, fraud-ops, MRM L2) with the audit pack pre-assembled. Decision in minutes, not weeks.</div>
+  </div>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_inaction():
+    st.markdown(
+        "<div class='section-h'>See it in action - pick a model</div>",
+        unsafe_allow_html=True,
+    )
+
+    selected = st.selectbox(
+        "Model",
+        MODEL_NAMES,
+        index=0,
+        key="selected_model",
+        label_visibility="collapsed",
+    )
+    m = MODELS[selected]
+
+    st.markdown(
+        f"""
+<div class='person-card' style='max-width: 100%; margin: 14px 0 18px 0;'>
+  <div class='avatar'>{m['kind'][0]}</div>
+  <div class='name'>{selected}</div>
+  <div class='meta'>{m['kind']}</div>
+  <div class='scenario'><b>What broke:</b> {m['what_broke']}</div>
+</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+    col_a, col_b, col_c = st.columns(3)
+    with col_a:
+        st.markdown(
+            f"""<div class='compare-card amber-card'>
+  <div class='label'>Door 1 - the old way</div>
+  <div class='what'>Quarterly Word doc, owner-signed</div>
+  <div class='stat-row'><span class='k'>Quarterly status</span><span class='v'>{m['old_way_status']}</span></div>
+  <div class='stat-row'><span class='k'>Days to notice</span><span class='v'>78+</span></div>
+  <div class='body'>{m['old_way_note']} The form says the model is fine. Nothing in the process actually inspects the model. Most US banks live here.</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+    with col_b:
+        st.markdown(
+            f"""<div class='compare-card red-card'>
+  <div class='label'>Door 2 - open-source PSI tool</div>
+  <div class='what'>Basic data-shift detector</div>
+  <div class='stat-row'><span class='k'>Days to notice</span><span class='v'>{m['ai_alone_days']}</span></div>
+  <div class='stat-row'><span class='k'>False alarms</span><span class='v'>31%</span></div>
+  <div class='body'>{m['ai_alone_caught']} Better than nothing - but slow, noisy, and blind to the worst kind of failure (vendor updates and slice-level rot).</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+    with col_c:
+        st.markdown(
+            f"""<div class='compare-card green-card'>
+  <div class='label'>Door 3 - DriftSentinel</div>
+  <div class='what'>Continuous, diagnosed, routed</div>
+  <div class='stat-row'><span class='k'>Days to notice</span><span class='v'>{m['driftsentinel_days']}</span></div>
+  <div class='stat-row'><span class='k'>False alarms</span><span class='v'>7%</span></div>
+  <div class='body'>{m['driftsentinel_caught']} Loss avoided: {m['loss_avoided']}</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+
+    st.markdown(
+        f"<div class='summary-line'>{m['summary']}</div>",
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_proof():
+    st.markdown(
+        """
+<div class='section-h'>Does it actually work?</div>
+<div class='section-lede'>We ran 90 days of synthetic bank traffic across 8 production models, with 8 drift events injected starting day 60.
+The events span input drift, output drift, vendor updates, and reference-data shifts. We compared three oversight regimes
+on the same data: quarterly attestation, basic open-source PSI, and DriftSentinel.</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.markdown(
+            """<div class='metric-tile'>
+  <div class='mlabel'>Days to notice (old way)</div>
+  <div class='mvalue' style='color:#ff8094;'>78</div>
+  <div class='mdelta'>Quarterly Word doc, owner-attested</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+    with c2:
+        st.markdown(
+            """<div class='metric-tile'>
+  <div class='mlabel'>Days to notice (DriftSentinel)</div>
+  <div class='mvalue'>9</div>
+  <div class='mdelta'>69 days earlier than baseline</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+    with c3:
+        st.markdown(
+            """<div class='metric-tile'>
+  <div class='mlabel'>False alarms (old / new)</div>
+  <div class='mvalue' style='color:#ffc94d;'>31% &rarr; 7%</div>
+  <div class='mdelta'>24 percentage points cleaner than basic tools</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+    with c4:
+        st.markdown(
+            """<div class='metric-tile'>
+  <div class='mlabel'>Audit pack (old / new)</div>
+  <div class='mvalue'>3 wks &rarr; 3 sec</div>
+  <div class='mdelta'>From "we noticed" to "validator has the pack"</div>
+</div>""",
+            unsafe_allow_html=True,
+        )
+
+
+def render_section_help():
+    st.markdown(
+        """
+<div class='section-h'>How does this help the bank?</div>
+<ul class='bullet-list'>
+  <li><b>About $45-90 million per year in modeled losses prevented</b> at a Tier-1 bank's scale - the size of a small acquisition, recurring annually.</li>
+  <li><b>Model coverage 22% &rarr; 100%</b> - every model watched, not just the riskiest fifth that has bandwidth.</li>
+  <li><b>Mean time to notice 78 &rarr; 9 days</b> - two months of leakage cut to one and a half weeks.</li>
+  <li><b>False-alarm rate 31% &rarr; 7%</b> - the team trusts the alerts, so they actually act on them.</li>
+</ul>
+<div class='second-order'>The MRM evidence pack a regulator or internal validator would ask for is already prepared. Auto-assembled in seconds, not the 3-week scramble that's typical today.</div>
+""",
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_caveats():
+    st.markdown(
+        """
+<div class='section-h'>What to keep in mind</div>
+<ul class='bullet-list'>
+  <li><b>This is a portfolio prototype</b> - not a deployed bank product. Built to demonstrate the PM analysis and the architecture I'd bring to the seat.</li>
+  <li><b>Vendor snapshot pinning trades a 4-8 week lag on model updates for governance signal.</b> That's the right trade-off for a regulated bank - but you'd revisit it for a fintech startup where speed-of-feature beats speed-of-disclosure.</li>
+  <li><b>DriftSentinel notices what's broken. It doesn't fix the model.</b> Decisions about rollback, retraining, and routing are still human - that's the right answer for Tier-1 regulated AI.</li>
+  <li><b>The 9-day mean is across the 8 injected events.</b> Tail cases (slice-level rot in low-volume segments) take longer; vendor version changes are caught within the hour. The mean isn't a guarantee for any single event.</li>
+  <li><b>Designed against US banking expectations</b> - SR 11-7 model risk, OCC heightened standards, and the recent NIST AI RMF mappings. Other jurisdictions (EU AI Act, MAS Singapore) would need re-mapping of the routing taxonomy.</li>
+</ul>
+""",
+        unsafe_allow_html=True,
+    )
+
+
+def render_section_audit(events_df, snaps_df, models_df):
     bundle = build_evidence_bundle(events_df, snaps_df, models_df)
     ledger_df = build_drift_ledger(events_df)
 
-    g1, g2 = st.columns(2)
-    with g1:
-        st.markdown("**Drift event ledger**")
-        if ledger_df.empty:
-            st.caption("Ledger not available - event data missing.")
-        else:
-            cols = [c for c in ["model_id", "feature_or_signal", "psi", "severity", "recommendation"]
-                    if c in ledger_df.columns]
-            st.dataframe(ledger_df[cols], use_container_width=True, hide_index=True, height=240)
-    with g2:
-        st.markdown("**PSI noise floor by segment**")
-        render_segment_noise_floor()
+    with st.expander("Show the technical detail - the audit pack the bank's risk team would review", expanded=False):
+        g1, g2 = st.columns(2)
+        with g1:
+            st.markdown(
+                """<div class='audit-card'>
+  <div class='title'>Drift event ledger</div>
+  <div class='desc'>Every detected event with PSI, segment, and recommendation.</div>
+</div>""",
+                unsafe_allow_html=True,
+            )
+            if ledger_df.empty:
+                st.caption("Ledger not available - event data missing.")
+            else:
+                cols = [c for c in ["model_id", "feature_or_signal", "psi", "severity", "recommendation"]
+                        if c in ledger_df.columns]
+                st.dataframe(ledger_df[cols], use_container_width=True, hide_index=True, height=240)
+        with g2:
+            st.markdown(
+                """<div class='audit-card'>
+  <div class='title'>Segment noise floor</div>
+  <div class='desc'>PSI by segment vs reference floor. Subprime is hot.</div>
+</div>""",
+                unsafe_allow_html=True,
+            )
+            render_segment_noise_floor()
 
-    g3, g4 = st.columns(2)
-    with g3:
-        st.markdown("**Vendor snapshot log**")
-        if snaps_df is not None and not snaps_df.empty:
-            show = snaps_df[["snapshot_date", "vendor", "snapshot_id", "announcement_status"]].copy()
-            st.dataframe(show, use_container_width=True, hide_index=True, height=240)
-    with g4:
-        st.markdown("**Decisions taken**")
-        st.dataframe(pd.DataFrame(bundle["decisions_taken"]),
-                     use_container_width=True, hide_index=True, height=240)
+        g3, g4 = st.columns(2)
+        with g3:
+            st.markdown(
+                """<div class='audit-card'>
+  <div class='title'>Vendor snapshot diff log</div>
+  <div class='desc'>Every external model version pinned. Silent updates flagged.</div>
+</div>""",
+                unsafe_allow_html=True,
+            )
+            if snaps_df is not None and not snaps_df.empty:
+                show = snaps_df[["snapshot_date", "vendor", "snapshot_id", "announcement_status"]].copy()
+                st.dataframe(show, use_container_width=True, hide_index=True, height=240)
+        with g4:
+            st.markdown(
+                """<div class='audit-card'>
+  <div class='title'>Decision audit trail</div>
+  <div class='desc'>Who decided what, when, and how long it took.</div>
+</div>""",
+                unsafe_allow_html=True,
+            )
+            st.dataframe(pd.DataFrame(bundle["decisions_taken"]),
+                         use_container_width=True, hide_index=True, height=240)
 
-    st.download_button(
-        "Download evidence bundle",
-        data=bundle_to_zip_bytes(bundle),
-        file_name=f"driftsentinel_mrm_{datetime.utcnow().strftime('%Y%m%d')}.zip",
-        mime="application/zip",
+        st.download_button(
+            "Download the full audit pack (.zip)",
+            data=bundle_to_zip_bytes(bundle),
+            file_name=f"driftsentinel_mrm_{datetime.utcnow().strftime('%Y%m%d')}.zip",
+            mime="application/zip",
+        )
+
+
+def render_footer():
+    st.markdown(
+        f"""<div class='footer'>
+Built by Vijay Saharan. Code, data, and PRDs at
+<a href='{GITHUB_URL}' target='_blank'>github.com/Vj-shipped-anyway/ai-pm-portfolio</a>.
+Connect on <a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a>.
+</div>""",
+        unsafe_allow_html=True,
     )
 
 
@@ -710,77 +711,29 @@ def render_dashboard(events_df, snaps_df, models_df):
 
 
 def main():
-    if "step" not in st.session_state:
-        st.session_state.step = 0
-    if "tour_mode" not in st.session_state:
-        st.session_state.tour_mode = True
-
-    with st.sidebar:
-        st.markdown("### Mode")
-        st.session_state.tour_mode = st.toggle(
-            "Tour mode (storyteller)",
-            value=st.session_state.tour_mode,
-            help="Off = dashboard with ledgers and underlying numbers.",
-        )
+    render_sidebar()
 
     (inf_df, models_df, events_df, snaps_df), err = safe_load()
     if err:
         st.error(f"Data not available: {err}")
         return
 
-    if not st.session_state.tour_mode:
-        render_dashboard(events_df, snaps_df, models_df)
-        return
-
-    # Tour mode
-    step = st.session_state.step
-    STEP_RENDERERS[step]()
-
-    st.markdown(
-        f"<div class='step-indicator'>Step {step + 1} of {TOTAL_STEPS}</div>",
-        unsafe_allow_html=True,
-    )
-
-    nav_cols = st.columns([1, 1, 1])
-    with nav_cols[0]:
-        st.button(
-            "Back",
-            on_click=go_back,
-            disabled=(step == 0),
-            use_container_width=True,
-            key="nav_back",
-        )
-    with nav_cols[1]:
-        st.write("")
-    with nav_cols[2]:
-        if step < TOTAL_STEPS - 1:
-            if step == 0:
-                label = "Start the tour"
-            elif step == 4:
-                label = "Door 1: the old way"
-            elif step == 5:
-                label = "Door 2: the better way"
-            elif step == 6:
-                label = "Door 3: DriftSentinel"
-            elif step == 7:
-                label = "But wait - there's a worse problem"
-            else:
-                label = "Next"
-            st.button(
-                label,
-                on_click=go_next,
-                use_container_width=True,
-                type="primary",
-                key="nav_next",
-            )
-        else:
-            st.button(
-                "Restart tour",
-                on_click=restart,
-                use_container_width=True,
-                type="primary",
-                key="nav_restart",
-            )
+    render_hero()
+    st.divider()
+    render_section_problem()
+    st.divider()
+    render_section_solution()
+    st.divider()
+    render_section_inaction()
+    st.divider()
+    render_section_proof()
+    st.divider()
+    render_section_help()
+    st.divider()
+    render_section_caveats()
+    st.divider()
+    render_section_audit(events_df, snaps_df, models_df)
+    render_footer()
 
 
 if __name__ == "__main__":
