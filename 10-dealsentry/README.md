@@ -1,8 +1,10 @@
 # 🏗️ DealSentry — CRE AI Underwriting Reliability
 
-**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../03-hallucination-containment/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
 
 > **Framing:** This is a roadmap placeholder for a portfolio prototype. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency framing and utility math below reflect how I'd apply PM rigor to a domain I follow as a learner.
+
+> **Reading the numbers — credibility tags inline.** Numbers in this roadmap doc are tagged 🟢 **Measured**, 🟡 **Modeled** (extrapolated from synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
 ---
 
@@ -25,14 +27,14 @@ The CRE-specific instance of "confident-and-wrong" — foundation models trained
 
 ## Utility math (modeled — priced when built)
 
-- SOTA: ~12-18% of AI-generated comp citations are fabricated (CRE-AI vendor independent audits)
-- DealSentry: < 1% fabrication reaches IC
+- 🟡 SOTA: ~12-18% of AI-generated comp citations are fabricated (CRE-AI vendor independent audits)
+- 🟡 DealSentry target: < 1% fabrication reaches IC (modeled — depends on the synthetic SOT coverage matching real CoStar/Reonomy/Cherre coverage in the engaged operator's submarkets)
 - Affected: a typical national CRE operator screens 800-1,200 deals/yr through AI underwriting
-- Annual utility: prevents 3-5 bad bids per year (modeled at average $1.8M each in misallocated capital), plus the bigger uncounted benefit of trust restoration in the AI underwriting tool itself
+- 🟡 Annual utility (modeled): prevents an estimated 3-5 bad bids per year at ~$1.8M each in modeled misallocated capital, plus the larger uncounted benefit of trust restoration in the AI underwriting tool itself
 
 ## Status
 
-Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
+Roadmap. [HalluGuard](../01-halluguard/) is the format reference for when this gets built.
 
 ---
 

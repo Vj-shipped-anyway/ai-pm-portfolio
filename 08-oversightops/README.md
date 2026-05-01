@@ -1,6 +1,6 @@
 # 👥 OversightOps — Human-in-the-Loop Workflow Designer
 
-**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../03-hallucination-containment/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
 
 ---
 
@@ -69,7 +69,7 @@ The high-stakes action is **paused for explicit user approval**, the agent proce
 
 ## Status
 
-Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
+Roadmap. [HalluGuard](../01-halluguard/) is the format reference for when this gets built.
 
 ---
 

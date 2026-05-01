@@ -1,6 +1,6 @@
 # 🤖 AgentWatch — Agent Reliability & Tool-Use Observability
 
-**Status:** Roadmap · Targeted Q3 2026 · See [HalluGuard](../03-hallucination-containment/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q3 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
 
 ---
 
@@ -64,7 +64,7 @@ Defense-in-depth controls: **Model Armor** scrubs prompts at the gateway (prompt
 
 ## Status
 
-Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
+Roadmap. [HalluGuard](../01-halluguard/) is the format reference for when this gets built.
 
 ---
 

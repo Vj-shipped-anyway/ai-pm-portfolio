@@ -1,6 +1,6 @@
 # 📜 LineageLog — AI Audit Trail & Decision Lineage
 
-**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../03-hallucination-containment/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
 
 ---
 
@@ -40,7 +40,7 @@ Google Cloud's *Building secure multi-agent systems on Google Cloud* (Kannan, Si
 | --- | --- | --- |
 | No prompt versioning | ADK session_id + user_id primitives | Prompt + system-instruction snapshot per decision |
 | No retrieval-set capture | Cloud Logging on Memory Bank reads | The exact retrieval set bound to the decision |
-| No model-snapshot pin | Vendor snapshot ID logged at A2A boundary | Model snapshot pinned per decision (interlocks with [DriftSentinel](../01-model-drift-sentinel/) v0.5) |
+| No model-snapshot pin | Vendor snapshot ID logged at A2A boundary | Model snapshot pinned per decision (interlocks with [DriftSentinel](../02-driftsentinel/) v0.5) |
 | No feature-at-decision-time | Data Vault's BigQuery MCP audit log | Features fetched, with timestamp and lineage to feature pipeline version |
 | No reviewer attribution | Agent Identity Auth Manager (user-delegation) | When user-delegated, the human user ID; when autonomous, the Agent Identity |
 | No outcome backlink | Cloud Storage summary report (paper's pattern) | Decision → action → downstream outcome (claim approved, customer complaint filed, charge-off, etc.) |
@@ -60,7 +60,7 @@ Google Cloud's *Building secure multi-agent systems on Google Cloud* (Kannan, Si
 
 ## Status
 
-Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
+Roadmap. [HalluGuard](../01-halluguard/) is the format reference for when this gets built.
 
 ---
 

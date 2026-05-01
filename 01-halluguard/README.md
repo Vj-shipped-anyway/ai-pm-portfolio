@@ -6,6 +6,8 @@
 
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. The training-notes describe the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
 
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 80-probe synthetic stress test in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the LLM gets it wrong.
 
 > If you're a non-technical reader: skip the code blocks. The plain-English explanation and the output tables tell the story.
@@ -203,11 +205,11 @@ python src/step_02_with_llm.py
 | Q04 | Can a California resident open a Premier Travel Account? | "Yes, the Premier Travel Account is available." | ❌ JURISDICTION — not in CA |
 | Q06 | Is the Premier Money Market paying close to 5%? | "Yes, the rate is 4.85% APY at the $25,000+ tier." | ✅ Yes |
 
-**Result:** **22 out of 30 queries answered correctly.** That's a huge lift over Step 1.
+**Result:** **22 out of 30 queries answered correctly.** That's a meaningful lift over Step 1.
 
-But — and this is the part the bank cared about — **8 out of 30 were confidently wrong.** Compliance gets to file 8 incidents per 30 chats.
+But — and this is the part the bank cared about — **8 out of 30 were confidently wrong.** Compliance ends up filing 8 incidents per 30 chats.
 
-**This is where most banks stop and ship.** And this is where the trouble starts.
+**This is where most banks stop and ship.** And this is where the next set of problems shows up.
 
 ---
 
@@ -269,7 +271,7 @@ The defects above aren't "the model is bad." They're specific, reproducible patt
 | Reg-citation fabrication | 58% pass | 49% pass | 42% pass |
 | Confident-and-wrong | 41% pass | 38% pass | 33% pass |
 
-Reading this table tells you the answer for the bank: **swapping the model from Llama to Claude buys you maybe 10-20% on each failure mode. Not enough.** The "confident-and-wrong" mode is uniformly bad across all three. **You can't escape this with a model upgrade. You need containment.**
+Reading this table tells you the answer for the bank: **swapping the model from Llama to Claude buys you maybe 10-20% on each failure mode. Not enough.** The "confident-and-wrong" mode is uniformly bad across all three. **A model upgrade does not get you out of this. The fix is containment.**
 
 ---
 
@@ -325,9 +327,9 @@ python src/step_04_with_containment.py
 | --- | --- | --- | --- |
 | Step 1: Rule-based | 0 / 30 | 0 | 100% |
 | Step 2: LLM only | 22 / 30 | **8** | 0% |
-| Step 4: LLM + Containment | 22 / 30 | **0** | 27% |
+| 🟢 Step 4: LLM + Containment (measured on this 30-query set) | 22 / 30 | **0** | 27% |
 
-**Containment turns 8 wrong answers into 8 honest "let me get a banker" responses.** Customers prefer this — pilot data showed +9 points on post-chat satisfaction when the bot abstained vs. when it confidently lied.
+🟢 **Containment turns 8 wrong answers into 8 honest "let me get a banker" responses on this eval set.** 🔴 Pilot framing: in a real engagement, post-chat satisfaction would be expected to move favorably when the bot abstains vs. when it confidently misstates — not yet measured against live customer traffic.
 
 ---
 
@@ -467,18 +469,18 @@ Anything else is theatre. Reducing a metric by 71% is not an outcome. *Reducing 
 
 | Term | Value | Where it comes from |
 | --- | --- | --- |
-| Current state of the art (LLM only, no containment) | 26.7% wrong answers reach the customer | Step 2 results on the 30-query eval set; calibrated to Anthropic / OpenAI / Llama production behavior |
-| HalluGuard solution | 0% wrong answers reach the customer | Step 4 results — verifier abstains on every miss in the eval set |
-| Per-interaction lift | **26.7 percentage points** | difference of the above |
-| Modeled affected population (mid-tier US bank shape, ~$40B-asset) | ~2.4M retail customers × 6 chats/yr | typical mid-tier US bank chatbot usage from public industry benchmarks |
+| 🟡 Current state of the art (LLM only, no containment) | 26.7% wrong answers reach the customer | Step 2 results on the 30-query eval set; calibrated to Anthropic / OpenAI / Llama production behavior |
+| 🟢 HalluGuard solution on this eval set | 0% wrong answers reach the customer | Step 4 results — verifier abstains on every miss in the 30-query set; on the 80-probe synthetic stress test in this repo, also 0 hallucinations land |
+| 🟡 Per-interaction lift | **26.7 percentage points** | difference of the above (modeled — the 30-query set is hand-curated to surface all 8 deficiency classes) |
+| Modeled affected population (mid-tier US bank shape, ~$40B-asset) | ~2.4M retail customers × ~6 chats/yr | typical mid-tier US bank chatbot usage from public industry benchmarks |
 | Modeled annual customer interactions | ~14.4M chats / yr | 2.4M × 6 |
-| **Modeled annual utility** | **~3.85M wrong answers prevented per year** | per-interaction lift × annual interactions |
+| 🟡 **Modeled annual utility** | **~3.85M wrong answers prevented per year** (modeled — assumes the 26.7-pp per-interaction lift holds on real traffic and the population shape above) | per-interaction lift × annual interactions |
 
 **Modeled 28-day shape (the design target).** A mid-tier US bank running this containment layer would expect roughly 14 Compliance-tracked misinformation incidents per 28-day pre-window to drop to ~4 in the 28-day post-window — annualizing to ~130 fewer incidents/yr at the *Compliance-tracked* level. The 3.85M number above includes the much larger long tail that never reaches Compliance — the customer who gets the wrong APR, takes the answer at face value, and never complains.
 
-**At fleet scale (Tier-1 retail bank with ~25M customers):** the math is roughly **40M wrong answers prevented per year**, plus the regulatory-tail-risk reduction that sits separately on the CRO's desk.
+🟡 **At fleet scale (Tier-1 retail bank with ~25M customers):** the math is roughly **~40M wrong answers prevented per year** (modeled — assumes the per-interaction lift scales linearly with population), plus the regulatory-tail-risk reduction that sits separately on the CRO's desk.
 
-**Modeled cost to deliver this utility:** ~$182 in training compute (the LoRA hyperparameters and run-cost in `build/training-notes.md` reflect the approach I'd take, not a deployed model) + 0.5 FTE labeling lead for 6 weeks + my time as PM. Per wrong answer prevented at fleet scale: well under one cent.
+🟡 **Modeled cost to deliver this utility:** ~$182 in training compute (the LoRA hyperparameters and run-cost reflect the approach I'd take, not a deployed model) + 0.5 FTE labeling lead for 6 weeks + my time as PM. Per wrong answer prevented at fleet scale: well under one cent.
 
 That ratio — utility delivered divided by cost — is the number I lead with in any AI investment conversation.
 
@@ -490,14 +492,14 @@ Modeled 28-day pilot design at a mid-tier US bank shape:
 
 | Metric | Before HalluGuard | With HalluGuard |
 | --- | --- | --- |
-| Auto-detected hallucination rate | 11.4% | 3.3% (-71%) |
-| Customer deflection retained | 67% | 64% (-3pp) |
-| Modeled Compliance incidents from chatbot misinfo | 14 | 4 |
-| Post-chat customer satisfaction | baseline | +9 points |
+| 🟡 Auto-detected hallucination rate | 11.4% | 3.3% (-71%) |
+| 🟡 Customer deflection retained | 67% | 64% (-3pp) |
+| 🟡 Modeled Compliance incidents from chatbot misinfo | 14 | 4 |
+| 🔴 Post-chat customer satisfaction (designed; not yet field-tested) | baseline | +9 points target |
 
 **Modeled cost of build:** ~$182 in compute (the LoRA training shape — 4× A100 for 6 hours — is the cost of the run I'd execute), plus 0.5 FTE labeling lead for 6 weeks, plus my time as PM. The training-notes describe the approach; the production verifier is what the next role trains.
 
-**What's next** — DPO with full deployment-surface coverage (the v0.5 design exploration described in [`CHANGELOG.md`](./CHANGELOG.md)), distillation to DeBERTa for sub-50ms verification, multi-language probe set.
+**What's next** — DPO with full deployment-surface coverage, distillation to DeBERTa for sub-50ms verification, multi-language probe set.
 
 ---
 
@@ -505,13 +507,39 @@ Modeled 28-day pilot design at a mid-tier US bank shape:
 
 This README is the walkthrough. The deeper artifacts:
 
-- [`CHANGELOG.md`](./CHANGELOG.md) — dated build journey from v0.0 (probe design, before any code) to v0.5 (DPO experiment, reverted). Includes the worst week of the project, where I lost six days to inconsistent annotation.
 - [`PRD.md`](./PRD.md) — the product requirements doc designed for a pre-MRM-committee read in a real engagement.
-- [`probes/`](./probes/) — the diagnostic test set. 1,260 examples across the eight failure modes. Schema documented in `probes/README.md`. Three deficiency files committed as samples.
-- [`build/training-notes.md`](./build/training-notes.md) — LoRA hyperparameters (rank 16, alpha 32, target modules), training cost ($182), inter-annotator kappa (0.71, measured retroactively as a mistake), what didn't work.
+- [`probes/`](./probes/) — the diagnostic test set. 1,260 examples across the eight failure modes. Three deficiency files committed as samples.
 - [`scripts/run-probes.sh`](./scripts/run-probes.sh) — CLI to run the full probe suite against any foundation model with a CI gate.
-- [`metrics/eval.md`](./metrics/eval.md) — KPI tree, eval harness, exit criteria.
-- [`diagrams/architecture.md`](./diagrams/architecture.md) — Mermaid system + sequence + trade-offs.
+
+---
+
+## 🛠️ Why this is a Streamlit prototype, not a production app
+
+Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
+
+**Streamlit is right for:**
+- Validating the product mechanic in 5 days, not 5 weeks
+- Walking a CRO, validator, or compliance lead through the eight-deficiency story end-to-end on a free deploy
+- Single-tenant, single-page workflows where the UI doesn't have to scale
+- Internal tools where 1-2 product folks are the only users
+
+**Streamlit is wrong for:**
+- Production multi-tenant SaaS — no tenant isolation, no row-level security
+- Mobile-first UX on a customer-facing chatbot — Streamlit's responsive story is "ok, not great"
+- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
+- Real-time websocket dashboards — every interaction is a full server rerender
+- Latency-sensitive customer-facing flows — server-side rerun on every widget change is too slow for a chatbot turn budget
+- Brand-controlled pixel-perfect UX — too much chrome you don't own
+
+**If HalluGuard graduated from prototype to product, the production stack would be:**
+- Front end: Next.js + Tailwind + shadcn/ui (or the bank's design system); the verifier and abstention surfaces sit in the existing chatbot UI, not a standalone app
+- Back end: FastAPI on the bank's existing K8s/EKS footprint; the LoRA verifier served via vLLM on 2x L4 GPUs, OpenTelemetry for trace export
+- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; in regulated shops, ForgeRock or PingFederate
+- Data plane: Postgres + pgvector for the verifier index and probe corpus; Snowflake or Databricks for the analytics warehouse the bank already runs
+- Observability: OpenTelemetry → Datadog (the bank's standard) and Langfuse for the verifier traces
+- Governance: integrate with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream — pick what your CRO already pays for)
+
+The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
 
 ---
 

@@ -6,6 +6,8 @@
 
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, architecture, and walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (MRM committee read, OCC exam, validator co-design) is what the next role does.
 
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
 [![Modeled fleet: 8 models](https://img.shields.io/badge/modeled--fleet-8%20synthetic%20models-blue)](#)
 [![FP rate: 7%](https://img.shields.io/badge/false--positive%20rate-7%25-brightgreen)](#)
 [![MTTD: 9d vs 78d](https://img.shields.io/badge/MTTD-9d%20vs%2078d%20SOTA-success)](#)
@@ -22,15 +24,20 @@
 
 ## 🔥 Demo in 30 seconds
 
+Open the static, no-Python demo: [`demo.html`](./demo.html).
+Watch Day 60 drift get auto-diagnosed → bounded recommendation → 🟢 MRM evidence bundle assembled in 3.2s on the prototype.
+
+To run the four-step walkthrough on your laptop:
+
 ```bash
 git clone https://github.com/vijaysaharan/ai-pm-portfolio
-cd ai-pm-portfolio/01-model-drift-sentinel/src
+cd ai-pm-portfolio/02-driftsentinel/src
 pip install -r requirements.txt
-streamlit run app.py
+python step_01_quarterly_attestation.py
+python step_02_basic_drift_detection.py
+python step_03_deficiencies_exposed.py
+python step_04_with_drift_sentinel.py
 ```
-
-Or open the static, no-Python demo: [`demo.html`](./demo.html).
-Watch Day 60 drift get auto-diagnosed → bounded recommendation → MRM evidence bundle assembled in 3.2 seconds.
 
 ---
 
@@ -46,8 +53,8 @@ The drift-monitoring space has two well-known incumbents (Evidently AI, Arize). 
 | Vendor-snapshot diff (catches Anthropic / Azure OpenAI silent updates) | ❌ | ❌ | ✅ |
 | Bounded recommendation engine (RETAIN / SHADOW / RETRAIN / ROLLBACK) | ❌ | ❌ | ✅ |
 | Auto-assembled MRM evidence bundle | ❌ | ❌ | ✅ |
-| MTTD on a Tier-1-shaped fleet (modeled) | ~78d | ~42d | **9d** |
-| SR 11-7 attestation-ready | ❌ | Partial | ✅ |
+| 🟡 MTTD on a Tier-1-shaped fleet (modeled) | ~78d | ~42d | **9d** |
+| 🔴 SR 11-7 attestation-ready (designed) | ❌ | Partial | ✅ |
 
 **Position:** *DriftSentinel doesn't replace Evidently — it sits on top of it and does the diagnosis + decide loops Evidently leaves to the validator.* This framing matters because it tells a buyer they can deploy this **without ripping out** what their data-science team already runs.
 
@@ -87,20 +94,20 @@ I'm a PM who follows this specific failure mode in industry research. The point 
 
 ## Executive summary (90 seconds)
 
-**Problem.** A Tier-1 retail bank receives a draft OCC exam finding for inadequate ongoing monitoring under SR 11-7. Validators are attesting 8 production models with quarterly Word docs. A credit model decays for 11 weeks before a complaint volume report surfaces it. Modeled exposure: **$14M/yr** in mispriced risk plus regulatory tail. This is the framing this prototype is designed against — calibrated against published SR 11-7 expectations and the public shape of recent OCC and FRB supervisory letters on AI/ML ongoing monitoring.
+**Problem.** A Tier-1 retail bank receives a draft OCC exam finding for inadequate ongoing monitoring under SR 11-7. Validators are attesting 8 production models with quarterly Word docs. A credit model decays for 11 weeks before a complaint volume report surfaces it. 🟡 Modeled exposure: **$14M/yr** in mispriced risk plus regulatory tail (assumes the $50B-asset retail-bank shape and the published loss-per-quarter-of-decay benchmarks). This is the framing this prototype is designed against — calibrated against published SR 11-7 expectations and the public shape of recent OCC and FRB supervisory letters on AI/ML ongoing monitoring.
 
 **Product.** DriftSentinel — a three-loop monitoring layer that sits on top of the existing model registry and feature store. **Detect** (PSI/KS plus GenAI proxy metrics plus vendor-snapshot diff) → **Diagnose** (feature bisect, segment slicer, upstream lineage, root-cause attribution) → **Decide** (RETAIN / SHADOW / RETRAIN / ROLLBACK with bounded risk envelope and auto-assembled MRM evidence bundle).
 
 **Modeled performance (90-day pilot design, 8-model synthetic fleet).**
 
-- **MTTD: 78 days → 9 days** (-89%) on Tier-1 models
-- **False-positive rate: 31% → 7%** — validator pager moves from "muted" to "real signal"
-- **MRM evidence-bundle assembly: 3 weeks → 3.2 seconds** (with human edit before sign-off)
-- **Modeled validator capacity reclaimed:** ~2 days/week per validator = ~16 person-days/week at fleet scale
-- **Vendor silent updates caught:** the Anthropic Feb-24 minor snapshot update is the public reference incident the design is calibrated against; the snapshot-pin design surfaces this class of change within 24h
-- **Modeled prevented loss:** $14M/yr at the $50B-asset retail-bank shape; ~$45-90M/yr at Tier-1 fleet scale
+- 🟡 **MTTD: 78 days → 9 days** (-89%) on Tier-1-style models (modeled — assumes the synthetic 90-day shipped data and a Tier-1-shaped fleet)
+- 🟢 **False-positive rate: 31% → 7%** measured on the 8 injected drift events in the synthetic 90-day run
+- 🟢 **MRM evidence-bundle assembly: ~3.2s on the prototype** (the assembly path is real; human edit before sign-off is part of the design)
+- 🟡 **Modeled validator capacity reclaimed:** ~2 days/week per validator = ~16 person-days/week at fleet scale (assumes a 1,200-model Tier-1 fleet and the SR 11-7 attestation cadence)
+- 🟢 **Vendor silent updates caught:** the Anthropic Feb-24 minor snapshot update is the reference incident; the snapshot-pin design surfaces this class of change within 24h on the prototype
+- 🟡 **Modeled prevented loss:** $14M/yr at the $50B-asset retail-bank shape; ~$45-90M/yr at Tier-1 fleet scale (assumes ~1,200 production models, 78d→9d MTTD compression, published average loss per quarter of decay)
 
-**Modeled cost.** ~$280k for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE engineer + line-2 partner time). Per dollar of modeled prevented loss: **under one cent**.
+🔴 **Modeled cost.** ~$280k for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE engineer + line-2 partner time) — designed, not yet executed. Per dollar of modeled prevented loss: **under one cent**.
 
 **Call to action.** Fork this repo. Swap the synthetic data in `data/` for your fleet's inference logs. The four step scripts and the Streamlit prototype run on a laptop in 10 minutes. Walk it through your CRO.
 
@@ -253,15 +260,15 @@ Reducing MTTD by 89% is not an outcome. *Reducing MTTD by 89% across 1,200 produ
 
 | Term | Value |
 | --- | --- |
-| Current SOTA MTTD (basic PSI/KS) | 78 days |
-| DriftSentinel MTTD | 9 days |
-| Per-model lift | **69 days** of decay caught earlier |
+| 🟡 Current SOTA MTTD (basic PSI/KS, modeled on industry baselines) | 78 days |
+| 🟢 DriftSentinel MTTD on the synthetic 90-day run | 9 days |
+| 🟡 Per-model lift (modeled at fleet scale) | **69 days** of decay caught earlier |
 | Affected fleet (typical Tier-1 BFSI) | ~1,200 production models |
-| **Annual model-decay-days prevented** | **~83,000** at fleet scale |
-| Modeled prevented loss ($50B-asset bank shape) | **$14M/yr** |
-| Modeled prevented loss (Tier-1 fleet shape) | **~$45-90M/yr** |
-| Modeled validator capacity reclaimed | **~2 days/week per validator · ~16 person-days/week at fleet scale** |
-| Cost per dollar of prevented loss | **< $0.01** |
+| 🟡 **Annual model-decay-days prevented** | **~83,000** at fleet scale (assumes 69d × 1,200 models) |
+| 🟡 Modeled prevented loss ($50B-asset bank shape) | **$14M/yr** (assumes 8-model fleet + published loss-per-quarter-of-decay) |
+| 🟡 Modeled prevented loss (Tier-1 fleet shape) | **~$45-90M/yr** (assumes 1,200 models + same per-model loss curve) |
+| 🟡 Modeled validator capacity reclaimed | **~2 days/week per validator · ~16 person-days/week at fleet scale** (assumes the SR 11-7 quarterly attestation cadence) |
+| 🟡 Cost per dollar of prevented loss | **< $0.01** (modeled — assumes ~$280k pilot cost vs. ~$14M modeled prevention) |
 
 ---
 
@@ -319,7 +326,7 @@ sequenceDiagram
     R->>B: action + diagnosis
     B-->>V: routed to MRM in 3.2s
     V-->>M: shadow candidate deployed alongside
-    Note over M,V: Validator attestation in 1 day, not 3 weeks.
+    Note over M,V: 🔴 Designed for 1-day validator attestation (vs. 3-week status quo); not yet tested with a real validator.
 ```
 
 See [`assets/drift-flow.svg`](./assets/drift-flow.svg) for a static visual of the same flow.
@@ -330,8 +337,6 @@ See [`assets/drift-flow.svg`](./assets/drift-flow.svg) for a static visual of th
 
 The PM artifacts that show how I'd run this product if I owned the seat:
 
-- [`PM_PROOF.md`](./PM_PROOF.md) — 1-page PRD stub, RICE-prioritized backlog, stakeholder map, six product principles
-- [`CHANGELOG.md`](./CHANGELOG.md) — six design iterations from kickoff through v0.5, framed as design pivots and product-shape changes
 - [`PRD.md`](./PRD.md) — full PRD designed for a pre-MRM-committee read in a real engagement
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — full systems doc: databases, runtime topology, encryption, IdP/RBAC, network controls, DR/RTO/RPO, compliance posture
 
@@ -354,11 +359,39 @@ python src/step_03_deficiencies_exposed.py
 python src/step_04_with_drift_sentinel.py
 
 # 3. Open the interactive demo
-streamlit run src/app.py     # full Streamlit prototype
 open demo.html               # standalone, no Python needed
 ```
 
 If you run it on real data and get something useful, open an issue or send me the slide. I'd rather see what your CRO did with it than what I think it should do.
+
+---
+
+## 🛠️ Why this is a Streamlit prototype, not a production app
+
+Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
+
+**Streamlit is right for:**
+- Validating the product mechanic in 5 days, not 5 weeks
+- Walking a CRO or validator through the Detect → Diagnose → Decide story end-to-end on a free deploy
+- Single-tenant, single-page workflows where the UI doesn't have to scale
+- Internal tools where 1-2 product folks are the only users
+
+**Streamlit is wrong for:**
+- Production multi-tenant SaaS — no tenant isolation, no row-level security
+- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
+- Real-time websocket dashboards — every interaction is a full server rerender
+- Latency-sensitive validator workflows — server-side rerun on every widget change
+- Brand-controlled pixel-perfect UX — too much chrome you don't own
+
+**If DriftSentinel graduated from prototype to product, the production stack would be:**
+- Front end: Next.js + Tailwind + shadcn/ui (or the bank's design system)
+- Back end: FastAPI on the bank's existing K8s/EKS footprint
+- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; in regulated shops, ForgeRock or PingFederate
+- Data plane: Snowflake or Databricks (whichever the bank already runs); ClickHouse for high-cardinality drift events; Postgres for the model registry side-channel
+- Observability: OpenTelemetry → Datadog (the bank's standard) and Langfuse for the GenAI proxy traces
+- Governance: integrate with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream — pick what your CRO already pays for)
+
+The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
 
 ---
 

@@ -1,6 +1,6 @@
 # 💰 InferenceLens — AI Inference Economics Dashboard
 
-**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../03-hallucination-containment/) for the format this folder will follow when built.
+**Status:** Roadmap · Targeted Q4 2026 · See [HalluGuard](../01-halluguard/) for the format this folder will follow when built.
 
 ---
 
@@ -30,7 +30,7 @@ Cost-as-a-deficiency is the AI-PM-specific framing. Without visibility, model se
 
 ## Status
 
-Roadmap. [HalluGuard](../03-hallucination-containment/) is the format reference for when this gets built.
+Roadmap. [HalluGuard](../01-halluguard/) is the format reference for when this gets built.
 
 ---
 

@@ -4,6 +4,8 @@
 
 > **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
 
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the deployed model gets it wrong.
 
 > If you're a non-technical reader (asset manager, acquisitions, investor): skip the code blocks. The plain-English explanation and the output tables tell the story.
@@ -42,7 +44,7 @@ It silently breaks on:
 
 The asset manager finds out two years later, during a CAM reconciliation dispute, when the tenant's lease counsel pulls out the redline and the landlord's abstracted record doesn't match. By then the recovery argument is already lost.
 
-**Modeled rent leakage at a portfolio of this shape: $4.2M/yr** — escalations on the wrong base, uncapped CAM that should have been capped, missed kick-out windows, missed ROFOs that turn into lost expansion deals.
+🟡 **Modeled rent leakage at a portfolio of this shape: ~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute / missed-escalation loss patterns, and the 12% blended error rate from public PropTech vendor benchmarks) — escalations on the wrong base, uncapped CAM that should have been capped, missed kick-out windows, missed ROFOs that turn into lost expansion deals.
 
 The PropTech-founder consensus on this has been public for two years. Lev, Cherre, CompStak, CoStar, Reonomy — all of them have published or spoken about lease-NLP working on standard leases and falling over on non-standard. The deployed pipelines documented in the public PropTech writing rarely have a verification layer downstream of the primary extractor.
 
@@ -120,7 +122,7 @@ python src/step_01_manual_abstraction.py
 | `lease_05` office + side letter | 3 | 3.13 | $246 | 96% |
 | `lease_06` anchor tenant complex | 4 | 3.85 | $295 | 96% |
 
-**Result:** Avg ~3.2 hours / lease, ~$245 / lease, ~96% per-field accuracy. Across a 220-asset portfolio that's roughly **$54K per re-abstraction cycle, or ~$18K/yr amortized** at a 3-year amendment cadence.
+**Result:** 🟡 Avg ~3.2 hours / lease, ~$245 / lease, ~96% per-field accuracy (modeled from public paralegal blended rates and lease-page complexity multipliers; not measured against a deployed paralegal team). Across a 220-asset portfolio that's roughly **$54K per re-abstraction cycle, or ~$18K/yr amortized** at a 3-year amendment cadence.
 
 **Why this is the wrong long-run answer:** the moment the portfolio grows past ~500 assets, or the moment the team has to re-abstract every quarter (which is what the asset-management VP wanted), this approach stops scaling. That's why every operator has tried to automate it.
 
@@ -161,13 +163,13 @@ python src/step_02_deployed_lease_nlp.py
 | `lease_04` redlined retail | 4 / 12 | 33% |
 | `lease_05` office + side letter | 11 / 12 | 92% |
 | `lease_06` anchor tenant complex | 8 / 12 | 67% |
-| **Blended** | **55 / 72** | **76% on this sample** |
+| 🟢 **Blended on this sample** | **55 / 72** | **76% on this sample** |
 
-The 6-lease sample is deliberately weighted toward the hard cases. **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** — about 96% on standard leases (which are the majority) and ~78% on non-standard. The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
+The 6-lease sample is deliberately weighted toward the hard cases. 🟡 **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** (modeled from public PropTech vendor benchmarks: ~96% on standard leases, which dominate the mix, and ~78% on non-standard). The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
 
-**Result:** The pipeline gets nearly everything right on standard leases. **It gets the wrong CAM cap, the wrong escalation type, missed kick-outs, and missed exclusivity on the non-standard ones.** And it does it silently — the structured output looks identical to a correct extraction.
+**Result:** The pipeline handles standard leases well. **It returns the wrong CAM cap, the wrong escalation type, missed kick-outs, and missed exclusivity on the non-standard ones.** And it does it silently — the structured output looks identical to a correct extraction.
 
-**This is where most CRE owner-operators stop and ship.** And this is where the trouble starts.
+**This is where most CRE owner-operators stop and ship.** And this is where the next set of problems shows up.
 
 ---
 
@@ -296,10 +298,10 @@ python src/step_04_with_leaseguard.py
 | `lease_04` redlined retail | 4 / 12 | 12 / 12 |
 | `lease_05` office + side letter | 11 / 12 | 12 / 12 |
 | `lease_06` anchor tenant complex | 8 / 12 | 12 / 12 |
-| **Blended on this sample** | **76%** | **100%** (6 of 6 caught) |
-| **Projected at portfolio scale** | **88%** | **98.2%** |
+| 🟢 **Blended on this sample** | **76%** | **100%** (6 of 6 hard-case leases caught in this eval set) |
+| 🟡 **Projected at portfolio scale** | **88%** | **98.2%** (modeled — assumes paralegal triage clears flagged fields with the published triage accuracy) |
 
-**LeaseGuard turns 17 wrong fields on this sample into 17 paralegal-reviewed correct fields,** at a marginal cost of ~30 minutes of paralegal time across the six leases. The remaining 1.8% gap at portfolio scale is the residual where both the primary and the secondary agree on a wrong answer and no rule catches it — a known class, addressed in `metrics/eval.md`.
+🟢 **LeaseGuard turns 17 wrong fields on this sample into 17 paralegal-reviewed correct fields,** at a marginal cost of ~30 minutes of paralegal time across the six leases. 🟡 The remaining 1.8% gap projected at portfolio scale is the residual where both the primary and the secondary agree on a wrong answer and no rule catches it — a known class.
 
 ---
 
@@ -313,15 +315,15 @@ Anything else is theatre. Going from 88% to 98% accuracy is not an outcome. *Goi
 
 | Term | Value | Where it comes from |
 | --- | --- | --- |
-| Current state of the art (deployed lease-NLP, blended) | 88% accuracy | Public PropTech vendor benchmarks; published independent audits; calibrated against the 6-lease sample here |
-| LeaseGuard solution | 98.2% accuracy after triage | Step 4 results on the eval set + projected at portfolio scale with paralegal triage |
-| Per-lease lift | **10.2 percentage points** of correctly-extracted fields | difference of the above |
+| 🟡 Current state of the art (deployed lease-NLP, blended) | 88% accuracy | Public PropTech vendor benchmarks; published independent audits; calibrated against the 6-lease sample here |
+| 🟡 LeaseGuard solution | 98.2% accuracy after triage | Step 4 results on the eval set + projected at portfolio scale with paralegal triage |
+| 🟡 Per-lease lift | **10.2 percentage points** of correctly-extracted fields | difference of the above |
 | Affected (modeled 220-asset portfolio) | 220 leases × 12 fields per cycle = 2,640 field extractions | 220-asset retail-and-office book shape |
-| Annual at modeled portfolio | **~270 field errors caught and corrected per year** | ~12% blended error × 2,640 fields × ~85% routed to triage successfully |
-| Modeled rent recovery at the 220-asset shape | **~$4.2M / yr** | Modeled from historical CAM dispute loss patterns, missed escalations, missed kick-out windows in the published literature. Not measured. Every portfolio is different. |
-| At fleet scale (national operator, 5,000+ leases) | **~6,100 field errors caught / yr** · **~$95M / yr modeled rent recovery** | Same per-lease error rate at fleet size |
-| Modeled cost to deliver (fleet scale) | **~$280K / yr** | Compute (secondary extraction + rule layer) + paralegal triage time |
-| Per error caught | **~$45** | vs $250-400 to manually re-abstract from scratch |
+| 🟡 Annual at modeled portfolio | **~270 field errors caught and corrected per year** | ~12% blended error × 2,640 fields × ~85% routed to triage successfully |
+| 🟡 Modeled rent recovery at the 220-asset shape | **~$4.2M / yr** | Modeled from historical CAM dispute loss patterns, missed escalations, missed kick-out windows in the published literature. Not measured. Every portfolio is different. |
+| 🟡 At fleet scale (national operator, 5,000+ leases) | **~6,100 field errors caught / yr** · **~$95M / yr modeled rent recovery** | Same per-lease error rate at fleet size |
+| 🟡 Modeled cost to deliver (fleet scale) | **~$280K / yr** | Compute (secondary extraction + rule layer) + paralegal triage time |
+| 🟡 Per error caught | **~$45** | vs $250-400 to manually re-abstract from scratch |
 
 **Modeled 28-day pilot shape (the design target).** A 220-asset portfolio running LeaseGuard in shadow for 28 days would expect to surface ~14 escalation / CAM-cap / side-letter errors that the deployed pipeline missed — every one of them the kind of error that would hit operating numbers within 18 months on the existing pipeline. The 270/yr number is the annualized projection of that modeled shadow run, conservative on the rare-error tail.
 
@@ -339,11 +341,11 @@ Modeled 28-day shadow window at a 220-asset retail-and-office book shape:
 
 | Metric | Before LeaseGuard | With LeaseGuard |
 | --- | --- | --- |
-| Per-lease blended field accuracy | 88.0% | 98.2% (+10.2 pp) |
-| Field errors per cycle (220 leases × 12 fields) | ~317 | ~48 |
-| CAM-reconciliation disputes lost (modeled trailing 12 mo) | ~11 | (modeled) 2 |
-| Mean time to detect a wrong escalation | 14-22 months (next reconciliation) | 24 hours (triage queue) |
-| Modeled $ recovered / yr at this portfolio shape | — | **$4.2M** |
+| 🟡 Per-lease blended field accuracy | 88.0% | 98.2% (+10.2 pp) |
+| 🟡 Field errors per cycle (220 leases × 12 fields) | ~317 | ~48 |
+| 🟡 CAM-reconciliation disputes lost (modeled trailing 12 mo) | ~11 | (modeled) ~2 |
+| 🟡 Mean time to detect a wrong escalation | 14-22 months (next reconciliation) | ~24 hours (triage queue, by design) |
+| 🟡 Modeled $ recovered / yr at this portfolio shape | — | **~$4.2M** |
 
 **Modeled cost of build:** ~$18K in compute (secondary extraction tuning + Mistral 7B fine-tune on 1,200 synthetic lease examples) + 0.5 FTE labeling lead for 4 weeks + my time as PM.
 
@@ -356,18 +358,8 @@ Modeled 28-day shadow window at a 220-asset retail-and-office book shape:
 This README is the walkthrough. The deeper artifacts:
 
 - [`PRD.md`](./PRD.md) — the product requirements doc the way it would land in front of an Investment Committee.
-- [`metrics/eval.md`](./metrics/eval.md) — KPI tree, eval harness, exit criteria, the 1.8% residual class.
-- [`diagrams/architecture.md`](./diagrams/architecture.md) — Mermaid system + sequence + trade-offs (primary vs secondary vs rule layer; OCR ingestion of side letters).
 - [`data/`](./data/) — the 6 lease abstracts, ground truth, deficiency map. `data/README.md` explains the redline markup convention.
-- [`src/`](./src/) — runnable step scripts + Streamlit prototype. `src/README.md` has the run order.
-
-Run the prototype:
-
-```bash
-cd src
-pip install -r requirements.txt
-streamlit run app.py
-```
+- [`src/`](./src/) — runnable step scripts.
 
 Run the eval suite end-to-end:
 
@@ -378,6 +370,36 @@ python step_02_deployed_lease_nlp.py
 python step_03_deficiencies_exposed.py
 python step_04_with_leaseguard.py
 ```
+
+---
+
+## 🛠️ Why this is a Streamlit prototype, not a production app
+
+Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a CRE operator or a PropTech buyer hears the architectural judgment.
+
+**Streamlit is right for:**
+- Validating the verification mechanic in 5 days, not 5 weeks
+- Walking an asset-management VP, a PropTech founder, or a CRE General Counsel through the six-deficiency story end-to-end on a free deploy
+- Single-tenant, single-page workflows where the UI doesn't have to scale
+- Internal tools where 1-2 paralegals are the only daily users
+
+**Streamlit is wrong for:**
+- Production multi-tenant SaaS — no native tenant isolation, no row-level security between operators
+- Mobile-first UX for an asset-management team in the field — Streamlit's responsive story is "ok, not great"
+- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated CRE shop
+- Real-time websocket triage queues — every interaction is a full server rerender
+- Brand-controlled pixel-perfect UX — too much chrome you don't own
+- High-volume paralegal triage (thousands of leases per cycle) — server-side rerun on every widget change does not scale to a national operator's queue
+
+**If LeaseGuard graduated from prototype to product, the production stack would be:**
+- Front end: Next.js + Tailwind + shadcn/ui (or the operator's design system); the triage UI is a queue + document viewer with span-level highlighting
+- Back end: FastAPI on the operator's K8s/EKS footprint or a managed Cloud Run; the secondary extractor and rule layer run as a worker pool
+- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; for institutional operators with SOC 2 / SOX scope, ForgeRock or PingFederate
+- Data plane: Postgres for the lease-record canonical store (write-back into Yardi Voyager / MRI / Argus Enterprise via existing connectors); Snowflake or Databricks for the analytics warehouse the operator already runs; S3 for the OCR'd PDF objects
+- Observability: OpenTelemetry → Datadog (the operator's standard) and Langfuse for the extraction traces
+- Governance: integrate with the operator's existing CRE workflow (Yardi Voyager / MRI / Argus / Salesforce CRE Cloud), not a parallel system; PropTech buyers already pay for the system of record and the verification layer should write back into it
+
+The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
 
 ---
 
