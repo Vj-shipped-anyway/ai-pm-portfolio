@@ -197,7 +197,7 @@ st.markdown(
   <h1>Stops CRE underwriting copilots from sending IC memos with fabricated comps and bad math.</h1>
   <div class='sub'>Verifies every cited comp against a source-of-truth DB, re-runs T-12 normalization symbolically, cross-checks submarket stats across feeds, and flags anything that smells synthetic before the deal hits IC.</div>
   <div class='pills'>
-    <span class='pill'><a href='https://github.com/vijaysaharan/ai-pm-portfolio' target='_blank'>GitHub</a></span>
+    <span class='pill'><a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='https://www.linkedin.com/in/vijaysaharan/' target='_blank'>LinkedIn</a></span>
     <span class='pill'>6 memos verified</span>
     <span class='pill'>Built 2026</span>

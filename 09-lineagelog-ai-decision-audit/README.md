@@ -65,5 +65,3 @@ Roadmap. [HalluGuard](../01-halluguard-bank-chatbot-safety/) is the format refer
 ---
 
 **Author:** Vijay Saharan · [LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
-
-<!-- LineageLog: AI decision audit trail - every regulated AI decision traced to its inputs, model snapshot, and reviewer -->

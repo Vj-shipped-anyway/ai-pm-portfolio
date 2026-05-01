@@ -26,6 +26,9 @@ st.set_page_config(
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
+GITHUB_URL = "https://github.com/Vj-shipped-anyway/ai-pm-portfolio"
+LINKEDIN_URL = "https://www.linkedin.com/in/vijaysaharan/"
+
 # ---------------------------------------------------------------------------
 # Theme
 # ---------------------------------------------------------------------------
@@ -189,14 +192,14 @@ def advance(target: int) -> None:
 # HERO
 # ---------------------------------------------------------------------------
 st.markdown(
-    """
+    f"""
 <div class='ds-hero'>
   <div class='brand'>🛰️ DriftSentinel</div>
   <h1>Catches production model drift 69 days before quarterly attestation does.</h1>
-  <div class='sub'>Sits on top of your existing drift tooling (Evidently, Arize) and adds the diagnose-decide loop they leave to the validator. Slice-aware, GenAI-aware, vendor-snapshot-aware - and outputs a bounded recommendation, not a chart.</div>
+  <div class='sub'>Sits on top of your existing drift tooling (Evidently, Arize) and adds the diagnose-decide loop they leave to the validator (the independent reviewer who must approve a model before launch). Slice-aware, GenAI-aware, vendor-snapshot-aware - and outputs a bounded recommendation, not a chart.</div>
   <div class='pills'>
-    <span class='pill'><a href='https://github.com/vijaysaharan/ai-pm-portfolio' target='_blank'>GitHub</a></span>
-    <span class='pill'><a href='https://www.linkedin.com/in/vijaysaharan/' target='_blank'>LinkedIn</a></span>
+    <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
+    <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
     <span class='pill'>SR 11-7 aligned</span>
     <span class='pill'>Built 2026</span>
   </div>
@@ -219,7 +222,8 @@ st.markdown(
     "<div class='ds-card'><span class='ds-step-label'>Step 1</span>"
     "<h3>Pick a model from the synthetic 8-model fleet</h3>"
     "<p class='muted'>Mid-tier US bank shape: 8 production models across credit, fraud, AML, GenAI. "
-    "Each one has a different drift story.</p></div>",
+    "Drift (model drift) is when an AI quietly stops working as well as it used to "
+    "(because the world changed). Each one has a different drift story.</p></div>",
     unsafe_allow_html=True,
 )
 
@@ -252,8 +256,11 @@ if st.session_state.step >= 2:
     st.markdown(
         "<div class='ds-card'><span class='ds-step-label'>Step 2</span>"
         "<h3>Day-90 simulation - what each layer of oversight saw</h3>"
-        "<p class='muted'>Three doors: (1) Evidently/Arize aggregate drift, "
-        "(2) quarterly validator attestation, (3) DriftSentinel slice + vendor + GenAI awareness.</p>"
+        "<p class='muted'>Three doors map to the bank's three lines of defense "
+        "(standard model-risk structure: 1=builders, 2=reviewers, 3=auditors): "
+        "(1) Evidently/Arize aggregate drift, "
+        "(2) quarterly validator attestation, "
+        "(3) DriftSentinel slice + vendor + GenAI awareness.</p>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -287,9 +294,11 @@ if st.session_state.step >= 3:
         days_saved = 90
         key_metric = f"Caught on Day {sentinel_day}; aggregate PSI/KS missed it entirely (vendor-snapshot blind)"
         tldr = (
-            f"Anthropic silently updated the snapshot. Aggregate PSI/KS saw nothing because the "
-            f"input distribution did not change - the model's behavior did. DriftSentinel caught it "
-            f"on Day {sentinel_day}."
+            f"Anthropic silently updated the vendor snapshot (the exact pinned version of an outside AI). "
+            f"Aggregate PSI (Population Stability Index - detects when the AI is seeing different data than "
+            f"it was trained on) and KS (Kolmogorov-Smirnov test - another data-shift detector) saw nothing "
+            f"because the input distribution did not change - the model's behavior did. DriftSentinel "
+            f"caught it on Day {sentinel_day}."
         )
     else:
         days_saved = sota_day - sentinel_day
@@ -298,10 +307,16 @@ if st.session_state.step >= 3:
         risk = "MEDIUM" if decision in ("SHADOW", "RETAIN") else "HIGH"
         action = m["rec_text"]
         key_metric = f"Caught on Day {sentinel_day} vs Day {sota_day} for SOTA tooling ({days_saved} days earlier)"
+        shadow_note = (
+            " (SHADOW = shadow mode: run the new model alongside the old one without affecting customers, "
+            "to see how it behaves)"
+            if decision == "SHADOW"
+            else ""
+        )
         tldr = (
             f"DriftSentinel flagged a slice-confined drift on Day {sentinel_day}. "
             f"Aggregate-only tooling would not have surfaced it until Day {sota_day}. "
-            f"Bounded recommendation: {decision}."
+            f"Bounded recommendation: {decision}.{shadow_note}"
         )
 
     st.markdown(
@@ -326,13 +341,13 @@ if st.session_state.step >= 3:
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>Compared input distributions and prediction distributions against the 90-day reference window from <code>inference_logs.csv</code>; vendor snapshots tracked from <code>vendor_snapshots.csv</code>.</div>
+  <div>Compared input distributions and inference (the actual requests customers send to the AI in production) against the 90-day reference window from <code>inference_logs.csv</code>; vendor snapshots tracked from <code>vendor_snapshots.csv</code>.</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
     <li>The 90-day reference window is representative of "stable" behavior.</li>
     <li>Slice cuts (subprime_650_680, card_present_pos, etc.) reflect the bank's actual operating segments.</li>
     <li>For GenAI proxy metrics (refusal-rate, response-length, judge-drift), the human label set is balanced.</li>
-    <li>SR 11-7 ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
+    <li>SR 11-7 (Federal Reserve's 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring) ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='confidence-high'>{confidence}</div>
@@ -433,9 +448,38 @@ if st.session_state.step >= 5:
             f"- **Reference window:** 90 days, `inference_logs.csv`\n"
             f"- **Vendor snapshot pin:** {mrow['snapshot_id']}\n"
             f"- **Telemetry stack:** OpenTelemetry -> ClickHouse (drift events) + Datadog + Langfuse\n"
-            f"- **SR 11-7 mapping:** ongoing monitoring + change management + escalation routing\n"
-            f"- **Validator workflow:** auto-routes to {mrow['owner']} with the bounded recommendation pre-filled"
+            f"- **SR 11-7 mapping:** ongoing monitoring + change management + escalation routing. "
+            f"OCC (Office of the Comptroller of the Currency) and FRB (Federal Reserve Board) co-issued the rule.\n"
+            f"- **Validator workflow:** auto-routes to {mrow['owner']} (the line-2 validator - independent reviewer "
+            f"who must approve a model before launch) with the bounded recommendation pre-filled"
         )
+
+    # ---------------------------------------------------------------------------
+    # GLOSSARY - plain-English definitions for jargon a non-technical reader hits
+    # ---------------------------------------------------------------------------
+    with st.expander("Glossary - what these terms mean"):
+        glossary_df = pd.DataFrame(
+            [
+                ("Drift / model drift", "When an AI quietly stops working as well as it used to (because the world changed)."),
+                ("Silent decay", "Drift where nobody on the team has noticed yet."),
+                ("PSI", "Population Stability Index - a way to detect when the AI is seeing different kinds of data than it was trained on."),
+                ("KS", "Kolmogorov-Smirnov test - another way to detect data shift, more sensitive than PSI."),
+                ("MTTD", "Mean Time To Detect - how long it took to notice the model went bad."),
+                ("Vendor snapshot", "The exact version of an outside AI (e.g., Anthropic Claude) you're using - pinned in writing."),
+                ("MRM", "Model Risk Management - the bank's internal team that approves every AI before deployment."),
+                ("Three lines of defense", "Bank's standard model-risk structure: 1=builders, 2=reviewers, 3=auditors."),
+                ("SR 11-7", "Federal Reserve 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring."),
+                ("OCC", "Office of the Comptroller of the Currency - federal banking regulator that audits AI safety practices."),
+                ("FRB", "Federal Reserve Board - central banking system; co-issues SR 11-7 with the OCC."),
+                ("Validator / line-2 validator", "Independent reviewer who must approve a model before launch and re-approve when it changes."),
+                ("Risk envelope", "Pre-agreed boundary for 'what we're allowed to do automatically' vs. 'what needs a human'."),
+                ("Shadow mode", "Running a new model alongside the old one without affecting customers, to see how it behaves."),
+                ("Inference", "The actual requests customers send to the AI in production."),
+                ("Detect / Diagnose / Decide loop", "The three steps when something looks wrong: notice it, figure out why, decide what to do."),
+            ],
+            columns=["Term", "Plain English"],
+        )
+        st.dataframe(glossary_df, use_container_width=True, hide_index=True)
 
     st.markdown(
         "<div class='ds-card muted'>Built as a portfolio prototype. Production architecture in <code>README.md</code>.</div>",

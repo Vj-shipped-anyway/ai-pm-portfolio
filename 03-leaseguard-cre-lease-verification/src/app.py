@@ -97,6 +97,9 @@ st.set_page_config(
 DATA_DIR = Path(__file__).parent.parent / "data"
 LEASE_DIR = DATA_DIR / "leases"
 
+GITHUB_URL = "https://github.com/Vj-shipped-anyway/ai-pm-portfolio"
+LINKEDIN_URL = "https://www.linkedin.com/in/vijaysaharan/"
+
 # ---------------------------------------------------------------------------
 # Theme
 # ---------------------------------------------------------------------------
@@ -282,14 +285,14 @@ def advance(target: int) -> None:
 # HERO
 # ---------------------------------------------------------------------------
 st.markdown(
-    """
+    f"""
 <div class='lg-hero'>
   <div class='brand'>🏢 LeaseGuard</div>
   <h1>Catches lease-abstraction errors before they show up in a CAM reconciliation dispute two years later.</h1>
-  <div class='sub'>Sits behind your lease-NLP pipeline (Yardi, Argus, Cherre) and re-checks every field against an ensemble verifier. Redlines, side letters, anchor-tenant clauses - the cases the primary extractor silently misses.</div>
+  <div class='sub'>Lease abstraction is reading a lease and extracting the key business terms into a structured database (today's method: paralegals manually). LeaseGuard sits behind your lease-NLP pipeline (Yardi, Argus, Cherre) and re-checks every field against an ensemble verifier. Redlines, side letters (separate agreements that modify the main lease - easy to miss, often contain big concessions), anchor-tenant clauses - the cases the primary extractor silently misses.</div>
   <div class='pills'>
-    <span class='pill'><a href='https://github.com/vijaysaharan/ai-pm-portfolio' target='_blank'>GitHub</a></span>
-    <span class='pill'><a href='https://www.linkedin.com/in/vijaysaharan/' target='_blank'>LinkedIn</a></span>
+    <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
+    <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
     <span class='pill'>6 leases verified</span>
     <span class='pill'>Built 2026</span>
   </div>
@@ -312,7 +315,8 @@ st.markdown(
     "<div class='lg-card'><span class='lg-step-label'>Step 1</span>"
     "<h3>Paste a lease, or pick one of the 6 sample leases</h3>"
     "<p class='muted'>Six synthetic leases mirror real failure patterns: clean retail, clean office, "
-    "non-standard industrial, redlined retail, side-letter ROFO, anchor-tenant power center.</p></div>",
+    "non-standard industrial, redlined retail, side-letter ROFO (Right of First Offer - landlord must "
+    "offer the tenant first before offering the space to anyone else), anchor-tenant power center.</p></div>",
     unsafe_allow_html=True,
 )
 
@@ -419,13 +423,13 @@ if st.session_state.step >= 2:
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>Compared extracted clauses against <code>data/expected_extractions.csv</code> (validated by manual abstraction); 12 ground-truth fields per lease.</div>
+  <div>Compared extracted clauses against <code>data/expected_extractions.csv</code> (validated by manual abstraction); 12 ground-truth fields per lease. Per-lease accuracy = of all the fields in one lease, what % did the AI extract correctly?</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
-    <li>The lease text is in plain English (not OCR'd from a poor scan).</li>
-    <li>Standard ICSC retail or BOMA office templates as baseline; non-standard forms calibrated against PropTech-vendor literature.</li>
+    <li>The lease text is in plain English (not OCR'd - OCR (Optical Character Recognition) means turning a scanned/photographed document into text the AI can read - so we assume it isn't from a poor scan).</li>
+    <li>Standard ICSC (International Council of Shopping Centers - sets standards for retail leases) retail or BOMA (Building Owners and Managers Association - sets standards for measuring office space) office templates as baseline; non-standard forms calibrated against PropTech-vendor literature.</li>
     <li>Side letters and amendments are passed in alongside the main lease document.</li>
-    <li>Dollar-at-risk uses portfolio-modeled CAM-recovery and escalation-arithmetic patterns; per-lease numbers are illustrative.</li>
+    <li>Dollar-at-risk (estimated financial impact, usually annual, if the deficiency goes uncaught) uses portfolio-modeled CAM-recovery and escalation-arithmetic patterns; per-lease numbers are illustrative.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='{confidence_class}'>{confidence}</div>
@@ -484,7 +488,9 @@ if st.session_state.step >= 3:
         "<div class='lg-card'><span class='lg-step-label'>Step 3</span>"
         "<h3>Dollar-at-risk on this lease</h3>"
         "<p class='muted'>What it would cost the operator if these errors landed in the lease-record table "
-        "and surfaced in a CAM reconciliation two years from now.</p>"
+        "and surfaced in a CAM (Common Area Maintenance - shared expenses the landlord charges the tenant) "
+        "reconciliation two years from now. The CAM cap is the maximum the landlord can charge for those "
+        "shared expenses.</p>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -564,6 +570,31 @@ if st.session_state.step >= 4:
             "- **Calibrated thresholds:** stricter for redlined / side-letter leases\n"
             "- **Audit trail:** every field gets a confidence score + provenance pointer"
         )
+
+    # ---------------------------------------------------------------------------
+    # GLOSSARY - plain-English definitions for jargon a non-technical reader hits
+    # ---------------------------------------------------------------------------
+    with st.expander("Glossary - what these terms mean"):
+        glossary_df = pd.DataFrame(
+            [
+                ("CAM cap", "Cap on Common Area Maintenance charges - the maximum the landlord can charge the tenant for shared expenses."),
+                ("Escalation clause", "Annual rent increase, usually a fixed % or tied to CPI (inflation index)."),
+                ("Triple net lease (NNN)", "Tenant pays rent + property taxes + insurance + maintenance."),
+                ("Co-tenancy clause", "Tenant's right to reduce rent or exit if a key co-tenant (anchor store) leaves."),
+                ("Side letter", "Separate agreement that modifies the main lease - easy to miss, often contains big concessions."),
+                ("ROFO", "Right of First Offer - landlord must offer the tenant first before offering the space to anyone else."),
+                ("ROFR", "Right of First Refusal - tenant can match any third-party offer the landlord gets."),
+                ("Kickout clause", "Tenant's right to terminate the lease early if sales fall below a threshold."),
+                ("BOMA", "Building Owners and Managers Association - sets standards for measuring office space."),
+                ("ICSC", "International Council of Shopping Centers - sets standards for retail leases."),
+                ("OCR", "Optical Character Recognition - turning a scanned/photographed document into text the AI can read."),
+                ("Lease abstraction", "Reading a lease and extracting the key business terms into a structured database (current method: paralegals manually)."),
+                ("Per-lease accuracy", "Of all the fields in one lease, what % did the AI extract correctly?"),
+                ("Dollar at risk", "Estimated financial impact (usually annual) if the deficiency goes uncaught."),
+            ],
+            columns=["Term", "Plain English"],
+        )
+        st.dataframe(glossary_df, use_container_width=True, hide_index=True)
 
     st.markdown(
         "<div class='lg-card muted'>Built as a portfolio prototype. Production architecture in <code>README.md</code>.</div>",

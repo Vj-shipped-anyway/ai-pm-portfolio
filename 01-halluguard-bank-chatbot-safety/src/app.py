@@ -26,6 +26,9 @@ st.set_page_config(
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
+GITHUB_URL = "https://github.com/Vj-shipped-anyway/ai-pm-portfolio"
+LINKEDIN_URL = "https://www.linkedin.com/in/vijaysaharan/"
+
 # ---------------------------------------------------------------------------
 # Theme - dark gradient hero, light body, contrast-preserving CSS
 # ---------------------------------------------------------------------------
@@ -215,14 +218,14 @@ def advance(target: int) -> None:
 # HERO
 # ---------------------------------------------------------------------------
 st.markdown(
-    """
+    f"""
 <div class='hg-hero'>
   <div class='brand'>🛡️ HalluGuard</div>
   <h1>Stops bank chatbots from giving customers wrong answers about fees, rates, and rules.</h1>
   <div class='sub'>When the chatbot tries to make up a fee, our safety check compares its answer to the bank's rate card and refuses to ship anything wrong. The customer either gets the right number, or "let me get a banker" - never a confident lie.</div>
   <div class='pills'>
-    <span class='pill'><a href='https://github.com/vijaysaharan/ai-pm-portfolio' target='_blank'>GitHub</a></span>
-    <span class='pill'><a href='https://www.linkedin.com/in/vijaysaharan/' target='_blank'>LinkedIn</a></span>
+    <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
+    <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
     <span class='pill'>Live - 80 probes verified</span>
     <span class='pill'>Built 2026</span>
   </div>
@@ -276,8 +279,9 @@ if st.session_state.step >= 2:
     st.markdown(
         "<div class='hg-card'><span class='hg-step-label'>Step 2</span>"
         "<h3>Without HalluGuard - the chatbot hallucinates</h3>"
-        "<p class='muted'>This is the unguarded LLM. RAG retrieved the right context, "
-        "but the model still produced a confidently wrong answer.</p></div>",
+        "<p class='muted'>This is the unguarded LLM (the AI on its own, without a safety check). "
+        "A hallucination is a wrong answer the AI made up that sounds confident. "
+        "RAG retrieved the right context, but the model still produced a confidently wrong answer.</p></div>",
         unsafe_allow_html=True,
     )
 
@@ -314,9 +318,11 @@ if st.session_state.step >= 3:
         risk = "HIGH"
         action = "Abstain - rewrite to 'let me get a banker'"
         tldr = (
-            f"The chatbot tried to ship a wrong answer. HalluGuard's verifier scored grounding "
-            f"at {score:.2f} - below the {threshold:.2f} threshold for this use case. "
-            f"Customer never sees the wrong number."
+            f"The chatbot tried to ship a wrong answer. HalluGuard's NLI verifier "
+            f"(Natural Language Inference - a small AI that checks 'does this answer match what "
+            f"the documents actually say?') scored grounding at {score:.2f} - below the "
+            f"{threshold:.2f} abstention threshold (how sure the AI must be before it tries to "
+            f"answer; otherwise it hands off). Customer never sees the wrong number."
         )
     else:
         verdict_class = "verdict-pass"
@@ -351,13 +357,13 @@ if st.session_state.step >= 3:
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>Compared the chatbot's answer against the bank's rate card (rates.csv, fees.csv, products.csv) effective Apr 14, 2026.</div>
+  <div>Compared the chatbot's answer against the bank's rate card (the ground truth - the real, correct answer from rates.csv, fees.csv, products.csv) effective Apr 14, 2026.</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
     <li>Every customer query in this test set has exactly one correct answer in the rate card.</li>
     <li>The LLM does not refuse to answer due to other safety rules (PII, jailbreak, etc.).</li>
     <li>Threshold tuned per use case: 0.82 for rates / regulations, 0.65 for general inquiries.</li>
-    <li>Vendor snapshot pinned - probe set runs nightly to catch silent provider updates.</li>
+    <li>Vendor snapshot pinned (the exact version of the outside AI we use, locked in writing) - probe set (a list of trick questions designed to expose the AI's weak spots) runs nightly to catch silent provider updates.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='{confidence_class}'>{confidence_label}</div>
@@ -372,7 +378,7 @@ if st.session_state.step >= 3:
         unsafe_allow_html=True,
     )
 
-    # CONTAINMENT RESPONSE
+    # CONTAINMENT RESPONSE - this is the abstention (the AI saying "I don't know - let me get a banker" instead of guessing)
     if abstain:
         msg = "I'm not certain on this. Let me get a banker for you."
     else:
@@ -469,11 +475,40 @@ if st.session_state.step >= 4:
             "- **Probe corpus:** `probes/01_paraphrase_blindness.jsonl`, "
             "`probes/02_negation_flip.jsonl`, `probes/06_reg_citation_fabrication.jsonl` (samples committed)\n"
             "- **Verifier:** LoRA Llama 3.1 8B served via vLLM on 2x L4 GPUs\n"
-            "- **Calibration:** thresholds set on a held-out 200-example calibration split\n"
+            "- **Calibration:** thresholds set on a held-out 200-example calibration split. "
+            "We track the calibration curve (plots 'AI says I'm 80% sure' vs. 'was it actually right 80% of the time?').\n"
             "- **Snapshot pin:** `claude-sonnet-4-20250215` (locked); nightly probe regression alerts on drift\n"
             "- **Telemetry:** OpenTelemetry -> Langfuse + Datadog\n"
-            "- **MRM-ready evidence bundle:** generated per pilot, attached to the model risk file"
+            "- **MRM-ready evidence bundle:** MRM (Model Risk Management - the bank's internal team that approves every AI before deployment) gets the bundle per pilot, attached to the model risk file"
         )
+
+    # ---------------------------------------------------------------------------
+    # GLOSSARY - plain-English definitions for jargon a non-technical reader hits
+    # ---------------------------------------------------------------------------
+    with st.expander("Glossary - what these terms mean"):
+        glossary_df = pd.DataFrame(
+            [
+                ("Hallucination", "Wrong answer the AI made up that sounds confident."),
+                ("Containment layer", "Safety check that catches the AI's wrong answers before a customer sees them."),
+                ("Abstention", "The AI says 'I don't know - let me get a banker' instead of guessing."),
+                ("Abstention threshold", "How sure the AI must be before it tries to answer (otherwise it hands off)."),
+                ("Ground truth", "The real, correct answer (from the bank's rate card or fee schedule)."),
+                ("NLI verifier", "A small AI that checks 'does this answer match what the documents actually say?' (Natural Language Inference)."),
+                ("Probe set", "A list of trick questions designed to expose the AI's weak spots."),
+                ("Calibration curve", "Plots 'AI says I'm 80% sure' vs. 'was it actually right 80% of the time?'"),
+                ("Reg DD", "Truth in Savings Act - federal rule requiring banks to clearly disclose savings rates and fees."),
+                ("Reg E", "Electronic Funds Transfer Act - federal rule covering ATM, wire, and ACH error disputes."),
+                ("UDAAP", "Unfair, Deceptive, or Abusive Acts or Practices - the rule that protects customers from misleading claims."),
+                ("FDIC", "Federal Deposit Insurance Corporation - insures bank deposits up to $250,000 per customer per institution."),
+                ("CFPB", "Consumer Financial Protection Bureau - federal regulator that audits how banks handle customer issues."),
+                ("MRM", "Model Risk Management - the bank's internal team that approves every AI before deployment."),
+                ("OWASP LLM Top 10", "OWASP's list of the top 10 security risks for applications using large language models."),
+                ("NIST AI RMF", "NIST's AI Risk Management Framework - voluntary guidance on managing AI risks."),
+                ("EU AI Act Article 12", "EU regulation requiring auditable logs of AI decisions."),
+            ],
+            columns=["Term", "Plain English"],
+        )
+        st.dataframe(glossary_df, use_container_width=True, hide_index=True)
 
     st.markdown(
         "<div class='hg-card muted'>Built as a portfolio prototype. "
