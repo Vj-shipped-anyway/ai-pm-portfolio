@@ -70,9 +70,11 @@ CSS = """
     color: #f4f6fb; padding: 40px 40px; border-radius: 16px;
     border: 1px solid #2a3a5c; margin: 0 0 14px 0;
   }
-  .hero h1 { font-size: 48px !important; margin: 0 0 12px 0; line-height: 1.1 !important; font-weight: 800 !important; }
-  .hero .subtitle { color: #e6ecf6; font-size: 22px; margin: 0 0 18px 0; line-height: 1.4; font-weight: 500; }
-  .hero .hook { color: #cfd8ee; font-size: 16px; line-height: 1.65; margin: 0 0 14px 0; max-width: 820px; }
+  .hero h1 { font-size: 48px !important; margin: 0 0 12px 0; line-height: 1.1 !important; font-weight: 800 !important; color: #f4f6fb !important; }
+  .hero h2, .hero h3 { color: #f4f6fb !important; }
+  .hero p { color: #cfd8ee !important; }
+  .hero .subtitle { color: #ffffff !important; font-size: 22px; margin: 0 0 18px 0; line-height: 1.4; font-weight: 500; }
+  .hero .hook { color: #cfd8ee !important; font-size: 16px; line-height: 1.65; margin: 0 0 14px 0; max-width: 820px; }
   .hero .scroll-cue { color: #7d8db0; font-size: 13px; font-style: italic; margin-top: 10px; }
 
   /* Section headings — dark for legibility on white Streamlit background */
