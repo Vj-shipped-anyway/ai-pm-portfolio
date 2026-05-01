@@ -510,6 +510,18 @@ if st.session_state.step >= 4:
         )
         st.dataframe(glossary_df, use_container_width=True, hide_index=True)
 
+        st.markdown("**Official references** (click to read the source documents):")
+        st.markdown(
+            "- [Reg DD - Truth in Savings (12 CFR 1030)](https://www.consumerfinance.gov/rules-policy/regulations/1030/) - CFPB-administered rule on savings-rate and fee disclosure\n"
+            "- [Reg E - Electronic Funds Transfer (12 CFR 1005)](https://www.consumerfinance.gov/rules-policy/regulations/1005/) - CFPB-administered rule on ATM/wire/ACH error disputes\n"
+            "- [UDAAP - 12 USC 5531 (Dodd-Frank Section 1031)](https://www.consumerfinance.gov/compliance/supervisory-guidance/unfair-deceptive-abusive-acts-practices-udaaps/) - CFPB unfair, deceptive, or abusive acts or practices guidance\n"
+            "- [FDIC Deposit Insurance overview](https://www.fdic.gov/resources/deposit-insurance/) - $250,000 coverage limits and rules\n"
+            "- [CFPB Supervisory Guidance](https://www.consumerfinance.gov/compliance/supervisory-guidance/) - examination expectations for banks\n"
+            "- [OWASP Top 10 for Large Language Model Applications](https://genai.owasp.org/llm-top-10/) - security risks for LLM-powered apps\n"
+            "- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) - voluntary AI risk guidance\n"
+            "- [EU AI Act - full text on EUR-Lex](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) - Article 12 covers auditable logging"
+        )
+
     st.markdown(
         "<div class='hg-card muted'>Built as a portfolio prototype. "
         "The Streamlit app demonstrates the product mechanic; "
