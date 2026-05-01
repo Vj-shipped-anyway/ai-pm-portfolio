@@ -200,7 +200,7 @@ st.markdown(
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
-    <span class='pill'><a href='https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf' target='_blank'>SR 11-7 aligned</a></span>
+    <span class='pill'><a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank'>SR 11-7 aligned</a></span>
     <span class='pill'>Built 2026</span>
   </div>
 </div>
@@ -347,7 +347,7 @@ if st.session_state.step >= 3:
     <li>The 90-day reference window is representative of "stable" behavior.</li>
     <li>Slice cuts (subprime_650_680, card_present_pos, etc.) reflect the bank's actual operating segments.</li>
     <li>For GenAI proxy metrics (refusal-rate, response-length, judge-drift), the human label set is balanced.</li>
-    <li><a href='https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf' target='_blank'>SR 11-7</a> (Federal Reserve's 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring) ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
+    <li><a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank'>SR 11-7</a> (Federal Reserve's 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring) ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='confidence-high'>{confidence}</div>
@@ -448,8 +448,8 @@ if st.session_state.step >= 5:
             f"- **Reference window:** 90 days, `inference_logs.csv`\n"
             f"- **Vendor snapshot pin:** {mrow['snapshot_id']}\n"
             f"- **Telemetry stack:** OpenTelemetry -> ClickHouse (drift events) + Datadog + Langfuse\n"
-            f"- **[SR 11-7](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf) mapping:** ongoing monitoring + change management + escalation routing. "
-            f"[OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) (Office of the Comptroller of the Currency) and [FRB](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf) (Federal Reserve Board) co-issued the rule.\n"
+            f"- **[SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) mapping:** ongoing monitoring + change management + escalation routing. "
+            f"[OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) (Office of the Comptroller of the Currency) and [FRB](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) (Federal Reserve Board) co-issued the rule.\n"
             f"- **Validator workflow:** auto-routes to {mrow['owner']} (the line-2 validator - independent reviewer "
             f"who must approve a model before launch) with the bounded recommendation pre-filled"
         )
@@ -483,9 +483,7 @@ if st.session_state.step >= 5:
 
         st.markdown("**Official references** (click to read the source documents):")
         st.markdown(
-            "- [SR 11-7 — Federal Reserve Supervisory Letter on Model Risk Management (2011)](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf)\n"
-            "- [OCC Bulletin 2011-12 — Supervisory Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf)\n"
-            "- [Federal Reserve Board — model risk supervision](https://www.federalreserve.gov/supervisionreg/topics/model_risk_management.htm)\n"
+            "- [SR 11-7 / OCC Bulletin 2011-12 — Supervisory Guidance on Model Risk Management](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — *the Federal Reserve's SR 11-7 and the OCC's Bulletin 2011-12 are co-issued and contain the same model-risk-management guidance. We link to the OCC's stable URL because the Fed reorganized their site and many SR-letter URLs now 404.*\n"
             "- [OCC — Model Risk Management resource center](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html)\n"
             "- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework)"
         )
