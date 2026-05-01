@@ -420,7 +420,7 @@ def render_sidebar():
 Vijay Saharan, AI PM portfolio prototype.
 [GitHub]({GITHUB_URL}) - [LinkedIn]({LINKEDIN_URL})
 
-Banking AI Model Risk. One of three demos in the portfolio.
+Banking AI Model Risk
 """,
             )
 

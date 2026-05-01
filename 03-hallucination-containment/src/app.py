@@ -435,7 +435,7 @@ def render_sidebar():
 Vijay Saharan, AI PM portfolio prototype.
 [GitHub]({GITHUB_URL}) - [LinkedIn]({LINKEDIN_URL})
 
-Banking AI Trust & Safety. One of three demos in the portfolio.
+Banking AI Trust & Safety
 """,
             )
 
