@@ -63,6 +63,13 @@ CSS = """
     border-radius: 999px; padding: 4px 12px;
   }
 
+  .what-is-card {
+    background: #1a2540; border: 1px solid #3a5180; border-left: 4px solid #6f9bff;
+    border-radius: 10px; padding: 14px 18px; color: #dde6f7;
+    margin: 10px 0 14px 0; font-size: 14px; line-height: 1.55;
+  }
+  .what-is-card b { color: #9ec5fe; }
+
   .bad-card {
     background: #2a0d12; border: 1px solid #6b1f2a; border-left: 6px solid #e0364f;
     border-radius: 12px; padding: 16px; color: #ffe5ea; height: 100%;
@@ -132,28 +139,51 @@ def safe_load():
 def render_act_1_setup(models_df: pd.DataFrame) -> None:
     st.markdown(
         f"""
-        <div class="hero">
-          <h1>DriftSentinel — Production AI Drift, Diagnosed and Routed</h1>
-          <p class="sub">It's Day 60. Your fraud model just started silently decaying.
-          Your three lines of defense are about to find out — at very different speeds.</p>
-          <p class="meta">
-            BFSI · MRM · Sr PM portfolio — Vijay Saharan
-            &nbsp;·&nbsp; <a href="{GITHUB_URL}" target="_blank">GitHub</a>
+        <div class='hero'>
+          <h1>DriftSentinel — Catches AI models when they quietly stop working</h1>
+          <p class='sub'>It's Day 60. The bank's fraud-detection AI just started silently
+          getting worse — also called "drift" or "silent decay" (the model is still running,
+          but the world changed and nobody on the team has noticed).
+          The bank's three layers of oversight are about to find out — at very different speeds.</p>
+          <p class='meta'>
+            Banking &amp; Financial Services · Model Risk Management · Sr PM portfolio — Vijay Saharan
+            &nbsp;·&nbsp; <a href='{GITHUB_URL}' target='_blank'>GitHub</a>
           </p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
+    # "What is this demo?" card — plain English, two sentences
+    st.markdown(
+        """
+        <div class='what-is-card'>
+          <b>What is this demo?</b> AI models at banks quietly stop working as the
+          world changes — and most banks only notice every 3 months when a paper
+          review happens. DriftSentinel watches every model continuously and alerts
+          the right people the moment something starts breaking. Below, you'll watch
+          what happens when the simulation injects a model failure on day 60.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Story-natural section heading (replaces "Act 1")
+    st.markdown("### It's day 90 of a $50B-asset bank's AI fleet — and a model is silently breaking")
+    st.caption(
+        "*The pills below set the scene: which bank, how many AI models are live, "
+        "and when things started going wrong.*"
+    )
+
     n_models = len(models_df) if models_df is not None else 8
     st.markdown(
         f"""
-        <div class="setup-card">
-          <div class="row">
-            <span class="pill">Bank: $50B-asset retail</span>
-            <span class="pill">{n_models} production AI models</span>
-            <span class="pill">Decay injected on Day 60</span>
-            <span class="pill">Today is Day 90</span>
+        <div class='setup-card'>
+          <div class='row'>
+            <span class='pill'>Bank: $50B in assets, retail</span>
+            <span class='pill'>{n_models} AI models running in production</span>
+            <span class='pill'>AI started getting worse on Day 60</span>
+            <span class='pill'>Today is Day 90 (30 days later)</span>
           </div>
         </div>
         """,
@@ -167,22 +197,24 @@ def render_act_1_setup(models_df: pd.DataFrame) -> None:
 
 
 def render_act_2_three_lines() -> None:
-    st.markdown("### Act 2 — What the three lines of defense see")
+    st.markdown("### What the three layers of bank oversight actually see")
     st.caption(
-        "Same 30 days of inference traffic. Three different surveillance regimes."
+        "*Plain English: same 30 days of customer traffic running through the AI. "
+        "Three approaches to spotting that the AI got worse — measured against the "
+        "same 8 real problems we know happened.*"
     )
 
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown(
             """
-            <div class="bad-card">
-              <div class="head">CARD A · QUARTERLY ATTESTATION (WORD DOC)</div>
-              <div class="what">0 of 8 drifts caught</div>
-              <div class="body">
-                Says GREEN. Wrong by 78 days.
-                Validator sees the drift only at the next quarterly review.
-                The BFSI default in 2026 — and it is blind.
+            <div class='bad-card'>
+              <div class='head'>A. THE OLD WAY: A WORD DOC EVERY 3 MONTHS</div>
+              <div class='what'>Caught 0 of 8 problems</div>
+              <div class='body'>
+                The dashboard says everything is green. Wrong — by 78 days.
+                The bank's reviewer only spots the problem at the next quarterly
+                check-in. This is what most banks still do in 2026 — and it's blind.
               </div>
             </div>
             """,
@@ -191,13 +223,15 @@ def render_act_2_three_lines() -> None:
     with c2:
         st.markdown(
             """
-            <div class="amber-card">
-              <div class="head">CARD B · BASIC PSI DRIFT (OPEN-SOURCE)</div>
-              <div class="what">3 of 8 drifts caught</div>
-              <div class="body">
-                False-positive rate: 31%.
-                Catches the obvious shifts. Misses slice drift,
-                proxy-metric decay, and silent vendor model swaps.
+            <div class='amber-card'>
+              <div class='head'>B. THE OPEN-SOURCE TOOL (BASIC DATA-SHIFT DETECTOR)</div>
+              <div class='what'>Caught 3 of 8 problems</div>
+              <div class='body'>
+                False alarms 31% of the time. Catches the obvious data shifts using
+                a standard tool called PSI (Population Stability Index — it watches
+                when customer data starts looking different). Misses the subtle stuff:
+                a problem in just one customer segment, slow accuracy decay, or a vendor
+                quietly updating their AI behind the scenes.
               </div>
             </div>
             """,
@@ -206,14 +240,16 @@ def render_act_2_three_lines() -> None:
     with c3:
         st.markdown(
             """
-            <div class="good-card">
-              <div class="head">CARD C · DRIFTSENTINEL</div>
-              <div class="what">8 of 8 drifts caught</div>
-              <div class="body">
-                False-positive rate: 7%.
-                MRM bundle assembled in 3.2s.
-                Catches the subtle ones too — including silent vendor updates
-                that no input-distribution PSI can see.
+            <div class='good-card'>
+              <div class='head'>C. DRIFTSENTINEL</div>
+              <div class='what'>Caught 8 of 8 problems</div>
+              <div class='body'>
+                False alarms only 7% of the time.
+                Audit pack ready for the bank's risk team in 3.2 seconds.
+                Catches the subtle ones too — including the case where an outside AI
+                vendor (e.g., Anthropic) silently changed their model and nobody told
+                you. The basic data-shift detector (PSI) can't see that — the inputs
+                didn't change, only the AI did.
               </div>
             </div>
             """,
@@ -222,11 +258,11 @@ def render_act_2_three_lines() -> None:
 
     st.markdown(
         """
-        Quarterly attestation is the BFSI default in 2026 — it is blind.
-        Basic PSI (Population Stability Index — a way to detect when the input
-        data shifts) catches the obvious. DriftSentinel catches the obvious AND
-        the subtle, including the GenAI silent vendor update that no input-PSI
-        can see.
+        The "Word doc every quarter" approach is what most banks still do in 2026 —
+        and it is blind. The open-source data-shift detector (PSI / Population
+        Stability Index — a way to spot when customer inputs start looking different)
+        catches the obvious. DriftSentinel catches the obvious AND the subtle —
+        including the silent outside-vendor AI update that no input-only check can see.
         """
     )
 
@@ -237,7 +273,12 @@ def render_act_2_three_lines() -> None:
 
 
 def render_act_3_vendor(snaps_df: pd.DataFrame) -> None:
-    st.markdown("### Act 3 — The vendor snapshot moment")
+    st.markdown("### The vendor surprise — when an outside AI silently changes overnight")
+    st.caption(
+        "*Plain English: many banks rent their AI from outside vendors (Anthropic, OpenAI, etc.). "
+        "When the vendor updates their AI — even a tiny change — your bank's behavior shifts "
+        "and nobody on your team knows.*"
+    )
 
     silent_row = None
     if snaps_df is not None and "announcement_status" in snaps_df.columns:
@@ -249,22 +290,23 @@ def render_act_3_vendor(snaps_df: pd.DataFrame) -> None:
     snap_date = silent_row["snapshot_date"] if silent_row is not None else "2026-02-14"
 
     st.markdown(
-        f"**Anthropic silently updated their model on {snap_date}** "
-        f"(snapshot `{snap_id}`)."
+        f"**On {snap_date}, Anthropic quietly updated their AI model** "
+        f"(the exact version, called a *vendor snapshot*: `{snap_id}`). They didn't announce it."
     )
 
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(
             """
-            <div class="bad-card">
-              <div class="head">WITHOUT SNAPSHOT PIN</div>
-              <div class="what">0 detection signal</div>
-              <div class="body">
-                Your GenAI assistant is now using a different model.
-                Refusal rate ticked up 6 points. Groundedness dropped 0.10.
-                You don't know. Input-distribution PSI sees nothing because
-                the inputs didn't change.
+            <div class='bad-card'>
+              <div class='head'>WITHOUT TRACKING THE EXACT VENDOR VERSION</div>
+              <div class='what'>No alert. Nothing fires.</div>
+              <div class='body'>
+                Your bank's AI assistant is now running on a different model than yesterday.
+                It refuses customer questions 6% more often. Its answers are 10% less grounded
+                in your documents. You don't notice.
+                The basic data-shift detector (PSI) sees nothing — the customer questions
+                didn't change, only the AI behind them did.
               </div>
             </div>
             """,
@@ -273,14 +315,16 @@ def render_act_3_vendor(snaps_df: pd.DataFrame) -> None:
     with c2:
         st.markdown(
             """
-            <div class="good-card">
-              <div class="head">WITH SNAPSHOT PIN</div>
-              <div class="what">Version diff is the alert</div>
-              <div class="body">
-                Sentinel's tracked attribute #3 is the vendor snapshot ID.
-                The diff fires the alert. MRM bundle assembled.
-                Validator on call within the hour.
-                Anthropic acknowledged the update post-hoc on Feb 19.
+            <div class='good-card'>
+              <div class='head'>WITH DRIFTSENTINEL TRACKING THE EXACT VENDOR VERSION</div>
+              <div class='what'>The version change IS the alert.</div>
+              <div class='body'>
+                DriftSentinel watches the exact AI version in writing (the 'vendor snapshot ID')
+                as a piece of metadata #3 on every model. When that ID changes, the alarm
+                goes off. Audit pack assembled. The bank's independent reviewer
+                (the line-2 validator — the person who must re-approve a model when it changes)
+                is paged within the hour. Anthropic acknowledged the change publicly on Feb 19 —
+                five days after DriftSentinel had already caught it.
               </div>
             </div>
             """,
@@ -288,8 +332,9 @@ def render_act_3_vendor(snaps_df: pd.DataFrame) -> None:
         )
 
     st.caption(
-        "This is why Tracked Attribute #3 in DriftSentinel is the vendor "
-        "snapshot ID. The version diff IS the signal."
+        "This is why one of the things DriftSentinel watches on every model is the exact "
+        "vendor version (the 'vendor snapshot ID'). When that changes, that IS the signal — "
+        "you don't need to wait for accuracy to drop."
     )
 
 
@@ -299,24 +344,34 @@ def render_act_3_vendor(snaps_df: pd.DataFrame) -> None:
 
 
 def render_act_4_architecture() -> None:
-    with st.expander("Act 4 — How DriftSentinel works (architecture)", expanded=False):
+    with st.expander(
+        "How DriftSentinel works (under the hood)",
+        expanded=False,
+    ):
         st.markdown(
             """
-            **Three loops. Each one runs on its own clock.**
+            **Three loops, each on its own clock. (In ML terms: Detect → Diagnose → Decide.)**
 
-            **Detect loop.** PSI/KS/proxy-metric sweep, runs hourly per model.
-            PSI compares input distributions. KS (Kolmogorov-Smirnov — a
-            statistical test for whether two samples come from the same
-            distribution) backs it up. Proxy metrics catch the GenAI cases
-            where input PSI is silent.
+            **1. Notice (Detect).** Every hour, run a sweep across every AI model the
+            bank has live. Two data-shift detectors do the watching:
+            - **PSI** (Population Stability Index) — checks whether the customer data
+              the AI is seeing today looks different than what it was trained on.
+            - **KS** (Kolmogorov-Smirnov) — a backup statistical check that's more
+              sensitive to subtle shifts.
+            Plus proxy metrics (refusal rate, groundedness) for AI assistants where the
+            inputs alone don't tell the story.
 
-            **Diagnose loop.** When a signal fires, the system segments the
-            traffic, bisects on time, and walks lineage upstream to find
-            whether the drift is real or a pipeline artifact.
+            **2. Figure out why (Diagnose).** When an alarm fires, automatically slice the
+            traffic by customer segment, time of day, and upstream data source. Walk the
+            data trail backwards (the "lineage") to figure out: is the AI actually broken,
+            or did some upstream data pipeline glitch?
 
-            **Decide loop.** Chooses an action — SHADOW, ROLLBACK-staging,
-            or ALERT-validator — based on a bounded risk envelope written
-            into the model's MRM file.
+            **3. Decide what to do (Decide).** Based on a pre-agreed boundary the bank's
+            risk team wrote down (the "risk envelope"), the system picks one of three
+            actions:
+            - **SHADOW** — quietly run a test fix alongside the live model
+            - **ROLLBACK** — pull the new version back to a known-good state
+            - **ALERT** — page the bank's independent reviewer (line-2 validator)
             """
         )
 
@@ -329,36 +384,36 @@ def render_act_4_architecture() -> None:
           </defs>
           <g font-family="Inter,Arial,sans-serif" font-size="12" fill="#dde6f7">
             <rect x="10"  y="20" width="120" height="200" rx="8" fill="#0e1726" stroke="#2a3a5c"/>
-            <text x="70"  y="40" text-anchor="middle" fill="#9ec5fe" font-weight="700">Inference</text>
+            <text x="70"  y="40" text-anchor="middle" fill="#9ec5fe" font-weight="700">Customer traffic</text>
 
             <rect x="160" y="20" width="120" height="200" rx="8" fill="#0e1726" stroke="#2a3a5c"/>
-            <text x="220" y="40" text-anchor="middle" fill="#9ec5fe" font-weight="700">Telemetry</text>
+            <text x="220" y="40" text-anchor="middle" fill="#9ec5fe" font-weight="700">Measurements</text>
 
             <rect x="310" y="20" width="120" height="200" rx="8" fill="#082018" stroke="#1ec07a"/>
-            <text x="370" y="40" text-anchor="middle" fill="#1ec07a" font-weight="700">Detect</text>
+            <text x="370" y="40" text-anchor="middle" fill="#1ec07a" font-weight="700">Notice</text>
 
             <rect x="460" y="20" width="120" height="200" rx="8" fill="#082018" stroke="#1ec07a"/>
-            <text x="520" y="40" text-anchor="middle" fill="#1ec07a" font-weight="700">Diagnose</text>
+            <text x="520" y="40" text-anchor="middle" fill="#1ec07a" font-weight="700">Figure out why</text>
 
             <rect x="610" y="20" width="140" height="200" rx="8" fill="#082018" stroke="#1ec07a"/>
-            <text x="680" y="40" text-anchor="middle" fill="#1ec07a" font-weight="700">Decide → MRM</text>
+            <text x="680" y="40" text-anchor="middle" fill="#1ec07a" font-weight="700">Decide → audit pack</text>
 
             <line x1="130" y1="120" x2="155" y2="120" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr2)"/>
             <line x1="280" y1="120" x2="305" y2="120" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr2)"/>
             <line x1="430" y1="120" x2="455" y2="120" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr2)"/>
             <line x1="580" y1="120" x2="605" y2="120" stroke="#9ec5fe" stroke-width="1.5" marker-end="url(#arr2)"/>
 
-            <text x="70"  y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">requests / responses</text>
+            <text x="70"  y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">customer requests</text>
             <text x="220" y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">PSI, KS, proxies</text>
             <text x="370" y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">hourly sweep</text>
-            <text x="520" y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">segment + bisect</text>
+            <text x="520" y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">slice + back-trace</text>
             <text x="680" y="140" text-anchor="middle" font-size="11" fill="#a7b6d3">SHADOW / ROLLBACK / ALERT</text>
 
-            <text x="70"  y="180" text-anchor="middle" font-size="11" fill="#7d8db0">vendor snapshot id</text>
-            <text x="220" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">tracked attributes</text>
-            <text x="370" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">band + threshold</text>
-            <text x="520" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">lineage walk</text>
-            <text x="680" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">bundle in 3.2s</text>
+            <text x="70"  y="180" text-anchor="middle" font-size="11" fill="#7d8db0">exact vendor version</text>
+            <text x="220" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">things we watch</text>
+            <text x="370" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">range + alarm bar</text>
+            <text x="520" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">walk the data trail</text>
+            <text x="680" y="180" text-anchor="middle" font-size="11" fill="#7d8db0">audit pack in 3.2s</text>
           </g>
         </svg>
         """
@@ -371,22 +426,58 @@ def render_act_4_architecture() -> None:
 
 
 def render_act_5_numbers() -> None:
-    st.markdown("### Act 5 — The numbers at Tier-1 fleet scale")
+    st.markdown("### The numbers — what this prevents at full bank scale")
+    st.caption(
+        "*Plain English: a Tier-1 retail bank typically has over a thousand AI models in "
+        "production. Here's what changes when DriftSentinel is watching all of them.*"
+    )
 
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Drift MTTD", "9 d", delta="-69 d vs. 78 d", delta_color="inverse",
-              help="MTTD = Mean Time To Detect. Industry baseline: 78 days.")
-    c2.metric("False-positive rate", "7%", delta="-24 pp vs. 31%", delta_color="inverse")
-    c3.metric("MRM evidence bundle", "3.2 s", delta="-3 weeks", delta_color="inverse",
-              help="Time from drift signal to validator-ready evidence package.")
-    c4.metric("Model coverage", "100%", delta="+78 pp vs. 22%")
+    c1.metric(
+        "Days to notice a model went bad",
+        "9 d",
+        delta="-69 d vs. 78 d",
+        delta_color="inverse",
+        help=(
+            "Industry baseline: 78 days. With DriftSentinel: 9 days. "
+            "(In ML jargon: MTTD = Mean Time To Detect.)"
+        ),
+    )
+    c2.metric(
+        "How often the alarm is wrong (false alarm rate)",
+        "7%",
+        delta="-24 percentage points vs. the 31% basic tools hit",
+        delta_color="inverse",
+    )
+    c3.metric(
+        "Time to package the audit pack for the bank's risk team",
+        "3.2 s",
+        delta="-3 weeks (used to take 3 weeks of manual work)",
+        delta_color="inverse",
+        help=(
+            "Time from 'we noticed a problem' to 'the bank's independent reviewer "
+            "(line-2 validator) has everything they need to decide what to do.'"
+        ),
+    )
+    c4.metric(
+        "Share of AI models being watched",
+        "100%",
+        delta="+78 percentage points vs. the 22% baseline",
+        help="Most banks today only actively watch the riskiest 22% of their models. DriftSentinel covers all of them.",
+    )
+    st.caption(
+        "*These numbers come from running the simulation against the synthetic 90-day "
+        "data shipped with this demo. The model is the same one your bank would deploy.*"
+    )
 
     st.markdown(
         """
-        At Tier-1 fleet scale (~1,200 production models), this is **~83,000
-        model-decay-days prevented annually**. **~$45–90M/yr modeled
-        prevented loss** at a Tier-1 retail bank. **~$14M/yr** at the
-        $50B-asset shape. Cost: $1.2–2.4M/yr software plus a 4–6 person ops team.
+        At a major retail bank with ~1,200 AI models running, this prevents about
+        **83,000 model-decay-days per year** (a model-decay-day = one model running
+        broken for one day). That works out to **roughly $45–90 million per year in
+        prevented losses** at a Tier-1 bank — about the size of a small acquisition.
+        At a smaller $50-billion-asset bank, it's about **$14 million per year**.
+        Cost: $1.2–2.4 million per year in software plus a 4–6 person operations team.
         """
     )
 
@@ -440,7 +531,7 @@ def render_segment_noise_floor() -> None:
         height=240, margin=dict(t=10, b=60, l=40, r=10),
         barmode="group",
         xaxis=dict(title=None, tickangle=-30),
-        yaxis_title="PSI",
+        yaxis_title="Data-shift score (PSI)",
         plot_bgcolor="#0e1726", paper_bgcolor="rgba(0,0,0,0)",
         font_color="#dde6f7", legend=dict(orientation="h", y=1.15),
     )
@@ -493,10 +584,13 @@ def bundle_to_zip_bytes(bundle: dict) -> bytes:
 
 def render_act_6_mrm(events_df: pd.DataFrame, snaps_df: pd.DataFrame,
                      models_df: pd.DataFrame) -> None:
-    with st.expander("Act 6 — What MRM / a validator sees", expanded=False):
+    with st.expander("The audit pack — what the bank's risk team and a regulator would review", expanded=False):
         st.caption(
-            "Auto-assembled MRM evidence bundle. Same shape MRM teams attest "
-            "against today — they just don't have to wait three weeks for it."
+            "*Plain English: this is the audit pack the bank's internal risk team (MRM = "
+            "Model Risk Management — they have to approve every AI before launch) and "
+            "outside regulators (the Federal Reserve, OCC) need to prove the AI is being "
+            "watched safely. Today this packet takes 3 weeks of manual work to assemble. "
+            "DriftSentinel does it in 3.2 seconds.*"
         )
 
         bundle = build_evidence_bundle(events_df, snaps_df, models_df)
@@ -504,8 +598,12 @@ def render_act_6_mrm(events_df: pd.DataFrame, snaps_df: pd.DataFrame,
 
         g1, g2 = st.columns(2)
         with g1:
-            st.markdown('<div class="grid-card"><div class="title">Drift event ledger</div>',
-                        unsafe_allow_html=True)
+            st.markdown("**Log of every problem we caught (drift event ledger)**")
+            st.caption(
+                "Each row: which model, what looked off, how bad (PSI = data-shift score), "
+                "and what we recommend. PSI thresholds: above 0.25 = RED, 0.10–0.25 = YELLOW, "
+                "below 0.10 = GREEN."
+            )
             if ledger_df.empty:
                 st.caption("Ledger not available — event data missing.")
             else:
@@ -514,36 +612,82 @@ def render_act_6_mrm(events_df: pd.DataFrame, snaps_df: pd.DataFrame,
                              if c in ledger_df.columns]
                 st.dataframe(ledger_df[show_cols], use_container_width=True,
                              hide_index=True, height=220)
-            st.markdown("</div>", unsafe_allow_html=True)
         with g2:
-            st.markdown('<div class="grid-card"><div class="title">Segment-aware noise floor</div>',
-                        unsafe_allow_html=True)
+            st.markdown("**How much shift is 'normal' for each customer segment**")
+            st.caption(
+                "Different customer segments naturally vary by different amounts. The yellow "
+                "line (0.10) and red line (0.25) are the alarm bars. Bars above the red line "
+                "mean real drift — not noise."
+            )
             render_segment_noise_floor()
-            st.markdown("</div>", unsafe_allow_html=True)
 
         g3, g4 = st.columns(2)
         with g3:
-            st.markdown('<div class="grid-card"><div class="title">Vendor snapshot diff log</div>',
-                        unsafe_allow_html=True)
+            st.markdown("**Outside vendor: which version of the AI ran when**")
+            st.caption(
+                "Every time the outside AI vendor (Anthropic, etc.) changed their model, "
+                "we logged the exact version. 'Silent' means the vendor didn't announce it."
+            )
             if snaps_df is not None and not snaps_df.empty:
                 show = snaps_df[["snapshot_date", "vendor", "snapshot_id",
                                  "announcement_status"]].copy()
                 st.dataframe(show, use_container_width=True, hide_index=True, height=220)
             else:
                 st.caption("Snapshot log not available.")
-            st.markdown("</div>", unsafe_allow_html=True)
         with g4:
-            st.markdown('<div class="grid-card"><div class="title">Decision audit trail</div>',
-                        unsafe_allow_html=True)
+            st.markdown("**What we did about each problem (decision audit trail)**")
+            st.caption(
+                "ROLLBACK = pull back to a known-good version. SHADOW = test a fix quietly "
+                "alongside the live model. RETRAIN = retrain with fresh data."
+            )
             st.dataframe(pd.DataFrame(bundle["decisions_taken"]),
                          use_container_width=True, hide_index=True, height=220)
-            st.markdown("</div>", unsafe_allow_html=True)
 
         st.download_button(
-            label="Download MRM evidence pack (.zip)",
+            label="Download the audit pack (.zip)",
             data=bundle_to_zip_bytes(bundle),
             file_name=f"driftsentinel_mrm_{datetime.utcnow().strftime('%Y%m%d')}.zip",
             mime="application/zip",
+            help="Everything the bank's internal risk team (MRM) and the Federal Reserve need to sign off.",
+        )
+
+    # ---- Plain-English glossary ----
+    with st.expander("What do these terms mean? (plain-English glossary)", expanded=False):
+        st.markdown(
+            """
+            - **Drift / model drift** — When an AI quietly stops working as well as it
+              used to, because the world changed (new fraud patterns, new customer
+              behavior, an updated outside vendor model, etc.).
+            - **Silent decay** — Drift that nobody on the team has noticed yet.
+            - **PSI (Population Stability Index)** — A standard way to detect when the
+              AI is seeing different kinds of data than it was trained on.
+            - **KS (Kolmogorov-Smirnov)** — A more sensitive backup statistical check
+              for the same kind of data shift.
+            - **Vendor snapshot** — The exact version of an outside AI (e.g., Anthropic
+              Claude) you're using, pinned in writing. When the vendor changes their AI,
+              the snapshot ID changes.
+            - **Three lines of defense** — A bank's standard model-oversight structure:
+              line 1 = the people who built it, line 2 = independent reviewers, line 3 =
+              auditors.
+            - **MRM (Model Risk Management)** — The internal team at a bank that has to
+              approve every AI before it goes live and re-approve when it changes.
+            - **Validator / line-2 validator** — The independent reviewer who must
+              re-approve a model when something changes.
+            - **SR 11-7** — The Federal Reserve's rule for how banks must monitor AI/ML
+              models for ongoing safety.
+            - **OCC / Federal Reserve** — Federal banking regulators that audit how a
+              bank manages its AI models.
+            - **MTTD (Mean Time To Detect)** — How long it took to notice the model
+              went bad.
+            - **Shadow mode** — Quietly running a new or fixed model alongside the live
+              one to see how it behaves, without affecting customers.
+            - **Inference / inference traffic** — The actual customer requests hitting
+              the AI in production.
+            - **Detect → Diagnose → Decide loop** — The three steps when something looks
+              off: notice it, figure out why, decide what to do.
+            - **Risk envelope** — The pre-agreed boundary for "what the system is
+              allowed to do automatically" vs. "what needs a human to call."
+            """
         )
 
 
@@ -557,8 +701,19 @@ def main() -> None:
 
     with st.sidebar:
         st.markdown("### Controls")
-        st.toggle("Run the audit", value=True, key="audit_on",
-                  help="Replays the 90-day window with the drift event injected on Day 60.")
+        st.toggle(
+            "Run the simulation",
+            value=True,
+            key="audit_on",
+            help=(
+                "Replays the 90-day window. The AI starts getting worse on Day 60. "
+                "Today is Day 90. Watch how each oversight approach reacts."
+            ),
+        )
+        st.caption(
+            "*Click to replay 90 days of fake bank traffic. The simulation injects "
+            "a model going bad on day 60 and shows what each oversight layer notices.*"
+        )
 
     if err:
         st.error(f"Data not available: {err}")
@@ -568,7 +723,7 @@ def main() -> None:
     render_act_1_setup(models_df)
 
     if not st.session_state.get("audit_on", True):
-        st.info("Toggle 'Run the audit' in the sidebar to advance through Acts 2–6.")
+        st.info("Flip 'Run the simulation' in the sidebar to walk through the rest of the story.")
         return
 
     st.divider()
