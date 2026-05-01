@@ -44,11 +44,11 @@ CSS = """
 
   .block-container { padding-top: 2rem; padding-bottom: 4rem; max-width: 1100px; }
 
-  /* Force Streamlit's auto-generated headings to be readable */
-  .stMarkdown h1, h1 { font-size: 42px !important; line-height: 1.15 !important; font-weight: 800 !important; }
-  .stMarkdown h2, h2 { font-size: 32px !important; line-height: 1.25 !important; font-weight: 700 !important; margin-top: 28px !important; }
-  .stMarkdown h3, h3 { font-size: 24px !important; line-height: 1.3 !important; font-weight: 700 !important; }
-  .stMarkdown p, p { font-size: 16px !important; line-height: 1.65 !important; }
+  /* Force Streamlit's auto-generated headings to be readable on white background */
+  .stMarkdown h1, h1 { font-size: 42px !important; line-height: 1.15 !important; font-weight: 800 !important; color: #0b1c3d !important; }
+  .stMarkdown h2, h2 { font-size: 32px !important; line-height: 1.25 !important; font-weight: 700 !important; margin-top: 28px !important; color: #0b1c3d !important; }
+  .stMarkdown h3, h3 { font-size: 24px !important; line-height: 1.3 !important; font-weight: 700 !important; color: #0b1c3d !important; }
+  .stMarkdown p, p { font-size: 16px !important; line-height: 1.65 !important; color: #1f2a44 !important; }
 
   .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 18px 0; }
   .pill {
@@ -73,16 +73,17 @@ CSS = """
   .hero .hook { color: #cfd8ee; font-size: 16px; line-height: 1.65; margin: 0 0 14px 0; max-width: 820px; }
   .hero .scroll-cue { color: #7d8db0; font-size: 13px; font-style: italic; margin-top: 10px; }
 
+  /* Section headings — dark for legibility on white Streamlit background */
   .section-h {
-    font-size: 34px; font-weight: 800; color: #e6ecf6;
+    font-size: 34px; font-weight: 800; color: #0b1c3d;
     margin: 8px 0 16px 0; line-height: 1.2;
   }
   .section-lede {
-    color: #cfd8ee; font-size: 17px; line-height: 1.65;
+    color: #1f2a44; font-size: 17px; line-height: 1.65;
     max-width: 860px; margin: 0 0 18px 0;
   }
   .caption {
-    color: #a7b6d3; font-size: 14px; font-style: italic;
+    color: #4a5a7c; font-size: 14px; font-style: italic;
     margin-top: 14px; max-width: 860px; line-height: 1.55;
   }
 
@@ -105,7 +106,7 @@ CSS = """
     color: #ff8094; margin-top: 10px; font-size: 14px; font-weight: 600;
   }
   .impact-line {
-    color: #ffc94d; font-size: 15px; font-weight: 600;
+    color: #8a6500; font-size: 15px; font-weight: 600;
     margin: 14px 0; max-width: 860px;
   }
 
@@ -156,7 +157,7 @@ CSS = """
   .green-card .label { color: #6fdba8; }
 
   .summary-line {
-    color: #b9c5dd; font-size: 15px; font-style: italic;
+    color: #1f2a44; font-size: 15px; font-style: italic;
     margin: 18px 0 0 0; max-width: 860px; line-height: 1.6;
     border-left: 3px solid #6f9bff; padding-left: 14px;
   }
@@ -173,14 +174,14 @@ CSS = """
   .metric-tile .mdelta { color: #a7b6d3; font-size: 13px; margin-top: 8px; }
 
   .bullet-list {
-    color: #e6ecf6; font-size: 16px; line-height: 1.75;
+    color: #1f2a44; font-size: 16px; line-height: 1.75;
     max-width: 880px; padding-left: 22px;
   }
   .bullet-list li { margin-bottom: 8px; }
-  .bullet-list b { color: #9ec5fe; }
+  .bullet-list b { color: #0b1c3d; }
 
   .second-order {
-    color: #ffc94d; font-size: 15px; font-style: italic;
+    color: #8a6500; font-size: 15px; font-style: italic;
     margin-top: 14px; max-width: 860px;
     border-left: 3px solid #d6a700; padding-left: 14px; line-height: 1.6;
   }
