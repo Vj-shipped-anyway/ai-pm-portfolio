@@ -32,8 +32,8 @@ st.set_page_config(
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 GITHUB_URL = "https://github.com/Vj-shipped-anyway/ai-pm-portfolio"
-DEMO_URL = "https://driftsentinel.streamlit.app"
-LINKEDIN_URL = "https://www.linkedin.com/in/vijay-saharan/"
+DEMO_URL = "https://driftsentinel-bfsi.streamlit.app"
+LINKEDIN_URL = "https://www.linkedin.com/in/vijaysaharan/"
 
 CSS = """
 <style>
