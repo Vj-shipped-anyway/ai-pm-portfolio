@@ -37,7 +37,18 @@ LINKEDIN_URL = "https://www.linkedin.com/in/vijaysaharan/"
 
 CSS = """
 <style>
+  /* Hide Streamlit chrome */
+  #MainMenu { visibility: hidden; }
+  footer { visibility: hidden; }
+  header { visibility: hidden; }
+
   .block-container { padding-top: 2rem; padding-bottom: 4rem; max-width: 1100px; }
+
+  /* Force Streamlit's auto-generated headings to be readable */
+  .stMarkdown h1, h1 { font-size: 42px !important; line-height: 1.15 !important; font-weight: 800 !important; }
+  .stMarkdown h2, h2 { font-size: 32px !important; line-height: 1.25 !important; font-weight: 700 !important; margin-top: 28px !important; }
+  .stMarkdown h3, h3 { font-size: 24px !important; line-height: 1.3 !important; font-weight: 700 !important; }
+  .stMarkdown p, p { font-size: 16px !important; line-height: 1.65 !important; }
 
   .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 18px 0; }
   .pill {
@@ -46,24 +57,28 @@ CSS = """
     text-decoration: none;
   }
   .pill a { color: #9ec5fe; text-decoration: none; }
+  a.pill { color: #cfd8ee; }
+  a.pill:hover { background: #2a3a5c; color: #9ec5fe; }
   .pill.author { border-color: #6f9bff; color: #9ec5fe; }
+  a.pill.author { color: #9ec5fe; }
+  a.pill.author:hover { background: #1f3a6b; }
 
   .hero {
     background: linear-gradient(135deg, #0b1c3d 0%, #142850 60%, #1f3a6b 100%);
-    color: #f4f6fb; padding: 36px 36px; border-radius: 16px;
+    color: #f4f6fb; padding: 40px 40px; border-radius: 16px;
     border: 1px solid #2a3a5c; margin: 0 0 14px 0;
   }
-  .hero h1 { font-size: 38px; margin: 0 0 10px 0; line-height: 1.15; }
-  .hero .subtitle { color: #cfd8ee; font-size: 18px; margin: 0 0 18px 0; }
-  .hero .hook { color: #b9c5dd; font-size: 15px; line-height: 1.6; margin: 0 0 14px 0; max-width: 820px; }
+  .hero h1 { font-size: 48px !important; margin: 0 0 12px 0; line-height: 1.1 !important; font-weight: 800 !important; }
+  .hero .subtitle { color: #e6ecf6; font-size: 22px; margin: 0 0 18px 0; line-height: 1.4; font-weight: 500; }
+  .hero .hook { color: #cfd8ee; font-size: 16px; line-height: 1.65; margin: 0 0 14px 0; max-width: 820px; }
   .hero .scroll-cue { color: #7d8db0; font-size: 13px; font-style: italic; margin-top: 10px; }
 
   .section-h {
-    font-size: 28px; font-weight: 700; color: #e6ecf6;
-    margin: 8px 0 14px 0; line-height: 1.2;
+    font-size: 34px; font-weight: 800; color: #e6ecf6;
+    margin: 8px 0 16px 0; line-height: 1.2;
   }
   .section-lede {
-    color: #cfd8ee; font-size: 16px; line-height: 1.65;
+    color: #cfd8ee; font-size: 17px; line-height: 1.65;
     max-width: 860px; margin: 0 0 18px 0;
   }
   .caption {
@@ -416,9 +431,8 @@ def render_hero():
     st.markdown(
         f"""
 <div class='pill-row'>
-  <a class='pill' href='{DEMO_URL}' target='_blank'>Live demo</a>
   <a class='pill' href='{GITHUB_URL}' target='_blank'>GitHub</a>
-  <span class='pill author'>Vijay Saharan</span>
+  <a class='pill author' href='{LINKEDIN_URL}' target='_blank'>Vijay Saharan - LinkedIn</a>
 </div>
 <div class='hero'>
   <h1>DriftSentinel</h1>
