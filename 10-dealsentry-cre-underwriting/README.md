@@ -67,6 +67,3 @@ The Streamlit prototype here proves the *product mechanic* — that three indepe
 ---
 
 **Author:** Vijay Saharan · [LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
-
-
-<!-- @description 2026-05-04-091013 : DealSentry: CRE AI underwriting reliability - catches comp fabrications, math errors, and submarket-stat hallucinations in AI-drafted memos -->

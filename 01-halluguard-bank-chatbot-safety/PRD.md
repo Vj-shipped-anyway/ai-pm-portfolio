@@ -156,5 +156,3 @@ A three-guard containment layer.
 ---
 
 *This PRD interlocks with Projects 01 (DriftSentinel), 02 (Eval-First Console), 05 (Prompt-Injection Defense), 07 (LLM Red Team) and 08 (Audit Trail).*
-
-<!-- _subfolder_description 2026-05-04-091004 : HalluGuard: PRD - 1-pager spec, deficiency taxonomy, stakeholder map -->

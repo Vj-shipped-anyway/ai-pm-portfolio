@@ -69,6 +69,3 @@ Roadmap. [HalluGuard](../01-halluguard-bank-chatbot-safety/) is the format refer
 ---
 
 **Author:** Vijay Saharan · [LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
-
-
-<!-- @description 2026-05-04-091013 : AgentWatch: AI agent reliability and tool-use observability - catches runaway costs and tool-call failures in deployed agents -->

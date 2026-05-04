@@ -81,5 +81,3 @@ if acc < threshold:
     sys.exit(1)
 print(f'PASS: overall accuracy {acc:.3f} meets threshold {threshold:.3f}')
 "
-
-# _subfolder_description 2026-05-04-091004 : HalluGuard: probe runner script with CI gate
