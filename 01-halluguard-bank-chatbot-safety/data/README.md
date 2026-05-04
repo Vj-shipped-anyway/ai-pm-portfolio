@@ -19,3 +19,5 @@ The `queries.csv` is the eval set. Each query is tagged with the foundation-mode
 - `currency_unit` — bps vs percentage points
 
 Every query in `queries.csv` is also documented in the `probes/` folder with rich JSONL records (full retrieved context, valid response patterns, invalid response patterns).
+
+<!-- _subfolder_description 2026-05-04-085631 : HalluGuard: synthetic test data - rate card, fee schedule, 30 customer queries -->
