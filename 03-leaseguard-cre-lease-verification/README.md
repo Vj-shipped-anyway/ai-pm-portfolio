@@ -440,4 +440,5 @@ If your seat involves shipping AI on top of a CRE operating book — or you're l
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/expected_extractions.csv` exists before any model was tuned.
 - Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. The list of deficiency classes in Step 3 is calibrated against that published commentary.
 
-<!-- @description 2026-05-04-090412 : LeaseGuard: CRE lease abstraction verifier - catches CAM caps, escalation clauses, and tenant rights buried in non-standard or redlined leases -->
+
+<!-- @description 2026-05-04-091013 : LeaseGuard: CRE lease abstraction verifier - catches CAM caps, escalation clauses, and tenant rights buried in non-standard or redlined leases -->
