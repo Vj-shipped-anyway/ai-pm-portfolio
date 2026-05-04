@@ -581,4 +581,5 @@ If your seat involves shipping AI under regulated constraint, this is the kind o
 - [Simon Willison](https://simonwillison.net/tags/hallucination/) — weekly hallucination posts. Required reading.
 - [Microsoft Presidio](https://microsoft.github.io/presidio/) — PII scrub on the labeling pipeline.
 
-<!-- @description 2026-05-04-090412 : HalluGuard: bank chatbot safety - catches hallucinated fees, rates, and policy claims before they reach customers -->
+
+<!-- @description 2026-05-04-091013 : HalluGuard: bank chatbot safety - catches hallucinated fees, rates, and policy claims before they reach customers -->
