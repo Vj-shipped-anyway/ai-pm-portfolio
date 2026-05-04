@@ -38,4 +38,5 @@ Roadmap. When built, it'll follow the [HalluGuard](../01-halluguard-bank-chatbot
 
 **Author:** Vijay Saharan · [LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
 
-<!-- @description 2026-05-04-083532 : EvalForge: eval-first console for regulated AI - catches GenAI regressions before deployment with versioned probe sets and CI gates -->
+
+<!-- @description 2026-05-04-083534 : EvalForge: eval-first console for regulated AI - catches GenAI regressions before deployment with versioned probe sets and CI gates -->
