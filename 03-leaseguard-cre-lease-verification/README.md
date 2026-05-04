@@ -439,5 +439,3 @@ If your seat involves shipping AI on top of a CRE operating book — or you're l
 - **Yardi Voyager**, **MRI**, **Argus Enterprise**, **Salesforce CRE Cloud** — the systems the corrected lease abstracts have to write back into.
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/expected_extractions.csv` exists before any model was tuned.
 - Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. The list of deficiency classes in Step 3 is calibrated against that published commentary.
-
-<!-- @description 2026-05-04-093708 : LeaseGuard: CRE lease abstraction verifier - catches CAM caps, escalation clauses, and tenant rights buried in non-standard or redlined leases -->

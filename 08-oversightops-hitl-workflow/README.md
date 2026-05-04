@@ -74,5 +74,3 @@ Roadmap. [HalluGuard](../01-halluguard-bank-chatbot-safety/) is the format refer
 ---
 
 **Author:** Vijay Saharan · [LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
-
-<!-- @description 2026-05-04-093708 : OversightOps: human-in-the-loop workflow designer - replaces rubber-stamp review with calibrated, role-aware oversight -->

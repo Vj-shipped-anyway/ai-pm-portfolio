@@ -2,5 +2,3 @@ streamlit>=1.32
 pandas>=2.0
 numpy>=1.24
 plotly>=5.18
-
-<!-- _subfolder_description 2026-05-04-093710 : HalluGuard: Python prototype - Streamlit app, 4 step scripts, requirements -->

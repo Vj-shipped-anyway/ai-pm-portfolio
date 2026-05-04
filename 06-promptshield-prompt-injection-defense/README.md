@@ -57,5 +57,3 @@ Roadmap. [HalluGuard](../01-halluguard-bank-chatbot-safety/) is the format refer
 ---
 
 **Author:** Vijay Saharan · [LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
-
-<!-- @description 2026-05-04-093708 : PromptShield: prompt-injection and egress defense - catches data exfiltration attacks on internal copilots over confidential data -->
