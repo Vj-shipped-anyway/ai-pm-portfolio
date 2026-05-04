@@ -2,7 +2,9 @@
 
 *A walkthrough: why retail-banking chatbots hallucinate, and what an AI Product Manager would build to stop them.*
 
-**▶ Live demo: [halluguard-bfsi.streamlit.app](https://halluguard-bfsi.streamlit.app)**
+**▶ Live demo:** [halluguard-bfsi.streamlit.app](https://halluguard-bfsi.streamlit.app)
+
+**▶ 60-second interactive walkthrough:** [Click through HalluGuard on Arcade](https://app.arcade.software/share/daLEfWH7yD0sYutT3HTP)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. The training-notes describe the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
 
@@ -578,5 +580,3 @@ If your seat involves shipping AI under regulated constraint, this is the kind o
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM09: Misinformation. The canonical industry framing.
 - [Simon Willison](https://simonwillison.net/tags/hallucination/) — weekly hallucination posts. Required reading.
 - [Microsoft Presidio](https://microsoft.github.io/presidio/) — PII scrub on the labeling pipeline.
-
-<!-- @description 2026-05-01-145654 : HalluGuard: bank chatbot safety - catches hallucinated fees, rates, and policy claims before they reach customers -->
