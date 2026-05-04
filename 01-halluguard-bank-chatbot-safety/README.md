@@ -580,3 +580,5 @@ If your seat involves shipping AI under regulated constraint, this is the kind o
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM09: Misinformation. The canonical industry framing.
 - [Simon Willison](https://simonwillison.net/tags/hallucination/) — weekly hallucination posts. Required reading.
 - [Microsoft Presidio](https://microsoft.github.io/presidio/) — PII scrub on the labeling pipeline.
+
+<!-- @description 2026-05-04-093708 : HalluGuard: bank chatbot safety - catches hallucinated fees, rates, and policy claims before they reach customers -->
