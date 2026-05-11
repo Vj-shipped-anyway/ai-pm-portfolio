@@ -2,7 +2,9 @@
 
 **A portfolio prototype for catching production AI decay 69 days earlier — modeled against SR 11-7 ongoing-monitoring expectations.**
 
-**▶ Live demo: [driftsentinel-bfsi.streamlit.app](https://driftsentinel-bfsi.streamlit.app)**
+**▶ Live demo:** [driftsentinel-bfsi.streamlit.app](https://driftsentinel-bfsi.streamlit.app)
+
+**▶ 60-second interactive walkthrough:** [Click through DriftSentinel on Arcade](https://app.arcade.software/share/mHOnNZCi66FsK0IFyiLs)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, architecture, and walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (MRM committee read, OCC exam, validator co-design) is what the next role does.
 
@@ -427,5 +429,3 @@ The Streamlit prototype here proves the *product mechanic* — that slice-aware 
 - [NannyML](https://www.nannyml.com/) — performance estimation under delayed ground truth
 - SR 11-7 (Federal Reserve SR letter) — the regulatory existence-proof for this product
 - [Arize AI](https://arize.com/) — drift-monitoring vendor whose blog shaped how I think about diagnosis-as-product
-
-<!-- @description 2026-05-11-115610 : DriftSentinel: production AI drift monitoring - catches credit, fraud, AML, and GenAI models when they quietly stop working -->

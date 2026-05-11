@@ -2,6 +2,10 @@
 
 *A walkthrough: why deployed lease-abstraction AI silently breaks on non-standard leases, and what an AI Product Manager would build to catch the misses before they show up in a CAM reconciliation dispute two years later.*
 
+**▶ Live demo:** [leaseguard-cre.streamlit.app](https://leaseguard-cre.streamlit.app)
+
+**▶ 60-second interactive walkthrough:** [Click through LeaseGuard on Arcade](https://app.arcade.software/share/hQWTvQIAmgkpQgjHC7iP)
+
 > **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
@@ -439,5 +443,3 @@ If your seat involves shipping AI on top of a CRE operating book — or you're l
 - **Yardi Voyager**, **MRI**, **Argus Enterprise**, **Salesforce CRE Cloud** — the systems the corrected lease abstracts have to write back into.
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/expected_extractions.csv` exists before any model was tuned.
 - Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. The list of deficiency classes in Step 3 is calibrated against that published commentary.
-
-<!-- @description 2026-05-11-115610 : LeaseGuard: CRE lease abstraction verifier - catches CAM caps, escalation clauses, and tenant rights buried in non-standard or redlined leases -->
