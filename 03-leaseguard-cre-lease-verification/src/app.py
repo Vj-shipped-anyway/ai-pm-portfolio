@@ -423,7 +423,7 @@ if st.session_state.step >= 2:
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>Compared extracted clauses against <code>data/expected_extractions.csv</code> (validated by manual abstraction); 12 ground-truth fields per lease. Per-lease accuracy = of all the fields in one lease, what % did the AI extract correctly?</div>
+  <div>Compared extracted clauses against <a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv' target='_blank'><code>data/expected_extractions.csv</code></a> (validated by manual abstraction); 12 ground-truth fields per lease. Per-lease accuracy = of all the fields in one lease, what % did the AI extract correctly?</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
     <li>The lease text is in plain English (not OCR'd - OCR (Optical Character Recognition) means turning a scanned/photographed document into text the AI can read - so we assume it isn't from a poor scan).</li>
@@ -552,7 +552,7 @@ if st.session_state.step >= 4:
         f"({100.0*result['fields_correct_naive']/result['fields_total']:.1f}%)\n\n"
         f"**Deficiencies caught:** {len(result['deficiencies_caught'])}\n\n"
         f"**Dollar at risk (modeled):** ${result['dollar_at_risk']:,.0f}\n\n"
-        f"**Source of truth:** data/expected_extractions.csv\n"
+        f"**Source of truth:** [data/expected_extractions.csv](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv)\n"
     )
     st.download_button(
         "Download workpaper (Markdown)",
@@ -563,13 +563,31 @@ if st.session_state.step >= 4:
 
     with st.expander("Audit pack - evidence bundle"):
         st.markdown(
-            "- **Source of truth:** `data/expected_extractions.csv` (12 ground-truth fields per lease, manually validated)\n"
-            "- **Deficiency taxonomy:** `data/deficiency_classes.csv` (6 named classes)\n"
+            "- **Source of truth:** [`data/expected_extractions.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv) (12 ground-truth fields per lease, manually validated)\n"
+            "- **Deficiency taxonomy:** [`data/deficiency_classes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/deficiency_classes.csv) (6 named classes)\n"
             "- **Primary extractor:** Claude Sonnet over OCR (Tesseract / Textract)\n"
             "- **Ensemble verifier:** secondary LLM + symbolic rule engine + clause-pair cross-check\n"
             "- **Calibrated thresholds:** stricter for redlined / side-letter leases\n"
             "- **Audit trail:** every field gets a confidence score + provenance pointer"
         )
+
+    with st.expander("Inspect source-of-truth data (expected_extractions.csv)"):
+        st.caption("The 12 ground-truth fields per lease that LeaseGuard's verifier compares against. Each row is one (lease_id, field) pair with the manually-validated expected value.")
+        try:
+            sot_df = pd.read_csv(DATA_DIR / "expected_extractions.csv")
+            st.dataframe(sot_df, use_container_width=True, hide_index=True)
+            st.caption(f"{len(sot_df)} rows total. Sort by clicking a column header. Source: data/expected_extractions.csv in the repo.")
+        except Exception as exc:
+            st.warning(f"Could not load expected_extractions.csv: {exc}")
+
+    with st.expander("Inspect deficiency taxonomy (deficiency_classes.csv)"):
+        st.caption("The 6 named classes of deficiency LeaseGuard checks for, with definitions and example failure patterns drawn from published PropTech industry literature.")
+        try:
+            tax_df = pd.read_csv(DATA_DIR / "deficiency_classes.csv")
+            st.dataframe(tax_df, use_container_width=True, hide_index=True)
+            st.caption(f"{len(tax_df)} deficiency classes. Source: data/deficiency_classes.csv in the repo.")
+        except Exception as exc:
+            st.warning(f"Could not load deficiency_classes.csv: {exc}")
 
     # ---------------------------------------------------------------------------
     # GLOSSARY - plain-English definitions for jargon a non-technical reader hits
