@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EvalForge — Eval-First Console for Regulated AI · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of EvalForge: an eval-first console for regulated AI with versioned probe sets, calibrated rubrics, cross-vendor LLM-as-judge, and a CI gate that blocks deploys on regression.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .meta { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+  .driver-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .status-strip {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 500; margin-left: 8px;
+  }
+  .status-red { background: #FCEBEB; color: #791F1F; }
+  .status-yellow { background: #FAEEDA; color: #633806; }
+  .status-green { background: #EAF3DE; color: #27500A; }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>EvalForge — Eval-First Console for Regulated AI</h1>
+    <p class="tagline">Pick an eval run. See how it's evaluated at three maturity levels: spreadsheet eyeball, basic cron, and EvalForge composite (versioned probes + calibrated rubrics + cross-vendor judge + CI gate).</p>
+    <p class="author">Project 04 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">60 versioned probes</span>
+      <span class="badge">12 calibrated rubrics</span>
+      <span class="badge">50 historical runs</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">CI gate aligned</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Eval suite summary">
+    <div class="stat"><p class="stat-label">Probe set version</p><p class="stat-value" id="stat-probeset">v0.7</p></div>
+    <div class="stat"><p class="stat-label">Regressions caught</p><p class="stat-value" id="stat-caught">0</p></div>
+    <div class="stat"><p class="stat-label">SOTA basic eval</p><p class="stat-value" id="stat-sota">0</p></div>
+    <div class="stat"><p class="stat-label">MTTD (weeks)</p><p class="stat-value" id="stat-mttd">— / —</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="run-select">Eval run</label>
+    <select id="run-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next run</button>
+    <button id="runall-btn">Replay all 6 representative runs</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage eval comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Spreadsheet eval</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>SOTA — Basic cron eval</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With EvalForge</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (basic-eval silent regression rate − EvalForge regression rate) × GenAI features deployed</p>
+    <p style="margin: 8px 0 0;">Per-feature lift: 🟡 <b>~14% → &lt;2% post-deploy silent-regression rate</b> (modeled — assumes the published industry baseline of ~14% silent post-deploy regression on GenAI features at Tier-1 BFSI shops, and the EvalForge CI gate catching the snapshot-update class on first run). Annualized at a Tier-1 BFSI shop (~12-20 GenAI features × ~tens of thousands of customer interactions per feature per day): 🟡 <b>thousands of bad responses caught before customer impact per year</b>. 🟡 Time-to-detect: 8-12 weeks via complaint backlog → first eval run. Modeled CI gate false-positive rate: &lt;5%.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/evalforge-flow.svg">Flow diagram</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const RUNS = [
+  {
+    id: "ER001", date: "2026-01-04", model: "claude-sonnet-4-20251101", probeSet: "probes-v0.7", n: 30,
+    passRate: 0.93, kappa: 0.78, verdict: "PASS", regressionFlagged: "no",
+    before: { eyeballed: true, marked: "PASS", silentlyWrong: 2,
+              note: "Engineer eyeballed 10 probes (the spreadsheet). Marked 10/10 PASS. Two were silently wrong on close read (P003 echoed account number, P008 hallucinated FICO floor) — engineer did not notice." },
+    sota: { ran: true, passRate: 0.93, sliceComputed: false, ciGate: false,
+            note: "Nightly cron ran all 30 probes. Aggregate pass rate 93%. No slice breakdown. No CI gate. Result dumped to S3, no one looked." },
+    shield: { passRate: 0.93, kappa: 0.78, baseline: 0.93, delta: "+0.0pp",
+              verdict: "PASS", action: "ship",
+              note: "Pre-deployment baseline. Inter-judge kappa 0.78. All slices above threshold. CI gate verdict: PASS." }
+  },
+  {
+    id: "ER011", date: "2026-02-13", model: "claude-sonnet-4-20251101", probeSet: "probes-v0.9", n: 60,
+    passRate: 0.91, kappa: 0.70, verdict: "PASS", regressionFlagged: "no",
+    before: { eyeballed: true, marked: "PASS", silentlyWrong: 3,
+              note: "Engineer eyeballed. The judge has been drifting for weeks but the spreadsheet has no judge — engineer cannot see kappa drift." },
+    sota: { ran: true, passRate: 0.91, sliceComputed: false, ciGate: false,
+            note: "Aggregate still 91%. Looks fine. No alert. The kappa drift (from 0.78 down to 0.70) is invisible to a binary-pass/fail cron." },
+    shield: { passRate: 0.91, kappa: 0.70, baseline: 0.93, delta: "-2.0pp",
+              verdict: "REVIEW", action: "L2 sign-off within 24h",
+              note: "EvalForge flagged: inter-judge kappa 0.70 below 0.75 target. Rubric anchor drift suspected. CI gate verdict: REVIEW. Recalibrate before next deploy." }
+  },
+  {
+    id: "ER012", date: "2026-02-17", model: "claude-sonnet-4-20260214", probeSet: "probes-v0.9", n: 60,
+    passRate: 0.86, kappa: 0.68, verdict: "FAIL", regressionFlagged: "yes",
+    before: { eyeballed: false, marked: "ship anyway", silentlyWrong: 9,
+              note: "Vendor pushed Anthropic claude-sonnet-4-20260214 silently. Engineer did not re-run the spreadsheet — no trigger. Refusal-rate slice regressed -17pp. No one would know for 8-12 weeks until customer complaints accumulated." },
+    sota: { ran: true, passRate: 0.86, sliceComputed: false, ciGate: false,
+            note: "Cron ran 2 days post-deploy. Pass rate dropped from 0.91 to 0.86. The dashboard would show this but the deploy already shipped — no gate." },
+    shield: { passRate: 0.86, kappa: 0.68, baseline: 0.93, delta: "-7.0pp",
+              verdict: "FAIL", action: "BLOCK deploy, pin to last green snapshot",
+              note: "EvalForge BLOCKED deploy. Regression -7pp vs baseline. Vendor snapshot rolled silently to claude-sonnet-4-20260214. Bundle routed to L2 trust-and-safety. Pin to claude-sonnet-4-20251101 until probe re-run clean." }
+  },
+  {
+    id: "ER019", date: "2026-03-17", model: "claude-sonnet-4-20260214", probeSet: "probes-v1.0", n: 60,
+    passRate: 0.92, kappa: 0.78, verdict: "PASS", regressionFlagged: "no",
+    before: { eyeballed: false, marked: "n/a", silentlyWrong: 0,
+              note: "Spreadsheet world has no concept of 'rubric recalibration.' The engineer would just re-run the same spreadsheet, get the same scores, ship." },
+    sota: { ran: true, passRate: 0.92, sliceComputed: false, ciGate: false,
+            note: "Pass rate recovered to 0.92. Looks healthy. Underlying recalibration is invisible." },
+    shield: { passRate: 0.92, kappa: 0.78, baseline: 0.93, delta: "-1.0pp",
+              verdict: "PASS", action: "ship",
+              note: "Prompt patch deployed + rubric R002 recalibrated with new anchors for the refusal-edge slice. Inter-judge kappa restored to 0.78. CI gate verdict: PASS. Deploy approved." }
+  },
+  {
+    id: "ER038", date: "2026-06-01", model: "claude-sonnet-4-20260520", probeSet: "probes-v1.2", n: 60,
+    passRate: 0.85, kappa: 0.72, verdict: "FAIL", regressionFlagged: "yes",
+    before: { eyeballed: false, marked: "ship anyway", silentlyWrong: 11,
+              note: "Second silent vendor update (claude-sonnet-4-20260520). Spreadsheet has no monitor — the engineer wouldn't even know to re-run. Customer complaints would accumulate for another 8-12 weeks." },
+    sota: { ran: true, passRate: 0.85, sliceComputed: false, ciGate: false,
+            note: "Cron flagged pass rate drop. Same problem as ER012: post-deploy detection, no pre-deploy block. The dashboard tells you AFTER customers already saw bad answers." },
+    shield: { passRate: 0.85, kappa: 0.72, baseline: 0.93, delta: "-8.0pp",
+              verdict: "FAIL", action: "BLOCK deploy, pin to last green snapshot",
+              note: "Second silent-update catch in 4 months. CI gate blocked. Bundle includes both the snapshot diff and the rubric-cluster pattern. This is the failure mode that justifies EvalForge as a product." }
+  },
+  {
+    id: "ER050", date: "2026-07-19", model: "claude-sonnet-4-20260520", probeSet: "probes-v1.3", n: 60,
+    passRate: 0.94, kappa: 0.86, verdict: "PASS", regressionFlagged: "no",
+    before: { eyeballed: true, marked: "PASS", silentlyWrong: 1,
+              note: "Engineer marks PASS as usual. No way to know whether this is the steady-state PASS or the about-to-regress PASS." },
+    sota: { ran: true, passRate: 0.94, sliceComputed: false, ciGate: false,
+            note: "Highest aggregate yet. Cron dashboard green. No early-warning signal — same gap as before." },
+    shield: { passRate: 0.94, kappa: 0.86, baseline: 0.93, delta: "+1.0pp",
+              verdict: "PASS", action: "ship",
+              note: "Current production baseline. Probe set v1.3 with promoted elder-fraud probes. Cross-vendor judge configuration stable. CI gate verdict: PASS. Deploy approved." }
+  }
+];
+
+let currentIdx = 0;
+let regressionsCaught = 0;
+let sotaCaught = 0;
+
+const sel = document.getElementById("run-select");
+RUNS.forEach((r, i) => {
+  const opt = document.createElement("option");
+  opt.value = i;
+  opt.textContent = `${r.id} — ${r.date} — ${r.model}`;
+  sel.appendChild(opt);
+});
+
+function statusClass(v) {
+  if (v === "PASS") return "status-green";
+  if (v === "REVIEW") return "status-yellow";
+  return "status-red";
+}
+function pillClass(v) {
+  if (v === "PASS") return "pill-ok";
+  if (v === "REVIEW") return "pill-warn";
+  return "pill-bad";
+}
+
+function render() {
+  const r = RUNS[currentIdx];
+  sel.value = currentIdx;
+
+  document.getElementById("stat-probeset").textContent = r.probeSet;
+  document.getElementById("stat-caught").textContent = regressionsCaught;
+  document.getElementById("stat-sota").textContent = sotaCaught;
+  document.getElementById("stat-mttd").textContent = "8-12wk / first run";
+
+  document.getElementById("run-meta").innerHTML = `
+    <b>${r.id}</b> on <b>${r.date}</b> — model <b>${r.model}</b>, probe set <b>${r.probeSet}</b> (${r.n} probes).
+    Pass rate <b>${(r.passRate*100).toFixed(0)}%</b>. Inter-judge kappa <b>${r.kappa.toFixed(2)}</b>.
+    EvalForge verdict <span class="status-strip ${statusClass(r.verdict)}">${r.verdict}</span>.
+  `;
+
+  document.getElementById("card-before").innerHTML = `
+    <p>${r.before.note}</p>
+    <div class="driver-row"><span class="driver-label">Engineer marked</span><span class="driver-value">${r.before.marked}</span></div>
+    <div class="driver-row"><span class="driver-label">Silently wrong</span><span class="driver-value">${r.before.silentlyWrong}/10</span></div>
+    <span class="pill pill-bad">no rubric · no judge · no CI gate</span>
+  `;
+
+  document.getElementById("card-sota").innerHTML = `
+    <p>${r.sota.note}</p>
+    <div class="driver-row"><span class="driver-label">Pass rate</span><span class="driver-value">${(r.sota.passRate*100).toFixed(0)}%</span></div>
+    <div class="driver-row"><span class="driver-label">Slice breakdown</span><span class="driver-value">${r.sota.sliceComputed ? "yes" : "no"}</span></div>
+    <div class="driver-row"><span class="driver-label">CI gate</span><span class="driver-value">${r.sota.ciGate ? "yes" : "no"}</span></div>
+    <span class="pill pill-warn">post-deploy reporting only</span>
+  `;
+
+  document.getElementById("card-shield").innerHTML = `
+    <p>${r.shield.note}</p>
+    <div class="driver-row"><span class="driver-label">Pass rate</span><span class="driver-value">${(r.shield.passRate*100).toFixed(0)}%</span></div>
+    <div class="driver-row"><span class="driver-label">Kappa</span><span class="driver-value">${r.shield.kappa.toFixed(2)}</span></div>
+    <div class="driver-row"><span class="driver-label">Δ vs baseline</span><span class="driver-value">${r.shield.delta}</span></div>
+    <div class="driver-row"><span class="driver-label">Verdict</span><span class="driver-value">${r.shield.verdict}</span></div>
+    <div class="driver-row"><span class="driver-label">Action</span><span class="driver-value">${r.shield.action}</span></div>
+    <span class="pill ${pillClass(r.shield.verdict)}">${r.shield.verdict}</span>
+  `;
+}
+
+function countCaught() {
+  // EvalForge catches all FAIL+REVIEW; basic SOTA cron only flags via post-deploy dashboard, no block.
+  let ef = 0, sota = 0;
+  for (let i = 0; i <= currentIdx; i++) {
+    if (RUNS[i].verdict === "FAIL" || RUNS[i].verdict === "REVIEW") ef += 1;
+    // SOTA cron 'catches' it post-deploy but does not block. We mark it as 'flagged' for fairness.
+    if (RUNS[i].regressionFlagged === "yes") sota += 1;
+  }
+  regressionsCaught = ef;
+  sotaCaught = sota;
+}
+
+document.getElementById("run-select").addEventListener("change", e => {
+  currentIdx = parseInt(e.target.value, 10);
+  countCaught();
+  render();
+});
+document.getElementById("prev-btn").addEventListener("click", () => {
+  if (currentIdx > 0) currentIdx -= 1;
+  countCaught(); render();
+});
+document.getElementById("next-btn").addEventListener("click", () => {
+  if (currentIdx < RUNS.length - 1) currentIdx += 1;
+  countCaught(); render();
+});
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => {
+    currentIdx = i;
+    countCaught(); render();
+    i += 1;
+    if (i >= RUNS.length) clearInterval(iv);
+  }, 700);
+});
+document.getElementById("reset-btn").addEventListener("click", () => {
+  currentIdx = 0;
+  regressionsCaught = 0;
+  sotaCaught = 0;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

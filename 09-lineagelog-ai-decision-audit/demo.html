@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LineageLog — AI Decision Audit Trail · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of LineageLog: an immutable decision-grain composition layer that turns scattered AI-decision logs into an exam-ready record in 12 minutes instead of 14 days.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f4ff;
+    --bg-tertiary: #ecebf7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --accent: #4f46e5;
+    --accent-dark: #1e2a78;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 940px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--accent-dark); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 300px; }
+  select:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 280px;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block; background: #E6E5FF; color: var(--accent-dark);
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6E5FF; color: var(--accent-dark); }
+  .meta { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+  .field-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; align-items: flex-start; gap: 8px; }
+  .field-label { color: var(--text-secondary); flex-shrink: 0; }
+  .field-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; text-align: right; max-width: 60%; word-break: break-word; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .status-strip {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 500; margin-left: 8px;
+  }
+  .status-red { background: #FCEBEB; color: #791F1F; }
+  .status-yellow { background: #FAEEDA; color: #633806; }
+  .status-green { background: #EAF3DE; color: #27500A; }
+  .decision-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .decision-meta b { color: var(--text-primary); font-weight: 500; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>LineageLog — AI decision audit trail in 12 minutes, not 14 days</h1>
+    <p class="tagline">Pick one of six regulated decisions. See what each maturity level returns to the OCC examiner: paralegal walk (14 days), basic Cloud Logging (request/response only), LineageLog composition (six-deficiency lineage).</p>
+    <p class="author">Project 09 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">200 synthetic decisions</span>
+      <span class="badge">4 deployed models</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">EU AI Act Art. 12 aligned</span>
+      <span class="badge">SR 11-7 aligned</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Audit readiness summary">
+    <div class="stat"><p class="stat-label">Decisions in corpus</p><p class="stat-value">200</p></div>
+    <div class="stat"><p class="stat-label">Deficiencies named</p><p class="stat-value">6</p></div>
+    <div class="stat"><p class="stat-label">Paralegal time (legacy)</p><p class="stat-value">14d</p></div>
+    <div class="stat"><p class="stat-label">LineageLog (target)</p><p class="stat-value">12m</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="decision-select">Regulated decision</label>
+    <select id="decision-select"></select>
+  </div>
+
+  <div class="decision-meta" id="decision-meta"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next decision</button>
+    <button id="runall-btn">Run through all 6</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage maturity comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Paralegal walk</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>SOTA — Cloud Logging only</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With LineageLog</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (legacy paralegal time − LineageLog time) × regulated AI decisions per year</p>
+    <p style="margin: 8px 0 0;">Per-decision lift: <b>~14 days → ~12 minutes</b> for full lineage (<b>99.94%</b> reduction). Annualized at Tier-1 retail bank scale (50-200M regulated AI decisions/yr): <b>continuous exam-readiness</b> instead of the annual fire drill. Modeled exam-pack assembly time: <b>3 weeks → 3 seconds</b> on the prototype. Modeled exam-readiness coverage: <b>22% → 100%</b>. Modeled time-to-decision-evidence: <b>14 days → 12 minutes</b>.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./ARCHITECTURE.md">Architecture</a>
+    <a href="./data/">Data</a>
+    <a href="./src/">Source</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const DECISIONS = [
+  {
+    id: "DEC_0150_20260312", name: "Loan denial — $65,673 to CUST_851897", model: "loan_pd_v3",
+    family: "credit", tier: 1, vendor: "internal", snapshot: "internal-xgb-3.2.1",
+    status: "EXAM_OPEN", exam_question: "OCC asks May 8: explain this AI denial.",
+    before: { dwellDays: 14, sources: 6, fieldsLost: 4,
+              note: "Paralegal walks Cloud Logging, Cloud Audit Logs, Agent Identity Logs, OTel traces, model registry, and the warehouse by hand. 14 days end-to-end. 4 of 6 lineage fields unrecoverable." },
+    sota: { caught: 0, total: 6,
+            note: "Cloud Logging returns one request/response pair: model scored a $65,673 application and returned DENY. Zero of six deficiencies closed: no prompt version, no retrieval set, no snapshot pin, no feature-at-time, no reviewer, no outcome." },
+    shield: { prompt: "template_loan_v3.2.2 (Mar 5)", snapshot: "internal-xgb-3.2.1 (trained 2025-08-12)",
+              retrieval: "policy_credit@v2.3 + disclosure_TIL@v4.1 + rate_card_2026q1 + underwriting_guide@v8.7",
+              features: "fico=692 dti=0.20 ltv=0.67 (at Mar 12 18:41:32Z)",
+              reviewer: "agent_autonomous — loan_pd_v3-sa@bank.iam",
+              outcome: "none observed within 75d window",
+              examPackSeconds: 0.31 }
+  },
+  {
+    id: "DEC_0073_20260318", name: "Claims SIU flag — $32,400 claim", model: "claims_triage_v2",
+    family: "genai", tier: 1, vendor: "anthropic", snapshot: "claude-sonnet-4-20251101",
+    status: "CFPB_INQUIRY", exam_question: "State DOI complaint: was this auto-flagged unfairly?",
+    before: { dwellDays: 11, sources: 6, fieldsLost: 4,
+              note: "Same six-source walk. Vendor snapshot question is the hardest — Anthropic rolled silently Feb 24; the registry only shows the post-roll value. Paralegal cannot confidently say which snapshot scored Mar 18." },
+    sota: { caught: 0, total: 6,
+            note: "Cloud Logging captures the request hash and the SIU_FLAG outcome. No prompt template, no retrieval set, no snapshot pin verified, no human-vs-autonomous distinction." },
+    shield: { prompt: "template_claims_v2.1.1 (Feb 12)", snapshot: "anthropic / claude-sonnet-4-20251101 (vendor-pin-verified vs Feb-24 silent roll)",
+              retrieval: "claims_handbook_2026@v6.2 + siu_referral_criteria@v2.4",
+              features: "claim_amount=$32,400 policy_age=453d prior_claims=2",
+              reviewer: "human_user_delegated — u.adams.3@bank.com (delegation_token dlg_3174)",
+              outcome: "siu_fraud_confirmed on 2026-04-08 → fraud prevented",
+              examPackSeconds: 0.28 }
+  },
+  {
+    id: "DEC_0042_20260322", name: "KYC EDD required — risk score 0.74", model: "kyc_review_v4",
+    family: "kyc", tier: 1, vendor: "azure_openai", snapshot: "gpt-4o-2025-08-06",
+    status: "INTERNAL_AUDIT", exam_question: "Internal Audit (L3): why did the agent require EDD on this customer?",
+    before: { dwellDays: 13, sources: 6, fieldsLost: 3,
+              note: "OFAC list version is critical — sanctions screening only works if you can prove which list version the model used. The list version is in a separate audit log; paralegal has to reconcile by timestamp." },
+    sota: { caught: 0, total: 6,
+            note: "Cloud Logging returns: kyc_review_v4 scored a customer at 0.74 risk score and returned EDD_REQUIRED. No proof the OFAC list was current. No proof a human onboarding analyst delegated this call." },
+    shield: { prompt: "template_kyc_v4.0.4 (Jan 22)", snapshot: "azure_openai / gpt-4o-2025-08-06 (trained 2025-09-22)",
+              retrieval: "kyc_policy_2026@v5.0 + ofac_sdn_2026_03_08@v2026.03.08 + edd_criteria_high_risk@v3.2",
+              features: "risk_score=0.74 country_tier=3 pep_match=0.12",
+              reviewer: "human_user_delegated — u.adams.0@bank.com (delegation_token dlg_6603)",
+              outcome: "sar_filed_later on 2026-04-12 → loss prevented",
+              examPackSeconds: 0.34 }
+  },
+  {
+    id: "DEC_0091_20260401", name: "Fraud block — $1,847 stepped up", model: "fraud_screen_v6",
+    family: "fraud", tier: 1, vendor: "internal", snapshot: "internal-lgbm-4.1.0",
+    status: "CUSTOMER_COMPLAINT", exam_question: "Customer files complaint: my legitimate purchase was blocked.",
+    before: { dwellDays: 14, sources: 6, fieldsLost: 4,
+              note: "Customer-impact complaint. Today the bank has the request-response pair and the customer's complaint — and no way to bind them. Outcome backlink is the gap." },
+    sota: { caught: 0, total: 6,
+            note: "Cloud Logging shows fraud_screen_v6 returned BLOCK. CFPB complaint database has the customer complaint. No join key between them." },
+    shield: { prompt: "template_fraud_v6.1.1 (Mar 1)", snapshot: "internal / internal-lgbm-4.1.0 (trained 2025-10-15)",
+              retrieval: "fraud_rule_2026q1@v9.4 + merchant_blocklist_2026_03_10 + velocity_limits@v4.0",
+              features: "txn_amount=$1,847 velocity_24h=14 merchant_tier=4",
+              reviewer: "agent_autonomous — fraud_screen_v6-sa@bank.iam",
+              outcome: "legitimate_blocked → case_filed (customer complaint resolved with reversal)",
+              examPackSeconds: 0.21 }
+  },
+  {
+    id: "DEC_0118_20260415", name: "Loan conditional approval — $14,200", model: "loan_pd_v3",
+    family: "credit", tier: 1, vendor: "internal", snapshot: "internal-xgb-3.2.1",
+    status: "STANDARD", exam_question: "Random sampling: pick any decision and walk the lineage.",
+    before: { dwellDays: 14, sources: 6, fieldsLost: 4,
+              note: "Random sample under SR 11-7 ongoing monitoring. The bank's MRM team can't auto-produce the lineage; sample-pull takes ~2 weeks per decision the auditor picks." },
+    sota: { caught: 0, total: 6,
+            note: "One log line. No business context. Six deficiencies open." },
+    shield: { prompt: "template_loan_v3.2.2 (Mar 5)", snapshot: "internal-xgb-3.2.1 (trained 2025-08-12)",
+              retrieval: "policy_credit@v2.3 + rate_card_2026q1",
+              features: "fico=628 dti=0.32 ltv=0.78",
+              reviewer: "agent_autonomous — loan_pd_v3-sa@bank.iam",
+              outcome: "repaid_on_time → closed clean",
+              examPackSeconds: 0.27 }
+  },
+  {
+    id: "DEC_0007_20260308", name: "Claims auto-pay — $4,100", model: "claims_triage_v2",
+    family: "genai", tier: 1, vendor: "anthropic", snapshot: "claude-sonnet-4-20251101",
+    status: "STANDARD", exam_question: "Sample pull: explain a clean claims decision the model auto-paid.",
+    before: { dwellDays: 11, sources: 6, fieldsLost: 4,
+              note: "Clean outcome decisions still get audited. Bank's MRM team has to walk the same six sources for a 'nothing happened' claim — and still cannot produce the snapshot proof." },
+    sota: { caught: 0, total: 6,
+            note: "AUTO_PAY logged. Nothing else." },
+    shield: { prompt: "template_claims_v2.1.0 (Nov 1)", snapshot: "anthropic / claude-sonnet-4-20251101 (vendor-pin-verified)",
+              retrieval: "claims_handbook_2026@v6.2 + policy_property_form_hop3@v3.1",
+              features: "claim_amount=$4,100 policy_age=287d prior_claims=0",
+              reviewer: "agent_autonomous — claims_triage_v2-sa@bank.iam",
+              outcome: "paid_no_dispute → closed clean",
+              examPackSeconds: 0.25 }
+  }
+];
+
+function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function statusPill(status) {
+  if (status === 'EXAM_OPEN') return '<span class="status-strip status-red">EXAM_OPEN</span>';
+  if (status === 'CFPB_INQUIRY' || status === 'CUSTOMER_COMPLAINT') return '<span class="status-strip status-yellow">' + status + '</span>';
+  if (status === 'INTERNAL_AUDIT') return '<span class="status-strip status-yellow">INTERNAL_AUDIT</span>';
+  return '<span class="status-strip status-green">STANDARD</span>';
+}
+
+function render(idx) {
+  const d = DECISIONS[idx];
+  document.getElementById('decision-meta').innerHTML =
+    '<b>' + escapeHtml(d.name) + '</b> · ' + escapeHtml(d.id) +
+    ' · model: ' + escapeHtml(d.model) +
+    ' · vendor: ' + escapeHtml(d.vendor) +
+    ' · snapshot: <code>' + escapeHtml(d.snapshot) + '</code>' +
+    ' · status: ' + statusPill(d.status) +
+    '<br><span style="color:#5a5a5a;">' + escapeHtml(d.exam_question) + '</span>';
+
+  // Card 1 — Before
+  let beforeHtml = '<div>' + escapeHtml(d.before.note) + '</div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Dwell time</span><span class="field-value">' + d.before.dwellDays + ' days</span></div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Sources walked</span><span class="field-value">' + d.before.sources + ' tools / vendors</span></div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Fields unrecoverable</span><span class="field-value">' + d.before.fieldsLost + ' of 6</span></div>';
+  beforeHtml += '<div class="pill pill-bad">14 days · 4 fields lost · finding-prone</div>';
+  document.getElementById('card-before').innerHTML = beforeHtml;
+
+  // Card 2 — SOTA
+  let sotaHtml = '<div>' + escapeHtml(d.sota.note) + '</div>';
+  sotaHtml += '<div class="field-row"><span class="field-label">Deficiencies closed</span><span class="field-value">' + d.sota.caught + ' of ' + d.sota.total + '</span></div>';
+  sotaHtml += '<div class="pill pill-bad">Insufficient — six gaps remain</div>';
+  document.getElementById('card-sota').innerHTML = sotaHtml;
+
+  // Card 3 — LineageLog
+  let shieldHtml = '';
+  shieldHtml += '<div class="field-row"><span class="field-label">Prompt version</span><span class="field-value">' + escapeHtml(d.shield.prompt) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Model snapshot</span><span class="field-value">' + escapeHtml(d.shield.snapshot) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Retrieval set</span><span class="field-value">' + escapeHtml(d.shield.retrieval) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Features @ decision-time</span><span class="field-value">' + escapeHtml(d.shield.features) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Reviewer attribution</span><span class="field-value">' + escapeHtml(d.shield.reviewer) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Outcome backlink</span><span class="field-value">' + escapeHtml(d.shield.outcome) + '</span></div>';
+  shieldHtml += '<div class="meta">Exam pack auto-assembled in ' + d.shield.examPackSeconds.toFixed(2) + 's on the prototype. Composition completed. Six deficiencies closed.</div>';
+  shieldHtml += '<div class="pill pill-ok">PASS — exam-ready in 12 minutes</div>';
+  document.getElementById('card-shield').innerHTML = shieldHtml;
+}
+
+function init() {
+  const sel = document.getElementById('decision-select');
+  DECISIONS.forEach((d, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = d.id + ' — ' + d.name + ' (' + d.status + ')';
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => render(parseInt(sel.value)));
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i - 1 + DECISIONS.length) % DECISIONS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i + 1) % DECISIONS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('runall-btn').addEventListener('click', () => {
+    let i = 0;
+    const tick = () => {
+      if (i >= DECISIONS.length) return;
+      sel.value = i;
+      render(i);
+      i++;
+      setTimeout(tick, 450);
+    };
+    tick();
+  });
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    sel.value = 0;
+    render(0);
+  });
+  render(0);
+}
+
+init();
+</script>
+</body>
+</html>

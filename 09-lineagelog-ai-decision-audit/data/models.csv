@@ -1,0 +1,5 @@
+model_id,name,family,vendor,snapshot_id,training_date,tier,owner_team
+loan_pd_v3,Personal Loan Approval (PD),credit,internal,internal-xgb-3.2.1,2025-08-12,1,line1.credit-risk
+claims_triage_v2,Insurance Claims Triage (GenAI),genai,anthropic,claude-sonnet-4-20251101,2025-11-01,1,line1.insurance-ops
+kyc_review_v4,KYC Document Review,kyc,azure_openai,gpt-4o-2025-08-06,2025-09-22,1,line1.financial-crimes
+fraud_screen_v6,Transaction Fraud Screen,fraud,internal,internal-lgbm-4.1.0,2025-10-15,1,line1.fraud-ops

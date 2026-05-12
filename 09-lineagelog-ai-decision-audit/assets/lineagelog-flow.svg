@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">LineageLog: AI decision flowing from origin through composition to an exam-ready immutable record</title>
+  <desc id="desc">Five-stage horizontal flow showing how a regulated AI decision moves through Decision Made, Logs Captured, Composed in lineage layer, Indexed by customer/date, and Exam-pack export. Includes paralegal-vs-LineageLog timing comparison.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #4f46e5; stroke-width: 1.5; }
+      .stage-box-compose { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-export { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1e2a78; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6E5FF; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1e2a78; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">LineageLog — composition flow for one regulated AI decision</text>
+  <text x="20" y="52" class="subheader">DEC_0150_20260312 loan denial on Mar 12 · OCC exam request May 8 · exam-pack delivered in 12 minutes.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="260" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: regulator opens exam on May 8, 2026</text>
+
+  <!-- Stage 1: DECISION MADE -->
+  <rect x="20" y="120" width="170" height="120" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 · DECISION MADE</text>
+  <text x="32" y="162" class="stage-title">Mar 12, 18:41:32Z</text>
+  <text x="32" y="180" class="stage-sub">loan_pd_v3 → DENY</text>
+  <text x="32" y="195" class="stage-sub">$65,673.12 to CUST_851897</text>
+  <text x="32" y="210" class="stage-sub">internal-xgb-3.2.1 snapshot</text>
+  <text x="32" y="228" class="meta-text">Tier 1 · consumer impact</text>
+
+  <!-- Arrow 1 -->
+  <line x1="195" y1="180" x2="232" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: LOGS CAPTURED -->
+  <rect x="235" y="120" width="190" height="120" rx="8" class="stage-box"/>
+  <text x="247" y="140" class="stage-num">2 · LOGS CAPTURED</text>
+  <text x="247" y="162" class="stage-title">Four log surfaces</text>
+  <text x="247" y="180" class="stage-sub">Cloud Logging</text>
+  <text x="247" y="195" class="stage-sub">Cloud Audit Logs</text>
+  <text x="247" y="210" class="stage-sub">Agent Identity Logs</text>
+  <text x="247" y="225" class="stage-sub">OpenTelemetry traces (ADK)</text>
+
+  <!-- Arrow 2 -->
+  <line x1="430" y1="180" x2="467" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: COMPOSED -->
+  <rect x="470" y="120" width="210" height="120" rx="8" class="stage-box-compose"/>
+  <text x="482" y="140" class="stage-num">3 · COMPOSED</text>
+  <text x="482" y="162" class="stage-title">LineageLog binding</text>
+  <text x="482" y="180" class="stage-sub">join by decision_id at decision</text>
+  <text x="482" y="195" class="stage-sub">time + customer hash</text>
+  <text x="482" y="210" class="stage-sub">prompt + snapshot + retrieval +</text>
+  <text x="482" y="225" class="meta-strong">features + reviewer + outcome</text>
+
+  <!-- Arrow 3 -->
+  <line x1="685" y1="180" x2="722" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: INDEXED -->
+  <rect x="725" y="120" width="200" height="120" rx="8" class="stage-box-compose"/>
+  <text x="737" y="140" class="stage-num">4 · INDEXED</text>
+  <text x="737" y="162" class="stage-title">Immutable storage</text>
+  <text x="737" y="180" class="stage-sub">Postgres decision_lineage</text>
+  <text x="737" y="195" class="stage-sub">WORM bucket for archive</text>
+  <text x="737" y="210" class="stage-sub">7-year retention (SR 11-7)</text>
+  <text x="737" y="225" class="meta-strong">hash-anchored, append-only</text>
+
+  <!-- Arrow 4 (down to export) -->
+  <path d="M 825 240 L 825 270 L 430 270 L 430 296" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: EXAM-PACK EXPORT -->
+  <rect x="265" y="300" width="340" height="80" rx="8" class="stage-box-export"/>
+  <text x="277" y="320" class="stage-num">5 · EXAM-PACK EXPORT</text>
+  <text x="277" y="340" class="stage-title">Auto-assembled, regulator-friendly artifact</text>
+  <text x="277" y="358" class="stage-sub">six-deficiency lineage · WORM-stored · MRM-routed</text>
+  <text x="277" y="372" class="timer-fast">delivered in 12 minutes (legacy: 14 days)</text>
+
+  <!-- Comparison strip -->
+  <rect x="630" y="300" width="295" height="80" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="642" y="320" class="stage-title">Total wall time</text>
+  <text x="642" y="342" class="timer">Legacy paralegal: 14d collation · 6 sources · 4-of-6 fields lost</text>
+  <text x="642" y="358" class="timer-fast">LineageLog: 12-min exam pack · 6-of-6 fields composed</text>
+  <text x="642" y="372" class="meta-strong">~99.9% reduction · continuous exam-readiness, not annual fire drill</text>
+
+  <!-- Bottom: outcome arrow back -->
+  <path d="M 265 340 L 100 340 L 100 395" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Final tile -->
+  <rect x="20" y="400" width="170" height="40" rx="8" class="stage-box"/>
+  <text x="32" y="420" class="stage-title">Regulator-ready</text>
+  <text x="32" y="434" class="stage-sub">finding-avoided, MRA-avoided</text>
+</svg>
