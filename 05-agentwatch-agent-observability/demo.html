@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentWatch — Agent Reliability & Tool-Use Observability · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of AgentWatch: a sidecar that catches runaway agent loops, hallucinated tool arguments, silent drift, and unbounded blast radius — in 6 minutes instead of 3 weeks.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f0f6ff;
+    --bg-tertiary: #e1ecfb;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --accent: #2563eb;
+    --accent-dark: #0a1f33;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 940px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--accent-dark); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 300px; }
+  select:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 280px;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block; background: #DBEAFE; color: var(--accent-dark);
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #DBEAFE; color: var(--accent-dark); }
+  .meta { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+  .field-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; align-items: flex-start; gap: 8px; }
+  .field-label { color: var(--text-secondary); flex-shrink: 0; }
+  .field-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; text-align: right; max-width: 60%; word-break: break-word; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .status-strip {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 500; margin-left: 8px;
+  }
+  .status-red { background: #FCEBEB; color: #791F1F; }
+  .status-yellow { background: #FAEEDA; color: #633806; }
+  .status-green { background: #EAF3DE; color: #27500A; }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>🤖 AgentWatch — Agent Reliability &amp; Tool-Use Observability</h1>
+    <p class="tagline">Every deployed agent — bounded, traced, and attributable in 6 minutes, not 3 weeks. <span class="status-strip status-green">portfolio prototype</span></p>
+    <p class="author">Built by <a href="https://www.linkedin.com/in/vijaysaharan/" target="_blank" rel="noopener">Vijay Saharan</a> · See the <a href="./README.md">full walkthrough</a>, <a href="./PRD.md">PRD</a>, and <a href="./ARCHITECTURE.md">architecture</a>.</p>
+    <div class="badges">
+      <span class="badge">500 synthetic runs</span>
+      <span class="badge">4 deployed agents</span>
+      <span class="badge">24 detected incidents</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">MTTR &lt;10 min</span>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <p class="stat-label">Incidents bounded</p>
+      <p class="stat-value">24 / 24</p>
+    </div>
+    <div class="stat">
+      <p class="stat-label">MTTR with AgentWatch</p>
+      <p class="stat-value">&lt; 10 min</p>
+    </div>
+    <div class="stat">
+      <p class="stat-label">Per-incident cost cap</p>
+      <p class="stat-value">$150–300</p>
+    </div>
+    <div class="stat">
+      <p class="stat-label">Undetected bleed (30d)</p>
+      <p class="stat-value">$0</p>
+    </div>
+  </div>
+
+  <div class="utility-callout">
+    <b>The bleed.</b> Deployed agents fail in ways pre-LLM apps never did. Runaway tool loops can burn $5–50k per incident. Tool-call failures cascade silently. Most banks run agents with no continuous observability — they find out via the AWS bill or a customer complaint.<br><br>
+    <b>The fix.</b> AgentWatch is a sidecar that ingests the agent framework's OpenTelemetry export, classifies failures under a six-deficiency taxonomy, and enforces a per-incident dollar cap. The bleed stops in minutes, not weeks. <span class="formula">utility = (3 weeks - 6 minutes) × every deployed agent</span>
+  </div>
+
+  <div class="controls">
+    <label for="run-select">Pick an agent run:</label>
+    <select id="run-select" aria-label="Pick an agent run"></select>
+  </div>
+  <div class="actions">
+    <button id="prev-btn">← Previous</button>
+    <button id="next-btn">Next →</button>
+    <button id="runall-btn">▶ Walk through all incidents</button>
+    <button id="reset-btn">Reset to INC_0001</button>
+  </div>
+
+  <div id="run-meta" class="run-meta"></div>
+
+  <div class="grid">
+    <div class="card" id="card-1">
+      <div class="card-title"><span class="step-num">1</span>Run captured</div>
+      <div class="card-body" id="card-1-body"></div>
+    </div>
+    <div class="card" id="card-2">
+      <div class="card-title"><span class="step-num">2</span>Composition layer</div>
+      <div class="card-body" id="card-2-body"></div>
+    </div>
+    <div class="card" id="card-3">
+      <div class="card-title"><span class="step-num">3</span>Incident pack</div>
+      <div class="card-body" id="card-3-body"></div>
+    </div>
+  </div>
+
+  <div class="footer-links">
+    <a href="./README.md">README (full walkthrough)</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./ARCHITECTURE.md">Architecture</a>
+    <a href="./src/">Source (Streamlit app + step scripts)</a>
+    <a href="./data/">Sample data CSVs</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
+
+<script>
+const RUNS = [
+  {
+    id: "RUN_00095", inc: "INC_0001", agent: "claims_triage_v3", framework: "LangGraph",
+    vendor: "anthropic", model: "claude-sonnet-4-20251101",
+    deficiency: "runaway_loop", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
+    duration_s: 4860, calls: 1847, cost: 4218.34,
+    detected_at: "2026-04-14T03:18:01Z", action: "auto_cutoff_at_blast_radius_cap",
+    mttr_min: 6, mttr_hr_without: 240,
+    note: "First malformed claim_lookup response. Agent retried with retry=1, retry=2, retry=N. The headline incident.",
+    fired: ["runaway_loop", "blast_unbounded"],
+  },
+  {
+    id: "RUN_00039", inc: "INC_0002", agent: "claims_triage_v3", framework: "LangGraph",
+    vendor: "anthropic", model: "claude-sonnet-4-20251101",
+    deficiency: "runaway_loop", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
+    duration_s: 3964, calls: 9166, cost: 22000.00,
+    detected_at: "2026-04-17T11:02:14Z", action: "auto_cutoff_at_blast_radius_cap",
+    mttr_min: 6, mttr_hr_without: 240,
+    note: "Largest runaway in the 30-day window. Bounded at the per-agent dollar cap.",
+    fired: ["runaway_loop", "blast_unbounded"],
+  },
+  {
+    id: "RUN_00207", inc: "INC_0007", agent: "kyc_refresh_v2", framework: "Bedrock Agents",
+    vendor: "anthropic_via_bedrock", model: "anthropic.claude-3-7-sonnet-20250219-v1:0",
+    deficiency: "hallucinated_args", severity: "P2", status: "FAILED_RETRYABLE",
+    duration_s: 400, calls: 95, cost: 1500.00,
+    detected_at: "2026-04-09T15:21:38Z", action: "schema_validator_blocked",
+    mttr_min: 8, mttr_hr_without: 96,
+    note: "Agent fabricated CUST_NNNNNN IDs that didn't exist in the system-of-truth. AgentWatch blocked the tool fire pre-flight.",
+    fired: ["hallucinated_args"],
+  },
+  {
+    id: "RUN_00312", inc: "INC_0011", agent: "dispute_recon_v1", framework: "OpenAI Assistants",
+    vendor: "azure_openai", model: "gpt-4o-2025-08-06",
+    deficiency: "silent_drift", severity: "P3", status: "COMPLETED",
+    duration_s: 142, calls: 12, cost: 1.32,
+    detected_at: "2026-04-22T08:14:00Z", action: "drift_alert_routed_to_owner",
+    mttr_min: 15, mttr_hr_without: 720,
+    note: "Tool-call mix shifted: ledger_lookup went from 35% baseline to 78%. Drift signal routed to the line-1 owner.",
+    fired: ["silent_drift"],
+  },
+  {
+    id: "RUN_00411", inc: "INC_0022", agent: "loan_pkg_v4", framework: "AutoGen",
+    vendor: "anthropic", model: "claude-opus-4-20250514",
+    deficiency: "blast_unbounded", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
+    duration_s: 1418, calls: 105, cost: 2400.00,
+    detected_at: "2026-04-19T13:47:23Z", action: "circuit_breaker_tripped",
+    mttr_min: 4, mttr_hr_without: 168,
+    note: "11-tool agent with one malformed plan compounding across all of them. Circuit breaker tripped before the rate-lock fired.",
+    fired: ["blast_unbounded"],
+  },
+  {
+    id: "RUN_00188", inc: "INC_0018", agent: "claims_triage_v3", framework: "LangGraph",
+    vendor: "anthropic", model: "claude-sonnet-4-20251101",
+    deficiency: "no_reasoning_trace", severity: "P3", status: "FAILED_RETRYABLE",
+    duration_s: 102, calls: 13, cost: 1.56,
+    detected_at: "2026-04-11T22:03:09Z", action: "trace_replay_synthesized",
+    mttr_min: 12, mttr_hr_without: 48,
+    note: "Underlying Langfuse trace TTL'd out before the post-mortem. AgentWatch's replay store synthesized the chain-of-thought.",
+    fired: ["no_reasoning_trace"],
+  },
+  {
+    id: "RUN_00427", inc: "INC_0023", agent: "loan_pkg_v4", framework: "AutoGen",
+    vendor: "anthropic", model: "claude-opus-4-20250514",
+    deficiency: "cost_detached", severity: "P3", status: "COMPLETED",
+    duration_s: 245, calls: 15, cost: 4.80,
+    detected_at: "2026-04-27T09:55:41Z", action: "cost_attributed_to_outcome",
+    mttr_min: 9, mttr_hr_without: 504,
+    note: "FinOps review queue lit up: agent ran fine, completed normally, but no business outcome attributed. AgentWatch joined cost to the downstream loan-package decision.",
+    fired: ["cost_detached"],
+  },
+];
+
+function render(i) {
+  const r = RUNS[i];
+
+  const isHealthy = r.fired.length === 0;
+  const isRunaway = r.fired.includes("runaway_loop") || r.fired.includes("blast_unbounded");
+  const isPP = !isHealthy && !isRunaway;
+
+  document.getElementById("run-meta").innerHTML =
+    `<b>Run:</b> ${r.id} &middot; <b>Incident:</b> ${r.inc} &middot; ` +
+    `<b>Agent:</b> ${r.agent} (${r.framework}) &middot; ` +
+    `<b>Vendor:</b> ${r.vendor} &middot; ` +
+    `<b>Model:</b> ${r.model}<br>` +
+    `<b>Deficiency:</b> ${r.deficiency} &middot; ` +
+    `<b>Severity:</b> ${r.severity} &middot; ` +
+    `<b>Detected:</b> ${r.detected_at}<br>` +
+    `<i>${r.note}</i>`;
+
+  // Card 1 — Run captured
+  document.getElementById("card-1-body").innerHTML =
+    `<div class="field-row"><span class="field-label">started</span><span class="field-value">${r.detected_at}</span></div>` +
+    `<div class="field-row"><span class="field-label">duration</span><span class="field-value">${r.duration_s}s</span></div>` +
+    `<div class="field-row"><span class="field-label">tool calls</span><span class="field-value">${r.calls.toLocaleString()}</span></div>` +
+    `<div class="field-row"><span class="field-label">cost</span><span class="field-value">$${r.cost.toLocaleString(undefined, {minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>` +
+    `<div class="field-row"><span class="field-label">status</span><span class="field-value">${r.status}</span></div>` +
+    `<p class="meta">OpenTelemetry export from ${r.framework} ingested by the AgentWatch sidecar. No agent-side instrumentation needed.</p>` +
+    `<span class="pill ${isHealthy?'pill-ok':'pill-info'}">OTel ingested</span>`;
+
+  // Card 2 — Composition
+  const allDefs = [
+    {k:'runaway_loop',     label:'1. Runaway loop'},
+    {k:'hallucinated_args', label:'2. Hallucinated args'},
+    {k:'silent_drift',     label:'3. Silent drift'},
+    {k:'blast_unbounded',  label:'4. Blast radius'},
+    {k:'no_reasoning_trace', label:'5. Reasoning trace'},
+    {k:'cost_detached',    label:'6. Cost attribution'},
+  ];
+  const compRows = allDefs.map(d => {
+    const fired = r.fired.includes(d.k);
+    const pillClass = fired ? (isRunaway?'pill-bad':'pill-warn') : 'pill-ok';
+    const pillText = fired ? (isRunaway?'FIRED':'FIRED') : 'clear';
+    return `<div class="field-row"><span class="field-label">${d.label}</span><span class="pill ${pillClass}" style="margin-top:0;">${pillText}</span></div>`;
+  }).join('');
+  document.getElementById("card-2-body").innerHTML = compRows +
+    `<p class="meta">Six-deficiency taxonomy classification. Composed in &lt;50ms by the sidecar.</p>`;
+
+  // Card 3 — Incident pack
+  const verdictPill = isHealthy ? `<span class="pill pill-ok">HEALTHY</span>` :
+                      isRunaway ? `<span class="pill pill-bad">BOUNDED</span>` :
+                      `<span class="pill pill-warn">${r.deficiency.toUpperCase()}</span>`;
+  document.getElementById("card-3-body").innerHTML =
+    `<div class="field-row"><span class="field-label">verdict</span><span>${verdictPill}</span></div>` +
+    `<div class="field-row"><span class="field-label">sidecar action</span><span class="field-value">${r.action}</span></div>` +
+    `<div class="field-row"><span class="field-label">cost at cutoff</span><span class="field-value">$${r.cost.toLocaleString(undefined, {minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>` +
+    `<div class="field-row"><span class="field-label">MTTR with AW</span><span class="field-value">${r.mttr_min} min</span></div>` +
+    `<div class="field-row"><span class="field-label">MTTR without AW</span><span class="field-value">~${r.mttr_hr_without} hr</span></div>` +
+    `<p class="meta">Incident pack routed to SRE on-call + the line-1 owner. Retained under SR 11-7 for 7 years.</p>` +
+    `<span class="pill pill-ok">routed</span>`;
+}
+
+function init() {
+  const sel = document.getElementById('run-select');
+  RUNS.forEach((r, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${r.inc} / ${r.id} — ${r.agent} — ${r.deficiency} ($${r.cost.toFixed(0)})`;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => render(parseInt(sel.value)));
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i - 1 + RUNS.length) % RUNS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i + 1) % RUNS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('runall-btn').addEventListener('click', () => {
+    let i = 0;
+    const tick = () => {
+      if (i >= RUNS.length) return;
+      sel.value = i;
+      render(i);
+      i++;
+      setTimeout(tick, 600);
+    };
+    tick();
+  });
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    sel.value = 0;
+    render(0);
+  });
+  render(0);
+}
+
+init();
+</script>
+</body>
+</html>

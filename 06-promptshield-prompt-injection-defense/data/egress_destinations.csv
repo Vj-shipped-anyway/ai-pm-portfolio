@@ -1,0 +1,51 @@
+destination_id,destination_type,value,category,severity
+EGR_001,domain,evil.example.com,known_attacker_domain,critical
+EGR_002,domain,bad.com,known_attacker_domain,critical
+EGR_003,domain,pastebin.example.com,untrusted_paste_site,high
+EGR_004,domain,filehosting.example,untrusted_file_host,high
+EGR_005,domain,attacker.com,known_attacker_domain,critical
+EGR_006,domain,leak.example.com,known_leak_endpoint,critical
+EGR_007,domain,ext-attacker.slack.com,untrusted_slack_workspace,critical
+EGR_008,domain_suffix,.onion,tor_hidden_service,critical
+EGR_009,domain_suffix,.ru,geo_blocked_tld,medium
+EGR_010,domain_glob,*.ngrok.io,tunnel_service,high
+EGR_011,domain_glob,*.requestbin.*,request_capture_service,high
+EGR_012,domain_glob,*.webhook.site,webhook_capture_service,high
+EGR_013,email_pattern,attacker@bad.com,known_attacker_inbox,critical
+EGR_014,email_pattern,leak@evil.example,known_leak_inbox,critical
+EGR_015,email_domain,gmail.com,external_personal_mailbox,high
+EGR_016,email_domain,yahoo.com,external_personal_mailbox,high
+EGR_017,email_domain,outlook.com,external_personal_mailbox,high
+EGR_018,email_domain,hotmail.com,external_personal_mailbox,high
+EGR_019,email_domain,protonmail.com,external_personal_mailbox,high
+EGR_020,email_pattern,*@bank.com.attacker.org,lookalike_domain,critical
+EGR_021,email_pattern,*@bank-secure.com,lookalike_domain,high
+EGR_022,url_pattern,*?ssn=*,pii_in_querystring_ssn,critical
+EGR_023,url_pattern,*?dob=*,pii_in_querystring_dob,critical
+EGR_024,url_pattern,*?account_number=*,pii_in_querystring_account,critical
+EGR_025,url_pattern,*?email=*,pii_in_querystring_email,high
+EGR_026,url_pattern,*?data=*,generic_data_exfil_param,high
+EGR_027,url_pattern,*?p=*<base64>*,base64_blob_param,high
+EGR_028,content_regex,\b\d{3}-\d{2}-\d{4}\b,ssn_in_response,critical
+EGR_029,content_regex,\b\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}\b,credit_card_in_response,critical
+EGR_030,content_regex,"\b\d{9,12}\b",account_number_in_response,high
+EGR_031,content_regex,-----BEGIN.*PRIVATE KEY-----,private_key_in_response,critical
+EGR_032,content_regex,"Bearer [A-Za-z0-9._-]{20,}",bearer_token_in_response,critical
+EGR_033,content_regex,"sk-[A-Za-z0-9]{20,}",openai_secret_token,critical
+EGR_034,content_regex,"[A-Za-z0-9+/]{100,}={0,2}",long_base64_blob_payload,medium
+EGR_035,content_regex,https?://[^\s]+\?[^\s]*=[^\s]+,outbound_url_with_query,medium
+EGR_036,content_regex,![\[]+[^]]*[\]]+\(https?://[^)]+\?.+\),markdown_tracking_pixel,high
+EGR_037,content_regex,"<img[^>]*src=[""']https?://[^""']+\?[^""']+",html_img_exfil_pixel,high
+EGR_038,content_regex,"<a[^>]*href=[""']https?://[^""']+\?[^""']+",html_link_exfil_query,high
+EGR_039,slack_workspace,attacker.slack.com,untrusted_slack,critical
+EGR_040,slack_workspace,external.slack.com,untrusted_slack,high
+EGR_041,domain_glob,*.dropbox-share.*,external_filehost,high
+EGR_042,domain_glob,*.transfer.sh,ephemeral_filehost,high
+EGR_043,domain_glob,*.tor2web.*,tor_gateway,critical
+EGR_044,domain_glob,*.i2p.*,i2p_gateway,high
+EGR_045,content_regex,CUST_\d{6},internal_customer_id_in_response,medium
+EGR_046,content_regex,"sha256:[a-f0-9]{32,}",hash_payload_in_response,low
+EGR_047,content_regex,[Pp]assword[: ]+\S+,password_in_response,critical
+EGR_048,content_regex,[Aa][Pp][Ii][_-]?[Kk][Ee][Yy][: ]+\S+,apikey_in_response,critical
+EGR_049,email_domain,mailinator.com,disposable_mailbox,high
+EGR_050,email_domain,guerrillamail.com,disposable_mailbox,high

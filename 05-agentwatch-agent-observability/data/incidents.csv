@@ -1,0 +1,25 @@
+incident_id,run_id,agent_id,detected_at,deficiency_class,scenario_note,severity,agentwatch_action,cost_at_cutoff_usd,tool_calls_at_cutoff,mttr_minutes_with_agentwatch,modeled_mttr_without_agentwatch_hours
+INC_0001,RUN_00095,claims_triage_v3,2026-04-14T03:18:01Z,runaway_loop,malformed lookup → retry 200x,P1,auto_cutoff_at_blast_radius_cap,4218.34,1847,6,240
+INC_0002,RUN_00164,claims_triage_v3,2026-04-13T08:04:32Z,runaway_loop,malformed lookup → retry 200x,P1,auto_cutoff_at_blast_radius_cap,85.0,60,6,240
+INC_0003,RUN_00246,claims_triage_v3,2026-04-01T13:55:34Z,runaway_loop,malformed lookup → retry 200x,P1,auto_cutoff_at_blast_radius_cap,85.0,60,6,240
+INC_0004,RUN_00393,claims_triage_v3,2026-04-01T07:24:08Z,runaway_loop,malformed lookup → retry 200x,P1,auto_cutoff_at_blast_radius_cap,85.0,60,6,240
+INC_0005,RUN_00039,claims_triage_v3,2026-04-01T21:39:04Z,runaway_loop,malformed lookup → retry 200x,P1,auto_cutoff_at_blast_radius_cap,22000.0,9166,6,240
+INC_0006,RUN_00086,claims_triage_v3,2026-04-21T14:42:51Z,runaway_loop,malformed lookup → retry 200x,P1,auto_cutoff_at_blast_radius_cap,15500.0,6458,6,240
+INC_0007,RUN_00438,kyc_refresh_v2,2026-04-23T03:52:09Z,hallucinated_args,fabricated customer_id,P2,schema_validator_blocked,60,10,8,96
+INC_0008,RUN_00088,kyc_refresh_v2,2026-04-11T13:22:45Z,hallucinated_args,fabricated customer_id,P2,schema_validator_blocked,80,10,8,96
+INC_0009,RUN_00162,kyc_refresh_v2,2026-04-15T22:01:29Z,hallucinated_args,fabricated customer_id,P2,schema_validator_blocked,75,10,8,96
+INC_0010,RUN_00172,kyc_refresh_v2,2026-04-15T15:26:28Z,hallucinated_args,fabricated customer_id,P2,schema_validator_blocked,1500,75,8,96
+INC_0011,RUN_00130,dispute_recon_v1,2026-04-30T17:54:59Z,silent_drift,retrieval-tool mix shift,P3,drift_alert_routed_to_owner,1.21,11,15,720
+INC_0012,RUN_00497,dispute_recon_v1,2026-04-07T10:28:54Z,silent_drift,retrieval-tool mix shift,P3,drift_alert_routed_to_owner,1.32,12,15,720
+INC_0013,RUN_00359,dispute_recon_v1,2026-04-16T23:17:09Z,silent_drift,retrieval-tool mix shift,P3,drift_alert_routed_to_owner,1.54,14,15,720
+INC_0014,RUN_00175,dispute_recon_v1,2026-04-08T18:51:58Z,silent_drift,retrieval-tool mix shift,P3,drift_alert_routed_to_owner,1.32,12,15,720
+INC_0015,RUN_00261,loan_pkg_v4,2026-04-22T10:07:23Z,blast_unbounded,11 tool calls compounded,P1,circuit_breaker_tripped,1800,95,4,168
+INC_0016,RUN_00002,loan_pkg_v4,2026-04-29T06:14:11Z,blast_unbounded,11 tool calls compounded,P1,circuit_breaker_tripped,2400,105,4,168
+INC_0017,RUN_00321,loan_pkg_v4,2026-04-28T22:49:15Z,blast_unbounded,11 tool calls compounded,P1,circuit_breaker_tripped,90,25,4,168
+INC_0018,RUN_00320,claims_triage_v3,2026-04-13T23:06:29Z,no_reasoning_trace,trace not captured,P3,trace_replay_synthesized,1.08,9,12,48
+INC_0019,RUN_00500,claims_triage_v3,2026-04-06T16:17:07Z,no_reasoning_trace,trace not captured,P3,trace_replay_synthesized,1.32,11,12,48
+INC_0020,RUN_00108,claims_triage_v3,2026-04-12T08:26:12Z,no_reasoning_trace,trace not captured,P3,trace_replay_synthesized,1.08,9,12,48
+INC_0021,RUN_00090,claims_triage_v3,2026-04-13T04:09:00Z,no_reasoning_trace,trace not captured,P3,trace_replay_synthesized,1.08,9,12,48
+INC_0022,RUN_00411,loan_pkg_v4,2026-04-10T02:39:55Z,cost_detached,no outcome attribution,P3,cost_attributed_to_outcome,4.16,13,9,504
+INC_0023,RUN_00227,loan_pkg_v4,2026-04-03T08:51:28Z,cost_detached,no outcome attribution,P3,cost_attributed_to_outcome,3.2,10,9,504
+INC_0024,RUN_00395,loan_pkg_v4,2026-04-20T09:19:07Z,cost_detached,no outcome attribution,P3,cost_attributed_to_outcome,5.12,16,9,504

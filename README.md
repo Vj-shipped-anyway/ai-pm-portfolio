@@ -2,7 +2,7 @@
 
 A working portfolio of AI Product Manager case studies, each shipped as a **walkthrough you can actually run on your laptop**: use case → sample data → before-LLM solution → with-LLM solution → defects exposed → containment fix → utility math.
 
-The portfolio is live in three tiers. **Five flagships are fully built** with sample data, four step scripts each, and a static `demo.html`. **Five more are on the roadmap**, each scoped with the bleed, the deficiency, and the utility-math formula it'll use when built.
+The portfolio is live in three tiers. **Seven flagships are fully built** with sample data, four step scripts each, and a static `demo.html`. **Three more are on the roadmap**, each scoped with the bleed, the deficiency, and the utility-math formula it'll use when built.
 
 ---
 
@@ -42,7 +42,7 @@ That framing also forces honesty about three things most AI portfolios fudge: wh
 
 ---
 
-## 🚀 The Five Flagships (live)
+## 🚀 The Seven Flagships (live)
 
 These are the polished case studies — full walkthrough README, sample data CSVs, four step-by-step Python scripts (`step_01_*.py` through `step_04_*.py`), utility math, and a PRD.
 
@@ -53,6 +53,8 @@ These are the polished case studies — full walkthrough README, sample data CSV
 | **🏢 [LeaseGuard](./03-leaseguard-cre-lease-verification/)** — CRE lease abstraction error detector | Ensemble verification (primary model + re-extraction + rule-based) over deployed lease-NLP outputs; catches CAM caps, escalation clauses, and tenant rights buried in non-standard / redlined leases | 🟢 6/6 hard-case leases caught in the synthetic eval set · 🟡 88% → 98.2% per-lease accuracy projected at portfolio scale (assumes 220-asset retail-and-office mix, paralegal triage clears flagged fields); 🟡 ~$4.2M/yr modeled recovered rent at the 220-asset shape; ~$95M/yr at national-operator scale | **▶ [Live demo](https://leaseguard-cre.streamlit.app)** · **▶ [60-sec walkthrough](https://app.arcade.software/share/hQWTvQIAmgkpQgjHC7iP)** |
 | **🧪 [EvalForge](./04-evalforge-llm-eval-platform/)** — Eval-first console for regulated AI | Versioned probe sets + calibrated rubrics + cross-vendor LLM-as-judge + CI gate (GitHub Actions / Argo CD pre-deploy hook) that blocks the deploy on regression | 🟢 Both silent vendor-snapshot updates in the 50-run synthetic dataset blocked on first eval run; 🟡 silent post-deploy regression rate 14% → <2% (modeled — assumes the published BFSI baseline and the Tier-1-shaped GenAI fleet) × 12-20 customer-facing GenAI features per Tier-1 BFSI shop = 🟡 ~25-40 silent regressions prevented per year at fleet scale; tens of thousands to hundreds of thousands of bad responses caught before customer impact | **▶ [Live demo](https://evalforge-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/evalforge-placeholder)** *(placeholder)* |
 | **🔍 [LineageLog](./09-lineagelog-ai-decision-audit/)** — AI decision audit trail & decision lineage | Immutable decision-grain composition layer that binds Cloud Logging + Cloud Audit Logs + Agent Identity Logs + OpenTelemetry traces at `(decision_id, customer_id_hash, timestamp)`; six-deficiency taxonomy closed; auto-assembled exam-pack export | 🟢 6 of 6 deficiencies closed on every decision in the 200-decision synthetic corpus; 🟢 composition latency <50ms per decision on the prototype; 🟡 audit-pack assembly time 3 weeks → 3 seconds (modeled — assumes the synthetic 200-decision corpus + Tier-1-style four-model fleet); 🟡 exam-readiness coverage 22% → 100% (modeled — assumes published BFSI baseline for sample-based vs continuous readiness); 🔴 time-to-decision-evidence 14d → 12min (designed) × 🟡 50-200M regulated AI decisions/yr at Tier-1 retail bank = continuous exam-readiness | **▶ [Live demo](https://lineagelog-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/lineagelog-placeholder)** *(placeholder)* |
+| **🤖 [AgentWatch](./05-agentwatch-agent-observability/)** — Agent reliability & tool-use observability | Sidecar over LangGraph / AutoGen / Bedrock Agents / OpenAI Assistants; classifies failure under a six-deficiency taxonomy (runaway tool loops, hallucinated tool args, silent drift, blast-radius unbounded, missing reasoning trace, cost detached from outcomes); enforces per-incident dollar cap; auto-assembled incident pack routed to SRE on-call + line-1 owner | 🟢 24 of 24 detected incidents bounded on the 500-run synthetic corpus; 🟢 composition latency <50ms per incident on the prototype; 🟢 headline runaway capped at $4,218 vs. modeled $42k+ undetected bleed; 🟡 APM-only detection rate ~25% → AgentWatch 100% (modeled — assumes Datadog with standard p99 thresholds); 🔴 MTTR 4h+ → <10min (designed) × 🟡 8-20 deployed agents at Tier-1 BFSI fleet scale = ~24 runaways/yr bounded ($120k - $1.2M of bounded spend) | **▶ [Live demo](https://agentwatch-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/agentwatch-placeholder)** *(placeholder)* |
+| **🛡️ [PromptShield](./06-promptshield-prompt-injection-defense/)** — Prompt-injection & egress defense for internal BFSI copilots | Five-layer defense-in-depth gateway between user input and the LLM: L1 input classifier (Llama Guard 3 / fine-tuned DeBERTa), L2 retrieval scanner (catches indirect injection in retrieved RAG content), L3 tool-call gate (OPA / Rego), L4 egress filter (DLP regex pack), L5 per-session memory boundary (Redis + SPIFFE); six-class deficiency taxonomy (direct, indirect, tool-call abuse, egress, cross-session leak, jailbreak) closed | 🟢 99% catch rate on the 100-prompt synthetic attack suite (measured) vs. ~37% on regex baseline; 🟢 1% false-positive rate on the 200-prompt legitimate-banker corpus; 🟢 100% accuracy on the 50-call tool-gate ground-truth set; 🟡 modeled production catch 96%+ at 4% FP (assumes fine-tuned classifier replaces the regex pack + continuous red-team probes); 🔴 designed data-exfiltration incidents → 0 × 🟡 4-12 internal copilots over confidential data at every Tier-1 BFSI shop = modeled $4-15M of prevented loss per confirmed customer-data breach avoided | **▶ [Live demo](https://promptshield-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/promptshield-placeholder)** *(placeholder)* |
 
 Run any flagship on your laptop:
 
@@ -67,14 +69,12 @@ python step_04_*.py    # the fix
 
 ---
 
-## 🧩 The Roadmap (5 more, scoped and queued)
+## 🧩 The Roadmap (3 more, scoped and queued)
 
 Each of these has a placeholder folder with the bleed, the named model deficiency, the use case sketch, and the utility-math formula. They get built in the same flagship format on the schedule below.
 
 | # | Project | Domain | Scoped utility | Target |
 | --- | --- | --- | --- | --- |
-| 05 | **🤖 [AgentWatch](./05-agentwatch-agent-observability/)** — Agent Reliability & Tool-Use Observability | AI Platform / Ops | 🔴 Runaway $/incident → 0; 🟡 MTTR 4h → 10min × every deployed agent | Q3 2026 |
-| 06 | **🛡️ [PromptShield](./06-promptshield-prompt-injection-defense/)** — Prompt-Injection & Egress Defense | AI Platform / Security | 🟡 Detection 30-50% → 96%+ × every internal copilot over confidential data | Q3 2026 |
 | 07 | **💰 [InferenceLens](./07-inferencelens-inference-finops/)** — Inference Economics Dashboard | AI Platform / FinOps | 🟡 0% → 100% per-feature cost visibility; ~25-30% modeled spend reduction | Q4 2026 |
 | 08 | **👥 [OversightOps](./08-oversightops-hitl-workflow/)** — HITL Workflow Designer | AI Platform / Governance | 🟡 Rubber-stamp rate ~94% → ≤4%; review SLA 24h+ → 35min × every HITL pipeline | Q4 2026 |
 | 10 | **🏗️ [DealSentry](./10-dealsentry-cre-underwriting/)** — CRE AI Underwriting Reliability | CRE / PropTech | 🟡 Comp-fabrication 12-18% → <1% × 800-1,200 deals/yr screened | Q4 2026 |
@@ -89,7 +89,7 @@ Each of these has a placeholder folder with the bleed, the named model deficienc
 
 **If you're a non-technical reader:** every flagship walkthrough is designed to be read with the code blocks skipped. The plain-English explanations and the output tables tell the story.
 
-**If you're triaging the 6 roadmap projects:** each placeholder has the bleed paragraph, the named deficiency, and the utility-math formula. Pick the one closest to your problem and ask me to prioritize building it.
+**If you're triaging the 3 roadmap projects:** each placeholder has the bleed paragraph, the named deficiency, and the utility-math formula. Pick the one closest to your problem and ask me to prioritize building it.
 
 ---
 
@@ -196,6 +196,6 @@ If your seat maps to one of these projects, pick that one and let's talk about i
 
 ## 🧩 Portfolio Progression
 
-The four flagships are the foundation. The six roadmap projects are scoped to fill in over Q3-Q4 2026. Future candidates being scoped: foundation-model regression detection, long-context fidelity probes, schema-drift detection for tool-calling agents.
+The seven flagships are the foundation. The three roadmap projects are scoped to fill in over Q3-Q4 2026. Future candidates being scoped: foundation-model regression detection, long-context fidelity probes, schema-drift detection for tool-calling agents.
 
 Each new project follows the same shape: pick a bleed, name the deficiency, build the test set, build the containment, ship the walkthrough. Depth over breadth — four projects done well say more than ten done shallow.

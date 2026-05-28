@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">AgentWatch: agent run flowing from execution through sidecar composition to a bounded incident pack</title>
+  <desc id="desc">Five-stage horizontal flow showing how a deployed BFSI agent's run moves through Agent Executes, Tool Calls Emitted, Sidecar Composes deficiencies, Cap Enforced, Incident Pack delivered. Includes FinOps-bill-vs-AgentWatch timing comparison.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #2563eb; stroke-width: 1.5; }
+      .stage-box-compose { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-export { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #0a1f33; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #DBEAFE; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1e3a8a; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">AgentWatch — sidecar composition flow for one agent run</text>
+  <text x="20" y="52" class="subheader">RUN_00095 claims_triage_v3 runaway · Apr 14 03:12Z · bounded at $4,218 / 1,847 calls in 6 minutes.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="320" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: agent enters a tool-call retry loop on malformed response</text>
+
+  <!-- Stage 1: AGENT EXECUTES -->
+  <rect x="20" y="120" width="170" height="120" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 · AGENT EXECUTES</text>
+  <text x="32" y="162" class="stage-title">Apr 14, 03:12:08Z</text>
+  <text x="32" y="180" class="stage-sub">claims_triage_v3</text>
+  <text x="32" y="196" class="stage-sub">LangGraph · Claude 4</text>
+  <text x="32" y="212" class="stage-sub">tier=1 · cap=$250</text>
+  <text x="32" y="232" class="meta-text">Plan: triage 1 claim</text>
+
+  <line x1="190" y1="180" x2="218" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: TOOL CALLS EMITTED -->
+  <rect x="220" y="120" width="170" height="120" rx="8" class="stage-box"/>
+  <text x="232" y="140" class="stage-num">2 · TOOL CALLS</text>
+  <text x="232" y="162" class="stage-title">OTel spans emitted</text>
+  <text x="232" y="180" class="stage-sub">claim_lookup retry=1</text>
+  <text x="232" y="196" class="stage-sub">claim_lookup retry=2</text>
+  <text x="232" y="212" class="stage-sub">claim_lookup retry=N</text>
+  <text x="232" y="232" class="timer">1,847 redundant calls</text>
+
+  <line x1="390" y1="180" x2="418" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: SIDECAR COMPOSES -->
+  <rect x="420" y="120" width="170" height="120" rx="8" class="stage-box-compose"/>
+  <text x="432" y="140" class="stage-num">3 · SIDECAR COMPOSES</text>
+  <text x="432" y="162" class="stage-title">Six-deficiency taxonomy</text>
+  <text x="432" y="180" class="stage-sub">runaway: FIRED</text>
+  <text x="432" y="196" class="stage-sub">blast: FIRED</text>
+  <text x="432" y="212" class="stage-sub">trace: CAPTURED</text>
+  <text x="432" y="232" class="meta-strong">composition in &lt;50ms</text>
+
+  <line x1="590" y1="180" x2="618" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: CAP ENFORCED -->
+  <rect x="620" y="120" width="170" height="120" rx="8" class="stage-box-export"/>
+  <text x="632" y="140" class="stage-num">4 · CAP ENFORCED</text>
+  <text x="632" y="162" class="stage-title">circuit_breaker_tripped</text>
+  <text x="632" y="180" class="stage-sub">cost @ cutoff:</text>
+  <text x="632" y="196" class="stage-sub">$4,218.34</text>
+  <text x="632" y="212" class="stage-sub">cap = $250</text>
+  <text x="632" y="232" class="meta-strong">bleed bounded</text>
+
+  <line x1="790" y1="180" x2="818" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: INCIDENT PACK -->
+  <rect x="820" y="120" width="120" height="120" rx="8" class="stage-box-export"/>
+  <text x="832" y="140" class="stage-num">5 · INCIDENT PACK</text>
+  <text x="832" y="162" class="stage-title">Routed to</text>
+  <text x="832" y="180" class="stage-sub">SRE on-call</text>
+  <text x="832" y="196" class="stage-sub">line-1 owner</text>
+  <text x="832" y="212" class="stage-sub">FinOps queue</text>
+  <text x="832" y="232" class="timer-fast">MTTR: 6 min</text>
+
+  <!-- Without AgentWatch comparison -->
+  <rect x="20" y="280" width="920" height="36" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1"/>
+  <text x="32" y="302" class="stage-title" fill="#7C2D12">Without AgentWatch</text>
+  <text x="170" y="302" class="meta-text" fill="#7C2D12">The agent keeps looping. Cost compounds. Detection happens 3 weeks later in the FinOps review.</text>
+  <text x="780" y="302" class="timer" fill="#7C2D12">MTTR: ~240 hours</text>
+
+  <!-- With AgentWatch comparison -->
+  <rect x="20" y="324" width="920" height="36" rx="8" fill="#DCFCE7" stroke="#16A34A" stroke-width="1"/>
+  <text x="32" y="346" class="stage-title" fill="#14532D">With AgentWatch</text>
+  <text x="170" y="346" class="meta-text" fill="#14532D">Per-incident dollar cap fires. Reasoning trace captured. Incident routed to validator. The bleed stops.</text>
+  <text x="780" y="346" class="timer-fast" fill="#14532D">MTTR: 6 minutes</text>
+
+  <!-- Summary numbers -->
+  <text x="20" y="395" class="stage-title">100% of runaways bounded · MTTR 4h+ → &lt;10min · per-incident cost capped · 30-day undetected bleed: $0</text>
+
+  <!-- Six-deficiency badges -->
+  <rect x="20" y="412" width="155" height="22" rx="4" fill="#E0E7FF"/>
+  <text x="27" y="427" class="badge-text" fill="#312E81">1. Runaway tool loops</text>
+
+  <rect x="180" y="412" width="180" height="22" rx="4" fill="#E0E7FF"/>
+  <text x="187" y="427" class="badge-text" fill="#312E81">2. Hallucinated tool args</text>
+
+  <rect x="365" y="412" width="148" height="22" rx="4" fill="#E0E7FF"/>
+  <text x="372" y="427" class="badge-text" fill="#312E81">3. Silent agent drift</text>
+
+  <rect x="518" y="412" width="158" height="22" rx="4" fill="#E0E7FF"/>
+  <text x="525" y="427" class="badge-text" fill="#312E81">4. Blast-radius unbounded</text>
+
+  <rect x="681" y="412" width="148" height="22" rx="4" fill="#E0E7FF"/>
+  <text x="688" y="427" class="badge-text" fill="#312E81">5. Reasoning trace</text>
+
+  <rect x="834" y="412" width="106" height="22" rx="4" fill="#E0E7FF"/>
+  <text x="841" y="427" class="badge-text" fill="#312E81">6. Cost attribution</text>
+</svg>

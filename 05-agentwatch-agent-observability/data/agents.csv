@@ -1,0 +1,5 @@
+agent_id,name,framework,vendor,model,tier,owner_team,deployed_at,n_tools,blast_radius_cap_usd
+claims_triage_v3,Claims Triage Agent,langgraph,anthropic,claude-sonnet-4-20251101,1,line1.insurance-ops,2026-01-12,9,250
+kyc_refresh_v2,KYC Refresh Agent,bedrock_agents,anthropic_via_bedrock,anthropic.claude-3-7-sonnet-20250219-v1:0,1,line1.financial-crimes,2025-11-20,7,180
+dispute_recon_v1,Dispute Reconciliation Agent,openai_assistants,azure_openai,gpt-4o-2025-08-06,1,line1.payments-ops,2026-02-04,6,150
+loan_pkg_v4,Loan Package Assembly Agent,autogen,anthropic,claude-opus-4-20250514,1,line1.mortgage-ops,2026-01-30,11,300

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">PromptShield: five-layer defense-in-depth gateway between user input and the LLM</title>
+  <desc id="desc">Horizontal pipeline showing a user prompt flowing through five PromptShield defense layers — input classifier, retrieval scanner, tool-call gate, egress filter, and per-session memory boundary — and out to the LLM and response. Includes catch-rate comparison strip.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #4f46e5; stroke-width: 1.5; }
+      .stage-box-defense { fill: #ffffff; stroke: #16a34a; stroke-width: 1.6; }
+      .stage-box-llm { fill: #fffbeb; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-resp { fill: #ffffff; stroke: #16a34a; stroke-width: 1.6; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10.5px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10.5px; font-weight: 600; fill: #1e2a78; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 600; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6E5FF; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1e2a78; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">PromptShield - five-layer defense-in-depth gateway</text>
+  <text x="20" y="52" class="subheader">User prompt + retrieved context flow left-to-right through five independent controls.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="340" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Scenario: Sarah's wealth-portfolio query with indirect injection</text>
+
+  <!-- Stage 0: User input -->
+  <rect x="20" y="120" width="120" height="100" rx="8" class="stage-box"/>
+  <text x="32" y="138" class="stage-num">USER INPUT</text>
+  <text x="32" y="158" class="stage-title">Sarah's prompt</text>
+  <text x="32" y="174" class="stage-sub">"Summarize</text>
+  <text x="32" y="188" class="stage-sub">CUST_851897's</text>
+  <text x="32" y="202" class="stage-sub">portfolio."</text>
+
+  <!-- Arrow 0 -->
+  <line x1="145" y1="170" x2="172" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 1: L1 input classifier -->
+  <rect x="175" y="120" width="140" height="100" rx="8" class="stage-box-defense"/>
+  <text x="187" y="138" class="stage-num">L1 INPUT CLASSIFIER</text>
+  <text x="187" y="158" class="stage-title">Direct + jailbreak</text>
+  <text x="187" y="174" class="stage-sub">DeBERTa / Llama</text>
+  <text x="187" y="188" class="stage-sub">Guard 3 / Prompt</text>
+  <text x="187" y="202" class="stage-sub">Guard</text>
+
+  <!-- Arrow 1 -->
+  <line x1="320" y1="170" x2="347" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: L2 retrieval scanner -->
+  <rect x="350" y="120" width="140" height="100" rx="8" class="stage-box-defense"/>
+  <text x="362" y="138" class="stage-num">L2 RETRIEVAL SCAN</text>
+  <text x="362" y="158" class="stage-title">Indirect injection</text>
+  <text x="362" y="174" class="stage-sub">scans every</text>
+  <text x="362" y="188" class="stage-sub">retrieved chunk</text>
+  <text x="362" y="202" class="meta-strong">CAUGHT HERE</text>
+
+  <!-- Arrow 2 -->
+  <line x1="495" y1="170" x2="522" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: L3 tool-call gate -->
+  <rect x="525" y="120" width="140" height="100" rx="8" class="stage-box-defense"/>
+  <text x="537" y="138" class="stage-num">L3 TOOL-CALL GATE</text>
+  <text x="537" y="158" class="stage-title">Outbound tools</text>
+  <text x="537" y="174" class="stage-sub">OPA / Rego policy</text>
+  <text x="537" y="188" class="stage-sub">allow-list of</text>
+  <text x="537" y="202" class="stage-sub">destinations</text>
+
+  <!-- Arrow 3 -->
+  <line x1="670" y1="170" x2="697" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: LLM (with annotation) -->
+  <rect x="700" y="120" width="120" height="100" rx="8" class="stage-box-llm"/>
+  <text x="712" y="138" class="stage-num">LLM</text>
+  <text x="712" y="158" class="stage-title">Foundation model</text>
+  <text x="712" y="174" class="stage-sub">Anthropic Claude</text>
+  <text x="712" y="188" class="stage-sub">/ Azure OpenAI</text>
+  <text x="712" y="202" class="stage-sub">/ Bedrock</text>
+
+  <!-- Arrow 4 -->
+  <line x1="825" y1="170" x2="852" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: L4 egress filter -->
+  <rect x="855" y="120" width="85" height="100" rx="8" class="stage-box-defense"/>
+  <text x="867" y="138" class="stage-num">L4 EGRESS</text>
+  <text x="867" y="158" class="stage-title">DLP scan</text>
+  <text x="867" y="174" class="stage-sub">PII +</text>
+  <text x="867" y="188" class="stage-sub">known-bad</text>
+  <text x="867" y="202" class="stage-sub">URLs</text>
+
+  <!-- Arrow down from L4 to response -->
+  <path d="M 897 220 L 897 252 L 525 252 L 525 296" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 6: Response to user -->
+  <rect x="380" y="300" width="290" height="80" rx="8" class="stage-box-resp"/>
+  <text x="392" y="320" class="stage-num">RESPONSE TO USER</text>
+  <text x="392" y="340" class="stage-title">Safe payload delivered to banker</text>
+  <text x="392" y="358" class="stage-sub">no exfil URLs * no PII leaks * no tracking pixels</text>
+  <text x="392" y="372" class="timer-fast">end-to-end pipeline under 200 ms</text>
+
+  <!-- L5 - side panel (per-session memory boundary - applies across the whole pipeline) -->
+  <rect x="20" y="240" width="340" height="50" rx="8" class="stage-box-defense"/>
+  <text x="32" y="258" class="stage-num">L5 PER-SESSION MEMORY BOUNDARY</text>
+  <text x="32" y="276" class="stage-sub">Redis with TTL + cryptographic session ID + SPIFFE workload identity</text>
+
+  <!-- Comparison strip -->
+  <rect x="380" y="240" width="380" height="50" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="392" y="258" class="stage-title">Catch-rate comparison</text>
+  <text x="392" y="276" class="timer">Regex-only baseline: ~30-50% catch * ~10-15% FP</text>
+  <text x="600" y="276" class="timer-fast">PromptShield: 96%+ catch * single-digit FP</text>
+
+  <!-- Bottom outcome -->
+  <rect x="780" y="300" width="160" height="80" rx="8" class="stage-box"/>
+  <text x="792" y="320" class="stage-title">Defense in depth</text>
+  <text x="792" y="338" class="stage-sub">5 independent</text>
+  <text x="792" y="352" class="stage-sub">controls *</text>
+  <text x="792" y="368" class="meta-strong">no single point of failure</text>
+</svg>
