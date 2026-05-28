@@ -551,3 +551,5 @@ The Streamlit prototype here proves the *product mechanic* — that defense-in-d
 - [AWS Bedrock Guardrails](https://aws.amazon.com/bedrock/guardrails/) and [Azure AI Content Safety / Prompt Shields](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/) — the cloud-native counterparts on the other two major clouds.
 - [Open Policy Agent (OPA)](https://www.openpolicyagent.org/) — the policy-as-code engine L3 sits on top of.
 - [Google Cloud DLP](https://cloud.google.com/security/products/dlp) / [Nightfall](https://nightfall.ai/) / [BigID](https://bigid.com/) — the DLP primitives L4 sits on top of.
+
+<!-- @description 2026-05-28-123644 : PromptShield: prompt-injection and egress defense - catches data exfiltration attacks on internal copilots over confidential data -->
