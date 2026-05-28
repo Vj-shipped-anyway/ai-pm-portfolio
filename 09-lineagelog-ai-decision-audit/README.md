@@ -538,3 +538,5 @@ The Streamlit prototype here proves the *product mechanic* — that decision-gra
 - [OCC — Model Risk Management resource center](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) and [Federal Reserve — Supervisory Letters](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm).
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives this product reads from.
 - [OpenTelemetry](https://opentelemetry.io/) — the substrate that makes composition possible.
+
+<!-- @description 2026-05-28-123644 : LineageLog: AI decision audit trail - every regulated AI decision traced to its inputs, model snapshot, and reviewer -->
