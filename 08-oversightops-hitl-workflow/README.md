@@ -608,3 +608,5 @@ The Streamlit prototype here proves the *product mechanic* — that difficulty-s
 - [SR 11-7 / OCC Bulletin 2011-12](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — the ongoing-monitoring requirement HITL satisfies on paper.
 - [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) — names human oversight as the safety lever for high-stakes AI decisions.
 - [Pega](https://www.pega.com/), [Appian](https://appian.com/), [ServiceNow Workflow](https://www.servicenow.com/) — the BPM substrate OversightOps integrates into, not replaces.
+
+<!-- @description 2026-06-15-154944 : OversightOps: human-in-the-loop workflow designer - replaces rubber-stamp review with calibrated, role-aware oversight -->
