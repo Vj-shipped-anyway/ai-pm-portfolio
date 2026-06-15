@@ -553,3 +553,5 @@ The Streamlit prototype here proves the *product mechanic* — that agent-shaped
 - [SR 11-7 / OCC Bulletin 2011-12](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — co-issued model-risk-management guidance. The "ongoing monitoring" requirement AgentWatch implements.
 - [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — human oversight on high-risk AI systems.
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives AgentWatch composes with.
+
+<!-- @description 2026-06-15-154944 : AgentWatch: AI agent reliability and tool-use observability - catches runaway costs and tool-call failures in deployed agents -->
