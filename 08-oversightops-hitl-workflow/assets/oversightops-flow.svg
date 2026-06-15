@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">OversightOps: AI case flowing from ingestion through difficulty-stratified routing to ground-truth backfill</title>
+  <desc id="desc">Five-stage horizontal flow showing how a regulated AI decision flagged for HITL moves through Case Ingested, Difficulty Scored, Routed to Right-Tier Reviewer, Decision Logged with Rubric, Ground-Truth Backfill, and Calibration Drift Detection. Includes single-queue-vs-OversightOps timing comparison.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #4f46e5; stroke-width: 1.5; }
+      .stage-box-route { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-backfill { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10.5px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10.5px; font-weight: 600; fill: #1e2a78; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6E5FF; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1e2a78; }
+      .compare-good { fill: #EAF3DE; }
+      .compare-bad { fill: #FCEBEB; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">OversightOps - calibrated HITL flow for one regulated AI case</text>
+  <text x="20" y="52" class="subheader">CASE_0317_20260512: private banking, AI conf 0.62, difficulty 5 - rubber-stamp blocked, escalated to lead, OFAC match rejected.</text>
+
+  <!-- Stage 1: Case ingested -->
+  <rect x="20" y="90" width="170" height="100" rx="8" class="stage-box"/>
+  <text x="32" y="112" class="stage-num">STAGE 1</text>
+  <text x="32" y="132" class="stage-title">Case ingested</text>
+  <text x="32" y="152" class="stage-sub">AI flags case for review</text>
+  <text x="32" y="168" class="stage-sub">ai_confidence: 0.62</text>
+  <text x="32" y="182" class="stage-sub">ai_decision: APPROVE</text>
+
+  <line x1="190" y1="140" x2="218" y2="140" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: Difficulty scored -->
+  <rect x="218" y="90" width="170" height="100" rx="8" class="stage-box"/>
+  <text x="230" y="112" class="stage-num">STAGE 2</text>
+  <text x="230" y="132" class="stage-title">Difficulty scored</text>
+  <text x="230" y="152" class="stage-sub">difficulty: 5 / 5</text>
+  <text x="230" y="168" class="stage-sub">customer_tier: PB</text>
+  <text x="230" y="182" class="stage-sub">country_risk: 4</text>
+
+  <line x1="388" y1="140" x2="416" y2="140" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: Routed to right-tier reviewer -->
+  <rect x="416" y="90" width="170" height="100" rx="8" class="stage-box-route"/>
+  <text x="428" y="112" class="stage-num">STAGE 3</text>
+  <text x="428" y="132" class="stage-title">Right-tier routing</text>
+  <text x="428" y="152" class="stage-sub">queue: LEAD (Tier-1)</text>
+  <text x="428" y="168" class="stage-sub">SLA timer: 480s start</text>
+  <text x="428" y="182" class="stage-sub">junior queue blocked</text>
+
+  <line x1="586" y1="140" x2="614" y2="140" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: Decision logged with rubric -->
+  <rect x="614" y="90" width="170" height="100" rx="8" class="stage-box-route"/>
+  <text x="626" y="112" class="stage-num">STAGE 4</text>
+  <text x="626" y="132" class="stage-title">Decision logged</text>
+  <text x="626" y="152" class="stage-sub">rubric attestation</text>
+  <text x="626" y="168" class="stage-sub">time_to_decision: 7m</text>
+  <text x="626" y="182" class="stage-sub">decision: REJECT</text>
+
+  <line x1="784" y1="140" x2="812" y2="140" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: Ground-truth backfill + drift -->
+  <rect x="812" y="90" width="130" height="100" rx="8" class="stage-box-backfill"/>
+  <text x="824" y="112" class="stage-num">STAGE 5</text>
+  <text x="824" y="132" class="stage-title">Backfill +</text>
+  <text x="824" y="146" class="stage-title">drift loop</text>
+  <text x="824" y="166" class="stage-sub">OFAC match seen</text>
+  <text x="824" y="180" class="stage-sub">cohort recalibrated</text>
+
+  <!-- Comparison strip - Single-queue baseline -->
+  <rect x="20" y="240" width="922" height="60" rx="8" class="compare-bad"/>
+  <text x="32" y="262" class="meta-strong" style="fill:#7f1d1d;">Single-queue HITL (today)</text>
+  <text x="32" y="280" class="meta-text">Case routed to next-available reviewer (junior). Review completed in 8s. Rubber-stamped APPROVE. AI's call wins by default. 27 days later: OFAC sanctions-list match - bank books modeled $420k MRA exposure.</text>
+  <text x="32" y="294" class="timer">Tier-1 SLA breaches: 100% under floor   |   Calibration drift: undetected   |   Ground-truth: not bound to reviewer   |   Rubber-stamps shipped: 125 of 313 PB cases</text>
+
+  <!-- Comparison strip - OversightOps -->
+  <rect x="20" y="320" width="922" height="80" rx="8" class="compare-good"/>
+  <text x="32" y="342" class="meta-strong">OversightOps difficulty-stratified routing</text>
+  <text x="32" y="360" class="meta-text">Case routed to LEAD queue at ingestion (difficulty 5 + private banking + country tier 4). Rubber-stamp blocker rejects sub-60s reviews on Tier-1.</text>
+  <text x="32" y="376" class="meta-text">Lead reviewer takes 7 minutes with the rubric. Runs OFAC re-check. Rejects. Calibration packet updates the reviewer cohort weekly. Ground-truth backfill closes the loop.</text>
+  <text x="32" y="392" class="timer-fast">Tier-1 SLA: enforced   |   Calibration drift: 2 reviewers flagged   |   Ground-truth: bound by case_id   |   Rubber-stamps shipped: 0</text>
+
+  <!-- Summary badge -->
+  <rect x="725" y="416" width="217" height="36" rx="6" class="badge-bg"/>
+  <text x="738" y="438" class="badge-text">Six HITL deficiencies closed in one pass</text>
+</svg>

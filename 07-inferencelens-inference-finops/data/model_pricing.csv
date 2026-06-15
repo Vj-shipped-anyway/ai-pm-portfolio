@@ -1,0 +1,10 @@
+model,vendor,tier,input_price_per_mtok,output_price_per_mtok,context_window,notes
+claude-opus-4-1,anthropic,frontier,15.00,75.00,200000,Highest-capability frontier model; reserve for complex agentic chains
+claude-sonnet-4-5,anthropic,balanced,3.00,15.00,200000,Default balanced model for most regulated workloads
+claude-haiku-4-5,anthropic,fast,1.00,5.00,200000,Fast tier — sub-second p50; right for high-volume customer-service queries
+gpt-4o,azure_openai,balanced,2.50,10.00,128000,Azure OpenAI balanced tier
+gpt-4o-mini,azure_openai,fast,0.15,0.60,128000,Azure OpenAI fast tier — drop-in cheaper substitution for many customer-service paths
+gpt-4-turbo,azure_openai,frontier,10.00,30.00,128000,Legacy frontier — rarely the right pick anymore
+llama-3-1-70b-instruct,bedrock,balanced,0.99,0.99,128000,AWS Bedrock; in-VPC inference for data-residency-locked workloads
+llama-3-1-8b-instruct,bedrock,fast,0.22,0.22,128000,AWS Bedrock fast tier
+mistral-large-2,bedrock,balanced,3.00,9.00,128000,Bedrock; EU residency available out-of-the-box

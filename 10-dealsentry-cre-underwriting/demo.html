@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DealSentry — CRE AI Underwriting Reliability · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of DealSentry: a three-path verifier that catches fabricated comps, rolling T-12 math errors, and stale submarket stats in AI-drafted CRE underwriting memos — before the bid clears IC.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #fdf6ec;
+    --bg-tertiary: #f5e9d3;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --accent: #b45309;
+    --accent-dark: #7c2d12;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 940px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--accent-dark); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 300px; }
+  select:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 320px;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block; background: var(--bg-secondary); color: var(--accent-dark);
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: var(--bg-secondary); color: var(--accent-dark); }
+  .meta { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+  .field-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; align-items: flex-start; gap: 8px; }
+  .field-label { color: var(--text-secondary); flex-shrink: 0; }
+  .field-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; text-align: right; max-width: 60%; word-break: break-word; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .status-strip {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 500; margin-left: 8px;
+  }
+  .status-red { background: #FCEBEB; color: #791F1F; }
+  .status-yellow { background: #FAEEDA; color: #633806; }
+  .status-green { background: #EAF3DE; color: #27500A; }
+  .memo-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .memo-meta b { color: var(--text-primary); font-weight: 500; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>DealSentry — CRE AI underwriting verification in &lt;90 seconds, not &lt;weeks of bid-side discovery</h1>
+    <p class="tagline">Pick one of six AI-drafted CRE underwriting memos. See what each maturity level returns to the IC chair: face-value trust (memo lands in IC packet), analyst spot-check (10% of comps verified), DealSentry three-path verifier (PASS / REVIEW / FAIL with sectional findings).</p>
+    <p class="author">Project 10 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">6 synthetic memos</span>
+      <span class="badge">40 SOT comps</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">CoStar / Reonomy / Cherre aligned</span>
+      <span class="badge">ICSC / NCREIF baselines</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="DealSentry summary">
+    <div class="stat"><p class="stat-label">Memos in eval set</p><p class="stat-value">6</p></div>
+    <div class="stat"><p class="stat-label">Deficiencies named</p><p class="stat-value">6</p></div>
+    <div class="stat"><p class="stat-label">Analyst spot-check (SOTA)</p><p class="stat-value">~28%</p></div>
+    <div class="stat"><p class="stat-label">DealSentry (target)</p><p class="stat-value">100%</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="memo-select">AI-drafted memo</label>
+    <select id="memo-select"></select>
+  </div>
+
+  <div class="memo-meta" id="memo-meta"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next memo</button>
+    <button id="runall-btn">Run through all 6</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage maturity comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Face-value trust</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>SOTA — Analyst spot-check (10%)</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With DealSentry</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (catch_with_DealSentry − catch_with_analyst_spotcheck) × deals_per_yr × avg_bid_risk</p>
+    <p style="margin: 8px 0 0;">Per-memo lift: <b>~28% &rarr; 100%</b> catch rate on fabricated comps, plus 5 deficiency classes spot-checking does not cover at all (T-12 drift, cap-rate math, occupancy, exit-cap mismatch, stale submarket stat). Annualized at a national CRE operator (~800-1,200 deals/yr screened through AI underwriting): <b>~3-5 bad bids prevented at ~$1.8M each = ~$7.2M/yr</b> modeled. At top-5 institutional fleet scale: <b>~15-25 bad bids/yr ≈ ~$35M/yr</b>. Per-memo verifier runtime: <b>&lt;90s p95</b>. Per finding caught: <b>~$28</b> vs $3K-$8K to manually re-verify against CoStar.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./ARCHITECTURE.md">Architecture</a>
+    <a href="./data/">Data</a>
+    <a href="./src/">Source</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const MEMOS = [
+  {
+    id: "MEMO_01", name: "Atlanta SE Distribution Hub — 180k sf industrial",
+    market: "Atlanta SE Industrial", asset_class: "industrial", ask: "$57.1M",
+    drafted: "2026-01-12", status: "CLEAN", scenario: "Baseline pass — 5 comps in SOT, T-12 reconciles, occupancy matches rent roll, exit-cap spread +45 bps.",
+    before: { dwell: "Memo lands in IC packet unverified", deficiencies_present: 0,
+              note: "Memo is clean. Face-value trust produces the correct read — but the operating mode is the same regardless of the underlying memo quality." },
+    sota: { caught: 0, missed: 0, note: "10% spot-check (1 of 5 comps). All 5 comps actually exist. No false flag." },
+    shield: { verdict: "PASS", action: "Approve and proceed to IC.", comps: "5 of 5 verified", findings: "all 6 checks clean",
+              t12: "PASS — reconciles", cap: "PASS — 5.95% reconciles", occ: "PASS — 96% / 96%", exit: "PASS — +45 bps spread", stat: "PASS — current Q4 2025", bid_risk: "$0", verifier_secs: 4.2 }
+  },
+  {
+    id: "MEMO_02", name: "Phoenix North Residences — 240-unit multifamily",
+    market: "Phoenix North", asset_class: "multifamily", ask: "$67.6M",
+    drafted: "2026-01-18", status: "CLEAN", scenario: "Baseline pass — 6 comps verified, T-12 with vacancy adjustment, occupancy reconciles.",
+    before: { dwell: "Memo lands in IC packet unverified", deficiencies_present: 0,
+              note: "Clean multifamily memo. Vacancy adjustment shown explicitly. Memo is correct." },
+    sota: { caught: 0, missed: 0, note: "10% spot-check (1 of 6 comps). All comps real." },
+    shield: { verdict: "PASS", action: "Approve and proceed to IC.", comps: "6 of 6 verified", findings: "all 6 checks clean",
+              t12: "PASS — vacancy applied correctly", cap: "PASS — 5.25%", occ: "PASS — 93.6% / 93.6%", exit: "PASS — +30 bps spread", stat: "PASS — current Q4 2025", bid_risk: "$0", verifier_secs: 4.8 }
+  },
+  {
+    id: "MEMO_03", name: "Dallas Uptown Tower — 320k sf Class-A office",
+    market: "Dallas Uptown", asset_class: "office", ask: "$74.2M",
+    drafted: "2026-02-04", status: "T12_DRIFT", scenario: "T-12 NOI sum is $5.16M; recompute is $5.10M. $60K positive drift. Capitalized at 6.95% = $863K overpay risk.",
+    before: { dwell: "Memo lands in IC packet; arithmetic drift uncaught", deficiencies_present: 1,
+              note: "Analyst trusted the $5.16M sum without re-running. Deficiency stays hidden until due-diligence buyer recomputes." },
+    sota: { caught: 0, missed: 1, note: "10% spot-check verified 1 comp. T-12 math not recomputed because spot-checking does not surface arithmetic." },
+    shield: { verdict: "FAIL", action: "Reject. Do not advance to IC.", comps: "5 of 5 verified", findings: "1 finding — T-12 drift",
+              t12: "FAIL — memo $5.16M vs recompute $5.10M (-$60K)", cap: "PASS", occ: "PASS", exit: "PASS", stat: "PASS", bid_risk: "$900K", verifier_secs: 4.4 }
+  },
+  {
+    id: "MEMO_04", name: "Brickell Crossing Retail — 92k sf grocery-anchored",
+    market: "Brickell South", asset_class: "retail", ask: "$73.6M",
+    drafted: "2026-02-22", status: "FABRICATED_COMPS", scenario: "AI cited 6 comps. 2 of them — Pinecrest Pavilion and South Bay Galleria — do not exist in any SOT feed. Exit cap = going-in (flat).",
+    before: { dwell: "Memo lands in IC packet with 2 phantom comps", deficiencies_present: 2,
+              note: "Canonical bad-bid pattern. AI generated comp citations that share submarket and price band with real ones. Memo passes IC because nobody verified." },
+    sota: { caught: 0, missed: 2, note: "10% spot-check verified 1 comp (a real one). Both fabrications slipped through. Exit-cap mismatch unaddressed by spot-check." },
+    shield: { verdict: "FAIL", action: "Reject. Do not advance to IC.", comps: "4 of 6 verified", findings: "3 findings — 2 fabricated comps + exit-cap mismatch",
+              t12: "PASS", cap: "PASS — 6.25% reconciles", occ: "PASS — 96% / 96%", exit: "FAIL — going-in 6.25% / exit 6.25% (+0 bps; std +25-50)", stat: "PASS", bid_risk: "$1.8M", verifier_secs: 5.1 }
+  },
+  {
+    id: "MEMO_05", name: "Bellevue MOB Plaza — 85k sf medical office",
+    market: "Bellevue Eastside", asset_class: "medical office", ask: "$41.0M",
+    drafted: "2026-03-08", status: "STALE_STAT", scenario: "Memo cites Bellevue MOB vacancy 4.2% and rent $49.50/sf as current. Those figures are CoStar 2024-Q3. Q4 2025 reading is 5.2% / $52.00.",
+    before: { dwell: "Stale stat presented as current in IC packet", deficiencies_present: 1,
+              note: "Memo cites a CoStar figure that's 5 quarters old. Analyst trusted the source-label, not the date. Submarket positioning argument built on a misread." },
+    sota: { caught: 0, missed: 1, note: "10% spot-check on comps does not surface stale submarket stats at all." },
+    shield: { verdict: "REVIEW", action: "Send to senior analyst review before IC.", comps: "4 of 4 verified (one duplicate flagged)", findings: "1 finding — stale stat",
+              t12: "PASS", cap: "PASS", occ: "PASS", exit: "PASS — +35 bps spread", stat: "REVIEW — 2024-Q3 vacancy shown as current; latest Q4 2025 reading 5.2% / $52", bid_risk: "$240K", verifier_secs: 4.6 }
+  },
+  {
+    id: "MEMO_06", name: "Chicago O'Hare Last-Mile — 410k sf industrial",
+    market: "Chicago O'Hare Industrial", asset_class: "industrial", ask: "$84.0M",
+    drafted: "2026-03-26", status: "MULTI_FAULT", scenario: "Fabricated Schaumburg comp + cap-rate off by 50 bps (memo 5.50% / recompute 6.00%) + 4.5-pt occupancy discrepancy + exit cap flat.",
+    before: { dwell: "Memo lands in IC packet; four deficiencies hidden", deficiencies_present: 4,
+              note: "The whole memo. Multi-fault pattern. Cap-rate 50 bps off on a $84M deal is a $7.6M value swing." },
+    sota: { caught: 0, missed: 4, note: "10% spot-check (1 of 5 comps). Hit a real comp. Cap-rate / occupancy / exit-cap all slipped." },
+    shield: { verdict: "FAIL", action: "Reject. Do not advance to IC.", comps: "4 of 5 verified", findings: "4 findings — fabricated comp + cap-rate + occupancy + exit-cap",
+              t12: "PASS — reconciles within tolerance", cap: "FAIL — stated 5.50% vs recompute 6.00% (+50 bps)", occ: "FAIL — stated 96.5% vs rent roll 92.0%", exit: "FAIL — going-in 5.65% / exit 5.65% (+0 bps)", stat: "PASS", bid_risk: "$3.0M", verifier_secs: 5.3 }
+  }
+];
+
+function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function statusPill(status) {
+  if (status === 'FABRICATED_COMPS' || status === 'MULTI_FAULT') return '<span class="status-strip status-red">' + status + '</span>';
+  if (status === 'T12_DRIFT') return '<span class="status-strip status-red">T12_DRIFT</span>';
+  if (status === 'STALE_STAT') return '<span class="status-strip status-yellow">STALE_STAT</span>';
+  return '<span class="status-strip status-green">CLEAN</span>';
+}
+
+function render(idx) {
+  const m = MEMOS[idx];
+  document.getElementById('memo-meta').innerHTML =
+    '<b>' + escapeHtml(m.name) + '</b> · ' + escapeHtml(m.id) +
+    ' · market: ' + escapeHtml(m.market) +
+    ' · asset class: ' + escapeHtml(m.asset_class) +
+    ' · ask: ' + escapeHtml(m.ask) +
+    ' · drafted: ' + escapeHtml(m.drafted) +
+    ' · status: ' + statusPill(m.status) +
+    '<br><span style="color:#5a5a5a;">' + escapeHtml(m.scenario) + '</span>';
+
+  // Card 1 — Before
+  let beforeHtml = '<div>' + escapeHtml(m.before.note) + '</div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Operating mode</span><span class="field-value">' + escapeHtml(m.before.dwell) + '</span></div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Deficiencies present</span><span class="field-value">' + m.before.deficiencies_present + ' of 6 classes</span></div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Deficiencies caught</span><span class="field-value">0</span></div>';
+  if (m.before.deficiencies_present > 0) {
+    beforeHtml += '<div class="pill pill-bad">Memo ships to IC unverified</div>';
+  } else {
+    beforeHtml += '<div class="pill pill-info">Clean memo; no flags</div>';
+  }
+  document.getElementById('card-before').innerHTML = beforeHtml;
+
+  // Card 2 — SOTA
+  let sotaHtml = '<div>' + escapeHtml(m.sota.note) + '</div>';
+  sotaHtml += '<div class="field-row"><span class="field-label">Deficiencies caught</span><span class="field-value">' + m.sota.caught + '</span></div>';
+  sotaHtml += '<div class="field-row"><span class="field-label">Deficiencies slipped</span><span class="field-value">' + m.sota.missed + '</span></div>';
+  sotaHtml += '<div class="field-row"><span class="field-label">T-12 math</span><span class="field-value">not recomputed</span></div>';
+  sotaHtml += '<div class="field-row"><span class="field-label">Submarket stats</span><span class="field-value">not cross-checked</span></div>';
+  if (m.sota.missed > 0) {
+    sotaHtml += '<div class="pill pill-bad">Insufficient — deficiencies slipped through</div>';
+  } else {
+    sotaHtml += '<div class="pill pill-info">Clean — nothing for spot-check to find</div>';
+  }
+  document.getElementById('card-sota').innerHTML = sotaHtml;
+
+  // Card 3 — DealSentry
+  let shieldHtml = '';
+  shieldHtml += '<div class="field-row"><span class="field-label">Verdict</span><span class="field-value">' + escapeHtml(m.shield.verdict) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Action</span><span class="field-value">' + escapeHtml(m.shield.action) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Comp existence</span><span class="field-value">' + escapeHtml(m.shield.comps) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">T-12 math</span><span class="field-value">' + escapeHtml(m.shield.t12) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Cap rate</span><span class="field-value">' + escapeHtml(m.shield.cap) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Occupancy</span><span class="field-value">' + escapeHtml(m.shield.occ) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Exit cap spread</span><span class="field-value">' + escapeHtml(m.shield.exit) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Submarket stat</span><span class="field-value">' + escapeHtml(m.shield.stat) + '</span></div>';
+  shieldHtml += '<div class="field-row"><span class="field-label">Bid risk caught</span><span class="field-value">' + escapeHtml(m.shield.bid_risk) + '</span></div>';
+  shieldHtml += '<div class="meta">Three-path verifier completed in ' + m.shield.verifier_secs.toFixed(1) + 's on the prototype.</div>';
+  if (m.shield.verdict === 'PASS') {
+    shieldHtml += '<div class="pill pill-ok">PASS — safe for IC</div>';
+  } else if (m.shield.verdict === 'REVIEW') {
+    shieldHtml += '<div class="pill pill-warn">REVIEW — route to senior analyst</div>';
+  } else {
+    shieldHtml += '<div class="pill pill-bad">FAIL — do not advance</div>';
+  }
+  document.getElementById('card-shield').innerHTML = shieldHtml;
+}
+
+function init() {
+  const sel = document.getElementById('memo-select');
+  MEMOS.forEach((m, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = m.id + ' — ' + m.name + ' (' + m.status + ')';
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => render(parseInt(sel.value)));
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i - 1 + MEMOS.length) % MEMOS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i + 1) % MEMOS.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('runall-btn').addEventListener('click', () => {
+    let i = 0;
+    const step = () => {
+      sel.value = i;
+      render(i);
+      i++;
+      if (i < MEMOS.length) setTimeout(step, 1100);
+    };
+    step();
+  });
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    sel.value = 0;
+    render(0);
+  });
+  sel.value = 3; // default to MEMO_04 fabricated-comp drama
+  render(3);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>

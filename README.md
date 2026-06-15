@@ -2,7 +2,7 @@
 
 A working portfolio of AI Product Manager case studies, each shipped as a **walkthrough you can actually run on your laptop**: use case → sample data → before-LLM solution → with-LLM solution → defects exposed → containment fix → utility math.
 
-The portfolio is live in three tiers. **Seven flagships are fully built** with sample data, four step scripts each, and a static `demo.html`. **Three more are on the roadmap**, each scoped with the bleed, the deficiency, and the utility-math formula it'll use when built.
+The portfolio is live in one tier. **All ten flagships are fully built** with sample data, four step scripts each, and a static `demo.html` (LeaseGuard, HalluGuard, DriftSentinel, EvalForge, LineageLog, AgentWatch, PromptShield, DealSentry, OversightOps, and now InferenceLens).
 
 ---
 
@@ -42,7 +42,7 @@ That framing also forces honesty about three things most AI portfolios fudge: wh
 
 ---
 
-## 🚀 The Seven Flagships (live)
+## 🚀 The Ten Flagships (live)
 
 These are the polished case studies — full walkthrough README, sample data CSVs, four step-by-step Python scripts (`step_01_*.py` through `step_04_*.py`), utility math, and a PRD.
 
@@ -55,6 +55,9 @@ These are the polished case studies — full walkthrough README, sample data CSV
 | **🔍 [LineageLog](./09-lineagelog-ai-decision-audit/)** — AI decision audit trail & decision lineage | Immutable decision-grain composition layer that binds Cloud Logging + Cloud Audit Logs + Agent Identity Logs + OpenTelemetry traces at `(decision_id, customer_id_hash, timestamp)`; six-deficiency taxonomy closed; auto-assembled exam-pack export | 🟢 6 of 6 deficiencies closed on every decision in the 200-decision synthetic corpus; 🟢 composition latency <50ms per decision on the prototype; 🟡 audit-pack assembly time 3 weeks → 3 seconds (modeled — assumes the synthetic 200-decision corpus + Tier-1-style four-model fleet); 🟡 exam-readiness coverage 22% → 100% (modeled — assumes published BFSI baseline for sample-based vs continuous readiness); 🔴 time-to-decision-evidence 14d → 12min (designed) × 🟡 50-200M regulated AI decisions/yr at Tier-1 retail bank = continuous exam-readiness | **▶ [Live demo](https://lineagelog-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/lineagelog-placeholder)** *(placeholder)* |
 | **🤖 [AgentWatch](./05-agentwatch-agent-observability/)** — Agent reliability & tool-use observability | Sidecar over LangGraph / AutoGen / Bedrock Agents / OpenAI Assistants; classifies failure under a six-deficiency taxonomy (runaway tool loops, hallucinated tool args, silent drift, blast-radius unbounded, missing reasoning trace, cost detached from outcomes); enforces per-incident dollar cap; auto-assembled incident pack routed to SRE on-call + line-1 owner | 🟢 24 of 24 detected incidents bounded on the 500-run synthetic corpus; 🟢 composition latency <50ms per incident on the prototype; 🟢 headline runaway capped at $4,218 vs. modeled $42k+ undetected bleed; 🟡 APM-only detection rate ~25% → AgentWatch 100% (modeled — assumes Datadog with standard p99 thresholds); 🔴 MTTR 4h+ → <10min (designed) × 🟡 8-20 deployed agents at Tier-1 BFSI fleet scale = ~24 runaways/yr bounded ($120k - $1.2M of bounded spend) | **▶ [Live demo](https://agentwatch-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/agentwatch-placeholder)** *(placeholder)* |
 | **🛡️ [PromptShield](./06-promptshield-prompt-injection-defense/)** — Prompt-injection & egress defense for internal BFSI copilots | Five-layer defense-in-depth gateway between user input and the LLM: L1 input classifier (Llama Guard 3 / fine-tuned DeBERTa), L2 retrieval scanner (catches indirect injection in retrieved RAG content), L3 tool-call gate (OPA / Rego), L4 egress filter (DLP regex pack), L5 per-session memory boundary (Redis + SPIFFE); six-class deficiency taxonomy (direct, indirect, tool-call abuse, egress, cross-session leak, jailbreak) closed | 🟢 99% catch rate on the 100-prompt synthetic attack suite (measured) vs. ~37% on regex baseline; 🟢 1% false-positive rate on the 200-prompt legitimate-banker corpus; 🟢 100% accuracy on the 50-call tool-gate ground-truth set; 🟡 modeled production catch 96%+ at 4% FP (assumes fine-tuned classifier replaces the regex pack + continuous red-team probes); 🔴 designed data-exfiltration incidents → 0 × 🟡 4-12 internal copilots over confidential data at every Tier-1 BFSI shop = modeled $4-15M of prevented loss per confirmed customer-data breach avoided | **▶ [Live demo](https://promptshield-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/promptshield-placeholder)** *(placeholder)* |
+| **💰 [InferenceLens](./07-inferencelens-inference-finops/)** — Per-feature inference economics for the BFSI GenAI portfolio | Per-feature inference-economics layer over OpenTelemetry span attributes + vendor billing-API reconcile; five derived views (per-feature attribution, runaway detection, cheaper-model substitution recommender, dead-feature flagger, per-feature ROI ranking); six-deficiency taxonomy (no per-feature attribution, no per-tenant attribution, no runaway detection, no substitution recommender, no dead-feature flagger, no per-feature ROI) closed | 🟢 6 of 6 deficiencies closed on every feature in the 18-feature synthetic fleet; 🟢 all five derived views composed in <10ms on the prototype; 🟢 headline runaway (FT_001 retrieval-depth misconfig) flagged day 1 with modeled overspend ~$195k caught vs. 45 days undetected; 🟢 $301,800/mo of substitution savings surfaced across 6 candidates; 🟢 dead-feature spend $25,991/mo flagged on FT_009; 🟡 modeled fleet-scale spend reduction 25-30% (assumes typical Tier-1 BFSI portfolio shape) × 🟡 $8-30M/yr aggregate inference spend at Tier-1 BFSI scale = **~$2-9M/yr saved** | **▶ [Live demo](https://inferencelens-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/inferencelens-placeholder)** *(placeholder)* |
+| **👥 [OversightOps](./08-oversightops-hitl-workflow/)** — HITL workflow designer | Calibrated, role-aware human-in-the-loop layer: difficulty-stratified routing (case + AI confidence + customer tier + country risk), rubber-stamp blocker (tier-specific time-on-task floor), reviewer calibration drift detection, escalation path for hard cases, SLA-by-tier with timer engagement, ground-truth feedback loop closed via downstream signals (SAR / OFAC / CFPB / charge-off) | 🟢 6 of 6 deficiencies closed on every case in the 1,000-case synthetic KYC corpus; 🟢 composition latency ~0.13ms per case on the prototype; 🟢 125 rubber-stamps blocked of 125 sub-floor private-banking reviews; 🟡 Tier-1 rubber-stamp rate 94% → 4% (modeled — assumes published BFSI baseline + OversightOps blocker engaged on Tier-1 queues); 🟡 reviewer-vs-ground-truth divergence 38% → 8% (modeled — assumes the 6-12-month tail + calibration packet engaged weekly); 🔴 Tier-1 KYC review SLA 9s → 8 min (designed) × 🟡 every regulated AI workflow with a HITL step (typical Tier-1: 6-15 such pipelines × thousands of high-stakes decisions per year per pipeline) = real oversight instead of theatrical | **▶ [Live demo](https://oversightops-bfsi.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/oversightops-placeholder)** *(placeholder)* |
+| **🏗️ [DealSentry](./10-dealsentry-cre-underwriting/)** — CRE AI underwriting reliability | Three-path verifier behind the AI underwriting copilot: comp existence (CoStar / Reonomy / Cherre dereference), symbolic re-run (pandas + sympy for T-12 / cap rate / occupancy / exit-cap spread), submarket-stat cross-feed; six-class deficiency taxonomy (comp fabrication, T-12 rollforward, stat staleness, cap-rate math, occupancy discrepancy, exit-cap mismatch) closed | 🟢 100% catch on 6 designed deficiencies across the 6-memo eval set vs. 0% on face-value trust and ~28% on analyst spot-check (10% sample); 🟢 $6.78M bid risk caught on the synthetic eval set; 🟡 ~28% → 100% catch on fabricated comps × ~800-1,200 deals/yr screened at a national CRE operator = 🟡 ~3-5 bad bids/yr prevented × ~$1.8M each ≈ **~$7.2M/yr modeled**; 🟡 at top-5 institutional fleet scale (~$25B+ AUM): ~15-25 bad bids/yr ≈ ~$35M/yr modeled; 🟡 per-memo verifier runtime <90s p95 | **▶ [Live demo](https://dealsentry-cre.streamlit.app)** *(placeholder)* · **▶ [60-sec walkthrough](https://app.arcade.software/share/dealsentry-placeholder)** *(placeholder)* |
 
 Run any flagship on your laptop:
 
@@ -69,18 +72,6 @@ python step_04_*.py    # the fix
 
 ---
 
-## 🧩 The Roadmap (3 more, scoped and queued)
-
-Each of these has a placeholder folder with the bleed, the named model deficiency, the use case sketch, and the utility-math formula. They get built in the same flagship format on the schedule below.
-
-| # | Project | Domain | Scoped utility | Target |
-| --- | --- | --- | --- | --- |
-| 07 | **💰 [InferenceLens](./07-inferencelens-inference-finops/)** — Inference Economics Dashboard | AI Platform / FinOps | 🟡 0% → 100% per-feature cost visibility; ~25-30% modeled spend reduction | Q4 2026 |
-| 08 | **👥 [OversightOps](./08-oversightops-hitl-workflow/)** — HITL Workflow Designer | AI Platform / Governance | 🟡 Rubber-stamp rate ~94% → ≤4%; review SLA 24h+ → 35min × every HITL pipeline | Q4 2026 |
-| 10 | **🏗️ [DealSentry](./10-dealsentry-cre-underwriting/)** — CRE AI Underwriting Reliability | CRE / PropTech | 🟡 Comp-fabrication 12-18% → <1% × 800-1,200 deals/yr screened | Q4 2026 |
-
----
-
 ## 💡 How to Navigate
 
 **If you're a hiring manager who wants the punchline:** read the master flagship — [HalluGuard](./01-halluguard-bank-chatbot-safety/) — top to bottom. It's a 15-minute read with the walkthrough format, the 8-deficiency taxonomy, the LoRA training trail, and the utility math.
@@ -89,7 +80,7 @@ Each of these has a placeholder folder with the bleed, the named model deficienc
 
 **If you're a non-technical reader:** every flagship walkthrough is designed to be read with the code blocks skipped. The plain-English explanations and the output tables tell the story.
 
-**If you're triaging the 3 roadmap projects:** each placeholder has the bleed paragraph, the named deficiency, and the utility-math formula. Pick the one closest to your problem and ask me to prioritize building it.
+**If you're a hiring manager:** each flagship's README is its own 12-minute story. Pick the one closest to your team's failure mode and let's talk.
 
 ---
 
@@ -196,6 +187,6 @@ If your seat maps to one of these projects, pick that one and let's talk about i
 
 ## 🧩 Portfolio Progression
 
-The seven flagships are the foundation. The three roadmap projects are scoped to fill in over Q3-Q4 2026. Future candidates being scoped: foundation-model regression detection, long-context fidelity probes, schema-drift detection for tool-calling agents.
+The ten flagships are the foundation. Future candidates being scoped: foundation-model regression detection, long-context fidelity probes, schema-drift detection for tool-calling agents.
 
 Each new project follows the same shape: pick a bleed, name the deficiency, build the test set, build the containment, ship the walkthrough. Depth over breadth — four projects done well say more than ten done shallow.

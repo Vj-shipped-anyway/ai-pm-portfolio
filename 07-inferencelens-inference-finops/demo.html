@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InferenceLens - Inference Economics for BFSI GenAI - Vijay Saharan</title>
+<meta name="description" content="A clickable demo of InferenceLens: a per-feature inference-economics layer that turns a $4M/month aggregate compute bill into per-feature attribution + runaway detection + substitution recs + dead-feature flags + ROI ranking. Six deficiencies closed.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f4ff;
+    --bg-tertiary: #ecebf7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --accent: #4f46e5;
+    --accent-dark: #1e2a78;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 940px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--accent-dark); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 300px; }
+  select:focus, button:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 280px;
+    display: flex; flex-direction: column;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .step-num {
+    display: inline-block; background: #E6E5FF; color: var(--accent-dark);
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6E5FF; color: var(--accent-dark); }
+  .meta { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; line-height: 1.5; }
+  .field-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; align-items: flex-start; gap: 8px; }
+  .field-label { color: var(--text-secondary); flex-shrink: 0; }
+  .field-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; text-align: right; max-width: 60%; word-break: break-word; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .status-strip {
+    display: inline-block; padding: 2px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 500; margin-left: 8px;
+  }
+  .status-red { background: #FCEBEB; color: #791F1F; }
+  .status-yellow { background: #FAEEDA; color: #633806; }
+  .status-green { background: #EAF3DE; color: #27500A; }
+  .status-gray { background: #ecebf7; color: #5a5a5a; }
+  .feature-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .feature-meta b { color: var(--text-primary); font-weight: 500; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>InferenceLens - per-feature inference economics in 1 day, not 6 weeks</h1>
+    <p class="tagline">Pick one of six deployed GenAI features. See what each maturity level returns to the CFO: aggregate invoice (6 weeks late), vendor console (per-API-key), InferenceLens (per-feature attribution + runaway + dead + substitution + ROI).</p>
+    <p class="author">Project 07 - AI PM Portfolio - <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">18 synthetic features</span>
+      <span class="badge">2,800+ sampled calls</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">FinOps Foundation aligned</span>
+      <span class="badge">NIST AI RMF Govern aligned</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Inference-economics summary">
+    <div class="stat"><p class="stat-label">Features in fleet</p><p class="stat-value">18</p></div>
+    <div class="stat"><p class="stat-label">Deficiencies named</p><p class="stat-value">6</p></div>
+    <div class="stat"><p class="stat-label">Invoice arrives (legacy)</p><p class="stat-value">6w</p></div>
+    <div class="stat"><p class="stat-label">InferenceLens detection</p><p class="stat-value">1d</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="feature-select">Pick a feature</label>
+    <select id="feature-select"></select>
+  </div>
+
+  <div class="feature-meta" id="feature-meta"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next feature</button>
+    <button id="runall-btn">Run through all 6</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage maturity comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before - Aggregate invoice</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>SOTA - Vendor console</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With InferenceLens</p>
+      <div class="card-body" id="card-lens"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (legacy detection lag - InferenceLens detection lag) x annual inference spend at risk</p>
+    <p style="margin: 8px 0 0;">Per-runaway lift: <b>~6 weeks -> ~1 day</b> for detection (<b>~99%</b> reduction in lag). Annualized at a typical Tier-1 BFSI GenAI portfolio scale (<b>$8-30M/yr inference spend</b>): modeled <b>25-30% spend reduction</b> = <b>$2-9M/yr saved</b> via cheaper-model substitution + dead-feature pruning + runaway prevention. Modeled per-feature attribution coverage: <b>0% -> 100%</b>. Modeled time-to-detect a runaway: <b>6 weeks -> 1 day</b>.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./ARCHITECTURE.md">Architecture</a>
+    <a href="./data/">Data</a>
+    <a href="./src/">Source</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const FEATURES = [
+  {
+    id: "FT_001", name: "customer-service-assistant", model: "claude-sonnet-4-5",
+    line: "retail", owner: "line1.contact-center", status: "RUNAWAY",
+    cfo_question: "Why is the retail-bank chatbot suddenly costing 3.7x more per call since May?",
+    before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic line item up by $130k. Aggregate hides which feature caused the spike. Finance asks; AI Platform PM has no answer." },
+    sota: { caught: 0, total: 6,
+            note: "Anthropic console shows ak_retail_prod has a daily-spend uptick. Console cannot say WHICH feature inside the key is responsible (4 features share this key)." },
+    lens: { attribution: "FT_001 modeled monthly spend ~$145k (up from ~$49k)",
+            runaway: "ALERT - 3.7x baseline since 2026-05-01 - retrieval depth misconfig (50 docs, should be 5)",
+            substitution: "claude-sonnet-4-5 -> claude-haiku-4-5 - savings $182k/mo - accuracy delta -1.4pp",
+            dead: "Live - retail customer-service is the bank's highest-traffic GenAI surface",
+            roi: "No revenue attribution; cost-center customer-service feature - kill the runaway, then substitute" }
+  },
+  {
+    id: "FT_009", name: "internal-research-copilot", model: "claude-opus-4-1",
+    line: "enterprise", owner: "line2.research", status: "DEAD",
+    cfo_question: "We shut down the internal research copilot UI on March 15. Why is it still costing $26k/month?",
+    before: { dwell: "6 weeks", note: "UI was decommissioned but the endpoint was not. A leaked SDK key keeps generating ~4,700 calls/day. Aggregate vendor invoice does not flag a 'feature with zero business value' line." },
+    sota: { caught: 0, total: 6,
+            note: "Console shows ak_enterprise_prod has steady spend on Claude Opus 4.1. Console cannot tell the operator the UI is dead - that fact lives in the feature catalog." },
+    lens: { attribution: "FT_009 modeled monthly spend ~$26k - all of it from a dead feature",
+            runaway: "Clear - traffic is steady; the problem is it should be zero",
+            substitution: "DEAD_FEATURE verdict - do not substitute; KILL the endpoint",
+            dead: "ALERT - UI shut down 2026-03-15 - endpoint still receiving 4,700 calls/day",
+            roi: "Zero revenue - 100% avoidable cost - kill criterion clearly met" }
+  },
+  {
+    id: "FT_006", name: "compliance-summarizer", model: "claude-opus-4-1",
+    line: "enterprise", owner: "line2.compliance", status: "OVER-TIERED",
+    cfo_question: "Does compliance summarization really need Claude Opus? It's $42k/mo and the volume is modest.",
+    before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic Opus line is meaningful. No mechanism inside Finance to evaluate 'is this the right model tier'." },
+    sota: { caught: 0, total: 6,
+            note: "Anthropic console shows model-mix; no recommendation engine. The 'is Opus the right tier' question is engineering judgment that nobody is paid to make." },
+    lens: { attribution: "FT_006 modeled monthly spend ~$42k - small feature, expensive model",
+            runaway: "Clear - steady volume",
+            substitution: "claude-opus-4-1 -> claude-sonnet-4-5 - savings $42k/mo at -3.1pp accuracy",
+            dead: "Live - compliance L2 uses it daily",
+            roi: "Cost-center feature; kill the over-tier - re-evaluate Opus when accuracy delta materially drops" }
+  },
+  {
+    id: "FT_002", name: "wealth-portfolio-summary", model: "claude-sonnet-4-5",
+    line: "wealth", owner: "line1.wealth", status: "ROI-POSITIVE",
+    cfo_question: "Random sample: which wealth-line features pay for themselves?",
+    before: { dwell: "6 weeks", note: "Vendor invoice doesn't separate revenue-generating features from cost-center ones. Board frames ALL AI spend as 'cost' at quarterly review." },
+    sota: { caught: 0, total: 6,
+            note: "Console aggregates wealth-line spend by API key. Revenue attribution lives in the data warehouse with a different join key (product_id). No automated link." },
+    lens: { attribution: "FT_002 modeled monthly spend ~$2k",
+            runaway: "Clear",
+            substitution: "Right-sized - Sonnet is the correct tier for long-context wealth summaries",
+            dead: "Live - advisor-facing feature",
+            roi: "POSITIVE - $1.24M/mo revenue attributed (end-of-month wealth statement narrative) - 615x ROI on inference cost" }
+  },
+  {
+    id: "FT_016", name: "trading-floor-news-summarizer", model: "claude-sonnet-4-5",
+    line: "wealth", owner: "line1.trading", status: "DORMANT",
+    cfo_question: "We piloted this with the trading floor; it ended Feb 1. Is it really gone?",
+    before: { dwell: "6 weeks", note: "Aggregate invoice doesn't surface dormant features. They contribute ~$1/mo individually; fleet-scale governance risk is the smell." },
+    sota: { caught: 0, total: 6,
+            note: "Console shows the API key is still live. No alert mechanism for 'feature volume below threshold for 30+ days'." },
+    lens: { attribution: "FT_016 modeled monthly spend ~$1 - true dormancy",
+            runaway: "Clear",
+            substitution: "DECOMMISSION verdict - retire the endpoint",
+            dead: "ALERT - status_in_catalog=dormant - traffic confirms dormancy",
+            roi: "No revenue, negligible cost, governance risk - decommission" }
+  },
+  {
+    id: "FT_018", name: "smb-loan-copilot", model: "claude-sonnet-4-5",
+    line: "retail", owner: "line1.smb-lending", status: "ROI-POSITIVE",
+    cfo_question: "SMB lending says this helps loan officers close 14% faster. Does the math work out?",
+    before: { dwell: "6 weeks", note: "Aggregate invoice does not break out by feature. The loan-officer team has a productivity number; Finance has a spend number; nobody joins them." },
+    sota: { caught: 0, total: 6,
+            note: "Console shows ak_retail_prod has spend; same key as 11 other retail features. Cannot isolate SMB-specific spend." },
+    lens: { attribution: "FT_018 modeled monthly spend ~$1.5k",
+            runaway: "Clear - newly deployed, healthy volume curve",
+            substitution: "Right-sized - Sonnet matches the loan-officer workflow complexity",
+            dead: "Live - SMB lending team uses daily",
+            roi: "POSITIVE - $820k/mo revenue attributed (14% close-rate lift x SMB deal volume) - 540x ROI on inference" }
+  }
+];
+
+function escapeHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function statusPill(status) {
+  if (status === 'RUNAWAY' || status === 'DEAD') return '<span class="status-strip status-red">' + status + '</span>';
+  if (status === 'OVER-TIERED' || status === 'DORMANT') return '<span class="status-strip status-yellow">' + status + '</span>';
+  if (status === 'ROI-POSITIVE') return '<span class="status-strip status-green">' + status + '</span>';
+  return '<span class="status-strip status-gray">' + status + '</span>';
+}
+
+function render(idx) {
+  const f = FEATURES[idx];
+  document.getElementById('feature-meta').innerHTML =
+    '<b>' + escapeHtml(f.name) + '</b> - ' + escapeHtml(f.id) +
+    ' - model: ' + escapeHtml(f.model) +
+    ' - business_line: ' + escapeHtml(f.line) +
+    ' - owner: <code>' + escapeHtml(f.owner) + '</code>' +
+    ' - status: ' + statusPill(f.status) +
+    '<br><span style="color:#5a5a5a;">' + escapeHtml(f.cfo_question) + '</span>';
+
+  // Card 1 - Before
+  let beforeHtml = '<div>' + escapeHtml(f.before.note) + '</div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Detection lag</span><span class="field-value">' + f.before.dwell + '</span></div>';
+  beforeHtml += '<div class="field-row"><span class="field-label">Per-feature attribution</span><span class="field-value">0%</span></div>';
+  beforeHtml += '<div class="pill pill-bad">Invoice arrives 6 weeks late - CFO has no answers</div>';
+  document.getElementById('card-before').innerHTML = beforeHtml;
+
+  // Card 2 - SOTA
+  let sotaHtml = '<div>' + escapeHtml(f.sota.note) + '</div>';
+  sotaHtml += '<div class="field-row"><span class="field-label">Deficiencies closed</span><span class="field-value">' + f.sota.caught + ' of ' + f.sota.total + '</span></div>';
+  sotaHtml += '<div class="pill pill-bad">Insufficient - per-API-key is not per-feature</div>';
+  document.getElementById('card-sota').innerHTML = sotaHtml;
+
+  // Card 3 - InferenceLens
+  let lensHtml = '';
+  lensHtml += '<div class="field-row"><span class="field-label">Attribution</span><span class="field-value">' + escapeHtml(f.lens.attribution) + '</span></div>';
+  lensHtml += '<div class="field-row"><span class="field-label">Runaway</span><span class="field-value">' + escapeHtml(f.lens.runaway) + '</span></div>';
+  lensHtml += '<div class="field-row"><span class="field-label">Substitution</span><span class="field-value">' + escapeHtml(f.lens.substitution) + '</span></div>';
+  lensHtml += '<div class="field-row"><span class="field-label">Dead-feature</span><span class="field-value">' + escapeHtml(f.lens.dead) + '</span></div>';
+  lensHtml += '<div class="field-row"><span class="field-label">ROI</span><span class="field-value">' + escapeHtml(f.lens.roi) + '</span></div>';
+  lensHtml += '<div class="meta">Composition completed in &lt;5ms per feature on the prototype. Six deficiencies closed.</div>';
+  if (f.status === 'ROI-POSITIVE') {
+    lensHtml += '<div class="pill pill-ok">PASS - revenue-positive, right-sized</div>';
+  } else if (f.status === 'RUNAWAY' || f.status === 'DEAD') {
+    lensHtml += '<div class="pill pill-bad">ACT - flagged for immediate action</div>';
+  } else {
+    lensHtml += '<div class="pill pill-warn">RECOMMEND - substitution or decommission</div>';
+  }
+  document.getElementById('card-lens').innerHTML = lensHtml;
+}
+
+function init() {
+  const sel = document.getElementById('feature-select');
+  FEATURES.forEach((f, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = f.id + ' - ' + f.name + ' (' + f.status + ')';
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => render(parseInt(sel.value)));
+  document.getElementById('prev-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i - 1 + FEATURES.length) % FEATURES.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('next-btn').addEventListener('click', () => {
+    const i = parseInt(sel.value);
+    sel.value = (i + 1) % FEATURES.length;
+    render(parseInt(sel.value));
+  });
+  document.getElementById('runall-btn').addEventListener('click', () => {
+    let i = 0;
+    const tick = () => {
+      if (i >= FEATURES.length) return;
+      sel.value = i;
+      render(i);
+      i++;
+      setTimeout(tick, 450);
+    };
+    tick();
+  });
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    sel.value = 0;
+    render(0);
+  });
+  render(0);
+}
+
+init();
+</script>
+</body>
+</html>

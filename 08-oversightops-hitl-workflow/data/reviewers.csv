@@ -1,0 +1,13 @@
+reviewer_id,name,tenure,training_level,average_decision_time_sec,override_rate,tier_authorization
+REV_01,Reviewer A,junior,basic_kyc,8.7,0.042,3
+REV_02,Reviewer B,junior,basic_kyc,7.5,0.066,3
+REV_03,Reviewer C,senior,kyc_plus_sanctions,33.4,0.103,2
+REV_04,Reviewer D,lead,kyc_full_aml,107.6,0.184,1
+REV_05,Reviewer E,junior,basic_kyc,5.6,0.039,3
+REV_06,Reviewer F,senior,kyc_plus_sanctions,33.3,0.116,2
+REV_07,Reviewer G,junior,basic_kyc,9.6,0.061,3
+REV_08,Reviewer H,lead,kyc_full_aml,108.2,0.175,1
+REV_09,Reviewer I,senior,kyc_plus_sanctions,38.7,0.08,2
+REV_10,Reviewer J,junior,basic_kyc,11.4,0.054,3
+REV_11,Reviewer K,senior,kyc_plus_sanctions,36.3,0.089,2
+REV_12,Reviewer L,lead,kyc_full_aml,105.9,0.219,1

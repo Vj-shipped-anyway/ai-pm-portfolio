@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title desc">
+  <title id="title">DealSentry: AI-drafted CRE underwriting memo flowing from ingestion through three independent verifier paths to an IC-ready workpaper</title>
+  <desc id="desc">Five-stage horizontal flow showing how an AI-drafted CRE memo is ingested, parsed into structured claims, run through three independent verifier paths (comp existence, symbolic math, submarket cross-feed), reconciled into a PASS/REVIEW/FAIL verdict, and exported as an IC-ready workpaper. Includes analyst-spotcheck-vs-DealSentry timing and bid-risk comparison.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #b45309; stroke-width: 1.5; }
+      .stage-box-verifier { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-export { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7c2d12; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-fail { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #fef3c7; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #7c2d12; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">DealSentry — verification flow for one AI-drafted CRE underwriting memo</text>
+  <text x="20" y="52" class="subheader">MEMO_04 Brickell retail, $73.6M ask · IC packet seals on Feb 28 · DealSentry verdict in &lt;90s.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="320" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: AI underwriting copilot emits draft memo for IC</text>
+
+  <!-- Stage 1: INGEST -->
+  <rect x="20" y="120" width="170" height="130" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 · INGEST</text>
+  <text x="32" y="162" class="stage-title">Memo → claims</text>
+  <text x="32" y="180" class="stage-sub">pdfplumber / Textract</text>
+  <text x="32" y="195" class="stage-sub">Claude Sonnet</text>
+  <text x="32" y="210" class="stage-sub">"cite-or-refuse" prompt</text>
+  <text x="32" y="225" class="stage-sub">Pydantic schema</text>
+  <text x="32" y="243" class="meta-text">6 comps · 12 t-12 rows</text>
+
+  <!-- Arrow 1 -->
+  <line x1="195" y1="180" x2="232" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 wrapper: 3 parallel verifier paths -->
+  <rect x="235" y="105" width="320" height="160" rx="10" fill="none" stroke="#cbd5e1" stroke-dasharray="4,4"/>
+  <text x="247" y="120" class="stage-num">2 · THREE INDEPENDENT VERIFIER PATHS (parallel)</text>
+
+  <!-- Path 1: comp -->
+  <rect x="245" y="130" width="145" height="60" rx="6" class="stage-box-verifier"/>
+  <text x="253" y="146" class="stage-title">Path 1 · comps</text>
+  <text x="253" y="162" class="stage-sub">CoStar + Reonomy</text>
+  <text x="253" y="176" class="stage-sub">+ Cherre dereference</text>
+
+  <!-- Path 2: symbolic -->
+  <rect x="395" y="130" width="155" height="60" rx="6" class="stage-box-verifier"/>
+  <text x="403" y="146" class="stage-title">Path 2 · symbolic math</text>
+  <text x="403" y="162" class="stage-sub">pandas + sympy</text>
+  <text x="403" y="176" class="stage-sub">T-12 · cap · occ · exit</text>
+
+  <!-- Path 3: submarket -->
+  <rect x="320" y="200" width="155" height="55" rx="6" class="stage-box-verifier"/>
+  <text x="328" y="216" class="stage-title">Path 3 · submarket</text>
+  <text x="328" y="232" class="stage-sub">CoStar + REIS + Reonomy</text>
+  <text x="328" y="246" class="stage-sub">quarterly stat versioning</text>
+
+  <!-- Arrows from ingest to all paths -->
+  <line x1="305" y1="200" x2="305" y2="200" class="arrow-line"/>
+
+  <!-- Arrow 2 (out of verifier cluster) -->
+  <line x1="560" y1="180" x2="597" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: RECONCILE -->
+  <rect x="600" y="120" width="170" height="130" rx="8" class="stage-box-verifier"/>
+  <text x="612" y="140" class="stage-num">3 · RECONCILE</text>
+  <text x="612" y="162" class="stage-title">Severity ladder</text>
+  <text x="612" y="180" class="stage-sub">PASS / REVIEW / FAIL</text>
+  <text x="612" y="195" class="stage-sub">bid-risk dollar model</text>
+  <text x="612" y="210" class="stage-sub">override audit ledger</text>
+  <text x="612" y="228" class="meta-fail">VERDICT: FAIL ($1.8M)</text>
+  <text x="612" y="243" class="meta-text">2 comps fabricated</text>
+
+  <!-- Arrow 3 -->
+  <line x1="775" y1="180" x2="812" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: EXPORT -->
+  <rect x="815" y="120" width="135" height="130" rx="8" class="stage-box-export"/>
+  <text x="827" y="140" class="stage-num">4 · EXPORT</text>
+  <text x="827" y="162" class="stage-title">IC workpaper</text>
+  <text x="827" y="180" class="stage-sub">signed PDF (KMS)</text>
+  <text x="827" y="195" class="stage-sub">JSON evidence</text>
+  <text x="827" y="210" class="stage-sub">Dealpath webhook</text>
+  <text x="827" y="225" class="stage-sub">Yardi handoff</text>
+  <text x="827" y="243" class="meta-strong">IC ready in &lt;90s</text>
+
+  <!-- Comparison band: analyst spot-check vs DealSentry -->
+  <line x1="20" y1="305" x2="940" y2="305" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="20" y="328" class="subheader" font-weight="500">How DealSentry compares against the analyst-staffed baseline (modeled)</text>
+
+  <rect x="20" y="345" width="450" height="115" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+  <text x="32" y="365" class="stage-title" fill="#7f1d1d">Analyst spot-check (current SOTA)</text>
+  <text x="32" y="385" class="stage-sub">- 10% of comps manually checked against CoStar</text>
+  <text x="32" y="402" class="stage-sub">- T-12 math: trusted, not recomputed</text>
+  <text x="32" y="419" class="stage-sub">- Submarket stats: trusted, not cross-checked</text>
+  <text x="32" y="438" class="meta-fail">Modeled catch rate on fabricated comps: ~28%</text>
+  <text x="32" y="453" class="timer">5-10 min review per memo · 5 deficiency classes uncovered</text>
+
+  <rect x="490" y="345" width="450" height="115" rx="8" fill="#ecfdf5" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="502" y="365" class="stage-title" fill="#14532d">DealSentry (three independent paths)</text>
+  <text x="502" y="385" class="stage-sub">- 100% of comps dereferenced against SOT_COMPS</text>
+  <text x="502" y="402" class="stage-sub">- T-12 / cap / occupancy re-run symbolically</text>
+  <text x="502" y="419" class="stage-sub">- Submarket stats cross-checked at quarterly grain</text>
+  <text x="502" y="438" class="meta-strong">Measured catch rate on 6-memo eval set: 100% of designed defects</text>
+  <text x="502" y="453" class="timer-fast">&lt;90s p95 per memo · all 6 deficiency classes covered</text>
+</svg>

@@ -176,4 +176,43 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 
 ---
 
-*This PRD interlocks with Project 08 (Audit Trail) — every override and verification is a lineage event — and Project 09 (Lease Abstraction Detector) — corrected lease abstractions feed Check 2's rent-roll arithmetic.*
+## 12. RICE backlog (v1 → v2)
+
+| Initiative | Reach | Impact | Confidence | Effort (wks) | RICE | Phase |
+| --- | --- | --- | --- | --- | --- | --- |
+| Comp existence verifier (CoStar + Reonomy + Cherre) | 1,200 memos/yr | 3 | 0.8 | 14 | 206 | v1 |
+| T-12 symbolic math re-run (pandas + sympy) | 1,200 memos/yr | 3 | 0.9 | 8 | 405 | v1 |
+| Submarket stat cross-feed (CoStar + REIS + Reonomy) | 1,200 memos/yr | 2 | 0.85 | 6 | 340 | v1 |
+| Cap-rate / occupancy / exit-cap symbolic checks | 1,200 memos/yr | 2 | 0.95 | 3 | 760 | v1 |
+| IC-ready verification stamp PDF (signed) | 1,200 memos/yr | 2 | 0.9 | 4 | 540 | v1 |
+| Override workflow + audit ledger integration | 1,200 memos/yr | 2 | 0.8 | 6 | 320 | v1 |
+| Per-analyst / per-broker / per-submarket hallucination dashboard | 80 analysts | 3 | 0.7 | 8 | 21 | v1 |
+| IRR / cash-on-cash full-cashflow re-run (Argus parity) | 1,200 memos/yr | 2 | 0.6 | 14 | 103 | v2 |
+| Line-level provenance highlighting in verifier UI | 1,200 memos/yr | 1 | 0.7 | 5 | 168 | v2 |
+| Yardi Voyager / Argus Enterprise write-back | 800 verified deals/yr | 2 | 0.7 | 10 | 112 | v2 |
+| Spanish-language broker-OM ingestion | 200 cross-border deals/yr | 1 | 0.5 | 8 | 13 | v2 |
+| Post-close NOI variance feedback loop into tolerance recalibration | 220 closed deals/yr | 3 | 0.5 | 12 | 28 | v2 |
+
+(RICE = Reach × Impact × Confidence / Effort, with Impact on a 0-3 scale matching the standard convention.)
+
+## 13. Stakeholder map
+
+| Role | Interest | Influence | Engagement pattern |
+| --- | --- | --- | --- |
+| **Head of Acquisitions** | Owns the bid quality and the "no IC memo without clean pass" rule for Tier-1 deals | High | Co-author of the rollout, not a stakeholder; tolerance authority |
+| **IC Chair** | Owns the verification-stamp policy and the high-severity escalation routing | High | Approver of the production runbook; consumes the verdict on every memo |
+| **Senior Analyst** (line 1) | Daily user of the override workflow | Medium | Frame as "defends the analyst in front of IC," never "checks the analyst" |
+| **Asset Management** (post-close) | Inherits the verified underwriting at handoff | Medium | Consumer of the verified-inputs artifact; light-touch feedback loop on post-close NOI variance |
+| **Audit / Compliance** | SOC 2 + LP retention policy | Medium | Consumer of the override audit trail; signs off on the retention SLA |
+| **CFO / Capital Markets** | Owns the capital deployment decision | Low (operational) / High (strategic) | Informed quarterly via the bid-risk-prevented dashboard |
+| **External Brokers** | Consumed by the verified-bids reputation | Low (decision) / High (relationship) | "Our offers are based on verifiable numbers" — relationship tail benefit |
+| **Acquisitions Tech / IT** | EKS deployment, SOT contracts, rate-limit governance | High (build) | Builder; not the owner of the policy |
+| **Project 08 (OversightOps)** | Consumes every override as a lineage event | Cross-project dependency | Shared interface contract |
+| **Project 09 (LineageLog)** | Consumes the verifier evidence bundle at decision-id grain | Cross-project dependency | Shared interface contract |
+| **Project 03 (LeaseGuard)** | Provides corrected lease abstractions to Path 2 arithmetic | Cross-project dependency | Without LeaseGuard, Path 2 is materially weaker on non-standard leases |
+
+---
+
+*This PRD interlocks with Project 08 (Audit Trail) — every override and verification is a lineage event — and Project 03 (LeaseGuard) — corrected lease abstractions feed Check 2's rent-roll arithmetic.*
+
+*For the reference architecture, see [`ARCHITECTURE.md`](./ARCHITECTURE.md). For the runnable prototype, see [`src/app.py`](./src/app.py).*

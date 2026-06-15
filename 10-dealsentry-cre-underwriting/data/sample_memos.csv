@@ -1,0 +1,130 @@
+memo_id,asset_name,market,asset_class,drafted_date,memo_text
+MEMO_01,Atlanta SE Distribution Hub,Atlanta SE Industrial,industrial,2026-01-12,"Investment Memo — Project Browns Mill
+
+Asset: 180,000 sf last-mile industrial, Atlanta SE Industrial submarket. Submarket vacancy 4.10% (CoStar Q4 2025). Going-in cap 5.95%. Exit cap (Year 5) 6.40%.
+
+Comparable Sales (cited from CoStar / Reonomy / Cherre):
+  Comp 1 - Atlanta SE Distribution Hub, sold 2025-07-29, $190.00/sf, 5.95% cap [PROVENANCE: SOT_006]
+  Comp 2 - Westside Last-Mile Center, sold 2025-09-04, $189.52/sf, 5.85% cap [PROVENANCE: SOT_008]
+  Comp 3 - Sandy Springs Logistics, sold 2025-10-22, $188.29/sf, 5.78% cap [PROVENANCE: SOT_009]
+  Comp 4 - O'Hare Logistics Center, sold 2025-09-12, $201.96/sf, 5.65% cap [PROVENANCE: SOT_020]
+  Comp 5 - Bensenville Distribution, sold 2025-07-08, $191.06/sf, 5.70% cap [PROVENANCE: SOT_021]
+
+T-12 NOI Build (rent roll reconciled): 12 months at $283,333/mo = $3,400,000.
+Stabilized NOI: $3,400,000.
+Asking price: $57,144,000 ($317.47/sf).
+Cap rate: 5.95% (3,400,000 / 57,144,000 = 5.95%, reconciles).
+Stated occupancy: 96.0%. Rent roll: 96.0% (12 of 12 tenants in place above abated threshold).
+"
+MEMO_02,Phoenix North Residences,Phoenix North,multifamily,2026-01-18,"Investment Memo — Project Sunset Vista
+
+Asset: 240-unit Class-B garden multifamily, Phoenix North submarket. Submarket vacancy 6.40% (CoStar Q4 2025), asking rent $1,850/mo. Going-in cap 5.25%. Exit cap (Year 5) 5.55%.
+
+Comparable Sales (cited from CoStar / Reonomy / Cherre):
+  Comp 1 - Phoenix North Residences, sold 2025-08-30, $281,250/door, 5.25% cap [PROVENANCE: SOT_010]
+  Comp 2 - Desert Ridge Apartments, sold 2025-05-17, $280,000/door, 5.20% cap [PROVENANCE: SOT_011]
+  Comp 3 - Skyline Vista at Tempe, sold 2025-11-08, $269,388/door, 5.30% cap [PROVENANCE: SOT_012]
+  Comp 4 - Mesa Crossing Multifamily, sold 2025-09-25, $256,667/door, 5.40% cap [PROVENANCE: SOT_013]
+  Comp 5 - Aventura Multifamily Tower, sold 2025-07-15, $297,143/door, 5.10% cap [PROVENANCE: SOT_039]
+  Comp 6 - Tempe Tech Tower, sold 2025-09-19, $237,500/door, 5.85% cap [PROVENANCE: SOT_035 - office repositioned to multifamily]
+
+T-12 NOI build (rent roll reconciled):
+  Gross potential rent: $5,328,000
+  Vacancy / concessions (6.40%): ($340,992)
+  Effective rent: $4,987,008
+  Other income: $312,000
+  Operating expenses: ($1,750,000)
+  Stabilized NOI: $3,549,008
+
+Asking price: $67,600,000 ($281,667/door).
+Cap rate: 5.25% (3,549,008 / 67,600,000 = 5.25%, reconciles).
+Stated occupancy: 93.6%. Rent roll: 93.6% (225 of 240 units leased).
+"
+MEMO_03,Dallas Uptown Tower,Dallas Uptown,office,2026-02-04,"Investment Memo — Project Knox Place
+
+Asset: 320,000 sf Class-A office, Dallas Uptown submarket. Submarket vacancy 18.80% (CoStar Q4 2025), asking rent $38.50/sf. Going-in cap 6.95%. Exit cap (Year 5) 7.20%.
+
+Comparable Sales (cited from CoStar / Reonomy / Cherre):
+  Comp 1 - Uptown Dallas Tower, sold 2025-04-19, $236.94/sf, 6.95% cap [PROVENANCE: SOT_014]
+  Comp 2 - Dallas Knox Henderson Plaza, sold 2025-07-02, $232.24/sf, 7.05% cap [PROVENANCE: SOT_015]
+  Comp 3 - Granite Park Six, sold 2025-10-15, $231.75/sf, 7.20% cap [PROVENANCE: SOT_016]
+  Comp 4 - Buckhead Tower One, sold 2025-06-11, $204.46/sf, 6.80% cap [PROVENANCE: SOT_007]
+  Comp 5 - Coconut Grove Office Plaza, sold 2025-10-11, $393.24/sf, 6.05% cap [PROVENANCE: SOT_038]
+
+T-12 NOI build (rent roll):
+  Month 1: $425,000
+  Month 2: $425,000
+  Month 3: $425,000
+  Month 4: $425,000
+  Month 5: $425,000
+  Month 6: $425,000
+  Month 7: $425,000
+  Month 8: $425,000
+  Month 9: $425,000
+  Month 10: $425,000
+  Month 11: $425,000
+  Month 12: $425,000
+  Sum (memo states): $5,160,000
+  [Actual sum: $5,100,000. $60K positive drift.]
+
+Stabilized NOI (memo): $5,160,000.
+Asking price: $74,244,000 ($232.01/sf).
+Cap rate (memo): 6.95%.
+Stated occupancy: 88.0%. Rent roll: 88.0%.
+"
+MEMO_04,Brickell Crossing Retail,Brickell South,retail,2026-02-22,"Investment Memo — Project Brickell
+
+Asset: 92,000 sf grocery-anchored retail center, Miami FL. Submarket: Brickell South. Submarket vacancy 4.80% (cited as CoStar Q4 2025). Going-in cap 6.25%. Exit cap (Year 5) 6.25%.
+
+Comparable Sales (cited from CoStar / Reonomy / Cherre):
+  Comp 1 - Lakeshore Plaza, sold 2025-08-14, $245.05/sf, 5.85% cap [claimed PROVENANCE: SOT_001]
+  Comp 2 - Brickell Crossing, sold 2025-05-22, $267.95/sf, 5.70% cap [claimed PROVENANCE: SOT_002]
+  Comp 3 - Miramar Town Center, sold 2025-11-03, $231.23/sf, 6.10% cap [claimed PROVENANCE: SOT_003]
+  Comp 4 - Pinecrest Pavilion, sold 2026-Q1, $254.00/sf, 5.95% cap [NO SOT MATCH]
+  Comp 5 - Coral Way Marketplace, sold 2025-09-17, $239.00/sf, 5.95% cap [claimed PROVENANCE: SOT_004]
+  Comp 6 - South Bay Galleria, sold 2025-Q4, $261.00/sf, 5.80% cap [NO SOT MATCH]
+
+T-12 NOI: $4,600,000 (annualized rent roll, no vacancy adjustment shown).
+Asking price: $73,600,000 ($800/sf).
+Cap rate: 6.25% (4,600,000 / 73,600,000 = 6.25%, reconciles).
+Stated occupancy: 96.0%. Rent roll: 96.0%.
+"
+MEMO_05,Bellevue MOB Plaza,Bellevue Eastside,medical_office,2026-03-08,"Investment Memo — Project Overlake
+
+Asset: 85,000 sf medical office, Bellevue Eastside submarket.
+
+Submarket statistics (as cited): vacancy 4.2%, asking rent $49.50/sf [SOURCE: CoStar].
+
+[NOTE: 4.2% vacancy / $49.50 rent are from CoStar 2024-Q3. Current Q4 2025 reading is 5.2% vacancy / $52.00 rent. The memo presents the 2024 numbers as current.]
+
+Going-in cap 6.10%. Exit cap (Year 5) 6.45%.
+
+Comparable Sales (cited from CoStar / Reonomy):
+  Comp 1 - Bellevue MOB Plaza, sold 2025-08-21, $467.35/sf, 6.10% cap [PROVENANCE: SOT_017]
+  Comp 2 - Overlake Medical Park, sold 2025-06-05, $466.07/sf, 6.05% cap [PROVENANCE: SOT_018]
+  Comp 3 - Renton MOB Center, sold 2025-10-30, $424.39/sf, 6.45% cap [PROVENANCE: SOT_019]
+  Comp 4 - Bellevue MOB Plaza, sold 2025-08-21, $467.35/sf, 6.10% cap [PROVENANCE: SOT_017 — duplicate]
+
+T-12 NOI: $2,500,000.
+Asking price: $41,000,000 ($482/sf).
+Cap rate: 6.10% (2,500,000 / 41,000,000 = 6.10%, reconciles).
+Stated occupancy: 97.0%. Rent roll: 97.0%.
+"
+MEMO_06,Chicago O'Hare Last-Mile,Chicago O'Hare Industrial,industrial,2026-03-26,"Investment Memo — Project Mannheim
+
+Asset: 410,000 sf last-mile industrial, Chicago O'Hare Industrial submarket. Submarket vacancy 4.85% (CoStar Q4 2025). Going-in cap (memo) 5.65%. Exit cap (Year 5) (memo) 5.65%.
+
+Comparable Sales (cited from CoStar / Reonomy / Cherre):
+  Comp 1 - O'Hare Logistics Center, sold 2025-09-12, $201.96/sf, 5.65% cap [PROVENANCE: SOT_020]
+  Comp 2 - Bensenville Distribution, sold 2025-07-08, $191.06/sf, 5.70% cap [PROVENANCE: SOT_021]
+  Comp 3 - Elk Grove Industrial Park, sold 2025-11-14, $186.90/sf, 5.85% cap [PROVENANCE: SOT_022]
+  Comp 4 - Aurora Last-Mile Hub, sold 2025-08-26, $183.02/sf, 5.95% cap [PROVENANCE: SOT_023]
+  Comp 5 - Schaumburg Logistics Park, sold 2026-Q1, $198.50/sf, 5.55% cap [NO SOT MATCH]
+
+T-12 NOI build (memo): $5,040,000. [Recomputation from rent roll yields $5,041,200; within tolerance.]
+Asking price: $84,000,000 ($204.88/sf).
+Stated cap rate: 5.50% (memo).
+[Recompute: 5,040,000 / 84,000,000 = 6.00%. Memo cap rate is wrong by 50 bps.]
+
+Stated occupancy: 96.5%. Rent roll: 92.0% (loaded 6 of 8 leases by rentable SF — 4.5-point discrepancy).
+"

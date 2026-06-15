@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
+  <title id="title">InferenceLens: a feature's inference cost flowing from OTEL span through composition to a per-feature dashboard</title>
+  <desc id="desc">Five-stage horizontal flow showing how one GenAI feature's inference call moves through Feature emits OTEL, Cost aggregator, Per-feature attribution, Runaway/dead/substitution detection, and CFO dashboard. Includes a comparison strip showing the legacy 6-week-late vendor-invoice path vs. the InferenceLens day-1 detection.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #4f46e5; stroke-width: 1.5; }
+      .stage-box-compose { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-detect { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-dashboard { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1e2a78; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6E5FF; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1e2a78; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">InferenceLens - composition flow for one GenAI feature's spend</text>
+  <text x="20" y="52" class="subheader">FT_001 customer-service-assistant - retrieval-depth misconfig on May 1 - runaway flagged day 1.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="290" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: feature emits OpenTelemetry span on every inference call</text>
+
+  <!-- Stage 1: FEATURE EMITS OTEL -->
+  <rect x="20" y="120" width="170" height="120" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 - FEATURE EMITS</text>
+  <text x="32" y="162" class="stage-title">OpenTelemetry span</text>
+  <text x="32" y="180" class="stage-sub">feature_id=FT_001</text>
+  <text x="32" y="195" class="stage-sub">tenant_id, model=sonnet-4-5</text>
+  <text x="32" y="210" class="stage-sub">query_tokens=12,060</text>
+  <text x="32" y="228" class="meta-text">misconfig: retrieval depth 50</text>
+
+  <!-- Arrow 1 -->
+  <line x1="195" y1="180" x2="232" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: COST AGGREGATOR -->
+  <rect x="235" y="120" width="190" height="120" rx="8" class="stage-box"/>
+  <text x="247" y="140" class="stage-num">2 - COST AGGREGATOR</text>
+  <text x="247" y="162" class="stage-title">Pricing + tokenization</text>
+  <text x="247" y="180" class="stage-sub">model_pricing.csv lookup</text>
+  <text x="247" y="195" class="stage-sub">vendor-billing-API reconcile</text>
+  <text x="247" y="210" class="stage-sub">cost_usd per call computed</text>
+  <text x="247" y="225" class="stage-sub">ClickHouse cost-event table</text>
+
+  <!-- Arrow 2 -->
+  <line x1="430" y1="180" x2="467" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: PER-FEATURE ATTRIBUTION -->
+  <rect x="470" y="120" width="210" height="120" rx="8" class="stage-box-compose"/>
+  <text x="482" y="140" class="stage-num">3 - ATTRIBUTION</text>
+  <text x="482" y="162" class="stage-title">Per-feature, per-tenant</text>
+  <text x="482" y="180" class="stage-sub">join span -> feature catalog</text>
+  <text x="482" y="195" class="stage-sub">aggregate by feature_id</text>
+  <text x="482" y="210" class="stage-sub">aggregate by tenant_id</text>
+  <text x="482" y="225" class="meta-strong">closes deficiencies #1 + #2</text>
+
+  <!-- Arrow 3 -->
+  <line x1="685" y1="180" x2="722" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: DETECTION -->
+  <rect x="725" y="120" width="200" height="120" rx="8" class="stage-box-detect"/>
+  <text x="737" y="140" class="stage-num">4 - DETECTION</text>
+  <text x="737" y="162" class="stage-title">Runaway + dead + sub</text>
+  <text x="737" y="180" class="stage-sub">3x baseline =&gt; runaway</text>
+  <text x="737" y="195" class="stage-sub">decommissioned + traffic =&gt; dead</text>
+  <text x="737" y="210" class="stage-sub">eval suite =&gt; substitute</text>
+  <text x="737" y="225" class="meta-strong">closes deficiencies #3, #4, #5</text>
+
+  <!-- Arrow 4 (down to dashboard) -->
+  <path d="M 825 240 L 825 270 L 430 270 L 430 296" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: CFO DASHBOARD -->
+  <rect x="265" y="300" width="340" height="80" rx="8" class="stage-box-dashboard"/>
+  <text x="277" y="320" class="stage-num">5 - CFO DASHBOARD</text>
+  <text x="277" y="340" class="stage-title">Per-feature ROI + runaway alerts + sub recs</text>
+  <text x="277" y="358" class="stage-sub">CSV exports - PagerDuty alerts - Datadog widget</text>
+  <text x="277" y="372" class="timer-fast">delivered in 1 day (legacy vendor invoice: 6 weeks)</text>
+
+  <!-- Comparison strip -->
+  <rect x="630" y="300" width="295" height="80" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="642" y="320" class="stage-title">Total wall time</text>
+  <text x="642" y="342" class="timer">Legacy invoice: 6w late - 0 per-feature attribution</text>
+  <text x="642" y="358" class="timer-fast">InferenceLens: day-1 alert - 6 of 6 deficiencies closed</text>
+  <text x="642" y="372" class="meta-strong">~99% reduction in detection lag - 25-30% modeled spend reduction</text>
+
+  <!-- Bottom: outcome arrow back -->
+  <path d="M 265 340 L 100 340 L 100 395" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Bottom box: outcome -->
+  <rect x="20" y="400" width="170" height="48" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="32" y="418" class="stage-num">OUTCOME</text>
+  <text x="32" y="436" class="stage-sub">runaway killed - feature fixed</text>
+
+  <!-- Comparison row markers -->
+  <rect x="630" y="395" width="295" height="20" rx="4" fill="#FCEBEB" stroke="none"/>
+  <text x="642" y="409" class="timer">Tier-1 bank GenAI portfolio: $8-30M/yr inference spend</text>
+  <rect x="630" y="420" width="295" height="20" rx="4" fill="#EAF3DE" stroke="none"/>
+  <text x="642" y="434" class="timer-fast">Modeled spend reduction: 25-30% = $2-9M/yr saved</text>
+</svg>

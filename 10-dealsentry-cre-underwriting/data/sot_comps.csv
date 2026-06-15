@@ -1,0 +1,41 @@
+comp_id,property_name,address,city,state,submarket,asset_class,sale_date,sale_price_usd,sf,price_per_sf,cap_rate,buyer,seller,source_feed
+SOT_001,Lakeshore Plaza,2400 Biscayne Blvd,Miami,FL,Brickell South,retail,2025-08-14,28500000,116300,245.05,5.85,Sterling REIT,Northstar Holdings,CoStar
+SOT_002,Brickell Crossing,901 SW 8th St,Miami,FL,Brickell South,retail,2025-05-22,32100000,119800,267.95,5.70,Mariner Realty,Coastal Acquisitions,Reonomy
+SOT_003,Miramar Town Center,11211 Miramar Pkwy,Miramar,FL,Miramar West,retail,2025-11-03,40050000,173200,231.23,6.10,Trio Capital,Greenleaf Partners,CoStar
+SOT_004,Coral Way Marketplace,3460 Coral Way,Miami,FL,Coral Gables,retail,2025-09-17,28680000,120000,239.00,5.95,Cardinal Group,Vista Holdings,Cherre
+SOT_005,Bayside Logistics Park,9100 NW 25th St,Doral,FL,Doral Industrial,industrial,2025-10-08,86400000,420000,205.71,5.55,Prologis,Sunbelt Industrial REIT,CoStar
+SOT_006,Atlanta SE Distribution Hub,4500 Browns Mill Rd,Atlanta,GA,Atlanta SE Industrial,industrial,2025-07-29,34200000,180000,190.00,5.95,Stonebridge Capital,Eagle Industrial,CoStar
+SOT_007,Buckhead Tower One,3344 Peachtree Rd NE,Atlanta,GA,Atlanta Buckhead,office,2025-06-11,114500000,560000,204.46,6.80,Argent Capital,Highland Office Group,Reonomy
+SOT_008,Westside Last-Mile Center,1850 MLK Jr Dr NW,Atlanta,GA,Atlanta SE Industrial,industrial,2025-09-04,28200000,148800,189.52,5.85,Prologis,Forge Industrial,Cherre
+SOT_009,Sandy Springs Logistics,1140 Hammond Dr,Sandy Springs,GA,Atlanta NE Industrial,industrial,2025-10-22,41800000,222000,188.29,5.78,Stonebridge Capital,Apex Realty,CoStar
+SOT_010,Phoenix North Residences,18200 N 27th Ave,Phoenix,AZ,Phoenix North,multifamily,2025-08-30,67500000,240,281250.00,5.25,Sunbelt Apartment Trust,Madison Multifamily,CoStar
+SOT_011,Desert Ridge Apartments,21000 N Tatum Blvd,Phoenix,AZ,Phoenix North,multifamily,2025-05-17,78400000,280,280000.00,5.20,Camden Property Trust,Trillium Living,Reonomy
+SOT_012,Skyline Vista at Tempe,1430 E Apache Blvd,Tempe,AZ,Tempe,multifamily,2025-11-08,52800000,196,269387.76,5.30,Sunbelt Apartment Trust,Lattice Living,Cherre
+SOT_013,Mesa Crossing Multifamily,2400 W Baseline Rd,Mesa,AZ,Mesa,multifamily,2025-09-25,46200000,180,256666.67,5.40,Camden Property Trust,Lattice Living,CoStar
+SOT_014,Uptown Dallas Tower,2100 McKinney Ave,Dallas,TX,Dallas Uptown,office,2025-04-19,148800000,628000,236.94,6.95,Argent Capital,Highland Office Group,CoStar
+SOT_015,Dallas Knox Henderson Plaza,3500 N Henderson Ave,Dallas,TX,Dallas Uptown,office,2025-07-02,98700000,425000,232.24,7.05,Pinnacle Office REIT,Northstar Holdings,Reonomy
+SOT_016,Granite Park Six,5601 Granite Pkwy,Plano,TX,Plano West,office,2025-10-15,112400000,485000,231.75,7.20,Argent Capital,Tower Office Partners,Cherre
+SOT_017,Bellevue MOB Plaza,1135 116th Ave NE,Bellevue,WA,Bellevue Eastside,medical_office,2025-08-21,45800000,98000,467.35,6.10,Healthcare REIT Partners,Vista Holdings,CoStar
+SOT_018,Overlake Medical Park,1700 116th Ave NE,Bellevue,WA,Bellevue Eastside,medical_office,2025-06-05,52200000,112000,466.07,6.05,Healthcare REIT Partners,Cascade Medical,Reonomy
+SOT_019,Renton MOB Center,400 S 43rd St,Renton,WA,South Sound,medical_office,2025-10-30,34800000,82000,424.39,6.45,Healthcare REIT Partners,Pacific Medical Group,Cherre
+SOT_020,O'Hare Logistics Center,5500 N Mannheim Rd,Rosemont,IL,Chicago O'Hare Industrial,industrial,2025-09-12,82400000,408000,201.96,5.65,Prologis,Forge Industrial,CoStar
+SOT_021,Bensenville Distribution,1140 Foster Ave,Bensenville,IL,Chicago O'Hare Industrial,industrial,2025-07-08,68400000,358000,191.06,5.70,Stonebridge Capital,Heartland Industrial,Reonomy
+SOT_022,Elk Grove Industrial Park,2400 Higgins Rd,Elk Grove Village,IL,Chicago O'Hare Industrial,industrial,2025-11-14,54200000,290000,186.90,5.85,Prologis,Apex Realty,CoStar
+SOT_023,Aurora Last-Mile Hub,2825 Bilter Rd,Aurora,IL,Chicago I-88 Corridor,industrial,2025-08-26,38800000,212000,183.02,5.95,Stonebridge Capital,Pinnacle Industrial,Cherre
+SOT_024,Long Beach Container Yard,2200 E Anaheim St,Long Beach,CA,LA South Bay Industrial,industrial,2025-10-04,118400000,580000,204.14,4.95,Prologis,Pacific Holdings,CoStar
+SOT_025,Carson Cross-Dock Center,1200 W Carson St,Carson,CA,LA South Bay Industrial,industrial,2025-07-21,98200000,488000,201.23,5.05,Rexford Industrial,Coastal Industrial,Reonomy
+SOT_026,Vernon Logistics Hub,4800 Soto St,Vernon,CA,LA Central Industrial,industrial,2025-09-30,84500000,420000,201.19,5.10,Rexford Industrial,Forge Industrial,Cherre
+SOT_027,Inland Empire Distribution,9000 Etiwanda Ave,Rancho Cucamonga,CA,Inland Empire West,industrial,2025-05-27,142800000,738000,193.50,4.85,Prologis,Mariner Industrial,CoStar
+SOT_028,Hudson Yards East Tower,560 W 30th St,New York,NY,Hudson Yards,office,2025-06-30,415000000,825000,503.03,5.45,Sterling REIT,Park Avenue Partners,CoStar
+SOT_029,Murray Hill Office Center,440 Park Ave S,New York,NY,Midtown South,office,2025-09-08,168500000,398000,423.37,5.85,Argent Capital,Highland Office Group,Reonomy
+SOT_030,Long Island City Logistics,3402 Queens Blvd,Long Island City,NY,Queens Industrial,industrial,2025-10-19,72800000,355000,205.07,5.30,Prologis,Big Apple Industrial,Cherre
+SOT_031,Bushwick Last-Mile,1240 Flushing Ave,Brooklyn,NY,Brooklyn Industrial,industrial,2025-08-12,48400000,242000,200.00,5.50,Rexford Industrial,Bridge Industrial,CoStar
+SOT_032,Tribeca Loft Office,55 Hudson St,New York,NY,Tribeca,office,2025-11-22,98700000,210000,470.00,5.65,Boutique Office Trust,Hudson Office Group,Reonomy
+SOT_033,Brooklyn Navy Yard South,141 Flushing Ave,Brooklyn,NY,Brooklyn Industrial,industrial,2025-04-08,128400000,640000,200.63,5.40,Prologis,Park Avenue Partners,CoStar
+SOT_034,Phoenix Sky Harbor Industrial,4400 E University Dr,Phoenix,AZ,Phoenix Sky Harbor,industrial,2025-06-24,42800000,228000,187.72,5.80,Stonebridge Capital,Desert Industrial,Cherre
+SOT_035,Tempe Tech Tower,1140 W Warner Rd,Tempe,AZ,Tempe,office,2025-09-19,68400000,288000,237.50,6.85,Argent Capital,Highland Office Group,CoStar
+SOT_036,Doral Logistics Hub,8400 NW 21st St,Doral,FL,Doral Industrial,industrial,2025-08-05,72500000,358000,202.51,5.60,Prologis,Coastal Industrial,Reonomy
+SOT_037,Hialeah Industrial Park,1840 W 4th Ave,Hialeah,FL,Miami Airport West,industrial,2025-11-30,38900000,198000,196.46,5.70,Stonebridge Capital,Mariner Industrial,CoStar
+SOT_038,Coconut Grove Office Plaza,2911 Grand Ave,Miami,FL,Coconut Grove,office,2025-10-11,58200000,148000,393.24,6.05,Argent Capital,Vista Holdings,Reonomy
+SOT_039,Aventura Multifamily Tower,19900 Biscayne Blvd,Aventura,FL,Aventura,multifamily,2025-07-15,124800000,420,297142.86,5.10,Camden Property Trust,Trillium Living,Cherre
+SOT_040,Frisco Industrial Park,9100 Dallas Pkwy,Frisco,TX,North Dallas Industrial,industrial,2025-09-27,52400000,288000,181.94,5.95,Prologis,Heartland Industrial,CoStar
