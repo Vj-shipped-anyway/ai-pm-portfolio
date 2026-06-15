@@ -559,3 +559,5 @@ The Streamlit prototype here proves the *product mechanic* — that per-feature 
 - [NIST AI RMF (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the Govern function on kill-criteria.
 - [OpenCost](https://www.opencost.io/) — the open-source K8s cost-attribution project that pioneered the per-workload allocation pattern InferenceLens adapts to AI features.
 - [Apptio Cloudability](https://www.apptio.com/products/cloudability/), [CloudHealth](https://www.vmware.com/products/cloudhealth.html), [Vantage](https://www.vantage.sh/) — the FinOps incumbents InferenceLens publishes into.
+
+<!-- @description 2026-06-15-154944 : InferenceLens: inference economics dashboard - per-feature cost attribution and runaway detection across the GenAI portfolio -->
