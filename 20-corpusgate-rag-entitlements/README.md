@@ -2,6 +2,8 @@
 
 **A portfolio prototype for making an assistant's retrieval respect who may read what: effective access resolved through nested groups, the index's ACL copy checked against the source, a filter applied before ranking, a personal-data scan at ingestion and a canary pack that tests all of it. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function, the sensitive-information-disclosure theme in the [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the current model-risk guidance, which replaced its 2011 predecessor in April 2026).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/20-corpusgate-rag-entitlements/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real document estate, the real access lists and group directory, an identity provider, a security review) is what the next role does.
@@ -640,7 +642,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs the access check between an enterprise assistant and the documents it reads, under regulated constraint*
 
@@ -649,7 +651,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 ## 🙌 Acknowledgements
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function maps onto the canary pack and the leak counts: continuous measurement of a system whose inputs other teams control.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance, which replaced its 2011 predecessor in April 2026; the standard the work would have to meet. A retrieval layer that shows a user a document they may not read is a control gap that ongoing monitoring has to be able to see. (That sentence is my paraphrase written for this exercise, not the text of the guidance.)
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance, which replaced its 2011 predecessor in April 2026; the model-risk guidance the work is compared with. A retrieval layer that shows a user a document they may not read is a control gap that ongoing monitoring has to be able to see. (That sentence is my paraphrase written for this exercise, not the text of the guidance.)
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the sensitive-information-disclosure theme behind treating retrieval as an access-controlled path.
 - **Access-control lists, nested groups and deny entries** — the directory conventions the synthetic data imitates, and the reason a flat group check is wrong in both directions.
 - **Sibling projects in this repo** — [01 HalluGuard](../01-halluguard-bank-chatbot-safety/), [06 PromptShield](../06-promptshield-prompt-injection-defense/), [09 LineageLog](../09-lineagelog-ai-decision-audit/) and [14 PolicyNeedle](../14-policyneedle-long-context-fidelity/), with 16 ControlMap and 23 ScopeKeeper as designed interlocks.
