@@ -1,0 +1,1367 @@
+Retail and Business Banking Policy Manual
+
+Version 14.2, issued 2026-07-01. Synthetic test document generated for PolicyNeedle.
+
+This is a synthetic document. Every product name, amount and rule in it is invented. No real institution, customer or system is described.
+
+How to read this manual. Clauses are numbered by section. Where an amendment listed in Appendix A replaces a clause, the amendment governs. A note that cites a clause applies to that clause.
+
+Section 1. Fraud Review Procedures
+
+1.1 The card replacement window for Holly Card is 10 days.
+
+1.2 The standard annual archive fee is $80.
+
+1.3 The standard monthly research fee is $80.
+
+1.4 The standard quarterly verification fee is $20.
+
+1.5 Each disclosure acknowledgment is kept for five years and is made available to internal audit on request.
+
+1.6 For Linden Mortgage, the daily peer transfer limit is $7,500.
+
+1.7 Each relationship banker must escalate the vendor access list within five business days of the request.
+
+1.8 The bonus overdraft rate for Daisy Mortgage is 3%.
+
+1.9 The onboarding specialist is expected to escalate the identity verification record at the start of each shift.
+
+1.10 The monthly wire transfer limit for Willow Mortgage is $5,000.
+
+1.11 If a source document is missing, the product owner shall escalate the key custody record before the next business day closes.
+
+1.12 For Fern Savings, the payment posting window is 5 business days.
+
+1.13 The quality reviewer is required to verify the dual control sign-off after every system release.
+
+1.14 The signed intake checklist shall be retained by the onboarding specialist and reviewed at least once each quarter.
+
+1.15 The weekly cash deposit limit for Olive Checking is $50,000.
+
+1.16 Each complaint tracking entry is kept for ten years and is made available to internal audit on request.
+
+1.17 The rush delivery fee on Gable Card is $5 and is charged when a replacement card is rushed.
+
+1.18 If a control owner changes, a contact center team lead must verify the vendor access list before the next business day closes.
+
+1.19 The duplicate statement fee on Ivy Card is $8 and is charged when a duplicate statement is requested.
+
+1.20 Each key custody record is kept for ten years and is made available to internal audit on request.
+
+1.21 The balance inquiry fee on Fern Checking is $18 and is charged when a balance is requested at a partner terminal.
+
+1.22 Each branch cash count is kept for ten years and is made available to internal audit on request.
+
+Table 1.23. Monthly maintenance fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Jade Certificate | $18 | $11 | $4 |
+| Vetch Certificate | $15 | $9 | $4 |
+| Garnet Certificate | $18 | $11 | $4 |
+
+1.24 Each system access review is kept for seven years and is made available to internal audit on request.
+
+Table 1.25. Annual notary fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Jasper Card | $20 | $12 | $5 |
+| Foxglove Card | $35 | $21 | $9 |
+| Hickory Card | $25 | $15 | $6 |
+
+1.26 The vendor access list shall be retained by the compliance officer on duty and reviewed each calendar month.
+
+Table 1.27. Annual membership fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Bramble Checking | $10 | $6 | $2 |
+| Dogwood Checking | $35 | $21 | $9 |
+| Willow Checking | $18 | $11 | $4 |
+
+1.28 The fraud review analyst is expected to document the incident summary before any change is approved.
+
+Note to clause 1.19: The duplicate statement fee on Ivy Card is not charged when a duplicate statement is requested because of disaster.
+
+Note to clause 1.21: The balance inquiry fee on Fern Checking is not charged when a balance is requested at a partner terminal because of disability.
+
+1.29 Each dual control sign-off is kept for five years and is made available to internal audit on request.
+
+Note to clause 1.17: The rush delivery fee on Gable Card is not charged when a replacement card is rushed because of relocation.
+
+1.30 Each relationship banker must report the incident summary on the first business day of the week.
+
+1.31 The audit trail extract shall be retained by the fraud review analyst and reviewed at the start of each shift.
+
+1.32 The vendor access list shall be retained by the deposit operations team and reviewed after every system release.
+
+1.33 Moss Student Certificate carries a check hold window of 3 business days.
+
+1.34 Moss Certificate carries a check hold window of 30 days.
+
+1.35 The check hold window for Moss Basic Certificate is 2 days.
+
+1.36 Each signed intake checklist is kept for seven years and is made available to internal audit on request.
+
+1.37 Tansy Basic Card carries a wire recall period of 10 business days.
+
+1.38 For Tansy Card, the wire recall period is 90 days.
+
+1.39 Tansy Select Card carries a wire recall period of 45 days.
+
+1.40 Each identity verification record is kept for seven years and is made available to internal audit on request.
+
+1.41 For Zinnia Select Certificate, the monthly branch withdrawal limit is $15,000.
+
+1.42 For Zinnia Certificate, the monthly branch withdrawal limit is $75,000.
+
+1.43 The monthly branch withdrawal limit for Zinnia Senior Certificate is $25,000.
+
+1.44 The service desk coordinator must approve the vendor access list before the end of the business day.
+
+1.45 The service desk coordinator must reconcile the dual control sign-off at the start of each shift.
+
+1.46 If a supervisor disputes the result, the service desk coordinator shall reconcile the branch cash count before the month-end close starts.
+
+1.47 The branch operations manager is expected to review the identity verification record before any change is approved.
+
+1.48 If a supervisor disputes the result, the onboarding specialist shall verify the vendor access list before the month-end close starts.
+
+1.49 If a source document is missing, the records custodian is expected to archive the system access review before the next business day closes.
+
+1.50 Each signed intake checklist is kept for seven years and is made available to internal audit on request.
+
+1.51 If a source document is missing, the regional controller shall approve the complaint tracking entry before the next review cycle begins.
+
+1.52 The call recording index must be retained by the product owner and reviewed before the end of the business day.
+
+1.53 If a supervisor disputes the result, the product owner is required to verify the disclosure acknowledgment before the next review cycle begins.
+
+1.54 Each identity verification record is kept for seven years and is made available to internal audit on request.
+
+Section 2. Statement Production Controls
+
+2.1 Linden Certificate receives 25% off the standard annual archive fee.
+
+2.2 Dune Certificate receives 25% off the standard monthly research fee.
+
+2.3 Larch Mortgage receives 25% off the standard quarterly verification fee.
+
+2.4 The service desk coordinator is required to log the dual control sign-off at least once each quarter.
+
+2.5 The fraud review analyst must review the dual control sign-off after every system release.
+
+2.6 The branch operations manager is expected to sample the call recording index on the first business day of the week.
+
+2.7 If a system outage lasts more than one shift, the regional controller is required to report the daily balancing sheet before the next business day closes.
+
+2.8 The quality reviewer is expected to document the incident summary at the start of each shift.
+
+2.9 Each audit trail extract is kept for ten years and is made available to internal audit on request.
+
+2.10 Each complaint tracking entry is kept for ten years and is made available to internal audit on request.
+
+2.11 A contact center team lead is expected to archive the exception report within five business days of the request.
+
+2.12 If a control owner changes, the compliance officer on duty is required to report the identity verification record before the month-end close starts.
+
+2.13 The signed intake checklist must be retained by the regional controller and reviewed after every system release.
+
+2.14 The fraud review analyst is required to approve the complaint tracking entry each calendar month.
+
+2.15 The branch cash count must be retained by the onboarding specialist and reviewed at the start of each shift.
+
+2.16 Each relationship banker shall log the identity verification record each calendar month.
+
+2.17 If a reviewer is unavailable, the deposit operations team is required to sample the daily balancing sheet before the month-end close starts.
+
+2.18 If a reviewer is unavailable, a contact center team lead is expected to review the identity verification record before the month-end close starts.
+
+2.19 The branch cash count must be retained by the service desk coordinator and reviewed at the start of each shift.
+
+2.20 If a source document is missing, each relationship banker is expected to document the call recording index before the next business day closes.
+
+2.21 If a control owner changes, the deposit operations team must confirm the exception report before the next review cycle begins.
+
+2.22 Each signed intake checklist is kept for five years and is made available to internal audit on request.
+
+2.23 If a system outage lasts more than one shift, the regional controller must log the training attestation before the next business day closes.
+
+2.24 Each audit trail extract is kept for ten years and is made available to internal audit on request.
+
+2.25 The deposit operations team shall review the dual control sign-off at the start of each shift.
+
+2.26 Each branch cash count is kept for five years and is made available to internal audit on request.
+
+2.27 Each system access review is kept for five years and is made available to internal audit on request.
+
+2.28 The product owner shall archive the vendor access list at the start of each shift.
+
+2.29 The exception report must be retained by the fraud review analyst and reviewed at least once each quarter.
+
+2.30 The deposit operations team is expected to file the dual control sign-off at least once each quarter.
+
+2.31 If a control owner changes, the records custodian must sample the dual control sign-off before the next business day closes.
+
+2.32 Each exception report is kept for seven years and is made available to internal audit on request.
+
+2.33 The vendor access list must be retained by the onboarding specialist and reviewed before any change is approved.
+
+Section 3. Exception Approval Controls
+
+3.1 Each relationship banker shall approve the call recording index after every system release.
+
+3.2 The incident summary must be retained by the product owner and reviewed before any change is approved.
+
+3.3 Each call recording index is kept for five years and is made available to internal audit on request.
+
+3.4 The system access review must be retained by the fraud review analyst and reviewed at the start of each shift.
+
+3.5 If a control owner changes, the branch operations manager is required to report the incident summary before the month-end close starts.
+
+3.6 Each relationship banker is expected to document the key custody record each calendar month.
+
+3.7 Each training attestation is kept for five years and is made available to internal audit on request.
+
+3.8 The service desk coordinator is expected to file the complaint tracking entry before the end of the business day.
+
+3.9 If a source document is missing, a contact center team lead is required to verify the exception report before the month-end close starts.
+
+3.10 Each vendor access list is kept for five years and is made available to internal audit on request.
+
+3.11 If a system outage lasts more than one shift, the service desk coordinator shall sample the incident summary before the next review cycle begins.
+
+3.12 Each relationship banker shall archive the exception report each calendar month.
+
+3.13 If a control owner changes, the records custodian shall document the key custody record before the next review cycle begins.
+
+3.14 If a source document is missing, the compliance officer on duty is required to verify the identity verification record before the next review cycle begins.
+
+3.15 The branch operations manager must sample the disclosure acknowledgment at least once each quarter.
+
+3.16 If a control owner changes, the deposit operations team must file the key custody record before the month-end close starts.
+
+3.17 Each vendor access list is kept for seven years and is made available to internal audit on request.
+
+3.18 The onboarding specialist shall sample the complaint tracking entry at least once each quarter.
+
+3.19 Each branch cash count is kept for ten years and is made available to internal audit on request.
+
+3.20 If a system outage lasts more than one shift, the onboarding specialist must confirm the audit trail extract before the next business day closes.
+
+3.21 The key custody record must be retained by each relationship banker and reviewed after every system release.
+
+3.22 Each identity verification record is kept for five years and is made available to internal audit on request.
+
+3.23 Each incident summary is kept for five years and is made available to internal audit on request.
+
+3.24 The branch operations manager is required to confirm the system access review each calendar month.
+
+3.25 The records custodian must reconcile the audit trail extract after every system release.
+
+3.26 If a supervisor disputes the result, each relationship banker is required to sample the branch cash count before the month-end close starts.
+
+3.27 Each call recording index is kept for three years and is made available to internal audit on request.
+
+3.28 The dual control sign-off shall be retained by the product owner and reviewed before any change is approved.
+
+3.29 The vendor access list shall be retained by each relationship banker and reviewed at the start of each shift.
+
+3.30 If a control owner changes, a contact center team lead is required to escalate the incident summary before the next review cycle begins.
+
+Section 4. Rate Changes Procedures
+
+4.1 If a system outage lasts more than one shift, the service desk coordinator must sample the disclosure acknowledgment before the next review cycle begins.
+
+4.2 Each daily balancing sheet is kept for three years and is made available to internal audit on request.
+
+4.3 If a system outage lasts more than one shift, each relationship banker shall reconcile the vendor access list before the next business day closes.
+
+4.4 If a supervisor disputes the result, the fraud review analyst must report the signed intake checklist before the next review cycle begins.
+
+4.5 The deposit operations team must report the disclosure acknowledgment at least once each quarter.
+
+4.6 The identity verification record must be retained by the deposit operations team and reviewed before the end of the business day.
+
+4.7 If a reviewer is unavailable, the product owner shall reconcile the key custody record before the next business day closes.
+
+4.8 A contact center team lead is required to review the incident summary each calendar month.
+
+4.9 The branch operations manager is required to report the exception report within five business days of the request.
+
+4.10 If a control owner changes, the compliance officer on duty is required to archive the signed intake checklist before the next review cycle begins.
+
+4.11 If a supervisor disputes the result, the service desk coordinator shall approve the incident summary before the next review cycle begins.
+
+4.12 If a supervisor disputes the result, each relationship banker must sample the dual control sign-off before the month-end close starts.
+
+4.13 The complaint tracking entry must be retained by the records custodian and reviewed at the start of each shift.
+
+4.14 For Fennel Checking, the penalty rewards rate is 3%.
+
+4.15 Each complaint tracking entry is kept for five years and is made available to internal audit on request.
+
+4.16 Fjord Checking carries a monthly mobile deposit limit of $2,500.
+
+4.17 Each vendor access list is kept for five years and is made available to internal audit on request.
+
+4.18 For Yarrow Card, the monthly cash deposit limit is $5,000.
+
+4.19 If a system outage lasts more than one shift, the quality reviewer is expected to escalate the call recording index before the next business day closes.
+
+4.20 The monthly check deposit limit for Alder Card is $100,000.
+
+4.21 The signed intake checklist shall be retained by the quality reviewer and reviewed on the first business day of the week.
+
+4.22 The weekly card purchase limit for Larch Savings is $40,000.
+
+4.23 Each vendor access list is kept for three years and is made available to internal audit on request.
+
+4.24 For Aspen Mortgage, the complaint response window is 21 business days.
+
+4.25 The branch operations manager is expected to approve the complaint tracking entry before the end of the business day.
+
+4.26 The stop payment fee on Tansy Checking is $20 and is charged when a stop payment order is placed.
+
+4.27 If a source document is missing, the regional controller must verify the disclosure acknowledgment before the month-end close starts.
+
+4.28 The loan prepayment fee on Quill Checking is $20 and is charged when the loan is prepaid in full.
+
+4.29 Each audit trail extract is kept for seven years and is made available to internal audit on request.
+
+4.30 The early replacement fee on Umber Certificate is $18 and is charged when a card is replaced early.
+
+4.31 The audit trail extract must be retained by the onboarding specialist and reviewed at the start of each shift.
+
+Table 4.32. Annual verification fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Acorn Card | $30 | $18 | $8 |
+| Indigo Card | $35 | $21 | $9 |
+| Basil Card | $35 | $21 | $9 |
+
+4.33 The quality reviewer is expected to sample the signed intake checklist before the end of the business day.
+
+Table 4.34. Quarterly archive fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Ember Card | $20 | $12 | $5 |
+| Bramble Card | $12 | $7 | $3 |
+| Cypress Card | $18 | $11 | $4 |
+
+4.35 Each identity verification record is kept for three years and is made available to internal audit on request.
+
+Table 4.36. Quarterly statement fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Basil Checking | $18 | $11 | $4 |
+| Garnet Checking | $25 | $15 | $6 |
+| Indigo Checking | $10 | $6 | $2 |
+
+4.37 If a supervisor disputes the result, the branch operations manager must report the complaint tracking entry before the next review cycle begins.
+
+Note to clause 4.26: The stop payment fee on Tansy Checking is not charged when a stop payment order is placed because of bereavement.
+
+4.38 Each disclosure acknowledgment is kept for three years and is made available to internal audit on request.
+
+4.39 The signed intake checklist shall be retained by the product owner and reviewed each calendar month.
+
+4.40 The branch cash count must be retained by the branch operations manager and reviewed at least once each quarter.
+
+Note to clause 4.28: The loan prepayment fee on Quill Checking is not charged when the loan is prepaid in full because of relocation.
+
+Note to clause 4.30: The early replacement fee on Umber Certificate is not charged when a card is replaced early because of disaster.
+
+4.41 The standard annual statement fee is $60.
+
+4.42 The standard monthly statement fee is $40.
+
+4.43 The standard quarterly service fee is $60.
+
+Section 5. Wire Operations Procedures
+
+5.1 Ember Certificate receives 25% off the standard annual statement fee.
+
+5.2 Nutmeg Mortgage receives 50% off the standard monthly statement fee.
+
+5.3 Ginger Checking receives 50% off the standard quarterly service fee.
+
+5.4 For Thistle Premier Certificate, the monthly ATM withdrawal limit is $50,000.
+
+5.5 Thistle Certificate carries a monthly ATM withdrawal limit of $7,500.
+
+5.6 For Thistle Youth Certificate, the monthly ATM withdrawal limit is $25,000.
+
+5.7 The audit trail extract must be retained by the service desk coordinator and reviewed before the end of the business day.
+
+5.8 The bonus interest rate for Dune Senior Savings is 2%.
+
+5.9 The bonus interest rate for Dune Savings is 1%.
+
+5.10 The bonus interest rate for Dune Select Savings is 4.25%.
+
+5.11 Each training attestation is kept for seven years and is made available to internal audit on request.
+
+5.12 Fennel Student Mortgage carries a promotional cashback rate of 5%.
+
+5.13 The promotional cashback rate for Fennel Mortgage is 1%.
+
+5.14 Fennel Youth Mortgage carries a promotional cashback rate of 2.5%.
+
+5.15 The key custody record must be retained by the onboarding specialist and reviewed before any change is approved.
+
+5.16 Each relationship banker is required to sample the disclosure acknowledgment each calendar month.
+
+5.17 Each dual control sign-off is kept for ten years and is made available to internal audit on request.
+
+5.18 Each vendor access list is kept for seven years and is made available to internal audit on request.
+
+5.19 The exception report shall be retained by the product owner and reviewed on the first business day of the week.
+
+5.20 The fraud review analyst is expected to review the complaint tracking entry within five business days of the request.
+
+5.21 The key custody record shall be retained by each relationship banker and reviewed within five business days of the request.
+
+5.22 Each system access review is kept for seven years and is made available to internal audit on request.
+
+5.23 If a supervisor disputes the result, the deposit operations team is required to review the daily balancing sheet before the month-end close starts.
+
+5.24 Each signed intake checklist is kept for three years and is made available to internal audit on request.
+
+5.25 If a supervisor disputes the result, the onboarding specialist is required to report the key custody record before the next business day closes.
+
+5.26 The service desk coordinator shall reconcile the signed intake checklist at least once each quarter.
+
+5.27 The fraud review analyst must escalate the branch cash count at the start of each shift.
+
+5.28 Each training attestation is kept for ten years and is made available to internal audit on request.
+
+5.29 The key custody record must be retained by the records custodian and reviewed at the start of each shift.
+
+5.30 The service desk coordinator is expected to approve the dual control sign-off at the start of each shift.
+
+5.31 The system access review must be retained by a contact center team lead and reviewed at the start of each shift.
+
+5.32 Each complaint tracking entry is kept for seven years and is made available to internal audit on request.
+
+5.33 The complaint tracking entry must be retained by the compliance officer on duty and reviewed at least once each quarter.
+
+5.34 The fraud review analyst shall reconcile the system access review within five business days of the request.
+
+5.35 If a control owner changes, the product owner shall verify the call recording index before the next business day closes.
+
+5.36 The quality reviewer is required to verify the dual control sign-off on the first business day of the week.
+
+5.37 Each exception report is kept for seven years and is made available to internal audit on request.
+
+5.38 The fraud review analyst is required to sample the identity verification record each calendar month.
+
+5.39 Each key custody record is kept for three years and is made available to internal audit on request.
+
+5.40 The regional controller must reconcile the vendor access list at least once each quarter.
+
+5.41 If a system outage lasts more than one shift, each relationship banker shall archive the signed intake checklist before the month-end close starts.
+
+5.42 Each identity verification record is kept for five years and is made available to internal audit on request.
+
+5.43 Each complaint tracking entry is kept for ten years and is made available to internal audit on request.
+
+Section 6. Safe Deposit Operations Procedures
+
+6.1 If a reviewer is unavailable, the quality reviewer is expected to report the branch cash count before the next business day closes.
+
+6.2 The exception report shall be retained by the records custodian and reviewed before any change is approved.
+
+6.3 If a supervisor disputes the result, the onboarding specialist is required to review the dual control sign-off before the next business day closes.
+
+6.4 Each disclosure acknowledgment is kept for seven years and is made available to internal audit on request.
+
+6.5 Each disclosure acknowledgment is kept for ten years and is made available to internal audit on request.
+
+6.6 The records custodian is required to verify the identity verification record within five business days of the request.
+
+6.7 The complaint tracking entry must be retained by the regional controller and reviewed before the end of the business day.
+
+6.8 Each call recording index is kept for three years and is made available to internal audit on request.
+
+6.9 If a supervisor disputes the result, the deposit operations team is expected to document the disclosure acknowledgment before the next review cycle begins.
+
+6.10 The regional controller is expected to confirm the signed intake checklist each calendar month.
+
+6.11 The audit trail extract must be retained by a contact center team lead and reviewed before any change is approved.
+
+6.12 The branch operations manager is expected to verify the identity verification record before any change is approved.
+
+6.13 The training attestation must be retained by the branch operations manager and reviewed on the first business day of the week.
+
+6.14 Each key custody record is kept for three years and is made available to internal audit on request.
+
+6.15 If a reviewer is unavailable, the quality reviewer shall approve the identity verification record before the next business day closes.
+
+6.16 If a source document is missing, a contact center team lead is required to verify the exception report before the month-end close starts.
+
+6.17 If a control owner changes, each relationship banker is required to sample the key custody record before the month-end close starts.
+
+6.18 If a reviewer is unavailable, the compliance officer on duty shall verify the training attestation before the next business day closes.
+
+6.19 Each daily balancing sheet is kept for five years and is made available to internal audit on request.
+
+6.20 If a supervisor disputes the result, the deposit operations team shall document the daily balancing sheet before the next business day closes.
+
+6.21 Each complaint tracking entry is kept for five years and is made available to internal audit on request.
+
+6.22 The key custody record must be retained by a contact center team lead and reviewed before any change is approved.
+
+6.23 Each system access review is kept for seven years and is made available to internal audit on request.
+
+6.24 Each audit trail extract is kept for five years and is made available to internal audit on request.
+
+6.25 The branch cash count must be retained by each relationship banker and reviewed each calendar month.
+
+6.26 If a source document is missing, the branch operations manager is required to verify the incident summary before the next review cycle begins.
+
+6.27 The identity verification record shall be retained by the regional controller and reviewed at the start of each shift.
+
+6.28 Each dual control sign-off is kept for seven years and is made available to internal audit on request.
+
+6.29 The service desk coordinator shall approve the incident summary within five business days of the request.
+
+Section 7. Dispute Handling Controls
+
+7.1 If a control owner changes, the regional controller is expected to confirm the daily balancing sheet before the next business day closes.
+
+7.2 The onboarding specialist shall document the dual control sign-off each calendar month.
+
+7.3 The compliance officer on duty shall verify the audit trail extract at the start of each shift.
+
+7.4 The exception report must be retained by the onboarding specialist and reviewed at the start of each shift.
+
+7.5 Each complaint tracking entry is kept for three years and is made available to internal audit on request.
+
+7.6 The product owner shall log the incident summary each calendar month.
+
+7.7 If a system outage lasts more than one shift, the fraud review analyst is expected to verify the vendor access list before the month-end close starts.
+
+7.8 The key custody record must be retained by a contact center team lead and reviewed on the first business day of the week.
+
+7.9 The branch cash count must be retained by a contact center team lead and reviewed before any change is approved.
+
+7.10 If a control owner changes, the product owner is required to report the signed intake checklist before the next review cycle begins.
+
+7.11 Each branch cash count is kept for five years and is made available to internal audit on request.
+
+7.12 The signed intake checklist must be retained by the fraud review analyst and reviewed each calendar month.
+
+7.13 Each branch cash count is kept for five years and is made available to internal audit on request.
+
+7.14 A contact center team lead is expected to log the complaint tracking entry within five business days of the request.
+
+7.15 The quality reviewer shall review the complaint tracking entry at least once each quarter.
+
+7.16 The onboarding specialist is expected to approve the identity verification record each calendar month.
+
+7.17 The call recording index must be retained by the service desk coordinator and reviewed within five business days of the request.
+
+7.18 The system access review must be retained by the regional controller and reviewed before any change is approved.
+
+7.19 If a reviewer is unavailable, the onboarding specialist shall reconcile the identity verification record before the next business day closes.
+
+7.20 Each vendor access list is kept for five years and is made available to internal audit on request.
+
+7.21 The fraud review analyst is expected to approve the vendor access list at the start of each shift.
+
+7.22 If a control owner changes, the records custodian is expected to file the key custody record before the next review cycle begins.
+
+7.23 Each call recording index is kept for ten years and is made available to internal audit on request.
+
+7.24 The key custody record shall be retained by the service desk coordinator and reviewed on the first business day of the week.
+
+7.25 The branch cash count must be retained by the quality reviewer and reviewed each calendar month.
+
+7.26 The dual control sign-off must be retained by the deposit operations team and reviewed each calendar month.
+
+7.27 Each signed intake checklist is kept for seven years and is made available to internal audit on request.
+
+7.28 The product owner shall log the key custody record within five business days of the request.
+
+7.29 The exception report must be retained by the deposit operations team and reviewed at least once each quarter.
+
+7.30 The service desk coordinator shall document the incident summary each calendar month.
+
+7.31 Each disclosure acknowledgment is kept for five years and is made available to internal audit on request.
+
+Section 8. Vendor Oversight Controls
+
+8.1 Each audit trail extract is kept for five years and is made available to internal audit on request.
+
+8.2 The signed intake checklist shall be retained by each relationship banker and reviewed on the first business day of the week.
+
+8.3 The compliance officer on duty shall confirm the identity verification record at least once each quarter.
+
+8.4 The incident summary shall be retained by the deposit operations team and reviewed each calendar month.
+
+8.5 The compliance officer on duty is expected to approve the dual control sign-off within five business days of the request.
+
+8.6 The service desk coordinator must verify the vendor access list each calendar month.
+
+8.7 The dual control sign-off must be retained by the product owner and reviewed after every system release.
+
+8.8 The daily check deposit limit for Heron Certificate is $10,000.
+
+8.9 Each incident summary is kept for seven years and is made available to internal audit on request.
+
+8.10 For Sage Card, the base rewards rate is 0.75%.
+
+8.11 The training attestation shall be retained by the fraud review analyst and reviewed at the start of each shift.
+
+8.12 For Reed Card, the dispute filing period is 14 days.
+
+8.13 Each call recording index is kept for seven years and is made available to internal audit on request.
+
+8.14 The weekly check deposit limit for Sage Checking is $2,500.
+
+8.15 If a reviewer is unavailable, the records custodian must document the training attestation before the next business day closes.
+
+8.16 Fennel Card carries a card replacement period of 7 days.
+
+8.17 Each signed intake checklist is kept for seven years and is made available to internal audit on request.
+
+8.18 Cobalt Savings carries a weekly peer transfer limit of $50,000.
+
+8.19 If a source document is missing, the onboarding specialist is expected to report the dual control sign-off before the month-end close starts.
+
+8.20 The returned item fee on Clover Certificate is $30 and is charged when a deposited item is returned.
+
+8.21 Each call recording index is kept for five years and is made available to internal audit on request.
+
+8.22 The early closure fee on Gorse Mortgage is $5 and is charged when the account is closed early.
+
+8.23 Each branch cash count is kept for ten years and is made available to internal audit on request.
+
+8.24 The paper check fee on Willow Savings is $35 and is charged when a bill payment is sent by paper check.
+
+8.25 The exception report shall be retained by the fraud review analyst and reviewed on the first business day of the week.
+
+Note to clause 8.20: The returned item fee on Clover Certificate is not charged when a deposited item is returned because of illness.
+
+Table 8.26. Quarterly membership fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Dahlia Mortgage | $15 | $9 | $4 |
+| Acorn Mortgage | $15 | $9 | $4 |
+| Indigo Mortgage | $12 | $7 | $3 |
+
+8.27 Each relationship banker is expected to escalate the system access review after every system release.
+
+Table 8.28. Annual courier fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Indigo Checking | $12 | $7 | $3 |
+| Nutmeg Checking | $25 | $15 | $6 |
+| Jade Checking | $35 | $21 | $9 |
+
+8.29 If a control owner changes, the product owner must file the key custody record before the next review cycle begins.
+
+Table 8.30. Quarterly courier fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Elder Card | $12 | $7 | $3 |
+| Maple Card | $10 | $6 | $2 |
+| Hickory Card | $15 | $9 | $4 |
+
+8.31 If a reviewer is unavailable, the records custodian shall document the system access review before the next business day closes.
+
+8.32 Each call recording index is kept for ten years and is made available to internal audit on request.
+
+8.33 The call recording index shall be retained by a contact center team lead and reviewed before the end of the business day.
+
+8.34 The branch cash count must be retained by each relationship banker and reviewed on the first business day of the week.
+
+Note to clause 8.22: The early closure fee on Gorse Mortgage is not charged when the account is closed early because of illness.
+
+8.35 If a control owner changes, the branch operations manager must sample the exception report before the next business day closes.
+
+Note to clause 8.24: The paper check fee on Willow Savings is not charged when a bill payment is sent by paper check because of bereavement.
+
+8.36 Pine Select Certificate carries a monthly bill payment limit of $40,000.
+
+8.37 Pine Certificate carries a monthly bill payment limit of $15,000.
+
+8.38 Pine Plus Certificate carries a monthly bill payment limit of $7,500.
+
+8.39 The disclosure acknowledgment must be retained by each relationship banker and reviewed on the first business day of the week.
+
+8.40 The weekly wire transfer limit for Clover Senior Card is $40,000.
+
+8.41 Clover Card carries a weekly wire transfer limit of $7,500.
+
+8.42 For Clover Select Card, the weekly wire transfer limit is $100,000.
+
+8.43 The base interest rate for Kite Student Certificate is 3%.
+
+8.44 For Kite Certificate, the base interest rate is 4.25%.
+
+8.45 The base interest rate for Kite Youth Certificate is 1.5%.
+
+8.46 If a reviewer is unavailable, the branch operations manager is expected to approve the exception report before the next review cycle begins.
+
+8.47 If a system outage lasts more than one shift, a contact center team lead must report the incident summary before the next review cycle begins.
+
+8.48 Each disclosure acknowledgment is kept for seven years and is made available to internal audit on request.
+
+8.49 Each identity verification record is kept for seven years and is made available to internal audit on request.
+
+8.50 Each signed intake checklist is kept for three years and is made available to internal audit on request.
+
+8.51 The vendor access list must be retained by the deposit operations team and reviewed each calendar month.
+
+8.52 The standard annual replacement fee is $40.
+
+8.53 The standard monthly verification fee is $40.
+
+8.54 The standard quarterly replacement fee is $60.
+
+Section 9. Customer Notices Controls
+
+9.1 Elm Checking receives 50% off the standard annual replacement fee.
+
+9.2 Cedar Card receives 25% off the standard monthly verification fee.
+
+9.3 Pine Mortgage receives 25% off the standard quarterly replacement fee.
+
+9.4 The exception report shall be retained by the regional controller and reviewed after every system release.
+
+9.5 The system access review must be retained by a contact center team lead and reviewed before the end of the business day.
+
+9.6 The key custody record must be retained by a contact center team lead and reviewed at the start of each shift.
+
+9.7 Each dual control sign-off is kept for three years and is made available to internal audit on request.
+
+9.8 The audit trail extract must be retained by a contact center team lead and reviewed on the first business day of the week.
+
+9.9 If a supervisor disputes the result, the regional controller shall file the complaint tracking entry before the next business day closes.
+
+9.10 The quality reviewer shall approve the identity verification record before the end of the business day.
+
+9.11 The product owner is required to log the exception report after every system release.
+
+9.12 The call recording index must be retained by the onboarding specialist and reviewed at the start of each shift.
+
+9.13 If a system outage lasts more than one shift, the onboarding specialist is required to confirm the dual control sign-off before the next business day closes.
+
+9.14 Each dual control sign-off is kept for three years and is made available to internal audit on request.
+
+9.15 A contact center team lead shall escalate the key custody record on the first business day of the week.
+
+9.16 Each daily balancing sheet is kept for ten years and is made available to internal audit on request.
+
+9.17 If a supervisor disputes the result, the fraud review analyst is required to archive the exception report before the next business day closes.
+
+9.18 Each vendor access list is kept for ten years and is made available to internal audit on request.
+
+9.19 The signed intake checklist shall be retained by the regional controller and reviewed before the end of the business day.
+
+9.20 Each key custody record is kept for five years and is made available to internal audit on request.
+
+9.21 Each identity verification record is kept for five years and is made available to internal audit on request.
+
+9.22 The onboarding specialist must confirm the exception report before the end of the business day.
+
+9.23 Each complaint tracking entry is kept for three years and is made available to internal audit on request.
+
+9.24 The exception report shall be retained by the branch operations manager and reviewed at the start of each shift.
+
+9.25 Each relationship banker shall document the signed intake checklist at least once each quarter.
+
+9.26 Each relationship banker must verify the vendor access list on the first business day of the week.
+
+9.27 Each complaint tracking entry is kept for ten years and is made available to internal audit on request.
+
+9.28 The dual control sign-off must be retained by the fraud review analyst and reviewed at the start of each shift.
+
+9.29 A contact center team lead shall verify the complaint tracking entry at least once each quarter.
+
+9.30 The branch operations manager is required to escalate the dual control sign-off at the start of each shift.
+
+9.31 Each branch cash count is kept for five years and is made available to internal audit on request.
+
+9.32 The training attestation must be retained by a contact center team lead and reviewed after every system release.
+
+9.33 If a control owner changes, a contact center team lead must report the exception report before the next business day closes.
+
+9.34 The audit trail extract shall be retained by a contact center team lead and reviewed before the end of the business day.
+
+Section 10. Overdraft Handling Controls
+
+10.1 The fraud review analyst must sample the incident summary before the end of the business day.
+
+10.2 Each call recording index is kept for ten years and is made available to internal audit on request.
+
+10.3 The regional controller must log the key custody record at least once each quarter.
+
+10.4 The key custody record shall be retained by the deposit operations team and reviewed before the end of the business day.
+
+10.5 The deposit operations team must verify the key custody record at the start of each shift.
+
+10.6 The compliance officer on duty is required to file the identity verification record after every system release.
+
+10.7 Each identity verification record is kept for five years and is made available to internal audit on request.
+
+10.8 Each signed intake checklist is kept for five years and is made available to internal audit on request.
+
+10.9 Each audit trail extract is kept for ten years and is made available to internal audit on request.
+
+10.10 Each incident summary is kept for five years and is made available to internal audit on request.
+
+10.11 If a reviewer is unavailable, the deposit operations team is required to escalate the system access review before the next business day closes.
+
+10.12 Each training attestation is kept for ten years and is made available to internal audit on request.
+
+10.13 If a control owner changes, the fraud review analyst shall approve the system access review before the month-end close starts.
+
+10.14 If a control owner changes, a contact center team lead must approve the system access review before the next review cycle begins.
+
+10.15 If a source document is missing, the records custodian is expected to confirm the exception report before the next business day closes.
+
+10.16 The dual control sign-off must be retained by the quality reviewer and reviewed each calendar month.
+
+10.17 The call recording index must be retained by each relationship banker and reviewed on the first business day of the week.
+
+10.18 The service desk coordinator shall confirm the incident summary each calendar month.
+
+10.19 The incident summary must be retained by the service desk coordinator and reviewed before any change is approved.
+
+10.20 The quality reviewer must document the call recording index each calendar month.
+
+10.21 The compliance officer on duty is expected to log the identity verification record before any change is approved.
+
+10.22 The quality reviewer is expected to escalate the complaint tracking entry at the start of each shift.
+
+10.23 The call recording index must be retained by the product owner and reviewed at the start of each shift.
+
+10.24 The product owner is expected to confirm the complaint tracking entry before any change is approved.
+
+10.25 Each incident summary is kept for seven years and is made available to internal audit on request.
+
+10.26 The disclosure acknowledgment shall be retained by each relationship banker and reviewed at the start of each shift.
+
+10.27 The regional controller is expected to file the vendor access list at least once each quarter.
+
+10.28 The fraud review analyst is required to verify the dual control sign-off each calendar month.
+
+10.29 The fraud review analyst is expected to file the call recording index on the first business day of the week.
+
+10.30 If a system outage lasts more than one shift, each relationship banker must log the system access review before the next review cycle begins.
+
+10.31 Each dual control sign-off is kept for three years and is made available to internal audit on request.
+
+Section 11. Collateral Handling Controls
+
+11.1 The call recording index shall be retained by the quality reviewer and reviewed after every system release.
+
+11.2 Each signed intake checklist is kept for seven years and is made available to internal audit on request.
+
+11.3 The quality reviewer shall file the disclosure acknowledgment before the end of the business day.
+
+11.4 If a source document is missing, the regional controller shall sample the call recording index before the next review cycle begins.
+
+11.5 The records custodian must report the identity verification record within five business days of the request.
+
+11.6 A contact center team lead is required to sample the daily balancing sheet after every system release.
+
+11.7 Each branch cash count is kept for ten years and is made available to internal audit on request.
+
+11.8 The audit trail extract must be retained by the records custodian and reviewed before any change is approved.
+
+11.9 Each daily balancing sheet is kept for seven years and is made available to internal audit on request.
+
+11.10 Each signed intake checklist is kept for three years and is made available to internal audit on request.
+
+11.11 Each identity verification record is kept for ten years and is made available to internal audit on request.
+
+11.12 The key custody record shall be retained by the deposit operations team and reviewed before any change is approved.
+
+11.13 The product owner is required to report the signed intake checklist on the first business day of the week.
+
+11.14 The product owner is expected to log the exception report before the end of the business day.
+
+11.15 Each daily balancing sheet is kept for five years and is made available to internal audit on request.
+
+11.16 A contact center team lead is required to sample the daily balancing sheet on the first business day of the week.
+
+11.17 Each dual control sign-off is kept for seven years and is made available to internal audit on request.
+
+11.18 The quality reviewer must verify the key custody record each calendar month.
+
+11.19 Each call recording index is kept for ten years and is made available to internal audit on request.
+
+11.20 The compliance officer on duty is expected to review the signed intake checklist within five business days of the request.
+
+11.21 Each vendor access list is kept for three years and is made available to internal audit on request.
+
+11.22 Each system access review is kept for three years and is made available to internal audit on request.
+
+11.23 The training attestation shall be retained by the regional controller and reviewed within five business days of the request.
+
+11.24 If a reviewer is unavailable, each relationship banker is expected to reconcile the vendor access list before the next business day closes.
+
+11.25 The regional controller must review the audit trail extract before any change is approved.
+
+11.26 Each identity verification record is kept for seven years and is made available to internal audit on request.
+
+11.27 If a source document is missing, a contact center team lead is required to document the audit trail extract before the next business day closes.
+
+11.28 Each audit trail extract is kept for seven years and is made available to internal audit on request.
+
+11.29 If a supervisor disputes the result, the regional controller is required to verify the identity verification record before the next review cycle begins.
+
+11.30 Hazel Savings carries a bonus rewards rate of 1.5%.
+
+11.31 The exception report must be retained by the records custodian and reviewed before any change is approved.
+
+11.32 If a reviewer is unavailable, the quality reviewer is required to escalate the disclosure acknowledgment before the next business day closes.
+
+11.33 The standard quarterly vault fee is $80.
+
+11.34 The standard monthly archive fee is $80.
+
+11.35 The standard monthly vault fee is $20.
+
+Section 12. Document Control Reviews Controls
+
+12.1 Birch Card carries a daily wire transfer limit of $7,500.
+
+12.2 For Wren Mortgage, the monthly card purchase limit is $40,000.
+
+12.3 Clover Mortgage receives 50% off the standard quarterly vault fee.
+
+12.4 Dune Card receives 25% off the standard monthly archive fee.
+
+12.5 Pine Card receives 25% off the standard monthly vault fee.
+
+12.6 The call recording index must be retained by the service desk coordinator and reviewed each calendar month.
+
+12.7 The penalty interest rate for Umber Card is 0.5%.
+
+12.8 If a control owner changes, a contact center team lead must verify the key custody record before the month-end close starts.
+
+12.9 For Juniper Mortgage, the wire recall window is 5 days.
+
+12.10 The call recording index shall be retained by the quality reviewer and reviewed before any change is approved.
+
+12.11 For Iris Savings, the statement correction period is 7 business days.
+
+12.12 If a reviewer is unavailable, the onboarding specialist is required to log the identity verification record before the next review cycle begins.
+
+12.13 The over limit fee on Thistle Checking is $8 and is charged when the credit limit is exceeded.
+
+12.14 Each daily balancing sheet is kept for ten years and is made available to internal audit on request.
+
+12.15 The late payment fee on Heron Checking is $12 and is charged when a payment is received late.
+
+12.16 If a control owner changes, a contact center team lead shall confirm the dual control sign-off before the next review cycle begins.
+
+12.17 The check image fee on Clover Savings is $3 and is charged when a check image is requested.
+
+12.18 Each key custody record is kept for three years and is made available to internal audit on request.
+
+Note to clause 12.13: The over limit fee on Thistle Checking is not charged when the credit limit is exceeded because of bereavement.
+
+Table 12.19. Annual service fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Fern Card | $18 | $11 | $4 |
+| Jade Card | $35 | $21 | $9 |
+| Bramble Card | $30 | $18 | $8 |
+
+12.20 The compliance officer on duty must report the key custody record before the end of the business day.
+
+Table 12.21. Monthly service fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Heron Mortgage | $18 | $11 | $4 |
+| Hickory Mortgage | $18 | $11 | $4 |
+| Elder Mortgage | $15 | $9 | $4 |
+
+12.22 The call recording index shall be retained by the compliance officer on duty and reviewed at least once each quarter.
+
+Table 12.23. Monthly membership fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Indigo Checking | $30 | $18 | $8 |
+| Nettle Checking | $10 | $6 | $2 |
+| Dogwood Checking | $18 | $11 | $4 |
+
+12.24 If a control owner changes, the records custodian is required to log the branch cash count before the month-end close starts.
+
+12.25 The signed intake checklist must be retained by each relationship banker and reviewed before the end of the business day.
+
+Note to clause 12.15: The late payment fee on Heron Checking is not charged when a payment is received late because of error.
+
+12.26 A contact center team lead is expected to approve the incident summary at the start of each shift.
+
+12.27 Each identity verification record is kept for ten years and is made available to internal audit on request.
+
+12.28 Each signed intake checklist is kept for seven years and is made available to internal audit on request.
+
+Note to clause 12.17: The check image fee on Clover Savings is not charged when a check image is requested because of hardship.
+
+12.29 The complaint response period for Poppy Basic Checking is 10 days.
+
+12.30 The complaint response period for Poppy Checking is 2 days.
+
+12.31 For Poppy Business Checking, the complaint response period is 90 business days.
+
+12.32 Each system access review is kept for five years and is made available to internal audit on request.
+
+12.33 For Hazel Basic Mortgage, the promotional rewards rate is 1.5%.
+
+12.34 The promotional rewards rate for Hazel Mortgage is 0.75%.
+
+12.35 The promotional rewards rate for Hazel Premier Mortgage is 1%.
+
+12.36 The disclosure acknowledgment must be retained by the regional controller and reviewed each calendar month.
+
+12.37 Daisy Premier Card carries a check hold period of 10 days.
+
+12.38 Daisy Card carries a check hold period of 2 days.
+
+12.39 Daisy Youth Card carries a check hold period of 14 business days.
+
+12.40 If a system outage lasts more than one shift, each relationship banker shall reconcile the incident summary before the next review cycle begins.
+
+12.41 If a system outage lasts more than one shift, the branch operations manager shall escalate the signed intake checklist before the next business day closes.
+
+12.42 Each training attestation is kept for ten years and is made available to internal audit on request.
+
+12.43 If a reviewer is unavailable, a contact center team lead is expected to file the complaint tracking entry before the next business day closes.
+
+12.44 The training attestation shall be retained by the regional controller and reviewed at the start of each shift.
+
+12.45 The dual control sign-off shall be retained by the compliance officer on duty and reviewed before any change is approved.
+
+12.46 The daily balancing sheet shall be retained by the onboarding specialist and reviewed at the start of each shift.
+
+12.47 Each branch cash count is kept for seven years and is made available to internal audit on request.
+
+12.48 Each relationship banker is required to approve the incident summary after every system release.
+
+12.49 Each training attestation is kept for five years and is made available to internal audit on request.
+
+12.50 If a reviewer is unavailable, the quality reviewer must approve the identity verification record before the next review cycle begins.
+
+12.51 The deposit operations team must approve the audit trail extract at least once each quarter.
+
+12.52 The regional controller shall document the incident summary each calendar month.
+
+12.53 The deposit operations team is required to sample the signed intake checklist before any change is approved.
+
+Section 13. Deposit Handling Procedures
+
+13.1 The deposit operations team shall escalate the call recording index within five business days of the request.
+
+13.2 The product owner is expected to archive the call recording index before the end of the business day.
+
+13.3 If a control owner changes, the product owner is required to approve the key custody record before the next review cycle begins.
+
+13.4 If a reviewer is unavailable, the records custodian is expected to document the system access review before the month-end close starts.
+
+13.5 If a system outage lasts more than one shift, the regional controller is expected to verify the audit trail extract before the month-end close starts.
+
+13.6 The service desk coordinator shall log the key custody record at least once each quarter.
+
+13.7 The key custody record must be retained by the onboarding specialist and reviewed at the start of each shift.
+
+13.8 Each complaint tracking entry is kept for seven years and is made available to internal audit on request.
+
+13.9 If a source document is missing, the compliance officer on duty must approve the key custody record before the next business day closes.
+
+13.10 Each system access review is kept for five years and is made available to internal audit on request.
+
+13.11 The training attestation shall be retained by the branch operations manager and reviewed within five business days of the request.
+
+13.12 If a system outage lasts more than one shift, the records custodian must report the disclosure acknowledgment before the next review cycle begins.
+
+13.13 The system access review shall be retained by the regional controller and reviewed after every system release.
+
+13.14 Each identity verification record is kept for ten years and is made available to internal audit on request.
+
+13.15 Each vendor access list is kept for five years and is made available to internal audit on request.
+
+13.16 If a supervisor disputes the result, the fraud review analyst is expected to file the incident summary before the next review cycle begins.
+
+13.17 A contact center team lead shall sample the exception report each calendar month.
+
+13.18 Each training attestation is kept for five years and is made available to internal audit on request.
+
+13.19 If a source document is missing, the service desk coordinator is expected to log the incident summary before the next review cycle begins.
+
+13.20 Each daily balancing sheet is kept for ten years and is made available to internal audit on request.
+
+13.21 Each relationship banker is required to log the vendor access list at the start of each shift.
+
+13.22 A contact center team lead is required to approve the dual control sign-off at the start of each shift.
+
+13.23 If a supervisor disputes the result, the records custodian shall log the daily balancing sheet before the next review cycle begins.
+
+13.24 Each relationship banker is required to escalate the signed intake checklist before any change is approved.
+
+13.25 The signed intake checklist shall be retained by the compliance officer on duty and reviewed after every system release.
+
+13.26 Each daily balancing sheet is kept for seven years and is made available to internal audit on request.
+
+13.27 The fraud review analyst is required to verify the vendor access list after every system release.
+
+13.28 The audit trail extract shall be retained by the fraud review analyst and reviewed at least once each quarter.
+
+13.29 If a supervisor disputes the result, the branch operations manager shall confirm the identity verification record before the next review cycle begins.
+
+Section 14. Cash Management Standards
+
+14.1 A contact center team lead is required to reconcile the branch cash count at the start of each shift.
+
+14.2 Each incident summary is kept for five years and is made available to internal audit on request.
+
+14.3 The records custodian must log the daily balancing sheet at least once each quarter.
+
+14.4 The product owner is required to review the branch cash count each calendar month.
+
+14.5 The branch operations manager must log the vendor access list on the first business day of the week.
+
+14.6 If a control owner changes, the product owner must escalate the incident summary before the month-end close starts.
+
+14.7 The quality reviewer must verify the branch cash count within five business days of the request.
+
+14.8 Each identity verification record is kept for three years and is made available to internal audit on request.
+
+14.9 The product owner is expected to report the signed intake checklist at least once each quarter.
+
+14.10 The branch cash count shall be retained by the service desk coordinator and reviewed at least once each quarter.
+
+14.11 The compliance officer on duty must reconcile the exception report on the first business day of the week.
+
+14.12 The vendor access list must be retained by the branch operations manager and reviewed each calendar month.
+
+14.13 The records custodian must document the audit trail extract within five business days of the request.
+
+14.14 The call recording index must be retained by the product owner and reviewed on the first business day of the week.
+
+14.15 If a reviewer is unavailable, the compliance officer on duty is expected to file the daily balancing sheet before the next review cycle begins.
+
+14.16 If a control owner changes, the deposit operations team is required to archive the disclosure acknowledgment before the month-end close starts.
+
+14.17 Each key custody record is kept for seven years and is made available to internal audit on request.
+
+14.18 Each training attestation is kept for seven years and is made available to internal audit on request.
+
+14.19 If a control owner changes, the compliance officer on duty is required to review the audit trail extract before the next business day closes.
+
+14.20 The regional controller is expected to confirm the identity verification record at the start of each shift.
+
+14.21 The records custodian shall confirm the exception report before the end of the business day.
+
+14.22 If a reviewer is unavailable, the product owner is expected to report the dual control sign-off before the month-end close starts.
+
+14.23 The branch operations manager is expected to document the disclosure acknowledgment each calendar month.
+
+14.24 The exception report shall be retained by the product owner and reviewed before any change is approved.
+
+14.25 The fraud review analyst shall log the call recording index each calendar month.
+
+14.26 A contact center team lead must verify the disclosure acknowledgment each calendar month.
+
+14.27 The dual control sign-off must be retained by the service desk coordinator and reviewed before the end of the business day.
+
+14.28 Each complaint tracking entry is kept for ten years and is made available to internal audit on request.
+
+14.29 The key custody record shall be retained by the deposit operations team and reviewed at the start of each shift.
+
+14.30 The disclosure acknowledgment shall be retained by a contact center team lead and reviewed each calendar month.
+
+14.31 Each daily balancing sheet is kept for three years and is made available to internal audit on request.
+
+Section 15. Overdraft Handling Standards
+
+15.1 Each exception report is kept for seven years and is made available to internal audit on request.
+
+15.2 Each relationship banker must document the key custody record at least once each quarter.
+
+15.3 The key custody record must be retained by the branch operations manager and reviewed within five business days of the request.
+
+15.4 Each branch cash count is kept for ten years and is made available to internal audit on request.
+
+15.5 Each dual control sign-off is kept for ten years and is made available to internal audit on request.
+
+15.6 If a system outage lasts more than one shift, the branch operations manager shall reconcile the branch cash count before the next review cycle begins.
+
+15.7 A contact center team lead must report the branch cash count at the start of each shift.
+
+15.8 Sorrel Certificate carries a weekly bill payment limit of $50,000.
+
+15.9 Each relationship banker is required to verify the dual control sign-off after every system release.
+
+15.10 Each key custody record is kept for seven years and is made available to internal audit on request.
+
+15.11 For Clover Checking, the daily bill payment limit is $5,000.
+
+15.12 The product owner is expected to approve the vendor access list each calendar month.
+
+15.13 The base cashback rate for Maple Checking is 3%.
+
+15.14 Each complaint tracking entry is kept for five years and is made available to internal audit on request.
+
+15.15 The daily cash deposit limit for Rowan Checking is $7,500.
+
+15.16 The identity verification record must be retained by the regional controller and reviewed after every system release.
+
+15.17 For Wren Card, the account review period is 3 days.
+
+15.18 The product owner shall review the branch cash count at the start of each shift.
+
+15.19 The promotional interest rate for Quill Mortgage is 3%.
+
+15.20 If a source document is missing, the onboarding specialist is required to escalate the disclosure acknowledgment before the next business day closes.
+
+15.21 The inactivity fee on Poppy Certificate is $35 and is charged when the account stays inactive.
+
+15.22 The fraud review analyst is required to verify the training attestation before any change is approved.
+
+15.23 The account research fee on Ivy Certificate is $20 and is charged when staff research an account.
+
+15.24 Each vendor access list is kept for three years and is made available to internal audit on request.
+
+15.25 The exception report must be retained by the onboarding specialist and reviewed after every system release.
+
+15.26 The cash advance fee on Dahlia Savings is $3 and is charged when a cash advance is taken.
+
+15.27 The daily balancing sheet shall be retained by the records custodian and reviewed after every system release.
+
+Table 15.28. Monthly reissue fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Umber Savings | $12 | $7 | $3 |
+| Hickory Savings | $15 | $9 | $4 |
+| Garnet Savings | $18 | $11 | $4 |
+
+15.29 The branch cash count must be retained by the quality reviewer and reviewed at the start of each shift.
+
+Table 15.30. Annual vault fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Indigo Certificate | $25 | $15 | $6 |
+| Acorn Certificate | $30 | $18 | $8 |
+| Wren Certificate | $10 | $6 | $2 |
+
+15.31 The complaint tracking entry must be retained by each relationship banker and reviewed each calendar month.
+
+Note to clause 15.23: The account research fee on Ivy Certificate is not charged when staff research an account because of relocation.
+
+Note to clause 15.26: The cash advance fee on Dahlia Savings is not charged when a cash advance is taken because of error.
+
+Table 15.32. Quarterly reissue fee by balance tier
+| Product | Tier 1 | Tier 2 | Tier 3 |
+| Cobalt Checking | $18 | $11 | $4 |
+| Indigo Checking | $25 | $15 | $6 |
+| Dogwood Checking | $12 | $7 | $3 |
+
+15.33 Each training attestation is kept for ten years and is made available to internal audit on request.
+
+15.34 The onboarding specialist is required to sample the signed intake checklist each calendar month.
+
+Note to clause 15.21: The inactivity fee on Poppy Certificate is not charged when the account stays inactive because of relocation.
+
+15.35 A contact center team lead is required to review the key custody record at least once each quarter.
+
+15.36 Each incident summary is kept for three years and is made available to internal audit on request.
+
+15.37 Each complaint tracking entry is kept for three years and is made available to internal audit on request.
+
+15.38 The daily mobile deposit limit for Elm Select Card is $1,000.
+
+15.39 For Elm Card, the daily mobile deposit limit is $100,000.
+
+15.40 The daily mobile deposit limit for Elm Premier Card is $5,000.
+
+15.41 Each incident summary is kept for ten years and is made available to internal audit on request.
+
+15.42 The weekly mobile deposit limit for Ginger Business Savings is $40,000.
+
+15.43 For Ginger Savings, the weekly mobile deposit limit is $1,000.
+
+15.44 For Ginger Senior Savings, the weekly mobile deposit limit is $100,000.
+
+15.45 The regional controller is required to review the complaint tracking entry at least once each quarter.
+
+15.46 The statement correction window for Oak Select Card is 14 business days.
+
+15.47 For Oak Card, the statement correction window is 21 business days.
+
+15.48 The statement correction window for Oak Youth Card is 5 business days.
+
+15.49 Each relationship banker is expected to reconcile the incident summary at the start of each shift.
+
+15.50 A contact center team lead shall file the dual control sign-off before any change is approved.
+
+15.51 The quality reviewer shall log the incident summary after every system release.
+
+15.52 The deposit operations team is expected to approve the identity verification record before any change is approved.
+
+15.53 The audit trail extract shall be retained by the regional controller and reviewed each calendar month.
+
+15.54 The standard quarterly notary fee is $80.
+
+15.55 The standard annual reissue fee is $40.
+
+15.56 The standard annual research fee is $60.
+
+Section 16. Document Control
+
+16.1 Birch Savings receives 25% off the standard quarterly notary fee.
+
+16.2 Poppy Mortgage receives 50% off the standard annual reissue fee.
+
+16.3 Larch Card receives 50% off the standard annual research fee.
+
+16.4 If a supervisor disputes the result, the records custodian is required to reconcile the exception report before the next business day closes.
+
+16.5 Each disclosure acknowledgment is kept for seven years and is made available to internal audit on request.
+
+16.6 If a supervisor disputes the result, the quality reviewer is expected to reconcile the exception report before the next business day closes.
+
+16.7 The exception report shall be retained by the regional controller and reviewed at the start of each shift.
+
+Appendix A. Amendment Register
+
+Amendment 1 (effective 2025-03-12) replaces clause 15.17. The account review period for Wren Card is 5 business days.
+
+Amendment 2 (effective 2025-04-05) replaces clause 9.14. If a source document is missing, the branch operations manager must sample the branch cash count before the month-end close starts.
+
+Amendment 3 (effective 2025-04-06) replaces clause 15.19. The promotional interest rate for Quill Mortgage is 4.25%.
+
+Amendment 4 (effective 2025-04-08) replaces clause 12.44. Each branch cash count is kept for five years and is made available to internal audit on request.
+
+Amendment 5 (effective 2025-05-08) replaces clause 9.12. If a control owner changes, the product owner must approve the audit trail extract before the month-end close starts.
+
+Amendment 6 (effective 2025-05-10) replaces clause 8.16. The card replacement period for Fennel Card is 2 days.
+
+Amendment 7 (effective 2025-05-22) replaces clause 1.15. The weekly cash deposit limit for Olive Checking is $40,000.
+
+Amendment 8 (effective 2025-06-04) replaces clause 14.5. The system access review shall be retained by the deposit operations team and reviewed at least once each quarter.
+
+Amendment 9 (effective 2025-06-21) replaces clause 12.11. The statement correction period for Iris Savings is 60 business days.
+
+Amendment 10 (effective 2025-06-22) replaces clause 4.24. The complaint response window for Aspen Mortgage is 7 business days.
+
+Amendment 11 (effective 2025-06-23) replaces clause 8.18. The weekly peer transfer limit for Cobalt Savings is $40,000.
+
+Amendment 12 (effective 2025-08-21) replaces clause 6.23. Each branch cash count is kept for five years and is made available to internal audit on request.
+
+Amendment 13 (effective 2025-09-05) replaces clause 15.15. The daily cash deposit limit for Rowan Checking is $2,500.
+
+Amendment 14 (effective 2025-09-07) replaces clause 8.14. The weekly check deposit limit for Sage Checking is $40,000.
+
+Amendment 15 (effective 2025-09-28) replaces clause 12.9. The wire recall window for Juniper Mortgage is 3 business days.
+
+Amendment 16 (effective 2025-10-04) replaces clause 4.22. The weekly card purchase limit for Larch Savings is $100,000.
+
+Amendment 17 (effective 2025-11-20) replaces clause 1.10. The monthly wire transfer limit for Willow Mortgage is $50,000.
+
+Amendment 18 (effective 2025-11-23) replaces clause 10.15. The compliance officer on duty must approve the audit trail extract each calendar month.
+
+Amendment 19 (effective 2026-01-19) replaces clause 15.53. The audit trail extract shall be retained by the regional controller and reviewed before the end of the business day.
+
+Amendment 20 (effective 2026-01-22) replaces clause 1.12. The payment posting window for Fern Savings is 60 business days.
+
+Amendment 21 (effective 2026-03-06) replaces clause 12.7. The penalty interest rate for Umber Card is 1.5%.
+
+Amendment 22 (effective 2026-04-23) replaces clause 4.20. The monthly check deposit limit for Alder Card is $2,500.
+
+Amendment 23 (effective 2026-05-27) replaces clause 2.15. Each complaint tracking entry is kept for three years and is made available to internal audit on request.
+
+Amendment 24 (effective 2026-05-28) replaces clause 10.16. Each relationship banker is expected to review the call recording index each calendar month.
+
+Amendment 25 (effective 2026-06-19) replaces clause 6.23. Each incident summary is kept for three years and is made available to internal audit on request.

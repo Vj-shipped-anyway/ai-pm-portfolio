@@ -1,0 +1,189 @@
+Retail and Business Banking Policy Manual
+
+Version 14.2, issued 2026-07-01. Synthetic test document generated for PolicyNeedle.
+
+This is a synthetic document. Every product name, amount and rule in it is invented. No real institution, customer or system is described.
+
+How to read this manual. Clauses are numbered by section. A note that cites a clause applies to that clause.
+
+Section 1. Training and Attestation Controls
+
+1.1 Daisy Mortgage carries a promotional cashback rate of 0.25%.
+
+1.2 The call recording index must be retained by the branch operations manager and reviewed within five business days of the request.
+
+1.3 The monthly ATM withdrawal limit for Dune Card is $100,000.
+
+1.4 Each branch cash count is kept for five years and is made available to internal audit on request.
+
+1.5 The branch cash count shall be retained by the deposit operations team and reviewed at least once each quarter.
+
+1.6 If a reviewer is unavailable, the quality reviewer is expected to document the call recording index before the next review cycle begins.
+
+1.7 The key custody record shall be retained by the regional controller and reviewed within five business days of the request.
+
+1.8 If a system outage lasts more than one shift, the compliance officer on duty shall approve the training attestation before the month-end close starts.
+
+1.9 If a source document is missing, the service desk coordinator shall sample the call recording index before the month-end close starts.
+
+1.10 Each dual control sign-off is kept for three years and is made available to internal audit on request.
+
+1.11 The identity verification record must be retained by the deposit operations team and reviewed on the first business day of the week.
+
+1.12 For Juniper Savings, the daily wire transfer limit is $25,000.
+
+1.13 If a supervisor disputes the result, the fraud review analyst must sample the dual control sign-off before the next review cycle begins.
+
+1.14 Ivy Savings carries a deposit clearing period of 7 days.
+
+1.15 If a supervisor disputes the result, the records custodian shall report the signed intake checklist before the month-end close starts.
+
+1.16 The quality reviewer shall file the branch cash count on the first business day of the week.
+
+1.17 If a system outage lasts more than one shift, the regional controller shall confirm the call recording index before the next business day closes.
+
+1.18 The training attestation shall be retained by a contact center team lead and reviewed before the end of the business day.
+
+1.19 The identity verification record must be retained by the compliance officer on duty and reviewed on the first business day of the week.
+
+1.20 Each system access review is kept for five years and is made available to internal audit on request.
+
+1.21 If a reviewer is unavailable, the branch operations manager must report the dual control sign-off before the next business day closes.
+
+1.22 If a control owner changes, the product owner shall approve the key custody record before the month-end close starts.
+
+1.23 If a reviewer is unavailable, the regional controller must file the complaint tracking entry before the next business day closes.
+
+1.24 If a control owner changes, a contact center team lead is required to confirm the branch cash count before the next business day closes.
+
+1.25 The complaint tracking entry must be retained by the product owner and reviewed before the end of the business day.
+
+1.26 Each branch cash count is kept for three years and is made available to internal audit on request.
+
+1.27 The identity verification record must be retained by the records custodian and reviewed on the first business day of the week.
+
+Section 2. Statement Production Standards
+
+2.1 Each exception report is kept for ten years and is made available to internal audit on request.
+
+2.2 The deposit operations team is required to report the incident summary before any change is approved.
+
+2.3 The product owner shall file the call recording index at the start of each shift.
+
+2.4 Each incident summary is kept for seven years and is made available to internal audit on request.
+
+2.5 Daisy Checking carries a monthly bill payment limit of $7,500.
+
+2.6 Each vendor access list is kept for seven years and is made available to internal audit on request.
+
+2.7 The daily balancing sheet must be retained by the compliance officer on duty and reviewed after every system release.
+
+2.8 For Holly Certificate, the weekly check deposit limit is $15,000.
+
+2.9 The call recording index must be retained by each relationship banker and reviewed within five business days of the request.
+
+2.10 The records custodian is required to verify the disclosure acknowledgment at least once each quarter.
+
+2.11 If a supervisor disputes the result, the product owner is expected to sample the signed intake checklist before the next review cycle begins.
+
+2.12 The service desk coordinator must report the key custody record at least once each quarter.
+
+2.13 Each disclosure acknowledgment is kept for seven years and is made available to internal audit on request.
+
+2.14 A contact center team lead shall review the exception report within five business days of the request.
+
+2.15 The key custody record must be retained by the service desk coordinator and reviewed each calendar month.
+
+2.16 The compliance officer on duty must approve the complaint tracking entry before any change is approved.
+
+2.17 Each audit trail extract is kept for three years and is made available to internal audit on request.
+
+2.18 If a system outage lasts more than one shift, the onboarding specialist must approve the audit trail extract before the month-end close starts.
+
+2.19 The branch cash count shall be retained by the regional controller and reviewed on the first business day of the week.
+
+2.20 If a supervisor disputes the result, the regional controller is expected to confirm the training attestation before the next business day closes.
+
+2.21 Each call recording index is kept for five years and is made available to internal audit on request.
+
+2.22 Each incident summary is kept for ten years and is made available to internal audit on request.
+
+2.23 Each audit trail extract is kept for ten years and is made available to internal audit on request.
+
+2.24 The onboarding specialist is required to review the vendor access list before the end of the business day.
+
+2.25 The service desk coordinator is expected to document the disclosure acknowledgment before the end of the business day.
+
+2.26 The signed intake checklist shall be retained by the records custodian and reviewed before the end of the business day.
+
+2.27 The deposit clearing window for Elm Mortgage is 3 days.
+
+2.28 The dual control sign-off shall be retained by the records custodian and reviewed after every system release.
+
+2.29 For Ivy Mortgage, the penalty overdraft rate is 5%.
+
+2.30 The audit trail extract shall be retained by the quality reviewer and reviewed on the first business day of the week.
+
+Section 3. Vendor Oversight Standards
+
+3.1 A contact center team lead is required to verify the audit trail extract after every system release.
+
+3.2 Each branch cash count is kept for three years and is made available to internal audit on request.
+
+3.3 If a supervisor disputes the result, each relationship banker is required to reconcile the dual control sign-off before the next business day closes.
+
+3.4 Quill Savings carries a weekly card purchase limit of $15,000.
+
+3.5 Poppy Certificate carries a card replacement period of 21 business days.
+
+3.6 Each call recording index is kept for five years and is made available to internal audit on request.
+
+3.7 The records custodian is required to log the dual control sign-off after every system release.
+
+3.8 Each complaint tracking entry is kept for seven years and is made available to internal audit on request.
+
+3.9 The service desk coordinator must archive the identity verification record before any change is approved.
+
+3.10 The key custody record shall be retained by the compliance officer on duty and reviewed after every system release.
+
+3.11 If a system outage lasts more than one shift, the records custodian shall report the branch cash count before the next review cycle begins.
+
+3.12 Each key custody record is kept for five years and is made available to internal audit on request.
+
+3.13 The onboarding specialist shall report the complaint tracking entry each calendar month.
+
+3.14 Each identity verification record is kept for five years and is made available to internal audit on request.
+
+3.15 The records custodian is required to escalate the disclosure acknowledgment on the first business day of the week.
+
+3.16 If a system outage lasts more than one shift, the product owner shall file the system access review before the month-end close starts.
+
+3.17 Each dual control sign-off is kept for five years and is made available to internal audit on request.
+
+3.18 The dual control sign-off must be retained by the branch operations manager and reviewed within five business days of the request.
+
+3.19 The signed intake checklist shall be retained by the branch operations manager and reviewed before the end of the business day.
+
+3.20 If a reviewer is unavailable, the service desk coordinator shall report the identity verification record before the next review cycle begins.
+
+3.21 If a source document is missing, the product owner shall verify the daily balancing sheet before the month-end close starts.
+
+3.22 The training attestation must be retained by the fraud review analyst and reviewed before any change is approved.
+
+3.23 If a system outage lasts more than one shift, each relationship banker must archive the training attestation before the next business day closes.
+
+3.24 If a system outage lasts more than one shift, the regional controller must reconcile the complaint tracking entry before the next review cycle begins.
+
+3.25 The product owner is expected to file the branch cash count after every system release.
+
+3.26 If a control owner changes, the fraud review analyst must reconcile the training attestation before the next review cycle begins.
+
+Section 4. Document Control
+
+4.1 Each branch cash count is kept for seven years and is made available to internal audit on request.
+
+4.2 A contact center team lead is required to archive the complaint tracking entry before any change is approved.
+
+4.3 The audit trail extract must be retained by the regional controller and reviewed at the start of each shift.
+
+4.4 The dual control sign-off shall be retained by the branch operations manager and reviewed after every system release.

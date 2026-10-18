@@ -1,0 +1,12 @@
+probe_type,scorable_by_exact_match,n_probes,description
+plain,yes,55,A single clause holds the answer.
+superseded,yes,45,An amendment later in the document replaces the clause.
+exception,yes,45,A footnote carves out an exception; the answer is yes or no.
+table,yes,45,The answer is one cell of a tier table.
+two_section,yes,45,The answer needs two clauses from different sections.
+distractor,yes,45,A near-duplicate clause for a sibling product sits next to the true clause.
+paraphrased_answer,no,0,"The right value stated in other words, for example twenty-five thousand dollars."
+unit_converted_answer,no,0,"The right value in another unit, for example 48 hours for 2 days."
+verbose_or_hedged_answer,no,0,"The right value inside a full sentence, or with a caveat."
+multi_value_answer,no,0,Several values that can be listed in any order.
+free_text_explanation,no,0,An explanation or a clause citation that has no single string to match.

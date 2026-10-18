@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 450" role="img" aria-labelledby="title desc">
+  <title id="title">PolicyNeedle: planted manuals, a reader under test, a per-slice pass matrix and a CI-style gate</title>
+  <desc id="desc">Four-stage horizontal flow. Synthetic manuals at three lengths with facts planted at five depths in six forms. A reader under test, which is a stub in this repo. A scorer that builds a per-slice pass matrix. A gate that returns PASS or FAIL. Below the flow, a worked example for the truncating stub at 120 pages and the catch rates of three tests on stubs with known faults.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #5bc0be; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">PolicyNeedle - probe sweep and gate for one reader</text>
+  <text x="20" y="52" class="subheader">3 manual lengths x 5 depths x 6 forms of fact. The gate blocks the release when a slice fails.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="70" width="400" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="85" class="badge-text">Trigger: new assistant build, new model, or new manual version</text>
+
+  <!-- Stage 1: PLANTED MANUALS -->
+  <rect x="20" y="112" width="205" height="120" rx="8" class="stage-box"/>
+  <text x="32" y="132" class="stage-num">1 . PLANTED MANUALS</text>
+  <text x="32" y="154" class="stage-title">Synthetic manuals</text>
+  <text x="32" y="172" class="stage-sub">40, 120, 240 pages</text>
+  <text x="32" y="187" class="stage-sub">6 forms x 5 depths</text>
+  <text x="32" y="202" class="stage-sub">270 exact-answer questions</text>
+  <text x="32" y="222" class="meta-text">seeded, regenerable</text>
+
+  <!-- Arrow 1 -->
+  <line x1="228" y1="172" x2="242" y2="172" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: READER UNDER TEST -->
+  <rect x="245" y="112" width="205" height="120" rx="8" class="stage-box-eval"/>
+  <text x="257" y="132" class="stage-num">2 . READER UNDER TEST</text>
+  <text x="257" y="154" class="stage-title">reader(doc, question)</text>
+  <text x="257" y="172" class="stage-sub">returns answer text</text>
+  <text x="257" y="187" class="stage-sub">4 stubs here, no model</text>
+  <text x="257" y="202" class="stage-sub">your assistant goes here</text>
+  <text x="257" y="222" class="meta-strong">interface: one function</text>
+
+  <!-- Arrow 2 -->
+  <line x1="453" y1="172" x2="467" y2="172" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: SCORE AND SLICE -->
+  <rect x="470" y="112" width="205" height="120" rx="8" class="stage-box-eval"/>
+  <text x="482" y="132" class="stage-num">3 . SCORE AND SLICE</text>
+  <text x="482" y="154" class="stage-title">Per-slice pass matrix</text>
+  <text x="482" y="172" class="stage-sub">normalized exact match</text>
+  <text x="482" y="187" class="stage-sub">form x length x depth</text>
+  <text x="482" y="202" class="stage-sub">flag a cell under 90%</text>
+  <text x="482" y="222" class="meta-text">3 probes per cell</text>
+
+  <!-- Arrow 3 -->
+  <line x1="678" y1="172" x2="692" y2="172" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: CI GATE -->
+  <rect x="695" y="112" width="205" height="120" rx="8" class="stage-box-gate"/>
+  <text x="707" y="132" class="stage-num">4 . CI GATE VERDICT</text>
+  <text x="707" y="154" class="stage-title">Pre-release gate</text>
+  <text x="707" y="172" class="stage-sub">overall pass rate 98%+</text>
+  <text x="707" y="187" class="stage-sub">each form x length 90%+</text>
+  <text x="707" y="202" class="stage-sub">each depth band 90%+</text>
+  <text x="707" y="222" class="meta-block">verdict: PASS or FAIL</text>
+
+  <!-- Worked example -->
+  <rect x="20" y="256" width="430" height="124" rx="8" class="stage-box-block"/>
+  <text x="32" y="276" class="stage-num">WORKED EXAMPLE . TRUNCATING STUB . 120 PAGES</text>
+  <text x="32" y="298" class="stage-sub">depth 0% and 25%: pass</text>
+  <text x="32" y="313" class="stage-sub">depth 50%, 75%, 100%: fail (past char 60,000)</text>
+  <text x="32" y="328" class="stage-sub">superseded clause: fails at every depth</text>
+  <text x="32" y="343" class="stage-sub">amendment register sits past the limit</text>
+  <text x="32" y="366" class="meta-block">gate: FAIL. Block, send the slice list to review.</text>
+
+  <!-- Catch rates -->
+  <rect x="470" y="256" width="430" height="124" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="482" y="276" class="stage-title">Known failing cells flagged (190)</text>
+  <text x="482" y="298" class="timer">Short-document test:    0 of 190</text>
+  <text x="482" y="313" class="timer">Fixed-needle test:      2 of 190</text>
+  <text x="482" y="328" class="timer-fast">PolicyNeedle sweep:   190 of 190</text>
+  <text x="482" y="343" class="timer-fast">False flags on the control: 0</text>
+  <text x="482" y="366" class="meta-text">Measured on stubs with known faults, not a real model.</text>
+
+  <!-- Known limit -->
+  <text x="20" y="410" class="meta-block">Known limit: exact-match scoring on synthetic wording. 5 probe types cannot be scored.</text>
+  <text x="20" y="428" class="meta-text">All data synthetic. The four readers are stubs, not models.</text>
+</svg>

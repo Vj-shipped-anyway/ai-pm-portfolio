@@ -1,0 +1,5 @@
+manual_id,file,nominal_pages,chars,approx_pages,sections,blocks,planted_facts,register_start_char,draw
+manual_006p,manuals/manual_006p.txt,6,10605,5.9,4,95,10,,0
+manual_040p,manuals/manual_040p.txt,40,72102,40.1,16,654,90,68613,0
+manual_120p,manuals/manual_120p.txt,120,216553,120.3,43,1840,90,209428,0
+manual_240p,manuals/manual_240p.txt,240,432391,240.2,83,3616,90,420044,0
