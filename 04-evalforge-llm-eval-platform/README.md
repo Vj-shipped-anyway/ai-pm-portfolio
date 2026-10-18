@@ -4,6 +4,8 @@
 
 **▶ Live demo:** [evalforge-bfsi.streamlit.app](https://evalforge-bfsi.streamlit.app) *(placeholder — deploy pending)*
 
+**▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/04-evalforge-llm-eval-platform/demo.html)
+
 **▶ 60-second interactive walkthrough:** [Click through EvalForge on Arcade](https://app.arcade.software/share/evalforge-placeholder) *(placeholder)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, architecture, and walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (L2 Trust-and-Safety co-design, CISO read, regulatory exam) is what the next role does.
