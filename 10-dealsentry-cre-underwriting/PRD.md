@@ -137,7 +137,7 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 - Storage: Postgres for verification reports, override audit trail, source-of-truth cache. Snowflake for analytics (per-analyst, per-submarket, per-broker hallucination rate over time).
 - Observability: OpenTelemetry into Datadog. Langfuse for parser LLM traces. Per-broker hallucination dashboard is a load-bearing feature.
 - Verification stamp: PDF stamp generated server-side with sectional pass/fail badges, signed (KMS), embedded in the IC packet.
-- Override workflow: senior sign-off UI with audit-trail write to Project 08's ledger.
+- Override workflow: senior sign-off UI with audit-trail write to Project 09's ledger.
 - Post-close integration: verified underwriting feeds Argus deal model; asset onboarding to Yardi or MRI; leasing handoff to VTS; debt-side workflow to Lev when applicable.
 - Security: SOC 2 Type II. CoStar / Reonomy / Cherre license terms govern data RBAC. Broker NDA redaction policy explicit before launch.
 
@@ -171,8 +171,8 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 - Senior Analysts are the daily users. Frame the sentinel as "defends the analyst in front of IC," never "checks the analyst."
 - Asset Management consumes the verified underwriting at post-close handoff.
 - Tech is builder. They don't own.
-- Project 08 (audit trail) consumes every override and verification as a lineage event.
-- Project 09 (lease abstraction detector) feeds the corrected lease abstractions into Check 2's rent-roll arithmetic. Without Project 09, Check 2 is materially weaker on portfolios with non-standard leases.
+- Project 09 (audit trail) consumes every override and verification as a lineage event.
+- Project 03 (lease abstraction detector) feeds the corrected lease abstractions into Check 2's rent-roll arithmetic. Without Project 03, Check 2 is materially weaker on portfolios with non-standard leases.
 
 ---
 
@@ -213,6 +213,6 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 
 ---
 
-*This PRD interlocks with Project 08 (Audit Trail) — every override and verification is a lineage event — and Project 03 (LeaseGuard) — corrected lease abstractions feed Check 2's rent-roll arithmetic.*
+*This PRD interlocks with Project 09 (LineageLog) — every override and verification is a lineage event — and Project 03 (LeaseGuard) — corrected lease abstractions feed Check 2's rent-roll arithmetic.*
 
 *For the reference architecture, see [`ARCHITECTURE.md`](./ARCHITECTURE.md). For the runnable prototype, see [`src/app.py`](./src/app.py).*
