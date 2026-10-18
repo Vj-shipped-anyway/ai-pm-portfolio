@@ -2,6 +2,8 @@
 
 **A portfolio prototype for the front door of AI governance at a regulated bank: recompute the risk tier the sponsor declared, hold approval until the evidence that tier requires is on file, and order the review queue by tier instead of arrival. Written against the vocabulary of SR 11-7, the NIST AI RMF (Govern and Map) and the EU AI Act risk categories.**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/11-tiergate-ai-usecase-intake/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the rubric, the architecture and the walkthrough are mine; every number below is measured or modeled on synthetic data, or marked hypothetical. No real bank, vendor, person or intake submission appears anywhere. Production validation (a model risk committee read, calibrating the rubric on real intake, a reviewer team working the queue) is what the next role does.
@@ -614,7 +616,7 @@ The Streamlit prototype shows the product mechanic: a written rubric on cross-ch
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Governance PM · Designs intake, tiering and evidence gates for AI under regulated constraint*
 
@@ -622,7 +624,7 @@ The Streamlit prototype shows the product mechanic: a written rubric on cross-ch
 
 ## 🙌 Acknowledgements
 
-- **SR 11-7 (Federal Reserve and OCC supervisory guidance on model risk management), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the standard the work would have to meet on inventory, risk-proportionate validation and effective challenge. TierGate's evidence checklist puts independent validation with effective challenge on tier 3 and above.
+- **SR 11-7 (Federal Reserve and OCC supervisory guidance on model risk management), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with on inventory, risk-proportionate validation and effective challenge. TierGate's evidence checklist puts independent validation with effective challenge on tier 3 and above.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the Govern and Map functions are the vocabulary for the register, the accountable owners and the context questions on the form.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the risk-category vocabulary. TierGate's four tiers are an internal scale and not those categories; the mapping is a design item.
 - Projects in this portfolio that TierGate hands evidence to or takes evidence from: [04 EvalForge](../04-evalforge-llm-eval-platform/), [08 OversightOps](../08-oversightops-hitl-workflow/), [09 LineageLog](../09-lineagelog-ai-decision-audit/). 12 ValueLedger takes the benefit tracking after approval.
