@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">PortfolioBoard: one evidence-based view of an AI program portfolio</title>
+  <desc id="desc">Flow showing how gate evidence, demand and supply, dependencies and stage history feed an evidence status per program, a capacity grid and dependency propagation, then a pull rule and a benefit-at-risk rollup that the head of the AI program office acts on. A comparison strip contrasts the owner-picked red-amber-green report with PortfolioBoard on the synthetic data.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">PortfolioBoard - one evidence-based view of the AI portfolio</text>
+  <text x="20" y="52" class="subheader">Owners attest. PortfolioBoard computes status, shortfalls and blockers, and suggests what to pause.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="250" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: monthly portfolio review</text>
+
+  <!-- Stage 1: INPUTS -->
+  <rect x="20" y="120" width="205" height="110" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 . INPUTS</text>
+  <text x="32" y="162" class="stage-title">Programs and evidence</text>
+  <text x="32" y="180" class="stage-sub">30 programs, 17 criteria</text>
+  <text x="32" y="195" class="stage-sub">demand and supply</text>
+  <text x="32" y="210" class="stage-sub">stage history by week</text>
+  <text x="32" y="223" class="meta-text">synthetic, seeded</text>
+
+  <!-- Arrow 1 -->
+  <line x1="228" y1="175" x2="242" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: EVIDENCE STATUS -->
+  <rect x="245" y="120" width="205" height="110" rx="8" class="stage-box-eval"/>
+  <text x="257" y="140" class="stage-num">2 . EVIDENCE STATUS</text>
+  <text x="257" y="162" class="stage-title">Criteria and freshness</text>
+  <text x="257" y="180" class="stage-sub">red: a criterion unmet</text>
+  <text x="257" y="195" class="stage-sub">amber: stale or slipped</text>
+  <text x="257" y="210" class="stage-sub">or behind a bad upstream</text>
+  <text x="257" y="224" class="meta-strong">23 of 30 change status</text>
+
+  <!-- Arrow 2 -->
+  <line x1="453" y1="175" x2="467" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: CAPACITY GRID -->
+  <rect x="470" y="120" width="205" height="110" rx="8" class="stage-box-eval"/>
+  <text x="482" y="140" class="stage-num">3 . CAPACITY GRID</text>
+  <text x="482" y="162" class="stage-title">Demand against supply</text>
+  <text x="482" y="180" class="stage-sub">4 teams x 4 quarters</text>
+  <text x="482" y="195" class="stage-sub">pro-rata when short</text>
+  <text x="482" y="210" class="stage-sub">reviewers are the gate</text>
+  <text x="482" y="224" class="meta-strong">6 of 16 over, review 4 of 4</text>
+
+  <!-- Arrow 3 -->
+  <line x1="678" y1="175" x2="692" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: DEPENDENCIES -->
+  <rect x="695" y="120" width="205" height="110" rx="8" class="stage-box-gate"/>
+  <text x="707" y="140" class="stage-num">4 . DEPENDENCIES</text>
+  <text x="707" y="162" class="stage-title">Red or slipped upstream</text>
+  <text x="707" y="180" class="stage-sub">direct or through a chain</text>
+  <text x="707" y="195" class="stage-sub">blocked-by on each row</text>
+  <text x="707" y="210" class="stage-sub">root causes ranked</text>
+  <text x="707" y="224" class="meta-block">6 of 19 green behind one</text>
+
+  <!-- Arrow 4 (down) -->
+  <path d="M 797 230 L 797 256 L 410 256 L 410 286" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: PULL RULE + ROLLUP -->
+  <rect x="240" y="290" width="340" height="90" rx="8" class="stage-box-block"/>
+  <text x="252" y="310" class="stage-num">5 . PULL RULE + BENEFIT ROLLUP</text>
+  <text x="252" y="328" class="stage-title">Pause, fund or defer</text>
+  <text x="252" y="345" class="stage-sub">stage over its limit: pause lowest priority</text>
+  <text x="252" y="359" class="stage-sub">review supply by value per FTE</text>
+  <text x="252" y="373" class="meta-block">3 pauses; $20.25M at risk (modeled)</text>
+
+  <!-- Arrow 5 (back) -->
+  <path d="M 240 330 L 100 330 L 100 380" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Final: PROGRAM OFFICE -->
+  <rect x="20" y="385" width="200" height="55" rx="8" class="stage-box-ship"/>
+  <text x="32" y="405" class="stage-title">Program office</text>
+  <text x="32" y="423" class="stage-sub">decides on evidence</text>
+  <text x="32" y="436" class="meta-strong">no color to argue about</text>
+
+  <!-- Comparison strip -->
+  <rect x="600" y="290" width="285" height="90" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="612" y="310" class="stage-title">Same portfolio, two views</text>
+  <text x="612" y="332" class="timer">Report: true status on 7 of 30</text>
+  <text x="612" y="350" class="timer-fast">PortfolioBoard: 27 of 30</text>
+  <text x="612" y="370" class="meta-strong">known limit: 3 false attestations unseen</text>
+</svg>

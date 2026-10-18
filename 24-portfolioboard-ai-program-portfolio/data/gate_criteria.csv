@@ -1,0 +1,18 @@
+criterion_id,gate,gate_name,criterion,attested_by,max_age_days
+K01,1,Intake,Owner named,owner,365
+K02,1,Intake,Risk tier assigned,model_risk_review,365
+K03,1,Intake,Use case registered in intake,owner,365
+K04,2,Discovery entry,Sponsor named,owner,365
+K05,2,Discovery entry,Data source approved,data_governance,180
+K06,2,Discovery entry,Benefit estimate logged,owner,180
+K07,3,Build entry,Evaluation plan attached,data_science,180
+K08,3,Build entry,Security design review complete,security_review,180
+K09,3,Build entry,Model risk scoping review complete,model_risk_review,180
+K10,4,Pilot entry,Eval evidence attached,data_science,90
+K11,4,Pilot entry,Risk review complete,model_risk_review,120
+K12,4,Pilot entry,Security review complete,security_review,120
+K13,4,Pilot entry,Rollback plan documented,engineering,180
+K14,5,Scale entry,Pilot results reviewed,owner,90
+K15,5,Scale entry,Control evidence complete,model_risk_review,90
+K16,5,Scale entry,Rollback plan tested,engineering,90
+K17,5,Scale entry,Monitoring in place,engineering,60

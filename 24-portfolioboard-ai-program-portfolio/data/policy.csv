@@ -1,0 +1,4 @@
+key,value,note
+as_of_week,200,fixed week constant; week 5 of 2026Q4 in the modeled calendar
+calendar_start_year,2023,week 1 is the first week of 2023Q1
+weeks_per_quarter,13,13-week quarters in the modeled calendar

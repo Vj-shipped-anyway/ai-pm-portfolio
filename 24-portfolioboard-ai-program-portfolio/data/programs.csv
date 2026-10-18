@@ -1,0 +1,31 @@
+program_id,name,stage,owner,self_reported_rag,est_benefit_usd,benefit_confidence,target_quarter
+P-01,Complaint triage assistant,pilot,CX-01,green,2550000,0.9,2027Q3
+P-02,Enterprise model gateway,scale,TC-01,green,1450000,0.9,2026Q3
+P-03,Dispute case summarizer,build,OP-01,red,1650000,0.7,2027Q2
+P-04,KYC document extraction,scale,OP-02,green,4550000,0.7,2026Q3
+P-05,Evaluation harness service,pilot,DS-01,amber,2100000,0.9,2027Q3
+P-06,Call center agent assist,pilot,CX-02,green,4150000,0.7,2027Q3
+P-07,Credit memo drafting,build,CB-01,green,1800000,0.5,2027Q2
+P-08,Fraud alert narrative writer,discovery,RK-02,green,1900000,0.3,2026Q3
+P-09,Customer master data feed,scale,TC-02,green,2450000,0.9,2026Q2
+P-10,Policy question answering,build,OP-03,green,2100000,0.7,2027Q4
+P-11,Collections outreach drafting,discovery,RB-01,amber,750000,0.5,2027Q4
+P-12,Treasury cash forecast explainer,idea,FN-01,green,1400000,0.3,2028Q1
+P-13,Document corpus ingestion,build,TC-03,green,1700000,0.7,2026Q3
+P-14,Regulatory change digest,scale,RK-03,green,3550000,0.9,2026Q2
+P-15,Onboarding checklist copilot,build,RB-02,amber,2100000,0.7,2027Q4
+P-16,Underwriting document check,pilot,CB-02,amber,2400000,0.5,2027Q2
+P-17,Model inventory registration,pilot,RK-04,green,950000,0.7,2027Q3
+P-18,Meeting note summarizer,scale,OP-04,green,2450000,0.7,2026Q3
+P-19,Branch FAQ assistant,discovery,RB-03,green,2150000,0.7,2026Q2
+P-20,Complaint root-cause clustering,idea,CX-01,red,500000,0.5,2028Q3
+P-21,Payments exception resolver,build,OP-02,green,1600000,0.5,2026Q2
+P-22,Prompt and tool registry,build,TC-01,green,2450000,0.9,2026Q2
+P-23,Trade surveillance alert triage,discovery,RK-02,amber,2650000,0.5,2027Q4
+P-24,Vendor contract clause finder,build,FN-02,green,1750000,0.7,2027Q2
+P-25,Wealth client briefing pack,discovery,WM-01,amber,1500000,0.5,2028Q1
+P-26,Code review assistant,discovery,TC-04,green,700000,0.5,2028Q1
+P-27,AML narrative quality checker,pilot,RK-03,amber,3400000,0.9,2027Q1
+P-28,Loan servicing email responder,idea,RB-04,green,1100000,0.5,2028Q1
+P-29,HR policy assistant,idea,HR-01,amber,1250000,0.5,2028Q2
+P-30,Audit evidence collector,idea,AU-01,amber,1300000,0.3,2028Q2

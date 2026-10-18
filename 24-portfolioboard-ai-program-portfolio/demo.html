@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PortfolioBoard — AI Program Portfolio · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of PortfolioBoard: an AI program portfolio run on gate evidence, capacity and dependencies instead of owner-picked red-amber-green. Synthetic data.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldrow:first-of-type { border-top: 0; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; overflow-wrap: anywhere; }
+  .fieldvals { color: var(--text-secondary); overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 999px; margin-left: 6px; }
+  .tag-ok { background: #EAF3DE; color: #27500A; }
+  .tag-bad { background: #FCEBEB; color: #791F1F; }
+  .tag-warn { background: #FAEEDA; color: #633806; }
+  .reltitle { font-size: 12px; font-weight: 500; margin: 10px 0 4px; overflow-wrap: anywhere; }
+  .reltitle:first-child { margin-top: 0; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>PortfolioBoard — AI Program Portfolio</h1>
+    <p class="tagline">Pick a program and compare the owner's color with the gate evidence, the capacity and the dependencies behind it.</p>
+    <p class="author">Project 24 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">Synthetic data</span>
+      <span class="badge">30 programs · 17 gate criteria · 4 teams</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">No model: plain rules</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Running totals through the selected program">
+    <div class="stat"><p class="stat-label">Statuses that change</p><p class="stat-value" id="stat-changed">—</p></div>
+    <div class="stat"><p class="stat-label">Green reports contradicted</p><p class="stat-value" id="stat-contradicted">—</p></div>
+    <div class="stat"><p class="stat-label">Benefit at risk (modeled)</p><p class="stat-value" id="stat-risk">—</p></div>
+    <div class="stat"><p class="stat-label">Missed by the board (known limit)</p><p class="stat-value" id="stat-missed">—</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="prog-select">Program</label>
+    <select id="prog-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next program</button>
+    <button id="runall-btn">Walk all 30 programs</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — The monthly report</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>Basic — Attention list, and the evidence</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With PortfolioBoard</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. The generator decided which evidence is missing, stale or false, so the truth is known. No model is used: status, capacity, dependency and pause rules are plain rules. Benefit figures are owner estimates, never measured. Every number on this page is generated from the scripts in <code>src/</code>.</p>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (programs shown with the true status: PortfolioBoard − report) ÷ programs × people affected</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> 23 of 30 programs change status once evidence is applied. The report shows the true status for 7 of 30 programs; PortfolioBoard for 27 of 30. 4 of 19 programs reported green fail a gate criterion, model risk review is short in 4 of 4 quarters, and 3 false attestations stay invisible to the board.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 25 distinct owners plus 10 sponsors (an assumption of one sponsor per 3 programs) gives 35 people. (27 − 7) ÷ 30 × 35 = <b>23.3 owners and sponsors</b> who see a true status for their program. Assumes the board's statuses are read and acted on.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/24-portfolioboard-ai-program-portfolio/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/24-portfolioboard-ai-program-portfolio/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/24-portfolioboard-ai-program-portfolio/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/portfolioboard-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"programs":[{"id":"P-14","name":"Regulatory change digest","stage":"scale","owner":"RK-03","reported":"GREEN","board":"RED","evidence":"RED","true":"RED","benefit":3550000,"benefit_m":"$3.55M","confidence":0.9,"target":"2026Q2","slipped":false,"on_list":false,"verdict":"missed","criteria":17,"unmet":[{"name":"Sponsor named","by":"owner"},{"name":"Benefit estimate logged","by":"owner"}],"stale":[],"ups":[],"blocked_by":[],"reason":"gate criteria not met: Sponsor named, Benefit estimate logged","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.15","ratio":111.1,"pro_rata":"0.13"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":true,"missed":false},{"id":"P-18","name":"Meeting note summarizer","stage":"scale","owner":"OP-04","reported":"GREEN","board":"RED","evidence":"RED","true":"RED","benefit":2450000,"benefit_m":"$2.45M","confidence":0.7,"target":"2026Q3","slipped":false,"on_list":false,"verdict":"missed","criteria":17,"unmet":[{"name":"Rollback plan tested","by":"engineering"}],"stale":[],"ups":[{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false}],"blocked_by":[],"reason":"gate criteria not met: Rollback plan tested","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.15","ratio":111.1,"pro_rata":"0.13"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":true,"missed":false},{"id":"P-22","name":"Prompt and tool registry","stage":"build","owner":"TC-01","reported":"GREEN","board":"RED","evidence":"RED","true":"RED","benefit":2450000,"benefit_m":"$2.45M","confidence":0.9,"target":"2026Q2","slipped":true,"on_list":false,"verdict":"missed","criteria":9,"unmet":[{"name":"Model risk scoping review complete","by":"model_risk_review"}],"stale":[{"name":"Use case registered in intake","age":425,"max":365}],"ups":[{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false}],"blocked_by":[],"reason":"gate criteria not met: Model risk scoping review complete; evidence past its freshness rule: Use case registered in intake; slipped: target 2026Q2 has passed","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it is the root cause for 1 other program, so its gaps are the first to close","short":[{"team":"model risk review","need":"0.17","ratio":111.1,"pro_rata":"0.15"}],"later":[],"blocks":1,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":true,"missed":false},{"id":"P-19","name":"Branch FAQ assistant","stage":"discovery","owner":"RB-03","reported":"GREEN","board":"RED","evidence":"RED","true":"RED","benefit":2150000,"benefit_m":"$2.15M","confidence":0.7,"target":"2026Q2","slipped":true,"on_list":false,"verdict":"missed","criteria":6,"unmet":[{"name":"Data source approved","by":"data_governance"},{"name":"Benefit estimate logged","by":"owner"}],"stale":[],"ups":[{"id":"P-05","name":"Evaluation harness service","board":"RED","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":true}],"reason":"gate criteria not met: Data source approved, Benefit estimate logged; slipped: target 2026Q2 has passed; depends on P-05 Evaluation harness service (red)","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it still depends on P-05; deferred in 2027Q2","short":[{"team":"model risk review","need":"0.20","ratio":111.1,"pro_rata":"0.18"}],"later":["2027Q2"],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":true,"missed":false},{"id":"P-04","name":"KYC document extraction","stage":"scale","owner":"OP-02","reported":"GREEN","board":"AMBER","evidence":"AMBER","true":"AMBER","benefit":4550000,"benefit_m":"$4.55M","confidence":0.7,"target":"2026Q3","slipped":false,"on_list":false,"verdict":"missed","criteria":17,"unmet":[],"stale":[{"name":"Evaluation plan attached","age":353,"max":180},{"name":"Model risk scoping review complete","age":272,"max":180}],"ups":[{"id":"P-05","name":"Evaluation harness service","board":"RED","slipped":false},{"id":"P-17","name":"Model inventory registration","board":"AMBER","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":true}],"reason":"evidence past its freshness rule: Evaluation plan attached, Model risk scoping review complete; depends on P-05 Evaluation harness service (red)","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it still depends on P-05; deferred in 2027Q2","short":[{"team":"model risk review","need":"0.20","ratio":111.1,"pro_rata":"0.18"}],"later":["2027Q2"],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-06","name":"Call center agent assist","stage":"pilot","owner":"CX-02","reported":"GREEN","board":"AMBER","evidence":"AMBER","true":"RED","benefit":4150000,"benefit_m":"$4.15M","confidence":0.7,"target":"2027Q3","slipped":false,"on_list":false,"verdict":"missed","criteria":13,"unmet":[],"stale":[{"name":"Owner named","age":697,"max":365}],"ups":[{"id":"P-01","name":"Complaint triage assistant","board":"AMBER","slipped":false},{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false},{"id":"P-17","name":"Model inventory registration","board":"AMBER","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":false}],"reason":"evidence past its freshness rule: Owner named; depends on P-05 Evaluation harness service (red, through a chain)","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it still depends on P-05; deferred in 2027Q1, 2027Q2","short":[{"team":"model risk review","need":"0.32","ratio":111.1,"pro_rata":"0.29"}],"later":["2027Q1","2027Q2"],"blocks":0,"false_attestation":"Evaluation plan attached","changed":true,"green_contradicted":true,"at_risk":false,"missed":true},{"id":"P-23","name":"Trade surveillance alert triage","stage":"discovery","owner":"RK-02","reported":"AMBER","board":"RED","evidence":"RED","true":"RED","benefit":2650000,"benefit_m":"$2.65M","confidence":0.5,"target":"2027Q4","slipped":false,"on_list":true,"verdict":"caught","criteria":6,"unmet":[{"name":"Risk tier assigned","by":"model_risk_review"},{"name":"Benefit estimate logged","by":"owner"}],"stale":[],"ups":[{"id":"P-17","name":"Model inventory registration","board":"AMBER","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":false}],"reason":"gate criteria not met: Risk tier assigned, Benefit estimate logged; depends on P-05 Evaluation harness service (red, through a chain)","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it still depends on P-05; deferred in 2027Q2","short":[{"team":"model risk review","need":"0.08","ratio":111.1,"pro_rata":"0.07"}],"later":["2027Q2"],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":true,"missed":false},{"id":"P-01","name":"Complaint triage assistant","stage":"pilot","owner":"CX-01","reported":"GREEN","board":"AMBER","evidence":"AMBER","true":"AMBER","benefit":2550000,"benefit_m":"$2.55M","confidence":0.9,"target":"2027Q3","slipped":false,"on_list":false,"verdict":"missed","criteria":13,"unmet":[],"stale":[{"name":"Eval evidence attached","age":156,"max":90}],"ups":[],"blocked_by":[],"reason":"evidence past its freshness rule: Eval evidence attached","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.41","ratio":111.1,"pro_rata":"0.37"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-09","name":"Customer master data feed","stage":"scale","owner":"TC-02","reported":"GREEN","board":"AMBER","evidence":"AMBER","true":"AMBER","benefit":2450000,"benefit_m":"$2.45M","confidence":0.9,"target":"2026Q2","slipped":false,"on_list":false,"verdict":"missed","criteria":17,"unmet":[],"stale":[{"name":"Rollback plan documented","age":278,"max":180},{"name":"Control evidence complete","age":169,"max":90},{"name":"Monitoring in place","age":75,"max":60}],"ups":[],"blocked_by":[],"reason":"evidence past its freshness rule: Rollback plan documented, Control evidence complete, Monitoring in place","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.22","ratio":111.1,"pro_rata":"0.20"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-05","name":"Evaluation harness service","stage":"pilot","owner":"DS-01","reported":"AMBER","board":"RED","evidence":"RED","true":"RED","benefit":2100000,"benefit_m":"$2.10M","confidence":0.9,"target":"2027Q3","slipped":false,"on_list":true,"verdict":"caught","criteria":13,"unmet":[{"name":"Risk review complete","by":"model_risk_review"}],"stale":[],"ups":[{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false}],"blocked_by":[],"reason":"gate criteria not met: Risk review complete","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it is the root cause for 8 other programs, so its gaps are the first to close","short":[{"team":"model risk review","need":"0.98","ratio":111.1,"pro_rata":"0.88"}],"later":[],"blocks":8,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":true,"missed":false},{"id":"P-10","name":"Policy question answering","stage":"build","owner":"OP-03","reported":"GREEN","board":"AMBER","evidence":"GREEN","true":"AMBER","benefit":2100000,"benefit_m":"$2.10M","confidence":0.7,"target":"2027Q4","slipped":false,"on_list":false,"verdict":"missed","criteria":9,"unmet":[],"stale":[],"ups":[{"id":"P-09","name":"Customer master data feed","board":"AMBER","slipped":false},{"id":"P-17","name":"Model inventory registration","board":"AMBER","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":false}],"reason":"depends on P-05 Evaluation harness service (red, through a chain)","action":"PAUSE","action_reason":"stage build holds 8 programs against a limit of 6; this one ranks 2 of 6 for pausing (blocked); programs other teams depend on are never paused","short":[{"team":"model risk review","need":"0.25","ratio":111.1,"pro_rata":"0.22"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-08","name":"Fraud alert narrative writer","stage":"discovery","owner":"RK-02","reported":"GREEN","board":"AMBER","evidence":"GREEN","true":"AMBER","benefit":1900000,"benefit_m":"$1.90M","confidence":0.3,"target":"2026Q3","slipped":true,"on_list":false,"verdict":"missed","criteria":6,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"slipped: target 2026Q3 has passed","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; deferred in 2027Q2","short":[{"team":"model risk review","need":"0.34","ratio":111.1,"pro_rata":"0.31"}],"later":["2027Q2"],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-07","name":"Credit memo drafting","stage":"build","owner":"CB-01","reported":"GREEN","board":"AMBER","evidence":"AMBER","true":"RED","benefit":1800000,"benefit_m":"$1.80M","confidence":0.5,"target":"2027Q2","slipped":false,"on_list":false,"verdict":"missed","criteria":9,"unmet":[],"stale":[{"name":"Use case registered in intake","age":504,"max":365}],"ups":[],"blocked_by":[],"reason":"evidence past its freshness rule: Use case registered in intake","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.74","ratio":111.1,"pro_rata":"0.67"}],"later":[],"blocks":0,"false_attestation":"Evaluation plan attached","changed":true,"green_contradicted":true,"at_risk":false,"missed":true},{"id":"P-24","name":"Vendor contract clause finder","stage":"build","owner":"FN-02","reported":"GREEN","board":"AMBER","evidence":"AMBER","true":"RED","benefit":1750000,"benefit_m":"$1.75M","confidence":0.7,"target":"2027Q2","slipped":false,"on_list":false,"verdict":"missed","criteria":9,"unmet":[],"stale":[{"name":"Security design review complete","age":344,"max":180}],"ups":[{"id":"P-09","name":"Customer master data feed","board":"AMBER","slipped":false}],"blocked_by":[],"reason":"evidence past its freshness rule: Security design review complete","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.19","ratio":111.1,"pro_rata":"0.17"}],"later":[],"blocks":0,"false_attestation":"Data source approved","changed":true,"green_contradicted":true,"at_risk":false,"missed":true},{"id":"P-13","name":"Document corpus ingestion","stage":"build","owner":"TC-03","reported":"GREEN","board":"AMBER","evidence":"GREEN","true":"AMBER","benefit":1700000,"benefit_m":"$1.70M","confidence":0.7,"target":"2026Q3","slipped":true,"on_list":false,"verdict":"missed","criteria":9,"unmet":[],"stale":[],"ups":[{"id":"P-09","name":"Customer master data feed","board":"AMBER","slipped":false}],"blocked_by":[],"reason":"slipped: target 2026Q3 has passed","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it is the root cause for 3 other programs, so its gaps are the first to close","short":[{"team":"model risk review","need":"0.31","ratio":111.1,"pro_rata":"0.28"}],"later":[],"blocks":3,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-21","name":"Payments exception resolver","stage":"build","owner":"OP-02","reported":"GREEN","board":"AMBER","evidence":"GREEN","true":"AMBER","benefit":1600000,"benefit_m":"$1.60M","confidence":0.5,"target":"2026Q2","slipped":true,"on_list":false,"verdict":"missed","criteria":9,"unmet":[],"stale":[],"ups":[{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false}],"blocked_by":[],"reason":"slipped: target 2026Q2 has passed","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.22","ratio":111.1,"pro_rata":"0.20"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-25","name":"Wealth client briefing pack","stage":"discovery","owner":"WM-01","reported":"AMBER","board":"RED","evidence":"RED","true":"RED","benefit":1500000,"benefit_m":"$1.50M","confidence":0.5,"target":"2028Q1","slipped":false,"on_list":true,"verdict":"caught","criteria":6,"unmet":[{"name":"Data source approved","by":"data_governance"}],"stale":[],"ups":[],"blocked_by":[],"reason":"gate criteria not met: Data source approved","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.13","ratio":111.1,"pro_rata":"0.12"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":true,"missed":false},{"id":"P-29","name":"HR policy assistant","stage":"idea","owner":"HR-01","reported":"AMBER","board":"RED","evidence":"RED","true":"RED","benefit":1250000,"benefit_m":"$1.25M","confidence":0.5,"target":"2028Q2","slipped":false,"on_list":true,"verdict":"caught","criteria":3,"unmet":[{"name":"Use case registered in intake","by":"owner"}],"stale":[],"ups":[],"blocked_by":[],"reason":"gate criteria not met: Use case registered in intake","action":"FUND","action_reason":"needs no model risk review time this quarter","short":[],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":true,"missed":false},{"id":"P-28","name":"Loan servicing email responder","stage":"idea","owner":"RB-04","reported":"GREEN","board":"AMBER","evidence":"GREEN","true":"AMBER","benefit":1100000,"benefit_m":"$1.10M","confidence":0.5,"target":"2028Q1","slipped":false,"on_list":false,"verdict":"missed","criteria":3,"unmet":[],"stale":[],"ups":[{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false},{"id":"P-13","name":"Document corpus ingestion","board":"AMBER","slipped":true}],"blocked_by":[{"id":"P-13","why":"slipped","direct":true}],"reason":"depends on P-13 Document corpus ingestion (slipped)","action":"FUND","action_reason":"needs no model risk review time this quarter; it still depends on P-13; deferred in 2027Q1, 2027Q2","short":[],"later":["2027Q1","2027Q2"],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-17","name":"Model inventory registration","stage":"pilot","owner":"RK-04","reported":"GREEN","board":"AMBER","evidence":"GREEN","true":"AMBER","benefit":950000,"benefit_m":"$0.95M","confidence":0.7,"target":"2027Q3","slipped":false,"on_list":false,"verdict":"missed","criteria":13,"unmet":[],"stale":[],"ups":[{"id":"P-05","name":"Evaluation harness service","board":"RED","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":true}],"reason":"depends on P-05 Evaluation harness service (red)","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it still depends on P-05; deferred in 2027Q1, 2027Q2","short":[{"team":"model risk review","need":"0.50","ratio":111.1,"pro_rata":"0.45"}],"later":["2027Q1","2027Q2"],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":true,"at_risk":false,"missed":false},{"id":"P-27","name":"AML narrative quality checker","stage":"pilot","owner":"RK-03","reported":"AMBER","board":"AMBER","evidence":"AMBER","true":"AMBER","benefit":3400000,"benefit_m":"$3.40M","confidence":0.9,"target":"2027Q1","slipped":false,"on_list":true,"verdict":"caught","criteria":13,"unmet":[],"stale":[{"name":"Risk tier assigned","age":563,"max":365},{"name":"Security review complete","age":142,"max":120}],"ups":[{"id":"P-13","name":"Document corpus ingestion","board":"AMBER","slipped":true},{"id":"P-17","name":"Model inventory registration","board":"AMBER","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":false},{"id":"P-13","why":"slipped","direct":true}],"reason":"evidence past its freshness rule: Risk tier assigned, Security review complete; depends on P-05 Evaluation harness service (red, through a chain); P-13 Document corpus ingestion (slipped)","action":"PAUSE","action_reason":"stage pilot holds 6 programs against a limit of 5; this one ranks 1 of 3 for pausing (blocked); programs other teams depend on are never paused","short":[{"team":"model risk review","need":"0.47","ratio":111.1,"pro_rata":"0.42"}],"later":[],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-15","name":"Onboarding checklist copilot","stage":"build","owner":"RB-02","reported":"AMBER","board":"AMBER","evidence":"AMBER","true":"AMBER","benefit":2100000,"benefit_m":"$2.10M","confidence":0.7,"target":"2027Q4","slipped":false,"on_list":true,"verdict":"caught","criteria":9,"unmet":[],"stale":[{"name":"Data source approved","age":274,"max":180}],"ups":[{"id":"P-13","name":"Document corpus ingestion","board":"AMBER","slipped":true},{"id":"P-22","name":"Prompt and tool registry","board":"RED","slipped":true}],"blocked_by":[{"id":"P-13","why":"slipped","direct":true},{"id":"P-22","why":"red and slipped","direct":true}],"reason":"evidence past its freshness rule: Data source approved; depends on P-13 Document corpus ingestion (slipped); P-22 Prompt and tool registry (red and slipped)","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply; it still depends on P-13, P-22; deferred in 2027Q1, 2027Q2","short":[{"team":"model risk review","need":"0.25","ratio":111.1,"pro_rata":"0.22"}],"later":["2027Q1","2027Q2"],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-03","name":"Dispute case summarizer","stage":"build","owner":"OP-01","reported":"RED","board":"RED","evidence":"RED","true":"RED","benefit":1650000,"benefit_m":"$1.65M","confidence":0.7,"target":"2027Q2","slipped":false,"on_list":true,"verdict":"caught","criteria":9,"unmet":[{"name":"Evaluation plan attached","by":"data_science"}],"stale":[{"name":"Model risk scoping review complete","age":316,"max":180}],"ups":[{"id":"P-17","name":"Model inventory registration","board":"AMBER","slipped":false}],"blocked_by":[{"id":"P-05","why":"red","direct":false}],"reason":"gate criteria not met: Evaluation plan attached; evidence past its freshness rule: Model risk scoping review complete; depends on P-05 Evaluation harness service (red, through a chain)","action":"PAUSE","action_reason":"stage build holds 8 programs against a limit of 6; this one ranks 1 of 6 for pausing (red); programs other teams depend on are never paused","short":[{"team":"model risk review","need":"0.66","ratio":111.1,"pro_rata":"0.59"}],"later":[],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":true,"missed":false},{"id":"P-02","name":"Enterprise model gateway","stage":"scale","owner":"TC-01","reported":"GREEN","board":"GREEN","evidence":"GREEN","true":"GREEN","benefit":1450000,"benefit_m":"$1.45M","confidence":0.9,"target":"2026Q3","slipped":false,"on_list":false,"verdict":"correctly quiet","criteria":17,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"every criterion met with fresh evidence; no red or slipped upstream program","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.15","ratio":111.1,"pro_rata":"0.13"}],"later":[],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-12","name":"Treasury cash forecast explainer","stage":"idea","owner":"FN-01","reported":"GREEN","board":"GREEN","evidence":"GREEN","true":"GREEN","benefit":1400000,"benefit_m":"$1.40M","confidence":0.3,"target":"2028Q1","slipped":false,"on_list":false,"verdict":"correctly quiet","criteria":3,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"every criterion met with fresh evidence; no red or slipped upstream program","action":"FUND","action_reason":"needs no model risk review time this quarter","short":[],"later":[],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-26","name":"Code review assistant","stage":"discovery","owner":"TC-04","reported":"GREEN","board":"GREEN","evidence":"GREEN","true":"GREEN","benefit":700000,"benefit_m":"$0.70M","confidence":0.5,"target":"2028Q1","slipped":false,"on_list":false,"verdict":"correctly quiet","criteria":6,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"every criterion met with fresh evidence; no red or slipped upstream program","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.09","ratio":111.1,"pro_rata":"0.08"}],"later":[],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-20","name":"Complaint root-cause clustering","stage":"idea","owner":"CX-01","reported":"RED","board":"RED","evidence":"RED","true":"RED","benefit":500000,"benefit_m":"$0.50M","confidence":0.5,"target":"2028Q3","slipped":false,"on_list":true,"verdict":"caught","criteria":3,"unmet":[{"name":"Owner named","by":"owner"},{"name":"Risk tier assigned","by":"model_risk_review"},{"name":"Use case registered in intake","by":"owner"}],"stale":[],"ups":[{"id":"P-01","name":"Complaint triage assistant","board":"AMBER","slipped":false},{"id":"P-02","name":"Enterprise model gateway","board":"GREEN","slipped":false}],"blocked_by":[],"reason":"gate criteria not met: Owner named, Risk tier assigned, Use case registered in intake","action":"FUND","action_reason":"needs no model risk review time this quarter","short":[],"later":[],"blocks":0,"false_attestation":"","changed":false,"green_contradicted":false,"at_risk":true,"missed":false},{"id":"P-16","name":"Underwriting document check","stage":"pilot","owner":"CB-02","reported":"AMBER","board":"GREEN","evidence":"GREEN","true":"GREEN","benefit":2400000,"benefit_m":"$2.40M","confidence":0.5,"target":"2027Q2","slipped":false,"on_list":true,"verdict":"false alarm","criteria":13,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"every criterion met with fresh evidence; no red or slipped upstream program","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.46","ratio":111.1,"pro_rata":"0.41"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-30","name":"Audit evidence collector","stage":"idea","owner":"AU-01","reported":"AMBER","board":"GREEN","evidence":"GREEN","true":"GREEN","benefit":1300000,"benefit_m":"$1.30M","confidence":0.3,"target":"2028Q2","slipped":false,"on_list":true,"verdict":"false alarm","criteria":3,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"every criterion met with fresh evidence; no red or slipped upstream program","action":"FUND","action_reason":"needs no model risk review time this quarter","short":[],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":false,"missed":false},{"id":"P-11","name":"Collections outreach drafting","stage":"discovery","owner":"RB-01","reported":"AMBER","board":"GREEN","evidence":"GREEN","true":"GREEN","benefit":750000,"benefit_m":"$0.75M","confidence":0.5,"target":"2027Q4","slipped":false,"on_list":true,"verdict":"false alarm","criteria":6,"unmet":[],"stale":[],"ups":[],"blocked_by":[],"reason":"every criterion met with fresh evidence; no red or slipped upstream program","action":"FUND","action_reason":"fits the 2026Q4 model risk review supply","short":[{"team":"model risk review","need":"0.14","ratio":111.1,"pro_rata":"0.13"}],"later":[],"blocks":0,"false_attestation":"","changed":true,"green_contradicted":false,"at_risk":false,"missed":false}],"s":{"programs":30,"changed":23,"pct_changed":76.7,"changed_worse":20,"changed_better":3,"board_counts":{"GREEN":6,"AMBER":14,"RED":10},"reported_counts":{"GREEN":19,"AMBER":9,"RED":2},"green_reported":19,"green_reported_not_green":16,"green_reported_red":4,"board_correct":27,"rag_correct":7,"evidence_correct":27,"blocked_correct":30,"board_wrong":3,"pct_board_correct":90.0,"pct_rag_correct":23.3,"planted_false_attestations":3,"stale_programs":10,"stale_criteria":14,"mr_over_before":4,"mr_quarters":4,"mr_over_after":2,"mr_gap_before":9.62,"mr_gap_after":5.78,"cells_over_before":6,"cells":16,"cells_over_after":2,"plan_quarter":"2026Q4","mr_supply_plan":7.0,"mr_demand_plan_before":7.78,"mr_demand_plan_after_pause":6.4,"deferred_plan":0,"deferred_later_programs":8,"deferred_fte_later":6.01,"quarters":[{"quarter":"2026Q4","supply":7.0,"demand":7.78,"demand_after_pause":6.4,"funded_fte":6.4,"deferred_programs":0,"deferred_fte":0},{"quarter":"2027Q1","supply":7.0,"demand":11.1,"demand_after_pause":9.18,"funded_fte":6.79,"deferred_programs":4,"deferred_fte":2.39},{"quarter":"2027Q2","supply":7.5,"demand":12.14,"demand_after_pause":11.1,"funded_fte":7.48,"deferred_programs":8,"deferred_fte":3.62},{"quarter":"2027Q3","supply":8.0,"demand":8.1,"demand_after_pause":7.04,"funded_fte":7.04,"deferred_programs":0,"deferred_fte":0}],"paused":3,"actions":{"FUND":27,"PAUSE":3},"pauses":[{"stage":"build","program_id":"P-03","name":"Dispute case summarizer","tier":"red"},{"stage":"build","program_id":"P-10","name":"Policy question answering","tier":"blocked"},{"stage":"pilot","program_id":"P-27","name":"AML narrative quality checker","tier":"blocked"}],"stages_over":[{"stage":"build","wip":8,"limit":6,"little_weeks":52.0,"weeks_at_limit":39.0},{"stage":"pilot","wip":6,"limit":5,"little_weeks":31.2,"weeks_at_limit":26.0}],"benefit_total":60350000,"benefit_red_by_evidence":20250000,"benefit_blocked":18350000,"benefit_slipped":5200000,"benefit_stale":8550000,"benefit_clear":8000000,"programs_red_by_evidence":10,"pct_benefit_red_by_evidence":33.6,"benefit_weighted_red":14615000,"owners":25,"sponsors_modeled":10,"people":35,"programs_per_sponsor":3,"lift_programs":20,"utility_people":23.3},"s1":{"programs":30,"green":19,"amber":9,"red":2,"benefit_total":60350000,"benefit_green":40750000,"benefit_amber":17450000,"benefit_red":2150000,"pct_green":63.3,"pct_benefit_green":67.5,"owners":25,"criteria":17,"stages":5,"evidence_rows":286,"dependencies":25,"history_rows":90,"as_of_week":200,"as_of_quarter":"2026Q4"},"s2":{"programs":30,"listed":11,"needs_attention":24,"caught":8,"missed":16,"false_alarms":3,"true_red":13,"true_red_reported_red":2,"true_red_reported_green":7,"matches":7,"pct_matches":23.3,"pct_missed_of_needs":66.7,"missed_benefit":37200000,"matrix":{"GREEN":{"GREEN":3,"AMBER":9,"RED":7},"AMBER":{"GREEN":3,"AMBER":2,"RED":4},"RED":{"GREEN":0,"AMBER":0,"RED":2}}},"s3":{"green_reported":19,"a_green_fail":4,"a_green_stale_only":6,"a_unmet_total":6,"b_cells":16,"b_over":6,"b_mr_cells":4,"b_mr_over":4,"b_mr_gap_total":9.62,"b_worst_team":"model_risk_review","b_worst_quarter":"2027Q2","b_worst_ratio_pct":161.9,"c_green_blocked":6,"c_direct":4,"c_chain_only":2,"d_stages_over":2,"d_stages":5,"d_over":[{"stage":"build","wip":8,"limit":6,"little_weeks":52.0,"mean_completed_weeks":36.2,"weeks_at_limit":39.0},{"stage":"pilot","wip":6,"limit":5,"little_weeks":31.2,"mean_completed_weeks":24.8,"weeks_at_limit":26.0}],"d_wip_matches_programs":true,"d_wip":[{"stage":"idea","wip":5,"limit":8,"over_by":0,"over":false,"exits":6,"throughput":0.2308,"little_weeks":21.7,"mean_completed_weeks":20.0,"gap_pct":8.3,"weeks_at_limit":34.7},{"stage":"discovery","wip":6,"limit":6,"over_by":0,"over":false,"exits":6,"throughput":0.2308,"little_weeks":26.0,"mean_completed_weeks":27.7,"gap_pct":-6.0,"weeks_at_limit":26.0},{"stage":"build","wip":8,"limit":6,"over_by":2,"over":true,"exits":4,"throughput":0.1538,"little_weeks":52.0,"mean_completed_weeks":36.2,"gap_pct":43.4,"weeks_at_limit":39.0},{"stage":"pilot","wip":6,"limit":5,"over_by":1,"over":true,"exits":5,"throughput":0.1923,"little_weeks":31.2,"mean_completed_weeks":24.8,"gap_pct":25.8,"weeks_at_limit":26.0},{"stage":"scale","wip":5,"limit":10,"over_by":0,"over":false,"exits":0,"throughput":0.0,"little_weeks":null,"mean_completed_weeks":null,"gap_pct":null,"weeks_at_limit":null}],"e_benefit_total":60350000,"e_benefit_red_ev":20250000,"e_pct_red_ev":33.6,"e_benefit_reported_red":2150000,"e_programs_red_ev":10,"e_benefit_red_ev_reported_green":10600000,"f_mean_heavy":12.7,"f_mean_light":3.1,"f_ratio":4.1,"f_waiting_heavy":4,"f_waiting_all":6,"f_waits":[{"stage":"idea","visits":25,"mean_work":21.4,"mean_wait":2.6,"wait_share":11.0,"waiting_now":1,"mean_wait_so_far":1.0,"not_yet_requested":4,"wait_sum":66,"wait_n":25},{"stage":"discovery","visits":19,"mean_work":26.5,"mean_wait":3.7,"wait_share":12.4,"waiting_now":1,"mean_wait_so_far":3.0,"not_yet_requested":5,"wait_sum":71,"wait_n":19},{"stage":"build","visits":11,"mean_work":21.3,"mean_wait":13.7,"wait_share":39.2,"waiting_now":2,"mean_wait_so_far":6.0,"not_yet_requested":6,"wait_sum":151,"wait_n":11},{"stage":"pilot","visits":5,"mean_work":14.4,"mean_wait":10.4,"wait_share":41.9,"waiting_now":2,"mean_wait_so_far":13.0,"not_yet_requested":4,"wait_sum":52,"wait_n":5}]},"plan_quarter":"2026Q4"};
+const PROGS = D.programs;
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
+function usd(x) { return "$" + (Math.floor((x + 5000) / 10000) / 100).toFixed(2) + "M"; }
+
+let idx = 0;
+const sel = document.getElementById("prog-select");
+PROGS.forEach((p, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = p.id + " " + p.name + " - reported " + p.reported.toLowerCase() + " - board " + p.board;
+  sel.appendChild(o);
+});
+
+function totals(upTo) {
+  let changed = 0, contradicted = 0, atRisk = 0, missed = 0;
+  for (let i = 0; i <= upTo; i++) {
+    const p = PROGS[i];
+    if (p.changed) changed++;
+    if (p.green_contradicted) contradicted++;
+    if (p.at_risk) atRisk += p.benefit;
+    if (p.missed) missed++;
+  }
+  return { changed, contradicted, atRisk, missed };
+}
+
+function statusPill(s) { return s === "RED" ? "pill-bad" : (s === "AMBER" ? "pill-warn" : "pill-ok"); }
+function statusTag(s) { return s === "RED" ? "tag-bad" : (s === "AMBER" ? "tag-warn" : "tag-ok"); }
+function actionPill(a) { return a === "PAUSE" ? "pill-bad" : (a === "DEFER" ? "pill-warn" : "pill-ok"); }
+
+function render() {
+  const p = PROGS[idx];
+  sel.value = idx;
+  const tt = totals(idx);
+  document.getElementById("stat-changed").textContent = String(tt.changed);
+  document.getElementById("stat-contradicted").textContent = String(tt.contradicted);
+  document.getElementById("stat-risk").textContent = usd(tt.atRisk);
+  document.getElementById("stat-missed").textContent = String(tt.missed);
+
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(p.id) + " " + esc(p.name) + "</b> - stage " + esc(p.stage) + ", owner " + esc(p.owner) + ", " +
+    esc(plural(p.criteria, "gate criterion")) + " in force. Program " + esc(idx + 1) + " of " + esc(PROGS.length) + ".";
+
+  // Card 1: the report as sent
+  let b = "";
+  b += "<p>Owner <b>" + esc(p.owner) + "</b> reports <b>" + esc(p.reported) + "</b>.</p>";
+  b += '<div class="driver-row"><span class="driver-label">Owner-estimated benefit</span><span class="driver-value">' + esc(p.benefit_m) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Owner confidence</span><span class="driver-value">' + esc(p.confidence) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Target quarter</span><span class="driver-value">' + esc(p.target) + "</span></div>";
+  let stamp, stampCls;
+  if (p.reported === "GREEN" && p.true !== "GREEN") { stamp = "MISSED: reported green"; stampCls = "pill-bad"; }
+  else if (p.reported !== p.true) { stamp = "WRONG: reported " + p.reported.toLowerCase(); stampCls = "pill-bad"; }
+  else { stamp = "matches, nothing behind it"; stampCls = "pill-info"; }
+  b += '<span class="pill ' + stampCls + '">' + esc(stamp) + "</span>";
+  b += '<div class="fieldvals" style="font-size:12px;margin-top:8px;">The report carries no gate evidence, capacity, dependencies or work in progress.</div>';
+  document.getElementById("card-before").innerHTML = b;
+
+  // Card 2: attention list, and the evidence it cannot see
+  let s = "";
+  s += '<div class="driver-row"><span class="driver-label">On the attention list (amber or red)</span><span class="driver-value">' + (p.on_list ? "yes" : "no") + "</span></div>";
+  s += '<div class="driver-row"><span class="driver-label">True status (generator)</span><span class="driver-value">' + esc(p.true) + "</span></div>";
+  const vcls = p.verdict === "caught" || p.verdict === "correctly quiet" ? "pill-ok" : (p.verdict === "missed" ? "pill-bad" : "pill-warn");
+  s += '<span class="pill ' + vcls + '">attention list: ' + esc(p.verdict) + "</span>";
+  s += '<div class="reltitle" style="margin-top:12px;">Gate evidence behind it</div>';
+  if (!p.unmet.length && !p.stale.length) {
+    s += '<div class="fieldvals">All ' + esc(p.criteria) + " criteria met with fresh evidence.</div>";
+  }
+  p.unmet.forEach(u => {
+    s += '<div class="fieldrow"><span class="fieldname">' + esc(u.name) + '</span><span class="tag tag-bad">not met</span><div class="fieldvals">attested by ' + esc(u.by) + "</div></div>";
+  });
+  p.stale.forEach(u => {
+    s += '<div class="fieldrow"><span class="fieldname">' + esc(u.name) + '</span><span class="tag tag-warn">stale</span><div class="fieldvals">' + esc(u.age) + " days old against " + esc(u.max) + "</div></div>";
+  });
+  if (p.slipped) {
+    s += '<div class="fieldrow"><span class="fieldname">Target ' + esc(p.target) + '</span><span class="tag tag-warn">slipped</span></div>';
+  }
+  p.ups.forEach(u => {
+    s += '<div class="fieldrow"><span class="fieldname">Depends on ' + esc(u.id) + '</span><span class="tag ' + statusTag(u.board) + '">' + esc(u.board.toLowerCase()) + (u.slipped ? ", slipped" : "") + '</span><div class="fieldvals">' + esc(u.name) + "</div></div>";
+  });
+  if (p.false_attestation) {
+    s += '<div class="fieldvals" style="font-size:12px;margin-top:8px;"><b>Ground truth (synthetic):</b> the generator planted a false attestation: ' + esc(p.false_attestation) + " is marked met with fresh evidence and is not truly met.</div>";
+  }
+  document.getElementById("card-sota").innerHTML = s;
+
+  // Card 3: PortfolioBoard
+  let h = "";
+  const word = p.board !== p.reported ? "FLAGGED " + p.board : "CONFIRMED " + p.board;
+  h += '<div class="reltitle">' + esc(word) + ' <span class="tag ' + statusTag(p.board) + '">' + esc(p.board) + "</span></div>";
+  h += '<div class="fieldvals" style="font-size:12px;margin-bottom:6px;">' + esc(p.reason) + "</div>";
+  if (p.blocked_by.length) {
+    h += '<div class="driver-row"><span class="driver-label">Blocked by</span><span class="driver-value">' + esc(p.blocked_by.map(x => x.id + " (" + x.why + (x.direct ? "" : ", chain") + ")").join(", ")) + "</span></div>";
+  }
+  if (p.blocks) {
+    h += '<div class="driver-row"><span class="driver-label">Blocks</span><span class="driver-value">' + esc(plural(p.blocks, "program")) + "</span></div>";
+  }
+  p.short.forEach(x => {
+    h += '<div class="fieldrow"><span class="fieldname">' + esc(x.team) + '</span><span class="tag tag-warn">' + esc(x.ratio) + "% subscribed before pauses</span>" +
+         '<div class="fieldvals">' + esc(D.plan_quarter) + ": needs " + esc(x.need) + " FTE, pro-rata share " + esc(x.pro_rata) + "</div></div>";
+  });
+  h += '<span class="pill ' + actionPill(p.action) + '">' + esc(p.action) + " in " + esc(D.plan_quarter) + "</span>";
+  h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">' + esc(p.action_reason) + ".</div>";
+  if (p.at_risk) {
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;"><b>Benefit at risk (modeled):</b> ' + esc(p.benefit_m) + " of owner-estimated benefit.</div>";
+  }
+  if (p.missed) {
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;"><b>Known limit:</b> the board shows ' + esc(p.board) + " and the true status is " + esc(p.true) + ". The board reads attested evidence and cannot see a false attestation.</div>";
+  }
+  document.getElementById("card-shield").innerHTML = h;
+}
+
+sel.addEventListener("change", e => { idx = parseInt(e.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < PROGS.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => { idx = i; render(); i++; if (i >= PROGS.length) clearInterval(iv); }, 600);
+});
+
+render();
+</script>
+</body>
+</html>

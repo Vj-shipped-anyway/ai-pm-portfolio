@@ -1,0 +1,17 @@
+team,quarter,supply_fte
+data_science,2026Q4,27.0
+data_science,2027Q1,27.0
+data_science,2027Q2,27.0
+data_science,2027Q3,27.0
+engineering,2026Q4,38.0
+engineering,2027Q1,41.0
+engineering,2027Q2,44.0
+engineering,2027Q3,46.0
+model_risk_review,2026Q4,7.0
+model_risk_review,2027Q1,7.0
+model_risk_review,2027Q2,7.5
+model_risk_review,2027Q3,8.0
+security_review,2026Q4,9.0
+security_review,2027Q1,10.0
+security_review,2027Q2,10.5
+security_review,2027Q3,11.0
