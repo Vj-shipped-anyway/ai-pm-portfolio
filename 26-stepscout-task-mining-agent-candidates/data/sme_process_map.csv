@@ -1,0 +1,12 @@
+seq,step_id,step,systems_named,owner_role,minutes_per_step
+1,S01,Open the exception from the queue,case system,operator,2
+2,S02,Read the reason code,case system,operator,2
+3,S03,Look up the original payment,payments hub,operator,5
+4,S04,Copy the beneficiary details,case system,operator,3
+5,S05,Check that name and account match,case system,operator,4
+6,S06,Screen the party against the watch list,screening application,operator,3
+7,S08,Draft the correction,case system,operator,8
+8,S09,Second person approves,case system,approver,3
+9,S10,Resubmit the payment,payments hub,operator,3
+10,S11,Write the case note,case system,operator,4
+11,S12,Close the case,case system,operator,1

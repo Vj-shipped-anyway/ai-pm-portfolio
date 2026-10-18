@@ -1,0 +1,17 @@
+step_id,step_name,process_order,status_event,restricted_data,control_flag,gated_by,data_fields,truth_class,planted_median_touch_min,planted_timing_sigma,planted_text_chars,planted_override_rate,planted_cross_app_copy,planted_repeats_per_case,planted_offdesk_share
+S01,open_exception,1,OPENED,0,0,,exception_id;queue;received_at,AGENT,1.5,0.25,0,0.0,0.0,1.0,0
+S02,read_reason_code,2,REASON_CODED,0,0,,reason_code;return_text,AGENT,1.0,0.25,0,0.0,0.0,1.0,0
+S03,lookup_original_payment,4,,0,0,,payment_reference;amount;value_date;beneficiary_bank,AGENT,4.0,0.35,0,0.02,0.55,1.0,0
+S04,copy_beneficiary_fields,5,,0,0,,beneficiary_name;account_number;bank_id,AGENT,5.0,0.3,0,0.02,0.95,1.0,0
+S05,match_name_account,6,MATCH_CHECKED,0,0,,beneficiary_name;account_number;match_score,AGENT,3.0,0.35,15,0.06,0.0,1.0,0
+S06,screen_watchlist,7,SCREENED,1,0,,party_name;country;list_result,AGENT,3.5,0.3,40,0.0,0.0,1.0,0
+S07,judge_ambiguous_match,8,MATCH_REVIEWED,1,0,,match_score;party_documents;prior_cases,HUMAN_JUDGMENT,9.0,0.6,240,0.55,0.3,1.12,0.2
+S08,draft_correction,12,CORRECTION_DRAFTED,0,0,,corrected_beneficiary;correction_narrative,AGENT_HITL,6.0,0.4,150,0.22,0.0,1.13,0
+S09,approve_four_eyes,13,APPROVED,0,1,,draft_correction;approver_id,HUMAN_CONTROL,2.5,0.4,0,0.01,0.0,1.13,0
+S10,resubmit_payment,14,RESUBMITTED,0,0,S09,corrected_beneficiary;payment_reference;approval_id,AGENT_HITL,2.5,0.3,0,0.0,0.7,1.0,0
+S11,write_case_note,15,NOTE_ADDED,0,0,,case_summary;actions_taken,AGENT,3.0,0.3,210,0.04,0.0,1.0,0
+S12,close_case,16,CLOSED,0,0,,case_id;closure_code,AGENT,1.0,0.2,0,0.0,0.0,1.0,0
+S13,triage_beneficiary_bank_reply,10,REPLY_LOGGED,0,0,,reply_text;case_history;requested_fields,HUMAN_JUDGMENT,7.0,0.55,420,0.35,0.5,1.62,0
+S14,choose_resolution_route,11,ROUTE_SET,0,0,,route_options;case_summary,HUMAN_JUDGMENT,2.0,0.12,0,0.02,0.0,1.0,1.0
+S15,check_cutoff_and_value_date,3,,0,0,,value_date;cutoff_time,AGENT,1.5,0.2,0,0.0,0.0,1.0,0
+S16,request_info_from_originator,9,INFO_REQUESTED,0,0,,originator_contact;missing_fields;template_id,AGENT_HITL,4.5,0.35,150,0.1,0.1,1.0,0

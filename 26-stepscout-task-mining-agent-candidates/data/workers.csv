@@ -1,0 +1,15 @@
+worker_id,role,team,tenure_band
+W01,operator,repair_a,3y+
+W02,operator,repair_a,1-3y
+W03,operator,repair_a,<1y
+W04,operator,repair_a,1-3y
+W05,operator,repair_a,3y+
+W06,operator,repair_b,1-3y
+W07,operator,repair_b,<1y
+W08,operator,repair_b,3y+
+W09,operator,repair_b,1-3y
+W10,senior_operator,repair_a,3y+
+W11,senior_operator,repair_b,3y+
+W12,senior_operator,repair_b,3y+
+W13,approver,repair_a,3y+
+W14,approver,repair_b,3y+
