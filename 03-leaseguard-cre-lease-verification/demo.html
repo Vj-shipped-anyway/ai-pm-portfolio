@@ -129,7 +129,7 @@
       <span class="badge">6 named deficiencies</span>
       <span class="badge">3 verification layers</span>
     </div>
-    <p class="framing">Portfolio prototype on synthetic leases, not a production case study. Extraction outputs are mocked and calibrated to observed failure patterns; every number below is generated from the scripts in <code>src/</code>.</p>
+    <p class="framing">Portfolio prototype on synthetic leases, not a production case study. Extraction outputs are mocked and calibrated to observed failure patterns; every 🟢 number below is generated from the scripts in <code>src/</code>; 🟡 numbers are modeled.</p>
   </header>
 
   <section class="stats" aria-label="Running totals through the selected lease">
@@ -171,7 +171,7 @@
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (deployed-NLP error rate − LeaseGuard error rate) × field extractions per cycle</p>
-    <p style="margin: 8px 0 0;">🟢 <b>Measured on this 6-lease set:</b> deployed pipeline 55/72 fields correct (76.4%); after LeaseGuard triage 71/72 (98.6%). 17 wrong fields: 16 routed to triage, 1 missed. 21 fields routed in total, so 5 were false flags a paralegal clears in seconds. The one miss is the lease_06 kick-out clause, where both models return the same incomplete value and no rule fires.</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this 6-lease set:</b> deployed pipeline 55/72 fields correct (76.4%); after LeaseGuard triage 71/72 (98.6%, counting every routed field as resolved correctly by the paralegal). 17 wrong fields: 16 routed to triage, 1 missed. 21 fields routed in total, so 5 were false flags a paralegal has to clear. The one miss is the lease_06 kick-out clause, where both models return the same incomplete value and no rule fires.</p>
     <p style="margin: 8px 0 0;">🟡 <b>Modeled at portfolio scale</b> (220 leases × 12 fields = 2,640 extractions per cycle): blended accuracy 88% → 98.2%, roughly 270 field errors caught per year, ~$4.2M/yr of recovered rent exposure. Assumes the public PropTech benchmarks named in the README and that paralegal triage clears flagged fields; not measured.</p>
   </section>
 

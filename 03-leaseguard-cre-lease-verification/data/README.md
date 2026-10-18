@@ -1,6 +1,6 @@
 # Sample Data — LeaseGuard Walkthrough
 
-Six synthetic lease abstracts plus two ground-truth CSVs. The leases are written to mirror what shows up in a real CRE portfolio: a couple of clean ICSC/BOMA forms, then four progressively non-standard cases that break a deployed lease-NLP pipeline in specific, named ways.
+Six synthetic leases plus two ground-truth CSVs. The leases are written to mirror what shows up in a real CRE portfolio: a couple of clean ICSC/BOMA forms, then four progressively non-standard cases that break a deployed lease-NLP pipeline in specific, named ways.
 
 These are synthetic. Names, addresses, and dollar figures are invented. The clause structure and lease language is calibrated against the public ICSC retail-lease template, BOMA office form, and the kinds of redlined leases I have read out of actual CRE portfolios over the past five years.
 
@@ -14,8 +14,8 @@ These are synthetic. Names, addresses, and dollar figures are invented. The clau
 | `leases/lease_04_redlined_retail.txt` | Mall in-line retail with `[STRIKE]`/`[INSERT]` redline markup, CPI-floor-cap, co-tenancy kick-out, exclusivity. The hardest one. |
 | `leases/lease_05_with_side_letter.txt` | Office lease + side letter granting ROFO on Floor 13. The ROFO does not appear in the lease body. |
 | `leases/lease_06_complex_anchor_tenant.txt` | Anchor tenant power-center lease: stepped escalation, co-tenancy kick-out, sales-based kick-out, four-category exclusivity. |
-| `expected_extractions.csv` | The 12 ground-truth fields per lease. The number `step_02` is graded against. |
-| `deficiency_classes.csv` | For each lease, which of the six deficiencies trip on it, plus a short note. The number `step_03` is graded against. |
+| `expected_extractions.csv` | The 12 ground-truth fields per lease. The file `step_02` is graded against. |
+| `deficiency_classes.csv` | For each lease, which of the six deficiencies trip on it, plus a short note. Reference table only: `step_03` hard-codes its own wrong-field mapping and does not read this file. |
 
 ## The 12 fields
 
@@ -37,5 +37,5 @@ In `lease_04`, redlines are simulated with `[STRIKE]old text[/STRIKE]` and `[INS
 
 - `step_01_manual_abstraction.py` ignores the deficiency_classes file. A paralegal reading the lease cover-to-cover gets the right answers regardless of how messy the document is — the bottleneck is time, not accuracy.
 - `step_02_deployed_lease_nlp.py` produces a per-lease per-field extraction calibrated to what real Claude-over-OCR pipelines actually produce on these patterns. Graded against `expected_extractions.csv`.
-- `step_03_deficiencies_exposed.py` explains every wrong field by mapping it to a class in `deficiency_classes.csv`.
+- `step_03_deficiencies_exposed.py` explains every wrong field by mapping it to one of the six classes (a mapping hard-coded in the script; it does not read `deficiency_classes.csv`).
 - `step_04_with_leaseguard.py` runs the verification ensemble and produces a triage queue.

@@ -366,7 +366,7 @@ Alignment, not certification.
 
 ## 7. What's deliberately not here
 
-- **A replacement for the deployed extraction pipeline.** Fine-tuning the primary is not the strategy; the README's three-backend comparison shows no single model wins all six deficiency classes.
+- **A replacement for the deployed extraction pipeline.** Fine-tuning the primary is not the strategy; the README's three-backend comparison (hypothetical inputs, not measured in this repo) shows no single model wins all six deficiency classes.
 - **A new system of record.** Verified values flow back into Yardi, MRI, or Argus.
 - **A new OCR engine.**
 - **A clause-completeness check.** The one miss in the prototype (both models return a partial kick-out) needs a check that counts distinct trigger clauses in the text. Designed, not built.

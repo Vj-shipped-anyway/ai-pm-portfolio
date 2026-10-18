@@ -17,11 +17,11 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 > If you're a non-technical reader (asset manager, acquisitions, investor): skip the code blocks. The plain-English explanation and the output tables tell the story.
 > If you're technical: every code block is runnable. `cd src && python step_NN_*.py` and you'll see the same output I show here.
 
-[![Synthetic leases: 6](https://img.shields.io/badge/synthetic%20leases-6-blue)](#)
-[![Fields per lease: 12](https://img.shields.io/badge/fields%20per%20lease-12-blue)](#)
-[![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)](#)
-[![Measured accuracy: 76.4% to 98.6%](https://img.shields.io/badge/measured%20accuracy-76.4%25%20%E2%86%92%2098.6%25-success)](#)
-[![Wrong fields routed to triage: 16 of 17](https://img.shields.io/badge/wrong%20fields%20routed-16%20of%2017-brightgreen)](#)
+![Synthetic leases: 6](https://img.shields.io/badge/synthetic%20leases-6-blue)
+![Fields per lease: 12](https://img.shields.io/badge/fields%20per%20lease-12-blue)
+![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)
+![Measured accuracy: 76.4% to 98.6%](https://img.shields.io/badge/measured%20accuracy-76.4%25%20%E2%86%92%2098.6%25-success)
+![Wrong fields routed to triage: 16 of 17](https://img.shields.io/badge/wrong%20fields%20routed-16%20of%2017-brightgreen)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
 
@@ -105,13 +105,13 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 
 **Measured and modeled performance.**
 
-- 🟢 **Deployed pipeline: 55/72 fields correct (76.4%)** on the 6-lease sample (`step_02`). **After LeaseGuard triage: 71/72 (98.6%)** (`step_04`).
+- 🟢 **Deployed pipeline: 55/72 fields correct (76.4%)** on the 6-lease sample (`step_02`). **After LeaseGuard triage: 71/72 (98.6%)** (`step_04`; counts every routed field as resolved correctly by the paralegal).
 - 🟢 **21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags.** 51 fields auto-cleared. Router mix: 12 DISAGREEMENT, 6 MISSING, 3 SIDE_LETTER_TRIPWIRE, 0 RULE_VIOLATION.
 - 🟢 **1 known miss:** the `lease_06` kick-out. Both models return `co_tenancy_kickout`; the lease has co-tenancy and sales-based kick-outs; no rule fires.
 - 🟡 **Blended accuracy at portfolio scale: 88% → 98.2%** (modeled — assumes paralegal triage clears flagged fields at the published triage accuracy)
 - 🟡 **\~270 field errors caught and corrected per year** at 220 leases × 12 fields (\~12% blended error × 2,640 fields × \~85% routed to triage successfully); **\~$4.2M/yr** modeled rent recovery at that shape. At fleet scale (5,000+ leases): **\~6,100 field errors/yr** and **\~$95M/yr**.
 
-🟡 **Modeled cost.** \~$18K in build compute (secondary-extraction tuning and a Mistral 7B fine-tune on 1,200 synthetic lease examples), plus 0.5 FTE labeling lead for 4 weeks and my time as PM. \~$280K/yr at fleet scale (compute plus paralegal triage time), or \~$45 per error caught against $250-400 to re-abstract from scratch. Modeled, not measured.
+🟡 **Modeled cost.** \~$18K in build compute (secondary-extraction tuning and a Mistral 7B fine-tune on 1,200 synthetic lease examples), plus 0.5 FTE labeling lead for 4 weeks and my time as PM. \~$280K/yr at fleet scale (compute plus paralegal triage time), or \~$46 per error caught ($280K ÷ \~6,100) against $226-$328 per lease to re-abstract from scratch (the Step 1 range). Modeled, not measured.
 
 **Call to action.** Fork this repo. Swap [`data/expected_extractions.csv`](./data/expected_extractions.csv) and [`data/leases/`](./data/leases/) for your own ground truth and leases, replace the mock extractions in `step_02` and `step_04` with your pipeline's output and a second model's, and run the four step scripts. Walk the triage queue they produce with your asset-management lead or your abstraction lead.
 
@@ -123,7 +123,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 2. **The sample data** — 6 synthetic leases (clean, redlined, side-lettered, anchor) + ground truth + deficiency mapping
 3. **Step 1 — Before automated abstraction.** Manual paralegal workflow. Cost, time, accuracy.
 4. **Step 2 — With deployed lease-NLP.** The Claude-Sonnet-over-OCR pipeline already in production. 96% on standard leases, 78% on non-standard, 88% blended.
-5. **Step 3 — Where this still breaks.** Six named deficiencies, each with a worked example pulled from the sample leases.
+5. **Step 3 — Where this still breaks.** Six named deficiencies; five have worked examples pulled from the sample leases (boilerplate paraphrase has 0 failures on this sample).
 6. **Step 4 — The fix.** LeaseGuard: an ensemble verification layer that catches what the primary missed.
 7. **Utility delivered.** The multiplied number, plus a modeled 28-day pilot design.
 
@@ -165,7 +165,7 @@ Six synthetic leases in [`data/leases/`](./data/leases/). They're written to mir
 | `lease_01_standard_retail.txt` | Clean ICSC retail, 60-month term, fixed 3% escalation, $12 CAM cap | Baseline — pipeline gets all 12 fields right |
 | `lease_02_standard_office.txt` | Clean BOMA office, 120-month term, stepped escalation table | Baseline — stepped table renders cleanly on this template |
 | `lease_03_non_standard_industrial.txt` | Triple-net industrial, embedded amendments, CPI-with-floor-and-cap escalation, ROFO | First non-standard case |
-| `lease_04_redlined_retail.txt` | Mall in-line retail with `[STRIKE]`/`[INSERT]` markup, CPI escalation, co-tenancy kick-out, exclusivity | The hardest one — six of six deficiencies trip on this lease |
+| `lease_04_redlined_retail.txt` | Mall in-line retail with `[STRIKE]`/`[INSERT]` markup, CPI escalation, co-tenancy kick-out, exclusivity | The hardest one — four of the six deficiency classes show up in its wrong fields (step_03) |
 | `lease_05_with_side_letter.txt` | Clean office lease + side letter granting ROFO on Floor 13 | Side-letter blindness case |
 | `lease_06_complex_anchor_tenant.txt` | Anchor power-center lease, stepped escalation, co-tenancy kick-out, sales-based kick-out, four-category exclusivity | Multi-section reasoning case |
 
@@ -175,7 +175,7 @@ Six synthetic leases in [`data/leases/`](./data/leases/). They're written to mir
 | --- | --- |
 | `tenant_name`, `premises_sf` | Identity. Wrong here = wrong everywhere. |
 | `base_rent_psf`, `lease_term_months`, `commencement_date` | The economic contract. |
-| `escalation_type`, `escalation_value` | Compounds over the term. CPI vs fixed-pct on a 10-year lease moves NOI by 5-8%. |
+| `escalation_type`, `escalation_value` | Compounds over the term. CPI vs fixed-pct on a long lease changes NOI (size not measured in this repo). |
 | `cam_cap_psf`, `cam_base_year` | The classic recovery dispute. An uncapped record on a capped lease is a six-figure-per-year leak. |
 | `kickout_clause`, `exclusivity_clause` | The disposition / redev surprise. Discovering one of these post-close turns a deal pencil upside down. |
 | `ROFO_present` | Lost expansion revenue at the next vacancy. |
@@ -192,7 +192,7 @@ A typical commercial lease has 80-150 abstractable fields. We use 12 because the
 
 **It works.** Per-field accuracy is roughly 96%. Paralegals are accurate at this — the failure mode is fatigue and mis-transcription, not misunderstanding the lease.
 
-**The bottleneck is scale.** A standard lease takes \~4 hours to abstract; a redlined or amended lease takes 6-8. At \~$65/hr blended for paralegal time and \~$145/hr for senior QC, you're looking at $300-700 per lease. At a 220-asset portfolio that's $66K-$154K every time you re-abstract on amendments.
+**The bottleneck is scale.** In the Step 1 model (🟡 modeled, not measured) a standard lease takes 2.86 hours to abstract and the most complex sample lease takes 4.44. At \~$65/hr blended for paralegal time and \~$145/hr for senior QC, that is $225.90 to $328.34 per lease. At a 220-asset portfolio that's roughly $61K every time you re-abstract on amendments (see the Result line below).
 
 **The code** ([`src/step_01_manual_abstraction.py`](./src/step_01_manual_abstraction.py)):
 
@@ -234,7 +234,7 @@ python src/step_01_manual_abstraction.py
 
 ## 🤖 Step 2 — With deployed lease-NLP: the SOTA
 
-**In plain English:** Replace the paralegal with a LangChain extraction chain over Claude Sonnet, run on top of OCR'd PDFs. Per-lease throughput drops from 4 hours to \~6 minutes. Per-lease cost drops from \~$245 to roughly $2-4.
+**In plain English:** Replace the paralegal with a LangChain extraction chain over Claude Sonnet, run on top of OCR'd PDFs. Per-lease throughput drops from \~3.7 hours (the Step 1 average) to \~6 minutes (🟡 modeled). Per-lease cost drops from \~$278 (the Step 1 average) to a model and OCR fee that this repo does not model.
 
 This is the public Cherre / Lev / ProDeal / Yardi Aspire pattern — the SOTA that any institutional CRE operator runs today. The code below is a simplified version; a real production pipeline would have retries, structured-output schemas, and a confidence threshold that does not save it from any of the failure modes in Step 3.
 
@@ -267,7 +267,7 @@ python src/step_02_deployed_lease_nlp.py
 | `lease_04` redlined retail | 4 / 12 | 33% |
 | `lease_05` office + side letter | 11 / 12 | 92% |
 | `lease_06` anchor tenant complex | 8 / 12 | 67% |
-| 🟢 **Blended on this sample** | **55 / 72** | **76% on this sample** |
+| 🟢 **Blended on this sample** | **55 / 72** | **76.4% on this sample** |
 
 The 6-lease sample is deliberately weighted toward the hard cases. 🟡 **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** (modeled from public PropTech vendor benchmarks: \~96% on standard leases, which dominate the mix, and \~78% on non-standard). The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
 
@@ -296,11 +296,11 @@ The six:
 
 **The code** ([`src/step_03_deficiencies_exposed.py`](./src/step_03_deficiencies_exposed.py)) reads the wrong-field log from Step 2 and maps each to its deficiency class.
 
-**Sample output — the actual failures, with the actual wrong extractions:**
+**Sample output (excerpt: three of the six classes; the script also prints CAM_CAP_OMISSION and KICKOUT_CLAUSE_MISSED, and BOILERPLATE_PARAPHRASE has 0 failures on this sample):**
 
 ```
 ### REDLINE_BLINDNESS  (3 failures on the 6-lease sample)
-    Model reads through STRIKE/INSERT markers. Picks up struck (wrong) values.
+    Model reads through STRIKE/INSERT markers as if they're regular text. Picks up struck (wrong) values.
 
   [lease_04 / premises_sf]
       Extracted:  '4800'
@@ -314,21 +314,40 @@ The six:
       Extracted:  '60'
       Expected:   '84'
 
-### ESCALATION_CLAUSE_VARIANCE  (3 failures)
-    Defaults to 'fixed N% annual.' Misses CPI-with-floor-and-cap, stepped,
-    and anniversary-indexed escalations.
+### ESCALATION_CLAUSE_VARIANCE  (6 failures on the 6-lease sample)
+    Defaults to 'fixed N% annual.' Misses CPI-with-floor-and-cap, stepped, and anniversary-indexed escalations.
 
   [lease_03 / escalation_type]
       Extracted:  'fixed_pct'
       Expected:   'cpi_with_floor_and_cap'
 
+  [lease_03 / escalation_value]
+      Extracted:  '3.0'
+      Expected:   'floor_2.0_cap_4.5'
+
+  [lease_04 / escalation_type]
+      Extracted:  'fixed_pct'
+      Expected:   'cpi_with_floor_and_cap'
+
+  [lease_04 / escalation_value]
+      Extracted:  '3.0'
+      Expected:   'floor_1.5_cap_4.0'
+
   [lease_06 / escalation_type]
       Extracted:  'fixed_pct'
       Expected:   'stepped'
 
-### TENANT_RIGHTS_BURIED_IN_SIDE_LETTER  (1 failure)
+  [lease_06 / escalation_value]
+      Extracted:  '10.0'
+      Expected:   '10pct_yr6_and_yr11'
+
+### TENANT_RIGHTS_BURIED_IN_SIDE_LETTER  (2 failures on the 6-lease sample)
     ROFO, ROFR, expansion right in a side letter the OCR pipeline did not
     ingest as part of 'this lease'.
+
+  [lease_03 / ROFO_present]
+      Extracted:  'No'
+      Expected:   'Yes'
 
   [lease_05 / ROFO_present]
       Extracted:  'No'
@@ -337,7 +356,7 @@ The six:
 
 **Why this is an AI PM artifact, not just a bug list:**
 
-The defects above aren't "the model is bad." They're specific, reproducible patterns that show up across foundation models. **The same eval, run against three extraction backends:**
+The defects above aren't "the model is bad." They're specific patterns that the public PropTech writing describes across models. 🔴 **Hypothetical pass rates for three extraction backends.** These figures are hard-coded in `step_03`, which labels them a 240-lease eval set; that set and the GPT-4o and Mistral runs are not in this repo, so nothing in this table was measured here:
 
 | Deficiency | Claude Sonnet (deployed) | GPT-4o | Mistral 7B FT |
 | --- | --- | --- | --- |
@@ -360,7 +379,7 @@ Three layers + a queue:
 
 1. **Primary extraction** — the existing deployed Claude-Sonnet-over-OCR pipeline. Untouched.
 2. **Re-extraction with a different model** — GPT-4o or a fine-tuned Mistral 7B Instruct over the same OCR'd text. Disagreement on a field flags it.
-3. **Rule-based field validators** — regex + structural rules per field type (rent must be a `$NN.NN` dollar amount, escalation must be in a known type set, dates must parse, ROFO must be Yes/No, state codes must be 2 letters).
+3. **Rule-based field validators** — regex + structural rules per field type (rent must be a `$NN.NN` dollar amount, escalation must be in a known type set, dates must parse, ROFO must be Yes/No, term must be a sane number of months).
 4. **Triage queue** — flagged fields routed to a paralegal with the source clause highlighted alongside the primary extraction. The paralegal reviews and resolves. The CSV write to Yardi only happens after triage clears.
 
 The product is **NOT a replacement for the deployed lease-NLP**. It's a verification layer that catches what the primary missed.
@@ -402,8 +421,8 @@ python src/step_04_with_leaseguard.py
 | `lease_04` redlined retail | 4 / 12 | 12 / 12 |
 | `lease_05` office + side letter | 11 / 12 | 12 / 12 |
 | `lease_06` anchor tenant complex | 8 / 12 | 11 / 12 |
-| 🟢 **Blended on this sample** | **76.4%** (55 / 72) | **98.6%** (71 / 72). 16 of the 17 wrong fields were routed to triage |
-| 🟡 **Projected at portfolio scale** | **88%** | **98.2%** (modeled — assumes paralegal triage clears flagged fields with the published triage accuracy) |
+| 🟢 **Blended on this sample** | **76.4%** (55 / 72) | **98.6%** (71 / 72), counting every routed field as resolved correctly by the paralegal. 16 of the 17 wrong fields were routed to triage |
+| 🟡 **Projected at portfolio scale** | **88%** | **98.2%** (modeled: 12% blended error × the ~15% not routed to triage = 1.8% residual, so 98.2%; the ~85% routed-successfully rate is an assumption, not a published figure) |
 
 🟢 **LeaseGuard routes 16 of the 17 wrong fields on this sample to paralegal triage.** The 17th is the `lease_06` kick-out clause: both models return the same incomplete value (`co_tenancy_kickout` instead of co-tenancy plus sales-based), so neither the ensemble nor the rules fire. That is the known miss class, left in the mock data on purpose. 21 fields in total are routed, so 5 are false flags (for example, clean leases whose text mentions exclusivity language). 🟡 The remaining 1.8% gap projected at portfolio scale is the residual where both the primary and the secondary agree on a wrong answer and no rule catches it — a known class.
 
@@ -427,9 +446,9 @@ Anything else is theatre. Going from 88% to 98% accuracy is not an outcome. *Goi
 | 🟡 Modeled rent recovery at the 220-asset shape | **~$4.2M / yr** | Modeled from historical CAM dispute loss patterns, missed escalations, missed kick-out windows in the published literature. Not measured. Every portfolio is different. |
 | 🟡 At fleet scale (national operator, 5,000+ leases) | **\~6,100 field errors caught / yr** · **\~$95M / yr modeled rent recovery** | Same per-lease error rate at fleet size |
 | 🟡 Modeled cost to deliver (fleet scale) | **~$280K / yr** | Compute (secondary extraction + rule layer) + paralegal triage time |
-| 🟡 Per error caught | **~$45** | vs $250-400 to manually re-abstract from scratch |
+| 🟡 Per error caught | **~$46** | ~$280K ÷ ~6,100 errors; vs $226-$328 per lease to manually re-abstract from scratch (Step 1 range) |
 
-**Modeled 28-day pilot shape (the design target).** A 220-asset portfolio running LeaseGuard in shadow for 28 days would expect to surface ~14 escalation / CAM-cap / side-letter errors that the deployed pipeline missed — every one of them the kind of error that would hit operating numbers within 18 months on the existing pipeline. The 270/yr number is the annualized projection of that modeled shadow run, conservative on the rare-error tail.
+**Modeled 28-day pilot shape (the design target).** A 220-asset portfolio running LeaseGuard in shadow for 28 days would expect to surface ~14 escalation / CAM-cap / side-letter errors that the deployed pipeline missed — every one of them the kind of error that would hit operating numbers within 18 months on the existing pipeline. The 270/yr number comes from the utility math above, not from annualizing this window: \~14 errors in 28 days annualizes to less than 270.
 
 **At fleet scale (a national CRE operator with 5,000+ leases):** the math is roughly **6,100 field errors caught per year**, plus the recovery-litigation tail risk that sits separately on the General Counsel's desk.
 
@@ -447,8 +466,8 @@ Modeled 28-day shadow window at a 220-asset retail-and-office book shape:
 | --- | --- | --- |
 | 🟡 Per-lease blended field accuracy | 88.0% | 98.2% (+10.2 pp) |
 | 🟡 Field errors per cycle (220 leases × 12 fields) | \~317 | \~48 |
-| 🟡 CAM-reconciliation disputes lost (modeled trailing 12 mo) | \~11 | (modeled) \~2 |
-| 🟡 Mean time to detect a wrong escalation | 14-22 months (next reconciliation) | ~24 hours (triage queue, by design) |
+| 🔴 CAM-reconciliation disputes lost per year | \~11 | \~2 (hypothetical; no input in this repo derives either figure) |
+| 🔴 Mean time to detect a wrong escalation | 14-22 months (next reconciliation) | ~24 hours (triage queue, by design) |
 | 🟡 Modeled $ recovered / yr at this portfolio shape | — | **~$4.2M** |
 
 **Modeled cost of build:** ~$18K in compute (secondary extraction tuning + Mistral 7B fine-tune on 1,200 synthetic lease examples) + 0.5 FTE labeling lead for 4 weeks + my time as PM.
@@ -560,8 +579,8 @@ The PM artifacts that show how I'd run this product if I owned the seat. This RE
 
 - [`PRD.md`](./PRD.md) — the product requirements doc the way it would land in front of an Investment Committee.
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the systems doc: components, router vocabulary, data model, leases-as-untrusted-input threat model, failure behavior, write-back controls.
-- [`demo.html`](./demo.html) — clickable, no-install walkthrough; every number is generated from the scripts in `src/`.
-- [`data/`](./data/) — the 6 lease abstracts, ground truth, deficiency map. `data/README.md` explains the redline markup convention.
+- [`demo.html`](./demo.html) — clickable, no-install walkthrough; every 🟢 number is generated from the scripts in `src/`, and 🟡 numbers are modeled.
+- [`data/`](./data/) — the six synthetic leases, ground truth, deficiency map. `data/README.md` explains the redline markup convention.
 - [`src/`](./src/) — runnable step scripts.
 
 Run the eval suite end-to-end:
@@ -653,7 +672,7 @@ If LeaseGuard were a real product shipping to a CRE owner-operator's asset manag
 - **Governance:** Every disagreement between primary extractor and ensemble verifier auto-routes to the senior abstraction lead with the diff pre-rendered.
 - **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; rollout to one asset book at a time (start with the redlined-retail subset where the lift is biggest).
 
-The Streamlit prototype here proves the *product mechanic* — that an ensemble verifier can catch the six named lease-NLP failure modes on the 6-lease eval set. The production architecture above is what the seat I'm pursuing actually delivers.
+The Streamlit prototype here demonstrates the *product mechanic* on synthetic data: on the 6-lease eval set an ensemble verifier routes 16 of the 17 wrong fields to triage, covering five of the six named failure modes (boilerplate paraphrase has no failures in the sample). The production architecture above is what the seat I'm pursuing actually delivers.
 
 ---
 

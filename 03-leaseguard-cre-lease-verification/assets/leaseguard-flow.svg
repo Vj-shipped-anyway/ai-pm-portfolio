@@ -104,7 +104,7 @@
   <!-- Measured strip -->
   <rect x="230" y="398" width="670" height="76" rx="8" fill="#f6f5f2" stroke="none"/>
   <text x="242" y="418" class="stage-title">Measured on the 6-lease synthetic eval set (72 fields)</text>
-  <text x="242" y="436" class="stage-sub">deployed 55/72 = 76.4%  ->  after triage 71/72 = 98.6%</text>
+  <text x="242" y="436" class="stage-sub">deployed 55/72 = 76.4%  ->  after triage 71/72 = 98.6% (routed fields assumed resolved)</text>
   <text x="242" y="452" class="stage-sub">16/17 wrong fields routed . 21 routed (5 false) . 1 miss: lease_06 kick-out</text>
   <text x="242" y="468" class="stage-sub">reproduce: python src/step_04_with_leaseguard.py</text>
 </svg>

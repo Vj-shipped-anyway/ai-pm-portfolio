@@ -27,9 +27,9 @@ Deployed lease-abstraction NLP is materially wrong on non-standard, redlined, an
 
 | Goal | Metric | Target |
 |------|--------|--------|
-| Cut abstraction error rate | Field-level error rate vs. ground truth | 12.4% to under 2% |
+| Cut abstraction error rate | Field-level error rate vs. ground truth | about 12% to under 2% |
 | Recover rent | Modeled $/yr from caught escalation + CAM errors | $4.2M/yr |
-| Cut reviewer load | Hours per lease post-deployment | 3.5h to under 30 min |
+| Cut reviewer load | Hours per lease post-deployment | about 3.7h to under 30 min |
 | Cut buyer-side surprise findings | Post-close abstraction findings, count/yr | Baseline to −60% |
 | Reduce missed-clause litigation exposure | Modeled $ exposure | −70% |
 
@@ -126,7 +126,7 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 - Primary extractor: whatever the firm runs today — Yardi's lease-abstraction module, ProDeal's abstraction product, an in-house Llama 3.1 70B fine-tune, or one of the standalone vendors. We don't replace it.
 - Re-extractor: Claude Sonnet via Bedrock (or direct Anthropic API). Different prompt, different chunking strategy than primary. The "different model family" rule is non-negotiable — same family produces correlated errors.
 - Second-opinion re-extractor: Azure OpenAI gpt-4o. The two re-extractors plus the primary form the ensemble.
-- Rule extractor: Python with regex and spaCy. Templates for dates, base rent, escalation %, CAM cap percentages. Runs in <100ms per lease.
+- Rule extractor: Python with regex and spaCy. Templates for dates, base rent, escalation %, CAM cap percentages. Design target: under 100 ms per lease (not measured).
 - Clause-class classifier: Llama 3.1 8B fine-tune on a labeled corpus of clause-class examples. Inferred on a single L4 GPU. Powers the missing-but-likely-present detector.
 - PDF source-clause highlight: PyMuPDF render with character-offset primary, embedding-search fallback (sentence-transformers / E5).
 - Orchestration: Airflow for nightly portfolio QA batch. Temporal for the per-lease reviewer workflow (queue, override, escalate to lease counsel).
@@ -137,7 +137,7 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 - Security: SOC 2 Type II; encryption at rest; RBAC by asset and role. GDPR for any EU-resident lease.
 
 **Throughput envelope and latency budget:**
-- Diligence-window mode: 50K leases in 21 days (a 200-asset platform deal). Parallel workers, full ensemble pass.
+- Diligence-window mode: 200 leases in 21 days (a 200-asset platform deal). Parallel workers, full ensemble pass.
 - Steady-state portfolio QA: ~5K leases/day across an institutional owner's full book. Nightly batch.
 - Per-lease ensemble pass: ~45s p50 (the LLM calls dominate). Acceptable for batch; not interactive.
 - Reviewer triage UI: under 1s p99 for queue load and field-level disagreement view.
