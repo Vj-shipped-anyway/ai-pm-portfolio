@@ -14,7 +14,7 @@ This doc is cloud-agnostic where the design allows it and explicit where it does
 
 SchemaWatch is a consumer-side control. It does not replace the tool registry, the tool owners' tests or the agent. It sits between a published schema revision and the agent that will call it, and decides one thing: let the release through, ask a person, or hold it.
 
-Eight components. Three are in the release path; five are not.
+Eight components. Four are in the release path; four are not.
 
 | Component | Responsibility | Language / framework | In release path? | Stateful? |
 | --- | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ Eight components. Three are in the release path; five are not.
 | `sw-console` | Review console: open decisions, evidence bundles, owner attestations, bypass log. | React + Next.js + Tailwind | No | No |
 | `sw-telemetry` | OpenTelemetry spans and metrics from every component, exported off the release path. | OTel Collector to the platform's monitoring | No, async | No |
 
-**What is in the release path, and what is not.** The collector, store and gate decide whether a release proceeds. Everything else supports them or reports on them. The agent's own request path is untouched: SchemaWatch never sits between the agent and a tool at call time. Runtime failure handling stays with AgentWatch.
+**What is in the release path, and what is not.** The collector, store, differ and gate decide whether a release proceeds. Everything else supports them or reports on them. The agent's own request path is untouched: SchemaWatch never sits between the agent and a tool at call time. Runtime failure handling stays with AgentWatch.
 
 **Repo structure** (production shape; monorepo):
 
@@ -398,7 +398,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 - **A runtime proxy between the agent and its tools.** SchemaWatch decides at release time. Runtime failure handling is AgentWatch; the tool-call gate is PromptShield.
 - **A replacement for the owners' own tests.** Owners know their API's behavior; SchemaWatch knows what the agent sends.
 - **A claim that it detects every semantic change.** It reads numbers and units. Meaning changes with no number or unit are a known limit, covered by owner attestation and human review.
-- **Constraint changes and nested schemas in v1.** Minimum, maximum, maxLength, pattern, nested objects and oneOf are outside the diff and the validator. Unsupported features produce REVIEW, not ALLOW.
+- **Constraint changes and nested schemas in v1.** The diff does not compare minimum, maximum, maxLength or pattern. The validator does not support pattern, nested objects or oneOf. Unsupported features produce REVIEW, not ALLOW.
 - **A standalone authentication system.** It uses the bank's IdP.
 
 Holding that line is the scope discipline: each item above is something a team would be tempted to absorb, and each one is already owned by another system or another phase.
@@ -435,6 +435,6 @@ Holding that line is the scope discipline: each item above is something a team w
 
 The counts, the findings and the reasons in the example are the prototype's `step_04` output for `get_transaction_history` release v2 on the synthetic data. The URI and ids are illustrative.
 
-OpenAPI spec lives at `apps/gate/openapi.yaml` and is the source of truth for the owner-pipeline client and the console.
+OpenAPI spec lives at `docs/api/openapi.yaml` and is the source of truth for the owner-pipeline client and the console.
 
 See also: [README](./README.md), [PRD](./PRD.md), and the [clickable demo](https://vj-shipped-anyway.github.io/ai-pm-portfolio/15-schemawatch-tool-schema-drift/demo.html).

@@ -60,7 +60,7 @@
 | **Agent Platform Lead** (line-1) | Owner | To hear about a release before the agent does, with the calls it breaks and the order to read them in. | A gate that blocks benign changes; a tool nobody owns. |
 | **Tool (API) owners** | Co-owners of the gate | A clear verdict and the evidence behind it, fast, inside the pipeline they already use. A way to say "this is cosmetic" and be believed. | Another approval step run by a team that does not own their roadmap; false BLOCKs on harmless edits. |
 | **SRE on call** | Consumer of the alerts | To be told "this failure is known drift from release X" instead of debugging a new incident. | Pages for changes that were already allowed; a second alert stream that duplicates the first. |
-| **Model risk reviewer** (line 2) | Auditor | A record of which schema revision each decision ran under, and evidence that changes were assessed before release. | A parallel attestation surface that competes with the model inventory; a heuristic presented as a guarantee. |
+| **Model risk reviewer** (line-2) | Auditor | A record of which schema revision each decision ran under, and evidence that changes were assessed before release. | A parallel attestation surface that competes with the model inventory; a heuristic presented as a guarantee. |
 | **Security / CISO** | Approver | No customer values stored in the replay log beyond what replay needs; least-privilege reads from the tool registry. | Argument values copied into yet another store. |
 | **Release engineering** | Consulted | A check that runs in the owner's pipeline without adding a long step. | A slow or flaky gate that gets disabled. |
 | **Agent feature product owners** | Consulted | To know why a feature's behavior changed in the same week. | Finding out from customers. |
@@ -88,7 +88,7 @@
 
 **Outputs (lagging):**
 - Calls broken or misread per change. Prototype baseline: 🟢 28.44 with no gate, 3.76 with the gate on synthetic data.
-- Releases shipped without a version bump that SchemaWatch caught. Prototype: 🟢 9 of 25 needing action were unbumped.
+- Releases shipped without a version bump that SchemaWatch caught. Prototype: 🟢 9 of 25 releases needing action were unbumped; the gate held 8 of those 9.
 - False REVIEW rate (target: trending down as owners attest). Prototype: 🟢 1 of 31.
 - Gate bypass count: releases that reached the agent with no decision.
 - Meaning changes found after release by a person (the known-limit class). Prototype: 🟢 3 changes, 169 calls.
