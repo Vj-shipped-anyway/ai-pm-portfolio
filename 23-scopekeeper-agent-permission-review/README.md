@@ -2,6 +2,8 @@
 
 **A portfolio prototype for cutting an AI agent's permissions to what it actually uses: a usage-versus-grant diff, a breadth score, a proposed least-privilege scope set per agent, a dry-run replay of 90 days of calls and a risk ranking. Aligned to the least-privilege theme of [NIST SP 800-53 Rev 5](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final) (control AC-6), the excessive-agency theme in the [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/), the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7, the 2011 predecessor, in April 2026).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/23-scopekeeper-agent-permission-review/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real grant store, real call logs, agent owners agreeing to an attestation flag, an access-governance read) is what the next role does.
@@ -711,7 +713,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs access governance for the tools agents call, under regulated constraint*
 
@@ -722,5 +724,5 @@ The portfolio prototype is the conversation-starter. The production architecture
 - **[NIST SP 800-53 Rev 5](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final), control AC-6 (least privilege)** — the theme the proposal is aligned to: give each account only the access its function needs. The sentence is a paraphrase written for this exercise, not the text of the control.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the excessive-agency theme behind treating an agent's scope list as something to shrink, not only to approve.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' and 'Manage' functions map onto the usage diff and the owner decision.
-- **SR 11-7 (the 2011 predecessor), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk standard the work would have to meet. A record of what each deployed agent was allowed to do, against what it did, is the kind of ongoing-monitoring evidence a reviewer would ask for. Paraphrase written for this exercise, not the text of the guidance.
+- **SR 11-7 (the 2011 predecessor), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A record of what each deployed agent was allowed to do, against what it did, is the kind of ongoing-monitoring evidence a reviewer would ask for. Paraphrase written for this exercise, not the text of the guidance.
 - **Sibling projects in this repo** — [05 AgentWatch](../05-agentwatch-agent-observability/), [06 PromptShield](../06-promptshield-prompt-injection-defense/), [08 OversightOps](../08-oversightops-hitl-workflow/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), the interlocks that exist today.
