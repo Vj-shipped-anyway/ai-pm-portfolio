@@ -427,7 +427,7 @@ sequenceDiagram
     D->>C: every 15 min — read daily rollup
     D->>D: 3x baseline check on per-feature daily spend
     D-->>P: P1 alert: FT_001 multiplier 3.7x (2026-05-01)
-    Note over F,P: 🟢 Runaway flagged day 1 in the prototype; designed for production sub-15-min detection.
+    Note over F,P: 🟢 Runaway flagged day 1 in the prototype, designed for production sub-15-min detection.
 ```
 
 **Cost-event table** (the core schema; full DDL in [`ARCHITECTURE.md`](./ARCHITECTURE.md)):
