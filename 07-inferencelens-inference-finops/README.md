@@ -296,6 +296,7 @@ python src/step_04_with_inferencelens.py
 **Composed views for the 18-feature fleet** (from the actual prototype run):
 
 ```
+--------------------------------------------------------------------------------
 View 1 / 5 - Per-feature attribution (closes deficiencies #1 and #2)
 --------------------------------------------------------------------------------
   Feature                          Model                         Monthly $
@@ -310,13 +311,15 @@ View 1 / 5 - Per-feature attribution (closes deficiencies #1 and #2)
   ... (other 10 features)                                   $      11,876
   TOTAL                                                     $     206,167
 
+--------------------------------------------------------------------------------
 View 2 / 5 - Runaway detection (closes deficiency #3)
 --------------------------------------------------------------------------------
-  [2026-05-01] FT_001 customer-service-assistant     $5,851/day (3.67x baseline)
-               retrieval depth misconfig
+  [2026-05-01] FT_001 customer-service-assistant       $     5,851/day (3.67x baseline) - retrieval depth misconfig
 
+--------------------------------------------------------------------------------
 View 3 / 5 - Cheaper-model substitution recommendations (closes #4)
 --------------------------------------------------------------------------------
+  Feature                          Current -> Candidate                            Monthly $
   customer-service-assistant       vendor-balanced-4-5 -> vendor-fast-4-5     $     182,000
   compliance-summarizer            vendor-frontier-4-1 -> vendor-balanced-4-5 $      42,000
   kyc-doc-reader                   gpt-4o -> gpt-4o-mini                      $      38,400
@@ -325,18 +328,25 @@ View 3 / 5 - Cheaper-model substitution recommendations (closes #4)
   marketing-copy-variants          gpt-4o -> gpt-4o-mini                      $       4,200
   TOTAL MODELED SAVINGS                                                       $     301,800
 
+--------------------------------------------------------------------------------
 View 4 / 5 - Dead-feature flagger (closes deficiency #5)
 --------------------------------------------------------------------------------
   [DEAD - UI shut down, endpoint still receiving traffic]
-    FT_009 internal-research-copilot        $25,991/mo
+    FT_009 internal-research-copilot        $    25,991/mo  (183 sampled calls in window)
   [DECOMMISSION - dormant; recommend full retirement]
-    FT_016 trading-floor-news-summarizer    $1/mo
+    FT_016 trading-floor-news-summarizer    $         1/mo  (61 sampled calls in window)
+  [DECOMMISSION - dormant; recommend full retirement]
+    FT_017 branch-feedback-summarizer       $         0/mo  (0 sampled calls in window)
+  TOTAL MODELED DEAD-FEATURE SPEND:    $    25,992/mo
 
+--------------------------------------------------------------------------------
 View 5 / 5 - Per-feature ROI ranking (closes deficiency #6)
 --------------------------------------------------------------------------------
-  wealth-portfolio-summary    revenue $1.24M  cost ~$2k     net ~$1.24M
-  smb-loan-copilot            revenue $820k   cost ~$2k     net ~$818k
-  sales-call-summarizer       revenue $640k   cost ~$2k     net ~$638k
+  Feature                               Revenue         Cost            Net
+  wealth-portfolio-summary         $ 1,240,000 $     1,897 $   1,238,103
+  smb-loan-copilot                 $   820,000 $     1,599 $     818,401
+  sales-call-summarizer            $   640,000 $     1,795 $     638,205
+  collections-script-generator     $   420,000 $     2,226 $     417,774
   ...
 ```
 
