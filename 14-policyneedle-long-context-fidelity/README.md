@@ -1,6 +1,8 @@
 # 📚 PolicyNeedle — Long-Context Fidelity Probes for Policy-Manual Assistants
 
-**A portfolio prototype for finding the clause a policy-manual assistant misses in a 100-to-300 page manual before launch, not after the answer has reached a customer. Built on the needle-in-a-haystack idea and aligned to the NIST AI RMF 'Measure' function; SR 11-7 ongoing monitoring is the standard the work would have to meet in a bank.**
+**A portfolio prototype for finding the clause a policy-manual assistant misses in a 100-to-300 page manual before launch, not after the answer has reached a customer. Built on the needle-in-a-haystack idea and aligned to the NIST AI RMF 'Measure' function; SR 11-7 ongoing monitoring is the model-risk guidance the work is compared with in a bank.**
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html)
 
@@ -622,7 +624,7 @@ The Streamlit prototype here shows the *product mechanic*: that a probe set with
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs long-context test sets for policy-grounded assistants under regulated constraint*
 
@@ -634,5 +636,5 @@ The Streamlit prototype here shows the *product mechanic*: that a probe set with
 - **[Hamel Husain — Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** — the eval-first thesis. The reason `data/probes.csv` and the expected answers exist before any reader does.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function maps onto a probe set, a scorer and a gate. PolicyNeedle is aligned to it as a prototype; nothing here is certified or attested.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — LLM09 (Misinformation) is the framing for a confident answer taken from the wrong clause.
-- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — model risk management. Ongoing monitoring of an assistant that answers from policy is the standard the work would have to meet.
+- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — model risk management. Ongoing monitoring of an assistant that answers from policy is the model-risk guidance the work is compared with.
 - Sibling projects in this portfolio: [HalluGuard](../01-halluguard-bank-chatbot-safety/), [LeaseGuard](../03-leaseguard-cre-lease-verification/) and [EvalForge](../04-evalforge-llm-eval-platform/).
