@@ -197,16 +197,16 @@ python src/step_02_basic_eval_set.py
 **Output:**
 
 ```
-Probes run:                 30
-PASS:                       30
-FAIL:                       0
-Aggregate pass rate:        100.0%
-Probe set version:          probes-v0.7 (locked - good!)
-Slice breakdown:            not computed (aggregate only - this is the gap)
-Rubric-scored:              no (binary pass/fail - no calibration)
-Judge audit trail:          none
-CI gate:                    none (cron only - results dumped, not blocking)
-Pre-deploy hook:            none - this is post-deploy reporting only
+  Probes run:                 30
+  PASS:                       30
+  FAIL:                       0
+  Aggregate pass rate:        100.0%
+  Probe set version:          probes-v0.7 (locked - good!)
+  Slice breakdown:            not computed (aggregate only - this is the gap)
+  Rubric-scored:              no (binary pass/fail - no calibration)
+  Judge audit trail:          none
+  CI gate:                    none (cron only - results dumped, not blocking)
+  Pre-deploy hook:            none - this is post-deploy reporting only
 ```
 
 Detection works on the easy failures. **A 100% pass rate looks healthy. Behind it:**
