@@ -96,7 +96,7 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 
 ## Executive summary (90 seconds)
 
-**Problem.** A modeled Tier-1 retail bank deploys a `claims_triage_v3` agent on Anthropic Claude Sonnet 4 via LangGraph, wired up with 9 tools (claim lookup, policy lookup, fraud score, doc extraction, customer match, adjudication calc, SIU check, comms draft, ticket create). On **April 14, 2026 at 03:12:08 UTC**, the agent processes a malformed `claim_lookup` response as "try again." It retries with `retry=1`, `retry=2`, …`retry=1847`. By **04:33:08 UTC** the run has burned **$4,218.34** of inference cost across **1,847 tool calls**. Without AgentWatch, the bank discovers it 3 weeks later in the FinOps review. 🟡 Modeled exposure across the 30-day window: **$47,978 of undetected runaway cost** (the synthetic data, calibrated against published Tier-1 BFSI agent-fleet shapes).
+**Problem.** A modeled Tier-1 retail bank deploys a `claims_triage_v3` agent on an Anthropic balanced model via LangGraph, wired up with 9 tools (claim lookup, policy lookup, fraud score, doc extraction, customer match, adjudication calc, SIU check, comms draft, ticket create). On **April 14, 2026 at 03:12:08 UTC**, the agent processes a malformed `claim_lookup` response as "try again." It retries with `retry=1`, `retry=2`, …`retry=1847`. By **04:33:08 UTC** the run has burned **$4,218.34** of inference cost across **1,847 tool calls**. Without AgentWatch, the bank discovers it 3 weeks later in the FinOps review. 🟡 Modeled exposure across the 30-day window: **$47,978 of undetected runaway cost** (the synthetic data, calibrated against published Tier-1 BFSI agent-fleet shapes).
 
 **Product.** AgentWatch — a sidecar that ingests the agent framework's OpenTelemetry export, classifies failure under a six-deficiency taxonomy, and enforces a per-incident dollar cap. Six-deficiency taxonomy: **runaway tool loops** + **hallucinated tool arguments** + **silent agent drift** + **blast-radius unbounded** + **no reasoning trace capture** + **cost telemetry detached from outcomes**. Per-run incident pack assembled in sub-second on the prototype, routed to SRE on-call + line-1 owner.
 
@@ -141,7 +141,7 @@ A modeled Tier-1 retail bank. Four production agents across claims triage, KYC r
 
 **The scenario:**
 
-- **April 14, 2026, 03:12:08 UTC.** The `claims_triage_v3` agent (Anthropic Claude Sonnet 4 on LangGraph) receives a triage request for `CUST_447219`. It calls `claim_lookup` with `claim_id=CLM_447000`. The internal API returns a malformed response (a stale cache line that doesn't parse). The agent interprets it as "try again with a different ID." It retries: `CLM_447001`, `CLM_447002`, … `CLM_448847`.
+- **April 14, 2026, 03:12:08 UTC.** The `claims_triage_v3` agent (an Anthropic balanced model on LangGraph) receives a triage request for `CUST_447219`. It calls `claim_lookup` with `claim_id=CLM_447000`. The internal API returns a malformed response (a stale cache line that doesn't parse). The agent interprets it as "try again with a different ID." It retries: `CLM_447001`, `CLM_447002`, … `CLM_448847`.
 - **April 14, 03:18:01 UTC.** AgentWatch detects the runaway (`detected_at` for INC_0001, about 6 minutes after the run started). The run ends at 04:33:08 UTC with status `BOUNDED_BY_AGENTWATCH`. Total burn: **$4,218.34** across **1,847 tool calls**. The reasoning trace is captured. The incident pack is routed to the SRE on-call and the `line1.insurance-ops` owner.
 
 **Today (no AgentWatch):** the agent keeps looping. Detection happens 3 weeks later when FinOps reviews the AWS bill. Modeled exposure: $5–50k per incident × ~24 incidents/yr at fleet scale. The on-call has no replay UI, no chain-of-thought trace, no incident classification.
@@ -150,10 +150,10 @@ A modeled Tier-1 retail bank. Four production agents across claims triage, KYC r
 
 The fleet (synthetic, but modeled on what a real Tier-1 BFSI shop typically runs):
 
-- **`claims_triage_v3`** — Insurance claims triage agent on LangGraph + Anthropic Claude Sonnet 4 (Tier 1, blast cap $250)
-- **`kyc_refresh_v2`** — KYC refresh agent on Bedrock Agents + Anthropic Claude 3.7 via Bedrock (Tier 1, blast cap $180)
+- **`claims_triage_v3`** — Insurance claims triage agent on LangGraph + an Anthropic balanced model (Tier 1, blast cap $250)
+- **`kyc_refresh_v2`** — KYC refresh agent on Bedrock Agents + an Anthropic balanced model (3.7) via Bedrock (Tier 1, blast cap $180)
 - **`dispute_recon_v1`** — Dispute reconciliation agent on OpenAI Assistants + Azure OpenAI gpt-4o (Tier 1, blast cap $150)
-- **`loan_pkg_v4`** — Loan-package assembly agent on AutoGen + Anthropic Claude Opus 4 (Tier 1, blast cap $300)
+- **`loan_pkg_v4`** — Loan-package assembly agent on AutoGen + an Anthropic frontier model (Tier 1, blast cap $300)
 
 ---
 
@@ -277,7 +277,7 @@ Deficiency class:   runaway_loop
 Severity:           P1
 Detected at:        2026-04-14T03:18:01Z
 Agent:              Claims Triage Agent (claims_triage_v3) on langgraph
-Vendor / model:     anthropic / claude-sonnet-4-20251101
+Vendor / model:     anthropic / vendor-balanced-4-20251101
 Run:                RUN_00095 (2026-04-14T03:12:08Z -> 2026-04-14T04:33:08Z)
                     4860s, 1847 tool calls, $4,218.34
 

@@ -92,9 +92,13 @@ This is the incident the walkthrough resolves. Walk the four CSVs and you get th
 
 | Source | What it gives you |
 | --- | --- |
-| `agents.csv` | The agent is `claims_triage_v3` on Anthropic Claude Sonnet 4 on the LangGraph framework. Wired up with 9 tools. Per-incident dollar cap = $250. |
+| `agents.csv` | The agent is `claims_triage_v3` on an Anthropic balanced model on the LangGraph framework. Wired up with 9 tools. Per-incident dollar cap = $250. |
 | `agent_runs.csv` | Run `RUN_00095` started `2026-04-14T03:12:08Z`, ran for 4,860s (1h21m), made `1,847` tool calls, burned `$4,218.34` of inference cost, and was `BOUNDED_BY_AGENTWATCH`. |
 | `tool_calls.csv` | The agent kept calling `claim_lookup` with slightly different `claim_id` arguments. The first lookup returned a malformed response; the agent's planner retried with `retry=1`, `retry=2`, … forever. |
 | `incidents.csv` | AgentWatch classified this as `runaway_loop`, severity `P1`, action `auto_cutoff_at_blast_radius_cap`. MTTR with AgentWatch: 6 minutes. Modeled MTTR without AgentWatch: 240 hours (the FinOps review cycle). |
 
 In raw-log form: scattered across 3 vendors × 2 cloud accounts × the LLM trace tail. In AgentWatch: one record, indexed by `(agent_id, run_id, deficiency_class)`, the bleeding bounded in 6 minutes, the incident routed for human review.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. Every id has the shape `vendor-<tier>-<version>[-<release date>]`, where `balanced` is the mid-priced hosted model and `frontier` the highest-capability one: `agents.csv` uses `vendor-balanced-4-20251101`, `vendor-frontier-4-20250514` and, for the Bedrock-hosted agent, `anthropic.vendor-balanced-3-7-20250219-v1:0`. No number in this project depends on the label.

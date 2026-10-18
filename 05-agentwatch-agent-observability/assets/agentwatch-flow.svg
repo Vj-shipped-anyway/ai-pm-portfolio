@@ -38,7 +38,7 @@
   <text x="32" y="140" class="stage-num">1 · AGENT EXECUTES</text>
   <text x="32" y="162" class="stage-title">Apr 14, 03:12:08Z</text>
   <text x="32" y="180" class="stage-sub">claims_triage_v3</text>
-  <text x="32" y="196" class="stage-sub">LangGraph · Claude 4</text>
+  <text x="32" y="196" class="stage-sub">LangGraph · hosted LLM</text>
   <text x="32" y="212" class="stage-sub">tier=1 · cap=$250</text>
   <text x="32" y="232" class="meta-text">Plan: triage 1 claim</text>
 

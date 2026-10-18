@@ -200,7 +200,7 @@
 const RUNS = [
   {
     id: "RUN_00095", inc: "INC_0001", agent: "claims_triage_v3", framework: "LangGraph",
-    vendor: "anthropic", model: "claude-sonnet-4-20251101",
+    vendor: "anthropic", model: "vendor-balanced-4-20251101",
     deficiency: "runaway_loop", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
     duration_s: 4860, calls: 1847, cost: 4218.34,
     detected_at: "2026-04-14T03:18:01Z", action: "auto_cutoff_at_blast_radius_cap",
@@ -210,7 +210,7 @@ const RUNS = [
   },
   {
     id: "RUN_00039", inc: "INC_0005", agent: "claims_triage_v3", framework: "LangGraph",
-    vendor: "anthropic", model: "claude-sonnet-4-20251101",
+    vendor: "anthropic", model: "vendor-balanced-4-20251101",
     deficiency: "runaway_loop", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
     duration_s: 350, calls: 9166, cost: 22000.00,
     detected_at: "2026-04-01T21:39:04Z", action: "auto_cutoff_at_blast_radius_cap",
@@ -220,7 +220,7 @@ const RUNS = [
   },
   {
     id: "RUN_00172", inc: "INC_0010", agent: "kyc_refresh_v2", framework: "Bedrock Agents",
-    vendor: "anthropic_via_bedrock", model: "anthropic.claude-3-7-sonnet-20250219-v1:0",
+    vendor: "anthropic_via_bedrock", model: "anthropic.vendor-balanced-3-7-20250219-v1:0",
     deficiency: "hallucinated_args", severity: "P2", status: "FAILED_RETRYABLE",
     duration_s: 350, calls: 75, cost: 1500.00,
     detected_at: "2026-04-15T15:26:28Z", action: "schema_validator_blocked",
@@ -240,7 +240,7 @@ const RUNS = [
   },
   {
     id: "RUN_00002", inc: "INC_0016", agent: "loan_pkg_v4", framework: "AutoGen",
-    vendor: "anthropic", model: "claude-opus-4-20250514",
+    vendor: "anthropic", model: "vendor-frontier-4-20250514",
     deficiency: "blast_unbounded", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
     duration_s: 350, calls: 105, cost: 2400.00,
     detected_at: "2026-04-29T06:14:11Z", action: "circuit_breaker_tripped",
@@ -250,7 +250,7 @@ const RUNS = [
   },
   {
     id: "RUN_00320", inc: "INC_0018", agent: "claims_triage_v3", framework: "LangGraph",
-    vendor: "anthropic", model: "claude-sonnet-4-20251101",
+    vendor: "anthropic", model: "vendor-balanced-4-20251101",
     deficiency: "no_reasoning_trace", severity: "P3", status: "FAILED_RETRYABLE",
     duration_s: 350, calls: 9, cost: 1.08,
     detected_at: "2026-04-13T23:06:29Z", action: "trace_replay_synthesized",
@@ -260,7 +260,7 @@ const RUNS = [
   },
   {
     id: "RUN_00227", inc: "INC_0023", agent: "loan_pkg_v4", framework: "AutoGen",
-    vendor: "anthropic", model: "claude-opus-4-20250514",
+    vendor: "anthropic", model: "vendor-frontier-4-20250514",
     deficiency: "cost_detached", severity: "P3", status: "COMPLETED",
     duration_s: 350, calls: 10, cost: 3.2,
     detected_at: "2026-04-03T08:51:28Z", action: "cost_attributed_to_outcome",
