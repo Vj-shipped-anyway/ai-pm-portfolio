@@ -58,10 +58,10 @@ Cherre, Lev, ProDeal, VTS, CompStak, CoStar, and Reonomy have publicly discussed
 
 | Capability | Paralegal only | Deployed lease-NLP alone | Second model alone | **LeaseGuard (layered)** |
 | --- | --- | --- | --- | --- |
-| Per-field accuracy | ~96% (🟡 assumed in Step 1, not measured) | 🟢 76.4% (55/72) on this sample · 🟡 ~88% blended on a mixed portfolio | Not measured on its own in this repo | 🟢 98.6% (71/72) after triage · 🟡 98.2% projected at portfolio scale |
+| Per-field accuracy | \~96% (🟡 assumed in Step 1, not measured) | 🟢 76.4% (55/72) on this sample · 🟡 \~88% blended on a mixed portfolio | Not measured on its own in this repo | 🟢 98.6% (71/72) after triage · 🟡 98.2% projected at portfolio scale |
 | Says which fields to check | No. A senior reviewer spot-checks 5-10% of the work | No. A wrong extraction looks identical to a correct one | No. A second answer with nothing to compare it to | Yes. 🟢 21 of 72 fields routed, including 16 of the 17 wrong ones |
 | Rule checks and side-letter tripwire | n/a | Rarely present downstream of the extractor | None | Yes. 🟢 Tripwire fired 3 times (2 real misses, 1 false flag); rule validators fired 0 times on this sample |
-| Human time | Every field of every lease: 🟡 ~3.7 h and ~$278 per lease; stops scaling past ~500 assets | None. 🟡 ~6 minutes per lease | None | Flagged fields only. 🟢 21 of 72 on this deliberately hard sample |
+| Human time | Every field of every lease: 🟡 \~3.7 h and \~$278 per lease; stops scaling past \~500 assets | None. 🟡 \~6 minutes per lease | None | Flagged fields only. 🟢 21 of 72 on this deliberately hard sample |
 | Where it still fails | Fatigue and mis-transcription | Redlines, CPI-with-floor-and-cap escalations, buried CAM caps, multi-section kick-outs, side letters, all silently | Its own errors in different places; no single backend wins all six deficiencies (Step 3) | 🟢 1 of 17 wrong fields on this sample: both models return the same incomplete value (lease_06 kick-out) |
 | Touches the existing pipeline | n/a | n/a | Swaps the extractor | No. Primary untouched; write-back only after a field clears |
 
@@ -99,7 +99,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 
 ## Executive summary (90 seconds)
 
-**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: Claude Sonnet over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **~88%** (public PropTech vendor benchmarks). 🟡 Modeled rent leakage at this portfolio shape: **~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
+**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: Claude Sonnet over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **\~88%** (public PropTech vendor benchmarks). 🟡 Modeled rent leakage at this portfolio shape: **\~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
 
 **Product.** LeaseGuard, a verification layer around the pipeline, not a replacement for it: **second-model re-extraction** (GPT-4o or a fine-tuned Mistral 7B over the same OCR text) + **rule validators** (dollar amounts, known escalation types, parseable dates, Yes/No flags) + a **side-letter tripwire** + a **router** (PASS / DISAGREEMENT / RULE_VIOLATION / MISSING / SIDE_LETTER_TRIPWIRE) that sends flagged fields to a **paralegal triage queue** with the source clause highlighted. Nothing is written back to the system of record until a flagged field clears.
 
@@ -109,9 +109,9 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 - 🟢 **21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags.** 51 fields auto-cleared. Router mix: 12 DISAGREEMENT, 6 MISSING, 3 SIDE_LETTER_TRIPWIRE, 0 RULE_VIOLATION.
 - 🟢 **1 known miss:** the `lease_06` kick-out. Both models return `co_tenancy_kickout`; the lease has co-tenancy and sales-based kick-outs; no rule fires.
 - 🟡 **Blended accuracy at portfolio scale: 88% → 98.2%** (modeled — assumes paralegal triage clears flagged fields at the published triage accuracy)
-- 🟡 **~270 field errors caught and corrected per year** at 220 leases × 12 fields (~12% blended error × 2,640 fields × ~85% routed to triage successfully); **~$4.2M/yr** modeled rent recovery at that shape. At fleet scale (5,000+ leases): **~6,100 field errors/yr** and **~$95M/yr**.
+- 🟡 **\~270 field errors caught and corrected per year** at 220 leases × 12 fields (\~12% blended error × 2,640 fields × \~85% routed to triage successfully); **\~$4.2M/yr** modeled rent recovery at that shape. At fleet scale (5,000+ leases): **\~6,100 field errors/yr** and **\~$95M/yr**.
 
-🟡 **Modeled cost.** ~$18K in build compute (secondary-extraction tuning and a Mistral 7B fine-tune on 1,200 synthetic lease examples), plus 0.5 FTE labeling lead for 4 weeks and my time as PM. ~$280K/yr at fleet scale (compute plus paralegal triage time), or ~$45 per error caught against $250-400 to re-abstract from scratch. Modeled, not measured.
+🟡 **Modeled cost.** \~$18K in build compute (secondary-extraction tuning and a Mistral 7B fine-tune on 1,200 synthetic lease examples), plus 0.5 FTE labeling lead for 4 weeks and my time as PM. \~$280K/yr at fleet scale (compute plus paralegal triage time), or \~$45 per error caught against $250-400 to re-abstract from scratch. Modeled, not measured.
 
 **Call to action.** Fork this repo. Swap [`data/expected_extractions.csv`](./data/expected_extractions.csv) and [`data/leases/`](./data/leases/) for your own ground truth and leases, replace the mock extractions in `step_02` and `step_04` with your pipeline's output and a second model's, and run the four step scripts. Walk the triage queue they produce with your asset-management lead or your abstraction lead.
 
@@ -127,7 +127,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 6. **Step 4 — The fix.** LeaseGuard: an ensemble verification layer that catches what the primary missed.
 7. **Utility delivered.** The multiplied number, plus a modeled 28-day pilot design.
 
-Total reading time: ~15 minutes for the full walkthrough. ~5 minutes if you skim the headers and tables.
+Total reading time: \~15 minutes for the full walkthrough. \~5 minutes if you skim the headers and tables.
 
 ---
 
@@ -192,7 +192,7 @@ A typical commercial lease has 80-150 abstractable fields. We use 12 because the
 
 **It works.** Per-field accuracy is roughly 96%. Paralegals are accurate at this — the failure mode is fatigue and mis-transcription, not misunderstanding the lease.
 
-**The bottleneck is scale.** A standard lease takes ~4 hours to abstract; a redlined or amended lease takes 6-8. At ~$65/hr blended for paralegal time and ~$145/hr for senior QC, you're looking at $300-700 per lease. At a 220-asset portfolio that's $66K-$154K every time you re-abstract on amendments.
+**The bottleneck is scale.** A standard lease takes \~4 hours to abstract; a redlined or amended lease takes 6-8. At \~$65/hr blended for paralegal time and \~$145/hr for senior QC, you're looking at $300-700 per lease. At a 220-asset portfolio that's $66K-$154K every time you re-abstract on amendments.
 
 **The code** ([`src/step_01_manual_abstraction.py`](./src/step_01_manual_abstraction.py)):
 
@@ -226,7 +226,7 @@ python src/step_01_manual_abstraction.py
 | `lease_05` office + side letter | 3 | 3.70 | $280.37 | 96% |
 | `lease_06` anchor tenant complex | 3 | 4.19 | $312.35 | 96% |
 
-**Result:** 🟡 Avg ~3.7 hours / lease, ~$278 / lease (paralegal time plus 0.5 h senior QC), ~96% per-field accuracy (modeled from blended paralegal rates and lease-page complexity multipliers; not measured against a deployed paralegal team). Across a 220-asset portfolio that's roughly **$61K per re-abstraction cycle, or ~$20K/yr amortized** at a 3-year amendment cadence.
+**Result:** 🟡 Avg \~3.7 hours / lease, \~$278 / lease (paralegal time plus 0.5 h senior QC), \~96% per-field accuracy (modeled from blended paralegal rates and lease-page complexity multipliers; not measured against a deployed paralegal team). Across a 220-asset portfolio that's roughly **$61K per re-abstraction cycle, or \~$20K/yr amortized** at a 3-year amendment cadence.
 
 **Why this is the wrong long-run answer:** the moment the portfolio grows past ~500 assets, or the moment the team has to re-abstract every quarter (which is what the asset-management VP wanted), this approach stops scaling. That's why every operator has tried to automate it.
 
@@ -234,7 +234,7 @@ python src/step_01_manual_abstraction.py
 
 ## 🤖 Step 2 — With deployed lease-NLP: the SOTA
 
-**In plain English:** Replace the paralegal with a LangChain extraction chain over Claude Sonnet, run on top of OCR'd PDFs. Per-lease throughput drops from 4 hours to ~6 minutes. Per-lease cost drops from ~$245 to roughly $2-4.
+**In plain English:** Replace the paralegal with a LangChain extraction chain over Claude Sonnet, run on top of OCR'd PDFs. Per-lease throughput drops from 4 hours to \~6 minutes. Per-lease cost drops from \~$245 to roughly $2-4.
 
 This is the public Cherre / Lev / ProDeal / Yardi Aspire pattern — the SOTA that any institutional CRE operator runs today. The code below is a simplified version; a real production pipeline would have retries, structured-output schemas, and a confidence threshold that does not save it from any of the failure modes in Step 3.
 
@@ -269,7 +269,7 @@ python src/step_02_deployed_lease_nlp.py
 | `lease_06` anchor tenant complex | 8 / 12 | 67% |
 | 🟢 **Blended on this sample** | **55 / 72** | **76% on this sample** |
 
-The 6-lease sample is deliberately weighted toward the hard cases. 🟡 **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** (modeled from public PropTech vendor benchmarks: ~96% on standard leases, which dominate the mix, and ~78% on non-standard). The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
+The 6-lease sample is deliberately weighted toward the hard cases. 🟡 **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** (modeled from public PropTech vendor benchmarks: \~96% on standard leases, which dominate the mix, and \~78% on non-standard). The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
 
 **Result:** The pipeline handles standard leases well. **It returns the wrong CAM cap, the wrong escalation type, missed kick-outs, and missed exclusivity on the non-standard ones.** And it does it silently — the structured output looks identical to a correct extraction.
 
@@ -423,9 +423,9 @@ Anything else is theatre. Going from 88% to 98% accuracy is not an outcome. *Goi
 | 🟡 LeaseGuard solution | 98.2% accuracy after triage | Step 4 results on the eval set + projected at portfolio scale with paralegal triage |
 | 🟡 Per-lease lift | **10.2 percentage points** of correctly-extracted fields | difference of the above |
 | Affected (modeled 220-asset portfolio) | 220 leases × 12 fields per cycle = 2,640 field extractions | 220-asset retail-and-office book shape |
-| 🟡 Annual at modeled portfolio | **~270 field errors caught and corrected per year** | ~12% blended error × 2,640 fields × ~85% routed to triage successfully |
+| 🟡 Annual at modeled portfolio | **\~270 field errors caught and corrected per year** | \~12% blended error × 2,640 fields × \~85% routed to triage successfully |
 | 🟡 Modeled rent recovery at the 220-asset shape | **~$4.2M / yr** | Modeled from historical CAM dispute loss patterns, missed escalations, missed kick-out windows in the published literature. Not measured. Every portfolio is different. |
-| 🟡 At fleet scale (national operator, 5,000+ leases) | **~6,100 field errors caught / yr** · **~$95M / yr modeled rent recovery** | Same per-lease error rate at fleet size |
+| 🟡 At fleet scale (national operator, 5,000+ leases) | **\~6,100 field errors caught / yr** · **\~$95M / yr modeled rent recovery** | Same per-lease error rate at fleet size |
 | 🟡 Modeled cost to deliver (fleet scale) | **~$280K / yr** | Compute (secondary extraction + rule layer) + paralegal triage time |
 | 🟡 Per error caught | **~$45** | vs $250-400 to manually re-abstract from scratch |
 
@@ -446,8 +446,8 @@ Modeled 28-day shadow window at a 220-asset retail-and-office book shape:
 | Metric | Before LeaseGuard | With LeaseGuard |
 | --- | --- | --- |
 | 🟡 Per-lease blended field accuracy | 88.0% | 98.2% (+10.2 pp) |
-| 🟡 Field errors per cycle (220 leases × 12 fields) | ~317 | ~48 |
-| 🟡 CAM-reconciliation disputes lost (modeled trailing 12 mo) | ~11 | (modeled) ~2 |
+| 🟡 Field errors per cycle (220 leases × 12 fields) | \~317 | \~48 |
+| 🟡 CAM-reconciliation disputes lost (modeled trailing 12 mo) | \~11 | (modeled) \~2 |
 | 🟡 Mean time to detect a wrong escalation | 14-22 months (next reconciliation) | ~24 hours (triage queue, by design) |
 | 🟡 Modeled $ recovered / yr at this portfolio shape | — | **~$4.2M** |
 
