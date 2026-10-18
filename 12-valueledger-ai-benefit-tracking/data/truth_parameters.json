@@ -1,0 +1,68 @@
+{
+  "hidden_drift_min_per_task": 0.45,
+  "launch_week": 13,
+  "n_employees": 320,
+  "n_teams": 24,
+  "n_weeks": 26,
+  "note": "Answer key. Known only because this data is synthetic. No method may read it except to score itself.",
+  "novelty_decay_k_per_week": 0.25,
+  "novelty_half_life_weeks": 2.77,
+  "novelty_min_per_assisted_task": 6.0,
+  "p_both_given_two_copilots": 0.6,
+  "person_week_noise_sd": 2.0,
+  "rework_by_cost_center": {
+    "CC-101": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.18
+    },
+    "CC-102": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.2
+    },
+    "CC-103": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.18
+    },
+    "CC-104": {
+      "mean_correction_min": 10.0,
+      "p_correction": 0.42
+    },
+    "CC-105": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.24
+    },
+    "CC-106": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.2
+    },
+    "CC-107": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.26
+    },
+    "CC-108": {
+      "mean_correction_min": 8.0,
+      "p_correction": 0.16
+    }
+  },
+  "season_amplitude_min": 2.0,
+  "season_peak_week": 5,
+  "seed": 20261012,
+  "selection_rule": "the 12 teams with the highest enthusiasm score get the copilot first; not randomized",
+  "selection_slope_min_per_sd": 1.8,
+  "steady_min_per_assisted_task": 5.5,
+  "team_week_shock_sd": 1.1,
+  "treated_team_ids": [
+    "T01",
+    "T02",
+    "T06",
+    "T09",
+    "T10",
+    "T13",
+    "T14",
+    "T17",
+    "T18",
+    "T20",
+    "T21",
+    "T24"
+  ]
+}

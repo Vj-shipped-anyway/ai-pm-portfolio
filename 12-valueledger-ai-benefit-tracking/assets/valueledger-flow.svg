@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">ValueLedger: a usage claim, a pre/post estimate and a difference-in-differences ledger scored against a known true effect</title>
+  <desc id="desc">Four-stage horizontal flow on synthetic data. Stage 1 is the vendor-style claim from usage events. Stage 2 is a pre/post comparison of treated people only. Stage 3 is a difference-in-differences estimate against a holdout cohort, net of rework, with a decay curve and overlap deduplication. Stage 4 splits the net hours into hard cash and soft capacity by budget line. Stage 5 is the benefit statement. A comparison strip shows each method's error against the answer key, which exists only because the data is synthetic.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-claim { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-basic { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #5bc0be; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .meta-warn { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #633806; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-mid { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #633806; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">ValueLedger - from a usage claim to a ledger finance can find</text>
+  <text x="20" y="52" class="subheader">Synthetic data, 26 weeks, 160 treated and 160 holdout people. The true effect is known only because it is synthetic.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="78" width="350" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Inputs: usage log, work log, holdout cohort, budget table</text>
+
+  <!-- Stage 1: VENDOR CLAIM -->
+  <rect x="20" y="120" width="170" height="110" rx="8" class="stage-box-claim"/>
+  <text x="32" y="140" class="stage-num">1 . VENDOR CLAIM</text>
+  <text x="32" y="162" class="stage-title">Usage x 12 min</text>
+  <text x="32" y="180" class="stage-sub">25,831 events logged</text>
+  <text x="32" y="195" class="stage-sub">no baseline, no rework</text>
+  <text x="32" y="218" class="meta-block">5,166 h claimed</text>
+
+  <!-- Arrow 1 -->
+  <line x1="195" y1="175" x2="232" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: PRE/POST -->
+  <rect x="235" y="120" width="170" height="110" rx="8" class="stage-box-basic"/>
+  <text x="247" y="140" class="stage-num">2 . PRE/POST</text>
+  <text x="247" y="162" class="stage-title">Treated only</text>
+  <text x="247" y="180" class="stage-sub">weeks 1-12 vs 13-26</text>
+  <text x="247" y="195" class="stage-sub">credits the trend</text>
+  <text x="247" y="218" class="meta-warn">4,311 h saved</text>
+
+  <!-- Arrow 2 -->
+  <line x1="410" y1="175" x2="452" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: DiD -->
+  <rect x="455" y="120" width="230" height="110" rx="8" class="stage-box-eval"/>
+  <text x="467" y="140" class="stage-num">3 . DiD AGAINST THE HOLDOUT</text>
+  <text x="467" y="162" class="stage-title">Net, deduplicated</text>
+  <text x="467" y="180" class="stage-sub">pre-trend check, placebo</text>
+  <text x="467" y="195" class="stage-sub">decay curve, team bootstrap</text>
+  <text x="467" y="218" class="meta-strong">2,152 h net (1,784 to 2,559)</text>
+
+  <!-- Arrow 3 -->
+  <line x1="690" y1="175" x2="722" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: LEDGER -->
+  <rect x="725" y="120" width="175" height="110" rx="8" class="stage-box"/>
+  <text x="737" y="140" class="stage-num">4 . BUDGET-LINE LEDGER</text>
+  <text x="737" y="162" class="stage-title">Hard vs soft</text>
+  <text x="737" y="180" class="stage-sub">hard $34,231</text>
+  <text x="737" y="195" class="stage-sub">soft $119,358</text>
+  <text x="737" y="218" class="meta-warn">guardrail holds CC-104</text>
+
+  <!-- Arrow 4 (down) -->
+  <path d="M 812 230 L 812 256 L 410 256 L 410 286" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: STATEMENT -->
+  <rect x="240" y="290" width="340" height="90" rx="8" class="stage-box-ship"/>
+  <text x="252" y="310" class="stage-num">5 . BENEFIT STATEMENT</text>
+  <text x="252" y="330" class="stage-title">Finance signs the hard column</text>
+  <text x="252" y="352" class="stage-sub">interval shown beside every number</text>
+  <text x="252" y="368" class="meta-strong">answer key (synthetic only): 2,046 h net</text>
+
+  <!-- Arrow 5 (back) -->
+  <path d="M 240 335 L 100 335 L 100 380" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Interlocks -->
+  <rect x="20" y="382" width="200" height="68" rx="8" class="stage-box"/>
+  <text x="32" y="400" class="stage-title">interlocks</text>
+  <text x="32" y="415" class="stage-sub">11 TierGate: use-case IDs</text>
+  <text x="32" y="428" class="stage-sub">07 InferenceLens: cost</text>
+  <text x="32" y="441" class="stage-sub">04 EvalForge: guardrail</text>
+
+  <!-- Comparison strip -->
+  <rect x="600" y="290" width="300" height="150" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="612" y="310" class="stage-title">Error against the answer key</text>
+  <text x="612" y="332" class="timer">vendor-style claim: +152% (+3,120 h)</text>
+  <text x="612" y="350" class="timer-mid">pre/post, treated only: +111% (+2,265 h)</text>
+  <text x="612" y="368" class="timer-fast">ValueLedger: +5% (+105 h)</text>
+  <text x="612" y="390" class="meta-text">Known limit left in: a hidden change by</text>
+  <text x="612" y="403" class="meta-text">the treated teams after launch,</text>
+  <text x="612" y="416" class="meta-text">+302 h (+15% of true net).</text>
+  <text x="612" y="429" class="meta-text">Intervals do not cover this bias.</text>
+</svg>

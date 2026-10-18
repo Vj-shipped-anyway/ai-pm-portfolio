@@ -1,0 +1,9 @@
+cost_center_id,cost_center_name,headcount,loaded_cost_per_hour_usd,freed_time_can_become_cash,cash_lever,addressable_spend_usd_annual
+CC-101,Retail operations processing,40,48.00,yes,contractor and overtime cover,70000
+CC-102,Client onboarding and KYC,33,55.00,yes,temporary staffing,45000
+CC-103,Collections and recoveries,39,50.00,yes,overtime,60000
+CC-104,Credit risk reporting,42,82.00,no,"none, fixed salaried headcount",0
+CC-105,Regulatory compliance,45,78.00,no,"none, fixed salaried headcount",0
+CC-106,Financial control,36,74.00,no,"none, fixed salaried headcount",0
+CC-107,Legal and contracts,48,95.00,no,"none, fixed salaried headcount",0
+CC-108,Product and analytics,37,70.00,no,"none, fixed salaried headcount",0
