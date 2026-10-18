@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SwapBrief — Go or No-Go Brief for a Model Migration · Vijay Saharan</title>
+<title>SwapBrief — Catches the Bad Model Swap the Average Calls Safe · Vijay Saharan</title>
 <meta name="description" content="A clickable demo of SwapBrief: a go or no-go decision brief for moving a production GenAI feature to a new model version, with slice intervals, cost per correct answer, tail latency, a prompt-fair comparison and rollback triggers. Simulated data; no model is called.">
 <style>
   :root {
@@ -126,15 +126,14 @@
 <body>
 <div class="container">
   <header class="hero">
-    <h1>SwapBrief — Go or No-Go Brief for a Model Migration</h1>
-    <p class="tagline">Pick a migration scenario. See how the same evaluation is decided three ways: the headline average, the average plus a significance test, and SwapBrief (slice intervals, cost per correct answer, tail latency, a prompt-fair comparison and rollback triggers).</p>
+    <h1>SwapBrief — catches the bad model swap the average calls safe</h1>
+    <p class="tagline">Pick a migration scenario. See the same evaluation decided three ways: headline average, aggregate test, and SwapBrief.</p>
     <p class="author">Project 13 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
-      <span class="badge">720 simulated items</span>
-      <span class="badge">8 slices</span>
-      <span class="badge">3 conditions</span>
+      <span class="badge">720 simulated items · 8 slices · 3 conditions</span>
       <span class="badge">6 named deficiencies</span>
-      <span class="badge">Simulated data, no model called</span>
+      <span class="badge">Synthetic data</span>
+      <span class="badge">Generator is a stub, not a model</span>
     </div>
   </header>
 
@@ -173,6 +172,7 @@
       <div class="card-body" id="card-swapbrief"></div>
     </div>
   </section>
+  <p class="meta" id="sim-note">Simulated evaluation results. The generator (<code>data/_generate.py</code>) is a stub, not a model, and nothing here measures any real model, vendor or bank.</p>
 
   <section class="wide" aria-label="Slice table">
     <p class="card-title">Slice table · model B with the retuned prompt minus model A · paired bootstrap 95% interval</p>
@@ -247,7 +247,7 @@ function render() {
   }
   document.getElementById("run-meta").innerHTML =
     "<b>" + esc(s.label) + "</b> — " + esc(s.n_items) + " items scored for model A, model B with A's old prompt and model B with a retuned prompt. " +
-    "Simulated results from a seeded generator (a stub for real evaluation runs), not measurements of any real model. SwapBrief decision " +
+    "SwapBrief decision " +
     '<span class="status-strip ' + decisionClass(r.decision) + '">' + esc(r.decision) + "</span>." + esc(truth);
 
   document.getElementById("card-before").innerHTML =
