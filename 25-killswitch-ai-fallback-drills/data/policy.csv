@@ -1,0 +1,20 @@
+parameter,scope,value,unit,set_by,note
+window_hours,all signals,3,hours,design,Rolling window the four signals are pooled over before they are scored.
+min_window_decisions,error_rate and override_rate,60,decisions,design,Below this many decisions in the window the two rate signals are not scored (too few to judge).
+persistence_hours,trip and warn,2,hours,design,The level must hold this many hours running before a warn or a trip fires.
+trip_level,per segment,fitted,standard errors,fitted_by_step_04,Fitted on days 1-60 by step_04: the lowest candidate whose false trips stay within the budget.
+warn_fraction,warn tier,0.75,fraction of trip level,design,Warn level = warn_fraction x trip level. A warn alerts a person; it does not switch anything.
+clear_fraction,hysteresis band,0.50,fraction of trip level,design,A segment may return only when its score stays below clear_fraction x trip level.
+clear_hours,recovery criteria,4,hours,design,The score must stay below the clear level this many hours running before the segment returns.
+cool_off_hours,fallback,6,hours,design,"Minimum time a segment stays on the rules path after a trip, whatever the signals do."
+trip_level_candidates,fit grid,3.0;3.5;4.0;4.5;5.0;5.5;6.0;7.0;8.0;10.0,standard errors,design,"Candidate trip levels the fit tries, lowest first."
+false_trip_budget_days_1_60,fit rule,2,false trips,assumption of a modeled bank,At most two unnecessary fallbacks in the 60 fit days. Both the single threshold and KillSwitch are tuned to it.
+fit_days,scoring,1-60,days,design,Thresholds are set on these days.
+held_out_days,scoring,61-90,days,design,Scored only; never used to set a threshold.
+justify_grace_hours,scoring,6,hours,design,A trip is justified if an event touching the tripped segment was active in the 6 hours before the metric crossed.
+re_trip_window_hours,scoring,6,hours,design,A return counts as re-tripped if the segment falls back again within this many hours.
+manual_cluster_complaints_3h,status quo,12,"complaints in 3 hours, all segments",assumption of a modeled bank,A person notices a problem when complaints reach this count in a rolling 3-hour window (about 4 times a normal daytime window).
+manual_decision_delay_hours,status quo,4,hours,assumption of a modeled bank,"Time from noticing to the switch actually being flipped, and again from the end of the event to flipping it back."
+drill_target_minutes,drill scorecard,30,minutes,assumption of a modeled bank,A drill passes the scorecard only if the fallback was live within this time.
+max_rules_version_age_days,drill scorecard,30,days,assumption of a modeled bank,"A drill on an older rules version is stale, even if the switch worked."
+drill_cadence_days,drill scorecard,45,days,assumption of a modeled bank,A scenario not drilled for longer than this at the end of the period is overdue.

@@ -1,0 +1,11 @@
+drill_id,date_hour,scenario,minutes_to_fallback,success,failure_reason,rules_version_age_days
+D01,82,full_switch_off,,no,rules version stale: rejected current product codes,38
+D02,250,full_switch_off,,no,rules version stale: rejected current product codes,45
+D03,446,upstream_outage,47,yes,,53
+D04,634,segment_switch_off,,no,rules version stale: rate table out of date,61
+D05,851,model_regression,58,yes,,2
+D06,1018,full_switch_off,53,yes,,9
+D07,1239,recovery_return,,no,switch config not deployed to one segment,18
+D08,1498,tool_failure,57,yes,,29
+D09,1762,segment_switch_off,38,yes,,3
+D10,2030,full_switch_off,48,yes,,14

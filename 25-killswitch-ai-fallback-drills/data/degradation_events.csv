@@ -1,0 +1,13 @@
+event_id,start_hour,end_hour,type,segments,bad_decision_rate,ramp_hours,signal_scale
+E01,110,116,tool_failure,new_to_bank,0.3,0,1.0
+E02,246,306,drift,affluent,0.14,12,1.0
+E03,393,407,model_regression,consumer;small_business,0.18,0,1.0
+E04,561,565,upstream_outage,consumer;small_business;affluent;new_to_bank,0.35,0,1.0
+E05,730,766,silent_error,small_business,0.1,0,1.0
+E06,982,990,tool_failure,affluent;small_business,0.28,0,0.9
+E07,1232,1262,silent_error,new_to_bank,0.09,0,1.0
+E08,1499,1515,model_regression,affluent,0.2,0,1.0
+E09,1623,1628,upstream_outage,consumer;small_business,0.32,0,0.9
+E10,1737,1777,silent_error,affluent,0.11,0,1.0
+E11,1875,1923,drift,new_to_bank,0.2,12,1.0
+E12,2029,2041,model_regression,consumer,0.16,0,0.8

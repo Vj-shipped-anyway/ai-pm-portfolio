@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KillSwitch — AI Fallback and Degradation Drills · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of KillSwitch: per-segment warn and trip tiers, hysteresis, a way back and a drill scorecard for an AI decision service's fallback path. Synthetic data, stub rules path.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldrow:first-of-type { border-top: 0; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; overflow-wrap: anywhere; }
+  .fieldvals { color: var(--text-secondary); overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 999px; margin-left: 6px; }
+  .tag-ok { background: #EAF3DE; color: #27500A; }
+  .tag-bad { background: #FCEBEB; color: #791F1F; }
+  .tag-warn { background: #FAEEDA; color: #633806; }
+  .reltitle { font-size: 12px; font-weight: 500; margin: 10px 0 4px; overflow-wrap: anywhere; }
+  .reltitle:first-child { margin-top: 0; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>KillSwitch — AI Fallback and Degradation Drills</h1>
+    <p class="tagline">Pick a degradation event and watch the manual switch-off, one threshold and KillSwitch handle it.</p>
+    <p class="author">Project 25 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">Synthetic data</span>
+      <span class="badge">12 events · 4 segments · 90 days</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">Stub rules path, not a model</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Running totals through the selected event">
+    <div class="stat"><p class="stat-label">Bad decisions, manual</p><p class="stat-value" id="stat-man">—</p></div>
+    <div class="stat"><p class="stat-label">Bad decisions, one threshold</p><p class="stat-value" id="stat-thr">—</p></div>
+    <div class="stat"><p class="stat-label">Bad decisions, KillSwitch</p><p class="stat-value" id="stat-ks">—</p></div>
+    <div class="stat"><p class="stat-label">Served in missed silent errors (known limit)</p><p class="stat-value" id="stat-silent">—</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="event-select">Event</label>
+    <select id="event-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next event</button>
+    <button id="runall-btn">Replay all 12 events</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Manual switch-off</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>Basic — One overall threshold</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With KillSwitch</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. Totals run from E01 to the selected event and count expected bad decisions inside event windows. The trip level was fitted on days 1-60 and scored on days 61-90. The rules path quality numbers are stubs set by the generator, and no model is used anywhere. Every number on this page is generated from the scripts in <code>src/</code>.</p>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (bad decisions per event without KillSwitch − with it) × degradation events per quarter</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on the 5 held-out events (days 61-90):</b> 255 bad decisions per event with the tuned single threshold, 223 with KillSwitch, so 32 avoided per event. KillSwitch tripped for 4 of 5 events, median 2.5 hours in, with 1 false trip. The single threshold tripped for 1.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 4 degradation events a quarter (an assumption, not a statistic) gives 32 × 4 = <b>128 bad decisions avoided per quarter</b> against the single threshold. Against the manual plan the figure is 75 per event, 300 per quarter, and rests on a 4 hour decision delay and a complaint-cluster notice level of 12 that are assumptions.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/25-killswitch-ai-fallback-drills/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/25-killswitch-ai-fallback-drills/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/25-killswitch-ai-fallback-drills/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/killswitch-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"events":[{"id":"E01","period":"train","type":"tool failure","silent":false,"segments":"new to bank","n_segments":1,"start":"day 5 14:00","hours":6,"day":5,"bad_rate_pct":30,"ramp":0,"decisions":156,"exposure":47,"peak_score":15.2,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":6,"bad_served":47,"bad_total":47,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":47,"bad_served":47},"ks":{"caught":true,"delay":2,"segments":[{"segment":"new to bank","warn":"day 5 16:00","trip":"day 5 16:00","delay":2,"back":"day 6 04:00","after_end":8,"lead":"latency"}],"protected":99,"bad_served":17,"bad_total":38,"other":[]}},{"id":"E02","period":"train","type":"drift","silent":false,"segments":"affluent","n_segments":1,"start":"day 11 06:00","hours":60,"day":11,"bad_rate_pct":14,"ramp":12,"decisions":1668,"exposure":212,"peak_score":36.2,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":6,"bad_served":212,"bad_total":212,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":212,"bad_served":212},"ks":{"caught":true,"delay":4,"segments":[{"segment":"affluent","warn":"day 11 09:00","trip":"day 11 10:00","delay":4,"back":"day 14 23:00","after_end":29,"lead":"drift"}],"protected":1570,"bad_served":3,"bad_total":210,"other":[]}},{"id":"E03","period":"train","type":"model regression","silent":false,"segments":"consumer, small business","n_segments":2,"start":"day 17 09:00","hours":14,"day":17,"bad_rate_pct":18,"ramp":0,"decisions":5744,"exposure":1034,"peak_score":13.1,"manual":{"acted":true,"cluster":"day 17 12:00","switch":"day 17 16:00","delay":7,"peak_complaints":24,"bad_served":617,"bad_total":785,"unneeded":489},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":1034,"bad_served":1034},"ks":{"caught":true,"delay":2,"segments":[{"segment":"consumer","warn":"day 17 11:00","trip":"day 17 11:00","delay":2,"back":"day 18 04:00","after_end":5,"lead":"error_rate"},{"segment":"small business","warn":"day 17 13:00","trip":"day 17 14:00","delay":5,"back":"day 18 05:00","after_end":6,"lead":"override_rate"}],"protected":4540,"bad_served":217,"bad_total":433,"other":[]}},{"id":"E04","period":"train","type":"upstream outage","silent":false,"segments":"consumer, small business, affluent, new to bank","n_segments":4,"start":"day 24 09:00","hours":4,"day":24,"bad_rate_pct":35,"ramp":0,"decisions":2327,"exposure":814,"peak_score":79.8,"manual":{"acted":false,"cluster":"day 24 10:00","switch":null,"delay":null,"peak_complaints":104,"bad_served":814,"bad_total":814,"unneeded":0},"threshold":{"caught":true,"hour":"day 24 10:00","delay":1,"bad_total":403,"bad_served":214},"ks":{"caught":true,"delay":2,"segments":[{"segment":"consumer","warn":"day 24 11:00","trip":"day 24 11:00","delay":2,"back":"day 25 01:00","after_end":12,"lead":"error_rate"},{"segment":"small business","warn":"day 24 11:00","trip":"day 24 11:00","delay":2,"back":"day 25 05:00","after_end":16,"lead":"latency"},{"segment":"affluent","warn":"day 24 11:00","trip":"day 24 11:00","delay":2,"back":"day 25 00:00","after_end":11,"lead":"latency"},{"segment":"new to bank","warn":"day 24 11:00","trip":"day 24 11:00","delay":2,"back":"day 25 00:00","after_end":11,"lead":"latency"}],"protected":1185,"bad_served":400,"bad_total":724,"other":[]}},{"id":"E05","period":"train","type":"silent error","silent":true,"segments":"small business","n_segments":1,"start":"day 31 10:00","hours":36,"day":31,"bad_rate_pct":10,"ramp":0,"decisions":1440,"exposure":144,"peak_score":2.0,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":4,"bad_served":144,"bad_total":144,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":144,"bad_served":144},"ks":{"caught":false,"delay":null,"segments":[],"protected":0,"bad_served":144,"bad_total":144,"other":[]}},{"id":"E06","period":"train","type":"tool failure","silent":false,"segments":"affluent, small business","n_segments":2,"start":"day 41 22:00","hours":8,"day":41,"bad_rate_pct":28,"ramp":0,"decisions":240,"exposure":67,"peak_score":17.5,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":5,"bad_served":67,"bad_total":67,"unneeded":0},"threshold":{"caught":true,"hour":"day 42 04:00","delay":6,"bad_total":65,"bad_served":61},"ks":{"caught":true,"delay":2,"segments":[{"segment":"small business","warn":"day 42 00:00","trip":"day 42 00:00","delay":2,"back":"day 42 20:00","after_end":14,"lead":"latency"},{"segment":"affluent","warn":"day 42 00:00","trip":"day 42 01:00","delay":3,"back":"day 42 17:00","after_end":11,"lead":"latency"}],"protected":133,"bad_served":30,"bad_total":165,"other":[]}},{"id":"E07","period":"train","type":"silent error","silent":true,"segments":"new to bank","n_segments":1,"start":"day 52 08:00","hours":30,"day":52,"bad_rate_pct":9,"ramp":0,"decisions":845,"exposure":76,"peak_score":2.7,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":7,"bad_served":76,"bad_total":76,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":76,"bad_served":76},"ks":{"caught":false,"delay":null,"segments":[],"protected":0,"bad_served":76,"bad_total":76,"other":[]}},{"id":"E08","period":"heldout","type":"model regression","silent":false,"segments":"affluent","n_segments":1,"start":"day 63 11:00","hours":16,"day":63,"bad_rate_pct":20,"ramp":0,"decisions":652,"exposure":130,"peak_score":7.5,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":8,"bad_served":130,"bad_total":130,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":130,"bad_served":130},"ks":{"caught":true,"delay":3,"segments":[{"segment":"affluent","warn":"day 63 14:00","trip":"day 63 14:00","delay":3,"back":"day 64 08:00","after_end":5,"lead":"drift"}],"protected":464,"bad_served":38,"bad_total":82,"other":[]}},{"id":"E09","period":"heldout","type":"upstream outage","silent":false,"segments":"consumer, small business","n_segments":2,"start":"day 68 15:00","hours":5,"day":68,"bad_rate_pct":32,"ramp":0,"decisions":1481,"exposure":474,"peak_score":57.5,"manual":{"acted":false,"cluster":"day 68 16:00","switch":null,"delay":null,"peak_complaints":40,"bad_served":474,"bad_total":474,"unneeded":0},"threshold":{"caught":true,"hour":"day 68 16:00","delay":1,"bad_total":210,"bad_served":105},"ks":{"caught":true,"delay":2,"segments":[{"segment":"consumer","warn":"day 68 17:00","trip":"day 68 17:00","delay":2,"back":"day 69 07:00","after_end":11,"lead":"error_rate"},{"segment":"small business","warn":"day 68 17:00","trip":"day 68 17:00","delay":2,"back":"day 69 13:00","after_end":17,"lead":"latency"}],"protected":841,"bad_served":205,"bad_total":329,"other":[]}},{"id":"E10","period":"heldout","type":"silent error","silent":true,"segments":"affluent","n_segments":1,"start":"day 73 09:00","hours":40,"day":73,"bad_rate_pct":11,"ramp":0,"decisions":1095,"exposure":120,"peak_score":2.1,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":6,"bad_served":120,"bad_total":120,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":120,"bad_served":120},"ks":{"caught":false,"delay":null,"segments":[],"protected":0,"bad_served":120,"bad_total":120,"other":[]}},{"id":"E11","period":"heldout","type":"drift","silent":false,"segments":"new to bank","n_segments":1,"start":"day 79 03:00","hours":48,"day":79,"bad_rate_pct":20,"ramp":12,"decisions":1300,"exposure":237,"peak_score":34.0,"manual":{"acted":false,"cluster":null,"switch":null,"delay":null,"peak_complaints":11,"bad_served":237,"bad_total":237,"unneeded":0},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":237,"bad_served":237},"ks":{"caught":true,"delay":4,"segments":[{"segment":"new to bank","warn":"day 79 07:00","trip":"day 79 07:00","delay":4,"back":"day 82 04:00","after_end":25,"lead":"drift"}],"protected":1264,"bad_served":2,"bad_total":207,"other":[]}},{"id":"E12","period":"heldout","type":"model regression","silent":false,"segments":"consumer","n_segments":1,"start":"day 85 13:00","hours":12,"day":85,"bad_rate_pct":16,"ramp":0,"decisions":3593,"exposure":575,"peak_score":10.2,"manual":{"acted":true,"cluster":"day 85 16:00","switch":"day 85 20:00","delay":7,"peak_complaints":20,"bad_served":445,"bad_total":527,"unneeded":482},"threshold":{"caught":false,"hour":null,"delay":null,"bad_total":575,"bad_served":575},"ks":{"caught":true,"delay":2,"segments":[{"segment":"consumer","warn":"day 85 15:00","trip":"day 85 15:00","delay":2,"back":"day 86 13:00","after_end":12,"lead":"error_rate"}],"protected":2741,"bad_served":136,"bad_total":350,"other":[]}}],"s":{"events":12,"segments":4,"days":90,"z_fit":4.0,"warn_z":3.0,"held_events":5,"held_caught":4,"held_median_delay":"2.5","man_caught":1,"thr_caught":1,"bad_per_event":{"manual":298,"threshold":255,"ks":223},"delta_thr":32,"delta_man":75,"epq":4,"per_quarter_thr":128,"per_quarter_man":300,"silent_missed":3,"drills_failed":4,"drills":10,"scen_ready":0,"scen":7,"ks_false_held":1,"cluster_n":12,"delay_h":4}};
+const EV = D.events;
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function fmt(n) { return Number(n).toLocaleString("en-US"); }
+
+let idx = 0;
+const sel = document.getElementById("event-select");
+EV.forEach((e, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = e.id + " - day " + e.day + " - " + e.type + " - " + e.segments + " - " + (e.period === "heldout" ? "held out" : "fit period");
+  sel.appendChild(o);
+});
+
+function totals(upTo) {
+  let man = 0, thr = 0, ks = 0, silent = 0;
+  for (let i = 0; i <= upTo; i++) {
+    const e = EV[i];
+    man += e.manual.bad_total; thr += e.threshold.bad_total; ks += e.ks.bad_total;
+    if (e.silent && !e.ks.caught) silent += e.ks.bad_served;
+  }
+  return { man, thr, ks, silent };
+}
+
+function render() {
+  const e = EV[idx];
+  sel.value = idx;
+  const tt = totals(idx);
+  document.getElementById("stat-man").textContent = fmt(tt.man);
+  document.getElementById("stat-thr").textContent = fmt(tt.thr);
+  document.getElementById("stat-ks").textContent = fmt(tt.ks);
+  document.getElementById("stat-silent").textContent = fmt(tt.silent);
+
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(e.id) + "</b> - " + esc(e.type) + " in " + esc(e.segments) + ", from " + esc(e.start) + " for " + esc(e.hours) +
+    " hours. " + esc(e.bad_rate_pct) + "% of the decisions in the affected segments were bad while it lasted: <b>" + esc(fmt(e.exposure)) +
+    "</b> bad decisions if nothing is done. " + (e.period === "heldout" ? "Held out: no threshold was set on this event." : "Fit period: the trip level was fitted on days 1-60.");
+
+  // Card 1: manual
+  let b = "";
+  if (e.manual.acted) {
+    b += "<p>Complaints reach " + esc(D.s.cluster_n) + " in 3 hours at <b>" + esc(e.manual.cluster) + "</b>. After a " + esc(D.s.delay_h) + " hour decision delay the switch is flipped at <b>" +
+         esc(e.manual.switch) + "</b>, " + esc(e.manual.delay) + " hours in. All four segments move.</p>";
+  } else if (e.manual.cluster) {
+    b += "<p>Complaints cluster at " + esc(e.manual.cluster) + ", but the " + esc(D.s.delay_h) + " hour decision delay lands after the event has ended. Nothing is switched.</p>";
+  } else {
+    b += "<p>Complaints never cluster: the busiest 3 hours reach " + esc(e.manual.peak_complaints) + " against a notice level of " + esc(D.s.cluster_n) + ". Nobody switches.</p>";
+  }
+  b += '<div class="driver-row"><span class="driver-label">Bad decisions served</span><span class="driver-value">' + esc(fmt(e.manual.bad_served)) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Healthy decisions moved</span><span class="driver-value">' + esc(fmt(e.manual.unneeded)) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Bad decisions, total</span><span class="driver-value">' + esc(fmt(e.manual.bad_total)) + "</span></div>";
+  b += '<span class="pill ' + (e.manual.acted ? "pill-warn" : "pill-bad") + '">' + (e.manual.acted ? "LATE" : "MISSED") + "</span>";
+  b += '<div style="font-size:12px;color:#8a8a8a;margin-top:8px;">Modeled: notice at ' + esc(D.s.cluster_n) + ' complaints in 3 hours, ' + esc(D.s.delay_h) + ' hours to flip, perfect triage. A floor on the harm.</div>';
+  document.getElementById("card-before").innerHTML = b;
+
+  // Card 2: single threshold
+  let s = "";
+  if (e.threshold.caught) {
+    s += "<p>The overall error rate crosses the threshold at <b>" + esc(e.threshold.hour) + "</b>, " + esc(e.threshold.delay) + " hours in. All four segments move.</p>";
+  } else {
+    s += "<p>The overall error rate never crosses the threshold. The event moves it too little, so nothing trips.</p>";
+  }
+  s += '<div class="driver-row"><span class="driver-label">Bad decisions served</span><span class="driver-value">' + esc(fmt(e.threshold.bad_served)) + "</span></div>";
+  s += '<div class="driver-row"><span class="driver-label">Bad decisions, total</span><span class="driver-value">' + esc(fmt(e.threshold.bad_total)) + "</span></div>";
+  s += '<span class="pill ' + (e.threshold.caught ? "pill-info" : "pill-bad") + '">' + (e.threshold.caught ? "tripped, no segment view" : "MISSED") + "</span>";
+  document.getElementById("card-sota").innerHTML = s;
+
+  // Card 3: KillSwitch
+  let h = "";
+  if (e.ks.caught) {
+    e.ks.segments.forEach(g => {
+      h += '<div class="fieldrow"><span class="fieldname">' + esc(g.segment) + '</span><span class="tag tag-ok">trip ' + esc(g.delay) + ' h in</span>' +
+           '<div class="fieldvals">warn ' + esc(g.warn) + "<br>trip " + esc(g.trip) + "<br>back " + esc(g.back) +
+           (g.after_end !== null ? " (" + esc(Math.abs(g.after_end)) + " h " + (g.after_end >= 0 ? "after" : "before") + " the event ended)" : "") + "</div></div>";
+    });
+    if (e.ks.other.length) {
+      h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">' + esc(e.ks.other.join(", ")) + " also ran on the rules path: a false trip on noise, counted in the fit.</div>";
+    }
+    h += '<div class="driver-row"><span class="driver-label">Decisions protected</span><span class="driver-value">' + esc(fmt(e.ks.protected)) + "</span></div>";
+    h += '<div class="driver-row"><span class="driver-label">Bad decisions served</span><span class="driver-value">' + esc(fmt(e.ks.bad_served)) + "</span></div>";
+    h += '<div class="driver-row"><span class="driver-label">Bad decisions, total</span><span class="driver-value">' + esc(fmt(e.ks.bad_total)) + "</span></div>";
+    h += '<span class="pill pill-ok">CAUGHT in ' + esc(e.ks.delay) + " h</span>";
+    if (e.threshold.bad_total < e.ks.bad_total) {
+      h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;"><b>Known cost:</b> the single threshold served fewer bad decisions here because it came back sooner. KillSwitch waits for clean signals.</div>';
+    }
+  } else {
+    h += "<p>A silent error moves no signal enough to see: the highest score was " + esc(e.peak_score) + " standard errors against a warn level of " + esc(D.s.warn_z) + ". KillSwitch cannot trip on what no metric shows.</p>";
+    h += '<div class="driver-row"><span class="driver-label">Bad decisions served</span><span class="driver-value">' + esc(fmt(e.ks.bad_served)) + "</span></div>";
+    h += '<span class="pill pill-warn">MISSED: known limit</span>';
+  }
+  document.getElementById("card-shield").innerHTML = h;
+}
+
+sel.addEventListener("change", ev => { idx = parseInt(ev.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < EV.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => { idx = i; render(); i++; if (i >= EV.length) clearInterval(iv); }, 700);
+});
+
+render();
+</script>
+</body>
+</html>
