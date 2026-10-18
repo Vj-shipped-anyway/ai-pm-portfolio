@@ -124,7 +124,7 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 
 **Reference architecture (vendor-named):**
 - Primary extractor: whatever the firm runs today — Yardi's lease-abstraction module, ProDeal's abstraction product, an in-house Llama 3.1 70B fine-tune, or one of the standalone vendors. We don't replace it.
-- Re-extractor: the hosted vendor model via Bedrock (or direct Anthropic API). Different prompt, different chunking strategy than primary. The "different model family" rule is non-negotiable — same family produces correlated errors.
+- Re-extractor: a fine-tuned Mistral 7B Instruct on hosted inference, a different model family from the primary. Different prompt, different chunking strategy than primary. The "different model family" rule is non-negotiable — same family produces correlated errors.
 - Second-opinion re-extractor: Azure OpenAI gpt-4o. The two re-extractors plus the primary form the ensemble.
 - Rule extractor: Python with regex and spaCy. Templates for dates, base rent, escalation %, CAM cap percentages. Design target: under 100 ms per lease (not measured).
 - Clause-class classifier: Llama 3.1 8B fine-tune on a labeled corpus of clause-class examples. Inferred on a single L4 GPU. Powers the missing-but-likely-present detector.
