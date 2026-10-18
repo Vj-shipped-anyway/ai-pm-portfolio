@@ -354,7 +354,7 @@ sequenceDiagram
     G->>B: VERDICT=FAIL, assemble evidence bundle
     B-->>L: routed to L2 queue, under 1s wall time
     L-->>E: deploy pinned to prior snapshot
-    Note over E,L: 🔴 Designed for 5-minute L2 triage on FAIL; not yet tested with a real L2 team.
+    Note over E,L: 🔴 Designed for 5-minute L2 triage on FAIL, not yet tested with a real L2 team.
 ```
 
 See [`assets/evalforge-flow.svg`](./assets/evalforge-flow.svg) for a static visual of the same flow.
