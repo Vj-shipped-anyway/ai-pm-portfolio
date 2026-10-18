@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI PM Portfolio · Vijay Saharan</title>
-<meta name="description" content="Ten AI product case studies in regulated finance and commercial real estate. Each names the failure modes of a deployed AI system and builds the layer that contains them.">
+<meta name="description" content="Fifteen AI product case studies in regulated finance and commercial real estate. Each names the failure modes of a deployed AI system and builds the layer that contains them.">
 <style>
   :root {
     --bg: #ffffff; --bg-2: #f6f5f2; --bg-3: #ecebe7;
@@ -39,14 +39,14 @@
 <body>
 <main class="wrap">
   <h1>AI PM Portfolio</h1>
-  <p class="sub">Ten prototypes of AI product work in regulated finance and commercial real estate. Each one names the failure modes of a deployed AI system, shows where it breaks on sample data, and builds the layer that contains them.</p>
+  <p class="sub">Fifteen prototypes of AI product work in regulated finance and commercial real estate. Each one names the failure modes of a deployed AI system, shows where it breaks on sample data, and builds the layer that contains them.</p>
   <div class="thesis">
     I price product impact with one formula:<br>
     <code>Utility = (my solution − current state of the art) × number of people it affects</code>
   </div>
   <p class="note">These are portfolio prototypes on synthetic data, not production case studies. Every number is tagged measured, modeled or hypothetical; see <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio#-reading-the-numbers">how to read the numbers</a>. LeaseGuard and DealSentry apply the same approach to commercial real estate, a domain I follow as a personal study interest.</p>
 
-  <section class="grid" aria-label="The ten case studies">
+  <section class="grid" aria-label="The fifteen case studies">
     <article class="card">
       <p class="num">01 · BFSI / Safety</p>
       <h2>HalluGuard</h2>
@@ -106,6 +106,36 @@
       <h2>DealSentry</h2>
       <p class="line">Verifies comps, T-12 math and submarket stats behind an AI underwriting copilot.</p>
       <p class="links"><a class="primary" href="./10-dealsentry-cre-underwriting/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/10-dealsentry-cre-underwriting">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/10-dealsentry-cre-underwriting/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">11 · AI / Program governance</p>
+      <h2>TierGate</h2>
+      <p class="line">Recomputes the risk tier of each AI use-case intake from the form, the data catalog and the vendor registry, and gates approval on the evidence the tier requires.</p>
+      <p class="links"><a class="primary" href="./11-tiergate-ai-usecase-intake/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/11-tiergate-ai-usecase-intake">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/11-tiergate-ai-usecase-intake/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">12 · AI / Value realization</p>
+      <h2>ValueLedger</h2>
+      <p class="line">Measures what a copilot actually saved against a holdout group, net of rework, and ties the benefit to a budget line.</p>
+      <p class="links"><a class="primary" href="./12-valueledger-ai-benefit-tracking/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/12-valueledger-ai-benefit-tracking">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/12-valueledger-ai-benefit-tracking/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">13 · AI / Model change</p>
+      <h2>SwapBrief</h2>
+      <p class="line">Turns a model-version migration into a go or no-go brief with per-slice intervals, cost, latency and rollback triggers.</p>
+      <p class="links"><a class="primary" href="./13-swapbrief-model-migration/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/13-swapbrief-model-migration">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/13-swapbrief-model-migration/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">14 · AI / Evaluation</p>
+      <h2>PolicyNeedle</h2>
+      <p class="line">Probes where assistants lose facts in long policy manuals, and flags the failing form and depth.</p>
+      <p class="links"><a class="primary" href="./14-policyneedle-long-context-fidelity/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/14-policyneedle-long-context-fidelity">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/14-policyneedle-long-context-fidelity/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">15 · AI / Agent reliability</p>
+      <h2>SchemaWatch</h2>
+      <p class="line">Detects tool-schema changes that break an agent, replays recorded calls against the new schema, and gates the release.</p>
+      <p class="links"><a class="primary" href="./15-schemawatch-tool-schema-drift/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/15-schemawatch-tool-schema-drift">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/15-schemawatch-tool-schema-drift/ARCHITECTURE.md">Architecture</a></p>
     </article>
   </section>
 
