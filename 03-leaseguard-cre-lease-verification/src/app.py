@@ -565,7 +565,7 @@ if st.session_state.step >= 4:
         st.markdown(
             "- **Source of truth:** [`data/expected_extractions.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv) (12 ground-truth fields per lease, manually validated)\n"
             "- **Deficiency taxonomy:** [`data/deficiency_classes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/deficiency_classes.csv) (6 named classes)\n"
-            "- **Primary extractor:** Claude Sonnet over OCR (Tesseract / Textract)\n"
+            "- **Primary extractor:** the hosted vendor model over OCR (Tesseract / Textract)\n"
             "- **Ensemble verifier:** secondary LLM + symbolic rule engine + clause-pair cross-check\n"
             "- **Calibrated thresholds:** stricter for redlined / side-letter leases\n"
             "- **Audit trail:** every field gets a confidence score + provenance pointer"

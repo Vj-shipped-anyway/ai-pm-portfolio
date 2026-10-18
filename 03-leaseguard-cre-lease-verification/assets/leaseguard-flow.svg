@@ -45,7 +45,7 @@
   <!-- Stage 2 -->
   <rect x="225" y="108" width="170" height="110" rx="8" class="stage-box"/>
   <text x="237" y="128" class="stage-num">2 . PRIMARY (EXISTING)</text>
-  <text x="237" y="150" class="stage-title">Sonnet over OCR</text>
+  <text x="237" y="150" class="stage-title">Model over OCR</text>
   <text x="237" y="168" class="stage-sub">base_rent_psf = 48.00</text>
   <text x="237" y="183" class="stage-sub">looks clean</text>
   <text x="237" y="206" class="meta-warn">no confidence signal</text>

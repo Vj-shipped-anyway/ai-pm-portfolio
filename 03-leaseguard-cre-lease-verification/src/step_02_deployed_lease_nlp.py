@@ -1,10 +1,10 @@
 """
-Step 2 — With deployed lease-NLP: a Claude-Sonnet-over-OCR pipeline.
+Step 2 — With deployed lease-NLP: a vendor-model-over-OCR pipeline.
 
 This is the SOTA approach an institutional CRE owner-operator runs today,
 matching the public Cherre / Lev / ProDeal / Yardi Aspire pattern. The pipeline:
     1. Tesseract / AWS Textract OCRs the lease PDF.
-    2. A LangChain extraction chain prompts Claude Sonnet to fill 12 fields.
+    2. A LangChain extraction chain prompts the hosted vendor model to fill 12 fields.
     3. Output lands in the lease abstraction database (Yardi / MRI / Argus).
 
 It works fine on standard ICSC / BOMA leases. It silently breaks on
@@ -13,7 +13,7 @@ team only finds out during a CAM reconciliation dispute, two years later.
 
 To keep this runnable WITHOUT API keys (so any reviewer can replicate the
 walkthrough on a laptop), this script uses MOCK extraction outputs
-calibrated to what real Claude-over-OCR produces on this exact set of
+calibrated to what real vendor-model-over-OCR produces on this exact set of
 six leases. The mock errors are the ones I have personally read out of
 production lease-abstraction tooling.
 
@@ -34,7 +34,7 @@ FIELDS = [
 ]
 
 
-# Mock outputs of the deployed Claude-Sonnet-over-OCR pipeline.
+# Mock outputs of the deployed vendor-model-over-OCR pipeline.
 # Each entry is what the pipeline ACTUALLY extracted, not what is correct.
 # Entries marked "WRONG" are the realistic, observed failure pattern.
 MOCK_EXTRACTIONS = {
@@ -160,7 +160,7 @@ def main():
     out_path.parent.mkdir(exist_ok=True)
 
     print(f"\n{'='*80}")
-    print("Step 2 — With deployed lease-NLP (Claude Sonnet over OCR)")
+    print("Step 2 — With deployed lease-NLP (the hosted vendor model over OCR)")
     print(f"{'='*80}\n")
 
     total_fields = 0

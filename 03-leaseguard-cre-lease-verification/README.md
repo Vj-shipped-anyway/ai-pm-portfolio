@@ -34,7 +34,7 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 ## 🔥 Demo in 30 seconds
 
 Open the static, no-Python demo: [`demo.html`](./demo.html).
-Pick one of the six synthetic leases from the dropdown, or use Next lease and Replay all 6 leases. Three cards show the same 12 fields extracted three ways: by a paralegal (time, cost, and an assumed ~96% accuracy, 🟡 modeled), by the deployed Claude-over-OCR pipeline (each wrong field, what it returned, and what the lease says), and by that pipeline wrapped in LeaseGuard (which fields were routed to triage and why, which routed fields were false flags, and which wrong field got through). The running totals at the top end at the 🟢 measured numbers: 76.4% for the deployed pipeline, 98.6% after triage, 16 of 17 wrong fields caught, 1 missed.
+Pick one of the six synthetic leases from the dropdown, or use Next lease and Replay all 6 leases. Three cards show the same 12 fields extracted three ways: by a paralegal (time, cost, and an assumed ~96% accuracy, 🟡 modeled), by the deployed vendor-model-over-OCR pipeline (each wrong field, what it returned, and what the lease says), and by that pipeline wrapped in LeaseGuard (which fields were routed to triage and why, which routed fields were false flags, and which wrong field got through). The running totals at the top end at the 🟢 measured numbers: 76.4% for the deployed pipeline, 98.6% after triage, 16 of 17 wrong fields caught, 1 missed.
 
 To run the four-step walkthrough on your laptop:
 
@@ -99,7 +99,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 
 ## Executive summary (90 seconds)
 
-**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: Claude Sonnet over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **\~88%** (public PropTech vendor benchmarks). 🟡 Modeled rent leakage at this portfolio shape: **\~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
+**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: the hosted vendor model over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **\~88%** (public PropTech vendor benchmarks). 🟡 Modeled rent leakage at this portfolio shape: **\~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
 
 **Product.** LeaseGuard, a verification layer around the pipeline, not a replacement for it: **second-model re-extraction** (GPT-4o or a fine-tuned Mistral 7B over the same OCR text) + **rule validators** (dollar amounts, known escalation types, parseable dates, Yes/No flags) + a **side-letter tripwire** + a **router** (PASS / DISAGREEMENT / RULE_VIOLATION / MISSING / SIDE_LETTER_TRIPWIRE) that sends flagged fields to a **paralegal triage queue** with the source clause highlighted. Nothing is written back to the system of record until a flagged field clears.
 
@@ -122,7 +122,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 1. **The use case** — a 220-asset CRE owner-operator with a deployed lease-NLP pipeline
 2. **The sample data** — 6 synthetic leases (clean, redlined, side-lettered, anchor) + ground truth + deficiency mapping
 3. **Step 1 — Before automated abstraction.** Manual paralegal workflow. Cost, time, accuracy.
-4. **Step 2 — With deployed lease-NLP.** The Claude-Sonnet-over-OCR pipeline already in production. 96% on standard leases, 78% on non-standard, 88% blended.
+4. **Step 2 — With deployed lease-NLP.** The vendor-model-over-OCR pipeline already in production. 96% on standard leases, 78% on non-standard, 88% blended.
 5. **Step 3 — Where this still breaks.** Six named deficiencies; five have worked examples pulled from the sample leases (boilerplate paraphrase has 0 failures on this sample).
 6. **Step 4 — The fix.** LeaseGuard: an ensemble verification layer that catches what the primary missed.
 7. **Utility delivered.** The multiplied number, plus a modeled 28-day pilot design.
@@ -135,7 +135,7 @@ Total reading time: \~15 minutes for the full walkthrough. \~5 minutes if you sk
 
 **A modeled CRE owner-operator running a 220-asset retail-and-office portfolio.**
 
-The team has the standard tooling stack — Yardi Voyager for property accounting, Argus Enterprise for valuation modeling, MRI for some of the acquired-asset book, and a deployed lease-abstraction pipeline that pushes structured fields into the lease-record table. The pipeline itself is a LangChain extraction chain calling Claude Sonnet over OCR'd PDFs (Tesseract for the bulk; Textract for the harder ones). It looks like the kind of thing Cherre, Lev, ProDeal, VTS, or a Salesforce CRE Cloud integration would ship.
+The team has the standard tooling stack — Yardi Voyager for property accounting, Argus Enterprise for valuation modeling, MRI for some of the acquired-asset book, and a deployed lease-abstraction pipeline that pushes structured fields into the lease-record table. The pipeline itself is a LangChain extraction chain calling the hosted vendor model over OCR'd PDFs (Tesseract for the bulk; Textract for the harder ones). It looks like the kind of thing Cherre, Lev, ProDeal, VTS, or a Salesforce CRE Cloud integration would ship.
 
 It works fine on standard ICSC retail and BOMA office leases. The asset-management team trusts it. The CAM reconciliation team trusts the database it writes to. The acquisitions team uses the abstracted data to underwrite.
 
@@ -234,7 +234,7 @@ python src/step_01_manual_abstraction.py
 
 ## 🤖 Step 2 — With deployed lease-NLP: the SOTA
 
-**In plain English:** Replace the paralegal with a LangChain extraction chain over Claude Sonnet, run on top of OCR'd PDFs. Per-lease throughput drops from \~3.7 hours (the Step 1 average) to \~6 minutes (🟡 modeled). Per-lease cost drops from \~$278 (the Step 1 average) to a model and OCR fee that this repo does not model.
+**In plain English:** Replace the paralegal with a LangChain extraction chain over the hosted vendor model, run on top of OCR'd PDFs. Per-lease throughput drops from \~3.7 hours (the Step 1 average) to \~6 minutes (🟡 modeled). Per-lease cost drops from \~$278 (the Step 1 average) to a model and OCR fee that this repo does not model.
 
 This is the public Cherre / Lev / ProDeal / Yardi Aspire pattern — the SOTA that any institutional CRE operator runs today. The code below is a simplified version; a real production pipeline would have retries, structured-output schemas, and a confidence threshold that does not save it from any of the failure modes in Step 3.
 
@@ -245,7 +245,7 @@ def deployed_pipeline(lease_pdf):
     text = ocr(lease_pdf)                                   # Tesseract / Textract
     chain = create_extraction_chain(
         schema=LEASE_FIELDS_SCHEMA,                         # 12 fields
-        llm=ChatAnthropic(model="claude-sonnet-4"),
+        llm=ChatAnthropic(model="vendor-balanced-4"),
         prompt=PROMPT_TEMPLATE,                             # zero-shot
     )
     return chain.run(text)                                  # writes to Yardi
@@ -358,7 +358,7 @@ The six:
 
 The defects above aren't "the model is bad." They're specific patterns that the public PropTech writing describes across models. 🔴 **Hypothetical pass rates for three extraction backends.** These figures are hard-coded in `step_03`, which labels them a 240-lease eval set; that set and the GPT-4o and Mistral runs are not in this repo, so nothing in this table was measured here:
 
-| Deficiency | Claude Sonnet (deployed) | GPT-4o | Mistral 7B FT |
+| Deficiency | Vendor model (deployed) | GPT-4o | Mistral 7B FT |
 | --- | --- | --- | --- |
 | Redline blindness | 42% | 49% | 55% |
 | Escalation clause variance | 61% | 58% | 71% |
@@ -373,11 +373,11 @@ Reading this table tells you the answer for the operator: **no single backend wi
 
 ## 🛠️ Step 4 — The fix: LeaseGuard
 
-**In plain English:** Don't replace the deployed pipeline. Don't try to fine-tune Claude Sonnet on lease language (the published evidence on this is consistent — marginal lift on the standard slice, no lift on the side-letter slice). Wrap the pipeline in a verification layer that runs every extracted field through three independent checks and routes anything that disagrees, fails the rules, or comes back missing into a triage queue.
+**In plain English:** Don't replace the deployed pipeline. Don't try to fine-tune the hosted vendor model on lease language (the published evidence on this is consistent — marginal lift on the standard slice, no lift on the side-letter slice). Wrap the pipeline in a verification layer that runs every extracted field through three independent checks and routes anything that disagrees, fails the rules, or comes back missing into a triage queue.
 
 Three layers + a queue:
 
-1. **Primary extraction** — the existing deployed Claude-Sonnet-over-OCR pipeline. Untouched.
+1. **Primary extraction** — the existing deployed vendor-model-over-OCR pipeline. Untouched.
 2. **Re-extraction with a different model** — GPT-4o or a fine-tuned Mistral 7B Instruct over the same OCR'd text. Disagreement on a field flags it.
 3. **Rule-based field validators** — regex + structural rules per field type (rent must be a `$NN.NN` dollar amount, escalation must be in a known type set, dates must parse, ROFO must be Yes/No, term must be a sane number of months).
 4. **Triage queue** — flagged fields routed to a paralegal with the source clause highlighted alongside the primary extraction. The paralegal reviews and resolves. The CSV write to Yardi only happens after triage clears.
@@ -487,7 +487,7 @@ flowchart LR
     subgraph EXISTING["Existing deployed pipeline - untouched"]
         PDF["Lease document set<br/>lease, amendments, side letters"]
         OCR["OCR<br/>Tesseract or Textract"]
-        PRIMARY["Primary extraction<br/>Claude Sonnet over OCR text<br/>12 fields per lease"]
+        PRIMARY["Primary extraction<br/>Hosted vendor model over OCR text<br/>12 fields per lease"]
         SOR["System of record<br/>Yardi, MRI, Argus"]
     end
 
@@ -547,7 +547,7 @@ flowchart LR
 ```mermaid
 sequenceDiagram
     autonumber
-    participant P as Primary pipeline<br/>Claude Sonnet over OCR
+    participant P as Primary pipeline<br/>Hosted vendor model over OCR
     participant R as lg-rules
     participant S as lg-secondary<br/>second model
     participant G as lg-router
@@ -666,7 +666,7 @@ If LeaseGuard were a real product shipping to a CRE owner-operator's asset manag
 - **Backend:** FastAPI on the operator's K8s footprint (EKS or AKS most common in CRE shops); microservice per check (primary extractor, ensemble verifier, symbolic clause-engine, side-letter ingestor).
 - **Data plane:** Postgres for the lease-record table (mirroring Yardi's lease ID schema); object storage (S3 / Azure Blob) for the redlined PDFs and OCR artifacts; Snowflake for the analytics warehouse the acquisitions team already queries.
 - **Integrations:** Yardi Voyager and MRI write-back via their published REST APIs; Argus Enterprise import for the cash-flow side; CoStar / CompStak / Cherre as auxiliary feeds for benchmark comps; ProDeal / Lev / VTS for transaction-management bridges.
-- **OCR layer:** Textract for the harder scans, Tesseract for clean PDFs, document-AI fallback (Anthropic Claude Vision) for the redlined edge cases.
+- **OCR layer:** Textract for the harder scans, Tesseract for clean PDFs, document-AI fallback (Anthropic's vision model) for the redlined edge cases.
 - **Observability:** OpenTelemetry → Datadog; Langfuse for the LLM extraction traces; per-lease confidence scores logged for the asset-management ops view.
 - **Compliance:** SOC 2 Type II baseline (CRE LPs increasingly ask for it); audit log of every field decision retained for 7 years to match REIT data-retention requirements.
 - **Governance:** Every disagreement between primary extractor and ensemble verifier auto-routes to the senior abstraction lead with the diff pre-rendered.

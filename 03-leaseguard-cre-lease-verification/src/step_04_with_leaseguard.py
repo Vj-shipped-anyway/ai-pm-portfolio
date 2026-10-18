@@ -4,7 +4,7 @@ Step 4 — The fix: LeaseGuard ensemble verification.
 LeaseGuard is NOT a replacement for the deployed lease-NLP pipeline. It's
 a verification layer that runs every extracted field through three checks:
 
-    1. Primary extraction (the deployed Claude-Sonnet-over-OCR pipeline)
+    1. Primary extraction (the deployed vendor-model-over-OCR pipeline)
     2. Re-extraction with a different model (GPT-4o, or a fine-tuned
        Mistral 7B Instruct) — disagreement on a field flags it
     3. Rule-based field validators — regex + structural rules for known

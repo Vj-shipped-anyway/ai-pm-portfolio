@@ -254,7 +254,7 @@ function render() {
     '<div class="driver-row"><span class="driver-label">Field accuracy</span><span class="driver-value">~96% (assumed)</span></div>' +
     '<span class="pill pill-warn">🟡 modeled from blended rates</span>';
 
-  let sotaHtml = '<p>Claude Sonnet over OCR, ~6 minutes per lease. ' +
+  let sotaHtml = '<p>The hosted vendor model over OCR, ~6 minutes per lease. ' +
     (wrongFields.length ? "The output looks identical to a correct extraction, so nobody knows which fields are wrong." : "Every field is right on this lease.") + "</p>" +
     '<div class="driver-row"><span class="driver-label">Correct fields</span><span class="driver-value">' + correct + " / " + l.fields.length + " (" + pct(correct, l.fields.length) + ")</span></div>";
   wrongFields.forEach(f => {

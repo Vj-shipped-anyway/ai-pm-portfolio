@@ -36,6 +36,10 @@ In `lease_04`, redlines are simulated with `[STRIKE]old text[/STRIKE]` and `[INS
 ## How this maps to the walkthrough
 
 - `step_01_manual_abstraction.py` ignores the deficiency_classes file. A paralegal reading the lease cover-to-cover gets the right answers regardless of how messy the document is — the bottleneck is time, not accuracy.
-- `step_02_deployed_lease_nlp.py` produces a per-lease per-field extraction calibrated to what real Claude-over-OCR pipelines actually produce on these patterns. Graded against `expected_extractions.csv`.
+- `step_02_deployed_lease_nlp.py` produces a per-lease per-field extraction calibrated to what real vendor-model-over-OCR pipelines actually produce on these patterns. Graded against `expected_extractions.csv`.
 - `step_03_deficiencies_exposed.py` explains every wrong field by mapping it to one of the six classes (a mapping hard-coded in the script; it does not read `deficiency_classes.csv`).
 - `step_04_with_leaseguard.py` runs the verification ensemble and produces a triage queue.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. The deployed extraction model is "the hosted vendor model" in prose and `vendor-balanced-4` in the README code sample, and the Step 3 comparison column is "Vendor model (deployed)" (stored values, not run in this repo). GPT-4o and Mistral keep their real names. No number in this project depends on the label.

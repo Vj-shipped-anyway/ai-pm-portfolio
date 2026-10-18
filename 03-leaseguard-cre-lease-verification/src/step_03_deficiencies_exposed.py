@@ -67,12 +67,12 @@ DEFICIENCY_DESCRIPTIONS = {
 # six-lease sample in this walkthrough is a slice; the table below is from
 # the full eval.
 MODEL_COMPARISON = {
-    "redline_blindness":                  {"Claude Sonnet (deployed)": 0.42, "GPT-4o": 0.49, "Mistral 7B FT": 0.55},
-    "escalation_clause_variance":         {"Claude Sonnet (deployed)": 0.61, "GPT-4o": 0.58, "Mistral 7B FT": 0.71},
-    "cam_cap_omission":                   {"Claude Sonnet (deployed)": 0.54, "GPT-4o": 0.60, "Mistral 7B FT": 0.68},
-    "kickout_clause_missed":              {"Claude Sonnet (deployed)": 0.39, "GPT-4o": 0.44, "Mistral 7B FT": 0.51},
-    "tenant_rights_buried_in_side_letter":{"Claude Sonnet (deployed)": 0.18, "GPT-4o": 0.22, "Mistral 7B FT": 0.24},
-    "boilerplate_paraphrase":             {"Claude Sonnet (deployed)": 0.66, "GPT-4o": 0.62, "Mistral 7B FT": 0.59},
+    "redline_blindness":                  {"Vendor model (deployed)": 0.42, "GPT-4o": 0.49, "Mistral 7B FT": 0.55},
+    "escalation_clause_variance":         {"Vendor model (deployed)": 0.61, "GPT-4o": 0.58, "Mistral 7B FT": 0.71},
+    "cam_cap_omission":                   {"Vendor model (deployed)": 0.54, "GPT-4o": 0.60, "Mistral 7B FT": 0.68},
+    "kickout_clause_missed":              {"Vendor model (deployed)": 0.39, "GPT-4o": 0.44, "Mistral 7B FT": 0.51},
+    "tenant_rights_buried_in_side_letter":{"Vendor model (deployed)": 0.18, "GPT-4o": 0.22, "Mistral 7B FT": 0.24},
+    "boilerplate_paraphrase":             {"Vendor model (deployed)": 0.66, "GPT-4o": 0.62, "Mistral 7B FT": 0.59},
 }
 
 
@@ -146,7 +146,7 @@ def main():
     print("Comparative pass rate by deficiency, three extraction backends")
     print("(Same 240-lease eval set, no verification layer)")
     print(f"{'='*80}\n")
-    backends = ["Claude Sonnet (deployed)", "GPT-4o", "Mistral 7B FT"]
+    backends = ["Vendor model (deployed)", "GPT-4o", "Mistral 7B FT"]
     print(f"  {'Deficiency':<40} " + " ".join(f"{b:>22}" for b in backends))
     print(f"  {'-'*40} " + " ".join("-"*22 for _ in backends))
     for deficiency, scores in MODEL_COMPARISON.items():
