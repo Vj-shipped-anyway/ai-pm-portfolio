@@ -1,6 +1,8 @@
 # 🧭 PortfolioBoard — An AI Program Portfolio Run on Gate Evidence, Capacity and Dependencies
 
-**A portfolio prototype for running a bank's AI programs on gate evidence instead of owner-picked colors: an evidence status per program, a capacity grid for scarce reviewers, dependency propagation, a pull rule that suggests what to pause, and a benefit-at-risk rollup. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Govern' function and written against [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm), the current model risk guidance that replaced its 2011 predecessor (SR 11-7) in April 2026, as the standard the work would have to meet.**
+**A portfolio prototype for running a bank's AI programs on gate evidence instead of owner-picked colors: an evidence status per program, a capacity grid for scarce reviewers, dependency propagation, a pull rule that suggests what to pause, and a benefit-at-risk rollup. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Govern' function and written against [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm), the current model risk guidance that replaced its 2011 predecessor (SR 11-7) in April 2026, as the model-risk guidance the work is compared with.**
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/24-portfolioboard-ai-program-portfolio/demo.html)
 
@@ -783,7 +785,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Program PM · Runs the AI portfolio on gate evidence, capacity and dependencies, under regulated constraint*
 
@@ -792,6 +794,6 @@ The portfolio prototype is the conversation-starter. The production architecture
 ## 🙌 Acknowledgements
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Govern' function maps onto the idea that accountability for AI programs sits with named owners and is checked against evidence, not asserted.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)**, which replaced its 2011 predecessor (SR 11-7) in April 2026 — the model-risk standard the work would have to meet. Any statement about its themes in this repo is a paraphrase written for this exercise, not the text of the rule.
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)**, which replaced its 2011 predecessor (SR 11-7) in April 2026 — the model-risk guidance the work is compared with. Any statement about its themes in this repo is a paraphrase written for this exercise, not the text of the rule.
 - **Stage-gate and work-in-progress limits** — general portfolio and flow methods the status rules and the pull rule borrow from. The relation used for the time-in-stage check (average time in stage equals work in progress divided by throughput) is the standard queueing result, applied here to the stage history.
 - **Sibling projects in this repo** — [11 TierGate](../11-tiergate-ai-usecase-intake/) and [12 ValueLedger](../12-valueledger-ai-benefit-tracking/), the two interlocks that exist; 16 ControlMap, 19 IncidentLedger and 21 AdoptionPulse are the other three, designed and none built.
