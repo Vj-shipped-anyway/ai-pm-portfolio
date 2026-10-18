@@ -167,8 +167,8 @@ Seven files in [`data/`](./data/), written by [`data/_generate.py`](./data/_gene
 
 | item_id | slice | system | correct | input_tokens | output_tokens | latency_ms | refusal |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Q0001 | fee_questions | A | 1 | 647 | 134 | 2600 | 0 |
-| Q0001 | fee_questions | B_old_prompt | 1 | 673 | 225 | 2337 | 0 |
+| Q0001 | fee_questions | A | 1 | 781 | 181 | 3303 | 0 |
+| Q0001 | fee_questions | B_old_prompt | 1 | 812 | 191 | 2241 | 0 |
 
 **[`data/eval_items.csv`](./data/eval_items.csv)** — the 720 items, tagged by slice and probe set. **[`data/slices.csv`](./data/slices.csv)** — severity and tolerance per slice:
 
@@ -183,7 +183,7 @@ Seven files in [`data/`](./data/), written by [`data/_generate.py`](./data/_gene
 | refusal_edge | critical | 5 | 90 | Requests that sit on the edge of what the feature should refuse |
 | jailbreak_resistance | critical | 5 | 70 | Attempts to talk the feature out of its rules |
 
-**[`data/ground_truth_effects.csv`](./data/ground_truth_effects.csv)** — the injected truth. The decision rules never read it; only the scoring does.
+**[`data/ground_truth_effects.csv`](./data/ground_truth_effects.csv)** — the injected truth. The decision rules never read it. No script reads the CSV: the step 4 scoring takes the same values from `_generate.py`, and this file records them.
 
 | slice | severity | items | A true accuracy | true change, B with A's old prompt | true change, B retuned prompt | truth label |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -443,7 +443,7 @@ KNOWN LIMIT - slices with too few items stay inconclusive (committed set, retune
 | 1440 items | 57 | 24 / 25 / 8 | 20 | 0 | 0 |
 | 2160 items | 45 | 24 / 14 / 7 | 15 | 0 | 1 |
 
-A second limit shows in the same run: 12 scenarios shipped with a real p95 problem the brief did not flag, because a p95 estimated from 720 items has an interval too wide to clear the watch rule on a 10 to 15 percent shift.
+A second limit shows in the same run: 12 scenarios shipped with a real p95 problem the brief did not flag, because a p95 estimate has a wide interval, and the real p95 shifts in those scenarios (11% and 16% above A) did not clear the watch rule.
 
 ### Decision quality: 200 seeded scenarios scored against the generator's truth
 
@@ -480,7 +480,7 @@ SwapBrief's decisions over the 200 scenarios: 87 GO, 83 GO WITH GUARDRAILS, 30 N
 
 **How the rates are defined.** *False-GO:* the rule said plain GO and the migration had a real problem. *Bad migration:* shipped with a real problem the rule did not flag (a plain GO on a bad migration, or GO WITH GUARDRAILS that left a real problem unflagged). *Missed regression:* a truly regressed slice that shipped while the rule called it OK or IMPROVED; slices called inconclusive are counted separately as unresolved. A "real problem" is a slice that truly lost 3 points or more, a cost per correct answer truly 5% or more above A's, or a p95 truly 10% or more above A's.
 
-**Sensitivity to the scenario mix.** The share of worlds with a real problem is an assumption of the simulation, so here are the rates at half and double the base mix (100 scenarios each for the two alternatives):
+**Sensitivity to the scenario mix.** The share of worlds with a real problem is an assumption of the simulation, so here are the rates at half and double the base mix (100 scenarios each for the two alternatives). The mix scales both the chance that a slice truly regresses and how often the most verbose and slowest-tail profiles are drawn:
 
 | Scenario mix | Scenarios | With a real problem | Headline bad-migration rate | SwapBrief bad-migration rate | Avoided per year |
 | --- | --- | --- | --- | --- | --- |
@@ -494,7 +494,7 @@ SwapBrief's decisions over the 200 scenarios: 87 GO, 83 GO WITH GUARDRAILS, 30 N
 
 The way I price product impact: **Utility = (my solution − current state of the art) × number of people it affects.**
 
-Anything else is theatre. Dropping the bad-migration rate is not an outcome. *Dropping it across the migrations a bank is forced into each year is.* Here the first term is the drop in the bad-migration rate, and "people it affects" becomes migrations per year (each migration puts one feature's customers on the new model).
+Anything else is theater. Dropping the bad-migration rate is not an outcome. *Dropping it across the migrations a bank is forced into each year is.* Here the first term is the drop in the bad-migration rate, and "people it affects" becomes migrations per year (each migration puts one feature's customers on the new model).
 
 **Utility = (headline-rule bad-migration rate − SwapBrief bad-migration rate) × model migrations per year**
 
@@ -505,7 +505,7 @@ Anything else is theatre. Dropping the bad-migration rate is not an outcome. *Dr
 | 🟢 Difference | **36.5 pp** | the two rates above |
 | 🟡 Model migrations per year | **6** | Assumption: 9 production GenAI features, each forced onto a successor about every 18 months (9 / 1.5). Replace it with your own count. |
 | 🟡 **Bad migrations avoided per year** | **2.2** | 36.5 pp × 6; a product of two 🟢 rates and one 🟡 count |
-| 🟢 Same rates at half and double the problem mix | 1.7 and 3.1 per year | `step_04_with_swapbrief.py` sensitivity run, same 🟡 count |
+| 🟡 Same rates at half and double the problem mix | 1.7 and 3.1 per year | `step_04_with_swapbrief.py` sensitivity run, same 🟡 count |
 | 🔴 Dollar value of a bad migration | not estimated | Depends on the feature's volume and the slice that regressed |
 
 🟢 The aggregate test sits between the two: 32.5% bad-migration rate. 🟡 The rates are measured on worlds I defined; they say what the rule does when a migration has the problems I injected, at the frequencies I chose. A bank whose migrations rarely regress would see a smaller gap.
@@ -669,7 +669,7 @@ Streamlit was the right tool for this prototype. It would be the wrong tool for 
 - Observability: OpenTelemetry traces, a metrics dashboard for trigger state
 - Governance: the brief and its approvals attach to the model risk record for the feature
 
-The portfolio prototype proves the *mechanic*: slice intervals, a status ladder, a prompt-fair comparison, and triggers derived from the evaluation. The production architecture is in [`ARCHITECTURE.md`](./ARCHITECTURE.md), and it is a design.
+The portfolio prototype demonstrates the *mechanic*: slice intervals, a status ladder, a prompt-fair comparison, and triggers derived from the evaluation. The production architecture is in [`ARCHITECTURE.md`](./ARCHITECTURE.md), and it is a design.
 
 ---
 
@@ -685,7 +685,7 @@ The portfolio prototype proves the *mechanic*: slice intervals, a status ladder,
 
 - **[Hamel Husain — Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** — the eval-first thesis. The reason the evaluation set, the slice tags, and the injected truth in `data/` exist before any decision code.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' and 'Manage' functions: SwapBrief is a measure step (intervals) feeding a manage step (decision and triggers).
-- **[SR 11-7 (OCC bulletin 2011-12)](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)** — the existence proof that a model change needs documented validation and ongoing monitoring; the standard the work would have to meet.
+- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the existence proof that a model change needs documented validation and ongoing monitoring; the standard the work would have to meet.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the logging and post-deployment monitoring expectations the trigger and audit design is written toward.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the framing behind the `jailbreak_resistance` slice being critical.
 - **[FinOps Framework](https://www.finops.org/framework/)** — unit economics: the reason the cost figure is cost per correct answer, not cost per token.

@@ -23,7 +23,7 @@ Running it twice on the same machine produces byte-identical files. The committe
 | `slice` | One of 8 slices (see `slices.csv`). |
 | `probe_id` | A synthetic id such as `PS1-FEE-001`. In production the items would be an export of EvalForge probe sets (project 04); no row here corresponds to a row in project 04. |
 | `probe_set` | `probeset-v1`. |
-| `should_refuse` | 1 if refusing is the correct behavior for the item. All `jailbreak_resistance` items, and about 45% of `refusal_edge` items. |
+| `should_refuse` | 1 if refusing is the correct behavior for the item. All `jailbreak_resistance` items, and 33 of the 90 `refusal_edge` items (the generator draws each item at 45%). |
 
 ---
 
@@ -44,7 +44,7 @@ Items are paired: the same `item_id` is scored under all three systems, and a sh
 
 ## `ground_truth_effects.csv` — the injected truth
 
-The true accuracy of model A in each slice and the true change for each B condition. **The decision rules never read this file**; only the scoring in step 4 does.
+The true accuracy of model A in each slice and the true change for each B condition. **The decision rules never read this file**, and no script does: the scoring in step 4 takes the same values from `_generate.py`, and this file records them.
 
 | slice | severity | items | A true accuracy | true change, B with A's old prompt | true change, B retuned prompt | truth label |
 | --- | --- | --- | --- | --- | --- | --- |

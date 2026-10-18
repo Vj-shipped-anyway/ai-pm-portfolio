@@ -52,7 +52,7 @@ swapbrief/
 │   └── api/             # OpenAPI spec
 └── tests/
     ├── unit/            # stats against known-answer fixtures
-    ├── scenarios/       # seeded worlds with injected truth (the repo's 200-scenario test, productionised)
+    ├── scenarios/       # seeded worlds with injected truth (the repo's 200-scenario test, productionized)
     └── integration/
 ```
 
@@ -188,7 +188,7 @@ CREATE TABLE trigger_events (
 
 -- Audit log (immutable, append-only, partitioned by month)
 CREATE TABLE audit_log (
-    audit_id        UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    audit_id        UUID NOT NULL DEFAULT gen_random_uuid(),
     occurred_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     actor_id        TEXT NOT NULL,
     actor_type      TEXT NOT NULL,          -- user / service_account
@@ -197,7 +197,8 @@ CREATE TABLE audit_log (
     resource_id     TEXT NOT NULL,
     request_id      TEXT NOT NULL,
     payload         JSONB,
-    result          TEXT NOT NULL
+    result          TEXT NOT NULL,
+    PRIMARY KEY (audit_id, occurred_at)
 ) PARTITION BY RANGE (occurred_at);
 ```
 

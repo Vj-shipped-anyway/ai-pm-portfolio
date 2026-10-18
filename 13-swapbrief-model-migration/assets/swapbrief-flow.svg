@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
   <title id="title">SwapBrief: a vendor retires model A, paired evaluation, slice intervals, cost and latency, a decision, and rollback triggers</title>
-  <desc id="desc">Four-stage horizontal flow showing how a model deprecation notice moves through a paired evaluation of model A and model B under two prompts, the SwapBrief analysis, and a decision rule that outputs GO, GO WITH GUARDRAILS or NO-GO, then into rollback triggers with a metric, a threshold and a window. A comparison strip shows the same simulated evaluation decided by the headline average, by the average plus a significance test, and by SwapBrief.</desc>
+  <desc id="desc">Five-stage flow showing how a model deprecation notice moves through a paired evaluation of model A and model B under two prompts, the SwapBrief analysis, and a decision rule that outputs GO, GO WITH GUARDRAILS or NO-GO, then into rollback triggers with a metric, a threshold and a window. A comparison strip shows the same simulated evaluation decided by the headline average, by the average plus a significance test, and by SwapBrief.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
