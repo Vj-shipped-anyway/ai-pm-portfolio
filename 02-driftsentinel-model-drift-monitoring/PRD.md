@@ -12,7 +12,7 @@
 
 Production ML and GenAI models silently decay. Across the BFSI fleet — credit, fraud, AML, customer-facing GenAI — ground truth is delayed 30 to 180 days, vendor models update without notice, and the SR 11-7 ongoing-monitoring requirement is met today with quarterly Word docs. The result is structural blindness. By the time decay surfaces in a business KPI, two quarters of value have leaked.
 
-The pattern is well-documented in industry research and recent supervisory writing. A credit model that drifts for 11 weeks before anyone notices. A fraud model that loses two recall points across a tactic shift and gets blamed on "campaign noise." A GenAI Q&A use case where the vendor pushes a minor update and the refusal rate doubles overnight (the Anthropic Feb-24 minor snapshot update is the public reference for this last one). None of these are exotic. All of them are invisible to legacy MRM tooling.
+The pattern is well-documented in industry research and recent supervisory writing. A credit model that drifts for 11 weeks before anyone notices. A fraud model that loses two recall points across a tactic shift and gets blamed on "campaign noise." A GenAI Q&A use case where the vendor pushes a minor update and the refusal rate doubles overnight (the Feb-14 snapshot change in this repo's synthetic data is the reference case for this last one). None of these are exotic. All of them are invisible to legacy MRM tooling.
 
 **Primary user:** Production ML/AI Operations Lead (line 1).
 **Secondary user:** Model Validator (line 2).
@@ -20,9 +20,9 @@ The pattern is well-documented in industry research and recent supervisory writi
 
 ## 2. Why now
 
-- GenAI is in production at every Tier-1 US bank, with a unified drift surface that covers it remaining a published gap across the major MRM tool vendors.
+- GenAI is in production at every Tier-1 US bank, and a unified drift surface that covers it remains a published gap across the major MRM tool vendors.
 - OCC, Fed, and CFPB are signaling sharper expectations on ongoing monitoring of AI/ML in their published supervisory letters. The next exam cycle is where this becomes a finding.
-- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock are now a quarterly occurrence (Anthropic's Feb-24, 2026 minor update on `claude-sonnet-4-20250215` is the public reference). Legacy MRM tooling does not see them.
+- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock can land without notice (the synthetic Feb-14, 2026 change to `claude-sonnet-4-20260214` in `data/vendor_snapshots.csv` is the reference case). Legacy MRM tooling does not see them.
 - The open-source drift primitives (Evidently, NannyML, Whylogs) are mature enough that the build is now about diagnosis and routing, not detection math.
 
 ## 3. Goals (12-month horizon)
@@ -30,7 +30,7 @@ The pattern is well-documented in industry research and recent supervisory writi
 | Goal | Metric | Target |
 |------|--------|--------|
 | Reduce drift MTTD | Median days to detection across Tier-1 models | 78d to 9d |
-| Increase coverage | % of Tier-1 models on continuous monitoring | 22% to 100% |
+| Increase coverage | % of Tier-1 models on continuous monitoring | 0% to 100% (Step 1 prints 0 of 8 models with a continuous signal) |
 | Reduce MRM cycle | Evidence-bundle assembly time | 3 weeks to under 1 hour, with human edit before sign-off |
 | Prevent loss | Modeled fraud/credit loss prevented | $14M/yr (modeled, not measured) |
 
@@ -46,7 +46,7 @@ The pattern is well-documented in industry research and recent supervisory writi
 - **As an Ops Lead**, I want every Tier-1 model on one screen with a drift health score and a root-cause hint, so I can triage before the business calls me.
 - **As a Validator**, I want the evidence pack auto-assembled — PSI/KS, segment slices, lineage, attestation history — so I spend my time on judgment and not collation.
 - **As a CRO**, I want a one-page exam-ready view of fleet health by tier, so the regulator's first three questions don't trigger a fire drill.
-- **As a Business Owner**, I want a recommendation (retain/retrain/shadow/rollback) with a bounded risk envelope, so I make a call without a 14-week MRM round trip.
+- **As a Business Owner**, I want a recommendation (retain/retrain/shadow/rollback) with a bounded risk envelope, so I make a call without a three-week MRM round trip.
 
 ## 6. Solution
 
@@ -68,7 +68,7 @@ A three-loop product.
 - Action recommendation engine with a bounded risk envelope:
   - Retain if drift stays within the attested envelope.
   - Shadow a candidate alongside if drift crosses the threshold but performance proxy holds.
-  - Rollback to N-1 if performance regression is over X% on a monitored slice.
+  - Rollback to N-1 if performance regression is over a per-use-case threshold on a monitored slice.
   - Retrain with an attached candidate spec.
 - Auto-routes the evidence bundle to MRM. Validator can attest in roughly a day instead of three weeks. The bundle is human-edited, never auto-attested.
 
@@ -110,7 +110,7 @@ A three-loop product.
 ## 10. Open questions
 
 1. Attestation cadence on GenAI. Do we treat each vendor minor version as a new model under MRM, or amend the parent attestation? My recommendation is new-model treatment for any customer-facing or credit-decisioning use case.
-2. Where does the eval-first console (Project 04, EvalForge) end and the drift sentinel begin? Likely shared eval-set storage and shared rubric registry; separate UX.
+2. Where does the eval-first console (Project 04, EvalForge) end and DriftSentinel begin? Likely shared eval-set storage and shared rubric registry; separate UX.
 3. Auto-rollback authority. Does the product execute, or always require a human? Recommend require human for Tier-1; auto on Tier-2/3 with audit trail.
 
 ## 11. Build & Scale Notes
@@ -126,7 +126,7 @@ A three-loop product.
 - Security: SOC 2 Type II, GLBA, PCI-DSS where in scope. SR 11-7 alignment is the existence proof.
 
 **Throughput envelope and latency budget.**
-- Roughly 800 to 1,500 monitored models at a $50B-asset bank. 50,000 to 200,000 drift evaluations per day at full coverage.
+- Roughly 800 to 1,500 monitored models at a Tier-1 bank. 50,000 to 200,000 drift evaluations per day at full coverage.
 - Latency: drift is not in the request path. End-to-end alert SLO is 15 minutes for hot use cases (fraud), 24 hours for cold. We are not optimizing tail latency; we are optimizing diagnosis-to-decision time.
 
 **Failure modes and degradation strategy.**

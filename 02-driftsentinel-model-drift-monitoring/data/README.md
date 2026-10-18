@@ -20,20 +20,20 @@ The fleet I model in the walkthrough. Eight production models across credit, fra
 | `vendor` | `internal` for in-house models; `anthropic` / `azure_openai` / `bedrock` for hosted. |
 | `snapshot_id` | Vendor model snapshot ID at deploy time. The whole point of `vendor_snapshots.csv` is tracking when this changes silently. |
 
-Composition: 4 credit (2 Tier-1, 2 Tier-2), 2 fraud (both Tier-1), 1 AML (Tier-1), 1 GenAI Q&A (Tier-1, Anthropic). This 60/25/10/5 split is roughly representative of a $50B-asset bank's monitored fleet today, biased toward credit because that's where the money is.
+Composition: 4 credit (2 Tier-1, 2 Tier-2), 2 fraud (both Tier-1), 1 AML (Tier-1), 1 GenAI Q&A (Tier-1, Anthropic). By count that is a 50/25/12.5/12.5 split (4/2/1/1 of 8), biased toward credit because that's where the money is.
 
 ---
 
 ## `inference_logs.csv` — 90 days of synthetic production traffic (~18k rows)
 
-Daily inference rows for every model in the fleet. Schema is intentionally narrow — production tables are 60+ columns, this is a five-feature reduction so the walkthrough scripts stay readable.
+Daily inference rows for every model in the fleet. Schema is intentionally narrow — production tables are 60+ columns, this is a three-feature reduction (`feature_dti`, `feature_fico`, `feature_ltv`) so the walkthrough scripts stay readable.
 
 | Field | Description |
 | --- | --- |
 | `date` | Calendar date of the inference batch. |
 | `model_id` | Foreign key to `models.csv`. |
-| `feature_dti` | Primary input for credit models; repurposed as `velocity` (fraud), `refusal` (GenAI). Production tables would have all features named separately. |
-| `feature_fico` | FICO for credit; transaction amount for fraud; response length for GenAI. |
+| `feature_dti` | Primary input for credit models; repurposed as `velocity` (fraud), `refusal` (GenAI). Empty for `credit_loss_v2`, `fraud_ach_v3` and `aml_sar_v2`. Production tables would have all features named separately. |
+| `feature_fico` | FICO for credit; transaction amount for fraud; response length for GenAI. Empty for `aml_sar_v2`. |
 | `feature_ltv` | LTV for credit; groundedness for GenAI; null elsewhere. |
 | `segment` | Slice for diagnosis: `subprime_650_680`, `prime_720_plus`, `card_present_pos`, `all`. |
 | `prediction` | Model output. PD for credit, fraud probability for fraud, groundedness score for GenAI. |
@@ -41,9 +41,9 @@ Daily inference rows for every model in the fleet. Schema is intentionally narro
 
 **The drift injection.** Day 60 is the cutover. Three intentional shifts:
 
-1. **`credit_pd_v3`** — DTI distribution moves up. The shift is concentrated in the subprime slice (`subprime_650_680` mean: 0.32 to 0.46) while the prime slice barely moves (0.32 to 0.33). Aggregate PSI looks merely yellow; subprime PSI is firmly red. This is the "aggregate PSI hides slice disasters" failure mode, with real numbers behind it.
+1. **`credit_pd_v3`** — DTI distribution moves up. The shift is concentrated in the subprime slice (`subprime_650_680` mean: 0.34 to 0.44, days 0-29 vs days 60-89) while the prime slice does not move (0.32 to 0.32). Aggregate PSI looks merely yellow; subprime PSI is firmly red. This is the "aggregate PSI hides slice disasters" failure mode, with real numbers behind it.
 2. **`fraud_card_v7`** — adversaries shift velocity from Poisson(2.4) to Poisson(1.6), a real tactic for evading velocity-based detection.
-3. **`support_qa_v2`** — vendor silent update at day 60. Refusal rate moves from 4% to 11%, response length distribution shifts longer, groundedness drops. No code change on the bank side. This is the vendor-version-blindness failure mode.
+3. **`support_qa_v2`** — vendor silent update at day 60. Refusal rate moves from 4.5% to 11.17%, response length distribution shifts longer, groundedness drops. No code change on the bank side. This is the vendor-version-blindness failure mode.
 
 The other five models are quiet — they're the false-positive control. Step 2's noise floor problem comes from running PSI/KS over them and watching benign features wiggle.
 
@@ -82,7 +82,7 @@ The flight log for hosted-model snapshot IDs. The whole reason this file exists:
 | `announcement_status` | `announced` (vendor told us) / `silent_minor_update` (we found it via probe regression) / `acknowledged_post_hoc` (vendor confirmed after escalation). |
 | `notes` | Free-text. |
 
-The interesting row is the Feb 14 entry: `claude-sonnet-4-20260214` showed up with the same API contract but a +6pp shift in refusal rate. The Sentinel caught it via vendor-version diff plus refusal-rate proxy. Anthropic confirmed the weights update five days later. This is the failure mode that quarterly Word docs literally cannot represent.
+The interesting row is the Feb 14 entry: `claude-sonnet-4-20260214` showed up with the same API contract but a +6.67pp shift in refusal rate. The Sentinel caught it via vendor-version diff plus refusal-rate proxy. Anthropic confirmed the weights update five days later. This is the failure mode that quarterly Word docs literally cannot represent.
 
 ---
 
@@ -101,4 +101,4 @@ models.csv  ──┬──>  inference_logs.csv  (90 days × 8 models)
         vendor_snapshots.csv  (silent-update flight log)
 ```
 
-Reproducibility: `np.random.seed(42)` in the inference-log generator. Same seed, same rows, same statistics. Re-run `python src/step_02_basic_drift_detection.py` and the PSI/KS values will match the README to three decimal places.
+Reproducibility: `np.random.seed(42)` in the inference-log generator. Same seed, same rows, same statistics. Re-run `python src/step_02_basic_drift_detection.py` and it prints the same PSI/KS values every time.

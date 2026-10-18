@@ -24,6 +24,8 @@ Run:
     python step_04_with_drift_sentinel.py
 """
 
+from __future__ import annotations
+
 import csv
 import json
 from datetime import datetime, date

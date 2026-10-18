@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Drift Sentinel — Production Model Drift Dashboard · Vijay Saharan</title>
-<meta name="description" content="A clickable demo of Drift Sentinel: a continuous-monitoring product for production ML and GenAI models in BFSI, with three-loop diagnosis and auto-assembled MRM evidence bundles.">
+<title>DriftSentinel — Production Model Drift Dashboard · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of DriftSentinel: a continuous-monitoring product for production ML and GenAI models in BFSI, with three-loop diagnosis and auto-assembled MRM evidence bundles.">
 <style>
   :root {
     --bg-primary: #ffffff;
@@ -120,9 +120,9 @@
 <body>
 <div class="container">
   <header class="hero">
-    <h1>Drift Sentinel — production model drift dashboard</h1>
-    <p class="tagline">Pick a model. See how it's monitored at three maturity levels: quarterly attestation, basic PSI/KS, and Drift Sentinel three-loop.</p>
-    <p class="author">Project 01 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <h1>DriftSentinel — production model drift dashboard</h1>
+    <p class="tagline">Pick a model. See how it's monitored at three maturity levels: quarterly attestation, basic PSI/KS, and DriftSentinel three-loop.</p>
+    <p class="author">Project 02 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
       <span class="badge">8-model production fleet</span>
       <span class="badge">5 named deficiencies</span>
@@ -133,9 +133,9 @@
 
   <section class="stats" aria-label="Fleet health summary">
     <div class="stat"><p class="stat-label">Models monitored</p><p class="stat-value" id="stat-total">8</p></div>
-    <div class="stat"><p class="stat-label">Drift events caught</p><p class="stat-value" id="stat-caught">0</p></div>
-    <div class="stat"><p class="stat-label">SOTA basic detector</p><p class="stat-value" id="stat-sota">0</p></div>
-    <div class="stat"><p class="stat-label">MTTD (days)</p><p class="stat-value" id="stat-mttd">— / —</p></div>
+    <div class="stat"><p class="stat-label">Models flagged by DriftSentinel</p><p class="stat-value" id="stat-caught">0</p></div>
+    <div class="stat"><p class="stat-label">Of those, also alerted by SOTA</p><p class="stat-value" id="stat-sota">0</p></div>
+    <div class="stat"><p class="stat-label">MTTD (days, modeled)</p><p class="stat-value" id="stat-mttd">— / —</p></div>
   </section>
 
   <div class="controls">
@@ -162,15 +162,15 @@
       <div class="card-body" id="card-sota"></div>
     </div>
     <div class="card">
-      <p class="card-title"><span class="step-num">3</span>With Drift Sentinel</p>
+      <p class="card-title"><span class="step-num">3</span>With DriftSentinel</p>
       <div class="card-body" id="card-shield"></div>
     </div>
   </section>
 
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
-    <p class="formula">Utility = (basic-detector MTTD − Drift Sentinel MTTD) × production model fleet</p>
-    <p style="margin: 8px 0 0;">Per-model lift: <b>69 days</b> of decay caught earlier (78d basic → 9d Drift Sentinel). Annualized at fleet scale (~1,200 production models for a Tier-1 BFSI shop): <b>~83,000 model-decay-days prevented per year</b>. Modeled prevented loss at the $50B-asset retail-bank shape: <b>$14M/yr</b>. At Tier-1 fleet scale: <b>~$45-90M/yr modeled</b>. Cost per dollar of prevented loss: under one cent.</p>
+    <p class="formula">Utility = (basic-detector MTTD − DriftSentinel MTTD) × production model fleet</p>
+    <p style="margin: 8px 0 0;">Per-model lift: <b>69 days</b> of decay caught earlier (78d basic → 9d DriftSentinel, modeled). Annualized at fleet scale (~1,200 production models for a Tier-1 BFSI shop): <b>~83,000 model-decay-days prevented per year</b>. Modeled prevented loss at the $50B-asset retail-bank shape: <b>$14M/yr</b>. At Tier-1 fleet scale: <b>~$45-90M/yr modeled</b>. Cost per dollar of prevented loss: about two cents ($280k modeled pilot cost against $14M/yr).</p>
   </section>
 
   <footer class="footer-links">
@@ -186,106 +186,100 @@
 const MODELS = [
   {
     id: "credit_pd_v3", name: "Credit PD (personal lending)", family: "credit", tier: 1, vendor: "in-house", owner: "risk_team",
-    snapshot: "sha-a4f2", driftStatus: "RED",
-    before: { attested: true, ksAtAttestation: 0.06, daysSinceLook: 84,
-              note: "Attested clean at end of Q1 on the day-0-30 reference window. Drift began on day 60. Validator next looks: Q2 (June 30). 30+ days of mispricing already." },
-    sota: { drifted: true, feature: "feature_dti", psi: 0.42, severity: "RED", false_positives: 4,
-            note: "PSI=0.42 RED on feature_dti. Three other false-positive alerts paged the validator this week. No diagnosis — what segment? what action? — provided." },
-    shield: { driver: "feature_dti (DTI)", segment: "subprime FICO<660 PSI=0.71",
-              lineage: "no upstream pipeline change in 48h",
-              rootCause: "exogenous: rate-cycle DTI shift (Fed +50 bps Feb 12)",
-              recommendation: "SHADOW with retrain candidate spec",
-              envelope: "+0.4% expected default rate if retain · +0.1% if shadow",
-              bundleSeconds: 3.2 }
+    snapshot: "internal-xgb-2.0.1", driftStatus: "RED",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
+              note: "Attested clean on 2026-01-15, before the drift. Drift began on day 60 (2026-03-02). Validator next looks: April (quarterly cycle). 30+ days of mispricing already." },
+    sota: { drifted: true, feature: "feature_dti", psi: 0.22, severity: "YELLOW", alerts: 2,
+            note: "PSI=0.22 YELLOW on feature_dti; prediction PSI=0.16 YELLOW. The aggregate hides the subprime slice. No diagnosis — what segment? what action? — provided." },
+    shield: { driver: "feature_dti (DTI)", segment: "subprime_650_680 PSI=2.368",
+              lineage: "feature_pipeline.dti_v2025_11 deployed day 58 (DTI normalization changed)",
+              rootCause: "upstream: DTI normalization changed from log1p to standard scale; correlates with drift onset on day 60",
+              recommendation: "SHADOW: deploy candidate alongside, monitor slice for 14 days",
+              envelope: "if slice PSI > 0.40 for 7 days, escalate to RETRAIN" }
   },
   {
     id: "credit_loss_v2", name: "Credit LGD (personal lending)", family: "credit", tier: 1, vendor: "in-house", owner: "risk_team",
-    snapshot: "sha-b8c1", driftStatus: "RED",
-    before: { attested: true, ksAtAttestation: 0.04, daysSinceLook: 84,
-              note: "Same quarterly cycle. Same blind spot. Day 60 shift invisible." },
-    sota: { drifted: true, feature: "feature_dti", psi: 0.39, severity: "RED", false_positives: 2,
-            note: "PSI=0.39 RED on feature_dti. Same root cause as credit_pd_v3 but flagged as a separate alert." },
-    shield: { driver: "feature_dti (DTI)", segment: "subprime FICO<660 PSI=0.68",
-              lineage: "co-correlated with credit_pd_v3 (same population shift)",
-              rootCause: "exogenous: rate-cycle DTI shift (Fed +50 bps Feb 12)",
-              recommendation: "SHADOW with retrain candidate spec",
-              envelope: "+0.3% expected loss-given-default if retain · +0.1% if shadow",
-              bundleSeconds: 2.9 }
+    snapshot: "internal-lgbm-1.4.0", driftStatus: "GREEN",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
+              note: "Same quarterly cycle. Same blind spot, but no drift is injected for this model." },
+    sota: { drifted: false, feature: "feature_fico", psi: 0.04, severity: "GREEN", alerts: 0,
+            note: "No alerts. feature_dti is empty for this model in the data, so its PSI prints nan; the other features are GREEN." },
+    shield: { driver: "—", segment: "—",
+              lineage: "no upstream pipeline change in 14d window",
+              rootCause: "stable; no injected drift",
+              recommendation: "RETAIN",
+              envelope: "continue continuous monitoring; re-evaluate at next window" }
   },
   {
     id: "heloc_pd_v1", name: "HELOC PD", family: "credit", tier: 2, vendor: "in-house", owner: "mortgage_team",
-    snapshot: "sha-c3d9", driftStatus: "GREEN",
-    before: { attested: true, ksAtAttestation: 0.05, daysSinceLook: 84,
-              note: "Attested. No real signal of drift. HELOC underwriting pool didn't move with the rate cycle the same way personal lending did." },
-    sota: { drifted: false, feature: "—", psi: 0.07, severity: "GREEN", false_positives: 0,
-            note: "All features within attested envelope." },
-    shield: { driver: "—", segment: "—", lineage: "—",
+    snapshot: "internal-xgb-1.2.3", driftStatus: "GREEN",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
+              note: "Attested. No drift is injected for this model." },
+    sota: { drifted: false, feature: "feature_dti", psi: 0.23, severity: "YELLOW", alerts: 2,
+            note: "Two YELLOW alerts (feature_dti and feature_ltv, PSI=0.2257 each) on a model with no injected drift. No diagnosis offered." },
+    shield: { driver: "—", segment: "—", lineage: "no upstream pipeline change in 14d window",
               rootCause: "stable population", recommendation: "RETAIN",
-              envelope: "within attested envelope", bundleSeconds: 1.4 }
+              envelope: "within attested envelope" }
   },
   {
     id: "auto_pd_v4", name: "Auto PD", family: "credit", tier: 2, vendor: "in-house", owner: "auto_team",
-    snapshot: "sha-d7e3", driftStatus: "GREEN",
-    before: { attested: true, ksAtAttestation: 0.07, daysSinceLook: 84,
+    snapshot: "internal-xgb-2.1.0", driftStatus: "GREEN",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
               note: "Attested." },
-    sota: { drifted: false, feature: "—", psi: 0.08, severity: "GREEN", false_positives: 1,
-            note: "One false-positive alert on feature_ltv (PSI=0.13) cleared on review — seasonal new-car-launch effect, not drift." },
-    shield: { driver: "—", segment: "—", lineage: "seasonal — new-model-year cohort",
-              rootCause: "stable population, seasonal LTV variation",
-              recommendation: "RETAIN", envelope: "within attested envelope",
-              bundleSeconds: 1.2 }
+    sota: { drifted: false, feature: "feature_fico", psi: 0.09, severity: "GREEN", alerts: 0,
+            note: "No alerts. All features GREEN (highest PSI 0.0946 on feature_fico)." },
+    shield: { driver: "—", segment: "—", lineage: "no upstream pipeline change in 14d window",
+              rootCause: "stable population",
+              recommendation: "RETAIN", envelope: "within attested envelope" }
   },
   {
     id: "fraud_card_v7", name: "Card-present fraud", family: "fraud", tier: 1, vendor: "in-house", owner: "fincrime_team",
-    snapshot: "sha-e2f5", driftStatus: "YELLOW",
-    before: { attested: true, ksAtAttestation: 0.03, daysSinceLook: 84,
+    snapshot: "internal-lgbm-3.2.1", driftStatus: "RED",
+    before: { attested: true, lastAttested: "2026-02-01", daysSinceLook: 86,
               note: "Attested. Fraud labels are delayed 30-60 days — quarterly attestation can't see recall slides this fast." },
-    sota: { drifted: false, feature: "prediction", psi: 0.18, severity: "YELLOW", false_positives: 0,
-            note: "Prediction-distribution drift YELLOW. Basic detector can't tell whether this is a real recall slide or normal seasonality." },
-    shield: { driver: "prediction distribution", segment: "high-velocity card-not-present",
-              lineage: "delayed ground truth — using NannyML performance estimator",
-              rootCause: "likely adversary tactic shift on CNP — recall estimated -3.1pp vs attested",
-              recommendation: "WATCH — second confirmation in 14 days",
-              envelope: "if confirmed: SHADOW + retrain on last 90 days",
-              bundleSeconds: 4.1 }
+    sota: { drifted: true, feature: "feature_dti (velocity)", psi: 0.42, severity: "RED", alerts: 2,
+            note: "PSI=0.42 RED on velocity; prediction PSI=0.36 RED. Basic detector can't tell whether this is a real recall slide or normal seasonality." },
+    shield: { driver: "velocity (feature_dti)", segment: "card_present_pos",
+              lineage: "no upstream pipeline change in 14d window",
+              rootCause: "traffic distribution shift (adversary tactic shift)",
+              recommendation: "RETRAIN",
+              envelope: "candidate must hold AUC within -0.5pp of incumbent on backtest before promotion; if not, ROLLBACK to N-1" }
   },
   {
-    id: "fraud_ach_v3", name: "ACH fraud", family: "fraud", tier: 2, vendor: "in-house", owner: "fincrime_team",
-    snapshot: "sha-f6a8", driftStatus: "GREEN",
-    before: { attested: true, ksAtAttestation: 0.04, daysSinceLook: 84,
+    id: "fraud_ach_v3", name: "ACH fraud", family: "fraud", tier: 1, vendor: "in-house", owner: "fincrime_team",
+    snapshot: "internal-rf-2.0.0", driftStatus: "GREEN",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
               note: "Attested." },
-    sota: { drifted: false, feature: "—", psi: 0.06, severity: "GREEN", false_positives: 0,
-            note: "All features within envelope." },
-    shield: { driver: "—", segment: "—", lineage: "—",
+    sota: { drifted: false, feature: "prediction", psi: 0.14, severity: "YELLOW", alerts: 1,
+            note: "One YELLOW alert on prediction (PSI=0.1363) on a model with no injected drift. No diagnosis offered." },
+    shield: { driver: "—", segment: "—", lineage: "no upstream pipeline change in 14d window",
               rootCause: "stable", recommendation: "RETAIN",
-              envelope: "within attested envelope", bundleSeconds: 1.1 }
+              envelope: "within attested envelope" }
   },
   {
     id: "aml_sar_v2", name: "AML SAR alerting", family: "aml", tier: 1, vendor: "in-house", owner: "aml_team",
-    snapshot: "sha-g9b4", driftStatus: "GREEN",
-    before: { attested: true, ksAtAttestation: 0.05, daysSinceLook: 84,
+    snapshot: "internal-xgb-3.0.2", driftStatus: "GREEN",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
               note: "Attested. AML model performance is hardest to attest — SAR conversion is delayed 60-180 days." },
-    sota: { drifted: false, feature: "—", psi: 0.09, severity: "GREEN", false_positives: 0,
-            note: "Within envelope on the prediction distribution. Ground truth gap remains." },
+    sota: { drifted: false, feature: "prediction", psi: 0.12, severity: "YELLOW", alerts: 1,
+            note: "One YELLOW alert on prediction (PSI=0.1156) on a model with no injected drift. Ground truth gap remains." },
     shield: { driver: "—", segment: "—",
               lineage: "180-day delayed ground truth — proxy metric portfolio active",
               rootCause: "stable proxy signals", recommendation: "RETAIN — re-evaluate at 180-day GT cycle",
-              envelope: "within attested envelope on proxy portfolio",
-              bundleSeconds: 1.6 }
+              envelope: "within attested envelope on proxy portfolio" }
   },
   {
     id: "support_qa_v2", name: "Customer support Q&A (GenAI)", family: "genai", tier: 1, vendor: "anthropic", owner: "cx_team",
-    snapshot: "claude-sonnet-4-20260224", driftStatus: "RED",
-    before: { attested: true, ksAtAttestation: 0.06, daysSinceLook: 84,
-              note: "Quarterly attestation has no GenAI drift methodology. PSI on feature placeholder slots is 0.07. Looks fine. Is not." },
-    sota: { drifted: false, feature: "feature placeholders", psi: 0.07, severity: "GREEN", false_positives: 0,
-            note: "Basic detector reports GREEN. No GenAI proxy metrics in pipeline. No vendor snapshot diff." },
+    snapshot: "claude-sonnet-4-20260214", driftStatus: "RED",
+    before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
+              note: "Quarterly attestation has no GenAI drift methodology. Nothing watches the refusal rate or the vendor snapshot between attestations." },
+    sota: { drifted: true, feature: "feature_fico (response length)", psi: 2.17, severity: "RED", alerts: 3,
+            note: "RED on response length (PSI=2.17), groundedness (0.88) and prediction (0.88), but the columns carry no label. The refusal column alone reads PSI=0.0654 GREEN. No GenAI proxy metrics in pipeline. No vendor snapshot diff." },
     shield: { driver: "refusal-rate distribution", segment: "—",
-              lineage: "Anthropic snapshot changed Feb 24 (claude-sonnet-4-20260224 vs prior claude-sonnet-4-20260214) — silent minor update",
-              rootCause: "vendor silent update — refusal rate jumped from 4.1% to 11.3%",
-              recommendation: "ROLLBACK to pre-Feb-24 snapshot pin until validated",
-              envelope: "deflection rate dropped 3pp — material customer impact",
-              bundleSeconds: 5.4 }
+              lineage: "Anthropic snapshot changed Feb 14 (claude-sonnet-4-20260214 vs prior claude-sonnet-4-20251101) — silent minor update",
+              rootCause: "vendor silent update — refusal rate jumped from 4.5% to 11.17%",
+              recommendation: "ROLLBACK to the pre-Feb-14 snapshot pin until validated",
+              envelope: "if the pinned snapshot fails the probe re-run, escalate to RETRAIN of the downstream RAG layer" }
   }
 ];
 
@@ -312,8 +306,8 @@ function render(idx) {
   // Card 1 — Before (quarterly attestation)
   const beforeBody = document.getElementById('card-before');
   let beforeHtml = '<div>' + escapeHtml(m.before.note) + '</div>';
-  beforeHtml += '<div class="meta">Last attestation KS: ' + m.before.ksAtAttestation.toFixed(2) +
-                ' · Days since validator look: ' + m.before.daysSinceLook + '</div>';
+  beforeHtml += '<div class="meta">Last attested: ' + m.before.lastAttested +
+                ' · Days since attestation (at the 2026-04-28 cut date): ' + m.before.daysSinceLook + '</div>';
   if (m.driftStatus === 'GREEN') {
     beforeHtml += '<div class="pill pill-info">Quietly attested — no drift event</div>';
   } else {
@@ -327,11 +321,13 @@ function render(idx) {
   sotaHtml += '<div class="driver-row"><span class="driver-label">Top feature</span><span class="driver-value">' + escapeHtml(m.sota.feature) + '</span></div>';
   sotaHtml += '<div class="driver-row"><span class="driver-label">PSI</span><span class="driver-value">' + m.sota.psi.toFixed(2) + '</span></div>';
   sotaHtml += '<div class="driver-row"><span class="driver-label">Status</span><span class="driver-value">' + escapeHtml(m.sota.severity) + '</span></div>';
-  sotaHtml += '<div class="driver-row"><span class="driver-label">False positives this week</span><span class="driver-value">' + m.sota.false_positives + '</span></div>';
+  sotaHtml += '<div class="driver-row"><span class="driver-label">Alerts in the Step 2 log</span><span class="driver-value">' + m.sota.alerts + '</span></div>';
   if (m.sota.drifted) {
     sotaHtml += '<div class="pill pill-bad">Detected — no diagnosis, no action</div>';
   } else if (m.driftStatus === 'RED' || m.driftStatus === 'YELLOW') {
     sotaHtml += '<div class="pill pill-warn">Missed — basic detector has no signal here</div>';
+  } else if (m.sota.severity !== 'GREEN') {
+    sotaHtml += '<div class="pill pill-warn">Alert on a model with no injected drift — noise</div>';
   } else {
     sotaHtml += '<div class="pill pill-ok">Clean</div>';
   }
@@ -359,7 +355,7 @@ function render(idx) {
   } else {
     shieldHtml += '<div class="pill pill-info">' + escapeHtml(m.shield.recommendation) + '</div>';
   }
-  shieldHtml += '<div class="meta">MRM evidence bundle assembled in ' + m.shield.bundleSeconds.toFixed(1) + 's. Validator attestation in ~1 day instead of 3 weeks.</div>';
+  shieldHtml += '<div class="meta">MRM evidence bundle assembled for the validator. Designed for attestation in ~1 day instead of 3 weeks (not tested with a real validator).</div>';
   shieldBody.innerHTML = shieldHtml;
 
   if (!seenIds.has(m.id)) {

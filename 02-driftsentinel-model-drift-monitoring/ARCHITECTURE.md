@@ -19,7 +19,7 @@ Six components. Each is independently deployable and independently scalable.
 | `drift-sentinel-events` | Vendor-snapshot diff job + alerting fan-out. Long-lived consumer on the model-output event spine. | Python + Faust (Kafka) or Cloud Functions (Pub/Sub) | No (commits offsets) |
 | `drift-sentinel-scheduler` | Cron + DAG runner for nightly PSI sweeps, weekly reports, monthly retraining-recommendation refresh. | Airflow 2.9 / Cloud Composer / MWAA | Stateful (DAG runs) |
 
-All six are stateless except the scheduler. State lives in the data layer (next section). Stateless components scale horizontally; the scheduler is a single-leader with a cold standby.
+All six are stateless except the scheduler. State lives in the data layer (Section 3). Stateless components scale horizontally; the scheduler is a single-leader with a cold standby.
 
 **Repo structure** (monorepo via Bazel or Pants for the bank shop; or pnpm workspaces if the org is JS-comfortable):
 
@@ -116,7 +116,7 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock, etc.):
 | Store | Purpose | Why this store |
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | Model metadata, drift events, recommendations, evidence bundles, attestations, validator activity, audit log | Relational integrity, joins, mature transactions, cheap at this scale. Bank ops teams know it. |
-| **ClickHouse** (Aiven / Altinity managed, or Bytebase OSS) | Daily/hourly drift-signal time-series (PSI, KS, segment-level distributions). High-cardinality, append-only, queried by date range. | 10-50x cheaper than RDS for time-series at this volume. Sub-second p95 on the dashboard queries that drive the Streamlit prototype. |
+| **ClickHouse** (Aiven / Altinity managed, or self-hosted open source) | Daily/hourly drift-signal time-series (PSI, KS, segment-level distributions). High-cardinality, append-only, queried by date range. | Cheaper than RDS for time-series at this volume (design expectation, not benchmarked). The Streamlit prototype reads the CSVs in `data/` and does not use ClickHouse. |
 | **Snowflake / Databricks** (read-only, no copy) | Inference logs, feature snapshots — owned by the existing data warehouse team | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (recommendation engine), rate-limiting counters | TTL-based eviction handles cleanup; multi-AZ for high availability |
 | **GCS / S3 / Blob Storage** (with Object Lock) | Immutable evidence bundles (PDF + JSON), audit log archive, model registry artifacts referenced by URI | Object Lock = WORM (write-once-read-many) for SR 11-7 7-year retention |
@@ -158,7 +158,7 @@ CREATE TABLE drift_events (
     diagnosis           JSONB,                 -- driver, segment, lineage, root_cause
     recommendation      TEXT,                  -- RETAIN / SHADOW / RETRAIN / ROLLBACK / WATCH
     risk_envelope       JSONB,
-    bundle_id           UUID REFERENCES evidence_bundles(bundle_id),
+    bundle_id           UUID,                  -- FK to evidence_bundles added below, after that table exists
     status              TEXT NOT NULL,         -- open / triaged / attested / closed
     created_at          TIMESTAMPTZ DEFAULT NOW()
 );
@@ -181,6 +181,7 @@ CREATE TABLE evidence_bundles (
     attested_at         TIMESTAMPTZ,
     attestation_decision TEXT                  -- approve / reject / request_changes
 );
+ALTER TABLE drift_events ADD FOREIGN KEY (bundle_id) REFERENCES evidence_bundles(bundle_id);
 
 -- Attestations (immutable append-only — no UPDATE, only INSERT)
 CREATE TABLE attestations (
@@ -208,7 +209,7 @@ CREATE TABLE vendor_snapshots (
 
 -- Audit log (immutable, append-only, partitioned by month)
 CREATE TABLE audit_log (
-    audit_id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    audit_id            UUID NOT NULL DEFAULT gen_random_uuid(),
     occurred_at         TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     actor_id            TEXT NOT NULL,
     actor_type          TEXT NOT NULL,         -- user / agent / service_account
@@ -219,7 +220,8 @@ CREATE TABLE audit_log (
     source_ip           INET,
     user_agent          TEXT,
     payload             JSONB,
-    result              TEXT NOT NULL          -- success / failure / forbidden
+    result              TEXT NOT NULL,         -- success / failure / forbidden
+    PRIMARY KEY (audit_id, occurred_at)
 ) PARTITION BY RANGE (occurred_at);
 ```
 
@@ -308,7 +310,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | Compromised API token | Short-lived tokens, mTLS service-to-service, IdP-side revocation propagates ≤ 5 min |
 | Insider — validator pulls all customer data | Field-level encryption + hashed customer identifiers + RBAC limits validator to drift-events scope, not raw inference logs |
 | Compromised drift event payload (poisoning) | All writes signed by component identity; tamper detection via SHA-256 on bundles |
-| Vendor model silent update | Snapshot pin tracked as model attribute; daily diff job surfaces the change as an audit event (this is the v0.5 shipped in CHANGELOG) |
+| Vendor model silent update | Snapshot pin tracked as model attribute; daily diff job surfaces the change as an audit event (designed; not built in this prototype) |
 | Database exfiltration via SQL injection | Parameterized queries everywhere; ORM-only (SQLAlchemy + Pydantic) at the API boundary; Cloud Armor WAF rule set |
 | Egress data exfiltration | VPC Service Controls + Secure Web Proxy allow-list |
 | Privileged escalation via misconfigured IAM | OPA policy review on every PR; quarterly access review with the head of MRM and the bank's CISO |
@@ -397,7 +399,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 - `dr-failover.md` — full region failover
 - `vendor-silent-update.md` — when the daily diff job flags a new snapshot
 - `validator-onboarding.md` — provision a new line-2 validator with cert + role
-- `false-positive-storm.md` — when alert volume spikes (the v0.2 lesson learned from CHANGELOG, codified)
+- `false-positive-storm.md` — when alert volume spikes
 - `audit-evidence-export.md` — pulling a complete decision lineage for an OCC exam
 
 ---
@@ -409,11 +411,11 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 | **SOC 2 Type II** | All six components in scope. Annual external audit. |
 | **PCI-DSS** | In scope only when the underlying model touches cardholder data. DriftSentinel itself doesn't process card data; it processes feature distributions. PCI scope minimization via field-level encryption and tokenization at the source. |
 | **GLBA** | Customer financial data handled with field-level encryption + access controls + audit trail. Right-to-be-forgotten cascades to drift events via customer-ID hash deletion. |
-| **SR 11-7** | This is the existence-proof regulation. DriftSentinel is the implementation surface for "ongoing monitoring" the SR letter has required since 2011. PRD references the specific paragraphs. |
+| **SR 11-7** | This is the existence-proof regulation. DriftSentinel is the implementation surface for "ongoing monitoring" the SR letter has required since 2011. The PRD cites it as the existence proof; a paragraph-level mapping is not part of this prototype. |
 | **NIST AI RMF + EU AI Act Article 12** | Decision-grain lineage maintained for the recommendation engine. Interlocks with Project 09 (LineageLog) for the full lineage surface. |
 | **GDPR** | EU instance enforces data residency. Right-to-erasure handled via customer-hash deletion cascade. DPO sign-off documented. |
 | **India RBI data localization** | Indian retail-arm fleet runs on the India regional instance only. No cross-border replication. |
-| **OCC / Fed / CFPB exam readiness** | Audit-pack export builds in <12 minutes per decision. Continuous, not annual. |
+| **OCC / Fed / CFPB exam readiness** | 🔴 Design target: audit-pack export in under 12 minutes per decision, not yet measured. Continuous, not annual. |
 
 ---
 
@@ -438,9 +440,9 @@ That last list is the discipline. Every internal-build I've seen die has died on
 {
     "model_id": "credit_pd_v3",
     "feature": "feature_dti",
-    "psi": 0.42,
-    "ks": 0.31,
-    "detected_at": "2026-03-04T08:14:00Z",
+    "psi": 0.2204,
+    "ks": 0.0956,
+    "detected_at": "2026-03-03T08:14:00Z",
     "detected_by": "drift_sentinel"
 }
 # Response 201:
@@ -448,20 +450,20 @@ That last list is the discipline. Every internal-build I've seen die has died on
     "event_id": "ee5f8c1a-...",
     "diagnosis": {
         "driver": "feature_dti",
-        "segment": "subprime FICO<660",
-        "segment_psi": 0.71,
-        "lineage": "no upstream pipeline change in 48h",
-        "root_cause_hypothesis": "exogenous: rate-cycle DTI shift"
+        "segment": "subprime_650_680",
+        "segment_psi": 2.3679,
+        "lineage": "feature_pipeline.dti_v2025_11 deployed Day 58",
+        "root_cause_hypothesis": "upstream: DTI normalization changed from log1p to standard scale"
     },
     "recommendation": "SHADOW",
     "risk_envelope": {
-        "expected_default_delta_if_retain": "+0.4%",
-        "expected_default_delta_if_shadow": "+0.1%"
+        "escalate_to": "RETRAIN",
+        "condition": "slice PSI > 0.40 sustained for 7 days"
     },
     "bundle": {
         "bundle_id": "...",
         "storage_uri": "gs://drift-sentinel-bundles/.../bundle.json",
-        "assembly_seconds": 3.2
+        "assembly_seconds": 3.2   # illustrative value, not measured
     },
     "status": "open"
 }
