@@ -214,15 +214,31 @@ python src/step_02_basic_cloud_logging.py
 ```json
 {
   "timestamp": "2026-03-12T18:41:32Z",
-  "resource": {"type": "cloud_run_revision",
-               "labels": {"service_name": "loan_pd_v3-service"}},
-  "httpRequest": {"requestUrl": "/v1/score/loan_approval", "status": 200},
+  "severity": "INFO",
+  "resource": {
+    "type": "cloud_run_revision",
+    "labels": {
+      "service_name": "loan_pd_v3-service",
+      "location": "us-east1"
+    }
+  },
+  "httpRequest": {
+    "requestMethod": "POST",
+    "requestUrl": "/v1/score/loan_approval",
+    "status": 200,
+    "latency": "0.482s"
+  },
   "jsonPayload": {
-    "request_body_hash": "sha256:e3b0c44298fc...",
-    "response": {"outcome": "DENY", "value": 65673.12},
+    "request_body_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb924...",
+    "response": {
+      "outcome": "DENY",
+      "value": 65673.12
+    },
     "customer_id_hash": "CUST_851897"
   },
-  "labels": {"model_id": "loan_pd_v3"},
+  "labels": {
+    "model_id": "loan_pd_v3"
+  },
   "trace": "projects/bank-prod/traces/aXk49fJ2..."
 }
 ```
@@ -267,38 +283,41 @@ Same data, same decision. Composition added.
 python src/step_04_with_lineagelog.py
 ```
 
-**Composed lineage for `DEC_0150_20260312`** (abridged from the prototype's exam-pack output; timing varies by run):
+**Composed lineage for `DEC_0150_20260312`** (the prototype's exam-pack output as written to `src/out/`; timing varies by run):
 
 ```
+============================================================================
 LINEAGELOG EXAM PACK — auto-assembled for regulator request
 ============================================================================
 
 Decision ID:        DEC_0150_20260312
 Customer (hashed):  CUST_851897
+Decision type:      loan_approval
 Decision time:      2026-03-12T18:41:32Z
 Outcome:            DENY  ($65,673.12)
 
 Six-deficiency lineage
 ----------------------------------------------------------------------------
-  Prompt versioning:            template_loan_v3.2.2 (effective 2026-03-05)
-  Retrieval-set capture:        4 docs: policy_credit_v2_3@v2.3,
-                                rate_card_2026q1@v1.0,
-                                disclosure_truth_in_lending@v4.1,
-                                internal_underwriting_guide@v8.7
-  Model-snapshot pin:           internal / internal-xgb-3.2.1 (trained 2025-08-12)
-  Feature-at-decision-time:     fico=692, dti=0.20, ltv=0.67
-  Reviewer attribution:         agent_autonomous — agent_identity=loan_pd_v3-sa@bank.iam
-  Outcome backlink:             none_observed on 2026-05-17 → —
+  Prompt versioning: template_loan_v3.2.2 (effective 2026-03-05)
+  Retrieval-set capture: 4 docs: policy_credit_v2_3@v2.3, rate_card_2026q1@v1.0, disclosure_truth_in_lending@v4.1, internal_underwriting_guide@v8.7
+  Model-snapshot pin: internal / internal-xgb-3.2.1 (trained 2025-08-12)
+  Feature-at-decision-time: fico_at_decision_time=692, dti_at_decision_time=0.2, ltv_at_decision_time=0.67
+  Reviewer attribution: agent_autonomous — agent_identity=loan_pd_v3-sa@bank.iam
+  Outcome backlink: none_observed on 2026-05-17 → —
 
 Cross-references (raw log surfaces that fed the composition)
 ----------------------------------------------------------------------------
-  cloud_logging_ref:   projects/bank-prod/logs/decisions/DEC_0150_20260312
-  cloud_audit_ref:     projects/bank-prod/audit/DEC_0150_20260312
-  agent_identity_ref:  iam/agent-identity/DEC_0150_20260312
-  otel_trace_ref:      projects/bank-prod/traces/DEC_0150_20260312
+  cloud_logging_ref: projects/bank-prod/logs/decisions/DEC_0150_20260312
+  cloud_audit_ref: projects/bank-prod/audit/DEC_0150_20260312
+  agent_identity_ref: iam/agent-identity/DEC_0150_20260312
+  otel_trace_ref: projects/bank-prod/traces/DEC_0150_20260312
 
 Retention policy:   7 years (SR 11-7, EU AI Act Article 12), WORM-bucketed
-Composition time:   0.0098s on the prototype
+Composed at:        2026-05-08T09:12:30
+Composition time:   0.0093s on the prototype
+
+This pack is immutable, hash-anchored, and stored under WORM retention. It interlocks with the bank's MRM workbench.
+============================================================================
 ```
 
 **Fleet-wide run** across all 200 decisions:
