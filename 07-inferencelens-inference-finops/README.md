@@ -2,11 +2,7 @@
 
 **A portfolio prototype for a per-feature inference-economics layer that turns the bank's $4M/month aggregate compute spend into a per-feature, per-segment, per-day record — catches the misconfigured retrieval depth burning $5k/day before the quarterly cost review notices, recommends cheaper-model substitutions, flags dead features still racking up bill, and ranks features by ROI. Built against the [FinOps Foundation framework](https://www.finops.org/framework/), anchored on [Anthropic](https://www.anthropic.com/pricing) / [Azure OpenAI](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) / [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) pricing, aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) Govern function.**
 
-**▶ Live demo:** *(placeholder — inferencelens-bfsi.streamlit.app)*
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/07-inferencelens-inference-finops/demo.html)
-
-**▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (FinOps committee read, CFO sign-off, fleet rollout) is what the next role does.
 
