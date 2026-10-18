@@ -486,7 +486,7 @@ if st.session_state.step >= 4:
     with st.expander("References - canonical sources behind the deficiency taxonomy"):
         st.markdown(
             f"- **Hamel Husain on evals** - [hamel.dev/blog/posts/evals/]({HAMEL_URL}) - the eval-first thesis. The reason every probe and rubric in this repo is committed before any model code.\n"
-            f"- **OWASP LLM Top 10** - [owasp.org/llm-top-10]({OWASP_URL}) - LLM09 (Misinformation), LLM06 (Sensitive Info Disclosure), LLM10 (Model Theft). The framing behind the high-severity slice weights.\n"
+            f"- **OWASP LLM Top 10** - [owasp.org/llm-top-10]({OWASP_URL}) - LLM09 (Misinformation), LLM02 (Sensitive Info Disclosure), LLM05 (Improper Output Handling). The framing behind the high-severity slice weights.\n"
             f"- **NIST AI RMF** - [nist.gov/itl/ai-risk-management-framework]({NIST_URL}) - 'Measure' function maps cleanly to versioned probe sets + calibrated rubrics.\n"
             "- **Greg Kamradt - needle-in-haystack** - long-context evals; reason multi-hop is a separate slice in the EvalForge taxonomy.\n"
         )
