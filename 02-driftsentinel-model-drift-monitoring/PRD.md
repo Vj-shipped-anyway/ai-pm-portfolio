@@ -56,7 +56,7 @@ A three-loop product.
 - Population Stability Index and Kolmogorov-Smirnov on every feature against a training reference window. Implemented on Evidently AI primitives.
 - Prediction-distribution drift, categorical and continuous.
 - Performance proxy when ground truth is delayed. NannyML for the estimator. Confidence-distribution drift, abstention rate, and vendor-version delta for GenAI use cases.
-- For GenAI specifically: groundedness, refusal rate, citation accuracy, response-length distribution, and judge-score drift. Interlocks with Project 02.
+- For GenAI specifically: groundedness, refusal rate, citation accuracy, response-length distribution, and judge-score drift. Interlocks with Project 04 (EvalForge).
 
 ### Loop 2 — Diagnose
 - Feature-contribution bisect on a tripped alert.
@@ -110,7 +110,7 @@ A three-loop product.
 ## 10. Open questions
 
 1. Attestation cadence on GenAI. Do we treat each vendor minor version as a new model under MRM, or amend the parent attestation? My recommendation is new-model treatment for any customer-facing or credit-decisioning use case.
-2. Where does the eval-first console (Project 02) end and the drift sentinel begin? Likely shared eval-set storage and shared rubric registry; separate UX.
+2. Where does the eval-first console (Project 04, EvalForge) end and the drift sentinel begin? Likely shared eval-set storage and shared rubric registry; separate UX.
 3. Auto-rollback authority. Does the product execute, or always require a human? Recommend require human for Tier-1; auto on Tier-2/3 with audit trail.
 
 ## 11. Build & Scale Notes
@@ -143,10 +143,10 @@ A three-loop product.
 **Org dependencies.**
 - Line-2 (MRM) co-signs the diagnosis rubric, the bundle template, and the recommendation thresholds. Without this, the product is dead on arrival.
 - Model owners (line 1) sign the per-model attestation envelope.
-- Internal Audit (line 3) gets read-only access and an audit-trail interlock with Project 08.
+- Internal Audit (line 3) gets read-only access and an audit-trail interlock with Project 09 (LineageLog).
 - The data platform team owns the feature-store and lineage interfaces. Get this commitment in writing before phase 0.
 - The existing GRC tool owner (Archer, ServiceNow GRC, or MetricStream) needs to agree to ingest events. This is usually a 3-month conversation. Start it on day one.
 
 ---
 
-*This PRD interlocks with Projects 02 (Eval-First Console), 06 (Inference Economics), and 08 (AI Audit Trail).*
+*This PRD interlocks with Project 04 (EvalForge), Project 07 (InferenceLens), and Project 09 (LineageLog).*
