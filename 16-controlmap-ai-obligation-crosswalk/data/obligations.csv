@@ -1,0 +1,49 @@
+obligation_id,framework,theme,statement,applies_to
+OB-01,EU AI Act,risk management,Keep a written risk process for each high-risk AI system and update it as the system changes.,credit_decision;fraud_scoring
+OB-02,EU AI Act,data governance,"Check that data used to build and test the system is relevant, representative and free of known errors.",credit_decision;fraud_scoring
+OB-03,EU AI Act,technical documentation,"Prepare documents that describe the system's design, purpose and limits before it goes live.",credit_decision
+OB-04,EU AI Act,record-keeping,Let the system log events automatically so its operation can be traced afterwards.,credit_decision;customer_chat
+OB-05,EU AI Act,transparency to users,Tell people when they are dealing with an AI system and give instructions for use.,customer_chat;internal_copilot
+OB-06,EU AI Act,human oversight,"Design the system so a trained person can oversee it, intervene and stop it.",credit_decision
+OB-07,EU AI Act,accuracy and resilience,State the expected accuracy and keep the system resistant to errors and attempts to manipulate it.,credit_decision;fraud_scoring
+OB-08,EU AI Act,external registration,Register each high-risk system in the public database and keep the entry current.,credit_decision
+OB-09,EU AI Act,independent validation,Have someone other than its builders assess the system before first use and again after a substantial change.,credit_decision
+OB-10,EU AI Act,ongoing monitoring,Collect and review data on the system's performance after it is in use and act on what it shows.,all
+OB-11,EU AI Act,governance and policy,"Run a quality management system with written policies, named roles and set procedures.",all
+OB-12,EU AI Act,vendor model oversight,Obtain the provider's instructions and documentation and hold the provider to them when you deploy its system.,all
+OB-13,Model risk guidance (SR 26-2),model inventory,"Keep a complete list of models in use, with purpose, owner and status.",all
+OB-14,Model risk guidance (SR 26-2),independent validation,Have staff independent of development validate a model before use and on a regular cycle.,credit_decision;fraud_scoring
+OB-15,Model risk guidance (SR 26-2),ongoing monitoring,Track model performance in use against set thresholds and escalate breaches.,credit_decision;fraud_scoring
+OB-16,Model risk guidance (SR 26-2),governance and policy,Have senior management approve a model risk policy that assigns roles and limits.,all
+OB-17,Model risk guidance (SR 26-2),technical documentation,"Document model design, assumptions and limits so an outside reader can follow them.",credit_decision;fraud_scoring
+OB-18,Model risk guidance (SR 26-2),vendor model oversight,Apply the same validation and monitoring to vendor models as to models built in-house.,all
+OB-19,Model risk guidance (SR 26-2),risk management,Identify and measure model risk and keep it inside a stated appetite.,all
+OB-20,Model risk guidance (SR 26-2),data governance,Assess the quality and fit of the data that feeds a model.,credit_decision;fraud_scoring
+OB-21,Model risk guidance (SR 26-2),accuracy and resilience,Compare model outputs with actual outcomes and investigate gaps.,credit_decision;fraud_scoring
+OB-22,Model risk guidance (SR 26-2),human oversight,Make sure users of model output can challenge it and override it where warranted.,internal_copilot
+OB-23,Model risk guidance (SR 26-2),record-keeping,Keep a record of each model's decisions and changes so they can be reviewed later.,all
+OB-24,Model risk guidance (SR 26-2),change management,Review changes to models and their uses before they go into production.,all
+OB-25,NIST AI RMF,governance and policy,"Set policies, roles and accountability for managing AI risk across the organization.",all
+OB-26,NIST AI RMF,model inventory,"Maintain an inventory of AI systems, including those supplied by third parties.",all
+OB-27,NIST AI RMF,vendor model oversight,Manage risks that come from third-party AI components and data.,all
+OB-28,NIST AI RMF,map function,"Record each system's context, intended purpose and the people it may affect.",all
+OB-29,NIST AI RMF,measure function,Select metrics and test the system for the risks identified.,all
+OB-30,NIST AI RMF,manage function,"Prepare a plan for AI incidents, name who responds and tell affected parties when one happens.",all
+OB-31,NIST AI RMF,human oversight,Define the roles people play in overseeing AI output and when they step in.,credit_decision;customer_chat;internal_copilot
+OB-32,NIST AI RMF,transparency to users,Explain system outputs and limits to the people who use or are affected by them.,credit_decision;customer_chat;internal_copilot
+OB-33,NIST AI RMF,accuracy and resilience,"Evaluate whether the system is valid, reliable, secure and able to recover from failure.",all
+OB-34,NIST AI RMF,ongoing monitoring,Monitor deployed AI systems for changes in behavior and for new risks.,all
+OB-35,NIST AI RMF,independent validation,Involve assessors who did not build the system when evaluating it.,credit_decision;fraud_scoring
+OB-36,NIST AI RMF,data governance,"Understand the origin, quality and suitability of the data the system uses.",all
+OB-37,ECOA / Regulation B,specific adverse-action reasons,Tell a declined applicant the specific principal reasons for the decision.,credit_decision
+OB-38,ECOA / Regulation B,specific adverse-action reasons,Make sure the reasons given are the factors the scoring model actually used.,credit_decision
+OB-39,ECOA / Regulation B,timely notice of action taken,Notify the applicant of the decision within the period the bank has set.,credit_decision
+OB-40,ECOA / Regulation B,timely notice of action taken,Send a notice for incomplete or countered applications on the same clock.,credit_decision
+OB-41,ECOA / Regulation B,record-keeping,Keep application and decision records for the period the bank has set.,credit_decision
+OB-42,ECOA / Regulation B,transparency to users,Give applicants the standard notice of their rights with each adverse decision.,credit_decision
+OB-43,ECOA / Regulation B,prohibited-basis inputs,Keep prohibited-basis information out of model inputs and test for proxies.,credit_decision
+OB-44,ECOA / Regulation B,governance and policy,Maintain a fair lending compliance program with named owners.,credit_decision
+OB-45,ECOA / Regulation B,ongoing monitoring,Watch decision outcomes and reason patterns for unexplained differences between groups.,credit_decision
+OB-46,ECOA / Regulation B,vendor model oversight,Check that a purchased scoring model can produce accurate reasons.,credit_decision
+OB-47,ECOA / Regulation B,technical documentation,Document how the model's reason codes are derived from its inputs.,credit_decision
+OB-48,ECOA / Regulation B,independent validation,Have the reason-code logic tested by someone who did not build it.,credit_decision

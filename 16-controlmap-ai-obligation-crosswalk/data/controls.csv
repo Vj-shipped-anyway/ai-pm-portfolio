@@ -1,0 +1,61 @@
+control_id,name,description,owner,test_frequency_days,scope,status
+CT-01,Fair lending compliance program,Written program with named owners for fair lending testing and issue follow-up.,Fair Lending Office,180,credit_decision,active
+CT-02,Benchmark replication exercise,Second-line analysts rebuild the model's headline results from raw data and reconcile any difference.,Model Risk Management,365,credit_decision;fraud_scoring,active
+CT-03,Legacy scorecard validation,Annual validation of the previous credit scorecard; closed when the scorecard was replaced.,Model Risk Management,365,credit_decision,retired
+CT-04,AI risk assessment at intake,Risk team scores each new AI proposal for severity and likelihood before build starts.,AI Governance Office,180,all,active
+CT-05,Evaluation test suite,Standing set of metrics and test cases run against each chatbot and copilot before release and monthly in use.,AI Platform Team,30,customer_chat;internal_copilot,active
+CT-06,Credit decision outcome watch,"Monthly report of approval and decline rates by segment, reviewed for unexplained shifts.",Fair Lending Office,30,credit_decision,active
+CT-07,Business owner inventory attestation,Each business owner signs that the entries for their area are correct and complete.,Model Risk Management,365,all,active
+CT-08,Branch cash handling audit,"Quarterly count and reconciliation of cash held at branches, reviewed by the branch audit lead.",Branch Operations,90,all,active
+CT-09,Workload roll-call,Each quarter the platform team counts the running AI workloads and ties each one to a business owner.,AI Platform Team,90,all,active
+CT-10,Chatbot answer sampling,Weekly sample of chatbot answers is read by a reviewer and scored for errors.,Customer Operations,30,customer_chat,active
+CT-11,Model documentation standard,"Template and review gate that requires design notes, assumptions and known limits before a model is approved.",Model Risk Management,180,all,active
+CT-12,Scoring service failure testing,Twice a year the scoring service is switched to its backup path and the results are compared with the primary.,Technology Operations,180,credit_decision;fraud_scoring,active
+CT-13,Adversarial testing of the chatbot,Red-team exercise that tries to push the chatbot into unsafe or wrong answers.,Information Security,180,customer_chat,active
+CT-14,Roles and responsibilities matrix review,"Annual refresh of who owns, builds, validates and approves each AI system.",AI Governance Office,365,all,active
+CT-15,Second-line review of chatbots,Second-line reviewers test each new chatbot or copilot against its approved use before launch.,Model Risk Management,180,customer_chat;internal_copilot,active
+CT-16,Developer pre-release self-check,Checklist the build team completes on its own work before release; it is not an independent validation.,AI Platform Team,90,credit_decision,active
+CT-17,Policy exception log,"Exceptions to AI policy are logged, approved by a named executive and reviewed each quarter.",AI Governance Office,90,all,active
+CT-18,Vendor invoice approval,Finance reviews third-party invoices against purchase orders before payment is released.,Finance Operations,30,all,active
+CT-19,Challenger comparison review,A separate team builds a simple alternative and compares its results with the production model.,Model Risk Management,365,credit_decision;fraud_scoring,active
+CT-20,Data center power resilience test,Annual test of generator and battery backup so critical services recover during a power cut.,Technology Operations,365,all,active
+CT-21,Underwriter override log,Every manual override of an automated credit decision is recorded with the reason and the approver.,Credit Risk Analytics,90,credit_decision,active
+CT-22,Model performance monitoring,"Monthly dashboard of accuracy and drift for each model, with threshold breaches escalated to the owner.",Credit Risk Analytics,30,credit_decision;customer_chat;fraud_scoring,active
+CT-23,Vendor model performance review,Annual comparison of a purchased model's results with the performance the vendor states.,Vendor Management,365,credit_decision;fraud_scoring,active
+CT-24,Copilot prompt log,Prompts and answers from the internal copilot are stored with user and time for later checks.,Technology Operations,90,internal_copilot,active
+CT-25,AI risk register,"Register of AI risks with an owner, severity rating and review date for every entry.",AI Governance Office,90,all,active
+CT-26,Vendor attestation collection,"Annual signed statements from model vendors on testing, change notices and support terms.",Vendor Management,365,credit_decision,active
+CT-27,Marketing material approval,"Compliance sign-off on customer-facing marketing text, including notices and instructions on how to use each offer, before publication.",Compliance Testing,90,all,active
+CT-28,Access recertification,Quarterly review of who can log in to production systems and with which privileges.,Information Security,90,all,active
+CT-29,Input data reconciliation,"Monthly reconciliation of model input tables to the source ledgers, with differences logged.",Data Office,30,credit_decision;fraud_scoring,active
+CT-30,Fraud score drift watch,"Daily drift dashboard on the fraud model's score distribution, with an alert when it moves.",Fraud Operations,30,fraud_scoring,active
+CT-31,Network traffic monitoring,Continuous monitoring of network traffic across deployed production systems for signs of intrusion.,Information Security,30,all,active
+CT-32,Outcomes back-testing,"Quarterly comparison of model predictions with realized outcomes, with gaps investigated.",Credit Risk Analytics,90,credit_decision;fraud_scoring,active
+CT-33,Model inventory register,"Single list of every model and AI system in use, with owner, tier and status.",Model Risk Management,30,all,active
+CT-34,Human review of automated declines,A trained underwriter reviews a sample of automated declines and can override the outcome.,Credit Risk Analytics,90,credit_decision,active
+CT-35,Late notice escalation,Any application nearing its notice deadline is flagged to the operations lead for same-day action.,Customer Operations,30,credit_decision,active
+CT-36,Reason-code derivation memo,Memo signed by the model owner showing how each reason code follows from the scorecard inputs.,Fair Lending Office,180,credit_decision,active
+CT-37,Population stability check,Monthly check that the applicants reaching the scorecard still look like the build population.,Credit Risk Analytics,30,credit_decision,active
+CT-38,Model risk appetite review,Senior risk committee reviews each year whether model risk stays inside the stated appetite limits.,Model Risk Management,365,all,active
+CT-39,Credit application record retention,Credit application files and decision notices are kept for the period the bank has set.,Records Management,180,credit_decision,active
+CT-40,Decision log retention,"Immutable log of each automated decision with its inputs, output and model version, kept for the retention period.",Technology Operations,90,credit_decision;fraud_scoring,active
+CT-41,Training data quality checks,"Automated checks for gaps, duplicates and known errors in the data used to build and test models.",Data Office,30,credit_decision;fraud_scoring,active
+CT-42,Exit plan review for model vendors,Annual check that each vendor-supplied model has a tested way out if the contract ends.,Vendor Management,365,all,active
+CT-43,Fraud case notes,"Analysts keep a note of why each fraud alert was closed or escalated, stored with the case.",Fraud Operations,90,fraud_scoring,active
+CT-44,Documentation completeness sampling,Second-line sample of model files checks that the required design notes are present and current.,Model Risk Management,365,all,active
+CT-45,Reason code mapping review,Annual review of the table that maps scorecard factors to the reason phrases shown to applicants.,Fair Lending Office,365,credit_decision,active
+CT-46,Prompt register,"Versioned record of the instructions given to each chatbot or copilot, with the approver and the date.",AI Platform Team,90,customer_chat;internal_copilot,active
+CT-47,Employee conduct training,"Annual training for staff on conduct, with policy acknowledgments and roles for reporting concerns.",People Operations,365,all,active
+CT-48,Chat handoff to a human agent,"Customers can reach a human agent at any point, and agents can stop the chatbot.",Customer Operations,90,customer_chat,active
+CT-49,Application uptime monitoring,"Alerts on response time and availability of customer applications against set thresholds, with escalation to the on-call engineer.",Technology Operations,30,all,active
+CT-50,Customer data use approval,Approval board decides whether a new use of customer data is allowed and records the reason.,Data Office,90,customer_chat;internal_copilot,active
+CT-51,AI governance committee,"Committee chaired by the chief risk officer approves AI policy, assigns roles and reviews exceptions quarterly.",AI Governance Office,90,all,active
+CT-52,Scorecard metrics review,"Monthly pack of accuracy and stability metrics for the credit scorecard, reviewed by the model owner.",Credit Risk Analytics,30,credit_decision,active
+CT-53,Model risk rating review,Model risk team assigns a rating to each model and sets how often it is reviewed.,Model Risk Management,180,all,active
+CT-54,Board reporting on AI use,"Quarterly pack to the board risk committee on AI use, exceptions and open issues.",AI Governance Office,90,all,active
+CT-55,Source lineage catalog,"Catalog showing the provenance of every data source, who approved its use and what changed since.",Data Office,90,all,active
+CT-56,Adverse action reason review,Compliance samples declined applications each month and checks the stated reasons against the model's top factors.,Compliance Testing,30,credit_decision,active
+CT-57,Vendor model due diligence,"Purchased models are assessed on onboarding and every year, with results filed by the model owner.",Vendor Management,365,all,active
+CT-58,Chatbot reply keyword filter,Blocklist of words screened from chatbot replies; closed after the chatbot was rebuilt.,AI Platform Team,90,customer_chat,retired
+CT-59,Notice timeliness report,"Weekly report of days from decision to notice for every credit application, with late items escalated.",Compliance Testing,30,credit_decision,active
+CT-60,Annual model validation,"Validation team, independent of development, tests each model before approval and every year after.",Model Risk Management,365,credit_decision;fraud_scoring,active
