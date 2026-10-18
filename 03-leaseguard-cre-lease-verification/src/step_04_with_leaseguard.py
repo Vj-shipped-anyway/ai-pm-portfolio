@@ -303,6 +303,15 @@ def main():
     print(f"                                          ~88% on a real-world mixed portfolio")
     print(f"  Step 4 (LeaseGuard, after triage):      {new_correct}/{total_fields} = {new_acc:.1f}% on this sample")
     print(f"                                          ~98.2% projected at portfolio scale")
+    wrong = {(lid, f) for lid in MOCK_EXTRACTIONS for f in FIELDS
+             if str(MOCK_EXTRACTIONS[lid].get(f, "")) != str(expected[lid].get(f, ""))}
+    flagged = {(r["lease_id"], r["field"]) for r in rows_out if r["status"] != "PASS"}
+    missed = sorted(wrong - flagged)
+    print()
+    print(f"  Wrong fields routed to triage:          {len(wrong & flagged)} of {len(wrong)}")
+    print(f"  False flags (routed, already correct):  {len(flagged - wrong)}")
+    print(f"  Missed (wrong and auto-cleared):        {len(missed)}"
+          + (" -> " + ", ".join(f"{lid}/{f}" for lid, f in missed) if missed else ""))
     print()
     print(f"  Per-lease accuracy lift: ~10.2 percentage points")
     print(f"\nWrote: {out_path}")
