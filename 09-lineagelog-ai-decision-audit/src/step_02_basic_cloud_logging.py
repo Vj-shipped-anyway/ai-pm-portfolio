@@ -33,7 +33,7 @@ TARGET_DECISION_ID = "DEC_0150_20260312"
 DEFICIENCY_CLASSES = [
     ("prompt_versioning",       "No prompt versioning",       "Which exact prompt was used. Was system instruction A or B."),
     ("retrieval_set_capture",   "No retrieval-set capture",   "Which documents the model was shown."),
-    ("model_snapshot_pin",      "No model-snapshot pin",      "Which vendor model version answered. Was it Claude 3.5 or 3.7."),
+    ("model_snapshot_pin",      "No model-snapshot pin",      "Which vendor model version answered. Was it version 3.5 or 3.7."),
     ("feature_at_decision_time","No feature-at-decision-time","What the customer's credit score / DTI was AT the moment of decision."),
     ("reviewer_attribution",    "No reviewer attribution",    "Who or what (human user, agent identity) authorized this action."),
     ("outcome_backlink",        "No outcome backlink",        "Whether the decision led to a complaint, charge-off, fraud loss."),

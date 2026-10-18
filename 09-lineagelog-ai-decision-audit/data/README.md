@@ -79,3 +79,7 @@ This is the decision the OCC asks about. Walk the four CSVs and you get the full
 | `outcomes.csv` | `none_observed`, dated `2026-05-17`: no downstream outcome recorded for this decision. |
 
 In raw-log form: 6 vendors across 4 cloud accounts. In LineageLog: one record, indexed by `(customer_id, decision_id, timestamp)`, returned in under a second.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. `models.csv` pins the GenAI claims model at `vendor-balanced-4-20251101`, shaped `vendor-<tier>-<version>-<release date>` where `balanced` is the mid-priced hosted model. In Step 2 the missing-pin example asks which release of the vendor model answered. No number in this project depends on the label.

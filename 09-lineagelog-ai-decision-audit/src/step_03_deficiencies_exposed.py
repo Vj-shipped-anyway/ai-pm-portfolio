@@ -75,7 +75,7 @@ DEFICIENCIES = [
         "label": "No model-snapshot pin",
         "exam_question": (
             "Which exact vendor model version produced this output? "
-            "If the answer is 'claude-sonnet-4-20251101' — can you prove it wasn't "
+            "If the answer is 'vendor-balanced-4-20251101' — can you prove it wasn't "
             "the silently rolled minor update from Feb 24?"
         ),
         "what_logs_return": (

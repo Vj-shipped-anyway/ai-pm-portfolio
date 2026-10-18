@@ -150,7 +150,7 @@ A modeled Tier-1 US retail bank ($50B-asset). Four production AI models across c
 The fleet (synthetic, but modeled on what a real $50B retail bank typically runs):
 
 - **`loan_pd_v3`** — Personal loan approval (internal XGBoost, Tier 1)
-- **`claims_triage_v2`** — Insurance claims triage (GenAI on Anthropic Claude Sonnet 4, Tier 1)
+- **`claims_triage_v2`** — Insurance claims triage (GenAI on a hosted Anthropic model, Tier 1)
 - **`kyc_review_v4`** — KYC document review (GenAI on Azure OpenAI gpt-4o, Tier 1)
 - **`fraud_screen_v6`** — Transaction fraud screen (internal LightGBM, Tier 1)
 
@@ -246,7 +246,7 @@ Cloud Logging is the foundation. It is not the lineage product.
 | --- | --- | --- | --- |
 | 1 | **No prompt versioning** | Which exact system instruction was used? Was it version A (Feb 8) or version B (Mar 5)? | Cloud Logging stores a SHA-256 of the request body. The template is loaded server-side from a file; neither the file path nor the template version is bound to the request. |
 | 2 | **No retrieval-set capture** | Which documents was the model shown? Was the disclosure pack the version with the corrected APR table, or the pre-correction draft? | Vector store retains the documents and a retrieval trace ID. No decision_id-to-doc_id join key in either system. 7% of cases hit ambiguity in the manual reverse-search. |
-| 3 | **No model-snapshot pin** | Which exact vendor version produced this output? If "claude-sonnet-4-20251101" — can you prove it wasn't the silently rolled minor update from Feb 24? | Model registry shows the deployment window. It does NOT show the vendor's post-roll behavioral change. (Reference incident: Anthropic Feb 24, 2026 silent minor update.) |
+| 3 | **No model-snapshot pin** | Which exact vendor version produced this output? If "vendor-balanced-4-20251101" — can you prove it wasn't the silently rolled minor update from Feb 24? | Model registry shows the deployment window. It does NOT show the vendor's post-roll behavioral change. (Reference incident: Anthropic Feb 24, 2026 silent minor update.) |
 | 4 | **No feature-at-decision-time** | What was this customer's FICO and DTI AT the moment of decision on March 12? Customer profile has been updated since. | Feature store returns CURRENT values, not March-12 values. Temporal rebuild from raw transaction history takes 6-12 hours per customer per decision; 11% of cases hit data-quality gaps. |
 | 5 | **No reviewer attribution** | Who or what authorized this action? A human underwriter with delegated authority, or did the agent act autonomously? | Agent Identity Logs show that workload identity `loan-decisioning-sa@bank.iam` acquired credentials. They do NOT distinguish user-delegated tokens from autonomous-agent action. |
 | 6 | **No outcome backlink** | Did this decision result in a complaint, a charge-off, or a CFPB filing? Show the link. | Outcomes live in three separate systems (loss-event lake, CFPB system, claims platform). None carries the `decision_id`. Manual lookup by `customer_id_hash` + date window; 18% of cases have ambiguous matches. |
