@@ -2,6 +2,8 @@
 
 **A portfolio prototype for a decision-grain composition layer that turns scattered AI-decision logs into an exam-ready immutable record — modeled against [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) record-keeping requirements and the [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the Federal Reserve, OCC and FDIC model risk management guidance that replaced SR 11-7 in April 2026) supervisory expectation for "explain this AI decision."**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/09-lineagelog-ai-decision-audit/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (compliance committee read, OCC exam evidence pull, regulator co-design) is what the next role does.
@@ -134,7 +136,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case — OCC exam walkthrough
 
-A modeled Tier-1 US retail bank ($50B-asset). Four production AI models across credit, claims, KYC, and fraud. [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) is in effect for the bank's EU operating arm; [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) governs the US side. The published shape of recent OCC exams is increasingly granular — examiners pick a specific decision and ask "explain it."
+A modeled Tier-1 US retail bank ($50B-asset). Four production AI models across credit, claims, KYC, and fraud. [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) is in effect for the bank's EU operating arm; [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) is the US model-risk reference for its non-generative models. The published shape of recent OCC exams is increasingly granular — examiners pick a specific decision and ask "explain it."
 
 **The scenario:**
 
@@ -538,7 +540,7 @@ The Streamlit prototype here shows the *product mechanic* — decision-grain com
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Designs compliant AI under regulated constraint*
 
