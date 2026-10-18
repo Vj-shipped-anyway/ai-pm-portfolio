@@ -48,6 +48,11 @@ echo "probes: $PROBES_DIR"
 echo "output: $CSV"
 echo
 
+if [ ! -f ./run_probes.py ]; then
+  echo "run_probes.py is not in this repo yet, so the probe suite cannot run." >&2
+  exit 2
+fi
+
 python3 ./run_probes.py \
   --model "$MODEL" \
   --probes-dir "$PROBES_DIR" \

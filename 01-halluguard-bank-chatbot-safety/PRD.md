@@ -39,7 +39,7 @@ The pattern is well-documented across published BFSI incidents and CFPB complain
 - Not a chatbot. Wraps existing chatbots — vendor or in-house.
 - Not a model fine-tuner. No retraining.
 - Not a knowledge-graph platform. Consumes the existing product, rate, and reg KG.
-- Not the eval-first console (Project 02), but interlocks for probe authoring.
+- Not the eval-first console (Project 04), but interlocks for probe authoring.
 
 ## 5. User stories
 
@@ -59,7 +59,7 @@ A three-guard containment layer.
 - Source citations attached to every response with a grounded claim.
 
 ### Guard 2 — Abstain
-- Calibrated confidence score per response (interlocks with Project 02 evals).
+- Calibrated confidence score per response (interlocks with Project 04 evals).
 - Below threshold: escalate to a live agent with full conversation context, intent classification, and pre-extracted account context.
 - Threshold is per-intent, not global. Owned by Head of CX with quarterly Compliance co-sign.
 - Abstention is treated as a successful interaction, not a failure metric.
@@ -76,9 +76,9 @@ A three-guard containment layer.
 | KG stale | High | High | Hourly Kafka sync from rate/fee/product source-of-record; staleness SLO of 60 min with auto-degrade to higher abstention |
 | Over-abstention (deflection collapse) | Med | High | Calibration set; per-intent threshold tuning; 3-point give-back budget |
 | Probe set captures wrong adversaries | Med | Med | Rotate probes monthly; mine from incident log; co-author with Compliance |
-| Vendor model change breaks grounding | High | High | Model-agnostic claim extractor; re-baseline on every vendor pin change (Project 02) |
+| Vendor model change breaks grounding | High | High | Model-agnostic claim extractor; re-baseline on every vendor pin change (Project 04) |
 | Handoff capacity insufficient | Med | High | Capacity planning by intent forecast; abstention rate is a real input to staffing |
-| Prompt-injection bypasses ground guard | Med | High | Treat customer turn as untrusted input; interlock with Project 05 |
+| Prompt-injection bypasses ground guard | Med | High | Treat customer turn as untrusted input; interlock with Project 06 |
 
 ## 8. KPIs
 
@@ -126,7 +126,7 @@ A three-guard containment layer.
 - Observability: OpenTelemetry as substrate. Datadog for SOC and CX SLOs. Langfuse for conversation traces. ClickHouse for the high-cardinality per-claim grounding event store.
 - Compute: Sub-200ms latency budget on the containment layer end-to-end. T4 or L4 GPUs in-region for claim extraction and grounding. Serverless (Lambda or Cloud Run) for the lighter routing.
 - Data plane: Snowflake or Databricks for the audit and analytics warehouse. Unity Catalog or Lake Formation for lineage. Every grounded claim, abstention, and refusal logged with rubric version, KG snapshot, and model snapshot.
-- Security: SOC 2 Type II, GLBA, PCI-DSS where in scope. Containment layer is treated as untrusted-input-handling code. Interlocks with Project 05 for prompt-injection defense.
+- Security: SOC 2 Type II, GLBA, PCI-DSS where in scope. Containment layer is treated as untrusted-input-handling code. Interlocks with Project 06 for prompt-injection defense.
 
 **Throughput envelope and latency budget.**
 - 200K to 800K customer turns per day at the $50B-asset retail bank shape.
@@ -136,7 +136,7 @@ A three-guard containment layer.
 **Failure modes and degradation strategy.**
 - KG staleness over the 60-minute SLO: auto-degrade to a higher abstention threshold; flag the use case as degraded; notify ops.
 - Claim extractor unavailable: fall back to a more conservative grounding heuristic (block any response containing a numeric rate or fee until restored).
-- Vendor model snapshot change: re-baseline the extractor prompt on the new snapshot before customer traffic resumes; coordinated with Project 02.
+- Vendor model snapshot change: re-baseline the extractor prompt on the new snapshot before customer traffic resumes; coordinated with Project 04.
 - Probe-set regression: in v1, auto-flag and exec-notify; in v2, auto-quarantine within 5 minutes.
 - Abstention spike beyond contact-center capacity: degrade gracefully to a softer threshold; alert ops.
 
@@ -151,8 +151,8 @@ A three-guard containment layer.
 - Compliance attests to the KG content quarterly and co-signs every probe added under Reg DD, Reg E, Reg Z, or Reg B.
 - Contact center owns the handoff SLO and the staffing model. Get the abstention-rate forecast into their planning cycle from day one.
 - Source-of-record owners (rate sheet, fee schedule, product catalog) commit to the 60-minute Kafka sync SLO. This is the dependency that breaks the product if it slips.
-- Internal Audit (line 3): read-only and an interlock with Project 08.
+- Internal Audit (line 3): read-only and an interlock with Project 09.
 
 ---
 
-*This PRD interlocks with Projects 01 (DriftSentinel), 02 (Eval-First Console), 05 (Prompt-Injection Defense), 07 (LLM Red Team) and 08 (Audit Trail).*
+*This PRD interlocks with Project 02 (DriftSentinel), Project 04 (EvalForge), Project 06 (PromptShield) and Project 09 (LineageLog).*

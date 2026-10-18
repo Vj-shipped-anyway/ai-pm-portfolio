@@ -70,8 +70,8 @@
   <rect x="695" y="108" width="205" height="110" rx="8" class="stage-box-gate"/>
   <text x="707" y="128" class="stage-num">4 . CALIBRATED THRESHOLD</text>
   <text x="707" y="150" class="stage-title">Per use case</text>
-  <text x="707" y="168" class="stage-sub">rates / regs   0.82</text>
-  <text x="707" y="183" class="stage-sub">general        0.65</text>
+  <text x="707" y="168" class="stage-sub">rates/regs/disputes 0.82</text>
+  <text x="707" y="183" class="stage-sub">general             0.65</text>
   <text x="707" y="198" class="stage-sub">0.31 &lt; 0.65</text>
   <text x="707" y="212" class="meta-block">decision: ABSTAIN</text>
 

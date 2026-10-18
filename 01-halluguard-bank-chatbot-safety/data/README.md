@@ -18,4 +18,6 @@ The `queries.csv` is the eval set. Each query is tagged with the foundation-mode
 - `multihop` — answer requires combining 2-3 facts
 - `currency_unit` — bps vs percentage points
 
-Every query in `queries.csv` is also documented in the `probes/` folder with rich JSONL records (full retrieved context, valid response patterns, invalid response patterns).
+Queries per failure class: `negation_flip` 8, `multihop` 7, `paraphrase_blindness` 6, `citation_fabrication` 4, `jurisdiction` 3, `currency_unit` 2. The taxonomy also names `time_staleness` and `confident_and_wrong`, which have no queries in this file.
+
+The `probes/` folder holds 15 sample probe records (5 each for paraphrase blindness, negation flip, and citation fabrication), not one per query. See [`probes/README.md`](../probes/README.md).

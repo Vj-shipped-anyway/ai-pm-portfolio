@@ -14,6 +14,10 @@ Llama 3.1 70B run against this exact eval.
 To swap in real LLM calls, replace `mock_llm_response()` with
 `call_anthropic()` / `call_openai()` etc.
 
+Note: retrieve() below is a naive word-overlap stub. main() prints the stored
+mock answers and does not call it; the production design uses pgvector with
+embedding similarity.
+
 Run:
     python step_02_with_llm.py
 """
