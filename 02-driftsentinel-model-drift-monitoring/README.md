@@ -4,6 +4,8 @@
 
 **▶ Live demo:** [driftsentinel-bfsi.streamlit.app](https://driftsentinel-bfsi.streamlit.app)
 
+**▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/02-driftsentinel-model-drift-monitoring/demo.html)
+
 **▶ 60-second interactive walkthrough:** [Click through DriftSentinel on Arcade](https://app.arcade.software/share/mHOnNZCi66FsK0IFyiLs)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, architecture, and walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (MRM committee read, OCC exam, validator co-design) is what the next role does.
