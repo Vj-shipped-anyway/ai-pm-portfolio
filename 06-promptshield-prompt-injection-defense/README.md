@@ -4,6 +4,8 @@
 
 **▶ Live demo:** *(placeholder — promptshield-bfsi.streamlit.app)*
 
+**▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/06-promptshield-prompt-injection-defense/demo.html)
+
 **▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-class deficiency taxonomy, the architecture, the five-layer pipeline, and the synthetic corpus are mine; the metrics below are measured on the shipped synthetic data and modeled against published industry baselines. Production validation (CISO sign-off, red-team rounds against the bank's real copilot, integration with the bank's MRM workbench) is what the next role does.
