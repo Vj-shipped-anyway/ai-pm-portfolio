@@ -348,7 +348,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 | `drift-sentinel-api` REST | OpenAPI 3.1 over HTTPS | OIDC bearer, role-checked via OPA | UI, CLI, MRM workbench iframes, GRC tool integrations |
 | `drift-sentinel-api` gRPC (internal only) | gRPC + protobuf | mTLS via service mesh (SPIFFE) | Worker, scheduler, events |
 | **Webhooks (outbound)** | HTTPS POST + HMAC-SHA256 signature | Pre-shared HMAC secret per consumer | Bank's incident management, Compliance dashboard |
-| **MCP server (optional, GCP-native deployments)** | Anthropic Model Context Protocol | OIDC + Agent Identity | Allows the bank's agents to query drift status as a tool — interlocks with [Project 04 — AgentWatch](../05-agentwatch-agent-observability/) |
+| **MCP server (optional, GCP-native deployments)** | Anthropic Model Context Protocol | OIDC + Agent Identity | Allows the bank's agents to query drift status as a tool — interlocks with [Project 05 — AgentWatch](../05-agentwatch-agent-observability/) |
 | **OpenAPI spec endpoint** | `/openapi.json` | Public (no auth) | Discovery for the CLI, UI, integration tools |
 
 ### API-design opinions (the choices a reviewer will ask about)
@@ -410,7 +410,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 | **PCI-DSS** | In scope only when the underlying model touches cardholder data. DriftSentinel itself doesn't process card data; it processes feature distributions. PCI scope minimization via field-level encryption and tokenization at the source. |
 | **GLBA** | Customer financial data handled with field-level encryption + access controls + audit trail. Right-to-be-forgotten cascades to drift events via customer-ID hash deletion. |
 | **SR 11-7** | This is the existence-proof regulation. DriftSentinel is the implementation surface for "ongoing monitoring" the SR letter has required since 2011. PRD references the specific paragraphs. |
-| **NIST AI RMF + EU AI Act Article 12** | Decision-grain lineage maintained for the recommendation engine. Interlocks with Project 08 (LineageLog) for the full lineage surface. |
+| **NIST AI RMF + EU AI Act Article 12** | Decision-grain lineage maintained for the recommendation engine. Interlocks with Project 09 (LineageLog) for the full lineage surface. |
 | **GDPR** | EU instance enforces data residency. Right-to-erasure handled via customer-hash deletion cascade. DPO sign-off documented. |
 | **India RBI data localization** | Indian retail-arm fleet runs on the India regional instance only. No cross-border replication. |
 | **OCC / Fed / CFPB exam readiness** | Audit-pack export builds in <12 minutes per decision. Continuous, not annual. |
