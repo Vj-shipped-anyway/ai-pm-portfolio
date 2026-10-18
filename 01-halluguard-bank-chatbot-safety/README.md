@@ -4,6 +4,8 @@
 
 **▶ Live demo:** [halluguard-bfsi.streamlit.app](https://halluguard-bfsi.streamlit.app)
 
+**▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/01-halluguard-bank-chatbot-safety/demo.html)
+
 **▶ 60-second interactive walkthrough:** [Click through HalluGuard on Arcade](https://app.arcade.software/share/daLEfWH7yD0sYutT3HTP)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. The training-notes describe the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.

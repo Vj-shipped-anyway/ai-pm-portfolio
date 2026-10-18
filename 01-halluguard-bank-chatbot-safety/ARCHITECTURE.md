@@ -419,3 +419,5 @@ Holding that line is the scope discipline: each item above is something a team w
 The score, threshold, and snapshot id in the example are illustrative, taken from the README's worked sequence.
 
 OpenAPI spec lives at `apps/gateway/openapi.yaml` and is the source of truth for the chatbot-side client and the console.
+
+See also: [README](./README.md), [PRD](./PRD.md), and the [clickable demo](https://vj-shipped-anyway.github.io/ai-pm-portfolio/01-halluguard-bank-chatbot-safety/demo.html).
