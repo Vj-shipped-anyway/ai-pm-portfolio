@@ -75,7 +75,7 @@
 - **Anthropic, OpenAI, and Microsoft all publish agent guidance that says the same thing.** Agents fail unpredictably in production. The remediation is per-incident cost bounding + reasoning-trace capture. AgentWatch is the implementation surface.
 - **[OpenTelemetry](https://opentelemetry.io/) on agent frameworks is now native.** LangGraph emits OTel spans by default. AutoGen exposes a logging hook. Bedrock Agents and OpenAI Assistants expose vendor-native trace tails. The substrate exists.
 - **Vendor model silent updates** make the cost-per-incident question harder every quarter. A silent Anthropic snapshot roll changes the agent's planning behavior; AgentWatch's tool-call-mix drift detector surfaces it.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) and [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** apply to deployed agents the same way they apply to deployed models. The ongoing-monitoring requirement is the same; the surface AgentWatch implements is the same.
+- **[EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** applies to deployed agents the same way it applies to deployed models. [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) places agentic AI outside its scope, so AgentWatch uses its ongoing-monitoring principle as an analogy, not as a requirement that governs agents.
 
 ## 5. Goals (12-month horizon)
 

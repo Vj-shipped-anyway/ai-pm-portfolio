@@ -2,6 +2,8 @@
 
 **A portfolio prototype for an agent reliability and tool-use observability sidecar that bounds runaway costs, catches hallucinated tool arguments, surfaces silent agent drift, and routes incidents to a validator before the FinOps bill lands — modeled against Google Cloud's [*Building secure multi-agent systems*](https://cloud.google.com/) reference architecture, [OpenTelemetry](https://opentelemetry.io/), [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/), and the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the sidecar architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (line-1 owner co-design, MRM committee read, SRE pager-rotation interop, fleet rollout) is what the next role does.
@@ -59,7 +61,7 @@ The agent-observability space has incumbents at every layer (Datadog APM for ser
 | Cost attribution to business outcome | ❌ | ❌ | ❌ | ✅ |
 | WORM-retained incident pack | ❌ | ❌ | ❌ | ✅ |
 | 🔴 MTTR on agent-shaped incidents (hypothetical, no source; not produced by any script) | 4 hr | 6 hr | 3 hr | **&lt;10 min** |
-| 🔴 [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) ongoing-monitoring ready (designed) | ❌ | ❌ | ❌ | ✅ |
+| 🔴 Ongoing-monitoring evidence in the style of [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) ready (designed) | ❌ | ❌ | ❌ | ✅ |
 
 **Position:** *AgentWatch does not replace your APM or your LLM trace vendor. It sits on top of them and does the agent-shaped composition the line-1 owner and FinOps reviewer actually need.* This matters because a Head of AI Platform can deploy this without ripping out Datadog, Langfuse, or the agent framework's native console.
 
@@ -135,7 +137,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case — the claims-triage runaway loop walkthrough
 
-A modeled Tier-1 retail bank. Four production agents across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly. [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) governs the model risk posture. [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) (human oversight on high-risk AI) is in effect for the EU operating arm. Each agent is wired up with 6-11 tools and has authority to call them autonomously.
+A modeled Tier-1 retail bank. Four production agents across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly. The bank's model risk guidance, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026), places agentic AI outside its scope, so the agents' controls here follow the bank's own governance practice. [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) (human oversight on high-risk AI) is in effect for the EU operating arm. Each agent is wired up with 6-11 tools and has authority to call them autonomously.
 
 **The scenario:**
 
@@ -551,7 +553,7 @@ The Streamlit prototype here demonstrates the *product mechanic* on synthetic da
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Designs compliant AI under regulated constraint*
 
