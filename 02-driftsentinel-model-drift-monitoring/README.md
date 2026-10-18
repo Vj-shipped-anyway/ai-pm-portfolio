@@ -231,14 +231,18 @@ python src/step_04_with_drift_sentinel.py
 **Sample output for credit_pd_v3 (excerpt):**
 
 ```
-[DETECT]
-  feature_dti        PSI= 0.220  KS=0.096
-[DIAGNOSE]
-  segment=subprime_650_680       PSI= 2.368  KS=0.454  n_cur=155
-  upstream: feature_pipeline.dti_v2025_11 deployed Day 58 — dti normalization changed from log1p to standard scale; correlates with drift onset Day 60.
-[DECIDE]
-  SHADOW: Aggregate PSI 0.220 is within attested envelope but slice PSI 2.368 crosses red. Deploy candidate alongside, monitor slice for 14 days.
-  envelope: If slice PSI > 0.40 sustained for 7 days, escalate to RETRAIN.
+  [DETECT]
+    feature_dti        PSI= 0.220  KS=0.096
+    feature_fico       PSI= 0.025  KS=0.028
+    feature_ltv        PSI= 0.018  KS=0.048
+    prediction         PSI= 0.155  KS=0.098
+  [DIAGNOSE]
+    segment=subprime_650_680       PSI= 2.368  KS=0.454  n_cur=155
+    segment=prime_720_plus         PSI= 0.037  KS=0.025  n_cur=745
+    upstream: feature_pipeline.dti_v2025_11 deployed Day 58 — dti normalization changed from log1p to standard scale; correlates with drift onset Day 60.
+  [DECIDE]
+    SHADOW: Aggregate PSI 0.220 is within attested envelope but slice PSI 2.368 crosses red. Deploy candidate alongside, monitor slice for 14 days.
+    envelope: If slice PSI > 0.40 sustained for 7 days, escalate to RETRAIN.
 ```
 
 **Fleet roll-up from the Step 4 output:**
