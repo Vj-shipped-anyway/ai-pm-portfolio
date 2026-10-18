@@ -4,7 +4,7 @@
 **Stage:** Portfolio prototype — designed for a pre-IC-steering read in a real engagement
 **Date:** 2026-Q2
 
-> This document describes the reference architecture for DealSentry. The prototype in `src/app.py` proves the product mechanic. This is what the production build looks like when it ships to a national CRE operator.
+> This document describes the reference architecture for DealSentry. The prototype in `src/app.py` demonstrates the product mechanic. This is what the production build looks like when it ships to a national CRE operator.
 
 ---
 

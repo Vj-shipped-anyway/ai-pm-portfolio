@@ -120,7 +120,7 @@
 <body>
 <div class="container">
   <header class="hero">
-    <h1>DealSentry — CRE AI underwriting verification in &lt;90 seconds, not &lt;weeks of bid-side discovery</h1>
+    <h1>DealSentry — CRE AI underwriting verification in &lt;90 seconds (modeled), not weeks of bid-side discovery</h1>
     <p class="tagline">Pick one of six AI-drafted CRE underwriting memos. See what each maturity level returns to the IC chair: face-value trust (memo lands in IC packet), analyst spot-check (10% of comps verified), DealSentry three-path verifier (PASS / REVIEW / FAIL with sectional findings).</p>
     <p class="author">Project 10 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
@@ -135,7 +135,7 @@
   <section class="stats" aria-label="DealSentry summary">
     <div class="stat"><p class="stat-label">Memos in eval set</p><p class="stat-value">6</p></div>
     <div class="stat"><p class="stat-label">Deficiencies named</p><p class="stat-value">6</p></div>
-    <div class="stat"><p class="stat-label">Analyst spot-check (SOTA)</p><p class="stat-value">~28%</p></div>
+    <div class="stat"><p class="stat-label">Analyst spot-check (SOTA, modeled; needs re-modeling)</p><p class="stat-value">~28%</p></div>
     <div class="stat"><p class="stat-label">DealSentry (target)</p><p class="stat-value">100%</p></div>
   </section>
 
@@ -172,7 +172,7 @@
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (catch_with_DealSentry − catch_with_analyst_spotcheck) × deals_per_yr × avg_bid_risk</p>
     <p style="margin: 8px 0 0;"><b>Needs re-modeling:</b> the ~28% spot-check baseline below was built on an earlier read of Step 2. The sample holds 3 fabricated comps and the spot-check script catches 0 of 3 at its fixed seed (about 18% expected across seeds), so the lift and the annual figures are stale.</p>
-    <p style="margin: 8px 0 0;">Per-memo lift: <b>~28% &rarr; 100%</b> catch rate on fabricated comps, plus 5 deficiency classes spot-checking does not cover at all (T-12 drift, cap-rate math, occupancy, exit-cap mismatch, stale submarket stat). Annualized at a national CRE operator (~800-1,200 deals/yr screened through AI underwriting): <b>~3-5 bad bids prevented at ~$1.8M each = ~$7.2M/yr</b> modeled. At top-5 institutional fleet scale: <b>~15-25 bad bids/yr ≈ ~$35M/yr</b>. Per-memo verifier runtime: <b>&lt;90s p95</b>. Per finding caught: <b>~$28</b> vs $3K-$8K to manually re-verify against CoStar.</p>
+    <p style="margin: 8px 0 0;">Per-memo lift: <b>~28% &rarr; 100%</b> catch rate on fabricated comps, plus 5 deficiency classes spot-checking does not cover at all (T-12 drift, cap-rate math, occupancy, exit-cap mismatch, stale submarket stat). Annualized at a national CRE operator (~800-1,200 deals/yr screened through AI underwriting): <b>~3-5 bad bids prevented at ~$1.8M each = ~$7.2M/yr</b> modeled. At top-5 institutional fleet scale: <b>~15-25 bad bids/yr ≈ ~$35M/yr</b>. Per-memo verifier runtime (modeled, live-feed design): <b>&lt;90s p95</b>. Per finding caught: <b>~$28</b> vs $3K-$8K to manually re-verify against CoStar.</p>
   </section>
 
   <footer class="footer-links">
@@ -196,7 +196,7 @@ const MEMOS = [
               note: "Memo is clean. Face-value trust produces the correct read — but the operating mode is the same regardless of the underlying memo quality." },
     sota: { caught: 0, missed: 0, note: "10% spot-check (1 of 5 comps). All 5 comps actually exist. No false flag." },
     shield: { verdict: "PASS", action: "Approve and proceed to IC.", comps: "5 of 5 verified", findings: "all 6 checks clean",
-              t12: "PASS — reconciles", cap: "PASS — 5.95% reconciles", occ: "PASS — 96% / 96%", exit: "PASS — +45 bps spread", stat: "PASS — current Q4 2025", bid_risk: "$0", verifier_secs: 4.2 }
+              t12: "PASS — no monthly rows to re-sum", cap: "PASS — 5.95% reconciles", occ: "PASS — 96% / 96%", exit: "PASS — +45 bps spread", stat: "PASS — current Q4 2025", bid_risk: "$0" }
   },
   {
     id: "MEMO_02", name: "Phoenix North Residences — 240-unit multifamily",
@@ -206,7 +206,7 @@ const MEMOS = [
               note: "Clean multifamily memo. Vacancy adjustment shown explicitly. Memo is correct." },
     sota: { caught: 0, missed: 0, note: "10% spot-check (1 of 6 comps). All comps real." },
     shield: { verdict: "PASS", action: "Approve and proceed to IC.", comps: "6 of 6 verified", findings: "all 6 checks clean",
-              t12: "PASS — vacancy applied correctly", cap: "PASS — 5.25%", occ: "PASS — 93.6% / 93.6%", exit: "PASS — +30 bps spread", stat: "PASS — current Q4 2025", bid_risk: "$0", verifier_secs: 4.8 }
+              t12: "PASS — no monthly rows to re-sum", cap: "PASS — 5.25%", occ: "PASS — 93.6% / 93.6%", exit: "PASS — +30 bps spread", stat: "PASS — current Q4 2025", bid_risk: "$0" }
   },
   {
     id: "MEMO_03", name: "Dallas Uptown Tower — 320k sf Class-A office",
@@ -216,17 +216,17 @@ const MEMOS = [
               note: "Analyst trusted the $5.16M sum without re-running. Deficiency stays hidden until due-diligence buyer recomputes." },
     sota: { caught: 0, missed: 1, note: "10% spot-check verified 1 comp. T-12 math not recomputed because spot-checking does not surface arithmetic." },
     shield: { verdict: "FAIL", action: "Reject. Do not advance to IC.", comps: "5 of 5 verified", findings: "1 finding — T-12 drift",
-              t12: "FAIL — memo $5.16M vs recompute $5.10M (-$60K)", cap: "PASS", occ: "PASS", exit: "PASS", stat: "PASS", bid_risk: "$2.1M", verifier_secs: 4.4 }
+              t12: "FAIL — memo $5.16M vs recompute $5.10M (+$60K)", cap: "PASS", occ: "PASS", exit: "PASS", stat: "PASS", bid_risk: "$2.1M" }
   },
   {
     id: "MEMO_04", name: "Brickell Crossing Retail — 92k sf grocery-anchored",
     market: "Brickell South", asset_class: "retail", ask: "$73.6M",
     drafted: "2026-02-22", status: "FABRICATED_COMPS", scenario: "AI cited 6 comps. 2 of them — Pinecrest Pavilion and South Bay Galleria — do not exist in any SOT feed. Exit cap = going-in (flat).",
     before: { dwell: "Memo lands in IC packet with 2 phantom comps", deficiencies_present: 2,
-              note: "Canonical bad-bid pattern. AI generated comp citations that share submarket and price band with real ones. Memo passes IC because nobody verified." },
+              note: "Canonical bad-bid pattern. The AI generated comp citations that share submarket and price band with real ones. Memo passes IC because nobody verified." },
     sota: { caught: 0, missed: 2, note: "10% spot-check verified 1 comp (a real one). Both fabrications slipped through. Exit-cap mismatch unaddressed by spot-check." },
     shield: { verdict: "FAIL", action: "Reject. Do not advance to IC.", comps: "4 of 6 verified", findings: "3 findings — 2 fabricated comps + exit-cap mismatch",
-              t12: "PASS", cap: "PASS — 6.25% reconciles", occ: "PASS — 96% / 96%", exit: "FAIL — going-in 6.25% / exit 6.25% (+0 bps; std +25-50)", stat: "PASS", bid_risk: "$2.1M", verifier_secs: 5.1 }
+              t12: "PASS", cap: "PASS — 6.25% reconciles", occ: "PASS — 96% / 96%", exit: "REVIEW — going-in 6.25% / exit 6.25% (+0 bps; std +25-50)", stat: "PASS", bid_risk: "$2.1M" }
   },
   {
     id: "MEMO_05", name: "Bellevue MOB Plaza — 85k sf medical office",
@@ -235,18 +235,18 @@ const MEMOS = [
     before: { dwell: "Stale stat presented as current in IC packet", deficiencies_present: 1,
               note: "Memo cites a CoStar figure that's 5 quarters old. Analyst trusted the source-label, not the date. Submarket positioning argument built on a misread." },
     sota: { caught: 0, missed: 1, note: "10% spot-check on comps does not surface stale submarket stats at all." },
-    shield: { verdict: "REVIEW", action: "Send to senior analyst review before IC.", comps: "4 of 4 verified (one duplicate flagged)", findings: "1 finding — stale stat",
-              t12: "PASS", cap: "PASS", occ: "PASS", exit: "PASS — +35 bps spread", stat: "REVIEW — 2024-Q3 vacancy shown as current; latest Q4 2025 reading 5.2% / $52", bid_risk: "$480K", verifier_secs: 4.6 }
+    shield: { verdict: "REVIEW", action: "Send to senior analyst review before IC.", comps: "4 of 4 verified (duplicate citation not flagged)", findings: "1 finding — stale stat",
+              t12: "PASS", cap: "PASS", occ: "PASS", exit: "PASS — +35 bps spread", stat: "REVIEW — 2024-Q3 vacancy shown as current; latest Q4 2025 reading 5.2% / $52", bid_risk: "$480K" }
   },
   {
     id: "MEMO_06", name: "Chicago O'Hare Last-Mile — 410k sf industrial",
     market: "Chicago O'Hare Industrial", asset_class: "industrial", ask: "$84.0M",
     drafted: "2026-03-26", status: "MULTI_FAULT", scenario: "Fabricated Schaumburg comp + cap-rate off by 50 bps (memo 5.50% / recompute 6.00%) + 4.5-pt occupancy discrepancy + exit cap flat.",
     before: { dwell: "Memo lands in IC packet; four deficiencies hidden", deficiencies_present: 4,
-              note: "The whole memo. Multi-fault pattern. Cap-rate 50 bps off on a $84M deal is a $7.6M value swing." },
+              note: "The whole memo. Multi-fault pattern. Cap-rate 50 bps off on an $84M deal is a $7.6M value swing." },
     sota: { caught: 0, missed: 4, note: "10% spot-check (1 of 5 comps). Hit a real comp. Cap-rate / occupancy / exit-cap all slipped." },
     shield: { verdict: "FAIL", action: "Reject. Do not advance to IC.", comps: "4 of 5 verified", findings: "4 findings — fabricated comp + cap-rate + occupancy + exit-cap",
-              t12: "PASS — reconciles within tolerance", cap: "FAIL — stated 5.50% vs recompute 6.00% (+50 bps)", occ: "FAIL — stated 96.5% vs rent roll 92.0%", exit: "FAIL — going-in 5.65% / exit 5.65% (+0 bps)", stat: "PASS", bid_risk: "$2.1M", verifier_secs: 5.3 }
+              t12: "PASS — no monthly rows to re-sum", cap: "FAIL — stated 5.50% vs recompute 6.00% (+50 bps)", occ: "FAIL — stated 96.5% vs rent roll 92.0%", exit: "REVIEW — going-in 5.65% / exit 5.65% (+0 bps)", stat: "PASS", bid_risk: "$2.1M" }
   }
 ];
 
@@ -306,7 +306,7 @@ function render(idx) {
   shieldHtml += '<div class="field-row"><span class="field-label">Exit cap spread</span><span class="field-value">' + escapeHtml(m.shield.exit) + '</span></div>';
   shieldHtml += '<div class="field-row"><span class="field-label">Submarket stat</span><span class="field-value">' + escapeHtml(m.shield.stat) + '</span></div>';
   shieldHtml += '<div class="field-row"><span class="field-label">Bid risk caught (modeled)</span><span class="field-value">' + escapeHtml(m.shield.bid_risk) + '</span></div>';
-  shieldHtml += '<div class="meta">Three-path verifier completed in ' + m.shield.verifier_secs.toFixed(1) + 's on the prototype.</div>';
+  shieldHtml += '<div class="meta">Fixed walkthrough of the step 4 verdict, not a live run.</div>';
   if (m.shield.verdict === 'PASS') {
     shieldHtml += '<div class="pill pill-ok">PASS — safe for IC</div>';
   } else if (m.shield.verdict === 'REVIEW') {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title desc">
   <title id="title">DealSentry: AI-drafted CRE underwriting memo flowing from ingestion through three independent verifier paths to an IC-ready workpaper</title>
-  <desc id="desc">Five-stage horizontal flow showing how an AI-drafted CRE memo is ingested, parsed into structured claims, run through three independent verifier paths (comp existence, symbolic math, submarket cross-feed), reconciled into a PASS/REVIEW/FAIL verdict, and exported as an IC-ready workpaper. Includes analyst-spotcheck-vs-DealSentry timing and bid-risk comparison.</desc>
+  <desc id="desc">Four-stage horizontal flow showing how an AI-drafted CRE memo is ingested, parsed into structured claims, run through three independent verifier paths (comp existence, symbolic math, submarket cross-feed), reconciled into a PASS/REVIEW/FAIL verdict, and exported as an IC-ready workpaper. Includes analyst-spotcheck-vs-DealSentry timing and bid-risk comparison.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -42,7 +42,7 @@
   <text x="32" y="195" class="stage-sub">Claude Sonnet</text>
   <text x="32" y="210" class="stage-sub">"cite-or-refuse" prompt</text>
   <text x="32" y="225" class="stage-sub">Pydantic schema</text>
-  <text x="32" y="243" class="meta-text">6 comps · 12 t-12 rows</text>
+  <text x="32" y="243" class="meta-text">6 comps · T-12 total only</text>
 
   <!-- Arrow 1 -->
   <line x1="195" y1="180" x2="232" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
@@ -108,7 +108,7 @@
   <text x="32" y="402" class="stage-sub">- T-12 math: trusted, not recomputed</text>
   <text x="32" y="419" class="stage-sub">- Submarket stats: trusted, not cross-checked</text>
   <text x="32" y="438" class="meta-fail">Modeled: ~28% caught (needs re-modeling)</text>
-  <text x="32" y="453" class="timer">5-10 min review per memo · 5 deficiency classes uncovered</text>
+  <text x="32" y="453" class="timer">5 deficiency classes uncovered</text>
 
   <rect x="490" y="345" width="450" height="115" rx="8" fill="#ecfdf5" stroke="#bbf7d0" stroke-width="1"/>
   <text x="502" y="365" class="stage-title" fill="#14532d">DealSentry (three independent paths)</text>

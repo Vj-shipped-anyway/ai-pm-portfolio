@@ -1,4 +1,4 @@
-# PRD · CRE AI Underwriting Reliability Sentinel
+# PRD · DealSentry — CRE AI Underwriting Reliability Sentinel
 
 **Author:** Vijay Saharan, Sr PM
 **Stage:** Portfolio prototype — designed for a pre-IC-steering read in a real engagement
@@ -20,7 +20,7 @@ Acquisitions teams now use AI copilots to draft underwriting memos: comp pulls, 
 
 - AI underwriting copilots are deployed at every institutional CRE shop. Almost none QA the output.
 - Capital markets are tight; mispricing on a single acquisition is now real money.
-- Source-of-truth databases (CoStar, Reonomy, Cherre, proprietary) are API-accessible — citation verification is technically feasible and cost-cheap.
+- Source-of-truth databases (CoStar, Reonomy, Cherre, proprietary) are API-accessible — citation verification is technically feasible and low-cost.
 - LLM hallucination on numerical and citation-heavy work is a *known property*, not a bug. Mitigation has to be a product.
 
 ## 3. Goals (12-month horizon)
@@ -90,7 +90,7 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 
 ## 8. KPIs
 
-**North star:** % of IC memos with a clean three-check pass before submission at least 95%.
+**North star:** % of IC memos with a clean three-check pass before submission (target at least 95%).
 
 **Inputs (leading):**
 - Comp-citation verification pass rate (target at least 98%)
@@ -142,7 +142,7 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 - Security: SOC 2 Type II. CoStar / Reonomy / Cherre license terms govern data RBAC. Broker NDA redaction policy explicit before launch.
 
 **Throughput envelope and latency budget:**
-- Designed envelope: 800 IC memos / year for an institutional shop. Peak 6 memos in the same week.
+- Designed envelope: 1,200 IC memos / year for an institutional shop. Peak 12 memos in the same week.
 - Sentinel runtime per memo: under 90s p95. The three checks run in parallel; the bottleneck is the source-of-truth API latency on cache miss.
 - Comp verification: under 30s for a memo with 12 comps cited (cache hits dominate after warm-up).
 - Symbolic re-val: under 5s. It's just pandas.

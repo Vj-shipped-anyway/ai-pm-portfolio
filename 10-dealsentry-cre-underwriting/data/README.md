@@ -9,7 +9,7 @@ All data is synthetic. Property names, addresses, and dollar figures are invente
 | File | What it is |
 | --- | --- |
 | `sot_comps.csv` | 40 synthetic source-of-truth comp transactions across LA, NYC, Chicago, Dallas, Phoenix, Atlanta, Miami, Bellevue. Mix of industrial / office / multifamily / retail / medical office. Each row carries a `source_feed` pointer (CoStar / Reonomy / Cherre). |
-| `sot_stats.csv` | Submarket vacancy / asking rent / cap-rate stats per (submarket, asset_class, quarter, feed). Quarterly versioning means the Q3 vs Q4 staleness check is a real comparison, not a flag. |
+| `sot_stats.csv` | Submarket vacancy / asking rent / cap-rate stats per (submarket, asset_class, quarter, feed). Quarterly versioning lets a production staleness check compare quarters; the step 4 script fires on a `[NOTE:` marker in the memo instead. |
 | `sample_memos.csv` | 6 synthetic AI-drafted memos covering the failure-mode mix: clean industrial, clean multifamily, T-12 math drift office, fabricated-comp retail, stale-stat medical office, multi-fault industrial. |
 | `deficiency_classes.csv` | The 6 named deficiency classes DealSentry checks for, with definitions and example failure patterns. |
 
@@ -46,4 +46,4 @@ These six map directly to what an IC chair would flag in a senior-review pass, i
 
 ## Notes on synthetic SOT coverage
 
-In production DealSentry would call live CoStar Real Estate Manager / Reonomy Properties / Cherre Property APIs. The 40-row SOT in this repo simulates the coverage shape — every submarket that appears in the memos has at least 3 SOT comps, and the fabricated comps in `MEMO_04` and `MEMO_06` are intentionally absent from the SOT so the comp-existence check has a real positive and a real negative on every memo.
+In production DealSentry would call live CoStar Real Estate Manager / Reonomy Properties / Cherre Property APIs. The 40-row SOT in this repo simulates the coverage shape — every submarket that appears in the memos has at least 2 SOT comps (Chicago O'Hare Industrial has 3), and the fabricated comps in `MEMO_04` and `MEMO_06` are intentionally absent from the SOT so the comp-existence check has real positives on every memo and real negatives on those two.
