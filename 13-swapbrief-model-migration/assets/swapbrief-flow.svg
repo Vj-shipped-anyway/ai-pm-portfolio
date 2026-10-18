@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">SwapBrief: a vendor retires model A, paired evaluation, slice intervals, cost and latency, a decision, and rollback triggers</title>
+  <desc id="desc">Four-stage horizontal flow showing how a model deprecation notice moves through a paired evaluation of model A and model B under two prompts, the SwapBrief analysis, and a decision rule that outputs GO, GO WITH GUARDRAILS or NO-GO, then into rollback triggers with a metric, a threshold and a window. A comparison strip shows the same simulated evaluation decided by the headline average, by the average plus a significance test, and by SwapBrief.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #5bc0be; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-trig { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">SwapBrief - decision flow for one model migration</text>
+  <text x="20" y="52" class="subheader">Vendor retires model A. The average on model B is higher. SwapBrief reads the slices before anyone ships.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="290" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: vendor deprecation notice for model A</text>
+
+  <!-- Stage 1: DEPRECATION NOTICE -->
+  <rect x="20" y="120" width="165" height="110" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 . DEPRECATION NOTICE</text>
+  <text x="32" y="162" class="stage-title">Model A retired</text>
+  <text x="32" y="180" class="stage-sub">end date announced</text>
+  <text x="32" y="195" class="stage-sub">candidate: model B</text>
+  <text x="32" y="218" class="meta-text">pin A for rollback</text>
+
+  <!-- Arrow 1 -->
+  <line x1="190" y1="175" x2="232" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: PAIRED EVALUATION -->
+  <rect x="235" y="120" width="195" height="110" rx="8" class="stage-box-eval"/>
+  <text x="247" y="140" class="stage-num">2 . PAIRED EVALUATION</text>
+  <text x="247" y="162" class="stage-title">720 items, 8 slices</text>
+  <text x="247" y="180" class="stage-sub">A, B old prompt,</text>
+  <text x="247" y="195" class="stage-sub">B retuned prompt</text>
+  <text x="247" y="218" class="meta-strong">simulated results only</text>
+
+  <!-- Arrow 2 -->
+  <line x1="435" y1="175" x2="477" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: SWAPBRIEF ANALYSIS -->
+  <rect x="480" y="120" width="225" height="110" rx="8" class="stage-box-eval"/>
+  <text x="492" y="140" class="stage-num">3 . SWAPBRIEF ANALYSIS</text>
+  <text x="492" y="162" class="stage-title">Intervals, cost, tail</text>
+  <text x="492" y="180" class="stage-sub">paired bootstrap per slice</text>
+  <text x="492" y="195" class="stage-sub">cost per correct answer</text>
+  <text x="492" y="210" class="stage-sub">p50 and p95, both prompts</text>
+
+  <!-- Arrow 3 -->
+  <line x1="710" y1="175" x2="742" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: DECISION RULE -->
+  <rect x="745" y="120" width="155" height="110" rx="8" class="stage-box-gate"/>
+  <text x="757" y="140" class="stage-num">4 . DECISION RULE</text>
+  <text x="757" y="162" class="stage-title">Three outputs</text>
+  <text x="757" y="180" class="stage-sub">GO</text>
+  <text x="757" y="195" class="stage-sub">GO WITH GUARDRAILS</text>
+  <text x="757" y="210" class="stage-sub">NO-GO</text>
+
+  <!-- Arrow 4 (down) -->
+  <path d="M 822 230 L 822 288" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: ROLLBACK TRIGGERS -->
+  <rect x="470" y="290" width="430" height="150" rx="8" class="stage-box-trig"/>
+  <text x="482" y="310" class="stage-num">5 . ROLLBACK TRIGGERS</text>
+  <text x="482" y="332" class="stage-title">Metric, threshold, window</text>
+  <text x="482" y="352" class="stage-sub">8 triggers on the committed set</text>
+  <text x="482" y="368" class="stage-sub">slice floors, cost per correct, p95</text>
+  <text x="482" y="388" class="meta-text">the line that blocks at evaluation is the line</text>
+  <text x="482" y="402" class="meta-text">that rolls back in production</text>
+  <text x="482" y="424" class="meta-block">a fired trigger returns traffic to pinned model A</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="290" width="430" height="150" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="32" y="310" class="stage-title">Same evaluation, three decisions</text>
+  <text x="32" y="332" class="timer">Headline average: GO on +4.3 pp, 0 triggers</text>
+  <text x="32" y="350" class="timer">Average plus test: GO, p = 0.0125, 0 triggers</text>
+  <text x="32" y="372" class="timer-fast">SwapBrief, A's old prompt: NO-GO</text>
+  <text x="32" y="390" class="timer-fast">SwapBrief, retuned prompt: GO WITH GUARDRAILS</text>
+  <text x="32" y="414" class="meta-strong">false-GO rate 96.9% to 8.2% over 200 simulated scenarios</text>
+  <text x="32" y="430" class="meta-text">simulated data: not a measurement of any real model</text>
+</svg>

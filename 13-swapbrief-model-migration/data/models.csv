@@ -1,0 +1,4 @@
+system,model_id,prompt,snapshot_pin,notice_date,end_of_support,note
+A,model-a,old prompt,model-a@2026-03,2026-08-15,2027-02-15,Current model. Vendor has announced deprecation. Synthetic dates.
+B_old_prompt,model-b,old prompt (written for A),model-b@2026-08,,,Candidate with A's prompt unchanged: the in-place swap.
+B_new_prompt,model-b,prompt retuned for B,model-b@2026-08,,,Candidate with a prompt retuned for B: the prompt-fair comparison.

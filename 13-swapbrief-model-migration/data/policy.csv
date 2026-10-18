@@ -1,0 +1,12 @@
+parameter,value,unit,meaning
+inconclusive_half_width,0.10,accuracy fraction,A slice whose 95% interval is wider than plus or minus this is inconclusive: too few items to resolve it
+cost_ratio_watch,1.05,ratio to model A,"Cost per correct answer at or above 1.05x A, with the interval above 1.00, puts a trigger on cost"
+cost_ratio_block,1.25,ratio to model A,Interval lower bound at or above 1.25x A blocks the migration; 1.25x A is also the production rollback line
+p95_ratio_watch,1.10,ratio to model A,"p95 latency at or above 1.10x A, with the interval above 1.00, puts a trigger on p95"
+p95_ratio_block,1.50,ratio to model A,Interval lower bound at or above 1.50x A blocks the migration; 1.50x A is also the production rollback line
+bootstrap_confidence,0.95,probability,Coverage of every paired bootstrap interval
+aggregate_alpha,0.05,probability,Significance level for the aggregate test in step 2
+window_slice,7 days rolling,text,Window for slice accuracy triggers
+window_cost,24 hours,text,Window for the cost per correct answer trigger
+window_p95,"1 hour, 3 windows in a row",text,Window for the p95 latency trigger
+rollback_target,"model A pinned snapshot, until its end-of-support date",text,Where a fired trigger sends traffic
