@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">TierGate: one intake submission flowing through cross-checks, tier recompute, evidence gate and a tier-ordered review queue</title>
+  <desc id="desc">Five-stage horizontal flow. The sponsor's intake form is cross-checked against the data catalog, the vendor registry and the text of the submission. The tier is recomputed from the written rubric, each discrepancy is flagged with a reason, approval is gated on the evidence checklist of the recomputed tier, and the review queue is ordered by tier. A strip of four interlocks and a strip of measured and modeled results on 150 synthetic submissions sit below.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-chk { fill: #ffffff; stroke: #5bc0be; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .row-good { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #27500A; }
+      .row-bad { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #791F1F; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">TierGate - intake and tiering flow for one submission</text>
+  <text x="20" y="52" class="subheader">UC-132 (synthetic): the sponsor declares tier 1. TierGate recomputes tier 3 and holds approval for evidence.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="70" width="300" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="85" class="badge-text">Trigger: intake form submitted by a sponsor</text>
+
+  <!-- Stage 1: INTAKE FORM -->
+  <rect x="16" y="108" width="176" height="124" rx="8" class="stage-box"/>
+  <text x="28" y="128" class="stage-num">1 . INTAKE FORM</text>
+  <text x="28" y="150" class="stage-title">Sponsor answers</text>
+  <text x="28" y="168" class="stage-sub">6 answers + free text</text>
+  <text x="28" y="183" class="stage-sub">plus a declared tier</text>
+  <text x="28" y="216" class="meta-block">no cross-check today</text>
+
+  <line x1="194" y1="170" x2="212" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: CROSS-CHECKS -->
+  <rect x="214" y="108" width="176" height="124" rx="8" class="stage-box-chk"/>
+  <text x="226" y="128" class="stage-num">2 . CROSS-CHECKS</text>
+  <text x="226" y="150" class="stage-title">Second sources</text>
+  <text x="226" y="168" class="stage-sub">catalog: data class</text>
+  <text x="226" y="183" class="stage-sub">registry: vendor</text>
+  <text x="226" y="198" class="stage-sub">text cue: customers</text>
+  <text x="226" y="216" class="meta-strong">ambiguous = assume yes</text>
+
+  <line x1="392" y1="170" x2="410" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: RECOMPUTE -->
+  <rect x="412" y="108" width="176" height="124" rx="8" class="stage-box-chk"/>
+  <text x="424" y="128" class="stage-num">3 . RECOMPUTE</text>
+  <text x="424" y="150" class="stage-title">Rubric to tier</text>
+  <text x="424" y="168" class="stage-sub">6 inputs, points sum</text>
+  <text x="424" y="183" class="stage-sub">tier = 1 + pts // 4</text>
+  <text x="424" y="198" class="stage-sub">capped at tier 4</text>
+  <text x="424" y="216" class="meta-strong">flag + reason per gap</text>
+
+  <line x1="590" y1="170" x2="608" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: EVIDENCE GATE -->
+  <rect x="610" y="108" width="176" height="124" rx="8" class="stage-box-gate"/>
+  <text x="622" y="128" class="stage-num">4 . EVIDENCE GATE</text>
+  <text x="622" y="150" class="stage-title">Checklist by tier</text>
+  <text x="622" y="168" class="stage-sub">tier 1: 2 items</text>
+  <text x="622" y="183" class="stage-sub">tier 4: 11 items</text>
+  <text x="622" y="198" class="stage-sub">missing = HOLD</text>
+  <text x="622" y="216" class="meta-block">hold until complete</text>
+
+  <line x1="788" y1="170" x2="806" y2="170" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: QUEUE -->
+  <rect x="808" y="108" width="176" height="124" rx="8" class="stage-box-ship"/>
+  <text x="820" y="128" class="stage-num">5 . REVIEW QUEUE</text>
+  <text x="820" y="150" class="stage-title">Ordered by tier</text>
+  <text x="820" y="168" class="stage-sub">review depth by tier</text>
+  <text x="820" y="183" class="stage-sub">tier 4 first</text>
+  <text x="820" y="198" class="stage-sub">duplicates linked</text>
+  <text x="820" y="216" class="meta-strong">reviewer confirms</text>
+
+  <!-- Interlocks -->
+  <text x="20" y="262" class="stage-title">Interlocks</text>
+  <rect x="16" y="272" width="228" height="44" rx="8" class="stage-box"/>
+  <text x="28" y="291" class="stage-sub">09 LineageLog</text>
+  <text x="28" y="306" class="meta-text">evidence trail</text>
+  <rect x="256" y="272" width="228" height="44" rx="8" class="stage-box"/>
+  <text x="268" y="291" class="stage-sub">04 EvalForge</text>
+  <text x="268" y="306" class="meta-text">eval evidence</text>
+  <rect x="496" y="272" width="228" height="44" rx="8" class="stage-box"/>
+  <text x="508" y="291" class="stage-sub">08 OversightOps</text>
+  <text x="508" y="306" class="meta-text">human review by tier</text>
+  <rect x="736" y="272" width="248" height="44" rx="8" class="stage-box"/>
+  <text x="748" y="291" class="stage-sub">12 ValueLedger</text>
+  <text x="748" y="306" class="meta-text">benefit tracking after approval</text>
+
+  <!-- Results strip -->
+  <rect x="16" y="340" width="968" height="150" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="28" y="362" class="stage-title">Results on 150 synthetic submissions (reference tier is true by construction)</text>
+  <text x="28" y="384" class="row-bad">Self-declared</text>
+  <text x="150" y="384" class="row-bad">tier correct 69.3%</text>
+  <text x="340" y="384" class="row-bad">tier 3-4 recall 75.7%</text>
+  <text x="560" y="384" class="row-bad">evidence gaps held 51.5%</text>
+  <text x="28" y="402" class="row-good">TierGate</text>
+  <text x="150" y="402" class="row-good">tier correct 86.0%</text>
+  <text x="340" y="402" class="row-good">tier 3-4 recall 100.0%</text>
+  <text x="560" y="402" class="row-good">evidence gaps held 95.5%</text>
+  <text x="28" y="424" class="meta-text">Measured: tier accuracy, recall and evidence-gap detection (step_02 and step_04 output).</text>
+  <text x="28" y="442" class="meta-strong">Modeled: tier 3-4 mean wait 2.9 days first in first out, 1.2 days ordered by tier (3 reviewers, 200 seeded replications).</text>
+  <text x="28" y="462" class="meta-block">Known limit: form and catalog both wrong on the data class, 6 cases, 2 end at the wrong tier.</text>
+  <text x="28" y="480" class="meta-text">Cost: 13 cases tiered above the reference by the conservative customer-facing checks.</text>
+</svg>

@@ -1,0 +1,35 @@
+dataset_name,steward_unit,catalog_class,true_class,catalog_status
+d_public_rate_sheets,Product,public,public,current
+d_product_brochures,Marketing,public,public,current
+d_published_filings,Finance,public,public,current
+d_market_data_feed,Treasury,public,public,current
+d_policy_library,Compliance,internal,internal,current
+d_procedure_manuals,Operations,internal,internal,current
+d_branch_ops_logs,Branch Network,internal,internal,current
+d_marketing_copy_library,Marketing,internal,internal,current
+d_it_service_tickets,Technology,internal,internal,current
+d_meeting_notes_corp,Corporate Office,internal,internal,current
+d_training_materials,Human Resources,internal,internal,current
+d_code_repository,Technology,internal,internal,current
+d_complaint_narratives,Compliance,restricted,confidential,stale_overstated
+d_employee_hr_cases,Human Resources,confidential,confidential,current
+d_vendor_contracts,Procurement,confidential,confidential,current
+d_legal_matter_files,Legal,confidential,confidential,current
+d_internal_audit_findings,Internal Audit,confidential,confidential,current
+d_model_inventory_records,Risk Management,confidential,confidential,current
+d_pricing_models,Finance,confidential,confidential,current
+d_call_center_transcripts,Contact Centre,confidential,confidential,current
+d_chat_logs_customer,Contact Centre,confidential,confidential,current
+d_marketing_response_data,Marketing,confidential,confidential,current
+d_loan_applications,Lending,confidential,restricted,stale_understated
+d_transaction_history,Operations,confidential,restricted,stale_understated
+d_kyc_documents,Compliance,restricted,restricted,current
+d_sar_case_files,Compliance,restricted,restricted,current
+d_credit_bureau_pulls,Lending,restricted,restricted,current
+d_account_master,Operations,confidential,restricted,stale_understated
+d_card_authorisations,Cards,restricted,restricted,current
+d_collections_notes,Collections,restricted,restricted,current
+d_wealth_client_profiles,Wealth,restricted,restricted,current
+d_fraud_case_files,Fraud,restricted,restricted,current
+d_mortgage_underwriting_files,Lending,restricted,restricted,current
+d_deposit_account_events,Operations,restricted,restricted,current

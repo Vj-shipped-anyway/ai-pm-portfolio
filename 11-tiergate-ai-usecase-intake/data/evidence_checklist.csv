@@ -1,0 +1,26 @@
+tier,evidence_id,evidence_item,interlock
+1,E01,Use-case card with named line-1 owner,-
+1,E02,Data-source attestation (dataset names and classes),-
+2,E01,Use-case card with named line-1 owner,-
+2,E02,Data-source attestation (dataset names and classes),-
+2,E03,Evaluation plan and results summary,04 EvalForge
+2,E04,Privacy and data-handling review,-
+3,E01,Use-case card with named line-1 owner,-
+3,E02,Data-source attestation (dataset names and classes),-
+3,E03,Evaluation plan and results summary,04 EvalForge
+3,E04,Privacy and data-handling review,-
+3,E05,Independent validation with effective challenge,-
+3,E06,Human review design for the tier,08 OversightOps
+3,E07,Decision logging and lineage plan,09 LineageLog
+3,E08,Vendor and third-party due diligence,-
+4,E01,Use-case card with named line-1 owner,-
+4,E02,Data-source attestation (dataset names and classes),-
+4,E03,Evaluation plan and results summary,04 EvalForge
+4,E04,Privacy and data-handling review,-
+4,E05,Independent validation with effective challenge,-
+4,E06,Human review design for the tier,08 OversightOps
+4,E07,Decision logging and lineage plan,09 LineageLog
+4,E08,Vendor and third-party due diligence,-
+4,E09,Regulatory-scope legal review,-
+4,E10,Fallback and exit plan,-
+4,E11,CRO sign-off,-
