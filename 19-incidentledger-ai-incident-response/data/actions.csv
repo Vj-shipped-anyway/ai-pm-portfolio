@@ -1,0 +1,201 @@
+action_id,incident_id,action,owner,due_at,status,closed_at,evidence_link
+A-0001,INC-0001,Test the fix against the crafted input,owner-11,432,closed,540,yes
+A-0002,INC-0001,Add an input filter for the pattern,owner-07,432,closed,434,yes
+A-0003,INC-0002,Agree a remediation with the model owner,owner-02,844,closed,882,yes
+A-0004,INC-0002,Review adverse action reasons,owner-02,844,closed,827,no
+A-0005,INC-0003,Add a regression test,owner-12,313,closed,475,no
+A-0006,INC-0003,Review the release checklist,owner-06,865,closed,946,no
+A-0007,INC-0004,Roll back or patch the change,owner-09,1589,in_progress,,no
+A-0008,INC-0004,Add a regression test,owner-05,317,closed,265,no
+A-0009,INC-0004,Review the release checklist,owner-02,485,open,,no
+A-0010,INC-0005,Add a regression test,owner-09,875,closed,772,no
+A-0011,INC-0005,Roll back or patch the change,owner-04,323,closed,559,no
+A-0012,INC-0006,Add capacity or a fallback path,owner-03,500,closed,628,yes
+A-0013,INC-0007,Review access to the shared location,owner-12,933,open,,no
+A-0014,INC-0008,Review adverse action reasons,owner-01,950,in_progress,,no
+A-0015,INC-0008,Run a disparity review on recent decisions,owner-12,566,in_progress,,no
+A-0016,INC-0009,Review adverse action reasons,owner-07,438,closed,468,yes
+A-0017,INC-0009,Run a disparity review on recent decisions,owner-04,438,closed,370,yes
+A-0018,INC-0009,Agree a remediation with the model owner,owner-07,1710,open,,no
+A-0019,INC-0010,Test the fix against the crafted input,owner-05,937,closed,836,yes
+A-0020,INC-0012,Review the release checklist,owner-05,1676,in_progress,,no
+A-0021,INC-0012,Add a regression test,owner-06,956,closed,964,yes
+A-0022,INC-0012,Roll back or patch the change,owner-01,1676,open,,no
+A-0023,INC-0013,Add capacity or a fallback path,owner-07,970,open,,no
+A-0024,INC-0013,Review the on-call runbook,owner-12,418,open,,no
+A-0025,INC-0014,Rotate affected credentials,owner-08,422,open,,no
+A-0026,INC-0014,Purge the exposed copies,owner-10,422,closed,328,yes
+A-0027,INC-0016,Review access to the shared location,owner-03,1702,closed,1664,yes
+A-0028,INC-0016,Rotate affected credentials,owner-01,1702,open,,no
+A-0029,INC-0016,Purge the exposed copies,owner-07,1702,closed,1853,yes
+A-0030,INC-0017,Review the prompt and retrieval set,owner-04,1717,in_progress,,no
+A-0031,INC-0017,Add a check against the source record,owner-02,613,open,,no
+A-0032,INC-0018,Add capacity or a fallback path,owner-02,462,closed,625,yes
+A-0033,INC-0018,Add an alert on the error rate,owner-01,1014,closed,1084,no
+A-0034,INC-0019,Add an input filter for the pattern,owner-09,504,in_progress,,no
+A-0035,INC-0020,Add a regression test,owner-03,646,closed,822,yes
+A-0036,INC-0020,Review the release checklist,owner-02,646,open,,no
+A-0037,INC-0022,Add the case to the eval set,owner-08,1076,closed,1201,yes
+A-0038,INC-0023,Add a regression test,owner-09,1800,closed,1964,yes
+A-0039,INC-0023,Roll back or patch the change,owner-02,528,closed,700,no
+A-0040,INC-0024,Rotate affected credentials,owner-11,1821,closed,1734,no
+A-0041,INC-0024,Purge the exposed copies,owner-12,549,closed,739,yes
+A-0042,INC-0024,Review access to the shared location,owner-07,1821,closed,2043,yes
+A-0043,INC-0025,Rotate affected credentials,owner-08,1892,closed,2096,no
+A-0044,INC-0025,Purge the exposed copies,owner-03,1172,closed,1334,yes
+A-0045,INC-0026,Rotate affected credentials,owner-04,1845,closed,2054,yes
+A-0046,INC-0026,Review access to the shared location,owner-08,741,open,,no
+A-0047,INC-0027,Add a check against the source record,owner-08,742,closed,824,no
+A-0048,INC-0028,Rotate affected credentials,owner-05,1118,closed,1258,yes
+A-0049,INC-0028,Review access to the shared location,owner-05,1118,open,,no
+A-0050,INC-0029,Add an input filter for the pattern,owner-10,573,closed,476,yes
+A-0051,INC-0030,Add a check against the source record,owner-08,868,in_progress,,no
+A-0052,INC-0030,Add the case to the eval set,owner-09,868,closed,1006,no
+A-0053,INC-0030,Review the prompt and retrieval set,owner-12,1252,closed,1446,no
+A-0054,INC-0031,Add the case to the eval set,owner-03,712,closed,676,yes
+A-0055,INC-0033,Review the prompt and retrieval set,owner-04,922,closed,809,yes
+A-0056,INC-0034,Review adverse action reasons,owner-07,720,closed,866,yes
+A-0057,INC-0034,Agree a remediation with the model owner,owner-11,1992,closed,2102,yes
+A-0058,INC-0034,Run a disparity review on recent decisions,owner-08,1992,in_progress,,no
+A-0059,INC-0035,Add the case to the eval set,owner-07,2000,closed,2029,no
+A-0060,INC-0035,Add a check against the source record,owner-01,1280,in_progress,,no
+A-0061,INC-0035,Review the prompt and retrieval set,owner-08,1280,open,,no
+A-0062,INC-0036,Review adverse action reasons,owner-10,2023,in_progress,,no
+A-0063,INC-0036,Run a disparity review on recent decisions,owner-12,751,in_progress,,no
+A-0064,INC-0036,Agree a remediation with the model owner,owner-03,919,closed,996,no
+A-0065,INC-0037,Add the case to the eval set,owner-04,2020,closed,1971,yes
+A-0066,INC-0038,Review the prompt and retrieval set,owner-11,2030,closed,2010,yes
+A-0067,INC-0039,Add an alert on the error rate,owner-02,918,closed,1061,yes
+A-0068,INC-0040,Add a check against the source record,owner-07,1345,open,,no
+A-0069,INC-0041,Review access to the shared location,owner-08,1340,open,,no
+A-0070,INC-0041,Rotate affected credentials,owner-03,1340,closed,1547,yes
+A-0071,INC-0042,Add the case to the eval set,owner-06,1365,closed,1320,yes
+A-0072,INC-0043,Review the on-call runbook,owner-06,2115,closed,2093,no
+A-0073,INC-0043,Add capacity or a fallback path,owner-04,1011,closed,915,yes
+A-0074,INC-0044,Review the release checklist,owner-09,2102,open,,no
+A-0075,INC-0044,Roll back or patch the change,owner-12,2102,closed,2132,no
+A-0076,INC-0044,Add a regression test,owner-10,998,in_progress,,no
+A-0077,INC-0045,Review adverse action reasons,owner-11,2132,open,,no
+A-0078,INC-0045,Run a disparity review on recent decisions,owner-01,1412,closed,1299,yes
+A-0079,INC-0045,Agree a remediation with the model owner,owner-06,2132,closed,2089,yes
+A-0080,INC-0046,Add capacity or a fallback path,owner-05,1042,in_progress,,no
+A-0081,INC-0046,Review the on-call runbook,owner-12,1042,in_progress,,no
+A-0082,INC-0047,Roll back or patch the change,owner-07,1071,in_progress,,no
+A-0083,INC-0048,Review adverse action reasons,owner-05,914,closed,860,yes
+A-0084,INC-0048,Agree a remediation with the model owner,owner-09,1466,closed,1533,yes
+A-0085,INC-0049,Add an input filter for the pattern,owner-06,2233,closed,2304,yes
+A-0086,INC-0049,Test the fix against the crafted input,owner-06,1513,closed,1619,yes
+A-0087,INC-0050,Roll back or patch the change,owner-09,974,closed,859,yes
+A-0088,INC-0050,Add a regression test,owner-02,2246,closed,2209,no
+A-0089,INC-0050,Review the release checklist,owner-11,1142,closed,1044,yes
+A-0090,INC-0051,Add an alert on the error rate,owner-12,1558,in_progress,,no
+A-0091,INC-0051,Add capacity or a fallback path,owner-05,1558,in_progress,,no
+A-0092,INC-0052,Review the on-call runbook,owner-01,1217,closed,1390,yes
+A-0093,INC-0052,Add an alert on the error rate,owner-08,1601,closed,1486,yes
+A-0094,INC-0053,Add the case to the eval set,owner-02,1066,open,,no
+A-0095,INC-0053,Review the prompt and retrieval set,owner-02,1066,closed,1051,yes
+A-0096,INC-0053,Add a check against the source record,owner-06,1066,closed,1178,yes
+A-0097,INC-0054,Review tool permissions,owner-04,1126,open,,no
+A-0098,INC-0055,Add an input filter for the pattern,owner-08,1311,closed,1455,yes
+A-0099,INC-0055,Review tool permissions,owner-07,1143,closed,1196,yes
+A-0100,INC-0056,Agree a remediation with the model owner,owner-09,1765,open,,no
+A-0101,INC-0056,Review adverse action reasons,owner-02,1213,closed,1210,yes
+A-0102,INC-0056,Run a disparity review on recent decisions,owner-08,2485,open,,no
+A-0103,INC-0057,Add an input filter for the pattern,owner-09,1155,in_progress,,no
+A-0104,INC-0057,Review tool permissions,owner-07,1155,closed,1160,yes
+A-0105,INC-0058,Add an alert on the error rate,owner-01,1200,closed,1401,yes
+A-0106,INC-0059,Review tool permissions,owner-07,1352,closed,1265,yes
+A-0107,INC-0059,Test the fix against the crafted input,owner-06,1184,closed,1403,no
+A-0108,INC-0060,Review access to the shared location,owner-03,2442,in_progress,,no
+A-0109,INC-0061,Review the release checklist,owner-11,2479,closed,2292,yes
+A-0110,INC-0061,Add a regression test,owner-07,1375,closed,1583,yes
+A-0111,INC-0062,Agree a remediation with the model owner,owner-12,1814,closed,1766,yes
+A-0112,INC-0063,Review adverse action reasons,owner-03,1270,open,,no
+A-0113,INC-0064,Review the release checklist,owner-09,2572,open,,no
+A-0114,INC-0064,Add a regression test,owner-03,1300,closed,1218,yes
+A-0115,INC-0065,Agree a remediation with the model owner,owner-01,1917,closed,1945,yes
+A-0116,INC-0066,Roll back or patch the change,owner-02,1874,closed,1811,no
+A-0117,INC-0066,Add a regression test,owner-09,1322,open,,no
+A-0118,INC-0067,Review the release checklist,owner-09,1545,open,,no
+A-0119,INC-0067,Roll back or patch the change,owner-11,1545,closed,1719,yes
+A-0120,INC-0067,Add a regression test,owner-08,1545,in_progress,,no
+A-0121,INC-0068,Review tool permissions,owner-04,1369,closed,1392,yes
+A-0122,INC-0068,Test the fix against the crafted input,owner-11,1537,open,,no
+A-0123,INC-0069,Add an alert on the error rate,owner-08,1373,open,,no
+A-0124,INC-0071,Add a check against the source record,owner-05,1583,closed,1549,yes
+A-0125,INC-0071,Review the prompt and retrieval set,owner-09,1967,closed,2006,no
+A-0126,INC-0072,Add an alert on the error rate,owner-05,1999,closed,1974,yes
+A-0127,INC-0073,Add the case to the eval set,owner-02,2728,open,,no
+A-0128,INC-0074,Review tool permissions,owner-08,2012,closed,2196,yes
+A-0129,INC-0074,Add an input filter for the pattern,owner-09,2732,in_progress,,no
+A-0130,INC-0075,Review tool permissions,owner-06,1643,closed,1647,yes
+A-0131,INC-0076,Roll back or patch the change,owner-06,2168,in_progress,,no
+A-0132,INC-0076,Add a regression test,owner-11,1784,in_progress,,no
+A-0133,INC-0077,Add the case to the eval set,owner-01,1599,in_progress,,no
+A-0134,INC-0077,Review the prompt and retrieval set,owner-10,2871,closed,2280,yes
+A-0135,INC-0077,Add a check against the source record,owner-10,2151,closed,2293,yes
+A-0136,INC-0078,Add the case to the eval set,owner-11,2162,closed,2274,yes
+A-0137,INC-0080,Rotate affected credentials,owner-08,1674,open,,no
+A-0138,INC-0080,Review access to the shared location,owner-06,1842,closed,2040,no
+A-0139,INC-0080,Purge the exposed copies,owner-05,1842,closed,2029,yes
+A-0140,INC-0082,Add capacity or a fallback path,owner-11,2267,open,,no
+A-0141,INC-0082,Review the on-call runbook,owner-12,1715,in_progress,,no
+A-0142,INC-0082,Add an alert on the error rate,owner-04,2987,open,,no
+A-0143,INC-0083,Review the prompt and retrieval set,owner-09,2988,in_progress,,no
+A-0144,INC-0083,Add a check against the source record,owner-07,1884,closed,1796,yes
+A-0145,INC-0084,Review the on-call runbook,owner-11,3014,in_progress,,no
+A-0146,INC-0084,Add capacity or a fallback path,owner-04,2294,closed,2281,no
+A-0147,INC-0085,Roll back or patch the change,owner-06,2331,in_progress,,no
+A-0148,INC-0086,Add an alert on the error rate,owner-04,2366,closed,2257,yes
+A-0149,INC-0086,Add capacity or a fallback path,owner-08,1814,closed,1761,yes
+A-0150,INC-0086,Review the on-call runbook,owner-03,2366,open,,no
+A-0151,INC-0087,Review access to the shared location,owner-01,2341,closed,2233,yes
+A-0152,INC-0087,Purge the exposed copies,owner-10,1789,in_progress,,no
+A-0153,INC-0088,Add capacity or a fallback path,owner-06,2348,in_progress,,no
+A-0154,INC-0088,Review the on-call runbook,owner-05,2348,open,,no
+A-0155,INC-0089,Rotate affected credentials,owner-08,1815,closed,1731,yes
+A-0156,INC-0089,Purge the exposed copies,owner-03,3087,open,,no
+A-0157,INC-0089,Review access to the shared location,owner-05,2367,in_progress,,no
+A-0158,INC-0090,Review the approval step,owner-08,1815,closed,1768,no
+A-0159,INC-0090,Restrict access for the use case,owner-05,1815,open,,no
+A-0160,INC-0090,Remind the team of the usage policy,owner-08,3087,open,,no
+A-0161,INC-0091,Add an input filter for the pattern,owner-09,1980,closed,2021,yes
+A-0162,INC-0092,Review tool permissions,owner-05,1842,closed,1772,yes
+A-0163,INC-0093,Remind the team of the usage policy,owner-12,3089,in_progress,,no
+A-0164,INC-0094,Add a regression test,owner-11,3099,open,,no
+A-0165,INC-0094,Roll back or patch the change,owner-03,1827,closed,1798,no
+A-0166,INC-0094,Review the release checklist,owner-08,2379,closed,2256,yes
+A-0167,INC-0095,Review the on-call runbook,owner-07,3115,in_progress,,no
+A-0168,INC-0096,Add an alert on the error rate,owner-04,3130,open,,no
+A-0169,INC-0096,Add capacity or a fallback path,owner-07,1858,in_progress,,no
+A-0170,INC-0096,Review the on-call runbook,owner-09,2410,in_progress,,no
+A-0171,INC-0097,Add an input filter for the pattern,owner-09,2419,in_progress,,no
+A-0172,INC-0098,Rotate affected credentials,owner-10,2041,closed,2003,yes
+A-0173,INC-0098,Review access to the shared location,owner-06,1873,open,,no
+A-0174,INC-0099,Review the prompt and retrieval set,owner-06,2072,closed,2152,yes
+A-0175,INC-0100,Rotate affected credentials,owner-08,3190,in_progress,,no
+A-0176,INC-0102,Review access to the shared location,owner-11,2188,closed,2238,yes
+A-0177,INC-0102,Rotate affected credentials,owner-08,2572,in_progress,,no
+A-0178,INC-0102,Purge the exposed copies,owner-07,2572,in_progress,,no
+A-0179,INC-0103,Review the on-call runbook,owner-09,2167,open,,no
+A-0180,INC-0103,Add capacity or a fallback path,owner-03,2719,closed,2294,yes
+A-0181,INC-0104,Add a regression test,owner-07,3337,in_progress,,no
+A-0182,INC-0104,Roll back or patch the change,owner-11,2233,closed,2257,yes
+A-0183,INC-0105,Add a regression test,owner-12,2117,closed,2107,yes
+A-0184,INC-0106,Purge the exposed copies,owner-08,2100,closed,2258,yes
+A-0185,INC-0106,Rotate affected credentials,owner-05,2652,open,,no
+A-0186,INC-0106,Review access to the shared location,owner-07,2268,in_progress,,no
+A-0187,INC-0107,Roll back or patch the change,owner-11,2704,open,,no
+A-0188,INC-0107,Review the release checklist,owner-11,2704,closed,2293,yes
+A-0189,INC-0110,Restrict access for the use case,owner-12,2194,closed,2212,no
+A-0190,INC-0111,Remind the team of the usage policy,owner-08,2770,open,,no
+A-0191,INC-0113,Add capacity or a fallback path,owner-05,2265,in_progress,,no
+A-0192,INC-0113,Review the on-call runbook,owner-07,3537,closed,2303,no
+A-0193,INC-0115,Add the case to the eval set,owner-01,3548,in_progress,,no
+A-0194,INC-0116,Review the on-call runbook,owner-05,2629,in_progress,,no
+A-0195,INC-0116,Add an alert on the error rate,owner-01,3733,in_progress,,no
+A-0196,INC-0117,Add the case to the eval set,owner-01,2855,open,,no
+A-0197,INC-0119,Run a disparity review on recent decisions,owner-05,3661,closed,2287,yes
+A-0198,INC-0119,Review adverse action reasons,owner-10,2941,closed,2282,yes
+A-0199,INC-0119,Agree a remediation with the model owner,owner-06,2389,in_progress,,no
+A-0200,INC-0120,Roll back or patch the change,owner-10,3692,in_progress,,no

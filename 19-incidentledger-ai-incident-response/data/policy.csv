@@ -1,0 +1,5 @@
+clock_id,clock_name,applies_to,hours,anchor,basis,note
+CK1,Internal executive notice,sev_s1,4,determination,"assumption of a modeled bank, not legal advice or a statement of any rule; assumed value to confirm with counsel",Executive committee told within 4 hours of determination for a severity S1 incident.
+CK2,Regulator notice,notification_incident,36,determination,"assumption of a modeled bank, not legal advice or a statement of any rule; assumed value to confirm with counsel",Supervisor told within 36 hours of determination for an incident flagged as a notification incident.
+CK3,Customer notice,pii_exposed,720,determination,"assumption of a modeled bank, not legal advice or a statement of any rule; assumed value to confirm with counsel",Affected customers told within 30 days of determination when personal data was exposed.
+CK4,Serious-incident report to an AI regulator,serious_incident,360,determination,"assumption of a modeled bank, not legal advice or a statement of any rule; assumed value to confirm with counsel",Report filed within 15 days of determination for a serious incident.
