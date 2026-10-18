@@ -1,6 +1,8 @@
 # 🚨 IncidentLedger — AI Incident Response with the Notification Clock Running
 
-**A portfolio prototype for AI incident response in a modeled bank: a rule-based classifier, a severity rubric, a notification-clock engine, a follow-up tracker and linking by root cause. Written against the standard the work would have to meet: the 'Manage' function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the current model-risk guidance, which replaced its 2011 predecessor in April 2026), the incident-notification theme of [SR 22-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2204.htm), and the serious-incident reporting article of the [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) (Article 73).**
+**A portfolio prototype for AI incident response in a modeled bank: a rule-based classifier, a severity rubric, a notification-clock engine, a follow-up tracker and linking by root cause. Written against the model-risk guidance the work is compared with: the 'Manage' function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the current model-risk guidance, which replaced its 2011 predecessor in April 2026), the incident-notification theme of [SR 22-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2204.htm), and the serious-incident reporting article of the [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) (Article 73).**
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/19-incidentledger-ai-incident-response/demo.html)
 
@@ -634,7 +636,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs incident response for AI systems, with the deadline clock running*
 
@@ -645,7 +647,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 Obligation themes below are a paraphrase written for this exercise, not the text of the rule.
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Manage' function: tracking, responding to and communicating about incidents. The clock engine and the follow-up tracker are the prototype's version of that theme.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance (its 2011 predecessor was SR 11-7). The standard the work would have to meet: an incident that reveals a model problem has to feed ongoing monitoring and be explained afterwards.
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance (its 2011 predecessor was SR 11-7). The guidance the work is compared with: an incident that reveals a model problem has to feed ongoing monitoring and be explained afterwards.
 - **[SR 22-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2204.htm)** — the Fed letter on contact information for incident notification. The theme is knowing whom to contact when an incident must be notified. The policy file names the recipient of each clock, and the hours in it remain assumptions to confirm with counsel.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — serious-incident reporting for high-risk systems is Article 73. The serious-incident clock in the policy file is modeled on that theme with an assumed value, not the Act's text.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the vocabulary behind the security and injection class.
