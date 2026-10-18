@@ -411,4 +411,3 @@ If your seat involves shipping AI on top of a CRE acquisitions book — or you'r
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/sample_memos.csv` and `data/deficiency_classes.csv` exist before any verification code.
 - Acquisitions-team writing on bad-bid post-mortems — public LinkedIn threads, ICSC panels, NCREIF commentary. The six deficiency classes in Step 3 are calibrated against that published commentary.
 
-<!-- @description 2026-06-15-154944 : DealSentry: CRE AI underwriting reliability - catches comp fabrications, math errors, and submarket-stat hallucinations in AI-drafted memos -->

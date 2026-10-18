@@ -6,6 +6,10 @@
 
 **▶ 60-second interactive walkthrough:** [Click through LeaseGuard on Arcade](https://app.arcade.software/share/hQWTvQIAmgkpQgjHC7iP)
 
+**▶ No-install demo:** open [`demo.html`](./demo.html) in any browser. Pick a lease, see the same 12 fields extracted by a paralegal, by the deployed pipeline, and by the pipeline wrapped in LeaseGuard.
+
+![LeaseGuard verification flow](./assets/leaseguard-flow.svg)
+
 > **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
@@ -119,14 +123,14 @@ python src/step_01_manual_abstraction.py
 
 | lease | pages | total hours | cost | assumed accuracy |
 | --- | --- | --- | --- | --- |
-| `lease_01` standard retail | 2 | 2.36 | $156 | 96% |
-| `lease_02` standard office | 3 | 2.46 | $169 | 96% |
-| `lease_03` non-standard industrial | 4 | 3.58 | $277 | 96% |
-| `lease_04` redlined retail | 4 | 4.10 | $317 | 96% |
-| `lease_05` office + side letter | 3 | 3.13 | $246 | 96% |
-| `lease_06` anchor tenant complex | 4 | 3.85 | $295 | 96% |
+| `lease_01` standard retail | 2 | 2.86 | $225.90 | 96% |
+| `lease_02` standard office | 2 | 2.86 | $225.90 | 96% |
+| `lease_03` non-standard industrial | 3 | 3.94 | $296.36 | 96% |
+| `lease_04` redlined retail | 3 | 4.44 | $328.34 | 96% |
+| `lease_05` office + side letter | 3 | 3.70 | $280.37 | 96% |
+| `lease_06` anchor tenant complex | 3 | 4.19 | $312.35 | 96% |
 
-**Result:** 🟡 Avg ~3.2 hours / lease, ~$245 / lease, ~96% per-field accuracy (modeled from public paralegal blended rates and lease-page complexity multipliers; not measured against a deployed paralegal team). Across a 220-asset portfolio that's roughly **$54K per re-abstraction cycle, or ~$18K/yr amortized** at a 3-year amendment cadence.
+**Result:** 🟡 Avg ~3.7 hours / lease, ~$278 / lease (paralegal time plus 0.5 h senior QC), ~96% per-field accuracy (modeled from blended paralegal rates and lease-page complexity multipliers; not measured against a deployed paralegal team). Across a 220-asset portfolio that's roughly **$61K per re-abstraction cycle, or ~$20K/yr amortized** at a 3-year amendment cadence.
 
 **Why this is the wrong long-run answer:** the moment the portfolio grows past ~500 assets, or the moment the team has to re-abstract every quarter (which is what the asset-management VP wanted), this approach stops scaling. That's why every operator has tried to automate it.
 
@@ -301,11 +305,11 @@ python src/step_04_with_leaseguard.py
 | `lease_03` non-standard industrial | 8 / 12 | 12 / 12 |
 | `lease_04` redlined retail | 4 / 12 | 12 / 12 |
 | `lease_05` office + side letter | 11 / 12 | 12 / 12 |
-| `lease_06` anchor tenant complex | 8 / 12 | 12 / 12 |
-| 🟢 **Blended on this sample** | **76%** | **100%** (6 of 6 hard-case leases caught in this eval set) |
+| `lease_06` anchor tenant complex | 8 / 12 | 11 / 12 |
+| 🟢 **Blended on this sample** | **76.4%** (55 / 72) | **98.6%** (71 / 72). 16 of the 17 wrong fields were routed to triage |
 | 🟡 **Projected at portfolio scale** | **88%** | **98.2%** (modeled — assumes paralegal triage clears flagged fields with the published triage accuracy) |
 
-🟢 **LeaseGuard turns 17 wrong fields on this sample into 17 paralegal-reviewed correct fields,** at a marginal cost of ~30 minutes of paralegal time across the six leases. 🟡 The remaining 1.8% gap projected at portfolio scale is the residual where both the primary and the secondary agree on a wrong answer and no rule catches it — a known class.
+🟢 **LeaseGuard routes 16 of the 17 wrong fields on this sample to paralegal triage.** The 17th is the `lease_06` kick-out clause: both models return the same incomplete value (`co_tenancy_kickout` instead of co-tenancy plus sales-based), so neither the ensemble nor the rules fire. That is the known miss class, left in the mock data on purpose. 21 fields in total are routed, so 5 are false flags (for example, clean leases whose text mentions exclusivity language). 🟡 The remaining 1.8% gap projected at portfolio scale is the residual where both the primary and the secondary agree on a wrong answer and no rule catches it — a known class.
 
 ---
 
@@ -362,6 +366,8 @@ Modeled 28-day shadow window at a 220-asset retail-and-office book shape:
 This README is the walkthrough. The deeper artifacts:
 
 - [`PRD.md`](./PRD.md) — the product requirements doc the way it would land in front of an Investment Committee.
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the systems doc: components, router vocabulary, data model, leases-as-untrusted-input threat model, failure behavior, write-back controls.
+- [`demo.html`](./demo.html) — clickable, no-install walkthrough; every number is generated from the scripts in `src/`.
 - [`data/`](./data/) — the 6 lease abstracts, ground truth, deficiency map. `data/README.md` explains the redline markup convention.
 - [`src/`](./src/) — runnable step scripts.
 
@@ -444,4 +450,3 @@ If your seat involves shipping AI on top of a CRE operating book — or you're l
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/expected_extractions.csv` exists before any model was tuned.
 - Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. The list of deficiency classes in Step 3 is calibrated against that published commentary.
 
-<!-- @description 2026-06-15-154944 : LeaseGuard: CRE lease abstraction verifier - catches CAM caps, escalation clauses, and tenant rights buried in non-standard or redlined leases -->

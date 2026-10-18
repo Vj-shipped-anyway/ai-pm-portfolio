@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeaseGuard — CRE Lease Abstraction Verifier · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of LeaseGuard: an ensemble verification layer over deployed lease-abstraction AI that routes disagreeing, rule-failing, and side-letter-exposed fields to a paralegal triage queue.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldrow:first-of-type { border-top: 0; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; }
+  .fieldvals { color: var(--text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; overflow-wrap: anywhere; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 999px; margin-left: 6px; }
+  .tag-ok { background: #EAF3DE; color: #27500A; }
+  .tag-bad { background: #FCEBEB; color: #791F1F; }
+  .tag-warn { background: #FAEEDA; color: #633806; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: 8px 0 0; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>LeaseGuard — CRE Lease Abstraction Verifier</h1>
+    <p class="tagline">Pick a lease. See the same 12 fields extracted three ways: by a paralegal, by a deployed lease-NLP pipeline, and by that pipeline wrapped in LeaseGuard (second-model re-extraction + rule checks + side-letter tripwire + paralegal triage).</p>
+    <p class="author">Project 03 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">6 synthetic leases</span>
+      <span class="badge">12 fields each</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">3 verification layers</span>
+    </div>
+    <p class="framing">Portfolio prototype on synthetic leases, not a production case study. Extraction outputs are mocked and calibrated to observed failure patterns; every number below is generated from the scripts in <code>src/</code>.</p>
+  </header>
+
+  <section class="stats" aria-label="Running totals through the selected lease">
+    <div class="stat"><p class="stat-label">Deployed NLP accuracy</p><p class="stat-value" id="stat-deployed">—</p></div>
+    <div class="stat"><p class="stat-label">After LeaseGuard triage</p><p class="stat-value" id="stat-after">—</p></div>
+    <div class="stat"><p class="stat-label">Wrong fields caught</p><p class="stat-value" id="stat-caught">—</p></div>
+    <div class="stat"><p class="stat-label">Missed (both models wrong)</p><p class="stat-value" id="stat-missed">—</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="lease-select">Lease</label>
+    <select id="lease-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next lease</button>
+    <button id="runall-btn">Replay all 6 leases</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage lease abstraction comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Paralegal abstraction</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>SOTA — Deployed lease-NLP</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With LeaseGuard</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (deployed-NLP error rate − LeaseGuard error rate) × field extractions per cycle</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this 6-lease set:</b> deployed pipeline 55/72 fields correct (76.4%); after LeaseGuard triage 71/72 (98.6%). 17 wrong fields: 16 routed to triage, 1 missed. 21 fields routed in total, so 5 were false flags a paralegal clears in seconds. The one miss is the lease_06 kick-out clause, where both models return the same incomplete value and no rule fires.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled at portfolio scale</b> (220 leases × 12 fields = 2,640 extractions per cycle): blended accuracy 88% → 98.2%, roughly 270 field errors caught per year, ~$4.2M/yr of recovered rent exposure. Assumes the public PropTech benchmarks named in the README and that paralegal triage clears flagged fields; not measured.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="./README.md">Full walkthrough README</a>
+    <a href="./PRD.md">PRD</a>
+    <a href="./ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/leaseguard-flow.svg">Flow diagram</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const LEASES = [{"id":"lease_01","label":"standard_retail","standard":true,"deficiencies":[],"note":"Clean ICSC retail. Primary NLP gets all 12 fields right. Baseline.","manual":{"hours":2.86,"cost":225.9},"fields":[{"field":"tenant_name","primary":"Brewmoor Coffee Roasters, Inc.","secondary":"","expected":"Brewmoor Coffee Roasters, Inc.","status":"PASS","primary_correct":true,"dollar":200},{"field":"premises_sf","primary":"2400","secondary":"","expected":"2400","status":"PASS","primary_correct":true,"dollar":18000},{"field":"base_rent_psf","primary":"40.00","secondary":"","expected":"40.00","status":"PASS","primary_correct":true,"dollar":42000},{"field":"lease_term_months","primary":"60","secondary":"","expected":"60","status":"PASS","primary_correct":true,"dollar":24000},{"field":"commencement_date","primary":"2025-04-01","secondary":"","expected":"2025-04-01","status":"PASS","primary_correct":true,"dollar":3500},{"field":"escalation_type","primary":"fixed_pct","secondary":"","expected":"fixed_pct","status":"PASS","primary_correct":true,"dollar":38000},{"field":"escalation_value","primary":"3.0","secondary":"","expected":"3.0","status":"PASS","primary_correct":true,"dollar":38000},{"field":"cam_cap_psf","primary":"12.00","secondary":"","expected":"12.00","status":"PASS","primary_correct":true,"dollar":55000},{"field":"cam_base_year","primary":"2025","secondary":"","expected":"2025","status":"PASS","primary_correct":true,"dollar":8000},{"field":"kickout_clause","primary":"none","secondary":"","expected":"none","status":"MISSING","primary_correct":true,"dollar":120000},{"field":"exclusivity_clause","primary":"none","secondary":"","expected":"none","status":"MISSING","primary_correct":true,"dollar":85000},{"field":"ROFO_present","primary":"No","secondary":"","expected":"No","status":"PASS","primary_correct":true,"dollar":45000}]},{"id":"lease_02","label":"standard_office","standard":true,"deficiencies":[],"note":"Clean BOMA office. Stepped escalation table renders fine on this template; 12/12 fields correct.","manual":{"hours":2.86,"cost":225.9},"fields":[{"field":"tenant_name","primary":"Argent Capital Advisors, LLC","secondary":"","expected":"Argent Capital Advisors, LLC","status":"PASS","primary_correct":true,"dollar":200},{"field":"premises_sf","primary":"11800","secondary":"","expected":"11800","status":"PASS","primary_correct":true,"dollar":18000},{"field":"base_rent_psf","primary":"85.00","secondary":"","expected":"85.00","status":"PASS","primary_correct":true,"dollar":42000},{"field":"lease_term_months","primary":"120","secondary":"","expected":"120","status":"PASS","primary_correct":true,"dollar":24000},{"field":"commencement_date","primary":"2025-07-01","secondary":"","expected":"2025-07-01","status":"PASS","primary_correct":true,"dollar":3500},{"field":"escalation_type","primary":"stepped","secondary":"","expected":"stepped","status":"PASS","primary_correct":true,"dollar":38000},{"field":"escalation_value","primary":"step_schedule_yr2_thru_yr10","secondary":"","expected":"step_schedule_yr2_thru_yr10","status":"PASS","primary_correct":true,"dollar":38000},{"field":"cam_cap_psf","primary":"none","secondary":"","expected":"none","status":"PASS","primary_correct":true,"dollar":55000},{"field":"cam_base_year","primary":"2025","secondary":"","expected":"2025","status":"PASS","primary_correct":true,"dollar":8000},{"field":"kickout_clause","primary":"none","secondary":"","expected":"none","status":"PASS","primary_correct":true,"dollar":120000},{"field":"exclusivity_clause","primary":"none","secondary":"","expected":"none","status":"PASS","primary_correct":true,"dollar":85000},{"field":"ROFO_present","primary":"No","secondary":"","expected":"No","status":"PASS","primary_correct":true,"dollar":45000}]},{"id":"lease_03","label":"non_standard_industrial","standard":false,"deficiencies":["escalation_clause_variance","cam_cap_omission"],"note":"CPI-with-floor-and-cap collapses to \"3% annual\" default. CAM cap buried in section 4.3 amendment, missed.","manual":{"hours":3.94,"cost":296.36},"fields":[{"field":"tenant_name","primary":"MeridianFlow Distribution, Inc.","secondary":"","expected":"MeridianFlow Distribution, Inc.","status":"PASS","primary_correct":true,"dollar":200},{"field":"premises_sf","primary":"148700","secondary":"","expected":"148700","status":"PASS","primary_correct":true,"dollar":18000},{"field":"base_rent_psf","primary":"blended_warehouse_office","secondary":"","expected":"blended_warehouse_office","status":"PASS","primary_correct":true,"dollar":42000},{"field":"lease_term_months","primary":"84","secondary":"","expected":"84","status":"PASS","primary_correct":true,"dollar":24000},{"field":"commencement_date","primary":"2025-09-15","secondary":"","expected":"2025-09-15","status":"PASS","primary_correct":true,"dollar":3500},{"field":"escalation_type","primary":"fixed_pct","secondary":"cpi_indexed","expected":"cpi_with_floor_and_cap","status":"DISAGREEMENT","primary_correct":false,"dollar":38000},{"field":"escalation_value","primary":"3.0","secondary":"cpi_indexed","expected":"floor_2.0_cap_4.5","status":"DISAGREEMENT","primary_correct":false,"dollar":38000},{"field":"cam_cap_psf","primary":"none","secondary":"7.00","expected":"7.00","status":"DISAGREEMENT","primary_correct":false,"dollar":55000},{"field":"cam_base_year","primary":"2025","secondary":"","expected":"2025","status":"PASS","primary_correct":true,"dollar":8000},{"field":"kickout_clause","primary":"none","secondary":"","expected":"none","status":"MISSING","primary_correct":true,"dollar":120000},{"field":"exclusivity_clause","primary":"none","secondary":"","expected":"none","status":"MISSING","primary_correct":true,"dollar":85000},{"field":"ROFO_present","primary":"No","secondary":"Yes","expected":"Yes","status":"SIDE_LETTER_TRIPWIRE","primary_correct":false,"dollar":45000}]},{"id":"lease_04","label":"redlined_retail","standard":false,"deficiencies":["redline_blindness","escalation_clause_variance","cam_cap_omission","kickout_clause_missed","exclusivity_buried","boilerplate_paraphrase"],"note":"The whole lease. STRIKE/INSERT markup defeats OCR + extractor. Co-tenancy kick-out, exclusivity, and CPI escalation all in [INSERT] blocks.","manual":{"hours":4.44,"cost":328.34},"fields":[{"field":"tenant_name","primary":"Sundara Apparel Group, Inc.","secondary":"","expected":"Sundara Apparel Group, Inc.","status":"PASS","primary_correct":true,"dollar":200},{"field":"premises_sf","primary":"4800","secondary":"5150","expected":"5150","status":"DISAGREEMENT","primary_correct":false,"dollar":18000},{"field":"base_rent_psf","primary":"48.00","secondary":"42.50","expected":"42.50","status":"DISAGREEMENT","primary_correct":false,"dollar":42000},{"field":"lease_term_months","primary":"60","secondary":"84","expected":"84","status":"DISAGREEMENT","primary_correct":false,"dollar":24000},{"field":"commencement_date","primary":"2025-11-01","secondary":"","expected":"2025-11-01","status":"PASS","primary_correct":true,"dollar":3500},{"field":"escalation_type","primary":"fixed_pct","secondary":"cpi_indexed","expected":"cpi_with_floor_and_cap","status":"DISAGREEMENT","primary_correct":false,"dollar":38000},{"field":"escalation_value","primary":"3.0","secondary":"cpi_indexed","expected":"floor_1.5_cap_4.0","status":"DISAGREEMENT","primary_correct":false,"dollar":38000},{"field":"cam_cap_psf","primary":"none","secondary":"8.50","expected":"8.50","status":"DISAGREEMENT","primary_correct":false,"dollar":55000},{"field":"cam_base_year","primary":"2025","secondary":"","expected":"2025","status":"PASS","primary_correct":true,"dollar":8000},{"field":"kickout_clause","primary":"none","secondary":"co_tenancy","expected":"co_tenancy_kickout","status":"MISSING","primary_correct":false,"dollar":120000},{"field":"exclusivity_clause","primary":"none","secondary":"women_apparel","expected":"women_apparel_50_to_150","status":"MISSING","primary_correct":false,"dollar":85000},{"field":"ROFO_present","primary":"No","secondary":"","expected":"No","status":"PASS","primary_correct":true,"dollar":45000}]},{"id":"lease_05","label":"office_with_side_letter","standard":false,"deficiencies":["tenant_rights_buried_in_side_letter"],"note":"ROFO sits in a side letter document the primary pipeline never ingested. Main lease body looks clean.","manual":{"hours":3.7,"cost":280.37},"fields":[{"field":"tenant_name","primary":"Veridian Health Analytics, Inc.","secondary":"","expected":"Veridian Health Analytics, Inc.","status":"PASS","primary_correct":true,"dollar":200},{"field":"premises_sf","primary":"38200","secondary":"","expected":"38200","status":"PASS","primary_correct":true,"dollar":18000},{"field":"base_rent_psf","primary":"46.00","secondary":"","expected":"46.00","status":"PASS","primary_correct":true,"dollar":42000},{"field":"lease_term_months","primary":"96","secondary":"","expected":"96","status":"PASS","primary_correct":true,"dollar":24000},{"field":"commencement_date","primary":"2026-02-01","secondary":"","expected":"2026-02-01","status":"PASS","primary_correct":true,"dollar":3500},{"field":"escalation_type","primary":"fixed_pct","secondary":"","expected":"fixed_pct","status":"PASS","primary_correct":true,"dollar":38000},{"field":"escalation_value","primary":"2.5","secondary":"","expected":"2.5","status":"PASS","primary_correct":true,"dollar":38000},{"field":"cam_cap_psf","primary":"opex_cap_5pct_compounding","secondary":"","expected":"opex_cap_5pct_compounding","status":"PASS","primary_correct":true,"dollar":55000},{"field":"cam_base_year","primary":"2026","secondary":"","expected":"2026","status":"PASS","primary_correct":true,"dollar":8000},{"field":"kickout_clause","primary":"none","secondary":"","expected":"none","status":"PASS","primary_correct":true,"dollar":120000},{"field":"exclusivity_clause","primary":"none","secondary":"","expected":"none","status":"PASS","primary_correct":true,"dollar":85000},{"field":"ROFO_present","primary":"No","secondary":"","expected":"Yes","status":"SIDE_LETTER_TRIPWIRE","primary_correct":false,"dollar":45000}]},{"id":"lease_06","label":"anchor_tenant_complex","standard":false,"deficiencies":["escalation_clause_variance","kickout_clause_missed","exclusivity_buried"],"note":"Stepped escalation (10% in Yr 6, 10% in Yr 11) defaults to \"10% annual.\" Co-tenancy AND sales-based kickout both present. Exclusivity covers four product categories.","manual":{"hours":4.19,"cost":312.35},"fields":[{"field":"tenant_name","primary":"HomeWorks Hardware Co.","secondary":"","expected":"HomeWorks Hardware Co.","status":"PASS","primary_correct":true,"dollar":200},{"field":"premises_sf","primary":"92400","secondary":"","expected":"92400","status":"PASS","primary_correct":true,"dollar":18000},{"field":"base_rent_psf","primary":"16.00","secondary":"","expected":"16.00","status":"PASS","primary_correct":true,"dollar":42000},{"field":"lease_term_months","primary":"180","secondary":"","expected":"180","status":"PASS","primary_correct":true,"dollar":24000},{"field":"commencement_date","primary":"2026-03-01","secondary":"","expected":"2026-03-01","status":"PASS","primary_correct":true,"dollar":3500},{"field":"escalation_type","primary":"fixed_pct","secondary":"stepped","expected":"stepped","status":"DISAGREEMENT","primary_correct":false,"dollar":38000},{"field":"escalation_value","primary":"10.0","secondary":"stepped_yr6_yr11","expected":"10pct_yr6_and_yr11","status":"DISAGREEMENT","primary_correct":false,"dollar":38000},{"field":"cam_cap_psf","primary":"5.75","secondary":"","expected":"5.75","status":"PASS","primary_correct":true,"dollar":55000},{"field":"cam_base_year","primary":"2026","secondary":"","expected":"2026","status":"PASS","primary_correct":true,"dollar":8000},{"field":"kickout_clause","primary":"co_tenancy_kickout","secondary":"co_tenancy_kickout","expected":"co_tenancy_and_sales_based","status":"PASS","primary_correct":false,"dollar":120000},{"field":"exclusivity_clause","primary":"hardware","secondary":"hardware_paint","expected":"hardware_home_paint_lumber","status":"DISAGREEMENT","primary_correct":false,"dollar":85000},{"field":"ROFO_present","primary":"No","secondary":"","expected":"No","status":"SIDE_LETTER_TRIPWIRE","primary_correct":true,"dollar":45000}]}];
+
+const FLAG_LABEL = {
+  DISAGREEMENT: "models disagree",
+  MISSING: "clause signal in text, primary says none",
+  SIDE_LETTER_TRIPWIRE: "side-letter / amendment language found",
+  RULE_VIOLATION: "failed field rule"
+};
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function pct(n, d) { return d ? (100 * n / d).toFixed(1) + "%" : "—"; }
+
+let idx = 0;
+const sel = document.getElementById("lease-select");
+LEASES.forEach((l, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = l.id + " — " + l.label.replace(/_/g, " ");
+  sel.appendChild(o);
+});
+
+function totals(upTo) {
+  let n = 0, correct = 0, wrong = 0, caught = 0, missed = 0, after = 0;
+  for (let i = 0; i <= upTo; i++) {
+    for (const f of LEASES[i].fields) {
+      n++;
+      if (f.primary_correct) correct++; else wrong++;
+      const flagged = f.status !== "PASS";
+      if (!f.primary_correct && flagged) caught++;
+      if (!f.primary_correct && !flagged) missed++;
+      if (flagged || f.primary_correct) after++;
+    }
+  }
+  return { n, correct, wrong, caught, missed, after };
+}
+
+function render() {
+  const l = LEASES[idx];
+  sel.value = idx;
+  const t = totals(idx);
+  document.getElementById("stat-deployed").textContent = pct(t.correct, t.n);
+  document.getElementById("stat-after").textContent = pct(t.after, t.n);
+  document.getElementById("stat-caught").textContent = t.caught + " / " + t.wrong;
+  document.getElementById("stat-missed").textContent = t.missed;
+
+  const wrongFields = l.fields.filter(f => !f.primary_correct);
+  const flagged = l.fields.filter(f => f.status !== "PASS");
+  const missed = l.fields.filter(f => !f.primary_correct && f.status === "PASS");
+  const tp = flagged.filter(f => !f.primary_correct);
+  const fp = flagged.filter(f => f.primary_correct);
+  const correct = l.fields.length - wrongFields.length;
+  const afterCorrect = l.fields.length - missed.length;
+
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(l.id) + "</b> — " + esc(l.label.replace(/_/g, " ")) + ". " +
+    (l.standard ? "Standard form." : "Non-standard.") + " " +
+    (l.deficiencies.length ? "Deficiencies triggered: <b>" + esc(l.deficiencies.join(", ").replace(/_/g, " ")) + "</b>." : "No deficiencies triggered.") +
+    "<br>" + esc(l.note);
+
+  document.getElementById("card-before").innerHTML =
+    "<p>A paralegal reads the lease cover to cover and fills in 12 fields; a senior reviewer QCs it. Accurate but slow, and it does not scale past a few hundred assets.</p>" +
+    '<div class="driver-row"><span class="driver-label">Total time</span><span class="driver-value">' + l.manual.hours.toFixed(2) + " h</span></div>" +
+    '<div class="driver-row"><span class="driver-label">Cost</span><span class="driver-value">$' + l.manual.cost.toFixed(2) + "</span></div>" +
+    '<div class="driver-row"><span class="driver-label">Field accuracy</span><span class="driver-value">~96% (assumed)</span></div>' +
+    '<span class="pill pill-warn">🟡 modeled from blended rates</span>';
+
+  let sotaHtml = '<p>Claude Sonnet over OCR, ~6 minutes per lease. ' +
+    (wrongFields.length ? "The output looks identical to a correct extraction, so nobody knows which fields are wrong." : "Every field is right on this lease.") + "</p>" +
+    '<div class="driver-row"><span class="driver-label">Correct fields</span><span class="driver-value">' + correct + " / " + l.fields.length + " (" + pct(correct, l.fields.length) + ")</span></div>";
+  wrongFields.forEach(f => {
+    sotaHtml += '<div class="fieldrow"><span class="fieldname">' + esc(f.field) + '</span><span class="tag tag-bad">wrong</span><div class="fieldvals">got ' + esc(f.primary) + "<br>expected " + esc(f.expected) + "</div></div>";
+  });
+  sotaHtml += '<span class="pill ' + (wrongFields.length ? "pill-bad" : "pill-ok") + '">' + (wrongFields.length ? "silent errors, no alert" : "clean") + "</span>";
+  document.getElementById("card-sota").innerHTML = sotaHtml;
+
+  let shHtml = "<p>" + (flagged.length ? flagged.length + " of " + l.fields.length + " fields routed to paralegal triage with the source clause highlighted." : "All 12 fields auto-cleared.") + "</p>" +
+    '<div class="driver-row"><span class="driver-label">Wrong caught</span><span class="driver-value">' + tp.length + " / " + wrongFields.length + "</span></div>" +
+    '<div class="driver-row"><span class="driver-label">False flags</span><span class="driver-value">' + fp.length + "</span></div>" +
+    '<div class="driver-row"><span class="driver-label">Correct after triage</span><span class="driver-value">' + afterCorrect + " / " + l.fields.length + " (" + pct(afterCorrect, l.fields.length) + ")</span></div>";
+  flagged.forEach(f => {
+    const isTp = !f.primary_correct;
+    shHtml += '<div class="fieldrow"><span class="fieldname">' + esc(f.field) + '</span><span class="tag ' + (isTp ? "tag-ok" : "tag-warn") + '">' + (isTp ? "caught" : "false flag") + "</span>" +
+      '<div class="fieldvals">' + esc(f.status.replace(/_/g, " ").toLowerCase()) + " — " + esc(FLAG_LABEL[f.status] || "") +
+      "<br>primary " + esc(f.primary) + (f.secondary ? " · second model " + esc(f.secondary) : "") + "</div></div>";
+  });
+  missed.forEach(f => {
+    shHtml += '<div class="fieldrow"><span class="fieldname">' + esc(f.field) + '</span><span class="tag tag-bad">missed</span><div class="fieldvals">both models say ' + esc(f.primary) + "<br>expected " + esc(f.expected) + "</div></div>";
+  });
+  shHtml += '<span class="pill ' + (missed.length ? "pill-warn" : "pill-ok") + '">' + (missed.length ? "1 known miss class" : "all errors resolved") + "</span>";
+  document.getElementById("card-shield").innerHTML = shHtml;
+}
+
+sel.addEventListener("change", e => { idx = parseInt(e.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < LEASES.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => { idx = i; render(); i++; if (i >= LEASES.length) clearInterval(iv); }, 900);
+});
+
+render();
+</script>
+</body>
+</html>

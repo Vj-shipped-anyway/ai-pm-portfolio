@@ -155,7 +155,8 @@ def main():
     print(f"  Deflection to human:     {abstained/total*100:.1f}%")
     print(f"{'='*80}")
     print(f"\nCompare to Step 2 (LLM only):")
-    print(f"  Hallucination rate before containment: 8/30 = 26.7%")
+    llm_wrong = sum(1 for _, ok in MOCK_RESPONSES.values() if not ok)
+    print(f"  Hallucination rate before containment: {llm_wrong}/{total} = {llm_wrong/total*100:.1f}%")
     print(f"  Hallucination rate after containment:  {served_wrong}/{total} = {served_wrong/total*100:.1f}%")
     print(f"\nWrote: {out_path}\n")
 

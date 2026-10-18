@@ -470,4 +470,3 @@ The Streamlit prototype here proves the *product mechanic* — that versioned pr
 - **[Simon Willison](https://simonwillison.net/)** — weekly required reading on the practical operationalization of evals against real foundation-model behavior.
 - **SR 11-7 (Federal Reserve Supervisory Letter on Model Risk Management)** — the regulatory existence-proof for the GenAI ongoing-monitoring story that EvalForge implements alongside [DriftSentinel](../02-driftsentinel-model-drift-monitoring/).
 
-<!-- @description 2026-06-15-154944 : EvalForge: eval-first console for regulated AI - catches GenAI regressions before deployment with versioned probe sets and CI gates -->

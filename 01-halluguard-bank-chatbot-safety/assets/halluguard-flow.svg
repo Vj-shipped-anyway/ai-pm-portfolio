@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" role="img" aria-labelledby="title desc">
+  <title id="title">HalluGuard: one chatbot answer flowing through retrieval, grounding verifier, calibrated threshold, and either ship or abstain</title>
+  <desc id="desc">Five-stage flow. A customer question goes to the existing chatbot, which retrieves rows and drafts an answer. HalluGuard's grounding verifier scores the draft against the retrieved rows. A per-use-case threshold decides whether the answer ships or is rewritten as an abstention that hands the customer to a banker. A nightly probe run and a pinned vendor snapshot sit outside the request path.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-new { fill: #ffffff; stroke: #5bc0be; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .dash-line { stroke: #8a8a8a; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .meta-warn { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #92400e; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">HalluGuard - containment flow for one chatbot answer</text>
+  <text x="20" y="52" class="subheader">Illustrative: "Does Premier Checking have a monthly fee?" The draft drops the negation. The verifier catches it.</text>
+
+  <rect x="20" y="70" width="290" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="85" class="badge-text">Chatbot layer untouched. Containment sits after it.</text>
+
+  <!-- Stage 1 -->
+  <rect x="20" y="108" width="150" height="110" rx="8" class="stage-box"/>
+  <text x="32" y="128" class="stage-num">1 . QUESTION</text>
+  <text x="32" y="150" class="stage-title">Customer asks</text>
+  <text x="32" y="168" class="stage-sub">retail banking chat</text>
+  <text x="32" y="183" class="stage-sub">rates, fees, eligibility,</text>
+  <text x="32" y="198" class="stage-sub">regulation</text>
+
+  <line x1="175" y1="163" x2="212" y2="163" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 -->
+  <rect x="215" y="108" width="180" height="110" rx="8" class="stage-box"/>
+  <text x="227" y="128" class="stage-num">2 . CHATBOT (EXISTING)</text>
+  <text x="227" y="150" class="stage-title">Retrieve + draft</text>
+  <text x="227" y="168" class="stage-sub">pgvector top-k rows</text>
+  <text x="227" y="183" class="stage-sub">LLM drafts the answer</text>
+  <text x="227" y="206" class="meta-block">draft: "Yes, the fee is..."</text>
+
+  <line x1="400" y1="163" x2="437" y2="163" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <rect x="440" y="108" width="210" height="110" rx="8" class="stage-box-new"/>
+  <text x="452" y="128" class="stage-num">3 . GROUNDING VERIFIER</text>
+  <text x="452" y="150" class="stage-title">Does the draft match the rows?</text>
+  <text x="452" y="168" class="stage-sub">fine-tuned small model</text>
+  <text x="452" y="183" class="stage-sub">trained on 8 failure modes</text>
+  <text x="452" y="198" class="stage-sub">in: question, rows, draft</text>
+  <text x="452" y="212" class="meta-block">score 0.31 (illustrative)</text>
+
+  <line x1="655" y1="163" x2="692" y2="163" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4 -->
+  <rect x="695" y="108" width="205" height="110" rx="8" class="stage-box-gate"/>
+  <text x="707" y="128" class="stage-num">4 . CALIBRATED THRESHOLD</text>
+  <text x="707" y="150" class="stage-title">Per use case</text>
+  <text x="707" y="168" class="stage-sub">rates / regs   0.82</text>
+  <text x="707" y="183" class="stage-sub">general        0.65</text>
+  <text x="707" y="198" class="stage-sub">0.31 &lt; 0.65</text>
+  <text x="707" y="212" class="meta-block">decision: ABSTAIN</text>
+
+  <!-- down arrows -->
+  <path d="M 797 218 L 797 250 L 560 250 L 560 282" class="arrow-line" marker-end="url(#arrow)"/>
+  <path d="M 797 218 L 797 240 L 860 240 L 860 282" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="808" y="262" class="meta-text">score ok</text>
+
+  <!-- Abstain -->
+  <rect x="330" y="286" width="320" height="86" rx="8" class="stage-box-block"/>
+  <text x="342" y="306" class="stage-num">5 . ABSTAIN</text>
+  <text x="342" y="326" class="stage-title">"I'm not certain. Let me get a banker."</text>
+  <text x="342" y="346" class="stage-sub">wrong answer never reaches the screen</text>
+  <text x="342" y="362" class="meta-block">cost: one human handoff, not one incident</text>
+
+  <!-- Ship -->
+  <rect x="700" y="286" width="200" height="86" rx="8" class="stage-box-ship"/>
+  <text x="712" y="306" class="stage-num">5 . SHIP</text>
+  <text x="712" y="326" class="stage-title">Answer served</text>
+  <text x="712" y="346" class="stage-sub">score at or above threshold</text>
+  <text x="712" y="362" class="meta-strong">no added human time</text>
+
+  <!-- Out of band -->
+  <rect x="20" y="286" width="270" height="86" rx="8" class="stage-box"/>
+  <text x="32" y="306" class="stage-num">OUT OF BAND</text>
+  <text x="32" y="326" class="stage-title">Nightly probes + vendor pin</text>
+  <text x="32" y="346" class="stage-sub">regression run on a pinned snapshot</text>
+  <text x="32" y="362" class="meta-warn">a silent vendor update shows up as a diff</text>
+  <path d="M 150 286 L 150 240 L 305 240 L 305 221" class="dash-line" marker-end="url(#arrow)"/>
+
+  <!-- Trade-off strip -->
+  <rect x="20" y="392" width="880" height="62" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="32" y="412" class="stage-title">The trade-off a PM owns</text>
+  <text x="32" y="430" class="stage-sub">Lower the threshold: more answers served, more wrong ones slip through.</text>
+  <text x="32" y="446" class="stage-sub">Raise it: fewer wrong answers, more banker handoffs. Set it per use case, then watch deflection and incidents together.</text>
+</svg>

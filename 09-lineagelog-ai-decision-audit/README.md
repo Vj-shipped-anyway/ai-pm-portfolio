@@ -539,4 +539,3 @@ The Streamlit prototype here proves the *product mechanic* — that decision-gra
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives this product reads from.
 - [OpenTelemetry](https://opentelemetry.io/) — the substrate that makes composition possible.
 
-<!-- @description 2026-06-15-154944 : LineageLog: AI decision audit trail - every regulated AI decision traced to its inputs, model snapshot, and reviewer -->

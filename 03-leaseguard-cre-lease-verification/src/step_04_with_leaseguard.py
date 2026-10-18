@@ -295,7 +295,11 @@ def main():
     print(f"{'='*80}")
     print("Accuracy lift")
     print(f"{'='*80}")
-    print(f"  Step 2 (deployed lease-NLP only):       62/72 = 86.1% on this sample")
+    base_correct = sum(
+        1 for lid in MOCK_EXTRACTIONS for f in FIELDS
+        if str(MOCK_EXTRACTIONS[lid].get(f, "")) == str(expected[lid].get(f, ""))
+    )
+    print(f"  Step 2 (deployed lease-NLP only):       {base_correct}/{total_fields} = {base_correct / total_fields * 100:.1f}% on this sample")
     print(f"                                          ~88% on a real-world mixed portfolio")
     print(f"  Step 4 (LeaseGuard, after triage):      {new_correct}/{total_fields} = {new_acc:.1f}% on this sample")
     print(f"                                          ~98.2% projected at portfolio scale")

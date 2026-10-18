@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 480" role="img" aria-labelledby="title desc">
+  <title id="title">LeaseGuard: one extracted lease field flowing through second-model re-extraction, rule checks, a router, and paralegal triage before write-back</title>
+  <desc id="desc">Five-stage flow. A lease PDF is OCR'd and extracted by the existing deployed pipeline. LeaseGuard re-extracts each field with a second model, runs rule validators and a side-letter tripwire, then routes each field to auto-clear or to a paralegal triage queue. Only cleared or triaged values are written back to the system of record. A footer strip shows the measured result on the six-lease synthetic eval set.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-new { fill: #ffffff; stroke: #5bc0be; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-warn { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #92400e; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">LeaseGuard - verification flow for one extracted field</text>
+  <text x="20" y="52" class="subheader">Example: lease_04, base_rent_psf. The primary reads the struck value; the second model reads the inserted one.</text>
+
+  <rect x="20" y="70" width="270" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="85" class="badge-text">Existing pipeline untouched. LeaseGuard wraps it.</text>
+
+  <!-- Stage 1 -->
+  <rect x="20" y="108" width="160" height="110" rx="8" class="stage-box"/>
+  <text x="32" y="128" class="stage-num">1 . INGEST</text>
+  <text x="32" y="150" class="stage-title">Lease PDF + OCR</text>
+  <text x="32" y="168" class="stage-sub">Tesseract / Textract</text>
+  <text x="32" y="183" class="stage-sub">12 fields per lease</text>
+  <text x="32" y="206" class="meta-warn">side letters may be missing</text>
+
+  <line x1="185" y1="163" x2="222" y2="163" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 -->
+  <rect x="225" y="108" width="170" height="110" rx="8" class="stage-box"/>
+  <text x="237" y="128" class="stage-num">2 . PRIMARY (EXISTING)</text>
+  <text x="237" y="150" class="stage-title">Sonnet over OCR</text>
+  <text x="237" y="168" class="stage-sub">base_rent_psf = 48.00</text>
+  <text x="237" y="183" class="stage-sub">looks clean</text>
+  <text x="237" y="206" class="meta-warn">no confidence signal</text>
+
+  <line x1="400" y1="163" x2="437" y2="163" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <rect x="440" y="108" width="210" height="110" rx="8" class="stage-box-new"/>
+  <text x="452" y="128" class="stage-num">3 . THREE CHECKS</text>
+  <text x="452" y="150" class="stage-title">Verify every field</text>
+  <text x="452" y="168" class="stage-sub">a. second model re-extracts</text>
+  <text x="452" y="183" class="stage-sub">b. rule validators (type, range)</text>
+  <text x="452" y="198" class="stage-sub">c. side-letter tripwire</text>
+  <text x="452" y="212" class="meta-strong">second model says 42.50</text>
+
+  <line x1="655" y1="163" x2="692" y2="163" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4 -->
+  <rect x="695" y="108" width="205" height="110" rx="8" class="stage-box-gate"/>
+  <text x="707" y="128" class="stage-num">4 . ROUTER</text>
+  <text x="707" y="150" class="stage-title">PASS or flag</text>
+  <text x="707" y="168" class="stage-sub">48.00 != 42.50</text>
+  <text x="707" y="183" class="stage-sub">status: DISAGREEMENT</text>
+  <text x="707" y="198" class="stage-sub">action: triage</text>
+  <text x="707" y="212" class="meta-warn">ranked by $ at risk</text>
+
+  <!-- down to triage -->
+  <path d="M 797 218 L 797 250 L 560 250 L 560 280" class="arrow-line" marker-end="url(#arrow)"/>
+  <!-- down for pass -->
+  <path d="M 797 218 L 797 240 L 860 240 L 860 280" class="arrow-line" marker-end="url(#arrow)"/>
+  <text x="808" y="262" class="meta-text">PASS</text>
+
+  <!-- Stage 5a triage -->
+  <rect x="330" y="284" width="320" height="92" rx="8" class="stage-box-gate"/>
+  <text x="342" y="304" class="stage-num">5 . PARALEGAL TRIAGE</text>
+  <text x="342" y="324" class="stage-title">Source clause highlighted beside both values</text>
+  <text x="342" y="344" class="stage-sub">paralegal picks 42.50 and records why</text>
+  <text x="342" y="360" class="meta-strong">resolution + reviewer written to the audit log</text>
+
+  <!-- Stage 5b auto-clear -->
+  <rect x="700" y="284" width="200" height="92" rx="8" class="stage-box-ship"/>
+  <text x="712" y="304" class="stage-num">5 . AUTO-CLEAR</text>
+  <text x="712" y="324" class="stage-title">Both models agree</text>
+  <text x="712" y="344" class="stage-sub">rules pass, no tripwire</text>
+  <text x="712" y="360" class="meta-strong">no human time spent</text>
+
+  <path d="M 330 330 L 120 330 L 120 392" class="arrow-line" marker-end="url(#arrow)"/>
+  <path d="M 800 376 L 800 392 L 190 392" class="arrow-line"/>
+
+  <!-- Write-back -->
+  <rect x="20" y="395" width="170" height="60" rx="8" class="stage-box"/>
+  <text x="32" y="415" class="stage-title">Write-back</text>
+  <text x="32" y="433" class="stage-sub">Yardi / MRI / Argus</text>
+  <text x="32" y="447" class="meta-strong">only after triage clears</text>
+
+  <!-- Measured strip -->
+  <rect x="230" y="398" width="670" height="64" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="242" y="418" class="stage-title">Measured on the 6-lease synthetic eval set (72 fields)</text>
+  <text x="242" y="436" class="stage-sub">deployed 55/72 = 76.4%  ->  after triage 71/72 = 98.6%</text>
+  <text x="242" y="452" class="stage-sub">16/17 wrong fields routed . 21 routed (5 false) . 1 miss: lease_06 kick-out</text>
+</svg>
