@@ -339,9 +339,9 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | --- | --- |
 | **Direct prompt injection** ([OWASP LLM01](https://genai.owasp.org/llm-top-10/)) | L1 input classifier |
 | **Indirect prompt injection** ([OWASP LLM01](https://genai.owasp.org/llm-top-10/), [MITRE ATLAS AML.T0051](https://atlas.mitre.org/)) | L2 retrieval scanner |
-| **Tool-call abuse** ([OWASP LLM07](https://genai.owasp.org/llm-top-10/) Insecure Plugin Design + [MITRE ATLAS AML.T0048](https://atlas.mitre.org/)) | L3 tool-call gate (OPA) |
-| **Egress / exfil** ([OWASP LLM06](https://genai.owasp.org/llm-top-10/) Sensitive Information Disclosure) | L4 egress filter (DLP) |
-| **Cross-session leakage** ([OWASP LLM06](https://genai.owasp.org/llm-top-10/), insider threat) | L5 SPIFFE-keyed session boundary |
+| **Tool-call abuse** ([OWASP LLM06](https://genai.owasp.org/llm-top-10/) Excessive Agency + [MITRE ATLAS AML.T0053](https://atlas.mitre.org/)) | L3 tool-call gate (OPA) |
+| **Egress / exfil** ([OWASP LLM02](https://genai.owasp.org/llm-top-10/) Sensitive Information Disclosure) | L4 egress filter (DLP) |
+| **Cross-session leakage** ([OWASP LLM02](https://genai.owasp.org/llm-top-10/), insider threat) | L5 SPIFFE-keyed session boundary |
 | **Jailbreak / role-play** ([OWASP LLM01](https://genai.owasp.org/llm-top-10/)) | L1 input classifier (long-tail generalization) |
 | Compromised API token | Short-lived tokens, mTLS service-to-service, IdP-side revocation propagates <=5 min |
 | Insider — analyst pulls all `attack_log` rows | RBAC limits analyst to time-windowed sample queries; bulk export blocked |
@@ -406,7 +406,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | **SOC 2 Type II** | All eight components in scope. Annual external audit. |
 | **PCI-DSS** | In scope when the underlying copilot touches cardholder data. PromptShield itself does not process card data; it scans for cards in egress. PCI scope minimization via `user_id_hash` + KMS pepper. |
 | **GLBA Safeguards Rule** | Customer financial data handled with field-level hashing + access controls + audit trail. Right-to-be-forgotten cascades to lineage records via `user_id_hash` deletion (with legal-hold override). |
-| **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** | LLM01 (Prompt Injection), LLM06 (Sensitive Information Disclosure), LLM07 (Insecure Plugin Design) directly addressed by L1-L5. |
+| **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** | LLM01 (Prompt Injection), LLM02 (Sensitive Information Disclosure), LLM06 (Excessive Agency) directly addressed by L1-L5. |
 | **[MITRE ATLAS](https://atlas.mitre.org/)** | Calibrated against the published attacker-techniques catalog. Quarterly probe runs use ATLAS technique IDs. |
 | **[NIST AI RMF 1.0](https://www.nist.gov/itl/ai-risk-management-framework)** | PromptShield is the implementation surface for the framework's "Map" (threat-model the deployed copilots), "Measure" (catch rate / FP rate metrics), and "Manage" (continuous red-team + classifier retraining) functions. |
 | **[EU AI Act (Regulation 2024/1689)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** | EU instance enforces data residency. The `attack_log` is the record-keeping artifact for high-risk AI systems (internal BFSI copilots qualify under Annex III). |

@@ -563,7 +563,7 @@ The Streamlit prototype here demonstrates the *product mechanic* on synthetic da
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the framework backbone for the threat-model section.
 - [MITRE ATLAS](https://atlas.mitre.org/) — the adversarial threat landscape for AI systems; the attacker-techniques catalog this product is calibrated against.
 - [EU AI Act (Regulation 2024/1689)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — the regulatory existence-proof for the broader portfolio.
-- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture PromptShield maps onto.
+- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture PromptShield maps onto.
 - [Google's Secure AI Framework (SAIF)](https://safety.google/cybersecurity-advancements/saif/) — model controls + agent controls + supply-chain controls.
 - [Meta Llama Guard 3](https://huggingface.co/meta-llama/Llama-Guard-3-8B) and [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) — the open-weight classifiers L1/L2 would use in production.
 - [AWS Bedrock Guardrails](https://aws.amazon.com/bedrock/guardrails/) and [Azure AI Content Safety / Prompt Shields](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/) — the cloud-native counterparts on the other two major clouds.
