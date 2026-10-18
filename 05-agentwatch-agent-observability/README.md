@@ -4,6 +4,8 @@
 
 **▶ Live demo:** *(placeholder — agentwatch-bfsi.streamlit.app)*
 
+**▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html)
+
 **▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the sidecar architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (line-1 owner co-design, MRM committee read, SRE pager-rotation interop, fleet rollout) is what the next role does.
