@@ -1,6 +1,6 @@
 # Sample Data — LineageLog walkthrough
 
-Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic, seeded (`random.seed(20260512)`), and reproducible. No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's regulated-decision substrate actually looks like across loan approval, claims triage, KYC review, and fraud screening.
+Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and shipped as static CSVs (the generator script is not included in this repo). No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's regulated-decision substrate actually looks like across loan approval, claims triage, KYC review, and fraud screening.
 
 The headline decision the walkthrough resolves is `DEC_0150_20260312` — a `loan_pd_v3` denial of customer `CUST_851897` on March 12, 2026. The OCC opens an exam on May 8 asking for the full lineage. Today: 14 days. With LineageLog: 12 minutes.
 
@@ -20,7 +20,7 @@ The decision-grain spine. Every regulated AI decision the bank produced in the 6
 | `outcome` | string | Model's decision — `APPROVE` / `DENY` / `CONDITIONAL` for credit; `AUTO_PAY` / `ADJUSTER_REVIEW` / `SIU_FLAG` for claims; etc. |
 | `decision_value` | float | The dollar amount or risk score the decision was about. |
 
-200 rows. Reproducible from `step_04_with_lineagelog.py` if regenerated with the same seed.
+200 rows. `step_04_with_lineagelog.py` reads this file; it does not regenerate it.
 
 ## `models.csv` — 4 deployed models
 
@@ -75,7 +75,7 @@ This is the decision the OCC asks about. Walk the four CSVs and you get the full
 | --- | --- |
 | `decisions.csv` | `loan_pd_v3` denied `CUST_851897` a `$65,673.12` loan on `2026-03-12T18:41:32Z`. |
 | `models.csv` | The model was `internal-xgb-3.2.1`, trained `2025-08-12`, owned by `line1.credit-risk`. |
-| `retrieval_sets.csv` | The model was shown `policy_credit_v2.3`, `rate_card_2026q1`, the disclosure pack, and the underwriting guide — all retrieved at decision time. |
-| `outcomes.csv` | Downstream outcome filed within 75 days. |
+| `retrieval_sets.csv` | The model was shown `policy_credit_v2_3`, `rate_card_2026q1`, the disclosure pack, and the underwriting guide — all retrieved at decision time. |
+| `outcomes.csv` | `none_observed`, dated `2026-05-17`: no downstream outcome recorded for this decision. |
 
-In raw-log form: 6 vendors × 4 cloud accounts. In LineageLog: one record, indexed by `(customer_id, decision_id, timestamp)`, returned in under a second.
+In raw-log form: 6 vendors across 4 cloud accounts. In LineageLog: one record, indexed by `(customer_id, decision_id, timestamp)`, returned in under a second.

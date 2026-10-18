@@ -48,23 +48,23 @@
 ## 3. RICE-prioritized backlog
 
 > RICE = (Reach × Impact × Confidence) ÷ Effort.
-> Status: "Sequenced for v0.x" = committed to a release. "Queued" = will be sequenced after v0.5.
+> Status: "Sequenced for v0.x" = committed to a release. "Queued" = will be sequenced after v0.6.
 
 | # | Item | Reach | Impact | Confidence | Effort | RICE | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 01 | **Decision-grain composer (v0.1)** — bind the four log sources at `(decision_id, customer_id_hash, timestamp)`; write immutable Postgres row. | 100M | 3 | 0.9 | 13 | 20.8 | Sequenced for v0.1 |
 | 02 | **Six-deficiency schema** — Postgres CREATE TABLE for `decision_lineage`; field-level encryption for `customer_id_hash`. | 100M | 3 | 0.9 | 5 | 54.0 | Sequenced for v0.1 |
-| 03 | **Exam-pack export (v0.1)** — auto-assemble PDF + JSON per `decision_id`; WORM upload to GCS Object Lock. | 100M | 3 | 0.85 | 8 | 31.9 | Sequenced for v0.2 |
+| 03 | **Exam-pack export (v0.2)** — auto-assemble PDF + JSON per `decision_id`; WORM upload to GCS Object Lock. | 100M | 3 | 0.85 | 8 | 31.9 | Sequenced for v0.2 |
 | 04 | **Prompt-template registry ingest** — every prompt deploy writes a registry row; composer joins by `(model_id, effective_at)`. | 100M | 2 | 0.8 | 8 | 20.0 | Sequenced for v0.2 |
 | 05 | **Retrieval-set capture** — RAG pipeline writes `(decision_id, doc_id, doc_version, retrieved_at)` to a sidecar topic. | 80M | 3 | 0.75 | 13 | 13.8 | Sequenced for v0.3 |
 | 06 | **Feature-at-decision-time** — temporal feature-store API; composer calls it per decision; cached for 24h. | 100M | 3 | 0.7 | 21 | 10.0 | Sequenced for v0.3 |
 | 07 | **Reviewer attribution** — Agent Identity Auth Manager integration; distinguish `human_user_delegated` from `agent_autonomous`. | 100M | 3 | 0.8 | 8 | 30.0 | Sequenced for v0.4 |
 | 08 | **Outcome backlink ingester** — daily job that joins downstream-system outcomes back to `decision_id` via customer-hash + time window. | 100M | 3 | 0.65 | 13 | 15.0 | Sequenced for v0.4 |
 | 09 | **Vendor-pin verifier** — interlock with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5; response-header pin extraction; daily diff. | 50M | 3 | 0.7 | 8 | 13.1 | Sequenced for v0.5 |
-| 10 | **Streamlit prototype** — single-decision drill-down, six-deficiency lineage card, exam-pack download. | 1k | 2 | 1.0 | 5 | 0.4 | Sequenced for v0.1 (this repo) |
+| 10 | **Streamlit prototype** — single-decision drill-down, six-deficiency lineage card, exam-pack download. | 1k | 2 | 1.0 | 5 | 0.0004 | Sequenced for v0.1 (this repo) |
 | 11 | **MRM workbench integration** — push lineage record ID to Archer / ServiceNow GRC / MetricStream; bidirectional sync on attestation. | 100M | 2 | 0.6 | 13 | 9.2 | Sequenced for v0.6 |
 | 12 | **OPA policy gates** — RBAC matrix scoped per region; OPA evaluates every exam-pack export. | 100M | 2 | 0.8 | 8 | 20.0 | Sequenced for v0.5 |
-| 13 | **GDPR right-to-erasure cascade** — customer_id_hash deletion cascades to lineage records (with legal-hold override). | 30M | 2 | 0.7 | 8 | 5.2 | Queued (post v0.6) |
+| 13 | **GDPR right-to-erasure cascade** — customer_id_hash deletion cascades to lineage records (with legal-hold override). | 30M | 2 | 0.7 | 8 | 5.3 | Queued (post v0.6) |
 | 14 | **Multi-region EU + India instances** — separate KMS key rings, no cross-region replication, RBI + GDPR alignment. | 60M | 2 | 0.6 | 21 | 3.4 | Queued (post v0.6) |
 
 ---
@@ -75,7 +75,7 @@
 - **OCC exam cycles** are shifting toward sample-based decision lineage audits. The published shape of recent supervisory letters is increasingly granular: "show us this specific decision," not "show us your model risk framework."
 - **NIST AI RMF 1.0** is the federal-government reference framework. Federal counterparty work — Treasury, FHFA, Fannie/Freddie counterparties — is increasingly RMF-aligned.
 - **Vendor model silent updates** (Anthropic Feb 24, 2026 reference incident) make the model-snapshot-pin question harder every quarter.
-- **The substrate is finally there.** Cloud Logging + Cloud Audit Logs + Agent Identity Auth Manager + OpenTelemetry on ADK is published, productized, and adopted at every Tier-1 bank. The composition layer is the missing piece.
+- **The substrate is finally there.** Cloud Logging + Cloud Audit Logs + Agent Identity Auth Manager + OpenTelemetry on ADK is published, productized, and adopted at most Tier-1 banks. The composition layer is the missing piece.
 
 ## 5. Goals (12-month horizon)
 
@@ -138,7 +138,7 @@ The product is a composition layer. Each deficiency maps to a specific source si
 
 **Reference architecture.** Composition runs on Cloud Run (stateless) backed by a Pub/Sub fan-in across the four log surfaces. Postgres (Cloud SQL with high-availability + read replicas) holds the immutable lineage table; ClickHouse holds the high-cardinality observability stream; GCS Object Lock + Cross-region replication holds the WORM archive. The exam-pack PDF is generated on-demand from the immutable Postgres row + retrieval set + cached vendor-snapshot diff.
 
-**Throughput envelope.** ~50-200M regulated AI decisions/yr at Tier-1 retail bank = ~1.5-6.5 decisions/second average, ~16-65 decisions/second peak. The composer's 5-minute compose SLO is far from latency-critical; the constraint is durability, not throughput.
+**Throughput envelope.** ~50-200M regulated AI decisions/yr at Tier-1 retail bank = ~1.5-6.5 decisions/second average, ~16-65 decisions/second peak (🟡 assumes a 10x peak-to-average ratio). The composer's 5-minute compose SLO is far from latency-critical; the constraint is durability, not throughput.
 
 **Failure modes.**
 - *Source-log delay.* Cloud Logging is ~2-5s lag; OTel traces are ~5-15s; Agent Identity Logs are <1s. The composer waits up to 5 minutes for all four; if any source is missing at T+5min, it composes what it has and writes a `lineage_partial: true` flag. The partial record is the artifact; backfill upgrades to complete in the next composer pass.

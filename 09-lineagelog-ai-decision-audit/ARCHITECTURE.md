@@ -118,7 +118,7 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock):
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | `decision_lineage` immutable table, attestation history, audit log, legal-hold flags. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. Append-only via insert-only role + trigger guard. |
 | **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — composer latency, source-tail lag, composition-completeness time series. | 10-50x cheaper than Postgres for time-series at this volume. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse for shared drift-signal querying. |
-| **Snowflake / Databricks** (read-only) | Inference logs, retrieval-set captures, feature-store temporal lookups. | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
+| **Snowflake / Databricks** (read-only) | Inference logs, retrieval-set captures, feature-store temporal lookups. | Already exists at most Tier-1 BFSI shops. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (composer), rate-limit counters. | TTL-based eviction. Multi-AZ for high availability. |
 | **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of lineage records** + exam-pack PDFs + JSON + cross-region replication. | Object Lock = Write-Once-Read-Many for the SR 11-7 / EU AI Act seven-year retention. |
 | **Pub/Sub / Kinesis / Event Hubs** | Source-tail topics, one per log surface. Composer fan-in subscription. | Native to the cloud; ordered delivery within a partition; replay-able. |
@@ -202,7 +202,7 @@ CREATE INDEX idx_decision_lineage_outcome
 CREATE INDEX idx_decision_lineage_legal_hold
     ON decision_lineage (legal_hold) WHERE legal_hold = TRUE;
 
--- Immutability guard. UPDATE allowed only on legal_hold fields.
+-- Immutability guard. UPDATE allowed only on outcome-backlink and legal_hold fields.
 CREATE OR REPLACE FUNCTION decision_lineage_immutability_guard()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -364,7 +364,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 - **Object stores.** Object Lock + versioning + cross-region replication for lineage WORM archive (within the same regulatory region only — never US ↔ EU).
 - **DR drill cadence.** Quarterly. Full failover to US-West, validate RTO 4h / RPO 5min for the `decision_lineage` table, fail back. Runbook in `docs/runbooks/dr-failover.md`.
 
-### Runbooks (one paragraph each in the repo)
+### Runbooks (planned: one paragraph each in the production repo, not in this portfolio repo)
 
 - `dr-failover.md` — full region failover
 - `composer-stuck.md` — when the composer's fan-in stalls
@@ -449,18 +449,18 @@ That last list is the discipline. Every internal-build I have watched die has di
         "agent_identity": "loan_pd_v3-sa@bank.iam"
     },
     "outcome": {
-        "outcome_type": "repaid_on_time",
-        "outcome_value": "closed_clean",
-        "outcome_date": "2026-04-12",
-        "observed": true
+        "outcome_type": "none_observed",
+        "outcome_value": "",
+        "outcome_date": "2026-05-17",
+        "observed": false
     },
 
     "composed_at": "2026-03-12T18:42:01Z",
-    "composition_seconds": 0.31,
+    "composition_seconds": 0.0098,  # illustrative; varies per run
     "lineage_complete": true,
     "row_hash": "sha256:c7d3...",
     "retention_until": "2033-03-12T18:41:32Z"
 }
 ```
 
-OpenAPI spec lives at `apps/api/openapi.yaml` and is the source of truth for both the CLI and the UI clients.
+In the production repo, the OpenAPI spec would live at `apps/api/openapi.yaml` (not included in this portfolio repo) and be the source of truth for both the CLI and the UI clients.

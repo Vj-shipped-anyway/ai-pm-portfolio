@@ -121,7 +121,7 @@
 <div class="container">
   <header class="hero">
     <h1>LineageLog — AI decision audit trail in 12 minutes, not 14 days</h1>
-    <p class="tagline">Pick one of six regulated decisions. See what each maturity level returns to the OCC examiner: paralegal walk (14 days), basic Cloud Logging (request/response only), LineageLog composition (six-deficiency lineage).</p>
+    <p class="tagline">Pick one of six regulated decisions (the first, DEC_0150_20260312, is a real row in data/decisions.csv; the other five are illustrative scenarios, not rows from the 200-decision corpus). See what each maturity level returns to the OCC examiner: paralegal walk (14 days), basic Cloud Logging (request/response only), LineageLog composition (six-deficiency lineage).</p>
     <p class="author">Project 09 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
       <span class="badge">200 synthetic decisions</span>
@@ -171,7 +171,7 @@
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (legacy paralegal time − LineageLog time) × regulated AI decisions per year</p>
-    <p style="margin: 8px 0 0;">Per-decision lift: <b>~14 days → ~12 minutes</b> for full lineage (<b>99.94%</b> reduction). Annualized at Tier-1 retail bank scale (50-200M regulated AI decisions/yr): <b>continuous exam-readiness</b> instead of the annual fire drill. Modeled exam-pack assembly time: <b>3 weeks → 3 seconds</b> on the prototype. Modeled exam-readiness coverage: <b>22% → 100%</b>. Modeled time-to-decision-evidence: <b>14 days → 12 minutes</b>.</p>
+    <p style="margin: 8px 0 0;">Per-decision lift: <b>~14 days → ~12 minutes</b> for full lineage (<b>99.94%</b> reduction). Annualized at Tier-1 retail bank scale (50-200M regulated AI decisions/yr): <b>continuous exam-readiness</b> instead of the annual fire drill. Modeled exam-pack assembly time: <b>3 weeks → 3 seconds</b>. Modeled exam-readiness coverage: <b>22% → 100%</b>. Designed (not tested) time-to-decision-evidence: <b>14 days → 12 minutes</b>.</p>
   </section>
 
   <footer class="footer-links">
@@ -200,7 +200,7 @@ const DECISIONS = [
               features: "fico=692 dti=0.20 ltv=0.67 (at Mar 12 18:41:32Z)",
               reviewer: "agent_autonomous — loan_pd_v3-sa@bank.iam",
               outcome: "none observed within 75d window",
-              examPackSeconds: 0.31 }
+              }
   },
   {
     id: "DEC_0073_20260318", name: "Claims SIU flag — $32,400 claim", model: "claims_triage_v2",
@@ -215,7 +215,7 @@ const DECISIONS = [
               features: "claim_amount=$32,400 policy_age=453d prior_claims=2",
               reviewer: "human_user_delegated — u.adams.3@bank.com (delegation_token dlg_3174)",
               outcome: "siu_fraud_confirmed on 2026-04-08 → fraud prevented",
-              examPackSeconds: 0.28 }
+              }
   },
   {
     id: "DEC_0042_20260322", name: "KYC EDD required — risk score 0.74", model: "kyc_review_v4",
@@ -230,7 +230,7 @@ const DECISIONS = [
               features: "risk_score=0.74 country_tier=3 pep_match=0.12",
               reviewer: "human_user_delegated — u.adams.0@bank.com (delegation_token dlg_6603)",
               outcome: "sar_filed_later on 2026-04-12 → loss prevented",
-              examPackSeconds: 0.34 }
+              }
   },
   {
     id: "DEC_0091_20260401", name: "Fraud block — $1,847 stepped up", model: "fraud_screen_v6",
@@ -245,7 +245,7 @@ const DECISIONS = [
               features: "txn_amount=$1,847 velocity_24h=14 merchant_tier=4",
               reviewer: "agent_autonomous — fraud_screen_v6-sa@bank.iam",
               outcome: "legitimate_blocked → case_filed (customer complaint resolved with reversal)",
-              examPackSeconds: 0.21 }
+              }
   },
   {
     id: "DEC_0118_20260415", name: "Loan conditional approval — $14,200", model: "loan_pd_v3",
@@ -260,7 +260,7 @@ const DECISIONS = [
               features: "fico=628 dti=0.32 ltv=0.78",
               reviewer: "agent_autonomous — loan_pd_v3-sa@bank.iam",
               outcome: "repaid_on_time → closed clean",
-              examPackSeconds: 0.27 }
+              }
   },
   {
     id: "DEC_0007_20260308", name: "Claims auto-pay — $4,100", model: "claims_triage_v2",
@@ -275,7 +275,7 @@ const DECISIONS = [
               features: "claim_amount=$4,100 policy_age=287d prior_claims=0",
               reviewer: "agent_autonomous — claims_triage_v2-sa@bank.iam",
               outcome: "paid_no_dispute → closed clean",
-              examPackSeconds: 0.25 }
+              }
   }
 ];
 
@@ -303,7 +303,7 @@ function render(idx) {
   beforeHtml += '<div class="field-row"><span class="field-label">Dwell time</span><span class="field-value">' + d.before.dwellDays + ' days</span></div>';
   beforeHtml += '<div class="field-row"><span class="field-label">Sources walked</span><span class="field-value">' + d.before.sources + ' tools / vendors</span></div>';
   beforeHtml += '<div class="field-row"><span class="field-label">Fields unrecoverable</span><span class="field-value">' + d.before.fieldsLost + ' of 6</span></div>';
-  beforeHtml += '<div class="pill pill-bad">14 days · 4 fields lost · finding-prone</div>';
+  beforeHtml += '<div class="pill pill-bad">' + d.before.dwellDays + ' days · ' + d.before.fieldsLost + ' fields lost · finding-prone</div>';
   document.getElementById('card-before').innerHTML = beforeHtml;
 
   // Card 2 — SOTA
@@ -320,8 +320,8 @@ function render(idx) {
   shieldHtml += '<div class="field-row"><span class="field-label">Features @ decision-time</span><span class="field-value">' + escapeHtml(d.shield.features) + '</span></div>';
   shieldHtml += '<div class="field-row"><span class="field-label">Reviewer attribution</span><span class="field-value">' + escapeHtml(d.shield.reviewer) + '</span></div>';
   shieldHtml += '<div class="field-row"><span class="field-label">Outcome backlink</span><span class="field-value">' + escapeHtml(d.shield.outcome) + '</span></div>';
-  shieldHtml += '<div class="meta">Exam pack auto-assembled in ' + d.shield.examPackSeconds.toFixed(2) + 's on the prototype. Composition completed. Six deficiencies closed.</div>';
-  shieldHtml += '<div class="pill pill-ok">PASS — exam-ready in 12 minutes</div>';
+  shieldHtml += '<div class="meta">Composition completed. Six deficiencies closed. The measured composition time is printed by step_04 (it varies by run).</div>';
+  shieldHtml += '<div class="pill pill-ok">PASS — 12-minute target (designed, not tested)</div>';
   document.getElementById('card-shield').innerHTML = shieldHtml;
 }
 

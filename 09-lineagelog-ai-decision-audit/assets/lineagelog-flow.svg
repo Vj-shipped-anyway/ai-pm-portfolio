@@ -27,7 +27,7 @@
   </defs>
 
   <text x="20" y="32" class="header">LineageLog — composition flow for one regulated AI decision</text>
-  <text x="20" y="52" class="subheader">DEC_0150_20260312 loan denial on Mar 12 · OCC exam request May 8 · exam-pack delivered in 12 minutes.</text>
+  <text x="20" y="52" class="subheader">DEC_0150_20260312 loan denial on Mar 12 · OCC exam request May 8 · exam-pack target: 12 minutes (designed, not tested).</text>
 
   <!-- Trigger badge -->
   <rect x="20" y="78" width="260" height="22" rx="4" class="badge-bg"/>
@@ -86,7 +86,7 @@
   <text x="277" y="320" class="stage-num">5 · EXAM-PACK EXPORT</text>
   <text x="277" y="340" class="stage-title">Auto-assembled, regulator-friendly artifact</text>
   <text x="277" y="358" class="stage-sub">six-deficiency lineage · WORM-stored · MRM-routed</text>
-  <text x="277" y="372" class="timer-fast">delivered in 12 minutes (legacy: 14 days)</text>
+  <text x="277" y="372" class="timer-fast">designed: 12 minutes (legacy, modeled: 14 days)</text>
 
   <!-- Comparison strip -->
   <rect x="630" y="300" width="295" height="80" rx="8" fill="#f6f5f2" stroke="none"/>

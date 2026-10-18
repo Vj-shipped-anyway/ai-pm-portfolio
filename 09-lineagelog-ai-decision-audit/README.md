@@ -1,6 +1,6 @@
 # 🔍 LineageLog — AI Decision Audit Trail in 12 minutes, not 14 days
 
-**A portfolio prototype for a decision-grain composition layer that turns scattered AI-decision logs into an exam-ready immutable record — modeled against [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) record-keeping requirements and the [OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) / [Federal Reserve](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm) supervisory expectation for "explain this AI decision."**
+**A portfolio prototype for a decision-grain composition layer that turns scattered AI-decision logs into an exam-ready immutable record — modeled against [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) record-keeping requirements and the [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the Federal Reserve, OCC and FDIC model risk management guidance that replaced SR 11-7 in April 2026) supervisory expectation for "explain this AI decision."**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/09-lineagelog-ai-decision-audit/demo.html)
 
@@ -8,11 +8,11 @@
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
-[![Modeled corpus: 200 decisions](https://img.shields.io/badge/modeled--corpus-200%20synthetic%20decisions-blue)](#)
-[![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%2Fof%206-brightgreen)](#)
-[![Exam pack: 12 min vs 14 d](https://img.shields.io/badge/exam--pack-12min%20vs%2014d-success)](#)
-[![Composition latency](https://img.shields.io/badge/composition%20latency-under%2050ms-orange)](#)
-[![EU AI Act Article 12](https://img.shields.io/badge/EU%20AI%20Act-Article%2012%20aligned-lightgrey)](#)
+![Modeled corpus: 200 decisions](https://img.shields.io/badge/modeled--corpus-200%20synthetic%20decisions-blue)
+![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%20of%206-brightgreen)
+![Exam pack: 12 min vs 14 d](https://img.shields.io/badge/exam--pack-12min%20vs%2014d-success)
+![Composition latency](https://img.shields.io/badge/composition%20latency-milliseconds%20per%20decision-orange)
+![EU AI Act Article 12](https://img.shields.io/badge/EU%20AI%20Act-Article%2012%20aligned-lightgrey)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
 
@@ -25,7 +25,7 @@
 ## 🔥 Demo in 30 seconds
 
 Open the static, no-Python demo: [`demo.html`](./demo.html).
-Pick `DEC_0150_20260312` (the loan denial on March 12). Watch the OCC exam request resolve to a complete six-deficiency lineage record auto-assembled in 0.31s on the prototype.
+Pick `DEC_0150_20260312` (the loan denial on March 12). Watch the OCC exam request resolve to a complete six-deficiency lineage record auto-assembled in well under a second on the prototype (step_04 prints the measured time).
 
 To run the four-step walkthrough on your laptop:
 
@@ -58,7 +58,7 @@ The audit-logging space has incumbents at every layer of the stack (Cloud Loggin
 | `human_user_delegated` vs `agent_autonomous` distinction | ❌ | ❌ | ❌ | ✅ |
 | Outcome backlink to charge-off / complaint / fraud loss | ❌ | ❌ | ❌ | ✅ |
 | Immutable WORM record + exam-pack auto-export | ❌ | ❌ | ❌ | ✅ |
-| 🟡 Time-to-decision-evidence on a Tier-1-shaped fleet (modeled) | 14 days | 9 days | 8 days | **12 minutes** |
+| 🔴 Time-to-decision-evidence on a Tier-1-shaped fleet (hypothetical: 14 days is the step_01 baseline assumption; 9 days, 8 days and 12 minutes are design estimates, not measured) | 14 days | 9 days | 8 days | **12 minutes** |
 | 🔴 [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) record-keeping ready (designed) | ❌ | ❌ | ❌ | ✅ |
 
 **Position:** *LineageLog does not replace your logging vendors. It sits on top of them and does the composition the regulator actually asks for.* This matters because a CISO can deploy this without ripping out Splunk, Datadog, Cloud Logging, or Langfuse.
@@ -67,9 +67,9 @@ The audit-logging space has incumbents at every layer of the stack (Cloud Loggin
 
 ## The honest version (why this exists)
 
-The failure mode this product is designed against — an OCC examiner asking "explain how the AI denied this loan to this specific customer on this date" and the bank's compliance team spending 14 days walking six log surfaces by hand — is the shape of what published [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) and SR 11-7 ongoing-monitoring expectations are increasingly catching at Tier-1 BFSI shops. It is the kind of failure I track in industry research and the kind of product I want to own as a Sr / Principal PM.
+The failure mode this product is designed against — an OCC examiner asking "explain how the AI denied this loan to this specific customer on this date" and the bank's compliance team spending 14 days (🟡 modeled: step_01 assumes a 14-day end-to-end baseline from industry estimates it does not cite; its per-source hours sum to 100, about 12.5 working days) walking six log surfaces by hand — is the shape of what published [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) and SR 11-7 ongoing-monitoring expectations are increasingly catching at Tier-1 BFSI shops. It is the kind of failure I track in industry research and the kind of product I want to own as a Sr / Principal PM.
 
-I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk through their own Head of Compliance with — to show how I'd reason about the problem, not to claim a deployment I haven't done.
+I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk their own Head of Compliance through — to show how I'd reason about the problem, not to claim a deployment I haven't done.
 
 If you have lived through a regulator's "show us this decision" request and felt the same itch, fork this. The taxonomy, the architecture, and the backlog are the parts you're welcome to lift; the production validation is what the seat I'm pursuing actually delivers.
 
@@ -94,14 +94,14 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 
 ## Executive summary (90 seconds)
 
-**Problem.** A Tier-1 US retail bank receives an OCC exam letter on May 8 asking: "Show us the full AI decision lineage for `CUST_851897` on March 12 — decision `DEC_0150_20260312`, a $65,673 loan denial." Today the bank assembles a 6-person paralegal team for 14 days, walking Cloud Logging, Cloud Audit Logs, Agent Identity Logs, OpenTelemetry traces, the model registry side-channel, and the data warehouse by hand. 🟡 Modeled exposure: an MRA (Matter Requiring Attention) becomes a consent order; the consent order rewrites the next year's compliance budget. This is the framing this prototype is designed against — calibrated against published [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj), [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), and the public shape of recent OCC / FRB supervisory letters on AI decision lineage.
+**Problem.** A Tier-1 US retail bank receives an OCC exam letter on May 8 asking: "Show us the full AI decision lineage for `CUST_851897` on March 12 — decision `DEC_0150_20260312`, a $65,673 loan denial." Today the bank assembles a paralegal team for 14 days (🟡 modeled; see Step 1), walking Cloud Logging, Cloud Audit Logs, Agent Identity Logs, OpenTelemetry traces, the model registry side-channel, and the data warehouse by hand. 🔴 Hypothetical exposure: an MRA (Matter Requiring Attention) becomes a consent order; the consent order rewrites the next year's compliance budget. This is the framing this prototype is designed against — calibrated against published [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj), [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), and the public shape of recent OCC / FRB supervisory letters on AI decision lineage.
 
 **Product.** LineageLog — an immutable decision-grain composition layer that binds four log sources at `(decision_id, customer_id_hash, timestamp)`. Six-deficiency taxonomy: **prompt versioning** + **retrieval-set capture** + **model-snapshot pin** + **feature-at-decision-time** + **reviewer attribution** + **outcome backlink**. Auto-assembled exam-pack export in sub-second on the prototype.
 
 **Modeled performance (200-decision synthetic corpus, four-model fleet).**
 
-- 🟢 **6 of 6 deficiencies closed** on every decision in the shipped corpus.
-- 🟢 **Composition latency: under 50ms per decision** measured on the prototype (`step_04_with_lineagelog.py` reports avg 0.3ms / decision on a 200-decision fleet sweep).
+- 🟢 **6 of 6 deficiencies closed** on the headline decision (`step_04` prints it), with all 200 decisions composed; 29 of the 200 outcome rows are `none_observed` (counted from `outcomes.csv`).
+- 🟢 **Composition latency: milliseconds per decision** measured on the prototype (`step_04_with_lineagelog.py` prints the average per decision over the 200-decision fleet sweep; the figure varies from run to run).
 - 🟡 **Audit-pack assembly time: 3 weeks → 3 seconds** (modeled — assumes the synthetic 200-decision corpus and a Tier-1-style four-model fleet).
 - 🟡 **Exam-readiness coverage: 22% → 100%** (modeled — assumes published BFSI baseline for sample-driven readiness vs. continuous lineage composition).
 - 🔴 **Time-to-decision-evidence: 14 days → 12 minutes** (designed against published OCC exam patterns; not yet tested in a real exam).
@@ -126,7 +126,7 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 9. **PM artifacts** — RICE backlog, 1-page PRD, stakeholder map
 
 > Non-technical reader: skip the code blocks. The plain-English explanation and the metric callouts tell the story.
-> Technical reader: every code block runs. `cd src && python step_NN_*.py` and you'll see the same output.
+> Technical reader: every code block runs. `cd src && python step_01_paralegal_audit.py` (then steps 02 to 04) and you'll see the same output, apart from timings.
 
 Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
@@ -134,16 +134,16 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case — OCC exam walkthrough
 
-A modeled Tier-1 US retail bank ($50B-asset). Four production AI models across credit, claims, KYC, and fraud. [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) is in effect for the bank's EU operating arm; [SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) governs the US side. The published shape of recent OCC exams is increasingly granular — examiners pick a specific decision and ask "explain it."
+A modeled Tier-1 US retail bank ($50B-asset). Four production AI models across credit, claims, KYC, and fraud. [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) is in effect for the bank's EU operating arm; [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) governs the US side. The published shape of recent OCC exams is increasingly granular — examiners pick a specific decision and ask "explain it."
 
 **The scenario:**
 
 - **March 12, 2026.** The bank's `loan_pd_v3` model denies a $65,673 personal loan to customer `CUST_851897`. Decision ID: `DEC_0150_20260312`. The decision is recorded in Cloud Logging, the OpenTelemetry trace TTLs out 14 days later, the customer profile is updated in April after a salary change, and life moves on.
 - **May 8, 2026.** The OCC opens an exam. The examiner picks `DEC_0150_20260312` from a stratified sample and asks: *show us the complete decision lineage — which prompt, which retrieval set, which model snapshot, which features at decision time, who or what authorized the action, and what happened downstream.*
 
-**Today:** 14 days, paralegal-led, six log surfaces, four of six lineage fields ultimately unrecoverable. Bank produces a narrative; examiner writes an MRA.
+**Today:** 14 days (🟡 modeled), paralegal-led, six log surfaces, four of six lineage fields ultimately unrecoverable. Bank produces a narrative; examiner writes an MRA.
 
-**With LineageLog:** 12 minutes, self-serve, complete six-deficiency lineage record returned by `GET /v1/lineage/DEC_0150_20260312`. Exam pack PDF auto-rendered. Examiner closes the question and moves on.
+**With LineageLog:** 12 minutes (🔴 designed, not tested), self-serve, complete six-deficiency lineage record returned by `GET /v1/lineage/DEC_0150_20260312`. Exam pack PDF auto-rendered. Examiner closes the question and moves on.
 
 The fleet (synthetic, but modeled on what a real $50B retail bank typically runs):
 
@@ -165,14 +165,14 @@ Four CSVs in [`data/`](./data/). Schema documented in [`data/README.md`](https:/
 | [`data/retrieval_sets.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/09-lineagelog-ai-decision-audit/data/retrieval_sets.csv) | 599 | Which exact documents each decision was shown. Closes deficiency #2. |
 | [`data/outcomes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/09-lineagelog-ai-decision-audit/data/outcomes.csv) | 200 | The downstream-outcome backlink. Closes deficiency #6. |
 
-**Preview** ([`decisions.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/09-lineagelog-ai-decision-audit/data/decisions.csv) — the headline decision and three neighbors):
+**Preview** ([`decisions.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/09-lineagelog-ai-decision-audit/data/decisions.csv) — the headline decision and three other rows):
 
 | decision_id | customer_id | model_id | decision_type | timestamp | outcome | decision_value |
 | --- | --- | --- | --- | --- | --- | --- |
 | **DEC_0150_20260312** | **CUST_851897** | **loan_pd_v3** | **loan_approval** | **2026-03-12T18:41:32Z** | **DENY** | **65673.12** |
 | DEC_0153_20260312 | CUST_741525 | loan_pd_v3 | loan_approval | 2026-03-12T18:06:32Z | APPROVE | 61902.96 |
-| DEC_0042_20260322 | CUST_xxx | kyc_review_v4 | kyc_review | 2026-03-22T... | EDD_REQUIRED | 0.74 |
-| DEC_0091_20260401 | CUST_xxx | fraud_screen_v6 | fraud_screen | 2026-04-01T... | BLOCK | 1847.00 |
+| DEC_0042_20260405 | CUST_338753 | fraud_screen_v6 | fraud_screen | 2026-04-05T15:08:40Z | STEP_UP_AUTH | 8917.06 |
+| DEC_0091_20260422 | CUST_223866 | kyc_review_v4 | kyc_review | 2026-04-22T11:23:09Z | EDD_REQUIRED | 0.585 |
 
 ---
 
@@ -193,7 +193,7 @@ python src/step_01_paralegal_audit.py
 5. **Model registry side-channel** (ML Platform) — model snapshot pin, deployment metadata.
 6. **Feature store / data warehouse** (Data Platform) — current customer profile. **Feature-at-decision-time is gone — the profile has been updated 4 times since March 12.**
 
-**Output:** total paralegal dwell time ~100 hours; 0 of 6 lineage fields **fully** recoverable; 2 partially recoverable; 4 unrecoverable. The bank produces a NARRATIVE for the OCC, not a record. Modeled paralegal cost: ~$9,500/decision at $95/hr loaded. Across the OCC's stratified sample of ~40 decisions per exam, this is a 4-week engagement.
+**Output:** total paralegal dwell time ~100 hours; 0 of 6 lineage fields **fully** recoverable; 2 partially recoverable; 4 unrecoverable. The bank produces a NARRATIVE for the OCC, not a record. Modeled paralegal cost: ~$9,500/decision at $95/hr loaded. Across the OCC's stratified sample of ~40 decisions per exam, the same rate is 4,000 hours (🔴 hypothetical: no step script computes the sample size or an engagement length).
 
 This is the structural blindness the rest of the walkthrough fixes.
 
@@ -240,7 +240,7 @@ Cloud Logging is the foundation. It is not the lineage product.
 
 ## 🔬 Step 3 — Where this still breaks: six named deficiencies
 
-| # | Deficiency | The OCC's exam-question | What raw logs return today |
+| # | Deficiency | The OCC's exam question | What raw logs return today |
 | --- | --- | --- | --- |
 | 1 | **No prompt versioning** | Which exact system instruction was used? Was it version A (Feb 8) or version B (Mar 5)? | Cloud Logging stores a SHA-256 of the request body. The template is loaded server-side from a file; neither the file path nor the template version is bound to the request. |
 | 2 | **No retrieval-set capture** | Which documents was the model shown? Was the disclosure pack the version with the corrected APR table, or the pre-correction draft? | Vector store retains the documents and a retrieval trace ID. No decision_id-to-doc_id join key in either system. 7% of cases hit ambiguity in the manual reverse-search. |
@@ -253,7 +253,7 @@ Cloud Logging is the foundation. It is not the lineage product.
 python src/step_03_deficiencies_exposed.py
 ```
 
-The fragments exist. The composition does not. Step 4 closes all six.
+The fragments exist. The composition does not. Step 4 closes all six. 🔴 The 7%, 11% and 18% rates and the 6-12 hour rebuild time in the table are illustrative assumptions written into `step_03`, not measured.
 
 ---
 
@@ -265,7 +265,7 @@ Same data, same decision. Composition added.
 python src/step_04_with_lineagelog.py
 ```
 
-**Composed lineage for `DEC_0150_20260312`** (from the actual prototype run):
+**Composed lineage for `DEC_0150_20260312`** (abridged from the prototype's exam-pack output; timing varies by run):
 
 ```
 LINEAGELOG EXAM PACK — auto-assembled for regulator request
@@ -280,13 +280,13 @@ Six-deficiency lineage
 ----------------------------------------------------------------------------
   Prompt versioning:            template_loan_v3.2.2 (effective 2026-03-05)
   Retrieval-set capture:        4 docs: policy_credit_v2_3@v2.3,
-                                disclosure_truth_in_lending@v4.1,
                                 rate_card_2026q1@v1.0,
+                                disclosure_truth_in_lending@v4.1,
                                 internal_underwriting_guide@v8.7
   Model-snapshot pin:           internal / internal-xgb-3.2.1 (trained 2025-08-12)
   Feature-at-decision-time:     fico=692, dti=0.20, ltv=0.67
   Reviewer attribution:         agent_autonomous — agent_identity=loan_pd_v3-sa@bank.iam
-  Outcome backlink:             repaid_on_time on 2026-04-12 → closed_clean
+  Outcome backlink:             none_observed on 2026-05-17 → —
 
 Cross-references (raw log surfaces that fed the composition)
 ----------------------------------------------------------------------------
@@ -296,7 +296,7 @@ Cross-references (raw log surfaces that fed the composition)
   otel_trace_ref:      projects/bank-prod/traces/DEC_0150_20260312
 
 Retention policy:   7 years (SR 11-7, EU AI Act Article 12), WORM-bucketed
-Composition time:   <50ms on the prototype
+Composition time:   0.0098s on the prototype
 ```
 
 **Fleet-wide run** across all 200 decisions:
@@ -304,9 +304,9 @@ Composition time:   <50ms on the prototype
 | Metric | Value |
 | --- | --- |
 | Decisions composed | 200 / 200 |
-| Six-of-six lineage closed | 200 / 200 |
-| Wall-clock for fleet sweep | ~0.1s on a laptop |
-| Average composition per decision | ~0.3ms |
+| Six-of-six lineage closed (by construction: step_04 composes all six fields for every record) | 200 / 200; 29 of the 200 outcome rows are `none_observed` |
+| Wall-clock for fleet sweep | printed by step_04; varies by run |
+| Average composition per decision | printed by step_04; varies by run |
 | Reviewer breakdown | 168 `agent_autonomous` · 32 `human_user_delegated` |
 
 The composition itself is a hash-anchored, immutable Postgres row in production. The CSV-based demo path is shipped so anyone can clone and run; the production architecture is in [`ARCHITECTURE.md`](./ARCHITECTURE.md).
@@ -322,14 +322,14 @@ Reducing time-to-evidence by 99.9% is not an outcome. *Reducing time-to-evidence
 | Term | Value |
 | --- | --- |
 | 🟡 Current SOTA time-to-decision-evidence (paralegal-led, six-source walk) | 14 days |
-| 🟢 LineageLog composition latency on the prototype | <50ms |
+| 🟢 LineageLog composition latency on the prototype | milliseconds per decision (step_04 prints the measured time; varies by run) |
 | 🔴 LineageLog time-to-decision-evidence (designed; with review + edit + export) | 12 minutes |
 | Per-decision lift (modeled at retail-bank scale) | **~14 days → ~12 minutes** of audit-evidence time |
-| Affected population (Tier-1 retail bank) | **50-200M regulated AI decisions/yr** |
+| 🟡 Affected population (Tier-1 retail bank) | **50-200M regulated AI decisions/yr** (assumption: Tier-1 retail bank volume; no source cited, not measured) |
 | 🟡 Modeled audit-pack assembly time | 3 weeks → 3 seconds (assumes the synthetic 200-decision corpus + Tier-1-style four-model fleet) |
 | 🟡 Modeled exam-readiness coverage | 22% → 100% (assumes published BFSI baseline for sample-based vs continuous readiness) |
-| 🔴 Modeled time-to-decision-evidence | 14 days → 12 minutes (designed against published OCC exam patterns) |
-| 🟡 Cost per dollar of avoided MRA / consent-order remediation | **<$0.005** (modeled — assumes ~$420k engagement vs. low-end ~$80M of remediation cost at a single consent-order event) |
+| 🔴 Designed time-to-decision-evidence | 14 days → 12 minutes (designed against published OCC exam patterns) |
+| 🟡 Cost per dollar of avoided MRA / consent-order remediation | **~$0.005** (modeled — assumes ~$420k engagement vs. low-end ~$80M of remediation cost at a single consent-order event) |
 
 ---
 
@@ -388,7 +388,7 @@ sequenceDiagram
     C->>D: INSERT decision_lineage row (within 5 min of decision)
     Note over D: row immutable; outcome backlink + legal hold are mutable
     E->>D: GET /v1/lineage/DEC_0150_20260312 (May 8 exam)
-    D-->>E: exam pack PDF + JSON in <50ms compose + 12-min human review
+    D-->>E: exam pack PDF + JSON, composed in milliseconds + 12-min human review
     Note over M,E: 🔴 Designed for sub-minute self-serve query; not yet tested with a real examiner.
 ```
 
@@ -532,7 +532,7 @@ If LineageLog were a real product shipping to a Tier-1 bank's compliance and MRM
 - **Governance:** Native integration with Archer / ServiceNow GRC / MetricStream; each lineage record gets a workflow ID; attestation routes to the line-2 validator's queue; legal-hold cascade is automatic.
 - **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on composition-completeness breach.
 
-The Streamlit prototype here proves the *product mechanic* — that decision-grain composition can compress audit-evidence assembly from 14 days to 12 minutes. The production architecture above is what the seat I'm pursuing actually delivers.
+The Streamlit prototype here shows the *product mechanic* — decision-grain composition on synthetic data. The compression of audit-evidence assembly from 14 days to 12 minutes is a designed target, not a measured result. The production architecture above is what the seat I'm pursuing actually delivers.
 
 ---
 
@@ -549,7 +549,7 @@ The Streamlit prototype here proves the *product mechanic* — that decision-gra
 - [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture LineageLog sits on top of.
 - [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — the regulatory existence-proof for this product.
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the framework backbone.
-- [SR 11-7 / OCC Bulletin 2011-12](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — co-issued model-risk-management guidance.
-- [OCC — Model Risk Management resource center](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) and [Federal Reserve — Supervisory Letters](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm).
+- SR 11-7 / OCC Bulletin 2011-12 (replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — co-issued model-risk-management guidance.
+- [Federal Reserve, OCC and FDIC — SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026; it replaced SR 11-7) and [Federal Reserve — Supervisory Letters](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm).
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives this product reads from.
 - [OpenTelemetry](https://opentelemetry.io/) — the substrate that makes composition possible.
