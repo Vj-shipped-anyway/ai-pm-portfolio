@@ -10,9 +10,9 @@ A working portfolio of AI Product Manager case studies, each shipped as a **walk
 
 These are **portfolio prototypes** — not production case studies. The deficiency taxonomies, architectures, RICE backlogs, schemas, and walkthroughs reflect how I'd approach these problems as a Senior PM, not work I shipped at a named bank.
 
-Where I cite SR 11-7, NIST AI RMF, OWASP LLM Top 10, EU AI Act Article 12, OCC supervisory guidance, and similar frameworks, those are the standards the work would have to meet — they are not engagements I led through. The synthetic data, prototype code, deficiency analysis, architecture diagrams, and PRDs are mine; the production validation (MRM committee read, OCC exam, FRB horizontal review, validator co-design, fleet rollout) is what the next role does.
+Where I cite SR 11-7, NIST AI RMF, OWASP LLM Top 10, EU AI Act Article 12, OCC supervisory guidance, and similar frameworks, those are the frameworks the work is designed against or compared with — they are not engagements I led through. The synthetic data, prototype code, deficiency analysis, architecture diagrams, and PRDs are mine; the production validation (MRM committee read, OCC exam, FRB horizontal review, validator co-design, fleet rollout) is what the next role does.
 
-**A note on SR 11-7.** Several projects were designed against SR 11-7, the 2011 model risk management guidance. On April 17, 2026 the Federal Reserve, OCC and FDIC replaced it with [SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm), which describes a risk-based approach tailored to each bank's model risk profile and the size and complexity of its operations. Where a project README says "SR 11-7", read it as the 2011 guidance the design was first mapped to. The projects have not yet been re-mapped clause by clause to SR 26-2.
+**A note on SR 11-7 and SR 26-2.** Several projects were first designed against SR 11-7, the 2011 model risk management guidance. On April 17, 2026 the Federal Reserve, OCC and FDIC replaced it with [SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm). Three things in SR 26-2 matter for how to read this portfolio: it sets no enforceable standards and is aimed mainly at banks with over $30 billion in assets; its definition of a model excludes deterministic rule-based processes that have no statistical, economic or financial theory behind them; and it says generative AI and agentic AI models are outside its scope, while saying a bank's own risk management and governance practices should guide the controls for them. So the SR citations in the project READMEs name a design basis or serve as an analogy. They are not a claim that a project meets SR 26-2, and the projects that govern generative or agentic AI follow the bank's own governance practice rather than SR 26-2. The projects have not been re-mapped clause by clause to SR 26-2.
 
 The CRE projects (LeaseGuard, DealSentry) apply the same PM rigor to a domain I follow as a personal study interest. I am not an LP in any CRE portfolio and am not actively investing; I read the lease forms, the operator playbooks, and the PropTech vendor literature because the data-quality and AI-reliability problems in CRE map cleanly to the problems I work on professionally.
 
@@ -129,7 +129,7 @@ These products don't exist in isolation. Each one slots into a published industr
 - **Google's Secure AI Framework (SAIF)** — model controls + agent controls + supply-chain controls. The framework backbone for projects 05, 06, 08, 09.
 - **OWASP LLM Top 10** — LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM09 Misinformation (2025 numbering). [Project 01 — HalluGuard](./01-halluguard-bank-chatbot-safety/) and [06 — PromptShield](./06-promptshield-prompt-injection-defense/) anchor here.
 - **NIST AI RMF + EU AI Act Article 12** — decision-grain lineage requirements. [Project 09 — LineageLog](./09-lineagelog-ai-decision-audit/) is the implementation surface.
-- **SR 11-7 (2011) and its replacement [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026)** — model risk management guidance from the Federal Reserve, OCC and FDIC. SR 11-7's ongoing-monitoring requirement is what [Project 02 — DriftSentinel](./02-driftsentinel-model-drift-monitoring/) was first mapped to; it has not yet been re-mapped to SR 26-2.
+- **SR 11-7 (2011) and its replacement [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026)** — model risk management guidance from the Federal Reserve, OCC and FDIC. SR 26-2 places generative and agentic AI outside its scope. [Project 02 — DriftSentinel](./02-driftsentinel-model-drift-monitoring/) monitors a fleet that includes traditional models and was first mapped to SR 11-7's ongoing-monitoring requirement; it has not been re-mapped to SR 26-2.
 - **The eval-first thesis** — Hamel Husain, Karpathy, Greg Kamradt's needle-in-haystack work, Lilian Weng on LLM patterns. Cited in [Project 04 — EvalForge](./04-evalforge-llm-eval-platform/) and the [HalluGuard probe taxonomy](./01-halluguard-bank-chatbot-safety/probes/).
 
 How I frame it: each project prototypes a product layer between a published framework and a production system. The portfolio doesn't propose new compliance requirements; it shows what that layer could look like on synthetic data.
@@ -142,7 +142,7 @@ The prototypes themselves call no model and no cloud service: the step scripts u
 
 | Layer | What the design assumes |
 | --- | --- |
-| **Foundation models** | Anthropic Claude Sonnet 4 (default), Azure OpenAI gpt-4o, fine-tuned Llama 3.1 8B / Mistral 7B for in-VPC workloads |
+| **Foundation models** | Azure OpenAI gpt-4o, fine-tuned Llama 3.1 8B / Mistral 7B for in-VPC workloads |
 | **Fine-tuning** | LoRA via PEFT (HalluGuard verifier: rank 16, alpha 32, 4× A100 for 6 hours, ~$182 modeled training compute, not run) |
 | **Retrieval** | Postgres + pgvector for moderate scale; Pinecone / Weaviate when latency budgets are tight; OpenSearch for hybrid lexical+semantic; `text-embedding-3-large` |
 | **Drift / eval primitives** | Evidently AI, NannyML, Whylogs, custom Python on Spark for GenAI proxy metrics |
@@ -188,13 +188,13 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 🎯 Career Goal
 
-Sr / Principal Product Manager at an AI-first BFSI org, AI platform team, or PropTech operator — where the work is shipping production AI under regulated constraint (drift, evals, hallucination, agent reliability, audit lineage). I follow commercial real estate as a personal study interest and the lease-NLP and underwriting-reliability problems map cleanly to the same AI-quality work.
+Sr / Principal Product / Program Manager at an AI-first BFSI org, AI platform team, or PropTech operator — where the work is shipping production AI under regulated constraint (drift, evals, hallucination, agent reliability, audit lineage). I follow commercial real estate as a personal study interest and the lease-NLP and underwriting-reliability problems map cleanly to the same AI-quality work.
 
 ---
 
 ## 👤 Author
 
-**Vijay Saharan** · Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** · Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 - **LinkedIn:** [linkedin.com/in/vijaysaharan](https://www.linkedin.com/in/vijaysaharan/) — primary contact, full work history, recommendations
 - **Resume:** available on request via LinkedIn DM
