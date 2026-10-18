@@ -127,7 +127,7 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 ## 11. Build & Scale Notes
 
 **Reference architecture (vendor-named):**
-- Memo parser: Claude Sonnet via Bedrock or direct Anthropic API. Extracts structured claims from the AI-drafted memo (comps, stats, T-12 line items, IRR assumptions). Hard "cite or refuse" prompt — the parser doesn't infer; it extracts what's literally there.
+- Memo parser: the hosted vendor model via Bedrock or direct Anthropic API. Extracts structured claims from the AI-drafted memo (comps, stats, T-12 line items, IRR assumptions). Hard "cite or refuse" prompt — the parser doesn't infer; it extracts what's literally there.
 - Comp citation verification: API integrations to CoStar (CompStak for sale comps), Reonomy, and Cherre. Address normalization via a Python-side library (libpostal or USAddress); transaction-date match within stated window; price/sf, cap rate, NOI within tolerance.
 - Symbolic re-validator: plain Python with pandas. Re-runs T-12, rent roll, effective-rent-on-stepped-leases, expense ratios, IRR / cash-on-cash. **No LLM in this path.** Outputs a divergence table with offending line items.
 - Submarket stat cross-check: parallel calls to CoStar, Reonomy, Cherre, plus internal proprietary feed if available. Tolerance bands per stat type. Disagreement surfaced, never resolved by the sentinel.

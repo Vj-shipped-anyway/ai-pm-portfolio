@@ -13,7 +13,7 @@
 ```
                           ┌─────────────────────────────────────┐
                           │  AI Underwriting Copilot            │
-                          │  (Claude Sonnet / GPT-4o agent over │
+                          │  (Vendor model / GPT-4o agent over  │
                           │   CoStar + Reonomy + Cherre + OM)   │
                           └──────────────┬──────────────────────┘
                                          │  draft memo (PDF/JSON)
@@ -21,7 +21,7 @@
                           ┌─────────────────────────────────────┐
                           │  1. INGESTION                       │
                           │  - PDF parse (pdfplumber/Textract)  │
-                          │  - Claim extraction (Claude Sonnet, │
+                          │  - Claim extraction (vendor model,  │
                           │    "cite-or-refuse" prompt)         │
                           │  - Normalize to structured schema   │
                           └──────────────┬──────────────────────┘
@@ -81,7 +81,7 @@ See [`assets/dealsentry-flow.svg`](./assets/dealsentry-flow.svg) for the visual 
 | Component | Choice | Why |
 | --- | --- | --- |
 | PDF parser | `pdfplumber` + AWS Textract fallback for scans | Most AI-drafted memos are emitted as PDF; pdfplumber preserves table structure; Textract handles the broker-OM scans the copilot ingests upstream |
-| Claim extractor | Claude Sonnet 4 via Anthropic API, "cite-or-refuse" prompt | The extractor does not infer; it extracts what is literally there. Hard prompt rule prevents the verification path from being polluted by the same hallucination pattern it's trying to detect |
+| Claim extractor | Hosted vendor model via Anthropic API, "cite-or-refuse" prompt | The extractor does not infer; it extracts what is literally there. Hard prompt rule prevents the verification path from being polluted by the same hallucination pattern it's trying to detect |
 | Schema | Pydantic models in Python | Structured output ensures the three verifier paths receive deterministic inputs |
 | Storage | Postgres (raw memo + extracted claims), S3 (PDF object) | Memo audit retention for the hold period |
 

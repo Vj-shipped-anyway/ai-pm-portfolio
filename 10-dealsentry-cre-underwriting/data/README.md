@@ -47,3 +47,7 @@ These six map directly to what an IC chair would flag in a senior-review pass, i
 ## Notes on synthetic SOT coverage
 
 In production DealSentry would call live CoStar Real Estate Manager / Reonomy Properties / Cherre Property APIs. The 40-row SOT in this repo simulates the coverage shape — every submarket that appears in the memos has at least 2 SOT comps (Chicago O'Hare Industrial has 3), and the fabricated comps in `MEMO_04` and `MEMO_06` are intentionally absent from the SOT so the comp-existence check has real positives on every memo and real negatives on those two.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. The memo drafter and claim extractor are "the hosted vendor model" in prose, and the Step 3 comparison column is "Vendor model (memo drafter)" (stored values, not run in this repo). GPT-4o and Mistral keep their real names. No number in this project depends on the label.

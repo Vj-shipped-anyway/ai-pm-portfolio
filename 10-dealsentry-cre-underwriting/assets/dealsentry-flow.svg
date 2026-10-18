@@ -39,7 +39,7 @@
   <text x="32" y="140" class="stage-num">1 · INGEST</text>
   <text x="32" y="162" class="stage-title">Memo → claims</text>
   <text x="32" y="180" class="stage-sub">pdfplumber / Textract</text>
-  <text x="32" y="195" class="stage-sub">Claude Sonnet</text>
+  <text x="32" y="195" class="stage-sub">Vendor model</text>
   <text x="32" y="210" class="stage-sub">"cite-or-refuse" prompt</text>
   <text x="32" y="225" class="stage-sub">Pydantic schema</text>
   <text x="32" y="243" class="meta-text">6 comps · T-12 total only</text>

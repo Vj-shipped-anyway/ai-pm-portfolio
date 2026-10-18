@@ -136,7 +136,7 @@ Total reading time: \~15 minutes for the full walkthrough. \~5 minutes if you sk
 
 **A modeled national CRE operator running an $8B+ acquisitions program across industrial, office, multifamily, and retail.**
 
-The team has the standard tooling stack — [Yardi Voyager](https://www.yardi.com/) for asset management, [Argus Enterprise](https://www.altusgroup.com/argus/) for valuation modeling, [Dealpath](https://www.dealpath.com/) for deal pipeline, and an AI underwriting copilot that drafts the first pass of every IC memo. The copilot is a Claude Sonnet / GPT-4o agent over [CoStar](https://www.costar.com/), [Reonomy](https://www.reonomy.com/), [Cherre](https://cherre.com/), and broker OMs. It looks like the kind of thing every PropTech founder is shipping right now.
+The team has the standard tooling stack — [Yardi Voyager](https://www.yardi.com/) for asset management, [Argus Enterprise](https://www.altusgroup.com/argus/) for valuation modeling, [Dealpath](https://www.dealpath.com/) for deal pipeline, and an AI underwriting copilot that drafts the first pass of every IC memo. The copilot is a hosted vendor model / GPT-4o agent over [CoStar](https://www.costar.com/), [Reonomy](https://www.reonomy.com/), [Cherre](https://cherre.com/), and broker OMs. It looks like the kind of thing every PropTech founder is shipping right now.
 
 It works fine on clean industrial trades in a tight submarket. The senior acquisitions analyst trusts it. The IC chair trusts the memo it produces.
 
@@ -310,7 +310,7 @@ The six:
 
 The defects above aren't "the AI is bad." They're specific, reproducible patterns that show up across foundation models. **The same six classes, observed across three common AI underwriting copilot configurations (modeled — calibrated against published PropTech vendor independent audits):**
 
-| Deficiency | Claude Sonnet (memo drafter) | GPT-4o (memo drafter) | Fine-tuned Mistral 7B |
+| Deficiency | Vendor model (memo drafter) | GPT-4o (memo drafter) | Fine-tuned Mistral 7B |
 | --- | --- | --- | --- |
 | Comp citation fabrication | 14% | 18% | 22% |
 | T-12 NOI rollforward error | 7% | 9% | 5% |
