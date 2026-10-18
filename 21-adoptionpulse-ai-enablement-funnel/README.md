@@ -707,7 +707,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Enablement PM · Turns license counts into usage stages a program lead can act on, under regulated constraint*
 
