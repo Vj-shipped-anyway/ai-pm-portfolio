@@ -4,6 +4,8 @@
 
 **▶ Live demo:** *(placeholder — inferencelens-bfsi.streamlit.app)*
 
+**▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/07-inferencelens-inference-finops/demo.html)
+
 **▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (FinOps committee read, CFO sign-off, fleet rollout) is what the next role does.
