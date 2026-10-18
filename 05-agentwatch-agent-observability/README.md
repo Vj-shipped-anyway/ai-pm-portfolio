@@ -2,11 +2,7 @@
 
 **A portfolio prototype for an agent reliability and tool-use observability sidecar that bounds runaway costs, catches hallucinated tool arguments, surfaces silent agent drift, and routes incidents to a validator before the FinOps bill lands — modeled against Google Cloud's [*Building secure multi-agent systems*](https://cloud.google.com/) reference architecture, [OpenTelemetry](https://opentelemetry.io/), [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/), and the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework).**
 
-**▶ Live demo:** *(placeholder — agentwatch-bfsi.streamlit.app)*
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html)
-
-**▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the sidecar architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (line-1 owner co-design, MRM committee read, SRE pager-rotation interop, fleet rollout) is what the next role does.
 
