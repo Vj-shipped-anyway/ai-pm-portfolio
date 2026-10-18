@@ -2,6 +2,8 @@
 
 **A portfolio prototype for scoring AI vendors on what can be checked: each questionnaire answer weighed against a document or the contract, the upstream model provider mapped for concentration, exit readiness scored, and a review cadence set by tier. Aligned to the interagency third-party risk guidance in [SR 23-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2304.htm) and the model-risk guidance in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026), and to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/18-vendorlens-ai-vendor-due-diligence/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the scoring rules, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real vendor register, real documents and contracts, a third-party risk team agreeing to the weights, a model-risk read) is what the next role does.
@@ -699,7 +701,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs due diligence for AI vendors that checks the claim, not only the questionnaire, under regulated constraint*
 
@@ -709,6 +711,6 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Govern' and 'Map' functions frame why a bank needs to know which third-party components an AI system depends on.
 - **[SR 23-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2304.htm)** — the interagency third-party risk guidance; the standard the due-diligence, contract and ongoing-monitoring work would have to meet.
-- **SR 11-7 (the 2011 predecessor), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk standard the work would have to meet. A vendor's model is still a model the bank is accountable for.
+- **SR 11-7 (the 2011 predecessor), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A vendor's model is still a model the bank is accountable for.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the provider and deployer split is why the design records which upstream provider a vendor's system runs on.
 - **Sibling projects in this repo** — [07 InferenceLens](../07-inferencelens-inference-finops/), [13 SwapBrief](../13-swapbrief-model-migration/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), with 16 ControlMap and 25 KillSwitch, the five interlocks.
