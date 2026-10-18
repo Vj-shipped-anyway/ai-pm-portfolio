@@ -465,7 +465,7 @@ if st.session_state.step >= 5:
                 ("PSI", "Population Stability Index - a way to detect when the AI is seeing different kinds of data than it was trained on."),
                 ("KS", "Kolmogorov-Smirnov test - another way to detect data shift, more sensitive than PSI."),
                 ("MTTD", "Mean Time To Detect - how long it took to notice the model went bad."),
-                ("Vendor snapshot", "The exact version of an outside AI (e.g., Anthropic Claude) you're using - pinned in writing."),
+                ("Vendor snapshot", "The exact version of an outside AI (e.g., Anthropic) you're using - pinned in writing."),
                 ("MRM", "Model Risk Management - the bank's internal team that approves every AI before deployment."),
                 ("Three lines of defense", "Bank's standard model-risk structure: 1=builders, 2=reviewers, 3=auditors."),
                 ("SR 11-7", "Federal Reserve 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring."),

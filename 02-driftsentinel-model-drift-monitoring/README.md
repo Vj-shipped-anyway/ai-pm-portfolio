@@ -110,7 +110,7 @@ I'm a PM who follows this specific failure mode in industry research. The point 
 - 🟢 **Alert volume (Step 2 → Step 4):** 11 alerts (6 YELLOW, 5 RED) from 26 feature-level checks across the 8-model synthetic fleet become 3 non-RETAIN decisions (SHADOW, RETRAIN, ROLLBACK). No script prints a false-positive rate; the PRD's 8% is a target
 - 🟢 **MRM evidence bundle:** Step 4 writes a sample bundle for credit_pd_v3 (`src/out/step_04_evidence_bundle_credit_pd_v3.json`); no script times the assembly, and human edit before sign-off is part of the design
 - 🟡 **Modeled validator capacity reclaimed:** ~2 days/week per validator = ~16 person-days/week at fleet scale (implies 8 validators; assumes a 1,200-model Tier-1 fleet and the SR 11-7 attestation cadence)
-- 🟢 **Vendor silent update caught:** Step 4 flags the synthetic Feb-14 snapshot change on `support_qa_v2` (`claude-sonnet-4-20251101` to `claude-sonnet-4-20260214`) as a silent minor update and recommends ROLLBACK; no script measures detection latency
+- 🟢 **Vendor silent update caught:** Step 4 flags the synthetic Feb-14 snapshot change on `support_qa_v2` (`vendor-balanced-4-20251101` to `vendor-balanced-4-20260214`) as a silent minor update and recommends ROLLBACK; no script measures detection latency
 - 🟡 **Modeled prevented loss:** $14M/yr at the $50B-asset retail-bank shape; ~$45-90M/yr at Tier-1 fleet scale (assumes ~1,200 production models, 78d→9d MTTD compression, published average loss per quarter of decay)
 
 🔴 **Hypothetical cost.** ~$280k for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE engineer + line-2 partner time) — designed, not yet executed. Per dollar of modeled prevented loss at $14M/yr: **about two cents**.
@@ -140,7 +140,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case
 
-A modeled Tier-1 US retail bank ($50B-asset). 8 production ML models across credit, fraud, AML, and one customer-facing GenAI use case on Anthropic Claude Sonnet. SR 11-7 ongoing-monitoring requirement met today via quarterly Word docs. Between attestations, drift is invisible. By the time a business KPI moves, two quarters have leaked.
+A modeled Tier-1 US retail bank ($50B-asset). 8 production ML models across credit, fraud, AML, and one customer-facing GenAI use case on a hosted Anthropic model. SR 11-7 ongoing-monitoring requirement met today via quarterly Word docs. Between attestations, drift is invisible. By the time a business KPI moves, two quarters have leaked.
 
 The design is anchored against an OCC draft finding pattern (not a Slack thread). The MRM committee has four weeks to show a remediation plan before the formal exam letter — that's the timebox the product is calibrated against.
 
@@ -213,7 +213,7 @@ What feature drove it. Which segment. Whether there was an upstream pipeline cha
 | 1 | **Aggregate PSI hides slice disasters** | Headline number is the average; the dangerous slice can be far worse (about 11x here) | `credit_pd_v3` agg PSI=0.220; subprime PSI=2.368 |
 | 2 | **No diagnosis routing** | Alert says "feature X drifted." Validator does the work by hand. | All 5 RED alerts in step 2 |
 | 3 | **GenAI proxy gap** | PSI has no notion of refusal rate, response length or groundedness. The shift shows up as unlabeled numeric drift. | `support_qa_v2` refusal: 4.5% → 11.17%; the refusal column itself reads PSI=0.0654, GREEN |
-| 4 | **Vendor-version blindness** | Snapshot ID changes are not part of the drift signal | Anthropic Feb-14 silent update (`claude-sonnet-4-20260214`) — no event |
+| 4 | **Vendor-version blindness** | Snapshot ID changes are not part of the drift signal | Anthropic Feb-14 silent update (`vendor-balanced-4-20260214`) — no event |
 | 5 | **No bounded recommendation** | Alert fires; what should the model owner DO? | PSI alert in Slack, three days of back-and-forth, no agreed call |
 
 The basic approach catches the *easy* drift (DTI on a credit model) and misses the *hard* drift (vendor silent updates on GenAI). It also generates a noise floor that drives validators away from the channel. **The product is the diagnosis, not the detection.**

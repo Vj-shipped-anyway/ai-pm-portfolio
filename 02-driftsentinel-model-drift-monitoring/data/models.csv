@@ -6,4 +6,4 @@ auto_pd_v4,Auto Loan PD,credit,2,line1.auto-lending,2025-08-30,2026-01-15,intern
 fraud_card_v7,Card-Present Fraud,fraud,1,line1.fraud-ops,2025-10-02,2026-02-01,internal,internal-lgbm-3.2.1
 fraud_ach_v3,ACH Fraud Detection,fraud,1,line1.fraud-ops,2025-06-15,2026-01-15,internal,internal-rf-2.0.0
 aml_sar_v2,AML SAR Triage,aml,1,line1.financial-crimes,2025-05-10,2026-01-15,internal,internal-xgb-3.0.2
-support_qa_v2,Customer Support Q&A GenAI,genai,1,line1.servicing,2025-12-01,2026-01-15,anthropic,claude-sonnet-4-20250215
+support_qa_v2,Customer Support Q&A GenAI,genai,1,line1.servicing,2025-12-01,2026-01-15,anthropic,vendor-balanced-4-20250215

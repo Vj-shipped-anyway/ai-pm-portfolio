@@ -76,13 +76,13 @@ The flight log for hosted-model snapshot IDs. The whole reason this file exists:
 | --- | --- |
 | `snapshot_date` | When the snapshot was first observed. |
 | `vendor` | `anthropic`, `azure_openai`, `bedrock`. |
-| `model_family` | E.g. `claude-sonnet-4`, `gpt-4o`. |
+| `model_family` | E.g. `vendor-balanced-4`, `gpt-4o`. |
 | `snapshot_id` | The version string. |
 | `observed_in_fleet` | Which production model ran on this snapshot, or `offline_eval_only`. |
 | `announcement_status` | `announced` (vendor told us) / `silent_minor_update` (we found it via probe regression) / `acknowledged_post_hoc` (vendor confirmed after escalation). |
 | `notes` | Free-text. |
 
-The interesting row is the Feb 14 entry: `claude-sonnet-4-20260214` showed up with the same API contract but a +6.67pp shift in refusal rate. The Sentinel caught it via vendor-version diff plus refusal-rate proxy. Anthropic confirmed the weights update five days later. This is the failure mode that quarterly Word docs literally cannot represent.
+The interesting row is the Feb 14 entry: `vendor-balanced-4-20260214` showed up with the same API contract but a +6.67pp shift in refusal rate. The Sentinel caught it via vendor-version diff plus refusal-rate proxy. Anthropic confirmed the weights update five days later. This is the failure mode that quarterly Word docs literally cannot represent.
 
 ---
 
@@ -102,3 +102,7 @@ models.csv  ──┬──>  inference_logs.csv  (90 days × 8 models)
 ```
 
 Reproducibility: `np.random.seed(42)` in the inference-log generator. Same seed, same rows, same statistics. Re-run `python src/step_02_basic_drift_detection.py` and it prints the same PSI/KS values every time.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. Every id has the shape `vendor-<tier>-<version>[-<release date>]`: `vendor-balanced-4` is the model family in `models.csv` and `vendor_snapshots.csv`, and `vendor-balanced-4-20251101`, `vendor-balanced-4-20260214` and `vendor-balanced-4-20250215` are pinned snapshots. `balanced` is the mid-priced hosted model. GPT-4o keeps its real name. No number in this project depends on the label.

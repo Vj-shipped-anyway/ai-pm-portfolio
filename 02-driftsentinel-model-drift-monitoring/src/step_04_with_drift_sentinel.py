@@ -145,7 +145,7 @@ def diagnose_upstream_lineage(model_id: str) -> str:
     lineage = {
         "credit_pd_v3":   "feature_pipeline.dti_v2025_11 deployed Day 58 — dti normalization changed from log1p to standard scale; correlates with drift onset Day 60.",
         "fraud_card_v7":  "no upstream pipeline change in 14d window; drift attributable to traffic distribution (adversary tactic shift).",
-        "support_qa_v2":  "no internal upstream change; vendor snapshot id changed Day 60 (claude-sonnet-4-20251101 -> claude-sonnet-4-20260214).",
+        "support_qa_v2":  "no internal upstream change; vendor snapshot id changed Day 60 (vendor-balanced-4-20251101 -> vendor-balanced-4-20260214).",
     }
     return lineage.get(model_id, "no upstream pipeline change in 14d window.")
 

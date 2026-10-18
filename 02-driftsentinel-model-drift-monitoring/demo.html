@@ -270,13 +270,13 @@ const MODELS = [
   },
   {
     id: "support_qa_v2", name: "Customer support Q&A (GenAI)", family: "genai", tier: 1, vendor: "anthropic", owner: "cx_team",
-    snapshot: "claude-sonnet-4-20260214", driftStatus: "RED",
+    snapshot: "vendor-balanced-4-20260214", driftStatus: "RED",
     before: { attested: true, lastAttested: "2026-01-15", daysSinceLook: 103,
               note: "Quarterly attestation has no GenAI drift methodology. Nothing watches the refusal rate or the vendor snapshot between attestations." },
     sota: { drifted: true, feature: "feature_fico (response length)", psi: 2.17, severity: "RED", alerts: 3,
             note: "RED on response length (PSI=2.17), groundedness (0.88) and prediction (0.88), but the columns carry no label. The refusal column alone reads PSI=0.0654 GREEN. No GenAI proxy metrics in pipeline. No vendor snapshot diff." },
     shield: { driver: "refusal-rate distribution", segment: "—",
-              lineage: "Anthropic snapshot changed Feb 14 (claude-sonnet-4-20260214 vs prior claude-sonnet-4-20251101) — silent minor update",
+              lineage: "Anthropic snapshot changed Feb 14 (vendor-balanced-4-20260214 vs prior vendor-balanced-4-20251101) — silent minor update",
               rootCause: "vendor silent update — refusal rate jumped from 4.5% to 11.17%",
               recommendation: "ROLLBACK to the pre-Feb-14 snapshot pin until validated",
               envelope: "if the pinned snapshot fails the probe re-run, escalate to RETRAIN of the downstream RAG layer" }

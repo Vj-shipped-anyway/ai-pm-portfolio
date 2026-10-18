@@ -199,7 +199,7 @@ CREATE TABLE attestations (
 CREATE TABLE vendor_snapshots (
     snapshot_id         TEXT PRIMARY KEY,
     vendor              TEXT NOT NULL,         -- anthropic / azure_openai / bedrock / mistral
-    base_model          TEXT NOT NULL,         -- claude-sonnet-4 / gpt-4o / etc.
+    base_model          TEXT NOT NULL,         -- vendor-balanced-4 / gpt-4o / etc.
     first_observed_at   TIMESTAMPTZ NOT NULL,
     observed_in_models  TEXT[],                -- which fleet models use this snapshot
     announcement_status TEXT,                  -- announced / silent_minor_update / acknowledged_post_hoc
@@ -325,7 +325,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 
 | External service | Protocol | Auth | What we call | Failure mode |
 | --- | --- | --- | --- | --- |
-| **Foundation model — Anthropic Claude** | REST + JSON, `https://api.anthropic.com` | API key from Vault, rotated 90 days | LLM-as-judge for GenAI proxy metrics; batched, off the request path | Circuit-breaker → fall back to Azure OpenAI gpt-4o judge; alert P3 |
+| **Foundation model — Anthropic** | REST + JSON, `https://api.anthropic.com` | API key from Vault, rotated 90 days | LLM-as-judge for GenAI proxy metrics; batched, off the request path | Circuit-breaker → fall back to Azure OpenAI gpt-4o judge; alert P3 |
 | **Foundation model — Azure OpenAI** | REST + JSON, regional endpoint | Managed Identity (no key) | Secondary judge for cross-vendor reliability check | Degrades to Anthropic-only judging; reliability flag goes amber |
 | **Foundation model — AWS Bedrock** | AWS SigV4 over HTTPS | IAM Role (IRSA) | Tertiary judge for vendor-diversity coverage; on-prem-equivalent fallback path | Optional path; failure does not affect primary flow |
 | **MLflow Model Registry** | REST `/api/2.0/mlflow/*` | OIDC bearer (the bank's IdP) | Read-only: model metadata, tier, owner, version | Cached for 60 min; if MLflow is down >60 min, drift compute pauses for affected models, alert P2 |

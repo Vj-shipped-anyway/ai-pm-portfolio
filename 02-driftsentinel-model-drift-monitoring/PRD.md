@@ -22,7 +22,7 @@ The pattern is well-documented in industry research and recent supervisory writi
 
 - GenAI is in production at every Tier-1 US bank, and a unified drift surface that covers it remains a published gap across the major MRM tool vendors.
 - OCC, Fed, and CFPB are signaling sharper expectations on ongoing monitoring of AI/ML in their published supervisory letters. The next exam cycle is where this becomes a finding.
-- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock can land without notice (the synthetic Feb-14, 2026 change to `claude-sonnet-4-20260214` in `data/vendor_snapshots.csv` is the reference case). Legacy MRM tooling does not see them.
+- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock can land without notice (the synthetic Feb-14, 2026 change to `vendor-balanced-4-20260214` in `data/vendor_snapshots.csv` is the reference case). Legacy MRM tooling does not see them.
 - The open-source drift primitives (Evidently, NannyML, Whylogs) are mature enough that the build is now about diagnosis and routing, not detection math.
 
 ## 3. Goals (12-month horizon)
@@ -117,7 +117,7 @@ A three-loop product.
 
 **Reference architecture.**
 - Drift compute: Spark on Snowflake (or Databricks if the bank's on Databricks) for the heavy aggregations. Python on a sidecar for diagnosis logic. Evidently AI for the open-source drift primitives. NannyML for performance estimation under delayed ground truth.
-- LLM-as-judge (GenAI portion only): Anthropic Claude Sonnet primary, Azure OpenAI gpt-4o secondary for cross-judge reliability, fine-tuned Mistral 7B on Triton for fully-isolated workloads. Two judges, two vendors, by design — so one shifting under us is itself a detected event.
+- LLM-as-judge (GenAI portion only): a hosted Anthropic model primary, Azure OpenAI gpt-4o secondary for cross-judge reliability, fine-tuned Mistral 7B on Triton for fully-isolated workloads. Two judges, two vendors, by design — so one shifting under us is itself a detected event.
 - Storage: Snowflake for model output history and reference windows. Feature snapshots from existing feature store. Drift events on ClickHouse (high-cardinality, cheap-to-store).
 - Orchestration: Airflow for scheduled jobs. Temporal for the multi-day human-approval retraining workflow. Kafka or Kinesis for the model-output event spine — pick the one already in the bank.
 - Observability: OpenTelemetry as the substrate. Datadog for SOC. Langfuse for GenAI traces.
