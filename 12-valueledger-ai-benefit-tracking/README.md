@@ -2,6 +2,8 @@
 
 **A portfolio prototype for measuring what an AI copilot really freed in a regulated bank: a holdout cohort, difference-in-differences, net of rework, a weekly effect curve with decay, overlap deduplication, and a hard-versus-soft ledger tied to the budget table. Built on synthetic data where the true effect is known, so each method's error can be read off an answer key.**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/12-valueledger-ai-benefit-tracking/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the estimators, the architecture, and the walkthrough are mine. The data is synthetic and the true effect is known only because the generator injected it, so the 🟢 numbers show how each method behaves on this data, not how any bank's copilots perform. Production validation (a real holdout, a finance sign-off, a model-risk read) is what the next role does.
@@ -765,7 +767,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 - **Backend:** one job per stage (ingest, cohort snapshot, estimator, bootstrap, ledger, guardrail), each idempotent and re-runnable for a past quarter.
 - **Cohort registry:** an append-only record of who was treated or held out, when, and by what rule, so the selection rule is on file before the first number is read.
 - **Integrations:** use-case IDs and approval from 11 TierGate; cost per feature from 07 InferenceLens; pass rates from 04 EvalForge for the guardrail; budget lines from the finance ledger.
-- **Compliance:** aligned to the standard a model used for investment decisions would have to meet (SR 11-7 and the NIST AI RMF Measure function); a legal and works-council read on employee work data is a precondition, not an afterthought.
+- **Compliance:** designed against the guidance a model used for investment decisions would be compared with (SR 11-7, replaced by SR 26-2 in April 2026, and the NIST AI RMF Measure function); a legal and works-council read on employee work data is a precondition, not an afterthought.
 - **Deployment:** shadow first: run the statements for one use case beside the existing business case, and let finance compare, before any statement replaces a slide.
 
 The Streamlit prototype here shows the *measurement mechanic*: that a comparison group, a rework deduction, a decay curve, a count-once rule, and a budget-line split move a copilot benefit number from +152% off to +5% off on this data. The production architecture above is what the seat I'm pursuing would deliver.
@@ -774,7 +776,7 @@ The Streamlit prototype here shows the *measurement mechanic*: that a comparison
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Program PM · Measures AI benefit net of rework and tied to a budget line*
 
