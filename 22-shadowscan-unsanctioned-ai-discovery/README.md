@@ -2,6 +2,8 @@
 
 **A portfolio prototype for discovering AI use nobody approved, from proxy and DNS logs: a catalog and feed lookup, a generation-style path pattern, an upload-size test, a ranking by data exposure and a block, sanction or coach recommendation for each tool. Aligned to the AI-system inventory theme under the Govern function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and to the sensitive-information-disclosure theme of the [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/22-shadowscan-unsanctioned-ai-discovery/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the exposure formula, the next-action rules, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (real proxy and DNS logs, a real catalog, a security operations read, an AI governance read) is what the next role does.
@@ -746,7 +748,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs the discovery layer that tells a bank which AI tools its staff already use*
 
@@ -755,7 +757,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 ## 🙌 Acknowledgements
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the Govern function's expectation that an organization knows which AI systems are in use (a paraphrase written for this exercise, not the text of the framework) is the reason a discovery layer sits before an approval process.
-- **SR 11-7, the 2011 predecessor of [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk standard the work would have to meet. A model in use that nobody inventoried is a gap in any model inventory (a paraphrase written for this exercise, not the text of the guidance).
+- **SR 11-7, the 2011 predecessor of [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A model in use that nobody inventoried is a gap in any model inventory (a paraphrase written for this exercise, not the text of the guidance).
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the sensitive-information-disclosure theme behind ranking tools by what staff send to them.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — a deployer has to know which AI systems it uses before it can meet obligations about them (a paraphrase written for this exercise, not the text of the regulation).
 - **Sibling projects in this repo** — [06 PromptShield](../06-promptshield-prompt-injection-defense/) and [11 TierGate](../11-tiergate-ai-usecase-intake/), two of the interlocks. 16 ControlMap, 18 VendorLens and 23 ScopeKeeper are the others, designed and not built.
