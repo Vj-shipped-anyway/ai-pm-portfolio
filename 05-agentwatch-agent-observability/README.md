@@ -304,7 +304,7 @@ Cross-references (raw agent log surfaces composed into this record)
   agent_identity_ref:   iam/agent-identity/RUN_00095
 
 Retention policy:   7 years (SR 11-7 ongoing monitoring evidence), WORM-bucketed
-Composed in:        <50ms on the prototype
+Composed in:        0.0001s on the prototype
 ```
 
 **Fleet-wide run** across all 24 incidents:
