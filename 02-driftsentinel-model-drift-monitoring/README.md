@@ -332,7 +332,7 @@ sequenceDiagram
     R->>B: action + diagnosis
     B-->>V: routed to MRM
     V-->>M: shadow candidate deployed alongside
-    Note over M,V: 🔴 Designed for 1-day validator attestation (vs. 3-week status quo); not yet tested with a real validator.
+    Note over M,V: 🔴 Designed for 1-day validator attestation (vs. 3-week status quo), not yet tested with a real validator.
 ```
 
 See [`assets/drift-flow.svg`](./assets/drift-flow.svg) for a static visual of the same flow.
