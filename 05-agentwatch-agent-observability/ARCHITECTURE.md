@@ -506,4 +506,4 @@ That last list is the discipline. Every internal-build I have watched die has di
 }
 ```
 
-OpenAPI spec lives at `apps/api/openapi.yaml` and is the source of truth for both the CLI and the UI clients.
+OpenAPI spec lives at `docs/api/openapi.yaml` and is the source of truth for both the CLI and the UI clients.

@@ -1,8 +1,8 @@
 # Sample Data — AgentWatch walkthrough
 
-Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic, seeded (`random.seed(20260512)`), and reproducible. No customer data. No PII. Shapes are calibrated against what a Tier-1 BFSI agent fleet actually looks like across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly.
+Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and was generated with `random.seed(20260512)`; the generator script is not shipped in this folder. No customer data. No PII. Shapes are calibrated against what a Tier-1 BFSI agent fleet actually looks like across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly.
 
-The headline incident the walkthrough resolves is `INC_0001` on run `RUN_00095` — a `claims_triage_v3` runaway loop on **April 14, 2026** that burned **$4,218.34** of inference cost across **1,847 redundant Anthropic API calls** before AgentWatch's runaway-detector fires. Without AgentWatch: the bank discovers it 3 weeks later in the FinOps review. With AgentWatch: bounded at 6 minutes, incident routed to a validator.
+The headline incident the walkthrough resolves is `INC_0001` on run `RUN_00095` — a `claims_triage_v3` runaway loop on **April 14, 2026** that burned **$4,218.34** of inference cost across **1,847 tool calls** before AgentWatch's runaway-detector fires. Without AgentWatch: the bank discovers it 3 weeks later in the FinOps review. With AgentWatch: bounded at 6 minutes, incident routed to a validator.
 
 ---
 
@@ -79,7 +79,7 @@ The product's classification table. Every incident is mapped to one of the six n
 | `agentwatch_action` | string | What AgentWatch's sidecar did. `auto_cutoff_at_blast_radius_cap`, `schema_validator_blocked`, `drift_alert_routed_to_owner`, `circuit_breaker_tripped`, `trace_replay_synthesized`, `cost_attributed_to_outcome`. |
 | `cost_at_cutoff_usd` | float | Dollar cost at the moment of the cut-off (the "bleed" capped by AgentWatch). |
 | `tool_calls_at_cutoff` | int | Tool-call count at the cut-off. |
-| `mttr_minutes_with_agentwatch` | int | Mean-time-to-recover MEASURED on the prototype (alert → mitigation routed). |
+| `mttr_minutes_with_agentwatch` | int | Mean-time-to-recover assumed for this synthetic incident (alert → mitigation routed). Seeded in this file; step_04 reads it and no script times a mitigation. |
 | `modeled_mttr_without_agentwatch_hours` | int | Modeled MTTR if AgentWatch were not present. Sourced from published BFSI agent-incident review intervals. |
 
 24 rows distributed across the six deficiencies: 6 runaway loops, 4 hallucinated-args, 4 silent-drift, 3 blast-unbounded, 4 no-reasoning-trace, 3 cost-detached.

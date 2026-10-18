@@ -128,26 +128,26 @@
       <span class="badge">4 deployed agents</span>
       <span class="badge">24 detected incidents</span>
       <span class="badge">6 named deficiencies</span>
-      <span class="badge">MTTR &lt;10 min</span>
+      <span class="badge">MTTR target &lt;10 min (designed)</span>
     </div>
   </header>
 
   <div class="stats">
     <div class="stat">
-      <p class="stat-label">Incidents bounded</p>
+      <p class="stat-label">Incidents composed</p>
       <p class="stat-value">24 / 24</p>
     </div>
     <div class="stat">
-      <p class="stat-label">MTTR with AgentWatch</p>
+      <p class="stat-label">MTTR target (designed)</p>
       <p class="stat-value">&lt; 10 min</p>
     </div>
     <div class="stat">
-      <p class="stat-label">Per-incident cost cap</p>
+      <p class="stat-label">Configured per-agent cost cap</p>
       <p class="stat-value">$150–300</p>
     </div>
     <div class="stat">
-      <p class="stat-label">Undetected bleed (30d)</p>
-      <p class="stat-value">$0</p>
+      <p class="stat-label">Undetected runaway cost today (30d)</p>
+      <p class="stat-value">$47,978</p>
     </div>
   </div>
 
@@ -209,61 +209,61 @@ const RUNS = [
     fired: ["runaway_loop", "blast_unbounded"],
   },
   {
-    id: "RUN_00039", inc: "INC_0002", agent: "claims_triage_v3", framework: "LangGraph",
+    id: "RUN_00039", inc: "INC_0005", agent: "claims_triage_v3", framework: "LangGraph",
     vendor: "anthropic", model: "claude-sonnet-4-20251101",
     deficiency: "runaway_loop", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
-    duration_s: 3964, calls: 9166, cost: 22000.00,
-    detected_at: "2026-04-17T11:02:14Z", action: "auto_cutoff_at_blast_radius_cap",
+    duration_s: 350, calls: 9166, cost: 22000.00,
+    detected_at: "2026-04-01T21:39:04Z", action: "auto_cutoff_at_blast_radius_cap",
     mttr_min: 6, mttr_hr_without: 240,
-    note: "Largest runaway in the 30-day window. Bounded at the per-agent dollar cap.",
+    note: "Largest runaway in the 30-day window. Cut off at $22,000.00, above the $250 per-agent cap.",
     fired: ["runaway_loop", "blast_unbounded"],
   },
   {
-    id: "RUN_00207", inc: "INC_0007", agent: "kyc_refresh_v2", framework: "Bedrock Agents",
+    id: "RUN_00172", inc: "INC_0010", agent: "kyc_refresh_v2", framework: "Bedrock Agents",
     vendor: "anthropic_via_bedrock", model: "anthropic.claude-3-7-sonnet-20250219-v1:0",
     deficiency: "hallucinated_args", severity: "P2", status: "FAILED_RETRYABLE",
-    duration_s: 400, calls: 95, cost: 1500.00,
-    detected_at: "2026-04-09T15:21:38Z", action: "schema_validator_blocked",
+    duration_s: 350, calls: 75, cost: 1500.00,
+    detected_at: "2026-04-15T15:26:28Z", action: "schema_validator_blocked",
     mttr_min: 8, mttr_hr_without: 96,
     note: "Agent fabricated CUST_NNNNNN IDs that didn't exist in the system-of-truth. AgentWatch blocked the tool fire pre-flight.",
     fired: ["hallucinated_args"],
   },
   {
-    id: "RUN_00312", inc: "INC_0011", agent: "dispute_recon_v1", framework: "OpenAI Assistants",
+    id: "RUN_00497", inc: "INC_0012", agent: "dispute_recon_v1", framework: "OpenAI Assistants",
     vendor: "azure_openai", model: "gpt-4o-2025-08-06",
     deficiency: "silent_drift", severity: "P3", status: "COMPLETED",
-    duration_s: 142, calls: 12, cost: 1.32,
-    detected_at: "2026-04-22T08:14:00Z", action: "drift_alert_routed_to_owner",
+    duration_s: 350, calls: 12, cost: 1.32,
+    detected_at: "2026-04-07T10:28:54Z", action: "drift_alert_routed_to_owner",
     mttr_min: 15, mttr_hr_without: 720,
-    note: "Tool-call mix shifted: ledger_lookup went from 35% baseline to 78%. Drift signal routed to the line-1 owner.",
+    note: "Tool-call mix shifted: ledger_lookup is 35% of calls at the stub baseline in step_04 and 100% of this run's six sampled calls. Drift signal routed to the line-1 owner.",
     fired: ["silent_drift"],
   },
   {
-    id: "RUN_00411", inc: "INC_0022", agent: "loan_pkg_v4", framework: "AutoGen",
+    id: "RUN_00002", inc: "INC_0016", agent: "loan_pkg_v4", framework: "AutoGen",
     vendor: "anthropic", model: "claude-opus-4-20250514",
     deficiency: "blast_unbounded", severity: "P1", status: "BOUNDED_BY_AGENTWATCH",
-    duration_s: 1418, calls: 105, cost: 2400.00,
-    detected_at: "2026-04-19T13:47:23Z", action: "circuit_breaker_tripped",
+    duration_s: 350, calls: 105, cost: 2400.00,
+    detected_at: "2026-04-29T06:14:11Z", action: "circuit_breaker_tripped",
     mttr_min: 4, mttr_hr_without: 168,
     note: "11-tool agent with one malformed plan compounding across all of them. Circuit breaker tripped before the rate-lock fired.",
     fired: ["blast_unbounded"],
   },
   {
-    id: "RUN_00188", inc: "INC_0018", agent: "claims_triage_v3", framework: "LangGraph",
+    id: "RUN_00320", inc: "INC_0018", agent: "claims_triage_v3", framework: "LangGraph",
     vendor: "anthropic", model: "claude-sonnet-4-20251101",
     deficiency: "no_reasoning_trace", severity: "P3", status: "FAILED_RETRYABLE",
-    duration_s: 102, calls: 13, cost: 1.56,
-    detected_at: "2026-04-11T22:03:09Z", action: "trace_replay_synthesized",
+    duration_s: 350, calls: 9, cost: 1.08,
+    detected_at: "2026-04-13T23:06:29Z", action: "trace_replay_synthesized",
     mttr_min: 12, mttr_hr_without: 48,
     note: "Underlying Langfuse trace TTL'd out before the post-mortem. AgentWatch's replay store synthesized the chain-of-thought.",
     fired: ["no_reasoning_trace"],
   },
   {
-    id: "RUN_00427", inc: "INC_0023", agent: "loan_pkg_v4", framework: "AutoGen",
+    id: "RUN_00227", inc: "INC_0023", agent: "loan_pkg_v4", framework: "AutoGen",
     vendor: "anthropic", model: "claude-opus-4-20250514",
     deficiency: "cost_detached", severity: "P3", status: "COMPLETED",
-    duration_s: 245, calls: 15, cost: 4.80,
-    detected_at: "2026-04-27T09:55:41Z", action: "cost_attributed_to_outcome",
+    duration_s: 350, calls: 10, cost: 3.2,
+    detected_at: "2026-04-03T08:51:28Z", action: "cost_attributed_to_outcome",
     mttr_min: 9, mttr_hr_without: 504,
     note: "FinOps review queue lit up: agent ran fine, completed normally, but no business outcome attributed. AgentWatch joined cost to the downstream loan-package decision.",
     fired: ["cost_detached"],
@@ -289,7 +289,7 @@ function render(i) {
 
   // Card 1 — Run captured
   document.getElementById("card-1-body").innerHTML =
-    `<div class="field-row"><span class="field-label">started</span><span class="field-value">${r.detected_at}</span></div>` +
+    `<div class="field-row"><span class="field-label">detected</span><span class="field-value">${r.detected_at}</span></div>` +
     `<div class="field-row"><span class="field-label">duration</span><span class="field-value">${r.duration_s}s</span></div>` +
     `<div class="field-row"><span class="field-label">tool calls</span><span class="field-value">${r.calls.toLocaleString()}</span></div>` +
     `<div class="field-row"><span class="field-label">cost</span><span class="field-value">$${r.cost.toLocaleString(undefined, {minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>` +

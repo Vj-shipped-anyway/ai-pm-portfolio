@@ -61,11 +61,11 @@
 | 07 | **Blast-radius circuit breaker (v0.3)** — per-incident distinct-tool cap + per-agent dollar ceiling; trip before downstream side-effects fire. | 100M | 3 | 0.8 | 8 | 30.0 | Sequenced for v0.3 |
 | 08 | **Long-term reasoning-trace replay store (v0.4)** — ClickHouse-backed event store; query by `run_id` past the LLM proxy's 7-15-day TTL. | 100M | 3 | 0.7 | 21 | 10.0 | Sequenced for v0.4 |
 | 09 | **Cost attribution to outcome (v0.4)** — daily ETL joining run cost to downstream business event via `outcome_id`. | 100M | 3 | 0.65 | 13 | 15.0 | Sequenced for v0.4 |
-| 10 | **Streamlit prototype (v0.1)** — single-run drill-down, six-deficiency verdict card, incident-pack download. | 1k | 2 | 1.0 | 5 | 0.4 | Sequenced for v0.1 (this repo) |
+| 10 | **Streamlit prototype (v0.1)** — single-run drill-down, six-deficiency verdict card, incident-pack download. | 1k | 2 | 1.0 | 5 | 0.0004 | Sequenced for v0.1 (this repo) |
 | 11 | **MRM workbench integration (v0.5)** — push incident_id to Archer / ServiceNow GRC / MetricStream; bidirectional sync on attestation. | 100M | 2 | 0.6 | 13 | 9.2 | Sequenced for v0.5 |
 | 12 | **OPA policy gates (v0.5)** — RBAC matrix scoped per region; OPA evaluates every incident-pack export. | 100M | 2 | 0.8 | 8 | 20.0 | Sequenced for v0.5 |
 | 13 | **PagerDuty / Slack routing (v0.5)** — incident-pack delivery to SRE on-call + line-1 owner queues; auto-deduplication by `(agent_id, deficiency_class)` within 1h window. | 100M | 2 | 0.85 | 5 | 34.0 | Sequenced for v0.5 |
-| 14 | **GDPR right-to-erasure cascade** — customer_id_hash deletion cascades to incident records (with legal-hold override). | 30M | 2 | 0.7 | 8 | 5.2 | Queued (post v0.6) |
+| 14 | **GDPR right-to-erasure cascade** — customer_id_hash deletion cascades to incident records (with legal-hold override). | 30M | 2 | 0.7 | 8 | 5.2 | Queued (after v0.5) |
 
 ---
 
@@ -75,13 +75,13 @@
 - **Anthropic, OpenAI, and Microsoft all publish agent guidance that says the same thing.** Agents fail unpredictably in production. The remediation is per-incident cost bounding + reasoning-trace capture. AgentWatch is the implementation surface.
 - **[OpenTelemetry](https://opentelemetry.io/) on agent frameworks is now native.** LangGraph emits OTel spans by default. AutoGen exposes a logging hook. Bedrock Agents and OpenAI Assistants expose vendor-native trace tails. The substrate exists.
 - **Vendor model silent updates** make the cost-per-incident question harder every quarter. A silent Anthropic snapshot roll changes the agent's planning behavior; AgentWatch's tool-call-mix drift detector surfaces it.
-- **[SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) and [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** apply to deployed agents the same way they apply to deployed models. The ongoing-monitoring requirement is the same; the surface AgentWatch implements is the same.
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) and [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** apply to deployed agents the same way they apply to deployed models. The ongoing-monitoring requirement is the same; the surface AgentWatch implements is the same.
 
 ## 5. Goals (12-month horizon)
 
 | Goal | Metric | Target | Tier |
 | --- | --- | --- | --- |
-| Bound per-incident cost | $ at cutoff per detected incident | unbounded → per-agent cap ($150–$300) | 🟢 |
+| Bound per-incident cost | $ at cutoff per detected incident | unbounded → per-agent cap ($150–$300, set in `agents.csv`); 6 of 24 synthetic cut-offs currently land above their cap | 🔴 |
 | Reduce MTTR | Median minutes from incident to mitigation routed | 4h+ → &lt;10min | 🔴 |
 | Increase detection coverage | % of agent-shaped incidents detected | ~25% (APM) → 100% (AgentWatch) | 🟡 |
 | Zero finding rate | SR 11-7 + EU AI Act Article 14 audit findings related to deployed agents | unknown → zero (designed target) | 🔴 |

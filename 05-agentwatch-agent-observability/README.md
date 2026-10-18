@@ -8,10 +8,10 @@
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
-[![Modeled corpus: 500 agent runs](https://img.shields.io/badge/modeled--corpus-500%20synthetic%20runs-blue)](#)
-[![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%2Fof%206-brightgreen)](#)
-[![Bounded incidents: 24 of 24](https://img.shields.io/badge/bounded%20incidents-24%20of%2024-success)](#)
-[![MTTR with AgentWatch](https://img.shields.io/badge/MTTR-under%2010%20min-orange)](#)
+![Modeled corpus: 500 agent runs](https://img.shields.io/badge/modeled--corpus-500%20synthetic%20runs-blue)
+![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%20of%206-brightgreen)
+![Incidents composed: 24 of 24](https://img.shields.io/badge/incidents%20composed-24%20of%2024-success)
+![MTTR target, designed](https://img.shields.io/badge/MTTR%20target-designed%2C%20under%2010%20min-orange)
 [![OpenTelemetry-native](https://img.shields.io/badge/OpenTelemetry-native-lightgrey)](https://opentelemetry.io/)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
@@ -25,7 +25,7 @@
 ## 🔥 Demo in 30 seconds
 
 Open the static, no-Python demo: [`demo.html`](./demo.html).
-Pick `INC_0001 / RUN_00095` (the `claims_triage_v3` runaway loop on April 14, 2026). Watch the bleed cap at $4,218.34 in 6 minutes instead of $42k+ over 3 weeks.
+Pick `INC_0001 / RUN_00095` (the `claims_triage_v3` runaway loop on April 14, 2026). Watch the run get cut off at $4,218.34 and routed in 6 minutes (the MTTR seeded in the data), instead of surfacing about 3 weeks later in the FinOps review.
 
 To run the four-step walkthrough on your laptop:
 
@@ -58,8 +58,8 @@ The agent-observability space has incumbents at every layer (Datadog APM for ser
 | Blast-radius circuit breaker | ❌ | ❌ | ❌ | ✅ |
 | Cost attribution to business outcome | ❌ | ❌ | ❌ | ✅ |
 | WORM-retained incident pack | ❌ | ❌ | ❌ | ✅ |
-| 🟡 MTTR on agent-shaped incidents (modeled) | 4 hr | 6 hr | 3 hr | **&lt;10 min** |
-| 🔴 [SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) ongoing-monitoring ready (designed) | ❌ | ❌ | ❌ | ✅ |
+| 🔴 MTTR on agent-shaped incidents (hypothetical, no source; not produced by any script) | 4 hr | 6 hr | 3 hr | **&lt;10 min** |
+| 🔴 [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) ongoing-monitoring ready (designed) | ❌ | ❌ | ❌ | ✅ |
 
 **Position:** *AgentWatch does not replace your APM or your LLM trace vendor. It sits on top of them and does the agent-shaped composition the line-1 owner and FinOps reviewer actually need.* This matters because a Head of AI Platform can deploy this without ripping out Datadog, Langfuse, or the agent framework's native console.
 
@@ -69,7 +69,7 @@ The agent-observability space has incumbents at every layer (Datadog APM for ser
 
 The failure mode this product is designed against — a bank's deployed agent stuck in a runaway tool-call loop, burning $5–50k per incident, surfacing 3 weeks later in the FinOps review — is the shape of what's increasingly reported across Tier-1 BFSI shops deploying their first wave of LangGraph / AutoGen / Bedrock Agents / OpenAI Assistants into ops workflows (claims triage, KYC refresh, dispute reconciliation, loan-package assembly). It is the kind of failure I track in industry research and the kind of product I want to own as a Sr / Principal PM.
 
-I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk through their own Head of AI Platform with — to show how I'd reason about the problem, not to claim a deployment I haven't done.
+I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk their own Head of AI Platform through — to show how I'd reason about the problem, not to claim a deployment I haven't done.
 
 If you have lived through a $30k surprise on the AWS bill from an agent loop and felt the same itch, fork this. The taxonomy, the architecture, and the backlog are the parts you're welcome to lift; the production validation is what the seat I'm pursuing actually delivers.
 
@@ -94,15 +94,15 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 
 ## Executive summary (90 seconds)
 
-**Problem.** A modeled Tier-1 retail bank deploys a `claims_triage_v3` agent on Anthropic Claude Sonnet 4 via LangGraph, wired up with 9 tools (claim lookup, policy lookup, fraud score, doc extraction, customer match, adjudication calc, SIU check, comms draft, ticket create). On **April 14, 2026 at 03:12:08 UTC**, the agent processes a malformed `claim_lookup` response as "try again." It retries with `retry=1`, `retry=2`, …`retry=1847`. By **04:33:08 UTC** the run has burned **$4,218.34** of inference cost across **1,847 redundant Anthropic API calls**. Without AgentWatch, the bank discovers it 3 weeks later in the FinOps review. 🟡 Modeled exposure across the 30-day window: **$47,978 of undetected runaway cost** (the synthetic data, calibrated against published Tier-1 BFSI agent-fleet shapes).
+**Problem.** A modeled Tier-1 retail bank deploys a `claims_triage_v3` agent on Anthropic Claude Sonnet 4 via LangGraph, wired up with 9 tools (claim lookup, policy lookup, fraud score, doc extraction, customer match, adjudication calc, SIU check, comms draft, ticket create). On **April 14, 2026 at 03:12:08 UTC**, the agent processes a malformed `claim_lookup` response as "try again." It retries with `retry=1`, `retry=2`, …`retry=1847`. By **04:33:08 UTC** the run has burned **$4,218.34** of inference cost across **1,847 tool calls**. Without AgentWatch, the bank discovers it 3 weeks later in the FinOps review. 🟡 Modeled exposure across the 30-day window: **$47,978 of undetected runaway cost** (the synthetic data, calibrated against published Tier-1 BFSI agent-fleet shapes).
 
 **Product.** AgentWatch — a sidecar that ingests the agent framework's OpenTelemetry export, classifies failure under a six-deficiency taxonomy, and enforces a per-incident dollar cap. Six-deficiency taxonomy: **runaway tool loops** + **hallucinated tool arguments** + **silent agent drift** + **blast-radius unbounded** + **no reasoning trace capture** + **cost telemetry detached from outcomes**. Per-run incident pack assembled in sub-second on the prototype, routed to SRE on-call + line-1 owner.
 
 **Modeled performance (500-run synthetic corpus, four-agent fleet, 24 detected incidents).**
 
-- 🟢 **24 of 24 incidents bounded** on every incident in the shipped corpus (`step_04_with_agentwatch.py` reports complete six-deficiency classification + sidecar action for each).
+- 🟢 **24 of 24 incidents composed** into a six-deficiency record with a sidecar action (`step_04_with_agentwatch.py` prints "24 of 24 incidents bounded", but it counts records composed, not dollars capped; 9 of the 24 runs carry status `BOUNDED_BY_AGENTWATCH` in `agent_runs.csv`).
 - 🟢 **Composition latency: <50ms per incident** measured on the prototype.
-- 🟢 **Headline runaway capped at $4,218.34** vs. an unbounded burn that would have continued for hours; 1,847 tool calls bounded at the per-agent dollar cap of $250.
+- 🟢 **Headline runaway cut off at $4,218.34** after 1,847 tool calls, against a per-agent dollar cap of $250 (`step_04_with_agentwatch.py` prints `cap_exceeded=True`). In this synthetic data, 6 of the 24 cut-offs land above their agent's cap.
 - 🟡 **Detection rate: 0% → 100%** of agent-shaped incidents (modeled — assumes the synthetic 500-run corpus + Tier-1-style four-agent fleet).
 - 🟡 **APM-only detection rate: ~25%** of incidents catch via generic latency / cost-per-run alerts; the other ~75% live and die in the FinOps bill (modeled — assumes Datadog with standard p99 thresholds).
 - 🔴 **MTTR: 4 hours → &lt;10 minutes** (designed against published BFSI agent-incident review intervals; not yet tested with a real SRE pager rotation).
@@ -119,7 +119,7 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 1. **The use case** — the `claims_triage_v3` runaway loop on April 14 walked step by step
 2. **Sample data** — 500 synthetic agent runs across four deployed agents + 24 detected incidents
 3. **Step 1 — Before observability** — 30 days of agent runs, 0 incidents detected, ~$48k undetected bleed
-4. **Step 2 — Basic Datadog APM** — latency + cost-per-run alerts catch ~25% of incidents, ~12-48hr after the fact
+4. **Step 2 — Basic Datadog APM** — latency + cost-per-run alerts catch ~25% of incidents, with an assumed 12-48hr lag (a fixed string in step 2, not computed)
 5. **Step 3 — Where this still breaks** — six named deficiencies with real-feeling consequences
 6. **Step 4 — The fix (AgentWatch)** — sidecar composition + per-incident cost ceiling + WORM incident pack
 7. **Utility delivered** — multiplied number, not the percentage
@@ -135,16 +135,16 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case — the claims-triage runaway loop walkthrough
 
-A modeled Tier-1 retail bank. Four production agents across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly. [SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) governs the model risk posture. [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) (human oversight on high-risk AI) is in effect for the EU operating arm. Each agent is wired up with 6-11 tools and has authority to call them autonomously.
+A modeled Tier-1 retail bank. Four production agents across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly. [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) governs the model risk posture. [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) (human oversight on high-risk AI) is in effect for the EU operating arm. Each agent is wired up with 6-11 tools and has authority to call them autonomously.
 
 **The scenario:**
 
 - **April 14, 2026, 03:12:08 UTC.** The `claims_triage_v3` agent (Anthropic Claude Sonnet 4 on LangGraph) receives a triage request for `CUST_447219`. It calls `claim_lookup` with `claim_id=CLM_447000`. The internal API returns a malformed response (a stale cache line that doesn't parse). The agent interprets it as "try again with a different ID." It retries: `CLM_447001`, `CLM_447002`, … `CLM_448847`.
-- **April 14, 04:33:08 UTC.** AgentWatch's per-incident cost-cap fires. The run is terminated. Total burn: **$4,218.34** across **1,847 redundant Anthropic API calls**. The reasoning trace is captured. The incident pack is routed to the SRE on-call and the `line1.insurance-ops` owner.
+- **April 14, 03:18:01 UTC.** AgentWatch detects the runaway (`detected_at` for INC_0001, about 6 minutes after the run started). The run ends at 04:33:08 UTC with status `BOUNDED_BY_AGENTWATCH`. Total burn: **$4,218.34** across **1,847 tool calls**. The reasoning trace is captured. The incident pack is routed to the SRE on-call and the `line1.insurance-ops` owner.
 
 **Today (no AgentWatch):** the agent keeps looping. Detection happens 3 weeks later when FinOps reviews the AWS bill. Modeled exposure: $5–50k per incident × ~24 incidents/yr at fleet scale. The on-call has no replay UI, no chain-of-thought trace, no incident classification.
 
-**With AgentWatch:** 6 minutes, self-serve, complete six-deficiency incident pack returned by `GET /v1/incidents/INC_0001`. Cost capped at $4,218 (vs. a modeled $42k+ if the loop had been allowed to continue). Validator gets the trace replay in their queue.
+**With AgentWatch:** 6 minutes, self-serve, complete six-deficiency incident pack returned by `GET /v1/incidents/INC_0001`. Cost at cutoff $4,218.34 against a $250 cap; no script models what the loop would have cost if left running. Validator gets the trace replay in their queue.
 
 The fleet (synthetic, but modeled on what a real Tier-1 BFSI shop typically runs):
 
@@ -171,9 +171,9 @@ Four CSVs in [`data/`](./data/). Schema documented in [`data/README.md`](https:/
 | run_id | agent_id | started_at | status | total_tool_calls | total_cost_usd |
 | --- | --- | --- | --- | --- | --- |
 | **RUN_00095** | **claims_triage_v3** | **2026-04-14T03:12:08Z** | **BOUNDED_BY_AGENTWATCH** | **1,847** | **$4,218.34** |
-| RUN_00039 | claims_triage_v3 | 2026-04-17T... | BOUNDED_BY_AGENTWATCH | 9,166 | $22,000.00 |
-| RUN_00207 | kyc_refresh_v2 | 2026-04-09T... | FAILED_RETRYABLE | 95 | $1,500.00 |
-| RUN_00411 | loan_pkg_v4 | 2026-04-19T... | BOUNDED_BY_AGENTWATCH | 105 | $2,400.00 |
+| RUN_00039 | claims_triage_v3 | 2026-04-01T... | BOUNDED_BY_AGENTWATCH | 9,166 | $22,000.00 |
+| RUN_00172 | kyc_refresh_v2 | 2026-04-15T... | FAILED_RETRYABLE | 75 | $1,500.00 |
+| RUN_00002 | loan_pkg_v4 | 2026-04-29T... | BOUNDED_BY_AGENTWATCH | 105 | $2,400.00 |
 
 ---
 
@@ -190,20 +190,20 @@ python src/step_01_no_observability.py
 ```
 Per-agent rollup (what the FinOps spreadsheet shows at month-end)
   agent_id                  runs    tool_calls    total_cost    runaways     runaway_$
-  claims_triage_v3           159         12918    $43,718.34          6     $41,973.34
-  dispute_recon_v1           133           605    $    56.52          0     $     0.00
-  kyc_refresh_v2             111           751    $ 4,249.70          4     $ 4,200.00
-  loan_pkg_v4                 97          1061    $ 7,457.25          3     $ 7,300.00
+  claims_triage_v3           159         18523$   42,091.93           6$   41,973.34
+  dispute_recon_v1           133           605$       56.52           0$        0.00
+  kyc_refresh_v2             111           571$    1,764.70           4$    1,715.00
+  loan_pkg_v4                 97           976$    4,447.25           3$    4,290.00
 
 Summary — what the bank does NOT see
-  Total inference + tool spend:       $54,100+
+  Total inference + tool spend:       $48,360.39
   Undetected runaway dollar bleed:    $47,978.34
-  Detection rate today:               0 of 24 incidents detected
+  Detection rate today:               0 of 13 incidents detected
   Mean-time-to-detect:                ~3 weeks (the FinOps review cycle)
   Mean-time-to-recover:                no MTTR — incidents are discovered post-mortem
 ```
 
-🟢 Measured on the synthetic 500-run corpus. 🟡 The $47,978 undetected bleed is calibrated against published Tier-1 BFSI agent-fleet shapes for a 30-day window.
+🟢 Measured on the synthetic 500-run corpus. The 13 in "0 of 13" are the runs with at least 50 tool calls or at least $50 (the script's retrospective runaway rule); the other 11 of the 24 incidents are cheap runs below both thresholds. 🟡 The $47,978 undetected bleed is calibrated against published Tier-1 BFSI agent-fleet shapes for a 30-day window.
 
 This is the structural blindness the rest of the walkthrough fixes.
 
@@ -246,7 +246,7 @@ Generic APM is the foundation. It is not the agent-observability product.
 | 3 | **Silent agent drift** | KYC agent that was 60% retrieval / 40% case-creation last quarter is now 90% retrieval / 10% case-creation. Signals planning regression. Nobody flagged the shift. | Sees nothing. Latency and error rate are within bounds. Token usage is up marginally — within noise. The agent appears 'healthy' until the next MRM cycle. |
 | 4 | **Blast-radius unbounded** | 11-tool loan-package agent has authority to call every tool. A malformed plan compounds across all of them — wrong rate-lock, premature approval routing, mis-drafted comms. | Sees that the run touched 11 tools. There is no policy saying that is bad. Downstream side-effects materialize hours or days later in customer-service tickets. |
 | 5 | **No reasoning trace capture** | The agent fails. The on-call sees the side-effects, not the chain-of-thought. The LLM proxy's trace TTLs out after 7-15 days. For an incident reviewed at week 4, the trace is gone. | Has the HTTP-level service trace. The agent's reasoning waterfall — the actual chain-of-thought — lives in the LLM proxy's transient buffer and is unrecoverable post-TTL. |
-| 6 | **Cost telemetry detached from outcomes** | Bank knows total agent spend. Cannot attribute that spend to specific customer outcomes or business value. A $0.42 average run gets approved at FinOps review — no idea whether the $0.42 produced a closed claim or noise. | Aggregate dollars per service. Aggregate token count. No attribution to the downstream business outcome. FinOps planning meeting: 'agent spend is up 30%' with no view of ROI. |
+| 6 | **Cost telemetry detached from outcomes** | Bank knows total agent spend. Cannot attribute that spend to specific customer outcomes or business value. A routine run (about $0.78 on average) gets approved at FinOps review — no idea whether the $0.78 produced a closed claim or noise. | Aggregate dollars per service. Aggregate token count. No attribution to the downstream business outcome. FinOps planning meeting: 'agent spend is up 30%' with no view of ROI. |
 
 ```bash
 python src/step_03_deficiencies_exposed.py
@@ -283,7 +283,7 @@ Six-deficiency composition
 ----------------------------------------------------------------------------
   1. Runaway tool loops:         tool_calls=1847, loop_threshold_exceeded=True
   2. Hallucinated tool args:     validated=True, rejected=0
-  3. Silent agent drift:         max_delta_pct=0.18, flag=False
+  3. Silent agent drift:         max_delta_pct=0.82, flag=False
   4. Blast-radius unbounded:     distinct_tools=1, cap=$250, cost=$4,218.34, cap_exceeded=True
   5. Reasoning trace:            captured=True, replay=https://agentwatch.bank/runs/RUN_00095/replay
   6. Cost attribution:           run_cost=$4,218.34, outcome=agent_terminated_by_cap, attributed=True
@@ -302,7 +302,7 @@ Cross-references (raw agent log surfaces composed into this record)
   agent_identity_ref:   iam/agent-identity/RUN_00095
 
 Retention policy:   7 years (SR 11-7 ongoing monitoring evidence), WORM-bucketed
-Composition time:   <50ms on the prototype
+Composed in:        <50ms on the prototype
 ```
 
 **Fleet-wide run** across all 24 incidents:
@@ -311,9 +311,9 @@ Composition time:   <50ms on the prototype
 | --- | --- |
 | Incidents composed | 24 / 24 |
 | Six-deficiency classification closed | 24 / 24 |
-| Wall-clock for fleet sweep | ~0.1s on a laptop |
-| Average composition per incident | ~3ms |
-| Avg MTTR with AgentWatch | 4-15 minutes (varies by class) |
+| Wall-clock for fleet sweep | under 0.1s on a laptop (the script prints the measured time) |
+| Average composition per incident | under 3ms (the script prints the measured average) |
+| Avg MTTR with AgentWatch | 4-15 minutes (varies by class; seeded in `incidents.csv`, not timed) |
 | Modeled avg MTTR without AgentWatch | 48-720 hours (varies by class) |
 
 The composition itself is a hash-anchored, immutable Postgres row in production. The CSV-based demo path is shipped so anyone can clone and run; the production architecture is in [`ARCHITECTURE.md`](./ARCHITECTURE.md).
@@ -328,15 +328,15 @@ Bounding $/incident by 100% is not an outcome. *Bounding $/incident by 100% acro
 
 | Term | Value |
 | --- | --- |
-| 🟡 Current SOTA: undetected runaway $/incident | $5,000 - $50,000 |
-| 🟢 AgentWatch: $/incident at cutoff | bounded by per-agent cap ($150 - $300) |
+| 🟡 Current SOTA: undetected runaway $/incident | $5,000 - $50,000 (assumed range; the six synthetic runaway loops run from $85 to $22,000) |
+| 🟢 AgentWatch: per-agent dollar cap configured | $150 - $300 (`agents.csv`); 6 of 24 synthetic cut-offs land above their cap, so cost at cutoff is not bounded by it in this data |
 | 🔴 AgentWatch: time-to-mitigation (designed) | &lt; 10 minutes |
 | 🟡 Current SOTA: time-to-detection (FinOps review) | ~3 weeks |
-| Per-incident lift (modeled at Tier-1 BFSI fleet scale) | **~3 weeks → &lt;10 minutes** of MTTR; **$5–50k → $150–300** of bounded cost |
+| Per-incident lift (modeled at Tier-1 BFSI fleet scale) | **~3 weeks → &lt;10 minutes** of MTTR; **$5–50k → $150–300** of bounded cost (design target; see the cap row above) |
 | Affected population (Tier-1 BFSI) | **8–20 deployed agents within 18 months** |
 | 🟡 Modeled incidents prevented per year at fleet scale | **24+ runaways/yr bounded** |
 | 🟡 Modeled cost prevented per year at fleet scale | **$120k - $1.2M of bounded runaway spend** (assumes 24 incidents × $5–50k each) |
-| 🟡 Cost per dollar of avoided runaway burn | **&lt;$0.40** (modeled — assumes ~$380k engagement vs. low-end $120k of prevented runaway cost) |
+| 🟡 Cost per dollar of avoided runaway burn | **$0.32 to $3.17** (modeled — $380k engagement ÷ $1.2M high end = $0.32; ÷ $120k low end = $3.17) |
 
 ---
 
@@ -491,6 +491,8 @@ cd ai-pm-portfolio/05-agentwatch-agent-observability
 #    data/ as CSVs with the schemas in data/README.md.
 cp /path/to/your/agent_runs.csv  data/agent_runs.csv
 cp /path/to/your/tool_calls.csv  data/tool_calls.csv
+cp /path/to/your/agents.csv      data/agents.csv
+cp /path/to/your/incidents.csv   data/incidents.csv
 
 # 2. Run the four-step walkthrough
 pip install -r src/requirements.txt
@@ -543,7 +545,7 @@ If AgentWatch were a real product shipping to a Tier-1 bank's AI Platform and SR
 - **Governance:** Native integration with Archer / ServiceNow GRC / MetricStream; each incident gets a workflow ID; attestation routes to the line-2 validator's queue; legal-hold cascade is automatic.
 - **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on composition-completeness breach.
 
-The Streamlit prototype here proves the *product mechanic* — that agent-shaped composition can compress MTTR from 3 weeks to under 10 minutes and bound per-incident cost. The production architecture above is what the seat I'm pursuing actually delivers.
+The Streamlit prototype here demonstrates the *product mechanic* on synthetic data: agent-shaped composition of six failure classes into one incident pack. The MTTR drop from 3 weeks to under 10 minutes and the per-incident cost bound are design targets, not measured results. The production architecture above is what the seat I'm pursuing actually delivers.
 
 ---
 
@@ -565,6 +567,6 @@ The Streamlit prototype here proves the *product mechanic* — that agent-shaped
 - [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview) — OpenAI's hosted agent runtime. Threads + tools + file search.
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM06 Sensitive Information Disclosure, LLM09 Misinformation. The taxonomy backbone.
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the federal-government framework backbone.
-- [SR 11-7 / OCC Bulletin 2011-12](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — co-issued model-risk-management guidance. The "ongoing monitoring" requirement AgentWatch implements.
+- SR 11-7 / OCC Bulletin 2011-12 (replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — co-issued model-risk-management guidance. The "ongoing monitoring" requirement AgentWatch implements.
 - [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — human oversight on high-risk AI systems.
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives AgentWatch composes with.

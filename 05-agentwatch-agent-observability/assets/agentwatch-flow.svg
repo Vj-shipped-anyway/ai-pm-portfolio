@@ -27,7 +27,7 @@
   </defs>
 
   <text x="20" y="32" class="header">AgentWatch — sidecar composition flow for one agent run</text>
-  <text x="20" y="52" class="subheader">RUN_00095 claims_triage_v3 runaway · Apr 14 03:12Z · bounded at $4,218 / 1,847 calls in 6 minutes.</text>
+  <text x="20" y="52" class="subheader">RUN_00095 claims_triage_v3 runaway · Apr 14 03:12Z · cut off at $4,218 / 1,847 calls in 6 minutes.</text>
 
   <!-- Trigger badge -->
   <rect x="20" y="78" width="320" height="22" rx="4" class="badge-bg"/>
@@ -69,11 +69,11 @@
   <!-- Stage 4: CAP ENFORCED -->
   <rect x="620" y="120" width="170" height="120" rx="8" class="stage-box-export"/>
   <text x="632" y="140" class="stage-num">4 · CAP ENFORCED</text>
-  <text x="632" y="162" class="stage-title">circuit_breaker_tripped</text>
+  <text x="632" y="162" class="stage-sub" style="font-size:9px" textLength="154" lengthAdjust="spacingAndGlyphs">auto_cutoff_at_blast_radius_cap</text>
   <text x="632" y="180" class="stage-sub">cost @ cutoff:</text>
   <text x="632" y="196" class="stage-sub">$4,218.34</text>
   <text x="632" y="212" class="stage-sub">cap = $250</text>
-  <text x="632" y="232" class="meta-strong">bleed bounded</text>
+  <text x="632" y="232" class="meta-strong">cap_exceeded=True</text>
 
   <line x1="790" y1="180" x2="818" y2="180" class="arrow-line" marker-end="url(#arrow)"/>
 
@@ -99,7 +99,7 @@
   <text x="780" y="346" class="timer-fast" fill="#14532D">MTTR: 6 minutes</text>
 
   <!-- Summary numbers -->
-  <text x="20" y="395" class="stage-title">100% of runaways bounded · MTTR 4h+ → &lt;10min · per-incident cost capped · 30-day undetected bleed: $0</text>
+  <text x="20" y="395" class="stage-title">100% of runaway_loop runs labeled BOUNDED_BY_AGENTWATCH · MTTR target &lt;10min (designed)</text>
 
   <!-- Six-deficiency badges -->
   <rect x="20" y="412" width="155" height="22" rx="4" fill="#E0E7FF"/>
