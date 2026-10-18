@@ -2,6 +2,8 @@
 
 **A portfolio prototype for the part of AI operations that usually has no owner: the trigger that moves a degraded customer segment to a simple rules path, the per-segment switch, the careful way back, and a scorecard for the drills that prove it works. Aligned to the operational-resilience expectations in [SR 20-24](https://www.federalreserve.gov/supervisionreg/srletters/SR2024.htm) and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced the 2011 predecessor, SR 11-7, in April 2026), and to the 'Manage' function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/25-killswitch-ai-fallback-drills/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the tier-and-recovery design, the drill scorecard, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real decision service, a real incident history, a rules engine with an owner, an operational-resilience read) is what the next role does.
@@ -814,7 +816,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs the fallback, the drill and the way back for AI decision services, under regulated constraint*
 
@@ -822,7 +824,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 🙌 Acknowledgements
 
-- **[SR 20-24](https://www.federalreserve.gov/supervisionreg/srletters/SR2024.htm)** — the interagency operational-resilience paper: the standard the work would have to meet on testing that recovery actually works. A fallback nobody has drilled is a plan, not a capability.
+- **[SR 20-24](https://www.federalreserve.gov/supervisionreg/srletters/SR2024.htm)** — the interagency operational-resilience paper: the model-risk guidance the work is compared with on testing that recovery actually works. A fallback nobody has drilled is a plan, not a capability.
 - **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance from the Federal Reserve, OCC and FDIC (April 2026), which replaced the 2011 predecessor, SR 11-7. The ongoing-monitoring and contingency theme is what the trip and the scorecard are written against. Obligation statements in this repo are paraphrases written for this exercise, not the text of the rule.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Manage' function maps onto responding to a degraded system and recovering from it.
 - **Sibling projects in this repo** — [02 DriftSentinel](../02-driftsentinel-model-drift-monitoring/), [05 AgentWatch](../05-agentwatch-agent-observability/), [08 OversightOps](../08-oversightops-hitl-workflow/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), four of the interlocks.
