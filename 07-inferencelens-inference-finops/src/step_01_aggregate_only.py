@@ -75,7 +75,7 @@ def main() -> None:
         modeled_cost = float(r["cost_usd"]) * scale
         # Map model -> vendor
         model = r["model"]
-        if model.startswith("claude-"):
+        if model.startswith("vendor-"):
             vendor = "Anthropic"
         elif model.startswith("gpt-"):
             vendor = "Azure OpenAI"

@@ -51,7 +51,7 @@ The decision-grain spine. One row per sampled inference call across 17 of the 18
 
 The pricing surface that drives every cost calculation. Pulled from the published pricing pages on:
 
-- [Anthropic pricing](https://www.anthropic.com/pricing) — Opus 4.1, Sonnet 4.5, Haiku 4.5
+- [Anthropic pricing](https://www.anthropic.com/pricing) — frontier, balanced and fast models
 - [Azure OpenAI pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) — gpt-4o, gpt-4o-mini, gpt-4-turbo
 - [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/) — Llama 3.1 family, Mistral Large 2
 
@@ -92,9 +92,13 @@ This is the feature the CFO would be ambushed by at the next quarterly cost revi
 
 | Source | What it gives you |
 | --- | --- |
-| `features.csv` | `FT_001` (customer-service-assistant) on `claude-sonnet-4-5`; product team thinks retrieval depth is 5; volume is 4.2M queries/month. |
+| `features.csv` | `FT_001` (customer-service-assistant) on `vendor-balanced-4-5`; product team thinks retrieval depth is 5; volume is 4.2M queries/month. |
 | `inference_logs.csv` | Sampled per-query cost jumps from ~$0.0117 to ~$0.0426 starting 2026-05-01 (visible as a step function in the daily cost roll-up). |
-| `model_pricing.csv` | Claude Sonnet 4.5 input pricing is $3.00/Mtok — the cost jump is consistent with input tokens ballooning ~6.7x, which is consistent with a retrieval-depth misconfiguration from 5 docs to 50 docs. |
-| `substitution_recommendations.csv` | Even after the runaway is fixed, `FT_001` should drop to Claude Haiku 4.5 — modeled savings $182k/mo at a -1.4pp accuracy delta. |
+| `model_pricing.csv` | Balanced-model input pricing is $3.00/Mtok — the cost jump is consistent with input tokens ballooning ~6.7x, which is consistent with a retrieval-depth misconfiguration from 5 docs to 50 docs. |
+| `substitution_recommendations.csv` | Even after the runaway is fixed, `FT_001` should drop to the fast model — modeled savings $182k/mo at a -1.4pp accuracy delta. |
 
 In raw vendor-invoice form: invisible inside a $4M aggregate compute line. In InferenceLens: per-feature attribution flags a 3.7x daily-spend anomaly on day 1.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. Every id has the shape `vendor-<tier>-<version>`, and the tier word matches the `tier` column of `model_pricing.csv`: `vendor-frontier-4-1` (highest capability), `vendor-balanced-4-5` (mid-priced) and `vendor-fast-4-5` (cheapest). In prose they are the frontier, balanced and fast models, and `step_01_aggregate_only.py` reads the `vendor-` prefix as the Anthropic invoice line. GPT-4o, Llama and Mistral keep their real names. Prices, volumes and costs are unchanged by the relabel.

@@ -71,7 +71,7 @@
 
 - **GenAI portfolios at Tier-1 BFSI are at 12-20 customer-facing features.** Each one was built with the vendor SDK's default settings. None of them was instrumented for per-feature cost from day one.
 - **Aggregate inference spend is now CFO-attention-grabbing.** $8-30M/yr is in the range where Finance asks for an account, and nobody can give one.
-- **Vendor pricing differentials are real.** [Anthropic Haiku 4.5](https://www.anthropic.com/pricing) is 1/15 the cost of [Opus 4.1](https://www.anthropic.com/pricing) per output token. [gpt-4o-mini](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) is 1/17 the cost of gpt-4o. The substitution candidate space is wide and well-priced.
+- **Vendor pricing differentials are real.** [Anthropic's fast model](https://www.anthropic.com/pricing) is 1/15 the cost of [its frontier model](https://www.anthropic.com/pricing) per output token. [gpt-4o-mini](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) is 1/17 the cost of gpt-4o. The substitution candidate space is wide and well-priced.
 - **OpenTelemetry has won.** Every modern LLM SDK either emits OTEL natively or has a community shim. The substrate exists; the composition layer is missing.
 - **FinOps Foundation framework** is the published industry reference. AI is currently in the framework's "emerging" tier; getting a bank to Level 3 maturity on AI/inference is now table stakes for the FinOps practice.
 

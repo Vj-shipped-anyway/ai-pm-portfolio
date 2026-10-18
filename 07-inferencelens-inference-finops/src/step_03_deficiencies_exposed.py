@@ -8,7 +8,7 @@ today.
 
 Each gap has a real, dollar-shaped consequence. The FT_001 runaway is the
 loudest, but the dead feature (FT_009), the dormant feature (FT_016), and the
-over-tiered features (Opus on customer-service queries) all contribute.
+over-tiered features (the frontier model on customer-service queries) all contribute.
 
 Run:
     python step_03_deficiencies_exposed.py
@@ -84,8 +84,8 @@ DEFICIENCIES = [
         "n": 4,
         "label": "No cheaper-model substitution recommender",
         "cfo_question": (
-            "Why is the customer-service-assistant on Sonnet when Haiku would work? "
-            "Why is the compliance-summarizer on Opus when Sonnet would?"
+            "Why is the customer-service-assistant on the balanced model when the fast model would work? "
+            "Why is the compliance-summarizer on the frontier model when the balanced model would?"
         ),
         "what_logs_return": (
             "Model choice gets made at feature-build time, by a developer, with the "

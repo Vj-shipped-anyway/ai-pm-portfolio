@@ -189,7 +189,7 @@
 <script>
 const FEATURES = [
   {
-    id: "FT_001", name: "customer-service-assistant", model: "claude-sonnet-4-5",
+    id: "FT_001", name: "customer-service-assistant", model: "vendor-balanced-4-5",
     line: "retail", owner: "line1.contact-center", status: "RUNAWAY",
     cfo_question: "Why is the retail-bank chatbot suddenly costing 3.7x more per call since May?",
     before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic line item up by $130k. Aggregate hides which feature caused the spike. Finance asks; AI Platform PM has no answer." },
@@ -197,17 +197,17 @@ const FEATURES = [
             note: "Anthropic console shows ak_retail_prod has a daily-spend uptick. Console cannot say WHICH feature inside the key is responsible (11 features share this key)." },
     lens: { attribution: "FT_001 modeled monthly spend ~$145k (up from ~$49k)",
             runaway: "ALERT - 3.7x baseline since 2026-05-01 - retrieval depth misconfig (50 docs, should be 5)",
-            substitution: "claude-sonnet-4-5 -> claude-haiku-4-5 - savings $182k/mo - accuracy delta -1.4pp",
+            substitution: "vendor-balanced-4-5 -> vendor-fast-4-5 - savings $182k/mo - accuracy delta -1.4pp",
             dead: "Live - retail customer-service is the bank's highest-traffic GenAI surface",
             roi: "No revenue attribution; cost-center customer-service feature - kill the runaway, then substitute" }
   },
   {
-    id: "FT_009", name: "internal-research-copilot", model: "claude-opus-4-1",
+    id: "FT_009", name: "internal-research-copilot", model: "vendor-frontier-4-1",
     line: "enterprise", owner: "line2.research", status: "DEAD",
     cfo_question: "We shut down the internal research copilot UI on March 15. Why is it still costing $26k/month?",
     before: { dwell: "6 weeks", note: "UI was decommissioned but the endpoint was not. A leaked SDK key keeps generating ~4,700 calls/day. Aggregate vendor invoice does not flag a 'feature with zero business value' line." },
     sota: { caught: 0, total: 6,
-            note: "Console shows ak_enterprise_prod has steady spend on Claude Opus 4.1. Console cannot tell the operator the UI is dead - that fact lives in the feature catalog." },
+            note: "Console shows ak_enterprise_prod has steady spend on the frontier model. Console cannot tell the operator the UI is dead - that fact lives in the feature catalog." },
     lens: { attribution: "FT_009 modeled monthly spend ~$26k - all of it from a dead feature",
             runaway: "Clear - traffic is steady; the problem is it should be zero",
             substitution: "DEAD_FEATURE verdict - do not substitute; KILL the endpoint",
@@ -215,20 +215,20 @@ const FEATURES = [
             roi: "Zero revenue - 100% avoidable cost - kill criterion clearly met" }
   },
   {
-    id: "FT_006", name: "compliance-summarizer", model: "claude-opus-4-1",
+    id: "FT_006", name: "compliance-summarizer", model: "vendor-frontier-4-1",
     line: "enterprise", owner: "line2.compliance", status: "OVER-TIERED",
-    cfo_question: "Does compliance summarization really need Claude Opus? It's $4,558/mo and the volume is modest.",
-    before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic Opus line is meaningful. No mechanism inside Finance to evaluate 'is this the right model tier'." },
+    cfo_question: "Does compliance summarization really need the frontier model? It's $4,558/mo and the volume is modest.",
+    before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic frontier-model line is meaningful. No mechanism inside Finance to evaluate 'is this the right model tier'." },
     sota: { caught: 0, total: 6,
-            note: "Anthropic console shows model-mix; no recommendation engine. The 'is Opus the right tier' question is engineering judgment that nobody is paid to make." },
+            note: "Anthropic console shows model-mix; no recommendation engine. The 'is the frontier model the right tier' question is engineering judgment that nobody is paid to make." },
     lens: { attribution: "FT_006 modeled monthly spend $4,558 - small feature, expensive model",
             runaway: "Clear - steady volume",
-            substitution: "claude-opus-4-1 -> claude-sonnet-4-5 - savings $42k/mo at -3.1pp accuracy",
+            substitution: "vendor-frontier-4-1 -> vendor-balanced-4-5 - savings $42k/mo at -3.1pp accuracy",
             dead: "Live - compliance L2 uses it daily",
-            roi: "Cost-center feature; kill the over-tier - re-evaluate Opus when accuracy delta materially drops" }
+            roi: "Cost-center feature; kill the over-tier - re-evaluate the frontier model when accuracy delta materially drops" }
   },
   {
-    id: "FT_002", name: "wealth-portfolio-summary", model: "claude-sonnet-4-5",
+    id: "FT_002", name: "wealth-portfolio-summary", model: "vendor-balanced-4-5",
     line: "wealth", owner: "line1.wealth", status: "ROI-POSITIVE",
     cfo_question: "Random sample: which wealth-line features pay for themselves?",
     before: { dwell: "6 weeks", note: "Vendor invoice doesn't separate revenue-generating features from cost-center ones. Board frames ALL AI spend as 'cost' at quarterly review." },
@@ -236,12 +236,12 @@ const FEATURES = [
             note: "Console aggregates wealth-line spend by API key. Revenue attribution lives in the data warehouse with a different join key (product_id). No automated link." },
     lens: { attribution: "FT_002 modeled monthly spend ~$2k",
             runaway: "Clear",
-            substitution: "Right-sized - Sonnet is the correct tier for long-context wealth summaries",
+            substitution: "Right-sized - the balanced model is the correct tier for long-context wealth summaries",
             dead: "Live - advisor-facing feature",
             roi: "POSITIVE - $1.24M/mo revenue attributed (end-of-month wealth statement narrative) - 654x ROI on inference cost" }
   },
   {
-    id: "FT_016", name: "trading-floor-news-summarizer", model: "claude-sonnet-4-5",
+    id: "FT_016", name: "trading-floor-news-summarizer", model: "vendor-balanced-4-5",
     line: "wealth", owner: "line1.trading", status: "DORMANT",
     cfo_question: "We piloted this with the trading floor; it ended Feb 1. Is it really gone?",
     before: { dwell: "6 weeks", note: "Aggregate invoice doesn't surface dormant features. They contribute ~$1/mo individually; fleet-scale governance risk is the smell." },
@@ -254,7 +254,7 @@ const FEATURES = [
             roi: "No revenue, negligible cost, governance risk - decommission" }
   },
   {
-    id: "FT_018", name: "smb-loan-copilot", model: "claude-sonnet-4-5",
+    id: "FT_018", name: "smb-loan-copilot", model: "vendor-balanced-4-5",
     line: "retail", owner: "line1.smb-lending", status: "ROI-POSITIVE",
     cfo_question: "SMB lending says this helps loan officers close 14% faster. Does the math work out?",
     before: { dwell: "6 weeks", note: "Aggregate invoice does not break out by feature. The loan-officer team has a productivity number; Finance has a spend number; nobody joins them." },
@@ -262,7 +262,7 @@ const FEATURES = [
             note: "Console shows ak_retail_prod has spend; same key as 10 other retail features. Cannot isolate SMB-specific spend." },
     lens: { attribution: "FT_018 modeled monthly spend ~$1.6k",
             runaway: "Clear - newly deployed, healthy volume curve",
-            substitution: "Right-sized - Sonnet matches the loan-officer workflow complexity",
+            substitution: "Right-sized - the balanced model matches the loan-officer workflow complexity",
             dead: "Live - SMB lending team uses daily",
             roi: "POSITIVE - $820k/mo revenue attributed (14% close-rate lift x SMB deal volume) - 513x ROI on inference" }
   }

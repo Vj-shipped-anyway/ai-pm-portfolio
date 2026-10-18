@@ -139,7 +139,7 @@ CREATE TABLE cost_events (
 
     -- Vendor + model
     vendor                    LowCardinality(String),  -- anthropic / azure_openai / bedrock
-    model                     LowCardinality(String),  -- claude-sonnet-4-5 / gpt-4o / llama-3-1-70b-instruct / ...
+    model                     LowCardinality(String),  -- vendor-balanced-4-5 / gpt-4o / llama-3-1-70b-instruct / ...
     pricing_snapshot_id       LowCardinality(String),  -- which row of model_pricing was used
 
     -- Tokens + cost
@@ -390,7 +390,7 @@ That last list is the discipline. Every internal-build I have watched die has di
     "feature_name": "customer-service-assistant",
     "owner_team": "line1.contact-center",
     "business_line": "retail",
-    "model_used": "claude-sonnet-4-5",
+    "model_used": "vendor-balanced-4-5",
     "status": "active",
 
     "attribution_30d": {
@@ -413,7 +413,7 @@ That last list is the discipline. Every internal-build I have watched die has di
     },
 
     "substitution_recommendation": {
-        "candidate_model": "claude-haiku-4-5",
+        "candidate_model": "vendor-fast-4-5",
         "accuracy_delta_pct": -1.4,
         "monthly_savings_usd": 182000.00,
         "confidence": "high",

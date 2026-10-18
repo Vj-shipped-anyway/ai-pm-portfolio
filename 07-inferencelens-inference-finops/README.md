@@ -147,11 +147,11 @@ A modeled Tier-1 US retail bank ($50B-asset). 18 customer-facing GenAI features 
 
 The fleet (synthetic, but modeled on what a real $50B retail bank typically runs):
 
-- **`FT_001` customer-service-assistant** — front-line retail chatbot (Claude Sonnet 4.5, Tier 1, the headline runaway)
-- **`FT_002` wealth-portfolio-summary** — end-of-month wealth statement narrative (Claude Sonnet 4.5, ROI-positive at $1.24M/mo revenue)
+- **`FT_001` customer-service-assistant** — front-line retail chatbot (balanced model, Tier 1, the headline runaway)
+- **`FT_002` wealth-portfolio-summary** — end-of-month wealth statement narrative (balanced model, ROI-positive at $1.24M/mo revenue)
 - **`FT_003` kyc-doc-reader** — KYC document extraction (gpt-4o, over-tiered)
-- **`FT_009` internal-research-copilot** — UI shut down 2026-03-15 but endpoint still receives traffic (Claude Opus 4.1, the dead feature)
-- **`FT_018` smb-loan-copilot** — SMB loan-officer copilot (Claude Sonnet 4.5, ROI-positive at $820k/mo revenue)
+- **`FT_009` internal-research-copilot** — UI shut down 2026-03-15 but endpoint still receives traffic (frontier model, the dead feature)
+- **`FT_018` smb-loan-copilot** — SMB loan-officer copilot (balanced model, ROI-positive at $820k/mo revenue)
 - ... 13 more across retail / wealth / enterprise lines, including the dormant FT_016 and the decommissioned FT_017
 
 ---
@@ -171,10 +171,10 @@ Four CSVs in [`data/`](./data/). Schema documented in [`data/README.md`](https:/
 
 | feature_id | feature_name | model_used | status | monthly_query_volume | notes |
 | --- | --- | --- | --- | --- | --- |
-| **FT_001** | **customer-service-assistant** | **claude-sonnet-4-5** | **active** | **4,200,000** | **THE RUNAWAY — retrieval depth misconfig 2026-05-01** |
-| FT_002 | wealth-portfolio-summary | claude-sonnet-4-5 | active | 98,000 | Advisor-facing; $1.24M/mo revenue |
-| FT_009 | internal-research-copilot | claude-opus-4-1 | active | 142,000 | THE DEAD FEATURE — UI shut down 2026-03-15 |
-| FT_016 | trading-floor-news-summarizer | claude-sonnet-4-5 | dormant | 84 | THE DORMANT FEATURE — pilot ended 2026-02-01 |
+| **FT_001** | **customer-service-assistant** | **vendor-balanced-4-5** | **active** | **4,200,000** | **THE RUNAWAY — retrieval depth misconfig 2026-05-01** |
+| FT_002 | wealth-portfolio-summary | vendor-balanced-4-5 | active | 98,000 | Advisor-facing; $1.24M/mo revenue |
+| FT_009 | internal-research-copilot | vendor-frontier-4-1 | active | 142,000 | THE DEAD FEATURE — UI shut down 2026-03-15 |
+| FT_016 | trading-floor-news-summarizer | vendor-balanced-4-5 | dormant | 84 | THE DORMANT FEATURE — pilot ended 2026-02-01 |
 
 ---
 
@@ -224,14 +224,14 @@ python src/step_02_vendor_console_view.py
 
 ```
 --------------------------------------------------------------------------------
-  API key                  Model                      Modeled monthly
+  API key                  Model                         Modeled monthly
 --------------------------------------------------------------------------------
-  ak_retail_prod           claude-sonnet-4-5          $      151,751.24
-  ak_enterprise_prod       claude-opus-4-1            $       33,196.30
+  ak_retail_prod           vendor-balanced-4-5        $      151,751.24
+  ak_enterprise_prod       vendor-frontier-4-1        $       33,196.30
   ak_retail_prod           gpt-4o                     $        9,083.05
-  ak_retail_prod           claude-haiku-4-5           $        4,510.31
-  ak_wealth_prod           claude-haiku-4-5           $        3,326.89
-  ak_wealth_prod           claude-sonnet-4-5          $        1,897.88
+  ak_retail_prod           vendor-fast-4-5            $        4,510.31
+  ak_wealth_prod           vendor-fast-4-5            $        3,326.89
+  ak_wealth_prod           vendor-balanced-4-5        $        1,897.88
   ak_wealth_prod           gpt-4o                     $        1,795.00
   ak_retail_prod           gpt-4o-mini                $          606.57
 ```
@@ -258,7 +258,7 @@ Vendor consoles are useful. They are not the inference-economics product.
 | 1 | **No per-feature attribution** | Of our $4.18M May compute spend, what did customer-service-assistant cost vs. wealth-portfolio-summary vs. kyc-doc-reader? | Vendor invoices are per-vendor totals. Vendor consoles are per-API-key. Both aggregate multiple features behind the same key. The feature catalog lives in Confluence; nothing joins it to the spend. |
 | 2 | **No per-tenant / segment attribution** | Of the customer-service-assistant spend, what did retail-Tier-1 customers consume vs. retail-Tier-2 vs. internal-employee testing? | API key separation is at the line-of-business level (retail / wealth / enterprise). It does NOT separate customer segment within a line. Internal dogfood traffic runs on the same key as real customers. |
 | 3 | **No runaway detection** | FT_001 daily spend was ~$1,600 on April 30 and ~$6,000 on May 2. It is now June 14. Why did nobody flag the 3.7x daily-spend spike? | The spike is invisible because it lives inside a $4M aggregate. No statistical-process-control threshold on per-feature spend. No alert fires until the monthly vendor invoice arrives — 6 weeks late. |
-| 4 | **No cheaper-model substitution recommender** | Why is the customer-service-assistant on Sonnet when Haiku would work? Why is the compliance-summarizer on Opus when Sonnet would? | Model choice gets made at feature-build time, by a developer, with the quickstart's default model in the snippet. Nothing re-evaluates whether the choice is still right. No eval suite that maps probe-set accuracy across the model-pricing tiers. |
+| 4 | **No cheaper-model substitution recommender** | Why is the customer-service-assistant on the balanced model when the fast model would work? Why is the compliance-summarizer on the frontier model when the balanced model would? | Model choice gets made at feature-build time, by a developer, with the quickstart's default model in the snippet. Nothing re-evaluates whether the choice is still right. No eval suite that maps probe-set accuracy across the model-pricing tiers. |
 | 5 | **No dead-feature detection** | FT_009 (internal-research-copilot) UI was shut down on March 15. Why is the endpoint still receiving 4,700 calls/day? | Status in the feature catalog is updated by the product team manually. Endpoint stays live until someone files a ticket. Decommissioning is everyone's job and no one's KPI. |
 | 6 | **No per-feature ROI dashboard** | Which GenAI features are generating revenue and which are burning cash? The board is asking for the AI-platform ROI number at the May offsite. | Cost lives in vendor invoices. Revenue attribution lives in Snowflake, tagged by product surface. No join key. AI Platform PM hand-builds a spreadsheet quarterly that is stale by the time it ships. |
 
@@ -299,14 +299,14 @@ python src/step_04_with_inferencelens.py
 View 1 / 5 - Per-feature attribution (closes deficiencies #1 and #2)
 --------------------------------------------------------------------------------
   Feature                          Model                         Monthly $
-  customer-service-assistant       claude-sonnet-4-5        $     144,872
-  internal-research-copilot        claude-opus-4-1          $      25,991
+  customer-service-assistant       vendor-balanced-4-5      $     144,872
+  internal-research-copilot        vendor-frontier-4-1      $      25,991
   kyc-doc-reader                   gpt-4o                   $       5,993
-  compliance-summarizer            claude-opus-4-1          $       4,558
-  branch-banker-copilot            claude-sonnet-4-5        $       4,092
-  research-note-classifier         claude-haiku-4-5         $       3,327
-  fraud-explainer                  claude-haiku-4-5         $       2,812
-  paralegal-discovery-assistant    claude-opus-4-1          $       2,647
+  compliance-summarizer            vendor-frontier-4-1      $       4,558
+  branch-banker-copilot            vendor-balanced-4-5      $       4,092
+  research-note-classifier         vendor-fast-4-5          $       3,327
+  fraud-explainer                  vendor-fast-4-5          $       2,812
+  paralegal-discovery-assistant    vendor-frontier-4-1      $       2,647
   ... (other 10 features)                                   $      11,876
   TOTAL                                                     $     206,167
 
@@ -317,13 +317,13 @@ View 2 / 5 - Runaway detection (closes deficiency #3)
 
 View 3 / 5 - Cheaper-model substitution recommendations (closes #4)
 --------------------------------------------------------------------------------
-  customer-service-assistant   sonnet-4-5 -> haiku-4-5   $182,000/mo
-  compliance-summarizer        opus-4-1   -> sonnet-4-5  $ 42,000/mo
-  kyc-doc-reader               gpt-4o     -> gpt-4o-mini $ 38,400/mo
-  collections-script-generator gpt-4o     -> gpt-4o-mini $ 18,800/mo
-  branch-banker-copilot        sonnet-4-5 -> haiku-4-5   $ 16,400/mo
-  marketing-copy-variants      gpt-4o     -> gpt-4o-mini $  4,200/mo
-  TOTAL MODELED SAVINGS                                  $301,800/mo
+  customer-service-assistant       vendor-balanced-4-5 -> vendor-fast-4-5     $     182,000
+  compliance-summarizer            vendor-frontier-4-1 -> vendor-balanced-4-5 $      42,000
+  kyc-doc-reader                   gpt-4o -> gpt-4o-mini                      $      38,400
+  collections-script-generator     gpt-4o -> gpt-4o-mini                      $      18,800
+  branch-banker-copilot            vendor-balanced-4-5 -> vendor-fast-4-5     $      16,400
+  marketing-copy-variants          gpt-4o -> gpt-4o-mini                      $       4,200
+  TOTAL MODELED SAVINGS                                                       $     301,800
 
 View 4 / 5 - Dead-feature flagger (closes deficiency #5)
 --------------------------------------------------------------------------------

@@ -657,7 +657,7 @@ if st.session_state.step >= 4:
         st.markdown("**Official references** (click to read the source documents):")
         st.markdown(
             "- [FinOps Foundation - framework](https://www.finops.org/framework/) - canonical FinOps definition\n"
-            "- [Anthropic pricing](https://www.anthropic.com/pricing) - per-token pricing for Claude Opus / Sonnet / Haiku\n"
+            "- [Anthropic pricing](https://www.anthropic.com/pricing) - per-token pricing for frontier / balanced / fast models\n"
             "- [Azure OpenAI pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) - per-token pricing for gpt-4o family\n"
             "- [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/) - per-token pricing for Llama / Mistral / Titan\n"
             "- [NIST AI RMF (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) - Govern function on kill-criteria for AI systems\n"

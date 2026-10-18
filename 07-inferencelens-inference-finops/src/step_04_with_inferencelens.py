@@ -332,14 +332,14 @@ def main() -> None:
     print("-" * 80)
     print("View 3 / 5 - Cheaper-model substitution recommendations (closes #4)")
     print("-" * 80)
-    print(f"  {'Feature':<32} {'Current -> Candidate':<38} {'Monthly $':>14}")
+    print(f"  {'Feature':<32} {'Current -> Candidate':<42} {'Monthly $':>14}")
     total_savings = 0.0
     for r in sub_findings:
         arrow = f"{r['current_model']} -> {r['candidate_model']}"
-        print(f"  {r['feature_name'][:32]:<32} {arrow[:38]:<38} "
+        print(f"  {r['feature_name'][:32]:<32} {arrow[:42]:<42} "
               f"${r['modeled_monthly_savings_usd']:>12,.0f}")
         total_savings += r['modeled_monthly_savings_usd']
-    print(f"  {'TOTAL MODELED SAVINGS':<32} {'':<38} ${total_savings:>12,.0f}")
+    print(f"  {'TOTAL MODELED SAVINGS':<32} {'':<42} ${total_savings:>12,.0f}")
     print()
 
     # ---- View 4
