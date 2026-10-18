@@ -1,0 +1,41 @@
+vendor_id,service_type,criticality,data_access,use_cases_supported,critical_use_cases,model_provider,exit_clause,portability_days,exit_tested,audit_right,model_change_notice_days,last_assessed_on,contract_end
+V-01,translation,standard,none,2,0,MP-1,yes,21,no,no,0,2026-08-30,2028-03-08
+V-02,collections outreach,standard,internal,2,0,MP-1,no,,no,yes,0,2025-12-23,2026-12-24
+V-03,HR screening support,important,internal,5,1,MP-4,yes,131,no,no,0,2024-12-14,2027-10-13
+V-04,enterprise search,standard,internal,1,1,MP-1,no,,no,no,90,2026-06-27,2028-05-09
+V-05,translation,standard,customer_pii,3,0,,yes,56,no,no,0,2025-05-03,2028-02-29
+V-06,contract analysis,standard,internal,3,1,MP-4,no,,no,yes,0,2024-11-01,2028-05-03
+V-07,call transcription,standard,customer_pii,2,1,MP-1,yes,108,yes,yes,0,2026-07-13,2027-12-15
+V-08,AML alert triage,critical,internal,7,5,MP-1,yes,27,no,no,0,2024-12-28,2026-11-07
+V-09,customer chat assistant,critical,customer_pii,4,3,MP-1,yes,96,no,yes,90,2024-12-15,2027-11-25
+V-10,email and letter drafting,standard,internal,2,0,MP-4,no,,no,no,15,2025-06-09,2028-07-30
+V-11,voice authentication,important,customer_pii,5,0,MP-2,yes,33,no,yes,0,2025-09-09,2027-04-15
+V-12,enterprise search,standard,internal,3,0,MP-5,yes,53,yes,no,0,2025-01-03,2027-03-28
+V-13,credit decision support,critical,none,3,3,,no,,no,yes,90,2025-05-09,2026-10-08
+V-14,market news summarization,standard,none,3,0,MP-2,no,,no,yes,60,2025-03-27,2027-02-02
+V-15,fraud scoring support,critical,customer_pii,6,4,MP-1,no,,no,yes,15,2025-04-27,2027-09-28
+V-16,market news summarization,standard,none,3,0,MP-2,yes,11,no,yes,60,2026-01-19,2027-06-14
+V-17,credit decision support,critical,customer_pii,4,2,MP-2,no,,no,yes,0,2026-07-26,2028-10-02
+V-18,credit decision support,critical,customer_pii,7,6,MP-1,yes,39,yes,no,30,2025-11-26,2026-10-09
+V-19,KYC document extraction,critical,customer_pii,5,2,MP-5,yes,72,no,no,90,2026-03-26,2027-08-02
+V-20,HR screening support,important,internal,4,2,,yes,57,no,yes,0,2026-02-23,2027-07-07
+V-21,code assistant,standard,internal,3,0,MP-1,no,,no,no,0,2025-08-09,2027-06-24
+V-22,document summarization,important,internal,3,0,MP-2,no,,no,yes,90,2026-05-21,2027-07-17
+V-23,document summarization,standard,internal,3,0,MP-1,yes,134,no,no,30,2025-05-08,2027-10-09
+V-24,customer chat assistant,important,none,5,0,MP-5,no,,no,yes,0,2025-05-02,2026-11-10
+V-25,document summarization,important,internal,4,1,MP-4,yes,118,yes,yes,0,2025-04-02,2026-10-29
+V-26,AML alert triage,important,customer_pii,5,0,MP-3,no,,no,no,0,2024-12-26,2028-01-09
+V-27,code assistant,standard,internal,3,1,MP-1,yes,25,no,yes,0,2025-08-09,2028-03-26
+V-28,KYC document extraction,critical,customer_pii,8,6,MP-3,yes,114,no,no,30,2025-05-03,2027-06-10
+V-29,call transcription,important,none,2,0,MP-1,yes,37,yes,no,0,2026-06-04,2028-06-10
+V-30,email and letter drafting,standard,none,1,1,MP-1,yes,119,yes,no,60,2026-03-26,2027-02-25
+V-31,fraud scoring support,important,none,4,2,MP-5,yes,60,no,no,0,2024-11-03,2027-11-26
+V-32,fraud scoring support,critical,customer_pii,3,3,MP-4,yes,48,no,yes,60,2025-04-21,2026-11-04
+V-33,collections outreach,important,internal,5,2,MP-1,no,,no,yes,90,2024-11-14,2027-05-09
+V-34,AML alert triage,important,customer_pii,3,0,MP-4,no,,no,no,0,2026-04-28,2028-01-13
+V-35,KYC document extraction,important,internal,3,2,MP-4,yes,88,no,yes,0,2025-01-09,2028-01-27
+V-36,customer chat assistant,critical,none,4,4,,no,,no,no,30,2026-01-30,2028-01-11
+V-37,voice authentication,standard,customer_pii,3,0,MP-3,no,,no,yes,0,2026-05-12,2028-08-01
+V-38,call transcription,important,customer_pii,2,2,MP-2,no,,no,no,0,2024-11-13,2028-04-03
+V-39,code assistant,standard,internal,1,0,,yes,103,yes,yes,0,2024-12-03,2027-03-08
+V-40,contract analysis,important,customer_pii,2,1,MP-4,yes,137,no,no,0,2025-05-22,2028-04-21

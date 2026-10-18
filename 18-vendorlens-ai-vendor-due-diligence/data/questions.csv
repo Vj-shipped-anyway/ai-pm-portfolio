@@ -1,0 +1,21 @@
+question_id,group,text,verified_by
+Q01,security,Access to customer data is limited by role and reviewed,independent_control_report
+Q02,security,Data is encrypted at rest and in transit,independent_control_report
+Q03,security,Security events are logged and monitored,independent_control_report
+Q04,security,An incident response plan exists and is exercised,independent_control_report
+Q05,security,A business continuity plan covers the AI service,independent_control_report
+Q06,security,Staff with data access are vetted and trained,independent_control_report
+Q07,application,An independent penetration test runs at least yearly,penetration_test
+Q08,application,Vulnerabilities are patched within a stated window,penetration_test
+Q09,application,Secure development practices are followed,penetration_test
+Q10,application,Defenses against prompt injection and data leakage are tested,penetration_test
+Q11,model,"Model purpose, limits and known failure modes are documented",model_documentation
+Q12,model,Training and evaluation data sources are documented,model_documentation
+Q13,model,Bias and accuracy testing is performed and recorded,model_documentation
+Q14,model,Model outputs are monitored in production,model_documentation
+Q15,contract,Customers are notified before a model version changes,contract
+Q16,contract,Customers may audit our controls,contract
+Q17,other,Subcontractors are covered by written agreements,none
+Q18,other,Customer data is deleted when the contract ends,none
+Q19,other,Regulatory change is tracked and applied,none
+Q20,other,We carry insurance that covers this service,none

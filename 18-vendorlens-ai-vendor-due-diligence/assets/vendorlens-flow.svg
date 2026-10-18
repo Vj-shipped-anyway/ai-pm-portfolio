@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">VendorLens: an AI vendor scored on evidence, upstream concentration and exit readiness</title>
+  <desc id="desc">Four-stage flow showing how a vendor record, a questionnaire and documents move through an evidence check, a map of upstream model providers and exit readiness, and a risk score with a review cadence. A comparison strip contrasts the questionnaire with VendorLens on the synthetic data.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">VendorLens - scoring one AI vendor</text>
+  <text x="20" y="52" class="subheader">Answers are checked against documents and contracts, the upstream model provider is mapped, and exit is scored.</text>
+
+  <rect x="20" y="78" width="260" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: onboarding or a scheduled review</text>
+
+  <rect x="20" y="120" width="170" height="110" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 . VENDOR DATA</text>
+  <text x="32" y="162" class="stage-title">Collect the record</text>
+  <text x="32" y="180" class="stage-sub">40 vendors</text>
+  <text x="32" y="195" class="stage-sub">20 answers each</text>
+  <text x="32" y="210" class="stage-sub">92 documents on file</text>
+  <text x="32" y="225" class="meta-strong">5 hide their provider</text>
+
+  <line x1="195" y1="175" x2="212" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="215" y="120" width="190" height="110" rx="8" class="stage-box-eval"/>
+  <text x="227" y="140" class="stage-num">2 . EVIDENCE CHECK</text>
+  <text x="227" y="162" class="stage-title">Weigh each answer</text>
+  <text x="227" y="180" class="stage-sub">documents or contract</text>
+  <text x="227" y="195" class="stage-sub">must back each yes, or</text>
+  <text x="227" y="210" class="stage-sub">it earns a fraction</text>
+  <text x="227" y="225" class="meta-strong">mean 85.1% yes to 55.8</text>
+
+  <line x1="410" y1="175" x2="427" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="430" y="120" width="210" height="110" rx="8" class="stage-box-eval"/>
+  <text x="442" y="140" class="stage-num">3 . FOURTH PARTY + EXIT</text>
+  <text x="442" y="162" class="stage-title">Map providers and exits</text>
+  <text x="442" y="180" class="stage-sub">critical-use-case share</text>
+  <text x="442" y="195" class="stage-sub">exit clause, test, days</text>
+  <text x="442" y="210" class="stage-sub">against the allowed window</text>
+  <text x="442" y="225" class="meta-strong">MP-1 at 42.9%: flagged</text>
+
+  <line x1="645" y1="175" x2="662" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="665" y="120" width="220" height="110" rx="8" class="stage-box-gate"/>
+  <text x="677" y="140" class="stage-num">4 . SCORE + CADENCE</text>
+  <text x="677" y="162" class="stage-title">Rate and schedule</text>
+  <text x="677" y="180" class="stage-sub">weighted by tier and data</text>
+  <text x="677" y="195" class="stage-sub">HIGH, MEDIUM or LOW</text>
+  <text x="677" y="210" class="stage-sub">HIGH reviewed twice as often</text>
+  <text x="677" y="225" class="meta-block">8 HIGH, 5 truly high</text>
+
+  <path d="M 775 230 L 775 256 L 410 256 L 410 286" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="240" y="290" width="340" height="90" rx="8" class="stage-box-block"/>
+  <text x="252" y="310" class="stage-num">5 . ACT ON THE RESULT</text>
+  <text x="252" y="330" class="stage-title">Risk manager reviews HIGH first</text>
+  <text x="252" y="352" class="stage-sub">fix gaps, ask for the exit plan</text>
+  <text x="252" y="368" class="meta-block">score and reasons on every vendor</text>
+
+  <path d="M 240 330 L 100 330 L 100 380" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="20" y="385" width="160" height="55" rx="8" class="stage-box-ship"/>
+  <text x="32" y="405" class="stage-title">risk manager</text>
+  <text x="32" y="423" class="stage-sub">knows where to look</text>
+  <text x="32" y="436" class="meta-strong">5 of 8 HIGH are real</text>
+
+  <rect x="600" y="290" width="285" height="90" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="612" y="310" class="stage-title">Same 40 vendors, two worlds</text>
+  <text x="612" y="332" class="timer">Questionnaire: 6 of 10 high-risk pass</text>
+  <text x="612" y="350" class="timer-fast">VendorLens: 5 of 8 rated HIGH are real</text>
+  <text x="612" y="370" class="meta-strong">known limit: 5 of 10 not rated HIGH</text>
+</svg>
