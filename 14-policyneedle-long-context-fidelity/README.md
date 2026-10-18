@@ -4,7 +4,7 @@
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the probe design, the harness and the walkthrough are mine. Every number below comes from synthetic manuals and from four stub readers that are not models. Running the probes against a real assistant and against real policy manuals is what the next role does.
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the probe design, the harness and the walkthrough are mine. Every measured number below comes from synthetic manuals and from four stub readers that are not models. Running the probes against a real assistant and against real policy manuals is what the next role does.
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder, from the synthetic manuals and the four stub readers: 270 probes × 4 readers = 1,080 reads), 🟡 **Modeled** (an assumption, named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). The 🟢 numbers describe the harness against stubs with known faults. They are not a measurement of any real model. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
@@ -239,13 +239,13 @@ The test flags 1 of 3 faulty stubs: the truncating stub, whose limit falls befor
 | c | **Exception or negation clause missed** | A footnote says the fee is not charged in a case. The reader answers from the main clause. | `exception` |
 | d | **Table value wrong** | The reader takes the first value in the product's row, not the column the question names. | `table` |
 | e | **Two-section synthesis fact missed** | The answer needs a standard fee in one section and a discount in the next. The reader uses one. | `two_section` |
-| f | **Near-duplicate distractor answered** | A clause for Business, Student or Plus sits next to the right one. The reader answers from a sibling. | `distractor` |
+| f | **Near-duplicate distractor answered** | A clause for a sibling such as Business, Student, Plus or Senior sits next to the right one. The reader answers from a sibling. | `distractor` |
 
 ```bash
 python3 step_03_deficiencies_exposed.py
 ```
 
-The script prints one depth-by-length grid per deficiency, with one column group per reader. Each cell is probes passed out of 3. Two of the six grids, as printed:
+The script prints one depth-by-length grid per deficiency, with one column group per reader (first-match is the keyword-window stub, last-match is the recency stub). Each cell is probes passed out of 3. Two of the six grids, as printed:
 
 ```
 (a) Position sensitivity   [form: plain]
@@ -278,7 +278,7 @@ The script prints one depth-by-length grid per deficiency, with one column group
 | (e) Two-section fact | 🟢 21/45 (47%) | 0/45 | 0/45 | 45/45 |
 | (f) Near-duplicate distractor | 🟢 21/45 (47%) | 0/45 | 0/45 | 45/45 |
 
-**One wrong answer per deficiency** (120 pages, depth 50%, from the stub built to fail it):
+**One wrong answer for each of (b) to (f)** (120 pages, depth 50%, from the stub built to fail it; step_03 also prints (a), a no-answer from the truncating stub):
 
 ```
 (b) first-match - L120-SUP-050-1   Q: What is the weekly check deposit limit for Ember Certificate?
@@ -397,7 +397,7 @@ Demonstration: the control's correct answers wrapped in one sentence score 0 of 
 90 of 90 cells flagged, gate FAIL. A correct but wordy reader would be flagged as broken.
 ```
 
-Paraphrase and model verbosity are not covered. Scoring a real assistant needs a tolerant scorer first; that is the first item in the backlog in [`PRD.md`](./PRD.md). It cuts the other way too: the 🟢 catch rates above would not carry over to a real assistant until it does.
+Paraphrase and model verbosity are not covered. Scoring a real assistant needs a tolerant scorer first; that is item 6 in the backlog in [`PRD.md`](./PRD.md). It cuts the other way too: the 🟢 catch rates above would not carry over to a real assistant until it does.
 
 ---
 
@@ -451,7 +451,7 @@ flowchart LR
 
     READER["Reader under test stub or your assistant"]
 
-    subgraph NEIGHBOURS["Neighbouring projects"]
+    subgraph NEIGHBOURS["Neighboring projects"]
         EF["EvalForge 04 probe registry and CI gate"]
         HG["HalluGuard 01 grounding check"]
         LG["LeaseGuard 03 long documents"]
@@ -505,7 +505,7 @@ sequenceDiagram
 | --- | --- |
 | **01 HalluGuard** (grounding of answers) | HalluGuard checks a draft against the rows it was given, so an answer taken from a superseded clause is grounded in the retrieved text and passes. PolicyNeedle checks whether the reader picked the right clause to ground on. Run PolicyNeedle before launch and HalluGuard at runtime. |
 | **03 LeaseGuard** (long documents) | A lease with a side letter and a redline has the same shapes as a manual with an amendment register and a footnote exception: the later document governs, and an extractor can stop at the first match. The superseded and exception forms here are those shapes, in a policy-manual setting. |
-| **04 EvalForge** (probe sets and CI gate) | The probe set is a versioned probe set and the gate is a CI gate. EvalForge's PRD lists long-context fidelity probes as a queued backlog item; this project is a standalone prototype of that item. The design hands the gate verdict to EvalForge's gate rather than building a second one. |
+| **04 EvalForge** (probe sets and CI gate) | PolicyNeedle's probe set is the kind of versioned probe set EvalForge holds, and its gate has the same shape as EvalForge's CI gate. EvalForge's PRD lists long-context fidelity probes as a queued backlog item; this project is a standalone prototype of that item. The design hands the gate verdict to EvalForge's gate rather than building a second one. |
 
 See [`assets/policyneedle-flow.svg`](./assets/policyneedle-flow.svg) for a static visual of the same flow.
 
@@ -616,7 +616,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 - **Governance:** each gate verdict files an evidence bundle (probe-set version, reader version, slice matrix, flagged-cell list) to the model risk workflow.
 - **Deployment:** shadow first. Run the sweep on every release candidate, publish the matrix, and only then make the gate blocking.
 
-The Streamlit prototype here proves the *product mechanic*: that a probe set with planted forms of fact, a per-slice matrix and a gate flags known faults and stays quiet on a control. The production architecture above is what the seat I'm pursuing actually delivers.
+The Streamlit prototype here shows the *product mechanic*: that a probe set with planted forms of fact, a per-slice matrix and a gate flags known faults and stays quiet on a control. The production architecture above is what the seat I'm pursuing actually delivers.
 
 ---
 
@@ -634,5 +634,5 @@ The Streamlit prototype here proves the *product mechanic*: that a probe set wit
 - **[Hamel Husain — Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** — the eval-first thesis. The reason `data/probes.csv` and the expected answers exist before any reader does.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function maps onto a probe set, a scorer and a gate. PolicyNeedle is aligned to it as a prototype; nothing here is certified or attested.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — LLM09 (Misinformation) is the framing for a confident answer taken from the wrong clause.
-- **[SR 11-7 (OCC bulletin 2011-12)](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)** — model risk management. Ongoing monitoring of an assistant that answers from policy is the standard the work would have to meet.
+- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — model risk management. Ongoing monitoring of an assistant that answers from policy is the standard the work would have to meet.
 - Sibling projects in this portfolio: [HalluGuard](../01-halluguard-bank-chatbot-safety/), [LeaseGuard](../03-leaseguard-cre-lease-verification/) and [EvalForge](../04-evalforge-llm-eval-platform/).

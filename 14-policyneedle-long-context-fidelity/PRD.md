@@ -19,7 +19,7 @@
 | **Secondary users** | Compliance and legal (consulted on gold answers); information security (manuals leave the building only to approved endpoints) |
 | **Problem** | A bank's assistant answers from 100 to 300 page policy manuals. A clause in the middle, a superseded version, an exception in a footnote or a table value gets missed or mixed up, and the answer still reads confidently. Teams test on short documents, so the failure never shows before launch. (Design premise; no real incident is cited.) |
 | **Solution** | A generator for synthetic or real-manual probes (facts planted at controlled depth in six forms), a question set with exact expected answers, a harness that takes any `reader(document_text, question) -> answer_text` function, a per-slice pass matrix, fault localization and a CI-style gate that blocks a release. |
-| **North-star metric** | % of policy-grounded assistant releases that pass the PolicyNeedle gate before launch. Target: 100% (🔴 design). Current state of the art in the model: no long-document gate exists. |
+| **North-star metric** | % of policy-grounded assistant releases that pass the PolicyNeedle gate before launch. Target: 100% (🔴 design). Current state of the art in the modeled bank: no long-document gate exists. |
 | **Measured on the prototype** | 🟢 190 of 190 known fault cells flagged, 0 missed, 0 false flags on the control (`step_04_with_policyneedle.py`). 🟢 Short-document spot test flags 0 of 190 (`step_01`). 🟢 Fixed-needle test flags 2 of 190 (`step_02`). All on stub readers with known faults; not a result for any real model. |
 | **Modeled metrics** | 🟡 8 policy-grounded assistants launched or re-launched per year at a large bank (my assumption, range 4-12). 🟡 Utility: (100% − 0%) × 8 = 8 launches a year with long-document faults caught before launch, if each carries at least one such fault. |
 | **Cost** | 🟢 One sweep of one reader at prototype size is 270 reader calls and 64,894,140 characters of manual text, because each probe sends its whole manual (`step_04`). 🟡 About 16 million tokens at 4 characters per token (rule of thumb). A dollar figure needs the bank's reader and price; not estimated here. |
@@ -79,7 +79,7 @@
 **North star:** % of policy-grounded assistant releases that pass the PolicyNeedle gate before launch. Target: 100% (🔴 design).
 
 **Inputs (leading):**
-- Probe coverage: cells (form × length × depth) with at least 3 signed probes. Prototype: 🟢 90 of 90 cells, 3 probes each (`data/probes.csv`).
+- Probe coverage: cells (form × length × depth) with at least 3 signed probes. Prototype: 🟢 90 of 90 cells have 3 probes each, none signed because the probes are synthetic (`data/probes.csv`).
 - Probe-set audit: questions that match more or fewer blocks than their form allows. Prototype: 🟢 0 of 280 (`step_04`).
 - Harness validity on the stub control set, re-run on every release of the harness: true flags, misses, false flags. Prototype: 🟢 190, 0, 0.
 - Policy-owner sign-off rate on gold answers (target 100% before a probe counts; 🔴 design).

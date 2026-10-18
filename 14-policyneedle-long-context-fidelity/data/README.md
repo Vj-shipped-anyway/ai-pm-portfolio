@@ -83,4 +83,4 @@ src/step_02 uses the long_sweep probes with form = plain and depth = 50
 src/step_03 and step_04 use all 270 long_sweep probes
 ```
 
-Reproducibility: every number in the README, the demo and the app is printed by a script that reads these files. Regenerate the data, rerun the scripts, and the output matches to the digit.
+Reproducibility: every measured (🟢) number in the README, the demo and the app is printed by a script that reads these files. Regenerate the data, rerun the scripts, and the output matches to the digit.
