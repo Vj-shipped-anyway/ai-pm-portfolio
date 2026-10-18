@@ -21,7 +21,7 @@
 | **North-star metric** | (catch_rate × queries_protected) − (FP_rate × queries_protected). Target steady-state: catch ≥ 96%, FP ≤ 4%, on every deployed internal copilot. |
 | **Modeled metrics (12-month horizon)** | 🟢 **Catch rate: 99%** on the shipped 100-attack suite (measured). 🟢 **FP rate: 1%** on the 200-prompt legitimate corpus (measured). 🟢 **Tool-gate accuracy: 100%** on 50-call ground-truth set (measured). 🟡 **Modeled production catch: 96%+** — assumes fine-tuned DeBERTa / Llama Guard 3 replaces the deterministic regex pack. 🟡 **Modeled production FP: ~4%** — assumes calibration against the bank's actual legitimate-query corpus. 🔴 **Data-exfiltration incidents → 0** at fleet scale (designed). |
 | **Modeled cost** | 🔴 ~$380k for a 90-day engagement in a real deployment (compute on existing K8s/EKS footprint + 1 PM + 1.5 FTE engineers + 0.5 FTE InfoSec partner + fine-tuned classifier inference on T4 / L4 GPUs + WORM bucket for the `attack_log` archive) — designed, not yet executed. |
-| **Risk #1** | Classifier latency. The fine-tuned DeBERTa / Llama Guard 3 on T4 / L4 GPUs adds ~50-100ms P99 to every prompt. Solution: batch inference at the gateway; cache by prompt hash; degrade to deterministic-only mode under load (catch rate drops to ~85% but FP stays low). |
+| **Risk #1** | Classifier latency. The fine-tuned DeBERTa / Llama Guard 3 on T4 / L4 GPUs adds ~50-100ms P99 to every prompt. Solution: batch inference at the gateway; cache by prompt hash; degrade to deterministic-only mode under load (🔴 designed estimate, not measured: catch rate drops to ~85% but FP stays low). |
 | **Risk #2** | False-positive rate hurts banker productivity. Even 4% FP across 200k+ queries/yr per copilot = thousands of legitimate queries blocked. Solution: continuous calibration against the bank's own legitimate-query corpus; per-tenant tuning; soft-block / explain-and-retry UX on borderline cases. |
 | **Risk #3** | Vendor classifier silent updates. If Meta or the fine-tuned-classifier vendor silently rolls a snapshot, behavior changes. Solution: interlock with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5 vendor-pin detector; daily diff job; auto-rollback on catch-rate regression. |
 | **Risk #4** | Adversarial drift. Attackers adapt to the classifier's patterns. Solution: continuous red-team probe runs; quarterly retraining; integration with [HuggingFace prompt-injection datasets](https://huggingface.co/datasets/deepset/prompt-injections) for community-fresh examples. |
@@ -55,8 +55,8 @@
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 01 | **L1 Input Classifier (v0.1)** — Llama Guard 3 deployed on T4 / L4 GPUs; FastAPI service; sub-100ms P99. | 100M | 3 | 0.9 | 13 | 20.8 | Sequenced for v0.1 |
 | 02 | **L2 Retrieval Scanner (v0.1)** — same classifier applied to retrieved chunks; FP-tolerant calibration. | 80M | 3 | 0.85 | 8 | 25.5 | Sequenced for v0.1 |
-| 03 | **L3 Tool-Call Gate (v0.1)** — OPA + Rego policy bundle; one bundle per tool; allow-list of destinations. | 100M | 3 | 0.9 | 8 | 33.8 | Sequenced for v0.2 |
-| 04 | **L4 Egress Filter (v0.1)** — DLP regex pack + Cloud DLP / Nightfall integration; markdown-pixel detection. | 100M | 3 | 0.85 | 8 | 31.9 | Sequenced for v0.2 |
+| 03 | **L3 Tool-Call Gate (v0.2)** — OPA + Rego policy bundle; one bundle per tool; allow-list of destinations. | 100M | 3 | 0.9 | 8 | 33.8 | Sequenced for v0.2 |
+| 04 | **L4 Egress Filter (v0.2)** — DLP regex pack + Cloud DLP / Nightfall integration; markdown-pixel detection. | 100M | 3 | 0.85 | 8 | 31.9 | Sequenced for v0.2 |
 | 05 | **L5 Per-Session Memory Boundary** — Redis Cluster + per-session SPIFFE ID; session state keyed by `(spiffe_id, session_id)`. | 60M | 2 | 0.8 | 8 | 12.0 | Sequenced for v0.3 |
 | 06 | **`attack_log` immutable table** — Postgres CREATE TABLE; row-hash HSM-signed; partitioned by month; 7-year retention. | 100M | 2 | 0.9 | 5 | 36.0 | Sequenced for v0.1 |
 | 07 | **Streamlit prototype** — config/observability panel; per-layer fire-rate; scenario walkthrough. | 1k | 2 | 1.0 | 5 | 0.4 | Sequenced for v0.1 (this repo) |
@@ -75,7 +75,7 @@
 - **[OWASP LLM01](https://genai.owasp.org/llm-top-10/)** has named Prompt Injection as the #1 LLM risk since 2023. The published industry threshold for "the problem is mature enough to invest in" — that's it.
 - **[MITRE ATLAS](https://atlas.mitre.org/)** is the now-stable attacker-techniques catalog. Every BFSI red team uses it. The gateway needs to be calibrated against the same catalog.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** is in effect. High-risk AI systems (BFSI internal copilots over confidential customer data qualify) must meet record-keeping + risk-management standards. The gateway is the implementation surface for "did our copilot do the safe thing on this request."
-- **The substrate is finally there.** [Llama Guard 3](https://huggingface.co/meta-llama/Llama-Guard-3-8B) is open-weight, fine-tunable, and deployable on T4 / L4. [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) is 86M params and runs sub-50ms on CPU. [OPA](https://www.openpolicyagent.org/) is in production at every Tier-1 bank already. [Cloud DLP](https://cloud.google.com/security/products/dlp) / [Nightfall](https://nightfall.ai/) / [BigID](https://bigid.com/) cover the L4 egress regex layer.
+- **The substrate is finally there.** [Llama Guard 3](https://huggingface.co/meta-llama/Llama-Guard-3-8B) is open-weight, fine-tunable, and deployable on T4 / L4. [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) is 86M params and small enough to run on CPU. [OPA](https://www.openpolicyagent.org/) is in production at every Tier-1 bank already. [Cloud DLP](https://cloud.google.com/security/products/dlp) / [Nightfall](https://nightfall.ai/) / [BigID](https://bigid.com/) cover the L4 egress regex layer.
 - **Vendor copilots are now everywhere.** Every BFSI shop has Microsoft Copilot for M365, an OpenAI / Anthropic / Bedrock-backed internal RM copilot, and at least one KYC / claims-triage agent. The attack surface is not theoretical.
 
 ## 5. Goals (12-month horizon)
@@ -107,7 +107,7 @@
 
 ## 8. Solution detail — the five-layer composition
 
-The product is a five-layer gateway. Each layer is one of the six deficiency-class fixes.
+The product is a five-layer gateway. Together the layers fix the six deficiency classes; L1 covers two.
 
 | # | Deficiency class | Primary layer | Catch action |
 | --- | --- | --- | --- |
@@ -134,16 +134,16 @@ The product is a five-layer gateway. Each layer is one of the six deficiency-cla
 1. **Classifier vendor.** Llama Guard 3 (open-weight, self-hosted) vs. Meta Prompt Guard (smaller, faster, narrower coverage) vs. a fine-tuned DeBERTa on the bank's red-team corpus. Default: Llama Guard 3 for L1/L2; fine-tuned DeBERTa as the fallback for FP-sensitive copilots.
 2. **DLP vendor.** Cloud DLP (GCP-native, cheap), Nightfall (SaaS, BFSI-tuned), or BigID (on-prem, broader coverage). Depends on the bank's existing footprint. Default: build the L4 service as a generic DLP-vendor-agnostic shim; let procurement pick.
 3. **Soft-block UX.** Hard refusal vs. soft-block-and-explain. Banker-productivity argument says explain; security argument says refuse. Default: soft-block on borderline (probability 0.5-0.7), hard refusal above 0.7; logged either way.
-4. **Latency budget under load.** Sub-100ms P99 in the classifier inference; degrade to deterministic-only under burst. Default: catch rate drops to ~85% under degraded mode but FP stays low; alert L2 on every degrade.
+4. **Latency budget under load.** Sub-100ms P99 in the classifier inference; degrade to deterministic-only under burst. Default: catch rate drops to ~85% under degraded mode (🔴 designed estimate) but FP stays low; alert L2 on every degrade.
 
 ## 11. Build & scale notes
 
 **Reference architecture.** Five stateless FastAPI services, one per layer, deployed on the bank's existing K8s/EKS footprint. OPA bundle distribution via Argo CD. Postgres for the `attack_log` table. Redis Cluster for session memory. ClickHouse for per-layer fire-rate observability. GCS / S3 Object Lock for the 7-year audit archive. Interlocks with [LineageLog](../09-lineagelog-ai-decision-audit/) for the audit-grade lineage layer.
 
-**Throughput envelope.** A Tier-1 BFSI shop typically runs 4-12 internal copilots, each handling 200-800k internal queries/yr. Aggregate: ~1-10M queries/yr per shop = ~0.5-3 queries/second average, ~5-30 queries/second peak. L1/L2 classifier inference is the bottleneck (sub-100ms P99 on T4 / L4 GPUs); L3/L4/L5 are sub-millisecond.
+**Throughput envelope.** A Tier-1 BFSI shop typically runs 4-12 internal copilots, each handling 200-800k internal queries/yr. Aggregate: ~1-10M queries/yr per shop = ~0.03-0.3 queries/second average over a full year, ~0.3-3 queries/second at a 10x peak. L1/L2 classifier inference is the bottleneck (sub-100ms P99 on T4 / L4 GPUs); L3 and L5 are sub-millisecond and L4 is budgeted under 10ms P99.
 
 **Failure modes.**
-- *Classifier service down.* Degrade to L1=deterministic-regex-only mode. Catch rate drops ~14 points; FP stays low. Alert L2.
+- *Classifier service down.* Degrade to L1=deterministic-regex-only mode. Catch rate drops to ~85% (🔴 designed estimate); FP stays low. Alert L2.
 - *OPA bundle deploy fails.* Roll back to the last-known-good bundle in <60s. Allow path open in the meantime.
 - *Vendor classifier silent update.* Vendor-pin verifier (interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5) catches via daily diff job. Auto-rollback on catch-rate regression.
 - *Adversarial drift.* Quarterly retraining cycle. New patterns added to L1 corpus; OPA bundle updated.

@@ -8,7 +8,7 @@ This doc is cloud-agnostic where the design allows it and explicit where it does
 
 ## 1. Logical architecture
 
-PromptShield is a **five-layer defense-in-depth gateway**, not a foundation-model vendor and not a logging vendor. It sits in the request path between the user / banker and the LLM, and in the response path between the LLM and the user. Six components, each independently deployable.
+PromptShield is a **five-layer defense-in-depth gateway**, not a foundation-model vendor and not a logging vendor. It sits in the request path between the user / banker and the LLM, and in the response path between the LLM and the user. Eight components, each independently deployable.
 
 | Component | Responsibility | Language / framework | Stateful? |
 | --- | --- | --- | --- |
@@ -145,7 +145,7 @@ The consequential schema. Every block / allow decision lands here. Same DDL disc
 
 CREATE TABLE attack_log (
     -- Identity
-    log_id                       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    log_id                       UUID NOT NULL DEFAULT gen_random_uuid(),
     request_id                   TEXT NOT NULL,
     session_id                   TEXT NOT NULL,
     user_id_hash                 TEXT NOT NULL,            -- SHA-256 with KMS pepper
@@ -165,7 +165,7 @@ CREATE TABLE attack_log (
     blocked_at_layer             TEXT,                     -- L1 / L2 / L3 / L4 / L5 / NULL
     matched_pattern              TEXT,                     -- which rule fired
     matched_evidence             TEXT,                     -- short evidence snippet (hashed if PII)
-    attack_class_predicted       TEXT,                     -- direct / indirect / tool / egress / cross_session / jailbreak
+    attack_class_predicted       TEXT,                     -- direct_injection / indirect_injection / tool_call_abuse / egress_attack / cross_session_leak / jailbreak_roleplay
     classifier_confidence        NUMERIC(4,3),             -- 0.000-1.000
 
     -- Per-layer trace (always populated, even if layer didn't fire)
@@ -175,7 +175,9 @@ CREATE TABLE attack_log (
     composed_at                  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     composition_ms               NUMERIC(6,2) NOT NULL,
     row_hash                     TEXT NOT NULL,            -- SHA-256 of all fields above, HSM-signed
-    retention_until              TIMESTAMPTZ NOT NULL      -- timestamp + 7 years by default
+    retention_until              TIMESTAMPTZ NOT NULL,     -- timestamp + 7 years by default
+
+    PRIMARY KEY (log_id, timestamp)
 ) PARTITION BY RANGE (timestamp);
 
 CREATE INDEX idx_attack_log_request
@@ -239,7 +241,7 @@ TTL:    28800  # 8 hours absolute
 ACL:    promptshield-l5-sa:RW; everyone-else:DENIED
 ```
 
-Cross-session reads are physically impossible — the L5 service rejects any read where the requesting principal's `spiffe_id` does not match the key's `spiffe_id`. The TTL is enforced by Redis. The audit-log of every L5 read is written to ClickHouse for the forensic trail.
+Cross-session reads are blocked by design — the L5 service rejects any read where the requesting principal's `spiffe_id` does not match the key's `spiffe_id`. The TTL is enforced by Redis. The audit-log of every L5 read is written to ClickHouse for the forensic trail.
 
 ### Six-deficiency → defense-layer mapping (threat model)
 
@@ -251,7 +253,7 @@ The table that compiles the defense contract. Every cell maps a deficiency class
 | 2 | Indirect injection in retrieved docs | L2 Retrieval scanner | Same classifier on every retrieved RAG chunk before model sees it | L3 (catches if model attempts the embedded tool call), L4 (catches embedded URL in response) | Three layers must miss; very low probability |
 | 3 | Tool-call abuse | L3 Tool-call gate | OPA / Rego evaluates every tool invocation against the bank's allow-list | L1 (catches the user-input variant), L4 (catches response leak) | Three layers must miss |
 | 4 | Egress channel | L4 Egress filter | DLP regex pack on response; refuse on PII / known-bad URL / markdown pixel | L1 (catches the user-input variant that asks for the exfil vector) | Two layers must miss |
-| 5 | Cross-session leak | L5 Session memory boundary | SPIFFE-keyed isolation; cross-session prompts physically cannot read another's state | L1 (catches the user-prompt variant) | Two layers must miss |
+| 5 | Cross-session leak | L5 Session memory boundary | SPIFFE-keyed isolation; cross-session prompts cannot read another's state | L1 (catches the user-prompt variant) | Two layers must miss |
 | 6 | Jailbreak via role-play | L1 Input classifier | Same classifier — generalizes past hand-tuned regex to the long tail | L4 (catches if jailbroken model emits PII in response) | Two layers must miss |
 
 ### ClickHouse schema (observability time-series)
@@ -401,7 +403,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All six components in scope. Annual external audit. |
+| **SOC 2 Type II** | All eight components in scope. Annual external audit. |
 | **PCI-DSS** | In scope when the underlying copilot touches cardholder data. PromptShield itself does not process card data; it scans for cards in egress. PCI scope minimization via `user_id_hash` + KMS pepper. |
 | **GLBA Safeguards Rule** | Customer financial data handled with field-level hashing + access controls + audit trail. Right-to-be-forgotten cascades to lineage records via `user_id_hash` deletion (with legal-hold override). |
 | **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** | LLM01 (Prompt Injection), LLM06 (Sensitive Information Disclosure), LLM07 (Insecure Plugin Design) directly addressed by L1-L5. |
@@ -508,12 +510,13 @@ is_bulk_send(args) if {
 }
 
 # Audit every decision.
+default matched_rule := "send_email.deny.default"
+
+matched_rule := "send_email.allow.internal" if allow
+
 decision := {
     "allow": allow,
-    "matched_rule": (
-        if allow then "send_email.allow.internal"
-        else "send_email.deny.default"
-    ),
+    "matched_rule": matched_rule,
     "evaluated_at": time.now_ns()
 }
 ```

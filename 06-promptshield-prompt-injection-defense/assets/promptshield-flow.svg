@@ -105,7 +105,7 @@
   <text x="392" y="320" class="stage-num">RESPONSE TO USER</text>
   <text x="392" y="340" class="stage-title">Safe payload delivered to banker</text>
   <text x="392" y="358" class="stage-sub">no exfil URLs * no PII leaks * no tracking pixels</text>
-  <text x="392" y="372" class="timer-fast">end-to-end pipeline under 200 ms</text>
+  <text x="392" y="372" class="timer-fast">designed end-to-end budget: under 200 ms</text>
 
   <!-- L5 - side panel (per-session memory boundary - applies across the whole pipeline) -->
   <rect x="20" y="240" width="340" height="50" rx="8" class="stage-box-defense"/>
@@ -114,9 +114,9 @@
 
   <!-- Comparison strip -->
   <rect x="380" y="240" width="380" height="50" rx="8" fill="#f6f5f2" stroke="none"/>
-  <text x="392" y="258" class="stage-title">Catch-rate comparison</text>
-  <text x="392" y="276" class="timer">Regex-only baseline: ~30-50% catch * ~10-15% FP</text>
-  <text x="600" y="276" class="timer-fast">PromptShield: 96%+ catch * single-digit FP</text>
+  <text x="392" y="258" class="stage-title">Catch-rate comparison (measured, synthetic suite)</text>
+  <text x="392" y="276" class="timer">Regex baseline: 43% catch * 7% FP</text>
+  <text x="600" y="276" class="timer-fast">PromptShield: 99% catch * 1% FP</text>
 
   <!-- Bottom outcome -->
   <rect x="780" y="300" width="160" height="80" rx="8" class="stage-box"/>
