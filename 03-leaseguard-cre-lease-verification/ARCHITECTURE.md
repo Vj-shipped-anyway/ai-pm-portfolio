@@ -392,3 +392,5 @@ Alignment, not certification.
 ```
 
 The dollar weights are the prototype's modeled values, not measured losses. OpenAPI spec lives at `apps/intake/openapi.yaml` and is the source of truth for the ingestion-side client and the triage UI.
+
+See also: [README](./README.md), [PRD](./PRD.md), and the [clickable demo](https://vj-shipped-anyway.github.io/ai-pm-portfolio/03-leaseguard-cre-lease-verification/demo.html).
