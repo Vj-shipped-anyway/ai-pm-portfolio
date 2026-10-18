@@ -59,8 +59,8 @@
   <rect x="440" y="108" width="210" height="110" rx="8" class="stage-box-new"/>
   <text x="452" y="128" class="stage-num">3 . GROUNDING VERIFIER</text>
   <text x="452" y="150" class="stage-title">Does the draft match the rows?</text>
-  <text x="452" y="168" class="stage-sub">fine-tuned small model</text>
-  <text x="452" y="183" class="stage-sub">trained on 8 failure modes</text>
+  <text x="452" y="168" class="stage-sub">planned fine-tuned model</text>
+  <text x="452" y="183" class="stage-sub">to cover 8 failure modes</text>
   <text x="452" y="198" class="stage-sub">in: question, rows, draft</text>
   <text x="452" y="212" class="meta-block">score 0.31 (illustrative)</text>
 

@@ -32,7 +32,7 @@ The pattern is well-documented across published BFSI incidents and CFPB complain
 | Cut hallucination rate | Hallucinations / 1k turns on probe set | -71% |
 | Hold deflection | End-to-end self-service deflection | At or above 64%, vs 67% baseline |
 | Lift customer trust | NPS on chatbot interactions | +14 |
-| Prevent loss | Modeled prevented loss (modeled, not measured) | $11M/yr |
+| Prevent loss | Modeled prevented loss (modeled, not measured; assumptions not yet written down) | $11M/yr |
 
 ## 4. Non-goals
 
@@ -116,6 +116,8 @@ A three-guard containment layer.
 
 ## 11. Build & Scale Notes
 
+*The figures in this section (latency, throughput, p95, entry counts) are design targets and sizing assumptions, tagged 🔴. None was measured or load-tested in this repo.*
+
 **Reference architecture.**
 - Wrapped chatbot model: vendor's choice. Could be Anthropic Claude Sonnet via AWS Bedrock, Azure OpenAI gpt-4o, or an in-house fine-tuned Llama-3 70B on Triton. The containment layer is model-agnostic by design.
 - Atomic-claim extractor: Claude Sonnet with a tightly-constrained JSON schema. Rewrite-or-refuse generator: same Claude Sonnet with a constraint that it can only emit grounded content or a refusal.
@@ -129,7 +131,7 @@ A three-guard containment layer.
 - Security: SOC 2 Type II, GLBA, PCI-DSS where in scope. Containment layer is treated as untrusted-input-handling code. Interlocks with Project 06 for prompt-injection defense.
 
 **Throughput envelope and latency budget.**
-- 200K to 800K customer turns per day at the $50B-asset retail bank shape.
+- 200K to 800K customer turns per day at the $40B-asset retail bank shape.
 - Containment layer adds 100 to 200ms per turn. Peak around 100 to 400 claim-extractor inferences per second.
 - T4/L4 GPU pool with auto-scaling. End-to-end (chatbot + containment) p95 under 1.5 seconds.
 

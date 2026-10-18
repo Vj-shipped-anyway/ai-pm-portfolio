@@ -381,7 +381,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 ## 7. What's deliberately not here
 
 - **A new chatbot or a new retriever.** HalluGuard wraps what exists; InfoSec does not re-audit the bot.
-- **Retraining of the foundation model.** The README's three-model comparison is the argument: swapping models moves each failure mode by a few points and leaves confident-and-wrong near the floor.
+- **Retraining of the foundation model.** The README's three-model comparison is the argument: swapping models moves each failure mode by 8 to 16 points of pass rate and leaves confident-and-wrong at 33% to 41% (stored values, not run in this repo).
 - **A claim that it detects wrong source data.** It checks the draft against the rows it was given. Bad rows are a data-quality problem upstream.
 - **Auto-lowering of thresholds.** Thresholds change by one person's proposal and a different person's approval.
 - **A standalone authentication system.** It uses the bank's IdP.
@@ -416,7 +416,7 @@ Holding that line is the scope discipline: each item above is something a team w
 }
 ```
 
-The score, threshold, and snapshot id in the example are illustrative, taken from the README's worked sequence.
+The score and threshold in the example are the Step 4 values for Q02 (0.31 against 0.65). The snapshot id is illustrative.
 
 OpenAPI spec lives at `apps/gateway/openapi.yaml` and is the source of truth for the chatbot-side client and the console.
 
