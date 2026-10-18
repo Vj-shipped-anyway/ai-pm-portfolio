@@ -1,0 +1,21 @@
+org_unit,licensed,rollout_week,champion_in_unit,appetite_logit,training_rate
+Branch Network,70,3,no,-0.106,0.34
+Collections,35,3,yes,0.27,0.263
+Commercial Lending,58,2,yes,-0.069,0.668
+Compliance,26,1,no,-1.075,0.489
+Credit Risk,46,1,no,-0.09,0.668
+Customer Service,100,1,no,-1.203,0.87
+Data and Analytics,28,1,yes,-0.271,0.78
+Finance,42,1,yes,0.204,0.399
+Fraud Operations,30,1,yes,-0.767,0.468
+Human Resources,14,4,yes,0.641,0.447
+Internal Audit,9,2,yes,0.263,0.571
+Legal,15,2,yes,-0.336,0.423
+Marketing,18,2,no,-0.001,0.813
+Mortgage Servicing,38,3,yes,0.489,0.799
+Payments Operations,75,2,yes,-0.42,0.268
+Procurement,10,4,no,-0.001,0.706
+Retail Operations,52,2,yes,-0.454,0.426
+Technology Delivery,90,1,no,-0.752,0.388
+Treasury,20,1,no,-0.001,0.717
+Wealth Advisory,24,3,yes,-0.537,0.275

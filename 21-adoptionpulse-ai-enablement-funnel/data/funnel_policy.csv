@@ -1,0 +1,8 @@
+parameter,value,applies_to,definition
+activation_window_weeks,2,activated,"Activated = at least 1 AI session in the first 14 days after licensing. Weekly data, so the licensing week and the next week."
+habit_window_weeks,6,habitual,Look-back window for habit and proficiency: the last 6 weeks of the data (weeks 7 to 12).
+habit_min_active_weeks,4,habitual,Habitual = AI sessions in at least 4 of the last 6 weeks.
+proficient_min_advanced_weeks,2,proficient,Proficient also needs advanced-feature use in at least 2 of the last 6 weeks.
+proficient_min_accept_rate,0.6,proficient,"Proficient also needs accepted outputs divided by prompts over the last 6 weeks at or above this value. A proxy for skill, not a measure of it."
+leak_min_gap_points,5,action,A stage conversion counts as a leak when a unit is at least this many points below the estate rate.
+leak_min_users,5,action,A stage conversion is judged for a unit only when at least this many users entered the stage before it.

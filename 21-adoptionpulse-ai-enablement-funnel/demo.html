@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdoptionPulse — AI Enablement Funnel · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of AdoptionPulse: AI adoption measured by stage, unit and week instead of license counts and logins. Synthetic data, no model.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card.red { border-top: 3px solid #dc2626; }
+  .card.blue { border-top: 3px solid #2563eb; }
+  .card.green { border-top: 3px solid #059669; }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; overflow-wrap: anywhere; }
+  .fieldvals { color: var(--text-secondary); overflow-wrap: anywhere; }
+  .bars { display: flex; align-items: flex-end; gap: 3px; height: 48px; margin: 6px 0 2px; }
+  .bar { flex: 1; min-width: 4px; border-radius: 2px 2px 0 0; }
+  .bar-red { background: #fca5a5; }
+  .bar-green { background: #6ee7b7; }
+  .bar-caption { font-size: 11px; color: var(--text-tertiary); margin: 0 0 6px; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>AdoptionPulse — AI Enablement Funnel</h1>
+    <p class="tagline">Pick an org unit and compare what a login count says with what its people do.</p>
+    <p class="author">Project 21 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">Synthetic data</span>
+      <span class="badge">800 users · 20 units · 12 weeks</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">No model: plain rules</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Estate totals">
+    <div class="stat"><p class="stat-label">Reported adoption (login view)</p><p class="stat-value">88.0%</p></div>
+    <div class="stat"><p class="stat-label">Habitual (4 of the last 6 weeks)</p><p class="stat-value">27.6%</p></div>
+    <div class="stat"><p class="stat-label">Staged correctly, AdoptionPulse</p><p class="stat-value">762 of 800</p></div>
+    <div class="stat"><p class="stat-label">Staged correctly, login flag, best case</p><p class="stat-value">407 of 800</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="unit-select">Org unit</label>
+    <select id="unit-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next unit</button>
+    <button id="runall-btn">Replay all 20 units</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-card comparison">
+    <div class="card red">
+      <p class="card-title"><span class="step-num">1</span>Before and basic — Licenses and logins</p>
+      <div class="card-body" id="card-login"></div>
+    </div>
+    <div class="card blue">
+      <p class="card-title"><span class="step-num">2</span>Truth — What the generator decided</p>
+      <div class="card-body" id="card-truth"></div>
+    </div>
+    <div class="card green">
+      <p class="card-title"><span class="step-num">3</span>With AdoptionPulse</p>
+      <div class="card-body" id="card-pulse"></div>
+    </div>
+  </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. The generator decided what each person does, so the truth is known. No model is used: the stage rules are plain thresholds (assumptions of a modeled bank). The champion and training effects are planted by construction. Every number on this page is generated from the scripts in <code>src/</code>.</p>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (share of licensed users correctly staged, with AdoptionPulse − with the login flag) × licensed users</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> AdoptionPulse stages 762 of 800 users (95.2%) the way the generator decided. The login flag, mapped to the four stages with hindsight so it gets its best case, gets 407 of 800 (50.9%). 337 of 558 activated users never became habitual, and the login view counts all of them as adopted. Known limit: 13 of 80 users staged proficient produce poor work, which weekly counts cannot show.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> (95.2% − 50.9%) × 800 licensed staff = <b>about 355 users correctly staged</b>. The licensed population is an assumption (the modeled bank's full license count), and it assumes the accuracy measured here holds on real usage data.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/21-adoptionpulse-ai-enablement-funnel/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/21-adoptionpulse-ai-enablement-funnel/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/21-adoptionpulse-ai-enablement-funnel/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/adoptionpulse-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"units":[{"unit":"Customer Service","rank":1,"licensed":100,"logged_in":80,"login_pct":80.0,"activated":47,"habitual":4,"proficient":2,"habitual_pct":4.0,"champion":false,"trained_pct":85.0,"gain":23.6,"leak":"activated to habitual","leak_users":43,"leak_gap":31.1,"action":"Users start and stop: 43 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",53],["tried once",14],["casual",20],["lapsed",9],["habitual",2],["proficient",2]],"truth_stages":{"licensed":53,"activated":43,"habitual":2,"proficient":2},"correct":98,"login_cum":[48.8,68.0,74.0,75.0,78.0,78.0,79.0,79.0,80.0,80.0,80.0,80.0],"active":[34.1,26.0,19.0,13.0,7.0,6.0,9.0,10.0,5.0,8.0,11.0,7.0]},{"unit":"Technology Delivery","rank":2,"licensed":90,"logged_in":81,"login_pct":90.0,"activated":61,"habitual":17,"proficient":8,"habitual_pct":18.9,"champion":false,"trained_pct":42.2,"gain":7.9,"leak":"activated to habitual","leak_users":44,"leak_gap":11.7,"action":"Users start and stop: 44 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",29],["tried once",15],["casual",14],["lapsed",15],["habitual",7],["proficient",10]],"truth_stages":{"licensed":29,"activated":44,"habitual":7,"proficient":10},"correct":87,"login_cum":[60.6,76.7,85.6,85.6,85.6,85.6,87.8,87.8,88.9,88.9,88.9,90.0],"active":[52.1,40.0,33.3,25.6,23.3,20.0,17.8,20.0,18.9,16.7,16.7,16.7]},{"unit":"Branch Network","rank":3,"licensed":70,"logged_in":58,"login_pct":82.9,"activated":45,"habitual":13,"proficient":7,"habitual_pct":18.6,"champion":false,"trained_pct":38.6,"gain":6.3,"leak":"activated to habitual","leak_users":32,"leak_gap":10.7,"action":"Users start and stop: 32 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",25],["tried once",17],["casual",9],["lapsed",5],["habitual",7],["proficient",7]],"truth_stages":{"licensed":25,"activated":31,"habitual":7,"proficient":7},"correct":69,"login_cum":[0.0,0.0,55.1,70.0,81.4,81.4,81.4,82.9,82.9,82.9,82.9,82.9],"active":[0.0,0.0,40.8,41.4,31.4,30.0,17.1,18.6,22.9,20.0,20.0,20.0]},{"unit":"Compliance","rank":4,"licensed":26,"logged_in":21,"login_pct":80.8,"activated":15,"habitual":3,"proficient":0,"habitual_pct":11.5,"champion":false,"trained_pct":38.5,"gain":4.2,"leak":"activated to habitual","leak_users":12,"leak_gap":19.6,"action":"Users start and stop: 12 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",11],["tried once",5],["casual",3],["lapsed",4],["habitual",3],["proficient",0]],"truth_stages":{"licensed":11,"activated":12,"habitual":3,"proficient":0},"correct":26,"login_cum":[62.5,80.8,80.8,80.8,80.8,80.8,80.8,80.8,80.8,80.8,80.8,80.8],"active":[45.8,42.3,19.2,19.2,7.7,11.5,11.5,3.8,11.5,11.5,15.4,7.7]},{"unit":"Credit Risk","rank":5,"licensed":46,"logged_in":41,"login_pct":89.1,"activated":33,"habitual":10,"proficient":4,"habitual_pct":21.7,"champion":false,"trained_pct":65.2,"gain":2.7,"leak":"activated to habitual","leak_users":23,"leak_gap":9.3,"action":"Users start and stop: 23 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",13],["tried once",12],["casual",5],["lapsed",4],["habitual",7],["proficient",5]],"truth_stages":{"licensed":13,"activated":21,"habitual":7,"proficient":5},"correct":44,"login_cum":[65.2,84.8,87.0,89.1,89.1,89.1,89.1,89.1,89.1,89.1,89.1,89.1],"active":[60.9,43.5,30.4,26.1,26.1,26.1,15.2,28.3,19.6,30.4,30.4,23.9]},{"unit":"Procurement","rank":6,"licensed":10,"logged_in":8,"login_pct":80.0,"activated":6,"habitual":1,"proficient":0,"habitual_pct":10.0,"champion":false,"trained_pct":90.0,"gain":1.8,"leak":"activated to habitual","leak_users":5,"leak_gap":22.9,"action":"Users start and stop: 5 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",4],["tried once",2],["casual",1],["lapsed",0],["habitual",3],["proficient",0]],"truth_stages":{"licensed":4,"activated":3,"habitual":3,"proficient":0},"correct":8,"login_cum":[0.0,0.0,0.0,60.0,80.0,80.0,80.0,80.0,80.0,80.0,80.0,80.0],"active":[0.0,0.0,0.0,30.0,40.0,20.0,10.0,20.0,10.0,20.0,20.0,10.0]},{"unit":"Payments Operations","rank":7,"licensed":75,"logged_in":66,"login_pct":88.0,"activated":51,"habitual":19,"proficient":8,"habitual_pct":25.3,"champion":true,"trained_pct":22.7,"gain":1.7,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",24],["tried once",7],["casual",9],["lapsed",10],["habitual",17],["proficient",8]],"truth_stages":{"licensed":24,"activated":26,"habitual":17,"proficient":8},"correct":69,"login_cum":[0.0,56.5,77.3,81.3,84.0,84.0,84.0,86.7,86.7,86.7,86.7,88.0],"active":[0.0,43.5,60.0,44.0,33.3,34.7,29.3,29.3,28.0,30.7,36.0,29.3]},{"unit":"Fraud Operations","rank":8,"licensed":30,"logged_in":26,"login_pct":86.7,"activated":20,"habitual":7,"proficient":3,"habitual_pct":23.3,"champion":true,"trained_pct":43.3,"gain":1.3,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",10],["tried once",8],["casual",4],["lapsed",1],["habitual",4],["proficient",3]],"truth_stages":{"licensed":10,"activated":13,"habitual":4,"proficient":3},"correct":30,"login_cum":[61.9,73.3,80.0,86.7,86.7,86.7,86.7,86.7,86.7,86.7,86.7,86.7],"active":[52.4,46.7,26.7,23.3,13.3,26.7,23.3,23.3,23.3,13.3,16.7,20.0]},{"unit":"Legal","rank":9,"licensed":15,"logged_in":15,"login_pct":100.0,"activated":11,"habitual":3,"proficient":1,"habitual_pct":20.0,"champion":true,"trained_pct":60.0,"gain":1.1,"leak":"activated to habitual","leak_users":8,"leak_gap":12.3,"action":"Users start and stop despite a champion: 8 activated users are not habitual. Review what the champion runs and add coaching.","types":[["never used",4],["tried once",5],["casual",2],["lapsed",0],["habitual",3],["proficient",1]],"truth_stages":{"licensed":4,"activated":7,"habitual":3,"proficient":1},"correct":14,"login_cum":[0.0,81.8,93.3,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0],"active":[0.0,45.5,46.7,26.7,33.3,26.7,26.7,26.7,20.0,20.0,26.7,26.7]},{"unit":"Marketing","rank":10,"licensed":18,"logged_in":17,"login_pct":94.4,"activated":14,"habitual":4,"proficient":1,"habitual_pct":22.2,"champion":false,"trained_pct":72.2,"gain":1.0,"leak":"activated to habitual","leak_users":10,"leak_gap":11.0,"action":"Users start and stop: 10 activated users are not habitual and the unit has no champion. Assign one (a hypothesis: the champion effect in this data is planted, not observed).","types":[["never used",4],["tried once",4],["casual",4],["lapsed",2],["habitual",3],["proficient",1]],"truth_stages":{"licensed":4,"activated":10,"habitual":3,"proficient":1},"correct":18,"login_cum":[0.0,50.0,83.3,94.4,94.4,94.4,94.4,94.4,94.4,94.4,94.4,94.4],"active":[0.0,50.0,50.0,38.9,22.2,22.2,33.3,16.7,22.2,27.8,33.3,16.7]},{"unit":"Retail Operations","rank":11,"licensed":52,"logged_in":46,"login_pct":88.5,"activated":39,"habitual":14,"proficient":5,"habitual_pct":26.9,"champion":true,"trained_pct":38.5,"gain":0.4,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",13],["tried once",15],["casual",4],["lapsed",6],["habitual",10],["proficient",4]],"truth_stages":{"licensed":13,"activated":25,"habitual":10,"proficient":4},"correct":51,"login_cum":[0.0,65.9,82.7,84.6,84.6,84.6,84.6,86.5,88.5,88.5,88.5,88.5],"active":[0.0,56.8,40.4,32.7,30.8,21.2,30.8,17.3,21.2,26.9,25.0,23.1]},{"unit":"Collections","rank":null,"licensed":35,"logged_in":32,"login_pct":91.4,"activated":28,"habitual":16,"proficient":0,"habitual_pct":45.7,"champion":true,"trained_pct":31.4,"gain":0.0,"leak":"habitual to proficient","leak_users":16,"leak_gap":36.2,"action":"Weekly users without depth: coach advanced features for 16 habitual users.","types":[["never used",7],["tried once",5],["casual",4],["lapsed",1],["habitual",18],["proficient",0]],"truth_stages":{"licensed":7,"activated":10,"habitual":18,"proficient":0},"correct":33,"login_cum":[0.0,0.0,71.9,91.4,91.4,91.4,91.4,91.4,91.4,91.4,91.4,91.4],"active":[0.0,0.0,65.6,54.3,60.0,40.0,54.3,37.1,42.9,48.6,48.6,45.7]},{"unit":"Commercial Lending","rank":null,"licensed":58,"logged_in":54,"login_pct":93.1,"activated":49,"habitual":23,"proficient":9,"habitual_pct":39.7,"champion":true,"trained_pct":72.4,"gain":0.0,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",9],["tried once",9],["casual",10],["lapsed",6],["habitual",15],["proficient",9]],"truth_stages":{"licensed":9,"activated":25,"habitual":15,"proficient":9},"correct":55,"login_cum":[0.0,66.0,89.7,93.1,93.1,93.1,93.1,93.1,93.1,93.1,93.1,93.1],"active":[0.0,57.4,63.8,44.8,39.7,39.7,39.7,41.4,37.9,36.2,37.9,32.8]},{"unit":"Data and Analytics","rank":null,"licensed":28,"logged_in":28,"login_pct":100.0,"activated":26,"habitual":15,"proficient":8,"habitual_pct":53.6,"champion":true,"trained_pct":78.6,"gain":0.0,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",2],["tried once",4],["casual",2],["lapsed",2],["habitual",10],["proficient",8]],"truth_stages":{"licensed":2,"activated":8,"habitual":10,"proficient":8},"correct":23,"login_cum":[70.0,85.7,96.4,96.4,96.4,96.4,96.4,96.4,96.4,96.4,100.0,100.0],"active":[70.0,60.7,64.3,50.0,50.0,57.1,46.4,53.6,42.9,57.1,53.6,50.0]},{"unit":"Finance","rank":null,"licensed":42,"logged_in":39,"login_pct":92.9,"activated":32,"habitual":21,"proficient":7,"habitual_pct":50.0,"champion":true,"trained_pct":33.3,"gain":0.0,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",10],["tried once",3],["casual",1],["lapsed",2],["habitual",17],["proficient",9]],"truth_stages":{"licensed":10,"activated":6,"habitual":17,"proficient":9},"correct":36,"login_cum":[67.6,90.5,90.5,90.5,90.5,92.9,92.9,92.9,92.9,92.9,92.9,92.9],"active":[62.2,64.3,54.8,54.8,57.1,47.6,50.0,52.4,47.6,47.6,50.0,33.3]},{"unit":"Human Resources","rank":null,"licensed":14,"logged_in":13,"login_pct":92.9,"activated":13,"habitual":6,"proficient":2,"habitual_pct":42.9,"champion":true,"trained_pct":57.1,"gain":0.0,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",1],["tried once",4],["casual",1],["lapsed",1],["habitual",4],["proficient",3]],"truth_stages":{"licensed":1,"activated":6,"habitual":4,"proficient":3},"correct":13,"login_cum":[0.0,0.0,0.0,57.1,92.9,92.9,92.9,92.9,92.9,92.9,92.9,92.9],"active":[0.0,0.0,0.0,50.0,71.4,42.9,42.9,35.7,28.6,28.6,42.9,50.0]},{"unit":"Internal Audit","rank":null,"licensed":9,"logged_in":9,"login_pct":100.0,"activated":9,"habitual":6,"proficient":1,"habitual_pct":66.7,"champion":true,"trained_pct":77.8,"gain":0.0,"leak":"habitual to proficient","leak_users":5,"leak_gap":19.5,"action":"Weekly users without depth: coach advanced features for 5 habitual users.","types":[["never used",0],["tried once",2],["casual",0],["lapsed",1],["habitual",4],["proficient",2]],"truth_stages":{"licensed":0,"activated":3,"habitual":4,"proficient":2},"correct":8,"login_cum":[0.0,83.3,88.9,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0,100.0],"active":[0.0,66.7,77.8,66.7,77.8,66.7,55.6,55.6,55.6,55.6,66.7,44.4]},{"unit":"Mortgage Servicing","rank":null,"licensed":38,"logged_in":35,"login_pct":92.1,"activated":29,"habitual":21,"proficient":8,"habitual_pct":55.3,"champion":true,"trained_pct":84.2,"gain":0.0,"leak":"","leak_users":0,"leak_gap":0.0,"action":"No action: at or above the estate rate at every stage.","types":[["never used",9],["tried once",3],["casual",3],["lapsed",0],["habitual",15],["proficient",8]],"truth_stages":{"licensed":9,"activated":6,"habitual":15,"proficient":8},"correct":36,"login_cum":[0.0,0.0,63.3,86.8,89.5,89.5,89.5,89.5,89.5,92.1,92.1,92.1],"active":[0.0,0.0,56.7,55.3,52.6,52.6,55.3,50.0,52.6,52.6,50.0,47.4]},{"unit":"Treasury","rank":null,"licensed":20,"logged_in":14,"login_pct":70.0,"activated":11,"habitual":7,"proficient":4,"habitual_pct":35.0,"champion":false,"trained_pct":60.0,"gain":0.0,"leak":"licensed to activated","leak_users":9,"leak_gap":14.8,"action":"First-use gap: 9 licensed users never started. Check access and run a first-week session.","types":[["never used",9],["tried once",2],["casual",1],["lapsed",1],["habitual",3],["proficient",4]],"truth_stages":{"licensed":9,"activated":4,"habitual":3,"proficient":4},"correct":20,"login_cum":[61.1,65.0,65.0,65.0,65.0,65.0,65.0,70.0,70.0,70.0,70.0,70.0],"active":[55.6,35.0,40.0,25.0,30.0,30.0,25.0,30.0,40.0,35.0,35.0,30.0]},{"unit":"Wealth Advisory","rank":null,"licensed":24,"logged_in":21,"login_pct":87.5,"activated":19,"habitual":11,"proficient":2,"habitual_pct":45.8,"champion":true,"trained_pct":37.5,"gain":0.0,"leak":"habitual to proficient","leak_users":9,"leak_gap":18.0,"action":"Weekly users without depth: coach advanced features for 9 habitual users.","types":[["never used",5],["tried once",3],["casual",3],["lapsed",2],["habitual",9],["proficient",2]],"truth_stages":{"licensed":5,"activated":8,"habitual":9,"proficient":2},"correct":24,"login_cum":[0.0,0.0,57.9,83.3,87.5,87.5,87.5,87.5,87.5,87.5,87.5,87.5],"active":[0.0,0.0,42.1,58.3,50.0,50.0,41.7,45.8,45.8,41.7,41.7,33.3]}],"s":{"licensed":800,"units":20,"funnel":{"licensed":800,"activated":558,"habitual":221,"proficient":80},"est_conv":{"activated":69.8,"habitual":39.6,"proficient":36.2},"habitual_pct":27.6,"proficient_pct":10.0,"activated_pct":69.8,"reported_pct":88.0,"reported_logged":704,"best_unit":"Customer Service","units_to_act":11,"nest_violations":0,"ap_correct":762,"ap_correct_pct":95.2,"ap_binary":768,"ap_binary_pct":96.0,"base_as_reported":343,"base_as_reported_pct":42.9,"base_best":407,"base_best_pct":50.9,"base_mapping":{"logged in":{"stage":"activated","correct":311,"n":704},"never logged in":{"stage":"licensed","correct":96,"n":96}},"understaged":33,"overstaged":5,"training":{"trained":{"n":428,"activated":296,"habitual":133,"proficient":54,"never_active":132,"activated_pct":69.2,"habitual_pct":31.1,"never_active_pct":30.8},"untrained":{"n":372,"activated":262,"habitual":88,"proficient":26,"never_active":110,"activated_pct":70.4,"habitual_pct":23.7,"never_active_pct":29.6},"measured_gap_points":7.4,"planted_gap_points":10.0,"planted_logit":0.55},"champion":{"appetite_champion":-0.14,"appetite_other":-0.6,"units_with":12,"units":20,"champions":60,"with":{"n":420,"activated":326,"habitual":162,"proficient":54,"never_active":94,"activated_pct":77.6,"habitual_pct":38.6,"never_active_pct":22.4},"without":{"n":380,"activated":232,"habitual":59,"proficient":26,"never_active":148,"activated_pct":61.1,"habitual_pct":15.5,"never_active_pct":38.9},"median_active_weeks":7.0,"per_100_users":14.3,"measured_gap_points":23.1,"planted_gap_points":13.9,"planted_logit":0.7},"limit":{"rule_proficient":80,"rule_proficient_poor":13,"rule_proficient_poor_pct":16.2,"true_proficient":86,"true_proficient_staged_proficient":78,"true_proficient_staged_habitual":4,"true_proficient_staged_lower":4,"true_habitual":161,"true_habitual_staged_proficient":2,"true_habitual_staged_activated":25},"utility":{"ap_share_pct":95.2,"baseline_share_pct":50.9,"delta_points":44.4,"modeled_population":800,"utility_users":355,"sensitivity":{"800":355,"2000":888,"5000":2219}},"retention_wk_from":{"week":4,"activated_active":288,"activated_pct":51.6,"login_view_pct":83.2},"retention_wk_last":{"week":12,"activated_active":203,"activated_pct":36.4,"login_view_pct":88.0},"retention_free_week":{"week":6,"activated_active":238,"activated_pct":42.7,"login_view_pct":86.1},"retention_activated":558},"s3":{"d2":{"activated":558,"act_not_hab":337,"act_not_hab_pct":60.4,"counted_adopted":337,"one_week_only":149},"d3":{"overall_habitual":221,"overall_habitual_pct":27.6,"best":{"unit":"Internal Audit","licensed":9,"habitual":6,"habitual_pct":66.7},"worst":{"unit":"Customer Service","licensed":100,"habitual":4,"habitual_pct":4.0},"spread_points":62.7,"login_best_pct":100.0,"login_worst_pct":70.0,"login_spread_points":30.0,"fooled_units":9,"fooled_names":["Branch Network","Compliance","Credit Risk","Customer Service","Fraud Operations","Legal","Marketing","Procurement","Technology Delivery"],"units":20,"low_habit_pct":25.0}},"ok":80.0};
+const UNITS = D.units;
+const S = D.s;
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function row(label, value) {
+  return '<div class="driver-row"><span class="driver-label">' + esc(label) + '</span><span class="driver-value">' + esc(value) + '</span></div>';
+}
+function bars(series, cls) {
+  let h = '<div class="bars">';
+  series.forEach((v, i) => {
+    const px = Math.max(2, Math.round(Number(v) * 0.46));
+    h += '<span class="bar ' + cls + '" style="height:' + px + 'px" title="week ' + (i + 1) + ': ' + esc(v) + '%"></span>';
+  });
+  return h + '</div>';
+}
+
+let idx = 0;
+const sel = document.getElementById("unit-select");
+UNITS.forEach((u, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = (u.rank ? String(u.rank) : "-") + ". " + u.unit + " - " + String(u.licensed) + " users - " + String(u.habitual_pct) + "% habitual";
+  sel.appendChild(o);
+});
+
+function render() {
+  const u = UNITS[idx];
+  sel.value = idx;
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(u.unit) + "</b> - " + esc(u.licensed) + " licensed users, " + (u.champion ? "a champion assigned" : "no champion") +
+    ", " + esc(u.trained_pct) + "% completed training. " +
+    (u.rank ? "Rank <b>" + esc(u.rank) + "</b> of " + esc(S.units_to_act) + " units with habitual users to gain." : "Not ranked: no habitual users to gain at the estate rate.");
+
+  // Card 1: license and login view
+  let b = row("Licenses issued", u.licensed) + row("Logged in at least once", u.logged_in) + row("Reported adoption", u.login_pct + "%");
+  b += '<span class="pill ' + (u.login_pct >= D.ok ? "pill-warn" : "pill-info") + '">' +
+       (u.login_pct >= D.ok ? "reads as healthy: nothing to act on" : "reads as below the " + esc(D.ok) + "% cut") + '</span>';
+  b += bars(u.login_cum, "bar-red");
+  b += '<p class="bar-caption">Cumulative logged-in share, weeks 1 to ' + esc(u.login_cum.length) + '. A person who logged in once stays counted.</p>';
+  b += '<div class="fieldvals" style="font-size:12px;">It does not say who uses the tool, how often or how well. Modeled: the healthy cut is an assumption.</div>';
+  document.getElementById("card-login").innerHTML = b;
+
+  // Card 2: the funnel truth
+  const ts = u.truth_stages;
+  const truthHab = ts.habitual + ts.proficient;
+  let t = "";
+  u.types.forEach(x => { t += row(x[0], x[1]); });
+  t += '<div class="fieldrow">' + row("Habitual or better", truthHab + " of " + u.licensed) +
+       row("Started, not habitual", ts.activated) + row("Never started", ts.licensed) +
+       row("Champion in the unit", u.champion ? "yes" : "no") + row("Training completed", u.trained_pct + "%") + '</div>';
+  t += '<span class="pill pill-info">synthetic truth: the generator decided it</span>';
+  document.getElementById("card-truth").innerHTML = t;
+
+  // Card 3: AdoptionPulse
+  const flagged = u.gain > 0 || u.leak !== "";
+  let h = '<span class="pill ' + (flagged ? "pill-ok" : "pill-info") + '">' + (flagged ? "FLAGGED" : "ON TRACK") + '</span>';
+  h += row("Licensed", u.licensed) + row("Activated", u.activated) + row("Habitual", u.habitual) + row("Proficient", u.proficient);
+  h += row("Habitual rate", u.habitual_pct + "% (estate " + S.habitual_pct + "%)");
+  h += '<div class="fieldrow"><span class="fieldname">' + (u.leak ? "leak: " + esc(u.leak) : "leak: none") + '</span>' +
+       '<div class="fieldvals">' + (u.leak ? esc(u.leak_users) + " users, " + esc(u.leak_gap) + " points below the estate rate. " : "At or above the estate rate at every stage. ") +
+       esc(u.action) + '</div></div>';
+  h += row("Habitual users to gain", u.gain) + row("Staged as the generator decided", u.correct + " of " + u.licensed);
+  h += bars(u.active, "bar-green");
+  h += '<p class="bar-caption">Share of licensed users with an AI session, by week.</p>';
+  document.getElementById("card-pulse").innerHTML = h;
+}
+
+sel.addEventListener("change", e => { idx = parseInt(e.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < UNITS.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => { idx = i; render(); i++; if (i >= UNITS.length) clearInterval(iv); }, 700);
+});
+
+render();
+</script>
+</body>
+</html>

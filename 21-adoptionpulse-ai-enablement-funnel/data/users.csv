@@ -1,0 +1,801 @@
+user_id,org_unit,role,licensed_week,champion_in_unit,trained_week
+U0001,Mortgage Servicing,associate,3,yes,4
+U0002,Customer Service,associate,1,no,
+U0003,Branch Network,relationship manager,3,no,
+U0004,Branch Network,relationship manager,3,no,
+U0005,Mortgage Servicing,associate,3,yes,6
+U0006,Branch Network,associate,3,no,
+U0007,Payments Operations,specialist,3,yes,4
+U0008,Commercial Lending,relationship manager,3,yes,4
+U0009,Customer Service,associate,1,no,2
+U0010,Compliance,manager,1,no,3
+U0011,Credit Risk,analyst,1,no,
+U0012,Commercial Lending,relationship manager,2,yes,2
+U0013,Technology Delivery,engineer,2,no,2
+U0014,Commercial Lending,relationship manager,2,yes,4
+U0015,Finance,analyst,1,yes,
+U0016,Branch Network,relationship manager,3,no,
+U0017,Finance,analyst,1,yes,
+U0018,Mortgage Servicing,specialist,3,yes,4
+U0019,Retail Operations,specialist,2,yes,
+U0020,Human Resources,manager,4,yes,
+U0021,Finance,analyst,1,yes,
+U0022,Internal Audit,manager,2,yes,
+U0023,Internal Audit,analyst,3,yes,5
+U0024,Fraud Operations,specialist,1,yes,2
+U0025,Fraud Operations,specialist,2,yes,3
+U0026,Customer Service,associate,1,no,4
+U0027,Marketing,specialist,3,no,6
+U0028,Wealth Advisory,associate,3,yes,
+U0029,Collections,manager,3,yes,
+U0030,Credit Risk,analyst,1,no,3
+U0031,Customer Service,associate,2,no,7
+U0032,Technology Delivery,engineer,2,no,
+U0033,Payments Operations,specialist,2,yes,
+U0034,Branch Network,associate,4,no,4
+U0035,Fraud Operations,analyst,2,yes,3
+U0036,Finance,analyst,1,yes,
+U0037,Branch Network,relationship manager,4,no,
+U0038,Fraud Operations,specialist,1,yes,
+U0039,Retail Operations,specialist,2,yes,4
+U0040,Retail Operations,specialist,2,yes,
+U0041,Data and Analytics,analyst,1,yes,1
+U0042,Marketing,specialist,2,no,2
+U0043,Retail Operations,associate,2,yes,4
+U0044,Finance,manager,1,yes,
+U0045,Collections,associate,3,yes,8
+U0046,Payments Operations,specialist,3,yes,4
+U0047,Compliance,analyst,1,no,
+U0048,Treasury,specialist,1,no,5
+U0049,Compliance,analyst,1,no,6
+U0050,Branch Network,relationship manager,4,no,
+U0051,Wealth Advisory,analyst,3,yes,
+U0052,Fraud Operations,manager,2,yes,
+U0053,Branch Network,relationship manager,3,no,
+U0054,Fraud Operations,analyst,1,yes,1
+U0055,Branch Network,associate,4,no,6
+U0056,Customer Service,specialist,1,no,1
+U0057,Wealth Advisory,relationship manager,4,yes,
+U0058,Branch Network,associate,3,no,6
+U0059,Mortgage Servicing,associate,3,yes,3
+U0060,Data and Analytics,engineer,1,yes,
+U0061,Procurement,analyst,4,no,5
+U0062,Technology Delivery,analyst,1,no,6
+U0063,Payments Operations,analyst,2,yes,2
+U0064,Branch Network,associate,4,no,9
+U0065,Commercial Lending,manager,2,yes,3
+U0066,Data and Analytics,analyst,1,yes,1
+U0067,Credit Risk,analyst,1,no,6
+U0068,Fraud Operations,analyst,2,yes,
+U0069,Payments Operations,associate,2,yes,
+U0070,Mortgage Servicing,associate,3,yes,6
+U0071,Marketing,specialist,3,no,
+U0072,Payments Operations,analyst,2,yes,
+U0073,Payments Operations,specialist,2,yes,
+U0074,Branch Network,associate,3,no,
+U0075,Customer Service,associate,1,no,4
+U0076,Credit Risk,analyst,1,no,3
+U0077,Retail Operations,specialist,2,yes,
+U0078,Commercial Lending,relationship manager,3,yes,8
+U0079,Customer Service,associate,2,no,
+U0080,Technology Delivery,engineer,1,no,
+U0081,Mortgage Servicing,specialist,3,yes,5
+U0082,Payments Operations,analyst,2,yes,
+U0083,Finance,specialist,1,yes,2
+U0084,Payments Operations,specialist,2,yes,
+U0085,Technology Delivery,engineer,1,no,
+U0086,Commercial Lending,relationship manager,2,yes,3
+U0087,Payments Operations,associate,2,yes,
+U0088,Technology Delivery,engineer,1,no,6
+U0089,Mortgage Servicing,specialist,3,yes,8
+U0090,Branch Network,relationship manager,3,no,
+U0091,Branch Network,associate,3,no,3
+U0092,Finance,manager,1,yes,6
+U0093,Technology Delivery,engineer,1,no,
+U0094,Technology Delivery,analyst,2,no,5
+U0095,Compliance,analyst,1,no,
+U0096,Customer Service,associate,1,no,2
+U0097,Technology Delivery,engineer,1,no,4
+U0098,Customer Service,associate,1,no,2
+U0099,Payments Operations,specialist,2,yes,5
+U0100,Commercial Lending,associate,3,yes,4
+U0101,Retail Operations,associate,2,yes,
+U0102,Treasury,analyst,1,no,
+U0103,Wealth Advisory,analyst,3,yes,5
+U0104,Credit Risk,specialist,1,no,2
+U0105,Customer Service,specialist,1,no,2
+U0106,Marketing,analyst,2,no,
+U0107,Collections,associate,3,yes,
+U0108,Commercial Lending,relationship manager,2,yes,
+U0109,Credit Risk,analyst,1,no,1
+U0110,Human Resources,specialist,4,yes,4
+U0111,Mortgage Servicing,specialist,3,yes,4
+U0112,Internal Audit,analyst,2,yes,7
+U0113,Commercial Lending,relationship manager,2,yes,
+U0114,Human Resources,manager,4,yes,5
+U0115,Commercial Lending,relationship manager,2,yes,
+U0116,Payments Operations,specialist,2,yes,
+U0117,Customer Service,specialist,1,no,1
+U0118,Retail Operations,specialist,2,yes,5
+U0119,Finance,specialist,1,yes,
+U0120,Data and Analytics,engineer,2,yes,3
+U0121,Collections,associate,3,yes,4
+U0122,Fraud Operations,analyst,2,yes,
+U0123,Mortgage Servicing,associate,4,yes,
+U0124,Data and Analytics,analyst,1,yes,
+U0125,Mortgage Servicing,associate,3,yes,8
+U0126,Branch Network,associate,3,no,
+U0127,Payments Operations,specialist,2,yes,
+U0128,Commercial Lending,relationship manager,2,yes,5
+U0129,Compliance,manager,1,no,
+U0130,Finance,specialist,2,yes,2
+U0131,Compliance,specialist,1,no,
+U0132,Data and Analytics,engineer,1,yes,3
+U0133,Branch Network,relationship manager,3,no,4
+U0134,Branch Network,associate,4,no,
+U0135,Retail Operations,specialist,3,yes,5
+U0136,Customer Service,specialist,1,no,6
+U0137,Technology Delivery,engineer,1,no,
+U0138,Compliance,analyst,1,no,
+U0139,Mortgage Servicing,specialist,3,yes,5
+U0140,Mortgage Servicing,manager,3,yes,8
+U0141,Retail Operations,associate,2,yes,
+U0142,Retail Operations,associate,3,yes,
+U0143,Fraud Operations,specialist,1,yes,
+U0144,Payments Operations,associate,2,yes,
+U0145,Technology Delivery,engineer,2,no,5
+U0146,Collections,specialist,3,yes,4
+U0147,Collections,associate,3,yes,
+U0148,Customer Service,associate,1,no,2
+U0149,Fraud Operations,specialist,2,yes,2
+U0150,Compliance,manager,1,no,
+U0151,Mortgage Servicing,associate,3,yes,5
+U0152,Customer Service,associate,1,no,4
+U0153,Customer Service,specialist,1,no,2
+U0154,Legal,manager,2,yes,2
+U0155,Customer Service,specialist,1,no,3
+U0156,Fraud Operations,analyst,1,yes,
+U0157,Payments Operations,specialist,2,yes,
+U0158,Branch Network,relationship manager,3,no,
+U0159,Marketing,specialist,2,no,
+U0160,Branch Network,associate,3,no,
+U0161,Retail Operations,specialist,2,yes,
+U0162,Credit Risk,analyst,1,no,4
+U0163,Finance,specialist,1,yes,
+U0164,Payments Operations,specialist,2,yes,
+U0165,Collections,associate,3,yes,
+U0166,Credit Risk,analyst,1,no,5
+U0167,Commercial Lending,analyst,2,yes,
+U0168,Retail Operations,specialist,2,yes,
+U0169,Customer Service,specialist,1,no,2
+U0170,Retail Operations,specialist,2,yes,
+U0171,Credit Risk,analyst,1,no,
+U0172,Payments Operations,specialist,2,yes,
+U0173,Customer Service,specialist,1,no,2
+U0174,Internal Audit,analyst,2,yes,3
+U0175,Commercial Lending,analyst,3,yes,5
+U0176,Customer Service,associate,1,no,5
+U0177,Fraud Operations,specialist,1,yes,
+U0178,Compliance,manager,2,no,
+U0179,Legal,specialist,2,yes,4
+U0180,Credit Risk,specialist,1,no,
+U0181,Branch Network,associate,3,no,3
+U0182,Mortgage Servicing,specialist,3,yes,5
+U0183,Customer Service,associate,1,no,6
+U0184,Procurement,analyst,4,no,6
+U0185,Technology Delivery,engineer,2,no,
+U0186,Collections,associate,3,yes,
+U0187,Credit Risk,analyst,1,no,3
+U0188,Mortgage Servicing,specialist,4,yes,6
+U0189,Finance,analyst,1,yes,4
+U0190,Collections,specialist,3,yes,
+U0191,Mortgage Servicing,associate,4,yes,4
+U0192,Technology Delivery,analyst,2,no,4
+U0193,Marketing,specialist,2,no,6
+U0194,Retail Operations,manager,2,yes,4
+U0195,Branch Network,associate,4,no,
+U0196,Technology Delivery,engineer,1,no,4
+U0197,Collections,associate,3,yes,6
+U0198,Branch Network,relationship manager,3,no,6
+U0199,Commercial Lending,relationship manager,2,yes,6
+U0200,Branch Network,associate,3,no,6
+U0201,Credit Risk,specialist,1,no,
+U0202,Customer Service,associate,1,no,1
+U0203,Retail Operations,associate,2,yes,
+U0204,Mortgage Servicing,associate,3,yes,3
+U0205,Finance,manager,1,yes,2
+U0206,Finance,analyst,1,yes,
+U0207,Branch Network,associate,3,no,
+U0208,Credit Risk,manager,1,no,6
+U0209,Finance,specialist,1,yes,6
+U0210,Payments Operations,specialist,3,yes,
+U0211,Payments Operations,associate,3,yes,
+U0212,Wealth Advisory,relationship manager,3,yes,6
+U0213,Branch Network,associate,3,no,8
+U0214,Branch Network,relationship manager,3,no,
+U0215,Credit Risk,analyst,1,no,
+U0216,Commercial Lending,relationship manager,2,yes,
+U0217,Finance,analyst,2,yes,
+U0218,Retail Operations,associate,3,yes,
+U0219,Treasury,analyst,1,no,
+U0220,Technology Delivery,analyst,1,no,
+U0221,Retail Operations,associate,2,yes,
+U0222,Legal,specialist,2,yes,3
+U0223,Finance,analyst,1,yes,
+U0224,Fraud Operations,manager,1,yes,2
+U0225,Technology Delivery,manager,1,no,
+U0226,Finance,analyst,1,yes,2
+U0227,Fraud Operations,specialist,1,yes,2
+U0228,Wealth Advisory,analyst,4,yes,7
+U0229,Commercial Lending,analyst,2,yes,2
+U0230,Procurement,analyst,4,no,6
+U0231,Fraud Operations,analyst,1,yes,
+U0232,Human Resources,associate,4,yes,6
+U0233,Legal,specialist,2,yes,
+U0234,Credit Risk,specialist,1,no,
+U0235,Human Resources,specialist,4,yes,
+U0236,Collections,associate,3,yes,4
+U0237,Customer Service,manager,1,no,
+U0238,Technology Delivery,engineer,1,no,
+U0239,Payments Operations,specialist,2,yes,
+U0240,Technology Delivery,engineer,1,no,3
+U0241,Payments Operations,specialist,2,yes,
+U0242,Branch Network,relationship manager,3,no,3
+U0243,Commercial Lending,manager,2,yes,4
+U0244,Retail Operations,associate,3,yes,4
+U0245,Procurement,specialist,4,no,7
+U0246,Data and Analytics,engineer,2,yes,4
+U0247,Marketing,specialist,3,no,6
+U0248,Commercial Lending,analyst,2,yes,4
+U0249,Customer Service,associate,2,no,5
+U0250,Credit Risk,analyst,1,no,
+U0251,Branch Network,manager,3,no,
+U0252,Payments Operations,specialist,2,yes,
+U0253,Legal,specialist,3,yes,
+U0254,Treasury,analyst,1,no,
+U0255,Technology Delivery,engineer,1,no,
+U0256,Fraud Operations,analyst,2,yes,2
+U0257,Customer Service,specialist,1,no,3
+U0258,Payments Operations,associate,2,yes,
+U0259,Fraud Operations,specialist,1,yes,
+U0260,Treasury,specialist,1,no,
+U0261,Customer Service,associate,1,no,4
+U0262,Treasury,analyst,1,no,3
+U0263,Marketing,manager,2,no,3
+U0264,Payments Operations,analyst,2,yes,
+U0265,Data and Analytics,analyst,1,yes,
+U0266,Data and Analytics,engineer,1,yes,
+U0267,Credit Risk,manager,1,no,4
+U0268,Payments Operations,manager,3,yes,
+U0269,Commercial Lending,analyst,2,yes,4
+U0270,Credit Risk,analyst,1,no,
+U0271,Branch Network,associate,3,no,
+U0272,Finance,specialist,1,yes,
+U0273,Mortgage Servicing,associate,3,yes,4
+U0274,Treasury,analyst,1,no,
+U0275,Payments Operations,specialist,2,yes,2
+U0276,Legal,specialist,2,yes,
+U0277,Retail Operations,associate,2,yes,
+U0278,Human Resources,specialist,4,yes,5
+U0279,Payments Operations,associate,2,yes,
+U0280,Payments Operations,manager,2,yes,7
+U0281,Data and Analytics,engineer,1,yes,4
+U0282,Retail Operations,specialist,2,yes,
+U0283,Mortgage Servicing,associate,4,yes,6
+U0284,Collections,associate,4,yes,
+U0285,Retail Operations,specialist,2,yes,
+U0286,Compliance,analyst,1,no,
+U0287,Branch Network,associate,3,no,
+U0288,Credit Risk,manager,1,no,1
+U0289,Payments Operations,specialist,2,yes,
+U0290,Credit Risk,manager,1,no,
+U0291,Credit Risk,specialist,1,no,
+U0292,Payments Operations,specialist,3,yes,
+U0293,Customer Service,associate,2,no,7
+U0294,Compliance,analyst,1,no,
+U0295,Commercial Lending,analyst,2,yes,5
+U0296,Customer Service,associate,1,no,5
+U0297,Collections,specialist,3,yes,
+U0298,Customer Service,associate,1,no,1
+U0299,Technology Delivery,engineer,1,no,1
+U0300,Wealth Advisory,associate,3,yes,
+U0301,Credit Risk,manager,1,no,3
+U0302,Marketing,manager,2,no,4
+U0303,Payments Operations,specialist,2,yes,
+U0304,Payments Operations,manager,2,yes,
+U0305,Treasury,specialist,1,no,1
+U0306,Credit Risk,specialist,1,no,3
+U0307,Payments Operations,specialist,2,yes,
+U0308,Fraud Operations,specialist,1,yes,1
+U0309,Finance,analyst,1,yes,
+U0310,Customer Service,associate,1,no,
+U0311,Payments Operations,specialist,2,yes,7
+U0312,Compliance,specialist,1,no,3
+U0313,Finance,analyst,2,yes,3
+U0314,Procurement,manager,4,no,6
+U0315,Branch Network,relationship manager,3,no,
+U0316,Marketing,analyst,2,no,5
+U0317,Technology Delivery,engineer,1,no,6
+U0318,Procurement,analyst,4,no,8
+U0319,Mortgage Servicing,associate,3,yes,
+U0320,Finance,specialist,1,yes,
+U0321,Retail Operations,manager,2,yes,3
+U0322,Mortgage Servicing,specialist,3,yes,4
+U0323,Finance,manager,1,yes,
+U0324,Marketing,analyst,2,no,
+U0325,Retail Operations,specialist,2,yes,5
+U0326,Wealth Advisory,analyst,3,yes,
+U0327,Commercial Lending,relationship manager,2,yes,
+U0328,Retail Operations,associate,2,yes,
+U0329,Payments Operations,associate,2,yes,
+U0330,Customer Service,associate,1,no,3
+U0331,Human Resources,specialist,4,yes,
+U0332,Payments Operations,specialist,2,yes,5
+U0333,Branch Network,associate,4,no,
+U0334,Fraud Operations,specialist,1,yes,
+U0335,Marketing,specialist,3,no,4
+U0336,Commercial Lending,relationship manager,2,yes,
+U0337,Payments Operations,manager,2,yes,5
+U0338,Commercial Lending,analyst,2,yes,4
+U0339,Technology Delivery,engineer,1,no,3
+U0340,Internal Audit,analyst,2,yes,5
+U0341,Branch Network,relationship manager,4,no,
+U0342,Payments Operations,specialist,3,yes,
+U0343,Commercial Lending,relationship manager,2,yes,
+U0344,Collections,associate,3,yes,3
+U0345,Data and Analytics,engineer,1,yes,3
+U0346,Treasury,analyst,1,no,
+U0347,Treasury,manager,1,no,4
+U0348,Compliance,specialist,1,no,3
+U0349,Collections,specialist,3,yes,
+U0350,Credit Risk,specialist,1,no,1
+U0351,Finance,specialist,2,yes,
+U0352,Customer Service,specialist,1,no,6
+U0353,Procurement,specialist,4,no,6
+U0354,Retail Operations,associate,2,yes,
+U0355,Customer Service,specialist,1,no,2
+U0356,Technology Delivery,engineer,2,no,
+U0357,Retail Operations,specialist,2,yes,
+U0358,Technology Delivery,engineer,1,no,5
+U0359,Technology Delivery,engineer,1,no,
+U0360,Technology Delivery,engineer,1,no,3
+U0361,Customer Service,associate,1,no,5
+U0362,Technology Delivery,engineer,1,no,5
+U0363,Customer Service,associate,1,no,1
+U0364,Mortgage Servicing,specialist,3,yes,8
+U0365,Payments Operations,associate,2,yes,
+U0366,Retail Operations,specialist,2,yes,
+U0367,Customer Service,specialist,1,no,3
+U0368,Commercial Lending,relationship manager,2,yes,3
+U0369,Retail Operations,associate,3,yes,
+U0370,Finance,specialist,1,yes,2
+U0371,Technology Delivery,engineer,1,no,4
+U0372,Payments Operations,associate,2,yes,4
+U0373,Data and Analytics,analyst,1,yes,4
+U0374,Collections,specialist,3,yes,
+U0375,Payments Operations,specialist,2,yes,
+U0376,Finance,specialist,1,yes,
+U0377,Technology Delivery,analyst,1,no,
+U0378,Branch Network,manager,3,no,
+U0379,Customer Service,associate,1,no,4
+U0380,Branch Network,manager,3,no,
+U0381,Branch Network,relationship manager,4,no,
+U0382,Technology Delivery,engineer,2,no,
+U0383,Payments Operations,specialist,2,yes,2
+U0384,Technology Delivery,analyst,1,no,4
+U0385,Technology Delivery,engineer,1,no,3
+U0386,Customer Service,associate,1,no,
+U0387,Commercial Lending,relationship manager,2,yes,4
+U0388,Collections,associate,4,yes,
+U0389,Payments Operations,associate,3,yes,
+U0390,Payments Operations,specialist,2,yes,
+U0391,Customer Service,associate,2,no,2
+U0392,Technology Delivery,engineer,2,no,3
+U0393,Credit Risk,analyst,1,no,
+U0394,Customer Service,specialist,1,no,4
+U0395,Commercial Lending,manager,3,yes,3
+U0396,Payments Operations,specialist,2,yes,2
+U0397,Wealth Advisory,analyst,3,yes,8
+U0398,Fraud Operations,specialist,1,yes,
+U0399,Payments Operations,associate,2,yes,
+U0400,Technology Delivery,analyst,1,no,
+U0401,Collections,manager,3,yes,
+U0402,Customer Service,associate,1,no,4
+U0403,Customer Service,associate,1,no,6
+U0404,Technology Delivery,manager,1,no,
+U0405,Payments Operations,associate,2,yes,
+U0406,Finance,manager,1,yes,
+U0407,Human Resources,associate,4,yes,
+U0408,Technology Delivery,engineer,1,no,
+U0409,Customer Service,specialist,1,no,
+U0410,Human Resources,specialist,4,yes,6
+U0411,Compliance,analyst,1,no,
+U0412,Branch Network,associate,3,no,4
+U0413,Compliance,manager,1,no,
+U0414,Technology Delivery,engineer,1,no,
+U0415,Branch Network,manager,4,no,
+U0416,Retail Operations,specialist,2,yes,3
+U0417,Marketing,analyst,3,no,5
+U0418,Compliance,specialist,1,no,3
+U0419,Customer Service,specialist,1,no,4
+U0420,Payments Operations,specialist,3,yes,
+U0421,Retail Operations,manager,2,yes,3
+U0422,Branch Network,associate,3,no,
+U0423,Payments Operations,specialist,3,yes,
+U0424,Mortgage Servicing,specialist,3,yes,3
+U0425,Finance,analyst,1,yes,2
+U0426,Compliance,analyst,1,no,3
+U0427,Collections,specialist,3,yes,
+U0428,Payments Operations,specialist,2,yes,7
+U0429,Payments Operations,analyst,2,yes,
+U0430,Treasury,manager,1,no,
+U0431,Data and Analytics,analyst,1,yes,1
+U0432,Compliance,specialist,1,no,
+U0433,Retail Operations,specialist,2,yes,5
+U0434,Collections,associate,3,yes,
+U0435,Credit Risk,specialist,1,no,4
+U0436,Commercial Lending,relationship manager,2,yes,4
+U0437,Finance,analyst,1,yes,5
+U0438,Branch Network,associate,4,no,
+U0439,Legal,specialist,3,yes,3
+U0440,Finance,specialist,1,yes,
+U0441,Customer Service,associate,1,no,
+U0442,Payments Operations,associate,2,yes,
+U0443,Fraud Operations,analyst,2,yes,2
+U0444,Payments Operations,specialist,2,yes,
+U0445,Procurement,manager,4,no,
+U0446,Branch Network,associate,3,no,5
+U0447,Collections,specialist,3,yes,5
+U0448,Customer Service,associate,1,no,3
+U0449,Customer Service,associate,1,no,
+U0450,Payments Operations,specialist,2,yes,
+U0451,Technology Delivery,analyst,1,no,2
+U0452,Technology Delivery,engineer,1,no,4
+U0453,Finance,analyst,1,yes,
+U0454,Commercial Lending,analyst,2,yes,4
+U0455,Credit Risk,manager,1,no,
+U0456,Legal,manager,3,yes,6
+U0457,Customer Service,associate,1,no,5
+U0458,Technology Delivery,manager,1,no,
+U0459,Technology Delivery,engineer,2,no,5
+U0460,Commercial Lending,relationship manager,3,yes,6
+U0461,Branch Network,manager,3,no,
+U0462,Legal,manager,2,yes,
+U0463,Retail Operations,specialist,3,yes,6
+U0464,Customer Service,associate,1,no,5
+U0465,Commercial Lending,analyst,3,yes,7
+U0466,Credit Risk,analyst,1,no,
+U0467,Technology Delivery,manager,1,no,3
+U0468,Payments Operations,analyst,3,yes,
+U0469,Customer Service,associate,1,no,4
+U0470,Credit Risk,analyst,1,no,3
+U0471,Branch Network,manager,3,no,3
+U0472,Fraud Operations,specialist,1,yes,
+U0473,Credit Risk,specialist,1,no,2
+U0474,Retail Operations,associate,2,yes,
+U0475,Wealth Advisory,relationship manager,3,yes,
+U0476,Commercial Lending,analyst,2,yes,4
+U0477,Commercial Lending,relationship manager,2,yes,
+U0478,Fraud Operations,analyst,1,yes,
+U0479,Wealth Advisory,associate,3,yes,
+U0480,Customer Service,specialist,1,no,3
+U0481,Finance,analyst,1,yes,3
+U0482,Mortgage Servicing,specialist,3,yes,
+U0483,Human Resources,specialist,4,yes,9
+U0484,Mortgage Servicing,associate,3,yes,5
+U0485,Retail Operations,specialist,2,yes,6
+U0486,Finance,analyst,1,yes,2
+U0487,Customer Service,associate,1,no,2
+U0488,Marketing,specialist,2,no,
+U0489,Collections,specialist,3,yes,
+U0490,Customer Service,manager,2,no,3
+U0491,Treasury,analyst,1,no,6
+U0492,Customer Service,associate,2,no,5
+U0493,Technology Delivery,engineer,1,no,
+U0494,Technology Delivery,engineer,2,no,
+U0495,Technology Delivery,engineer,2,no,
+U0496,Collections,specialist,3,yes,8
+U0497,Credit Risk,specialist,1,no,5
+U0498,Mortgage Servicing,associate,3,yes,4
+U0499,Finance,manager,1,yes,
+U0500,Payments Operations,specialist,2,yes,
+U0501,Retail Operations,associate,2,yes,
+U0502,Technology Delivery,engineer,1,no,
+U0503,Mortgage Servicing,manager,3,yes,
+U0504,Credit Risk,analyst,1,no,1
+U0505,Collections,associate,3,yes,3
+U0506,Technology Delivery,analyst,2,no,4
+U0507,Technology Delivery,analyst,1,no,
+U0508,Technology Delivery,engineer,1,no,
+U0509,Data and Analytics,manager,1,yes,3
+U0510,Customer Service,manager,1,no,
+U0511,Collections,associate,3,yes,
+U0512,Compliance,specialist,2,no,
+U0513,Credit Risk,analyst,1,no,5
+U0514,Credit Risk,analyst,1,no,1
+U0515,Technology Delivery,manager,1,no,
+U0516,Marketing,manager,3,no,5
+U0517,Mortgage Servicing,specialist,3,yes,7
+U0518,Credit Risk,analyst,1,no,2
+U0519,Customer Service,associate,2,no,5
+U0520,Credit Risk,analyst,1,no,1
+U0521,Data and Analytics,engineer,1,yes,4
+U0522,Payments Operations,analyst,2,yes,4
+U0523,Customer Service,specialist,1,no,3
+U0524,Compliance,manager,1,no,3
+U0525,Retail Operations,associate,3,yes,
+U0526,Technology Delivery,manager,1,no,
+U0527,Technology Delivery,engineer,2,no,6
+U0528,Branch Network,manager,4,no,9
+U0529,Wealth Advisory,relationship manager,4,yes,
+U0530,Commercial Lending,relationship manager,2,yes,4
+U0531,Legal,specialist,3,yes,4
+U0532,Payments Operations,associate,2,yes,5
+U0533,Commercial Lending,relationship manager,2,yes,7
+U0534,Treasury,analyst,2,no,3
+U0535,Technology Delivery,engineer,1,no,3
+U0536,Wealth Advisory,relationship manager,4,yes,
+U0537,Wealth Advisory,analyst,3,yes,
+U0538,Retail Operations,associate,2,yes,3
+U0539,Customer Service,associate,1,no,2
+U0540,Legal,specialist,2,yes,
+U0541,Technology Delivery,analyst,1,no,5
+U0542,Technology Delivery,engineer,2,no,
+U0543,Commercial Lending,manager,2,yes,
+U0544,Customer Service,associate,2,no,4
+U0545,Credit Risk,analyst,1,no,1
+U0546,Customer Service,specialist,2,no,
+U0547,Customer Service,specialist,2,no,6
+U0548,Retail Operations,associate,2,yes,
+U0549,Mortgage Servicing,specialist,3,yes,4
+U0550,Branch Network,associate,3,no,4
+U0551,Branch Network,associate,4,no,
+U0552,Fraud Operations,manager,1,yes,2
+U0553,Retail Operations,manager,2,yes,4
+U0554,Technology Delivery,engineer,1,no,
+U0555,Technology Delivery,engineer,1,no,1
+U0556,Payments Operations,specialist,2,yes,
+U0557,Treasury,specialist,1,no,
+U0558,Data and Analytics,engineer,2,yes,
+U0559,Commercial Lending,analyst,3,yes,
+U0560,Commercial Lending,analyst,2,yes,
+U0561,Internal Audit,analyst,3,yes,3
+U0562,Customer Service,associate,1,no,2
+U0563,Customer Service,manager,1,no,3
+U0564,Data and Analytics,engineer,1,yes,5
+U0565,Commercial Lending,manager,2,yes,6
+U0566,Payments Operations,associate,2,yes,
+U0567,Technology Delivery,analyst,1,no,
+U0568,Technology Delivery,engineer,1,no,
+U0569,Legal,specialist,2,yes,2
+U0570,Credit Risk,specialist,1,no,6
+U0571,Customer Service,associate,2,no,4
+U0572,Treasury,analyst,2,no,5
+U0573,Commercial Lending,relationship manager,2,yes,7
+U0574,Marketing,analyst,3,no,4
+U0575,Customer Service,associate,1,no,3
+U0576,Collections,associate,4,yes,6
+U0577,Commercial Lending,relationship manager,2,yes,6
+U0578,Branch Network,relationship manager,3,no,5
+U0579,Branch Network,associate,3,no,
+U0580,Treasury,specialist,1,no,3
+U0581,Payments Operations,associate,2,yes,
+U0582,Compliance,specialist,1,no,1
+U0583,Wealth Advisory,analyst,3,yes,
+U0584,Fraud Operations,specialist,1,yes,
+U0585,Payments Operations,specialist,3,yes,
+U0586,Customer Service,specialist,1,no,4
+U0587,Data and Analytics,analyst,1,yes,1
+U0588,Customer Service,associate,2,no,6
+U0589,Finance,analyst,1,yes,
+U0590,Mortgage Servicing,specialist,3,yes,3
+U0591,Technology Delivery,engineer,2,no,4
+U0592,Technology Delivery,engineer,1,no,5
+U0593,Procurement,analyst,4,no,4
+U0594,Branch Network,associate,3,no,4
+U0595,Technology Delivery,engineer,1,no,
+U0596,Payments Operations,associate,3,yes,
+U0597,Finance,manager,2,yes,
+U0598,Commercial Lending,relationship manager,3,yes,3
+U0599,Customer Service,associate,1,no,3
+U0600,Internal Audit,analyst,3,yes,4
+U0601,Payments Operations,associate,2,yes,
+U0602,Technology Delivery,engineer,1,no,
+U0603,Compliance,analyst,1,no,
+U0604,Technology Delivery,engineer,1,no,
+U0605,Branch Network,relationship manager,3,no,
+U0606,Treasury,analyst,1,no,1
+U0607,Wealth Advisory,relationship manager,3,yes,8
+U0608,Collections,manager,3,yes,
+U0609,Retail Operations,specialist,2,yes,5
+U0610,Branch Network,associate,3,no,
+U0611,Finance,analyst,1,yes,
+U0612,Payments Operations,specialist,2,yes,
+U0613,Customer Service,associate,1,no,3
+U0614,Data and Analytics,analyst,2,yes,4
+U0615,Retail Operations,manager,2,yes,6
+U0616,Treasury,analyst,1,no,3
+U0617,Human Resources,specialist,4,yes,
+U0618,Customer Service,associate,2,no,5
+U0619,Mortgage Servicing,specialist,3,yes,5
+U0620,Retail Operations,associate,2,yes,7
+U0621,Customer Service,associate,1,no,2
+U0622,Compliance,specialist,1,no,1
+U0623,Collections,associate,3,yes,
+U0624,Mortgage Servicing,specialist,4,yes,
+U0625,Commercial Lending,analyst,2,yes,3
+U0626,Branch Network,relationship manager,3,no,5
+U0627,Legal,manager,2,yes,4
+U0628,Branch Network,manager,4,no,5
+U0629,Branch Network,associate,4,no,
+U0630,Technology Delivery,engineer,1,no,
+U0631,Fraud Operations,analyst,1,yes,2
+U0632,Customer Service,specialist,1,no,
+U0633,Technology Delivery,analyst,1,no,
+U0634,Customer Service,manager,1,no,2
+U0635,Legal,specialist,2,yes,
+U0636,Branch Network,associate,3,no,
+U0637,Branch Network,associate,3,no,
+U0638,Technology Delivery,engineer,1,no,
+U0639,Human Resources,specialist,4,yes,4
+U0640,Customer Service,associate,1,no,1
+U0641,Technology Delivery,engineer,1,no,3
+U0642,Compliance,manager,1,no,
+U0643,Retail Operations,associate,2,yes,
+U0644,Treasury,specialist,1,no,3
+U0645,Finance,manager,1,yes,
+U0646,Data and Analytics,analyst,1,yes,4
+U0647,Payments Operations,associate,2,yes,
+U0648,Credit Risk,manager,1,no,
+U0649,Technology Delivery,analyst,1,no,
+U0650,Branch Network,associate,3,no,6
+U0651,Payments Operations,manager,2,yes,
+U0652,Wealth Advisory,relationship manager,3,yes,7
+U0653,Fraud Operations,analyst,2,yes,2
+U0654,Branch Network,associate,3,no,3
+U0655,Treasury,analyst,1,no,2
+U0656,Customer Service,associate,1,no,4
+U0657,Branch Network,associate,4,no,
+U0658,Technology Delivery,manager,1,no,
+U0659,Branch Network,manager,3,no,4
+U0660,Technology Delivery,engineer,1,no,
+U0661,Retail Operations,associate,2,yes,
+U0662,Customer Service,specialist,1,no,
+U0663,Commercial Lending,analyst,2,yes,3
+U0664,Payments Operations,associate,2,yes,
+U0665,Wealth Advisory,analyst,3,yes,3
+U0666,Credit Risk,manager,1,no,6
+U0667,Technology Delivery,engineer,1,no,5
+U0668,Retail Operations,manager,2,yes,3
+U0669,Collections,associate,3,yes,
+U0670,Payments Operations,analyst,2,yes,
+U0671,Mortgage Servicing,specialist,4,yes,9
+U0672,Branch Network,associate,3,no,
+U0673,Customer Service,specialist,1,no,2
+U0674,Commercial Lending,relationship manager,2,yes,3
+U0675,Branch Network,associate,3,no,
+U0676,Customer Service,associate,2,no,7
+U0677,Commercial Lending,associate,2,yes,
+U0678,Technology Delivery,engineer,1,no,1
+U0679,Technology Delivery,engineer,1,no,
+U0680,Legal,specialist,2,yes,4
+U0681,Fraud Operations,specialist,1,yes,
+U0682,Branch Network,relationship manager,3,no,3
+U0683,Human Resources,specialist,4,yes,
+U0684,Finance,analyst,1,yes,
+U0685,Customer Service,associate,1,no,1
+U0686,Collections,manager,3,yes,4
+U0687,Commercial Lending,associate,2,yes,
+U0688,Finance,analyst,1,yes,5
+U0689,Compliance,manager,1,no,2
+U0690,Technology Delivery,analyst,1,no,
+U0691,Wealth Advisory,relationship manager,3,yes,
+U0692,Collections,associate,3,yes,
+U0693,Data and Analytics,analyst,1,yes,2
+U0694,Retail Operations,associate,2,yes,
+U0695,Customer Service,associate,1,no,4
+U0696,Wealth Advisory,relationship manager,4,yes,
+U0697,Technology Delivery,engineer,2,no,4
+U0698,Payments Operations,associate,2,yes,
+U0699,Branch Network,associate,4,no,6
+U0700,Commercial Lending,relationship manager,3,yes,
+U0701,Technology Delivery,engineer,1,no,
+U0702,Collections,specialist,3,yes,
+U0703,Wealth Advisory,relationship manager,3,yes,
+U0704,Payments Operations,associate,2,yes,
+U0705,Collections,associate,3,yes,
+U0706,Mortgage Servicing,manager,3,yes,5
+U0707,Branch Network,manager,3,no,4
+U0708,Commercial Lending,associate,2,yes,3
+U0709,Technology Delivery,engineer,1,no,
+U0710,Credit Risk,specialist,1,no,3
+U0711,Payments Operations,specialist,2,yes,
+U0712,Data and Analytics,analyst,2,yes,5
+U0713,Finance,specialist,1,yes,
+U0714,Credit Risk,analyst,1,no,5
+U0715,Data and Analytics,analyst,1,yes,1
+U0716,Retail Operations,associate,2,yes,
+U0717,Credit Risk,analyst,1,no,2
+U0718,Wealth Advisory,relationship manager,3,yes,5
+U0719,Technology Delivery,engineer,1,no,1
+U0720,Payments Operations,manager,2,yes,4
+U0721,Branch Network,relationship manager,4,no,
+U0722,Branch Network,relationship manager,3,no,
+U0723,Commercial Lending,relationship manager,2,yes,
+U0724,Customer Service,associate,1,no,
+U0725,Commercial Lending,analyst,2,yes,6
+U0726,Customer Service,manager,1,no,2
+U0727,Customer Service,associate,2,no,2
+U0728,Retail Operations,associate,2,yes,
+U0729,Data and Analytics,engineer,1,yes,6
+U0730,Customer Service,specialist,1,no,
+U0731,Fraud Operations,analyst,1,yes,
+U0732,Commercial Lending,analyst,2,yes,3
+U0733,Fraud Operations,analyst,1,yes,
+U0734,Mortgage Servicing,specialist,3,yes,8
+U0735,Credit Risk,analyst,1,no,1
+U0736,Internal Audit,analyst,2,yes,
+U0737,Commercial Lending,relationship manager,2,yes,4
+U0738,Payments Operations,associate,2,yes,
+U0739,Finance,analyst,1,yes,
+U0740,Customer Service,associate,2,no,4
+U0741,Technology Delivery,engineer,1,no,
+U0742,Commercial Lending,associate,3,yes,3
+U0743,Procurement,specialist,4,no,7
+U0744,Marketing,specialist,2,no,5
+U0745,Retail Operations,specialist,2,yes,
+U0746,Collections,specialist,3,yes,
+U0747,Branch Network,associate,4,no,
+U0748,Mortgage Servicing,specialist,4,yes,7
+U0749,Retail Operations,specialist,2,yes,
+U0750,Customer Service,associate,1,no,2
+U0751,Commercial Lending,analyst,2,yes,4
+U0752,Marketing,specialist,3,no,5
+U0753,Technology Delivery,engineer,1,no,
+U0754,Customer Service,associate,1,no,3
+U0755,Customer Service,associate,1,no,3
+U0756,Commercial Lending,relationship manager,2,yes,2
+U0757,Customer Service,associate,1,no,3
+U0758,Customer Service,specialist,1,no,
+U0759,Customer Service,associate,1,no,1
+U0760,Technology Delivery,analyst,2,no,
+U0761,Wealth Advisory,analyst,3,yes,
+U0762,Data and Analytics,analyst,2,yes,
+U0763,Customer Service,specialist,1,no,3
+U0764,Collections,manager,3,yes,
+U0765,Commercial Lending,relationship manager,2,yes,3
+U0766,Customer Service,associate,1,no,6
+U0767,Branch Network,relationship manager,4,no,
+U0768,Credit Risk,analyst,1,no,
+U0769,Technology Delivery,engineer,1,no,
+U0770,Customer Service,associate,1,no,2
+U0771,Human Resources,manager,4,yes,5
+U0772,Retail Operations,associate,2,yes,7
+U0773,Retail Operations,associate,3,yes,
+U0774,Wealth Advisory,relationship manager,3,yes,3
+U0775,Commercial Lending,relationship manager,2,yes,4
+U0776,Technology Delivery,manager,2,no,
+U0777,Data and Analytics,engineer,1,yes,1
+U0778,Customer Service,associate,1,no,2
+U0779,Branch Network,associate,3,no,4
+U0780,Technology Delivery,engineer,1,no,
+U0781,Customer Service,associate,1,no,2
+U0782,Customer Service,associate,1,no,4
+U0783,Internal Audit,manager,2,yes,6
+U0784,Customer Service,associate,2,no,2
+U0785,Technology Delivery,engineer,1,no,2
+U0786,Technology Delivery,engineer,1,no,
+U0787,Customer Service,manager,1,no,2
+U0788,Finance,analyst,1,yes,
+U0789,Mortgage Servicing,associate,4,yes,
+U0790,Payments Operations,specialist,2,yes,5
+U0791,Technology Delivery,engineer,1,no,3
+U0792,Technology Delivery,engineer,1,no,3
+U0793,Data and Analytics,analyst,2,yes,4
+U0794,Customer Service,associate,1,no,5
+U0795,Technology Delivery,engineer,1,no,
+U0796,Data and Analytics,analyst,2,yes,3
+U0797,Customer Service,associate,1,no,4
+U0798,Compliance,analyst,1,no,
+U0799,Credit Risk,analyst,1,no,
+U0800,Mortgage Servicing,specialist,3,yes,7

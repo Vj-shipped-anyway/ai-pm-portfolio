@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">AdoptionPulse: weekly AI usage flowing through stage rules, a cut by unit, and a ranked action list</title>
+  <desc id="desc">Five-stage flow showing how weekly AI usage is staged as licensed, activated, habitual or proficient, cut by org unit, training and champion coverage, ranked by habitual users to gain, and turned into a rule-based action. A comparison strip contrasts the login view with AdoptionPulse on the synthetic data.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a5a5a"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 11px; fill: #5a5a5a; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .meta-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; fill: #8a8a8a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .timer { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #791F1F; }
+      .timer-fast { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 10px; fill: #27500A; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #5a5a5a; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 10px; font-weight: 500; fill: #1c2541; }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">AdoptionPulse - from weekly usage to the unit that needs help</text>
+  <text x="20" y="52" class="subheader">A login count says who opened the tool. AdoptionPulse stages each person, finds the leak and ranks the units.</text>
+
+  <!-- Trigger badge -->
+  <rect x="20" y="78" width="250" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="93" class="badge-text">Trigger: a week of AI usage lands</text>
+
+  <!-- Stage 1: USAGE FEED -->
+  <rect x="20" y="120" width="155" height="110" rx="8" class="stage-box"/>
+  <text x="32" y="140" class="stage-num">1 . USAGE FEED</text>
+  <text x="32" y="162" class="stage-title">Weekly AI usage</text>
+  <text x="32" y="180" class="stage-sub">sessions prompts</text>
+  <text x="32" y="195" class="stage-sub">accepted advanced</text>
+  <text x="32" y="210" class="stage-sub">per user per week</text>
+  <text x="32" y="223" class="meta-text">9,600 usage rows</text>
+
+  <!-- Arrow 1 -->
+  <line x1="180" y1="175" x2="222" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: STAGE RULES -->
+  <rect x="225" y="120" width="180" height="110" rx="8" class="stage-box-eval"/>
+  <text x="237" y="140" class="stage-num">2 . STAGE RULES</text>
+  <text x="237" y="162" class="stage-title">Stage every user</text>
+  <text x="237" y="180" class="stage-sub">licensed activated</text>
+  <text x="237" y="195" class="stage-sub">habitual proficient</text>
+  <text x="237" y="210" class="stage-sub">thresholds in a file</text>
+  <text x="237" y="225" class="meta-strong">762 of 800 staged right</text>
+
+  <!-- Arrow 2 -->
+  <line x1="410" y1="175" x2="452" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: CUT -->
+  <rect x="455" y="120" width="200" height="110" rx="8" class="stage-box-eval"/>
+  <text x="467" y="140" class="stage-num">3 . CUT AND COMPARE</text>
+  <text x="467" y="162" class="stage-title">By unit and week</text>
+  <text x="467" y="180" class="stage-sub">funnel per org unit</text>
+  <text x="467" y="195" class="stage-sub">retention by week</text>
+  <text x="467" y="210" class="stage-sub">training and champion</text>
+  <text x="467" y="225" class="meta-strong">20 units staged</text>
+
+  <!-- Arrow 3 -->
+  <line x1="660" y1="175" x2="702" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: RANK -->
+  <rect x="705" y="120" width="180" height="110" rx="8" class="stage-box-gate"/>
+  <text x="717" y="140" class="stage-num">4 . RANK + ACTION</text>
+  <text x="717" y="162" class="stage-title">Units to act on</text>
+  <text x="717" y="180" class="stage-sub">rank by users to gain</text>
+  <text x="717" y="195" class="stage-sub">leak + rule action</text>
+  <text x="717" y="210" class="stage-sub">rules, not tested</text>
+  <text x="717" y="225" class="meta-block">11 of 20 units to help</text>
+
+  <!-- Arrow 4 (down) -->
+  <path d="M 795 230 L 795 256 L 410 256 L 410 286" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: ACT -->
+  <rect x="240" y="290" width="340" height="90" rx="8" class="stage-box-block"/>
+  <text x="252" y="310" class="stage-num">5 . THE PROGRAM LEAD ACTS</text>
+  <text x="252" y="330" class="stage-title">Help the unit, then re-stage</text>
+  <text x="252" y="352" class="stage-sub">champion . training . coaching</text>
+  <text x="252" y="368" class="meta-block">actions are rules: never tested</text>
+
+  <!-- Arrow 5 (back) -->
+  <path d="M 240 330 L 100 330 L 100 380" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Final: NEXT REPORT -->
+  <rect x="20" y="385" width="160" height="55" rx="8" class="stage-box-ship"/>
+  <text x="32" y="405" class="stage-title">next weekly run</text>
+  <text x="32" y="423" class="stage-sub">did the leak close</text>
+  <text x="32" y="436" class="meta-strong">design: never run</text>
+
+  <!-- Comparison strip -->
+  <rect x="600" y="290" width="285" height="90" rx="8" fill="#f6f5f2" stroke="none"/>
+  <text x="612" y="310" class="stage-title">Same people, two views</text>
+  <text x="612" y="332" class="timer">Login view: 88.0% adopted</text>
+  <text x="612" y="350" class="timer-fast">AdoptionPulse: 27.6% habitual</text>
+  <text x="612" y="370" class="meta-strong">known limit: use counted, not value</text>
+</svg>

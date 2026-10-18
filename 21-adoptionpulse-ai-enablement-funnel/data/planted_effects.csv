@@ -1,0 +1,3 @@
+effect,planted_logit_shift,users_affected,avg_p_habitual_or_better_without,avg_p_habitual_or_better_with,planted_gap_points
+champion_in_unit,0.7,420,0.2429,0.3823,13.9
+training_completed,0.55,428,0.2365,0.3364,10.0
