@@ -55,5 +55,35 @@ jobs:
       - name: Ping SchemaWatch
         run: curl -sSf --max-time 60 https://schemawatch-bfsi.streamlit.app || true
 
+      - name: Ping ControlMap
+        run: curl -sSf --max-time 60 https://controlmap-bfsi.streamlit.app || true
+
+      - name: Ping FairLens
+        run: curl -sSf --max-time 60 https://fairlens-bfsi.streamlit.app || true
+
+      - name: Ping VendorLens
+        run: curl -sSf --max-time 60 https://vendorlens-bfsi.streamlit.app || true
+
+      - name: Ping IncidentLedger
+        run: curl -sSf --max-time 60 https://incidentledger-bfsi.streamlit.app || true
+
+      - name: Ping CorpusGate
+        run: curl -sSf --max-time 60 https://corpusgate-bfsi.streamlit.app || true
+
+      - name: Ping AdoptionPulse
+        run: curl -sSf --max-time 60 https://adoptionpulse-bfsi.streamlit.app || true
+
+      - name: Ping ShadowScan
+        run: curl -sSf --max-time 60 https://shadowscan-bfsi.streamlit.app || true
+
+      - name: Ping ScopeKeeper
+        run: curl -sSf --max-time 60 https://scopekeeper-bfsi.streamlit.app || true
+
+      - name: Ping PortfolioBoard
+        run: curl -sSf --max-time 60 https://portfolioboard-bfsi.streamlit.app || true
+
+      - name: Ping KillSwitch
+        run: curl -sSf --max-time 60 https://killswitch-bfsi.streamlit.app || true
+
       - name: Log completion
         run: echo "Keep-alive ping completed at $(date -u)"

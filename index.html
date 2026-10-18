@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI PM Portfolio · Vijay Saharan</title>
-<meta name="description" content="Fifteen AI product case studies in regulated finance and commercial real estate. Each names the failure modes of a deployed AI system and builds the layer that contains them.">
+<meta name="description" content="Twenty-five AI product case studies in regulated finance and commercial real estate. Each names the failure modes of a deployed AI system and builds the layer that contains them.">
 <style>
   :root {
     --bg: #ffffff; --bg-2: #f6f5f2; --bg-3: #ecebe7;
@@ -39,14 +39,14 @@
 <body>
 <main class="wrap">
   <h1>AI PM Portfolio</h1>
-  <p class="sub">Fifteen prototypes of AI product work in regulated finance and commercial real estate. Each one names the failure modes of a deployed AI system, shows where it breaks on sample data, and builds the layer that contains them.</p>
+  <p class="sub">Twenty-five prototypes of AI product work in regulated finance and commercial real estate. Each one names the failure modes of a deployed AI system, shows where it breaks on sample data, and builds the layer that contains them.</p>
   <div class="thesis">
     I price product impact with one formula:<br>
     <code>Utility = (my solution − current state of the art) × number of people it affects</code>
   </div>
   <p class="note">These are portfolio prototypes on synthetic data, not production case studies. Every number is tagged measured, modeled or hypothetical; see <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio#-reading-the-numbers">how to read the numbers</a>. LeaseGuard and DealSentry apply the same approach to commercial real estate, a domain I follow as a personal study interest.</p>
 
-  <section class="grid" aria-label="The fifteen case studies">
+  <section class="grid" aria-label="The twenty-five case studies">
     <article class="card">
       <p class="num">01 · BFSI / Safety</p>
       <h2>HalluGuard</h2>
@@ -136,6 +136,66 @@
       <h2>SchemaWatch</h2>
       <p class="line">Detects tool-schema changes that break an agent, replays recorded calls against the new schema, and gates the release.</p>
       <p class="links"><a class="primary" href="./15-schemawatch-tool-schema-drift/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/15-schemawatch-tool-schema-drift">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/15-schemawatch-tool-schema-drift/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">16 · AI / Governance</p>
+      <h2>ControlMap</h2>
+      <p class="line">Maps AI obligations from four frameworks to controls and evidence, and shows which are uncovered, stale or serve nothing.</p>
+      <p class="links"><a class="primary" href="./16-controlmap-ai-obligation-crosswalk/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/16-controlmap-ai-obligation-crosswalk">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/16-controlmap-ai-obligation-crosswalk/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">17 · AI / Fairness</p>
+      <h2>FairLens</h2>
+      <p class="line">Tests a synthetic credit model for the gap overall accuracy hides: adverse impact by group, cutoff sweep, proxy and reason-code checks.</p>
+      <p class="links"><a class="primary" href="./17-fairlens-credit-model-fairness/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/17-fairlens-credit-model-fairness">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/17-fairlens-credit-model-fairness/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">18 · AI / Third-party risk</p>
+      <h2>VendorLens</h2>
+      <p class="line">Scores AI vendors on evidence, upstream-provider concentration and exit readiness instead of a self-filled questionnaire.</p>
+      <p class="links"><a class="primary" href="./18-vendorlens-ai-vendor-due-diligence/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/18-vendorlens-ai-vendor-due-diligence">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/18-vendorlens-ai-vendor-due-diligence/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">19 · AI / Incident response</p>
+      <h2>IncidentLedger</h2>
+      <p class="line">Rates AI incidents by rubric, starts the notification clocks and tracks follow-ups instead of a ticket queue.</p>
+      <p class="links"><a class="primary" href="./19-incidentledger-ai-incident-response/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/19-incidentledger-ai-incident-response">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/19-incidentledger-ai-incident-response/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">20 · AI / Data access</p>
+      <h2>CorpusGate</h2>
+      <p class="line">Checks that assistant retrieval respects who may read each document, and scans for personal data at ingestion.</p>
+      <p class="links"><a class="primary" href="./20-corpusgate-rag-entitlements/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/20-corpusgate-rag-entitlements">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/20-corpusgate-rag-entitlements/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">21 · AI / Enablement</p>
+      <h2>AdoptionPulse</h2>
+      <p class="line">Stages AI adoption from licensed to proficient by team, instead of reporting license counts and logins.</p>
+      <p class="links"><a class="primary" href="./21-adoptionpulse-ai-enablement-funnel/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/21-adoptionpulse-ai-enablement-funnel">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/21-adoptionpulse-ai-enablement-funnel/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">22 · AI / Security</p>
+      <h2>ShadowScan</h2>
+      <p class="line">Finds AI tools staff use without approval in proxy and DNS logs and ranks them by data exposure.</p>
+      <p class="links"><a class="primary" href="./22-shadowscan-unsanctioned-ai-discovery/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/22-shadowscan-unsanctioned-ai-discovery">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/22-shadowscan-unsanctioned-ai-discovery/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">23 · AI / Agent access</p>
+      <h2>ScopeKeeper</h2>
+      <p class="line">Compares an agent's granted scopes with its real calls and proposes the smallest scope set that still works.</p>
+      <p class="links"><a class="primary" href="./23-scopekeeper-agent-permission-review/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/23-scopekeeper-agent-permission-review">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/23-scopekeeper-agent-permission-review/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">24 · AI / Program office</p>
+      <h2>PortfolioBoard</h2>
+      <p class="line">Runs an AI program portfolio on gate evidence, reviewer capacity and dependencies instead of owner-picked colors.</p>
+      <p class="links"><a class="primary" href="./24-portfolioboard-ai-program-portfolio/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/24-portfolioboard-ai-program-portfolio">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/24-portfolioboard-ai-program-portfolio/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">25 · AI / Resilience</p>
+      <h2>KillSwitch</h2>
+      <p class="line">Trips a degraded segment to a rules fallback by threshold, scores the drills, and tracks the safe way back.</p>
+      <p class="links"><a class="primary" href="./25-killswitch-ai-fallback-drills/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/25-killswitch-ai-fallback-drills">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/25-killswitch-ai-fallback-drills/ARCHITECTURE.md">Architecture</a></p>
     </article>
   </section>
 
