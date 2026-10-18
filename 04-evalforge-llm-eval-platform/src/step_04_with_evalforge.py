@@ -12,7 +12,7 @@ Same eval runs, same probe set. Four layers added.
   Inter-rater kappa target: at or above 0.78. Judge prompt rebuilt against
   the anchored rubric.
 
-  Layer 3 - Cross-vendor LLM-as-judge.  Claude judge + GPT-4o judge. If
+  Layer 3 - Cross-vendor LLM-as-judge.  Vendor-model judge + GPT-4o judge. If
   they disagree by more than 1 point on a probe-rubric pair, route to
   human review.
 
@@ -242,11 +242,11 @@ def main() -> None:
     print("-" * 80)
     print("Headline catches:")
     print("-" * 80)
-    print(f"  ER012 (2026-02-17, claude-sonnet-4-20260214 silent update):")
+    print(f"  ER012 (2026-02-17, vendor-balanced-4-20260214 silent update):")
     print(f"    verdict={er012['ci_gate_verdict']}, pass_rate={er012['pass_rate']}, baseline={er012['rolling_baseline']}")
     print(f"    -> {er012['ci_gate_reason']}")
     print()
-    print(f"  ER038 (2026-06-01, claude-sonnet-4-20260520 silent update):")
+    print(f"  ER038 (2026-06-01, vendor-balanced-4-20260520 silent update):")
     print(f"    verdict={er038['ci_gate_verdict']}, pass_rate={er038['pass_rate']}, baseline={er038['rolling_baseline']}")
     print(f"    -> {er038['ci_gate_reason']}")
     print()

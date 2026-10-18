@@ -189,7 +189,7 @@ def main() -> None:
         print(f"  ER012 (post-update): pass_rate={er012['pass_rate']}  kappa={er012['inter_judge_kappa']}  verdict={er012['ci_gate_verdict']}")
         print(f"  Delta pass_rate:     {delta_pass:+.2f}")
         print(f"  Delta kappa:         {delta_kappa:+.2f}")
-        print(f"  Vendor snapshot change: claude-sonnet-4-20251101 -> claude-sonnet-4-20260214")
+        print(f"  Vendor snapshot change: vendor-balanced-4-20251101 -> vendor-balanced-4-20260214")
         print(f"  Step 2's basic eval would have shipped this update. EvalForge catches it.")
         print()
 

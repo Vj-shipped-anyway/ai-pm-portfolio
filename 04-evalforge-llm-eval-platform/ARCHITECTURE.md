@@ -14,7 +14,7 @@ Six components. Each is independently deployable and independently scalable.
 | --- | --- | --- | --- |
 | `evalforge-api` | REST + gRPC API. Auth, RBAC, request routing, evidence-bundle assembly. | Python 3.11 + FastAPI + Pydantic v2 | No |
 | `evalforge-runner` | Probe execution: sends each probe to the deployed assistant, captures the response, persists for judging. | Python on K8s Jobs (one job per eval run, fan-out per probe) | No |
-| `evalforge-judge` | Judge orchestrator: fan-out to Claude + GPT-4o + in-VPC Llama; rubric scoring; kappa computation. | Python + asyncio | No |
+| `evalforge-judge` | Judge orchestrator: fan-out to the hosted vendor model + GPT-4o + in-VPC Llama; rubric scoring; kappa computation. | Python + asyncio | No |
 | `evalforge-ui` | L2 Trust-and-Safety authoring UI (rubrics, calibration anchors, override-audit viewer). | React 19 + Next.js 15 + TypeScript + Tailwind | No |
 | `evalforge-gate` | GitHub Action / Argo CD pre-deploy hook. Reads the run verdict, posts a PR check, fails the merge if FAIL. | TypeScript Action + Go binary fallback | No |
 | `evalforge-scheduler` | Cron for nightly regression runs against the production assistant snapshot; weekly judge re-anchor. | Argo Workflows / Cloud Composer | Stateful (workflow runs) |
@@ -309,7 +309,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 
 | External service | Protocol | Auth | What we call | Failure mode |
 | --- | --- | --- | --- | --- |
-| **Anthropic Claude** | REST + JSON | API key from Vault, rotated 90 days | Primary LLM-as-judge | Circuit-breaker → fall back to GPT-4o judge; alert P3 |
+| **Anthropic** | REST + JSON | API key from Vault, rotated 90 days | Primary LLM-as-judge | Circuit-breaker → fall back to GPT-4o judge; alert P3 |
 | **Azure OpenAI** | REST + JSON, regional endpoint | Managed Identity | Secondary judge | Degrades to primary-only; cross-vendor kappa flagged |
 | **In-VPC Llama 3.1 8B** | gRPC to Triton on bank's GPU pool | mTLS | Tertiary judge (in-VPC for sensitive features) | Optional path; failure does not affect primary flow |
 | **GitHub / GitLab** | REST + Webhook | OAuth App + HMAC webhook | PR check posting; webhook receipt | Local queue retries 5x; manual sync if both fail |
@@ -408,12 +408,12 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 # Auth: OIDC bearer; role: ef:engineer or higher
 # Request:
 {
-    "model_version": "claude-sonnet-4-20260214",
+    "model_version": "vendor-balanced-4-20260214",
     "probe_set_version": "probes-v0.9",
     "triggered_by": "ci_pr",
     "pr_number": 8417,
     "judge_config": {
-        "primary": "claude-judge-v1",
+        "primary": "vendor-judge-v1",
         "secondary": "gpt-4o-judge"
     }
 }

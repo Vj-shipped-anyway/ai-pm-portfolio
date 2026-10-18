@@ -50,7 +50,7 @@ The flight log. Each row is one nightly or pre-deploy eval run, with the model s
 | `probe_set_version` | Pinned probe set version. |
 | `n_probes` | Probe count at that version (the set grew from 30 to 60 over the walkthrough window). |
 | `pass_rate` | Aggregate pass rate. |
-| `judge_id` | Which judge configuration scored this run. Cross-vendor judging (Claude + GPT-4o) lights up at ER021. |
+| `judge_id` | Which judge configuration scored this run. Cross-vendor judging (hosted vendor model + GPT-4o) lights up at ER021. |
 | `judge_snapshot` | The judge model's own snapshot pin — critical for catching the "judge silently drifted" failure mode. |
 | `inter_judge_kappa` | Cohen's kappa between primary and secondary judge. Step 4 raises REVIEW below 0.75 and FAIL below 0.70. |
 | `ci_gate_verdict` | `PASS` / `FAIL` / `REVIEW` — the verdict recorded in the file. Step 4 recomputes verdicts from `pass_rate` and `inter_judge_kappa`, and 11 of the 50 differ (the README quotes Step 4's 36 / 9 / 5; the column holds 37 / 6 / 7). |
@@ -58,7 +58,7 @@ The flight log. Each row is one nightly or pre-deploy eval run, with the model s
 | `human_override_count` | How many judge scores got overridden by a human reviewer this run. |
 | `notes` | Free-text — vendor updates, rubric recalibration, probe-set bumps. |
 
-**The narrative arc inside this file.** ER001-ER011 is the pre-EvalForge world (clean PASS streak but inter-judge kappa quietly drifting from 0.78 to 0.70). ER012 is the Anthropic Feb-14, 2026 silent snapshot update — the probe set catches it, pass rate drops to 0.86, regression flags. ER017-ER019 is the rubric recalibration + prompt patch. ER021 introduces cross-vendor judging. ER038 is the second silent vendor update (claude-sonnet-4-20260520) — the CI gate blocks deploy on first run. ER050 is the current production baseline.
+**The narrative arc inside this file.** ER001-ER011 is the pre-EvalForge world (clean PASS streak but inter-judge kappa quietly drifting from 0.78 to 0.70). ER012 is the Anthropic Feb-14, 2026 silent snapshot update — the probe set catches it, pass rate drops to 0.86, regression flags. ER017-ER019 is the rubric recalibration + prompt patch. ER021 introduces cross-vendor judging. ER038 is the second silent vendor update (vendor-balanced-4-20260520) — the CI gate blocks deploy on first run. ER050 is the current production baseline.
 
 ---
 
@@ -98,3 +98,7 @@ probes.csv  ──┬──>  eval_runs.csv  (50 runs, 30 to 60 probes each, sco
 ```
 
 Reproducibility: every value above is hand-curated to match the README narrative. The step scripts in `src/` read these CSVs; the counts they compute (per-class probe and override counts, the Step 4 verdict roll-up) are the ones the README quotes.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. Every id has the shape `vendor-<tier>-<version>[-<release date>]`: `model_version` and `judge_snapshot` use `vendor-balanced-4-20251101`, `vendor-balanced-4-20260214` and `vendor-balanced-4-20260520`, where `balanced` is the mid-priced hosted model. `judge_id` uses `vendor-judge-v1` and `vendor-judge-v2` for judge configurations built on that model, and a `+gpt-4o-judge` suffix marks cross-vendor judging. GPT-4o and Llama keep their real names. No number in this project depends on the label.

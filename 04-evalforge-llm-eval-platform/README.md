@@ -99,7 +99,7 @@ I'm a PM who follows this specific failure mode in industry research. The point 
 
 **Problem.** Tier-1 BFSI shops run 12-20 customer-facing GenAI features in production. ~14% of the deploys to those features produce a silent post-deploy regression — the model still answers, the answer is still plausible, but the answer is subtly worse than yesterday (more refusing, less specific, occasionally hallucinating fee waivers or eligibility floors). The legacy eval ("the spreadsheet a senior engineer maintains," or even "nightly cron that runs 30 probes and dumps to S3") cannot represent the failure modes that actually hit customers. The bleed: customer complaints surface the regression 8-12 weeks later, by which time tens of thousands of bad interactions have shipped. 🟡 Modeled exposure: **thousands of bad responses per regression × 14% × 12-20 features = the customer-trust and compliance tail that EvalForge is designed to shrink**.
 
-**Product.** EvalForge — a four-layer pre-deploy console: **Versioned probe sets** (Git-style commits, severity-tagged, slice-labeled) + **Calibrated rubrics** (12 criteria with anchors at 1, 3, 5; inter-rater kappa target ≥ 0.78) + **Cross-vendor LLM-as-judge** (Claude primary + GPT-4o secondary; snapshot-pinned; kappa floor enforced) + **CI gate** (GitHub Actions / Argo CD pre-deploy hook; PASS / FAIL / REVIEW; FAIL blocks the merge).
+**Product.** EvalForge — a four-layer pre-deploy console: **Versioned probe sets** (Git-style commits, severity-tagged, slice-labeled) + **Calibrated rubrics** (12 criteria with anchors at 1, 3, 5; inter-rater kappa target ≥ 0.78) + **Cross-vendor LLM-as-judge** (hosted vendor model primary + GPT-4o secondary; snapshot-pinned; kappa floor enforced) + **CI gate** (GitHub Actions / Argo CD pre-deploy hook; PASS / FAIL / REVIEW; FAIL blocks the merge).
 
 **Modeled performance (90-day pilot design, 1-feature pilot scaling to 12-feature fleet).**
 
@@ -139,7 +139,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 **A modeled Tier-1 US retail bank ($50B-asset). 14 customer-facing GenAI features in production.** 🔴 The session volume, refusal rates and complaint timeline in this scenario are illustrative, not measured.
 
-The flagship one — the use case this walkthrough is calibrated against — is the **customer-service assistant** running on Anthropic Claude Sonnet with a RAG layer over the bank's policy library. It handles ~40,000 customer chat sessions per day across web, mobile, and IVR-handoff. It works perfectly in dev. It worked perfectly in production on launch day. Three months after launch, the L2 Trust-and-Safety lead notices the complaint volume on the GenAI feature has tripled. Investigation reveals: Anthropic pushed a minor snapshot update eight weeks earlier (`claude-sonnet-4-20251101` → `claude-sonnet-4-20260214`). The assistant's refusal rate moved from 4% to 11% on the refusal-edge slice. Customers were getting "I'm not able to help with that — let me connect you to a banker" when they previously got a clean answer. The complaint volume was the proxy.
+The flagship one — the use case this walkthrough is calibrated against — is the **customer-service assistant** running on a hosted Anthropic model with a RAG layer over the bank's policy library. It handles ~40,000 customer chat sessions per day across web, mobile, and IVR-handoff. It works perfectly in dev. It worked perfectly in production on launch day. Three months after launch, the L2 Trust-and-Safety lead notices the complaint volume on the GenAI feature has tripled. Investigation reveals: Anthropic pushed a minor snapshot update eight weeks earlier (`vendor-balanced-4-20251101` → `vendor-balanced-4-20260214`). The assistant's refusal rate moved from 4% to 11% on the refusal-edge slice. Customers were getting "I'm not able to help with that — let me connect you to a banker" when they previously got a clean answer. The complaint volume was the proxy.
 
 By the time anyone connected the dots, eight weeks of customer trust had leaked.
 
@@ -250,7 +250,7 @@ python src/step_04_with_evalforge.py
 **Printed output for ER012 (the headline catch):**
 
 ```
-ER012 (2026-02-17, claude-sonnet-4-20260214 silent update):
+ER012 (2026-02-17, vendor-balanced-4-20260214 silent update):
   verdict=FAIL, pass_rate=0.86, baseline=0.92
   -> Aggregate pass_rate 0.860 below floor 0.880. Deploy blocked.
 ```
@@ -306,7 +306,7 @@ flowchart LR
         REGISTRY_PROBES["Probe Registry<br/>(Postgres, SHA-pinned)"]
         RUBRICS["Rubric Set<br/>(12 calibrated criteria)"]
         RUNNER["Runner<br/>(probe execution)"]
-        JUDGE["Cross-vendor Judge<br/>Claude + GPT-4o + in-VPC Llama"]
+        JUDGE["Cross-vendor Judge<br/>Vendor model + GPT-4o + in-VPC Llama"]
         GATE["CI Gate<br/>(GitHub Action / Argo CD hook)"]
         OVERRIDE["Override Audit Log"]
     end
@@ -341,7 +341,7 @@ sequenceDiagram
     participant E as Engineer (PR merge)
     participant R as Runner
     participant A as Assistant
-    participant J as Judge (Claude + GPT-4o)
+    participant J as Judge (vendor model + GPT-4o)
     participant G as CI Gate
     participant B as Bundle
     participant L as L2 Reviewer
@@ -435,7 +435,7 @@ If EvalForge were a real product shipping to a bank's AI platform organization:
 - **Backend:** FastAPI on the bank's existing K8s cluster (EKS / GKE / AKS); microservice per layer (probe runner, judge orchestrator, kappa calculator, CI gate evaluator, override audit service).
 - **Probe registry:** Postgres with content-addressed SHA versioning; probe-set diffs surfaced as Git-style commits.
 - **Rubric calibration:** Snowflake for the historical scoring cohort; Postgres for the current anchor set; quarterly re-anchor cron.
-- **Judge models:** Anthropic Claude Sonnet (primary, snapshot-pinned), Azure OpenAI GPT-4o (secondary, snapshot-pinned), in-VPC fine-tuned Llama 3.1 8B on Triton (tertiary, for HIPAA / PCI features). Cross-vendor kappa is the calibration signal.
+- **Judge models:** a hosted Anthropic model (primary, snapshot-pinned), Azure OpenAI GPT-4o (secondary, snapshot-pinned), in-VPC fine-tuned Llama 3.1 8B on Triton (tertiary, for HIPAA / PCI features). Cross-vendor kappa is the calibration signal.
 - **CI gate:** GitHub Actions / Argo CD pre-deploy hook; verdict posted as a PR check. FAIL blocks merge; REVIEW requires L2 approval within 24h or auto-blocks.
 - **Observability:** OpenTelemetry → Datadog (system traces); Langfuse for judge prompt traces; PagerDuty for SLO breaches; per-feature dashboards for the L1 PM owner.
 - **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate if federal counterparty work; data residency configurable per region (US East, EU West, India for RBI compliance).

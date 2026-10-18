@@ -452,7 +452,7 @@ if st.session_state.step >= 4:
             "- **Probe set:** [`data/probes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/probes.csv) (60 versioned probes)\n"
             "- **Rubric set:** [`data/rubrics.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/rubrics.csv) (12 calibrated criteria)\n"
             "- **Override log:** [`data/judge_overrides.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/judge_overrides.csv) (30 human-judge disagreements)\n"
-            "- **Primary judge:** Anthropic Claude Sonnet (snapshot-pinned)\n"
+            "- **Primary judge:** a hosted Anthropic model (snapshot-pinned)\n"
             "- **Secondary judge:** Azure OpenAI GPT-4o (cross-vendor cross-check)\n"
             "- **CI gate:** GitHub Actions / Argo CD pre-deploy hook\n"
             "- **Audit trail handoff:** Project 09 LineageLog - decision lineage event emitted per run"
@@ -468,7 +468,7 @@ if st.session_state.step >= 4:
                 ("Probe", "One question in the eval set, plus a documented expected behavior. Versioned and severity-tagged."),
                 ("Probe set", "A Git-tagged collection of probes. The version pin matters: comparing ER001 to ER050 only makes sense if you know which probe set each used."),
                 ("Rubric", "The scoring criteria a judge (human or LLM) applies. Anchored at 1, 3, and 5 with worked examples so different judges score consistently."),
-                ("LLM-as-judge", "Using a second LLM (Claude, GPT-4o) to score the primary model's output against a rubric. Cheaper and faster than human review; needs calibration and snapshot pinning."),
+                ("LLM-as-judge", "Using a second LLM (a hosted vendor model, GPT-4o) to score the primary model's output against a rubric. Cheaper and faster than human review; needs calibration and snapshot pinning."),
                 ("Inter-judge kappa", "Cohen's kappa - a statistical measure of agreement between two judges. Above 0.78 is solid; below 0.70 means the rubric is unstable."),
                 ("CI gate", "Continuous-integration deployment gate. The eval result blocks or allows the production deploy. PASS / FAIL / REVIEW."),
                 ("Behavioral regression", "Same question, plausible answer, but subtly worse than yesterday. The class of regression a basic eval set misses."),
@@ -503,7 +503,7 @@ if st.session_state.step >= 4:
             "- **Backend:** FastAPI on the bank's existing K8s footprint (EKS / GKE / AKS); microservice per check (probe runner, judge orchestrator, kappa calculator, CI gate evaluator, override audit).\n"
             "- **Probe registry:** Postgres with row-level versioning; probe set diffs surfaced as Git-style commits the L2 team reviews.\n"
             "- **Rubric calibration:** Snowflake for the historical scoring data; calibration anchor diffs surfaced as audit events.\n"
-            "- **Judge models:** Anthropic Claude (primary) + Azure OpenAI GPT-4o (secondary) + a fine-tuned Llama 3.1 8B (tertiary, fully in-VPC). Cross-vendor kappa is the calibration signal.\n"
+            "- **Judge models:** an Anthropic model (primary) + Azure OpenAI GPT-4o (secondary) + a fine-tuned Llama 3.1 8B (tertiary, fully in-VPC). Cross-vendor kappa is the calibration signal.\n"
             "- **CI gate:** GitHub Actions / Argo CD pre-deploy hook; verdict posted as a PR check. FAIL blocks merge; REVIEW requires L2 approval within 24h.\n"
             "- **Observability:** OpenTelemetry traces; Langfuse for judge prompt traces; Datadog for SLO breaches.\n"
             "- **Compliance:** SOC 2 Type II baseline; SR 11-7 alignment for the regression-detection layer; NIST AI RMF 'Measure' function as the design target.\n"

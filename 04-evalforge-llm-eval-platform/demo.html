@@ -185,7 +185,7 @@
 <script>
 const RUNS = [
   {
-    id: "ER001", date: "2026-01-04", model: "claude-sonnet-4-20251101", probeSet: "probes-v0.7", n: 30,
+    id: "ER001", date: "2026-01-04", model: "vendor-balanced-4-20251101", probeSet: "probes-v0.7", n: 30,
     passRate: 0.93, kappa: 0.78, verdict: "PASS", regressionFlagged: "no",
     before: { eyeballed: true, marked: "7 PASS / 3 FAIL", silentlyWrong: 2,
               note: "Engineer eyeballed 10 probes (the spreadsheet). Marked 7 PASS and 3 FAIL. Two were silently wrong on close read (P003 echoed account number, P008 hallucinated FICO floor) — engineer did not notice." },
@@ -196,7 +196,7 @@ const RUNS = [
               note: "Pre-deployment baseline. Inter-judge kappa 0.78. CI gate verdict: PASS." }
   },
   {
-    id: "ER011", date: "2026-02-13", model: "claude-sonnet-4-20251101", probeSet: "probes-v0.9", n: 60,
+    id: "ER011", date: "2026-02-13", model: "vendor-balanced-4-20251101", probeSet: "probes-v0.9", n: 60,
     passRate: 0.91, kappa: 0.70, verdict: "REVIEW", regressionFlagged: "no",
     before: { eyeballed: true, marked: "PASS", silentlyWrong: "n/a",
               note: "Engineer eyeballed. The judge has been drifting for weeks but the spreadsheet has no judge — engineer cannot see kappa drift." },
@@ -207,18 +207,18 @@ const RUNS = [
               note: "EvalForge flagged: inter-judge kappa 0.70 below 0.75 target. Rubric anchor drift suspected. CI gate verdict: REVIEW. Recalibrate before next deploy." }
   },
   {
-    id: "ER012", date: "2026-02-17", model: "claude-sonnet-4-20260214", probeSet: "probes-v0.9", n: 60,
+    id: "ER012", date: "2026-02-17", model: "vendor-balanced-4-20260214", probeSet: "probes-v0.9", n: 60,
     passRate: 0.86, kappa: 0.68, verdict: "FAIL", regressionFlagged: "yes",
     before: { eyeballed: false, marked: "ship anyway", silentlyWrong: "n/a",
-              note: "Vendor pushed Anthropic claude-sonnet-4-20260214 silently. Engineer did not re-run the spreadsheet — no trigger. A high-severity slice such as fraud_workflow would regress too (illustrative; the dataset stores no per-slice rates). No one would know for 8-12 weeks until customer complaints accumulated." },
+              note: "Vendor pushed Anthropic vendor-balanced-4-20260214 silently. Engineer did not re-run the spreadsheet — no trigger. A high-severity slice such as fraud_workflow would regress too (illustrative; the dataset stores no per-slice rates). No one would know for 8-12 weeks until customer complaints accumulated." },
     sota: { ran: true, passRate: 0.86, sliceComputed: false, ciGate: false,
             note: "Cron ran 2 days post-deploy. Pass rate dropped from 0.91 to 0.86. The dashboard would show this but the deploy already shipped — no gate." },
     shield: { passRate: 0.86, kappa: 0.68, baseline: 0.92, delta: "-6.0pp",
               verdict: "FAIL", action: "BLOCK deploy, pin to last green snapshot",
-              note: "EvalForge BLOCKED deploy. Regression -6pp vs baseline. Vendor snapshot rolled silently to claude-sonnet-4-20260214. Bundle routed to L2 trust-and-safety. Pin to claude-sonnet-4-20251101 until probe re-run clean." }
+              note: "EvalForge BLOCKED deploy. Regression -6pp vs baseline. Vendor snapshot rolled silently to vendor-balanced-4-20260214. Bundle routed to L2 trust-and-safety. Pin to vendor-balanced-4-20251101 until probe re-run clean." }
   },
   {
-    id: "ER019", date: "2026-03-17", model: "claude-sonnet-4-20260214", probeSet: "probes-v1.0", n: 60,
+    id: "ER019", date: "2026-03-17", model: "vendor-balanced-4-20260214", probeSet: "probes-v1.0", n: 60,
     passRate: 0.92, kappa: 0.78, verdict: "PASS", regressionFlagged: "no",
     before: { eyeballed: false, marked: "n/a", silentlyWrong: "n/a",
               note: "Spreadsheet world has no concept of 'rubric recalibration.' The engineer would just re-run the same spreadsheet, get the same scores, ship." },
@@ -229,10 +229,10 @@ const RUNS = [
               note: "Prompt patch deployed + rubric R002 recalibrated with new anchors for the refusal-edge slice. Inter-judge kappa restored to 0.78. CI gate verdict: PASS. Deploy approved." }
   },
   {
-    id: "ER038", date: "2026-06-01", model: "claude-sonnet-4-20260520", probeSet: "probes-v1.2", n: 60,
+    id: "ER038", date: "2026-06-01", model: "vendor-balanced-4-20260520", probeSet: "probes-v1.2", n: 60,
     passRate: 0.85, kappa: 0.72, verdict: "FAIL", regressionFlagged: "yes",
     before: { eyeballed: false, marked: "ship anyway", silentlyWrong: "n/a",
-              note: "Second silent vendor update (claude-sonnet-4-20260520). Spreadsheet has no monitor — the engineer wouldn't even know to re-run. Customer complaints would accumulate for another 8-12 weeks." },
+              note: "Second silent vendor update (vendor-balanced-4-20260520). Spreadsheet has no monitor — the engineer wouldn't even know to re-run. Customer complaints would accumulate for another 8-12 weeks." },
     sota: { ran: true, passRate: 0.85, sliceComputed: false, ciGate: false,
             note: "Cron flagged pass rate drop. Same problem as ER012: post-deploy detection, no pre-deploy block. The dashboard tells you AFTER customers already saw bad answers." },
     shield: { passRate: 0.85, kappa: 0.72, baseline: 0.93, delta: "-8.0pp",
@@ -240,7 +240,7 @@ const RUNS = [
               note: "Second silent-update catch in under 4 months. CI gate blocked. Bundle includes both the snapshot diff and the rubric-cluster pattern. This is the failure mode that justifies EvalForge as a product." }
   },
   {
-    id: "ER050", date: "2026-07-19", model: "claude-sonnet-4-20260520", probeSet: "probes-v1.3", n: 60,
+    id: "ER050", date: "2026-07-19", model: "vendor-balanced-4-20260520", probeSet: "probes-v1.3", n: 60,
     passRate: 0.94, kappa: 0.86, verdict: "PASS", regressionFlagged: "no",
     before: { eyeballed: true, marked: "PASS", silentlyWrong: "n/a",
               note: "Engineer marks PASS as usual. No way to know whether this is the steady-state PASS or the about-to-regress PASS." },

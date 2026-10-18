@@ -63,7 +63,7 @@
   <rect x="455" y="120" width="200" height="110" rx="8" class="stage-box-eval"/>
   <text x="467" y="140" class="stage-num">3 . JUDGE + RUBRIC SCORES</text>
   <text x="467" y="162" class="stage-title">Cross-vendor LLM-as-judge</text>
-  <text x="467" y="180" class="stage-sub">Claude + GPT-4o judges</text>
+  <text x="467" y="180" class="stage-sub">Model + GPT-4o judges</text>
   <text x="467" y="195" class="stage-sub">12 calibrated rubrics</text>
   <text x="467" y="210" class="stage-sub">inter-judge kappa = 0.68</text>
   <text x="467" y="225" class="meta-block">kappa below 0.70 floor</text>

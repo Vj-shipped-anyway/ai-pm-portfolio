@@ -36,7 +36,7 @@
 | Rank | Item | R | I | C | E | RICE | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | **Versioned probe registry** (Postgres + Git-style commits) | 12 features | 3 | 0.9 | 4 | 8.1 | Sequenced for v0.1 |
-| 2 | **Cross-vendor LLM-as-judge with kappa floor** (Claude + GPT-4o) | 12 features | 3 | 0.85 | 6 | 5.1 | Sequenced for v0.1 |
+| 2 | **Cross-vendor LLM-as-judge with kappa floor** (hosted vendor model + GPT-4o) | 12 features | 3 | 0.85 | 6 | 5.1 | Sequenced for v0.1 |
 | 3 | **Calibrated rubric authoring UI** (L2 owns the criteria) | 8 L2 reviewers | 3 | 0.8 | 5 | 3.8 | Sequenced for v0.2 |
 | 4 | **CI gate as GitHub Action / Argo CD pre-deploy hook** | 12 features | 3 | 0.9 | 3 | 10.8 | Sequenced for v0.1 |
 | 5 | **Vendor snapshot pin + diff job** (interlocks with DriftSentinel) | 12 features | 3 | 0.85 | 3 | 10.2 | Sequenced for v0.2 |
@@ -120,7 +120,7 @@
 
 - **Probe registry:** Postgres with row-level versioning; each probe is one row with a SHA pin.
 - **Rubric calibration:** Snowflake for historical scoring; Postgres for current anchor set.
-- **Judge orchestrator:** FastAPI on K8s; fan-out to Anthropic Claude (primary) + Azure OpenAI GPT-4o (secondary) + in-VPC Llama 3.1 8B (tertiary).
+- **Judge orchestrator:** FastAPI on K8s; fan-out to an Anthropic model (primary) + Azure OpenAI GPT-4o (secondary) + in-VPC Llama 3.1 8B (tertiary).
 - **CI gate:** GitHub Actions or Argo CD pre-deploy hook; verdict posted as a PR check.
 - **Storage:** Postgres for metadata; ClickHouse for high-cardinality per-probe scores; GCS / S3 Object Lock for immutable evidence bundles.
 
