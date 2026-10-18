@@ -82,7 +82,7 @@
   <rect x="700" y="120" width="120" height="100" rx="8" class="stage-box-llm"/>
   <text x="712" y="138" class="stage-num">LLM</text>
   <text x="712" y="158" class="stage-title">Foundation model</text>
-  <text x="712" y="174" class="stage-sub">Anthropic Claude</text>
+  <text x="712" y="174" class="stage-sub">Anthropic</text>
   <text x="712" y="188" class="stage-sub">/ Azure OpenAI</text>
   <text x="712" y="202" class="stage-sub">/ Bedrock</text>
 

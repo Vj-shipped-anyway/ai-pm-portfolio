@@ -78,3 +78,7 @@ This is the scenario the walkthrough resolves. Walk the four CSVs and you can re
 | `egress_destinations.csv` | The egress filter's match: `attacker@bad.com` matches pattern `EGR_013` (known_attacker_inbox), `bad.com` matches `EGR_002` (known_attacker_domain). |
 
 In raw-LLM form: the attack succeeds. In PromptShield form: caught at the retrieval scanner; the tool call is blocked at the gate; the egress filter is the third line of defense. Defense in depth — every layer is an independent control with an independent failure mode.
+
+## Model labels
+
+Hosted-model names in this project are neutral labels, not product ids. The RM copilot's prose model is "a hosted Anthropic model"; Azure OpenAI `gpt-4o` and Llama keep their real names. No number in this project depends on the label.

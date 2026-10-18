@@ -136,7 +136,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case — Sarah's wealth-portfolio walkthrough
 
-A modeled Tier-1 US private bank with an internal RM copilot deployed over the bank's CRM, deal pipeline, and customer-disclosure document store. Four foundation-model endpoints sit behind the copilot (Anthropic Claude Sonnet 4 for prose, Azure OpenAI `gpt-4o` for the long-context document summarization, an internal Llama 3.1 8B for low-stakes lookups, and Bedrock for a Q&A surface). The copilot has tool access to: `send_email`, `crm_update`, `export_pdf`, `run_query`, `retrieve_doc`, `schedule_meeting`, `draft_letter`. Standard RM workflow.
+A modeled Tier-1 US private bank with an internal RM copilot deployed over the bank's CRM, deal pipeline, and customer-disclosure document store. Four foundation-model endpoints sit behind the copilot (a hosted Anthropic model for prose, Azure OpenAI `gpt-4o` for the long-context document summarization, an internal Llama 3.1 8B for low-stakes lookups, and Bedrock for a Q&A surface). The copilot has tool access to: `send_email`, `crm_update`, `export_pdf`, `run_query`, `retrieve_doc`, `schedule_meeting`, `draft_letter`. Standard RM workflow.
 
 **The scenario:**
 
@@ -150,7 +150,7 @@ A modeled Tier-1 US private bank with an internal RM copilot deployed over the b
 
 The fleet (synthetic, but modeled on what a Tier-1 BFSI shop typically runs):
 
-- **RM Copilot** — Wealth portfolio + KYC + book-of-business queries (GenAI on Anthropic Claude Sonnet 4)
+- **RM Copilot** — Wealth portfolio + KYC + book-of-business queries (GenAI on a hosted Anthropic model)
 - **Claims Triage** — Insurance claims (GenAI on Azure OpenAI `gpt-4o`)
 - **KYC Assistant** — Document review + sanctions screening (GenAI on internal Llama 3.1 8B)
 - **Q&A Surface** — Generic product / policy / rate questions (GenAI on Bedrock)
