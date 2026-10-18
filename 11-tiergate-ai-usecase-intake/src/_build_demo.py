@@ -143,7 +143,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TierGate — AI Use-Case Intake and Risk Tiering · Vijay Saharan</title>
-<meta name="description" content="A clickable demo of TierGate: AI use-case intake and risk tiering for a regulated bank. Pick one of 150 synthetic submissions and see the sponsor's declared tier, the recomputed tier, the discrepancies, the evidence gate and the queue effect.">
+<meta name="description" content="A clickable demo of TierGate: AI use-case intake and risk tiering for a regulated bank. Pick one of ten synthetic submissions from a set of 150 and see the sponsor's declared tier, the recomputed tier, the discrepancies, the evidence gate and the queue effect.">
 <style>
   :root {
     --bg-primary: #ffffff;

@@ -8,11 +8,11 @@
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder on the 150 synthetic submissions, with the script named), 🟡 **Modeled** (an assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). **The reference tier is true by construction:** it is the written rubric applied to the hidden true attributes of each submission, so accuracy measures how well a method recovers it from noisy inputs, not how real banks tier AI use cases. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
-[![Synthetic submissions: 150](https://img.shields.io/badge/synthetic%20submissions-150-blue)](#)
-[![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)](#)
-[![Tier accuracy: 69.3% to 86.0%](https://img.shields.io/badge/tier%20accuracy-69.3%25%20%E2%86%92%2086.0%25-success)](#)
-[![Tier 3-4 recall: 75.7% to 100.0%](https://img.shields.io/badge/tier%203--4%20recall-75.7%25%20%E2%86%92%20100.0%25-brightgreen)](#)
-[![Evidence-gap detection: 51.5% to 95.5%](https://img.shields.io/badge/evidence--gap%20detection-51.5%25%20%E2%86%92%2095.5%25-brightgreen)](#)
+![Synthetic submissions: 150](https://img.shields.io/badge/synthetic%20submissions-150-blue)
+![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)
+![Tier accuracy: 69.3% to 86.0%](https://img.shields.io/badge/tier%20accuracy-69.3%25%20%E2%86%92%2086.0%25-success)
+![Tier 3-4 recall: 75.7% to 100.0%](https://img.shields.io/badge/tier%203--4%20recall-75.7%25%20%E2%86%92%20100.0%25-brightgreen)
+![Evidence-gap detection: 51.5% to 95.5%](https://img.shields.io/badge/evidence--gap%20detection-51.5%25%20%E2%86%92%2095.5%25-brightgreen)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
 
@@ -25,7 +25,7 @@
 ## 🔥 Demo in 30 seconds
 
 Open the static, no-Python demo: [`demo.html`](./demo.html).
-Pick one of ten synthetic submissions. The first is `UC-132`, an automated portfolio rebalancer: the sponsor answered "no" to customer-facing and declared tier 1. TierGate reads the text (it mentions consumers), recomputes 9 rubric points and tier 3, and holds approval until three evidence items arrive. Three cards show the same submission handled three ways: the spreadsheet row, the basic approach that trusts the declared tier, and TierGate. The other nine scenarios cover each deficiency, a clean case, the known limit, the cost of the conservative checks, and a false duplicate link. The totals at the top are the 🟢 measured numbers.
+Pick one of ten synthetic submissions. The first is `UC-132`, an automated portfolio rebalancer: the sponsor answered "no" to customer-facing and declared tier 1. TierGate reads the text (it mentions consumers), recomputes 9 rubric points and tier 3, and holds approval until three evidence items arrive. Three cards show the same submission handled three ways: the spreadsheet row, the basic approach that trusts the declared tier, and TierGate. The other nine scenarios cover the other five deficiencies, a clean case, the known limit, the cost of the conservative checks, and a false duplicate link. The totals at the top are the 🟢 measured numbers, except the queue wait, which is 🟡 modeled.
 
 To run the four-step walkthrough on your laptop:
 
@@ -50,7 +50,7 @@ Most banks that review AI use cases today do it with a form, a spreadsheet and a
 | --- | --- | --- | --- |
 | Where the tier comes from | None drives the review | The sponsor types it | Recomputed from the form, the data catalog, the vendor registry and the text |
 | 🟢 Tier equals the reference tier | Not applicable | 69.3% (104 of 150, `step_02`) | 86.0% (129 of 150, `step_04`) |
-| 🟢 True tier 3-4 cases recognised as tier 3-4 | Not applicable | 75.7% (53 of 70) | 100.0% (70 of 70) |
+| 🟢 True tier 3-4 cases recognized as tier 3-4 | Not applicable | 75.7% (53 of 70) | 100.0% (70 of 70) |
 | Says which answer disagrees with a second source, and why | No | No | Yes. 🟢 74 of 150 submissions carry at least one cross-check flag with a reason |
 | 🟢 Approvals granted with required evidence missing | Evidence not recorded | 32 of 116 approvals | 3 of 76 approvals |
 | 🟢 Real evidence gaps caught before approval | Not recorded | 51.5% (34 of 66) | 95.5% (63 of 66) |
@@ -59,7 +59,7 @@ Most banks that review AI use cases today do it with a form, a spreadsheet and a
 | 🟡 Tier 3-4 mean queue wait | 3.7 business days, FIFO | 1.1 days (lighter workload, shallower reviews) | 2.9 days FIFO, 1.2 days ordered by tier |
 | Where it still fails | Everything above | Understated answers pass silently | 🟢 Known limit: form and catalog both wrong (6 cases, 2 land at the wrong tier). 🟢 13 cases tiered above the reference by the conservative customer-facing checks |
 
-**Position:** *TierGate does not replace the intake form, the model inventory, or the model risk review. It sits between the form and the review queue and does four things the form cannot: recompute the tier by a written rule, flag each discrepancy with its reason, hold approval until the tier's evidence is on file, and put the riskiest reviews first. The table is the argument: a self-declared tier is wrong on 30.7% of this set, a spreadsheet cannot say what evidence anything owes, and a tier recomputed from a second source gets most of the way there without asking the sponsor for more work.*
+**Position:** *TierGate does not replace the intake form, the model inventory, or the model risk review. It sits between the form and the review queue and does five things the form cannot: recompute the tier by a written rule, flag each discrepancy with its reason, link overlapping submissions, hold approval until the tier's evidence is on file, and put the riskiest reviews first. The table is the argument: a self-declared tier is wrong on 30.7% of this set, a spreadsheet cannot say what evidence anything owes, and a tier recomputed from a second source gets most of the way there without asking the sponsor for more work.*
 
 ---
 
@@ -67,7 +67,7 @@ Most banks that review AI use cases today do it with a form, a spreadsheet and a
 
 The failure mode this prototype is built around: a sponsor fills in an AI use-case intake form and declares the risk tier. High-risk cases get a light review because the declared tier is low. Low-risk cases wait behind heavy ones. Required evidence is requested ad hoc, one email at a time. Nobody can say how many AI use cases exist, which tier each sits in, or what evidence each one owes.
 
-This is the program-governance project in the portfolio. The other ten are controls on AI that is already running. This one decides what is allowed to run, and at what scrutiny.
+This is the program-governance project in the portfolio. The others are controls on AI that is already running. This one decides what is allowed to run, and at what scrutiny.
 
 It is a prototype on 150 synthetic submissions. I wrote the rubric, the generator, the error rates and the TierGate rules. The reference tier is true by construction, so the 🟢 numbers show how the mechanic behaves on this set, not how any bank's intake performs. The error rates are parameters I chose and document in [`data/README.md`](./data/README.md). No real submission, catalog, registry or vendor was touched, and no AI model is used anywhere: the rubric, the cross-checks and the duplicate score are plain rules.
 
@@ -106,8 +106,8 @@ If a step does not run from a fresh clone, that's a bug in this README. Open an 
 - 🟢 **Duplicates:** 9 of 10 true pairs proposed at a fixed 0.50 threshold, with 5 false proposals (precision 0.64, recall 0.90).
 - 🟡 **Tier 3-4 mean queue wait: 2.9 → 1.2 business days** when the same review times are ordered by tier instead of arrival (3 reviewers, 200 seeded replications). The cost: 🟡 tier 1-2 cases wait 3.4 → 9.7 days.
 - 🟢 **Known limit left in:** 6 submissions where the form and the catalog both understate the data class. TierGate agrees with the wrong answer; 2 of them end at the wrong tier.
-- 🟢 **Cost of the conservative checks:** 13 submissions are tiered above the reference, mostly because a blank or "unsure" customer-facing answer resolves to yes.
-- 🟡 **Utility:** (30.7% − 14.0%) × 375 submissions a year = **62.5 mis-tiered use cases avoided per year** at the modeled bank.
+- 🟢 **Cost of the conservative checks:** 13 submissions are tiered above the reference, mostly because the text cue turns a customer-facing "no" into yes, and in a few cases because a blank or "unsure" answer resolves to yes.
+- 🟡 **Utility:** (46 of 150 − 21 of 150) × 375 submissions a year = **62.5 mis-tiered use cases avoided per year** at the modeled bank.
 
 🔴 **Not modeled.** Cost to deliver, reviewer acceptance of the flags, and what a real catalog or registry looks like. The rollout in the PRD is designed, not executed.
 
@@ -128,7 +128,7 @@ If a step does not run from a fresh clone, that's a bug in this README. Open an 
 9. **PM artifacts.** PRD and architecture doc
 
 > Non-technical reader: skip the code blocks. The plain-English explanation and the tables tell the story.
-> Technical reader: every code block runs. `cd src && python3 step_NN_*.py` and you'll see the same output.
+> Technical reader: every command block runs. `cd src && python3 step_NN_*.py` and you'll see the same output.
 
 Total reading time: about 15 minutes in full, about 4 minutes if you skim the headers and tables.
 
@@ -267,7 +267,7 @@ Confusion (rows are the reference tier, columns the declared tier):
 | --- | --- | --- | --- |
 | 1 | **Self-declared tier understates risk** | The sponsor's tier sits below the rubric on the true attributes. The case gets a lighter review and a shorter checklist. | **44** of 150 declared tiers are too low; 26 of them are truly tier 3-4. Example `UC-026`: declared tier 2, reference tier 4 (sanctions name screening). |
 | 2 | **Data class never cross-checked against the catalog** | The form's data class is never compared with the class the catalog records for the same dataset. | **38** forms declare a class below the catalog's; 34 are real understatements. 40 forms are below the true class in total, and on 6 of those the catalog is below the true class too. Example `UC-016`: form says internal, catalog says confidential, true class confidential. |
-| 3 | **Customer-facing impact missing or ambiguous** | The answer is blank, "unsure", or "no" on a case that does reach customers. It is worth two rubric points. | **24** forms: 7 blank, 5 "unsure", 12 "no" on a truly customer-facing case. 12 of the 24 ended up declared below their reference tier. |
+| 3 | **Customer-facing impact missing or ambiguous** | The answer is blank or "unsure", or it is "no" on a case that does reach customers. It is worth two rubric points. | **24** forms: 7 blank, 5 "unsure", 12 "no" on a truly customer-facing case. 12 of the 24 ended up declared below their reference tier. |
 | 4 | **Vendor dependency unflagged** | The form says no vendor model where the use case uses one. The vendor registry often already knows. | **31** of 107 vendor-dependent use cases say "none"; the registry lists 21 of those 31. Example `UC-011`. |
 | 5 | **Overlapping use cases not linked** | Two sponsors submit the same idea. The spreadsheet has no link, so both get a full review and may carry different tiers. | **8** duplicate groups (17 submissions, 10 true pairs), 0 linked; 2 groups carry different declared tiers for the same use case. |
 | 6 | **Approval without the evidence the tier requires** | The reviewer approves against the declared tier's checklist. The reference tier owes more. | **32** of 116 approvals are missing required evidence (74 items absent). Example `UC-042`: approved at declared tier 2, reference tier 3, missing E05, E06, E07, E08. |
@@ -276,7 +276,7 @@ Confusion (rows are the reference tier, columns the declared tier):
 python3 src/step_03_deficiencies_exposed.py
 ```
 
-The deficiencies compound. `UC-026` writes confidential for restricted data, so its own form gives 11 points (tier 3), and the sponsor then declares tier 2. It gets the tier 2 checklist (4 items) and a 3.0 hour review where the reference tier 4 calls for 11 items and 14.0 hours, and it can be approved without independent validation or a human review design. Nothing in the spreadsheet shows it. **The product is the cross-check, the written rule and the gate, not another reviewer.**
+The deficiencies compound. `UC-026` writes confidential for restricted data, so its own form gives 11 points (tier 3), and the sponsor then declares tier 2. It gets the tier 2 checklist (4 items) and a 3.0 hour review where the reference tier 4 calls for 11 items and 14.0 hours, and the tier 2 checklist does not ask for independent validation or a human review design. Nothing in the spreadsheet shows it. **The product is the cross-check, the written rule and the gate, not another reviewer.**
 
 ---
 
@@ -382,7 +382,7 @@ Links are proposals; a reviewer confirms each (0.5 h modeled). 150 submissions g
 | 2. Declared tier, FIFO | 1.1 days | 714.0 | 74% |
 | 4. TierGate, ordered by tier | 1.2 days | 837.0 | 87% |
 
-TierGate spends more reviewer hours than Step 2 because tier 3-4 cases get the depth their tier calls for. It is not cheaper. It moves the hours to where the risk is. Sensitivity to reviewer count (the tier-depth hours stay, so the load moves):
+TierGate spends more reviewer hours than Step 2 because tier 3-4 cases get the depth their tier calls for. The 837.0 also counts duplicate handling: a proposed link that is a true duplicate costs the 0.5 h confirm instead of a second full review, and a wrong proposal adds 0.5 h to its review (🟡, `step_04`). It is not cheaper. It moves the hours to where the risk is. Sensitivity to reviewer count (the tier-depth hours stay, so the load moves):
 
 | Reviewers | Offered load | Tier 3-4 FIFO | Tier 3-4 ordered | Tier 1-2 FIFO | Tier 1-2 ordered |
 | --- | --- | --- | --- | --- | --- |
@@ -394,7 +394,7 @@ At 2 reviewers the queue is overloaded and no ordering rescues it. At 4 the effe
 
 ### The known limit, left in on purpose
 
-**When the form and the catalog are both wrong about a data class, the recompute agrees with the wrong answer.** 🟢 `step_04` finds 6 submissions where the form's data class and the catalog's recorded class are both below the true class (`UC-044`, `UC-058`, `UC-066`, `UC-088`, `UC-089`, `UC-129`). TierGate takes the higher of the two, which is still too low. 2 of the 6 end at the wrong tier (`UC-088`, `UC-089`); in the other 4 the missing point does not cross a tier boundary. Data class is the only input with a second source here, so nothing can disagree.
+**When the form and the catalog are both wrong about a data class, the recompute agrees with the wrong answer.** 🟢 `step_04` finds 6 submissions where the form's data class and the catalog's recorded class are both below the true class (`UC-044`, `UC-058`, `UC-066`, `UC-088`, `UC-089`, `UC-129`). TierGate takes the higher of the two, which is still too low. 2 of the 6 end at the wrong tier (`UC-088`, `UC-089`); in the other 4 the missing point does not cross a tier boundary. Both sources carry the same wrong class, so nothing can disagree.
 
 All 21 wrong tiers by cause (a case can have more than one): 13 customer-facing resolved to yes but truly internal; 5 customer-facing "no" with no cue in the text; 2 data class with the form and the catalog both below the true class; 1 catalog entry that overstates the class; 1 vendor with the form and the registry both silent. No true tier 3-4 case is left below tier 3, but 6 true tier 4 cases are recomputed as tier 3.
 
@@ -504,7 +504,7 @@ sequenceDiagram
     S->>I: submits UC-132 and declares tier 1
     I->>C: form view only
     C->>C: catalog says confidential and form says restricted so keep restricted and flag the catalog
-    C->>C: form says internal but the text mentions consumers so treat as customer-facing and flag
+    C->>C: form says no but the text mentions consumers so treat as customer-facing and flag
     C->>R: checked inputs
     R->>R: 9 points means tier 3
     R->>E: tier 3
@@ -549,8 +549,8 @@ git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
 cd ai-pm-portfolio/11-tiergate-ai-usecase-intake
 
 # 1. Drop in your own intake, catalog, registry and evidence data
-#    data/intake_submissions.csv   the visible form columns are required; the true_* and reference_* columns
-#                                  are only needed if you want to score TierGate against a labelled sample
+#    data/intake_submissions.csv   the visible form columns feed recompute(); the step scripts also read the
+#                                  true_* and reference_* columns, so a labeled sample is needed to run them as written
 #    data/data_catalog.csv         dataset_name, catalog_class (the class your catalog records)
 #    data/vendor_registry.csv      use_case_id, vendor_model
 #    data/evidence_checklist.csv   your evidence items per tier
@@ -608,7 +608,7 @@ If TierGate were a real product shipping to a bank's AI governance office (🔴 
 - **Integrations:** the data catalog, the vendor registry, the model inventory, and the interlocks with 04, 08, 09 and 12.
 - **Deployment:** shadow first (recompute and log, change nothing), then gate one business unit, then the rest.
 
-The Streamlit prototype proves the product mechanic: a written rubric on cross-checked inputs recovers most of the reference tier, and an evidence gate and a tier-ordered queue follow from it. The production architecture above is a design the seat I'm pursuing would validate.
+The Streamlit prototype shows the product mechanic: a written rubric on cross-checked inputs recovers most of the reference tier, and an evidence gate and a tier-ordered queue follow from it. The production architecture above is a design the seat I'm pursuing would validate.
 
 ---
 
@@ -622,7 +622,7 @@ The Streamlit prototype proves the product mechanic: a written rubric on cross-c
 
 ## 🙌 Acknowledgements
 
-- **[SR 11-7 (Federal Reserve and OCC supervisory guidance on model risk management)](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)** — the standard the work would have to meet on inventory, risk-proportionate validation and effective challenge. TierGate's evidence checklist puts independent validation with effective challenge on tier 3 and above.
+- **SR 11-7 (Federal Reserve and OCC supervisory guidance on model risk management), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the standard the work would have to meet on inventory, risk-proportionate validation and effective challenge. TierGate's evidence checklist puts independent validation with effective challenge on tier 3 and above.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the Govern and Map functions are the vocabulary for the register, the accountable owners and the context questions on the form.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the risk-category vocabulary. TierGate's four tiers are an internal scale and not those categories; the mapping is a design item.
 - Projects in this portfolio that TierGate hands evidence to or takes evidence from: [04 EvalForge](../04-evalforge-llm-eval-platform/), [08 OversightOps](../08-oversightops-hitl-workflow/), [09 LineageLog](../09-lineagelog-ai-decision-audit/). 12 ValueLedger takes the benefit tracking after approval.

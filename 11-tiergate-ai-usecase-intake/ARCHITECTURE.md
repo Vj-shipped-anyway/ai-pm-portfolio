@@ -46,7 +46,7 @@ tiergate/
 ├── config/
 │   ├── rubric/         # versioned points tables and tier cuts (proposer and approver)
 │   └── checklist/      # evidence items per tier, with interlock tags
-├── golden/             # labelled sample for regression runs (the audit sample, never customer data)
+├── golden/             # labeled sample for regression runs (the audit sample, never customer data)
 ├── infra/
 │   ├── terraform/
 │   ├── kubernetes/

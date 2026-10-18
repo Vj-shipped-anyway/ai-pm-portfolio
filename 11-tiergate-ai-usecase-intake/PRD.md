@@ -22,7 +22,7 @@
 | **North-star metric** | Share of AI use cases in the register whose tier was recomputed from a second source and whose approval was gated on that tier's checklist. Design target: 100%. Current basic approach: 0%, because no tier is recomputed. |
 | **Measured metrics (synthetic set)** | 🟢 Tier accuracy 69.3% → 86.0%; 🟢 tier 3-4 recall 75.7% → 100.0%; 🟢 evidence-gap detection 51.5% → 95.5%; 🟢 approvals with required evidence missing 32 of 116 → 3 of 76; 🟢 duplicate pairs proposed 9 of 10, with 5 false proposals (`step_02`, `step_04`) |
 | **Modeled metrics** | 🟡 Tier 3-4 mean queue wait 2.9 → 1.2 business days when the same review times are ordered by tier (3 reviewers, 200 seeded replications); 🟡 tier 1-2 wait 3.4 → 9.7 days; 🟡 reviewer hours 900.0 (spreadsheet), 714.0 (declared tier), 837.0 (TierGate) |
-| **Utility** | 🟡 (30.7% − 14.0%) × 375 submissions a year = 62.5 mis-tiered use cases avoided per year at a modeled $50B-asset US retail bank that sees the intake rate of the synthetic set (🟢 error rates, 🟡 volume) |
+| **Utility** | 🟡 (46 of 150 − 21 of 150) × 375 submissions a year = 62.5 mis-tiered use cases avoided per year at a modeled $50B-asset US retail bank that sees the intake rate of the synthetic set (🟢 error rates, 🟡 volume) |
 | **Cost** | Not modeled in the prototype. Reviewer hours are modeled (above); build and run cost for a real engagement is not estimated here. |
 | **Risk #1** | Over-tiering floods reviewers. 🟢 13 of 150 submissions are tiered above the reference, and the customer-facing text cue was right on 6 of 25 flags. Mitigation: flags are proposals a sponsor clears with a named confirmation; false-flag rate is tracked per rule and a rule below its floor is retired. |
 | **Risk #2** | The catalog is stale or the form and the catalog are both wrong, so the recompute agrees with the wrong answer. 🟢 6 synthetic cases, 2 at the wrong tier. Mitigation: catalog freshness check, a third source for data class (lineage scan), and the known-limit count shown on the governance lead's console. |
@@ -84,7 +84,7 @@
 **North star:** share of AI use cases whose tier was recomputed from a second source and whose approval was gated on the recomputed tier's checklist. Design target: 100%.
 
 **Inputs (leading):**
-- Tier accuracy on a labelled audit sample drawn by the governance lead. The prototype measures 86.0% on the synthetic set; a real target is set after the first audit sample, not before.
+- Tier accuracy on a labeled audit sample drawn by the governance lead. The prototype measures 86.0% on the synthetic set; a real target is set after the first audit sample, not before.
 - Share of submissions with a cross-check flag. The prototype shows 74 of 150.
 - Flag precision per rule. The prototype shows 34 of 38 for the catalog rule, 21 of 21 for the registry rule, 6 of 25 for the text cue, 3 of 12 for the ambiguous-answer rule.
 - Catalog freshness: share of entries reviewed inside the steward's own cycle.
@@ -106,7 +106,7 @@ All durations are design targets, not tested (🔴).
 | Phase | Duration | Scope |
 | --- | --- | --- |
 | 0 — Register | 4w | Import the spreadsheet; back-fill the register so someone can say how many AI use cases exist. No tiering change. |
-| 1 — Shadow | 8w | Recompute and log beside the declared tier. Nothing changes for sponsors. Measure flag precision per rule against a reviewer-labelled sample. |
+| 1 — Shadow | 8w | Recompute and log beside the declared tier. Nothing changes for sponsors. Measure flag precision per rule against a reviewer-labeled sample. |
 | 2 — Flags to sponsors | 6w | Sponsors see the flags and clear, correct or contest them. The rubric and the checklist become versioned configuration with a proposer and a different approver. |
 | 3 — Evidence gate | 8w | Gate approval on the recomputed tier's checklist for tier 3 and tier 4 first, then tier 2. |
 | 4 — Ordered queue | 6w | Order by tier with an aging cap, one business unit at a time. |
@@ -150,7 +150,7 @@ All durations are design targets, not tested (🔴).
 **Org dependencies.**
 - The AI governance lead owns the rubric and the checklist. Without that ownership the gate has no authority.
 - Catalog stewards and procurement own the second sources. A recompute is only as good as the freshest entry; the catalog freshness check and the known-limit count make that visible.
-- The model risk reviewers need capacity for tier 3 and tier 4 depth. 🟡 The model shows tier-depth review hours at 837.0 against 714.0 for declared tiers; if capacity is flat, the queue is the constraint.
+- The model risk reviewers need capacity for tier 3 and tier 4 depth. 🟡 The model shows tier-depth review hours at 837.0 (after duplicate merging) against 714.0 for declared tiers; if capacity is flat, the queue is the constraint.
 
 ---
 
