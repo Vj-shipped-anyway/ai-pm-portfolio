@@ -341,9 +341,9 @@ The six:
       Extracted:  '10.0'
       Expected:   '10pct_yr6_and_yr11'
 
+...
 ### TENANT_RIGHTS_BURIED_IN_SIDE_LETTER  (2 failures on the 6-lease sample)
-    ROFO, ROFR, expansion right in a side letter the OCR pipeline did not
-    ingest as part of 'this lease'.
+    ROFO, ROFR, expansion right in a side letter the OCR pipeline did not ingest as part of 'this lease'.
 
   [lease_03 / ROFO_present]
       Extracted:  'No'
