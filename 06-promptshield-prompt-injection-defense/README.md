@@ -2,11 +2,7 @@
 
 **A portfolio prototype for a five-layer defense-in-depth gateway that sits between user input and an internal BFSI copilot over confidential data — input classifier + retrieval scanner + tool-call gate + egress filter + per-session memory boundary. Maps to [OWASP LLM01](https://genai.owasp.org/llm-top-10/), [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), [MITRE ATLAS](https://atlas.mitre.org/), and [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj).**
 
-**▶ Live demo:** *(placeholder — promptshield-bfsi.streamlit.app)*
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/06-promptshield-prompt-injection-defense/demo.html)
-
-**▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-class deficiency taxonomy, the architecture, the five-layer pipeline, and the synthetic corpus are mine; the metrics below are measured on the shipped synthetic data and modeled against published industry baselines. Production validation (CISO sign-off, red-team rounds against the bank's real copilot, integration with the bank's MRM workbench) is what the next role does.
 
