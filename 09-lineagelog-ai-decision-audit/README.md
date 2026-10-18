@@ -546,7 +546,7 @@ The Streamlit prototype here shows the *product mechanic* — decision-grain com
 
 ## 🙌 Acknowledgements
 
-- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture LineageLog sits on top of.
+- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture LineageLog sits on top of.
 - [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — the regulatory existence-proof for this product.
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the framework backbone.
 - SR 11-7 / OCC Bulletin 2011-12 (replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — co-issued model-risk-management guidance.
