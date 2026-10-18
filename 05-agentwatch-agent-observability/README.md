@@ -401,7 +401,7 @@ sequenceDiagram
     S->>A: tool-call cap reached -> terminate run
     S->>D: INSERT agent_incidents row (immutable + hash-anchored)
     D->>O: route incident pack to SRE on-call
-    Note over A,O: 🔴 Designed for sub-10-minute MTTR; not yet tested with a real pager rotation.
+    Note over A,O: 🔴 Designed for sub-10-minute MTTR, not yet tested with a real pager rotation.
 ```
 
 **Agent-incident composition table** (the core schema; full DDL in [`ARCHITECTURE.md`](./ARCHITECTURE.md)):
