@@ -1,0 +1,13 @@
+tool,domains,approved_data_class,ai_in_scope,use_case
+S-01 Enterprise chat assistant,assist-s01.example,Confidential,yes,chat
+S-02 Code assistant,codehelp-s02.example,Internal,yes,code
+S-03 Meeting notes summarizer,notes-s03.example,Internal,yes,transcribe
+S-04 Translation assistant,translate-s04.example,Public,yes,translate
+S-05 Document summarizer,summarize-s05.example,Confidential,yes,document
+S-06 Research assistant,research-s06.example,Public,yes,chat
+S-07 Knowledge base search,knowledge-s07.example,Confidential,yes,chat
+P-01 Document suite,docs-p01.example,Confidential,no,saas
+P-02 CRM,crm-p02.example,Confidential,no,saas
+P-03 Service desk,desk-p03.example,Internal,no,saas
+P-04 Meetings and video,meet-p04.example,Internal,no,saas
+P-05 HR portal,people-p05.example;hrdocs-p05.example,Restricted,no,saas

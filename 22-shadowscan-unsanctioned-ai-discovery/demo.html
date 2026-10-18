@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShadowScan — Unsanctioned AI Discovery · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of ShadowScan: finds the AI tools staff already use and ranks them by data exposure, not by a blocklist hit count. Synthetic data, plain rules, no model.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 22px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin: 0 0 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .truth { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px; font-size: 13px; color: #1e3a8a; }
+  .truth p { margin: 0 0 6px; }
+  .nextaction { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px; font-size: 13px; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>ShadowScan — Unsanctioned AI Discovery</h1>
+    <p class="tagline">Pick a domain or a department and compare a blocklist with ShadowScan on synthetic logs.</p>
+    <p class="author">Project 22 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">Synthetic data</span>
+      <span class="badge">No model: plain rules</span>
+      <span class="badge">15,000 proxy rows · 7,500 DNS rows</span>
+      <span class="badge">6 named deficiencies</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Whole-extract totals">
+    <div class="stat"><p class="stat-label">Found by the blocklist</p><p class="stat-value">2,275 of 4,200</p></div>
+    <div class="stat"><p class="stat-label">Found by ShadowScan</p><p class="stat-value">3,948 of 4,200</p></div>
+    <div class="stat"><p class="stat-label">False alarms from the list</p><p class="stat-value">1,150</p></div>
+    <div class="stat"><p class="stat-label">Off-network, in no log</p><p class="stat-value">600</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="pick-select">Pick one</label>
+    <select id="pick-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Proxy report</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>Basic — Blocklist</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With ShadowScan</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. 24 picks: the highest-exposure domains found, four edge cases, then the ten departments. The generator decided which domains are AI tools, so the truth is known. No model is used: the classifier is a catalog lookup, a feed lookup, a path pattern and a byte-ratio test. Every number on this page is generated from the scripts in <code>src/</code>.</p>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (sessions found per staff member with ShadowScan − with a blocklist) × staff using AI outside the catalog</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> the blocklist finds 2,275 of 4,200 unsanctioned AI sessions (11.849 per staff member who used one); ShadowScan finds 3,948 (20.562 per staff member), 1,673 of them beyond the list. It finds 28 of 30 unapproved AI domains; the list hits 14. Precision is 87.9% against 66.4% for the list.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 10,000 staff × 15% using AI outside the catalog = 1,500 people (an assumption, not a statistic) gives (20.562 − 11.849) × 1,500 = <b>about 13,070 extra sessions brought into view per two-week window</b>. The 600 off-network sessions stay invisible to both.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/22-shadowscan-unsanctioned-ai-discovery/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/22-shadowscan-unsanctioned-ai-discovery/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/22-shadowscan-unsanctioned-ai-discovery/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/shadowscan-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"options":[{"label":"#1 meetscribe-u27.example - block","kind":"domain","title":"meetscribe-u27.example","meta":"meetscribe-u27.example: truth is an unsanctioned AI tool. 112 sessions in the logs, 26 more off the network; 201.9 of 455.2 MB out is invisible to the proxy.","before":["The proxy report lists meetscribe-u27.example: 80 hits, rank #55 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","The known-AI feed lists it, but nobody copied it to the blocklist."]},"blue":["Truth (synthetic): an AI tool nobody approved. 112 sessions in the logs (80 proxy, 32 DNS) by 31 staff.","253.3 MB out in the proxy log; 99.2 MB more in DNS sessions that show no size.","26 more sessions (102.7 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 112 of 112 sessions.","Exposure rank #1 of 35: index 23,658 = 1,028.6 weighted MB x 23 staff (proxy rows only).","Owner: Fraud and Financial Crime. 88% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell Fraud and Financial Crime to use S-03 Meeting notes summarizer.","note":""}},{"label":"#2 voicenote-u26.example - block","kind":"domain","title":"voicenote-u26.example","meta":"voicenote-u26.example: truth is an unsanctioned AI tool. 98 sessions in the logs, 16 more off the network; 199.6 of 430.9 MB out is invisible to the proxy.","before":["The proxy report lists voicenote-u26.example: 70 hits, rank #67 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"HIT: A COUNT, NOTHING MORE","tone":"bad","lines":["98 hits on the blocklist, matching voicenote-u26.example (exact entry).","The count does not say how much data left (231.3 MB in the proxy log), from which department, or what to do about it."]},"blue":["Truth (synthetic): an AI tool nobody approved. 98 sessions in the logs (70 proxy, 28 DNS) by 25 staff.","231.3 MB out in the proxy log; 108.7 MB more in DNS sessions that show no size.","16 more sessions (90.9 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 98 of 98 sessions.","Exposure rank #2 of 35: index 18,324 = 916.2 weighted MB x 20 staff (proxy rows only).","Owner: People and HR. 67% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell People and HR to use S-03 Meeting notes summarizer.","note":""}},{"label":"#3 filevault-f01.example - block","kind":"domain","title":"filevault-f01.example","meta":"filevault-f01.example: truth is an ordinary site. 263 sessions in the logs.","before":["The proxy report lists filevault-f01.example: 150 hits, rank #26 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"NO HIT (CORRECT)","tone":"good","lines":["0 hits. The list is right about this domain: it is an ordinary site."]},"blue":["Truth (synthetic): not an AI tool. 263 sessions (150 proxy, 113 DNS) by 189 staff."],"green":{"tag":"WRONG: FALSE POSITIVE","tone":"warn","lines":["Class: unsanctioned AI (evidence: ratio). Exposure rank #3 of 35: index 17,683.","Owner: Credit Underwriting. Flagged 263 sessions by name once the rules fired on its proxy rows."],"next":"BLOCK: Block at proxy and DNS; tell Credit Underwriting; the feed gives no category, so no catalog tool is suggested.","note":"False positive of the path and ratio rules. The action is a recommendation that a person reviews, not an automatic block."}},{"label":"#4 callsummary-ai-u29.example - block","kind":"domain","title":"callsummary-ai-u29.example","meta":"callsummary-ai-u29.example: truth is an unsanctioned AI tool. 98 sessions in the logs, 14 more off the network; 159.9 of 376.0 MB out is invisible to the proxy.","before":["The proxy report lists callsummary-ai-u29.example: 70 hits, rank #62 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"HIT: A COUNT, NOTHING MORE","tone":"bad","lines":["98 hits on the blocklist, matching ai (keyword rule).","The count does not say how much data left (216.1 MB in the proxy log), from which department, or what to do about it."]},"blue":["Truth (synthetic): an AI tool nobody approved. 98 sessions in the logs (70 proxy, 28 DNS) by 25 staff.","216.1 MB out in the proxy log; 112.7 MB more in DNS sessions that show no size.","14 more sessions (47.2 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 98 of 98 sessions.","Exposure rank #4 of 35: index 15,116 = 795.6 weighted MB x 19 staff (proxy rows only).","Owner: People and HR. 66% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell People and HR to use S-03 Meeting notes summarizer.","note":""}},{"label":"#5 transcribo-u28.example - block","kind":"domain","title":"transcribo-u28.example","meta":"transcribo-u28.example: truth is an unsanctioned AI tool. 84 sessions in the logs, 4 more off the network; 81.9 of 297.9 MB out is invisible to the proxy.","before":["The proxy report lists transcribo-u28.example: 60 hits, rank #74 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","The known-AI feed lists it, but nobody copied it to the blocklist."]},"blue":["Truth (synthetic): an AI tool nobody approved. 84 sessions in the logs (60 proxy, 24 DNS) by 23 staff.","216.0 MB out in the proxy log; 65.7 MB more in DNS sessions that show no size.","4 more sessions (16.2 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 84 of 84 sessions.","Exposure rank #5 of 35: index 14,706 = 865.1 weighted MB x 17 staff (proxy rows only).","Owner: People and HR. 82% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell People and HR to use S-03 Meeting notes summarizer.","note":""}},{"label":"#6 briefreader-u11.example - block","kind":"domain","title":"briefreader-u11.example","meta":"briefreader-u11.example: truth is an unsanctioned AI tool. 126 sessions in the logs, 19 more off the network; 54.3 of 152.6 MB out is invisible to the proxy.","before":["The proxy report lists briefreader-u11.example: 90 hits, rank #51 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","The known-AI feed lists it, but nobody copied it to the blocklist."]},"blue":["Truth (synthetic): an AI tool nobody approved. 126 sessions in the logs (90 proxy, 36 DNS) by 37 staff.","98.3 MB out in the proxy log; 34.0 MB more in DNS sessions that show no size.","19 more sessions (20.3 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 126 of 126 sessions.","Exposure rank #6 of 35: index 9,841 = 364.5 weighted MB x 27 staff (proxy rows only).","Owner: Technology and Engineering. 55% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell Technology and Engineering to use S-05 Document summarizer.","note":""}},{"label":"#7 dictate-u30.example - block","kind":"domain","title":"dictate-u30.example","meta":"dictate-u30.example: truth is an unsanctioned AI tool. 70 sessions in the logs, 14 more off the network; 128.1 of 308.9 MB out is invisible to the proxy.","before":["The proxy report lists dictate-u30.example: 50 hits, rank #77 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","It is in neither the known-AI feed nor the list."]},"blue":["Truth (synthetic): an AI tool nobody approved. 70 sessions in the logs (50 proxy, 20 DNS) by 19 staff.","180.8 MB out in the proxy log; 46.4 MB more in DNS sessions that show no size.","14 more sessions (81.6 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: ratio). Found 70 of 70 sessions.","Exposure rank #7 of 35: index 9,301 = 664.4 weighted MB x 14 staff (proxy rows only).","Owner: Legal and Compliance. 60% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell Legal and Compliance; the feed gives no category, so no catalog tool is suggested.","note":""}},{"label":"#8 sheetmind-u13.example - block","kind":"domain","title":"sheetmind-u13.example","meta":"sheetmind-u13.example: truth is an unsanctioned AI tool. 105 sessions in the logs, 19 more off the network; 45.6 of 141.6 MB out is invisible to the proxy.","before":["The proxy report lists sheetmind-u13.example: 75 hits, rank #60 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","The known-AI feed lists it, but nobody copied it to the blocklist."]},"blue":["Truth (synthetic): an AI tool nobody approved. 105 sessions in the logs (75 proxy, 30 DNS) by 28 staff.","96.0 MB out in the proxy log; 33.7 MB more in DNS sessions that show no size.","19 more sessions (11.9 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 105 of 105 sessions.","Exposure rank #8 of 35: index 8,715 = 415.0 weighted MB x 21 staff (proxy rows only).","Owner: Legal and Compliance. 92% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell Legal and Compliance to use S-05 Document summarizer.","note":""}},{"label":"#9 pdfchat-u09.example - block","kind":"domain","title":"pdfchat-u09.example","meta":"pdfchat-u09.example: truth is an unsanctioned AI tool. 112 sessions in the logs, 18 more off the network; 53.7 of 160.7 MB out is invisible to the proxy.","before":["The proxy report lists pdfchat-u09.example: 80 hits, rank #56 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"HIT: A COUNT, NOTHING MORE","tone":"bad","lines":["112 hits on the blocklist, matching pdfchat-u09.example (exact entry).","The count does not say how much data left (107.0 MB in the proxy log), from which department, or what to do about it."]},"blue":["Truth (synthetic): an AI tool nobody approved. 112 sessions in the logs (80 proxy, 32 DNS) by 31 staff.","107.0 MB out in the proxy log; 25.7 MB more in DNS sessions that show no size.","18 more sessions (28.0 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 112 of 112 sessions.","Exposure rank #9 of 35: index 8,086 = 367.5 weighted MB x 22 staff (proxy rows only).","Owner: Finance and Treasury. 73% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell Finance and Treasury to use S-05 Document summarizer.","note":""}},{"label":"#10 contract-ai-u12.example - block","kind":"domain","title":"contract-ai-u12.example","meta":"contract-ai-u12.example: truth is an unsanctioned AI tool. 98 sessions in the logs, 14 more off the network; 48.6 of 124.5 MB out is invisible to the proxy.","before":["The proxy report lists contract-ai-u12.example: 70 hits, rank #63 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"HIT: A COUNT, NOTHING MORE","tone":"bad","lines":["98 hits on the blocklist, matching ai (keyword rule).","The count does not say how much data left (75.9 MB in the proxy log), from which department, or what to do about it."]},"blue":["Truth (synthetic): an AI tool nobody approved. 98 sessions in the logs (70 proxy, 28 DNS) by 29 staff.","75.9 MB out in the proxy log; 32.6 MB more in DNS sessions that show no size.","14 more sessions (16.0 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 98 of 98 sessions.","Exposure rank #10 of 35: index 6,788 = 323.2 weighted MB x 21 staff (proxy rows only).","Owner: Legal and Compliance. 89% of the bytes come from departments weighted 4 or 5."],"next":"BLOCK: Block at proxy and DNS; tell Legal and Compliance to use S-05 Document summarizer.","note":""}},{"label":"#20 snippetgen-u19.example - sanction (sanction candidate)","kind":"domain","title":"snippetgen-u19.example","meta":"snippetgen-u19.example: truth is an unsanctioned AI tool. 182 sessions in the logs, 13 more off the network; 2.3 of 8.3 MB out is invisible to the proxy.","before":["The proxy report lists snippetgen-u19.example: 130 hits, rank #36 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","The known-AI feed lists it, but nobody copied it to the blocklist."]},"blue":["Truth (synthetic): an AI tool nobody approved. 182 sessions in the logs (130 proxy, 52 DNS) by 40 staff.","6.0 MB out in the proxy log; 1.9 MB more in DNS sessions that show no size.","13 more sessions (0.4 MB) on personal devices that no log shows."],"green":{"tag":"CAUGHT","tone":"good","lines":["Class: unsanctioned AI (evidence: feed). Found 182 of 182 sessions.","Exposure rank #20 of 35: index 559 = 20.0 weighted MB x 28 staff (proxy rows only).","Owner: Technology and Engineering. 26% of the bytes come from departments weighted 4 or 5."],"next":"SANCTION: Open an intake (TierGate) and due diligence (VendorLens) before approving it.","note":""}},{"label":"#15 meet-p04.example - coach (AI feature in approved SaaS)","kind":"domain","title":"meet-p04.example","meta":"meet-p04.example: truth is an approved product with an AI feature. 133 sessions in the logs.","before":["The proxy report lists meet-p04.example: 500 hits, rank #7 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED: LOOKS APPROVED","tone":"bad","lines":["0 hits. P-04 Meetings and video is in the sanctioned catalog, so the domain looks approved.","The AI feature inside it is invisible by domain."]},"blue":["Truth (synthetic): the domain belongs to the approved product P-04 Meetings and video, but 133 of its sessions use an AI feature (100 proxy, 33 DNS) by 94 staff.","20.6 MB out in the proxy log for those sessions."],"green":{"tag":"FLAGGED","tone":"good","lines":["Class: AI feature inside approved SaaS (evidence: path in approved SaaS). Found 70 of 133 sessions.","Exposure rank #15 of 35: index 2,900. Owner: Technology and Engineering.","The other 63 sessions use a vendor-specific path or a DNS row, which a path pattern cannot read."],"next":"COACH: Coach Technology and Engineering on the approved scope.","note":""}},{"label":"ponder-u08.example - not found (known limit)","kind":"domain","title":"ponder-u08.example","meta":"ponder-u08.example: truth is an unsanctioned AI tool. 140 sessions in the logs, 26 more off the network; 0.2 of 0.5 MB out is invisible to the proxy.","before":["The proxy report lists ponder-u08.example: 100 hits, rank #48 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"MISSED","tone":"bad","lines":["0 hits. The domain is not on the list and no keyword rule matches its name.","It is in neither the known-AI feed nor the list."]},"blue":["Truth (synthetic): an AI tool nobody approved. 140 sessions in the logs (100 proxy, 40 DNS) by 48 staff.","0.3 MB out in the proxy log; 0.1 MB more in DNS sessions that show no size.","26 more sessions (0.1 MB) on personal devices that no log shows."],"green":{"tag":"MISSED: KNOWN LIMIT","tone":"warn","lines":["Class: other. 0 of 140 sessions found.","Why: proxy paths look ordinary and sizes are small, so no rule fires."],"next":"None. ShadowScan does not know this domain exists.","note":"Known limit: a chat tool on ordinary paths with small payloads and a hidden path is invisible to these rules."}},{"label":"airfare-desk-l01.example - blocklist false alarm","kind":"domain","title":"airfare-desk-l01.example","meta":"airfare-desk-l01.example: truth is a benign look-alike name. 201 sessions in the logs.","before":["The proxy report lists airfare-desk-l01.example: 140 hits, rank #31 of 84 domains by hits.","It shows a name and a count. It does not show who sent what, how much, or whether the tool is approved."],"red":{"tag":"FALSE ALARM","tone":"bad","lines":["201 hits, matching ai (keyword rule).","The name contains the letters 'ai'. The site is not an AI service. Someone has to triage the hits by hand."]},"blue":["Truth (synthetic): not an AI service. 201 sessions of ordinary use (140 proxy, 61 DNS) by 166 staff."],"green":{"tag":"IGNORED (CORRECT)","tone":"good","lines":["Class: other. No catalog or feed match, and its paths and sizes are ordinary.","ShadowScan does not read names, so the look-alike costs it nothing."],"next":"None.","note":""}},{"label":"Department: Legal and Compliance","kind":"dept","title":"Department: Legal and Compliance","meta":"Legal and Compliance: 30 staff, sensitivity weight 5 of 5. 11 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 130 of 265 unsanctioned AI sessions (49.1%).","It found 0 of 62 AI-feature sessions inside approved SaaS.","It raised 75 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 265 unsanctioned AI sessions and 62 AI-feature sessions in the logs, 213.4 MB out in the proxy log for the unsanctioned ones.","43 more sessions (87.8 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 258 of 265 unsanctioned AI sessions (97.4%) and 38 of 62 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #7 dictate-u30.example 51.4 MB (block), #2 voicenote-u26.example 42.6 MB (block), #8 sheetmind-u13.example 25.4 MB (block).","It owns 4 of the 35 ranked items. Still invisible: 43 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Credit Underwriting","kind":"dept","title":"Department: Credit Underwriting","meta":"Credit Underwriting: 60 staff, sensitivity weight 5 of 5. 25 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 278 of 550 unsanctioned AI sessions (50.5%).","It found 0 of 105 AI-feature sessions inside approved SaaS.","It raised 148 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 550 unsanctioned AI sessions and 105 AI-feature sessions in the logs, 210.6 MB out in the proxy log for the unsanctioned ones.","66 more sessions (67.2 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 527 of 550 unsanctioned AI sessions (95.8%) and 34 of 105 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #1 meetscribe-u27.example 47.3 MB (block), #5 transcribo-u28.example 26.8 MB (block), #2 voicenote-u26.example 24.9 MB (block).","It owns 2 of the 35 ranked items. Still invisible: 66 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Wealth Advisory","kind":"dept","title":"Department: Wealth Advisory","meta":"Wealth Advisory: 45 staff, sensitivity weight 4 of 5. 13 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 131 of 232 unsanctioned AI sessions (56.5%).","It found 0 of 76 AI-feature sessions inside approved SaaS.","It raised 96 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 232 unsanctioned AI sessions and 76 AI-feature sessions in the logs, 59.6 MB out in the proxy log for the unsanctioned ones.","50 more sessions (44.7 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 226 of 232 unsanctioned AI sessions (97.4%) and 16 of 76 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #1 meetscribe-u27.example 17.3 MB (block), #4 callsummary-ai-u29.example 17.0 MB (block), #7 dictate-u30.example 7.7 MB (block).","It owns 0 of the 35 ranked items. Still invisible: 50 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Finance and Treasury","kind":"dept","title":"Department: Finance and Treasury","meta":"Finance and Treasury: 55 staff, sensitivity weight 4 of 5. 25 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 250 of 484 unsanctioned AI sessions (51.7%).","It found 0 of 165 AI-feature sessions inside approved SaaS.","It raised 126 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 484 unsanctioned AI sessions and 165 AI-feature sessions in the logs, 276.0 MB out in the proxy log for the unsanctioned ones.","92 more sessions (54.9 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 457 of 484 unsanctioned AI sessions (94.4%) and 77 of 165 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #5 transcribo-u28.example 62.0 MB (block), #4 callsummary-ai-u29.example 41.6 MB (block), #12 notesum-u14.example 34.4 MB (coach).","It owns 7 of the 35 ranked items. Still invisible: 92 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: People and HR","kind":"dept","title":"Department: People and HR","meta":"People and HR: 25 staff, sensitivity weight 4 of 5. 14 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 246 of 487 unsanctioned AI sessions (50.5%).","It found 0 of 110 AI-feature sessions inside approved SaaS.","It raised 44 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 487 unsanctioned AI sessions and 110 AI-feature sessions in the logs, 338.6 MB out in the proxy log for the unsanctioned ones.","54 more sessions (70.8 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 471 of 487 unsanctioned AI sessions (96.7%) and 50 of 110 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #5 transcribo-u28.example 76.0 MB (block), #2 voicenote-u26.example 62.6 MB (block), #4 callsummary-ai-u29.example 54.2 MB (block).","It owns 5 of the 35 ranked items. Still invisible: 54 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Fraud and Financial Crime","kind":"dept","title":"Department: Fraud and Financial Crime","meta":"Fraud and Financial Crime: 40 staff, sensitivity weight 4 of 5. 20 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 288 of 493 unsanctioned AI sessions (58.4%).","It found 0 of 116 AI-feature sessions inside approved SaaS.","It raised 82 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 493 unsanctioned AI sessions and 116 AI-feature sessions in the logs, 225.3 MB out in the proxy log for the unsanctioned ones.","56 more sessions (35.7 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 462 of 493 unsanctioned AI sessions (93.7%) and 61 of 116 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #1 meetscribe-u27.example 64.2 MB (block), #13 docsense-u10.example 41.4 MB (coach), #8 sheetmind-u13.example 25.9 MB (block).","It owns 3 of the 35 ranked items. Still invisible: 56 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Technology and Engineering","kind":"dept","title":"Department: Technology and Engineering","meta":"Technology and Engineering: 110 staff, sensitivity weight 3 of 5. 32 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 490 of 905 unsanctioned AI sessions (54.1%).","It found 0 of 196 AI-feature sessions inside approved SaaS.","It raised 218 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 905 unsanctioned AI sessions and 196 AI-feature sessions in the logs, 222.5 MB out in the proxy log for the unsanctioned ones.","96 more sessions (33.0 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 821 of 905 unsanctioned AI sessions (90.7%) and 106 of 196 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #2 voicenote-u26.example 55.3 MB (block), #6 briefreader-u11.example 37.8 MB (block), #4 callsummary-ai-u29.example 31.0 MB (block).","It owns 13 of the 35 ranked items. Still invisible: 96 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Operations and Servicing","kind":"dept","title":"Department: Operations and Servicing","meta":"Operations and Servicing: 80 staff, sensitivity weight 3 of 5. 35 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 310 of 518 unsanctioned AI sessions (59.8%).","It found 0 of 263 AI-feature sessions inside approved SaaS.","It raised 207 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 518 unsanctioned AI sessions and 263 AI-feature sessions in the logs, 122.6 MB out in the proxy log for the unsanctioned ones.","70 more sessions (76.1 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 479 of 518 unsanctioned AI sessions (92.5%) and 58 of 263 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #4 callsummary-ai-u29.example 29.1 MB (block), #2 voicenote-u26.example 21.3 MB (block), #1 meetscribe-u27.example 15.9 MB (block).","It owns 0 of the 35 ranked items. Still invisible: 70 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Marketing and Communications","kind":"dept","title":"Department: Marketing and Communications","meta":"Marketing and Communications: 40 staff, sensitivity weight 2 of 5. 12 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 87 of 151 unsanctioned AI sessions (57.6%).","It found 0 of 52 AI-feature sessions inside approved SaaS.","It raised 76 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 151 unsanctioned AI sessions and 52 AI-feature sessions in the logs, 14.3 MB out in the proxy log for the unsanctioned ones.","49 more sessions (9.1 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 141 of 151 unsanctioned AI sessions (93.4%) and 23 of 52 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #7 dictate-u30.example 10.9 MB (block), #3 filevault-f01.example 6.8 MB (block), #10 contract-ai-u12.example 1.5 MB (block).","It owns 1 of the 35 ranked items. Still invisible: 49 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}},{"label":"Department: Facilities and Procurement","kind":"dept","title":"Department: Facilities and Procurement","meta":"Facilities and Procurement: 35 staff, sensitivity weight 1 of 5. 11 of them used AI outside the catalog in the logs.","before":["The proxy report ranks domains by hits. It has no department view.","Nobody can say from it which department sends what to which tool."],"red":{"tag":"PARTLY SEEN","tone":"bad","lines":["The blocklist found 65 of 115 unsanctioned AI sessions (56.5%).","It found 0 of 55 AI-feature sessions inside approved SaaS.","It raised 78 false alarms on look-alike names for this department."]},"blue":["Truth (synthetic): 115 unsanctioned AI sessions and 55 AI-feature sessions in the logs, 68.2 MB out in the proxy log for the unsanctioned ones.","24 more sessions (11.3 MB) on personal devices or off the network. No log shows them."],"green":{"tag":"FLAGGED","tone":"good","lines":["ShadowScan found 106 of 115 unsanctioned AI sessions (92.2%) and 28 of 55 AI-feature sessions.","Where this department's bytes go, top three by size (rank, domain, MB out, action): #9 pdfchat-u09.example 25.7 MB (block), #7 dictate-u30.example 24.1 MB (block), #4 callsummary-ai-u29.example 13.1 MB (block).","It owns 0 of the 35 ranked items. Still invisible: 24 off-network sessions."],"next":"Take the top three to their owners; start with any marked block.","note":""}}]};
+const OPTS = D.options;
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function tone(t) { return t === "good" ? "pill-ok" : (t === "warn" ? "pill-warn" : "pill-bad"); }
+function paras(lines) { return lines.map(l => "<p>" + esc(l) + "</p>").join(""); }
+
+let idx = 0;
+const sel = document.getElementById("pick-select");
+OPTS.forEach((o, i) => {
+  const e = document.createElement("option");
+  e.value = i;
+  e.textContent = o.label;
+  sel.appendChild(e);
+});
+
+function render() {
+  const o = OPTS[idx];
+  sel.value = idx;
+  document.getElementById("run-meta").innerHTML = "<b>" + esc(o.title) + "</b> - " + esc(o.meta);
+
+  document.getElementById("card-before").innerHTML = paras(o.before) +
+    '<span class="pill pill-info">a name and a count</span>';
+
+  document.getElementById("card-sota").innerHTML =
+    '<span class="pill ' + tone(o.red.tone) + '">' + esc(o.red.tag) + "</span>" + paras(o.red.lines) +
+    '<div class="truth"><b>Truth (synthetic)</b>' + o.blue.map(l => "<p>" + esc(l) + "</p>").join("") + "</div>";
+
+  let g = '<span class="pill ' + tone(o.green.tone) + '">' + esc(o.green.tag) + "</span>" + paras(o.green.lines);
+  if (o.green.next) { g += '<div class="nextaction"><b>Next action:</b> ' + esc(o.green.next) + "</div>"; }
+  if (o.green.note) { g += '<div class="nextaction">' + esc(o.green.note) + "</div>"; }
+  document.getElementById("card-shield").innerHTML = g;
+}
+
+sel.addEventListener("change", e => { idx = parseInt(e.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < OPTS.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+
+render();
+</script>
+</body>
+</html>

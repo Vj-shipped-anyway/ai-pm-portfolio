@@ -1,0 +1,16 @@
+entry,match_type
+talkwise-u01.example,domain
+askpilot-u02.example,domain
+quickai-u03.example,domain
+chatnest-u04.example,domain
+pdfchat-u09.example,domain
+docsense-u10.example,domain
+codepal-u17.example,domain
+pixelforge-u22.example,domain
+voicenote-u26.example,domain
+oldchat-b01.example,domain
+oldchat-b02.example,domain
+oldchat-b03.example,domain
+oldchat-b04.example,domain
+ai,keyword
+llm,keyword

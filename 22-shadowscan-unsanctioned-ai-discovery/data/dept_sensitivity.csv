@@ -1,0 +1,11 @@
+dept,dept_name,sensitivity_weight
+LEG,Legal and Compliance,5
+CRD,Credit Underwriting,5
+WLT,Wealth Advisory,4
+FIN,Finance and Treasury,4
+HRP,People and HR,4
+FRD,Fraud and Financial Crime,4
+ENG,Technology and Engineering,3
+OPS,Operations and Servicing,3
+MKT,Marketing and Communications,2
+FAC,Facilities and Procurement,1
