@@ -2,11 +2,7 @@
 
 **A portfolio prototype for a human-in-the-loop workflow designer that replaces rubber-stamp review with calibrated, role-aware oversight — modeled against [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) human-oversight requirements, the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) HITL section, and [OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) / [Federal Reserve](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm) supervisory expectations for "real oversight, not theatrical review."**
 
-**▶ Live demo:** *(placeholder — oversightops-bfsi.streamlit.app)*
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/08-oversightops-hitl-workflow/demo.html)
-
-**▶ 60-second interactive walkthrough:** *(placeholder — Arcade share link)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the routing logic, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (compliance committee read, OCC exam evidence pull, reviewer-operations co-design) is what the next role does.
 
