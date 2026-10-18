@@ -1,0 +1,135 @@
+{
+  "schema": "build-brief/v1",
+  "brief_id": "BB-002",
+  "candidate": {
+    "name": "choose_resolution_route + draft_correction",
+    "workflow": "wire repair (payment exception handling)",
+    "steps": [
+      "S14",
+      "S08"
+    ],
+    "automation_class": "AGENT_HITL"
+  },
+  "scope": {
+    "in_scope": [
+      "S14 choose_resolution_route",
+      "S08 draft_correction"
+    ],
+    "out_of_scope": [
+      "S07 judge_ambiguous_match and S13 triage_beneficiary_bank_reply: a person decides",
+      "S09 approve_four_eyes: stays with a person",
+      "phone calls and any work off the desktop",
+      "sending anything outside the bank"
+    ]
+  },
+  "inputs": [
+    {
+      "name": "choose_resolution_route",
+      "source": "case system",
+      "fields": [
+        "route_options",
+        "case_summary"
+      ]
+    },
+    {
+      "name": "draft_correction",
+      "source": "case system",
+      "fields": [
+        "corrected_beneficiary",
+        "correction_narrative"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "case_system",
+      "access": "write",
+      "allowed_actions": [
+        "read",
+        "select_option",
+        "submit",
+        "write_fields"
+      ]
+    }
+  ],
+  "controls": {
+    "hitl_gates": [
+      {
+        "step": "S08",
+        "reason": "workers override it in 23% of runs; 159 characters of free text per run",
+        "approver_role": "operator"
+      }
+    ],
+    "four_eyes": [
+      {
+        "step": "S09",
+        "rule": "Stays with a person who did not draft the correction; the agent only prepares what the approver reads."
+      }
+    ],
+    "kill_switch": "One flag per step in the pack, read before every action. When it is off the step returns to the manual queue. The trip and return rules are designed in 25 KillSwitch.",
+    "audit": "Every read and write is logged with case id, step id, run id and the pseudonymous id of the approving person. Free text from case records is not stored in the log."
+  },
+  "acceptance": [
+    {
+      "id": "A1",
+      "metric": "field agreement with the worker's saved result, shadow mode",
+      "threshold": 0.98,
+      "how_measured": "Run beside workers on golden cases and compare field by field."
+    },
+    {
+      "id": "A2",
+      "metric": "escalations to a person per 100 cases",
+      "threshold": 10,
+      "how_measured": "Count runs the agent hands back, from the agent's own audit log."
+    },
+    {
+      "id": "A3",
+      "metric": "touch-time share removed on the pack's steps",
+      "threshold": 0.7,
+      "how_measured": "Task-mining touch time on the same step labels, before and after rollout."
+    }
+  ],
+  "test_plan": {
+    "golden_cases": 200,
+    "fault_injections": [
+      "a transposed character in the beneficiary name",
+      "a closed account returned by the lookup",
+      "a timeout from the payments hub",
+      "a missing field in the original payment"
+    ],
+    "shadow_mode_cases": 500
+  },
+  "rollout": {
+    "stages": [
+      "shadow: agent runs, workers keep working",
+      "assist: agent drafts, worker confirms",
+      "supervised: agent acts on a sample, worker audits",
+      "scoped autonomy: agent acts, worker audits exceptions"
+    ],
+    "exit_criteria": [
+      "A1 met on the golden cases",
+      "A1 met on the shadow-mode cases",
+      "no A4 finding in two weeks",
+      "kill switch drilled once"
+    ]
+  },
+  "handoff": {
+    "owner_role": "payments operations product owner",
+    "runbook_items": [
+      "switch the flag off",
+      "read the audit log for a case",
+      "restart a stuck run",
+      "return the step to the manual queue"
+    ],
+    "monitoring": [
+      "field agreement",
+      "escalations per 100 cases",
+      "touch minutes per case on the pack's steps",
+      "flag state"
+    ]
+  },
+  "estimate": {
+    "hours_at_stake_modeled": 155.1,
+    "assumption": "An agent removes 70% of a step's touch time (modeled, not measured). Hours are touch hours in the 30 days of data."
+  }
+}

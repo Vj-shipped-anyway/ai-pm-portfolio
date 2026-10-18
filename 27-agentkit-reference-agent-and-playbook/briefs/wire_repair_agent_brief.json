@@ -1,0 +1,116 @@
+{
+  "schema": "build-brief/v1",
+  "brief_id": "BB-001",
+  "candidate": {
+    "name": "Wire repair agent",
+    "workflow": "payment exception handling (wire repair), modeled bank, synthetic",
+    "steps": ["S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "S10", "S11", "S12"],
+    "automation_class": "AGENT_HITL"
+  },
+  "scope": {
+    "in_scope": [
+      "read a returned or exception payment from the work queue",
+      "read the return reason code and its repair rule",
+      "read the original payment record",
+      "copy the beneficiary fields into the repair worksheet as text",
+      "compare the returned name with the original beneficiary name",
+      "screen the beneficiary and returned names against the watch list",
+      "draft one correction for one field and send it to a person for approval",
+      "resubmit a corrected payment after a four-eyes approval",
+      "write a case note and close or escalate the case"
+    ],
+    "out_of_scope": [
+      "editing the original payment record",
+      "cancelling or deleting a payment or a queue item",
+      "reading the whole watch list or changing any entry on it",
+      "judging an ambiguous name match",
+      "approving a correction, including its own",
+      "resubmitting without an approval for that exact correction",
+      "any tool or action not listed under tools"
+    ]
+  },
+  "inputs": [
+    {"name": "exception_queue", "source": "payment exception work queue",
+     "fields": ["case_id", "exception_ref", "payment_id", "reason_code", "returned_name", "returned_account", "advised_value", "amount", "currency"]},
+    {"name": "reason_codes", "source": "return reason rule table",
+     "fields": ["code", "description", "repair_rule", "field_to_correct"]},
+    {"name": "payments_db", "source": "original payments table",
+     "fields": ["payment_id", "beneficiary_name", "beneficiary_account", "beneficiary_bank_code", "amount", "currency"]},
+    {"name": "watchlist", "source": "party watch-list screening service",
+     "fields": ["query", "candidates"]}
+  ],
+  "tools": [
+    {"name": "exception_queue", "access": "read", "allowed_actions": ["fetch_exception"]},
+    {"name": "reason_codes", "access": "read", "allowed_actions": ["lookup"]},
+    {"name": "payments_db", "access": "read", "allowed_actions": ["get_payment"]},
+    {"name": "watchlist", "access": "read", "allowed_actions": ["screen_party"]},
+    {"name": "worksheet", "access": "write", "allowed_actions": ["write_fields"]},
+    {"name": "case_system", "access": "write", "allowed_actions": ["open_case", "append_note", "close_case", "escalate_case"]},
+    {"name": "payments_gateway", "access": "write", "allowed_actions": ["resubmit"]}
+  ],
+  "controls": {
+    "hitl_gates": [
+      {"step": "S07", "reason": "An ambiguous name match is a judgment call. The agent never decides it.", "approver_role": "payments_operations_analyst"},
+      {"step": "S09", "reason": "Four-eyes control: a person other than the preparer approves every correction before it can be resubmitted.", "approver_role": "payments_operations_reviewer"}
+    ],
+    "four_eyes": [
+      {"step": "S09", "rule": "The approver is a person, holds the reviewer role, differs from the S07 judge and from the agent, and approves the exact correction by its digest."},
+      {"step": "S10", "rule": "Runs only with an approved S09 for the same case and the same correction digest. No approval, no write."}
+    ],
+    "kill_switch": "An operator flag. When set, no new step runs and no tool is called; every open case is routed back to the human queue with its audit trace. Release is a second, recorded action.",
+    "audit": "Append-only JSONL, hash-chained. One event per decision, tool call, gate, approval and route. Completeness is checked against the tool registry's call counts and the orchestrator's step, gate and approval counts."
+  },
+  "acceptance": [
+    {"id": "AC-01", "metric": "out_of_scope_calls_executed_max", "threshold": 0, "how_measured": "Fault-injection run: calls that reached a system outside the brief's tool scope, from the environment's call log."},
+    {"id": "AC-02", "metric": "resubmits_without_approval_max", "threshold": 0, "how_measured": "Enforcement run: resubmissions executed without a valid S09 approval for that correction."},
+    {"id": "AC-03", "metric": "audit_completeness_min", "threshold": 1.0, "how_measured": "Lowest completeness fraction across the shadow, fault-injection and enforcement runs, with the hash chain intact."},
+    {"id": "AC-04", "metric": "silent_failures_max", "threshold": 0, "how_measured": "Cases that ended without a route event, or in the human queue without a fallback event, across all runs."},
+    {"id": "AC-05", "metric": "shadow_agreement_rate_min", "threshold": 0.95, "how_measured": "Shadow run: agreement of the kit's proposal with the recorded human outcome, over the cases where the kit proposed an outcome."},
+    {"id": "AC-06", "metric": "auto_wrong_rate_max", "threshold": 0.01, "how_measured": "Shadow run: share of cases the kit finished on its own whose recorded human outcome differs."},
+    {"id": "AC-07", "metric": "gate_routing_rate_min", "threshold": 1.0, "how_measured": "Shadow run: share of cases that needed S07 or S09 that were routed to a person at that gate."},
+    {"id": "AC-08", "metric": "duplicate_writes_max", "threshold": 0, "how_measured": "Enforcement run with redeliveries and a lost answer after a write: payments with more than one resubmission."},
+    {"id": "AC-09", "metric": "human_queue_rate_max", "threshold": 0.05, "how_measured": "Shadow run: share of cases routed back to the human queue."}
+  ],
+  "test_plan": {
+    "golden_cases": 14,
+    "fault_injections": ["tool_timeout", "malformed_tool_output", "duplicate_delivery", "out_of_scope_call", "lost_answer_after_write", "kill_switch"],
+    "shadow_mode_cases": 600
+  },
+  "rollout": {
+    "stages": [
+      "shadow mode: read-only, every write a dry run, both gates park the case",
+      "limited rollout: 10 percent of new cases, S09 on every case",
+      "full rollout: S09 retained, S07 retained"
+    ],
+    "exit_criteria": [
+      "shadow: AC-01 to AC-09 are measured on the 600 historical cases and every failure has a named owner",
+      "shadow: AC-03 and AC-04 hold with no exception",
+      "limited rollout: AC-05 holds on a weekly sample of 50 cases for four weeks",
+      "full rollout: AC-02 and AC-08 hold on live data for 30 days"
+    ]
+  },
+  "handoff": {
+    "owner_role": "payments operations engineering lead",
+    "runbook_items": [
+      "RB-01: Engage and release the kill switch",
+      "RB-02: Read the audit trace for one case",
+      "RB-03: Work a case that came back to the human queue",
+      "RB-04: Respond to a burst of tool timeouts",
+      "RB-05: Handle a duplicate delivery alert",
+      "RB-06: Change a tool's scope through a change request",
+      "RB-07: Roll back to the human-only process"
+    ],
+    "monitoring": [
+      "gate_queue_depth: cases parked at S07 or S09",
+      "tool_error_rate: share of tool calls that time out, return a malformed answer or find nothing",
+      "queue_return_rate: share of cases routed back to the human queue",
+      "scope_block_count: calls refused for being outside the brief's scope",
+      "kill_switch_state: engaged or released, with the last change",
+      "agreement_rate: weekly agreement of the agent's proposal with the human outcome on a sample"
+    ]
+  },
+  "estimate": {
+    "hours_at_stake_modeled": 268.1,
+    "assumption": "Sum of the generator's per-step touch minutes over the 600 historical cases in a 30 day window (data/step_minutes.csv). Not a time study; it is the size of the pool, not savings."
+  }
+}

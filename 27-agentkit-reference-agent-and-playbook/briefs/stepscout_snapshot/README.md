@@ -1,0 +1,3 @@
+# StepScout snapshot
+
+`BB-001.json`, `BB-002.json` and `BB-003.json` are a snapshot of the briefs project 26 StepScout writes in its step 4 (`src/out/`). They are not hand-written and nobody edited them here; `briefs/wire_repair_agent_brief.json` is the hand-written sample. They are kept so `tests/test_stepscout_briefs.py` can check that AgentKit's validator accepts the shape StepScout actually emits. BB-001 validates and `derive_config` accepts its shape. BB-002 validates, but its S14 step is not in this kit's 12-step catalog: it gets an unsupported-step warning and running it is refused. BB-003 validates.

@@ -1,0 +1,13 @@
+step,step_name,truth_class,minutes
+S01,open_exception,AGENT,2.0
+S02,read_reason_code,AGENT,1.0
+S03,lookup_original_payment,AGENT,3.0
+S04,copy_beneficiary_fields,AGENT,4.0
+S05,match_name_account,AGENT,3.0
+S06,screen_watchlist,AGENT,2.0
+S07,judge_ambiguous_match,HUMAN_JUDGMENT,8.0
+S08,draft_correction,AGENT_HITL,5.0
+S09,approve_four_eyes,HUMAN_CONTROL,4.0
+S10,resubmit_payment,AGENT_HITL,2.0
+S11,write_case_note,AGENT,3.0
+S12,close_case,AGENT,1.0

@@ -1,0 +1,159 @@
+{
+  "schema": "build-brief/v1",
+  "brief_id": "BB-003",
+  "candidate": {
+    "name": "resubmit_payment + write_case_note + close_case",
+    "workflow": "wire repair (payment exception handling)",
+    "steps": [
+      "S10",
+      "S11",
+      "S12"
+    ],
+    "automation_class": "AGENT_HITL"
+  },
+  "scope": {
+    "in_scope": [
+      "S10 resubmit_payment",
+      "S11 write_case_note",
+      "S12 close_case"
+    ],
+    "out_of_scope": [
+      "S07 judge_ambiguous_match and S13 triage_beneficiary_bank_reply: a person decides",
+      "S09 approve_four_eyes: stays with a person",
+      "phone calls and any work off the desktop",
+      "sending anything outside the bank"
+    ]
+  },
+  "inputs": [
+    {
+      "name": "resubmit_payment",
+      "source": "case system",
+      "fields": [
+        "corrected_beneficiary",
+        "payment_reference",
+        "approval_id"
+      ]
+    },
+    {
+      "name": "write_case_note",
+      "source": "case system",
+      "fields": [
+        "case_summary",
+        "actions_taken"
+      ]
+    },
+    {
+      "name": "close_case",
+      "source": "case system",
+      "fields": [
+        "case_id",
+        "closure_code"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "case_system",
+      "access": "write",
+      "allowed_actions": [
+        "read",
+        "submit",
+        "write_fields"
+      ]
+    },
+    {
+      "name": "payments_hub",
+      "access": "write",
+      "allowed_actions": [
+        "submit_after_approval",
+        "write_fields"
+      ]
+    }
+  ],
+  "controls": {
+    "hitl_gates": [
+      {
+        "step": "S10",
+        "reason": "writes to the payments hub",
+        "approver_role": "approver"
+      },
+      {
+        "step": "S11",
+        "reason": "218 characters of free text per run",
+        "approver_role": "operator"
+      }
+    ],
+    "four_eyes": [
+      {
+        "step": "S10",
+        "rule": "Runs only after S09 is approved by a person other than the one who drafted; the agent never approves its own work."
+      }
+    ],
+    "kill_switch": "One flag per step in the pack, read before every action. When it is off the step returns to the manual queue. The trip and return rules are designed in 25 KillSwitch.",
+    "audit": "Every read and write is logged with case id, step id, run id and the pseudonymous id of the approving person. Free text from case records is not stored in the log."
+  },
+  "acceptance": [
+    {
+      "id": "A1",
+      "metric": "field agreement with the worker's saved result, shadow mode",
+      "threshold": 0.98,
+      "how_measured": "Run beside workers on golden cases and compare field by field."
+    },
+    {
+      "id": "A2",
+      "metric": "escalations to a person per 100 cases",
+      "threshold": 10,
+      "how_measured": "Count runs the agent hands back, from the agent's own audit log."
+    },
+    {
+      "id": "A3",
+      "metric": "touch-time share removed on the pack's steps",
+      "threshold": 0.7,
+      "how_measured": "Task-mining touch time on the same step labels, before and after rollout."
+    }
+  ],
+  "test_plan": {
+    "golden_cases": 200,
+    "fault_injections": [
+      "a transposed character in the beneficiary name",
+      "a closed account returned by the lookup",
+      "a timeout from the payments hub",
+      "a missing field in the original payment",
+      "a resubmit attempted without an approval on file"
+    ],
+    "shadow_mode_cases": 500
+  },
+  "rollout": {
+    "stages": [
+      "shadow: agent runs, workers keep working",
+      "assist: agent drafts, worker confirms",
+      "supervised: agent acts on a sample, worker audits",
+      "scoped autonomy: agent acts, worker audits exceptions"
+    ],
+    "exit_criteria": [
+      "A1 met on the golden cases",
+      "A1 met on the shadow-mode cases",
+      "no A4 finding in two weeks",
+      "kill switch drilled once"
+    ]
+  },
+  "handoff": {
+    "owner_role": "payments operations product owner",
+    "runbook_items": [
+      "switch the flag off",
+      "read the audit log for a case",
+      "restart a stuck run",
+      "return the step to the manual queue"
+    ],
+    "monitoring": [
+      "field agreement",
+      "escalations per 100 cases",
+      "touch minutes per case on the pack's steps",
+      "flag state"
+    ]
+  },
+  "estimate": {
+    "hours_at_stake_modeled": 130.4,
+    "assumption": "An agent removes 70% of a step's touch time (modeled, not measured). Hours are touch hours in the 30 days of data."
+  }
+}

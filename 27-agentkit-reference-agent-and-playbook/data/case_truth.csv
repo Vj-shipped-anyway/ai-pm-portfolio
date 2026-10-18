@@ -1,0 +1,601 @@
+case_id,scenario,planted,note
+C-0001,fix_account_clean,0,
+C-0002,fix_account_clean,0,
+C-0003,fix_account_clean,0,
+C-0004,closed_account,0,
+C-0005,closed_account,0,
+C-0006,fix_name_unrelated,0,the account belongs to a different party
+C-0007,missing_bank_code,0,
+C-0008,fix_account_clean,0,
+C-0009,fix_account_clean,0,
+C-0010,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0011,closed_account,0,
+C-0012,fix_name_style,0,
+C-0013,fix_account_clean,0,
+C-0014,fix_account_clean,0,
+C-0015,fix_account_clean,0,
+C-0016,fix_account_clean,0,
+C-0017,malformed,1,bad_advised_value
+C-0018,fix_account_clean,0,
+C-0019,fix_account_clean,0,
+C-0020,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0021,closed_account,0,
+C-0022,watch_exact,1,beneficiary name equals a watch-list entry
+C-0023,fix_account_clean,0,
+C-0024,watch_lookalike,1,string-similar to a watch-list entry; a person cleared it
+C-0025,fix_account_clean,0,
+C-0026,missing_bank_code,0,
+C-0027,fix_account_clean,0,
+C-0028,missing_bank_code,0,
+C-0029,fix_account_clean,0,
+C-0030,fix_account_clean,0,
+C-0031,fix_name_style,0,
+C-0032,fix_name_unrelated,0,the account belongs to a different party
+C-0033,fix_name_typo,0,
+C-0034,fix_account_clean,0,
+C-0035,fix_account_clean,0,
+C-0036,fix_account_clean,0,
+C-0037,missing_bank_code,0,
+C-0038,fix_name_ambiguous,1,judged the same party
+C-0039,fix_name_style,0,
+C-0040,fix_name_ambiguous,1,judged a different party
+C-0041,fix_account_clean,0,
+C-0042,fix_account_clean,0,
+C-0043,duplicate,1,redelivery of C-0036
+C-0044,fix_account_clean,0,
+C-0045,missing_bank_code,0,
+C-0046,fix_name_style,0,
+C-0047,fix_account_clean,0,
+C-0048,fix_account_clean,0,
+C-0049,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0050,closed_account,0,
+C-0051,closed_account,0,
+C-0052,fix_name_style,0,
+C-0053,fix_account_clean,0,
+C-0054,fix_account_clean,0,
+C-0055,fix_account_clean,0,
+C-0056,fix_account_clean,0,
+C-0057,fix_account_clean,0,
+C-0058,fix_account_clean,0,
+C-0059,missing_bank_code,0,
+C-0060,fix_name_ambiguous,1,judged the same party
+C-0061,fix_account_clean,0,
+C-0062,watch_exact,1,beneficiary name equals a watch-list entry
+C-0063,fix_account_clean,0,
+C-0064,fix_name_style,0,
+C-0065,fix_account_clean,0,
+C-0066,fix_account_clean,0,
+C-0067,fix_account_clean,0,
+C-0068,fix_account_clean,0,
+C-0069,missing_bank_code,0,
+C-0070,fix_account_clean,0,
+C-0071,fix_account_clean,0,
+C-0072,closed_account,0,
+C-0073,fix_name_unrelated,0,the account belongs to a different party
+C-0074,watch_lookalike,1,string-similar to a watch-list entry; a person cleared it
+C-0075,closed_account,0,
+C-0076,missing_bank_code,0,
+C-0077,malformed,1,missing_payment_id
+C-0078,missing_bank_code,0,
+C-0079,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0080,closed_account,0,
+C-0081,fix_name_style,0,
+C-0082,watch_exact,1,beneficiary name equals a watch-list entry
+C-0083,fix_name_style,0,
+C-0084,fix_name_unrelated,0,the account belongs to a different party
+C-0085,fix_name_ambiguous,1,judged the same party
+C-0086,fix_account_clean,0,
+C-0087,missing_bank_code,0,
+C-0088,fix_account_clean,0,
+C-0089,fix_account_clean,0,
+C-0090,fix_account_clean,0,
+C-0091,fix_account_clean,0,
+C-0092,closed_account,0,
+C-0093,watch_variant,1,watch-list variant: translit
+C-0094,closed_account,0,
+C-0095,fix_name_ambiguous,1,judged a different party
+C-0096,fix_account_clean,0,
+C-0097,fix_name_ambiguous,1,judged the same party
+C-0098,fix_account_clean,0,
+C-0099,fix_account_clean,0,
+C-0100,missing_bank_code,0,
+C-0101,fix_account_clean,0,
+C-0102,closed_account,0,
+C-0103,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0104,fix_name_ambiguous,1,judged the same party
+C-0105,fix_name_typo,0,
+C-0106,fix_name_unrelated,0,the account belongs to a different party
+C-0107,closed_account,0,
+C-0108,closed_account,0,
+C-0109,closed_successor,1,the return advice carries a successor account
+C-0110,fix_account_clean,0,
+C-0111,fix_account_clean,0,
+C-0112,missing_bank_code,0,
+C-0113,fix_account_clean,0,
+C-0114,fix_name_ambiguous,1,judged a different party
+C-0115,closed_account,0,
+C-0116,fix_name_style,0,
+C-0117,closed_account,0,
+C-0118,closed_account,0,
+C-0119,fix_name_unrelated,0,the account belongs to a different party
+C-0120,missing_bank_code,0,
+C-0121,malformed,1,bad_advised_value
+C-0122,duplicate,1,redelivery of C-0120
+C-0123,fix_account_clean,0,
+C-0124,fix_account_clean,0,
+C-0125,fix_name_ambiguous,1,judged the same party
+C-0126,missing_bank_code,0,
+C-0127,fix_account_clean,0,
+C-0128,fix_account_clean,0,
+C-0129,missing_bank_code,0,
+C-0130,fix_account_clean,0,
+C-0131,missing_bank_code,0,
+C-0132,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0133,closed_account,0,
+C-0134,fix_name_ambiguous,1,judged the same party
+C-0135,fix_name_ambiguous,1,judged the same party
+C-0136,fix_name_ambiguous,1,judged the same party
+C-0137,missing_bank_code,0,
+C-0138,fix_name_style,0,
+C-0139,fix_account_clean,0,
+C-0140,malformed,1,unknown_reason_code
+C-0141,fix_name_unrelated,0,the account belongs to a different party
+C-0142,fix_account_clean,0,
+C-0143,fix_name_style,0,
+C-0144,fix_account_clean,0,
+C-0145,fix_name_style,0,
+C-0146,fix_name_style,0,
+C-0147,duplicate,1,redelivery of C-0145
+C-0148,fix_account_clean,0,
+C-0149,fix_name_style,0,
+C-0150,closed_account,0,
+C-0151,fix_account_clean,0,
+C-0152,fix_name_unrelated,0,the account belongs to a different party
+C-0153,fix_account_clean,0,
+C-0154,closed_account,0,
+C-0155,fix_account_clean,0,
+C-0156,missing_bank_code,0,
+C-0157,fix_account_clean,0,
+C-0158,fix_account_clean,0,
+C-0159,fix_name_style,0,
+C-0160,fix_name_style,0,
+C-0161,closed_account,0,
+C-0162,fix_name_typo,0,
+C-0163,fix_account_clean,0,
+C-0164,fix_name_style,0,
+C-0165,fix_name_unrelated,0,the account belongs to a different party
+C-0166,missing_bank_code,0,
+C-0167,duplicate,1,redelivery of C-0163
+C-0168,fix_name_style,0,
+C-0169,fix_name_style,0,
+C-0170,fix_name_unrelated,0,the account belongs to a different party
+C-0171,missing_bank_code,0,
+C-0172,fix_name_unrelated,0,the account belongs to a different party
+C-0173,fix_name_unrelated,0,the account belongs to a different party
+C-0174,fix_account_clean,0,
+C-0175,fix_name_style,0,
+C-0176,missing_bank_code,0,
+C-0177,fix_account_clean,0,
+C-0178,closed_account,0,
+C-0179,fix_account_clean,0,
+C-0180,fix_name_style,0,
+C-0181,fix_name_typo,0,
+C-0182,missing_bank_code,0,
+C-0183,closed_successor,1,the return advice carries a successor account
+C-0184,missing_bank_code,0,
+C-0185,closed_account,0,
+C-0186,watch_variant,1,watch-list variant: typo
+C-0187,malformed,1,orphan_payment
+C-0188,fix_account_clean,0,
+C-0189,fix_account_clean,0,
+C-0190,closed_account,0,
+C-0191,missing_bank_code,0,
+C-0192,watch_variant,1,watch-list variant: translit
+C-0193,fix_account_clean,0,
+C-0194,watch_variant,1,watch-list variant: style
+C-0195,duplicate,1,redelivery of C-0193
+C-0196,watch_exact,1,beneficiary name equals a watch-list entry
+C-0197,missing_bank_code,0,
+C-0198,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0199,fix_name_ambiguous,1,judged a different party
+C-0200,fix_account_clean,0,
+C-0201,missing_bank_code,0,
+C-0202,fix_account_clean,0,
+C-0203,missing_bank_code,0,
+C-0204,missing_bank_code,0,
+C-0205,fix_name_typo,0,
+C-0206,watch_exact,1,beneficiary name equals a watch-list entry
+C-0207,fix_name_style,0,
+C-0208,fix_account_clean,0,
+C-0209,fix_name_unrelated,0,the account belongs to a different party
+C-0210,fix_name_ambiguous,1,judged the same party
+C-0211,closed_account,0,
+C-0212,fix_name_ambiguous,1,judged the same party
+C-0213,fix_name_style,0,
+C-0214,fix_account_clean,0,
+C-0215,fix_account_clean,0,
+C-0216,fix_account_clean,0,
+C-0217,fix_account_clean,0,
+C-0218,missing_bank_code,0,
+C-0219,fix_account_clean,0,
+C-0220,fix_account_clean,0,
+C-0221,fix_name_unrelated,0,the account belongs to a different party
+C-0222,closed_account,0,
+C-0223,fix_name_style,0,
+C-0224,missing_bank_code,0,
+C-0225,closed_account,0,
+C-0226,fix_name_unrelated,0,the account belongs to a different party
+C-0227,fix_account_clean,0,
+C-0228,fix_name_unrelated,0,the account belongs to a different party
+C-0229,closed_account,0,
+C-0230,duplicate,1,redelivery of C-0224
+C-0231,missing_bank_code,0,
+C-0232,fix_account_clean,0,
+C-0233,missing_bank_code,0,
+C-0234,fix_name_unrelated,0,the account belongs to a different party
+C-0235,closed_account,0,
+C-0236,fix_account_clean,0,
+C-0237,missing_bank_code,0,
+C-0238,fix_account_clean,0,
+C-0239,malformed,1,missing_payment_id
+C-0240,fix_name_typo,0,
+C-0241,fix_account_clean,0,
+C-0242,fix_name_unrelated,0,the account belongs to a different party
+C-0243,fix_account_clean,0,
+C-0244,fix_name_unrelated,0,the account belongs to a different party
+C-0245,missing_bank_code,0,
+C-0246,fix_account_clean,0,
+C-0247,malformed,1,orphan_payment
+C-0248,missing_bank_code,0,
+C-0249,fix_account_clean,0,
+C-0250,closed_account,0,
+C-0251,fix_name_style,0,
+C-0252,missing_bank_code,0,
+C-0253,fix_account_clean,0,
+C-0254,fix_account_clean,0,
+C-0255,fix_account_clean,0,
+C-0256,fix_name_style,0,
+C-0257,closed_account,0,
+C-0258,fix_account_clean,0,
+C-0259,fix_account_clean,0,
+C-0260,fix_name_style,0,
+C-0261,fix_account_clean,0,
+C-0262,fix_account_clean,0,
+C-0263,fix_account_clean,0,
+C-0264,fix_name_style,0,
+C-0265,closed_account,0,
+C-0266,duplicate,1,redelivery of C-0261
+C-0267,duplicate,1,redelivery of C-0264
+C-0268,missing_bank_code,0,
+C-0269,missing_bank_code,0,
+C-0270,fix_account_clean,0,
+C-0271,fix_name_ambiguous,1,judged the same party
+C-0272,fix_name_unrelated,0,the account belongs to a different party
+C-0273,watch_variant,1,watch-list variant: typo
+C-0274,fix_account_clean,0,
+C-0275,fix_account_clean,0,
+C-0276,fix_account_clean,0,
+C-0277,fix_account_clean,0,
+C-0278,closed_account,0,
+C-0279,fix_name_ambiguous,1,judged the same party
+C-0280,fix_name_typo,0,
+C-0281,duplicate,1,redelivery of C-0276
+C-0282,malformed,1,bad_advised_value
+C-0283,fix_name_style,0,
+C-0284,fix_name_unrelated,0,the account belongs to a different party
+C-0285,closed_successor,1,the return advice carries a successor account
+C-0286,fix_account_clean,0,
+C-0287,fix_name_style,0,
+C-0288,fix_account_clean,0,
+C-0289,fix_name_ambiguous,1,judged the same party
+C-0290,missing_bank_code,0,
+C-0291,fix_account_clean,0,
+C-0292,fix_account_clean,0,
+C-0293,fix_name_style,0,
+C-0294,fix_account_clean,0,
+C-0295,fix_account_clean,0,
+C-0296,fix_account_clean,0,
+C-0297,fix_name_typo,0,
+C-0298,watch_variant,1,watch-list variant: swap
+C-0299,fix_name_ambiguous,1,judged a different party
+C-0300,missing_bank_code,0,
+C-0301,fix_name_style,0,
+C-0302,closed_successor,1,the return advice carries a successor account
+C-0303,closed_account,0,
+C-0304,missing_bank_code,0,
+C-0305,fix_name_style,0,
+C-0306,missing_bank_code,0,
+C-0307,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0308,missing_bank_code,0,
+C-0309,fix_account_clean,0,
+C-0310,fix_name_style,0,
+C-0311,closed_account,0,
+C-0312,missing_bank_code,0,
+C-0313,missing_bank_code,0,
+C-0314,fix_account_clean,0,
+C-0315,missing_bank_code,0,
+C-0316,fix_account_clean,0,
+C-0317,fix_account_clean,0,
+C-0318,duplicate,1,redelivery of C-0316
+C-0319,closed_account,0,
+C-0320,fix_name_typo,0,
+C-0321,missing_bank_code,0,
+C-0322,fix_name_style,0,
+C-0323,watch_variant,1,watch-list variant: translit
+C-0324,watch_variant,1,watch-list variant: typo
+C-0325,malformed,1,orphan_payment
+C-0326,fix_name_typo,0,
+C-0327,closed_account,0,
+C-0328,closed_account,0,
+C-0329,fix_account_clean,0,
+C-0330,closed_account,0,
+C-0331,fix_name_style,0,
+C-0332,watch_exact,1,beneficiary name equals a watch-list entry
+C-0333,fix_account_clean,0,
+C-0334,fix_name_typo,0,
+C-0335,closed_account,0,
+C-0336,fix_name_unrelated,0,the account belongs to a different party
+C-0337,fix_account_clean,0,
+C-0338,missing_bank_code,0,
+C-0339,fix_account_clean,0,
+C-0340,fix_name_typo,0,
+C-0341,fix_name_style,0,
+C-0342,missing_bank_code,0,
+C-0343,fix_name_unrelated,0,the account belongs to a different party
+C-0344,fix_name_style,0,
+C-0345,missing_bank_code,0,
+C-0346,fix_account_clean,0,
+C-0347,fix_name_typo,0,
+C-0348,fix_name_ambiguous,1,judged the same party
+C-0349,malformed,1,unknown_reason_code
+C-0350,fix_account_clean,0,
+C-0351,closed_account,0,
+C-0352,missing_bank_code,0,
+C-0353,missing_bank_code,0,
+C-0354,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0355,fix_account_clean,0,
+C-0356,fix_name_style,0,
+C-0357,fix_account_clean,0,
+C-0358,watch_exact,1,beneficiary name equals a watch-list entry
+C-0359,missing_bank_code,0,
+C-0360,closed_account,0,
+C-0361,fix_account_clean,0,
+C-0362,missing_bank_code,0,
+C-0363,missing_bank_code,0,
+C-0364,fix_account_clean,0,
+C-0365,fix_account_clean,0,
+C-0366,fix_name_ambiguous,1,judged the same party
+C-0367,fix_name_ambiguous,1,judged a different party
+C-0368,watch_exact,1,beneficiary name equals a watch-list entry
+C-0369,fix_name_style,0,
+C-0370,closed_account,0,
+C-0371,closed_account,0,
+C-0372,fix_account_clean,0,
+C-0373,fix_account_clean,0,
+C-0374,fix_name_unrelated,0,the account belongs to a different party
+C-0375,fix_name_ambiguous,1,judged the same party
+C-0376,fix_account_clean,0,
+C-0377,fix_name_ambiguous,1,judged a different party
+C-0378,fix_account_clean,0,
+C-0379,fix_account_clean,0,
+C-0380,fix_name_style,0,
+C-0381,fix_name_style,0,
+C-0382,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0383,fix_account_clean,0,
+C-0384,fix_name_style,0,
+C-0385,fix_account_clean,0,
+C-0386,fix_account_clean,0,
+C-0387,fix_account_clean,0,
+C-0388,fix_name_unrelated,0,the account belongs to a different party
+C-0389,fix_name_unrelated,0,the account belongs to a different party
+C-0390,fix_account_clean,0,
+C-0391,fix_name_style,0,
+C-0392,fix_name_style,0,
+C-0393,fix_account_clean,0,
+C-0394,fix_account_clean,0,
+C-0395,fix_account_clean,0,
+C-0396,fix_name_unrelated,0,the account belongs to a different party
+C-0397,closed_account,0,
+C-0398,missing_bank_code,0,
+C-0399,fix_account_clean,0,
+C-0400,fix_name_ambiguous,1,judged a different party
+C-0401,missing_bank_code,0,
+C-0402,fix_account_clean,0,
+C-0403,fix_name_style,0,
+C-0404,fix_account_clean,0,
+C-0405,fix_account_clean,0,
+C-0406,fix_name_style,0,
+C-0407,fix_account_clean,0,
+C-0408,fix_name_style,0,
+C-0409,fix_account_clean,0,
+C-0410,fix_account_clean,0,
+C-0411,fix_account_clean,0,
+C-0412,fix_account_clean,0,
+C-0413,fix_name_style,0,
+C-0414,malformed,1,missing_payment_id
+C-0415,watch_exact,1,beneficiary name equals a watch-list entry
+C-0416,fix_name_style,0,
+C-0417,fix_name_unrelated,0,the account belongs to a different party
+C-0418,fix_account_clean,0,
+C-0419,fix_name_ambiguous,1,judged a different party
+C-0420,closed_account,0,
+C-0421,fix_name_unrelated,0,the account belongs to a different party
+C-0422,fix_name_unrelated,0,the account belongs to a different party
+C-0423,closed_account,0,
+C-0424,fix_name_unrelated,0,the account belongs to a different party
+C-0425,fix_name_unrelated,0,the account belongs to a different party
+C-0426,closed_account,0,
+C-0427,fix_account_clean,0,
+C-0428,fix_name_ambiguous,1,judged the same party
+C-0429,missing_bank_code,0,
+C-0430,missing_bank_code,0,
+C-0431,closed_account,0,
+C-0432,fix_account_clean,0,
+C-0433,fix_name_ambiguous,1,judged the same party
+C-0434,fix_account_clean,0,
+C-0435,watch_lookalike,1,string-similar to a watch-list entry; a person cleared it
+C-0436,fix_account_clean,0,
+C-0437,fix_name_typo,0,
+C-0438,fix_name_typo,0,
+C-0439,missing_bank_code,0,
+C-0440,fix_name_style,0,
+C-0441,missing_bank_code,0,
+C-0442,fix_name_style,0,
+C-0443,fix_name_ambiguous,1,judged the same party
+C-0444,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0445,fix_account_clean,0,
+C-0446,fix_name_style,0,
+C-0447,fix_name_style,0,
+C-0448,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0449,missing_bank_code,0,
+C-0450,missing_bank_code,0,
+C-0451,watch_variant,1,watch-list variant: style
+C-0452,fix_name_style,0,
+C-0453,fix_account_clean,0,
+C-0454,missing_bank_code,0,
+C-0455,fix_account_clean,0,
+C-0456,missing_bank_code,0,
+C-0457,closed_account,0,
+C-0458,fix_account_clean,0,
+C-0459,fix_account_clean,0,
+C-0460,fix_account_clean,0,
+C-0461,watch_lookalike,1,string-similar to a watch-list entry; a person cleared it
+C-0462,fix_account_clean,0,
+C-0463,fix_account_clean,0,
+C-0464,duplicate,1,redelivery of C-0458
+C-0465,fix_account_clean,0,
+C-0466,fix_account_clean,0,
+C-0467,fix_account_clean,0,
+C-0468,fix_account_clean,0,
+C-0469,fix_account_clean,0,
+C-0470,closed_account,0,
+C-0471,fix_name_style,0,
+C-0472,fix_account_clean,0,
+C-0473,missing_bank_code,0,
+C-0474,fix_name_ambiguous,1,judged the same party
+C-0475,fix_name_unrelated,0,the account belongs to a different party
+C-0476,fix_name_unrelated,0,the account belongs to a different party
+C-0477,fix_account_clean,0,
+C-0478,missing_bank_code,0,
+C-0479,duplicate,1,redelivery of C-0477
+C-0480,fix_account_clean,0,
+C-0481,fix_name_style,0,
+C-0482,fix_name_unrelated,0,the account belongs to a different party
+C-0483,fix_account_clean,0,
+C-0484,missing_bank_code,0,
+C-0485,fix_name_ambiguous,1,judged a different party
+C-0486,malformed,1,unknown_reason_code
+C-0487,fix_account_clean,0,
+C-0488,closed_account,0,
+C-0489,watch_exact,1,beneficiary name equals a watch-list entry
+C-0490,fix_account_clean,0,
+C-0491,fix_account_clean,0,
+C-0492,closed_successor,1,the return advice carries a successor account
+C-0493,fix_account_clean,0,
+C-0494,missing_bank_code,0,
+C-0495,fix_name_style,0,
+C-0496,fix_account_clean,0,
+C-0497,fix_account_clean,0,
+C-0498,fix_account_clean,0,
+C-0499,watch_lookalike,1,string-similar to a watch-list entry; a person cleared it
+C-0500,fix_name_unrelated,0,the account belongs to a different party
+C-0501,fix_account_clean,0,
+C-0502,fix_account_clean,0,
+C-0503,missing_bank_code,0,
+C-0504,watch_variant,1,watch-list variant: swap
+C-0505,fix_name_typo,0,
+C-0506,fix_account_clean,0,
+C-0507,closed_account,0,
+C-0508,fix_account_clean,0,
+C-0509,fix_account_clean,0,
+C-0510,fix_account_clean,0,
+C-0511,fix_account_clean,0,
+C-0512,missing_bank_code,0,
+C-0513,fix_account_clean,0,
+C-0514,fix_account_clean,0,
+C-0515,fix_account_clean,0,
+C-0516,fix_name_style,0,
+C-0517,fix_name_style,0,
+C-0518,fix_account_clean,0,
+C-0519,missing_bank_code,0,
+C-0520,fix_name_style,0,
+C-0521,missing_bank_code,0,
+C-0522,missing_bank_code,0,
+C-0523,missing_bank_code,0,
+C-0524,watch_variant,1,watch-list variant: typo
+C-0525,duplicate,1,redelivery of C-0520
+C-0526,fix_account_clean,0,
+C-0527,fix_name_ambiguous,1,judged the same party
+C-0528,fix_account_clean,0,
+C-0529,missing_bank_code,0,
+C-0530,closed_account,0,
+C-0531,fix_name_ambiguous,1,judged a different party
+C-0532,fix_account_clean,0,
+C-0533,fix_name_unrelated,0,the account belongs to a different party
+C-0534,missing_bank_code,0,
+C-0535,fix_name_style,0,
+C-0536,fix_account_clean,0,
+C-0537,fix_account_clean,0,
+C-0538,fix_account_clean,0,
+C-0539,fix_account_clean,0,
+C-0540,fix_name_style,0,
+C-0541,fix_name_unrelated,0,the account belongs to a different party
+C-0542,fix_name_style,0,
+C-0543,closed_account,0,
+C-0544,fix_name_typo,0,
+C-0545,fix_account_clean,0,
+C-0546,fix_account_clean,0,
+C-0547,missing_bank_code,0,
+C-0548,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0549,fix_account_clean,0,
+C-0550,missing_bank_code,0,
+C-0551,closed_account,0,
+C-0552,fix_name_unrelated,0,the account belongs to a different party
+C-0553,fix_account_clean,0,
+C-0554,fix_account_clean,0,
+C-0555,fix_name_style,0,
+C-0556,watch_variant,1,watch-list variant: translit
+C-0557,closed_account,0,
+C-0558,fix_name_style,0,
+C-0559,closed_successor,1,the return advice carries a successor account
+C-0560,fix_account_clean,0,
+C-0561,missing_bank_code,0,
+C-0562,fix_name_typo,0,
+C-0563,fix_account_clean,0,
+C-0564,closed_account,0,
+C-0565,fix_name_style,0,
+C-0566,missing_bank_code,0,
+C-0567,fix_name_unrelated,0,the account belongs to a different party
+C-0568,fix_account_clean,0,
+C-0569,fix_account_clean,0,
+C-0570,missing_bank_code,0,
+C-0571,fix_account_clean,0,
+C-0572,missing_bank_code,0,
+C-0573,closed_account,0,
+C-0574,fix_account_clean,0,
+C-0575,fix_account_clean,0,
+C-0576,closed_account,0,
+C-0577,fix_account_clean,0,
+C-0578,watch_lookalike,1,string-similar to a watch-list entry; a person cleared it
+C-0579,fix_name_affiliate,1,"affiliate entity, a different legal party"
+C-0580,fix_account_clean,0,
+C-0581,missing_bank_code,0,
+C-0582,fix_name_typo,0,
+C-0583,fix_name_ambiguous,1,judged a different party
+C-0584,missing_bank_code,0,
+C-0585,missing_bank_code,0,
+C-0586,fix_account_clean,0,
+C-0587,fix_name_style,0,
+C-0588,fix_account_clean,0,
+C-0589,missing_bank_code,0,
+C-0590,fix_name_typo,0,
+C-0591,fix_name_style,0,
+C-0592,missing_bank_code,0,
+C-0593,missing_bank_code,0,
+C-0594,fix_name_style,0,
+C-0595,missing_bank_code,0,
+C-0596,fix_account_clean,0,
+C-0597,duplicate,1,redelivery of C-0596
+C-0598,fix_name_ambiguous,1,judged the same party
+C-0599,fix_name_ambiguous,1,judged the same party
+C-0600,fix_account_clean,0,

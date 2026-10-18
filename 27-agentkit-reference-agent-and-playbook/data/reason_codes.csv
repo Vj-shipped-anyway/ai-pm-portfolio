@@ -1,0 +1,5 @@
+code,description,repair_rule,field_to_correct
+RX01,account number invalid,FIX_ACCOUNT,beneficiary_account
+RX02,beneficiary name does not match the account,FIX_NAME,beneficiary_name
+RX03,account closed,NOT_REPAIRABLE,
+RX04,beneficiary bank code missing,FIX_BANK_CODE,beneficiary_bank_code
