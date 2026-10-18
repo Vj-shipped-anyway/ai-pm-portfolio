@@ -2,6 +2,8 @@
 
 **A portfolio prototype for catching tool-schema changes before an agent's calls fail, or quietly mean something else: a structural diff, a description heuristic, a replay of recorded calls, a blast-radius ranking and a release gate. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/15-schemawatch-tool-schema-drift/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (tool owners agreeing to a gate, a real tool registry, real call logs, a model-risk read) is what the next role does.
@@ -602,7 +604,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs change control for the tools agents call, under regulated constraint*
 
@@ -611,7 +613,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 ## 🙌 Acknowledgements
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function maps onto replay and the release gate: continuous measurement of a system that depends on components other teams change.
-- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk standard the work would have to meet. A tool whose meaning changes under a deployed agent is a change the ongoing-monitoring story has to account for.
+- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A tool whose meaning changes under a deployed agent is a change the ongoing-monitoring story has to account for.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the excessive-agency theme behind treating tool schemas as a controlled interface.
 - **[OpenTelemetry](https://opentelemetry.io/)** — the telemetry standard the production design would emit to.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the Article 12 record-keeping expectation that the revision-hash lineage in the LineageLog interlock would have to meet.
