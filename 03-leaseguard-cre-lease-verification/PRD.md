@@ -73,7 +73,7 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 - Field-level disagreement view, side-by-side.
 - Source-clause highlight rendered over the original PDF.
 - One-click accept / override / "needs lease counsel."
-- Override writes audit trail (interlocks with Project 08).
+- Override writes audit trail (interlocks with Project 09).
 
 ## 7. Risks
 
@@ -131,7 +131,7 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 - PDF source-clause highlight: PyMuPDF render with character-offset primary, embedding-search fallback (sentence-transformers / E5).
 - Orchestration: Airflow for nightly portfolio QA batch. Temporal for the per-lease reviewer workflow (queue, override, escalate to lease counsel).
 - Retrieval/vector layer: pgvector on Postgres for clause-similarity ("show me 12 leases with comparable CAM language"). 768-dim embeddings.
-- Reviewer UI: React app with the PDF viewer and side-by-side disagreement panels. Override events POST to Project 08's audit ledger.
+- Reviewer UI: React app with the PDF viewer and side-by-side disagreement panels. Override events POST to Project 09's audit ledger.
 - Lease-admin write-back: Yardi Voyager REST API; MRI XML connector (translation layer); Argus rent-roll export; VTS leasing-team-side if used.
 - Observability: OpenTelemetry into Datadog. Langfuse for LLM traces — when override rate spikes on a field, you can pull the prompts.
 - Security: SOC 2 Type II; encryption at rest; RBAC by asset and role. GDPR for any EU-resident lease.
@@ -165,8 +165,8 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 - Disposition consumes the re-QA pack before marketing.
 - Legal consumes the override audit trail for dispute defense.
 - Tech is builder. They don't own.
-- Project 08 (audit trail) consumes every override as a lineage event. Project 10 (underwriting reliability) consumes the corrected abstractions as truth for rent-roll re-validation.
+- Project 09 (audit trail) consumes every override as a lineage event. Project 10 (underwriting reliability) consumes the corrected abstractions as truth for rent-roll re-validation.
 
 ---
 
-*This PRD interlocks with Projects 08 (Audit Trail) and 10 (CRE Underwriting Reliability Sentinel). Reviewer overrides are audit events; corrected abstractions feed underwriting truth.*
+*This PRD interlocks with Project 09 (LineageLog) and Project 10 (DealSentry). Reviewer overrides are audit events; corrected abstractions feed underwriting truth.*
