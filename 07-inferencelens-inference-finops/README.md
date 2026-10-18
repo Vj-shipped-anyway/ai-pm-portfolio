@@ -1,6 +1,6 @@
 # 💰 InferenceLens — Per-feature inference economics in 1 day, not 6 weeks
 
-**A portfolio prototype for a per-feature inference-economics layer that turns the bank's $4M/month aggregate compute spend into a per-feature, per-segment, per-day record — catches the misconfigured retrieval depth burning $5k/day before the quarterly cost review notices, recommends cheaper-model substitutions, flags dead features still racking up bill, and ranks features by ROI. Built against the [FinOps Foundation framework](https://www.finops.org/framework/), anchored on [Anthropic](https://www.anthropic.com/pricing) / [Azure OpenAI](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) / [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) pricing, aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) Govern function.**
+**A portfolio prototype for a per-feature inference-economics layer that turns the bank's $4M/month aggregate compute spend into a per-feature, per-segment, per-day record — catches the misconfigured retrieval depth burning ~$6k/day before the quarterly cost review notices, recommends cheaper-model substitutions, flags dead features still racking up bill, and ranks features by ROI. Built against the [FinOps Foundation framework](https://www.finops.org/framework/), anchored on [Anthropic](https://www.anthropic.com/pricing) / [Azure OpenAI](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) / [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) pricing, aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) Govern function.**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/07-inferencelens-inference-finops/demo.html)
 
@@ -8,11 +8,11 @@
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
-[![Modeled corpus: 18 features](https://img.shields.io/badge/modeled--corpus-18%20synthetic%20features-blue)](#)
-[![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%2Fof%206-brightgreen)](#)
-[![Detection lag: 1d vs 6w](https://img.shields.io/badge/detection--lag-1d%20vs%206w-success)](#)
-[![Modeled spend reduction: 25-30%](https://img.shields.io/badge/modeled%20spend%20reduction-25--30%25-orange)](#)
-[![FinOps Foundation framework](https://img.shields.io/badge/FinOps%20Foundation-framework%20aligned-lightgrey)](#)
+![Modeled corpus: 18 features](https://img.shields.io/badge/modeled--corpus-18%20synthetic%20features-blue)
+![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%20of%206-brightgreen)
+![Detection lag: 1d vs 6w](https://img.shields.io/badge/detection--lag-1d%20vs%206w-success)
+![Modeled spend reduction: 25-30%](https://img.shields.io/badge/modeled%20spend%20reduction-25--30%25-orange)
+![FinOps Foundation framework](https://img.shields.io/badge/FinOps%20Foundation-framework%20aligned-lightgrey)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
 
@@ -44,7 +44,7 @@ streamlit run app.py
 
 ## 💰 Why this lands — the competitive frame
 
-The FinOps space has incumbents at every layer of the cloud-cost stack ([Apptio Cloudability](https://www.apptio.com/products/cloudability/), [CloudHealth](https://www.vmware.com/products/cloudhealth.html), [Vantage](https://www.vantage.sh/), [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/), [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/), and the open-source [OpenCost](https://www.opencost.io/) project). **The product gap they leave open is the per-feature AI layer — the thing that turns OpenTelemetry token attributes into a per-feature, per-segment, per-day record indexed by `(feature_id, tenant_id, day)`.**
+The FinOps space has incumbents at every layer of the cloud-cost stack ([Apptio Cloudability](https://www.apptio.com/products/cloudability/), [CloudHealth](https://www.broadcom.com/products/software/finops/cloudhealth), [Vantage](https://www.vantage.sh/), [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/), [Azure Cost Management](https://learn.microsoft.com/en-us/azure/cost-management-billing/), and the open-source [OpenCost](https://www.opencost.io/) project). **The product gap they leave open is the per-feature AI layer — the thing that turns OpenTelemetry token attributes into a per-feature, per-segment, per-day record indexed by `(feature_id, tenant_id, day)`.**
 
 | Capability | Vendor invoice only | AWS Cost Explorer / Azure Cost Mgmt | Apptio / CloudHealth | **InferenceLens** |
 | --- | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ The FinOps space has incumbents at every layer of the cloud-cost stack ([Apptio 
 | Cheaper-model substitution recommender | ❌ | ❌ | ❌ | ✅ |
 | Dead-feature flagger (catalog status vs traffic) | ❌ | ❌ | ❌ | ✅ |
 | Per-feature ROI ranking (revenue join) | ❌ | ❌ | Partial | ✅ |
-| 🟡 Time-to-detect-runaway on a Tier-1 BFSI fleet (modeled) | 6 weeks | 4 weeks | 3 weeks | **1 day** |
+| 🟡 Time-to-detect-runaway on a Tier-1 BFSI fleet (modeled; the 4-week and 3-week competitor figures are assumptions, not measurements) | 6 weeks | 4 weeks | 3 weeks | **1 day** |
 | 🟡 [FinOps Foundation framework](https://www.finops.org/framework/) Level-3 maturity on AI domain (designed) | ❌ | ❌ | Partial | ✅ |
 
 **Position:** *InferenceLens does not replace your FinOps tooling. It sits on top of OpenTelemetry and publishes per-feature AI spend into your existing executive view.* This matters because a CFO can deploy this without ripping out Apptio Cloudability or CloudHealth.
@@ -83,7 +83,7 @@ You don't need a cluster, a cloud account, or an API key. You need:
 - **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, and `plotly`. The step scripts do not use them.
 - **No API key.** The step scripts read the CSVs in `data/` and make no network calls.
 - **A browser**, for [`demo.html`](./demo.html). It needs no install.
-- **Or skip local setup.** The repo's dev container installs the packages and starts the HalluGuard prototype in GitHub Codespaces. For this project, run `streamlit run 07-inferencelens-inference-finops/src/app.py` in the Codespace terminal.
+- **Or skip local setup.** The repo's dev container installs Streamlit and starts the HalluGuard prototype in GitHub Codespaces. For this project, run `streamlit run 07-inferencelens-inference-finops/src/app.py` in the Codespace terminal.
 
 Each step writes its results to `src/out/`.
 
@@ -93,17 +93,17 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 
 ## Executive summary (90 seconds)
 
-**Problem.** A Tier-1 US retail bank runs 18 customer-facing GenAI features across retail / wealth / enterprise lines. Aggregate inference spend is ~$4M/month. Vendor invoices arrive on the 5th, aggregated, decoupled from the feature catalog. On May 1, 2026, a developer pushed a one-line config change to the customer-service-assistant feature: retrieval depth from 5 documents to 50. Per-call cost jumped from ~$0.012 to ~$0.043 (3.7x). Daily spend on that one feature jumped from ~$1,600 to ~$5,966. 🟡 Modeled exposure: a ~$195k overspend by June 14 before the quarterly cost review notices. This is the framing this prototype is designed against — calibrated against published Anthropic / Azure OpenAI / Bedrock pricing and the shape of typical Tier-1 BFSI GenAI portfolios.
+**Problem.** A Tier-1 US retail bank runs 18 customer-facing GenAI features across retail / wealth / enterprise lines. Aggregate compute spend is ~$4M/month. Vendor invoices arrive on the 5th, aggregated, decoupled from the feature catalog. On May 1, 2026, a developer pushed a one-line config change to the customer-service-assistant feature: retrieval depth from 5 documents to 50. Per-call cost jumped from ~$0.012 to ~$0.043 (3.7x). Daily spend on that one feature jumped from ~$1,632 to ~$5,966. 🟡 Modeled exposure: a ~$195k overspend by June 14 before the quarterly cost review notices. This is the framing this prototype is designed against — calibrated against published Anthropic / Azure OpenAI / Bedrock pricing and the shape of typical Tier-1 BFSI GenAI portfolios.
 
 **Product.** InferenceLens — a per-feature inference-economics layer that reads OpenTelemetry span attributes from each feature, reconciles against vendor billing APIs, and runs five derived views: per-feature attribution + runaway detection + cheaper-model substitution recommender + dead-feature flagger + per-feature ROI ranking. Six-deficiency taxonomy: **no per-feature attribution** + **no per-tenant attribution** + **no runaway detection** + **no substitution recommender** + **no dead-feature flagger** + **no per-feature ROI**. All five views composed in milliseconds on the prototype.
 
 **Modeled performance (18-feature synthetic fleet, 60-day inference log).**
 
 - 🟢 **6 of 6 deficiencies closed** on every feature in the shipped fleet.
-- 🟢 **All five derived views composed in under 10ms** on the prototype (`step_04_with_inferencelens.py` reports avg <5ms per view on the 2,800-call sample).
+- 🟢 **All five derived views composed in under 10ms** on the prototype (`step_04_with_inferencelens.py` prints the measured time for all five views together).
 - 🟢 **Runaway caught on day 1.** `step_04_with_inferencelens.py` flags FT_001 (customer-service-assistant) as 3.7x baseline starting 2026-05-01. Modeled overspend captured: ~$195k over 45 days undetected.
-- 🟢 **Dead feature caught.** FT_009 (internal-research-copilot) flagged as receiving traffic against a `dormant` catalog status; modeled spend ~$26k/mo.
-- 🟢 **Substitution savings surfaced.** $301,800/mo of modeled savings across 6 substitution candidates in the fleet.
+- 🟢 **Dead feature caught.** FT_009 (internal-research-copilot) flagged as still receiving traffic after its UI was shut down (the catalog status is still `active`); modeled spend ~$26k/mo.
+- 🟡 **Substitution savings surfaced.** $301,800/mo of modeled savings across 6 substitution candidates in the fleet. The script sums the `monthly_savings_usd` values in `substitution_recommendations.csv`; they are modeled inputs, not computed from the logs.
 - 🟡 **Modeled spend reduction at fleet scale: 25-30%** of aggregate inference spend, via cheaper-model substitution + dead-feature pruning + runaway prevention.
 
 🔴 **Modeled cost.** ~$340k for a 90-day engagement in a real deployment (compute on existing ClickHouse footprint + 1 PM + 1.5 FTE engineers + 0.25 FTE Finance partner + Snowflake reads for revenue join) — designed, not yet executed.
@@ -133,7 +133,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case — Tier-1 bank customer-service-assistant runaway
 
-A modeled Tier-1 US retail bank ($50B-asset). 18 customer-facing GenAI features across credit, KYC, claims, wealth, customer-service, fraud, collections, marketing, branch ops. Aggregate inference spend is ~$4M/month. Vendor invoices from [Anthropic](https://www.anthropic.com/pricing), [Azure OpenAI](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/), and [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) arrive on the 5th of each month, aggregated, with no per-feature breakdown.
+A modeled Tier-1 US retail bank ($50B-asset). 18 customer-facing GenAI features across credit, KYC, claims, wealth, customer-service, fraud, collections, marketing, branch ops. Aggregate compute spend is ~$4M/month. Vendor invoices from [Anthropic](https://www.anthropic.com/pricing), [Azure OpenAI](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/), and [AWS Bedrock](https://aws.amazon.com/bedrock/pricing/) arrive on the 5th of each month, aggregated, with no per-feature breakdown.
 
 **The scenario:**
 
@@ -143,7 +143,7 @@ A modeled Tier-1 US retail bank ($50B-asset). 18 customer-facing GenAI features 
 
 **Today (no InferenceLens):** 6 weeks of detection lag. CFO learns about the runaway when the May invoice arrives June 5; AI Platform PM spends 2 weeks tracing it; fix lands mid-July. Total modeled overspend: ~$195k. Then the CFO asks the worse question: *"how do we know this isn't happening elsewhere?"* No answer.
 
-**With InferenceLens:** Day 1. Per-feature attribution flags FT_001's 3.7x daily-spend spike on 2026-05-01. PagerDuty alert routes to the feature owner. Fix lands 2026-05-02. Total modeled overspend: ~$4.3k (one day of spike before the alert fires; another day before the fix is deployed). And the CFO's *"what else is happening"* question is now self-serve: the same dashboard shows three over-tiered features ($240k/mo of substitution savings available), one dead feature ($26k/mo of avoidable cost on a leaked SDK key), and a per-feature ROI ranking that names which features pay for themselves and which don't.
+**With InferenceLens:** Day 1. Per-feature attribution flags FT_001's 3.7x daily-spend spike on 2026-05-01. PagerDuty alert routes to the feature owner. Fix lands 2026-05-02. Total modeled overspend: ~$8.7k (one day of spike before the alert fires; another day before the fix is deployed). And the CFO's *"what else is happening"* question is now self-serve: the same dashboard shows six over-tiered features ($301,800/mo of modeled substitution savings available), one dead feature ($26k/mo of avoidable cost on a leaked SDK key), and a per-feature ROI ranking that names which features pay for themselves and which don't.
 
 The fleet (synthetic, but modeled on what a real $50B retail bank typically runs):
 
@@ -195,11 +195,10 @@ Reporting period:    April 15, 2026 - June 14, 2026 (60-day window)
 
 Monthly aggregate by vendor (the only view the CFO gets today)
 --------------------------------------------------------------------------------
-  Anthropic            $    412,XXX
-  Azure OpenAI         $     XX,XXX
-  AWS Bedrock          $        XXX
+  Anthropic            $    194,682.62
+  Azure OpenAI         $     11,484.63
 --------------------------------------------------------------------------------
-  TOTAL                $    4XX,XXX
+  TOTAL                $    206,167.25
 
 What this report does NOT tell the CFO:
   - Which features cost what
@@ -227,11 +226,14 @@ python src/step_02_vendor_console_view.py
 --------------------------------------------------------------------------------
   API key                  Model                      Modeled monthly
 --------------------------------------------------------------------------------
-  ak_retail_prod           claude-sonnet-4-5          $    XXX,XXX
-  ak_retail_prod           claude-haiku-4-5           $     XX,XXX
-  ak_retail_prod           gpt-4o                     $     XX,XXX
-  ak_enterprise_prod       claude-opus-4-1            $     XX,XXX
-  ak_wealth_prod           claude-sonnet-4-5          $      X,XXX
+  ak_retail_prod           claude-sonnet-4-5          $      151,751.24
+  ak_enterprise_prod       claude-opus-4-1            $       33,196.30
+  ak_retail_prod           gpt-4o                     $        9,083.05
+  ak_retail_prod           claude-haiku-4-5           $        4,510.31
+  ak_wealth_prod           claude-haiku-4-5           $        3,326.89
+  ak_wealth_prod           claude-sonnet-4-5          $        1,897.88
+  ak_wealth_prod           gpt-4o                     $        1,795.00
+  ak_retail_prod           gpt-4o-mini                $          606.57
 ```
 
 The API key is a tenancy artifact. `ak_retail_prod` serves 11 different features. The console cannot answer "which BUSINESS feature inside `ak_retail_prod` is responsible for the daily-spend spike." Six of the bank's deficiencies remain wide open.
@@ -302,8 +304,11 @@ View 1 / 5 - Per-feature attribution (closes deficiencies #1 and #2)
   kyc-doc-reader                   gpt-4o                   $       5,993
   compliance-summarizer            claude-opus-4-1          $       4,558
   branch-banker-copilot            claude-sonnet-4-5        $       4,092
-  ... (other 13 features)                                   $      14,661
-  TOTAL                                                     $     200,167
+  research-note-classifier         claude-haiku-4-5         $       3,327
+  fraud-explainer                  claude-haiku-4-5         $       2,812
+  paralegal-discovery-assistant    claude-opus-4-1          $       2,647
+  ... (other 10 features)                                   $      11,876
+  TOTAL                                                     $     206,167
 
 View 2 / 5 - Runaway detection (closes deficiency #3)
 --------------------------------------------------------------------------------
@@ -345,16 +350,16 @@ The composition itself is a ClickHouse cost-event row in production (one per inf
 
 > **Utility = (current SOTA − my solution) × number of features it covers × annual spend at risk**
 
-Reducing detection lag by 99% is not an outcome. *Reducing detection lag by 99% across 12-20 customer-facing GenAI features at a Tier-1 BFSI shop, against an $8-30M/yr aggregate inference spend, is.*
+Reducing detection lag by 98% is not an outcome. *Reducing detection lag by 98% across 12-20 customer-facing GenAI features at a Tier-1 BFSI shop, against an $8-30M/yr aggregate inference spend, is.*
 
 | Term | Value |
 | --- | --- |
 | 🟡 Current SOTA detection lag (vendor invoice arrives monthly) | 6 weeks |
-| 🟢 InferenceLens detection lag on the prototype | <1 day |
+| 🟢 InferenceLens detection lag on the prototype | day 1 (FT_001 flagged on 2026-05-01) |
 | 🟡 Per-runaway lift (modeled at fleet scale) | **~6 weeks → ~1 day** of detection lag |
-| Affected portfolio (Tier-1 BFSI fleet) | **12-20 customer-facing GenAI features, $8-30M/yr inference spend** |
+| 🟡 Affected portfolio (Tier-1 BFSI fleet; assumed range, not measured) | **12-20 customer-facing GenAI features, $8-30M/yr inference spend** |
 | 🟢 Headline runaway: modeled overspend captured | **~$195k caught on day 1** (vs. 45 days undetected) |
-| 🟢 Substitution savings surfaced on the fleet | **$301,800/mo across 6 candidates** |
+| 🟡 Substitution savings surfaced on the fleet (modeled inputs summed from `substitution_recommendations.csv`) | **$301,800/mo across 6 candidates** |
 | 🟢 Dead-feature spend flagged | **$25,991/mo from FT_009** |
 | 🟡 Modeled fleet-scale spend reduction (substitution + dead + runaway prevention) | **25-30% of aggregate inference spend** (assumes typical Tier-1 BFSI portfolio shape) |
 | 🟡 Modeled annual savings at Tier-1 BFSI scale | **$2M - $9M/yr** (= $8-30M/yr × 25-30%) |
@@ -553,7 +558,7 @@ If InferenceLens were a real product shipping to a Tier-1 bank's FinOps and AI P
 - **Governance:** Native integration with Apptio Cloudability / CloudHealth — InferenceLens publishes per-feature AI spend; the bank's existing FinOps tooling aggregates with non-AI compute for the executive view.
 - **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on composition-completeness breach.
 
-The Streamlit prototype here proves the *product mechanic* — that per-feature attribution can compress runaway detection from 6 weeks to 1 day, and that a cheaper-model substitution recommender can drive a modeled 25-30% spend reduction. The production architecture above is what the seat I'm pursuing actually delivers.
+The Streamlit prototype here illustrates the *product mechanic* — that per-feature attribution can compress runaway detection from 6 weeks to 1 day, and that a cheaper-model substitution recommender can drive a modeled 25-30% spend reduction. The production architecture above is what the seat I'm pursuing actually delivers.
 
 ---
 
@@ -573,4 +578,4 @@ The Streamlit prototype here proves the *product mechanic* — that per-feature 
 - [ClickHouse](https://clickhouse.com/) and [Aiven](https://aiven.io/clickhouse) / [Altinity](https://altinity.com/) — the right database for high-cardinality cost events at fleet scale.
 - [NIST AI RMF (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the Govern function on kill-criteria.
 - [OpenCost](https://www.opencost.io/) — the open-source K8s cost-attribution project that pioneered the per-workload allocation pattern InferenceLens adapts to AI features.
-- [Apptio Cloudability](https://www.apptio.com/products/cloudability/), [CloudHealth](https://www.vmware.com/products/cloudhealth.html), [Vantage](https://www.vantage.sh/) — the FinOps incumbents InferenceLens publishes into.
+- [Apptio Cloudability](https://www.apptio.com/products/cloudability/), [CloudHealth](https://www.broadcom.com/products/software/finops/cloudhealth), [Vantage](https://www.vantage.sh/) — the FinOps incumbents InferenceLens publishes into.

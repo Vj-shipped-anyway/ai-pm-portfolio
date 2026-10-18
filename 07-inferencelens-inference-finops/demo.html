@@ -172,7 +172,7 @@
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (legacy detection lag - InferenceLens detection lag) x annual inference spend at risk</p>
-    <p style="margin: 8px 0 0;">Per-runaway lift: <b>~6 weeks -> ~1 day</b> for detection (<b>~99%</b> reduction in lag). Annualized at a typical Tier-1 BFSI GenAI portfolio scale (<b>$8-30M/yr inference spend</b>): modeled <b>25-30% spend reduction</b> = <b>$2-9M/yr saved</b> via cheaper-model substitution + dead-feature pruning + runaway prevention. Modeled per-feature attribution coverage: <b>0% -> 100%</b>. Modeled time-to-detect a runaway: <b>6 weeks -> 1 day</b>.</p>
+    <p style="margin: 8px 0 0;">Per-runaway lift: <b>~6 weeks -> ~1 day</b> for detection (<b>~98%</b> reduction in lag). Annualized at a typical Tier-1 BFSI GenAI portfolio scale (<b>$8-30M/yr inference spend</b>): modeled <b>25-30% spend reduction</b> = <b>$2-9M/yr saved</b> via cheaper-model substitution + dead-feature pruning + runaway prevention. Modeled per-feature attribution coverage: <b>0% -> 100%</b>. Modeled time-to-detect a runaway: <b>6 weeks -> 1 day</b>.</p>
   </section>
 
   <footer class="footer-links">
@@ -194,7 +194,7 @@ const FEATURES = [
     cfo_question: "Why is the retail-bank chatbot suddenly costing 3.7x more per call since May?",
     before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic line item up by $130k. Aggregate hides which feature caused the spike. Finance asks; AI Platform PM has no answer." },
     sota: { caught: 0, total: 6,
-            note: "Anthropic console shows ak_retail_prod has a daily-spend uptick. Console cannot say WHICH feature inside the key is responsible (4 features share this key)." },
+            note: "Anthropic console shows ak_retail_prod has a daily-spend uptick. Console cannot say WHICH feature inside the key is responsible (11 features share this key)." },
     lens: { attribution: "FT_001 modeled monthly spend ~$145k (up from ~$49k)",
             runaway: "ALERT - 3.7x baseline since 2026-05-01 - retrieval depth misconfig (50 docs, should be 5)",
             substitution: "claude-sonnet-4-5 -> claude-haiku-4-5 - savings $182k/mo - accuracy delta -1.4pp",
@@ -217,11 +217,11 @@ const FEATURES = [
   {
     id: "FT_006", name: "compliance-summarizer", model: "claude-opus-4-1",
     line: "enterprise", owner: "line2.compliance", status: "OVER-TIERED",
-    cfo_question: "Does compliance summarization really need Claude Opus? It's $42k/mo and the volume is modest.",
+    cfo_question: "Does compliance summarization really need Claude Opus? It's $4,558/mo and the volume is modest.",
     before: { dwell: "6 weeks", note: "Vendor invoice shows Anthropic Opus line is meaningful. No mechanism inside Finance to evaluate 'is this the right model tier'." },
     sota: { caught: 0, total: 6,
             note: "Anthropic console shows model-mix; no recommendation engine. The 'is Opus the right tier' question is engineering judgment that nobody is paid to make." },
-    lens: { attribution: "FT_006 modeled monthly spend ~$42k - small feature, expensive model",
+    lens: { attribution: "FT_006 modeled monthly spend $4,558 - small feature, expensive model",
             runaway: "Clear - steady volume",
             substitution: "claude-opus-4-1 -> claude-sonnet-4-5 - savings $42k/mo at -3.1pp accuracy",
             dead: "Live - compliance L2 uses it daily",
@@ -238,7 +238,7 @@ const FEATURES = [
             runaway: "Clear",
             substitution: "Right-sized - Sonnet is the correct tier for long-context wealth summaries",
             dead: "Live - advisor-facing feature",
-            roi: "POSITIVE - $1.24M/mo revenue attributed (end-of-month wealth statement narrative) - 615x ROI on inference cost" }
+            roi: "POSITIVE - $1.24M/mo revenue attributed (end-of-month wealth statement narrative) - 654x ROI on inference cost" }
   },
   {
     id: "FT_016", name: "trading-floor-news-summarizer", model: "claude-sonnet-4-5",
@@ -259,12 +259,12 @@ const FEATURES = [
     cfo_question: "SMB lending says this helps loan officers close 14% faster. Does the math work out?",
     before: { dwell: "6 weeks", note: "Aggregate invoice does not break out by feature. The loan-officer team has a productivity number; Finance has a spend number; nobody joins them." },
     sota: { caught: 0, total: 6,
-            note: "Console shows ak_retail_prod has spend; same key as 11 other retail features. Cannot isolate SMB-specific spend." },
-    lens: { attribution: "FT_018 modeled monthly spend ~$1.5k",
+            note: "Console shows ak_retail_prod has spend; same key as 10 other retail features. Cannot isolate SMB-specific spend." },
+    lens: { attribution: "FT_018 modeled monthly spend ~$1.6k",
             runaway: "Clear - newly deployed, healthy volume curve",
             substitution: "Right-sized - Sonnet matches the loan-officer workflow complexity",
             dead: "Live - SMB lending team uses daily",
-            roi: "POSITIVE - $820k/mo revenue attributed (14% close-rate lift x SMB deal volume) - 540x ROI on inference" }
+            roi: "POSITIVE - $820k/mo revenue attributed (14% close-rate lift x SMB deal volume) - 513x ROI on inference" }
   }
 ];
 
@@ -307,7 +307,7 @@ function render(idx) {
   lensHtml += '<div class="field-row"><span class="field-label">Substitution</span><span class="field-value">' + escapeHtml(f.lens.substitution) + '</span></div>';
   lensHtml += '<div class="field-row"><span class="field-label">Dead-feature</span><span class="field-value">' + escapeHtml(f.lens.dead) + '</span></div>';
   lensHtml += '<div class="field-row"><span class="field-label">ROI</span><span class="field-value">' + escapeHtml(f.lens.roi) + '</span></div>';
-  lensHtml += '<div class="meta">Composition completed in &lt;5ms per feature on the prototype. Six deficiencies closed.</div>';
+  lensHtml += '<div class="meta">All five views compose across the whole fleet in under 10ms on the prototype. Six deficiencies closed.</div>';
   if (f.status === 'ROI-POSITIVE') {
     lensHtml += '<div class="pill pill-ok">PASS - revenue-positive, right-sized</div>';
   } else if (f.status === 'RUNAWAY' || f.status === 'DEAD') {

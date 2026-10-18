@@ -2,9 +2,9 @@
 
 Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic, seeded (`random.seed(20260601)`), and reproducible. No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's customer-facing GenAI portfolio actually looks like: ~18 deployed features, $8-30M/yr aggregate inference spend, monthly vendor invoice as the only feedback loop.
 
-The headline runaway the walkthrough resolves is **`FT_001` (customer-service-assistant)** — retrieval depth misconfigured from 5 documents to 50 on 2026-05-01. Per-query cost jumps from ~$0.02 to ~$0.85. Daily spend on that one feature jumps from ~$1,200 to ~$51,000. The runaway buries itself in the bank's $4M aggregate monthly compute spend for 6 weeks before anyone notices. InferenceLens catches it on day 1 via per-feature attribution.
+The headline runaway the walkthrough resolves is **`FT_001` (customer-service-assistant)** — retrieval depth misconfigured from 5 documents to 50 on 2026-05-01. Per-query cost jumps from ~$0.0117 to ~$0.0426. Daily spend on that one feature jumps from ~$1,632 to ~$5,966 (3.7x). The runaway buries itself in the bank's $4M aggregate monthly compute spend for 6 weeks before anyone notices. InferenceLens catches it on day 1 via per-feature attribution.
 
-The headline dead feature is **`FT_009` (internal-research-copilot)** — UI shut down 2026-03-15, endpoint kept receiving ~4,700 calls/day from a leaked SDK key. Zero business value; ~$28k/mo of avoidable spend.
+The headline dead feature is **`FT_009` (internal-research-copilot)** — UI shut down 2026-03-15, endpoint kept receiving ~4,700 calls/day from a leaked SDK key. Zero business value; ~$26k/mo of avoidable spend.
 
 ---
 
@@ -31,9 +31,9 @@ The feature catalog. One row per customer-facing or internal-facing GenAI surfac
 
 18 rows.
 
-## `inference_logs.csv` — 30 days of synthetic per-query logs
+## `inference_logs.csv` — 60 days of synthetic per-query logs
 
-The decision-grain spine. One row per sampled inference call across the 18 features in the 30-day window ending 2026-06-14 (the walkthrough is run on 2026-06-15).
+The decision-grain spine. One row per sampled inference call across 17 of the 18 features (the decommissioned FT_017 has no rows) in the 60-day window ending 2026-06-14 (the walkthrough is run on 2026-06-15).
 
 | Column | Type | What it is |
 | --- | --- | --- |
@@ -45,14 +45,14 @@ The decision-grain spine. One row per sampled inference call across the 18 featu
 | `cost_usd` | float | Computed cost in USD using the pricing in `model_pricing.csv`. |
 | `latency_ms` | int | End-to-end latency for this call. |
 
-1,350 rows. Each represents a sampled call; volumes scale to the per-feature `monthly_query_volume` for the dollar math in Step 4.
+2,867 rows. Each represents a sampled call; volumes scale to the per-feature `monthly_query_volume` for the dollar math in Step 4.
 
 ## `model_pricing.csv` — current vendor pricing snapshot
 
 The pricing surface that drives every cost calculation. Pulled from the published pricing pages on:
 
 - [Anthropic pricing](https://www.anthropic.com/pricing) — Opus 4.1, Sonnet 4.5, Haiku 4.5
-- [Azure OpenAI pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) — gpt-4o, gpt-4o-mini
+- [Azure OpenAI pricing](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) — gpt-4o, gpt-4o-mini, gpt-4-turbo
 - [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/) — Llama 3.1 family, Mistral Large 2
 
 | Column | Type | What it is |
@@ -93,8 +93,8 @@ This is the feature the CFO would be ambushed by at the next quarterly cost revi
 | Source | What it gives you |
 | --- | --- |
 | `features.csv` | `FT_001` (customer-service-assistant) on `claude-sonnet-4-5`; product team thinks retrieval depth is 5; volume is 4.2M queries/month. |
-| `inference_logs.csv` | Sampled per-query cost jumps from ~$0.02 to ~$0.85 starting 2026-05-01 (visible as a step function in the daily cost roll-up). |
+| `inference_logs.csv` | Sampled per-query cost jumps from ~$0.0117 to ~$0.0426 starting 2026-05-01 (visible as a step function in the daily cost roll-up). |
 | `model_pricing.csv` | Claude Sonnet 4.5 input pricing is $3.00/Mtok — the cost jump is consistent with input tokens ballooning ~6.7x, which is consistent with a retrieval-depth misconfiguration from 5 docs to 50 docs. |
 | `substitution_recommendations.csv` | Even after the runaway is fixed, `FT_001` should drop to Claude Haiku 4.5 — modeled savings $182k/mo at a -1.4pp accuracy delta. |
 
-In raw vendor-invoice form: invisible inside a $4M aggregate compute line. In InferenceLens: per-feature attribution flags a 42x daily-spend anomaly on day 1.
+In raw vendor-invoice form: invisible inside a $4M aggregate compute line. In InferenceLens: per-feature attribution flags a 3.7x daily-spend anomaly on day 1.

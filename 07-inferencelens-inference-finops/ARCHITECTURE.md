@@ -328,7 +328,7 @@ Authorization via Open Policy Agent (OPA) + Rego policies. Every API call evalua
 | Severity | Channel | SLO |
 | --- | --- | --- |
 | P1 (aggregator down >5 min, OR runaway detected on any feature) | PagerDuty primary + secondary, Slack #ai-platform-incident | Acknowledge ≤5 min |
-| P2 (vendor billing reconcile drift >5% in any 24h window) | PagerDuty (lower urgency), Slack | Acknowledge ≤30 min |
+| P2 (vendor billing reconcile drift >2% in any 24h window) | PagerDuty (lower urgency), Slack | Acknowledge ≤30 min |
 | P3 (dead-feature flag not acked by feature owner in 7 days) | Slack only | Triaged in weekly FinOps standup |
 | P4 (informational - new substitution recommendations) | Daily digest email | None |
 
@@ -384,7 +384,7 @@ That last list is the discipline. Every internal-build I have watched die has di
 ```python
 # GET /v1/features/{feature_id}/economics
 # Auth: OIDC bearer; role: il:viewer or higher
-# Response 200:
+# Response 200 (illustrative values; the shipped logs have no tenant column, so the per-tenant split below is not computed by any step script):
 {
     "feature_id": "FT_001",
     "feature_name": "customer-service-assistant",
@@ -408,7 +408,7 @@ That last list is the discipline. Every internal-build I have watched die has di
         "first_seen": "2026-05-01",
         "multiplier": 3.7,
         "daily_overspend_usd": 4334.00,
-        "modeled_total_overspend_usd": 195030.00,
+        "modeled_total_overspend_usd": 194992.00,
         "likely_cause": "retrieval_depth_misconfig"
     },
 
@@ -434,4 +434,4 @@ That last list is the discipline. Every internal-build I have watched die has di
 }
 ```
 
-OpenAPI spec lives at `apps/api/openapi.yaml` and is the source of truth for both the CLI and the UI clients.
+OpenAPI spec lives at `docs/api/openapi.yaml` and is the source of truth for both the CLI and the UI clients.

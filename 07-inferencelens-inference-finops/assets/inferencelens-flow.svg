@@ -94,7 +94,7 @@
   <text x="642" y="320" class="stage-title">Total wall time</text>
   <text x="642" y="342" class="timer">Legacy invoice: 6w late - 0 per-feature attribution</text>
   <text x="642" y="358" class="timer-fast">InferenceLens: day-1 alert - 6 of 6 deficiencies closed</text>
-  <text x="642" y="372" class="meta-strong">~99% reduction in detection lag - 25-30% modeled spend reduction</text>
+  <text x="642" y="372" class="meta-strong">~98% reduction in detection lag - 25-30% modeled spend reduction</text>
 
   <!-- Bottom: outcome arrow back -->
   <path d="M 265 340 L 100 340 L 100 395" class="arrow-line" marker-end="url(#arrow)"/>

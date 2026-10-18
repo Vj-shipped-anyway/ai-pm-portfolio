@@ -16,7 +16,7 @@
 | **Owner** | Vijay Saharan, Sr PM (AI Platform / FinOps). |
 | **Stage** | Portfolio prototype, designed for engagement. Synthetic data, no production deployment. |
 | **Users** | Primary: Head of FinOps, AI Platform PM. Secondary: CFO's office, individual feature owners (line-1 product managers), CTO. Tertiary: Procurement, vendor-relationship leads. |
-| **Problem** | Tier-1 BFSI shops run 12-20 customer-facing GenAI features against $4-30M/yr aggregate inference spend. Per-feature attribution is ~0%. A single misconfigured feature can burn $50k/day for 6 weeks before quarterly cost review notices. Cheaper-model substitutions are obvious in retrospect, invisible in the moment. Dead features rack up bill long after their UIs were shut down. CFO asks "what are we paying for?" — nobody can answer. |
+| **Problem** | Tier-1 BFSI shops run 12-20 customer-facing GenAI features against $8-30M/yr aggregate inference spend. Per-feature attribution is ~0%. A single misconfigured feature can run at 3.7x its baseline spend for 6 weeks before quarterly cost review notices. Cheaper-model substitutions are obvious in retrospect, invisible in the moment. Dead features rack up bill long after their UIs were shut down. CFO asks "what are we paying for?" — nobody can answer. |
 | **Solution** | Per-feature inference economics layer that reads OpenTelemetry span attributes (feature_id, tenant_id, model, tokens), reconciles against vendor billing APIs, and runs five derived views: per-feature attribution, runaway detection, cheaper-model substitution recommender, dead-feature flagger, per-feature ROI ranking. Six-deficiency taxonomy closed by design. |
 | **North-star metric** | % of inference spend that is per-feature attributed within 24 hours of cost incurrence, with revenue-attribution joined within 7 days. |
 | **Modeled metrics (12-month horizon)** | 🟡 Per-feature attribution coverage: **0% → 100%** (assumes the OpenTelemetry span attributes ship on every feature). 🟡 Modeled spend reduction: **25-30%** (assumes cheaper-model substitutions on the over-tiered fleet + dead-feature pruning + runaway prevention; reference baseline is the synthetic 18-feature fleet). 🟡 Runaway detection lag: **6 weeks → 1 day** (modeled — assumes 3x trailing-7-day baseline threshold and per-feature alerting). |
@@ -98,7 +98,7 @@
 - **As a CFO**, I want a per-feature ROI ranking so I can defend the AI roadmap on a per-feature basis at the board offsite.
 - **As an AI Platform PM**, I want a runaway alert within 24 hours of a misconfig so I don't have to explain a $1.5M overspend at the next QBR.
 - **As an individual feature owner (line-1 PM)**, I want to see my feature's modeled cost and the substitution recommender's verdict so I can act on cost reductions without waiting for a Finance ask.
-- **As a Procurement lead**, I want a vendor-mix report so I can negotiate the next Anthropic / Azure renewal with leverage.
+- **As a Procurement lead**, I want a vendor-mix report so I can negotiate the next Anthropic / Azure renewal with per-feature usage data in hand.
 
 ## 8. Solution detail — the six-deficiency taxonomy
 
