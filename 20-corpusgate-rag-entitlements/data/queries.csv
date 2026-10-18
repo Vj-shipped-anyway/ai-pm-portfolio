@@ -1,0 +1,201 @@
+query_id,user_id,text,relevant_doc_ids
+Q001,U007,how do we handle checkout and session for privileged recording,D0115;D0137;D0163;D0192;D0303;D0424
+Q002,U004,what is the rule for identity on account opening verification,D0028;D0033;D0126;D0214;D0335;D0427;D0448
+Q003,U031,loan covenant extension amortization collateral,D0023;D0087;D0091;D0153;D0169;D0307;D0353;D0425
+Q004,U040,how do we handle renewal and extension for loan,D0023;D0087;D0091;D0153;D0169;D0307;D0353;D0425
+Q005,U001,what is the rule for challenger on model validation,D0219;D0223;D0270;D0326;D0366;D0382;D0423;D0492
+Q006,U007,records archive journaling,D0012;D0180;D0198;D0255;D0257;D0287;D0349;D0500
+Q007,U039,merchant acquiring interchange scheme,D0048;D0213;D0318;D0331;D0395;D0483
+Q008,U019,what is the rule for dormant on account opening,D0059;D0064;D0077;D0173;D0356;D0373;D0390
+Q009,U029,regulator correspondence submission tracker,D0021;D0117;D0322;D0375;D0429;D0433
+Q010,U002,what is the rule for collection on trade finance acceptance,D0017;D0156;D0203;D0240;D0399;D0434;D0467
+Q011,U038,litigation custodian acknowledgement notice,D0009;D0085;D0132;D0136;D0171;D0305;D0341;D0391
+Q012,U035,how do we handle limit and notice for overdraft opt,D0052;D0142;D0170;D0239;D0244;D0442;D0447;D0451
+Q013,U023,collateral covenant guidance,D0089;D0119;D0144;D0178;D0365;D0388
+Q014,U019,regulator correspondence submission tracker,D0021;D0117;D0322;D0375;D0429;D0433
+Q015,U007,what is the rule for recall on wire transfer reversal,D0078;D0083;D0140;D0195;D0283;D0312;D0468;D0472
+Q016,U038,employee relations severance,D0113;D0250;D0251;D0389;D0422;D0438;D0445
+Q017,U010,market stress scenario shock,D0036;D0072;D0185;D0261;D0418;D0453
+Q018,U016,threshold alert guidance velocity investigation,D0160;D0209;D0218;D0290;D0291;D0414;D0493;D0496
+Q019,U034,how do we handle ratio and breach for loan cure,D0031;D0062;D0161;D0243;D0272;D0344;D0370
+Q020,U035,how do we handle guarantee and tenor for trade,D0060;D0125;D0152;D0222;D0369;D0460
+Q021,U017,scorecard applicant backtest benchmark,D0133;D0186;D0199;D0302;D0315;D0334;D0463
+Q022,U008,what is the rule for guarantee on trade finance,D0060;D0125;D0152;D0222;D0369;D0460
+Q023,U017,how do we handle courier and pickup for branch shortage,D0040;D0158;D0176;D0383;D0469;D0473
+Q024,U038,how do we handle grievance and mediation for employee leave,D0029;D0063;D0073;D0205;D0345;D0371;D0465
+Q025,U002,merit band guidance budget,D0051;D0084;D0141;D0146;D0269;D0286;D0299;D0328
+Q026,U019,contract indemnity carve,D0053;D0058;D0098;D0109;D0207;D0236;D0440;D0494
+Q027,U017,stability applicant guidance vintage,D0133;D0186;D0199;D0302;D0315;D0334;D0463
+Q028,U022,loan collateral appraisal lien,D0089;D0119;D0144;D0178;D0365;D0388
+Q029,U010,scorecard applicant refresh stability,D0039;D0043;D0276;D0292;D0298;D0386;D0455
+Q030,U011,filing alert guidance typology,D0273;D0289;D0342;D0374;D0400;D0484
+Q031,U003,what is the rule for chargeback on card dispute provisional,D0099;D0112;D0121;D0151;D0175;D0184;D0499
+Q032,U010,change freeze calendar approval,D0046;D0102;D0104;D0191;D0234;D0263;D0271;D0406
+Q033,U029,how do we handle stress and scenario for market,D0036;D0072;D0185;D0261;D0418;D0453
+Q034,U022,what is the rule for matters on regulator correspondence requiring intake,D0061;D0107;D0114;D0168;D0330;D0337
+Q035,U004,investigation alert guidance disposition,D0076;D0118;D0221;D0308;D0458;D0481
+Q036,U013,change rollback plan evidence,D0004;D0041;D0081;D0103;D0128;D0143;D0150;D0189
+Q037,U027,what is the rule for reserve on merchant settlement underwriting,D0066;D0067;D0314;D0333;D0348;D0446;D0449;D0497
+Q038,U030,sanctions screening calibration,D0086;D0165;D0181;D0217;D0450;D0461
+Q039,U039,voice archive guidance storage,D0035;D0106;D0110;D0135;D0456;D0471
+Q040,U025,how do we handle destruction and certificate for records schedule,D0069;D0075;D0197;D0310;D0346;D0359;D0475
+Q041,U033,model finding remediation issue,D0014;D0016;D0166;D0324;D0362;D0363
+Q042,U019,terminal settlement guidance firmware,D0074;D0116;D0229;D0241;D0284;D0320;D0464
+Q043,U017,records archive recording playback,D0035;D0106;D0110;D0135;D0456;D0471
+Q044,U009,what is the rule for ratio on loan covenant renewal,D0031;D0062;D0161;D0243;D0272;D0344;D0370
+Q045,U039,market exposure position,D0008;D0111;D0123;D0224;D0430;D0482;D0488
+Q046,U010,how do we handle reserve and holdback for merchant onboarding,D0066;D0067;D0314;D0333;D0348;D0446;D0449;D0497
+Q047,U033,what is the rule for control on operational loss,D0011;D0188;D0196;D0237;D0264;D0420;D0439
+Q048,U009,how do we handle postmortem and action for incident owner,D0154;D0164;D0325;D0410;D0470;D0476;D0491
+Q049,U023,cutpoint applicant guidance backtest,D0030;D0108;D0167;D0285;D0368;D0417;D0441;D0487
+Q050,U025,how do we handle inventory and tier for model,D0054;D0254;D0306;D0340;D0351;D0355;D0411
+Q051,U025,what is the rule for dual on wire transfer limit,D0068;D0220;D0282;D0300;D0309;D0354
+Q052,U036,scorecard cutpoint band exception,D0030;D0108;D0167;D0285;D0368;D0417;D0441;D0487
+Q053,U036,merit band guidance,D0051;D0084;D0141;D0146;D0269;D0286;D0299;D0328
+Q054,U015,loan ratio breach renewal,D0031;D0062;D0161;D0243;D0272;D0344;D0370
+Q055,U015,what is the rule for acquiring on merchant settlement scheme,D0048;D0213;D0318;D0331;D0395;D0483
+Q056,U036,how do we handle custodian and acknowledgement for litigation notice,D0009;D0085;D0132;D0136;D0171;D0305;D0341;D0391
+Q057,U011,watchlist screening guidance,D0071;D0124;D0187;D0238;D0274;D0277
+Q058,U005,checkout entitlement guidance break joiner,D0115;D0137;D0163;D0192;D0303;D0424
+Q059,U006,litigation preservation device,D0013;D0018;D0174;D0204;D0231;D0457
+Q060,U030,what is the rule for rollback on change release emergency,D0004;D0041;D0081;D0103;D0128;D0143;D0150;D0189
+Q061,U027,how do we handle assignment and succession for contract,D0042;D0088;D0139;D0227;D0245;D0253;D0296;D0437
+Q062,U011,what is the rule for destruction on records archive mailbox,D0069;D0075;D0197;D0310;D0346;D0359;D0475
+Q063,U036,joiner entitlement guidance recertification,D0032;D0172;D0210;D0256;D0265;D0267;D0393;D0428
+Q064,U026,what is the rule for erasure on privacy request verification,D0045;D0093;D0208;D0258;D0304;D0338;D0343
+Q065,U038,compensation band award vesting,D0094;D0147;D0249;D0293;D0316;D0477;D0490
+Q066,U022,model challenger sensitivity,D0219;D0223;D0270;D0326;D0366;D0382;D0423;D0492
+Q067,U028,operational event taxonomy near,D0079;D0177;D0225;D0246;D0260;D0275
+Q068,U013,privacy erasure portability schedule,D0045;D0093;D0208;D0258;D0304;D0338;D0343
+Q069,U032,change release retroactive,D0025;D0049;D0090;D0242;D0339;D0416;D0444
+Q070,U031,overdraft waiver goodwill,D0034;D0266;D0367;D0392;D0398;D0474
+Q071,U021,how do we handle collateral and appraisal for loan lien,D0089;D0119;D0144;D0178;D0365;D0388
+Q072,U015,card affidavit fraud,D0005;D0138;D0145;D0149;D0252;D0352;D0387;D0435
+Q073,U026,destruction archive guidance schedule,D0069;D0075;D0197;D0310;D0346;D0359;D0475
+Q074,U029,scorecard applicant refresh file,D0039;D0043;D0276;D0292;D0298;D0386;D0455
+Q075,U003,what is the rule for postmortem on incident severity owner rota,D0154;D0164;D0325;D0410;D0470;D0476;D0491
+Q076,U020,how do we handle snapshot and device for litigation,D0013;D0018;D0174;D0204;D0231;D0457
+Q077,U040,what is the rule for vault on branch cash custody,D0006;D0162;D0215;D0381;D0459;D0486;D0489
+Q078,U013,records archive certificate,D0069;D0075;D0197;D0310;D0346;D0359;D0475
+Q079,U028,what is the rule for courier on branch cash,D0040;D0158;D0176;D0383;D0469;D0473
+Q080,U034,how do we handle cutpoint and band for scorecard override,D0030;D0108;D0167;D0285;D0368;D0417;D0441;D0487
+Q081,U008,what is the rule for challenger on model validation analysis,D0219;D0223;D0270;D0326;D0366;D0382;D0423;D0492
+Q082,U021,operational loss heatmap,D0001;D0096;D0216;D0233;D0301;D0431;D0478
+Q083,U011,contract termination convenience notice,D0129;D0226;D0232;D0268;D0379;D0394;D0432
+Q084,U010,what is the rule for renewal on loan covenant appraisal,D0023;D0087;D0091;D0153;D0169;D0307;D0353;D0425
+Q085,U038,what is the rule for recall on wire transfer cutoff,D0078;D0083;D0140;D0195;D0283;D0312;D0468;D0472
+Q086,U027,how do we handle discovery and privilege for litigation device,D0020;D0131;D0182;D0259;D0372;D0380;D0454
+Q087,U038,employee relations severance,D0113;D0250;D0251;D0389;D0422;D0438;D0445
+Q088,U017,privacy retention schedule hold,D0019;D0120;D0295;D0317;D0350;D0396
+Q089,U002,trade finance documentary acceptance,D0017;D0156;D0203;D0240;D0399;D0434;D0467
+Q090,U002,how do we handle provisional and credit for card fraud,D0003;D0037;D0148;D0357;D0361;D0401;D0402
+Q091,U014,rollback release guidance,D0004;D0041;D0081;D0103;D0128;D0143;D0150;D0189
+Q092,U036,what is the rule for desk on market exposure limit,D0008;D0111;D0123;D0224;D0430;D0482;D0488
+Q093,U009,model inventory tier owner,D0054;D0254;D0306;D0340;D0351;D0355;D0411
+Q094,U015,how do we handle finding and remediation for model,D0014;D0016;D0166;D0324;D0362;D0363
+Q095,U020,how do we handle custodian and acknowledgement for litigation notice,D0009;D0085;D0132;D0136;D0171;D0305;D0341;D0391
+Q096,U022,how do we handle assignment and succession for contract consent,D0042;D0088;D0139;D0227;D0245;D0253;D0296;D0437
+Q097,U002,what is the rule for blocking on sanctions screening,D0007;D0038;D0044;D0056;D0248;D0280
+Q098,U037,how do we handle discovery and privilege for litigation log,D0020;D0131;D0182;D0259;D0372;D0380;D0454
+Q099,U032,what is the rule for reserve on merchant settlement acquiring,D0066;D0067;D0314;D0333;D0348;D0446;D0449;D0497
+Q100,U001,privileged service rotation checkout,D0082;D0157;D0206;D0321;D0407;D0415
+Q101,U040,card affidavit fraud,D0005;D0138;D0145;D0149;D0252;D0352;D0387;D0435
+Q102,U033,custodian preservation guidance notice,D0009;D0085;D0132;D0136;D0171;D0305;D0341;D0391
+Q103,U036,how do we handle renewal and extension for loan maturity,D0023;D0087;D0091;D0153;D0169;D0307;D0353;D0425
+Q104,U001,what is the rule for stress on market exposure valuation,D0036;D0072;D0185;D0261;D0418;D0453
+Q105,U031,account opening signer,D0070;D0159;D0288;D0311;D0323;D0452
+Q106,U028,what is the rule for inquiry on regulator correspondence,D0155;D0183;D0190;D0202;D0376;D0378;D0462;D0485
+Q107,U020,what is the rule for courier on branch cash,D0040;D0158;D0176;D0383;D0469;D0473
+Q108,U037,how do we handle vault and count for branch sealed,D0006;D0162;D0215;D0381;D0459;D0486;D0489
+Q109,U026,what is the rule for invoice on trade finance,D0022;D0024;D0047;D0050;D0101;D0122;D0297
+Q110,U002,identity opening guidance,D0028;D0033;D0126;D0214;D0335;D0427;D0448
+Q111,U026,what is the rule for reserve on merchant settlement,D0066;D0067;D0314;D0333;D0348;D0446;D0449;D0497
+Q112,U029,what is the rule for cutpoint on scorecard applicant refresh,D0030;D0108;D0167;D0285;D0368;D0417;D0441;D0487
+Q113,U038,loan covenant appraisal lien breach,D0089;D0119;D0144;D0178;D0365;D0388
+Q114,U021,how do we handle joiner and mover for privileged recertification,D0032;D0172;D0210;D0256;D0265;D0267;D0393;D0428
+Q115,U030,how do we handle dormant and reactivation for account closure,D0059;D0064;D0077;D0173;D0356;D0373;D0390
+Q116,U025,regulator matters attention requiring,D0061;D0107;D0114;D0168;D0330;D0337
+Q117,U021,branch shortage variance teller pickup,D0057;D0095;D0193;D0228;D0278;D0327;D0364
+Q118,U037,what is the rule for status on incident severity cadence,D0002;D0100;D0262;D0347;D0408;D0436
+Q119,U009,trade collection documentary,D0017;D0156;D0203;D0240;D0399;D0434;D0467
+Q120,U013,what is the rule for mailbox on records archive email,D0012;D0180;D0198;D0255;D0257;D0287;D0349;D0500
+Q121,U023,how do we handle page and rota for incident communication,D0027;D0127;D0332;D0377;D0419;D0426;D0479
+Q122,U012,what is the rule for joiner on privileged entitlement,D0032;D0172;D0210;D0256;D0265;D0267;D0393;D0428
+Q123,U030,change release retroactive,D0025;D0049;D0090;D0242;D0339;D0416;D0444
+Q124,U020,what is the rule for termination on contract clause notice,D0129;D0226;D0232;D0268;D0379;D0394;D0432
+Q125,U013,destruction archive guidance,D0069;D0075;D0197;D0310;D0346;D0359;D0475
+Q126,U035,valuation exposure guidance,D0092;D0130;D0281;D0313;D0360;D0443;D0498
+Q127,U033,examination correspondence guidance response,D0021;D0117;D0322;D0375;D0429;D0433
+Q128,U018,what is the rule for emergency on change release closure,D0025;D0049;D0090;D0242;D0339;D0416;D0444
+Q129,U014,what is the rule for freeze on change release,D0046;D0102;D0104;D0191;D0234;D0263;D0271;D0406
+Q130,U022,employee relations severance release grievance,D0113;D0250;D0251;D0389;D0422;D0438;D0445
+Q131,U014,trade finance receivable recourse,D0022;D0024;D0047;D0050;D0101;D0122;D0297
+Q132,U036,custodian preservation guidance notice,D0009;D0085;D0132;D0136;D0171;D0305;D0341;D0391
+Q133,U034,what is the rule for blocking on sanctions screening hold,D0007;D0038;D0044;D0056;D0248;D0280
+Q134,U001,checkout entitlement guidance,D0115;D0137;D0163;D0192;D0303;D0424
+Q135,U019,how do we handle guarantee and tenor for trade,D0060;D0125;D0152;D0222;D0369;D0460
+Q136,U002,what is the rule for consent on privacy request,D0134;D0200;D0247;D0319;D0397;D0404;D0480
+Q137,U005,loan covenant appraisal lien,D0089;D0119;D0144;D0178;D0365;D0388
+Q138,U007,market exposure scenario desk,D0036;D0072;D0185;D0261;D0418;D0453
+Q139,U012,what is the rule for bonus on compensation band deferral signing,D0080;D0105;D0201;D0336;D0385;D0403;D0466;D0495
+Q140,U003,operational loss taxonomy near,D0079;D0177;D0225;D0246;D0260;D0275
+Q141,U020,what is the rule for chargeback on card dispute,D0099;D0112;D0121;D0151;D0175;D0184;D0499
+Q142,U036,dual transfer guidance recall,D0068;D0220;D0282;D0300;D0309;D0354
+Q143,U033,monitoring alert deadline confidentiality,D0273;D0289;D0342;D0374;D0400;D0484
+Q144,U031,how do we handle shortage and variance for branch,D0057;D0095;D0193;D0228;D0278;D0327;D0364
+Q145,U030,snapshot preservation guidance,D0013;D0018;D0174;D0204;D0231;D0457
+Q146,U038,how do we handle bonus and accrual for compensation,D0080;D0105;D0201;D0336;D0385;D0403;D0466;D0495
+Q147,U018,wire transfer approval callback,D0068;D0220;D0282;D0300;D0309;D0354
+Q148,U023,market desk position breach,D0008;D0111;D0123;D0224;D0430;D0482;D0488
+Q149,U010,how do we handle inquiry and intake for regulator,D0155;D0183;D0190;D0202;D0376;D0378;D0462;D0485
+Q150,U004,compensation band accrual,D0080;D0105;D0201;D0336;D0385;D0403;D0466;D0495
+Q151,U023,bureau applicant guidance file,D0039;D0043;D0276;D0292;D0298;D0386;D0455
+Q152,U009,vault cash guidance sealed pickup,D0006;D0162;D0215;D0381;D0459;D0486;D0489
+Q153,U036,how do we handle valuation and curve for market,D0092;D0130;D0281;D0313;D0360;D0443;D0498
+Q154,U006,incident severity communication action,D0002;D0100;D0262;D0347;D0408;D0436
+Q155,U012,privileged joiner mover,D0032;D0172;D0210;D0256;D0265;D0267;D0393;D0428
+Q156,U002,what is the rule for collateral on loan covenant lien,D0089;D0119;D0144;D0178;D0365;D0388
+Q157,U022,how do we handle invoice and receivable for trade,D0022;D0024;D0047;D0050;D0101;D0122;D0297
+Q158,U035,collateral covenant guidance perfection,D0089;D0119;D0144;D0178;D0365;D0388
+Q159,U017,what is the rule for waiver on overdraft fee cap,D0034;D0266;D0367;D0392;D0398;D0474
+Q160,U038,privileged entitlement rotation,D0082;D0157;D0206;D0321;D0407;D0415
+Q161,U022,privileged joiner mover leaver,D0032;D0172;D0210;D0256;D0265;D0267;D0393;D0428
+Q162,U030,monitoring alert narrative,D0076;D0118;D0221;D0308;D0458;D0481
+Q163,U001,how do we handle page and rota for incident escalation,D0027;D0127;D0332;D0377;D0419;D0426;D0479
+Q164,U022,privacy erasure portability access withdrawal,D0045;D0093;D0208;D0258;D0304;D0338;D0343
+Q165,U031,how do we handle acquiring and interchange for merchant scheme,D0048;D0213;D0318;D0331;D0395;D0483
+Q166,U015,trade collection documentary,D0017;D0156;D0203;D0240;D0399;D0434;D0467
+Q167,U035,how do we handle cutpoint and band for scorecard exception,D0030;D0108;D0167;D0285;D0368;D0417;D0441;D0487
+Q168,U031,how do we handle voice and recording for records playback,D0035;D0106;D0110;D0135;D0456;D0471
+Q169,U017,account identity document verification,D0028;D0033;D0126;D0214;D0335;D0427;D0448
+Q170,U018,how do we handle ratio and breach for loan,D0031;D0062;D0161;D0243;D0272;D0344;D0370
+Q171,U032,trade invoice receivable advance tenor,D0022;D0024;D0047;D0050;D0101;D0122;D0297
+Q172,U015,what is the rule for acquiring on merchant settlement,D0048;D0213;D0318;D0331;D0395;D0483
+Q173,U026,how do we handle leave and accommodation for employee,D0055;D0212;D0230;D0235;D0294;D0405;D0412;D0421
+Q174,U031,card dispute fraud liability,D0005;D0138;D0145;D0149;D0252;D0352;D0387;D0435
+Q175,U036,terminal settlement guidance firmware,D0074;D0116;D0229;D0241;D0284;D0320;D0464
+Q176,U032,change emergency retroactive freeze,D0025;D0049;D0090;D0242;D0339;D0416;D0444
+Q177,U026,compensation signing award,D0094;D0147;D0249;D0293;D0316;D0477;D0490
+Q178,U012,model validation sensitivity analysis,D0219;D0223;D0270;D0326;D0366;D0382;D0423;D0492
+Q179,U007,page severity guidance escalation,D0027;D0127;D0332;D0377;D0419;D0426;D0479
+Q180,U033,guarantee finance guidance presentation,D0060;D0125;D0152;D0222;D0369;D0460
+Q181,U010,mailbox archive guidance email,D0012;D0180;D0198;D0255;D0257;D0287;D0349;D0500
+Q182,U031,scorecard bureau refresh file,D0039;D0043;D0276;D0292;D0298;D0386;D0455
+Q183,U027,trade finance tenor presentation,D0060;D0125;D0152;D0222;D0369;D0460
+Q184,U010,limit fee guidance opt,D0052;D0142;D0170;D0239;D0244;D0442;D0447;D0451
+Q185,U010,what is the rule for postmortem on incident severity,D0154;D0164;D0325;D0410;D0470;D0476;D0491
+Q186,U018,privacy retention schedule erasure,D0019;D0120;D0295;D0317;D0350;D0396
+Q187,U006,what is the rule for daily on overdraft fee,D0010;D0015;D0097;D0179;D0211;D0279;D0409
+Q188,U033,model validation sensitivity outcome,D0219;D0223;D0270;D0326;D0366;D0382;D0423;D0492
+Q189,U003,custodian preservation guidance release,D0009;D0085;D0132;D0136;D0171;D0305;D0341;D0391
+Q190,U035,control loss guidance deficiency,D0011;D0188;D0196;D0237;D0264;D0420;D0439
+Q191,U010,scorecard stability backtest benchmark,D0133;D0186;D0199;D0302;D0315;D0334;D0463
+Q192,U020,destruction archive guidance schedule,D0069;D0075;D0197;D0310;D0346;D0359;D0475
+Q193,U036,postmortem severity guidance owner,D0154;D0164;D0325;D0410;D0470;D0476;D0491
+Q194,U026,what is the rule for courier on branch cash manifest,D0040;D0158;D0176;D0383;D0469;D0473
+Q195,U011,erasure request guidance,D0045;D0093;D0208;D0258;D0304;D0338;D0343
+Q196,U025,change rollback plan,D0004;D0041;D0081;D0103;D0128;D0143;D0150;D0189
+Q197,U016,privacy consent withdrawal,D0134;D0200;D0247;D0319;D0397;D0404;D0480
+Q198,U019,how do we handle freeze and calendar for change approval,D0046;D0102;D0104;D0191;D0234;D0263;D0271;D0406
+Q199,U015,wire cutoff beneficiary correspondent amendment,D0026;D0065;D0194;D0329;D0358;D0384;D0413
+Q200,U005,event loss guidance miss,D0079;D0177;D0225;D0246;D0260;D0275
