@@ -76,6 +76,23 @@ If you have lived through a "what are we paying Anthropic for" Slack thread from
 
 ---
 
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a cloud account, or an API key. You need:
+
+- **Python 3.** The four step scripts use only the standard library, so there is nothing to install for them. All four run on Python 3.9 and newer. The repo's dev container uses Python 3.11.
+- **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
+- **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, and `plotly`. The step scripts do not use them.
+- **No API key.** The step scripts read the CSVs in `data/` and make no network calls.
+- **A browser**, for [`demo.html`](./demo.html). It needs no install.
+- **Or skip local setup.** The repo's dev container installs the packages and starts the HalluGuard prototype in GitHub Codespaces. For this project, run `streamlit run 07-inferencelens-inference-finops/src/app.py` in the Codespace terminal.
+
+Each step writes its results to `src/out/`.
+
+If any of this fails on your machine, that is a bug in this README. Open an issue.
+
+---
+
 ## Executive summary (90 seconds)
 
 **Problem.** A Tier-1 US retail bank runs 18 customer-facing GenAI features across retail / wealth / enterprise lines. Aggregate inference spend is ~$4M/month. Vendor invoices arrive on the 5th, aggregated, decoupled from the feature catalog. On May 1, 2026, a developer pushed a one-line config change to the customer-service-assistant feature: retrieval depth from 5 documents to 50. Per-call cost jumped from ~$0.012 to ~$0.043 (3.7x). Daily spend on that one feature jumped from ~$1,600 to ~$5,966. 🟡 Modeled exposure: a ~$195k overspend by June 14 before the quarterly cost review notices. This is the framing this prototype is designed against — calibrated against published Anthropic / Azure OpenAI / Bedrock pricing and the shape of typical Tier-1 BFSI GenAI portfolios.
@@ -559,4 +576,3 @@ The Streamlit prototype here proves the *product mechanic* — that per-feature 
 - [NIST AI RMF (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the Govern function on kill-criteria.
 - [OpenCost](https://www.opencost.io/) — the open-source K8s cost-attribution project that pioneered the per-workload allocation pattern InferenceLens adapts to AI features.
 - [Apptio Cloudability](https://www.apptio.com/products/cloudability/), [CloudHealth](https://www.vmware.com/products/cloudhealth.html), [Vantage](https://www.vantage.sh/) — the FinOps incumbents InferenceLens publishes into.
-

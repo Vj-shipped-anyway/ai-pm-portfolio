@@ -6,10 +6,6 @@
 
 **▶ 60-second interactive walkthrough:** [Click through LeaseGuard on Arcade](https://app.arcade.software/share/hQWTvQIAmgkpQgjHC7iP)
 
-**▶ No-install demo:** open [`demo.html`](./demo.html) in any browser. Pick a lease, see the same 12 fields extracted by a paralegal, by the deployed pipeline, and by the pipeline wrapped in LeaseGuard.
-
-![LeaseGuard verification flow](./assets/leaseguard-flow.svg)
-
 > **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
@@ -18,6 +14,104 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 
 > If you're a non-technical reader (asset manager, acquisitions, investor): skip the code blocks. The plain-English explanation and the output tables tell the story.
 > If you're technical: every code block is runnable. `cd src && python step_NN_*.py` and you'll see the same output I show here.
+
+[![Synthetic leases: 6](https://img.shields.io/badge/synthetic%20leases-6-blue)](#)
+[![Fields per lease: 12](https://img.shields.io/badge/fields%20per%20lease-12-blue)](#)
+[![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)](#)
+[![Measured accuracy: 76.4% to 98.6%](https://img.shields.io/badge/measured%20accuracy-76.4%25%20%E2%86%92%2098.6%25-success)](#)
+[![Wrong fields routed to triage: 16 of 17](https://img.shields.io/badge/wrong%20fields%20routed-16%20of%2017-brightgreen)](#)
+
+[![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
+
+![LeaseGuard verification flow](./assets/leaseguard-flow.svg)
+
+> **▶ 30-second demo:** open [`demo.html`](./demo.html) in any browser, no install. Pick a lease and see the same 12 fields extracted by a paralegal, by the deployed pipeline, and by the pipeline wrapped in LeaseGuard.
+
+---
+
+## 🔥 Demo in 30 seconds
+
+Open the static, no-Python demo: [`demo.html`](./demo.html).
+Pick one of the six synthetic leases from the dropdown, or use Next lease and Replay all 6 leases. Three cards show the same 12 fields extracted three ways: by a paralegal (time, cost, and an assumed ~96% accuracy, 🟡 modeled), by the deployed Claude-over-OCR pipeline (each wrong field, what it returned, and what the lease says), and by that pipeline wrapped in LeaseGuard (which fields were routed to triage and why, which routed fields were false flags, and which wrong field got through). The running totals at the top end at the 🟢 measured numbers: 76.4% for the deployed pipeline, 98.6% after triage, 16 of 17 wrong fields caught, 1 missed.
+
+To run the four-step walkthrough on your laptop:
+
+```bash
+git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
+cd ai-pm-portfolio/03-leaseguard-cre-lease-verification/src
+pip install -r requirements.txt      # only the Streamlit app needs this; the step scripts use the standard library
+python step_01_manual_abstraction.py
+python step_02_deployed_lease_nlp.py
+python step_03_deficiencies_exposed.py
+python step_04_with_leaseguard.py
+```
+
+To run the Streamlit app locally instead, use `streamlit run app.py` from the same folder.
+
+---
+
+## 💰 Why this lands — competitive positioning
+
+Cherre, Lev, ProDeal, VTS, CompStak, CoStar, and Reonomy have publicly discussed lease-NLP working on standard leases and failing on non-standard ones (see Acknowledgements). The deployed pipelines described in that public writing rarely have a verification layer downstream of the extractor. I am not scoring any vendor's product here. The table compares four approaches, and the "deployed lease-NLP alone" column stands for the pattern those vendors describe.
+
+| Capability | Paralegal only | Deployed lease-NLP alone | Second model alone | **LeaseGuard (layered)** |
+| --- | --- | --- | --- | --- |
+| Per-field accuracy | ~96% (🟡 assumed in Step 1, not measured) | 🟢 76.4% (55/72) on this sample · 🟡 ~88% blended on a mixed portfolio | Not measured on its own in this repo | 🟢 98.6% (71/72) after triage · 🟡 98.2% projected at portfolio scale |
+| Says which fields to check | No. A senior reviewer spot-checks 5-10% of the work | No. A wrong extraction looks identical to a correct one | No. A second answer with nothing to compare it to | Yes. 🟢 21 of 72 fields routed, including 16 of the 17 wrong ones |
+| Rule checks and side-letter tripwire | n/a | Rarely present downstream of the extractor | None | Yes. 🟢 Tripwire fired 3 times (2 real misses, 1 false flag); rule validators fired 0 times on this sample |
+| Human time | Every field of every lease: 🟡 ~3.7 h and ~$278 per lease; stops scaling past ~500 assets | None. 🟡 ~6 minutes per lease | None | Flagged fields only. 🟢 21 of 72 on this deliberately hard sample |
+| Where it still fails | Fatigue and mis-transcription | Redlines, CPI-with-floor-and-cap escalations, buried CAM caps, multi-section kick-outs, side letters, all silently | Its own errors in different places; no single backend wins all six deficiencies (Step 3) | 🟢 1 of 17 wrong fields on this sample: both models return the same incomplete value (lease_06 kick-out) |
+| Touches the existing pipeline | n/a | n/a | Swaps the extractor | No. Primary untouched; write-back only after a field clears |
+
+**Position:** *LeaseGuard does not replace the deployed lease-NLP pipeline, the OCR layer, or the system of record. It adds the layer the public PropTech writing rarely describes: a check downstream of the extractor that decides which fields a paralegal has to read before anything is written back to Yardi, MRI, or Argus. The table is the argument: a paralegal alone does not scale, the deployed pipeline alone fails silently, and a model swap trades one set of silent errors for another.*
+
+---
+
+## The honest version (why this exists)
+
+The failure mode this prototype is built around: a deployed lease-abstraction pipeline reads standard ICSC and BOMA leases well, then returns a wrong CAM cap, escalation type, or kick-out on a redlined or side-lettered one. The structured output looks identical to a correct extraction, so nobody checks it, and the asset-management team finds out two years later in a CAM reconciliation dispute. That pattern is well discussed in public PropTech writing.
+
+This is a prototype on six synthetic leases. I wrote the leases, the ground-truth CSV, and the mock extraction outputs. The mock outputs are shaped to the failure patterns described in that public writing, so the 🟢 numbers show how the verification mechanic behaves on this set, not how any vendor's product performs. CRE is a personal study interest for me. I am not an LP in any CRE portfolio, I have no insider data, and no real lease, tenant, or system of record was touched.
+
+I put it on disk so anyone can clone it, run four scripts, and see which fields get flagged, which flags are false, and which one wrong field gets through. That is the whole claim. It shows how I reason about the problem; it is not a deployment.
+
+If you work with lease data and have watched a deployed extractor get a redlined lease wrong, fork it. The deficiency taxonomy, the router vocabulary, and the architecture are the parts worth lifting. Validating them on real leases is the work the next role would do.
+
+---
+
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a cloud account, or an API key. You need:
+
+- **Python 3.** The four step scripts use only the standard library (`csv`, `re`, `pathlib`, `collections`), so there is nothing to install for them. They also run on Python 3.9. The repo's `.devcontainer` uses Python 3.11 and starts the HalluGuard app by default, so for LeaseGuard open a terminal there and run the scripts.
+- **Git**, to clone the repo. `brew install git` / `winget install git`.
+- **`src/requirements.txt` — only for the Streamlit app.** It lists `streamlit`, `pandas`, `numpy`, `plotly`, and `reportlab`. The step scripts do not import any of them.
+- **No API key.** `step_02` and `step_04` use mock extraction outputs by design, so the walkthrough runs offline with no Anthropic or OpenAI credentials. The `ChatAnthropic` chain shown in Step 2 illustrates the deployed pattern; the script does not call it.
+- **Not needed:** Postgres, containers, Kubernetes, or a cloud account. They appear in [`ARCHITECTURE.md`](./ARCHITECTURE.md) as the production design, not as prototype requirements.
+
+The clickable `demo.html` runs in any browser with zero install. The scripts print to the terminal and write CSVs to `src/out/`.
+
+I'm a PM who follows this failure mode as a study interest. The point of the list above is that anyone curious (asset manager, paralegal, engineer, PM) can replicate the result on a laptop. If a step does not run from a fresh clone, that's a bug in the README. Open an issue.
+
+---
+
+## Executive summary (90 seconds)
+
+**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: Claude Sonnet over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **~88%** (public PropTech vendor benchmarks). 🟡 Modeled rent leakage at this portfolio shape: **~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
+
+**Product.** LeaseGuard, a verification layer around the pipeline, not a replacement for it: **second-model re-extraction** (GPT-4o or a fine-tuned Mistral 7B over the same OCR text) + **rule validators** (dollar amounts, known escalation types, parseable dates, Yes/No flags) + a **side-letter tripwire** + a **router** (PASS / DISAGREEMENT / RULE_VIOLATION / MISSING / SIDE_LETTER_TRIPWIRE) that sends flagged fields to a **paralegal triage queue** with the source clause highlighted. Nothing is written back to the system of record until a flagged field clears.
+
+**Measured and modeled performance.**
+
+- 🟢 **Deployed pipeline: 55/72 fields correct (76.4%)** on the 6-lease sample (`step_02`). **After LeaseGuard triage: 71/72 (98.6%)** (`step_04`).
+- 🟢 **21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags.** 51 fields auto-cleared. Router mix: 12 DISAGREEMENT, 6 MISSING, 3 SIDE_LETTER_TRIPWIRE, 0 RULE_VIOLATION.
+- 🟢 **1 known miss:** the `lease_06` kick-out. Both models return `co_tenancy_kickout`; the lease has co-tenancy and sales-based kick-outs; no rule fires.
+- 🟡 **Blended accuracy at portfolio scale: 88% → 98.2%** (modeled — assumes paralegal triage clears flagged fields at the published triage accuracy)
+- 🟡 **~270 field errors caught and corrected per year** at 220 leases × 12 fields (~12% blended error × 2,640 fields × ~85% routed to triage successfully); **~$4.2M/yr** modeled rent recovery at that shape. At fleet scale (5,000+ leases): **~6,100 field errors/yr** and **~$95M/yr**.
+
+🟡 **Modeled cost.** ~$18K in build compute (secondary-extraction tuning and a Mistral 7B fine-tune on 1,200 synthetic lease examples), plus 0.5 FTE labeling lead for 4 weeks and my time as PM. ~$280K/yr at fleet scale (compute plus paralegal triage time), or ~$45 per error caught against $250-400 to re-abstract from scratch. Modeled, not measured.
+
+**Call to action.** Fork this repo. Swap [`data/expected_extractions.csv`](./data/expected_extractions.csv) and [`data/leases/`](./data/leases/) for your own ground truth and leases, replace the mock extractions in `step_02` and `step_04` with your pipeline's output and a second model's, and run the four step scripts. Walk the triage queue they produce with your asset-management lead or your abstraction lead.
 
 ---
 
@@ -361,9 +455,106 @@ Modeled 28-day shadow window at a 220-asset retail-and-office book shape:
 
 ---
 
-## 🧭 How to read the rest of this folder
+## 🔄 Architecture & Call Flow
 
-This README is the walkthrough. The deeper artifacts:
+How every extracted field flows through the system, end to end. GitHub renders these diagrams natively. Component names match [`ARCHITECTURE.md`](./ARCHITECTURE.md).
+
+**System topology:**
+
+```mermaid
+flowchart LR
+    subgraph EXISTING["Existing deployed pipeline - untouched"]
+        PDF["Lease document set<br/>lease, amendments, side letters"]
+        OCR["OCR<br/>Tesseract or Textract"]
+        PRIMARY["Primary extraction<br/>Claude Sonnet over OCR text<br/>12 fields per lease"]
+        SOR["System of record<br/>Yardi, MRI, Argus"]
+    end
+
+    subgraph GUARD["LeaseGuard - new verification layer"]
+        INTAKE["lg-intake<br/>was every attachment ingested"]
+        ADAPTER["lg-primary-adapter<br/>read-only copy of primary fields"]
+        SECOND["lg-secondary<br/>second-model re-extraction"]
+        RULES["lg-rules<br/>rule validators per field type"]
+        TRIPWIRE["Side-letter tripwire<br/>text mentions side letter, amendment, ROFO or ROFR"]
+        ROUTER["lg-router<br/>one status per field"]
+        QUEUE["Triage queue<br/>ordered by modeled dollar exposure"]
+        UI["lg-triage-ui<br/>both values and the source clause"]
+        WRITE["lg-writeback<br/>refuses flagged fields"]
+        SCHED["lg-scheduler<br/>re-verify on amendments"]
+    end
+
+    subgraph TELEMETRY["Telemetry"]
+        OTEL["OpenTelemetry"]
+        DD["Datadog<br/>queue depth and age"]
+        LF["Langfuse<br/>extraction traces"]
+    end
+
+    PDF --> OCR
+    OCR --> PRIMARY
+    OCR --> SECOND
+    OCR --> TRIPWIRE
+    PRIMARY --> ADAPTER
+    PDF -.-> INTAKE
+    INTAKE -.->|document set check| ADAPTER
+    SCHED -.-> INTAKE
+    ADAPTER --> RULES
+    ADAPTER --> ROUTER
+    SECOND --> ROUTER
+    RULES --> ROUTER
+    TRIPWIRE --> ROUTER
+    ROUTER -->|PASS auto-clear| WRITE
+    ROUTER -->|DISAGREEMENT RULE_VIOLATION MISSING SIDE_LETTER_TRIPWIRE| QUEUE
+    QUEUE --> UI
+    UI -->|paralegal resolution| WRITE
+    WRITE --> SOR
+
+    SECOND -.-> LF
+    ROUTER -.-> OTEL
+    UI -.-> OTEL
+    OTEL --> DD
+
+    classDef existing fill:#e0e7ff,stroke:#4338ca,color:#1e1b4b
+    classDef added fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef tel fill:#fef3c7,stroke:#d97706,color:#78350f
+    class PDF,OCR,PRIMARY,SOR existing
+    class INTAKE,ADAPTER,SECOND,RULES,TRIPWIRE,ROUTER,QUEUE,UI,WRITE,SCHED added
+    class OTEL,DD,LF tel
+```
+
+**Per-field sequence** (`lease_04`, `base_rent_psf`):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant P as Primary pipeline<br/>Claude Sonnet over OCR
+    participant R as lg-rules
+    participant S as lg-secondary<br/>second model
+    participant G as lg-router
+    participant T as lg-triage-ui
+    participant L as Paralegal
+    participant W as lg-writeback
+    participant Y as System of record<br/>Yardi, MRI, Argus
+
+    P->>G: base_rent_psf reads 48.00 (via lg-primary-adapter)
+    G->>R: validate 48.00
+    R-->>G: valid dollar amount, no RULE_VIOLATION
+    S->>G: same OCR text, base_rent_psf reads 42.50
+    G->>G: 48.00 vs 42.50, status DISAGREEMENT, action triage
+    G->>T: queue item with both values and the source clause
+    T->>L: shows 48.00, 42.50 and the highlighted BASE RENT block
+    L-->>T: resolves 42.50, records source span and reason
+    T->>W: resolved value 42.50
+    W->>Y: write 42.50 with the verification id
+    Note over P,Y: 🟢 The values and the DISAGREEMENT status are step_04 output for lease_04. 🔴 Triage resolution and write-back are designed in ARCHITECTURE.md, not built in this prototype.
+```
+
+See [`assets/leaseguard-flow.svg`](./assets/leaseguard-flow.svg) for a static visual of the same flow.
+
+---
+
+## 📋 PM Artifacts
+
+The PM artifacts that show how I'd run this product if I owned the seat. This README is the walkthrough; the rest of the folder holds:
 
 - [`PRD.md`](./PRD.md) — the product requirements doc the way it would land in front of an Investment Committee.
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the systems doc: components, router vocabulary, data model, leases-as-untrusted-input threat model, failure behavior, write-back controls.
@@ -380,6 +571,38 @@ python step_02_deployed_lease_nlp.py
 python step_03_deficiencies_exposed.py
 python step_04_with_leaseguard.py
 ```
+
+---
+
+## 🚀 Fork this for your team
+
+```bash
+git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
+cd ai-pm-portfolio/03-leaseguard-cre-lease-verification
+
+# 1. Drop in your own leases and ground truth
+#    data/leases/lease_NN_<label>.txt  one text file per lease (replace the six synthetic files)
+#    data/expected_extractions.csv     lease_id plus the 12 fields, one row per lease
+cp /path/to/your/expected_extractions.csv data/expected_extractions.csv
+
+# 2. Swap the mock extractions for real outputs
+#    MOCK_EXTRACTIONS in src/step_02_deployed_lease_nlp.py    -> your deployed pipeline's 12 fields per lease
+#    SECONDARY_EXTRACTIONS in src/step_04_with_leaseguard.py  -> a second model's values where they differ
+
+# 3. Run the four-step walkthrough
+cd src
+python step_01_manual_abstraction.py
+python step_02_deployed_lease_nlp.py
+python step_03_deficiencies_exposed.py
+python step_04_with_leaseguard.py
+
+# 4. Open the interactive demo
+open ../demo.html            # static snapshot of the six synthetic leases; it does not read data/
+```
+
+Keep the lease IDs identical across the lease file names, `expected_extractions.csv`, and the two extraction dictionaries. `step_02` treats `lease_01` and `lease_02` as the standard leases in its roll-up (`standard_ids`), and `step_03` reads the file `step_02` writes, so change that set to match your leases and run the steps in order.
+
+If you run it on real leases and get something useful, open an issue or send me what your abstraction lead did with it. I'd rather see that than what I think it should do.
 
 ---
 
@@ -449,4 +672,3 @@ If your seat involves shipping AI on top of a CRE operating book — or you're l
 - **Yardi Voyager**, **MRI**, **Argus Enterprise**, **Salesforce CRE Cloud** — the systems the corrected lease abstracts have to write back into.
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/expected_extractions.csv` exists before any model was tuned.
 - Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. The list of deficiency classes in Step 3 is calibrated against that published commentary.
-

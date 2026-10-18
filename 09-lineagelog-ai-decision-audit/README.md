@@ -77,6 +77,23 @@ If you have lived through a regulator's "show us this decision" request and felt
 
 ---
 
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a cloud account, or an API key. You need:
+
+- **Python 3.** The four step scripts use only the standard library, so there is nothing to install for them. Step 4 uses `X | None` type annotations, so this project needs **Python 3.10 or newer**; steps 1-3 also run on 3.9. The repo's dev container uses Python 3.11.
+- **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
+- **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, `plotly`, and `reportlab`. The step scripts do not use them.
+- **No API key.** The step scripts read the CSVs in `data/` and make no network calls.
+- **A browser**, for [`demo.html`](./demo.html). It needs no install.
+- **Or skip local setup.** The repo's dev container installs the packages and starts the HalluGuard prototype in GitHub Codespaces. For this project, run `streamlit run 09-lineagelog-ai-decision-audit/src/app.py` in the Codespace terminal.
+
+Each step writes its results to `src/out/`.
+
+If any of this fails on your machine, that is a bug in this README. Open an issue.
+
+---
+
 ## Executive summary (90 seconds)
 
 **Problem.** A Tier-1 US retail bank receives an OCC exam letter on May 8 asking: "Show us the full AI decision lineage for `CUST_851897` on March 12 — decision `DEC_0150_20260312`, a $65,673 loan denial." Today the bank assembles a 6-person paralegal team for 14 days, walking Cloud Logging, Cloud Audit Logs, Agent Identity Logs, OpenTelemetry traces, the model registry side-channel, and the data warehouse by hand. 🟡 Modeled exposure: an MRA (Matter Requiring Attention) becomes a consent order; the consent order rewrites the next year's compliance budget. This is the framing this prototype is designed against — calibrated against published [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj), [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), and the public shape of recent OCC / FRB supervisory letters on AI decision lineage.
@@ -538,4 +555,3 @@ The Streamlit prototype here proves the *product mechanic* — that decision-gra
 - [OCC — Model Risk Management resource center](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) and [Federal Reserve — Supervisory Letters](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm).
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives this product reads from.
 - [OpenTelemetry](https://opentelemetry.io/) — the substrate that makes composition possible.
-

@@ -10,10 +10,113 @@
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-memo eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
+[![Eval set: 6 synthetic memos](https://img.shields.io/badge/eval%20set-6%20synthetic%20memos-blue)](./data/sample_memos.csv)
+[![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)](./data/deficiency_classes.csv)
+[![SOT comps: 40](https://img.shields.io/badge/SOT%20comps-40-lightgrey)](./data/sot_comps.csv)
+[![Step 4 verdicts: 2 PASS, 1 REVIEW, 3 FAIL](https://img.shields.io/badge/step%204%20verdicts-2%20PASS%20%C2%B7%201%20REVIEW%20%C2%B7%203%20FAIL-success)](#)
+[![Step scripts: standard library only](https://img.shields.io/badge/step%20scripts-standard%20library%20only-brightgreen)](./src/)
+
+[![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
+
+![Hero — DealSentry verification flow](./assets/dealsentry-flow.svg)
+
+> **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the deployed AI underwriting copilot gets it wrong.
 
 > If you're a non-technical reader (acquisitions lead, asset manager, investor): skip the code blocks. The plain-English explanation and the output tables tell the story.
 > If you're technical: every code block is runnable. `cd src && python step_NN_*.py` and you'll see the same output I show here.
+
+---
+
+## 🔥 Demo in 30 seconds
+
+Open the static, no-Python demo: [`demo.html`](./demo.html).
+Pick any of the six synthetic memos from the drop-down. The page lays three cards side by side: face-value trust, the 10% analyst spot-check, and the DealSentry three-path verifier, with the PASS / REVIEW / FAIL verdict and the result of each check (comp existence, T-12, cap rate, occupancy, exit cap, submarket stat). It opens on `MEMO_04`, the Brickell retail memo with two comps that do not exist in the source-of-truth table. *Previous*, *Next memo*, and *Run through all 6* step through the set. The page is a fixed walkthrough of the six memos, not a live run; the step scripts below produce the measured output.
+
+To run the four-step walkthrough on your laptop:
+
+```bash
+git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
+cd ai-pm-portfolio/10-dealsentry-cre-underwriting/src
+pip install -r requirements.txt   # only the Streamlit app needs this; the four step scripts use the standard library
+python step_01_face_value_trust.py
+python step_02_analyst_spotcheck.py
+python step_03_deficiencies_exposed.py
+python step_04_with_dealsentry.py
+```
+
+Each script prints its result to the terminal and writes a CSV to `src/out/`. Step 4 ends with the aggregate: 2 PASS, 1 REVIEW, 3 FAIL.
+
+---
+
+## 💰 Why this lands — competitive positioning
+
+An AI-drafted memo reaches the IC chair one of three ways today: trusted at face value, spot-checked by a senior analyst, or run through a verifier. The table sets those three side by side, using what the step scripts print on the 6-memo set. **The gap is the deterministic layer between the copilot's draft and the analyst's limited time.**
+
+| Capability on the 6-memo set | Face-value trust | Analyst spot-check (10%) | **DealSentry (three paths)** |
+| --- | --- | --- | --- |
+| 🟢 Cited comps looked up in the source-of-truth table | 0 of 31 | 6 of 31 (one per memo) | 31 of 31 (28 found, 3 not found) |
+| 🟢 Fabricated comps flagged | 0 of 3 | 0 of 3 (fixed seed) | **3 of 3** |
+| 🟢 T-12 monthly rows re-summed against the memo total | No | No | Yes (`MEMO_03`, the only memo with monthly rows: $60K drift flagged) |
+| 🟢 Stated cap rate checked against a recompute | No | No | Yes (`MEMO_06`: 5.50% stated, 6.00% recompute) |
+| 🟢 Stated occupancy checked against the rent roll | No | No | Yes (`MEMO_06`: 96.5% stated, 92.0% rent roll) |
+| 🟢 Exit-cap spread checked against going-in cap | No | No | Yes (`MEMO_04` and `MEMO_06`: +0 bps, REVIEW) |
+| 🟢 Stale submarket stat flagged | No | No | Yes (`MEMO_05`, REVIEW) |
+| 🟢 Flawed memos (4) stopped or routed before IC | 0 of 4 | 0 of 4 | **4 of 4** (3 FAIL, 1 REVIEW) |
+| 🟢 Clean memos (2) flagged | n/a | n/a | 0 of 2 (too few clean memos to estimate a false-flag rate) |
+
+**Position:** *DealSentry does not replace the AI copilot or the senior analyst. It runs the checks a 10% spot-check never reaches, and it hands the analyst a named finding instead of a whole memo to re-read.* A better drafting model is not the substitute: the modeled drafter comparison in Step 3 shows comp fabrication and exit-cap mismatch running high on all three backends. That also means the verifier can sit behind whatever copilot the acquisitions team already runs. What each row does and does not prove in this prototype is spelled out in the next section.
+
+---
+
+## The honest version (why this exists)
+
+The failure mode this product is designed against: an AI underwriting copilot drafts an IC memo that reads clean but cites a comp that does not exist, or a T-12 that does not sum, and the bid clears IC before anyone dereferences the comp. It is the pattern the PropTech literature describes. Nothing in this repo comes from a live deal.
+
+This is a prototype on synthetic data. The six memos, the 40-row comp table, and the stats feed are invented. CRE is a personal study interest for me: I am not an LP in any CRE portfolio and I am not actively investing. There is no insider data, and no real operator's deals or systems are involved.
+
+Here is what the prototype does and does not prove. The comp check is a name lookup against [`data/sot_comps.csv`](./data/sot_comps.csv). The T-12 check re-sums monthly NOI rows against the memo's stated total, and `MEMO_03` is the only memo that carries monthly rows. The cap-rate, occupancy, and stale-stat checks compare the memo against figures and notes written into the synthetic memo text (a recompute line, a rent-roll line, a dated note); they do not rebuild those numbers from raw NOI, price, or a rent roll. So the 6-memo results show the verdict logic and the routing working end to end. They are not a recall measurement on real memos. The production design in [`ARCHITECTURE.md`](./ARCHITECTURE.md) recomputes from source feeds, and that is the part a real engagement would have to prove.
+
+If you have watched an AI-drafted memo pass IC with a bad comp in it, fork this. The deficiency taxonomy, the verdict ladder, and the test memos are yours to lift. Running it on real memos and real feeds is the validation I would do in the seat.
+
+---
+
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a data license, or an API key. You need:
+
+- **Python 3.** The four step scripts import only `csv`, `re`, `random`, and `pathlib` from the standard library, so there is nothing to install for them. They ran clean on Python 3.9.6. The repo's devcontainer uses a Python 3.11 image.
+- **Git**, to clone the repo.
+- **The packages in `src/requirements.txt`, for the Streamlit app and the PDF workpaper only.** The file pins `streamlit>=1.32,<1.40`, `pandas>=2.0`, `numpy>=1.24`, and `reportlab==4.2.0`. Install with `pip install -r requirements.txt` from `src/`, then `streamlit run app.py`.
+- **No API key, no cloud account, no network.** Nothing in `src/` calls an API. The source-of-truth comp and stats feeds are the CSVs in `data/`. CoStar, Reonomy, and Cherre access belongs to the production design in `ARCHITECTURE.md`, not to this prototype.
+- **A Codespaces note.** The repo's `.devcontainer` installs Streamlit and launches Project 01 (HalluGuard) on attach, not DealSentry. In a Codespace, run `pip install -r requirements.txt` and then `streamlit run app.py` from `10-dealsentry-cre-underwriting/src`.
+
+The clickable `demo.html` runs in any browser with zero install.
+
+The point of this list is that anyone curious — acquisitions analyst, PropTech PM, asset manager, IC member — can reproduce the walkthrough on a laptop. If you can't, that's a bug in the README. Open an issue.
+
+---
+
+## Executive summary (90 seconds)
+
+**Problem.** An AI underwriting copilot drafts the first pass of every IC memo, and the draft reads like finished work. It breaks silently on six things: comps that do not exist, T-12 sums that drift, stale submarket stats, cap rates that do not match NOI over price, occupancy that does not match the rent roll, and exit caps set equal to the going-in cap. A typical memo carries 40-80 individually checkable claims, and the senior analyst has time to look at a few of them. The bid clears IC and the broker accepts before a buyer's third-party verifier comes back with "no record" on a cited comp. 🟡 Modeled bid risk at a national operator screening 800-1,200 deals a year: **~$7.2M/yr** (~3-5 bad bids at ~$1.8M each).
+
+**Product.** DealSentry — a verification layer behind the copilot, not a replacement for it. Three independent paths: **comp existence** (every cited comp looked up in the source-of-truth comp table) + **symbolic re-run** (T-12 re-sum, cap rate, occupancy, exit-cap spread; no LLM in this path) + **submarket-stat cross-feed** (the cited stat checked against the latest quarter in the stats feed). A verdict follows: PASS, REVIEW (to a senior analyst), or FAIL (does not advance to IC).
+
+**Measured and modeled performance (6-memo synthetic eval set; fleet figures modeled).**
+
+- 🟢 **Face-value trust (step 1):** 6 memos read, 31 comps cited, 0 comps verified, 0 T-12 sums recomputed, 0 submarket stats cross-checked. All six memos go to the IC packet.
+- 🟢 **Analyst spot-check (step 2):** 6 of 31 comps checked (one per memo), 0 of 3 fabricated comps caught at the walkthrough's fixed seed. The other five deficiency classes are not checked at all.
+- 🟢 **Deficiency taxonomy (step 3):** 8 deficiency trips across all six classes, in 4 of the 6 memos. The other 2 memos are clean.
+- 🟢 **DealSentry (step 4):** all 3 fabricated comps flagged and all six classes caught. Verdicts: 2 PASS, 1 REVIEW, 3 FAIL, and both clean memos passed. All six memos run in under a second on the standard library alone.
+- 🟡 **Bid risk caught on the sample: $6.78M.** The script prints this as modeled: a flat $2.1M per FAIL and $480K per REVIEW, not a per-deal estimate.
+- 🟡 **Fleet scale (modeled):** ~3-5 bad bids/yr prevented × ~$1.8M each ≈ **~$7.2M/yr** at an operator screening 800-1,200 deals/yr; ~$35M/yr at top-5 institutional fleet scale.
+- 🟡 **Per-memo verifier runtime: <90s p95** in a live-feed design, dominated by source-of-truth API latency on a cache miss.
+
+🟡 **Modeled cost.** ~$420K/yr at fleet scale (source-of-truth API costs, compute, and 0.5 FTE senior analyst on the override workflow). A pilot build is ~$28K in compute plus a 0.5 FTE labeling lead for 6 weeks and my time as PM. Designed, not yet executed.
+
+**Call to action.** Fork this repo. Swap the synthetic [`data/sample_memos.csv`](./data/sample_memos.csv), [`data/sot_comps.csv`](./data/sot_comps.csv), and [`data/sot_stats.csv`](./data/sot_stats.csv) for your own memos and feeds. The four step scripts run on a laptop with no installs. Walk the output through your acquisitions lead or your IC chair.
 
 ---
 
@@ -113,12 +216,11 @@ python src/step_01_face_value_trust.py
     Stated cap rate:  6.25%
     Stated NOI:       $4,600,000
     Asking price:     $73,600,000
-    Stated occupancy: 96.0%
     Verification:     NONE (trusted at face value)
     Action:           memo goes to IC packet as-is.
 ```
 
-**Result:** 🟢 6 memos read, 31 comps cited across the set, 0 comps verified, 0 T-12 sums recomputed, 0 submarket stats cross-checked (on this sample). The 5 fabricated comps designed into MEMO_04 and MEMO_06 plus the T-12 drift in MEMO_03 plus the cap/occupancy errors in MEMO_06 plus the stale stat in MEMO_05 all land in the IC packet.
+**Result:** 🟢 6 memos read, 31 comps cited across the set, 0 comps verified, 0 T-12 sums recomputed, 0 submarket stats cross-checked (on this sample). The 3 fabricated comps designed into MEMO_04 and MEMO_06 plus the T-12 drift in MEMO_03 plus the cap/occupancy errors in MEMO_06 plus the stale stat in MEMO_05 all land in the IC packet.
 
 **This is the operating mode at most CRE acquisitions teams today.** The senior analyst would catch some of this if they had the time. They don't.
 
@@ -130,7 +232,7 @@ python src/step_01_face_value_trust.py
 
 This is the SOTA that an analyst-staffed acquisitions team runs today.
 
-The 10% spot-check rate is what the published BFSI and PropTech literature describes as realistic for senior analysts under deal-flow pressure. With 31 cited comps across the 6-memo set, that's roughly 3 comps manually verified. With 5 fabricated comps spread across MEMO_04 and MEMO_06, the probability that the spot-check hits a fabricated one in any given memo is on the order of 25-35%.
+The 10% spot-check rate is what the published BFSI and PropTech literature describes as realistic for senior analysts under deal-flow pressure. The script checks one comp per memo, so 6 of the 31 cited comps get verified. The 3 fabricated comps sit in MEMO_04 (2 of its 6 comps) and MEMO_06 (1 of its 5), so a one-comp sample hits a fabricated one with probability 2 in 6 for MEMO_04 and 1 in 5 for MEMO_06. That is an expected 0.53 catches out of 3, about 18%.
 
 **The code** ([`src/step_02_analyst_spotcheck.py`](./src/step_02_analyst_spotcheck.py), simplified):
 
@@ -157,7 +259,7 @@ python src/step_02_analyst_spotcheck.py
 | `MEMO_06` | 5 | 1 | 0 | 1 |
 | 🟢 **Aggregate** | **31** | **6** | **0** | **3** |
 
-**Result:** The analyst spot-check catches 0 of 3 fabricated comps (modeled at 10% sample rate, deterministic seed). Even with the seed varied across runs, expected catch rate is roughly 25-35% — most fabrications slip through. **T-12 math drift, submarket-stat staleness, cap-rate computational error, occupancy discrepancy, and exit-cap mismatch are all undetected** because spot-checking comps does not surface them at all.
+**Result:** The analyst spot-check catches 0 of 3 fabricated comps at the script's fixed seed. Across seeds the expected catch is about 0.53 of 3 (2/6 for MEMO_04 plus 1/5 for MEMO_06, arithmetic on the table above), roughly 18%, so most fabrications slip through. **T-12 math drift, submarket-stat staleness, cap-rate computational error, occupancy discrepancy, and exit-cap mismatch are all undetected** because spot-checking comps does not surface them at all.
 
 **This is where most CRE acquisitions teams currently sit.** Spot-checking is a courtesy gesture toward verification, not a containment layer. The bid risk hidden in the unverified 90% is the gap DealSentry closes.
 
@@ -233,6 +335,8 @@ Three independent paths + a verdict:
 2. **Symbolic math re-run** — pandas re-sums the 12 monthly NOI rows. Recomputes cap = NOI / price. Recomputes occupancy from rent-roll lines. Recomputes exit-cap spread. **No LLM in this path.** Divergence beyond tolerance is flagged.
 3. **Submarket stat cross-feed** — every cited stat is cross-checked against the latest-quarter row in `sot_stats.csv`. If the memo's stat matches a prior quarter (e.g., 2024-Q3), it's flagged as stale.
 
+> **What the prototype does.** The three paths above are the design. In `src/step_04_with_dealsentry.py` they run as plain Python on the standard library, with no pandas. The T-12 re-sum runs only on `MEMO_03`, the one memo that carries monthly rows. The cap-rate, occupancy, and stale-stat checks compare the memo's claim against figures and notes written into the synthetic memo text, and the stale-stat check fires on a `[NOTE:` marker that mentions 2024.
+
 The verdict is **PASS** (all checks clean), **REVIEW** (one or more medium-severity flags — send to senior analyst), or **FAIL** (high-severity flag — fabricated comp, T-12 drift, or cap-rate math — do not advance to IC).
 
 The product is **NOT a replacement for the AI underwriting copilot**. It's a verification layer that catches what the copilot got wrong.
@@ -269,7 +373,7 @@ python src/step_04_with_dealsentry.py
 | 🟢 **Aggregate** | 6/6 advanced to IC (0 deficiencies caught) | 2 PASS · 1 REVIEW · 3 FAIL · **$6.78M modeled bid risk caught** |
 | 🟡 **Projected at fleet scale** | n/a | 🟡 ~3-5 bad bids/yr prevented at ~$1.8M each = **~$7.2M/yr** modeled at a national operator |
 
-🟢 **DealSentry turns 3 bid-killing memos on this sample into 3 senior-review or rejected workpapers**, at a marginal cost of <5 seconds of compute per memo (symbolic re-run is pure pandas; comp verification is an indexed lookup; submarket cross-check is a single CSV join). The 1 REVIEW (Bellevue MOB) is what the system correctly routes to a human — a stale-stat finding that a senior analyst should resolve before IC, not the verifier auto-rejecting.
+🟢 **DealSentry turns 3 bid-killing memos on this sample into 3 senior-review or rejected workpapers**, at a marginal cost of <5 seconds of compute per memo (symbolic re-run is plain Python; comp verification is an indexed lookup; submarket cross-check is a single CSV join). The 1 REVIEW (Bellevue MOB) is what the system correctly routes to a human — a stale-stat finding that a senior analyst should resolve before IC, not the verifier auto-rejecting.
 
 ---
 
@@ -277,13 +381,15 @@ python src/step_04_with_dealsentry.py
 
 The way I price product impact: **Utility = (my solution − current state of the art) × number of people it affects.**
 
-Anything else is theatre. Going from 0% to 100% catch on the 5 fabricated comps in this sample is not an outcome. *Going from ~28% catch (analyst spot-check baseline) to 100% catch across 800-1,200 deals/yr at a national CRE operator is.*
+Anything else is theatre. Going from 0% to 100% catch on the 3 fabricated comps in this sample is not an outcome. *Going from ~28% catch (analyst spot-check baseline) to 100% catch across 800-1,200 deals/yr at a national CRE operator is.*
 
-**The math for DealSentry:**
+> **Needs re-modeling.** The ~28% spot-check baseline below was built on an earlier read of Step 2 ("5 fabricated comps", "~3 hits per fabrication"). The data holds 3 fabricated comps and the script samples one comp per memo, so the expected catch on this set is about 18%, and 0 of 3 at the fixed seed. The per-memo lift, the annual bad-bid counts, the ~$7.2M and ~$35M figures, and the per-finding cost have not been re-derived. Treat them as stale until they are re-modeled on a representative deal mix.
+
+**The math for DealSentry (stale inputs, see the note above):**
 
 | Term | Value | Where it comes from |
 | --- | --- | --- |
-| 🟡 Current state of the art (analyst spot-check) | ~28% of fabricated comps caught | 10% sample rate × ~3 hits per fabrication × calibrated to published BFSI / PropTech analyst capacity literature |
+| 🟡 Current state of the art (analyst spot-check) | ~28% of fabricated comps caught (needs re-modeling; this sample: 0 of 3) | 10% sample rate × ~3 hits per fabrication × calibrated to published BFSI / PropTech analyst capacity literature |
 | 🟢 DealSentry on this eval set | 100% of fabricated comps + 100% of T-12 / cap / occupancy / exit-cap / stale-stat findings caught | Step 4 measured output on the 6-memo set; 6 deficiencies caught of 6 designed in |
 | 🟡 Per-memo lift | ~72 percentage-points of fabricated-comp catch + 5 deficiency classes spot-check ignores entirely | difference |
 | Affected (modeled national operator) | 800-1,200 deals/yr screened through AI underwriting | published PropTech-vendor deployment scale + industry deal flow |
@@ -321,9 +427,94 @@ Modeled 90-day shadow window at a 220-deal/yr institutional CRE operator shape:
 
 ---
 
-## 🧭 How to read the rest of this folder
+## 🔄 Architecture & Call Flow
 
-This README is the walkthrough. The deeper artifacts:
+How one AI-drafted memo flows through DealSentry, end to end. GitHub renders these diagrams natively. Component names follow [`ARCHITECTURE.md`](./ARCHITECTURE.md); the prototype in `src/` implements the three paths and the verdict, with regex claim extraction standing in for the ingestion layer.
+
+**System topology:**
+
+```mermaid
+flowchart LR
+    subgraph SOURCE["Deal team (existing)"]
+        COPILOT["AI Underwriting Copilot<br/>drafts the IC memo"]
+    end
+
+    subgraph SENTRY["DealSentry (new)"]
+        INGEST["Ingestion<br/>claim extraction"]
+        P1["Path 1<br/>Comp existence check"]
+        P2["Path 2<br/>Symbolic re-run<br/>T-12, cap rate, occupancy, exit-cap spread"]
+        P3["Path 3<br/>Submarket stat cross-feed"]
+        RECON["Reconciliation<br/>severity-weighted verdict"]
+        AUDIT["Override audit trail"]
+    end
+
+    subgraph REFERENCE["Source-of-truth data"]
+        SOTC[("SOT comp database<br/>CoStar, Reonomy, Cherre")]
+        SOTS[("SOT stats feed<br/>quarterly versions")]
+        LEASE["LeaseGuard output<br/>Project 03"]
+    end
+
+    subgraph DOWNSTREAM["Downstream"]
+        PACKET["IC-ready workpaper<br/>PDF with verifier badges"]
+        ANALYST["Senior analyst queue"]
+        EVIDENCE["JSON evidence bundle"]
+        OPS["OversightOps<br/>Project 08"]
+        LINEAGE["LineageLog<br/>Project 09"]
+    end
+
+    COPILOT -->|draft memo| INGEST
+    INGEST -->|cited comps| P1
+    INGEST -->|T-12 rows, cap rate, occupancy, exit cap| P2
+    INGEST -->|cited stats| P3
+    SOTC -.-> P1
+    LEASE -.-> P2
+    SOTS -.-> P3
+    P1 --> RECON
+    P2 --> RECON
+    P3 --> RECON
+    RECON -->|PASS| PACKET
+    RECON -->|REVIEW or FAIL| ANALYST
+    ANALYST -->|confirm or override| AUDIT
+    RECON --> EVIDENCE
+    AUDIT --> OPS
+    EVIDENCE --> LINEAGE
+```
+
+**Per-memo sequence** (`MEMO_06`, the Chicago last-mile industrial memo with an $84.0M ask):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as AI Copilot
+    participant I as Ingestion
+    participant P1 as Path 1 Comp check
+    participant P2 as Path 2 Symbolic re-run
+    participant P3 as Path 3 Stat cross-feed
+    participant R as Reconciliation
+    participant A as Senior analyst
+
+    C->>I: MEMO_06 draft memo
+    I->>P1: 5 cited comps
+    I->>P2: T-12, cap rate, occupancy, exit cap
+    I->>P3: submarket stat
+    P1-->>R: 4 of 5 found, Schaumburg Logistics Park not in SOT, FAIL
+    P2-->>R: T-12 has no monthly rows to re-sum, PASS
+    P2-->>R: cap rate stated 5.50%, recompute 6.00%, FAIL
+    P2-->>R: occupancy stated 96.5%, rent roll 92.0%, FAIL
+    P2-->>R: exit cap 5.65% equals going-in 5.65%, spread +0 bps, REVIEW
+    P3-->>R: cited stat aligns with latest SOT quarter, PASS
+    R->>R: any FAIL finding sets the verdict to FAIL
+    R-->>A: FAIL, do not advance to IC, four findings attached
+    Note over R,A: 🟡 The step 4 script books a flat 2.1M of bid risk for any FAIL memo and labels it modeled.
+```
+
+See [`assets/dealsentry-flow.svg`](./assets/dealsentry-flow.svg) for a static visual of the same flow, drawn for `MEMO_04`.
+
+---
+
+## 📋 PM Artifacts
+
+This README is the walkthrough. These are the PM artifacts that show how I'd run this product if I owned the seat:
 
 - [`PRD.md`](./PRD.md) — the product requirements doc the way it would land in front of an Investment Committee, plus the RICE backlog and stakeholder map.
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the reference architecture diagram + vendor-named production stack.
@@ -351,6 +542,33 @@ Launch the Streamlit walkthrough:
 ```bash
 streamlit run app.py
 ```
+
+---
+
+## 🚀 Fork this for your team
+
+```bash
+git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
+cd ai-pm-portfolio/10-dealsentry-cre-underwriting
+
+# 1. Drop in your own memos and source-of-truth feeds
+cp /path/to/your/sample_memos.csv data/sample_memos.csv
+cp /path/to/your/sot_comps.csv data/sot_comps.csv
+cp /path/to/your/sot_stats.csv data/sot_stats.csv
+
+# 2. Run the four-step walkthrough
+python src/step_01_face_value_trust.py
+python src/step_02_analyst_spotcheck.py
+python src/step_03_deficiencies_exposed.py
+python src/step_04_with_dealsentry.py
+
+# 3. Open the interactive demo
+open demo.html               # standalone, no Python needed
+```
+
+Three things to know before you swap the data. The memo checks read `memo_text` with fixed patterns: `Comp N - Name, ...` lines for comps, `Month N: $...` rows plus a `Sum (memo states): $...` line for the T-12, `Stated cap rate:` with a `[Recompute: ... = x%]` note, `Stated occupancy:` with a `Rent roll:` figure, and `Going-in cap` / `Exit cap` lines. A memo in another layout needs those patterns adjusted, or the ingestion step from `ARCHITECTURE.md` in front of it. The comp check matches `property_name` in `sot_comps.csv` by lowercase name. And `demo.html` has the six memos embedded, so it does not read your CSVs. What each data file holds is described in [`data/README.md`](./data/README.md).
+
+If you run it on real memos and get something useful, open an issue. I'd rather see what your acquisitions lead did with it than what I think it should do.
 
 ---
 
@@ -410,4 +628,3 @@ If your seat involves shipping AI on top of a CRE acquisitions book — or you'r
 - **[Yardi Voyager](https://www.yardi.com/), [Argus Enterprise](https://www.altusgroup.com/argus/), [Dealpath](https://www.dealpath.com/), [Juniper Square](https://www.junipersquare.com/)** — the systems the verified underwriting would have to write back into.
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/sample_memos.csv` and `data/deficiency_classes.csv` exist before any verification code.
 - Acquisitions-team writing on bad-bid post-mortems — public LinkedIn threads, ICSC panels, NCREIF commentary. The six deficiency classes in Step 3 are calibrated against that published commentary.
-

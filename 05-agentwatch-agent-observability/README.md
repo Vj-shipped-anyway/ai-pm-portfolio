@@ -77,6 +77,23 @@ If you have lived through a $30k surprise on the AWS bill from an agent loop and
 
 ---
 
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a cloud account, or an API key. You need:
+
+- **Python 3.** The four step scripts use only the standard library, so there is nothing to install for them. All four run on Python 3.9 and newer. The repo's dev container uses Python 3.11.
+- **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
+- **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, and `plotly`. The step scripts do not use them.
+- **No API key.** The step scripts read the CSVs in `data/` and make no network calls.
+- **A browser**, for [`demo.html`](./demo.html). It needs no install.
+- **Or skip local setup.** The repo's dev container installs the packages and starts the HalluGuard prototype in GitHub Codespaces. For this project, run `streamlit run 05-agentwatch-agent-observability/src/app.py` in the Codespace terminal.
+
+Each step writes its results to `src/out/`.
+
+If any of this fails on your machine, that is a bug in this README. Open an issue.
+
+---
+
 ## Executive summary (90 seconds)
 
 **Problem.** A modeled Tier-1 retail bank deploys a `claims_triage_v3` agent on Anthropic Claude Sonnet 4 via LangGraph, wired up with 9 tools (claim lookup, policy lookup, fraud score, doc extraction, customer match, adjudication calc, SIU check, comms draft, ticket create). On **April 14, 2026 at 03:12:08 UTC**, the agent processes a malformed `claim_lookup` response as "try again." It retries with `retry=1`, `retry=2`, …`retry=1847`. By **04:33:08 UTC** the run has burned **$4,218.34** of inference cost across **1,847 redundant Anthropic API calls**. Without AgentWatch, the bank discovers it 3 weeks later in the FinOps review. 🟡 Modeled exposure across the 30-day window: **$47,978 of undetected runaway cost** (the synthetic data, calibrated against published Tier-1 BFSI agent-fleet shapes).
@@ -495,7 +512,7 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why Streamlit, and when it's the wrong stack
+## 🛠️ Why this is a Streamlit prototype, not a production app
 
 Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
 
@@ -553,4 +570,3 @@ The Streamlit prototype here proves the *product mechanic* — that agent-shaped
 - [SR 11-7 / OCC Bulletin 2011-12](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — co-issued model-risk-management guidance. The "ongoing monitoring" requirement AgentWatch implements.
 - [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — human oversight on high-risk AI systems.
 - [Langfuse](https://langfuse.com/) and [Helicone](https://helicone.ai/) — open-source LLM-trace primitives AgentWatch composes with.
-

@@ -15,6 +15,104 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 > If you're a non-technical reader: skip the code blocks. The plain-English explanation and the output tables tell the story.
 > If you're technical: every code block is runnable. `cd src && python step_NN_*.py` and you'll see the same output I show here.
 
+[![30 eval queries](https://img.shields.io/badge/eval%20set-30%20queries-blue)](./data/queries.csv)
+[![6 failure classes in the query set](https://img.shields.io/badge/query%20set-6%20failure%20classes-blue)](./data/queries.csv)
+[![8 failure modes in the taxonomy](https://img.shields.io/badge/taxonomy-8%20failure%20modes-orange)](#)
+[![Wrong answers served on the eval set: 19 to 0](https://img.shields.io/badge/wrong%20answers%20served%20on%20eval%20set-19%20%E2%86%92%200-brightgreen)](#)
+[![Handed to a banker on the eval set: 63.3%](https://img.shields.io/badge/handed%20to%20a%20banker%20on%20eval%20set-63.3%25-yellow)](#)
+
+[![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
+
+![Hero — HalluGuard containment flow](./assets/halluguard-flow.svg)
+
+> **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+---
+
+## 🔥 Demo in 30 seconds
+
+Open the static, no-Python demo: [`demo.html`](./demo.html).
+Pick any of the 30 customer queries and see the answer at three stages: the rule-based router, the LLM alone, and the LLM behind HalluGuard. "Run all 30" steps through the whole set and updates the counters for wrong answers and catches.
+
+To run the four-step walkthrough on your laptop:
+
+```bash
+git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
+cd ai-pm-portfolio/01-halluguard-bank-chatbot-safety/src
+pip install -r requirements.txt   # only the Streamlit prototype (app.py) needs this
+python step_01_before_llm.py
+python step_02_with_llm.py
+python step_03_defects_exposed.py
+python step_04_with_containment.py
+```
+
+---
+
+## 💰 Why this lands — competitive positioning
+
+A bank has four ways to try to stop a chatbot from stating a wrong rate, fee, or rule. This walkthrough runs or discusses all four, so I compare those approaches rather than named vendors. Each cell traces to a script's output or to text elsewhere in this folder.
+
+| Capability | Rule-based router (Step 1) | LLM only (Step 2) | Swap the foundation model (Step 3) | **LLM + containment (Step 4)** |
+| --- | --- | --- | --- | --- |
+| Correct answers served, 30-query set | 🟢 2 (both only point to a product page) | 🟢 11 | n/m | 🟢 11 |
+| Wrong answers reaching the customer | 🟢 0 | 🟢 19 | Non-zero. Llama 3.1 70B to Claude Sonnet 4 gains 8 to 16 points of pass rate per failure mode (Step 3 table) | 🟢 0 |
+| Sent to a page or a banker | 🟢 28 (93.3%) | 🟢 0 | n/m | 🟢 19 (63.3%) |
+| Checks the answer before the customer sees it | No | No | No | Yes: verifier score against a per-use-case threshold (0.82 rates, regs, disputes; 0.65 general). The scores are fixed mock values in this repo |
+| Exposed to a silent vendor model update | No model to update | Yes | Yes, to a different vendor | 🔴 Designed to pin the snapshot and probe nightly; not built in this prototype |
+| Changes the existing chatbot | Replaces it | n/a | Swaps the model underneath it | 🔴 Designed to leave it untouched |
+
+*n/m: not measured by a step script.*
+
+**Position:** *HalluGuard does not replace the chatbot, the retrieval layer, or the foundation model. It sits between the draft answer and the customer and holds back anything the retrieved data does not support.* On this 30-query set that trade is 0 wrong answers served for 19 handoffs to a banker. The set is built from failure cases, so the live handoff rate should be lower, but it is not measured. A model swap moves the pass rate by points; it does not add a check.
+
+---
+
+## The honest version (why this exists)
+
+The failure mode this product is designed against: a bank's chatbot tells a customer, in fluent and confident language, that Premier Checking has a monthly fee when it has none (Q02 in [`data/queries.csv`](./data/queries.csv)), that a California resident can open an account the bank does not offer in California (Q04), or that APY disclosure falls under an act that does not exist (Q05). Each is a wrong statement about a fee, an eligibility rule, or a regulation. The customer may act on it. Compliance opens an incident and Legal reviews it. A better model lowers the count and does not take it to zero, so the check has to sit outside the model.
+
+This is a prototype on synthetic data. I used no insider data and touched no production systems. The model answers and verifier scores in the step scripts are stored mock values, so anyone who clones the repo gets the same output on every run. What the prototype shows is how I name and group the failure modes, how a per-use-case abstention threshold routes answers, and what the architecture around it would be. It does not show how accurate a trained verifier is. I have not trained one.
+
+If you have handled one of these incidents, fork this. The taxonomy and the architecture are yours to lift. Validation against real traffic is the work I have not done.
+
+---
+
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a cloud account, or an API key. You need:
+
+- **Python 3.** The repo's dev container uses 3.11. The four step scripts import only the Python standard library (`csv`, `os`, `pathlib`, `collections`), so they run without installing anything.
+- **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
+- **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, and `plotly`. The step scripts do not use them.
+- **No API key for the step scripts.** The model answers in Step 2 are stored mock values (`MOCK_RESPONSES` in `src/step_02_with_llm.py`), and the verifier scores in Step 4 are fixed per-query values (`VERIFIER_SCORES` in `src/step_04_with_containment.py`). The scripts read the CSVs in `data/` and make no network calls. To run against a real model, replace `mock_llm_response()` in Step 2 with your own call.
+- **A browser**, for [`demo.html`](./demo.html). It needs no install.
+- **Or skip local setup.** The repo's dev container installs Streamlit and starts the prototype on port 8501 in GitHub Codespaces.
+
+Run the steps in order. Each writes a results file to `src/out/`, and Step 3 reads the file Step 2 writes.
+
+If any of this fails on your machine, that is a bug in this README. Open an issue.
+
+---
+
+## Executive summary (90 seconds)
+
+**Problem.** A retail-bank chatbot that misstates a rate, a fee, an eligibility rule, or a regulation opens a Compliance incident each time, and Legal reviews each one. On the 30-query eval set, the keyword router the bank ran before LLMs answers 2 questions and sends the other 28 to a page or a banker. Adding an LLM answers 11 correctly and states 19 wrongly, in fluent, confident language. The 19 fall into five named failure modes: negation flip (8), multi-hop (5), citation fabrication (2), jurisdiction (2), and currency-unit confusion (2). The set is hand-picked to trigger failures, so 19 of 30 is a stress-test rate, not a production error rate. Swapping the foundation model does not close the gap: in the Step 3 table, moving from Llama 3.1 70B to Claude Sonnet 4 adds 8 to 16 points of pass rate per failure mode, and confident-and-wrong stays at 33% to 41% on all three models.
+
+**Product.** HalluGuard — a containment layer that wraps the existing chatbot without modifying it: **Grounding verifier** (scores whether a draft answer matches the retrieved rows; the production design is a LoRA fine-tune of Llama 3.1 8B) + **Calibrated abstention** (below a per-use-case threshold, 0.82 for rates, regs, and disputes and 0.65 for general questions, the answer becomes "let me get a banker") + **Vendor pinning and drift** (lock the foundation model snapshot and run the probe set nightly; 🔴 designed, not built in this prototype).
+
+**Measured and modeled performance (30-query eval set).**
+
+- 🟢 **Rule-based router (Step 1):** 2 of 30 answered, both only pointing to a product page; 28 of 30 (93.3%) sent to a page or a banker
+- 🟢 **LLM only (Step 2):** 11 of 30 correct; 19 wrong answers would reach the customer
+- 🟢 **LLM + containment (Step 4):** serves 11, ships 0 wrong, abstains on 19 (63.3% handed to a banker). All 11 correct answers were served and all 19 wrong ones were held back
+- **What that result shows.** The verifier scores in Step 4 are fixed values (`VERIFIER_SCORES`) set to match the design, so 19 to 0 shows the threshold and routing logic working. It does not measure a trained verifier. The 63.3% handoff rate comes from a set built from failure cases; the handoff rate on live traffic is not measured
+- 🟡 **Annual wrong answers prevented, incident counts, and deflection retained: being re-modeled.** The earlier figures were built on an older Step 2 result (8 of 30 wrong) and are flagged stale in [Utility Delivered](#-utility-delivered) and the pilot targets table. I am not restating them as findings until they are re-derived on a representative traffic mix
+- 🔴 **Customer-satisfaction effect of abstaining vs. confidently misstating:** designed, never measured against live traffic
+
+**Modeled cost.** 🟡 ~$182 in training compute for the LoRA verifier (4× A100 for 6 hours, the run I'd execute), plus 0.5 FTE labeling lead for 6 weeks, plus my time as PM. Not executed: the verifier in this repo is a mock.
+
+**Call to action.** Fork this repo. Swap [`data/queries.csv`](./data/queries.csv) for the questions your own bot gets wrong, each with the correct answer and a failure class. Replace the two mocks, the model answers in Step 2 and the verifier scores in Step 4, with your chatbot and a verifier, then compare the numbers. Walk it through your Head of Digital CX or your Trust & Safety lead.
+
 ---
 
 ## 🗺️ What this walkthrough covers
@@ -88,7 +186,7 @@ Four small CSVs in [`data/`](./data/):
 | PCK | overdraft (each thereafter) | 35.00 | capped at 4 per day |
 | TRV | international ATM | 5.00 | + 1% of withdrawal |
 
-**`data/queries.csv`** — 30 real customer questions, hand-curated from incident logs (PII scrubbed):
+**`data/queries.csv`** — 30 synthetic customer questions, written to mirror the failure patterns banks report for retail chatbots:
 
 | query_id | question | correct_answer | deficiency_class |
 | --- | --- | --- | --- |
@@ -167,10 +265,12 @@ python src/step_01_before_llm.py
 
 **In plain English:** Add an LLM. Two changes:
 
-1. **Retrieval.** When a customer asks a question, search the product/rate/fee data for the most relevant rows. (Done with embeddings — `text-embedding-3-large` over `pgvector`.)
+1. **Retrieval.** When a customer asks a question, search the product/rate/fee data for the most relevant rows. (Production design: embeddings with `text-embedding-3-large` over `pgvector`.)
 2. **Generation.** Pass those rows + the question to Claude Sonnet, ask for a natural-language answer.
 
 The LLM can now read the customer's question, understand intent (even with paraphrasing), and write a real reply.
+
+> **What the script does.** `step_02_with_llm.py` prints stored mock answers keyed by `query_id`; it makes no model call and does not run retrieval. The `retrieve()` function in the file is a keyword-matching stub, not the embedding search described above. Those answers are written to mirror what foundation models produce on this query set, so the pipeline above is the design and the output below is a recorded stand-in for it.
 
 **The code** ([`src/step_02_with_llm.py`](./src/step_02_with_llm.py), simplified):
 
@@ -283,6 +383,8 @@ The defects above aren't "the model is bad." They're specific, reproducible patt
 | Multi-hop failure | 64% pass | 61% pass | 49% pass |
 | Reg-citation fabrication | 58% pass | 49% pass | 42% pass |
 | Confident-and-wrong | 41% pass | 38% pass | 33% pass |
+
+These pass rates are stored in `src/step_03_defects_exposed.py`. This repo does not include the runs that produced them, so they are not tagged measured.
 
 Reading this table tells you the answer for the bank: **swapping the model from Llama to Claude buys you maybe 10-20% on each failure mode. Not enough.** The "confident-and-wrong" mode is uniformly bad across all three. **A model upgrade does not get you out of this. The fix is containment.**
 
@@ -518,15 +620,41 @@ Modeled 28-day pilot design at a mid-tier US bank shape. These targets predate t
 
 ---
 
-## 🧭 How to Read the Rest of This Folder
+## 📋 PM Artifacts
 
-This README is the walkthrough. The deeper artifacts:
+This README is the walkthrough. These are the PM artifacts that show how I'd run this product if I owned the seat:
 
 - [`PRD.md`](./PRD.md) — the product requirements doc designed for a pre-MRM-committee read in a real engagement.
 - [`ARCHITECTURE.md`](./ARCHITECTURE.md) — the systems doc: request-path vs out-of-band components, fail-closed behavior, data model, threshold governance, threat model. Flow diagram: [`assets/halluguard-flow.svg`](./assets/halluguard-flow.svg).
 - [`demo.html`](./demo.html) — clickable, no-install version of the walkthrough.
 - [`probes/`](./probes/) — the diagnostic test set. 1,260 examples across the eight failure modes. Three deficiency files committed as samples.
-- [`scripts/run-probes.sh`](./scripts/run-probes.sh) — CLI to run the full probe suite against any foundation model with a CI gate.
+- [`scripts/run-probes.sh`](./scripts/run-probes.sh) — CLI wrapper to run the probe suite against a foundation model with a CI gate. It calls `run_probes.py`, which is not in this repo yet, so the script does not run as is.
+
+---
+
+## 🚀 Fork this for your team
+
+```bash
+git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
+cd ai-pm-portfolio/01-halluguard-bank-chatbot-safety
+
+# 1. Drop in your own questions (columns: query_id, question, correct_answer, deficiency_class)
+cp /path/to/your/queries.csv data/queries.csv
+
+# 2. Run the four-step walkthrough
+pip install -r src/requirements.txt   # Streamlit prototype only
+python src/step_01_before_llm.py
+python src/step_02_with_llm.py
+python src/step_03_defects_exposed.py
+python src/step_04_with_containment.py
+
+# 3. Open the interactive demo
+open demo.html               # standalone, no Python needed; it does not read your CSV
+```
+
+Step 2 and Step 4 look up their answers and scores by `query_id`, so queries you swap in will not match the stored mock values. Replace `mock_llm_response()` in `src/step_02_with_llm.py` with a call to your chatbot, and `VERIFIER_SCORES` in `src/step_04_with_containment.py` with scores from your verifier. Until you do, a `query_id` outside Q01-Q30 gets a placeholder answer and a 0.5 score.
+
+If you run it on real data and get something useful, open an issue or send me the slide. I'd rather see what your Head of Digital CX or Trust & Safety lead did with it than what I think it should do.
 
 ---
 
@@ -595,4 +723,3 @@ If your seat involves shipping AI under regulated constraint, this is the kind o
 - [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM09: Misinformation. The canonical industry framing.
 - [Simon Willison](https://simonwillison.net/tags/hallucination/) — weekly hallucination posts. Required reading.
 - [Microsoft Presidio](https://microsoft.github.io/presidio/) — PII scrub on the labeling pipeline.
-

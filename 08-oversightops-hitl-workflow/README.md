@@ -75,6 +75,23 @@ If you have run a HITL queue and watched it become a rubber-stamp factory under 
 
 ---
 
+## Prereqs to run this on your laptop (in plain English)
+
+You don't need a cluster, a cloud account, or an API key. You need:
+
+- **Python 3.** The four step scripts use only the standard library, so there is nothing to install for them. All four run on Python 3.9 and newer. The repo's dev container uses Python 3.11.
+- **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
+- **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, and `plotly`. The step scripts do not use them.
+- **No API key.** The step scripts read the CSVs in `data/` and make no network calls.
+- **A browser**, for [`demo.html`](./demo.html). It needs no install.
+- **Or skip local setup.** The repo's dev container installs the packages and starts the HalluGuard prototype in GitHub Codespaces. For this project, run `streamlit run 08-oversightops-hitl-workflow/src/app.py` in the Codespace terminal.
+
+Each step writes its results to `src/out/`.
+
+If any of this fails on your machine, that is a bug in this README. Open an issue.
+
+---
+
 ## Executive summary (90 seconds)
 
 **Problem.** A Tier-1 US retail bank's KYC AI flags 12% of new customer applications for human review. The reviewer queue is ~4,500 cases per week. Average review time per case: 9 seconds. Override rate: 6%. The bank's MRM attestation reads: "All Tier-1 KYC decisions undergo human review." The reality, when you look at the audit log nobody reads, is that 🟡 ~94% of reviews complete in under 10 seconds and the reviewer-vs-ground-truth divergence rate over a 6-12-month tail is ~38%. The HITL exists on paper. It does not produce review.
@@ -608,4 +625,3 @@ The Streamlit prototype here proves the *product mechanic* — that difficulty-s
 - [SR 11-7 / OCC Bulletin 2011-12](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) — the ongoing-monitoring requirement HITL satisfies on paper.
 - [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) — names human oversight as the safety lever for high-stakes AI decisions.
 - [Pega](https://www.pega.com/), [Appian](https://appian.com/), [ServiceNow Workflow](https://www.servicenow.com/) — the BPM substrate OversightOps integrates into, not replaces.
-
