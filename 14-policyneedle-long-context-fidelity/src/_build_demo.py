@@ -212,19 +212,16 @@ TEMPLATE = r"""<!DOCTYPE html>
 <body>
 <div class="container">
   <header class="hero">
-    <h1>PolicyNeedle — Long-Context Fidelity Probes</h1>
-    <p class="tagline">Pick a stub reader and a manual length. See it tested three ways: a short-document spot test, a single fixed needle, and the PolicyNeedle sweep (six forms of fact at five depths), with the faults flagged and a CI-style gate verdict.</p>
+    <h1>PolicyNeedle — long-context fidelity probes</h1>
+    <p class="tagline">Pick a stub reader and a manual length. See it tested three ways.</p>
     <p class="author">Project 14 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
       <span class="badge">{{PROBES}} probes</span>
-      <span class="badge">4 stub readers, no model</span>
+      <span class="badge">4 stub readers, not models</span>
       <span class="badge">6 named deficiencies</span>
-      <span class="badge">40, 120 and 240 page manuals</span>
       <span class="badge">synthetic data</span>
     </div>
   </header>
-
-  <p class="note-synthetic">Everything on this page is synthetic. The four readers are small functions written to have known faults. They are stubs, not models, and their answers are not observed behavior of any real model.</p>
 
   <section class="stats" aria-label="Running totals for the scenarios replayed so far">
     <div class="stat"><p class="stat-label">Short test flagged</p><p class="stat-value" id="stat-short">0</p></div>
@@ -261,6 +258,8 @@ TEMPLATE = r"""<!DOCTYPE html>
       <div class="card-body" id="card-pn"></div>
     </div>
   </section>
+
+  <p class="note-synthetic">Everything on this page is synthetic. The four readers are small functions written to have known faults. They are stubs, not models, and their answers are not observed behavior of any real model.</p>
 
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>

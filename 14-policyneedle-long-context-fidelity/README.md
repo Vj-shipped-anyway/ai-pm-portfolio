@@ -468,6 +468,13 @@ flowchart LR
     GATE -->|PASS or FAIL with slice list| EF
     LG -.->|amendment and side letter shapes| MAN
     READER -.->|answer passes to| HG
+
+    classDef existing fill:#e0e7ff,stroke:#4338ca,color:#1e1b4b
+    classDef new fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef nbr fill:#fef3c7,stroke:#d97706,color:#78350f
+    class INPUTS,MAN,QS,READER existing
+    class NEEDLE,AUDIT,RUN,SCORE,MATRIX,LOC,GATE new
+    class NEIGHBOURS,EF,HG,LG nbr
 ```
 
 **Per-probe sequence** (`L120-SUP-050-1`, a superseded clause in the 120-page manual, read by the keyword-window stub):
