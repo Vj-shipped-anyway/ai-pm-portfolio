@@ -85,5 +85,11 @@ jobs:
       - name: Ping KillSwitch
         run: curl -sSf --max-time 60 https://killswitch-bfsi.streamlit.app || true
 
+      - name: Ping StepScout
+        run: curl -sSf --max-time 60 https://stepscout-bfsi.streamlit.app || true
+
+      - name: Ping AgentKit
+        run: curl -sSf --max-time 60 https://agentkit-bfsi.streamlit.app || true
+
       - name: Log completion
         run: echo "Keep-alive ping completed at $(date -u)"
