@@ -76,6 +76,7 @@ def main() -> None:
     total_spot_checked = 0
     total_fabricated_caught = 0
     total_fabricated_present = 0
+    expected_caught = 0.0
 
     with (DATA_DIR / "sample_memos.csv").open() as f:
         for r in csv.DictReader(f):
@@ -93,6 +94,7 @@ def main() -> None:
             caught = [n for n in checked if n.lower() not in sot_index]
             total_spot_checked += n_to_check
             total_fabricated_caught += len(caught)
+            expected_caught += n_to_check * len(fabricated_names) / comps_cited
 
             slipped = max(0, len(fabricated_names) - len(caught))
 
@@ -127,6 +129,9 @@ def main() -> None:
     print(f"  Fabricated comps present:           {total_fabricated_present}")
     print(f"  Fabricated comps caught (modeled):  {total_fabricated_caught}")
     print(f"  Fabricated comps slipped through:   {total_fabricated_present - total_fabricated_caught}")
+    if total_fabricated_present:
+        print(f"  Expected catches across seeds:      {expected_caught:.2f} of {total_fabricated_present}"
+              f" ({expected_caught / total_fabricated_present * 100:.0f}%)")
     print()
     print("  T-12 arithmetic drift:    UNDETECTED (analyst didn't recompute)")
     print("  Submarket stat staleness: UNDETECTED (analyst trusted memo)")

@@ -82,7 +82,7 @@
   <text x="612" y="180" class="stage-sub">PASS / REVIEW / FAIL</text>
   <text x="612" y="195" class="stage-sub">bid-risk dollar model</text>
   <text x="612" y="210" class="stage-sub">override audit ledger</text>
-  <text x="612" y="228" class="meta-fail">VERDICT: FAIL ($2.1M)</text>
+  <text x="612" y="228" class="meta-fail">VERDICT: FAIL ($2.1M modeled)</text>
   <text x="612" y="243" class="meta-text">2 comps fabricated</text>
 
   <!-- Arrow 3 -->
