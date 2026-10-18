@@ -386,10 +386,10 @@ sequenceDiagram
     L->>C: fan-in subscription on (decision_id, customer_id_hash, ts)
     C->>C: join + write immutable row + hash-anchor
     C->>D: INSERT decision_lineage row (within 5 min of decision)
-    Note over D: row immutable; outcome backlink + legal hold are mutable
+    Note over D: row immutable, outcome backlink + legal hold are mutable
     E->>D: GET /v1/lineage/DEC_0150_20260312 (May 8 exam)
     D-->>E: exam pack PDF + JSON, composed in milliseconds + 12-min human review
-    Note over M,E: 🔴 Designed for sub-minute self-serve query; not yet tested with a real examiner.
+    Note over M,E: 🔴 Designed for sub-minute self-serve query, not yet tested with a real examiner.
 ```
 
 **Decision-grain composition table** (the core schema; full DDL in [`ARCHITECTURE.md`](./ARCHITECTURE.md)):
