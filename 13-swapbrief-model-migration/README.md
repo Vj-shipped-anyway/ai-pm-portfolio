@@ -2,6 +2,8 @@
 
 **A portfolio prototype for the week a vendor retires the model behind a production GenAI feature. It turns "the average went up" into a go or no-go decision with slice intervals, cost per correct answer, tail latency, a prompt-fair comparison, and rollback triggers written down before launch. Simulated data; no model is called.**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/13-swapbrief-model-migration/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the decision rule, the architecture, and the walkthrough are mine. Every result comes from a seeded generator that injects known true effects, so a decision rule can be scored against the truth. No real model, vendor, bank, or customer is involved. Production validation (a real evaluation set, a model risk review, a live rollback drill) is what the next role does.
@@ -675,7 +677,7 @@ The portfolio prototype demonstrates the *mechanic*: slice intervals, a status l
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Writes the rollback trigger before the migration ships*
 
@@ -685,7 +687,7 @@ The portfolio prototype demonstrates the *mechanic*: slice intervals, a status l
 
 - **[Hamel Husain — Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** — the eval-first thesis. The reason the evaluation set, the slice tags, and the injected truth in `data/` exist before any decision code.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' and 'Manage' functions: SwapBrief is a measure step (intervals) feeding a manage step (decision and triggers).
-- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the existence proof that a model change needs documented validation and ongoing monitoring; the standard the work would have to meet.
+- **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the existence proof that a model change needs documented validation and ongoing monitoring; the model-risk guidance the work is compared with.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the logging and post-deployment monitoring expectations the trigger and audit design is written toward.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the framing behind the `jailbreak_resistance` slice being critical.
 - **[FinOps Framework](https://www.finops.org/framework/)** — unit economics: the reason the cost figure is cost per correct answer, not cost per token.
