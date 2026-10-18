@@ -174,7 +174,7 @@ CSS = """
     margin-bottom: 16px; line-height: 1.6;
   }
   .run-meta b { color: var(--text-primary); font-weight: 500; }
-  .framing { font-size: 12px; color: var(--text-tertiary); margin: 8px 0 0; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
   @media (max-width: 720px) {
     .grid { grid-template-columns: 1fr; }
     .stats { grid-template-columns: 1fr 1fr; }
@@ -321,16 +321,14 @@ def build_html(p: dict) -> str:
 <div class="container">
   <header class="hero">
     <h1>SchemaWatch — Tool-Schema Drift Detection</h1>
-    <p class="tagline">Pick a tool. See what happens to the same recorded calls three ways: with nothing watching, with a version or hash check, and with SchemaWatch (structural diff, description heuristic, replay, release gate).</p>
+    <p class="tagline">Pick a tool and watch what happens to its recorded calls, with and without SchemaWatch.</p>
     <p class="author">Project 15 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
-      <span class="badge">{n_tools} synthetic tools</span>
-      <span class="badge">{s['changes']} injected changes</span>
-      <span class="badge">{s['calls']:,} recorded calls</span>
+      <span class="badge">Synthetic data</span>
+      <span class="badge">{n_tools} tools · {s['calls']:,} recorded calls · {s['changes']} injected changes</span>
       <span class="badge">6 named deficiencies</span>
-      <span class="badge">release gate</span>
+      <span class="badge">No model: plain rules</span>
     </div>
-    <p class="framing">Portfolio prototype on synthetic data, not a production case study. The truth is known because the generator injected every change. No model is used: the diff, heuristic, validator and gate are plain rules. Every number below is generated from the scripts in <code>src/</code>.</p>
   </header>
 
   <section class="stats" aria-label="Running totals through the selected tool">
@@ -368,6 +366,8 @@ def build_html(p: dict) -> str:
       <div class="card-body" id="card-shield"></div>
     </div>
   </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. The generator injected every change, so the truth is known. No model is used: the diff, heuristic, validator and gate are plain rules. Every number on this page is generated from the scripts in <code>src/</code>.</p>
 
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
