@@ -2,6 +2,8 @@
 
 **A portfolio prototype for mapping AI-related obligations (EU AI Act, model risk guidance, NIST AI RMF, ECOA / Regulation B) to the controls that meet them and to evidence that is still current: a theme dictionary, a scope check, an evidence-freshness check, an orphan-control list and one consolidated evidence request per theme. Aligned to the govern, map, measure and manage themes in the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and to the inventory, validation and monitoring themes in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the April 2026 model-risk guidance; SR 11-7 was its 2011 predecessor).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/16-controlmap-ai-obligation-crosswalk/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the crosswalk design, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real obligation register, a real control library, real evidence dates, a second-line read) is what the next role does.
@@ -136,7 +138,7 @@ Total reading time: about 12 minutes deep, 3 minutes if you skim.
 
 **A modeled bank's AI governance program. 48 obligations from four frameworks, 60 controls, and an exam to prepare for.**
 
-The head of AI governance has to show, for each obligation, which control meets it and whether the evidence is current. The obligations come from the EU AI Act, model risk guidance (SR 26-2), the NIST AI RMF and ECOA / Regulation B, and each framework has its own list. The controls are owned by model risk, credit risk, fair lending, technology, vendor management and the AI platform team, who test on their own cycles.
+The head of AI governance has to show, for each obligation, which control meets it and whether the evidence is current. The obligations come from the EU AI Act, model risk guidance (SR 26-2), the NIST AI RMF and ECOA / Regulation B, and each framework has its own list. SR 26-2 places generative and agentic AI outside its scope, so the modeled bank applies its themes to all of its AI systems by its own policy. The controls are owned by model risk, credit risk, fair lending, technology, vendor management and the AI platform team, who test on their own cycles.
 
 Four things happen in the synthetic data:
 
@@ -730,7 +732,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Governance PM · Designs the join between obligations, controls and evidence, under regulated constraint*
 
@@ -739,7 +741,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 ## 🙌 Acknowledgements
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the govern, map, measure and manage themes are four of the 20 themes the obligations are filed under, and the map and manage obligations are the gaps in the prototype's data.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the April 2026 model-risk guidance from the Federal Reserve, OCC and FDIC, and the standard the work would have to meet on the inventory, validation, monitoring and governance themes. SR 11-7 was its 2011 predecessor.
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the April 2026 model-risk guidance from the Federal Reserve, OCC and FDIC, and the model-risk guidance the work is compared with on the inventory, validation, monitoring and governance themes. SR 11-7 was its 2011 predecessor.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the source of the record-keeping, human-oversight, transparency and risk-management themes in the EU rows, as paraphrased for this exercise.
 - **[Regulation B (CFPB)](https://www.consumerfinance.gov/rules-policy/regulations/1002/)** — the source of the adverse-action reasons and notice themes in the ECOA rows, as paraphrased for this exercise. The notice-timing and record-retention periods are left as "the period the bank has set" in the synthetic data; any real value would be an assumption of the bank, not legal advice.
 - **Sibling projects in this repo** — [11 TierGate](../11-tiergate-ai-usecase-intake/), [09 LineageLog](../09-lineagelog-ai-decision-audit/) and [04 EvalForge](../04-evalforge-llm-eval-platform/), the three interlocks that exist today; 17 FairLens and 19 IncidentLedger are designed interlocks, none built.

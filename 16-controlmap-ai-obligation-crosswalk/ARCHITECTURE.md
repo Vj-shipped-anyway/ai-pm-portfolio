@@ -376,7 +376,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 
 | Framework | How the design relates |
 | --- | --- |
-| **SR 26-2 / model risk management** (SR 11-7 was its 2011 predecessor) | The inventory, validation, monitoring and governance themes appear as obligations; ControlMap maps them to controls and dates the evidence. It does not decide whether a model is validated. |
+| **SR 26-2 / model risk management** (SR 11-7 was its 2011 predecessor) | The inventory, validation, monitoring and governance themes appear as obligations; ControlMap maps them to controls and dates the evidence. It does not decide whether a model is validated. SR 26-2 places generative and agentic AI outside its scope, so the modeled bank applies these themes to its AI systems by its own policy. |
 | **NIST AI RMF** | The govern, map, measure and manage themes appear as obligations; the map and manage functions are the gaps in the prototype's data. |
 | **EU AI Act** | Record-keeping, human oversight, transparency and risk-management themes appear as obligations; the record-keeping hook is the interlock with LineageLog (designed). |
 | **ECOA / Regulation B** | Adverse-action reasons and notice themes appear as obligations scoped to credit decisions; FairLens (17) is the designed source of adverse-action evidence. |
