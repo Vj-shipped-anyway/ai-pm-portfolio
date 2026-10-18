@@ -445,7 +445,7 @@ The full DDL, the immutability trigger, the security architecture (encryption, R
 
 ## 🏛️ Reference architecture — Google Cloud secure-multi-agent paper
 
-AgentWatch is the **agent-reliability observability layer** that sits on top of the four log signals described in Google Cloud's [*Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) (Kannan, Sizemore, Herriford et al., 2025). The paper specifies the data sources and the security controls; AgentWatch is the compositional read-side that turns those sources into the named incident pack a line-1 owner and a FinOps reviewer can act on.
+AgentWatch is the **agent-reliability observability layer** that sits on top of the four log signals described in Google Cloud's [*Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) (Kannan, Sizemore, Herriford et al., 2025). The paper specifies the data sources and the security controls; AgentWatch is the compositional read-side that turns those sources into the named incident pack a line-1 owner and a FinOps reviewer can act on.
 
 **The four log signals the paper defines, mapped to AgentWatch:**
 
@@ -559,13 +559,13 @@ The Streamlit prototype here demonstrates the *product mechanic* on synthetic da
 
 ## 🙌 Acknowledgements
 
-- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture AgentWatch sits on top of.
+- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the reference architecture AgentWatch sits on top of.
 - [OpenTelemetry](https://opentelemetry.io/) — the substrate that makes the AgentWatch sidecar possible. LangGraph, AutoGen, Bedrock Agents, and OpenAI Assistants all export to it.
 - [LangGraph](https://langchain-ai.github.io/langgraph/) — the agent-orchestration framework AgentWatch wraps as a sidecar.
 - [AutoGen](https://microsoft.github.io/autogen/) — Microsoft's multi-agent framework. Native logging hooks.
 - [AWS Bedrock Agents](https://aws.amazon.com/bedrock/agents/) — AWS's managed agent runtime. Action groups + knowledge bases + guardrails.
 - [OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview) — OpenAI's hosted agent runtime. Threads + tools + file search.
-- [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM06 Sensitive Information Disclosure, LLM09 Misinformation. The taxonomy backbone.
+- [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM02 Sensitive Information Disclosure, LLM09 Misinformation. The taxonomy backbone.
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the federal-government framework backbone.
 - SR 11-7 / OCC Bulletin 2011-12 (replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — co-issued model-risk-management guidance. The "ongoing monitoring" requirement AgentWatch implements.
 - [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) — human oversight on high-risk AI systems.

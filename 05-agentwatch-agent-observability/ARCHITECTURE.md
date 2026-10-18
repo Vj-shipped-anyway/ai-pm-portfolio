@@ -2,7 +2,7 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network topology, operational runbooks. What you would hand to your CISO and your platform engineering lead on day one.
 
-This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the [*Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline. The substrate AgentWatch reads from is [OpenTelemetry](https://opentelemetry.io/) — which all four agent frameworks (LangGraph, AutoGen, Bedrock Agents, OpenAI Assistants) export to natively.
+This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the [*Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline. The substrate AgentWatch reads from is [OpenTelemetry](https://opentelemetry.io/) — which all four agent frameworks (LangGraph, AutoGen, Bedrock Agents, OpenAI Assistants) export to natively.
 
 ---
 
@@ -418,7 +418,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | **SR 11-7 / OCC Bulletin 2011-12** | The per-incident reliability evidence is the missing piece for "documented ongoing monitoring" of deployed agents. PRD references the relevant supervisory expectations. |
 | **NIST AI RMF 1.0** | Per-agent incident composition maintained for the deployed fleet. AgentWatch is the implementation surface for the framework's "Measure" + "Manage" functions. |
 | **EU AI Act Article 14** | Human oversight requirement for high-risk AI systems. AgentWatch surfaces the human-vs-autonomous reviewer distinction; the incident pack is the audit evidence. EU instance enforces data residency. |
-| **OWASP LLM Top 10** | LLM06 (Sensitive Information Disclosure) and LLM09 (Misinformation) anchor the taxonomy. AgentWatch's schema validator catches the LLM06 / LLM09 surface that prompt-injection defense (PromptShield) misses. |
+| **OWASP LLM Top 10** | LLM02 (Sensitive Information Disclosure) and LLM09 (Misinformation) anchor the taxonomy. AgentWatch's schema validator catches the LLM02 / LLM09 surface that prompt-injection defense (PromptShield) misses. |
 | **GDPR** | EU instance enforces data residency. Right-to-erasure cascades to `customer_id_hash` deletion with legal-hold override. DPO sign-off documented per region. |
 | **India RBI data localization** | Indian retail-arm agent incidents run on the India regional instance only. No cross-border replication. |
 

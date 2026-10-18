@@ -655,7 +655,7 @@ if st.session_state.step >= 4:
                 ("MTTR", "Mean time to recover. From incident detection to mitigation routed. AgentWatch compresses this from 3 weeks to under 10 minutes."),
                 ("SR 11-7", "Federal Reserve 2011 supervisory letter on model risk management. Requires ongoing monitoring of every production model — including agents."),
                 ("EU AI Act Article 14", "EU regulation requiring human oversight on high-risk AI systems — exactly the autonomous agents AgentWatch observes."),
-                ("OWASP LLM Top 10", "OWASP's canonical taxonomy of LLM application risks. LLM06 (sensitive info disclosure) and LLM09 (misinformation) anchor the AgentWatch taxonomy."),
+                ("OWASP LLM Top 10", "OWASP's canonical taxonomy of LLM application risks. LLM02 (sensitive info disclosure) and LLM09 (misinformation) anchor the AgentWatch taxonomy."),
                 ("NIST AI RMF", "NIST's AI Risk Management Framework. AgentWatch is the implementation surface for the framework's 'Measure' and 'Manage' functions."),
             ],
             columns=["Term", "Plain English"],
@@ -669,7 +669,7 @@ if st.session_state.step >= 4:
             "- [Google Cloud — Agent Identity primitives](https://cloud.google.com/iam/docs/workload-identity-federation)\n"
             "- [LangGraph — agent orchestration framework](https://langchain-ai.github.io/langgraph/)\n"
             "- [AutoGen — Microsoft's multi-agent framework](https://microsoft.github.io/autogen/)\n"
-            "- [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM06 Sensitive Info Disclosure, LLM09 Misinformation\n"
+            "- [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — LLM02 Sensitive Info Disclosure, LLM09 Misinformation\n"
             "- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework)\n"
             "- [SR 11-7 / OCC Bulletin 2011-12 — Supervisory Guidance on Model Risk Management](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)\n"
             "- [EU AI Act — Article 14 (human oversight on high-risk AI)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)"
