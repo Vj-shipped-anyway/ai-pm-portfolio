@@ -104,7 +104,7 @@ Both copilots have the same per-task effect; the generator does not model one be
 ```
 teams.csv ──> employees.csv ──> panel.csv ──────────> Steps 1, 2, 3, 4 (methods)
                    │                                          │
-                   └──> budget.csv, copilots.csv ──> Step 4 (ledger, cost, booking)
+                   └──> budget.csv, copilots.csv ──> Steps 1 to 4 (assumed minutes, value at loaded rates; Step 4 adds ledger, cost, booking)
                                                               │
 truth_person_week.csv, truth_parameters.json ──> scoring only: error against the answer key
 ```

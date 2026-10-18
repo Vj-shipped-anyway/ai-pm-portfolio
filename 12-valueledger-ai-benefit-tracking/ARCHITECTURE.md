@@ -14,7 +14,7 @@ This doc is cloud-agnostic where the design allows it and explicit where it does
 
 ValueLedger is a measurement layer. It does not replace the copilots, the work system, the finance ledger, or the eval harness. It reads from them, estimates a copilot's effect against a comparison group, and writes a benefit statement for review. Nothing in it sits in a user's request path.
 
-Nine components. One is interactive; the rest are batch jobs.
+Nine components. One is interactive, five are batch jobs, and three are support pieces (a cohort registry API, the panel store, and telemetry) that no one's work waits on.
 
 | Component | Responsibility | Language / framework | In request path? | Stateful? |
 | --- | --- | --- | --- | --- |
@@ -190,7 +190,7 @@ CREATE TABLE signoffs (
 
 -- Audit log (immutable, append-only, partitioned by month)
 CREATE TABLE audit_log (
-    audit_id        UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    audit_id        UUID NOT NULL DEFAULT gen_random_uuid(),
     occurred_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     actor_id        TEXT NOT NULL,
     actor_type      TEXT NOT NULL,          -- user / service_account
@@ -198,7 +198,8 @@ CREATE TABLE audit_log (
     resource_type   TEXT NOT NULL,
     resource_id     TEXT NOT NULL,
     payload         JSONB,
-    result          TEXT NOT NULL           -- success / failure / forbidden
+    result          TEXT NOT NULL,          -- success / failure / forbidden
+    PRIMARY KEY (audit_id, occurred_at)
 ) PARTITION BY RANGE (occurred_at);
 ```
 
@@ -439,6 +440,6 @@ Holding that line is the scope discipline: each item above is something a team w
 }
 ```
 
-The values in the example are taken from `step_04_with_valueledger.py` on the synthetic data. A real statement has no answer key. The OpenAPI spec would live at `apps/console/openapi.yaml` and be the source of truth for the console client.
+The values in the example are taken from `step_04_with_valueledger.py` on the synthetic data. A real statement has no answer key. The OpenAPI spec would live at `docs/api/openapi.yaml` and be the source of truth for the console client.
 
 See also: [README](./README.md), [PRD](./PRD.md), and the [clickable demo](https://vj-shipped-anyway.github.io/ai-pm-portfolio/12-valueledger-ai-benefit-tracking/demo.html).

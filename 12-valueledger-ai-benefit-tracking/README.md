@@ -8,11 +8,11 @@
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder on the shipped synthetic data: 320 people × 26 weeks in 24 teams; the script is named next to the number), 🟡 **Modeled** (extrapolated, with the assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Error figures are 🟢 measured against the answer key. Scaling them to a bank's headcount is 🟡 modeled. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
-[![Synthetic people: 160 treated, 160 holdout](https://img.shields.io/badge/synthetic%20people-320-blue)](#)
-[![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)](#)
-[![Error vs answer key: +152% to +5%](https://img.shields.io/badge/error%20vs%20answer%20key-%2B152%25%20%E2%86%92%20%2B5%25-success)](#)
-[![Cash a budget line can absorb: 9% of the claim](https://img.shields.io/badge/cash%20a%20budget%20line%20can%20absorb-9%25%20of%20the%20claim-yellow)](#)
-[![Step scripts: standard library, tested on Python 3.9](https://img.shields.io/badge/step%20scripts-stdlib%20only%20%C2%B7%20Python%203.9-lightgrey)](#)
+![Synthetic people: 160 treated, 160 holdout](https://img.shields.io/badge/synthetic%20people-320-blue)
+![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)
+![Error vs answer key: +152% to +5%](https://img.shields.io/badge/error%20vs%20answer%20key-%2B152%25%20%E2%86%92%20%2B5%25-success)
+![Cash a budget line can absorb: 9% of the claim](https://img.shields.io/badge/cash%20a%20budget%20line%20can%20absorb-9%25%20of%20the%20claim-yellow)
+![Step scripts: standard library, tested on Python 3.9](https://img.shields.io/badge/step%20scripts-stdlib%20only%20%C2%B7%20Python%203.9-lightgrey)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
 
@@ -31,15 +31,15 @@ To run the four-step walkthrough on your laptop:
 
 ```bash
 git clone https://github.com/Vj-shipped-anyway/ai-pm-portfolio
-cd ai-pm-portfolio/12-valueledger-ai-benefit-tracking/src
-pip install -r requirements.txt      # only the Streamlit app needs this; the step scripts use the standard library
-python3 step_01_vendor_claim.py
-python3 step_02_prepost_basic.py
-python3 step_03_deficiencies_exposed.py
-python3 step_04_with_valueledger.py
+cd ai-pm-portfolio/12-valueledger-ai-benefit-tracking
+pip install -r src/requirements.txt  # only the Streamlit app needs this; the step scripts use the standard library
+python3 src/step_01_vendor_claim.py
+python3 src/step_02_prepost_basic.py
+python3 src/step_03_deficiencies_exposed.py
+python3 src/step_04_with_valueledger.py
 ```
 
-To run the Streamlit app locally instead, use `streamlit run app.py` from the same folder.
+To run the Streamlit app locally instead, use `streamlit run app.py` from the `src` folder.
 
 ---
 
@@ -55,7 +55,7 @@ A copilot benefit number can reach leadership in one of three shapes: usage time
 | Handles novelty decay | No: flat by construction | No: the seasonal easing hides it | Depends on when the owner reports | Yes: 🟢 fitted half-life 2.5 weeks against 2.8 in the answer key |
 | Counts overlapping tools once | No: 🟢 12.3% of logged events are the same task twice | Not applicable | Depends on whether owners compare notes | Yes: 🟢 3,177 duplicate events removed from attribution |
 | Ties hours to a budget line | No | No | Depends on the form | Yes: 🟢 hard cash is 22% of ledger value |
-| Interval on the number | None | A narrow one around the wrong answer | None | 95% team-level bootstrap |
+| Interval on the number | None | An interval that excludes the answer key | None | 95% team-level bootstrap |
 | 🟢 Error against the answer key on this data | +152% (2.52x) | +111% (2.11x) | Not measured in this repo | +5% (1.05x) |
 | Where it still fails | Every row above | Every row above except that it measures the work | Depends on the owner's records | 🟢 A change the treated teams made on their own after launch is invisible: 302 h (+15% of true net) injected |
 
@@ -111,7 +111,7 @@ The point of the list above is that anyone curious (AI program lead, finance par
 
 🔴 **Designed, never tested.** A finance sign-off on the hard column, a quarterly statement cycle, and the live joins to TierGate, InferenceLens, and EvalForge. The prototype stands in for each of them with a synthetic column.
 
-**Call to action.** Fork this repo. Swap [`data/panel.csv`](./data/panel.csv), `teams.csv`, `employees.csv`, `budget.csv`, and `copilots.csv` for your own work records and budget lines, run the four step scripts, and put the ledger in front of your finance business partner. Without an answer key, the scoring lines in Steps 3 and 4 have nothing to score against; the estimators still run.
+**Call to action.** Fork this repo. Swap [`data/panel.csv`](./data/panel.csv), `teams.csv`, `employees.csv`, `budget.csv`, and `copilots.csv` for your own work records and budget lines, run the four step scripts, and put the ledger in front of your finance business partner. Without an answer key, the scoring lines in Steps 3 and 4 have nothing to score against, and `load_data()` in `src/valueledger_core.py` must stop reading the two truth files for any step to run; the estimators themselves do not use them.
 
 ---
 
@@ -119,7 +119,7 @@ The point of the list above is that anyone curious (AI program lead, finance par
 
 1. **The use case** — a modeled regulated bank with two overlapping copilots and a business case that multiplies usage by an assumption
 2. **The sample data** — 320 synthetic people over 26 weeks in 24 teams, a budget table, and an answer key
-3. **Step 1 — Before.** The vendor-style claim. Usage events times an assumed minutes saved per use
+3. **Step 1 — Before.** The vendor-style claim. Usage events times an assumed number of minutes saved per use
 4. **Step 2 — Basic approach.** Pre/post comparison of the treated cohort only
 5. **Step 3 — Where this still breaks.** Six named deficiencies, each scored against the answer key
 6. **Step 4 — The fix.** ValueLedger: holdout, difference-in-differences, net of rework, decay curve, deduplication, hard-versus-soft ledger, bootstrap intervals. One known limit left in and printed
@@ -296,7 +296,7 @@ Weekly reduction per task, min (week 13 ... 26):
   7.4  6.6  6.2  5.9  6.3  5.9  6.8  6.5  5.6  6.4  5.9  6.9  6.7  6.9
 ```
 
-**Result:** 🟢 4,311 hours (6.4 minutes per task × 40,265 tasks), $310,377 implied (`step_02_prepost_basic.py`). That is 2.11x the answer key, which Step 3 explains. The weekly reduction per task is roughly flat across the 14 weeks. A flat line reads as a sustained effect. Step 3 shows why that reading is wrong.
+**Result:** 🟢 4,311 hours (a 6.42-minute reduction per task over 40,265 tasks, converted to hours), $310,377 implied (`step_02_prepost_basic.py`). That is 2.11x the answer key, which Step 3 explains. The weekly reduction per task is roughly flat across the 14 weeks. A flat line reads as a sustained effect. Step 3 shows why that reading is wrong.
 
 ---
 
@@ -379,11 +379,11 @@ Bridge from the claim to the answer key (hours):
 
 Six moves, each answering a deficiency from Step 3:
 
-1. **Holdout and difference-in-differences** (b). The effect is the change in minutes per task for treated teams minus the change for holdout teams over the same weeks. The seasonal trend hits both groups, so it cancels, and so does the treated teams' baseline head start. A pre-period check (a gap slope and a placebo launch in week 7) says whether the holdout is a fair stand-in.
+1. **Holdout and difference-in-differences** (a, b). The effect is the change in minutes per task for treated teams minus the change for holdout teams over the same weeks. The seasonal trend hits both groups, so it cancels, and so does the treated teams' baseline head start. A pre-period check (a gap slope and a placebo launch in week 7) says whether the holdout is a fair stand-in.
 2. **Net of rework** (d). Minutes spent correcting copilot output are subtracted.
 3. **A weekly effect curve with decay** (c). Gross minutes saved per distinct assisted task, by week, with an exponential fit, so the launch month is not annualized.
 4. **Overlap deduplication** (e). Each task is counted once. Shared tasks are split equally between the two copilots, a policy choice and not a measurement.
-5. **A hard-versus-soft ledger tied to the budget table** (a, f). Freed time is hard cash only where the cost center has a cash lever, up to the addressable spend on that line. The rest is soft capacity.
+5. **A hard-versus-soft ledger tied to the budget table** (f). Freed time is hard cash only where the cost center has a cash lever, up to the addressable spend on that line. The rest is soft capacity.
 6. **Seeded team-level bootstrap intervals.** Whole teams are resampled with replacement within each arm, 1,000 times, with the standard library. Assignment was by team, so resampling people would understate the noise.
 
 **The code** ([`src/step_04_with_valueledger.py`](./src/step_04_with_valueledger.py), simplified):
@@ -425,7 +425,7 @@ python3 src/step_04_with_valueledger.py
    This check can only see what happened before launch.
 ```
 
-🟢 The pre-period gap slope is -0.050 min per task per week (95% interval -0.131 to +0.022) and the placebo launch is +0.25 min per task, both inside the tolerance: **parallel**. With 12 teams on each side the check can only rule out large divergence, and it can only see the weeks before launch (`step_04_with_valueledger.py`).
+🟢 The pre-period gap slope is -0.050 min per task per week (95% interval -0.131 to +0.022), inside the ±0.15 tolerance, and the placebo launch is +0.25 min per task (95% interval -0.23 to +0.76, which includes zero): **parallel**. With 12 teams on each side the check can only rule out large divergence, and it can only see the weeks before launch (`step_04_with_valueledger.py`).
 
 **Output, net of rework and the effect curve (moves 2 and 3):**
 
@@ -522,7 +522,7 @@ python3 src/step_04_with_valueledger.py
 | **ValueLedger (Step 4)** | **2,152** | **+105 h (+5%)** | 1,784 to 2,559 | yes |
 | Answer key (true net) | 2,046 | 0 | not applicable | not applicable |
 
-🟢 All figures from `step_04_with_valueledger.py`. Pre/post is +111% off with an interval that excludes the truth: confidently wrong. The claim has no interval at all.
+🟢 All figures from `step_04_with_valueledger.py`. Pre/post is +111% off with an interval that excludes the truth: confidently wrong. The claim has no interval at all. Errors and sums are computed from unrounded hours, so a printed difference can be off by 1 (2,152 − 2,046 = 106, printed +105).
 
 **The known limit, left in on purpose.**
 
@@ -560,7 +560,7 @@ The enthusiastic teams made a process change after launch that no column records
 
 The way I price product impact: **Utility = (my solution − current state of the art) × number of people it affects.**
 
-Anything else is theatre. Removing a 152% overstatement from one cohort's business case is not an outcome. *Removing it across every person a copilot program covers at a bank's headcount is.* The state of the art here is what reaches leadership: the claim. The lift is the overstatement removed.
+Anything else is theater. Removing a 152% overstatement from one cohort's business case is not an outcome. *Removing it across every person a copilot program covers at a bank's headcount is.* The state of the art here is what reaches leadership: the claim. The lift is the overstatement removed.
 
 **The math for ValueLedger:**
 
@@ -573,7 +573,7 @@ Anything else is theatre. Removing a 152% overstatement from one cohort's busine
 | 🟢 Phantom benefit removed from the business case | **18.8 h per person** (17.6 h if the whole hidden bias had landed) | claimed minus true net, less ValueLedger's own error |
 | Treated people in the cohort | 160 | `step_04_with_valueledger.py` |
 | 🟡 Modeled bank headcount in scope | **5,000 eligible staff** | Assumption: the same adoption, overlap, rework, and seasonal pattern hold at a bank's mix. Not measured |
-| 🟡 Phantom benefit removed at that scale | **about 94,200 h per 14-week window** | removed per person × 5,000, rounded to three significant figures |
+| 🟡 Phantom benefit removed at that scale | **about 94,200 h per 14-week window** | removed per person (printed as 18.8 h; unrounded 18.84 h, which is (5,166 − 2,152) ÷ 160) × 5,000, rounded to three significant figures |
 | 🟡 Value at the cohort's blended loaded rate | **about $6,780,000 per 14-week window** | $72 per hour blended rate, `step_04_with_valueledger.py`. Hours are not cash: see the hard column |
 | 🟢 Cash a budget line can absorb, per the answer key | $33,706 of $372,329 claimed | `step_03_deficiencies_exposed.py` |
 
@@ -659,7 +659,7 @@ sequenceDiagram
 
     I->>E: usage logs and work records joined into a person by week panel
     C->>E: 12 treated teams and 12 holdout teams with the assignment rule
-    E->>E: pre period gap slope and placebo launch both inside tolerance so the holdout reads as parallel
+    E->>E: pre period gap slope inside tolerance and placebo interval covers zero so the holdout reads as parallel
     E->>E: DiD gross 2,874 h minus rework 723 h equals net 2,152 h
     E->>B: resample whole teams 1000 times with a fixed seed
     B-->>E: interval 1,784 to 2,559 h
@@ -723,7 +723,7 @@ python3 _build_demo.py
 open ../demo.html            # static snapshot; it does not read data/ at run time
 ```
 
-Keep the cohort labels identical across `employees.csv` and `teams.csv`, and keep launch in week 13 or change `LAUNCH_WEEK` in `src/valueledger_core.py`. Steps 3 and 4 also open `truth_person_week.csv` and `truth_parameters.json` to score each method. Real data has no answer key, so with real data remove the scoring lines or the scripts stop there; the estimators in Step 4 do not need the key. A holdout built from teams that chose not to adopt is not a holdout. If you can still decide who gets the tool next, randomize or stagger it by team.
+Keep the cohort labels identical across `employees.csv` and `teams.csv`, and keep launch in week 13 or change `LAUNCH_WEEK` in `src/valueledger_core.py`. `load_data()` in `src/valueledger_core.py` opens `truth_person_week.csv` and `truth_parameters.json` for all four scripts, and Steps 3 and 4 use them to score each method. Real data has no answer key, so with real data remove the answer-key loading from `load_data()` and the scoring lines, or the scripts stop with a missing-file error; the estimators in Step 4 do not need the key. A holdout built from teams that chose not to adopt is not a holdout. If you can still decide who gets the tool next, randomize or stagger it by team.
 
 If you run it on real work data and get something useful, open an issue or send me what your finance partner did with the hard column. I'd rather see that than what I think it should do.
 
@@ -768,7 +768,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 - **Compliance:** aligned to the standard a model used for investment decisions would have to meet (SR 11-7 and the NIST AI RMF Measure function); a legal and works-council read on employee work data is a precondition, not an afterthought.
 - **Deployment:** shadow first: run the statements for one use case beside the existing business case, and let finance compare, before any statement replaces a slide.
 
-The Streamlit prototype here proves the *measurement mechanic*: that a comparison group, a rework deduction, a decay curve, a count-once rule, and a budget-line split move a copilot benefit number from +152% off to +5% off on this data. The production architecture above is what the seat I'm pursuing would deliver.
+The Streamlit prototype here shows the *measurement mechanic*: that a comparison group, a rework deduction, a decay curve, a count-once rule, and a budget-line split move a copilot benefit number from +152% off to +5% off on this data. The production architecture above is what the seat I'm pursuing would deliver.
 
 ---
 
@@ -784,7 +784,7 @@ The Streamlit prototype here proves the *measurement mechanic*: that a compariso
 
 - **[FinOps Foundation framework](https://www.finops.org/framework/)** — the cost-accountability vocabulary the cost side of the ledger borrows. The reason a benefit statement carries its cost beside it.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the Measure function: the standard the benefit measurement would have to meet.
-- **SR 11-7** (the model risk management guidance, see the [OCC bulletin](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html)) — a model that informs an investment decision is in its scope, which is why the interval, the cohort rule, and the known limit travel with the number.
+- **SR 11-7** (the model risk management guidance, see the [SR 26-2, which replaced it](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — a model that informs an investment decision is in its scope, which is why the interval, the cohort rule, and the known limit travel with the number.
 - **Difference-in-differences, placebo tests, and cluster bootstrap** — standard methods from applied statistics, named here without a citation; the implementation in `src/step_04_with_valueledger.py` is mine and uses only the standard library.
 - **[EvalForge](../04-evalforge-llm-eval-platform/)** (Project 04) — the quality guardrail interlock: speed is not bought with errors.
 - **[InferenceLens](../07-inferencelens-inference-finops/)** (Project 07) — the cost side of return.

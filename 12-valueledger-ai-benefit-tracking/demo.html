@@ -275,7 +275,7 @@ function render() {
     '<span class="status-strip ' + (d.covers_pp === "yes" ? "status-green" : "status-red") + '">' + esc(d.covers_pp) + "</span>.";
 
   document.getElementById("card-before").innerHTML =
-    '<p>Usage events times an assumed minutes saved per use. No holdout, no baseline, no rework, no budget line.</p>' +
+    '<p>Usage events times an assumed number of minutes saved per use. No holdout, no baseline, no rework, no budget line.</p>' +
     row("Events logged, both tools", d.claim_events) +
     row("Counted twice", d.claim_dup + " (" + d.dup_pct + ")") +
     row("Assumed minutes per use", d.assumed) +

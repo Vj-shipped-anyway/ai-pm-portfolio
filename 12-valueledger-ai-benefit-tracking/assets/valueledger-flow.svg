@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
   <title id="title">ValueLedger: a usage claim, a pre/post estimate and a difference-in-differences ledger scored against a known true effect</title>
-  <desc id="desc">Four-stage horizontal flow on synthetic data. Stage 1 is the vendor-style claim from usage events. Stage 2 is a pre/post comparison of treated people only. Stage 3 is a difference-in-differences estimate against a holdout cohort, net of rework, with a decay curve and overlap deduplication. Stage 4 splits the net hours into hard cash and soft capacity by budget line. Stage 5 is the benefit statement. A comparison strip shows each method's error against the answer key, which exists only because the data is synthetic.</desc>
+  <desc id="desc">Five-stage flow on synthetic data. Stage 1 is the vendor-style claim from usage events. Stage 2 is a pre/post comparison of treated people only. Stage 3 is a difference-in-differences estimate against a holdout cohort, net of rework, with a decay curve and overlap deduplication. Stage 4 splits the net hours into hard cash and soft capacity by budget line. Stage 5 is the benefit statement. A comparison strip shows each method's error against the answer key, which exists only because the data is synthetic.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
