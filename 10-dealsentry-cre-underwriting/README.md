@@ -2,11 +2,7 @@
 
 *A walkthrough: why AI-drafted CRE underwriting memos silently break on fabricated comps and rolling arithmetic errors, and what an AI Product Manager would build to catch the misses before the bid goes wrong by millions.*
 
-**▶ Live demo:** [dealsentry-cre.streamlit.app](https://dealsentry-cre.streamlit.app) *(placeholder)*
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/10-dealsentry-cre-underwriting/demo.html)
-
-**▶ 60-second interactive walkthrough:** [Click through DealSentry on Arcade](https://app.arcade.software/share/dealsentry-placeholder) *(placeholder)*
 
 > **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic SOT comps, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The AI-underwriting failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
 
@@ -102,7 +98,7 @@ The point of this list is that anyone curious — acquisitions analyst, PropTech
 
 ## Executive summary (90 seconds)
 
-**Problem.** An AI underwriting copilot drafts the first pass of every IC memo, and the draft reads like finished work. It breaks silently on six things: comps that do not exist, T-12 sums that drift, stale submarket stats, cap rates that do not match NOI over price, occupancy that does not match the rent roll, and exit caps set equal to the going-in cap. A typical memo carries 40-80 individually checkable claims, and the senior analyst has time to look at a few of them. The bid clears IC and the broker accepts before a buyer's third-party verifier comes back with "no record" on a cited comp. 🟡 Modeled bid risk at a national operator screening 800-1,200 deals a year: **~$7.2M/yr** (~3-5 bad bids at ~$1.8M each).
+**Problem.** An AI underwriting copilot drafts the first pass of every IC memo, and the draft reads like finished work. It breaks silently on six things: comps that do not exist, T-12 sums that drift, stale submarket stats, cap rates that do not match NOI over price, occupancy that does not match the rent roll, and exit caps set equal to the going-in cap. A typical memo carries 40-80 individually checkable claims, and the senior analyst has time to look at a few of them. The bid clears IC and the broker accepts before a buyer's third-party verifier comes back with "no record" on a cited comp. 🟡 Modeled bid risk at a national operator screening 800-1,200 deals a year: **\~$7.2M/yr** (\~3-5 bad bids at \~$1.8M each).
 
 **Product.** DealSentry — a verification layer behind the copilot, not a replacement for it. Three independent paths: **comp existence** (every cited comp looked up in the source-of-truth comp table) + **symbolic re-run** (T-12 re-sum, cap rate, occupancy, exit-cap spread; no LLM in this path) + **submarket-stat cross-feed** (the cited stat checked against the latest quarter in the stats feed). A verdict follows: PASS, REVIEW (to a senior analyst), or FAIL (does not advance to IC).
 
@@ -113,10 +109,10 @@ The point of this list is that anyone curious — acquisitions analyst, PropTech
 - 🟢 **Deficiency taxonomy (step 3):** 8 deficiency trips across all six classes, in 4 of the 6 memos. The other 2 memos are clean.
 - 🟢 **DealSentry (step 4):** all 3 fabricated comps flagged and all six classes caught. Verdicts: 2 PASS, 1 REVIEW, 3 FAIL, and both clean memos passed. All six memos run in under a second on the standard library alone.
 - 🟡 **Bid risk caught on the sample: $6.78M.** The script prints this as modeled: a flat $2.1M per FAIL and $480K per REVIEW, not a per-deal estimate.
-- 🟡 **Fleet scale (modeled):** ~3-5 bad bids/yr prevented × ~$1.8M each ≈ **~$7.2M/yr** at an operator screening 800-1,200 deals/yr; ~$35M/yr at top-5 institutional fleet scale.
+- 🟡 **Fleet scale (modeled):** \~3-5 bad bids/yr prevented × \~$1.8M each ≈ **\~$7.2M/yr** at an operator screening 800-1,200 deals/yr; \~$35M/yr at top-5 institutional fleet scale.
 - 🟡 **Per-memo verifier runtime: <90s p95** in a live-feed design, dominated by source-of-truth API latency on a cache miss.
 
-🟡 **Modeled cost.** ~$420K/yr at fleet scale (source-of-truth API costs, compute, and 0.5 FTE senior analyst on the override workflow). A pilot build is ~$28K in compute plus a 0.5 FTE labeling lead for 6 weeks and my time as PM. Designed, not yet executed.
+🟡 **Modeled cost.** \~$420K/yr at fleet scale (source-of-truth API costs, compute, and 0.5 FTE senior analyst on the override workflow). A pilot build is \~$28K in compute plus a 0.5 FTE labeling lead for 6 weeks and my time as PM. Designed, not yet executed.
 
 **Call to action.** Fork this repo. Swap the synthetic [`data/sample_memos.csv`](./data/sample_memos.csv), [`data/sot_comps.csv`](./data/sot_comps.csv), and [`data/sot_stats.csv`](./data/sot_stats.csv) for your own memos and feeds. The four step scripts run on a laptop with no installs. Walk the output through your acquisitions lead or your IC chair.
 
@@ -132,7 +128,7 @@ The point of this list is that anyone curious — acquisitions analyst, PropTech
 6. **Step 4 — The fix.** DealSentry: three independent verifier paths that catch what the analyst spot-check missed.
 7. **Utility delivered.** The multiplied number, plus a modeled fleet-scale projection.
 
-Total reading time: ~15 minutes for the full walkthrough. ~5 minutes if you skim the headers and tables.
+Total reading time: \~15 minutes for the full walkthrough. \~5 minutes if you skim the headers and tables.
 
 ---
 
@@ -155,7 +151,7 @@ It silently breaks on:
 
 The acquisitions team finds out when the bid clears IC, the broker accepts, due diligence opens, and the buyer's third-party comp verifier comes back with two of the cited comps marked "no record." By then the bid is on the table and the IC chair is asking how this happened.
 
-🟡 **Modeled bid risk at a national CRE operator screening 800-1,200 deals/yr through an AI underwriting copilot: ~$7.2M/yr** (assumes 3-5 bad bids prevented per year at ~$1.8M each in mispriced acquisition — calibrated against published PropTech-vendor independent audits of AI-generated comp citations and the operator's own deal flow shape) — comp-fabrication-driven mispricing, T-12 math drift compounded by cap-rate, and stale-stat-driven asking-rent overstatement.
+🟡 **Modeled bid risk at a national CRE operator screening 800-1,200 deals/yr through an AI underwriting copilot: \~$7.2M/yr** (assumes 3-5 bad bids prevented per year at \~$1.8M each in mispriced acquisition — calibrated against published PropTech-vendor independent audits of AI-generated comp citations and the operator's own deal flow shape) — comp-fabrication-driven mispricing, T-12 math drift compounded by cap-rate, and stale-stat-driven asking-rent overstatement.
 
 The PropTech-founder consensus on this has been public for two years. CoStar, Reonomy, Cherre, CompStak, RCA/MSCI — all of them have published or spoken about AI underwriting copilots producing plausible-shaped comp citations that don't survive deference. The deployed copilots in the public PropTech writing rarely have a deterministic verification layer downstream of the primary drafting model.
 
@@ -373,7 +369,7 @@ python src/step_04_with_dealsentry.py
 | `MEMO_05` Bellevue MOB | passed (stale stat slipped) | **REVIEW** (2024-Q3 stat shown as current) |
 | `MEMO_06` Chicago industrial | passed (multi-fault slipped) | **FAIL** (fabricated comp + cap math + occupancy + exit cap caught) |
 | 🟢 **Aggregate** | 6/6 advanced to IC (0 deficiencies caught) | 2 PASS · 1 REVIEW · 3 FAIL · **$6.78M modeled bid risk caught** |
-| 🟡 **Projected at fleet scale** | n/a | 🟡 ~3-5 bad bids/yr prevented at ~$1.8M each = **~$7.2M/yr** modeled at a national operator |
+| 🟡 **Projected at fleet scale** | n/a | 🟡 \~3-5 bad bids/yr prevented at \~$1.8M each = **\~$7.2M/yr** modeled at a national operator |
 
 🟢 **DealSentry turns 3 bid-killing memos on this sample into 3 senior-review or rejected workpapers**, at a marginal cost of <5 seconds of compute per memo (symbolic re-run is plain Python; comp verification is an indexed lookup; submarket cross-check is a single CSV join). The 1 REVIEW (Bellevue MOB) is what the system correctly routes to a human — a stale-stat finding that a senior analyst should resolve before IC, not the verifier auto-rejecting.
 
@@ -385,22 +381,22 @@ The way I price product impact: **Utility = (my solution − current state of th
 
 Anything else is theatre. Going from 0% to 100% catch on the 3 fabricated comps in this sample is not an outcome. *Going from ~28% catch (analyst spot-check baseline) to 100% catch across 800-1,200 deals/yr at a national CRE operator is.*
 
-> **Needs re-modeling.** The ~28% spot-check baseline below was built on an earlier read of Step 2 ("5 fabricated comps", "~3 hits per fabrication"). The data holds 3 fabricated comps and the script samples one comp per memo, so the expected catch on this set is about 18%, and 0 of 3 at the fixed seed. The per-memo lift, the annual bad-bid counts, the ~$7.2M and ~$35M figures, and the per-finding cost have not been re-derived. Treat them as stale until they are re-modeled on a representative deal mix.
+> **Needs re-modeling.** The \~28% spot-check baseline below was built on an earlier read of Step 2 ("5 fabricated comps", "\~3 hits per fabrication"). The data holds 3 fabricated comps and the script samples one comp per memo, so the expected catch on this set is about 18%, and 0 of 3 at the fixed seed. The per-memo lift, the annual bad-bid counts, the \~$7.2M and \~$35M figures, and the per-finding cost have not been re-derived. Treat them as stale until they are re-modeled on a representative deal mix.
 
 **The math for DealSentry (stale inputs, see the note above):**
 
 | Term | Value | Where it comes from |
 | --- | --- | --- |
-| 🟡 Current state of the art (analyst spot-check) | ~28% of fabricated comps caught (needs re-modeling; this sample: 0 of 3) | 10% sample rate × ~3 hits per fabrication × calibrated to published BFSI / PropTech analyst capacity literature |
+| 🟡 Current state of the art (analyst spot-check) | \~28% of fabricated comps caught (needs re-modeling; this sample: 0 of 3) | 10% sample rate × \~3 hits per fabrication × calibrated to published BFSI / PropTech analyst capacity literature |
 | 🟢 DealSentry on this eval set | 100% of fabricated comps + 100% of T-12 / cap / occupancy / exit-cap / stale-stat findings caught | Step 4 measured output on the 6-memo set; 6 deficiencies caught of 6 designed in |
 | 🟡 Per-memo lift | ~72 percentage-points of fabricated-comp catch + 5 deficiency classes spot-check ignores entirely | difference |
 | Affected (modeled national operator) | 800-1,200 deals/yr screened through AI underwriting | published PropTech-vendor deployment scale + industry deal flow |
-| 🟡 Annual bad-bid prevention (modeled) | ~3-5 bad bids/yr × ~$1.8M each = **~$7.2M/yr** | bid-risk shape from the 6-memo eval set scaled to deal volume + published independent audit fabrication rate (~12-18%) |
-| 🟡 At fleet scale (top-5 institutional CRE operator) | ~15-25 bad bids/yr × ~$1.8M each = **~$35M/yr** | same per-deal risk at full institutional fleet shape |
+| 🟡 Annual bad-bid prevention (modeled) | \~3-5 bad bids/yr × \~$1.8M each = **\~$7.2M/yr** | bid-risk shape from the 6-memo eval set scaled to deal volume + published independent audit fabrication rate (\~12-18%) |
+| 🟡 At fleet scale (top-5 institutional CRE operator) | \~15-25 bad bids/yr × \~$1.8M each = **\~$35M/yr** | same per-deal risk at full institutional fleet shape |
 | 🟡 Modeled cost to deliver (fleet scale) | **~$420K/yr** | CoStar / Reonomy / Cherre API costs (cached) + compute + 0.5 FTE senior analyst on the override workflow |
 | 🟡 Per finding caught | **~$28** | vs $3K-$8K to manually re-verify a memo against CoStar from scratch |
 
-**Modeled 90-day pilot shape (the design target).** A 220-deal-flow team running DealSentry in shadow for 90 days would expect to surface ~6-12 memo-killing findings the analyst spot-check missed — every one of them the kind of error that would hit the bid by millions on the existing copilot. The ~$7.2M/yr number is the annualized projection of that shadow run, conservative on the rare-error tail.
+**Modeled 90-day pilot shape (the design target).** A 220-deal-flow team running DealSentry in shadow for 90 days would expect to surface \~6-12 memo-killing findings the analyst spot-check missed — every one of them the kind of error that would hit the bid by millions on the existing copilot. The \~$7.2M/yr number is the annualized projection of that shadow run, conservative on the rare-error tail.
 
 **At fleet scale (a top-5 institutional CRE operator with $25B+ AUM and 1,200+ deals screened/yr):** the math is roughly **15-25 bad bids prevented per year**, plus the larger uncounted benefit of trust restoration in the AI underwriting tool itself and the bid-discipline reputation with brokers.
 
@@ -416,9 +412,9 @@ Modeled 90-day shadow window at a 220-deal/yr institutional CRE operator shape:
 
 | Metric | Before DealSentry | With DealSentry |
 | --- | --- | --- |
-| 🟡 % of memos with at least one named deficiency | ~22% | ~22% (rate unchanged; copilot still drafts) |
+| 🟡 % of memos with at least one named deficiency | \~22% | \~22% (rate unchanged; copilot still drafts) |
 | 🟡 % of those that ship to IC unverified | ~95% | 0% (every finding routes to senior or rejects) |
-| 🟡 Modeled bad bids per year | ~3-5 | ~0-1 (residual where SOT itself disagrees and the override path approves a wrong call) |
+| 🟡 Modeled bad bids per year | \~3-5 | \~0-1 (residual where SOT itself disagrees and the override path approves a wrong call) |
 | 🟡 Mean time to detect a fabricated comp | 4-12 weeks (due-diligence buyer) | <5 sec (per-memo verifier path 1) |
 | 🟡 Modeled $ avoided / yr at this operator shape | — | **~$7.2M** |
 | 🟡 Per-memo verifier runtime | n/a | < 90s p95 (parallel paths, dominated by SOT API latency on cache miss) |
