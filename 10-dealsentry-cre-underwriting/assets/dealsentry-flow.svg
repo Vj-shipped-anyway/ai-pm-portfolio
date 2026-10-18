@@ -107,7 +107,7 @@
   <text x="32" y="385" class="stage-sub">- 10% of comps manually checked against CoStar</text>
   <text x="32" y="402" class="stage-sub">- T-12 math: trusted, not recomputed</text>
   <text x="32" y="419" class="stage-sub">- Submarket stats: trusted, not cross-checked</text>
-  <text x="32" y="438" class="meta-fail">Modeled catch rate on fabricated comps: ~28%</text>
+  <text x="32" y="438" class="meta-fail">Modeled: ~28% caught (needs re-modeling)</text>
   <text x="32" y="453" class="timer">5-10 min review per memo · 5 deficiency classes uncovered</text>
 
   <rect x="490" y="345" width="450" height="115" rx="8" fill="#ecfdf5" stroke="#bbf7d0" stroke-width="1"/>
