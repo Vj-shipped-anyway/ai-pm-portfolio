@@ -2,6 +2,8 @@
 
 **A portfolio prototype for finding the gap that overall accuracy hides in a credit-decision model: approval rate and adverse impact ratio by group with a bootstrap interval, a cutoff sweep, a proxy ablation, a reason-code check and a PASS, REVIEW or FAIL verdict per test. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026; it replaced the 2011 predecessor, SR 11-7), with the reason-code test written against the adverse-action theme in [Regulation B](https://www.consumerfinance.gov/rules-policy/regulations/1002/).**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/17-fairlens-credit-model-fairness/demo.html)
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the test pack, the verdict rules, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real decision log, a defensible group-inference step, a fair-lending counsel read, a model-risk read) is what the next role does. Nothing here is a legal finding.
@@ -692,7 +694,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs repeatable fairness tests for credit-decision models, under regulated constraint*
 
@@ -703,7 +705,7 @@ The portfolio prototype is the conversation-starter. The production architecture
 Obligation themes named below are a paraphrase written for this exercise, not the text of the rule.
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function maps onto the six tests: repeatable measurement of a deployed system's behavior across the groups it affects.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance (the 2011 predecessor, SR 11-7, was replaced in April 2026) and the standard the work would have to meet. The theme this prototype maps to is ongoing outcomes analysis on a model in use.
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance (the 2011 predecessor, SR 11-7, was replaced in April 2026) and the model-risk guidance the work is compared with. The theme this prototype maps to is ongoing outcomes analysis on a model in use.
 - **[Regulation B](https://www.consumerfinance.gov/rules-policy/regulations/1002/)** — the CFPB's rule on credit discrimination and notices to declined applicants. The theme the reason-code test maps to is that the reasons given should be the ones that drove the decision.
 - **[29 CFR 1607](https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1607)** — the employment guidance where the four-fifths convention comes from. It is used here only as a screening convention, not as a credit-law standard.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — lists the creditworthiness assessment of natural persons among its high-risk topics; named here, not quoted, as the reason the full pack belongs in the highest tier.
