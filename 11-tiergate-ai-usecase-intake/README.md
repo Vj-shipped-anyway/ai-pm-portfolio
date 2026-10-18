@@ -479,6 +479,13 @@ flowchart LR
     EVIDENCE -.-> EVALFORGE
     RUBRIC -.-> OVERSIGHT
     MRM -.-> LEDGER
+
+    classDef existing fill:#e0e7ff,stroke:#4338ca,color:#1e1b4b
+    classDef new fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef nbr fill:#fef3c7,stroke:#d97706,color:#78350f
+    class EXISTING,FORM,SHEET,MRM,SOURCES,CATALOG,REGISTRY existing
+    class TIERGATE,INTAKE,CHECKER,RUBRIC,EVIDENCE,LINKER,QUEUE,CONSOLE new
+    class INTERLOCKS,LINEAGE,EVALFORGE,OVERSIGHT,LEDGER nbr
 ```
 
 **Per-submission sequence** (`UC-132`):
