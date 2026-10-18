@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SchemaWatch — Tool-Schema Drift Detection · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of SchemaWatch: tool-schema drift detection for tool-calling agents. It diffs each schema release, replays recorded calls, ranks the blast radius and gates the release. Synthetic data.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldrow:first-of-type { border-top: 0; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; overflow-wrap: anywhere; }
+  .fieldvals { color: var(--text-secondary); overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 999px; margin-left: 6px; }
+  .tag-ok { background: #EAF3DE; color: #27500A; }
+  .tag-bad { background: #FCEBEB; color: #791F1F; }
+  .tag-warn { background: #FAEEDA; color: #633806; }
+  .reltitle { font-size: 12px; font-weight: 500; margin: 10px 0 4px; overflow-wrap: anywhere; }
+  .reltitle:first-child { margin-top: 0; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: 8px 0 0; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>SchemaWatch — Tool-Schema Drift Detection</h1>
+    <p class="tagline">Pick a tool. See what happens to the same recorded calls three ways: with nothing watching, with a version or hash check, and with SchemaWatch (structural diff, description heuristic, replay, release gate).</p>
+    <p class="author">Project 15 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">28 synthetic tools</span>
+      <span class="badge">45 injected changes</span>
+      <span class="badge">2,500 recorded calls</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">release gate</span>
+    </div>
+    <p class="framing">Portfolio prototype on synthetic data, not a production case study. The truth is known because the generator injected every change. No model is used: the diff, heuristic, validator and gate are plain rules. Every number below is generated from the scripts in <code>src/</code>.</p>
+  </header>
+
+  <section class="stats" aria-label="Running totals through the selected tool">
+    <div class="stat"><p class="stat-label">Calls that break</p><p class="stat-value" id="stat-broken">—</p></div>
+    <div class="stat"><p class="stat-label">Predicted by replay</p><p class="stat-value" id="stat-predicted">—</p></div>
+    <div class="stat"><p class="stat-label">Broken, version never bumped</p><p class="stat-value" id="stat-unbumped">—</p></div>
+    <div class="stat"><p class="stat-label">Misread, not flagged (known limit)</p><p class="stat-value" id="stat-unflagged">—</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="tool-select">Tool</label>
+    <select id="tool-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next tool</button>
+    <button id="runall-btn">Replay all 28 tools</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Nothing watches</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>Basic — Version or hash</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With SchemaWatch</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (calls broken or misread per change without SchemaWatch − with it) × schema changes per quarter</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> 1,280 of 2,500 recorded calls are broken or misread across 45 changes (28.44 per change). With the gate holding every BLOCK and REVIEW, 169 remain (3.76 per change): the 3 meaning changes with no number or unit, which the heuristic cannot see. Replay predicted 742 of 742 broken calls with 0 false positives and 0 misses; classification matched the ledger on 41 of 45 changes.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 12 schema changes per quarter across a 28-tool estate (an assumption, not a statistic) gives (28.44 − 3.76) × 12 = <b>296 calls per quarter</b> per recorded week of exposure per change. Assumes every BLOCK and REVIEW is acted on before the release reaches the agent.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/15-schemawatch-tool-schema-drift/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/15-schemawatch-tool-schema-drift/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/15-schemawatch-tool-schema-drift/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/schemawatch-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"tools":[{"tool":"get_transaction_history","calls":295,"rank":1,"decision":"BLOCK","would_break":143,"at_risk":72,"silent":72,"unbumped_broken":143,"unflagged_silent":0,"releases":[{"id":"get_transaction_history@v2","rev":"v2","before":"1.3.0","after":"1.3.0","bumped":false,"ledger_class":"breaking","version_alert":false,"findings":[{"kind":"param_renamed","param":"limit","cls":"breaking","reason":"limit is gone and page_size appears with the same type and description. Any call that still sends limit is rejected.","at_risk":0},{"kind":"default_changed","param":"txn_type","cls":"behavior_risk","reason":"default of txn_type changed from \"all\" to \"debit\". Calls that omit it get the new value and still pass validation.","at_risk":72}],"would_break":143,"true_broken":143,"at_risk":72,"examples":[{"call_id":"C0041","args":"{\"account_id\": \"AC-315400\", \"start_date\": \"2026-02-07\", \"end_date\": \"2026-02-20\", \"limit\": 157, \"txn_type\": \"all\"}","violation":"unknown parameter on limit: not in the schema"},{"call_id":"C0059","args":"{\"account_id\": \"AC-675611\", \"start_date\": \"2026-01-25\", \"end_date\": \"2026-02-19\", \"limit\": 198, \"txn_type\": \"credit\"}","violation":"unknown parameter on limit: not in the schema"}],"decision":"BLOCK","reason":"143 of 295 recorded calls to get_transaction_history would fail strict validation (unknown parameter x143). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":143,"first_h":7.7,"alert_h":11.1}}]},{"tool":"calculate_loan_payment","calls":98,"rank":2,"decision":"BLOCK","would_break":17,"at_risk":81,"silent":81,"unbumped_broken":17,"unflagged_silent":0,"releases":[{"id":"calculate_loan_payment@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"breaking","version_alert":false,"findings":[{"kind":"type_changed","param":"principal","cls":"breaking","reason":"principal narrowed number -> integer. Fractional values are now rejected.","at_risk":0},{"kind":"unit_or_number_changed","param":"annual_rate","cls":"behavior_risk","reason":"numbers or units in the description changed: [6.5 None, pct] -> [6.5 None, bps]. The structure is identical, so validation still passes calls that now mean something different.","at_risk":81}],"would_break":17,"true_broken":17,"at_risk":81,"examples":[{"call_id":"C0436","args":"{\"principal\": 736823.4, \"annual_rate\": 4.4, \"term_months\": 180, \"payment_frequency\": \"monthly\"}","violation":"type mismatch on principal: expected integer, got float"},{"call_id":"C0500","args":"{\"principal\": 723961.34, \"annual_rate\": 8.29, \"term_months\": 120, \"payment_frequency\": \"monthly\"}","violation":"type mismatch on principal: expected integer, got float"}],"decision":"BLOCK","reason":"17 of 98 recorded calls to calculate_loan_payment would fail strict validation (type mismatch x17). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":17,"first_h":21.5,"alert_h":59.3}}]},{"tool":"lookup_customer_profile","calls":197,"rank":3,"decision":"BLOCK","would_break":82,"at_risk":0,"silent":0,"unbumped_broken":82,"unflagged_silent":0,"releases":[{"id":"lookup_customer_profile@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"noise_only","version_alert":true,"findings":[{"kind":"description_reworded","param":"","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0},{"kind":"optional_added","param":"locale","cls":"non_breaking","reason":"new optional field locale. Existing calls are unaffected.","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"ALLOW","event":null},{"id":"lookup_customer_profile@v3","rev":"v3","before":"1.0.1","after":"1.0.1","bumped":false,"ledger_class":"breaking","version_alert":false,"findings":[{"kind":"param_renamed","param":"include_inactive","cls":"breaking","reason":"include_inactive is gone and include_closed appears with the same type and description. Any call that still sends include_inactive is rejected.","at_risk":0}],"would_break":82,"true_broken":82,"at_risk":0,"examples":[{"call_id":"C0052","args":"{\"customer_id\": \"CU-904308\", \"include_inactive\": false}","violation":"unknown parameter on include_inactive: not in the schema"},{"call_id":"C0080","args":"{\"customer_id\": \"CU-725962\", \"fields\": [\"name\"], \"include_inactive\": false}","violation":"unknown parameter on include_inactive: not in the schema"}],"decision":"BLOCK","reason":"82 of 197 recorded calls to lookup_customer_profile would fail strict validation (unknown parameter x82). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":82,"first_h":8.1,"alert_h":10.9}}]},{"tool":"create_support_ticket","calls":74,"rank":4,"decision":"BLOCK","would_break":74,"at_risk":0,"silent":0,"unbumped_broken":64,"unflagged_silent":0,"releases":[{"id":"create_support_ticket@v2","rev":"v2","before":"1.0.0","after":"1.1.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"enum_value_removed","param":"category","cls":"breaking","reason":"other was removed from category. Calls that send it are rejected.","at_risk":0}],"would_break":10,"true_broken":10,"at_risk":0,"examples":[{"call_id":"C0107","args":"{\"customer_id\": \"CU-904729\", \"category\": \"other\", \"summary\": \"Loan payment date question\"}","violation":"enum violation on category: 'other' is not an allowed value"},{"call_id":"C0137","args":"{\"customer_id\": \"CU-415374\", \"category\": \"other\", \"priority\": \"high\", \"summary\": \"Loan payment date question\"}","violation":"enum violation on category: 'other' is not an allowed value"}],"decision":"BLOCK","reason":"10 of 74 recorded calls to create_support_ticket would fail strict validation (enum violation x10). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":10,"first_h":9.9,"alert_h":65.7}},{"id":"create_support_ticket@v3","rev":"v3","before":"1.1.0","after":"1.1.0","bumped":false,"ledger_class":"breaking","version_alert":false,"findings":[{"kind":"param_renamed","param":"summary","cls":"breaking","reason":"summary is gone and title appears with the same type and description. Any call that still sends summary is rejected. title is also required, so calls without it fail.","at_risk":0}],"would_break":64,"true_broken":64,"at_risk":0,"examples":[{"call_id":"C0086","args":"{\"customer_id\": \"CU-174010\", \"category\": \"payments\", \"summary\": \"Transfer limit too low\"}","violation":"unknown parameter on summary: not in the schema"},{"call_id":"C0089","args":"{\"customer_id\": \"CU-848495\", \"category\": \"card\", \"priority\": \"normal\", \"summary\": \"Card declined at merchant\"}","violation":"unknown parameter on summary: not in the schema"}],"decision":"BLOCK","reason":"64 of 74 recorded calls to create_support_ticket would fail strict validation (unknown parameter x64). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":64,"first_h":9.4,"alert_h":10.4}}]},{"tool":"initiate_wire_transfer","calls":74,"rank":5,"decision":"BLOCK","would_break":74,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"initiate_wire_transfer@v2","rev":"v2","before":"1.0.0","after":"1.1.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"required_added","param":"idempotency_key","cls":"breaking","reason":"new required field idempotency_key. Every existing call lacks it, so every existing call fails.","at_risk":0},{"kind":"enum_value_added","param":"currency","cls":"non_breaking","reason":"CAD was added to currency. Existing calls still validate.","at_risk":0}],"would_break":74,"true_broken":74,"at_risk":0,"examples":[{"call_id":"C0018","args":"{\"from_account\": \"AC-642018\", \"beneficiary_id\": \"BN-64411\", \"amount\": 18505, \"currency\": \"USD\", \"speed\": \"standard\"}","violation":"missing required on idempotency_key: required but absent"},{"call_id":"C0161","args":"{\"from_account\": \"AC-830340\", \"beneficiary_id\": \"BN-90192\", \"amount\": 132665, \"currency\": \"USD\", \"speed\": \"standard\"}","violation":"missing required on idempotency_key: required but absent"}],"decision":"BLOCK","reason":"74 of 74 recorded calls to initiate_wire_transfer would fail strict validation (missing required x74). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":74,"first_h":4.6,"alert_h":11.1}},{"id":"initiate_wire_transfer@v3","rev":"v3","before":"1.1.0","after":"1.1.0","bumped":false,"ledger_class":"noise_only","version_alert":false,"findings":[{"kind":"description_reworded","param":"amount","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"ALLOW","event":null}]},{"tool":"schedule_ach_payment","calls":74,"rank":6,"decision":"BLOCK","would_break":74,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"schedule_ach_payment@v2","rev":"v2","before":"1.2.0","after":"2.0.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"param_renamed","param":"payee_id","cls":"breaking","reason":"payee_id is gone and beneficiary_id appears with the same type and description. Any call that still sends payee_id is rejected. beneficiary_id is also required, so calls without it fail.","at_risk":0}],"would_break":74,"true_broken":74,"at_risk":0,"examples":[{"call_id":"C0025","args":"{\"from_account\": \"AC-904001\", \"payee_id\": \"PY-66704\", \"amount\": 7816.48, \"run_date\": \"2026-03-24\"}","violation":"unknown parameter on payee_id: not in the schema"},{"call_id":"C0043","args":"{\"from_account\": \"AC-322666\", \"payee_id\": \"PY-76740\", \"amount\": 2470.72, \"run_date\": \"2026-03-20\"}","violation":"unknown parameter on payee_id: not in the schema"}],"decision":"BLOCK","reason":"74 of 74 recorded calls to schedule_ach_payment would fail strict validation (unknown parameter x74). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":74,"first_h":6.7,"alert_h":9.6}}]},{"tool":"get_statement_pdf","calls":98,"rank":7,"decision":"REVIEW","would_break":0,"at_risk":53,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"get_statement_pdf@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"noise_only","version_alert":false,"findings":[{"kind":"unit_or_number_changed","param":"delivery","cls":"behavior_risk","reason":"numbers or units in the description changed: [7 d] -> [d]. The structure is identical, so validation still passes calls that now mean something different.","at_risk":53}],"would_break":0,"true_broken":0,"at_risk":53,"examples":[],"decision":"REVIEW","reason":"53 recorded calls still validate but would mean something different. Validation cannot see this; a person has to confirm the new meaning.","should":"ALLOW","event":null}]},{"tool":"screen_sanctions","calls":62,"rank":8,"decision":"REVIEW","would_break":0,"at_risk":52,"silent":52,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"screen_sanctions@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"behavior_risk","version_alert":true,"findings":[{"kind":"default_changed","param":"match_threshold","cls":"behavior_risk","reason":"default of match_threshold changed from 0.85 to 0.95. Calls that omit it get the new value and still pass validation.","at_risk":33},{"kind":"unit_or_number_changed","param":"timeout","cls":"behavior_risk","reason":"numbers or units in the description changed: [s] -> [ms]. The structure is identical, so validation still passes calls that now mean something different.","at_risk":34}],"would_break":0,"true_broken":0,"at_risk":52,"examples":[],"decision":"REVIEW","reason":"52 recorded calls still validate but would mean something different. Validation cannot see this; a person has to confirm the new meaning.","should":"REVIEW","event":null}]},{"tool":"place_card_hold","calls":49,"rank":9,"decision":"REVIEW","would_break":0,"at_risk":49,"silent":49,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"place_card_hold@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"behavior_risk","version_alert":false,"findings":[{"kind":"unit_or_number_changed","param":"amount","cls":"behavior_risk","reason":"numbers or units in the description changed: [USD] -> [cents]. The structure is identical, so validation still passes calls that now mean something different.","at_risk":49}],"would_break":0,"true_broken":0,"at_risk":49,"examples":[],"decision":"REVIEW","reason":"49 recorded calls still validate but would mean something different. Validation cannot see this; a person has to confirm the new meaning.","should":"REVIEW","event":null}]},{"tool":"get_account_balance","calls":345,"rank":10,"decision":"BLOCK","would_break":40,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"get_account_balance@v2","rev":"v2","before":"1.0.0","after":"1.1.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"optional_added","param":"include_holds","cls":"non_breaking","reason":"new optional field include_holds. Existing calls are unaffected.","at_risk":0},{"kind":"enum_value_removed","param":"balance_type","cls":"breaking","reason":"pending was removed from balance_type. Calls that send it are rejected.","at_risk":0}],"would_break":40,"true_broken":40,"at_risk":0,"examples":[{"call_id":"C0064","args":"{\"account_id\": \"AC-995566\", \"balance_type\": \"pending\"}","violation":"enum violation on balance_type: 'pending' is not an allowed value"},{"call_id":"C0306","args":"{\"account_id\": \"AC-603574\", \"balance_type\": \"pending\"}","violation":"enum violation on balance_type: 'pending' is not an allowed value"}],"decision":"BLOCK","reason":"40 of 345 recorded calls to get_account_balance would fail strict validation (enum violation x40). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":40,"first_h":8.8,"alert_h":22.7}}]},{"tool":"get_rate_sheet","calls":74,"rank":11,"decision":"BLOCK","would_break":12,"at_risk":28,"silent":28,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"get_rate_sheet@v2","rev":"v2","before":"1.0.0","after":"1.1.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"enum_value_removed","param":"product_code","cls":"breaking","reason":"heloc was removed from product_code. Calls that send it are rejected.","at_risk":0},{"kind":"default_changed","param":"region","cls":"behavior_risk","reason":"default of region changed from \"national\" to \"northeast\". Calls that omit it get the new value and still pass validation.","at_risk":28}],"would_break":12,"true_broken":12,"at_risk":28,"examples":[{"call_id":"C0171","args":"{\"product_code\": \"heloc\", \"as_of_date\": \"2026-02-20\"}","violation":"enum violation on product_code: 'heloc' is not an allowed value"},{"call_id":"C0221","args":"{\"product_code\": \"heloc\", \"region\": \"west\"}","violation":"enum violation on product_code: 'heloc' is not an allowed value"}],"decision":"BLOCK","reason":"12 of 74 recorded calls to get_rate_sheet would fail strict validation (enum violation x12). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":12,"first_h":11.2,"alert_h":38.2}}]},{"tool":"find_branch","calls":74,"rank":12,"decision":"REVIEW","would_break":0,"at_risk":39,"silent":39,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"find_branch@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"behavior_risk","version_alert":true,"findings":[{"kind":"unit_or_number_changed","param":"radius_miles","cls":"behavior_risk","reason":"numbers or units in the description changed: [mi] -> [km]. The structure is identical, so validation still passes calls that now mean something different.","at_risk":39},{"kind":"type_changed","param":"limit","cls":"non_breaking","reason":"limit widened integer -> number. Every value that was valid still is.","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":39,"examples":[],"decision":"REVIEW","reason":"39 recorded calls still validate but would mean something different. Validation cannot see this; a person has to confirm the new meaning.","should":"REVIEW","event":null}]},{"tool":"dispute_transaction","calls":37,"rank":13,"decision":"BLOCK","would_break":37,"at_risk":0,"silent":0,"unbumped_broken":37,"unflagged_silent":0,"releases":[{"id":"dispute_transaction@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"breaking","version_alert":false,"findings":[{"kind":"type_changed","param":"transaction_id","cls":"breaking","reason":"transaction_id changed string -> integer. Values of the old type are rejected.","at_risk":0},{"kind":"enum_value_added","param":"reason_code","cls":"non_breaking","reason":"fraud was added to reason_code. Existing calls still validate.","at_risk":0}],"would_break":37,"true_broken":37,"at_risk":0,"examples":[{"call_id":"C0084","args":"{\"transaction_id\": \"TX-47335503\", \"reason_code\": \"incorrect_amount\"}","violation":"type mismatch on transaction_id: expected integer, got str"},{"call_id":"C0207","args":"{\"transaction_id\": \"TX-64049399\", \"reason_code\": \"not_received\", \"amount\": 2403.09}","violation":"type mismatch on transaction_id: expected integer, got str"}],"decision":"BLOCK","reason":"37 of 37 recorded calls to dispute_transaction would fail strict validation (type mismatch x37). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":37,"first_h":9.3,"alert_h":17.6}}]},{"tool":"run_kyc_check","calls":37,"rank":14,"decision":"BLOCK","would_break":37,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"run_kyc_check@v2","rev":"v2","before":"1.1.0","after":"1.2.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"required_added","param":"consent_id","cls":"breaking","reason":"new required field consent_id. Every existing call lacks it, so every existing call fails.","at_risk":0}],"would_break":37,"true_broken":37,"at_risk":0,"examples":[{"call_id":"C0026","args":"{\"customer_id\": \"CU-133886\", \"check_level\": \"standard\", \"id_document_type\": \"passport\"}","violation":"missing required on consent_id: required but absent"},{"call_id":"C0282","args":"{\"customer_id\": \"CU-427468\", \"check_level\": \"standard\", \"id_document_type\": \"drivers_license\"}","violation":"missing required on consent_id: required but absent"}],"decision":"BLOCK","reason":"37 of 37 recorded calls to run_kyc_check would fail strict validation (missing required x37). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":37,"first_h":6.8,"alert_h":35.3}}]},{"tool":"schedule_appointment","calls":37,"rank":15,"decision":"BLOCK","would_break":37,"at_risk":0,"silent":0,"unbumped_broken":37,"unflagged_silent":0,"releases":[{"id":"schedule_appointment@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"breaking","version_alert":false,"findings":[{"kind":"type_changed","param":"branch_id","cls":"breaking","reason":"branch_id changed string -> integer. Values of the old type are rejected.","at_risk":0},{"kind":"type_changed","param":"duration_minutes","cls":"non_breaking","reason":"duration_minutes widened integer -> number. Every value that was valid still is.","at_risk":0}],"would_break":37,"true_broken":37,"at_risk":0,"examples":[{"call_id":"C0029","args":"{\"customer_id\": \"CU-267767\", \"branch_id\": \"BR-442\", \"slot_start\": \"2026-03-08\", \"duration_minutes\": 15, \"topic\": \"advice\"}","violation":"type mismatch on branch_id: expected integer, got str"},{"call_id":"C0140","args":"{\"customer_id\": \"CU-373327\", \"branch_id\": \"BR-522\", \"slot_start\": \"2026-03-03\", \"topic\": \"other\"}","violation":"type mismatch on branch_id: expected integer, got str"}],"decision":"BLOCK","reason":"37 of 37 recorded calls to schedule_appointment would fail strict validation (type mismatch x37). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":37,"first_h":7.3,"alert_h":14.6}}]},{"tool":"submit_loan_application","calls":37,"rank":16,"decision":"BLOCK","would_break":37,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"submit_loan_application@v2","rev":"v2","before":"2.4.0","after":"3.0.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"required_added","param":"applicant_consent","cls":"breaking","reason":"new required field applicant_consent. Every existing call lacks it, so every existing call fails.","at_risk":0}],"would_break":37,"true_broken":37,"at_risk":0,"examples":[{"call_id":"C0047","args":"{\"customer_id\": \"CU-319764\", \"product_code\": \"personal\", \"requested_amount\": 511265, \"term_months\": 240, \"purpose\": \"Home improvement\"}","violation":"missing required on applicant_consent: required but absent"},{"call_id":"C0049","args":"{\"customer_id\": \"CU-433327\", \"product_code\": \"auto\", \"requested_amount\": 502585, \"term_months\": 36}","violation":"missing required on applicant_consent: required but absent"}],"decision":"BLOCK","reason":"37 of 37 recorded calls to submit_loan_application would fail strict validation (missing required x37). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":37,"first_h":8.0,"alert_h":17.3}}]},{"tool":"update_customer_address","calls":37,"rank":17,"decision":"BLOCK","would_break":37,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"update_customer_address@v2","rev":"v2","before":"1.0.0","after":"2.0.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"required_added","param":"verification_token","cls":"breaking","reason":"new required field verification_token. Every existing call lacks it, so every existing call fails.","at_risk":0}],"would_break":37,"true_broken":37,"at_risk":0,"examples":[{"call_id":"C0019","args":"{\"customer_id\": \"CU-715935\", \"address_line1\": \"12 Harbor Lane\", \"city\": \"Lakeside\", \"state\": \"NY\", \"postal_code\": \"94105\"}","violation":"missing required on verification_token: required but absent"},{"call_id":"C0028","args":"{\"customer_id\": \"CU-127974\", \"address_line1\": \"12 Harbor Lane\", \"city\": \"Lakeside\", \"state\": \"CA\", \"postal_code\": \"73301\"}","violation":"missing required on verification_token: required but absent"}],"decision":"BLOCK","reason":"37 of 37 recorded calls to update_customer_address would fail strict validation (missing required x37). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":37,"first_h":4.7,"alert_h":12.3}}]},{"tool":"create_savings_goal","calls":25,"rank":18,"decision":"REVIEW","would_break":0,"at_risk":25,"silent":25,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"create_savings_goal@v2","rev":"v2","before":"1.0.0","after":"1.1.0","bumped":true,"ledger_class":"behavior_risk","version_alert":true,"findings":[{"kind":"optional_added","param":"nickname","cls":"non_breaking","reason":"new optional field nickname. Existing calls are unaffected.","at_risk":0},{"kind":"unit_or_number_changed","param":"target_amount","cls":"behavior_risk","reason":"numbers or units in the description changed: [USD] -> [EUR]. The structure is identical, so validation still passes calls that now mean something different.","at_risk":25}],"would_break":0,"true_broken":0,"at_risk":25,"examples":[],"decision":"REVIEW","reason":"25 recorded calls still validate but would mean something different. Validation cannot see this; a person has to confirm the new meaning.","should":"REVIEW","event":null}]},{"tool":"get_portfolio_summary","calls":74,"rank":19,"decision":"BLOCK","would_break":23,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"get_portfolio_summary@v2","rev":"v2","before":"1.4.0","after":"2.0.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"param_removed","param":"include_positions","cls":"breaking","reason":"include_positions was removed. Calls that send it are rejected.","at_risk":0}],"would_break":23,"true_broken":23,"at_risk":0,"examples":[{"call_id":"C0065","args":"{\"customer_id\": \"CU-785343\", \"include_positions\": true}","violation":"unknown parameter on include_positions: not in the schema"},{"call_id":"C0101","args":"{\"customer_id\": \"CU-854785\", \"include_positions\": false}","violation":"unknown parameter on include_positions: not in the schema"}],"decision":"BLOCK","reason":"23 of 74 recorded calls to get_portfolio_summary would fail strict validation (unknown parameter x23). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":23,"first_h":8.9,"alert_h":12.0}}]},{"tool":"get_fee_schedule","calls":49,"rank":20,"decision":"REVIEW","would_break":0,"at_risk":23,"silent":23,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"get_fee_schedule@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"noise_only","version_alert":true,"findings":[{"kind":"description_reworded","param":"","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"ALLOW","event":null},{"id":"get_fee_schedule@v3","rev":"v3","before":"1.0.1","after":"1.0.1","bumped":false,"ledger_class":"behavior_risk","version_alert":false,"findings":[{"kind":"default_changed","param":"tier","cls":"behavior_risk","reason":"default of tier changed from \"basic\" to \"plus\". Calls that omit it get the new value and still pass validation.","at_risk":23}],"would_break":0,"true_broken":0,"at_risk":23,"examples":[],"decision":"REVIEW","reason":"23 recorded calls still validate but would mean something different. Validation cannot see this; a person has to confirm the new meaning.","should":"REVIEW","event":null}]},{"tool":"send_secure_message","calls":74,"rank":21,"decision":"BLOCK","would_break":14,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"send_secure_message@v2","rev":"v2","before":"1.0.0","after":"1.1.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"param_removed","param":"attachment_ids","cls":"breaking","reason":"attachment_ids was removed. Calls that send it are rejected.","at_risk":0}],"would_break":14,"true_broken":14,"at_risk":0,"examples":[{"call_id":"C0081","args":"{\"customer_id\": \"CU-881945\", \"subject\": \"Fee question\", \"body\": \"Please see the attached document.\", \"attachment_ids\": [\"AT-983864\", \"AT-286402\", \"AT-533032\"]}","violation":"unknown parameter on attachment_ids: not in the schema"},{"call_id":"C0325","args":"{\"customer_id\": \"CU-809244\", \"subject\": \"Fee question\", \"body\": \"A banker will contact you shortly.\", \"attachment_ids\": [\"AT-169096\", \"AT-932448\", \"AT-467320\"]}","violation":"unknown parameter on attachment_ids: not in the schema"}],"decision":"BLOCK","reason":"14 of 74 recorded calls to send_secure_message would fail strict validation (unknown parameter x14). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":14,"first_h":9.3,"alert_h":40.2}}]},{"tool":"block_card","calls":37,"rank":22,"decision":"BLOCK","would_break":4,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"block_card@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"noise_only","version_alert":true,"findings":[{"kind":"description_reworded","param":"replace_card","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"ALLOW","event":null},{"id":"block_card@v3","rev":"v3","before":"1.0.1","after":"1.1.0","bumped":true,"ledger_class":"breaking","version_alert":true,"findings":[{"kind":"enum_value_removed","param":"reason","cls":"breaking","reason":"customer_request was removed from reason. Calls that send it are rejected.","at_risk":0}],"would_break":4,"true_broken":4,"at_risk":0,"examples":[{"call_id":"C0936","args":"{\"card_id\": \"CR-615510\", \"reason\": \"customer_request\"}","violation":"enum violation on reason: 'customer_request' is not an allowed value"},{"call_id":"C1346","args":"{\"card_id\": \"CR-833227\", \"reason\": \"customer_request\", \"replace_card\": true}","violation":"enum violation on reason: 'customer_request' is not an allowed value"}],"decision":"BLOCK","reason":"4 of 37 recorded calls to block_card would fail strict validation (enum violation x4). Hold the release until the owner and the agent team agree a fix.","should":"BLOCK","event":{"failed":4,"first_h":45.2,"alert_h":null}}]},{"tool":"calculate_early_payoff","calls":74,"rank":23,"decision":"ALLOW","would_break":0,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[]},{"tool":"find_atm","calls":49,"rank":24,"decision":"ALLOW","would_break":0,"at_risk":0,"silent":21,"unbumped_broken":0,"unflagged_silent":21,"releases":[{"id":"find_atm@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"behavior_risk","version_alert":true,"findings":[{"kind":"optional_added","param":"accessible_only","cls":"non_breaking","reason":"new optional field accessible_only. Existing calls are unaffected.","at_risk":0},{"kind":"description_reworded","param":"network","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"REVIEW","event":null}]},{"tool":"get_credit_score","calls":148,"rank":25,"decision":"ALLOW","would_break":0,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[]},{"tool":"get_fx_rate","calls":123,"rank":26,"decision":"ALLOW","would_break":0,"at_risk":0,"silent":123,"unbumped_broken":0,"unflagged_silent":123,"releases":[{"id":"get_fx_rate@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"behavior_risk","version_alert":false,"findings":[{"kind":"description_reworded","param":"base_currency","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0},{"kind":"enum_value_added","param":"rate_type","cls":"non_breaking","reason":"wholesale was added to rate_type. Existing calls still validate.","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"REVIEW","event":null}]},{"tool":"search_policy_docs","calls":123,"rank":27,"decision":"ALLOW","would_break":0,"at_risk":0,"silent":0,"unbumped_broken":0,"unflagged_silent":0,"releases":[{"id":"search_policy_docs@v2","rev":"v2","before":"1.0.0","after":"1.0.0","bumped":false,"ledger_class":"noise_only","version_alert":false,"findings":[{"kind":"enum_value_added","param":"doc_type","cls":"non_breaking","reason":"guideline was added to doc_type. Existing calls still validate.","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"ALLOW","event":null}]},{"tool":"set_transfer_limit","calls":25,"rank":28,"decision":"ALLOW","would_break":0,"at_risk":0,"silent":25,"unbumped_broken":0,"unflagged_silent":25,"releases":[{"id":"set_transfer_limit@v2","rev":"v2","before":"1.0.0","after":"1.0.1","bumped":true,"ledger_class":"behavior_risk","version_alert":true,"findings":[{"kind":"description_reworded","param":"","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0},{"kind":"description_reworded","param":"daily_limit","cls":"non_breaking","reason":"wording changed; no number or unit changed","at_risk":0}],"would_break":0,"true_broken":0,"at_risk":0,"examples":[],"decision":"ALLOW","reason":"only non-breaking changes. Notify the agent team; nothing to hold.","should":"REVIEW","event":null}]}],"s":{"tools":28,"releases":31,"changes":45,"calls":2500,"v1_valid_calls":2500,"class_correct":41,"class_total":45,"class_acc_pct":91.1,"class_correct_no_heuristic":37,"class_acc_no_heuristic_pct":82.2,"spurious_findings":0,"confusion":{"breaking":{"breaking":17},"non_breaking":{"non_breaking":15,"behavior_risk":1},"behavior_risk":{"behavior_risk":9,"non_breaking":3}},"replay_tp":742,"replay_fp":0,"replay_fn":0,"replay_tn":1758,"replay_true_broken":742,"replay_pred_broken":742,"replay_precision_pct":100.0,"replay_recall_pct":100.0,"attribution_ok":2500,"semantic_total":8,"semantic_caught":5,"semantic_recall_pct":62.5,"unit_total":5,"unit_caught":5,"nosignal_total":3,"nosignal_caught":0,"reworded_total":6,"reworded_false_flags":1,"silent_truth":538,"silent_flagged":422,"silent_tp":369,"silent_fp":53,"silent_recall_pct":68.6,"silent_precision_pct":87.4,"limit_changes":3,"limit_calls":169,"gate_ok":27,"gate_total":31,"gate_acc_pct":87.1,"gate_counts":{"BLOCK":17,"ALLOW":8,"REVIEW":6},"gate_needs_action":25,"gate_caught":22,"gate_false_review":1,"gate_missed":3,"affected_without":1280,"affected_with":169,"affected_version_only":738,"per_change_without":28.44,"per_change_with":3.76,"changes_per_quarter":12,"utility_per_quarter":296.0,"utility_sensitivity":{"6":148.0,"12":296.0,"24":593.0,"45":1111.0},"top_blast":[{"rank":1,"tool":"get_transaction_history","calls":295,"would_break":143,"at_risk":72,"decision":"BLOCK"},{"rank":2,"tool":"calculate_loan_payment","calls":98,"would_break":17,"at_risk":81,"decision":"BLOCK"},{"rank":3,"tool":"lookup_customer_profile","calls":197,"would_break":82,"at_risk":0,"decision":"BLOCK"},{"rank":4,"tool":"create_support_ticket","calls":74,"would_break":74,"at_risk":0,"decision":"BLOCK"},{"rank":5,"tool":"initiate_wire_transfer","calls":74,"would_break":74,"at_risk":0,"decision":"BLOCK"}]},"s1":{"events":17,"broken_calls":742,"total_calls":2500,"pct_broken":29.7,"alarm_failures":5,"alerted_events":16,"never_alert_events":1,"never_alert_calls":4,"median_first_failure_h":8.8,"median_alert_h":15.9,"max_alert_h":65.7,"silent_unit":228,"silent_meaning":169,"silent_default":156,"silent_calls":538,"daily":[{"day":1,"failed":134,"cumulative":134,"events_alerted":11},{"day":2,"failed":149,"cumulative":283,"events_alerted":14},{"day":3,"failed":126,"cumulative":409,"events_alerted":16},{"day":4,"failed":139,"cumulative":548,"events_alerted":16},{"day":5,"failed":136,"cumulative":684,"events_alerted":16},{"day":6,"failed":35,"cumulative":719,"events_alerted":16},{"day":7,"failed":23,"cumulative":742,"events_alerted":16}],"sensitivity":[{"alarm_failures":1,"alerted":17,"never":0,"median_alert_h":8.8},{"alarm_failures":3,"alerted":17,"never":0,"median_alert_h":11.8},{"alarm_failures":5,"alerted":16,"never":1,"median_alert_h":15.9},{"alarm_failures":10,"alerted":16,"never":1,"median_alert_h":36.4}]},"s2":{"releases":31,"needs_action_releases":25,"noise_only_releases":6,"changes":45,"non_breaking_changes":16,"broken_calls":742,"version":{"alerts":19,"tp":16,"fp":3,"fn":9,"tn":3,"recall_pct":64.0,"precision_pct":84.2,"broken_calls_in_alerted":362,"broken_calls_missed":380},"hash":{"alerts":31,"tp":25,"fp":6,"fn":0,"tn":0,"recall_pct":100.0,"precision_pct":80.6,"broken_calls_in_alerted":742,"broken_calls_missed":0}},"s3":{"a":{"hash_alerts":31,"changes":45,"breaking":17,"behavior_risk":12,"non_breaking":16,"noise_only_releases":6,"non_breaking_pct":35.6},"b":{"unbumped_changes":17,"changes":45,"unbumped_pct":37.8,"unbumped_actionable_changes":11,"unbumped_releases":12,"releases":31,"unbumped_actionable_releases":9,"calls_broken_in_unbumped":380,"tools_never_bumped":8,"tools_never_bumped_needing_action":6},"c":{"semantic_changes":8,"unit_signal":5,"no_signal":3,"seen_by_structural_diff":0,"calls_misread_unit":228,"calls_misread_meaning":169,"calls_misread":397},"d":{"enum_removed":4,"enum_added":4,"alerts_raised_for_both":8,"calls_broken_by_removals":66,"calls_broken_by_additions":0},"e":{"required_added":4,"tools":4,"calls_to_these_tools":185,"calls_broken":185,"naive_calls_safe":4},"f":{"default_changed":4,"tools":4,"calls_to_these_tools":480,"calls_rely_on_default":156,"reliance_pct":32.5,"calls_failing_validation":0}}};
+const TOOLS = D.tools;
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
+
+let idx = 0;
+const sel = document.getElementById("tool-select");
+TOOLS.forEach((t, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = String(t.rank) + ". " + t.tool + " - " + t.decision + " - " + String(t.would_break) + " calls break";
+  sel.appendChild(o);
+});
+
+function totals(upTo) {
+  let broken = 0, predicted = 0, unbumped = 0, unflagged = 0;
+  for (let i = 0; i <= upTo; i++) {
+    const t = TOOLS[i];
+    t.releases.forEach(r => { broken += r.true_broken; predicted += r.would_break; if (!r.bumped) unbumped += r.true_broken; });
+    unflagged += t.unflagged_silent;
+  }
+  return { broken, predicted, unbumped, unflagged };
+}
+
+function gateClass(d) { return d === "BLOCK" ? "pill-bad" : (d === "REVIEW" ? "pill-warn" : "pill-ok"); }
+function clsTag(c) { return c === "breaking" ? "tag-bad" : (c === "behavior_risk" ? "tag-warn" : "tag-ok"); }
+
+function render() {
+  const t = TOOLS[idx];
+  sel.value = idx;
+  const tt = totals(idx);
+  document.getElementById("stat-broken").textContent = String(tt.broken);
+  document.getElementById("stat-predicted").textContent = String(tt.predicted);
+  document.getElementById("stat-unbumped").textContent = String(tt.unbumped);
+  document.getElementById("stat-unflagged").textContent = String(tt.unflagged);
+
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(t.tool) + "</b> - " + esc(plural(t.calls, "recorded call")) + ", " + esc(plural(t.releases.length, "schema release")) +
+    " since v1. Blast-radius rank <b>" + esc(t.rank) + "</b> of " + esc(TOOLS.length) + ". Gate: <b>" + esc(t.decision) + "</b>.";
+
+  // Card 1: before
+  let b = "";
+  if (!t.releases.length) {
+    b += "<p>No schema change since v1. Nothing fails and nothing alerts.</p>";
+  }
+  t.releases.forEach(r => {
+    if (r.event) {
+      const alert = r.event.alert_h !== null
+        ? "the " + D.s1.alarm_failures + "th failure arrives " + r.event.alert_h + " h after release"
+        : "only " + r.event.failed + " calls fail in the week, so the error alarm never fires";
+      b += "<p><b>" + esc(r.rev) + ":</b> " + esc(r.event.failed) + " calls fail, the first after " + esc(r.event.first_h) + " h; " + esc(alert) + ".</p>";
+    } else {
+      b += "<p><b>" + esc(r.rev) + ":</b> no recorded call fails.</p>";
+    }
+  });
+  b += '<div class="driver-row"><span class="driver-label">Calls that mean something else</span><span class="driver-value">' + esc(t.silent) + "</span></div>";
+  b += '<span class="pill ' + (t.would_break || t.silent ? "pill-bad" : "pill-ok") + '">' +
+       (t.would_break ? "found when calls fail" : (t.silent ? "never fails, never alerts" : "nothing to find")) + "</span>";
+  b += '<div class="meta" style="font-size:12px;color:#8a8a8a;margin-top:8px;">Modeled: traffic repeats the recorded week; alert on the ' + esc(D.s1.alarm_failures) + 'th failed call; delivery instant (a floor).</div>';
+  document.getElementById("card-before").innerHTML = b;
+
+  // Card 2: basic approach
+  let s = "";
+  if (!t.releases.length) { s += "<p>Nothing changed, so neither check fires.</p>"; }
+  t.releases.forEach(r => {
+    s += '<div class="reltitle">' + esc(r.id) + "</div>";
+    s += '<div class="driver-row"><span class="driver-label">Version check</span><span class="driver-value">' +
+         (r.version_alert ? esc(r.before) + " to " + esc(r.after) + ": alert" : "unchanged " + esc(r.after) + ": no alert") + "</span></div>";
+    s += '<div class="driver-row"><span class="driver-label">Content hash</span><span class="driver-value">alert</span></div>';
+    s += '<div class="driver-row"><span class="driver-label">Ledger says</span><span class="driver-value">' + esc(r.ledger_class.replace("_", " ")) + "</span></div>";
+    if (r.ledger_class === "noise_only") {
+      s += '<span class="pill pill-warn">false alarm: nothing to do</span>';
+    } else if (!r.version_alert) {
+      s += '<span class="pill pill-bad">version check silent, ' + esc(r.true_broken) + ' calls break</span>';
+    } else {
+      s += '<span class="pill pill-info">alert, no ranking, no call count</span>';
+    }
+  });
+  document.getElementById("card-sota").innerHTML = s;
+
+  // Card 3: SchemaWatch
+  let h = "";
+  if (!t.releases.length) { h += "<p>No release since v1. Gate: ALLOW.</p>"; }
+  t.releases.forEach(r => {
+    h += '<div class="reltitle">' + esc(r.id) + ' <span class="tag ' + (r.decision === "BLOCK" ? "tag-bad" : (r.decision === "REVIEW" ? "tag-warn" : "tag-ok")) + '">' + esc(r.decision) + "</span></div>";
+    r.findings.forEach(f => {
+      h += '<div class="fieldrow"><span class="fieldname">' + esc(f.kind.replace(/_/g, " ")) + (f.param ? " " + esc(f.param) : "") + '</span><span class="tag ' + clsTag(f.cls) + '">' + esc(f.cls.replace("_", " ")) + '</span>' +
+           '<div class="fieldvals">' + esc(f.reason) + "</div></div>";
+    });
+    h += '<div class="driver-row"><span class="driver-label">Replay: would break</span><span class="driver-value">' + esc(r.would_break) + " of " + esc(t.calls) + "</span></div>";
+    h += '<div class="driver-row"><span class="driver-label">Valid but changed meaning</span><span class="driver-value">' + esc(r.at_risk) + "</span></div>";
+    r.examples.forEach(x => {
+      h += '<div class="fieldrow"><span class="fieldname">' + esc(x.call_id) + '</span><span class="tag tag-bad">breaks</span><div class="fieldvals mono">' + esc(x.args) + "<br>" + esc(x.violation) + "</div></div>";
+    });
+    h += '<span class="pill ' + gateClass(r.decision) + '">' + esc(r.decision) + "</span>";
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">' + esc(r.reason) + "</div>";
+    if (r.decision !== r.should) {
+      h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;"><b>Ground truth (synthetic):</b> ' +
+           (r.decision === "ALLOW" ? "this release changes meaning with no number or unit, so the heuristic cannot see it. Known limit." :
+                                     "this release is cosmetic; a number written as a word reads as a changed number. A person clears it.") + "</div>";
+    }
+  });
+  document.getElementById("card-shield").innerHTML = h;
+}
+
+sel.addEventListener("change", e => { idx = parseInt(e.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < TOOLS.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => { idx = i; render(); i++; if (i >= TOOLS.length) clearInterval(iv); }, 700);
+});
+
+render();
+</script>
+</body>
+</html>
