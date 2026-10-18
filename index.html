@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI PM Portfolio · Vijay Saharan</title>
+<meta name="description" content="Ten AI product case studies in regulated finance and commercial real estate. Each names the failure modes of a deployed AI system and builds the layer that contains them.">
+<style>
+  :root {
+    --bg: #ffffff; --bg-2: #f6f5f2; --bg-3: #ecebe7;
+    --text: #1a1a1a; --text-2: #5a5a5a; --text-3: #8a8a8a;
+    --border: rgba(0,0,0,0.12); --border-strong: rgba(0,0,0,0.25);
+    --accent: #1c2541; --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px;
+         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 30px; font-weight: 500; margin: 0 0 8px; }
+  .sub { color: var(--text-2); margin: 0 0 20px; max-width: 70ch; }
+  .thesis { background: var(--bg-2); border-radius: var(--radius); padding: 16px 20px; margin: 0 0 12px; font-size: 15px; }
+  .thesis code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; background: var(--bg-3); padding: 4px 8px; border-radius: 6px; display: inline-block; margin: 4px 0; }
+  .note { font-size: 13px; color: var(--text-2); margin: 0 0 28px; max-width: 80ch; }
+  .note a, .foot a { color: var(--text-2); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+  .card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; }
+  .num { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .6px; color: var(--text-3); margin: 0 0 6px; }
+  .card h2 { font-size: 19px; font-weight: 500; margin: 0 0 6px; }
+  .line { font-size: 14px; color: var(--text-2); margin: 0 0 14px; flex: 1; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; font-size: 13px; }
+  .links a { color: var(--text-2); text-decoration: none; border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; }
+  .links a:hover { background: var(--bg-2); }
+  .links a.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .links a.primary:hover { opacity: .9; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .foot { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-2); display: flex; gap: 20px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>AI PM Portfolio</h1>
+  <p class="sub">Ten prototypes of AI product work in regulated finance and commercial real estate. Each one names the failure modes of a deployed AI system, shows where it breaks on sample data, and builds the layer that contains them.</p>
+  <div class="thesis">
+    I price product impact with one formula:<br>
+    <code>Utility = (my solution − current state of the art) × number of people it affects</code>
+  </div>
+  <p class="note">These are portfolio prototypes on synthetic data, not production case studies. Every number is tagged measured, modeled or hypothetical; see <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio#-reading-the-numbers">how to read the numbers</a>. LeaseGuard and DealSentry apply the same approach to commercial real estate, a domain I follow as a personal study interest.</p>
+
+  <section class="grid" aria-label="The ten case studies">
+    <article class="card">
+      <p class="num">01 · BFSI / Safety</p>
+      <h2>HalluGuard</h2>
+      <p class="line">Wraps a deployed bank chatbot, scores each answer against the retrieved rows, and hands low-confidence ones to a banker.</p>
+      <p class="links"><a class="primary" href="./01-halluguard-bank-chatbot-safety/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/01-halluguard-bank-chatbot-safety">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/01-halluguard-bank-chatbot-safety/ARCHITECTURE.md">Architecture</a> <a href="https://halluguard-bfsi.streamlit.app" rel="noopener">Streamlit app</a></p>
+    </article>
+    <article class="card">
+      <p class="num">02 · BFSI / Model risk</p>
+      <h2>DriftSentinel</h2>
+      <p class="line">Detect, diagnose and decide across a credit, fraud, AML and GenAI model fleet, with the evidence bundle assembled for the validator.</p>
+      <p class="links"><a class="primary" href="./02-driftsentinel-model-drift-monitoring/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/02-driftsentinel-model-drift-monitoring">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/02-driftsentinel-model-drift-monitoring/ARCHITECTURE.md">Architecture</a> <a href="https://driftsentinel-bfsi.streamlit.app" rel="noopener">Streamlit app</a></p>
+    </article>
+    <article class="card">
+      <p class="num">03 · CRE / Document AI</p>
+      <h2>LeaseGuard</h2>
+      <p class="line">Verifies a deployed lease-extraction pipeline with a second model, rule checks and a paralegal triage queue.</p>
+      <p class="links"><a class="primary" href="./03-leaseguard-cre-lease-verification/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/03-leaseguard-cre-lease-verification">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/ARCHITECTURE.md">Architecture</a> <a href="https://leaseguard-cre.streamlit.app" rel="noopener">Streamlit app</a></p>
+    </article>
+    <article class="card">
+      <p class="num">04 · AI / Quality</p>
+      <h2>EvalForge</h2>
+      <p class="line">Versioned probe sets, calibrated rubrics and a CI gate that blocks a deploy on regression.</p>
+      <p class="links"><a class="primary" href="./04-evalforge-llm-eval-platform/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/04-evalforge-llm-eval-platform">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">05 · AI / Operations</p>
+      <h2>AgentWatch</h2>
+      <p class="line">Classifies agent failures and enforces a per-incident dollar cap.</p>
+      <p class="links"><a class="primary" href="./05-agentwatch-agent-observability/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/05-agentwatch-agent-observability">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/05-agentwatch-agent-observability/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">06 · AI / Security</p>
+      <h2>PromptShield</h2>
+      <p class="line">Five layers between user input and the model for internal copilots over confidential data.</p>
+      <p class="links"><a class="primary" href="./06-promptshield-prompt-injection-defense/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/06-promptshield-prompt-injection-defense">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/06-promptshield-prompt-injection-defense/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">07 · AI / FinOps</p>
+      <h2>InferenceLens</h2>
+      <p class="line">Per-feature cost attribution, runaway detection and cheaper-model recommendations across a GenAI portfolio.</p>
+      <p class="links"><a class="primary" href="./07-inferencelens-inference-finops/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/07-inferencelens-inference-finops">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/07-inferencelens-inference-finops/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">08 · AI / Governance</p>
+      <h2>OversightOps</h2>
+      <p class="line">Difficulty-based routing and a rubber-stamp blocker for human-in-the-loop review, with reviewer calibration.</p>
+      <p class="links"><a class="primary" href="./08-oversightops-hitl-workflow/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/08-oversightops-hitl-workflow">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/08-oversightops-hitl-workflow/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">09 · BFSI / Compliance</p>
+      <h2>LineageLog</h2>
+      <p class="line">Binds logs, audit events and traces to one decision ID so an exam pack can be assembled on request.</p>
+      <p class="links"><a class="primary" href="./09-lineagelog-ai-decision-audit/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/09-lineagelog-ai-decision-audit">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/09-lineagelog-ai-decision-audit/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+    <article class="card">
+      <p class="num">10 · CRE / Underwriting</p>
+      <h2>DealSentry</h2>
+      <p class="line">Verifies comps, T-12 math and submarket stats behind an AI underwriting copilot.</p>
+      <p class="links"><a class="primary" href="./10-dealsentry-cre-underwriting/demo.html">Open demo</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/10-dealsentry-cre-underwriting">Case study</a> <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/10-dealsentry-cre-underwriting/ARCHITECTURE.md">Architecture</a></p>
+    </article>
+  </section>
+
+  <footer class="foot">
+    <span>Vijay Saharan</span>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio">Repository</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</main>
+</body>
+</html>
