@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="title desc">
   <title id="title">OversightOps: AI case flowing from ingestion through difficulty-stratified routing to ground-truth backfill</title>
-  <desc id="desc">Five-stage horizontal flow showing how a regulated AI decision flagged for HITL moves through Case Ingested, Difficulty Scored, Routed to Right-Tier Reviewer, Decision Logged with Rubric, Ground-Truth Backfill, and Calibration Drift Detection. Includes single-queue-vs-OversightOps timing comparison.</desc>
+  <desc id="desc">Five-stage horizontal flow showing how a regulated AI decision flagged for HITL moves through Case Ingested, Difficulty Scored, Routed to Right-Tier Reviewer, Decision Logged with Rubric, and Ground-Truth Backfill with Calibration Drift Detection. Includes single-queue-vs-OversightOps timing comparison.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -35,7 +35,7 @@
   <rect x="20" y="90" width="170" height="100" rx="8" class="stage-box"/>
   <text x="32" y="112" class="stage-num">STAGE 1</text>
   <text x="32" y="132" class="stage-title">Case ingested</text>
-  <text x="32" y="152" class="stage-sub">AI flags case for review</text>
+  <text x="32" y="152" class="stage-sub">AI flags for review</text>
   <text x="32" y="168" class="stage-sub">ai_confidence: 0.62</text>
   <text x="32" y="182" class="stage-sub">ai_decision: APPROVE</text>
 
@@ -77,22 +77,22 @@
   <text x="824" y="132" class="stage-title">Backfill +</text>
   <text x="824" y="146" class="stage-title">drift loop</text>
   <text x="824" y="166" class="stage-sub">OFAC match seen</text>
-  <text x="824" y="180" class="stage-sub">cohort recalibrated</text>
+  <text x="824" y="180" class="stage-sub">cohort updated</text>
 
   <!-- Comparison strip - Single-queue baseline -->
   <rect x="20" y="240" width="922" height="60" rx="8" class="compare-bad"/>
   <text x="32" y="262" class="meta-strong" style="fill:#7f1d1d;">Single-queue HITL (today)</text>
-  <text x="32" y="280" class="meta-text">Case routed to next-available reviewer (junior). Review completed in 8s. Rubber-stamped APPROVE. AI's call wins by default. 27 days later: OFAC sanctions-list match - bank books modeled $420k MRA exposure.</text>
-  <text x="32" y="294" class="timer">Tier-1 SLA breaches: 100% under floor   |   Calibration drift: undetected   |   Ground-truth: not bound to reviewer   |   Rubber-stamps shipped: 125 of 313 PB cases</text>
+  <text x="32" y="280" class="meta-text">Next-available reviewer (junior) rubber-stamps APPROVE in 8s. 27 days later an OFAC sanctions-list match surfaces: modeled $420k MRA exposure.</text>
+  <text x="32" y="294" class="timer">Below 480s SLA target: 100%   |   Calibration drift: undetected   |   Ground-truth: not bound to reviewer   |   Rubber-stamps shipped: 125 of 146 PB cases</text>
 
   <!-- Comparison strip - OversightOps -->
   <rect x="20" y="320" width="922" height="80" rx="8" class="compare-good"/>
   <text x="32" y="342" class="meta-strong">OversightOps difficulty-stratified routing</text>
   <text x="32" y="360" class="meta-text">Case routed to LEAD queue at ingestion (difficulty 5 + private banking + country tier 4). Rubber-stamp blocker rejects sub-60s reviews on Tier-1.</text>
-  <text x="32" y="376" class="meta-text">Lead reviewer takes 7 minutes with the rubric. Runs OFAC re-check. Rejects. Calibration packet updates the reviewer cohort weekly. Ground-truth backfill closes the loop.</text>
+  <text x="32" y="376" class="meta-text">Lead reviewer takes 7 minutes with the rubric. Runs OFAC re-check. Rejects. Calibration packet updates the cohort weekly. Backfill closes the loop.</text>
   <text x="32" y="392" class="timer-fast">Tier-1 SLA: enforced   |   Calibration drift: 2 reviewers flagged   |   Ground-truth: bound by case_id   |   Rubber-stamps shipped: 0</text>
 
   <!-- Summary badge -->
   <rect x="725" y="416" width="217" height="36" rx="6" class="badge-bg"/>
-  <text x="738" y="438" class="badge-text">Six HITL deficiencies closed in one pass</text>
+  <text x="738" y="438" class="badge-text">Six deficiencies closed in one pass</text>
 </svg>

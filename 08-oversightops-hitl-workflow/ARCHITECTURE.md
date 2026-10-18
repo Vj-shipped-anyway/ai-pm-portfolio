@@ -8,7 +8,7 @@ This doc is cloud-agnostic where the design allows it and explicit where it does
 
 ## 1. Logical architecture
 
-OversightOps is a **routing and calibration layer**, not a BPM platform. It does not own case storage; it composes routing decisions on top of the bank's existing case-management workflow (Pega / Appian / ServiceNow). Six components, each independently deployable.
+OversightOps is a **routing and calibration layer**, not a BPM platform. It does not own case storage; it composes routing decisions on top of the bank's existing case-management workflow (Pega / Appian / ServiceNow). Eight components, each independently deployable.
 
 | Component | Responsibility | Language / framework | Stateful? |
 | --- | --- | --- | --- |
@@ -126,7 +126,7 @@ Egress to BPM API (Pega / Appian / ServiceNow):
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | `oversight_decisions` immutable table, queue claim state, calibration drift snapshots, legal-hold flags. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. Append-only via insert-only role + trigger guard. |
 | **Temporal Cloud** | SLA timers; long-running review workflow state. | Mature long-running ops primitives; PagerDuty integration native; saves us from rebuilding the timer engine. |
-| **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — reviewer throughput, SLA breach time-series, drift signal series. | 10-50x cheaper than Postgres for time-series at this volume. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) for shared drift-signal querying. |
+| **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — reviewer throughput, SLA breach time-series, drift signal series. | 🔴 Assumed 10-50x cheaper than Postgres for time-series at this volume (not benchmarked). Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) for shared drift-signal querying. |
 | **Snowflake / Databricks** (read-only) | Downstream signals (SAR system, OFAC list, CFPB system, charge-off log, loss-event lake). | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (router), queue depth counters. | TTL-based eviction. Multi-AZ for HA. |
 | **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of oversight records** + calibration packets + cross-region replication. | Object Lock = WORM for the SR 11-7 / EU AI Act seven-year retention. |
@@ -137,13 +137,14 @@ Egress to BPM API (Pega / Appian / ServiceNow):
 The consequential schema. Every reviewer decision under OversightOps produces one row:
 
 ```sql
--- Append-only. Immutability enforced via insert-only role + DENY on UPDATE/DELETE
+-- Append-only. Immutability enforced via insert-only role + REVOKE of UPDATE/DELETE
 -- to anyone except the legal-hold service account (which can flag, not modify).
 -- Partitioned by month for retention cycling and reviewer-quality queries.
 
 CREATE TABLE oversight_decisions (
     -- Identity
-    decision_id                   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    decision_id                   UUID NOT NULL DEFAULT gen_random_uuid(),
+    PRIMARY KEY (decision_id, case_ingested_at),
     case_id                       TEXT NOT NULL,
     customer_id_hash              TEXT NOT NULL,            -- SHA-256 with KMS-managed pepper
     case_ingested_at              TIMESTAMPTZ NOT NULL,
@@ -211,7 +212,7 @@ The immutability trigger:
 CREATE OR REPLACE FUNCTION oversight_immutability_guard()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Only the legal_hold + backfill service accounts can update specific columns
+    -- Only the legal_hold, backfill and drift service accounts can update specific columns
     IF current_user NOT IN ('legal_hold_sa', 'backfill_sa', 'drift_sa') THEN
         RAISE EXCEPTION 'oversight_decisions is append-only';
     END IF;
@@ -256,7 +257,7 @@ CREATE TABLE reviewer_calibration_snapshots (
 
 - **Encryption:** TLS 1.3 in transit; KMS-backed AES-256 at rest on Postgres + GCS Object Lock + ClickHouse. The `customer_id_hash` column uses SHA-256 + KMS-managed pepper.
 - **RBAC:** OIDC role mapping `oo:reviewer_junior` → `oo:reviewer_senior` → `oo:reviewer_lead` → `oo:queue_admin` → `oo:compliance` → `oo:cro` → `oo:admin`. Each role's permissions defined in OPA bundles.
-- **Service account model:** Workload identity federation (no long-lived JSON keys). Per-component service account: `router-sa`, `blocker-sa`, `drift-sa`, `backfill-sa`, `temporal-sa`, `legal_hold_sa`. Cross-component calls via SPIFFE-identified mTLS.
+- **Service account model:** Workload identity federation (no long-lived JSON keys). Per-component service account: `router_sa`, `blocker_sa`, `drift_sa`, `backfill_sa`, `temporal_sa`, `legal_hold_sa`. Cross-component calls via SPIFFE-identified mTLS.
 - **Threat model:** Reviewer tries to clear queue depth by bulk-approving — caught at the rubber-stamp blocker. Reviewer tries to game calibration drift by patterned overrides — caught by the ground-truth feedback loop on the 6-12-month tail. Insider tries to modify a decision after the fact — caught by the immutability trigger + row_hash chain.
 - **Audit:** Every read of an oversight record produces an audit-on-audit log row (Cloud Audit Logs / CloudTrail). Internal Audit (L3) has read access to the audit-on-audit feed.
 

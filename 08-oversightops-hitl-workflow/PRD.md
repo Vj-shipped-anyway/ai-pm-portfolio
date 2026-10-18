@@ -136,14 +136,14 @@ The product is a routing layer. Each deficiency maps to a specific primitive and
 
 **Reference architecture.** Routing runs on Cloud Run (stateless) backed by Pub/Sub fan-in from the AI model's "flag for review" event. Postgres (Cloud SQL with HA + read replicas) holds the immutable `oversight_decisions` table; Temporal holds the SLA timers; ClickHouse holds the high-cardinality reviewer-throughput stream; GCS Object Lock + cross-region replication holds the WORM evidence bundles for the 7-year audit archive.
 
-**Throughput envelope.** ~4,500 cases/week on the headline KYC workflow = ~0.7 cases/second average, ~5 cases/second peak. The composition is dominated by the routing decision (sub-millisecond on the prototype) and the SLA timer write (Temporal, ~10ms). The constraint is the reviewer-workbench UI roundtrip, not the OversightOps composition itself.
+**Throughput envelope.** ~4,500 cases/week on the headline KYC workflow = ~0.007 cases/second averaged over a 7-day week (4,500 ÷ 604,800 seconds); 🔴 ~5 cases/second is an assumed peak. The composition is dominated by the routing decision (sub-millisecond on the prototype) and the SLA timer write (Temporal, 🔴 ~10ms assumed). The constraint is the reviewer-workbench UI roundtrip, not the OversightOps composition itself.
 
 **Failure modes.**
 - *AI's "flag for review" event lost.* Daily reconciliation job compares cases-flagged-by-AI vs cases-in-OversightOps-queues; backfill on detection.
 - *Temporal SLA timer fires after reviewer has claimed but not finished.* Grace period (90s) before PagerDuty alert; reviewer can extend timer with rubric attestation.
 - *Ground-truth ETL stale.* Calibration packet falls back to the prior week's drift profile; flagged in the packet as "stale ground truth."
 
-**Migration path.** If the bank is already running Pega / Appian / ServiceNow with HITL queues: OversightOps inserts itself between the AI model and the existing queue. The BPM remains the system of record. If the bank is on a Word-doc quarterly review cycle: 12-week Phase 0 to wire up the difficulty router first; calibrated review becomes the side-effect over a 12-month transition.
+**Migration path.** If the bank is already running Pega / Appian / ServiceNow with HITL queues: OversightOps inserts itself between the AI model and the existing queue. The BPM remains the system of record. If the bank is on a Word-doc quarterly review cycle: 6-week Phase 0 to wire up the difficulty router first; calibrated review becomes the side-effect over a 12-month transition.
 
 **Org dependencies.** Reviewer Operations co-designs the difficulty-router thresholds and the SLA floors (they own the queues and the staffing). Internal Audit (L3) signs off on the immutability properties of the oversight log. Head of Compliance signs the regulator-facing narrative.
 

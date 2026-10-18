@@ -1,8 +1,8 @@
 # Sample Data — OversightOps walkthrough
 
-Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic, seeded (`random.seed(20260615)`), and reproducible. No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's KYC HITL substrate actually looks like — confidence-scored AI decisions routed to a flat reviewer queue, where ~94% of reviews complete in under 10 seconds and the bank can't tell which approvals are real.
+Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and seeded (`random.seed(20260615)`). No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's KYC HITL substrate actually looks like — confidence-scored AI decisions routed to a flat reviewer queue, where the modeled baseline (🟡 an assumption, not measured here) has ~94% of reviews complete in under 10 seconds and the bank can't tell which approvals are real. In this synthetic data, step 1 prints 41% under 10 seconds.
 
-The headline case the walkthrough resolves is `CASE_0317_20260512` — a `private_banking` KYC application from a country-tier-4 jurisdiction that the AI approved with 0.62 confidence and a junior reviewer rubber-stamped in 8 seconds. The ground-truth backfill on June 8 surfaces an OFAC sanctions-list match that should have been blocked. Today: this case ships and the bank books a 🟡 modeled $420k regulatory-finding exposure. With OversightOps: this case is auto-blocked from the junior queue, routed to a lead reviewer with a 6-minute SLA, and rejected before it ships.
+The headline case the walkthrough resolves is `CASE_0317_20260512` — a `private_banking` KYC application from a country-tier-4 jurisdiction that the AI approved with 0.62 confidence and a junior reviewer rubber-stamped in 8 seconds. The ground-truth backfill on June 8 surfaces an OFAC sanctions-list match that should have been blocked. Today: this case ships and the bank books a 🟡 modeled $420k regulatory-finding exposure. With OversightOps: this case is auto-blocked from the junior queue, routed to a lead reviewer with an 8-minute SLA, and rejected before it ships.
 
 ---
 
@@ -20,14 +20,14 @@ The case-grain spine. Every KYC decision the AI flagged for human review in the 
 | `difficulty_score` | int | 1 (easy / well-precedented) - 5 (hardest / edge case). Inverse-correlates with AI confidence. |
 | `customer_tier` | string | `retail` / `sme` / `private_banking`. Private-banking cases warrant Tier-1 review SLA. |
 | `country_risk_tier` | int | 1 (low) - 4 (high — sanctions-adjacent). |
-| `true_outcome` | string | Backfilled from downstream signals when known. Blank if not yet observed. |
+| `true_outcome` | string | Equals `ground_truth_outcome` for the 198 cases in `ground_truth_backfill.csv`. Filled on 427 other cases with no downstream signal, and blank on 375. |
 | `case_value_usd` | float | The dollar value of the underlying transaction or relationship. |
 
-1,000 rows. Reproducible from the generator embedded in `step_04_with_oversightops.py` if regenerated with the same seed.
+1,000 rows. No step script generates these files, and the generator is not included in this repo.
 
 ## `reviewers.csv` — 12 synthetic KYC reviewers
 
-The reviewer roster. Three tenure tiers (`junior` / `senior` / `lead`) with calibrated decision-time and override-rate priors. Reality: junior reviewers are 10x faster than leads — because they're not actually reviewing.
+The reviewer roster. Three tenure tiers (`junior` / `senior` / `lead`) with calibrated decision-time and override-rate priors. Reality: junior reviewers are about 15x faster than leads (step 1 prints mean 7.5 s vs 110.1 s) — because they're not actually reviewing.
 
 | Column | Type | What it is |
 | --- | --- | --- |
@@ -35,7 +35,7 @@ The reviewer roster. Three tenure tiers (`junior` / `senior` / `lead`) with cali
 | `name` | string | Display name for the UI. |
 | `tenure` | string | `junior` / `senior` / `lead`. |
 | `training_level` | string | `basic_kyc` / `kyc_plus_sanctions` / `kyc_full_aml`. |
-| `average_decision_time_sec` | float | Mean review time. Juniors ~8-14s, seniors ~30-40s, leads ~95-115s. |
+| `average_decision_time_sec` | float | Mean review time. Juniors ~6-11s, seniors ~30-40s, leads ~95-115s. |
 | `override_rate` | float | Fraction of cases the reviewer overrides the AI on. Juniors ~4%, leads ~18%. |
 | `tier_authorization` | int | Highest case tier this reviewer is authorized for. 1 = Tier-1 (private banking, sanctions-adjacent); 3 = Tier-3 (retail only). |
 
@@ -69,7 +69,7 @@ Reviewer decisions don't get a verdict at the moment of decision. They get one w
 | `modeled_loss_usd` | float | The bank's modeled exposure on this single case. `0.00` for non-monetary findings (complaints, MRAs in narrative form). |
 | `reviewer_was_wrong` | bool | Always `True` in this file — this CSV is the universe of cases where the human reviewer's decision contradicted the eventual outcome. |
 
-196 rows. Of the 1,000 cases, ~20% surface a downstream-signal contradiction within the 90-day study window. The full reviewer-vs-ground-truth divergence rate (~38% modeled) materializes over the 6-12-month tail.
+198 rows. Of the 1,000 cases, ~20% have a downstream-signal contradiction on file (the 90 days is the case-ingestion window; backfill dates run from 2026-03-29 to 2026-11-20). The full reviewer-vs-ground-truth divergence rate (~38% modeled) materializes over the 6-12-month tail.
 
 ---
 

@@ -121,7 +121,7 @@
 <div class="container">
   <header class="hero">
     <h1>OversightOps — calibrated HITL in 8 minutes, not 8 seconds</h1>
-    <p class="tagline">Pick one of six KYC review cases. See what each maturity level returns when the regulator asks: who reviewed this and was it a real review?</p>
+    <p class="tagline">Pick one of six KYC review cases. See what each maturity level returns when the regulator asks: who reviewed this and was it a real review? The first is a row in the shipped data; the other five are illustrative and are not rows in cases.csv.</p>
     <p class="author">Project 08 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
       <span class="badge">1,000 synthetic KYC cases</span>
@@ -135,8 +135,8 @@
   <section class="stats" aria-label="Review readiness summary">
     <div class="stat"><p class="stat-label">Cases in corpus</p><p class="stat-value">1,000</p></div>
     <div class="stat"><p class="stat-label">Deficiencies named</p><p class="stat-value">6</p></div>
-    <div class="stat"><p class="stat-label">Rubber-stamp rate (single-queue)</p><p class="stat-value">94%</p></div>
-    <div class="stat"><p class="stat-label">OversightOps target</p><p class="stat-value">4%</p></div>
+    <div class="stat"><p class="stat-label">Rubber-stamp rate (single-queue, modeled)</p><p class="stat-value">94%</p></div>
+    <div class="stat"><p class="stat-label">OversightOps target (modeled)</p><p class="stat-value">4%</p></div>
   </section>
 
   <div class="controls">
@@ -171,7 +171,7 @@
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (single-queue rubber-stamp rate − OversightOps rubber-stamp rate) × Tier-1 cases per year</p>
-    <p style="margin: 8px 0 0;">Per-case lift: <b>~94% → 4%</b> rubber-stamp rate on Tier-1 review (<b>96% reduction</b>). Reviewer-vs-ground-truth divergence: <b>~38% → 8%</b> modeled. Annualized at Tier-1 bank scale (every regulated AI workflow with a HITL step; typical Tier-1: 6-15 such pipelines × thousands of high-stakes decisions per year): <b>real oversight instead of theatrical</b>. Tier-1 SLA breach rate (<b>100%</b> below floor on the synthetic corpus) collapses to <b>auto-blocked</b>.</p>
+    <p style="margin: 8px 0 0;">Per-case lift: <b>~94% → 4%</b> rubber-stamp rate on Tier-1 review (<b>96% reduction</b>). Reviewer-vs-ground-truth divergence: <b>~38% → 8%</b> modeled. Annualized at Tier-1 bank scale (every regulated AI workflow with a HITL step; typical Tier-1: 6-15 such pipelines × thousands of high-stakes decisions per year): <b>real oversight instead of theatrical</b>. Tier-1 SLA breach rate (<b>100%</b> of private-banking reviews below the 480-second SLA target on the synthetic corpus) collapses to <b>auto-blocked</b>.</p>
   </section>
 
   <footer class="footer-links">
@@ -205,7 +205,7 @@ const CASES = [
       routed_to: "LEAD queue",
       blocker: "rubber-stamp blocker (sub-60s on PB)",
       sla: "8-minute SLA timer engaged",
-      drift: "REV_07 flagged 1.5+ sigma below cohort override rate",
+      drift: "REV_07 not flagged (step 4 flags only Reviewers H and D, both leads)",
       backfill: "OFAC match auto-bound to case_id 27d later",
       verdict_word: "RUBBER_STAMPED_BLOCKED",
       verdict_pill: "pill-bad"
@@ -251,7 +251,7 @@ const CASES = [
     },
     ops: {
       routed_to: "JUNIOR queue",
-      blocker: "passes (6s above 8s retail floor) - just",
+      blocker: "passes (6s is under the 8s retail floor, but the blocker enforces private banking and SME only)",
       sla: "1-minute target, no breach",
       drift: "within cohort",
       backfill: "no signal observed",
@@ -375,7 +375,7 @@ function render(idx) {
   opsHtml += '<div class="field-row"><span class="field-label">SLA</span><span class="field-value">' + escapeHtml(c.ops.sla) + '</span></div>';
   opsHtml += '<div class="field-row"><span class="field-label">Calibration drift</span><span class="field-value">' + escapeHtml(c.ops.drift) + '</span></div>';
   opsHtml += '<div class="field-row"><span class="field-label">Ground-truth loop</span><span class="field-value">' + escapeHtml(c.ops.backfill) + '</span></div>';
-  opsHtml += '<div class="meta">Composed in 0.13ms per case on the 1,000-case fleet sweep. Six deficiencies closed.</div>';
+  opsHtml += '<div class="meta">Composed in under 1 ms per case on the 1,000-case fleet sweep. Six deficiencies closed.</div>';
   opsHtml += '<div class="pill ' + c.ops.verdict_pill + '">' + escapeHtml(c.ops.verdict_word.replace(/_/g, ' ')) + '</div>';
   document.getElementById('card-ops').innerHTML = opsHtml;
 }
