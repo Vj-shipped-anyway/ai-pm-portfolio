@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScopeKeeper — Agent Permission Review · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of ScopeKeeper: it compares what each AI agent is allowed to do with what it called in 90 days and proposes the smallest scope set. Synthetic data, no model.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 280px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldrow:first-of-type { border-top: 0; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; overflow-wrap: anywhere; }
+  .fieldvals { color: var(--text-secondary); overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 999px; margin-left: 6px; }
+  .tag-ok { background: #EAF3DE; color: #27500A; }
+  .tag-bad { background: #FCEBEB; color: #791F1F; }
+  .tag-warn { background: #FAEEDA; color: #633806; }
+  .reltitle { font-size: 12px; font-weight: 500; margin: 10px 0 4px; overflow-wrap: anywhere; }
+  .reltitle:first-child { margin-top: 0; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>ScopeKeeper — Agent Permission Review</h1>
+    <p class="tagline">Pick an agent and compare the annual review, the 90-day call log and the proposed scope set.</p>
+    <p class="author">Project 23 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">Synthetic data</span>
+      <span class="badge">15 agents · 184 grants · 7,994 calls</span>
+      <span class="badge">6 named deficiencies</span>
+      <span class="badge">No model: plain rules</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Running totals through the selected agent">
+    <div class="stat"><p class="stat-label">Grants the review approved</p><p class="stat-value" id="stat-approved">—</p></div>
+    <div class="stat"><p class="stat-label">Grants unused in 90 days</p><p class="stat-value" id="stat-unused">—</p></div>
+    <div class="stat"><p class="stat-label">Unneeded grants removed</p><p class="stat-value" id="stat-removed">—</p></div>
+    <div class="stat"><p class="stat-label">Legit calls denied next quarter (known limit)</p><p class="stat-value" id="stat-denied">—</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="agent-select">Agent</label>
+    <select id="agent-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next agent</button>
+    <button id="runall-btn">Replay all 15 agents</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Grants and calls never compared</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>Basic — Annual recertification</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With ScopeKeeper</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. The generator decided which grants each agent needs, so the truth is known. No model is used: the diff, proposal, replay and ranking are plain rules. Every number on this page comes from the scripts in <code>src/</code>.</p>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (unneeded grants removed per agent with ScopeKeeper − with annual recertification) × agents in the estate</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> 71 of 184 grants are not needed by the agent that holds them. The annual review removed 1 of them (1.4%); ScopeKeeper removed 61 (85.9%). That is 4.07 against 0.07 unneeded grants removed per agent. The dry-run replay of the 90 days denied 0 of 7,994 calls (by construction). The known limit: 8 quarterly grants are removed too, and the next quarter would deny 51 legitimate calls until owners mark them periodic.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 200 agents in a bank's estate (an assumption, not a statistic) gives (4.07 − 0.07) × 200 = about <b>800 unneeded grants removed</b>, and about 680 legitimate calls denied next quarter until the periodic scopes are attested.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/23-scopekeeper-agent-permission-review/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/23-scopekeeper-agent-permission-review/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/23-scopekeeper-agent-permission-review/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/scopekeeper-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"agents":[{"id":"A-07","purpose":"Matches ledger entries to payment confirmations","owner":"T-18 Finance Operations","tier":"high","account":"SA-07","shared":false,"siblings":[],"launched":"2025-03-03","rank":1,"points":146,"grants":12,"reach":15,"proposed":7,"cut":8,"breadth":53.3,"keep":5,"remove":6,"narrow":1,"calls":907,"unapproved":25,"high_impact":4,"wildcards":1,"post_launch":2,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"ledger:*","ticket":"TKT-41276"},{"scope":"messages:send_email","ticket":"TKT-41290"},{"scope":"payments:initiate_payment","ticket":"TKT-41301"},{"scope":"payments:cancel_payment","ticket":"TKT-43977"}],"high_impact_approved_n":4,"unused":[{"scope":"accounts:read_profile","impact":"read"},{"scope":"documents:upload","impact":"write"},{"scope":"ledger:post_adjustment","impact":"write"},{"scope":"ledger:reverse_entry","impact":"write"},{"scope":"messages:send_email","impact":"external_message"},{"scope":"payments:cancel_payment","impact":"money_movement"},{"scope":"payments:initiate_payment","impact":"money_movement"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_transactions","cases:create","cases:read","documents:read","ledger:read_entry","ledger:write_entry","payments:read_status"],"actions":[{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"ledger:*","action":"narrow","after":["ledger:read_entry","ledger:write_entry"],"reason":"2 of 4 scopes it reaches were called","impact":"write"},{"scope":"messages:send_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"external_message"},{"scope":"payments:initiate_payment","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"accounts:read_profile","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:cancel_payment","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"}],"wild":[{"scope":"ledger:*","reach":4,"called":2}],"rare":[{"scope":"documents:upload","why":"quarter-end reconciliation pack","last":"2026-07-11","next":"2026-10-28","calls":9,"removed":true}],"unused_grants":6,"removed_unneeded":5,"kept_unneeded":[],"next_q_denied":9},{"id":"A-10","purpose":"Sends payment reminders to late accounts","owner":"T-13 Collections","tier":"high","account":"SA-02","shared":true,"siblings":["A-09"],"launched":"2025-09-15","rank":2,"points":127,"grants":12,"reach":12,"proposed":9,"cut":3,"breadth":25.0,"keep":9,"remove":3,"narrow":0,"calls":237,"unapproved":30,"high_impact":5,"wildcards":0,"post_launch":2,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"messages:post_portal_notice","ticket":"TKT-42918"},{"scope":"messages:send_email","ticket":"TKT-42920"},{"scope":"messages:send_sms","ticket":"TKT-42951"},{"scope":"payments:schedule_transfer","ticket":"TKT-42996"}],"high_impact_approved_n":5,"unused":[{"scope":"accounts:update_contact","impact":"write"},{"scope":"payments:initiate_payment","impact":"money_movement"},{"scope":"payments:schedule_transfer","impact":"money_movement"}],"proposed_scopes":["accounts:read_balance","cases:create","cases:read","documents:read","messages:draft_email","messages:post_portal_notice","messages:send_email","messages:send_sms","payments:read_status"],"actions":[{"scope":"accounts:update_contact","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"payments:schedule_transfer","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"payments:initiate_payment","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"}],"wild":[],"rare":[],"unused_grants":3,"removed_unneeded":3,"kept_unneeded":["documents:read","messages:draft_email"],"next_q_denied":0},{"id":"A-14","purpose":"Logs and routes customer complaints","owner":"T-12 Contact Centre","tier":"medium","account":"SA-10","shared":false,"siblings":[],"launched":"2026-01-12","rank":3,"points":82,"grants":12,"reach":18,"proposed":9,"cut":9,"breadth":50.0,"keep":7,"remove":5,"narrow":0,"calls":473,"unapproved":0,"high_impact":3,"wildcards":2,"post_launch":2,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"cases:*","ticket":"TKT-43883"},{"scope":"messages:send_email","ticket":"TKT-43962"},{"scope":"payments:*","ticket":"TKT-43968"}],"high_impact_approved_n":3,"unused":[{"scope":"accounts:read_balance","impact":"read"},{"scope":"documents:upload","impact":"write"},{"scope":"messages:draft_email","impact":"write"},{"scope":"payments:cancel_payment","impact":"money_movement"},{"scope":"payments:initiate_payment","impact":"money_movement"},{"scope":"payments:initiate_wire","impact":"money_movement"},{"scope":"payments:read_status","impact":"read"},{"scope":"payments:schedule_transfer","impact":"money_movement"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_profile","accounts:read_transactions","cases:close","cases:create","cases:read","documents:read","kyc:read_case","ledger:read_entry","messages:send_email"],"actions":[{"scope":"accounts:read_balance","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"payments:*","action":"remove","after":[],"reason":"wildcard never called","impact":"money_movement"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"messages:draft_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[{"scope":"cases:*","reach":3,"called":3},{"scope":"payments:*","reach":5,"called":0}],"rare":[],"unused_grants":5,"removed_unneeded":5,"kept_unneeded":[],"next_q_denied":0},{"id":"A-13","purpose":"Builds the daily liquidity summary","owner":"T-19 Treasury","tier":"low","account":"SA-03","shared":true,"siblings":["A-12"],"launched":"2025-12-01","rank":4,"points":55,"grants":12,"reach":19,"proposed":6,"cut":13,"breadth":68.4,"keep":4,"remove":6,"narrow":2,"calls":300,"unapproved":0,"high_impact":5,"wildcards":2,"post_launch":1,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"accounts:*","ticket":"TKT-43488"},{"scope":"ledger:*","ticket":"TKT-43650"},{"scope":"messages:send_email","ticket":"TKT-43690"},{"scope":"payments:initiate_wire","ticket":"TKT-43730"}],"high_impact_approved_n":5,"unused":[{"scope":"accounts:close_account","impact":"write"},{"scope":"accounts:read_profile","impact":"read"},{"scope":"accounts:read_transactions","impact":"read"},{"scope":"accounts:update_contact","impact":"write"},{"scope":"cases:create","impact":"write"},{"scope":"documents:upload","impact":"write"},{"scope":"kyc:read_case","impact":"read"},{"scope":"ledger:post_adjustment","impact":"write"},{"scope":"ledger:reverse_entry","impact":"write"},{"scope":"ledger:write_entry","impact":"write"},{"scope":"messages:send_email","impact":"external_message"},{"scope":"payments:initiate_wire","impact":"money_movement"},{"scope":"payments:schedule_transfer","impact":"money_movement"}],"proposed_scopes":["accounts:read_balance","cases:read","documents:read","ledger:read_entry","payments:read_status","rates:read_quote"],"actions":[{"scope":"accounts:*","action":"narrow","after":["accounts:read_balance"],"reason":"1 of 5 scopes it reaches were called","impact":"write"},{"scope":"cases:create","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"kyc:read_case","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"ledger:*","action":"narrow","after":["ledger:read_entry"],"reason":"1 of 4 scopes it reaches were called","impact":"write"},{"scope":"messages:send_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"external_message"},{"scope":"payments:initiate_wire","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"payments:schedule_transfer","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"}],"wild":[{"scope":"accounts:*","reach":5,"called":1},{"scope":"ledger:*","reach":4,"called":1}],"rare":[{"scope":"documents:upload","why":"quarterly regulatory extract","last":"2026-07-14","next":"2026-11-11","calls":8,"removed":true}],"unused_grants":6,"removed_unneeded":5,"kept_unneeded":[],"next_q_denied":8},{"id":"A-08","purpose":"Posts month-end accrual adjustments","owner":"T-18 Finance Operations","tier":"high","account":"SA-08","shared":false,"siblings":[],"launched":"2025-08-11","rank":5,"points":53,"grants":14,"reach":14,"proposed":8,"cut":6,"breadth":42.9,"keep":8,"remove":6,"narrow":0,"calls":382,"unapproved":1,"high_impact":5,"wildcards":0,"post_launch":4,"approved":14,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"ledger:post_adjustment","ticket":"TKT-42651"},{"scope":"ledger:reverse_entry","ticket":"TKT-42694"},{"scope":"ledger:write_entry","ticket":"TKT-42723"},{"scope":"payments:initiate_payment","ticket":"TKT-43236"}],"high_impact_approved_n":5,"unused":[{"scope":"accounts:read_transactions","impact":"read"},{"scope":"accounts:update_contact","impact":"write"},{"scope":"cases:read","impact":"read"},{"scope":"documents:upload","impact":"write"},{"scope":"payments:initiate_payment","impact":"money_movement"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_balance","documents:read","ledger:post_adjustment","ledger:read_entry","ledger:reverse_entry","ledger:write_entry","messages:send_email","payments:read_status"],"actions":[{"scope":"accounts:read_transactions","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"cases:read","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:initiate_payment","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"accounts:update_contact","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[],"rare":[{"scope":"accounts:read_transactions","why":"quarter-end tie-out","last":"2026-07-16","next":"2026-11-03","calls":8,"removed":true},{"scope":"documents:upload","why":"quarter-end close pack","last":"2026-07-10","next":"2026-10-28","calls":6,"removed":true}],"unused_grants":6,"removed_unneeded":4,"kept_unneeded":[],"next_q_denied":14},{"id":"A-04","purpose":"Prepares routine payments for operator release","owner":"T-16 Payments","tier":"high","account":"SA-01","shared":true,"siblings":["A-05","A-06"],"launched":"2025-05-05","rank":6,"points":52,"grants":12,"reach":16,"proposed":10,"cut":6,"breadth":37.5,"keep":6,"remove":6,"narrow":0,"calls":315,"unapproved":0,"high_impact":5,"wildcards":1,"post_launch":2,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"ledger:post_adjustment","ticket":"TKT-42116"},{"scope":"ledger:write_entry","ticket":"TKT-42135"},{"scope":"messages:send_email","ticket":"TKT-42146"},{"scope":"payments:*","ticket":"TKT-42160"}],"high_impact_approved_n":5,"unused":[{"scope":"accounts:update_contact","impact":"write"},{"scope":"cases:read","impact":"read"},{"scope":"documents:read","impact":"read"},{"scope":"ledger:post_adjustment","impact":"write"},{"scope":"messages:send_email","impact":"external_message"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_balance","accounts:read_transactions","ledger:read_entry","ledger:reverse_entry","ledger:write_entry","payments:cancel_payment","payments:initiate_payment","payments:initiate_wire","payments:read_status","payments:schedule_transfer"],"actions":[{"scope":"cases:read","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"documents:read","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"ledger:post_adjustment","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"messages:send_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"external_message"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"accounts:update_contact","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[{"scope":"payments:*","reach":5,"called":5}],"rare":[{"scope":"ledger:post_adjustment","why":"quarter-end adjustment","last":"2026-07-09","next":"2026-11-08","calls":4,"removed":true}],"unused_grants":6,"removed_unneeded":5,"kept_unneeded":[],"next_q_denied":4},{"id":"A-15","purpose":"Processes address and contact changes","owner":"T-11 Retail Servicing","tier":"high","account":"SA-11","shared":false,"siblings":[],"launched":"2026-03-09","rank":7,"points":51,"grants":12,"reach":12,"proposed":6,"cut":6,"breadth":50.0,"keep":6,"remove":6,"narrow":0,"calls":333,"unapproved":0,"high_impact":4,"wildcards":0,"post_launch":2,"approved":11,"approved_pct":91.7,"recert_removed":[{"scope":"ledger:write_entry","used":false}],"high_impact_approved":[{"scope":"accounts:close_account","ticket":"TKT-44107"},{"scope":"messages:send_email","ticket":"TKT-44337"},{"scope":"payments:cancel_payment","ticket":"TKT-44473"}],"high_impact_approved_n":3,"unused":[{"scope":"accounts:read_transactions","impact":"read"},{"scope":"documents:upload","impact":"write"},{"scope":"ledger:read_entry","impact":"read"},{"scope":"ledger:write_entry","impact":"write"},{"scope":"payments:cancel_payment","impact":"money_movement"},{"scope":"payments:read_status","impact":"read"}],"proposed_scopes":["accounts:close_account","accounts:read_profile","accounts:update_contact","cases:create","documents:read","messages:send_email"],"actions":[{"scope":"accounts:read_transactions","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"ledger:read_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:read_status","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:cancel_payment","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"ledger:write_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[],"rare":[],"unused_grants":6,"removed_unneeded":6,"kept_unneeded":[],"next_q_denied":0},{"id":"A-05","purpose":"Drafts wire transfers for human release","owner":"T-16 Payments","tier":"high","account":"SA-01","shared":true,"siblings":["A-04","A-06"],"launched":"2025-06-02","rank":8,"points":45,"grants":12,"reach":12,"proposed":9,"cut":3,"breadth":25.0,"keep":9,"remove":3,"narrow":0,"calls":185,"unapproved":1,"high_impact":7,"wildcards":0,"post_launch":3,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"ledger:write_entry","ticket":"TKT-42258"},{"scope":"messages:send_email","ticket":"TKT-42298"},{"scope":"payments:cancel_payment","ticket":"TKT-42303"},{"scope":"payments:initiate_payment","ticket":"TKT-42314"}],"high_impact_approved_n":7,"unused":[{"scope":"accounts:close_account","impact":"write"},{"scope":"accounts:update_contact","impact":"write"},{"scope":"messages:send_email","impact":"external_message"}],"proposed_scopes":["accounts:read_balance","kyc:read_case","ledger:read_entry","ledger:write_entry","payments:cancel_payment","payments:initiate_payment","payments:initiate_wire","payments:read_status","payments:schedule_transfer"],"actions":[{"scope":"messages:send_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"external_message"},{"scope":"accounts:close_account","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"accounts:update_contact","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[],"rare":[{"scope":"ledger:write_entry","why":"quarterly true-up posting","last":"2026-07-12","next":"2026-10-20","calls":5,"removed":false}],"unused_grants":3,"removed_unneeded":3,"kept_unneeded":["payments:initiate_payment","payments:schedule_transfer"],"next_q_denied":0},{"id":"A-03","purpose":"Tells customers where a payment is","owner":"T-16 Payments","tier":"medium","account":"SA-06","shared":false,"siblings":[],"launched":"2025-04-14","rank":9,"points":40,"grants":12,"reach":12,"proposed":7,"cut":5,"breadth":41.7,"keep":7,"remove":5,"narrow":0,"calls":721,"unapproved":1,"high_impact":5,"wildcards":0,"post_launch":2,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"messages:post_portal_notice","ticket":"TKT-41658"},{"scope":"messages:send_email","ticket":"TKT-41669"},{"scope":"messages:send_sms","ticket":"TKT-41701"},{"scope":"payments:cancel_payment","ticket":"TKT-41727"}],"high_impact_approved_n":5,"unused":[{"scope":"documents:read","impact":"read"},{"scope":"ledger:read_entry","impact":"read"},{"scope":"payments:cancel_payment","impact":"money_movement"},{"scope":"payments:schedule_transfer","impact":"money_movement"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_balance","accounts:read_profile","cases:read","messages:post_portal_notice","messages:send_email","messages:send_sms","payments:read_status"],"actions":[{"scope":"documents:read","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:cancel_payment","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:schedule_transfer","action":"remove","after":[],"reason":"no call in 90 days","impact":"money_movement"},{"scope":"ledger:read_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"}],"wild":[],"rare":[],"unused_grants":5,"removed_unneeded":5,"kept_unneeded":[],"next_q_denied":0},{"id":"A-06","purpose":"Schedules recurring transfers","owner":"T-16 Payments","tier":"high","account":"SA-01","shared":true,"siblings":["A-04","A-05"],"launched":"2025-07-21","rank":10,"points":33,"grants":12,"reach":12,"proposed":11,"cut":1,"breadth":8.3,"keep":11,"remove":1,"narrow":0,"calls":145,"unapproved":7,"high_impact":5,"wildcards":0,"post_launch":1,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"payments:cancel_payment","ticket":"TKT-42506"},{"scope":"payments:initiate_payment","ticket":"TKT-42512"},{"scope":"payments:initiate_wire","ticket":"TKT-42519"},{"scope":"payments:schedule_transfer","ticket":"TKT-42568"}],"high_impact_approved_n":5,"unused":[{"scope":"messages:draft_email","impact":"write"}],"proposed_scopes":["accounts:read_balance","accounts:read_profile","cases:create","kyc:read_case","ledger:read_entry","ledger:write_entry","payments:cancel_payment","payments:initiate_payment","payments:initiate_wire","payments:read_status","payments:schedule_transfer"],"actions":[{"scope":"messages:draft_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[],"rare":[{"scope":"payments:initiate_payment","why":"quarterly fee sweep","last":"2026-07-18","next":"2026-11-05","calls":9,"removed":false}],"unused_grants":1,"removed_unneeded":1,"kept_unneeded":["kyc:read_case","ledger:read_entry","payments:initiate_wire","ledger:write_entry"],"next_q_denied":0},{"id":"A-09","purpose":"Drafts and sends customer e-mail replies","owner":"T-12 Contact Centre","tier":"medium","account":"SA-02","shared":true,"siblings":["A-10"],"launched":"2025-04-28","rank":11,"points":32,"grants":12,"reach":15,"proposed":11,"cut":4,"breadth":26.7,"keep":8,"remove":4,"narrow":0,"calls":314,"unapproved":5,"high_impact":2,"wildcards":1,"post_launch":1,"approved":11,"approved_pct":91.7,"recert_removed":[{"scope":"messages:*","used":true}],"high_impact_approved":[{"scope":"cases:close","ticket":"TKT-41872"}],"high_impact_approved_n":1,"unused":[{"scope":"accounts:update_contact","impact":"write"},{"scope":"kyc:read_case","impact":"read"},{"scope":"ledger:read_entry","impact":"read"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_balance","accounts:read_profile","cases:close","cases:create","cases:read","documents:read","messages:draft_email","messages:post_portal_notice","messages:send_email","messages:send_sms","payments:read_status"],"actions":[{"scope":"kyc:read_case","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"ledger:read_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"accounts:update_contact","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[{"scope":"messages:*","reach":4,"called":4}],"rare":[],"unused_grants":4,"removed_unneeded":4,"kept_unneeded":["payments:read_status"],"next_q_denied":0},{"id":"A-01","purpose":"Answers customer balance and transaction questions","owner":"T-11 Retail Servicing","tier":"medium","account":"SA-04","shared":false,"siblings":[],"launched":"2025-02-10","rank":12,"points":30,"grants":12,"reach":16,"proposed":9,"cut":7,"breadth":43.8,"keep":7,"remove":4,"narrow":1,"calls":729,"unapproved":0,"high_impact":3,"wildcards":1,"post_launch":2,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"accounts:*","ticket":"TKT-41005"},{"scope":"messages:send_email","ticket":"TKT-42053"},{"scope":"cases:close","ticket":"TKT-42798"}],"high_impact_approved_n":3,"unused":[{"scope":"accounts:close_account","impact":"write"},{"scope":"accounts:read_profile","impact":"read"},{"scope":"accounts:update_contact","impact":"write"},{"scope":"cases:close","impact":"write"},{"scope":"documents:upload","impact":"write"},{"scope":"ledger:read_entry","impact":"read"},{"scope":"payments:read_status","impact":"read"}],"proposed_scopes":["accounts:read_balance","accounts:read_transactions","cases:create","cases:read","documents:read","kyc:read_case","messages:draft_email","messages:send_email","rates:read_quote"],"actions":[{"scope":"accounts:*","action":"narrow","after":["accounts:read_balance","accounts:read_transactions"],"reason":"2 of 5 scopes it reaches were called","impact":"write"},{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"ledger:read_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:read_status","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"cases:close","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[{"scope":"accounts:*","reach":5,"called":2}],"rare":[],"unused_grants":4,"removed_unneeded":4,"kept_unneeded":[],"next_q_denied":0},{"id":"A-12","purpose":"Quotes indicative rates to relationship managers","owner":"T-19 Treasury","tier":"low","account":"SA-03","shared":true,"siblings":["A-13"],"launched":"2025-11-17","rank":13,"points":19,"grants":12,"reach":12,"proposed":7,"cut":5,"breadth":41.7,"keep":7,"remove":5,"narrow":0,"calls":165,"unapproved":0,"high_impact":0,"wildcards":0,"post_launch":3,"approved":12,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[],"high_impact_approved_n":0,"unused":[{"scope":"accounts:read_profile","impact":"read"},{"scope":"accounts:read_transactions","impact":"read"},{"scope":"cases:create","impact":"write"},{"scope":"documents:upload","impact":"write"},{"scope":"kyc:read_case","impact":"read"}],"proposed_scopes":["accounts:read_balance","cases:read","documents:read","ledger:read_entry","messages:draft_email","payments:read_status","rates:read_quote"],"actions":[{"scope":"accounts:read_transactions","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"documents:upload","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"kyc:read_case","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"accounts:read_profile","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"cases:create","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[],"rare":[{"scope":"documents:upload","why":"quarterly rate-sheet publication","last":"2026-07-16","next":"2026-11-09","calls":5,"removed":true}],"unused_grants":5,"removed_unneeded":4,"kept_unneeded":["ledger:read_entry"],"next_q_denied":5},{"id":"A-11","purpose":"Collects periodic KYC refresh documents","owner":"T-15 Compliance Operations","tier":"medium","account":"SA-09","shared":false,"siblings":[],"launched":"2025-10-06","rank":14,"points":18,"grants":13,"reach":13,"proposed":8,"cut":5,"breadth":38.5,"keep":8,"remove":5,"narrow":0,"calls":423,"unapproved":0,"high_impact":2,"wildcards":0,"post_launch":2,"approved":13,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"cases:close","ticket":"TKT-43065"},{"scope":"messages:send_email","ticket":"TKT-43215"}],"high_impact_approved_n":2,"unused":[{"scope":"accounts:read_balance","impact":"read"},{"scope":"accounts:read_transactions","impact":"read"},{"scope":"cases:close","impact":"write"},{"scope":"ledger:read_entry","impact":"read"},{"scope":"messages:draft_email","impact":"write"}],"proposed_scopes":["accounts:read_profile","cases:create","cases:read","documents:read","documents:upload","kyc:read_case","messages:send_email","payments:read_status"],"actions":[{"scope":"accounts:read_balance","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"accounts:read_transactions","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"cases:close","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"ledger:read_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"messages:draft_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"}],"wild":[],"rare":[{"scope":"cases:close","why":"quarterly stale-case sweep","last":"2026-07-15","next":"2026-11-01","calls":8,"removed":true}],"unused_grants":5,"removed_unneeded":4,"kept_unneeded":[],"next_q_denied":8},{"id":"A-02","purpose":"Triages card dispute intake","owner":"T-14 Cards","tier":"medium","account":"SA-05","shared":false,"siblings":[],"launched":"2025-03-24","rank":15,"points":14,"grants":13,"reach":13,"proposed":9,"cut":4,"breadth":30.8,"keep":9,"remove":4,"narrow":0,"calls":642,"unapproved":1,"high_impact":2,"wildcards":0,"post_launch":3,"approved":13,"approved_pct":100.0,"recert_removed":[],"high_impact_approved":[{"scope":"cases:close","ticket":"TKT-41439"},{"scope":"messages:send_email","ticket":"TKT-42827"}],"high_impact_approved_n":2,"unused":[{"scope":"ledger:read_entry","impact":"read"},{"scope":"messages:draft_email","impact":"write"},{"scope":"payments:read_status","impact":"read"},{"scope":"rates:read_quote","impact":"read"}],"proposed_scopes":["accounts:read_balance","accounts:read_profile","accounts:read_transactions","cases:close","cases:create","cases:read","documents:read","kyc:read_case","messages:send_email"],"actions":[{"scope":"ledger:read_entry","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"messages:draft_email","action":"remove","after":[],"reason":"no call in 90 days","impact":"write"},{"scope":"rates:read_quote","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"},{"scope":"payments:read_status","action":"remove","after":[],"reason":"no call in 90 days","impact":"read"}],"wild":[],"rare":[{"scope":"ledger:read_entry","why":"quarterly chargeback true-up","last":"2026-07-09","next":"2026-11-10","calls":3,"removed":true}],"unused_grants":4,"removed_unneeded":3,"kept_unneeded":[],"next_q_denied":3}],"s":{"agents":15,"grants":184,"calls":7994,"reach_before":211,"reach_after":126,"reach_cut":85,"reach_cut_pct":40.3,"keep":111,"remove":69,"narrow":4,"narrow_cut":12,"replay_calls":7994,"replay_denied":0,"approval_held":118,"recert_replay_denied":142,"unneeded_grants":71,"unneeded_pct":38.6,"sk_removed_unneeded":61,"sk_removed_unneeded_pct":85.9,"sk_removed_needed":8,"sk_kept_unneeded":10,"rec_removed":2,"rec_removed_unneeded":1,"rec_removed_unneeded_pct":1.4,"rec_removed_needed":1,"unused_grants_log":69,"ent_needed":120,"ent_unneeded":91,"ent_unneeded_cut":77,"ent_unneeded_kept":14,"ent_needed_cut":8,"rare_grants":10,"rare_removed":8,"rare_kept":2,"next_q_denied":51,"next_q_denied_by_rare":{"A-02 ledger:read_entry":3,"A-04 ledger:post_adjustment":4,"A-07 documents:upload":9,"A-08 accounts:read_transactions":8,"A-08 documents:upload":6,"A-11 cases:close":8,"A-12 documents:upload":5,"A-13 documents:upload":8},"per_agent_sk":4.07,"per_agent_rec":0.07,"per_agent_denied":3.4,"agents_in_estate":200,"utility_grants":800,"utility_denied_calls":680,"utility_sensitivity":{"50":200,"100":400,"200":800,"500":2000},"top_risk_agent":"A-07"},"s1":{"agents":15,"service_accounts":11,"shared_accounts":3,"agents_on_shared":7,"scopes":30,"wildcard_scopes":5,"grants":184,"calls":7994,"wildcard_grants":8,"high_impact_grants":57,"high_impact_by_impact":{"write":20,"external_message":17,"money_movement":20},"post_launch_grants":32,"no_ticket_grants":2,"reach_total":211,"wildcard_extra_reach":27,"per_agent":[{"agent_id":"A-01","tier":"medium","service_account":"SA-04","shared":false,"grants":12,"wildcards":1,"high_impact":3,"post_launch":2,"reach":16},{"agent_id":"A-02","tier":"medium","service_account":"SA-05","shared":false,"grants":13,"wildcards":0,"high_impact":2,"post_launch":3,"reach":13},{"agent_id":"A-03","tier":"medium","service_account":"SA-06","shared":false,"grants":12,"wildcards":0,"high_impact":5,"post_launch":2,"reach":12},{"agent_id":"A-04","tier":"high","service_account":"SA-01","shared":true,"grants":12,"wildcards":1,"high_impact":5,"post_launch":2,"reach":16},{"agent_id":"A-05","tier":"high","service_account":"SA-01","shared":true,"grants":12,"wildcards":0,"high_impact":7,"post_launch":3,"reach":12},{"agent_id":"A-06","tier":"high","service_account":"SA-01","shared":true,"grants":12,"wildcards":0,"high_impact":5,"post_launch":1,"reach":12},{"agent_id":"A-07","tier":"high","service_account":"SA-07","shared":false,"grants":12,"wildcards":1,"high_impact":4,"post_launch":2,"reach":15},{"agent_id":"A-08","tier":"high","service_account":"SA-08","shared":false,"grants":14,"wildcards":0,"high_impact":5,"post_launch":4,"reach":14},{"agent_id":"A-09","tier":"medium","service_account":"SA-02","shared":true,"grants":12,"wildcards":1,"high_impact":2,"post_launch":1,"reach":15},{"agent_id":"A-10","tier":"high","service_account":"SA-02","shared":true,"grants":12,"wildcards":0,"high_impact":5,"post_launch":2,"reach":12},{"agent_id":"A-11","tier":"medium","service_account":"SA-09","shared":false,"grants":13,"wildcards":0,"high_impact":2,"post_launch":2,"reach":13},{"agent_id":"A-12","tier":"low","service_account":"SA-03","shared":true,"grants":12,"wildcards":0,"high_impact":0,"post_launch":3,"reach":12},{"agent_id":"A-13","tier":"low","service_account":"SA-03","shared":true,"grants":12,"wildcards":2,"high_impact":5,"post_launch":1,"reach":19},{"agent_id":"A-14","tier":"medium","service_account":"SA-10","shared":false,"grants":12,"wildcards":2,"high_impact":3,"post_launch":2,"reach":18},{"agent_id":"A-15","tier":"high","service_account":"SA-11","shared":false,"grants":12,"wildcards":0,"high_impact":4,"post_launch":2,"reach":12}],"window_start":"2026-07-20","as_of":"2026-10-17"},"d":{"d1":{"unused":69,"unused_pct":37.5,"unused_high_impact":20,"unused_by_impact":{"read":31,"write":23,"external_message":4,"money_movement":11},"unused_money_or_message":15},"d2":{"wildcards":8,"over_broad":4,"over_broad_list":[["A-01","accounts:*",2,5],["A-07","ledger:*",2,4],["A-13","accounts:*",1,5],["A-13","ledger:*",1,4]],"excess_reach":12,"unused_wildcards":1,"wide_use_wildcards":3,"masked":1,"masked_list":[["A-09","messages:*"]]},"d3":{"post_launch":32,"post_launch_pct":17.4,"post_launch_unused":20,"post_launch_unused_pct":62.5,"launch_unused":49,"launch":152,"launch_unused_pct":32.2,"post_unused_high_impact":9,"post_unused_money":6},"d4":{"unattributed":1723,"unattributed_pct":21.6,"calls":7994,"shared_accounts":3,"agents_on_shared":7,"by_account":{"SA-01":651,"SA-02":572,"SA-03":500},"unattributed_needs_approval":352,"only_shared":12,"only_shared_unneeded":10},"d5":{"approval_required_calls":1243,"unapproved":118,"unapproved_pct":9.5,"unapproved_by_impact":{"write":28,"external_message":74,"money_movement":16},"unapproved_untagged":47,"agents_with_unapproved":8,"top_agents":[["(no tag)",47],["A-10",30],["A-07",25],["A-06",7]]},"d6":{"recert_removed":2,"usage_unused":69,"recert_removed_unused":1,"recert_removed_unused_pct":1.4,"recert_removed_in_use":1,"recert_denied_calls":142,"grants":184}}};
+const AGENTS = D.agents;
+const IMPACT = {read: "reads data", write: "changes data", external_message: "sends a message", money_movement: "moves money"};
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
+
+let idx = 0;
+const sel = document.getElementById("agent-select");
+AGENTS.forEach((t, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = String(t.rank) + ". " + t.id + " " + t.purpose + " - " + t.tier + " tier - " + String(t.cut) + " of " + String(t.reach) + " scopes unused";
+  sel.appendChild(o);
+});
+
+function totals(upTo) {
+  let approved = 0, unused = 0, removed = 0, denied = 0;
+  for (let i = 0; i <= upTo; i++) {
+    const t = AGENTS[i];
+    approved += t.approved; unused += t.unused_grants; removed += t.removed_unneeded; denied += t.next_q_denied;
+  }
+  return { approved, unused, removed, denied };
+}
+
+function render() {
+  const t = AGENTS[idx];
+  sel.value = idx;
+  const tt = totals(idx);
+  document.getElementById("stat-approved").textContent = String(tt.approved);
+  document.getElementById("stat-unused").textContent = String(tt.unused);
+  document.getElementById("stat-removed").textContent = String(tt.removed);
+  document.getElementById("stat-denied").textContent = String(tt.denied);
+
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(t.id) + "</b> - " + esc(t.purpose) + ". Owner " + esc(t.owner) + ", " + esc(t.tier) + " tier, launched " + esc(t.launched) +
+    ". Service account " + esc(t.account) + (t.shared ? " (shared with " + esc(t.siblings.join(", ")) + ")" : " (its own)") +
+    ". Risk rank <b>" + esc(t.rank) + "</b> of " + esc(AGENTS.length) + ".";
+
+  // Card 1: before - grants and calls are never compared
+  let b = "";
+  b += "<p><b>" + esc(t.grants) + "</b> grants reach <b>" + esc(t.reach) + "</b> scopes. " + esc(t.high_impact) + " are high-impact, " +
+       esc(t.wildcards) + " wildcard, " + esc(t.post_launch) + " added after launch.</p>";
+  b += "<p>The call log shows <b>" + esc(t.proposed) + "</b> of " + esc(t.reach) + " scopes called in 90 days. <b>" + esc(t.cut) + "</b> never.</p>";
+  t.unused.slice(0, 6).forEach(u => {
+    b += '<div class="driver-row"><span class="driver-label">' + esc(u.scope) + '</span><span class="driver-value">' + esc(IMPACT[u.impact]) + "</span></div>";
+  });
+  if (t.unused.length > 6) {
+    b += '<div class="driver-row"><span class="driver-label">and ' + esc(t.unused.length - 6) + ' more never called</span><span class="driver-value"></span></div>';
+  }
+  b += '<div class="driver-row"><span class="driver-label">Calls with this agent tag</span><span class="driver-value">' + esc(t.calls) + "</span></div>";
+  if (t.unapproved) {
+    b += '<div class="driver-row"><span class="driver-label">Calls with no human approval</span><span class="driver-value">' + esc(t.unapproved) + "</span></div>";
+  }
+  b += '<span class="pill ' + (t.cut ? "pill-bad" : "pill-ok") + '">' + (t.cut ? "grants and calls never compared" : "nothing unused") + "</span>";
+  document.getElementById("card-before").innerHTML = b;
+
+  // Card 2: basic approach - annual recertification
+  let s = "";
+  s += '<div class="reltitle">Annual recertification</div>';
+  s += '<div class="driver-row"><span class="driver-label">Approved</span><span class="driver-value">' + esc(t.approved) + " of " + esc(t.grants) + " (" + esc(t.approved_pct.toFixed(1)) + "%)</span></div>";
+  s += '<div class="driver-row"><span class="driver-label">Removed</span><span class="driver-value">' + esc(t.recert_removed.length) + "</span></div>";
+  s += '<div class="driver-row"><span class="driver-label">Sees</span><span class="driver-value">ticket, grant date</span></div>';
+  s += '<div class="driver-row"><span class="driver-label">Does not see</span><span class="driver-value">any call</span></div>';
+  if (t.high_impact_approved_n) {
+    s += '<div class="reltitle">High-impact grants approved (' + esc(t.high_impact_approved_n) + ")</div>";
+    t.high_impact_approved.forEach(h => {
+      s += '<div class="fieldrow"><span class="fieldname">' + esc(h.scope) + '</span><span class="tag tag-warn">approved</span><div class="fieldvals">' + esc(h.ticket || "no ticket") + "</div></div>";
+    });
+  }
+  t.recert_removed.forEach(r => {
+    s += '<div class="fieldrow"><span class="fieldname">' + esc(r.scope) + '</span><span class="tag ' + (r.used ? "tag-bad" : "tag-ok") + '">removed</span><div class="fieldvals">' +
+         (r.used ? "no ticket reference, but the agent used it: calls would be denied" : "no ticket reference, and it was unused") + "</div></div>";
+  });
+  s += '<span class="pill ' + (t.recert_removed.length ? "pill-warn" : "pill-bad") + '">' +
+       (t.recert_removed.length ? "removed by paperwork, not by use" : "approved 100%: nothing cut") + "</span>";
+  document.getElementById("card-sota").innerHTML = s;
+
+  // Card 3: ScopeKeeper
+  let h = "";
+  h += '<div class="reltitle">' + esc(t.id) + ' <span class="tag ' + (t.cut ? "tag-ok" : "tag-warn") + '">' + (t.cut ? "CAUGHT" : "NOTHING TO CUT") + "</span></div>";
+  t.actions.forEach(a => {
+    h += '<div class="fieldrow"><span class="fieldname">' + esc(a.scope) + '</span><span class="tag ' + (a.action === "remove" ? "tag-bad" : "tag-warn") + '">' + esc(a.action) + "</span>" +
+         '<div class="fieldvals">' + (a.action === "narrow" ? "replace by " + esc(a.after.join(", ")) + ": " : "") + esc(a.reason) + "</div></div>";
+  });
+  h += '<div class="driver-row"><span class="driver-label">Grants: keep / remove / narrow</span><span class="driver-value">' + esc(t.keep) + " / " + esc(t.remove) + " / " + esc(t.narrow) + "</span></div>";
+  h += '<div class="driver-row"><span class="driver-label">Breadth score</span><span class="driver-value">' + esc(t.breadth.toFixed(1)) + "%</span></div>";
+  h += '<div class="driver-row"><span class="driver-label">Proposed set</span><span class="driver-value">' + esc(t.proposed) + " scopes</span></div>";
+  h += '<div class="fieldvals" style="font-size:12px;margin:4px 0 6px;">' + esc(t.proposed_scopes.join(", ")) + "</div>";
+  h += '<div class="driver-row"><span class="driver-label">Replay of this agent&#39;s ' + esc(t.calls) + ' tagged calls</span><span class="driver-value">0 denied (by construction)</span></div>';
+  t.rare.forEach(r => {
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;"><b>Known limit:</b> ' + esc(r.scope) + " is a quarterly scope (" + esc(r.why) + "), last used " + esc(r.last) + ". " +
+         (r.removed ? "The log shows no use in 90 days, so it is removed. Next use " + esc(r.next) + ", " + esc(r.calls) + " calls, would be denied unless the owner marks it periodic."
+                    : "It stays only because another agent on the shared account called the scope.") + "</div>";
+  });
+  if (t.kept_unneeded.length) {
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;"><b>Also kept:</b> ' + esc(t.kept_unneeded.join(", ")) + " stay because untagged calls on the shared account are credited to every agent that could have made them. Ground truth (synthetic): this agent does not need them.</div>";
+  }
+  h += '<span class="pill ' + (t.cut ? "pill-ok" : "pill-warn") + '">' + (t.cut ? "cut " + esc(t.cut) + " of " + esc(t.reach) : "nothing to cut") + "</span>";
+  document.getElementById("card-shield").innerHTML = h;
+}
+
+sel.addEventListener("change", e => { idx = parseInt(e.target.value, 10); render(); });
+document.getElementById("prev-btn").addEventListener("click", () => { if (idx > 0) idx--; render(); });
+document.getElementById("next-btn").addEventListener("click", () => { if (idx < AGENTS.length - 1) idx++; render(); });
+document.getElementById("reset-btn").addEventListener("click", () => { idx = 0; render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0;
+  const iv = setInterval(() => { idx = i; render(); i++; if (i >= AGENTS.length) clearInterval(iv); }, 700);
+});
+
+render();
+</script>
+</body>
+</html>

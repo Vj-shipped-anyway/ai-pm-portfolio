@@ -1,0 +1,16 @@
+agent_id,owner,purpose,service_account,risk_tier,launched_on
+A-01,T-11 Retail Servicing,Answers customer balance and transaction questions,SA-04,medium,2025-02-10
+A-02,T-14 Cards,Triages card dispute intake,SA-05,medium,2025-03-24
+A-03,T-16 Payments,Tells customers where a payment is,SA-06,medium,2025-04-14
+A-04,T-16 Payments,Prepares routine payments for operator release,SA-01,high,2025-05-05
+A-05,T-16 Payments,Drafts wire transfers for human release,SA-01,high,2025-06-02
+A-06,T-16 Payments,Schedules recurring transfers,SA-01,high,2025-07-21
+A-07,T-18 Finance Operations,Matches ledger entries to payment confirmations,SA-07,high,2025-03-03
+A-08,T-18 Finance Operations,Posts month-end accrual adjustments,SA-08,high,2025-08-11
+A-09,T-12 Contact Centre,Drafts and sends customer e-mail replies,SA-02,medium,2025-04-28
+A-10,T-13 Collections,Sends payment reminders to late accounts,SA-02,high,2025-09-15
+A-11,T-15 Compliance Operations,Collects periodic KYC refresh documents,SA-09,medium,2025-10-06
+A-12,T-19 Treasury,Quotes indicative rates to relationship managers,SA-03,low,2025-11-17
+A-13,T-19 Treasury,Builds the daily liquidity summary,SA-03,low,2025-12-01
+A-14,T-12 Contact Centre,Logs and routes customer complaints,SA-10,medium,2026-01-12
+A-15,T-11 Retail Servicing,Processes address and contact changes,SA-11,high,2026-03-09
