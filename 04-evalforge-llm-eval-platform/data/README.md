@@ -17,13 +17,13 @@ The eval set itself. Each row is one probe — a question we send the deployed a
 | `slice` | The behavioral slice this probe belongs to — `refusal_edge`, `policy_specific`, `account_specific`, `fraud_workflow`, etc. Lets us compute slice-level pass-rate, not just aggregate. |
 | `severity` | `high` / `med` / `low` — used by the CI gate to weight blocking decisions. A `high` regression blocks; a `low` one warns. |
 
-Composition: 60 probes across 6 deficiency classes and ~15 behavioral slices. Weighted heavier toward the high-severity cases (PII refusal, fraud workflow, advice-boundary, identity disclosure) because those are the ones that actually hit customers when they regress.
+Composition: 60 probes tagged to 5 of the 6 deficiency classes (none is tagged `no_ci_gate`) across 18 behavioral slices. Severity mix: 21 high, 22 med, 17 low. The high-severity cases include PII refusal, fraud workflow, advice-boundary and identity disclosure, because those are the ones that actually hit customers when they regress.
 
 ---
 
 ## `rubrics.csv` — 12 calibration rubric criteria
 
-The scoring rubric the LLM-as-judge applies, and the calibration anchors a human reviewer uses to override. The whole reason this file exists is that "is the answer correct?" without anchors gives you ~0.55 inter-rater kappa. Anchor every score on the 1-5 scale and you get kappa above 0.78.
+The scoring rubric the LLM-as-judge applies, and the calibration anchors a human reviewer uses to override. The whole reason this file exists is that "is the answer correct?" without anchors gives you low inter-rater agreement (🔴 illustrative: step_03's text says below 0.6; no inter-rater figure is measured here). Anchoring every score on the 1-5 scale is designed to hold kappa at 0.78 or higher; the 50 runs' inter-judge kappa ranges from 0.68 to 0.86.
 
 | Field | Description |
 | --- | --- |
@@ -38,7 +38,7 @@ The 12 criteria cover answer accuracy, refusal appropriateness, citation truthfu
 
 ---
 
-## `eval_runs.csv` — 50 historical eval runs across 6 model versions
+## `eval_runs.csv` — 50 historical eval runs across 3 model versions
 
 The flight log. Each row is one nightly or pre-deploy eval run, with the model snapshot, the probe set version, the judge configuration, and the CI gate verdict.
 
@@ -52,8 +52,8 @@ The flight log. Each row is one nightly or pre-deploy eval run, with the model s
 | `pass_rate` | Aggregate pass rate. |
 | `judge_id` | Which judge configuration scored this run. Cross-vendor judging (Claude + GPT-4o) lights up at ER021. |
 | `judge_snapshot` | The judge model's own snapshot pin — critical for catching the "judge silently drifted" failure mode. |
-| `inter_judge_kappa` | Cohen's kappa between primary and secondary judge. Drift below 0.7 fires a calibration alert. |
-| `ci_gate_verdict` | `PASS` / `FAIL` / `REVIEW` — what EvalForge tells the deployment pipeline. |
+| `inter_judge_kappa` | Cohen's kappa between primary and secondary judge. Step 4 raises REVIEW below 0.75 and FAIL below 0.70. |
+| `ci_gate_verdict` | `PASS` / `FAIL` / `REVIEW` — the verdict recorded in the file. Step 4 recomputes verdicts from `pass_rate` and `inter_judge_kappa`, and 11 of the 50 differ (the README quotes Step 4's 36 / 9 / 5; the column holds 37 / 6 / 7). |
 | `regression_flagged` | `yes` / `no` / `partial` — whether the run flagged a behavioral regression vs the last green baseline. |
 | `human_override_count` | How many judge scores got overridden by a human reviewer this run. |
 | `notes` | Free-text — vendor updates, rubric recalibration, probe-set bumps. |
@@ -78,14 +78,14 @@ The audit-trail-of-overrides table. Every time a human reviewer disagreed with t
 | `override_reason` | Free-text rationale. The data behind the calibration-drift detector. |
 | `deficiency_class_addressed` | Which of the six deficiencies the override pattern is evidence for. |
 
-**What the override table reveals.** Eight overrides cluster on rubric R002 (Refusal Appropriateness) on the refusal-edge slice after the Feb-14 vendor update — that pattern is the rubric-drift signal EvalForge raises to L2 trust-and-safety. Five overrides cluster on R010 (Identity Disclosure) on the post-vendor-update window — that's the judge-drift signal.
+**What the override table reveals.** Seven overrides land on ER005-ER006 (the first runs after the probe set grew to 45) from three different reviewers across six rubrics — the rubric-calibration signal EvalForge raises to L2 trust-and-safety. Four overrides sit on R010 (Identity Disclosure), all from reviewer.trust-safety; the one after the Feb-14 vendor update (ER012) lowers the score from 4 to 2, the other three raise it.
 
 ---
 
 ## How the four files connect
 
 ```
-probes.csv  ──┬──>  eval_runs.csv  (50 runs × 60 probes × scored on rubrics)
+probes.csv  ──┬──>  eval_runs.csv  (50 runs, 30 to 60 probes each, scored on rubrics)
               │              │
               │              v
               │      CI gate evaluator
@@ -97,4 +97,4 @@ probes.csv  ──┬──>  eval_runs.csv  (50 runs × 60 probes × scored on 
         rubrics.csv  (12 criteria with calibration anchors)
 ```
 
-Reproducibility: every value above is hand-curated to match the README narrative. The step scripts in `src/` read these CSVs and print a story that matches the walkthrough text. Re-run any step script and the output will match the README to the digit.
+Reproducibility: every value above is hand-curated to match the README narrative. The step scripts in `src/` read these CSVs; the counts they compute (per-class probe and override counts, the Step 4 verdict roll-up) are the ones the README quotes.

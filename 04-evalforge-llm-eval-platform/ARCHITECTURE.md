@@ -62,7 +62,7 @@ evalforge/
 | `judge` | Cloud Run + Cloud Functions for fan-out | Bursty, event-driven |
 | `ui` | Cloud Run | Static + SSR Next.js |
 | `gate` | GitHub Actions runner + self-hosted Argo CD plugin | Customer's CI/CD environment |
-| `scheduler` | Cloud Composer 3 (Argo on Composer) | Existing skill set |
+| `scheduler` | Cloud Composer 3 (managed Airflow) | Existing skill set |
 
 **AWS equivalent:** ECS Fargate or EKS for `api`/`ui`; Batch + EKS for `runner`; Lambda for `judge` fan-out; MWAA for `scheduler`.
 
@@ -115,7 +115,7 @@ Egress to vendor judges (Anthropic, Azure OpenAI):
 | Store | Purpose | Why this store |
 | --- | --- | --- |
 | **PostgreSQL 15** | Probes (with version SHA), rubrics, eval runs, judge overrides, evidence bundles, audit log | Relational integrity; mature transactions. |
-| **ClickHouse** | Per-probe per-judge score time-series; high-cardinality kappa computation source data | 10-50x cheaper than RDS at this volume; sub-second p95 on the dashboard queries. |
+| **ClickHouse** | Per-probe per-judge score time-series; high-cardinality kappa computation source data | Cheaper than RDS at this volume (modeled, not benchmarked); design target of sub-second p95 on the dashboard queries. |
 | **Snowflake / Databricks** (read-only) | Historical scoring data for the rubric-calibration model; cohort analysis | Already exists at every Tier-1 BFSI shop. |
 | **Redis** | Session cache, idempotency keys, rate-limiting counters | TTL-based eviction. |
 | **GCS / S3 / Blob Storage** (Object Lock) | Immutable evidence bundles, audit log archive | WORM for 7-year retention. |
@@ -233,7 +233,7 @@ CREATE TABLE probe_scores (
     judge_id          LowCardinality(String),
     judge_snapshot    LowCardinality(String),
     score             Float32,
-    response_text     String,
+    response_text     String TTL scored_at + INTERVAL 90 DAY,
     scored_at         DateTime64(3, 'UTC'),
     slice             LowCardinality(String),
     severity          LowCardinality(String)
@@ -409,7 +409,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 # Request:
 {
     "model_version": "claude-sonnet-4-20260214",
-    "probe_set_version": "probes-v1.0",
+    "probe_set_version": "probes-v0.9",
     "triggered_by": "ci_pr",
     "pr_number": 8417,
     "judge_config": {
@@ -419,21 +419,21 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 }
 # Response 201:
 {
-    "eval_run_id": "ER0312",
+    "eval_run_id": "ER012",
     "status": "running",
     "estimated_completion": "2026-02-17T09:08:00Z",
     "ci_gate_pending": true
 }
 
-# GET /v1/eval-runs/ER0312
+# GET /v1/eval-runs/ER012
 # Response 200 (after completion):
 {
-    "eval_run_id": "ER0312",
+    "eval_run_id": "ER012",
     "run_date": "2026-02-17T09:07:14Z",
     "pass_rate": 0.86,
     "inter_judge_kappa": 0.68,
     "ci_gate_verdict": "FAIL",
-    "ci_gate_reason": "Regression of -7.0pp vs rolling baseline 0.93.",
+    "ci_gate_reason": "Aggregate pass_rate 0.860 below floor 0.880. Deploy blocked.",
     "ci_gate_action": "block_deploy",
     "bundle": {
         "bundle_id": "...",

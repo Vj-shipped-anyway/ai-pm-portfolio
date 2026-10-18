@@ -17,10 +17,10 @@
 | **Stage** | Portfolio prototype; pre-MRM-committee read |
 | **Primary user** | AI Platform engineer shipping prompt edits or model updates |
 | **Secondary users** | L2 Trust-and-Safety reviewers; L3 Compliance; the model owner (PM) |
-| **Problem** | Tier-1 BFSI shops deploy 12-20 GenAI features per year. ~14% of deploys produce silent post-deploy regressions. Customer complaints surface the regression 8-12 weeks later. The legacy eval ("spreadsheet a senior engineer maintains") cannot represent the failure modes that actually hit customers. |
+| **Problem** | Tier-1 BFSI shops run 12-20 GenAI features in production. ~14% of their deploys produce silent post-deploy regressions. Customer complaints surface the regression 8-12 weeks later. The legacy eval ("spreadsheet a senior engineer maintains") cannot represent the failure modes that actually hit customers. |
 | **Solution** | Versioned probe sets + calibrated rubrics + cross-vendor LLM-as-judge + CI gate (GitHub Actions / Argo CD pre-deploy hook) that blocks deploys on regression. |
 | **North-star metric** | % of customer-facing GenAI deploys with EvalForge PASS verdict before production traffic. Target: 100%. Current SOTA: ~0% (no gate exists). |
-| **Modeled metrics** | 🟡 Silent post-deploy regression rate 14% → <2%; 🟡 time-to-detect 8-12 weeks → first eval run; 🟡 CI gate FP rate <5%; 🟢 inter-judge kappa 0.78+ on the calibrated rubric set. |
+| **Modeled metrics** | 🟡 Silent post-deploy regression rate 14% → <2%; 🟡 time-to-detect 8-12 weeks → first eval run; 🟡 CI gate FP rate <5%; 🟢 inter-judge kappa 0.86 on the latest run (ER050), against a 0.78 target. |
 | **Cost** | 🔴 ~$220K for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE platform engineer + L2 partner time). Per-feature ongoing: ~$1.5K/month in judge compute. |
 | **Risk #1** | Engineering treats the CI gate as a speed bump, finds the bypass switch. Mitigation: gate is owned by L2, bypass requires named approver + audit log entry. |
 | **Risk #2** | Judge model itself drifts silently (the very failure mode the product targets). Mitigation: judge snapshot pinning + cross-vendor agreement floor + periodic re-anchor against held-out set. |
@@ -45,10 +45,10 @@
 | 8 | **Inter-judge kappa monitor + auto-recalibration trigger** | 12 features | 2 | 0.75 | 3 | 6.0 | Sequenced for v0.3 |
 | 9 | **Paraphrase variant generator** (catch the paraphrastic-false-pass class) | 12 features | 2 | 0.7 | 4 | 4.2 | Queued |
 | 10 | **Behavioral regression suite** (probe-level diff between runs) | 12 features | 3 | 0.8 | 4 | 7.2 | Sequenced for v0.3 |
-| 11 | **Long-context fidelity probes** (Greg Kamradt's needle-in-haystack) | 4 features | 2 | 0.7 | 5 | 2.2 | Queued |
-| 12 | **Evidence bundle exporter** (PDF + JSON to GRC tool) | 4 GRC owners | 2 | 0.9 | 2 | 7.2 | Sequenced for v0.3 |
-| 13 | **MCP server** (lets agents query eval status as a tool — Project 05 interlock) | 4 agents | 2 | 0.7 | 3 | 3.7 | Queued |
-| 14 | **Multilingual probe coverage** (Spanish, then Mandarin for BFSI in CA / Asia regions) | 6 features | 2 | 0.65 | 8 | 1.9 | Queued |
+| 11 | **Long-context fidelity probes** (Greg Kamradt's needle-in-haystack) | 4 features | 2 | 0.7 | 5 | 1.1 | Queued |
+| 12 | **Evidence bundle exporter** (PDF + JSON to GRC tool) | 4 GRC owners | 2 | 0.9 | 2 | 3.6 | Sequenced for v0.3 |
+| 13 | **MCP server** (lets agents query eval status as a tool — Project 05 interlock) | 4 agents | 2 | 0.7 | 3 | 1.9 | Queued |
+| 14 | **Multilingual probe coverage** (Spanish, then Mandarin for BFSI in CA / Asia regions) | 6 features | 2 | 0.65 | 8 | 1.0 | Queued |
 
 ---
 
@@ -99,7 +99,7 @@
 | Phase | Duration | Scope |
 | --- | --- | --- |
 | 0 — Foundation | 6w | Wire to one GenAI feature (the customer-service assistant); ship probe registry + judge orchestrator + CI gate skeleton |
-| 1 — Calibrated rubrics | 6w | L2 co-design 12 calibration anchors; kappa monitor live |
+| 1 — Calibrated rubrics | 6w | L2 co-design 12 rubric criteria with calibration anchors; kappa monitor live |
 | 2 — Cross-vendor judge | 6w | GPT-4o secondary judge; in-VPC Llama tertiary; cross-vendor kappa floor enforced |
 | 3 — Fleet onboarding | 12w | Onboard remaining 11-19 customer-facing GenAI features; per-feature owner sign-off |
 | 4 — Evidence bundle + GRC | 6w | Auto-route to Archer / ServiceNow GRC; LineageLog interlock |
@@ -125,7 +125,7 @@
 - **Storage:** Postgres for metadata; ClickHouse for high-cardinality per-probe scores; GCS / S3 Object Lock for immutable evidence bundles.
 
 **Throughput envelope and latency budget.**
-- 60 probes × 3 judges × 12-20 features × 5-10 runs per feature per week ≈ 40K-80K judge calls per week at fleet scale.
+- 60 probes × 3 judges × 12-20 features × 5-10 runs per feature per week ≈ 10,800-36,000 judge calls per week at fleet scale.
 - CI gate latency budget: 10 minutes p95 per run. Parallelize probe execution across the 3 judges.
 
 **Failure modes and degradation strategy.**

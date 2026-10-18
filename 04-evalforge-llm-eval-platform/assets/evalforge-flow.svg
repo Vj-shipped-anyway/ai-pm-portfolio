@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
   <title id="title">EvalForge: prompt change flowing through probe run, judge scoring, CI gate verdict, and deploy decision</title>
-  <desc id="desc">Five-stage horizontal flow showing how a prompt change moves through Probe Set Runs, Judge plus Rubric Scores, CI Gate Verdict, and either Deploy or Block. Each stage has a one-line description and a dwell time annotation showing the speedup vs the legacy spreadsheet eval process.</desc>
+  <desc id="desc">Five-stage horizontal flow showing how a prompt change moves through Probe Set Runs, Judge plus Rubric Scores, CI Gate Verdict, and either Deploy or Block. Each stage has a short description, and a comparison strip contrasts EvalForge with the spreadsheet eval.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -30,7 +30,7 @@
   </defs>
 
   <text x="20" y="32" class="header">EvalForge - CI gate flow for one prompt change</text>
-  <text x="20" y="52" class="subheader">Vendor snapshot rolls 2026-02-14. Pass rate drops 5pp. CI gate blocks deploy on first run.</text>
+  <text x="20" y="52" class="subheader">Vendor snapshot rolls 2026-02-14. Pass rate drops 5pp vs the prior run. CI gate blocks deploy on first run.</text>
 
   <!-- Trigger badge -->
   <rect x="20" y="78" width="200" height="22" rx="4" class="badge-bg"/>
@@ -51,10 +51,10 @@
   <rect x="225" y="120" width="180" height="110" rx="8" class="stage-box-eval"/>
   <text x="237" y="140" class="stage-num">2 . PROBE SET RUNS</text>
   <text x="237" y="162" class="stage-title">60 versioned probes</text>
-  <text x="237" y="180" class="stage-sub">probes-v1.2 pinned</text>
-  <text x="237" y="195" class="stage-sub">6 deficiency classes</text>
-  <text x="237" y="210" class="stage-sub">15 behavioral slices</text>
-  <text x="237" y="225" class="meta-strong">~3 min wall time on prototype</text>
+  <text x="237" y="180" class="stage-sub">probes-v0.9 pinned</text>
+  <text x="237" y="195" class="stage-sub">5 deficiency classes</text>
+  <text x="237" y="210" class="stage-sub">18 behavioral slices</text>
+  <text x="237" y="225" class="meta-strong">~3 min wall time (modeled)</text>
 
   <!-- Arrow 2 -->
   <line x1="410" y1="175" x2="452" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
@@ -66,7 +66,7 @@
   <text x="467" y="180" class="stage-sub">Claude + GPT-4o judges</text>
   <text x="467" y="195" class="stage-sub">12 calibrated rubrics</text>
   <text x="467" y="210" class="stage-sub">inter-judge kappa = 0.68</text>
-  <text x="467" y="225" class="meta-block">kappa collapsed below 0.75</text>
+  <text x="467" y="225" class="meta-block">kappa below 0.70 floor</text>
 
   <!-- Arrow 3 -->
   <line x1="660" y1="175" x2="702" y2="175" class="arrow-line" marker-end="url(#arrow)"/>
@@ -76,7 +76,7 @@
   <text x="717" y="140" class="stage-num">4 . CI GATE VERDICT</text>
   <text x="717" y="162" class="stage-title">Pre-deploy hook</text>
   <text x="717" y="180" class="stage-sub">pass_rate = 0.86</text>
-  <text x="717" y="195" class="stage-sub">delta vs baseline = -5pp</text>
+  <text x="717" y="195" class="stage-sub">delta vs baseline = -6pp</text>
   <text x="717" y="210" class="stage-sub">kappa = 0.68 (below floor)</text>
   <text x="717" y="225" class="meta-block">verdict: FAIL</text>
 
@@ -86,7 +86,7 @@
   <!-- Stage 5: DEPLOY OR BLOCK -->
   <rect x="240" y="290" width="340" height="90" rx="8" class="stage-box-block"/>
   <text x="252" y="310" class="stage-num">5 . BLOCK DEPLOY</text>
-  <text x="252" y="330" class="stage-title">Pin to last green snapshot; route to L2 trust-and-safety</text>
+  <text x="252" y="330" class="stage-title">Pin to last green snapshot; route to L2</text>
   <text x="252" y="352" class="stage-sub">never auto-ship under FAIL . always human review</text>
   <text x="252" y="368" class="meta-block">evidence bundle auto-assembled, routed to L2 queue</text>
 
@@ -101,8 +101,8 @@
 
   <!-- Comparison strip -->
   <rect x="600" y="290" width="280" height="90" rx="8" fill="#f6f5f2" stroke="none"/>
-  <text x="612" y="310" class="stage-title">Total wall time vs spreadsheet eval</text>
-  <text x="612" y="332" class="timer">Spreadsheet eval: ~14% silent-regression rate, 8-12 weeks to detect</text>
-  <text x="612" y="350" class="timer-fast">EvalForge: caught on first run, deploy blocked, 0 customer impact</text>
-  <text x="612" y="370" class="meta-strong">modeled regression rate &lt;2% post-deploy at fleet scale</text>
+  <text x="612" y="310" class="stage-title">EvalForge vs spreadsheet eval</text>
+  <text x="612" y="332" class="timer">Spreadsheet: ~14% silent, found in 8-12 wk</text>
+  <text x="612" y="350" class="timer-fast">EvalForge: caught on first run, blocked</text>
+  <text x="612" y="370" class="meta-strong">rates modeled; EvalForge target &lt;2%</text>
 </svg>
