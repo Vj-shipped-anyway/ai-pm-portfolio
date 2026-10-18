@@ -25,6 +25,8 @@ Output:
   - writes src/out/step_04_fleet_lineage_summary.csv
 """
 
+from __future__ import annotations
+
 import csv
 import json
 import time

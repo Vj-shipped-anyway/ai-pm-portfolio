@@ -79,7 +79,7 @@ If you have lived through a regulator's "show us this decision" request and felt
 
 You don't need a cluster, a cloud account, or an API key. You need:
 
-- **Python 3.** The four step scripts use only the standard library, so there is nothing to install for them. Step 4 uses `X | None` type annotations, so this project needs **Python 3.10 or newer**; steps 1-3 also run on 3.9. The repo's dev container uses Python 3.11.
+- **Python 3.** The four step scripts use only the standard library, so there is nothing to install for them. All four run on Python 3.9 and newer. The repo's dev container uses Python 3.11.
 - **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
 - **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, `plotly`, and `reportlab`. The step scripts do not use them.
 - **No API key.** The step scripts read the CSVs in `data/` and make no network calls.
