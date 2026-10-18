@@ -1,0 +1,35 @@
+component,bucket,low,high,points
+income,under 25k,0,25000,0
+income,25k to 35k,25000,35000,12
+income,35k to 50k,35000,50000,26
+income,50k to 70k,50000,70000,40
+income,70k to 100k,70000,100000,54
+income,100k to 150k,100000,150000,64
+income,150k and over,150000,,70
+dti,under 0.15,0,0.15,65
+dti,0.15 to 0.25,0.15,0.25,54
+dti,0.25 to 0.35,0.25,0.35,38
+dti,0.35 to 0.45,0.35,0.45,20
+dti,0.45 to 0.55,0.45,0.55,7
+dti,0.55 and over,0.55,,0
+history_months,under 12,0,12,0
+history_months,12 to 35,12,36,14
+history_months,36 to 71,36,72,28
+history_months,72 to 119,72,120,40
+history_months,120 to 179,120,180,52
+history_months,180 and over,180,,60
+utilization,under 0.15,0,0.15,60
+utilization,0.15 to 0.30,0.15,0.3,50
+utilization,0.30 to 0.50,0.3,0.5,36
+utilization,0.50 to 0.70,0.5,0.7,20
+utilization,0.70 to 0.85,0.7,0.85,6
+utilization,0.85 and over,0.85,,0
+prior_delinq,0,0,1,60
+prior_delinq,1,1,2,28
+prior_delinq,2,2,3,8
+prior_delinq,3 or more,3,,0
+postcode_band,P1,,,35
+postcode_band,P2,,,25
+postcode_band,P3,,,15
+postcode_band,P4,,,5
+postcode_band,P5,,,0

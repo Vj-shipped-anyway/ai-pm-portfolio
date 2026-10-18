@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FairLens — Credit-Model Fairness Test Pack · Vijay Saharan</title>
+<meta name="description" content="A clickable demo of FairLens: a fairness test pack for a credit-decision model. It computes adverse impact by group with an interval, sweeps the cutoff, ablates a proxy and checks reason codes. Synthetic data and a stub scorecard, not a model.">
+<style>
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f5f2;
+    --bg-tertiary: #ecebe7;
+    --text-primary: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --text-tertiary: #8a8a8a;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.25);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+  .hero { margin-bottom: 32px; }
+  .hero h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .hero .tagline { font-size: 16px; color: var(--text-secondary); margin: 0 0 12px; }
+  .hero .author { font-size: 13px; color: var(--text-tertiary); }
+  .hero .author a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+  .stat { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 14px 16px; }
+  .stat-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; margin: 0; line-height: 1.1; }
+  .controls { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--text-secondary); }
+  select, button {
+    font-family: inherit; font-size: 14px; padding: 8px 12px;
+    border-radius: var(--radius-md); border: 1px solid var(--border);
+    background: var(--bg-primary); color: var(--text-primary); cursor: pointer;
+  }
+  select { flex: 1; min-width: 200px; }
+  select:focus, button:focus { outline: 2px solid #1c2541; outline-offset: 1px; }
+  button:hover { background: var(--bg-secondary); }
+  .actions { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .card {
+    background: var(--bg-primary); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px 18px; min-height: 240px;
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 12px;
+  }
+  .card-body { font-size: 14px; line-height: 1.6; flex: 1; }
+  .card-body p { margin: 0 0 8px; }
+  .step-num {
+    display: inline-block; background: #E6F1FB; color: #1c2541;
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 999px; margin-right: 6px;
+  }
+  .pill {
+    display: inline-block; font-size: 11px; padding: 3px 8px;
+    border-radius: var(--radius-md); font-weight: 500; margin-top: 8px;
+  }
+  .pill-ok { background: #EAF3DE; color: #27500A; }
+  .pill-bad { background: #FCEBEB; color: #791F1F; }
+  .pill-warn { background: #FAEEDA; color: #633806; }
+  .pill-info { background: #E6F1FB; color: #1c2541; }
+  .driver-row { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; font-size: 13px; }
+  .driver-label { color: var(--text-secondary); }
+  .driver-value { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-size: 12px; text-align: right; overflow-wrap: anywhere; }
+  .fieldrow { border-top: 1px solid var(--border); padding: 6px 0; font-size: 12px; }
+  .fieldrow:first-of-type { border-top: 0; }
+  .fieldname { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; font-weight: 500; overflow-wrap: anywhere; }
+  .fieldvals { color: var(--text-secondary); overflow-wrap: anywhere; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 999px; margin-left: 6px; }
+  .tag-ok { background: #EAF3DE; color: #27500A; }
+  .tag-bad { background: #FCEBEB; color: #791F1F; }
+  .tag-warn { background: #FAEEDA; color: #633806; }
+  .reltitle { font-size: 12px; font-weight: 500; margin: 10px 0 4px; overflow-wrap: anywhere; }
+  .reltitle:first-child { margin-top: 0; }
+  .utility-callout {
+    background: var(--bg-secondary); border-radius: var(--radius-lg);
+    padding: 18px 22px; font-size: 14px; line-height: 1.7;
+    color: var(--text-secondary); margin-bottom: 24px;
+  }
+  .utility-callout b { color: var(--text-primary); font-weight: 500; }
+  .formula {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 13px; background: var(--bg-tertiary);
+    padding: 8px 12px; border-radius: var(--radius-md);
+    display: inline-block; margin: 6px 0;
+  }
+  .footer-links {
+    display: flex; gap: 20px; margin-top: 32px; padding-top: 20px;
+    border-top: 1px solid var(--border); font-size: 13px;
+    color: var(--text-secondary); flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .run-meta {
+    background: var(--bg-secondary); border-radius: var(--radius-md);
+    padding: 10px 14px; font-size: 13px; color: var(--text-secondary);
+    margin-bottom: 16px; line-height: 1.6;
+  }
+  .run-meta b { color: var(--text-primary); font-weight: 500; }
+  .framing { font-size: 12px; color: var(--text-tertiary); margin: -12px 0 24px; }
+  .note { font-size: 12px; color: var(--text-tertiary); margin-top: 8px; }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>FairLens — Credit-Model Fairness Test Pack</h1>
+    <p class="tagline">Pick a group and a cutoff and see what accuracy shows, and what 6 fairness tests show.</p>
+    <p class="author">Project 17 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
+    <div class="badges">
+      <span class="badge">Synthetic data</span>
+      <span class="badge">6,000 applicants · 3 groups</span>
+      <span class="badge">Stub scorecard, not a model</span>
+      <span class="badge">6 named deficiencies</span>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="Numbers for the selected group and cutoff">
+    <div class="stat"><p class="stat-label">Model-card accuracy</p><p class="stat-value" id="stat-acc">—</p></div>
+    <div class="stat"><p class="stat-label">Approval rate, this group</p><p class="stat-value" id="stat-apr">—</p></div>
+    <div class="stat"><p class="stat-label">AIR, this group</p><p class="stat-value" id="stat-air">—</p></div>
+    <div class="stat"><p class="stat-label">Tests returning REVIEW or FAIL</p><p class="stat-value" id="stat-flag">—</p></div>
+  </section>
+
+  <div class="controls">
+    <label for="group-select">Group</label>
+    <select id="group-select"></select>
+    <label for="cutoff-select">Cutoff</label>
+    <select id="cutoff-select"></select>
+  </div>
+
+  <div class="run-meta" id="run-meta" aria-live="polite"></div>
+
+  <div class="actions">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next scenario</button>
+    <button id="runall-btn">Replay all 18 scenarios</button>
+    <button id="reset-btn">Reset</button>
+  </div>
+
+  <section class="grid" aria-label="Three-stage comparison">
+    <div class="card">
+      <p class="card-title"><span class="step-num">1</span>Before — Model card only</p>
+      <div class="card-body" id="card-before"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">2</span>Basic — Accuracy by group</p>
+      <div class="card-body" id="card-sota"></div>
+    </div>
+    <div class="card">
+      <p class="card-title"><span class="step-num">3</span>With FairLens</p>
+      <div class="card-body" id="card-shield"></div>
+    </div>
+  </section>
+
+  <p class="framing">Portfolio prototype on synthetic data, not a production case study. The groups are labels the generator made up and encode no real protected class. The scorecard is a stub, not a trained model, and no model is used anywhere. AIR is a screening statistic, not a legal finding; 0.80 is a convention from employment guidance, not a credit-law standard. Every number on this page is generated from the scripts in <code>src/</code>.</p>
+
+  <section class="utility-callout">
+    <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
+    <p class="formula">Utility = (fairness tests run with FairLens − with accuracy only) ÷ tests × credit decisions a year</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> the accuracy-only view runs 0 of 6 fairness tests (by definition). The pack runs 6 of 6 and 5 of 6 return REVIEW or FAIL at the policy cutoff 190. The lowest AIR is 0.750 (Group C) against 20.9 points of approval spread behind 87.1% accuracy. Neutralizing the postcode points lifts the lowest AIR from 0.750 to 0.871 and accuracy from 87.1% to 89.2%.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 20,000 credit decisions a year under this scorecard (an assumption, not a statistic) gives 1.00 × 20,000 = <b>20,000 decisions a year</b> under a model with a full fairness test pack. 495 of 6,000 test-set decisions (8.25%) turn on the postcode points; at the same share the modeled volume would be about 1,650. The test set is dense on purpose, so that is not a frequency estimate.</p>
+    <p style="margin: 8px 0 0;">🔴 <b>What it still gets wrong:</b> AIR is a screening statistic, and the search for less discriminatory alternatives is one ablation. Real credit data has no group labels: with 14.8% of labels wrong at random the screen passes (lowest AIR 0.817) when it fails on the true labels (0.750). The reason-code pair check passes (+3.3 points against its control) while 295 declines are caused by the postcode points; with 4 reasons listed, 18 of them omit the postcode reason.</p>
+  </section>
+
+  <footer class="footer-links">
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/17-fairlens-credit-model-fairness/README.md">Full walkthrough README</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/17-fairlens-credit-model-fairness/PRD.md">PRD</a>
+    <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/17-fairlens-credit-model-fairness/ARCHITECTURE.md">Architecture</a>
+    <a href="./assets/fairlens-flow.svg">Flow diagram</a>
+    <a href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">All projects</a>
+    <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">LinkedIn</a>
+  </footer>
+</div>
+
+<script>
+const D = {"meta":{"applicants":6000,"groups":3,"tests":6,"policy":190,"crossing":185,"screen":"0.80","model_acc":"87.1%","model_apr":"75.7%","spread":"20.9","flagged":5,"min_air":"0.750","min_group":"Group C","lift_before":"0.750","lift_after":"0.871","acc_before":"87.1%","acc_after":"89.2%","u_delta":"1.00","u_run":6,"u_base":0,"u_volume":"20,000","u_total":"20,000","u_turn":495,"u_applicants":"6,000","u_turn_share":"8.25%","u_turn_annual":"1,650","reasons_listed":4,"label_share":"14.8%","label_air":"0.817","label_true_air":"0.750","t5_excess":"+3.3","t5_unnamed":18,"t5_proxy":295,"cutoffs":[170,180,185,190,200,210]},"scn":{"170":{"Group A":{"n":3600,"approved":3339,"approval":"92.8%","accuracy":"86.2%","acc_gap":"0.0","air":"1.000","lo":"1.000","hi":"1.000","verdict":"REFERENCE","is_reference":true,"reference":"Group A","ref_approval":"92.8%","min_air":"0.872","min_group":"Group B","overall_acc":"85.6%","overall_apr":"88.0%","default_rate":"19.6%","declined":261,"reasons":[{"code":"R03","text":"Length of credit history is short","share":"24.5%"},{"code":"R01","text":"Income is low for the credit requested","share":"24.5%"},{"code":"R02","text":"Debt payments are high compared with income","share":"19.5%"}]},"Group B":{"n":1950,"approved":1577,"approval":"80.9%","accuracy":"84.7%","acc_gap":"1.5","air":"0.872","lo":"0.852","hi":"0.893","verdict":"PASS","is_reference":false,"reference":"Group A","ref_approval":"92.8%","min_air":"0.872","min_group":"Group B","overall_acc":"85.6%","overall_apr":"88.0%","default_rate":"29.9%","declined":373,"reasons":[{"code":"R01","text":"Income is low for the credit requested","share":"24.9%"},{"code":"R03","text":"Length of credit history is short","share":"23.3%"},{"code":"R02","text":"Debt payments are high compared with income","share":"19.6%"}]},"Group C":{"n":450,"approved":367,"approval":"81.6%","accuracy":"84.4%","acc_gap":"1.8","air":"0.879","lo":"0.835","hi":"0.920","verdict":"PASS","is_reference":false,"reference":"Group A","ref_approval":"92.8%","min_air":"0.872","min_group":"Group B","overall_acc":"85.6%","overall_apr":"88.0%","default_rate":"30.4%","declined":83,"reasons":[{"code":"R01","text":"Income is low for the credit requested","share":"25.3%"},{"code":"R02","text":"Debt payments are high compared with income","share":"25.3%"},{"code":"R05","text":"Late payments are on record","share":"19.3%"}]}},"180":{"Group A":{"n":3600,"approved":3207,"approval":"89.1%","accuracy":"88.1%","acc_gap":"0.0","air":"1.000","lo":"1.000","hi":"1.000","verdict":"REFERENCE","is_reference":true,"reference":"Group A","ref_approval":"89.1%","min_air":"0.828","min_group":"Group B","overall_acc":"87.4%","overall_apr":"83.0%","default_rate":"19.6%","declined":393,"reasons":[{"code":"R01","text":"Income is low for the credit requested","share":"24.7%"},{"code":"R03","text":"Length of credit history is short","share":"23.2%"},{"code":"R02","text":"Debt payments are high compared with income","share":"21.1%"}]},"Group B":{"n":1950,"approved":1439,"approval":"73.8%","accuracy":"86.3%","acc_gap":"1.8","air":"0.828","lo":"0.804","hi":"0.853","verdict":"PASS","is_reference":false,"reference":"Group A","ref_approval":"89.1%","min_air":"0.828","min_group":"Group B","overall_acc":"87.4%","overall_apr":"83.0%","default_rate":"29.9%","declined":511,"reasons":[{"code":"R01","text":"Income is low for the credit requested","share":"25.4%"},{"code":"R02","text":"Debt payments are high compared with income","share":"21.7%"},{"code":"R03","text":"Length of credit history is short","share":"21.5%"}]},"Group C":{"n":450,"approved":335,"approval":"74.4%","accuracy":"87.1%","acc_gap":"0.9","air":"0.836","lo":"0.787","hi":"0.885","verdict":"REVIEW","is_reference":false,"reference":"Group A","ref_approval":"89.1%","min_air":"0.828","min_group":"Group B","overall_acc":"87.4%","overall_apr":"83.0%","default_rate":"30.4%","declined":115,"reasons":[{"code":"R01","text":"Income is low for the credit requested","share":"28.7%"},{"code":"R02","text":"Debt payments are high compared with income","share":"28.7%"},{"code":"R03","text":"Length of credit history is short","share":"16.5%"}]}},"185":{"Group A":{"n":3600,"approved":3118,"approval":"86.6%","accuracy":"88.8%","acc_gap":"0.0","air":"1.000","lo":"1.000","hi":"1.000","verdict":"REFERENCE","is_reference":true,"reference":"Group A","ref_approval":"86.6%","min_air":"0.803","min_group":"Group B","overall_acc":"87.5%","overall_apr":"79.8%","default_rate":"19.6%","declined":482,"reasons":[{"code":"R03","text":"Length of credit history is short","share":"23.7%"},{"code":"R01","text":"Income is low for the credit requested","share":"23.2%"},{"code":"R02","text":"Debt payments are high compared with income","share":"22.6%"}]},"Group B":{"n":1950,"approved":1357,"approval":"69.6%","accuracy":"85.4%","acc_gap":"3.4","air":"0.803","lo":"0.778","hi":"0.830","verdict":"REVIEW","is_reference":false,"reference":"Group A","ref_approval":"86.6%","min_air":"0.803","min_group":"Group B","overall_acc":"87.5%","overall_apr":"79.8%","default_rate":"29.9%","declined":593,"reasons":[{"code":"R01","text":"Income is low for the credit requested","share":"25.5%"},{"code":"R02","text":"Debt payments are high compared with income","share":"23.9%"},{"code":"R03","text":"Length of credit history is short","share":"19.9%"}]},"Group C":{"n":450,"approved":315,"approval":"70.0%","accuracy":"86.7%","acc_gap":"2.1","air":"0.808","lo":"0.760","hi":"0.860","verdict":"REVIEW","is_reference":false,"reference":"Group A","ref_approval":"86.6%","min_air":"0.803","min_group":"Group B","overall_acc":"87.5%","overall_apr":"79.8%","default_rate":"30.4%","declined":135,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"28.9%"},{"code":"R01","text":"Income is low for the credit requested","share":"26.7%"},{"code":"R03","text":"Length of credit history is short","share":"17.8%"}]}},"190":{"Group A":{"n":3600,"approved":3007,"approval":"83.5%","accuracy":"88.9%","acc_gap":"0.0","air":"1.000","lo":"1.000","hi":"1.000","verdict":"REFERENCE","is_reference":true,"reference":"Group A","ref_approval":"83.5%","min_air":"0.750","min_group":"Group C","overall_acc":"87.1%","overall_apr":"75.7%","default_rate":"19.6%","declined":593,"reasons":[{"code":"R03","text":"Length of credit history is short","share":"23.8%"},{"code":"R02","text":"Debt payments are high compared with income","share":"23.3%"},{"code":"R01","text":"Income is low for the credit requested","share":"23.1%"}]},"Group B":{"n":1950,"approved":1253,"approval":"64.3%","accuracy":"84.2%","acc_gap":"4.7","air":"0.769","lo":"0.742","hi":"0.797","verdict":"FAIL","is_reference":false,"reference":"Group A","ref_approval":"83.5%","min_air":"0.750","min_group":"Group C","overall_acc":"87.1%","overall_apr":"75.7%","default_rate":"29.9%","declined":697,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"25.5%"},{"code":"R01","text":"Income is low for the credit requested","share":"25.3%"},{"code":"R03","text":"Length of credit history is short","share":"19.5%"}]},"Group C":{"n":450,"approved":282,"approval":"62.7%","accuracy":"84.2%","acc_gap":"4.7","air":"0.750","lo":"0.698","hi":"0.808","verdict":"REVIEW","is_reference":false,"reference":"Group A","ref_approval":"83.5%","min_air":"0.750","min_group":"Group C","overall_acc":"87.1%","overall_apr":"75.7%","default_rate":"30.4%","declined":168,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"31.0%"},{"code":"R01","text":"Income is low for the credit requested","share":"25.6%"},{"code":"R03","text":"Length of credit history is short","share":"18.5%"}]}},"200":{"Group A":{"n":3600,"approved":2760,"approval":"76.7%","accuracy":"86.8%","acc_gap":"0.0","air":"1.000","lo":"1.000","hi":"1.000","verdict":"REFERENCE","is_reference":true,"reference":"Group A","ref_approval":"76.7%","min_air":"0.714","min_group":"Group B","overall_acc":"84.2%","overall_apr":"68.0%","default_rate":"19.6%","declined":840,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"26.8%"},{"code":"R01","text":"Income is low for the credit requested","share":"23.1%"},{"code":"R03","text":"Length of credit history is short","share":"22.9%"}]},"Group B":{"n":1950,"approved":1067,"approval":"54.7%","accuracy":"80.1%","acc_gap":"6.7","air":"0.714","lo":"0.683","hi":"0.744","verdict":"FAIL","is_reference":false,"reference":"Group A","ref_approval":"76.7%","min_air":"0.714","min_group":"Group B","overall_acc":"84.2%","overall_apr":"68.0%","default_rate":"29.9%","declined":883,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"29.2%"},{"code":"R01","text":"Income is low for the credit requested","share":"24.6%"},{"code":"R03","text":"Length of credit history is short","share":"18.6%"}]},"Group C":{"n":450,"approved":254,"approval":"56.4%","accuracy":"81.1%","acc_gap":"5.7","air":"0.736","lo":"0.674","hi":"0.801","verdict":"REVIEW","is_reference":false,"reference":"Group A","ref_approval":"76.7%","min_air":"0.714","min_group":"Group B","overall_acc":"84.2%","overall_apr":"68.0%","default_rate":"30.4%","declined":196,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"33.2%"},{"code":"R01","text":"Income is low for the credit requested","share":"25.0%"},{"code":"R03","text":"Length of credit history is short","share":"18.4%"}]}},"210":{"Group A":{"n":3600,"approved":2462,"approval":"68.4%","accuracy":"82.8%","acc_gap":"0.0","air":"1.000","lo":"1.000","hi":"1.000","verdict":"REFERENCE","is_reference":true,"reference":"Group A","ref_approval":"68.4%","min_air":"0.681","min_group":"Group B","overall_acc":"79.2%","overall_apr":"59.8%","default_rate":"19.6%","declined":1138,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"27.8%"},{"code":"R01","text":"Income is low for the credit requested","share":"22.8%"},{"code":"R03","text":"Length of credit history is short","share":"22.8%"}]},"Group B":{"n":1950,"approved":908,"approval":"46.6%","accuracy":"73.5%","acc_gap":"9.3","air":"0.681","lo":"0.646","hi":"0.717","verdict":"FAIL","is_reference":false,"reference":"Group A","ref_approval":"68.4%","min_air":"0.681","min_group":"Group B","overall_acc":"79.2%","overall_apr":"59.8%","default_rate":"29.9%","declined":1042,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"30.3%"},{"code":"R01","text":"Income is low for the credit requested","share":"25.0%"},{"code":"R03","text":"Length of credit history is short","share":"17.8%"}]},"Group C":{"n":450,"approved":216,"approval":"48.0%","accuracy":"75.3%","acc_gap":"7.4","air":"0.702","lo":"0.634","hi":"0.776","verdict":"FAIL","is_reference":false,"reference":"Group A","ref_approval":"68.4%","min_air":"0.681","min_group":"Group B","overall_acc":"79.2%","overall_apr":"59.8%","default_rate":"30.4%","declined":234,"reasons":[{"code":"R02","text":"Debt payments are high compared with income","share":"32.1%"},{"code":"R01","text":"Income is low for the credit requested","share":"22.6%"},{"code":"R03","text":"Length of credit history is short","share":"20.5%"}]}}},"packs":{"170":[{"id":"T1","name":"Group approval gap","verdict":"REVIEW","numbers":"approval 92.8% / 80.9% / 81.6%, spread 11.9 points"},{"id":"T2","name":"AIR by group","verdict":"PASS","numbers":"lowest AIR 0.872 (Group B); 0 of 2 non-reference groups below 0.80"},{"id":"T3","name":"Cutoff sweep","verdict":"PASS","numbers":"screen holds up to cutoff 185; cutoff 170 has 15 points of headroom below it; approved-book default rate 14.9% at 170"},{"id":"T4","name":"Proxy ablation","verdict":"REVIEW","numbers":"lowest AIR 0.872 -> 0.937, accuracy 85.6% -> 85.4%, 189 decisions turn to approve and 76 to decline"},{"id":"T5","name":"Reason-code consistency","verdict":"REVIEW","numbers":"266 of 337 matched pairs differ (78.9%) against 81.6% within Group A (-2.6 points); 34 of 189 proxy-caused declines omit R06 (18.0%)"},{"id":"T6","name":"Small-group stability","verdict":"PASS","numbers":"Group C (n 450) AIR 0.879, interval 0.835 to 0.920, entirely at or above 0.80"}],"180":[{"id":"T1","name":"Group approval gap","verdict":"FAIL","numbers":"approval 89.1% / 73.8% / 74.4%, spread 15.3 points"},{"id":"T2","name":"AIR by group","verdict":"REVIEW","numbers":"lowest AIR 0.828 (Group B); 0 of 2 non-reference groups below 0.80"},{"id":"T3","name":"Cutoff sweep","verdict":"REVIEW","numbers":"screen holds up to cutoff 185; cutoff 180 has 5 points of headroom below it; approved-book default rate 11.7% at 180"},{"id":"T4","name":"Proxy ablation","verdict":"REVIEW","numbers":"lowest AIR 0.828 -> 0.903, accuracy 87.4% -> 88.4%, 222 decisions turn to approve and 142 to decline"},{"id":"T5","name":"Reason-code consistency","verdict":"PASS","numbers":"388 of 496 matched pairs differ (78.2%) against 82.4% within Group A (-4.1 points); 20 of 222 proxy-caused declines omit R06 (9.0%)"},{"id":"T6","name":"Small-group stability","verdict":"REVIEW","numbers":"Group C (n 450) AIR 0.836, interval 0.787 to 0.885, straddles 0.80"}],"185":[{"id":"T1","name":"Group approval gap","verdict":"FAIL","numbers":"approval 86.6% / 69.6% / 70.0%, spread 17.0 points"},{"id":"T2","name":"AIR by group","verdict":"REVIEW","numbers":"lowest AIR 0.803 (Group B); 0 of 2 non-reference groups below 0.80"},{"id":"T3","name":"Cutoff sweep","verdict":"REVIEW","numbers":"screen holds up to cutoff 185; cutoff 185 has 0 points of headroom below it; approved-book default rate 10.1% at 185"},{"id":"T4","name":"Proxy ablation","verdict":"REVIEW","numbers":"lowest AIR 0.803 -> 0.903, accuracy 87.5% -> 88.9%, 261 decisions turn to approve and 173 to decline"},{"id":"T5","name":"Reason-code consistency","verdict":"PASS","numbers":"467 of 598 matched pairs differ (78.1%) against 79.5% within Group A (-1.4 points); 22 of 261 proxy-caused declines omit R06 (8.4%)"},{"id":"T6","name":"Small-group stability","verdict":"REVIEW","numbers":"Group C (n 450) AIR 0.808, interval 0.760 to 0.860, straddles 0.80"}],"190":[{"id":"T1","name":"Group approval gap","verdict":"FAIL","numbers":"approval 83.5% / 64.3% / 62.7%, spread 20.9 points"},{"id":"T2","name":"AIR by group","verdict":"FAIL","numbers":"lowest AIR 0.750 (Group C); 2 of 2 non-reference groups below 0.80"},{"id":"T3","name":"Cutoff sweep","verdict":"FAIL","numbers":"screen holds up to cutoff 185; cutoff 190 is 5 points above; passing costs approval 75.7% -> 79.8% and approved-book default rate 8.2% -> 10.1%"},{"id":"T4","name":"Proxy ablation","verdict":"FAIL","numbers":"lowest AIR 0.750 -> 0.871, accuracy 87.1% -> 89.2%, 295 decisions turn to approve and 200 to decline"},{"id":"T5","name":"Reason-code consistency","verdict":"PASS","numbers":"578 of 735 matched pairs differ (78.6%) against 75.4% within Group A (+3.3 points); 18 of 295 proxy-caused declines omit R06 (6.1%)"},{"id":"T6","name":"Small-group stability","verdict":"REVIEW","numbers":"Group C (n 450) AIR 0.750, interval 0.698 to 0.808, straddles 0.80"}],"200":[{"id":"T1","name":"Group approval gap","verdict":"FAIL","numbers":"approval 76.7% / 54.7% / 56.4%, spread 21.9 points"},{"id":"T2","name":"AIR by group","verdict":"FAIL","numbers":"lowest AIR 0.714 (Group B); 2 of 2 non-reference groups below 0.80"},{"id":"T3","name":"Cutoff sweep","verdict":"FAIL","numbers":"screen holds up to cutoff 185; cutoff 200 is 15 points above; passing costs approval 68.0% -> 79.8% and approved-book default rate 5.6% -> 10.1%"},{"id":"T4","name":"Proxy ablation","verdict":"FAIL","numbers":"lowest AIR 0.714 -> 0.844, accuracy 84.2% -> 86.8%, 365 decisions turn to approve and 211 to decline"},{"id":"T5","name":"Reason-code consistency","verdict":"PASS","numbers":"733 of 949 matched pairs differ (77.2%) against 80.8% within Group A (-3.5 points); 34 of 365 proxy-caused declines omit R06 (9.3%)"},{"id":"T6","name":"Small-group stability","verdict":"REVIEW","numbers":"Group C (n 450) AIR 0.736, interval 0.674 to 0.801, straddles 0.80"}],"210":[{"id":"T1","name":"Group approval gap","verdict":"FAIL","numbers":"approval 68.4% / 46.6% / 48.0%, spread 21.8 points"},{"id":"T2","name":"AIR by group","verdict":"FAIL","numbers":"lowest AIR 0.681 (Group B); 2 of 2 non-reference groups below 0.80"},{"id":"T3","name":"Cutoff sweep","verdict":"FAIL","numbers":"screen holds up to cutoff 185; cutoff 210 is 25 points above; passing costs approval 59.8% -> 79.8% and approved-book default rate 3.7% -> 10.1%"},{"id":"T4","name":"Proxy ablation","verdict":"REVIEW","numbers":"lowest AIR 0.681 -> 0.776, accuracy 79.2% -> 81.8%, 329 decisions turn to approve and 239 to decline"},{"id":"T5","name":"Reason-code consistency","verdict":"PASS","numbers":"870 of 1146 matched pairs differ (75.9%) against 76.0% within Group A (-0.1 points); 5 of 329 proxy-caused declines omit R06 (1.5%)"},{"id":"T6","name":"Small-group stability","verdict":"PASS","numbers":"Group C (n 450) AIR 0.702, interval 0.634 to 0.776, entirely below 0.80"}]}};
+const M = D.meta;
+const GROUPS = ["Group A", "Group B", "Group C"];
+const CUTS = M.cutoffs;
+
+function esc(v) {
+  return String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+const gsel = document.getElementById("group-select");
+const csel = document.getElementById("cutoff-select");
+GROUPS.forEach((g, i) => { const o = document.createElement("option"); o.value = i; o.textContent = g; gsel.appendChild(o); });
+CUTS.forEach((c, i) => {
+  const o = document.createElement("option");
+  o.value = i;
+  o.textContent = c + " points" + (c === M.policy ? " - policy cutoff" : (c === M.crossing ? " - last cutoff where the screen holds" : ""));
+  csel.appendChild(o);
+});
+let gi = 1, ci = CUTS.indexOf(M.policy);
+
+function vClass(v) { return v === "FAIL" ? "tag-bad" : (v === "REVIEW" ? "tag-warn" : "tag-ok"); }
+function pillClass(v) { return v === "FAIL" ? "pill-bad" : (v === "REVIEW" ? "pill-warn" : "pill-ok"); }
+
+function render() {
+  gsel.value = gi; csel.value = ci;
+  const c = CUTS[ci], g = GROUPS[gi];
+  const s = D.scn[String(c)][g];
+  const tests = D.packs[String(c)];
+  const flagged = tests.filter(t => t.verdict !== "PASS").length;
+
+  document.getElementById("stat-acc").textContent = s.overall_acc;
+  document.getElementById("stat-apr").textContent = s.approval;
+  document.getElementById("stat-air").textContent = s.is_reference ? "1.000" : s.air;
+  document.getElementById("stat-flag").textContent = flagged + " of " + tests.length;
+
+  document.getElementById("run-meta").innerHTML =
+    "<b>" + esc(g) + "</b> at cutoff <b>" + esc(c) + "</b> - " + esc(s.n.toLocaleString("en-US")) + " applicants, " +
+    esc(s.approved.toLocaleString("en-US")) + " approved. Reference group (highest approval rate): <b>" + esc(s.reference) + "</b> at " + esc(s.ref_approval) + ".";
+
+  // Card 1: before
+  let b = "";
+  b += '<div class="driver-row"><span class="driver-label">Model card: accuracy</span><span class="driver-value">' + esc(s.overall_acc) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Model card: approval rate</span><span class="driver-value">' + esc(s.overall_apr) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Fairness tests run</span><span class="driver-value">' + esc(M.u_base) + " of " + esc(M.tests) + "</span></div>";
+  b += '<div class="driver-row"><span class="driver-label">Numbers split by group</span><span class="driver-value">none</span></div>';
+  b += '<span class="pill pill-ok">accuracy ' + esc(s.overall_acc) + ": looks fine</span>";
+  b += '<div class="note">The model card is the only evidence a reviewer is given. The scorecard is a stub, not a model.</div>';
+  document.getElementById("card-before").innerHTML = b;
+
+  // Card 2: basic approach
+  let a = "";
+  a += '<div class="driver-row"><span class="driver-label">' + esc(g) + " accuracy</span><span class=\"driver-value\">" + esc(s.accuracy) + "</span></div>";
+  a += '<div class="driver-row"><span class="driver-label">Below the best group</span><span class="driver-value">' + esc(s.acc_gap) + " points</span></div>";
+  a += '<div class="driver-row"><span class="driver-label">Approval rate shown?</span><span class="driver-value">no</span></div>';
+  a += '<div class="driver-row"><span class="driver-label">AIR shown?</span><span class="driver-value">no</span></div>';
+  a += '<div class="driver-row"><span class="driver-label">Reason codes checked?</span><span class="driver-value">no</span></div>';
+  a += '<span class="pill pill-warn">accuracy by group: looks fine, MISSED</span>';
+  a += '<div class="note">Accuracy-style checks are correct. They are silent on who is approved.</div>';
+  document.getElementById("card-sota").innerHTML = a;
+
+  // Card 3: FairLens
+  let h = "";
+  const word = s.verdict === "REFERENCE" ? "REFERENCE GROUP" : (s.verdict === "FAIL" ? "FAIL - CAUGHT" : (s.verdict === "REVIEW" ? "REVIEW - FLAGGED" : "PASS"));
+  h += '<div class="reltitle">' + esc(g) + ' <span class="tag ' + vClass(s.verdict === "REFERENCE" ? "PASS" : s.verdict) + '">' + esc(word) + "</span></div>";
+  h += '<div class="driver-row"><span class="driver-label">Approval rate</span><span class="driver-value">' + esc(s.approval) + " vs " + esc(s.ref_approval) + "</span></div>";
+  h += '<div class="driver-row"><span class="driver-label">AIR</span><span class="driver-value">' + (s.is_reference ? "1.000 (reference)" : esc(s.air)) + "</span></div>";
+  h += '<div class="driver-row"><span class="driver-label">95% interval</span><span class="driver-value">' + (s.is_reference ? "-" : esc(s.lo) + " to " + esc(s.hi)) + "</span></div>";
+  h += '<div class="driver-row"><span class="driver-label">Screen</span><span class="driver-value">' + esc(M.screen) + "</span></div>";
+  tests.forEach(t => {
+    h += '<div class="fieldrow"><span class="fieldname">' + esc(t.id) + " " + esc(t.name) + '</span><span class="tag ' + vClass(t.verdict) + '">' + esc(t.verdict) + "</span>" +
+         '<div class="fieldvals">' + esc(t.numbers) + "</div></div>";
+  });
+  if (s.reasons.length) {
+    h += '<div class="fieldrow"><span class="fieldname">Top reason codes, declined ' + esc(g) + '</span><div class="fieldvals">' +
+         s.reasons.map(r => esc(r.code) + " " + esc(r.share)).join(", ") + " (of " + esc(s.declined.toLocaleString("en-US")) + " declines)</div></div>";
+  }
+  h += '<span class="pill ' + pillClass(s.verdict === "REFERENCE" ? "PASS" : s.verdict) + '">' + esc(word) + "</span>";
+  if (s.verdict === "REVIEW") {
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The interval straddles the screen. With this few applicants the data cannot say which side the group is on, so a person reviews it.</div>';
+  }
+  document.getElementById("card-shield").innerHTML = h;
+}
+
+gsel.addEventListener("change", e => { gi = parseInt(e.target.value, 10); render(); });
+csel.addEventListener("change", e => { ci = parseInt(e.target.value, 10); render(); });
+document.getElementById("next-btn").addEventListener("click", () => {
+  gi++; if (gi >= GROUPS.length) { gi = 0; ci = (ci + 1) % CUTS.length; } render();
+});
+document.getElementById("prev-btn").addEventListener("click", () => {
+  gi--; if (gi < 0) { gi = GROUPS.length - 1; ci = (ci - 1 + CUTS.length) % CUTS.length; } render();
+});
+document.getElementById("reset-btn").addEventListener("click", () => { gi = 1; ci = CUTS.indexOf(M.policy); render(); });
+document.getElementById("runall-btn").addEventListener("click", () => {
+  let i = 0; const total = GROUPS.length * CUTS.length;
+  const iv = setInterval(() => { ci = Math.floor(i / GROUPS.length); gi = i % GROUPS.length; render(); i++; if (i >= total) clearInterval(iv); }, 700);
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+component,reason_code,plain_language
+income,R01,Income is low for the credit requested
+dti,R02,Debt payments are high compared with income
+history_months,R03,Length of credit history is short
+utilization,R04,Balances are high compared with credit limits
+prior_delinq,R05,Late payments are on record
+postcode_band,R06,Postcode band of the home address
