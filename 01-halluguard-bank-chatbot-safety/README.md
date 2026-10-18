@@ -57,7 +57,7 @@ A bank has four ways to try to stop a chatbot from stating a wrong rate, fee, or
 | Capability | Rule-based router (Step 1) | LLM only (Step 2) | Swap the foundation model (Step 3) | **LLM + containment (Step 4)** |
 | --- | --- | --- | --- | --- |
 | Correct answers served, 30-query set | 🟢 2 (both only point to a product page) | 🟢 11 | n/m | 🟢 11 |
-| Wrong answers reaching the customer | 🟢 0 | 🟢 19 | Non-zero. Llama 3.1 70B to Claude Sonnet 4 gains 8 to 16 points of pass rate per failure mode (Step 3 table; stored values, not run in this repo) | 🟢 0 |
+| Wrong answers reaching the customer | 🟢 0 | 🟢 19 | Non-zero. Llama 3.1 70B to the hosted vendor model gains 8 to 16 points of pass rate per failure mode (Step 3 table; stored values, not run in this repo) | 🟢 0 |
 | Sent to a page or a banker | 🟢 28 (93.3%) | 🟢 0 | n/m | 🟢 19 (63.3%) |
 | Checks the answer before the customer sees it | No | No | No | Yes: verifier score against a per-use-case threshold (0.82 rates, regs, disputes; 0.65 general). The scores are fixed mock values in this repo |
 | Exposed to a silent vendor model update | No model to update | Yes | Yes, to a different vendor | 🔴 Designed to pin the snapshot and probe nightly; not built in this prototype |
@@ -98,7 +98,7 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 
 ## Executive summary (90 seconds)
 
-**Problem.** A retail-bank chatbot that misstates a rate, a fee, an eligibility rule, or a regulation opens a Compliance incident each time, and Legal reviews each one. On the 30-query eval set, the keyword router the bank ran before LLMs answers 2 questions and sends the other 28 to a page or a banker. Adding an LLM answers 11 correctly and states 19 wrongly, in fluent, confident language. The 19 fall into five named failure modes: negation flip (8), multi-hop (5), citation fabrication (2), jurisdiction (2), and currency-unit confusion (2). The set is hand-picked to trigger failures, so 19 of 30 is a stress-test rate, not a production error rate. Swapping the foundation model does not close the gap: in the Step 3 table (stored values, not run in this repo), moving from Llama 3.1 70B to Claude Sonnet 4 adds 8 to 16 points of pass rate per failure mode, and confident-and-wrong stays at 33% to 41% on all three models.
+**Problem.** A retail-bank chatbot that misstates a rate, a fee, an eligibility rule, or a regulation opens a Compliance incident each time, and Legal reviews each one. On the 30-query eval set, the keyword router the bank ran before LLMs answers 2 questions and sends the other 28 to a page or a banker. Adding an LLM answers 11 correctly and states 19 wrongly, in fluent, confident language. The 19 fall into five named failure modes: negation flip (8), multi-hop (5), citation fabrication (2), jurisdiction (2), and currency-unit confusion (2). The set is hand-picked to trigger failures, so 19 of 30 is a stress-test rate, not a production error rate. Swapping the foundation model does not close the gap: in the Step 3 table (stored values, not run in this repo), moving from Llama 3.1 70B to the hosted vendor model adds 8 to 16 points of pass rate per failure mode, and confident-and-wrong stays at 33% to 41% on all three models.
 
 **Product.** HalluGuard — a containment layer that wraps the existing chatbot without modifying it: **Grounding verifier** (scores whether a draft answer matches the retrieved rows; the production design is a LoRA fine-tune of Llama 3.1 8B) + **Calibrated abstention** (below a per-use-case threshold, 0.82 for rates, regs, and disputes and 0.65 for general questions, the answer becomes "let me get a banker") + **Vendor pinning and drift** (lock the foundation model snapshot and run the probe set nightly; 🔴 designed, not built in this prototype).
 
@@ -263,12 +263,12 @@ python src/step_01_before_llm.py
 
 ---
 
-## 🤖 Step 2 — With LLMs: RAG + Claude
+## 🤖 Step 2 — With LLMs: RAG + a hosted vendor model
 
 **In plain English:** Add an LLM. Two changes:
 
 1. **Retrieval.** When a customer asks a question, search the product/rate/fee data for the most relevant rows. (Production design: embeddings with `text-embedding-3-large` over `pgvector`.)
-2. **Generation.** Pass those rows + the question to Claude Sonnet, ask for a natural-language answer.
+2. **Generation.** Pass those rows + the question to the hosted vendor model, ask for a natural-language answer.
 
 The LLM can now read the customer's question, understand intent (even with paraphrasing), and write a real reply.
 
@@ -281,7 +281,7 @@ def answer_with_llm(question: str) -> str:
     # 1. Retrieve relevant rows from products/rates/fees
     context = retrieve(question, top_k=5)
 
-    # 2. Call Claude Sonnet
+    # 2. Call the hosted vendor model
     prompt = f"""You are a bank customer service assistant.
 Answer the customer's question using only the information provided.
 
@@ -291,7 +291,7 @@ Context:
 Customer question: {question}
 
 Answer:"""
-    return call_claude_sonnet(prompt)
+    return call_hosted_model(prompt)
 ```
 
 **Run it on our 30 queries:**
@@ -378,7 +378,7 @@ The eight:
 
 The defects above aren't "the model is bad." They're specific, reproducible patterns that show up across foundation models. **Pass rates for three different models (five of the eight failure modes shown):**
 
-| Failure mode | Claude Sonnet 4 | GPT-4o | Llama 3.1 70B |
+| Failure mode | Vendor model | GPT-4o | Llama 3.1 70B |
 | --- | --- | --- | --- |
 | Paraphrase blindness | 88% pass | 84% pass | 79% pass |
 | Negation flip | 71% pass | 68% pass | 56% pass |
@@ -388,7 +388,7 @@ The defects above aren't "the model is bad." They're specific, reproducible patt
 
 These pass rates are stored in `src/step_03_defects_exposed.py`. This repo does not include the runs that produced them, so they are not tagged measured.
 
-Reading this table tells you the answer for the bank: **swapping the model from Llama to Claude buys you 8 to 16 points of pass rate on each failure mode. Not enough.** The "confident-and-wrong" mode is uniformly bad across all three. **A model upgrade does not get you out of this. The fix is containment.**
+Reading this table tells you the answer for the bank: **swapping the model from Llama to the hosted vendor model buys you 8 to 16 points of pass rate on each failure mode. Not enough.** The "confident-and-wrong" mode is uniformly bad across all three. **A model upgrade does not get you out of this. The fix is containment.**
 
 ---
 
@@ -407,7 +407,7 @@ Three guards:
 ```python
 def answer_with_containment(question: str) -> str:
     context = retrieve(question, top_k=5)
-    chatbot_response = call_claude_sonnet(generate_prompt(context, question))
+    chatbot_response = call_hosted_model(generate_prompt(context, question))
 
     # NEW: verify before serving
     grounding_score = grounding_verifier.score(
@@ -461,7 +461,7 @@ flowchart LR
     USER([Customer])
 
     subgraph CHATBOT_LAYER["Chatbot Layer (existing, untouched)"]
-        BOT["Bank Chatbot<br/>(Claude Sonnet 4 / Azure OpenAI gpt-4o)"]
+        BOT["Bank Chatbot<br/>(hosted vendor model / Azure OpenAI gpt-4o)"]
         RAG["Retrieval<br/>pgvector + text-embedding-3-large"]
         KB[("Authoritative KB<br/>products, rates, fees, regs")]
     end
@@ -513,7 +513,7 @@ flowchart LR
 sequenceDiagram
     autonumber
     participant U as Customer
-    participant B as Bank Chatbot<br/>(Claude Sonnet 4)
+    participant B as Bank Chatbot<br/>(hosted vendor model)
     participant R as Retrieval<br/>(pgvector)
     participant V as HalluGuard Verifier<br/>(LoRA Llama 3.1 8B)
     participant C as Calibrator
@@ -523,7 +523,7 @@ sequenceDiagram
     U->>B: "What's the rate on a 12-month CD?"
     B->>R: embed(query) + similarity search
     R-->>B: top-5 chunks (rates.csv rows + product details)
-    B->>B: generate response with Claude Sonnet
+    B->>B: generate response with the hosted vendor model
     Note over B: "Currently, our 12-Month CD is paying 4.10% APY."
     B->>V: response + retrieved context
     V->>V: score grounding (LoRA Llama 3.1 8B forward pass)

@@ -477,7 +477,7 @@ if st.session_state.step >= 4:
             "- **Verifier:** LoRA Llama 3.1 8B served via vLLM on 2x L4 GPUs\n"
             "- **Calibration:** thresholds set on a held-out 200-example calibration split. "
             "We track the calibration curve (plots 'AI says I'm 80% sure' vs. 'was it actually right 80% of the time?').\n"
-            "- **Snapshot pin:** `claude-sonnet-4-20250215` (locked); nightly probe regression alerts on drift\n"
+            "- **Snapshot pin:** `vendor-balanced-4-20250215` (locked); nightly probe regression alerts on drift\n"
             "- **Telemetry:** OpenTelemetry -> Langfuse + Datadog\n"
             "- **MRM-ready evidence bundle:** MRM (Model Risk Management - the bank's internal team that approves every AI before deployment) gets the bundle per pilot, attached to the model risk file"
         )

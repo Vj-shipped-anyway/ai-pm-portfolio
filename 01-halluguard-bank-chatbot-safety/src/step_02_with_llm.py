@@ -1,5 +1,5 @@
 """
-Step 2 — With LLMs: RAG + Claude (or GPT, or Llama).
+Step 2 — With LLMs: RAG + a hosted vendor model (or GPT, or Llama).
 
 Now we have an LLM. Two changes vs. Step 1:
   1. Retrieval: search the products/rates/fees CSVs for relevant rows.
@@ -8,7 +8,7 @@ Now we have an LLM. Two changes vs. Step 1:
 To keep this runnable WITHOUT API keys (so any reviewer can replicate the
 walkthrough on a laptop), this script uses MOCK LLM RESPONSES that mirror
 what real foundation models actually produce on this query set. The mock
-responses are based on observed behavior of Claude Sonnet 4, GPT-4o, and
+responses are based on observed behavior of the hosted vendor model, GPT-4o, and
 Llama 3.1 70B run against this exact eval.
 
 To swap in real LLM calls, replace `mock_llm_response()` with
@@ -49,7 +49,7 @@ def retrieve(question: str, products, rates, fees, top_k: int = 5):
 
 
 # Mock LLM responses, calibrated to the actual behavior we observed when
-# running these exact queries against Claude Sonnet 4 in development.
+# running these exact queries against the hosted vendor model in development.
 # These are approximately the responses real LLMs produced. The point of
 # the mock is reproducibility for any reviewer — same output every time.
 MOCK_RESPONSES = {
@@ -109,7 +109,7 @@ def main():
         writer.writerow(["query_id", "question", "llm_response", "correct", "expected"])
 
         print(f"\n{'='*80}")
-        print("Step 2 — With LLMs: RAG + Claude")
+        print("Step 2 — With LLMs: RAG + a hosted vendor model")
         print(f"{'='*80}\n")
 
         for row in reader:

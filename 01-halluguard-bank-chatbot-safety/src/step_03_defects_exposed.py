@@ -25,14 +25,14 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 # These numbers come from running the actual probe suite (1,260 examples
 # total; the 30-query CSV here is a slice).
 MODEL_COMPARISON = {
-    "paraphrase_blindness":  {"Claude Sonnet 4": 0.88, "GPT-4o": 0.84, "Llama 3.1 70B": 0.79},
-    "negation_flip":         {"Claude Sonnet 4": 0.71, "GPT-4o": 0.68, "Llama 3.1 70B": 0.56},
-    "time_staleness":        {"Claude Sonnet 4": 0.92, "GPT-4o": 0.89, "Llama 3.1 70B": 0.81},
-    "multihop":              {"Claude Sonnet 4": 0.64, "GPT-4o": 0.61, "Llama 3.1 70B": 0.49},
-    "currency_unit":         {"Claude Sonnet 4": 0.79, "GPT-4o": 0.71, "Llama 3.1 70B": 0.64},
-    "citation_fabrication":  {"Claude Sonnet 4": 0.58, "GPT-4o": 0.49, "Llama 3.1 70B": 0.42},
-    "jurisdiction":          {"Claude Sonnet 4": 0.67, "GPT-4o": 0.63, "Llama 3.1 70B": 0.58},
-    "confident_and_wrong":   {"Claude Sonnet 4": 0.41, "GPT-4o": 0.38, "Llama 3.1 70B": 0.33},
+    "paraphrase_blindness":  {"Vendor model": 0.88, "GPT-4o": 0.84, "Llama 3.1 70B": 0.79},
+    "negation_flip":         {"Vendor model": 0.71, "GPT-4o": 0.68, "Llama 3.1 70B": 0.56},
+    "time_staleness":        {"Vendor model": 0.92, "GPT-4o": 0.89, "Llama 3.1 70B": 0.81},
+    "multihop":              {"Vendor model": 0.64, "GPT-4o": 0.61, "Llama 3.1 70B": 0.49},
+    "currency_unit":         {"Vendor model": 0.79, "GPT-4o": 0.71, "Llama 3.1 70B": 0.64},
+    "citation_fabrication":  {"Vendor model": 0.58, "GPT-4o": 0.49, "Llama 3.1 70B": 0.42},
+    "jurisdiction":          {"Vendor model": 0.67, "GPT-4o": 0.63, "Llama 3.1 70B": 0.58},
+    "confident_and_wrong":   {"Vendor model": 0.41, "GPT-4o": 0.38, "Llama 3.1 70B": 0.33},
 }
 
 FAILURE_DESCRIPTIONS = {
@@ -87,11 +87,11 @@ def main():
     print("Comparative pass rate across three foundation models")
     print("(Same query set, zero-shot, no containment)")
     print(f"{'='*80}\n")
-    print(f"  {'Failure mode':<28} {'Claude Sonnet 4':>17} {'GPT-4o':>10} {'Llama 3.1 70B':>16}")
+    print(f"  {'Failure mode':<28} {'Vendor model':>17} {'GPT-4o':>10} {'Llama 3.1 70B':>16}")
     print(f"  {'-'*28} {'-'*17:>17} {'-'*10:>10} {'-'*16:>16}")
     for mode, scores in MODEL_COMPARISON.items():
         row = f"  {mode:<28}"
-        for model in ["Claude Sonnet 4", "GPT-4o", "Llama 3.1 70B"]:
+        for model in ["Vendor model", "GPT-4o", "Llama 3.1 70B"]:
             row += f" {scores[model]*100:>15.0f}%"
         print(row)
 

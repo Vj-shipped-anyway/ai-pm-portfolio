@@ -2,11 +2,11 @@
 # Run the full probe suite against a target model and emit an accuracy report.
 #
 # Usage:
-#   ./run-probes.sh --model claude-sonnet-4 --probes ../probes/
+#   ./run-probes.sh --model vendor-balanced-4 --probes ../probes/
 #   ./run-probes.sh --model gpt-4o-2024-08-06 --probes ../probes/ --slice 04
 #
 # Env vars expected:
-#   ANTHROPIC_API_KEY     for claude-* models
+#   ANTHROPIC_API_KEY     for Anthropic models
 #   OPENAI_API_KEY        for gpt-* models
 #   FIREWORKS_API_KEY     for Llama/Mistral via Fireworks
 #
@@ -34,7 +34,7 @@ done
 
 if [[ -z "$MODEL" ]]; then
   echo "error: --model is required"
-  echo "examples: claude-sonnet-4, gpt-4o-2024-08-06, accounts/fireworks/models/llama-v3p1-70b-instruct"
+  echo "examples: vendor-balanced-4, gpt-4o-2024-08-06, accounts/fireworks/models/llama-v3p1-70b-instruct"
   exit 1
 fi
 

@@ -53,7 +53,7 @@ The pattern is well-documented across published BFSI incidents and CFPB complain
 A three-guard containment layer.
 
 ### Guard 1 — Ground
-- Atomic-claim extractor (Anthropic Claude Sonnet with constrained JSON output) parses every response candidate for rate, fee, term, regulation reference, and account-behavior claims.
+- Atomic-claim extractor (a hosted Anthropic model with constrained JSON output) parses every response candidate for rate, fee, term, regulation reference, and account-behavior claims.
 - Each atomic claim is checked against the authoritative knowledge graph: product catalog and rate sheet in Postgres, reg-claim graph in Neo4j.
 - Ungroundable or contradicted claims trigger rewrite-or-refuse.
 - Source citations attached to every response with a grounded claim.
@@ -119,8 +119,8 @@ A three-guard containment layer.
 *The figures in this section (latency, throughput, p95, entry counts) are design targets and sizing assumptions, tagged 🔴. None was measured or load-tested in this repo.*
 
 **Reference architecture.**
-- Wrapped chatbot model: vendor's choice. Could be Anthropic Claude Sonnet via AWS Bedrock, Azure OpenAI gpt-4o, or an in-house fine-tuned Llama-3 70B on Triton. The containment layer is model-agnostic by design.
-- Atomic-claim extractor: Claude Sonnet with a tightly-constrained JSON schema. Rewrite-or-refuse generator: same Claude Sonnet with a constraint that it can only emit grounded content or a refusal.
+- Wrapped chatbot model: vendor's choice. Could be a hosted Anthropic model via AWS Bedrock, Azure OpenAI gpt-4o, or an in-house fine-tuned Llama-3 70B on Triton. The containment layer is model-agnostic by design.
+- Atomic-claim extractor: the hosted vendor model with a tightly-constrained JSON schema. Rewrite-or-refuse generator: same the hosted vendor model with a constraint that it can only emit grounded content or a refusal.
 - Vector / retrieval: Postgres + pgvector for the rate, fee, and product KG embeddings. Catalog at a typical retail bank lands at 50K to 200K chunked entries — pgvector handles that at sub-30ms p95. Skip Pinecone here; the operational cost isn't worth it under 5M entries.
 - Knowledge graph: Neo4j for the reg-claim graph (Reg DD, Reg E, Reg Z, Reg B nodes with conditional relationships). Postgres for relational claims (rates, fees, product attributes).
 - Source-of-record sync: Kafka spine. Hourly sync from the product catalog, rate sheet, and fee schedule into the KG. 60-minute staleness SLO with auto-degrade.
