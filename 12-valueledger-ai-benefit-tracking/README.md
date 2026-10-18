@@ -635,6 +635,13 @@ flowchart LR
     CONSOLE --> FBP
     CONSOLE --> PO
     CONSOLE --> CRO
+
+    classDef existing fill:#e0e7ff,stroke:#4338ca,color:#1e1b4b
+    classDef new fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef nbr fill:#fef3c7,stroke:#d97706,color:#78350f
+    class SOURCES,USAGE,WORK,FIN,REG,COST,EVAL existing
+    class VL,INGEST,COHORT,PANEL,EST,BOOT,BOOKS,GUARD,CONSOLE new
+    class USERS,PL,FBP,PO,CRO nbr
 ```
 
 **Per-run sequence** (the headline run on the synthetic data):
