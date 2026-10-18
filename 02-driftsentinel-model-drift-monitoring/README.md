@@ -2,6 +2,8 @@
 
 **A portfolio prototype for catching production AI decay 69 days earlier — modeled against SR 11-7 ongoing-monitoring expectations.**
 
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
 **▶ Live demo:** [driftsentinel-bfsi.streamlit.app](https://driftsentinel-bfsi.streamlit.app)
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/02-driftsentinel-model-drift-monitoring/demo.html)
@@ -16,7 +18,7 @@
 ![FP rate target: 8%](https://img.shields.io/badge/false--positive%20rate%20target-8%25-lightgrey)
 ![MTTD modeled: 9d vs 78d](https://img.shields.io/badge/MTTD%20modeled-9d%20vs%2078d%20SOTA-yellow)
 ![Modeled validator hours saved: 2d/wk](https://img.shields.io/badge/modeled--validator%20hours%20saved-2d%2Fwk-orange)
-![SR 11-7 aligned](https://img.shields.io/badge/SR%2011--7-aligned-lightgrey)
+![SR 11-7 design basis](https://img.shields.io/badge/SR%2011--7-design%20basis-lightgrey)
 
 [![Open the static demo](https://img.shields.io/badge/▶%20open%20demo.html-clickable-success)](./demo.html)
 
@@ -420,7 +422,7 @@ The Streamlit prototype here demonstrates the *product mechanic* on synthetic da
 
 ## 👤 Author
 
-**Vijay Saharan** — Sr Product Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
+**Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
 [LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Designs compliant AI under regulated constraint*
 
