@@ -617,7 +617,7 @@ The Streamlit prototype here demonstrates the *product mechanic* — that diffic
 
 ## 🙌 Acknowledgements
 
-- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://cloud.google.com/) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the ADK confirmation primitive OversightOps sits on top of.
+- [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the ADK confirmation primitive OversightOps sits on top of.
 - [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) — the human-oversight requirement for high-risk AI systems. The regulatory existence-proof for this product.
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the framework backbone, including the HITL section.
 - [Federal Reserve, OCC and FDIC — SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026; it replaced SR 11-7) and [Federal Reserve — Supervisory Letters](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm) — co-issued model-risk-management supervisory expectation.
