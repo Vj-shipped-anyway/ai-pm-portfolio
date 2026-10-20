@@ -154,7 +154,7 @@ The number before each control is its lifecycle stage. Owners and frequencies ar
 
 |Control|Printed|Known miss, printed by the same project|
 |---|---|---|
-|26 StepScout|🟢 A volume-first top 10 holds 6 agent-ready steps and 4 that touch restricted data or a four-eyes control; StepScout's holds 9 (26, step_03, step_04)|S14 hides a phone call, is classed AGENT, ranks #10|
+|26 StepScout|🟢 A volume-first top 10 holds 6 agent-ready steps (counted separately, 4 of the 10 touch restricted data or a four-eyes control); StepScout's holds 9 (26, step_03, step_04)|S14 hides a phone call, is classed AGENT, ranks #10|
 |22 ShadowScan|🟢 A blocklist finds 2,275 of 4,200 sessions; ShadowScan finds 3,948 (recall 94.0%, precision 87.9%) (22, step_02, step_04)|600 off-network sessions sit in no log (22, step_03)|
 |01 HalluGuard|🟢 11 of 30 correct, 19 wrong reach the customer; with containment 0 wrong ship and 19 go to a banker (01, step_02, step_04)|Verifier scores are fixed values on hand-picked failures|
 |13 SwapBrief|🟢 False-GO over 200 simulated scenarios: 96.9% headline rule, 67.0% aggregate test, 8.2% SwapBrief (13, step_04)|5 of 75 true slice regressions inconclusive, 6 missed|

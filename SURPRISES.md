@@ -22,7 +22,7 @@ Each prototype in this repo ends with a known miss. These ten results changed ho
 
 **8. The simple threshold wins where both fire.** On the 3 held-out events that both approaches tripped on, a tuned single threshold served fewer bad decisions than the per-segment switch: 678 against 1,219. The drill scorecard also reports 0 of 7 scenarios ready. → [25 KillSwitch](./25-killswitch-ai-fallback-drills/), `step_04`.
 
-**9. Ranking by volume puts controls at the top of the automation list.** A volume-first top 10 holds 6 steps an agent can take over and 4 that touch restricted data or a four-eyes control. → [26 StepScout](./26-stepscout-task-mining-agent-candidates/), `step_03` and `step_04`.
+**9. Ranking by volume puts controls at the top of the automation list.** A volume-first top 10 holds 6 steps an agent can take over; counted separately, 4 of the 10 touch restricted data or a four-eyes control. → [26 StepScout](./26-stepscout-task-mining-agent-candidates/), `step_03` and `step_04`.
 
 **10. A script without controls resubmits everything; the kit still misses.** The happy-path script resubmits 515 payments with 0 approved. The kit blocks 1,164 unapproved attempts, and 15 of the 134 cases it finishes on its own still differ from the recorded human outcome. → [27 AgentKit](./27-agentkit-reference-agent-and-playbook/), `step_03` and `step_04`.
 
