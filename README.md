@@ -2,6 +2,8 @@
 
 **I'm curious how AI actually gets into bank operations, and what breaks when it does.** This repo is twenty-seven runnable prototypes on synthetic data. Each one names how the common approach fails, builds the layer that contains it, and prints what it still gets wrong. I'm open to AI delivery and product leadership in bank operations, and to AI founders selling into banks.
 
+[![Verify the projects](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/actions/workflows/verify.yml/badge.svg)](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/actions/workflows/verify.yml) Every push runs all twenty-seven projects on Python 3.9 and 3.12: step scripts, regenerated data, links, demo scripts, tests, and a check that the green numbers in each README appear in a script's output (`python3 tools/check_repo.py`).
+
 **Live site:** [vj-shipped-anyway.github.io/ai-pm-portfolio](https://vj-shipped-anyway.github.io/ai-pm-portfolio/) has a clickable demo for each of the twenty-seven, no install. Every project ships sample data, four step scripts and a static `demo.html`. Streamlit apps are deployed for HalluGuard, DriftSentinel and LeaseGuard; the other twenty-four are not deployed yet.
 
 Tags used everywhere: 🟢 measured (a script in the repo prints it), 🟡 modeled (the assumption is named), 🔴 hypothetical (designed, never tested). All data is synthetic and these are prototypes, not production case studies; the [full note on framing](#-note-on-framing) is below.
