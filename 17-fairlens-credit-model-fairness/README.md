@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/17-fairlens-credit-model-fairness/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 AIR by group: Group B 0.769 (interval 0.742 to 0.797), Group C 0.750 (interval 0.698 to 0.808) (`step_04`)
 - 🟢 Cutoff: the screen holds up to cutoff 185; the policy cutoff 190 is 5 points above (`step_03`, `step_04`)
