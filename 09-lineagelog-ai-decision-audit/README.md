@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/09-lineagelog-ai-decision-audit/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 6 of 6 deficiencies closed on the headline decision (`step_04` prints it), with all 200 decisions composed; 29 of the 200 outcome rows are `none_observed` (counted from `outcomes.csv`)
 - 🟢 Composition latency: milliseconds per decision measured on the prototype (`step_04_with_lineagelog.py` prints the average per decision over the 200-decision fleet sweep; the figure varies from run to run)
