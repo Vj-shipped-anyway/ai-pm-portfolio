@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/04-evalforge-llm-eval-platform/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 CI gate caught both silent vendor-snapshot updates on first run (2026-02-14 Anthropic update and 2026-05-20 Anthropic update both blocked in this dataset)
 - 🟢 Inter-judge kappa at 0.86 on the latest run (ER050); 🟢 kappa drifted from 0.78 (ER001) to 0.70 (ER011) ahead of the ER012 regression, and the Step 4 gate raised REVIEW on five of those runs (ER005, ER006, ER009, ER010, ER011)
