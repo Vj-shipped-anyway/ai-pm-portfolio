@@ -8,7 +8,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/01-halluguard-bank-chatbot-safety/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Rule-based router (Step 1): 2 of 30 answered, both only pointing to a product page; 28 of 30 (93.3%) sent to a page or a banker
 - 🟢 LLM only (Step 2): 11 of 30 correct; 19 wrong answers would reach the customer
