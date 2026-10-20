@@ -1,0 +1,41 @@
+name: Verify the projects
+
+# Runs every project's four step scripts, regenerates its data, parses its SVG,
+# checks its relative links and demo scripts, runs the unit tests in project 27,
+# and checks that the green numbers in each README appear in the printed output.
+# Project 02 needs numpy, pandas and scipy; the other twenty-six use the standard library only.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Check the standard-library projects
+        run: python tools/check_repo.py --exclude 02
+
+      - name: Install what project 02 needs
+        run: python -m pip install --quiet numpy pandas scipy
+
+      - name: Check project 02
+        run: python tools/check_repo.py 02
