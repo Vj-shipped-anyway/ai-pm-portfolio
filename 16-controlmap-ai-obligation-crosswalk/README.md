@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/16-controlmap-ai-obligation-crosswalk/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Right status: 46 of 48 obligations (95.8%) with ControlMap against 23 of 48 for the sheet (`step_04`, `step_02`)
 - 🟢 Each part earns its place: the dictionary takes the right-status count to 31, the scope check to 39 and the freshness check to 46 (`step_04`)
