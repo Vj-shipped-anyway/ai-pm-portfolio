@@ -36,6 +36,8 @@ Pick the path closest to your seat. Every project opens with a clickable demo an
 
 **What surprised me.** [Ten results](./SURPRISES.md) that changed how I read the common approach: an access review that removes 1 of 71 unneeded grants, a retrieval eval that scores 283 of 291 leaked results as correct, and an adoption number that rose while real use fell.
 
+**How I would run it.** [An operating model for AI in bank operations](./OPERATING_MODEL.md), built from the twenty-seven: eight stages, who decides what, a catalog of the controls and the evidence each one leaves, and the first 90 days. It is a design (🔴), and every number in it is copied from a project README with its tag.
+
 ---
 
 ---
