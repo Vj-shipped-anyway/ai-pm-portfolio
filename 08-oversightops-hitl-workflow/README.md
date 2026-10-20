@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/08-oversightops-hitl-workflow/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 A verdict composed for all 1,000 cases in the shipped corpus (step 4 prints 714 APPROVED, 82 ESCALATED, 204 RUBBER_STAMPED_BLOCKED)
 - 🟢 Composition latency: under 1 ms per case measured on the prototype (`step_04_with_oversightops.py` prints the measured wall-clock for the 1,000-case fleet sweep; the figure varies from run to run)
