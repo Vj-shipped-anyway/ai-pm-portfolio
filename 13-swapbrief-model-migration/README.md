@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/13-swapbrief-model-migration/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Headline rule on the committed set: GO, +4.3 pp (78.6% to 82.9%)
 - 🟢 SwapBrief on the same set: GO WITH GUARDRAILS on the retuned prompt, NO-GO on A's old prompt, 8 rollback triggers (`step_04_with_swapbrief.py`)
