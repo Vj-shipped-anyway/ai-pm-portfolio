@@ -2,13 +2,17 @@
 
 **A portfolio prototype for measuring what an AI copilot really freed in a regulated bank: a holdout cohort, difference-in-differences, net of rework, a weekly effect curve with decay, overlap deduplication, and a hard-versus-soft ledger tied to the budget table. Built on synthetic data where the true effect is known, so each method's error can be read off an answer key.**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/12-valueledger-ai-benefit-tracking/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the estimators, the architecture, and the walkthrough are mine. The data is synthetic and the true effect is known only because the generator injected it, so the 🟢 numbers show how each method behaves on this data, not how any bank's copilots perform. Production validation (a real holdout, a finance sign-off, a model-risk read) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/12-valueledger-ai-benefit-tracking/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder on the shipped synthetic data: 320 people × 26 weeks in 24 teams; the script is named next to the number), 🟡 **Modeled** (extrapolated, with the assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Error figures are 🟢 measured against the answer key. Scaling them to a bank's headcount is 🟡 modeled. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Vendor-style claim: 5,166 h against 2,046 h true net: +152% (2.52x)
+- 🟢 ValueLedger: 2,152 h, +5% (1.05x), 95% interval 1,784 to 2,559 h, which covers the answer key (`step_04_with_valueledger.py`)
+- 🟢 One known limit left in: a hidden change by the treated teams after launch is injected at 302 h (+15% of true net)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic people: 160 treated, 160 holdout](https://img.shields.io/badge/synthetic%20people-320-blue)
 ![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)
@@ -21,6 +25,17 @@
 ![Hero — ValueLedger flow](./assets/valueledger-flow.svg)
 
 > **▶ 30-second demo:** open [`demo.html`](./demo.html) in any browser, no install. Pick a scenario and see the same copilot benefit measured three ways: a vendor-style usage claim, a pre/post comparison, and ValueLedger, each scored against a true effect that is known only because the data is synthetic.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the estimators, the architecture, and the walkthrough are mine. The data is synthetic and the true effect is known only because the generator injected it, so the 🟢 numbers show how each method behaves on this data, not how any bank's copilots perform. Production validation (a real holdout, a finance sign-off, a model-risk read) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder on the shipped synthetic data: 320 people × 26 weeks in 24 teams; the script is named next to the number), 🟡 **Modeled** (extrapolated, with the assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Error figures are 🟢 measured against the answer key. Scaling them to a bank's headcount is 🟡 modeled. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
