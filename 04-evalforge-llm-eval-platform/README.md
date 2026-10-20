@@ -10,7 +10,7 @@
 
 - 🟢 CI gate caught both silent vendor-snapshot updates on first run (2026-02-14 Anthropic update and 2026-05-20 Anthropic update both blocked in this dataset)
 - 🟢 Inter-judge kappa at 0.86 on the latest run (ER050); 🟢 kappa drifted from 0.78 (ER001) to 0.70 (ER011) ahead of the ER012 regression, and the Step 4 gate raised REVIEW on five of those runs (ER005, ER006, ER009, ER010, ER011)
-- 🟢 Evidence bundle assembly: under 1 second on the prototype (per-run JSON bundle written to disk, about 0.1 s for the whole Step 4 script; production version writes to GCS Object Lock and routes to GRC)
+- 🟢 ER012, the first silent vendor update: pass rate 0.86 against a 0.92 baseline, verdict FAIL, deploy blocked (`step_04`)
 
 _A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
@@ -42,7 +42,7 @@ _A portfolio prototype on synthetic data, not a production case study. The frami
 ## 🔥 Demo in 30 seconds
 
 Open the static, no-Python demo: [`demo.html`](./demo.html).
-Walk through six representative eval runs — the 2026-02-14 silent vendor snapshot update gets auto-blocked by the CI gate; 🟢 evidence bundle JSON assembled, with an L2-queue routing field, in under 1 second on the prototype (the whole Step 4 script runs in about 0.1 s).
+Walk through six representative eval runs — the 2026-02-14 silent vendor snapshot update gets auto-blocked by the CI gate; 🟢 evidence bundle JSON assembled, with an L2-queue routing field; 🟡 under 1 second on the prototype (the whole Step 4 script ran in about 0.1 s on one laptop run; no script prints it).
 
 To run the four-step walkthrough on your laptop:
 
@@ -123,7 +123,7 @@ I'm a PM who follows this specific failure mode in industry research. The point 
 - 🟢 **Inter-judge kappa at 0.86 on the latest run (ER050)**; 🟢 **kappa drifted from 0.78 (ER001) to 0.70 (ER011) ahead of the ER012 regression, and the Step 4 gate raised REVIEW on five of those runs (ER005, ER006, ER009, ER010, ER011)**
 - 🟡 **Time-to-detect: 8-12 weeks → first eval run** (modeled — assumes the published BFSI complaint-backlog lag)
 - 🟡 **Modeled CI gate FP rate: <5%** (assumes a false positive is a FAIL or REVIEW that human review overturns; the dataset records no sign-off outcomes, so this is a design target, not a measured rate)
-- 🟢 **Evidence bundle assembly: under 1 second on the prototype** (per-run JSON bundle written to disk, about 0.1 s for the whole Step 4 script; production version writes to GCS Object Lock and routes to GRC)
+- 🟡 **Evidence bundle assembly: under 1 second on the prototype** (per-run JSON bundle written to disk, about 0.1 s for the whole Step 4 script, observed on one laptop run; no script prints it; production version writes to GCS Object Lock and routes to GRC)
 
 🔴 **Modeled cost.** ~$220k for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE platform engineer + L2 partner time) — designed, not yet executed. Per-feature ongoing: ~$1.5K/month in judge compute. Per dollar of modeled prevented customer-complaint-cost: **under one cent**.
 
