@@ -3,8 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI PM Portfolio · Vijay Saharan</title>
-<meta name="description" content="Twenty-seven AI product case studies in regulated finance and commercial real estate. Each names the failure modes of a deployed AI system and builds the layer that contains them.">
+<title>AI in Bank Operations · Vijay Saharan</title>
+<meta name="description" content="I&#x27;m curious how AI actually gets into bank operations, and what breaks when it does. Twenty-seven runnable prototypes on synthetic data; every number is printed by a script and every project prints what it still gets wrong.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI PM Portfolio · Vijay Saharan">
+<meta property="og:title" content="AI in Bank Operations · 27 runnable prototypes">
+<meta property="og:description" content="I&#x27;m curious how AI actually gets into bank operations, and what breaks when it does. Twenty-seven runnable prototypes on synthetic data; every number is printed by a script and every project prints what it still gets wrong.">
+<meta property="og:url" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">
+<meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI in Bank Operations · 27 runnable prototypes">
+<meta name="twitter:description" content="I&#x27;m curious how AI actually gets into bank operations, and what breaks when it does. Twenty-seven runnable prototypes on synthetic data; every number is printed by a script and every project prints what it still gets wrong.">
+<meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
   :root {
     --bg: #ffffff; --bg-2: #f6f5f2; --bg-3: #ecebe7;
@@ -22,6 +36,14 @@
   .thesis code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; background: var(--bg-3); padding: 4px 8px; border-radius: 6px; display: inline-block; margin: 4px 0; }
   .note { font-size: 13px; color: var(--text-2); margin: 0 0 28px; max-width: 80ch; }
   .note a, .foot a { color: var(--text-2); text-decoration: none; border-bottom: 1px dotted var(--border-strong); }
+  .sect { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: .6px; color: var(--text-3); margin: 30px 0 12px; }
+  .paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin: 0 0 8px; }
+  .path { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; background: var(--bg-2); }
+  .path h2 { font-size: 16px; font-weight: 500; margin: 0 0 10px; }
+  .path ul { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+  .path li { margin: 0 0 9px; color: var(--text-2); }
+  .path li a { color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--border-strong); }
+  .path li span { display: block; font-size: 13px; color: var(--text-3); }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
   .card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; }
   .num { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .6px; color: var(--text-3); margin: 0 0 6px; }
@@ -38,14 +60,40 @@
 </head>
 <body>
 <main class="wrap">
-  <h1>AI PM Portfolio</h1>
-  <p class="sub">Twenty-seven prototypes of AI product work in regulated finance and commercial real estate. Each one names the failure modes of a deployed AI system, shows where it breaks on sample data, and builds the layer that contains them.</p>
+  <h1>How AI gets into bank operations</h1>
+  <p class="sub">I'm curious how AI actually gets into bank operations, and what breaks when it does. These are twenty-seven runnable prototypes on synthetic data. Each one names how the common approach fails, builds the layer that contains it, and prints what it still gets wrong. I'm open to AI delivery and product leadership in bank operations, and to AI founders selling into banks.</p>
   <div class="thesis">
     I price product impact with one formula:<br>
     <code>Utility = (my solution − current state of the art) × number of people it affects</code>
   </div>
   <p class="note">These are portfolio prototypes on synthetic data, not production case studies. Every number is tagged measured, modeled or hypothetical; see <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio#-reading-the-numbers">how to read the numbers</a>. LeaseGuard and DealSentry apply the same approach to commercial real estate, a domain I follow as a personal study interest.</p>
 
+  <h2 class="sect">Start here</h2>
+  <div class="paths">
+    <div class="path">
+      <h2>If you run AI in a bank's operations</h2>
+      <ul>
+        <li><a href="./26-stepscout-task-mining-agent-candidates/demo.html">StepScout</a> <span>Which steps can an agent take over? A volume-first top 10 holds 6 agent-ready steps; StepScout's holds 9.</span></li>
+        <li><a href="./11-tiergate-ai-usecase-intake/demo.html">TierGate</a> <span>Which use cases get in? The tier matches the reference on 129 of 150 submissions, against 104 self-declared.</span></li>
+        <li><a href="./27-agentkit-reference-agent-and-playbook/demo.html">AgentKit</a> <span>How does an engineer pick up the build? 522 of 548 shadow-mode cases agree with the human outcome.</span></li>
+        <li><a href="./23-scopekeeper-agent-permission-review/demo.html">ScopeKeeper</a> <span>What can the agent touch? 61 of 71 unneeded grants removed; the annual review removes 1.</span></li>
+        <li><a href="./25-killswitch-ai-fallback-drills/demo.html">KillSwitch</a> <span>What happens when it degrades? Trips on 4 of 5 held-out events; 0 of 7 drill scenarios are ready.</span></li>
+      </ul>
+    </div>
+    <div class="path">
+      <h2>If you build AI for banks</h2>
+      <ul>
+        <li><a href="./18-vendorlens-ai-vendor-due-diligence/demo.html">VendorLens</a> <span>Can we trust this vendor? A questionnaire passes 29 of 40, including 6 of the 10 truly high-risk vendors.</span></li>
+        <li><a href="./11-tiergate-ai-usecase-intake/demo.html">TierGate</a> <span>Which tier and evidence does it need? Approvals missing evidence: 32 of 116 self-declared, 3 of 76 checked.</span></li>
+        <li><a href="./16-controlmap-ai-obligation-crosswalk/demo.html">ControlMap</a> <span>Which obligations map to which controls? Right status on 46 of 48, against 23 of 48 for a keyword sheet.</span></li>
+        <li><a href="./20-corpusgate-rag-entitlements/demo.html">CorpusGate</a> <span>Who can retrieve what? 291 of 1,000 results leak without a check, 11 with it.</span></li>
+        <li><a href="./23-scopekeeper-agent-permission-review/demo.html">ScopeKeeper</a> <span>Is the agent over-permissioned? 69 of 184 grants had no call in 90 days; the annual review removes 2.</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="note" style="margin-top:14px">All numbers above are measured on synthetic data. <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/SURPRISES.md">What surprised me</a>: ten results that changed how I read the common approach.</p>
+
+  <h2 class="sect">All twenty-seven</h2>
   <section class="grid" aria-label="The twenty-seven case studies">
     <article class="card">
       <p class="num">01 · BFSI / Safety</p>
