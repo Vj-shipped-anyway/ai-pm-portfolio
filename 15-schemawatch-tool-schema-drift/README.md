@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/15-schemawatch-tool-schema-drift/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Classification: 41 of 45 changes match the ledger (91.1%) (`step_04`)
 - 🟢 Replay: 742 calls predicted broken, 742 truly broken, 0 false positives, 0 misses (`step_04`)
