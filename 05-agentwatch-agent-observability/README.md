@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 24 of 24 incidents composed into a six-deficiency record with a sidecar action (`step_04_with_agentwatch.py` prints "24 of 24 incidents bounded", but it counts records composed, not dollars capped; 9 of the 24 runs carry status `BOUNDED_BY_AGENTWATCH` in `agent_runs.csv`)
 - 🟢 Composition latency: <50ms per incident measured on the prototype
