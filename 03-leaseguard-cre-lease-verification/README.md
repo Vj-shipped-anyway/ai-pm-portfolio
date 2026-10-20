@@ -6,11 +6,16 @@
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/03-leaseguard-cre-lease-verification/demo.html)
 
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/03-leaseguard-cre-lease-verification/demo.html)
+
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Deployed pipeline: 55/72 fields correct (76.4%) on the 6-lease sample (`step_02`)
+- 🟢 21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+
 **▶ 60-second interactive walkthrough:** [Click through LeaseGuard on Arcade](https://app.arcade.software/share/hQWTvQIAmgkpQgjHC7iP)
-
-> **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
-
-> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the deployed model gets it wrong.
 
@@ -28,6 +33,15 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 ![LeaseGuard verification flow](./assets/leaseguard-flow.svg)
 
 > **▶ 30-second demo:** open [`demo.html`](./demo.html) in any browser, no install. Pick a lease and see the same 12 fields extracted by a paralegal, by the deployed pipeline, and by the pipeline wrapped in LeaseGuard.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
