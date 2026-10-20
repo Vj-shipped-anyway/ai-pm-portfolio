@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/24-portfolioboard-ai-program-portfolio/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 23 of 30 statuses change once evidence is applied (20 worse than reported, 3 better; `step_04`)
 - 🟢 The board shows the true status for 27 of 30 programs; the report does for 7 of 30 (`step_04`)
