@@ -4,9 +4,15 @@
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/06-promptshield-prompt-injection-defense/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-class deficiency taxonomy, the architecture, the five-layer pipeline, and the synthetic corpus are mine; the metrics below are measured on the shipped synthetic data and modeled against published industry baselines. Production validation (CISO sign-off, red-team rounds against the bank's real copilot, integration with the bank's MRM workbench) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/06-promptshield-prompt-injection-defense/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 99% catch rate on the 100-prompt attack suite (`step_04_with_promptshield.py` output)
+- 🟢 1% false-positive rate on the 200-prompt legitimate-banker corpus
+- 🟢 100% accuracy on the 50-call tool-gate ground-truth set
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic corpus: 100 attacks](https://img.shields.io/badge/synthetic--corpus-100%20attacks-blue)
 ![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%20of%206-brightgreen)
@@ -20,6 +26,15 @@
 ![Hero — PromptShield defense flow](./assets/promptshield-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-class deficiency taxonomy, the architecture, the five-layer pipeline, and the synthetic corpus are mine; the metrics below are measured on the shipped synthetic data and modeled against published industry baselines. Production validation (CISO sign-off, red-team rounds against the bank's real copilot, integration with the bank's MRM workbench) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
