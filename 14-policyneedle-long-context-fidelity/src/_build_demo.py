@@ -88,6 +88,20 @@ TEMPLATE = r"""<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PolicyNeedle — Long-Context Fidelity Probes · Vijay Saharan</title>
 <meta name="description" content="A clickable demo of PolicyNeedle: long-context fidelity probes for assistants that answer from policy manuals. Synthetic manuals, four stub readers (not models), a per-slice pass matrix, fault localization and a CI-style gate.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI PM Portfolio · Vijay Saharan">
+<meta property="og:title" content="PolicyNeedle — Long-Context Fidelity Probes">
+<meta property="og:description" content="Probes where assistants lose facts in long policy manuals, and flags the failing form and depth.">
+<meta property="og:url" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html">
+<meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PolicyNeedle — Long-Context Fidelity Probes">
+<meta name="twitter:description" content="Probes where assistants lose facts in long policy manuals, and flags the failing form and depth.">
+<meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
   :root {
     --bg-primary: #ffffff;

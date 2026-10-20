@@ -315,6 +315,20 @@ def build_html(p: dict) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SchemaWatch — Tool-Schema Drift Detection · Vijay Saharan</title>
 <meta name="description" content="A clickable demo of SchemaWatch: tool-schema drift detection for tool-calling agents. It diffs each schema release, replays recorded calls, ranks the blast radius and gates the release. Synthetic data.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI PM Portfolio · Vijay Saharan">
+<meta property="og:title" content="SchemaWatch — Tool-Schema Drift Detection">
+<meta property="og:description" content="Detects tool-schema changes that break an agent, replays recorded calls against the new schema, and gates the release.">
+<meta property="og:url" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/15-schemawatch-tool-schema-drift/demo.html">
+<meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SchemaWatch — Tool-Schema Drift Detection">
+<meta name="twitter:description" content="Detects tool-schema changes that break an agent, replays recorded calls against the new schema, and gates the release.">
+<meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/15-schemawatch-tool-schema-drift/demo.html">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>{CSS}</style>
 </head>
 <body>

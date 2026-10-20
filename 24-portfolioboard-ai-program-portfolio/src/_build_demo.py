@@ -320,6 +320,20 @@ def build_html(p: dict) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PortfolioBoard — AI Program Portfolio · Vijay Saharan</title>
 <meta name="description" content="A clickable demo of PortfolioBoard: an AI program portfolio run on gate evidence, capacity and dependencies instead of owner-picked red-amber-green. Synthetic data.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI PM Portfolio · Vijay Saharan">
+<meta property="og:title" content="PortfolioBoard — AI Program Portfolio">
+<meta property="og:description" content="Runs an AI program portfolio on gate evidence, reviewer capacity and dependencies instead of owner-picked colors.">
+<meta property="og:url" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/24-portfolioboard-ai-program-portfolio/demo.html">
+<meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PortfolioBoard — AI Program Portfolio">
+<meta name="twitter:description" content="Runs an AI program portfolio on gate evidence, reviewer capacity and dependencies instead of owner-picked colors.">
+<meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
+<link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/24-portfolioboard-ai-program-portfolio/demo.html">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>{CSS}</style>
 </head>
 <body>
