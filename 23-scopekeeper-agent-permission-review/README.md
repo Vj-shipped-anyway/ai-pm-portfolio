@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/23-scopekeeper-agent-permission-review/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Unneeded grants removed: 61 of 71 (85.9%) (`step_04`), against 1 of 71 (1.4%) for the annual review
 - 🟢 Effective entitlements: 211 before, 126 after, 40.3% cut (`step_04`)
