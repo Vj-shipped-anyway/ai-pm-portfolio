@@ -216,7 +216,7 @@ A gate does not open because the calendar says so. It opens when its exit criter
 - A change that adds a tool or an action changes the brief first, with its approver, and the code second.
 - A change near S07, S09 or S10 needs a test that fails without it.
 - Every new decision writes an audit event. Every new write has an idempotency key.
-- A stub stays labelled as a stub, in code, in the docs and in the app, until a model replaces it and has been evaluated.
+- A stub stays labeled as a stub, in code, in the docs and in the app, until a model replaces it and has been evaluated.
 
 ### Test and evaluation gates
 - Merge is blocked unless the unit, scope, gate, idempotency, kill switch, audit and fault-injection tests pass.
@@ -226,7 +226,7 @@ A gate does not open because the calendar says so. It opens when its exit criter
 
 ### Rollback
 - The kill switch stops new work and sends open cases back to the human queue. It is not a rollback: it does not undo a write.
-- Rollback is a decision to return intake to the human-only process (RB-07). Rehearse it before G5 closes.
+- Rollback is a decision to return the workflow to the human-only process (RB-07). Rehearse it before G5 closes.
 - Pin the brief version, the config and the kit version together, so that a rollback restores a known set.
 - Idempotency keys survive a rollback, so a case replayed after one does not resubmit twice.
 

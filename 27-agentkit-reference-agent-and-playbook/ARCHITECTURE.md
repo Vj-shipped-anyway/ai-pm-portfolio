@@ -14,7 +14,7 @@ This doc is cloud-agnostic where the design allows it and explicit where it does
 
 AgentKit is a delivery kit for an agent that takes over a rule-based operations workflow. It does not replace the systems the workflow runs on, the people who hold the approval steps, the permission review, or the observability stack. It sits between a build brief and a running agent and makes four things checkable: what the agent may touch, where a person must answer, what it did, and how it compares with the people it replaces.
 
-Ten components. Four sit in the path of a case; six do not.
+Ten components. Five sit in the path of a case; five do not.
 
 | Component | Responsibility | Language / framework | In the case path? | Stateful? |
 | --- | --- | --- | --- | --- |
@@ -29,9 +29,9 @@ Ten components. Four sit in the path of a case; six do not.
 | `ak-console` | Case view, audit trace viewer, approval screen, scorecard, brief viewer. | React + Next.js + Tailwind | No | No |
 | `ak-telemetry` | OpenTelemetry spans and metrics, exported off the case path; feeds the platform's observability (05 AgentWatch). | OTel Collector | No, async | No |
 
-**What is in the case path, and what is not.** A case touches the orchestrator, the gateway, the approval queue and the audit store. If the console, the shadow job, the telemetry exporter or the reasoner were down, cases that do not need a drafted correction would continue; a case that needs one parks. If the audit store is unreachable the gateway refuses writes: a case does not proceed without a trace (🔴 design stance; the prototype writes to memory and a file).
+**What is in the case path, and what is not.** A case touches the orchestrator, the gateway, the approval queue, the audit store and the kill switch flag. If the console, the shadow job, the telemetry exporter or the reasoner were down, cases that do not need a drafted correction would continue; a case that needs one parks. If the audit store is unreachable the gateway refuses writes: a case does not proceed without a trace (🔴 design stance; the prototype writes to memory and a file).
 
-**The reasoner is a stub in this repo.** The two drafting methods are deterministic templates labelled STUB in code, README and app. They are not a model and nothing about them describes model behavior. A model behind the same interface is a later, separate decision with its own evaluation gate.
+**The reasoner is a stub in this repo.** The two drafting methods are deterministic templates labeled STUB in code, README and app. They are not a model and nothing about them describes model behavior. A model behind the same interface is a later, separate decision with its own evaluation gate.
 
 **Repo structure** (prototype, as built):
 
@@ -117,7 +117,7 @@ agentkit/
 | A pack starts mid-workflow and a step lacks an earlier step's result | The case goes to the human queue with the reason `prerequisite_missing`; no tool is called | P3 on a rate rise |
 | Hash chain or completeness check fails | Alert; the owner decides whether to pause | P1 |
 
-**Latency.** The only new wait on a step is the gateway's scope check, the audit write and, at a gate, a person. 🔴 Design target: gateway overhead under 50 ms per call at the 95th percentile. It has not been measured in this repo; the prototype replays 600 cases in about two seconds with every call logged.
+**Latency.** The only new wait on a step is the gateway's scope check, the audit write and, at a gate, a person. 🔴 Design target: gateway overhead under 50 ms per call at the 95th percentile. It has not been measured in this repo; the prototype replays 600 cases in a few seconds with every call logged.
 
 ### Network topology
 
@@ -415,7 +415,7 @@ Offline tests, then shadow mode, then a limited share of live cases with both ga
 - `RB-04-tool-timeouts.md` — respond to a burst of tool timeouts
 - `RB-05-duplicate-delivery.md` — handle a duplicate delivery alert
 - `RB-06-scope-change.md` — change a tool's scope through a change request
-- `RB-07-rollback.md` — return intake to the human-only process
+- `RB-07-rollback.md` — return the workflow to the human-only process
 
 `handoff.build_runbook` drafts a skeleton of these from the brief. The skeleton carries what the brief already knows and marks the operator's steps TO WRITE. Nobody has run it.
 

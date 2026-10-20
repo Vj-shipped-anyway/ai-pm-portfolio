@@ -14,7 +14,7 @@ The headline scenario the walkthrough resolves: **a modeled bank's payment excep
 
 ## Time
 
-Hour 0 is a constant epoch; the clock is never read. `opened_hour` runs from 0 to 719 (30 days). Cases are in arrival order, and a duplicate delivery always arrives 1 to 6 hours after its first delivery.
+Hour 0 is a constant epoch; the clock is never read. `opened_hour` runs from 0 to 712 in this file, inside the 720-hour (30-day) window. Cases are in arrival order, and a duplicate delivery always arrives 1 to 6 hours after its first delivery.
 
 ## `cases.csv` — 600 rows (the input an agent sees)
 
@@ -23,7 +23,7 @@ Hour 0 is a constant epoch; the clock is never read. `opened_hour` runs from 0 t
 | `case_id` | string | `C-0001` to `C-0600`, in arrival order. One per delivery. |
 | `exception_ref` | string | The exception's own reference. A redelivery repeats it. |
 | `delivery_no` | int | 1 for the first delivery, 2 for a redelivery. |
-| `opened_hour` | int | Hours since the epoch, 0 to 719. |
+| `opened_hour` | int | Hours since the epoch, 0 to 712 in this file (the window is 720 hours). |
 | `payment_id` | string | The original payment. Blank in three malformed cases; a payment that does not exist in three others. |
 | `reason_code` | string | `RX01` to `RX04`, or `RX99` (unknown) in three malformed cases. |
 | `returned_name` | string | The name the receiving side holds for the account. |
@@ -61,7 +61,7 @@ Outcome mix: 432 resubmit, 132 return to originator, 22 escalate to compliance, 
 | `fix_name_style` | 70 | `RX02` | The returned name is the payment's name in another style: case, punctuation, legal form, an abbreviation. | Resubmit with the returned name |
 | `fix_name_typo` | 20 | `RX02` | One letter changed in one word. | Resubmit with the returned name |
 | `fix_name_affiliate` | 14 | `RX02` | An affiliate entity: the payment's name with a place or numeral added (UK, Asia, II, 2, Global). A different legal party that looks like a close match. | Return to originator |
-| `fix_name_ambiguous` | 36 | `RX02` | The first two words match, the third differs (Group, Holdings, Associates, Ventures, Capital). | 60% judged the same party and resubmitted, 40% judged different and returned |
+| `fix_name_ambiguous` | 36 | `RX02` | The first two words match, the third differs (Group, Holdings, Associates, Ventures, Capital). | 24 of 36 judged the same party and resubmitted, 12 judged different and returned (the generator draws at 60% and 40%; this seed gave 24 and 12) |
 | `fix_name_unrelated` | 40 | `RX02` | A different company altogether. | Return to originator |
 | `closed_account` | 60 | `RX03` | The account is closed; no advice. | Return to originator |
 | `closed_successor` | 6 | `RX03` | The account is closed and the advice carries a successor account. | Resubmit with the successor account |
@@ -78,7 +78,7 @@ Planted edge cases: the affiliate names, the ambiguous names, the closed account
 
 ## `payments.csv` — 686 rows (the synthetic payments table)
 
-`payment_id`, `originator`, `beneficiary_name`, `beneficiary_account`, `beneficiary_bank_code`, `amount`, `currency`, `value_hour`. 586 payments for the 586 first deliveries and 100 filler payments no case uses. Bank codes look like `SYNB0042` (blank where the case is `RX04`). The account numbers are ten digits with a Luhn check digit; the transposed accounts fail it.
+`payment_id`, `originator`, `beneficiary_name`, `beneficiary_account`, `beneficiary_bank_code`, `amount`, `currency`, `value_hour`. 586 payments for the 586 first deliveries and 100 filler payments no case uses. Six of the 586 belong to malformed cases whose `payment_id` is blank or points at a payment that does not exist, so 106 payments in all are never read by a case. Bank codes look like `SYNB0042` (blank where the case is `RX04`). The account numbers are ten digits with a Luhn check digit; the transposed accounts fail it.
 
 ## `parties_watchlist.csv` — 60 rows (a synthetic party watch list)
 
