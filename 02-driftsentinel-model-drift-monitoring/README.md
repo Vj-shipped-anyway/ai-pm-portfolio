@@ -8,7 +8,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/02-driftsentinel-model-drift-monitoring/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Alert volume (Step 2 → Step 4): 11 alerts (6 YELLOW, 5 RED) from 26 feature-level checks across the 8-model synthetic fleet become 3 non-RETAIN decisions (SHADOW, RETRAIN, ROLLBACK)
 - 🟢 MRM evidence bundle: Step 4 writes a sample bundle for credit_pd_v3 (`src/out/step_04_evidence_bundle_credit_pd_v3.json`); no script times the assembly, and human edit before sign-off is part of the design
