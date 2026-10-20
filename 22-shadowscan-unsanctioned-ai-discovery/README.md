@@ -2,13 +2,17 @@
 
 **A portfolio prototype for discovering AI use nobody approved, from proxy and DNS logs: a catalog and feed lookup, a generation-style path pattern, an upload-size test, a ranking by data exposure and a block, sanction or coach recommendation for each tool. Aligned to the AI-system inventory theme under the Govern function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and to the sensitive-information-disclosure theme of the [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/).**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/22-shadowscan-unsanctioned-ai-discovery/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the exposure formula, the next-action rules, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (real proxy and DNS logs, a real catalog, a security operations read, an AI governance read) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/22-shadowscan-unsanctioned-ai-discovery/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in `src/` on the shipped synthetic data: 15,000 proxy rows, 7,500 DNS rows, 520 staff, 30 unsanctioned AI domains), 🟡 **Modeled** (an assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers). **All data is synthetic and produced by a seeded script. The truth is known because the data is synthetic: the generator decided which domains are AI tools nobody approved. Agreement that holds by construction (the feed lookup, the catalog lookup) is labeled as such. No model is used anywhere in this repo.**
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Discovery: 3,948 of 4,200 unsanctioned AI sessions found (recall 94.0%, precision 87.9%) (`step_04`)
+- 🟢 Ranking: the top 10 by hit count and the top 10 by exposure share 0 of 10 domains (`step_03`)
+- 🟢 Known limit: 600 off-network sessions (12.5% of all unsanctioned AI sessions) are in no log (`step_03`, `step_04`)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic proxy rows: 15,000](https://img.shields.io/badge/synthetic%20proxy%20rows-15%2C000-blue)
 ![Unsanctioned AI domains: 30](https://img.shields.io/badge/unsanctioned%20AI%20domains-30-blue)
@@ -22,6 +26,17 @@
 ![Hero — ShadowScan flow](./assets/shadowscan-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the exposure formula, the next-action rules, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (real proxy and DNS logs, a real catalog, a security operations read, an AI governance read) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in `src/` on the shipped synthetic data: 15,000 proxy rows, 7,500 DNS rows, 520 staff, 30 unsanctioned AI domains), 🟡 **Modeled** (an assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers). **All data is synthetic and produced by a seeded script. The truth is known because the data is synthetic: the generator decided which domains are AI tools nobody approved. Agreement that holds by construction (the feed lookup, the catalog lookup) is labeled as such. No model is used anywhere in this repo.**
+
+</details>
 
 ---
 
