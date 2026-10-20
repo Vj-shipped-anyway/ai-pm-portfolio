@@ -2,13 +2,17 @@
 
 **A portfolio prototype for an agent reliability and tool-use observability sidecar that bounds runaway costs, catches hallucinated tool arguments, surfaces silent agent drift, and routes incidents to a validator before the FinOps bill lands — modeled against Google Cloud's [*Building secure multi-agent systems*](https://cloud.google.com/) reference architecture, [OpenTelemetry](https://opentelemetry.io/), [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/), and the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework).**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the sidecar architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (line-1 owner co-design, MRM committee read, SRE pager-rotation interop, fleet rollout) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 24 of 24 incidents composed into a six-deficiency record with a sidecar action (`step_04_with_agentwatch.py` prints "24 of 24 incidents bounded", but it counts records composed, not dollars capped; 9 of the 24 runs carry status `BOUNDED_BY_AGENTWATCH` in `agent_runs.csv`)
+- 🟢 Composition latency: <50ms per incident measured on the prototype
+- 🟢 Headline runaway cut off at $4,218.34 after 1,847 tool calls, against a per-agent dollar cap of $250 (`step_04_with_agentwatch.py` prints `cap_exceeded=True`)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Modeled corpus: 500 agent runs](https://img.shields.io/badge/modeled--corpus-500%20synthetic%20runs-blue)
 ![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%20of%206-brightgreen)
@@ -21,6 +25,17 @@
 ![Hero — AgentWatch composition flow](./assets/agentwatch-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the sidecar architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (line-1 owner co-design, MRM committee read, SRE pager-rotation interop, fleet rollout) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
