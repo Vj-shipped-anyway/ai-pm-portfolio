@@ -13,7 +13,7 @@
 ![Synthetic programs: 30](https://img.shields.io/badge/synthetic%20programs-30-blue)
 ![Gate criteria: 17](https://img.shields.io/badge/gate%20criteria-17-blue)
 ![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)
-![Statuses changed: 22 of 30](https://img.shields.io/badge/statuses%20changed-23%20of%2030-success)
+![Statuses changed: 23 of 30](https://img.shields.io/badge/statuses%20changed-23%20of%2030-success)
 ![True status shown: 27 of 30](https://img.shields.io/badge/true%20status%20shown-27%20of%2030-brightgreen)
 ![Known limit: 3 false attestations unseen](https://img.shields.io/badge/known%20limit-3%20false%20attestations%20unseen-red)
 
