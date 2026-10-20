@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/18-vendorlens-ai-vendor-due-diligence/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Questionnaire: 29 of 40 pass (72.5%); 6 of 10 truly high-risk vendors pass (`step_02`)
 - 🟢 Evidence: 27 of 29 passes have at least one missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions (58.4%) have no valid document (`step_03`)
