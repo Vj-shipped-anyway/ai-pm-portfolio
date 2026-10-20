@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/20-corpusgate-rag-entitlements/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Cheap guards alone leave 47 (ACL copy from index time), 52 (flat group check) and 114 (label-only filter) (`step_03`)
 - 🟢 Canary pack: 120 of 120 leak with no control, 7 of 120 with CorpusGate (`step_04`)
