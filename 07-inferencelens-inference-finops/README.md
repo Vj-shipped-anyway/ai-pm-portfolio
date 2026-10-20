@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/07-inferencelens-inference-finops/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 6 of 6 deficiencies closed on every feature in the shipped fleet
 - 🟢 All five derived views composed in under 10ms on the prototype (`step_04_with_inferencelens.py` prints the measured time for all five views together)
