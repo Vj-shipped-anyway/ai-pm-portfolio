@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/10-dealsentry-cre-underwriting/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Face-value trust (step 1): 6 memos read, 31 comps cited, 0 comps verified, 0 T-12 sums recomputed, 0 submarket stats cross-checked
 - 🟢 Analyst spot-check (step 2): 6 of 31 comps checked (one per memo), 0 of 3 fabricated comps caught at the walkthrough's fixed seed
