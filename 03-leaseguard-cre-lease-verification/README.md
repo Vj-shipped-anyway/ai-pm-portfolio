@@ -8,7 +8,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/03-leaseguard-cre-lease-verification/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Deployed pipeline: 55/72 fields correct (76.4%) on the 6-lease sample (`step_02`)
 - 🟢 21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags
