@@ -6,7 +6,7 @@
 
 - **Tags.** 🟢 measured: a script in the repo prints it, on synthetic data. 🟡 modeled: an assumption is named. 🔴 hypothetical: designed, never tested.
 - **Sources.** A bracket such as (11, step_04) names the project and script behind a number, copied from that README with its tag. All data is synthetic: the numbers show a mechanism working, not how a real bank behaves.
-- **What is mine.** Roles, forums, cadences, RACI cells, the gate pairing and the 30/60/90 plan are my design (🔴). Where the repo has no number I give none; placeholders need calibrating on your data.
+- **What is mine.** Roles, forums, cadences, RACI cells, the gate pairing and the 30/60/90 plan are my design (🔴). Where the repo has no number I give none; assumed values need calibrating on your data.
 - **Frameworks.** SR 11-7, SR 26-2, NIST AI RMF, OWASP LLM Top 10 and the EU AI Act appear as design basis or comparison only. SR 26-2 (April 17, 2026) replaced SR 11-7. It sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and puts generative AI and agentic AI models outside its scope, leaving a bank's own governance to guide their controls. This model is a design for that governance, not mapped clause by clause to SR 26-2.
 
 ## Design spine
@@ -181,7 +181,7 @@ A kill switch stops new work and sends open cases to the human queue. It does no
 
 **Escalation (🔴).** KillSwitch has two response tiers. A warn tells the on-call engineer and switches nothing. A trip tells the owner and the resilience lead. An incident the owner judges real goes to the incident manager, who records the determination. The notification clocks start there.
 
-IncidentLedger rates S1 to S4 from customers affected, regulated decision, personal data, financial impact band and duration (19). Clock hours are a modeled bank's assumptions, placeholders to confirm with counsel (🟡, 19, `data/policy.csv`):
+IncidentLedger rates S1 to S4 from customers affected, regulated decision, personal data, financial impact band and duration (19). Clock hours are a modeled bank's assumptions, to confirm with counsel (🟡, 19, `data/policy.csv`):
 
 |Clock|Applies to|Hours after determination|
 |---|---|---|
@@ -236,7 +236,7 @@ Ownership moves at AgentKit gate G6, from the builder to the team that carries t
 |---|---|---|
 |Days 1 to 30|Name roles and forums. Put rubric and checklist in versioned configuration. Run the tier recompute in shadow beside the declared tier (11). Scan logs against the catalog to size unregistered use (22). Confirm clock hours with counsel and name the determination role (19). Baseline logins against habitual use (21) and reviewer demand (24).|Every known use case has a tier and an owner; policy file dated; baselines tagged|
 |Days 31 to 60|Send flags to sponsors, then gate evidence at tier 3 and 4 (11). Publish the board beside the monthly report, advisory (24). Rate critical vendors (18). Run the permission usage diff on the agent estate (23). Give each catalog row an owner and an evidence location.|Color-versus-status differences counted; every tier 3 and 4 use case shows an evidence status; first control health review held|
-|Days 61 to 90|Take one screened candidate (26) through G0 to G4 into shadow (27). Drill the kill switch with someone who did not build it (25). Name an approver for pull-rule suggestions (24). Issue the first executive report. Recalibrate placeholders: clock hours, freshness factor, work-in-progress limits, drill target and cadence.|One shadow scorecard with known misses; executive report issued; placeholder list closed or re-dated|
+|Days 61 to 90|Take one screened candidate (26) through G0 to G4 into shadow (27). Drill the kill switch with someone who did not build it (25). Name an approver for pull-rule suggestions (24). Issue the first executive report. Recalibrate the assumed values: clock hours, freshness factor, work-in-progress limits, drill target and cadence.|One shadow scorecard with known misses; executive report issued; assumed-value list closed or re-dated|
 
 The PRDs for 11 and 24 plan rollouts longer than 90 days (🔴 estimates). These 90 days reach the register, the flags, the first evidence gate and one shadow run, not the full ladder.
 

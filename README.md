@@ -21,7 +21,7 @@ Pick the path closest to your seat. Every project opens with a clickable demo an
 | Which steps can an agent take over? | [StepScout](./26-stepscout-task-mining-agent-candidates/) | A volume-first top 10 holds 6 agent-ready steps; StepScout's holds 9 |
 | Which AI use cases get in, and under which tier? | [TierGate](./11-tiergate-ai-usecase-intake/) | The tier matches the reference on 129 of 150 submissions, against 104 when the sponsor declares it |
 | How does an engineer pick up the build? | [AgentKit](./27-agentkit-reference-agent-and-playbook/) | In shadow mode it agrees with the human outcome on 522 of 548 cases and blocks 1,164 unapproved resubmits |
-| What can the agent touch? | [ScopeKeeper](./23-scopekeeper-agent-permission-review/) | Removes 61 of 71 unneeded grants; the annual review removes 1 |
+| What can the agent touch? | [ScopeKeeper](./23-scopekeeper-agent-permission-review/) | Removes 61 of 71 unneeded grants; the annual review removes 1 of those 71 |
 | What happens when it degrades? | [KillSwitch](./25-killswitch-ai-fallback-drills/) | Trips on 4 of 5 held-out events; 0 of 7 drill scenarios are ready |
 
 **If you build AI for banks and want to know what a bank asks before it says yes**
@@ -37,8 +37,6 @@ Pick the path closest to your seat. Every project opens with a clickable demo an
 **What surprised me.** [Ten results](./SURPRISES.md) that changed how I read the common approach: an access review that removes 1 of 71 unneeded grants, a retrieval eval that scores 283 of 291 leaked results as correct, and an adoption number that rose while real use fell.
 
 **How I would run it.** [An operating model for AI in bank operations](./OPERATING_MODEL.md), built from the twenty-seven: eight stages, who decides what, a catalog of the controls and the evidence each one leaves, and the first 90 days. It is a design (🔴), and every number in it is copied from a project README with its tag.
-
----
 
 ---
 
