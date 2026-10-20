@@ -1,0 +1,11 @@
+{
+  "_note": "Number of digit strings after a green tag in a project README that no script prints. The check fails when a project has more than its entry; absent means 0.",
+  "_reasons": {
+    "05": "300 is the top of the $150 to $300 per-agent cap range read from data/agents.csv, an input file and not a script output.",
+    "06": "0.1 is the bound in 'under 0.1ms / input', derived from the printed time for 100 inputs.",
+    "10": "28 is derived: 31 comps looked up, 3 not found, 28 found."
+  },
+  "05": 1,
+  "06": 2,
+  "10": 1
+}
