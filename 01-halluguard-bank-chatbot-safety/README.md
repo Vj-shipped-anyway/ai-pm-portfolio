@@ -6,11 +6,17 @@
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/01-halluguard-bank-chatbot-safety/demo.html)
 
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/01-halluguard-bank-chatbot-safety/demo.html)
+
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Rule-based router (Step 1): 2 of 30 answered, both only pointing to a product page; 28 of 30 (93.3%) sent to a page or a banker
+- 🟢 LLM only (Step 2): 11 of 30 correct; 19 wrong answers would reach the customer
+- 🟢 LLM + containment (Step 4): serves 11, ships 0 wrong, abstains on 19 (63.3% handed to a banker)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+
 **▶ 60-second interactive walkthrough:** [Click through HalluGuard on Arcade](https://app.arcade.software/share/daLEfWH7yD0sYutT3HTP)
-
-> **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. This README describes the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
-
-> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the step scripts in this repo, run on the 30-query synthetic eval set), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
 Designed to be readable by **both technical and non-technical managers**. Each step starts in plain English, shows the sample data, runs the code, and prints the actual output — including the moments where the LLM gets it wrong.
 
@@ -28,6 +34,15 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 ![Hero — HalluGuard containment flow](./assets/halluguard-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. This README describes the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the step scripts in this repo, run on the 30-query synthetic eval set), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
