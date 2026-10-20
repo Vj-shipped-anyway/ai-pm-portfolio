@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/21-adoptionpulse-ai-enablement-funnel/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Funnel: 800 licensed, 558 activated (69.8%), 221 habitual (27.6%), 80 proficient (10.0%) (`step_04`)
 - 🟢 Unit spread: 4.0% habitual (Customer Service, 100 users) to 66.7% (Internal Audit, 9 users), while the login view shows 70.0% to 100.0% (`step_03`)
