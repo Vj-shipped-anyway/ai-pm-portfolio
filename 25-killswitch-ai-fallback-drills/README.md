@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/25-killswitch-ai-fallback-drills/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Held out (days 61-90): tripped for 4 of 5 events, median 2.5 hours in, 1 false trip (`step_04`)
 - 🟢 Bad decisions per event, days 61-90: 223 with KillSwitch against 255 with the tuned single threshold (`step_04`), 12.5% fewer
