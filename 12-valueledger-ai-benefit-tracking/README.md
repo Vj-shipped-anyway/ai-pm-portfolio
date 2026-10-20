@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/12-valueledger-ai-benefit-tracking/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Vendor-style claim: 5,166 h against 2,046 h true net: +152% (2.52x)
 - 🟢 ValueLedger: 2,152 h, +5% (1.05x), 95% interval 1,784 to 2,559 h, which covers the answer key (`step_04_with_valueledger.py`)

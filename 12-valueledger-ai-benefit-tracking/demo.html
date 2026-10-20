@@ -315,7 +315,7 @@ function render() {
   s.cc.forEach(function (c) { hardV += c.hard_raw; softV += c.soft_raw; });
   const hardShare = (hardV + softV) > 0 ? Math.max(0, Math.min(100, 100 * hardV / (hardV + softV))) : 0;
   const hardBar = '<div class="bar-track"><div class="bar-fill" style="width:' + fx(hardShare, 1) + '%;background:#16a34a"></div></div>' +
-                  '<div class="bar-caption">green = hard cash, grey = soft capacity (' + fx(hardShare, 0) + '% hard)</div>';
+                  '<div class="bar-caption">green = hard cash, gray = soft capacity (' + fx(hardShare, 0) + '% hard)</div>';
   document.getElementById("card-new").innerHTML =
     '<p>Difference-in-differences against the holdout, net of rework, deduplicated, split into hard cash and soft capacity by budget line.</p>' +
     row("DiD gross hours", d.gross_h) +
