@@ -2,13 +2,17 @@
 
 **A portfolio prototype for the week a vendor retires the model behind a production GenAI feature. It turns "the average went up" into a go or no-go decision with slice intervals, cost per correct answer, tail latency, a prompt-fair comparison, and rollback triggers written down before launch. Simulated data; no model is called.**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/13-swapbrief-model-migration/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the decision rule, the architecture, and the walkthrough are mine. Every result comes from a seeded generator that injects known true effects, so a decision rule can be scored against the truth. No real model, vendor, bank, or customer is involved. Production validation (a real evaluation set, a model risk review, a live rollback drill) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/13-swapbrief-model-migration/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in `src/` on the simulated data in this repo: 720 items scored under 3 conditions, plus 200 simulated migration scenarios), 🟡 **Modeled** (an assumption, named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). These are simulated evaluation results, not measurements of any real model. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Headline rule on the committed set: GO, +4.3 pp (78.6% to 82.9%)
+- 🟢 SwapBrief on the same set: GO WITH GUARDRAILS on the retuned prompt, NO-GO on A's old prompt, 8 rollback triggers (`step_04_with_swapbrief.py`)
+- 🟢 Known limit: SwapBrief left 5 of 75 true slice regressions unresolved (inconclusive) and missed 6; 12 scenarios shipped with a real p95 problem it did not flag
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 [![Simulated items: 720](https://img.shields.io/badge/simulated%20items-720-blue)](./data/eval_results.csv)
 [![Slices: 8](https://img.shields.io/badge/slices-8-blue)](./data/slices.csv)
@@ -21,6 +25,17 @@
 ![Hero — SwapBrief decision flow](./assets/swapbrief-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the decision rule, the architecture, and the walkthrough are mine. Every result comes from a seeded generator that injects known true effects, so a decision rule can be scored against the truth. No real model, vendor, bank, or customer is involved. Production validation (a real evaluation set, a model risk review, a live rollback drill) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in `src/` on the simulated data in this repo: 720 items scored under 3 conditions, plus 200 simulated migration scenarios), 🟡 **Modeled** (an assumption, named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). These are simulated evaluation results, not measurements of any real model. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
