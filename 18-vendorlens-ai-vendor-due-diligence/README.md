@@ -2,13 +2,17 @@
 
 **A portfolio prototype for scoring AI vendors on what can be checked: each questionnaire answer weighed against a document or the contract, the upstream model provider mapped for concentration, exit readiness scored, and a review cadence set by tier. Aligned to the interagency third-party risk guidance in [SR 23-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2304.htm) and the model-risk guidance in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026), and to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework).**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/18-vendorlens-ai-vendor-due-diligence/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the scoring rules, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real vendor register, real documents and contracts, a third-party risk team agreeing to the weights, a model-risk read) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/18-vendorlens-ai-vendor-due-diligence/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in `src/` on the shipped synthetic data: 40 vendors, 20 questions, 800 answers, 92 documents, 56 critical use cases), 🟡 **Modeled** (extrapolated from that data, with the assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers). **All data is synthetic and produced by a seeded script. Vendor ids and model providers are invented codes. The truth is known because the data is synthetic: the generator decided every vendor's real risk, how much it over-claims and which model provider it really runs on.**
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Questionnaire: 29 of 40 pass (72.5%); 6 of 10 truly high-risk vendors pass (`step_02`)
+- 🟢 Evidence: 27 of 29 passes have at least one missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions (58.4%) have no valid document (`step_03`)
+- 🟢 Known limit: 5 of 10 truly high-risk vendors are not rated HIGH, and 3 vendors rated HIGH are not truly high (`step_04`)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic vendors: 40](https://img.shields.io/badge/synthetic%20vendors-40-blue)
 ![Questionnaire passes: 29 of 40](https://img.shields.io/badge/questionnaire%20passes-29%20of%2040-blue)
@@ -23,6 +27,17 @@
 ![Hero — VendorLens scoring flow](./assets/vendorlens-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the scoring rules, the architecture, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (a real vendor register, real documents and contracts, a third-party risk team agreeing to the weights, a model-risk read) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in `src/` on the shipped synthetic data: 40 vendors, 20 questions, 800 answers, 92 documents, 56 critical use cases), 🟡 **Modeled** (extrapolated from that data, with the assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers). **All data is synthetic and produced by a seeded script. Vendor ids and model providers are invented codes. The truth is known because the data is synthetic: the generator decided every vendor's real risk, how much it over-claims and which model provider it really runs on.**
+
+</details>
 
 ---
 
