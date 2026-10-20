@@ -2,13 +2,17 @@
 
 **A portfolio prototype for finding the clause a policy-manual assistant misses in a 100-to-300 page manual before launch, not after the answer has reached a customer. Built on the needle-in-a-haystack idea and aligned to the NIST AI RMF 'Measure' function; SR 11-7 ongoing monitoring is the model-risk guidance the work is compared with in a bank.**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the probe design, the harness and the walkthrough are mine. Every measured number below comes from synthetic manuals and from four stub readers that are not models. Running the probes against a real assistant and against real policy manuals is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder, from the synthetic manuals and the four stub readers: 270 probes × 4 readers = 1,080 reads), 🟡 **Modeled** (an assumption, named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). The 🟢 numbers describe the harness against stubs with known faults. They are not a measurement of any real model. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Short-document spot test (`step_01`): 10 of 10 pass for all four readers, including the three that carry a known fault
+- 🟢 Fixed-needle test (`step_02`): 3 of 9 for the truncating stub, 9 of 9 for the other three
+- 🟢 Known limit left in: 5 probe types cannot be scored by exact match (paraphrased, unit-converted, verbose or hedged, multi-value and free-text answers)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 [![Probes: 270 long sweep plus 10 short test](https://img.shields.io/badge/probes-270%20long%20sweep%20%2B%2010%20short-blue)](./data/probes.csv)
 [![Stub readers: 4, no model called](https://img.shields.io/badge/stub%20readers-4%2C%20no%20model%20called-lightgrey)](./src/harness.py)
@@ -22,6 +26,17 @@
 ![Hero — PolicyNeedle probe sweep and gate](./assets/policyneedle-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the probe design, the harness and the walkthrough are mine. Every measured number below comes from synthetic manuals and from four stub readers that are not models. Running the probes against a real assistant and against real policy manuals is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder, from the synthetic manuals and the four stub readers: 270 probes × 4 readers = 1,080 reads), 🟡 **Modeled** (an assumption, named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). The 🟢 numbers describe the harness against stubs with known faults. They are not a measurement of any real model. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
