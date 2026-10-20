@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/11-tiergate-ai-usecase-intake/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Tier accuracy 69.3% → 86.0% (129 of 150 recomputed tiers equal the reference; `step_04`)
 - 🟢 Evidence-gap detection 51.5% → 95.5%; approvals granted with required evidence missing 32 of 116 → 3 of 76
