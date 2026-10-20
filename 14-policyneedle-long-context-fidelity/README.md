@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/14-policyneedle-long-context-fidelity/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Short-document spot test (`step_01`): 10 of 10 pass for all four readers, including the three that carry a known fault
 - 🟢 Fixed-needle test (`step_02`): 3 of 9 for the truncating stub, 9 of 9 for the other three
