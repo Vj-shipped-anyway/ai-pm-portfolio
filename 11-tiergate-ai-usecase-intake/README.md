@@ -2,13 +2,17 @@
 
 **A portfolio prototype for the front door of AI governance at a regulated bank: recompute the risk tier the sponsor declared, hold approval until the evidence that tier requires is on file, and order the review queue by tier instead of arrival. Written against the vocabulary of SR 11-7, the NIST AI RMF (Govern and Map) and the EU AI Act risk categories.**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/11-tiergate-ai-usecase-intake/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the rubric, the architecture and the walkthrough are mine; every number below is measured or modeled on synthetic data, or marked hypothetical. No real bank, vendor, person or intake submission appears anywhere. Production validation (a model risk committee read, calibrating the rubric on real intake, a reviewer team working the queue) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/11-tiergate-ai-usecase-intake/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder on the 150 synthetic submissions, with the script named), 🟡 **Modeled** (an assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). **The reference tier is true by construction:** it is the written rubric applied to the hidden true attributes of each submission, so accuracy measures how well a method recovers it from noisy inputs, not how real banks tier AI use cases. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 Tier accuracy 69.3% → 86.0% (129 of 150 recomputed tiers equal the reference; `step_04`)
+- 🟢 Evidence-gap detection 51.5% → 95.5%; approvals granted with required evidence missing 32 of 116 → 3 of 76
+- 🟢 Known limit left in: 6 submissions where the form and the catalog both understate the data class
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic submissions: 150](https://img.shields.io/badge/synthetic%20submissions-150-blue)
 ![Named deficiencies: 6](https://img.shields.io/badge/named%20deficiencies-6-orange)
@@ -21,6 +25,17 @@
 ![Hero — TierGate flow](./assets/tiergate-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the rubric, the architecture and the walkthrough are mine; every number below is measured or modeled on synthetic data, or marked hypothetical. No real bank, vendor, person or intake submission appears anywhere. Production validation (a model risk committee read, calibrating the rubric on real intake, a reviewer team working the queue) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the demo is tagged 🟢 **Measured** (printed by a script in this folder on the 150 synthetic submissions, with the script named), 🟡 **Modeled** (an assumption named in one line), or 🔴 **Hypothetical** (designed and reasoned about, never tested). **The reference tier is true by construction:** it is the written rubric applied to the hidden true attributes of each submission, so accuracy measures how well a method recovers it from noisy inputs, not how real banks tier AI use cases. Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
