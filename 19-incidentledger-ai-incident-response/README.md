@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/19-incidentledger-ai-incident-response/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Deadlines: 39 of 87 missed (44.8%), on 25 incidents, and the engine flags 39 of 39 (`step_04`)
 - 🟢 Category: 110 of 120 right (91.7%) (`step_04`)
