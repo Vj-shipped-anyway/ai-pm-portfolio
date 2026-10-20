@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/22-shadowscan-unsanctioned-ai-discovery/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Discovery: 3,948 of 4,200 unsanctioned AI sessions found (recall 94.0%, precision 87.9%) (`step_04`)
 - 🟢 Ranking: the top 10 by hit count and the top 10 by exposure share 0 of 10 domains (`step_03`)
