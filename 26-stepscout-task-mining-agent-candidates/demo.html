@@ -153,8 +153,8 @@
   <section class="stats" aria-label="Running totals through the selected step">
     <div class="stat"><p class="stat-label">Touch hours the interview map covers</p><p class="stat-value" id="stat-map">—</p></div>
     <div class="stat"><p class="stat-label">Touch hours the log records as steps</p><p class="stat-value" id="stat-log">—</p></div>
-    <div class="stat"><p class="stat-label">Touch hours StepScout measures</p><p class="stat-value" id="stat-all">—</p></div>
-    <div class="stat"><p class="stat-label">Hours at stake in agent-ready steps (modeled)</p><p class="stat-value" id="stat-stake">—</p></div>
+    <div class="stat"><p class="stat-label">Touch hours StepScout attributes to a step</p><p class="stat-value" id="stat-all">—</p></div>
+    <div class="stat"><p class="stat-label">Hours at stake in steps StepScout calls agent-ready (modeled)</p><p class="stat-value" id="stat-stake">—</p></div>
   </section>
 
   <div class="controls">
@@ -191,7 +191,7 @@
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (agent-ready hours at stake per worker in StepScout's top 10 − in the volume-first top 10) × workers</p>
-    <p style="margin: 8px 0 0;">🟢 <b>Measured on the answer key:</b> the volume-first top 10 holds 6 agent-ready steps and 4 that touch restricted data or a four-eyes control, with no control screen. StepScout's top 10 holds 9 agent-ready steps. It classifies 13 of 16 steps correctly (81.2%), with 92.3% precision and 100.0% recall for agent-ready steps. Known miss: S14 choose_resolution_route, ranked #10.</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on the answer key:</b> the volume-first top 10 holds 6 agent-ready steps; counted separately, 4 of the 10 touch restricted data or a four-eyes control, with no control screen. StepScout's top 10 holds 9 agent-ready steps. It classifies 13 of 16 steps correctly (81.2%), with 92.3% precision and 100.0% recall for agent-ready steps. Known miss: S14 choose_resolution_route, ranked #10.</p>
     <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> (42.3 − 26.5) = 15.8 hours per worker per 30 days × 14 workers = <b>221 hours per 30 days</b>, assuming an agent removes 70% of touch time and both teams build their top 10.</p>
   </section>
 
@@ -304,7 +304,7 @@ function render() {
     h += '<span class="pill pill-ok">MATCHES THE KEY</span>';
   } else if (e.agent_ready_pred && !e.agent_ready_key) {
     h += '<span class="pill pill-warn">MISSED: known limit</span>';
-    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The key says ' + esc(e.key) + ". On the desktop this step is a short pick with tight timing, no free text and no overrides. The judgment happens in a phone call that no file records, so nothing observable separates it from a rule.</div>";
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The key says ' + esc(e.key) + ". On the desktop this step is a short pick with tight timing, no free text and almost no overrides. The judgment happens in a phone call that no file records, so nothing observable separates it from a rule.</div>";
   } else {
     h += '<span class="pill pill-info">MORE CAUTIOUS THAN THE KEY</span>';
     h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The key says ' + esc(e.key) + ". The step stays agent-ready; a person reviews it. Cost: a lower readiness weight in the ranking.</div>";

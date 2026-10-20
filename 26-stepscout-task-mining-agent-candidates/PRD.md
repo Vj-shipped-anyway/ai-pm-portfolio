@@ -20,7 +20,7 @@
 | **Problem** | Agent pilots are aimed from an interview and from the case system's log. The interview describes one happy path, the log never sees work in a spreadsheet, an email or a second application, and a ranking by volume times time puts judgment-heavy steps at the top. In the synthetic data, 🟢 24.8% of cases follow the documented path, 🟢 44.8% of touch time is outside the case system, and 🟢 6 of the volume-first top 10 are steps an agent can take over. |
 | **Solution** | An evidence layer: merge desktop and system events into step occurrences with touch time, classify each step from observable features, screen it for controls and restricted data, rank by modeled hours at stake times readiness, and write a build brief an engineer can pick up. |
 | **North-star metric** | Share of agent pilots aimed at a step that a person who knows the work calls agent-ready. Target 🔴 set after the labeled-sample phase. Prototype: 🟢 9 of 10 in the top 10 against the generator's key; the miss is S14. |
-| **Measured metrics (synthetic)** | 🟢 13 of 16 steps classified as the key says; precision 92.3% and recall 100.0% for agent-ready steps. 🟢 87.8% of handling time attributed to a named step, against at most 49.6% from the log alone. 🟢 98.8% of status events land on a labeled occurrence of the right step. |
+| **Measured metrics (synthetic)** | 🟢 13 of 16 steps classified as the key says; precision 92.3% and recall 100.0% for agent-ready steps. 🟢 87.8% of handling time attributed to a named step, against at most 49.6% from the log alone. 🟢 98.8% of the status events a person wrote (17,334 of 17,550) land on a labeled occurrence of the right step. |
 | **Modeled metrics** | 🟡 592 agent-ready hours at stake in StepScout's top 10 against 371 in the volume-first list, per 30 days, assuming an agent removes 70% of a step's touch time. 🟡 Utility (42.3 − 26.5) × 14 = 221 hours per 30 days. |
 | **Cost** | 🔴 Not estimated. The prototype runs in seconds on a laptop; production cost depends on collector coverage, event volume and labeling effort, and has not been sized. |
 | **Risk #1** | A judgment made off the desktop looks like a rule. 🟢 S14 is classified AGENT and the key says HUMAN_JUDGMENT; it ranks #10. Mitigation: the build brief's shadow-mode test, a check of whether similar inputs lead to different choices, and a time-diary sample of off-desktop work. All 🔴 designed, not built. |
@@ -81,7 +81,7 @@
 
 **Inputs (leading):**
 - Desktop events that carry a step label (target: set in calibration). Prototype: 🟢 2.4% unlabeled.
-- Status events that land on a labeled occurrence of the right step (target: set in calibration). Prototype: 🟢 98.8%.
+- Status events a person wrote that land on a labeled occurrence of the right step (target: set in calibration). Prototype: 🟢 98.8% (17,334 of 17,550).
 - Steps with a control and data-classification flag in the register (target: every step in scope). Prototype: 16 of 16 by construction.
 
 **Outputs (lagging):**

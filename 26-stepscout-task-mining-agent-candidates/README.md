@@ -6,13 +6,13 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/26-stepscout-task-mining-agent-candidates/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Interview map: 24.8% of cases, 1 of 151 real paths (`step_03`)
 - 🟢 Off-system work: 44.8% of touch time is outside the case system; the interview names 3 of the 6 applications (`step_03`)
 - 🟢 Known miss, left in on purpose: S14 choose_resolution_route is classified AGENT; the key says HUMAN_JUDGMENT. It ranks #10 (`step_04`)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+_A portfolio prototype on synthetic data, not a production case study. The framing and how to read the numbers are folded below._
 
 ![Synthetic cases: 1,500](https://img.shields.io/badge/synthetic%20cases-1500-blue)
 ![Desktop events: 53,584](https://img.shields.io/badge/desktop%20events-53584-blue)
@@ -29,7 +29,7 @@ _A portfolio prototype on synthetic data, not a production case study. The frami
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
 
 <details>
-<summary>Framing, how to read the numbers, and the regulatory note</summary>
+<summary>Framing and how to read the numbers</summary>
 
 > **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the step features and classifier rules, the control screen, the ranking, the build-brief writer, the data generator and the walkthrough are mine. Every number below is either printed by a script in this folder on data I generated, or is modeled with its assumption named. Production validation (real desktop events under a works-council and data-protection review, a labeled sample of steps, an engineer who builds from a brief) is what the next role does.
 
@@ -107,7 +107,7 @@ The whole walkthrough runs in a few seconds and each step writes its CSV or JSON
 
 ## Executive summary (90 seconds)
 
-**Problem.** A modeled bank runs a payment-exception queue (wire repair): a returned payment lands in a work queue, and a worker reads the reason, looks up the original payment, copies fields between applications, checks the match, screens the party, judges any ambiguous match, drafts a correction, gets a second person to approve it, resubmits, writes a note and closes the case. In 30 synthetic days it handles 1,500 cases through 16 steps, 14 workers and 6 applications. The operations lead wants an agent on part of it and has three inputs. 🟢 The interview map describes a path that 24.8% of cases follow. 🟢 The case-system log never records 3 of the 16 steps, and 44.8% of touch time is spent outside the case system. 🟢 The volume-first list's top 10 holds 6 steps an agent can take over and 4 that touch restricted data or a four-eyes control, with no control screen.
+**Problem.** A modeled bank runs a payment-exception queue (wire repair): a returned payment lands in a work queue, and a worker reads the reason, looks up the original payment, copies fields between applications, checks the match, screens the party, judges any ambiguous match, drafts a correction, gets a second person to approve it, resubmits, writes a note and closes the case. In 30 synthetic days it handles 1,500 cases through 16 steps, 14 workers and 6 applications. The operations lead wants an agent on part of it and has three inputs. 🟢 The interview map describes a path that 24.8% of cases follow. 🟢 The case-system log never records 3 of the 16 steps, and 44.8% of touch time is spent outside the case system. 🟢 The volume-first list's top 10 holds 6 steps an agent can take over; counted separately, 4 of its 10 steps touch restricted data or a four-eyes control, with no control screen.
 
 **Product.** StepScout, an evidence layer between "put an agent here" and an engineer's first line of code: **merge** desktop and system events into step occurrences with touch time and wait; **classify** each step as AGENT, AGENT_HITL, HUMAN_JUDGMENT or HUMAN_CONTROL from observable features only (overrides, free text, repeats, timing spread, writes, outbound email, plus the control register's flags); **screen** it for four-eyes controls and restricted data; **rank** the survivors by modeled hours at stake times readiness; and write a **build brief** (build-brief/v1) an engineer can pick up.
 
@@ -416,8 +416,8 @@ Six parts, all plain rules, no model:
 2. **Classify.** Per step, from observable features only: how often workers override a proposed value, how many characters they type, how often the step repeats within a case, how much its touch time varies, whether it writes to the payments hub or sends email, and the register's control flag. A step is HUMAN_JUDGMENT if at least 2 of 4 judgment signals fire (overrides at 20% or more, 200 or more characters of free text, 1.3 or more runs per case, a timing spread of 0.5 or more). Otherwise it is AGENT_HITL if it writes to the hub, sends email, is overridden at 5% or more, or carries 80 or more characters of free text. Otherwise AGENT. The register's four-eyes flag makes a step HUMAN_CONTROL. The thresholds are my choices.
 3. **Screen.** Four-eyes steps leave the candidate list and judgment steps are left to a person. Candidates that touch restricted data, or may run only after an approval, stay and carry conditions into the brief.
 4. **Rank.** Modeled hours at stake times readiness (AGENT 1.0, AGENT_HITL 0.6; ranking weights, not measurements). Hours at stake is 30 days of touch time times **one named assumption**: an agent removes 70% of a step's touch time. It is modeled and never measured.
-5. **Brief.** Adjacent top-10 steps form a pack of up to three. For the three packs with the highest ranking score, write a build-brief/v1 file to `src/out/` and validate it with a stdlib check.
-6. **Score.** Against the generator's answer key: accuracy, precision and recall of agent-ready steps, the top 10 against the volume-first list, the share of handling time recovered, and the known miss. A check shuffles the answer key in the catalog and shows the classes do not move.
+5. **Score.** Against the generator's answer key: accuracy, precision and recall of agent-ready steps, the top 10 against the volume-first list, the share of handling time recovered, and the known miss. A check shuffles the answer key in the catalog and shows the classes do not move.
+6. **Brief.** Adjacent top-10 steps form a pack of up to three. For the three packs with the highest ranking score, write a build-brief/v1 file to `src/out/` and validate it with a stdlib check.
 
 ```bash
 python3 src/step_04_with_stepscout.py

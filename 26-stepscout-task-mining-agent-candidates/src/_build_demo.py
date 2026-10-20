@@ -258,7 +258,7 @@ function render() {
     h += '<span class="pill pill-ok">MATCHES THE KEY</span>';
   } else if (e.agent_ready_pred && !e.agent_ready_key) {
     h += '<span class="pill pill-warn">MISSED: known limit</span>';
-    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The key says ' + esc(e.key) + ". On the desktop this step is a short pick with tight timing, no free text and no overrides. The judgment happens in a phone call that no file records, so nothing observable separates it from a rule.</div>";
+    h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The key says ' + esc(e.key) + ". On the desktop this step is a short pick with tight timing, no free text and almost no overrides. The judgment happens in a phone call that no file records, so nothing observable separates it from a rule.</div>";
   } else {
     h += '<span class="pill pill-info">MORE CAUTIOUS THAN THE KEY</span>';
     h += '<div class="fieldvals" style="font-size:12px;margin-top:6px;">The key says ' + esc(e.key) + ". The step stays agent-ready; a person reviews it. Cost: a lower readiness weight in the ranking.</div>";
@@ -328,8 +328,8 @@ def build_html(p: dict) -> str:
   <section class="stats" aria-label="Running totals through the selected step">
     <div class="stat"><p class="stat-label">Touch hours the interview map covers</p><p class="stat-value" id="stat-map">—</p></div>
     <div class="stat"><p class="stat-label">Touch hours the log records as steps</p><p class="stat-value" id="stat-log">—</p></div>
-    <div class="stat"><p class="stat-label">Touch hours StepScout measures</p><p class="stat-value" id="stat-all">—</p></div>
-    <div class="stat"><p class="stat-label">Hours at stake in agent-ready steps (modeled)</p><p class="stat-value" id="stat-stake">—</p></div>
+    <div class="stat"><p class="stat-label">Touch hours StepScout attributes to a step</p><p class="stat-value" id="stat-all">—</p></div>
+    <div class="stat"><p class="stat-label">Hours at stake in steps StepScout calls agent-ready (modeled)</p><p class="stat-value" id="stat-stake">—</p></div>
   </section>
 
   <div class="controls">
@@ -366,7 +366,7 @@ def build_html(p: dict) -> str:
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (agent-ready hours at stake per worker in StepScout's top {s['top_n']} − in the volume-first top {s['top_n']}) × workers</p>
-    <p style="margin: 8px 0 0;">🟢 <b>Measured on the answer key:</b> the volume-first top {s['top_n']} holds {s['vf_ready']} agent-ready steps and {s['vf_flagged']} that touch restricted data or a four-eyes control, with no control screen. StepScout's top {s['top_n']} holds {s['ss_ready']} agent-ready steps. It classifies {s['accuracy']} of {s['steps']} steps correctly ({s['accuracy_pct']}%), with {s['precision_pct']}% precision and {s['recall_pct']}% recall for agent-ready steps. Known miss: {s['known_step']} {s['known_name']}, ranked #{s['known_rank']}.</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on the answer key:</b> the volume-first top {s['top_n']} holds {s['vf_ready']} agent-ready steps; counted separately, {s['vf_flagged']} of the {s['top_n']} touch restricted data or a four-eyes control, with no control screen. StepScout's top {s['top_n']} holds {s['ss_ready']} agent-ready steps. It classifies {s['accuracy']} of {s['steps']} steps correctly ({s['accuracy_pct']}%), with {s['precision_pct']}% precision and {s['recall_pct']}% recall for agent-ready steps. Known miss: {s['known_step']} {s['known_name']}, ranked #{s['known_rank']}.</p>
     <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> ({s['ss_per_worker']} − {s['vf_per_worker']}) = {s['lift_per_worker']} hours per worker per 30 days × {s['workers']} workers = <b>{s['lift_hours']:,} hours per 30 days</b>, assuming an agent removes {s['removal_pct']}% of touch time and both teams build their top {s['top_n']}.</p>
   </section>
 

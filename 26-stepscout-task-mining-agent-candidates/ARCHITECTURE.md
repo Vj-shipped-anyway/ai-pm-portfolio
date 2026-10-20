@@ -347,7 +347,7 @@ StepScout is a glue layer. Every external dependency is listed with its protocol
 | SLO | Why it is the PM's number |
 | --- | --- |
 | **Share of events that carry a step label** | The coverage of everything downstream. 🟢 Prototype: 2.4% unlabeled on generated events; a real miner's figure is unknown. |
-| **Status events landing on an occurrence of the right step** | The merge's health. 🟢 Prototype: 98.8%. |
+| **Status events landing on an occurrence of the right step** | The merge's health. 🟢 Prototype: 98.8% (17,334 of the 17,550 status events a person wrote). |
 | **Agreement with a hand-labeled sample** | The calibration. 🔴 Not measurable until a sample exists. |
 | **Briefs that pass the schema check** | The hand-off's health. 🟢 Prototype: all 3. |
 
