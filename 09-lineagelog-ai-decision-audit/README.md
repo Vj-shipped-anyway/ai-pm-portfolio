@@ -2,13 +2,16 @@
 
 **A portfolio prototype for a decision-grain composition layer that turns scattered AI-decision logs into an exam-ready immutable record — modeled against [EU AI Act Article 12](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) record-keeping requirements and the [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the Federal Reserve, OCC and FDIC model risk management guidance that replaced SR 11-7 in April 2026) supervisory expectation for "explain this AI decision."**
 
-> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
-
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/09-lineagelog-ai-decision-audit/demo.html)
 
-> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (compliance committee read, OCC exam evidence pull, regulator co-design) is what the next role does.
+[![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/09-lineagelog-ai-decision-audit/demo.html)
 
-> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+
+- 🟢 6 of 6 deficiencies closed on the headline decision (`step_04` prints it), with all 200 decisions composed; 29 of the 200 outcome rows are `none_observed` (counted from `outcomes.csv`)
+- 🟢 Composition latency: milliseconds per decision measured on the prototype (`step_04_with_lineagelog.py` prints the average per decision over the 200-decision fleet sweep; the figure varies from run to run)
+
+_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Modeled corpus: 200 decisions](https://img.shields.io/badge/modeled--corpus-200%20synthetic%20decisions-blue)
 ![Deficiencies closed: 6 of 6](https://img.shields.io/badge/deficiencies%20closed-6%20of%206-brightgreen)
@@ -21,6 +24,17 @@
 ![Hero — LineageLog composition flow](./assets/lineagelog-flow.svg)
 
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
+
+<details>
+<summary>Framing, how to read the numbers, and the regulatory note</summary>
+
+> **Regulatory note.** This README cites SR 11-7 or its replacement, [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, April 17, 2026). SR 26-2 sets no enforceable standards, is aimed mainly at banks with over $30 billion in assets, and places generative AI and agentic AI outside its scope. Here those citations name the design basis for validation, monitoring and inventory practices, or serve as an analogy. They are not a claim that the project meets SR 26-2 or that SR 26-2 governs the systems it examines.
+
+> **Framing:** This is a portfolio prototype, not a production case study. The six-deficiency taxonomy, the architecture, the schema, and the walkthrough are mine; the metrics below are modeled against synthetic data and published industry baselines. Production validation (compliance committee read, OCC exam evidence pull, regulator co-design) is what the next role does.
+
+> **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from a real run on the shipped synthetic data), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
+
+</details>
 
 ---
 
