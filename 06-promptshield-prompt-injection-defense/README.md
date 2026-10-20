@@ -6,7 +6,7 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/06-promptshield-prompt-injection-defense/demo.html)
 
-**What it proves** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 99% catch rate on the 100-prompt attack suite (`step_04_with_promptshield.py` output)
 - 🟢 1% false-positive rate on the 200-prompt legitimate-banker corpus
