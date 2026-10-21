@@ -16,8 +16,11 @@ For each project folder it checks:
   links      every relative link in README, PRD and ARCHITECTURE points at a file that exists
   demo       the inline scripts in demo.html pass `node --check` (skipped when node is missing)
   tests      tests/ runs under unittest, when present
+  real       project 26 only: `real_bpi2012.py --selftest` passes on its hand-worked fixture; and when the
+             public log is on disk (data/real/raw/, git-ignored), a fresh run reproduces the committed
+             data/real/bpi2012_output.txt line for line
   numbers    every digit string after a green tag in the README appears in the scripts' printed output,
-             the files they write to src/out/, or data/README.md. A few older projects have known
+             the files they write to src/out/, data/README.md, or data/real/*.txt. A few older projects have known
              exceptions; tools/claims_baseline.json holds the count for each, and the check fails only
              when a project has more unmatched numbers than its baseline.
 
@@ -154,11 +157,34 @@ def check_tests(work: Path):
     return []
 
 
+def check_real(work: Path):
+    """Project 26's real-data mode: self-test always; full reproduction only when the log is on disk."""
+    script = work / "src" / "real_bpi2012.py"
+    if not script.exists():
+        return []
+    r = run([sys.executable, "-I", script.name, "--selftest"], work / "src")
+    if r.returncode != 0:
+        return ["real_bpi2012.py --selftest failed: " + ((r.stdout + r.stderr).strip().splitlines() or [""])[-1][:140]]
+    committed = work / "data" / "real" / "bpi2012_output.txt"
+    raw = work / "data" / "real" / "raw" / "BPI_Challenge_2012.xes.gz"
+    if not raw.exists() or not committed.exists():
+        return []
+    r = run([sys.executable, "-I", script.name], work / "src", timeout=900)
+    if r.returncode != 0:
+        return ["real_bpi2012.py exit %d: %s" % (r.returncode, (r.stdout + r.stderr).strip()[-140:])]
+    printed = [ln for ln in r.stdout.splitlines() if not ln.startswith("Wrote ")]
+    if printed != committed.read_text(encoding="utf-8").splitlines():
+        return ["a fresh run differs from data/real/bpi2012_output.txt"]
+    return []
+
+
 def unmatched_numbers(src: Path, corpus: str):
     """Digit strings that follow a green tag in the README but appear in no printed output."""
     readme = (src / "README.md").read_text(encoding="utf-8")
     data_readme = src / "data" / "README.md"
     evidence = corpus + "\n" + (data_readme.read_text(encoding="utf-8") if data_readme.exists() else "")
+    for extra in sorted((src / "data" / "real").glob("*.txt")) if (src / "data" / "real").exists() else []:
+        evidence += "\n" + extra.read_text(encoding="utf-8")
     evidence = evidence.replace(",", "")
     missing = []
     for line in readme.split("\n"):
@@ -183,6 +209,7 @@ def check_project(src: Path):
         results["steps"] = steps
         results["generator"] = check_generator(src, work)
         results["tests"] = check_tests(work)
+        results["real"] = check_real(work)
     results["svg"] = check_svg(src)
     results["links"] = check_links(src)
     results["demo"] = check_demo(src)
