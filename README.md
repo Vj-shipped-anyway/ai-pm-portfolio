@@ -131,9 +131,9 @@ I price product impact by one formula:
 
 > **Utility = (my solution − current state of the art) × number of people it affects**
 
-Reducing a metric by 71% is not an outcome. *Reducing a metric by 71% across 14 million customer interactions per year is.* Every case study below leads with the multiplied number, not the percentage.
+Reducing a metric by 71% is not an outcome. *Reducing a metric by 71% across 14 million customer interactions per year is.* So each project's "Utility Delivered" section ends with the multiplied number. The lift it rests on is 🟢 measured where a script prints it; the population and the multiplication are 🟡 modeled, with the assumption named beside the number.
 
-That framing also forces honesty about three things most AI portfolios fudge: what the SOTA actually is, what the lift actually is, and how big the population actually is. If any of those numbers is shaky, the utility number is shaky, and the value story falls apart.
+That framing also forces honesty about three things most AI portfolios fudge: what the state of the art actually is, what the lift actually is, and how big the population actually is. If any of those numbers is shaky, the utility number is shaky, and the value story falls apart. The HalluGuard and DealSentry pages say so where it applies.
 
 ---
 
