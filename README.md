@@ -198,36 +198,6 @@ The prototypes themselves call no model and no cloud service: the step scripts u
 
 ---
 
-## 🛠️ Why Streamlit (and when it's the wrong stack)
-
-Streamlit was the right tool for these prototypes. It would be the wrong tool for production. The distinction matters and a hiring manager should hear it explicitly.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking a stakeholder through a story end-to-end on a free deploy
-- Running internal tools where 1-2 product folks are the only users
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no native tenant isolation, no row-level security
-- Mobile-first UX — Streamlit's responsive story is "ok, not great"
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for regulated environments
-- Real-time websocket dashboards — every interaction is a full server rerender
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-- Latency-sensitive customer-facing flows — server-side rerun on every widget change
-
-**If any flagship in this portfolio graduated from prototype to product, the production stack would be:**
-- Front end: Next.js + Tailwind + shadcn/ui (or the bank's design system)
-- Back end: FastAPI or NestJS, deployed on the bank's existing K8s/EKS footprint
-- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; in regulated shops, ForgeRock or PingFederate
-- Data plane: Snowflake or Databricks (whichever the bank already runs); Postgres + pgvector for the verifier index
-- Observability: OpenTelemetry → Datadog (the bank's standard) and Langfuse for LLM-specific traces
-- Governance: integrate with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream — pick what your CRO already pays for)
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 🎯 Career Goal
 
 Bank AI operations: getting agents and GenAI into operations queues under regulated constraint, from finding the work and the intake decision to the build hand-off, access control and the way back when it degrades. I am also open to working with AI founders who sell into banks.
