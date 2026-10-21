@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+type: software
+title: "AI PM Portfolio: twenty-seven runnable prototypes on how AI gets into bank operations"
+version: 1.0.0
+date-released: 2026-10-20
+authors:
+  - family-names: Saharan
+    given-names: Vijay
+repository-code: "https://github.com/Vj-shipped-anyway/ai-pm-portfolio"
+url: "https://vj-shipped-anyway.github.io/ai-pm-portfolio/"
+license: MIT
+abstract: "Twenty-seven runnable prototypes on how AI gets into bank operations and what breaks: synthetic data, numbers printed by scripts, and a known miss in every project. Prototypes, not production case studies."
+keywords:
+  - ai-agents
+  - ai-governance
+  - banking
+  - model-risk-management
+  - process-mining
+  - responsible-ai
