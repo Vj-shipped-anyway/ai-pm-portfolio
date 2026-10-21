@@ -61,7 +61,7 @@ This grouping is how I organize the work, not a published framework.
 
 ## 🚀 The Twenty-Seven Flagships (live demos)
 
-These are the polished case studies — full walkthrough README, sample data CSVs, four step-by-step Python scripts (`step_01_*.py` through `step_04_*.py`), utility math, and a PRD.
+These are the twenty-seven walkthroughs. Each has a full README, sample data CSVs, four step-by-step Python scripts (`step_01_*.py` through `step_04_*.py`), utility math, and a PRD.
 
 | Flagship | What it does | Utility delivered | Live demo |
 | --- | --- | --- | --- |
