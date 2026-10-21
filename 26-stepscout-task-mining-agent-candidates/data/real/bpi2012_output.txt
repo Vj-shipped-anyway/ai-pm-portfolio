@@ -1,0 +1,46 @@
+================================================================================
+Real-data mode - the case-log half of StepScout on the BPI Challenge 2012 loan-application log
+================================================================================
+Source: van Dongen, Boudewijn (2012): BPI Challenge 2012. Version 1. 4TU.ResearchData. dataset. https://doi.org/10.4121/uuid:3926db30-f712-4394-aebc-75976070e91f
+Terms: 4TU General Terms of Use (August 2016): cite the dataset, no commercial use, log not redistributed here.
+File check: MD5 matches the published value
+
+1. What the log holds
+   13,087 cases, 262,200 events, 24 activities, 68 resources
+   6 of the activities are work items (W_), with 71,371 START-to-COMPLETE sessions (1,042 completes without a START)
+
+2. Paths: how many real variants, and how much the most common one covers
+   a variant is the ordered list of COMPLETE events of a case (A_, O_ and W_ activities)
+   4,336 distinct variants over 13,087 cases
+   the most common variant covers 3,429 cases (26.2%)
+   1,719 variants are needed to cover 80% of cases
+   3,727 variants occur once (28.5% of cases)
+
+3. Hands-on time against elapsed time
+   elapsed, first to last event per case:        2,708,646 h
+   hands-on, START to COMPLETE of work sessions: 14,357 h (0.53% of elapsed)
+   waiting, SCHEDULE to first START of a task:   738,395 h (98.1% of waiting plus hands-on)
+
+4. Rework and resumption
+   26,318 tasks were scheduled; 2,311 cases (17.7%) schedule the same activity again (4,165 repeat tasks)
+   45,133 sessions resume a task already started; they hold 7,280 hands-on hours
+
+5. Work-item activities ranked two ways
+   by hands-on hours (touch-first) and by waiting plus hands-on hours (volume-first)
+   activity                           tasks sessions med. min  res.     wait h hands-on h  t-rk  v-rk
+   W_Completeren aanvraag             7,371   23,511      2.7    52   43,071.3    4,002.1     1     3
+   W_Nabellen offertes                6,634   22,405      1.7    52  448,391.8    3,477.8     2     1
+   W_Valideren aanvraag               5,023    7,889     12.0    50  216,012.2    2,753.8     3     2
+   W_Nabellen incomplete dossiers     2,383   11,399      2.1    51    3,782.4    2,416.7     4     5
+   W_Afhandelen leads                 4,771    5,897      1.9    47   24,419.7    1,665.3     5     4
+   W_Beoordelen fraude                  124      270      0.1     5    2,717.7       41.7     6     6
+   top 3 by hands-on hours:         W_Completeren aanvraag; W_Nabellen offertes; W_Valideren aanvraag
+   top 3 by waiting plus hands-on:  W_Nabellen offertes; W_Valideren aanvraag; W_Completeren aanvraag
+   the volume-first top 3 is credited 70.1 times the hands-on hours it holds
+
+6. What this log cannot show
+   - No desktop layer: work in a spreadsheet, an email or a second application is not observable, so
+     the off-system share that StepScout measures on the synthetic data cannot be measured here.
+   - No control register and no answer key: no step is classified and no accuracy is claimed.
+   - START to COMPLETE is the time a work item was open, not proof of hands on the keyboard.
+   - One institution, one process, 2011-2012. The numbers describe this log and are not a benchmark.

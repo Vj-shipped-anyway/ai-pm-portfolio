@@ -12,7 +12,7 @@
 - 🟢 Off-system work: 44.8% of touch time is outside the case system; the interview names 3 of the 6 applications (`step_03`)
 - 🟢 Known miss, left in on purpose: S14 choose_resolution_route is classified AGENT; the key says HUMAN_JUDGMENT. It ranks #10 (`step_04`)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing and how to read the numbers are folded below._
+_A portfolio prototype on synthetic data, not a production case study. A separate [real-data mode](#-real-data-mode-one-public-loan-application-log) asks the case-log questions of one public loan-application log. The framing and how to read the numbers are folded below._
 
 ![Synthetic cases: 1,500](https://img.shields.io/badge/synthetic%20cases-1500-blue)
 ![Desktop events: 53,584](https://img.shields.io/badge/desktop%20events-53584-blue)
@@ -137,9 +137,10 @@ The whole walkthrough runs in a few seconds and each step writes its CSV or JSON
 4. **Step 2 — Basic approach** — process-mine the case-system log; variants, cycle time and the volume-first candidate list
 5. **Step 3 — The six named deficiencies** — each with a number from the dataset
 6. **Step 4 — The fix (StepScout)** — merge, classify, screen, rank and brief; scored against the key, with the known miss printed
-7. **Utility delivered** — a multiplied number with the assumption named
-8. **Architecture & call flow** — topology and a per-step sequence
-9. **PM artifacts** — PRD and architecture
+7. **Real-data mode** — the paths and time questions of Steps 2 and 3, asked of a public loan-application log
+8. **Utility delivered** — a multiplied number with the assumption named
+9. **Architecture & call flow** — topology and a per-step sequence
+10. **PM artifacts** — PRD and architecture
 
 > Non-technical reader: skip the code blocks. The plain-English explanation and the output tables tell the story.
 > Technical reader: every code block runs. `cd src && python3 step_NN_*.py` and you'll see the same output.
@@ -620,6 +621,38 @@ Everything in a brief except `estimate` is 🔴 design: the thresholds are targe
 
 ---
 
+## 🌍 Real-data mode: one public loan-application log
+
+Everything above runs on synthetic data where I wrote the answer. This section asks the paths-and-time questions of Steps 2 and 3 of a real log that nobody planted anything in: the [BPI Challenge 2012](./data/real/README.md) loan-application log (van Dongen, 2012; 13,087 cases, 262,200 events). The log is not in this repo. `data/real/fetch_bpi2012.py` downloads it and checks its MD5, and `src/real_bpi2012.py` reads it in a few seconds. It is published under the 4TU General Terms of Use (cite it; no commercial use), which [`data/real/README.md`](./data/real/README.md) summarizes.
+
+**What it printed** (🟢 `real_bpi2012.py`; the full text is [`data/real/bpi2012_output.txt`](./data/real/bpi2012_output.txt)):
+
+| Question | Result |
+| --- | --- |
+| How many real paths? | 🟢 4,336 distinct variants over 13,087 cases. The most common covers 3,429 cases (26.2%); 1,719 variants are needed to cover 80% of cases; 3,727 variants occur once (28.5% of cases) |
+| How much of the elapsed time is hands-on work? | 🟢 14,357 h from START to COMPLETE of work sessions, against 2,708,646 h elapsed: 0.53% |
+| What is the rest of a work item's open time? | 🟢 738,395 h between SCHEDULE and the first START, 98.1% of waiting plus hands-on time |
+| Is work repeated? | 🟢 2,311 cases (17.7%) schedule the same work item again |
+| What does a list ranked by elapsed time credit? | 🟢 The volume-first top 3 of the 6 work items is credited 70.1 times the hands-on hours it holds |
+
+How to read it:
+
+- **Same shape as the synthetic queue, a different process.** The most common real path covers about a quarter of cases (26.2% here; the path the interview describes covers 24.8% in the wire-repair queue), and most of the variety is a long tail. I wrote the generator before I read this log, and the two are different processes, so the match shows the interview-map question is worth asking. It does not show the generator is right.
+- **Step 2's weakness appears without a planted signal.** A volume-times-elapsed list counts waiting as work. Here 98.1% of the time work items are open is the gap before anyone starts them. The log does not say why a task waits, and some waiting is by design (a task that depends on someone outside the bank, for example), so read 98.1% as the share a volume-first list would credit as work, not as avoidable delay.
+- **The ranking changes the order, not the members.** The log has only six work items, so the top 3 holds the same three activities under both rankings. The order differs: W_Nabellen offertes is first by elapsed time and second by hands-on hours.
+
+What it cannot show, and the script prints the same list: there is no desktop layer, so the off-system share (44.8% of touch time in the walkthrough) cannot be measured; there is no control register and no answer key, so no step is classified and no accuracy is claimed; START to COMPLETE is the time an item was open, not proof of hands on the keyboard; and the log is one institution, one process, 2011 to 2012.
+
+```bash
+# from the repo root: fetch once (3.3 MB), then run
+python3 26-stepscout-task-mining-agent-candidates/data/real/fetch_bpi2012.py
+cd 26-stepscout-task-mining-agent-candidates/src
+python3 real_bpi2012.py
+python3 real_bpi2012.py --selftest   # no download: a three-case log with hand-worked answers
+```
+
+---
+
 ## 📐 Utility Delivered
 
 The way I price product impact: **Utility = (my solution − current state of the art) × number of people it affects.**
@@ -779,6 +812,10 @@ python3 step_04_with_stepscout.py
 
 # 2. Open the interactive demo
 open ../demo.html            # static snapshot of the synthetic run; it does not read data/
+
+# 3. Ask the paths-and-time questions of a public real log (read data/real/README.md for the terms first)
+python3 ../data/real/fetch_bpi2012.py
+python3 real_bpi2012.py
 ```
 
 To point it at your own queue, replace these files and keep their columns:
