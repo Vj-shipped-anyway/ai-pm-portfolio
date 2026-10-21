@@ -172,3 +172,6 @@ NOTES.md
 TODO.local.md
 scratch/
 .scratch/
+
+# StepScout real-data mode: the public log is fetched on demand, not committed
+26-stepscout-task-mining-agent-candidates/data/real/raw/
