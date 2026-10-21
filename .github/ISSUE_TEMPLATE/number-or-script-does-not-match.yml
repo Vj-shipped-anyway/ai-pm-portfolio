@@ -1,0 +1,49 @@
+name: A number, script or link does not match its README
+description: Report a printed number that differs from the README, a script that fails, or a broken link or demo.
+title: "[project NN] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every green-tagged number in a project README is printed by a script in that project's `src/` folder. A report that names the number and the command is the easiest kind for me to check.
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: The folder name, for example `23-scopekeeper-agent-permission-review`.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - A printed number differs from the README
+        - A script fails
+        - A link is broken or a demo does not load
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What the README says
+      description: Quote the sentence or number, and say which section it is in.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What you got
+      description: The number or the last lines of the error.
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command, Python version and operating system
+      description: For example `cd 26-stepscout-task-mining-agent-candidates/src && python3 step_04_with_stepscout.py`, Python 3.12, macOS.
+      render: shell
+    validations:
+      required: true
