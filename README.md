@@ -6,7 +6,7 @@
 
 **Live site:** [vj-shipped-anyway.github.io/ai-pm-portfolio](https://vj-shipped-anyway.github.io/ai-pm-portfolio/) has a clickable demo for each of the twenty-seven, no install. Every project ships sample data, four step scripts and a static `demo.html`. Streamlit apps are deployed for HalluGuard, DriftSentinel and LeaseGuard; the other twenty-four are not deployed yet.
 
-Tags used everywhere: 🟢 measured (a script in the repo prints it), 🟡 modeled (the assumption is named), 🔴 hypothetical (designed, never tested). All data is synthetic and these are prototypes, not production case studies; the [full note on framing](#-note-on-framing) is below.
+Tags used everywhere: 🟢 measured (a script in the repo prints it), 🟡 modeled (the assumption is named), 🔴 hypothetical (designed, never tested). All data is synthetic, apart from one public loan-application log that [StepScout's real-data mode](./26-stepscout-task-mining-agent-candidates/README.md#-real-data-mode-one-public-loan-application-log) reads (fetched on demand, not stored here), and these are prototypes, not production case studies; the [full note on framing](#-note-on-framing) is below.
 
 ---
 
