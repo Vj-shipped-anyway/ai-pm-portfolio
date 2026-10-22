@@ -770,34 +770,6 @@ If you run it on a real evidence feed and get something useful, open an issue or
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the status, capacity and pull-rule mechanic in days, not weeks
-- Walking a head of AI program office, a program owner or a model risk lead through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two people are the only daily users
-
-**Streamlit is wrong for:**
-- A shared board many owners and sponsors open at once, with live updates when an attestation lands
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for owners, reviewers and the program office
-- Evidence ingestion from several review systems with retries, audit and replay
-- Brand-controlled UX inside the program office's existing reporting
-
-**If PortfolioBoard graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Ingest: a scheduled puller and a webhook per source system, writing attestations as immutable events with the attestation date
-- Status, grid, dependencies and pull rule: stateless workers (Python) running on a schedule and on each new attestation
-- Data plane: Postgres for programs, criteria, attestations, statuses and decisions; object storage with retention for the monthly board snapshot
-- Console: a web app behind the bank's single sign-on, read-only for sponsors, with a challenge flow for owners
-- Observability: OpenTelemetry into the platform's existing monitoring; evidence feed lag and status run age as the first SLOs
-- Governance: the monthly snapshot and the audit-sample results written to the model-risk record, with the interlocks above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
