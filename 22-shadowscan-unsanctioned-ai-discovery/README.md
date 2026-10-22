@@ -733,34 +733,6 @@ If you run it on a real log and get something useful, open an issue or send me w
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a security lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the discovery, ranking and recommendation mechanic in days, not weeks
-- Walking an information-security lead, an AI governance lead or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two analysts are the only daily users
-
-**Streamlit is wrong for:**
-- Log volumes. Real proxy and DNS logs are millions of rows a day; classification needs a streaming job and a columnar store, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for security, governance and department owners
-- A review queue with assignments, comments, an audit trail and contestation
-- Brand-controlled UX inside the tools the security team already works in
-
-**If ShadowScan graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Collector: a reader on the log pipeline that already feeds the security team's analytics, with user identifiers pseudonymized before they reach the classifier
-- Classifier and ranker: stateless workers (Python) that hold the catalog, the feed and the weights, writing per-day aggregates by domain, department and user bucket
-- Data plane: Postgres for domains, decisions and resolutions; a columnar store for per-session aggregates; object storage with retention for evidence bundles
-- Review queue: a console behind the bank's SSO, with interlocks to intake and due diligence
-- Observability: OpenTelemetry into the platform's existing monitoring; classifier lag and the share of rows that match a catalog or feed entry as the first SLOs
-- Governance: decisions and evidence written to the AI inventory and the model-risk record, with the interlocks to TierGate, VendorLens, ControlMap, PromptShield and ScopeKeeper above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
