@@ -800,35 +800,6 @@ If you run it on a real incident history and get something useful, open an issue
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the tier, trip and recovery mechanic in days, not weeks
-- Walking a service owner, an operational-resilience lead or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two platform engineers are the only daily users
-
-**Streamlit is wrong for:**
-- A control in the decision path. A trip has to be a flag that every decision node reads within a defined time, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for the service owner, on-call, validators and auditors
-- Large metric history. Scoring minute-level signals for many services needs a streaming job and a time-series store
-- Brand-controlled UX inside the operations console where on-call people already work
-
-**If KillSwitch graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Collector and scorer: a streaming job reading per-segment metrics and the complaints feed, writing scores and baselines per segment
-- Controller: a small service that owns the per-segment state machine, writes every transition with its reason, and publishes the desired path to a flag service
-- Router: the decision service reads the per-segment flag from a local cache with a short time-to-live and holds its last known state if the flag service is unreachable
-- Rules registry and drill service: versioned rules with an owner and a test suite, a drill scheduler and the scorecard
-- Data plane: Postgres for state, transitions, policy versions and drill results; object storage with retention for evidence bundles
-- Observability: OpenTelemetry into the platform's existing monitoring; trip latency and flag staleness as the first SLOs
-- Governance: transitions and overrides written to the model-risk record, with the interlocks above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
