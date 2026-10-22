@@ -641,55 +641,6 @@ If you run it on real leases and get something useful, open an issue or send me 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a CRE operator or a PropTech buyer hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the verification mechanic in 5 days, not 5 weeks
-- Walking an asset-management VP, a PropTech founder, or a CRE General Counsel through the six-deficiency story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where 1-2 paralegals are the only daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no native tenant isolation, no row-level security between operators
-- Mobile-first UX for an asset-management team in the field — Streamlit's responsive story is "ok, not great"
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated CRE shop
-- Real-time websocket triage queues — every interaction is a full server rerender
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-- High-volume paralegal triage (thousands of leases per cycle) — server-side rerun on every widget change does not scale to a national operator's queue
-
-**If LeaseGuard graduated from prototype to product, the production stack would be:**
-- Front end: Next.js + Tailwind + shadcn/ui (or the operator's design system); the triage UI is a queue + document viewer with span-level highlighting
-- Back end: FastAPI on the operator's K8s/EKS footprint or a managed Cloud Run; the secondary extractor and rule layer run as a worker pool
-- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; for institutional operators with SOC 2 / SOX scope, ForgeRock or PingFederate
-- Data plane: Postgres for the lease-record canonical store (write-back into Yardi Voyager / MRI / Argus Enterprise via existing connectors); Snowflake or Databricks for the analytics warehouse the operator already runs; S3 for the OCR'd PDF objects
-- Observability: OpenTelemetry → Datadog (the operator's standard) and Langfuse for the extraction traces
-- Governance: integrate with the operator's existing CRE workflow (Yardi Voyager / MRI / Argus / Salesforce CRE Cloud), not a parallel system; PropTech buyers already pay for the system of record and the verification layer should write back into it
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If LeaseGuard were a real product shipping to a CRE owner-operator's asset management team:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui — a per-lease verification panel that lives inside the operator's existing system of record (Yardi Voyager, MRI, JD Edwards), not a standalone app. Asset managers approve/reject from where they already work.
-- **Auth:** SAML / OIDC with the operator's IdP (Okta, Azure AD); RBAC mapping abstraction analyst / senior abstraction lead / asset manager / acquisitions roles.
-- **Backend:** FastAPI on the operator's K8s footprint (EKS or AKS most common in CRE shops); microservice per check (primary extractor, ensemble verifier, symbolic clause-engine, side-letter ingestor).
-- **Data plane:** Postgres for the lease-record table (mirroring Yardi's lease ID schema); object storage (S3 / Azure Blob) for the redlined PDFs and OCR artifacts; Snowflake for the analytics warehouse the acquisitions team already queries.
-- **Integrations:** Yardi Voyager and MRI write-back via their published REST APIs; Argus Enterprise import for the cash-flow side; CoStar / CompStak / Cherre as auxiliary feeds for benchmark comps; ProDeal / Lev / VTS for transaction-management bridges.
-- **OCR layer:** Textract for the harder scans, Tesseract for clean PDFs, document-AI fallback (Anthropic's vision model) for the redlined edge cases.
-- **Observability:** OpenTelemetry → Datadog; Langfuse for the LLM extraction traces; per-lease confidence scores logged for the asset-management ops view.
-- **Compliance:** SOC 2 Type II baseline (CRE LPs increasingly ask for it); audit log of every field decision retained for 7 years to match REIT data-retention requirements.
-- **Governance:** Every disagreement between primary extractor and ensemble verifier auto-routes to the senior abstraction lead with the diff pre-rendered.
-- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; rollout to one asset book at a time (start with the redlined-retail subset where the lift is biggest).
-
-The Streamlit prototype here demonstrates the *product mechanic* on synthetic data: on the 6-lease eval set an ensemble verifier routes 16 of the 17 wrong fields to triage, covering five of the six named failure modes (boilerplate paraphrase has no failures in the sample). The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
