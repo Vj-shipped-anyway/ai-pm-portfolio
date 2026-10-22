@@ -846,35 +846,6 @@ If you run it on a real queue and get something useful, open an issue or send me
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the merge, classify, screen and rank mechanic in days, not weeks
-- Walking an operations lead, a works-council representative or a risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two analysts are the only daily users
-
-**Streamlit is wrong for:**
-- A collector on employees' desktops. That is an agent with its own signing, update and consent story, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for the operations lead, the data-protection officer, the works-council observer and an auditor
-- Large event history. Millions of desktop events need a streaming job and a time-series store
-- Aggregate-only views with a minimum group size enforced by the database, not by a page
-
-**If StepScout graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Collector and labeler: a desktop collector that writes pseudonymous events, and a labeler that turns application and action patterns into step labels
-- Merge and classifier: a batch job that builds step occurrences, joins the case-system log and writes step features and classes
-- Register: owned by the data-classification and control owners, versioned, with an approver
-- Ranker and brief writer: ranking by hours at stake and readiness, and a writer that validates every brief against the schema
-- Data plane: Postgres for steps, features, classes, rankings and briefs; object storage with retention for evidence bundles
-- Observability: OpenTelemetry into the platform's existing monitoring; label coverage and merge match rate as the first SLOs
-- Governance: every brief and every change of class written to an audit record, with the interlocks above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
