@@ -679,34 +679,6 @@ If you run it on a real decision log and get something useful, open an issue or 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a model-risk or platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the six-test mechanic in days, not weeks
-- Walking a model risk reviewer, a fair-lending reviewer or a model owner through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two reviewers are the only daily users
-
-**Streamlit is wrong for:**
-- A scheduled test run on every model release. That is a job with a runner, a store and a defined schedule, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for reviewers, model owners and counsel
-- Large decision logs. Bootstrapping millions of decisions needs a worker pool and a columnar store
-- Brand-controlled UX inside the model-risk system of record where reviewers already work
-
-**If FairLens graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Reader: a scheduled job that reads scored decisions, outcomes and group labels from the model's scoring log through a read-only view
-- Test runner: stateless workers (Python) running the six tests, with the bootstrap seeded and the seed stored with the result
-- Group inference: a separate, documented step with its own validation, not folded into the tests
-- Data plane: Postgres for runs, test results and verdicts; a columnar store for per-decision results; object storage with retention for evidence bundles
-- Observability: OpenTelemetry into the platform's existing monitoring; run age and failed runs as the first SLOs
-- Governance: verdicts and evidence written to the model-risk record, with the interlocks to ControlMap, EvalForge, DriftSentinel and TierGate above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
