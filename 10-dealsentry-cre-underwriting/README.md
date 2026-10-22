@@ -585,45 +585,6 @@ If you run it on real memos and get something useful, open an issue. I'd rather 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a CRE operator or a PropTech buyer hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the verification mechanic in 5 days, not 5 weeks
-- Walking an acquisitions VP, a PropTech founder, or a CRE General Counsel through the six-deficiency story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where 1-2 senior analysts are the only daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no native tenant isolation, no row-level security between operators
-- Mobile-first UX for an acquisitions team in the field — Streamlit's responsive story is "ok, not great"
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated CRE shop
-- Real-time websocket verification queues — every interaction is a full server rerender
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-- High-volume per-deal verification (thousands of deals per cycle) — server-side rerun on every widget change does not scale
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If DealSentry were a real product shipping to a national CRE operator's acquisitions team:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui — a per-memo verification panel that lives inside the deal-pipeline tool the team already uses ([Dealpath](https://www.dealpath.com/), [Juniper Square](https://www.junipersquare.com/), [Honest Buildings](https://www.honestbuildings.com/), or a custom Salesforce CRE Cloud build), not a standalone app. Senior analysts approve / reject from where they already work.
-- **Auth:** SAML / OIDC with the operator's IdP (Okta, Azure AD); RBAC mapping junior analyst / senior analyst / IC member / managing director roles.
-- **Backend:** FastAPI on the operator's K8s footprint (most CRE shops standardize on AWS — EKS); microservice per check (comp verifier, T-12 symbolic re-runner, submarket cross-check, cap-rate / occupancy / exit-cap validator).
-- **Source-of-truth data plane:** live integrations with [CoStar Real Estate Manager API](https://www.costar.com/products), [Reonomy Properties API](https://www.reonomy.com/), [Cherre Property API](https://cherre.com/), [RCA / MSCI Real Capital Analytics](https://www.msci.com/data-and-analytics/real-estate/real-capital-analytics), [REIS / Moody's CRE](https://www.moodyscre.com/). Postgres + pgvector for the comp embedding index; Snowflake / Databricks as the analytics warehouse.
-- **Symbolic math:** sympy-based T-12 normalization re-runner that replays the rent roll → NOI → cap rate chain deterministically and flags any AI-generated number that does not reconcile.
-- **Observability:** OpenTelemetry → Datadog; Langfuse for the LLM-verifier traces; PagerDuty for IC-eve memo-fail escalations.
-- **Compliance:** SOC 2 Type II baseline (LPs increasingly require it for any tool touching investment decisions); audit log of every fabrication decision retained for the holding period.
-- **Governance:** Every flagged comp produces a workpaper the senior analyst signs off on before IC; every cleared memo carries a verification token the IC chair can verify.
-- **Integrations:** [Yardi Voyager](https://www.yardi.com/) for post-close asset onboarding; [Argus Enterprise](https://www.altusgroup.com/argus/) for the cash-flow model write-back; [MRI](https://www.mrisoftware.com/) where the operator's asset book is split; [VTS](https://www.vts.com/) for leasing handoff; broker OM intake from [ProDeal](https://prodeal360.com/) where applicable.
-- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; canary rollout starts with one asset class (industrial in the Sunbelt, where comp coverage is densest) before expanding.
-
-The Streamlit prototype here demonstrates the *product mechanic* — that three independent verifier paths can catch the canonical fabricated-comp / bad-math / stale-stat patterns on a 6-memo eval set. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
