@@ -746,49 +746,6 @@ If you run it on real work data and get something useful, open an issue or send 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so an AI program lead or a finance partner hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the measurement mechanic and walking the four-step story through in a few screens
-- Walking an AI program lead, a finance business partner, or a CRO through the claim, the pre/post comparison, and the ledger side by side
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two analysts are the only daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant access: no tenant isolation, no row-level security between business lines
-- Hardened auth (OIDC, SAML, fine-grained RBAC) and a sign-off step where finance approves the hard column and the approval is recorded
-- Scheduled recomputation: every interaction is a full server rerun, and a quarterly statement cycle is a batch job
-- Employee-level work data: the production design aggregates at team level, hashes identifiers, and keeps individual rows out of the UI
-- Brand-controlled, pixel-perfect statements that finance can attach to a business case
-
-**If ValueLedger graduated from prototype to product, the production stack would be:**
-- Front end: a statement review console in the bank's design system, with the interval beside every number
-- Back end: a batch service on the bank's existing container platform; estimators run as scheduled jobs per cohort and per quarter
-- Auth: the bank's identity provider with OIDC and role mapping for the AI program lead, finance business partner, product owner, and CRO
-- Data plane: Postgres for cohorts, estimates, ledger lines, and sign-offs; a columnar store for the person-by-week panel; the finance ledger read through an existing export
-- Observability: OpenTelemetry spans from the ingest and estimator jobs into the bank's standard monitoring
-- Governance: each statement carries its cohort rule, its pre-trend result, its interval, and the guardrail status, and is versioned and signed
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — the shape a buyer inside a bank's AI program office would procure. Design, not deployed.
-
-- **Frontend:** a benefit-statement page per use case, embedded in the bank's existing AI governance console, with Claimed, Pre/post, and Ledger columns, the interval, and a hard/soft split.
-- **Auth:** the bank's IdP; RBAC mapping program lead, finance business partner, product owner, CRO, and audit roles.
-- **Backend:** one job per stage (ingest, cohort snapshot, estimator, bootstrap, ledger, guardrail), each idempotent and re-runnable for a past quarter.
-- **Cohort registry:** an append-only record of who was treated or held out, when, and by what rule, so the selection rule is on file before the first number is read.
-- **Integrations:** use-case IDs and approval from 11 TierGate; cost per feature from 07 InferenceLens; pass rates from 04 EvalForge for the guardrail; budget lines from the finance ledger.
-- **Compliance:** designed against the guidance a model used for investment decisions would be compared with (SR 11-7, replaced by SR 26-2 in April 2026, and the NIST AI RMF Measure function); a legal and works-council read on employee work data is a precondition, not an afterthought.
-- **Deployment:** shadow first: run the statements for one use case beside the existing business case, and let finance compare, before any statement replaces a slide.
-
-The Streamlit prototype here shows the *measurement mechanic*: that a comparison group, a rework deduction, a decay curve, a count-once rule, and a budget-line split move a copilot benefit number from +152% off to +5% off on this data. The production architecture above is what the seat I'm pursuing would deliver.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
