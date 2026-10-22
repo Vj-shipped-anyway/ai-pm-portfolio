@@ -591,44 +591,6 @@ If you run it on real intake and get something useful, open an issue or send me 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production.
-
-**Streamlit is right for:**
-- Validating the mechanic (recompute, flag, gate, order) in days, not weeks
-- Walking an AI governance lead or a model risk reviewer through the four-step story with a scenario picker
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where a handful of governance staff are the only daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant use with row-level access control; the intake data names business units, datasets and vendors
-- Hardened authentication and fine-grained roles for sponsors, reviewers, the governance lead and the CRO
-- Write-back workflows: a sponsor answering a flag, a reviewer confirming a duplicate link, a steward fixing a catalog entry. Every widget change reruns the script
-- An append-only decision record that auditors can rely on
-
-**If TierGate graduated from prototype to product, the production shape would be:**
-- A web console embedded where reviewers already work, with the bank's identity provider and role mapping
-- A service per component in [`ARCHITECTURE.md`](./ARCHITECTURE.md), on the bank's existing container platform
-- Postgres for the use-case register and the append-only tier decision record; object storage with write-once retention for evidence files
-- OpenTelemetry into the bank's standard monitoring for queue age and flag volumes
-- Integration with the model inventory and the GRC tool the bank already runs, not a parallel register
-
-### What this would look like as a client-facing SaaS
-
-If TierGate were a real product shipping to a bank's AI governance office (🔴 design only):
-
-- **Frontend:** a console panel for sponsors (the form with live flags), reviewers (the queue and the evidence checklist) and the governance lead (the register and the flag list).
-- **Auth:** SSO with the bank's identity provider; roles for sponsor, reviewer, governance lead, CRO and audit.
-- **Backend:** a service per component; the rubric and the checklist are versioned configuration owned by the governance lead, with a proposer and a different approver for every change.
-- **Data plane:** the use-case register in Postgres; catalog and registry read through read-only connectors; evidence files in write-once storage.
-- **Integrations:** the data catalog, the vendor registry, the model inventory, and the interlocks with 04, 08, 09 and 12.
-- **Deployment:** shadow first (recompute and log, change nothing), then gate one business unit, then the rest.
-
-The Streamlit prototype shows the product mechanic: a written rubric on cross-checked inputs recovers most of the reference tier, and an evidence gate and a tier-ordered queue follow from it. The production architecture above is a design the seat I'm pursuing would validate.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
