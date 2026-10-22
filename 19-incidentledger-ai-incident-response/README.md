@@ -621,34 +621,6 @@ If you run it on real tickets and get something useful, open an issue or send me
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so an incident manager and a platform lead hear the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the rubric, clock and tracker mechanic in days, not weeks
-- Walking an incident manager, a regulatory liaison or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two engineers are the only daily users
-
-**Streamlit is wrong for:**
-- A countdown that has to reach a person. A clock needs a scheduler and a notification channel, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for the manager, the liaison and the reviewer
-- An incident record that has to be immutable and retained under the bank's schedule
-- Brand-controlled UX inside the tools the incident manager already uses
-
-**If IncidentLedger graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Intake: an API behind the existing incident system, with a typed form that replaces the free-text category and the reporter's priority
-- Rubric, classifier and clock engine: stateless workers (Python) reading the policy file as versioned configuration, with a scheduler that evaluates open clocks on a fixed interval
-- Notifications: the engine alerts the incident manager and records what was sent; the bank's own channels send the notices
-- Data plane: Postgres for incidents, clocks, notices and actions; object storage with retention for the evidence record
-- Observability: OpenTelemetry into the platform's existing monitoring; clock evaluation lag and open breaches as the first SLOs
-- Governance: the record written to the model-risk file, with the interlocks to AgentWatch, OversightOps and LineageLog above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
