@@ -589,34 +589,6 @@ If you run it on a real tool log and get something useful, open an issue or send
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the diff, replay and gate mechanic in days, not weeks
-- Walking an agent platform lead, a tool owner or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two platform engineers are the only daily users
-
-**Streamlit is wrong for:**
-- A gate in the release path. A gate has to be an API or a pipeline check that answers in a defined time, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for owners, platform and reviewers
-- Large call logs. Replay over millions of recorded calls needs a worker pool and a columnar store
-- Brand-controlled UX inside the developer portal where owners already work
-
-**If SchemaWatch graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Collector: a scheduled poller plus a publish hook on the tool registry, writing immutable schema revisions keyed by content hash
-- Differ and replay: stateless workers (Python) reading recorded calls from the tool-call log, with sensitive argument values tokenized because replay needs only types and enum values
-- Gate: an HTTP check that the owner's pipeline calls, plus a hold state in the registry
-- Data plane: Postgres for revisions, findings and decisions; a columnar store for replay results; object storage with retention for evidence bundles
-- Observability: OpenTelemetry into the platform's existing monitoring; queue age and gate latency as the first SLOs
-- Governance: decisions and evidence bundles written to the model-risk record, with the interlocks to AgentWatch, PromptShield and LineageLog above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
