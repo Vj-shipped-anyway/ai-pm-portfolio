@@ -627,34 +627,6 @@ If you run it on a real estate and get something useful, open an issue or send m
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform owner hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the resolver, pre-filter and scan mechanic in days, not weeks
-- Walking an assistant platform owner, an information-security reviewer or a privacy officer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two platform engineers are the only daily users
-
-**Streamlit is wrong for:**
-- The filter itself. A filter in the retrieval path has to be a service or a query clause that answers in a defined time, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for platform, security and privacy
-- Large document estates. Resolving groups and scanning documents at volume needs workers and a proper store
-- Brand-controlled UX inside the tools where reviewers already work
-
-**If CorpusGate graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Sync: a scheduled pull plus a change feed from each document store and the group directory, writing versioned ACLs and group edges
-- Resolver and filter: a stateless service that returns the user's effective groups and applies them as a clause inside the retrieval query, so unreadable documents never enter the candidate set
-- Ingestion: a scan stage in the indexing pipeline with a quarantine queue and an owner review step
-- Data plane: PostgreSQL for ACLs, group edges, decisions and findings, partitioned by time where volume needs it; the retrieval store keeps documents, with ACL tags as a hint and never as the source of truth
-- Observability: OpenTelemetry into the platform's existing monitoring; canary leak count and sync lag as the first SLOs
-- Governance: access decisions and canary results written to the model-risk and security records, with the interlocks to HalluGuard, LineageLog and ControlMap above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
