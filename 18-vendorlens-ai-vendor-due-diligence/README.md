@@ -686,34 +686,6 @@ If you run it on a real register and get something useful, open an issue or send
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the evidence rule, the concentration view and the exit score in days, not weeks
-- Walking a third-party risk manager, a business owner or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two analysts are the only daily users
-
-**Streamlit is wrong for:**
-- A review queue with assignments, comments and approvals. That is a workflow, and it belongs in the bank's existing third-party risk system
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for risk, business, procurement and line-2
-- Vendor-facing document upload, which needs scanning, retention and an audit trail
-- Brand-controlled UX inside the tool where reviewers already work
-
-**If VendorLens graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Ingest: connectors to the vendor register, the questionnaire tool and the contract repository, writing immutable snapshots with a content hash
-- Evidence store: object storage with retention for documents, a Postgres table for type, issue date and scope, and a named reader for each document
-- Scoring: a stateless service that reads the snapshot and the policy file and writes a decision with its reasons
-- Data plane: Postgres for vendors, answers, evidence metadata, scores and decisions; object storage with retention for documents and decision bundles
-- Observability: OpenTelemetry into the platform's existing monitoring; evidence age and queue age as the first SLOs
-- Governance: decisions and evidence written to the third-party risk record, with the interlocks to InferenceLens, SwapBrief, SchemaWatch, ControlMap and KillSwitch above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
