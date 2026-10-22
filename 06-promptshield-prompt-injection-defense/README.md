@@ -524,45 +524,6 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking a CISO through the five-layer story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI does not have to scale
-- Internal tools where 1-2 product folks are the only users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
-- Real-time dashboards — every interaction is a full server rerender
-- Latency-sensitive request-path gateways — Streamlit is for the configuration / observability surface, never the data path
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If PromptShield were a real product shipping to a Tier-1 bank's CISO and Head of AI Platform organizations:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system, e.g., JPMorgan Glaze, Capital One Cube) — embedded as a configuration / observability panel inside the bank's AI Platform's gateway-policy console, not a standalone app.
-- **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate); fine-grained RBAC mapping `ps:viewer` → `ps:analyst` → `ps:policy_admin` → `ps:ciso_admin`.
-- **Backend:** FastAPI on the bank's existing K8s/EKS footprint; one stateless service per defense layer (L1, L2, L3, L4, L5); shared OPA policy bundle distributed via Argo CD.
-- **Layer 1 / L2 classifier:** Fine-tuned DeBERTa-v3-large or [Llama Guard 3](https://huggingface.co/meta-llama/Llama-Guard-3-8B) / [Meta Prompt Guard](https://huggingface.co/meta-llama/Prompt-Guard-86M) on T4 / L4 GPUs in the bank's VPC. P99 latency budget 80ms. Continuous retraining from the bank's red-team probe set + the [HuggingFace prompt-injection datasets](https://huggingface.co/datasets/deepset/prompt-injections).
-- **Layer 3 tool gate:** [OPA + Rego](https://www.openpolicyagent.org/) policies deployed via Argo CD; one bundle per service. Native integration with the bank's tool registry. Allow-list of egress destinations (vendor APIs, internal services); hard refusal of everything else.
-- **Layer 4 egress filter:** [Google Cloud DLP](https://cloud.google.com/security/products/dlp) / [Nightfall](https://nightfall.ai/) / [BigID](https://bigid.com/) for the regex-heavy PII detection; custom regex pack for the bank's product-specific patterns (account-number formats, internal customer-ID schemas).
-- **Layer 5 session memory:** Redis Cluster with TTL + per-session [SPIFFE ID](https://spiffe.io/); session state is keyed by `(spiffe_id, session_id)` and never readable cross-session.
-- **Data plane:** Postgres for the immutable `attack_log` table (row-level security, append-only role, immutability trigger); ClickHouse for high-cardinality per-layer fire-rate time series; GCS / S3 with Object Lock for the 7-year audit archive. Interlocks with [LineageLog](../09-lineagelog-ai-decision-audit/) so every block / allow decision joins to the broader decision-grain lineage record.
-- **Observability:** OpenTelemetry → Datadog (the bank's standard); per-layer fire-rate dashboards; PagerDuty on (catch_rate < SLO) or (FP_rate > SLO).
-- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it; alignment to [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/), [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), [MITRE ATLAS](https://atlas.mitre.org/), [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj), and [GLBA Safeguards Rule](https://www.ftc.gov/business-guidance/privacy-security/gramm-leach-bliley-act).
-- **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on catch-rate regression or FP-rate breach.
-
-The Streamlit prototype here demonstrates the *product mechanic* on synthetic data: defense-in-depth against prompt injection landing 99% catch at 1% FP (🟢 measured; the 96%+ production figure is 🟡 modeled). The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
