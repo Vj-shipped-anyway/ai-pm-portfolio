@@ -411,56 +411,6 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking an AI platform lead or an L2 Trust-and-Safety lead through the four-step story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where 1-2 platform engineers are the only daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
-- Real-time websocket dashboards — every interaction is a full server rerender
-- Latency-sensitive CI gate workflows — server-side rerun on every widget change
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-- High-volume judge orchestration (10,800-36,000 judge calls per week at fleet scale) — server-side rerun doesn't scale
-
-**If EvalForge graduated from prototype to product, the production stack would be:**
-- Front end: Next.js + Tailwind + shadcn/ui (or the bank's design system); the L2 authoring UI is a rubric editor + override-audit viewer
-- Back end: FastAPI on the bank's existing K8s/EKS footprint; the judge orchestrator and CI gate run as separate services
-- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; in regulated shops, ForgeRock or PingFederate
-- Data plane: Postgres for the probe registry; ClickHouse for the high-cardinality per-probe scoring time-series; Snowflake or Databricks (whichever the bank already runs) for the rubric-calibration cohort data
-- Observability: OpenTelemetry → Datadog (the bank's standard) and Langfuse for the judge prompt traces
-- Governance: integrate with the bank's GRC tool (Archer, ServiceNow GRC, MetricStream); evidence bundle auto-files on FAIL/REVIEW
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If EvalForge were a real product shipping to a bank's AI platform organization:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui — embedded as a panel inside the bank's AI platform console (Vertex AI Studio, Azure AI Foundry, AWS SageMaker Studio), not a standalone app. Engineers and L2 reviewers work where they already work.
-- **Auth:** SAML / OIDC with the bank's IdP (Okta, ForgeRock, PingFederate); RBAC mapping L1 product owner / L2 trust-and-safety / L3 compliance / L4 audit roles.
-- **Backend:** FastAPI on the bank's existing K8s cluster (EKS / GKE / AKS); microservice per layer (probe runner, judge orchestrator, kappa calculator, CI gate evaluator, override audit service).
-- **Probe registry:** Postgres with content-addressed SHA versioning; probe-set diffs surfaced as Git-style commits.
-- **Rubric calibration:** Snowflake for the historical scoring cohort; Postgres for the current anchor set; quarterly re-anchor cron.
-- **Judge models:** a hosted Anthropic model (primary, snapshot-pinned), Azure OpenAI GPT-4o (secondary, snapshot-pinned), in-VPC fine-tuned Llama 3.1 8B on Triton (tertiary, for HIPAA / PCI features). Cross-vendor kappa is the calibration signal.
-- **CI gate:** GitHub Actions / Argo CD pre-deploy hook; verdict posted as a PR check. FAIL blocks merge; REVIEW requires L2 approval within 24h or auto-blocks.
-- **Observability:** OpenTelemetry → Datadog (system traces); Langfuse for judge prompt traces; PagerDuty for SLO breaches; per-feature dashboards for the L1 PM owner.
-- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate if federal counterparty work; data residency configurable per region (US East, EU West, India for RBI compliance).
-- **Governance:** Native integration with the bank's GRC tool (Archer, ServiceNow GRC, MetricStream); each CI gate verdict auto-files an evidence bundle and routes to the correct L2 queue.
-- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; canary onboarding 1 feature → 4 features → fleet over 90 days; auto-rollback on false-positive rate breach.
-
-The Streamlit prototype here demonstrates the *product mechanic* — that versioned probe sets + calibrated rubrics + cross-vendor judging + a CI gate catches silent vendor-snapshot regressions on first eval run. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
