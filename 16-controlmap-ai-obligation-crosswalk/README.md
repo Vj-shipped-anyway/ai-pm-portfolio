@@ -717,34 +717,6 @@ If you run it on a real library and get something useful, open an issue or send 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the dictionary, scope and freshness mechanic in days, not weeks
-- Walking a head of AI governance, a second-line reviewer or a control owner through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two governance analysts are the only daily users
-
-**Streamlit is wrong for:**
-- A system of record. Statuses, dictionary versions and reviewer verdicts need an audit trail with a proposer and a different approver, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for owners, governance and reviewers
-- Live reads from the register, the library and the evidence systems, with their own retention and access rules
-- Brand-controlled UX inside the GRC tools where reviewers already work
-
-**If ControlMap graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Registry: scheduled importers plus change events from the obligation register, the control library and the evidence systems, keeping their identifiers
-- Matcher and status: stateless workers (Python) over a versioned dictionary, re-run when the dictionary or an evidence date changes
-- Data plane: Postgres for obligations, controls, links, statuses and the dictionary; object storage with retention for exam notes
-- Console: a review UI with a proposer and a different approver for every dictionary change
-- Observability: OpenTelemetry into the platform's existing monitoring; evidence age at read and the share of reviewer-confirmed links as the first SLOs
-- Governance: statuses and exam notes written to the model-risk record, with the interlocks to TierGate, LineageLog, EvalForge, FairLens and IncidentLedger above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
