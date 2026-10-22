@@ -675,54 +675,6 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking a CRO, validator, or compliance lead through the eight-deficiency story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where 1-2 product folks are the only users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no tenant isolation, no row-level security
-- Mobile-first UX on a customer-facing chatbot — Streamlit's responsive story is "ok, not great"
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
-- Real-time websocket dashboards — every interaction is a full server rerender
-- Latency-sensitive customer-facing flows — server-side rerun on every widget change is too slow for a chatbot turn budget
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-
-**If HalluGuard graduated from prototype to product, the production stack would be:**
-- Front end: Next.js + Tailwind + shadcn/ui (or the bank's design system); the verifier and abstention surfaces sit in the existing chatbot UI, not a standalone app
-- Back end: FastAPI on the bank's existing K8s/EKS footprint; the LoRA verifier served via vLLM on 2x L4 GPUs, OpenTelemetry for trace export
-- Auth: Auth0 / Okta / Cognito with OIDC + RBAC; in regulated shops, ForgeRock or PingFederate
-- Data plane: Postgres + pgvector for the verifier index and probe corpus; Snowflake or Databricks for the analytics warehouse the bank already runs
-- Observability: OpenTelemetry → Datadog (the bank's standard) and Langfuse for the verifier traces
-- Governance: integrate with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream — pick what your CRO already pays for)
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If HalluGuard were a real product shipping to a bank's chatbot oversight team:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's own design system) — embedded as a React component inside the existing chatbot console, not a standalone app.
-- **Auth:** SAML / OIDC integration with the bank's IdP (Okta, ForgeRock, PingFederate); RBAC mapping line-1 chatbot owner / line-2 model risk / line-3 audit roles.
-- **Backend:** FastAPI on the bank's existing K8s cluster (typically EKS or GKE); microservice per check (verifier, abstention rewriter, probe runner). The LoRA Llama 3.1 8B verifier served via vLLM on 2× L4 GPUs with autoscaling on QPS.
-- **Vendor pinning:** Anthropic snapshot pinning enforced at gateway (model_id + snapshot_date locked); diffs surface as drift events.
-- **Data plane:** Postgres + pgvector for the verifier index and probe corpus; Snowflake / Databricks (whichever the bank already runs) for the analytics warehouse.
-- **Observability:** OpenTelemetry → Datadog (the bank's standard) for system traces; Langfuse for LLM-specific verifier traces; PagerDuty for SLO breaches (nightly probe regression).
-- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate if federal counterparty work; data residency configurable per region (US East, EU West, India for RBI compliance).
-- **Governance:** Native integration with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream); each abstention event auto-files a Compliance disposition record.
-- **Deployment:** Blue-green via Argo CD; feature flags via LaunchDarkly; canary rollout 1% → 10% → 50% → 100% over 14 days, with auto-rollback on probe regression.
-
-The Streamlit prototype here shows the *product mechanic*: a per-use-case threshold that holds back answers the retrieved data does not support, using fixed mock verifier scores on a synthetic query set. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
