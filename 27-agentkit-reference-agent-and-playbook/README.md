@@ -785,35 +785,6 @@ If you run it on a real workflow and get something useful, open an issue or send
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the brief-to-agent mechanic in days, not weeks
-- Walking a program lead, a security reviewer or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two platform engineers are the only daily users
-
-**Streamlit is wrong for:**
-- An approval screen. S07 and S09 are control points with a role, a person identity and a digest; they belong in the bank's own work queue behind its SSO, not on a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for the analyst, the reviewer, the operator, the owner and the auditor
-- Large audit history. A trace store with a chain check needs a database and an immutable archive
-- Brand-controlled UX inside the operations console where people already work
-
-**If AgentKit graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Brief registry: versioned briefs with an approver per version; the config and acceptance tests derived, never hand-edited
-- Gateway: one choke point that checks scope, approval, idempotency and output shape before a call reaches a system
-- Orchestrator: workers running the per-case state machine, parking cases at the gates, honoring the kill switch before every step
-- Approval service: S07 and S09 in the bank's work queue, with the answer checked by the kit
-- Audit store: append-only PostgreSQL partitions with an Object Lock archive, a chain check and a completeness check on a schedule
-- Shadow job: replay and scorecard regenerated when a skill or a threshold changes
-- Observability: OpenTelemetry into the platform's existing monitoring; resubmissions without an approval and out-of-scope calls as the first alerts
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
