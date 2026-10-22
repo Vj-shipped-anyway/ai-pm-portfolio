@@ -698,34 +698,6 @@ If you run it on a real grant store and call log and get something useful, open 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so an access-governance lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the diff, proposal and replay mechanic in days, not weeks
-- Walking an agent platform owner, an access-governance reviewer or a model risk reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two platform engineers are the only daily users
-
-**Streamlit is wrong for:**
-- A review queue where owners answer attestation questions and every answer is a signed record. That is a workflow with state, roles and an audit trail, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate roles for owners, governance and reviewers
-- Large call logs. A nightly diff over millions of calls needs a columnar store and a worker pool
-- Brand-controlled UX inside the access-governance tool where reviewers already work
-
-**If ScopeKeeper graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Collector: a nightly snapshot of the grant store plus a read-only view of the tool-call log, written as immutable daily usage facts
-- Differ, proposer and replay: stateless workers (Python) reading usage facts, with scope names and counts only, no call arguments
-- Review queue: a workflow service with owner attestation, a separate approver for any change to a high-impact scope, and a hook that applies an approved change in the grant store
-- Data plane: Postgres for grants, proposals, decisions and attestations; a columnar store for usage facts; object storage with retention for evidence bundles
-- Observability: OpenTelemetry into the platform's existing monitoring; queue age and review latency as the first SLOs
-- Governance: decisions and evidence bundles written to the model-risk and access-governance records, with the interlocks to AgentWatch, PromptShield and OversightOps above
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
