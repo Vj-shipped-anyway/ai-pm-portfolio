@@ -529,43 +529,6 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking a Head of AI Platform through the composition story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI does not have to scale
-- Internal tools where 1-2 product folks are the only users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
-- Real-time dashboards — every interaction is a full server rerender
-- Latency-sensitive SRE on-call workflows — server-side rerun on every widget change
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If AgentWatch were a real product shipping to a Tier-1 bank's AI Platform and SRE organizations:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system, e.g., JPMorgan Glaze, Capital One Cube) — embedded as a panel inside the SRE on-call workflow (PagerDuty, Datadog), not a standalone app.
-- **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate); fine-grained RBAC mapping `aw:viewer` → `aw:agent_owner` → `aw:validator` → `aw:platform_admin` → `aw:cro`.
-- **Backend:** FastAPI on the bank's existing K8s/EKS footprint; per-agent sidecar processes consuming the framework's [OpenTelemetry](https://opentelemetry.io/) export.
-- **Data plane:** **Postgres** for the immutable `agent_incidents` table (row-level security, immutability trigger, append-only role); **ClickHouse** for the high-cardinality reasoning-trace event stream (interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse for shared drift-signal querying); **GCS / S3 with Object Lock** for the WORM evidence bundles and 7-year audit archive.
-- **Composition engine:** Pub/Sub / EventBridge / Event Grid for source fan-in; 5-minute compose SLO; idempotent on `(run_id, deficiency_class)`.
-- **Observability:** [OpenTelemetry](https://opentelemetry.io/) → Datadog (the bank's standard); Langfuse for the agent reasoning-trace path; PagerDuty for SLO breaches.
-- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it; data residency configurable per region (US East, EU West, India for RBI compliance).
-- **Governance:** Native integration with Archer / ServiceNow GRC / MetricStream; each incident gets a workflow ID; attestation routes to the line-2 validator's queue; legal-hold cascade is automatic.
-- **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on composition-completeness breach.
-
-The Streamlit prototype here demonstrates the *product mechanic* on synthetic data: agent-shaped composition of six failure classes into one incident pack. The MTTR drop from 3 weeks to under 10 minutes and the per-incident cost bound are design targets, not measured results. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
