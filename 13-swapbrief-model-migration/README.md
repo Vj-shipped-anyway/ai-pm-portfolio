@@ -661,35 +661,6 @@ If you run it on real evaluation results and get something useful, open an issue
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead or a model risk reviewer hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the decision mechanic in days, not weeks
-- Walking an AI platform lead, a model risk reviewer, or a product owner through the six-deficiency story end to end
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two people are the daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant use: no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained roles): the thresholds in a brief need a named proposer and a different approver
-- Anything that must run on a schedule: trigger evaluation against a live scoring stream is a service, not a page rerun
-- An append-only audit trail of who approved which threshold
-- Brand-controlled UX inside the bank's model inventory and release workflow
-
-**If SwapBrief graduated from prototype to product, the production stack would be (design, nothing deployed):**
-- Front end: a panel inside the bank's model inventory and release workflow, not a standalone app
-- Back end: a stateless service for the analysis and decision rule, a scheduler for trigger evaluation
-- Auth: the bank's identity provider with role mapping (platform lead, reviewer, product owner, finance partner, audit)
-- Data plane: Postgres for cases, decisions, thresholds, and the audit log; a column store for the scored-response time series the triggers read
-- Observability: OpenTelemetry traces, a metrics dashboard for trigger state
-- Governance: the brief and its approvals attach to the model risk record for the feature
-
-The portfolio prototype demonstrates the *mechanic*: slice intervals, a status ladder, a prompt-fair comparison, and triggers derived from the evaluation. The production architecture is in [`ARCHITECTURE.md`](./ARCHITECTURE.md), and it is a design.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
