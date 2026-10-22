@@ -593,50 +593,6 @@ If you run it on a real manual and get something useful, open an issue or send m
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the probe-and-gate mechanic in days, not weeks
-- Walking an AI platform lead or a model risk reviewer through the four-step story end to end
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two platform engineers are the daily users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS: no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained RBAC) in a regulated bank
-- Long-running sweeps: a sweep against a hosted assistant is minutes to hours of calls, and a rerun-on-every-widget-change model restarts the page, not the job
-- Latency-sensitive CI gate workflows: the gate belongs in the pipeline, not in a page
-- Brand-controlled UX for a policy owner who reviews slice lists daily
-
-**If PolicyNeedle graduated from prototype to product, the production stack would be (design, not built):**
-- Front end: a results console embedded in the bank's AI platform console; the policy owner's view is a slice list and a manual viewer with the planted clause highlighted
-- Back end: a Python service on the bank's existing container platform; the runner, scorer and gate as separate workers
-- Auth: the bank's identity provider with role mapping for AI platform lead, policy owner, model risk reviewer and product owner
-- Data plane: Postgres for manuals, probe sets, runs and gate decisions; object storage with write-once retention for sweep evidence
-- Observability: OpenTelemetry to the bank's standard monitoring; Langfuse for the reader-adapter traces
-- Governance: gate verdicts filed to the bank's model risk workflow as an evidence bundle
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — the SaaS shape a buyer would actually procure. 🔴 Designed, not built.
-
-- **Frontend:** a panel inside the bank's AI platform console, not a standalone app. Policy owners and model risk reviewers work where they already work.
-- **Auth:** SAML or OIDC with the bank's identity provider; roles for AI platform lead, policy owner, model risk reviewer and assistant product owner.
-- **Backend:** one service per stage (planter, runner, scorer, matrix, gate) so a long sweep never blocks the gate API.
-- **Probe registry:** versioned probe sets, content-addressed, so a gate verdict names the exact probe-set version it ran.
-- **Scoring:** exact match first, then a tolerant scorer for paraphrase and verbosity, with every tolerant pass logged for review. This closes the known limit; it is not built.
-- **CI gate:** a pre-release check that blocks a deploy on FAIL and requires a named approver and an audit entry to override.
-- **Governance:** each gate verdict files an evidence bundle (probe-set version, reader version, slice matrix, flagged-cell list) to the model risk workflow.
-- **Deployment:** shadow first. Run the sweep on every release candidate, publish the matrix, and only then make the gate blocking.
-
-The Streamlit prototype here shows the *product mechanic*: that a probe set with planted forms of fact, a per-slice matrix and a gate flags known faults and stays quiet on a control. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
