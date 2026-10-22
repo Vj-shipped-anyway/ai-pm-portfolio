@@ -587,43 +587,6 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking a Head of Compliance through the calibrated-review story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI does not have to scale
-- Internal tools where 1-2 product folks are the only users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
-- Real-time reviewer-queue dashboards — every interaction is a full server rerender
-- Latency-sensitive reviewer workflows — server-side rerun on every widget change
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If OversightOps were a real product shipping to a Tier-1 bank's compliance and reviewer-operations organizations:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system, e.g., JPMorgan Glaze, Capital One Cube) — embedded as a panel inside the reviewer workbench in Pega / Appian / ServiceNow, not a standalone app.
-- **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate); fine-grained RBAC mapping `oo:reviewer_junior` → `oo:reviewer_senior` → `oo:reviewer_lead` → `oo:queue_admin` → `oo:compliance` → `oo:cro` → `oo:admin`.
-- **Backend:** FastAPI on the bank's existing K8s/EKS footprint; Cloud Functions / Lambda for the case ingester, the rubber-stamp blocker, and the drift detector.
-- **Data plane:** **Postgres** for the immutable `oversight_decisions` table (row-level security, immutability trigger, append-only role); **ClickHouse** for reviewer-throughput and SLA-breach time-series; **GCS / S3 with Object Lock** for the WORM evidence bundles and 7-year audit archive.
-- **Event spine:** Kafka / Pub/Sub for case ingestion fan-in; Temporal for long-running review workflows with the tier-specific SLA timer (8m / 3m / 1m); PagerDuty for breach alerts.
-- **Observability:** OpenTelemetry → Datadog (the bank's standard); custom Grafana dashboards for rubber-stamp rate / SLA breaches / calibration drift; weekly calibration packet auto-emailed to each reviewer.
-- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it; data residency configurable per region.
-- **Governance:** Native integration with Archer / ServiceNow GRC / MetricStream; each rubber-stamp block gets a workflow ID; escalation routes to the line-2 validator's queue; calibration packets are auditable from the workbench.
-- **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on rubber-stamp-rate regression or SLA-breach spike.
-
-The Streamlit prototype here demonstrates the *product mechanic* — that difficulty-stratified routing + a rubber-stamp blocker + calibration drift + a ground-truth feedback loop closes the six HITL deficiencies on synthetic data. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
