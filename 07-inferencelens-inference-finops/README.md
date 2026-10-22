@@ -549,43 +549,6 @@ If you run it on real data and get something useful, open an issue or send me th
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a hiring manager hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the product mechanic in 5 days, not 5 weeks
-- Walking a Head of FinOps through the per-feature attribution story end-to-end on a free deploy
-- Single-tenant, single-page workflows where the UI does not have to scale
-- Internal tools where 1-2 product folks are the only users
-
-**Streamlit is wrong for:**
-- Production multi-tenant SaaS — no tenant isolation, no row-level security
-- Hardened auth (OIDC, SAML, fine-grained RBAC) — community-tier auth is too thin for a regulated bank
-- Real-time dashboards — every interaction is a full server rerender
-- Latency-sensitive operator workflows — server-side rerun on every widget change
-- Brand-controlled pixel-perfect UX — too much chrome you don't own
-
-### What this would look like as a client-facing SaaS
-
-> **Production stack reassessment** — strengthening the Streamlit-vs-production framing above with the SaaS shape a buyer would actually procure.
-
-If InferenceLens were a real product shipping to a Tier-1 bank's FinOps and AI Platform organizations:
-
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system, e.g., JPMorgan Glaze, Capital One Cube) — embedded as a panel inside the FinOps team's existing dashboard (Apptio Cloudability, CloudHealth), not a standalone app.
-- **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate); fine-grained RBAC mapping `il:viewer` → `il:finops_analyst` → `il:feature_owner` → `il:cfo` → `il:admin`.
-- **Backend:** FastAPI on the bank's existing K8s/EKS footprint; per-vendor billing-API ingesters run as Lambdas / Cloud Functions.
-- **Data plane:** **ClickHouse** for the high-cardinality cost-event table (10-50x cheaper than Postgres for time-series at this volume; same engine [LineageLog](../09-lineagelog-ai-decision-audit/) uses); **Postgres** for the feature catalog + recommender decision log; **Snowflake** read-only for the revenue-attribution join; **S3 Object Lock** for the CFO-pack archive.
-- **Composition engine:** OpenTelemetry collector → Pub/Sub / EventBridge / Event Grid fan-in into ClickHouse; 5-minute compose SLO; idempotent on `(feature_id, request_id)`.
-- **Observability:** OpenTelemetry → Datadog (the bank's standard); PagerDuty for runaway alerts; the cost-event stream itself IS the observability for InferenceLens.
-- **Compliance:** SOC 2 Type II baseline; aligned to FinOps Foundation framework's Level-3 maturity on the AI domain; NIST AI RMF Govern function on kill-criterion for dead features.
-- **Governance:** Native integration with Apptio Cloudability / CloudHealth — InferenceLens publishes per-feature AI spend; the bank's existing FinOps tooling aggregates with non-AI compute for the executive view.
-- **Deployment:** Blue-green via Argo CD; canary rollout 1% → 10% → 50% → 100% over 14 days; auto-rollback on composition-completeness breach.
-
-The Streamlit prototype here illustrates the *product mechanic* — that per-feature attribution can compress runaway detection from 6 weeks to 1 day, and that a cheaper-model substitution recommender can drive a modeled 25-30% spend reduction. The production architecture above is what the seat I'm pursuing actually delivers.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
