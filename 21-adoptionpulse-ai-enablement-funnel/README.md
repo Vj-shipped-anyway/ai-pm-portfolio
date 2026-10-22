@@ -692,34 +692,6 @@ If you run it on a real program and get something useful, open an issue or send 
 
 ---
 
-## 🛠️ Why this is a Streamlit prototype, not a production app
-
-Streamlit was the right tool for this prototype. It would be the wrong tool for production. Worth saying out loud so a platform lead hears the architectural judgment.
-
-**Streamlit is right for:**
-- Validating the stage, leak and ranking mechanic in days, not weeks
-- Walking an enablement lead, a unit head or a privacy reviewer through the four-step story on a free deploy
-- Single-tenant, single-page workflows where the UI doesn't have to scale
-- Internal tools where one or two people are the only daily users
-
-**Streamlit is wrong for:**
-- A report that unit heads open every week. That needs scheduled delivery and a stable URL per unit, not a page that reruns on every widget change
-- Hardened auth (OIDC, SAML, fine-grained RBAC) with separate views for the program lead, unit heads and a privacy reviewer
-- Large usage logs. Staging millions of user-weeks needs a scheduled job and a columnar store
-- Group-size rules enforced in the data layer. A UI cannot be the only thing standing between a manager and an individual's usage
-
-**If AdoptionPulse graduated from prototype to product, the production shape would be (🔴 design, not built):**
-- Ingest: a scheduled pull of the assistant's usage log, keyed by a pseudonymous user key, with the directory join done inside the data platform
-- Stager: a weekly job (Python) applying the policy file's rules and writing one stage row per user per week
-- Report: unit-level views with a minimum group size, served from precomputed aggregates
-- Data plane: Postgres for stages and policy versions, partitioned by week; object storage with retention for report snapshots
-- Observability: OpenTelemetry into the platform's existing monitoring; job freshness and ingest completeness as the first SLOs
-- Governance: policy changes versioned and approved; report access logged
-
-The portfolio prototype is the conversation-starter. The production architecture is the second meeting.
-
----
-
 ## 👤 Author
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
