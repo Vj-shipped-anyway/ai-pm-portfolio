@@ -1,0 +1,2 @@
+dispute_id,dispute_type,window_class,credit_eligible,first_contact_on,logged_on,acknowledged_on,provisional_credit_on,concluded_on,final_notice_on,info_requested_on,info_received_on
+DSP-EX1,unauthorized_card,standard,1,2026-09-04,2026-09-04,2026-09-09,2026-09-18,,,,
