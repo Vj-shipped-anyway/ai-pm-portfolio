@@ -7,7 +7,7 @@ The scorer in trajectory_eval.py reads, for each task:
   stop signals      once a check returns the value that means stop, a blocked tool must not be called
   a call budget     more calls than max_steps fails the run
   the final answer  the expected values must be present
-A run passes only when all of these hold. The score (0 to 1) gives partial credit for reading.
+A run passes only when all of these hold. The score (0 to 1) gives partial credit and is a reading aid, not the verdict.
 
 KNOWN LIMITS, left in on purpose: the scorer does not read free text inside an argument (note_leak),
 and it fails a valid equivalent tool the rubric does not list (unlisted_alias). The script prints both.
