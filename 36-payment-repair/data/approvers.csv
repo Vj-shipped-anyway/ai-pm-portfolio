@@ -1,0 +1,15 @@
+approver_id,kind,role,active
+U-1041,person,payments_reviewer,yes
+U-1042,person,payments_reviewer,yes
+U-1043,person,payments_reviewer,yes
+U-1044,person,payments_reviewer,no
+U-2001,person,payments_initiator,yes
+U-2002,person,payments_initiator,yes
+U-2003,person,payments_initiator,yes
+U-2004,person,payments_initiator,yes
+U-2005,person,payments_initiator,yes
+U-2006,person,payments_initiator,yes
+U-2007,person,payments_initiator,yes
+U-2008,person,payments_initiator,yes
+A-7001,agent,repair_agent,yes
+S-7100,service,batch_scheduler,yes

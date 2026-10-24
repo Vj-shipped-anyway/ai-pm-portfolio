@@ -1,0 +1,375 @@
+msg_id,path,kind,true_value,source_available
+M-0003,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,DUMONL22XXX,directory
+M-0004,GrpHdr.NbOfTxs,missing,1,message
+M-0005,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,BOTAIT22XXX,directory
+M-0008,CdtTrfTxInf.PmtId.UETR,blank,90e23cc1-14f1-4334-aaa5-62cab1150cdf,none
+M-0009,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,LENENLMMXXX,none
+M-0010,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TIRANL2XXXX,directory
+M-0012,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,GBP,none
+M-0013,CdtTrfTxInf.Cdtr.Nm,missing,Zame Marine NV,none
+M-0015,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0018,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,NODEDEFF,directory
+M-0020,GrpHdr.NbOfTxs,blank,1,message
+M-0021,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TIRANL2XXXX,directory
+M-0022,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,DE,iban_prefix
+M-0023,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,PUBADELLXXX,none
+M-0024,CdtTrfTxInf.PmtId.UETR,blank,79656852-e719-4b3b-acd8-5bb5507a3e00,none
+M-0028,CdtTrfTxInf.PmtId.UETR,blank,834a4e87-1c04-467d-92f7-ad085eb969aa,order
+M-0030,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,NODEDEFF,directory
+M-0030,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,DE,iban_prefix
+M-0031,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,NEPUDEPP,directory
+M-0032,CdtTrfTxInf.Dbtr.Nm,missing,Zitefu Ceramics BV,master
+M-0033,GrpHdr.NbOfTxs,blank,1,message
+M-0035,CdtTrfTxInf.Dbtr.Nm,blank,Moba Electrical SL,master
+M-0036,CdtTrfTxInf.PmtId.UETR,blank,c766fdcd-0eb7-499a-90d4-057995285d0e,order
+M-0037,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TIRANL2XXXX,directory
+M-0040,CdtTrfTxInf.Cdtr.Nm,blank,Bozi Machining SARL,none
+M-0041,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,IT,iban_prefix
+M-0045,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,NODEDEFF,directory
+M-0047,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,GBP,none
+M-0048,CdtTrfTxInf.Dbtr.Nm,blank,Mafo Logistics SL,master
+M-0049,CdtTrfTxInf.ChrgBr,missing,SHAR,none
+M-0050,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,IT,none
+M-0051,CdtTrfTxInf.CdtrAcct.Id.IBAN,blank,IT60950139872096152450,none
+M-0052,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,CHF,none
+M-0053,CdtTrfTxInf.Dbtr.Nm,blank,Zeko Freight GmbH,master
+M-0055,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,FOTUDEMM,directory
+M-0056,CdtTrfTxInf.PmtId.UETR,missing,9929cf0a-8bfe-491f-b941-83524a0478b8,order
+M-0057,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,FR,iban_prefix
+M-0058,CdtTrfTxInf.IntrBkSttlmAmt,malformed,961.92,none
+M-0059,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0060,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,NODEDEFF,directory
+M-0062,CdtTrfTxInf.Dbtr.Nm,blank,Vigifa Foods SL,none
+M-0063,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,VOGOES2X,directory
+M-0065,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,FR,iban_prefix
+M-0066,CdtTrfTxInf.CdtrAcct.Id.IBAN,missing,FR25942565396386602514,none
+M-0067,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,FOTUDEMM,directory
+M-0068,CdtTrfTxInf.ChrgBr,blank,CRED,order
+M-0069,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0070,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,FR,iban_prefix
+M-0071,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,KATEBEPPXXX,none
+M-0073,CdtTrfTxInf.ChrgBr,missing,SHAR,order
+M-0074,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TEBENL2XXXX,none
+M-0076,CdtTrfTxInf.Cdtr.Nm,blank,Pomido Logistics NV,none
+M-0079,GrpHdr.NbOfTxs,blank,1,message
+M-0079,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0080,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TIRANL2XXXX,directory
+M-0080,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,NL,iban_prefix
+M-0083,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,BE,iban_prefix
+M-0084,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0085,CdtTrfTxInf.Dbtr.Nm,blank,Nubipu Machining SARL,master
+M-0086,CdtTrfTxInf.Cdtr.Nm,placeholder,Vofe Logistics SL,none
+M-0087,CdtTrfTxInf.CdtrAcct.Id.IBAN,blank,ES37985099324326265310,none
+M-0088,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,BAVIDEFFXXX,directory
+M-0089,CdtTrfTxInf.PmtId.UETR,blank,b926326f-dc15-4768-8de9-00c204a1e3e6,order
+M-0090,GrpHdr.NbOfTxs,blank,1,message
+M-0090,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0091,CdtTrfTxInf.Dbtr.Nm,missing,Vasabi Freight SARL,master
+M-0092,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,GBP,none
+M-0093,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,KANUES22XXX,none
+M-0095,CdtTrfTxInf.Cdtr.Nm,missing,Fimonu Plastics SpA,none
+M-0096,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,DUMONL22XXX,directory
+M-0097,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,SATUIT22XXX,none
+M-0098,CdtTrfTxInf.IntrBkSttlmAmt,malformed,15879.51,none
+M-0099,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,FAROFR22XXX,directory
+M-0099,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,FR,iban_prefix
+M-0101,CdtTrfTxInf.IntrBkSttlmAmt,blank,9223.45,none
+M-0102,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,NL,iban_prefix
+M-0106,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,VOGOES2X,directory
+M-0107,GrpHdr.NbOfTxs,blank,1,message
+M-0107,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,CHF,none
+M-0108,GrpHdr.NbOfTxs,blank,1,message
+M-0109,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,BUKUESFF,directory
+M-0110,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TUBUBE22XXX,directory
+M-0110,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,BE,iban_prefix
+M-0113,CdtTrfTxInf.Dbtr.Nm,blank,Nive Chemicals GmbH,none
+M-0114,CdtTrfTxInf.ChrgBr,blank,SHAR,order
+M-0115,CdtTrfTxInf.Cdtr.Nm,blank,Gamu Machining SpA,none
+M-0117,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TOMIESLLXXX,none
+M-0118,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,NUKOESPP,directory
+M-0118,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,ES,iban_prefix
+M-0119,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,BE,none
+M-0120,CdtTrfTxInf.PmtId.UETR,missing,013f4358-15f5-4374-91ff-87048202dc60,order
+M-0121,CdtTrfTxInf.Dbtr.Nm,blank,Ninu Ceramics BV,master
+M-0122,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,SATUIT22XXX,none
+M-0124,CdtTrfTxInf.Dbtr.Nm,missing,Tora Freight SARL,master
+M-0128,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,LENENLMMXXX,none
+M-0130,CdtTrfTxInf.PmtId.UETR,blank,f99ef935-3634-43b1-9f2f-660dab275f57,none
+M-0131,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TIRANL2XXXX,directory
+M-0132,CdtTrfTxInf.PmtId.UETR,missing,e6637670-a337-49d1-b84e-804f330f1431,none
+M-0133,GrpHdr.NbOfTxs,missing,1,message
+M-0134,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,FOTUDEMM,directory
+M-0134,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,DE,iban_prefix
+M-0135,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0138,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,PUBADELLXXX,none
+M-0140,CdtTrfTxInf.Dbtr.Nm,missing,Boli Chemicals GmbH,master
+M-0141,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,VOGOES2X,directory
+M-0142,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,BOTAIT22XXX,directory
+M-0144,CdtTrfTxInf.Dbtr.Nm,missing,Sire Freight SL,master
+M-0146,GrpHdr.NbOfTxs,missing,1,message
+M-0147,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,NIKUFR22XXX,directory
+M-0148,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,FOTUDEMM,directory
+M-0149,CdtTrfTxInf.IntrBkSttlmAmt,malformed,149621.69,none
+M-0150,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,LENENLMMXXX,none
+M-0151,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TOMIESLLXXX,none
+M-0152,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,ES,iban_prefix
+M-0153,CdtTrfTxInf.Dbtr.Nm,missing,Sori Timber SL,master
+M-0154,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,CHF,none
+M-0155,CdtTrfTxInf.PmtId.UETR,missing,87f7150c-48ce-4eaa-a99d-4ecf6a2ce30d,none
+M-0156,CdtTrfTxInf.ChrgBr,blank,CRED,order
+M-0158,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,IT,iban_prefix
+M-0159,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TUBUBE22XXX,directory
+M-0161,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,KIZEBE2XXXX,directory
+M-0162,CdtTrfTxInf.Cdtr.Nm,placeholder,Ruki Logistics SpA,none
+M-0165,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,VOGOES2X,directory
+M-0166,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,CHF,none
+M-0167,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,DE,iban_prefix
+M-0169,CdtTrfTxInf.PmtId.UETR,missing,0d6b6317-4816-454e-a1f4-5dde7fdf4207,order
+M-0170,CdtTrfTxInf.IntrBkSttlmAmt,blank,7047.36,none
+M-0171,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0172,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,DASOFR2XXXX,directory
+M-0172,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,FR,iban_prefix
+M-0173,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,PEGIFRPP,directory
+M-0174,CdtTrfTxInf.Cdtr.Nm,placeholder,Merami Freight NV,none
+M-0175,CdtTrfTxInf.Dbtr.Nm,missing,Sori Textiles SARL,master
+M-0176,CdtTrfTxInf.ChrgBr,missing,SHAR,none
+M-0178,CdtTrfTxInf.PmtId.UETR,blank,263a32b9-50ca-4033-a808-88a6cfdddeac,order
+M-0183,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0184,CdtTrfTxInf.ChrgBr,blank,DEBT,order
+M-0186,CdtTrfTxInf.ChrgBr,blank,SHAR,none
+M-0187,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,CHF,none
+M-0188,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TUBUBE22XXX,directory
+M-0189,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,FR,iban_prefix
+M-0193,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,DUMONL22XXX,directory
+M-0194,CdtTrfTxInf.ChrgBr,blank,SHAR,none
+M-0196,CdtTrfTxInf.Dbtr.Nm,blank,Zitefu Ceramics BV,master
+M-0197,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TIRANL2XXXX,directory
+M-0198,CdtTrfTxInf.Dbtr.Nm,blank,Lurozi Paper SARL,master
+M-0200,CdtTrfTxInf.ChrgBr,missing,SHAR,none
+M-0201,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,FR,iban_prefix
+M-0202,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0204,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,PEGIFRPP,directory
+M-0205,CdtTrfTxInf.ChrgBr,missing,DEBT,order
+M-0207,CdtTrfTxInf.Cdtr.Nm,blank,Navu Logistics SARL,book
+M-0210,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,BOTAIT22XXX,directory
+M-0212,CdtTrfTxInf.PmtId.UETR,missing,87413a81-3ab4-42cf-94d9-17f9c7125221,order
+M-0213,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,BAVIDEFFXXX,directory
+M-0214,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TIRANL2XXXX,directory
+M-0215,GrpHdr.NbOfTxs,blank,1,message
+M-0216,CdtTrfTxInf.Cdtr.Nm,missing,Lapivi Packaging BV,book
+M-0217,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,BAVIDEFFXXX,directory
+M-0220,GrpHdr.NbOfTxs,missing,1,message
+M-0221,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,FOTUDEMM,directory
+M-0223,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,FOTUDEMM,directory
+M-0226,CdtTrfTxInf.PmtId.UETR,blank,745c72ba-6443-4129-976a-d7b58ebbda74,order
+M-0227,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TUBUBE22XXX,directory
+M-0229,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,VOGOES2X,directory
+M-0231,CdtTrfTxInf.Cdtr.Nm,blank,Zamedi Ceramics GmbH,book
+M-0233,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,NODEDEFF,directory
+M-0234,CdtTrfTxInf.ChrgBr,missing,DEBT,order
+M-0235,CdtTrfTxInf.Cdtr.Nm,blank,Vosidu Electrical BV,book
+M-0236,CdtTrfTxInf.Cdtr.Nm,blank,Bevi Electrical SARL,book
+M-0238,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,FR,iban_prefix
+M-0240,CdtTrfTxInf.PmtId.UETR,blank,aa5f00df-0c8a-4339-bf77-3e2a61cd6576,order
+M-0241,CdtTrfTxInf.Cdtr.Nm,placeholder,Gitako Chemicals NV,none
+M-0242,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,SANINLMMXXX,directory
+M-0243,CdtTrfTxInf.Dbtr.Nm,missing,Vebo Foods BV,master
+M-0246,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TIRANL2XXXX,directory
+M-0248,GrpHdr.NbOfTxs,blank,1,message
+M-0248,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0249,GrpHdr.NbOfTxs,blank,1,message
+M-0250,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TIRANL2XXXX,directory
+M-0251,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0254,CdtTrfTxInf.Dbtr.Nm,missing,Vasabi Freight SARL,master
+M-0255,CdtTrfTxInf.Cdtr.Nm,missing,Toda Electrical GmbH,book
+M-0257,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,BAVIDEFFXXX,directory
+M-0258,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,KANUES22XXX,none
+M-0261,CdtTrfTxInf.Cdtr.Nm,placeholder,Keti Chemicals NV,none
+M-0262,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,FR,iban_prefix
+M-0264,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,NIKUFR22XXX,directory
+M-0265,GrpHdr.NbOfTxs,blank,1,message
+M-0266,GrpHdr.NbOfTxs,missing,1,message
+M-0267,CdtTrfTxInf.ChrgBr,blank,SHAR,order
+M-0268,CdtTrfTxInf.Cdtr.Nm,missing,Nilo Optics NV,book
+M-0269,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,IT,iban_prefix
+M-0270,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0272,CdtTrfTxInf.Dbtr.Nm,missing,Bukoga Timber SARL,master
+M-0273,CdtTrfTxInf.PmtId.UETR,blank,8ebf7d91-0845-44f8-b719-0fee018000a2,order
+M-0274,GrpHdr.NbOfTxs,blank,1,message
+M-0275,CdtTrfTxInf.Dbtr.Nm,missing,Gamepu Freight BV,none
+M-0276,GrpHdr.NbOfTxs,missing,1,message
+M-0280,CdtTrfTxInf.ChrgBr,missing,DEBT,order
+M-0281,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0282,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0284,GrpHdr.NbOfTxs,missing,1,message
+M-0285,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,NUKOESPP,directory
+M-0286,GrpHdr.NbOfTxs,missing,1,message
+M-0286,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0290,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,NEPUDEPP,directory
+M-0291,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0292,GrpHdr.NbOfTxs,missing,1,message
+M-0293,CdtTrfTxInf.ChrgBr,missing,SLEV,order
+M-0295,CdtTrfTxInf.ChrgBr,missing,SHAR,order
+M-0296,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TOMIESLLXXX,none
+M-0297,CdtTrfTxInf.Cdtr.Nm,placeholder,Zada Chemicals GmbH,none
+M-0298,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,SATUIT22XXX,none
+M-0300,CdtTrfTxInf.PmtId.UETR,missing,350fea2e-c535-4a4e-8e6c-a6ed1d320e5a,none
+M-0301,GrpHdr.NbOfTxs,blank,1,message
+M-0303,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TUBUBE22XXX,directory
+M-0304,CdtTrfTxInf.CdtrAcct.Id.IBAN,missing,FR64921163089207903060,none
+M-0305,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,ZEKEITLLXXX,directory
+M-0306,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,KANUES22XXX,none
+M-0307,CdtTrfTxInf.ChrgBr,missing,SHAR,order
+M-0309,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0311,GrpHdr.NbOfTxs,missing,1,message
+M-0313,CdtTrfTxInf.Cdtr.Nm,blank,Fifapu Foods SL,none
+M-0315,CdtTrfTxInf.Dbtr.Nm,blank,Zize Textiles GmbH,master
+M-0316,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TUBUBE22XXX,directory
+M-0317,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,BE,iban_prefix
+M-0320,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,IT,none
+M-0321,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,ZEKEITLLXXX,directory
+M-0322,CdtTrfTxInf.Dbtr.Nm,missing,Dudize Chemicals BV,none
+M-0326,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TUBUBE22XXX,directory
+M-0327,CdtTrfTxInf.CdtrAcct.Id.IBAN,blank,FR48921163082499150475,none
+M-0328,CdtTrfTxInf.Cdtr.Nm,missing,Kobine Optics BV,none
+M-0330,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,DASOFR2XXXX,directory
+M-0331,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,FAROFR22XXX,directory
+M-0331,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,FR,iban_prefix
+M-0332,CdtTrfTxInf.Cdtr.Nm,missing,Zame Marine NV,none
+M-0333,CdtTrfTxInf.CdtrAcct.Id.IBAN,missing,FR50992148186380358672,none
+M-0334,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,ZEKEITLLXXX,directory
+M-0336,CdtTrfTxInf.Dbtr.Nm,blank,Rezapu Machining SL,master
+M-0337,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TUBUBE22XXX,directory
+M-0338,CdtTrfTxInf.IntrBkSttlmAmt,blank,19917.46,none
+M-0339,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0340,CdtTrfTxInf.ChrgBr,blank,DEBT,order
+M-0341,CdtTrfTxInf.IntrBkSttlmAmt,missing,8687.98,none
+M-0342,CdtTrfTxInf.IntrBkSttlmAmt,missing,17252.75,none
+M-0343,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,ES,iban_prefix
+M-0345,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,USD,none
+M-0347,CdtTrfTxInf.Dbtr.Nm,missing,Sire Freight SL,master
+M-0348,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,KIZEBE2XXXX,directory
+M-0349,CdtTrfTxInf.Cdtr.Nm,placeholder,Gamu Machining SpA,none
+M-0351,CdtTrfTxInf.PmtId.UETR,missing,e291712c-e042-4f93-a14d-369b0fdc6172,order
+M-0352,CdtTrfTxInf.Cdtr.Nm,blank,Sazebi Logistics NV,book
+M-0353,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,TEBENL2XXXX,none
+M-0354,CdtTrfTxInf.Cdtr.Nm,placeholder,Fomane Timber BV,none
+M-0355,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,TIRANL2XXXX,directory
+M-0357,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0358,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,PASIBEMMXXX,none
+M-0359,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,ES,iban_prefix
+M-0360,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,USD,none
+M-0362,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0363,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,IT,none
+M-0364,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TOMIESLLXXX,none
+M-0366,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0367,CdtTrfTxInf.PmtId.UETR,missing,e6eb298c-b057-43fb-b699-94d8236f0b9d,order
+M-0368,CdtTrfTxInf.Dbtr.Nm,missing,Name Optics BV,none
+M-0369,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,CHF,none
+M-0370,GrpHdr.NbOfTxs,missing,1,message
+M-0371,CdtTrfTxInf.PmtId.UETR,blank,183ca206-62b2-418c-817e-add757ddf97d,order
+M-0373,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,VOGOES2X,directory
+M-0374,CdtTrfTxInf.Cdtr.Nm,placeholder,Tageru Plastics SARL,none
+M-0375,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,FAROFR22XXX,directory
+M-0376,GrpHdr.NbOfTxs,missing,1,message
+M-0376,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0377,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,SANINLMMXXX,directory
+M-0378,CdtTrfTxInf.Cdtr.Nm,blank,Gitako Chemicals NV,none
+M-0379,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,USD,none
+M-0380,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,SEMAFRLLXXX,none
+M-0381,CdtTrfTxInf.PmtId.UETR,missing,eb5f9464-e94d-4632-a399-76258e104c1d,order
+M-0382,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,BAVIDEFFXXX,directory
+M-0383,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,NIKUFR22XXX,directory
+M-0384,CdtTrfTxInf.Dbtr.Nm,blank,Somu Ceramics SARL,master
+M-0385,CdtTrfTxInf.Cdtr.Nm,missing,Sazebi Logistics NV,book
+M-0386,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,DASOFR2XXXX,directory
+M-0387,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,NODEDEFF,directory
+M-0388,GrpHdr.NbOfTxs,missing,1,message
+M-0389,CdtTrfTxInf.Cdtr.Nm,missing,Toda Electrical GmbH,book
+M-0390,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,VOGOES2X,directory
+M-0391,CdtTrfTxInf.Dbtr.Nm,missing,Gimo Packaging SARL,master
+M-0393,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,KIZEBE2XXXX,directory
+M-0395,CdtTrfTxInf.CdtrAcct.Id.IBAN,blank,NL30990641838778426852,none
+M-0396,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,ES,iban_prefix
+M-0397,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,VOGOES2X,directory
+M-0398,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,VOGOES2X,directory
+M-0399,CdtTrfTxInf.Cdtr.Nm,blank,Zusefo Optics GmbH,none
+M-0400,CdtTrfTxInf.IntrBkSttlmAmt,missing,1160.70,none
+M-0401,CdtTrfTxInf.Dbtr.Nm,missing,Maboro Ceramics BV,master
+M-0402,CdtTrfTxInf.Cdtr.Nm,missing,Nage Freight SARL,none
+M-0404,GrpHdr.NbOfTxs,blank,1,message
+M-0405,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,VOGOES2X,directory
+M-0406,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0407,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,GBP,none
+M-0408,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,PUBADELLXXX,none
+M-0410,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,BOTAIT22XXX,directory
+M-0411,CdtTrfTxInf.Cdtr.Nm,missing,Dogo Foods SpA,book
+M-0412,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,KATEBEPPXXX,none
+M-0415,CdtTrfTxInf.PmtId.UETR,blank,4bb5a009-5c6b-46ac-92e1-4efe7f4e7c13,order
+M-0416,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,ZEKEITLLXXX,directory
+M-0417,CdtTrfTxInf.Cdtr.Nm,missing,Zura Foods SARL,book
+M-0418,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,BAVIDEFFXXX,directory
+M-0419,GrpHdr.NbOfTxs,missing,1,message
+M-0419,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,USD,none
+M-0420,CdtTrfTxInf.Dbtr.Nm,blank,Bukoga Timber SARL,master
+M-0421,CdtTrfTxInf.Cdtr.Nm,blank,Susivi Marine NV,none
+M-0422,CdtTrfTxInf.Dbtr.Nm,blank,Nive Chemicals GmbH,none
+M-0424,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,TIRANL2XXXX,directory
+M-0428,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,PUBADELLXXX,none
+M-0430,CdtTrfTxInf.PmtId.UETR,missing,8a5608dd-2bce-4f1d-a017-61e4f81d19c8,order
+M-0431,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,VOGOES2X,directory
+M-0432,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0433,CdtTrfTxInf.Dbtr.Nm,blank,Gosa Plastics SL,master
+M-0434,CdtTrfTxInf.Cdtr.Nm,missing,Give Machining NV,none
+M-0435,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,NIKUFR22XXX,directory
+M-0436,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,DE,iban_prefix
+M-0437,GrpHdr.NbOfTxs,missing,1,message
+M-0437,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,missing,EUR,none
+M-0438,CdtTrfTxInf.Dbtr.Nm,missing,Zume Chemicals SARL,none
+M-0440,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,USD,none
+M-0441,CdtTrfTxInf.Cdtr.Nm,blank,Zame Marine NV,none
+M-0442,CdtTrfTxInf.IntrBkSttlmAmt,missing,809.42,none
+M-0443,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,SANINLMMXXX,directory
+M-0444,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,NIKUFR22XXX,directory
+M-0445,CdtTrfTxInf.Dbtr.Nm,missing,Lurozi Paper SARL,master
+M-0447,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,EUR,none
+M-0448,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,FR,iban_prefix
+M-0450,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,FOTUDEMM,directory
+M-0450,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,DE,iban_prefix
+M-0451,GrpHdr.NbOfTxs,blank,1,message
+M-0452,CdtTrfTxInf.PmtId.UETR,missing,562a959b-811d-47e1-a589-7ebd5c9b7dd2,order
+M-0453,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,ZEKEITLLXXX,directory
+M-0454,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,LENENLMMXXX,none
+M-0456,CdtTrfTxInf.Dbtr.Nm,missing,Divuze Textiles GmbH,master
+M-0457,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,SEMAFRLLXXX,none
+M-0458,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,blank,DE,iban_prefix
+M-0459,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,NEPUDEPP,directory
+M-0460,GrpHdr.NbOfTxs,blank,1,message
+M-0461,CdtTrfTxInf.ChrgBr,blank,SLEV,order
+M-0465,CdtTrfTxInf.CdtrAcct.Id.IBAN,missing,DE71949378063651195367,none
+M-0466,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,BUKUESFF,directory
+M-0467,GrpHdr.NbOfTxs,missing,1,message
+M-0468,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0471,CdtTrfTxInf.Dbtr.Nm,blank,Leri Foods SL,master
+M-0472,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,ES,iban_prefix
+M-0473,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,ES,iban_prefix
+M-0475,CdtTrfTxInf.Dbtr.Nm,blank,Lidani Electrical SL,none
+M-0476,CdtTrfTxInf.Cdtr.Nm,placeholder,Zetake Paper GmbH,none
+M-0477,CdtTrfTxInf.PmtId.UETR,missing,b27b51ce-e205-4f51-890f-ffae9d73e799,order
+M-0480,CdtTrfTxInf.Cdtr.Nm,placeholder,Zetake Paper GmbH,none
+M-0481,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,KANUES22XXX,none
+M-0484,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,malformed,TUBUBE22XXX,directory
+M-0485,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,blank,DUMONL22XXX,directory
+M-0486,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,DASOFR2XXXX,directory
+M-0487,CdtTrfTxInf.DbtrAgt.FinInstnId.BICFI,missing,PEGIFRPP,directory
+M-0488,CdtTrfTxInf.Dbtr.Nm,blank,Kuvu Machining GmbH,master
+M-0489,CdtTrfTxInf.Dbtr.Nm,blank,Ligifu Ceramics GmbH,master
+M-0490,CdtTrfTxInf.PmtId.UETR,blank,a110bce8-716b-41b2-93f1-e15914c19715,order
+M-0491,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,KIZEBE2XXXX,directory
+M-0492,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,wrong,TIRANL2XXXX,directory
+M-0493,GrpHdr.NbOfTxs,blank,1,message
+M-0494,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,missing,FAROFR22XXX,directory
+M-0494,CdtTrfTxInf.Cdtr.PstlAdr.Ctry,missing,FR,iban_prefix
+M-0495,CdtTrfTxInf.Cdtr.Nm,blank,Navu Logistics SARL,book
+M-0498,CdtTrfTxInf.CdtrAgt.FinInstnId.BICFI,blank,PASIBEMMXXX,none
+M-0499,CdtTrfTxInf.IntrBkSttlmAmt@Ccy,blank,GBP,none
