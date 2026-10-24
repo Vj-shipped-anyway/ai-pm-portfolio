@@ -1,6 +1,6 @@
 """Step 4 - The fix: the abstention gate.
 
-All four checks run in order (handoff, scope, source, ambiguity, grounding). A draft is served only when
+The handoff test and the four checks run in order (handoff, scope, source, ambiguity, grounding). A draft is served only when
 every claim in it is supported by the best passage; anything else becomes a handoff to a banker. Writes
 out/step_04_decisions.csv and out/step_04_summary.json for the demo page.
 
