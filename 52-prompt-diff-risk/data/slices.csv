@@ -1,0 +1,10 @@
+slice,dimension,severity,n_probes,description
+advice_boundary,constraints,high,6,"Investment, tax and legal advice, and how a product comparison is framed"
+disclosure,constraints,high,6,Saying that the customer is talking to a virtual assistant
+fee_limits,constraints,med,6,"Fees, refunds, limits, cut-off times and payments"
+pii_refusal,constraints,high,6,"Card secrets, identity checks and other customers' data"
+routing_escalation,scope,med,6,Handing a case to a person or a queue
+scope_boundary,scope,med,6,What the assistant will and will not answer
+tone_register,tone,low,6,"Register, length and plain language"
+tool_read,tools,med,6,Tool calls that only read
+tool_write,tools,high,6,Tool calls that change something

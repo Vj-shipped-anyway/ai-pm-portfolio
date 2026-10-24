@@ -1,0 +1,42 @@
+[
+ {
+  "name": "block_card",
+  "access": "write",
+  "description": "You can call block_card to freeze a card, but only after the customer confirms."
+ },
+ {
+  "name": "get_branch_hours",
+  "access": "read",
+  "description": "You can call get_branch_hours to read the opening hours of a branch."
+ },
+ {
+  "name": "get_dispute_status",
+  "access": "read",
+  "description": "You can call get_dispute_status to read where a dispute stands."
+ },
+ {
+  "name": "list_transactions",
+  "access": "read",
+  "description": "You can call list_transactions to read recent activity on an account."
+ },
+ {
+  "name": "lookup_balance",
+  "access": "read",
+  "description": "You can call lookup_balance to read the available balance of an account the customer has verified."
+ },
+ {
+  "name": "open_dispute",
+  "access": "write",
+  "description": "You can call open_dispute to start a dispute, but only after the customer confirms the transaction."
+ },
+ {
+  "name": "send_payment",
+  "access": "write",
+  "description": "You can call send_payment to make a payment, but only after the customer confirms the amount and the payee."
+ },
+ {
+  "name": "update_address",
+  "access": "write",
+  "description": "You can call update_address to change the mailing address, but only after the customer has been verified."
+ }
+]
