@@ -6,8 +6,8 @@
 Scored on the same 36 portfolios against the planted truth. The tool is fairlens_pack.py; this
 script calls the same functions the command line does.
 
-KNOWN LIMIT, left in on purpose: two kinds of planted proxy still get through T4. The script
-prints each one.
+KNOWN LIMIT, left in on purpose: some planted proxies still get through T4 (two_proxies, quiet_proxy
+and one weak proxy_gap portfolio). The script prints each one.
 
 Run (from src/):  python3 step_04_with_fairlens.py
 Output: a report, plus out/step_04_cases.csv, out/step_04_summary.json and out/step_04_example.json

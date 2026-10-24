@@ -20,7 +20,7 @@ Tests (each returns PASS, REVIEW or FAIL, or NOT RUN when the file lacks what it
     T2 AIR by group       adverse impact ratio per group with a 95% bootstrap interval
     T3 cutoff sweep       where the lowest AIR crosses the screen, and what moving the cutoff costs
     T4 proxy ablation     replace the proxy points by their mean and re-run the decisions
-    T5 reason pairs       do declined applicants with equal scores get the same top reason in every group
+    T5 reason pairs       do declined applicants within 5 score points of each other get the same top reason in every group
     T6 reason naming      do the declines that turn on the proxy list the proxy's reason code
 
 Exit status: 0 when the overall verdict is below --fail-on, 1 when it is at or above it, 2 for bad
@@ -441,16 +441,16 @@ def main(argv=None) -> int:
     ap.add_argument("--demo", action="store_true", help="run the bundled example (data/example_scores.csv)")
     sub = ap.add_subparsers(dest="cmd")
     c = sub.add_parser("check", help="run the six tests on a scores file")
-    c.add_argument("scores")
+    c.add_argument("scores", help="the scores CSV: group, score, bad_outcome, optional proxy points and reason_1 to reason_3")
     c.add_argument("--cutoff", help="approve when score >= cutoff")
     c.add_argument("--proxy-column", help="column holding the suspected proxy's points")
     c.add_argument("--proxy-code", help="reason code that names the proxy on a decline notice")
     c.add_argument("--reason-columns", help="comma-separated reason columns, most important first")
-    c.add_argument("--fail-on", choices=["fail", "review", "never"], default="fail")
-    c.add_argument("--format", choices=["text", "github"], default="text")
-    c.add_argument("--resamples", default=str(RESAMPLES))
-    c.add_argument("--seed", default=str(SEED))
-    c.add_argument("--sweep-width", default=str(SWEEP_WIDTH))
+    c.add_argument("--fail-on", choices=["fail", "review", "never"], default="fail", help="exit 1 when the overall verdict is at or above this level (default fail)")
+    c.add_argument("--format", choices=["text", "github"], default="text", help="text, or github for workflow annotations")
+    c.add_argument("--resamples", default=str(RESAMPLES), help="bootstrap resamples for the T2 interval, 50 to 20000 (default %(default)s)")
+    c.add_argument("--seed", default=str(SEED), help="seed for the bootstrap (default %(default)s)")
+    c.add_argument("--sweep-width", default=str(SWEEP_WIDTH), help="T3 sweeps cutoffs this many score points either side, 1 to 200 (default %(default)s)")
     try:
         a = ap.parse_args(argv)
         if a.demo:

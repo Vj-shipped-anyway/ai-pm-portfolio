@@ -23,7 +23,7 @@ fairlens: 830 applicants in 3 groups, cutoff 126, reference Group A
 overall: FAIL (3 FAIL, 1 REVIEW, 2 PASS)
 ```
 
-The reason pairs pass: declined applicants with the same score get the same kind of reason in every group. The ablation fails: take the postcode points out and the lowest ratio goes from 0.702 to 0.936 while accuracy rises. Standard library only, Python 3.9 or newer.
+The reason pairs pass: declined applicants with scores within 5 points of each other differ in their top reason about as often across groups (67.8%) as within Group A (66.3%). The ablation fails: take the postcode points out and the lowest ratio goes from 0.702 to 0.936 while accuracy rises. Standard library only, Python 3.9 or newer.
 
 To check your own file:
 
@@ -47,7 +47,7 @@ The file needs `group`, `score` and `bad_outcome` (1 for a default). Optional: t
 
 ## What it still gets wrong
 
-- 🟢 Seven of the 14 planted proxies are not marked FAIL by T4 (`step_04` prints each one). Three are `two_proxies` portfolios: the tool is pointed at the postcode column, removing it lifts the lowest ratio to 0.771, 0.783 and 0.797, and the region points that remain keep it under 0.80 (REVIEW). Three are `quiet_proxy` portfolios worth 8 to 12 points, where the lift is under 0.01 (PASS). One is a weak `proxy_gap` portfolio (C18, 0.818 to 0.861, PASS).
+- 🟢 Seven of the 14 planted proxies are not marked FAIL by T4 (`step_04` prints each one). Three are `two_proxies` portfolios: the tool is pointed at the postcode column, removing it lifts the lowest ratio to 0.771, 0.783 and 0.797, and the region points that remain keep it under 0.80 (REVIEW). Three are `quiet_proxy` portfolios worth 8 to 12 points, where the lift is +0.005, +0.004 and -0.013 (PASS). One is a weak `proxy_gap` portfolio (C18, 0.818 to 0.861, PASS).
 - 🟢 One of the 22 portfolios with no planted proxy is marked FAIL by T4, a `small_group_noise` portfolio (C14). A group of 30 applicants moves when you re-score it, and the ablation reads that movement as a proxy. The 1-point accuracy guard is an assumption 🟡 and I did not estimate how noisy the accuracy change is.
 - 🟢 No portfolio reads PASS overall: T6 is REVIEW or FAIL on 29 of 36 (`step_04`). A decline reason list built from points lost rarely names the postcode points that tipped the decision. That is a finding about the notice, whatever the groups look like, and it keeps every clean portfolio at REVIEW. T6 can only FAIL when T4 did not pass.
 - **The test set and the rules share an author.** I planted the mechanisms and wrote the tests, so 7 of 14 is what these rules do on what I planted, not a rate on a real portfolio. I also adjusted group sizes, proxy weights and coefficients after looking at earlier output (see [data/README.md](./data/README.md)). Treat every number as a ceiling.
