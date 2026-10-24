@@ -128,9 +128,9 @@ One short-lived process in the pipeline that already runs `terraform plan`. Ther
 
 ## 6. Alignment and posture
 
-Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [Cloud Security Alliance Cloud Controls Matrix](https://cloudsecurityalliance.org/research/cloud-controls-matrix). The ten rules sit in its subject areas: Change Control and Configuration Management, Cryptography, Encryption and Key Management, Data Security and Privacy, Infrastructure and Virtualization Security, and Identity and Access Management. I read the matrix page on 2026-10-24: it names version 4.1, 197 control objectives and 17 domains, and shows no release date. I did not read the control text, so there is no control-by-control mapping. The FFIEC cloud statement and handbook booklet returned HTTP 403 to my fetch, so I cite neither.
+Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [Cloud Security Alliance Cloud Controls Matrix](https://cloudsecurityalliance.org/research/cloud-controls-matrix). By my own reading, the ten rules touch these of its domain names: Change Control and Configuration Management, Cryptography, Encryption and Key Management, Data Security and Privacy, Infrastructure and Virtualization Security, and Identity and Access Management. The page does not assign rules to domains. I read the matrix page on 2026-10-24: it names version 4.1, 197 control objectives and 17 domains, and shows no release date. I did not read the control text, so there is no control-by-control mapping. The FFIEC cloud statement and handbook booklet returned HTTP 403 to my fetch, so I cite neither.
 
-- **What the design does.** It checks a planned change against ten rules in those subject areas before apply and records the decision.
+- **What the design does.** It checks a planned change against ten rules, which I placed near those domain names by my own reading, before apply and records the decision.
 - **What it does not claim.** It makes no claim of conformity to the matrix, maps no control, and I have not read or mapped any other source.
 
 ---

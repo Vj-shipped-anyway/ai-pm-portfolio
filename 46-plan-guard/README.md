@@ -208,9 +208,9 @@ python3 step_04_with_guard.py
 
 ## Aligned to
 
-The ten rules sit in the subject areas of the [Cloud Security Alliance Cloud Controls Matrix](https://cloudsecurityalliance.org/research/cloud-controls-matrix): Change Control and Configuration Management, Cryptography, Encryption and Key Management, Data Security and Privacy, Infrastructure and Virtualization Security, and Identity and Access Management. I read the matrix page on 2026-10-24: it names version 4.1, 197 control objectives and 17 domains, and shows no release date. I did not read the control text, so there is no control-by-control mapping.
+By my own reading, the ten rules touch these domain names on the [Cloud Security Alliance Cloud Controls Matrix](https://cloudsecurityalliance.org/research/cloud-controls-matrix): Change Control and Configuration Management, Cryptography, Encryption and Key Management, Data Security and Privacy, Infrastructure and Virtualization Security, and Identity and Access Management. The page does not assign rules to domains. I read the matrix page on 2026-10-24: it names version 4.1, 197 control objectives and 17 domains, and shows no release date. I did not read the control text, so there is no control-by-control mapping.
 
-I also tried to read the FFIEC statement on security in a cloud computing environment and the FFIEC IT Handbook booklet on architecture, infrastructure and operations on 2026-10-24. The site returned HTTP 403 to my fetch, so I cite neither. This is a prototype, aligned to the CSA matrix's subject areas. It makes no claim of conformity to that guidance.
+I also tried to read the FFIEC statement on security in a cloud computing environment and the FFIEC IT Handbook booklet on architecture, infrastructure and operations on 2026-10-24. The site returned HTTP 403 to my fetch, so I cite neither. This is a prototype, aligned, by my own reading, to some of the CSA matrix's domain names. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 
