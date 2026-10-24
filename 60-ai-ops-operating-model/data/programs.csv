@@ -1,0 +1,61 @@
+program_id,program_name,tier,builder,claimed_stage
+P-001,Reconciliation break match - payments operations,4,u021,4
+P-002,Address-change screening - card operations,2,u026,1
+P-003,Reconciliation break match - deposit servicing,2,u005,0
+P-004,Loan-document tie-out - lending operations,2,u025,6
+P-005,Chargeback evidence pack - payments operations,2,u031,4
+P-006,Loan-document tie-out - client onboarding,4,u001,2
+P-007,Address-change screening - lending operations,1,u034,6
+P-008,Address-change screening - client onboarding,1,u030,3
+P-009,Dispute triage - payments operations,2,u029,6
+P-010,Fee waiver review - card operations,3,u017,5
+P-011,Account-opening document check - lending operations,1,u040,2
+P-012,Payment return coding - card operations,3,u040,5
+P-013,Account-opening document check - deposit servicing,3,u015,2
+P-014,Reconciliation break match - lending operations,1,u009,2
+P-015,Statement inquiry reply - lending operations,2,u017,5
+P-016,Chargeback evidence pack - lending operations,3,u003,7
+P-017,Payment return coding - lending operations,3,u031,2
+P-018,Chargeback evidence pack - client onboarding,1,u001,3
+P-019,Payment return coding - deposit servicing,1,u012,7
+P-020,Address-change screening - deposit servicing,1,u007,0
+P-021,Complaint routing - client onboarding,1,u001,6
+P-022,Complaint routing - lending operations,2,u036,2
+P-023,Loan-document tie-out - deposit servicing,1,u005,4
+P-024,Sanctions alert narrative - deposit servicing,2,u038,6
+P-025,Statement inquiry reply - deposit servicing,2,u015,4
+P-026,Statement inquiry reply - card operations,4,u012,4
+P-027,Loan-document tie-out - card operations,3,u037,5
+P-028,Wire exception summary - deposit servicing,1,u022,3
+P-029,Fee waiver review - lending operations,4,u014,3
+P-030,Complaint routing - payments operations,4,u012,0
+P-031,Dispute triage - client onboarding,4,u008,3
+P-032,Fee waiver review - deposit servicing,4,u016,7
+P-033,Wire exception summary - payments operations,3,u022,5
+P-034,Dispute triage - lending operations,2,u007,7
+P-035,Chargeback evidence pack - deposit servicing,3,u024,2
+P-036,Reconciliation break match - card operations,2,u038,2
+P-037,Fee waiver review - client onboarding,3,u025,3
+P-038,Wire exception summary - lending operations,2,u009,8
+P-039,Account-opening document check - card operations,2,u029,8
+P-040,Statement inquiry reply - payments operations,2,u026,4
+P-041,Dispute triage - card operations,2,u011,7
+P-042,Complaint routing - card operations,1,u032,7
+P-043,Sanctions alert narrative - card operations,1,u029,4
+P-044,Reconciliation break match - client onboarding,2,u005,4
+P-045,Payment return coding - client onboarding,3,u029,1
+P-046,Fee waiver review - payments operations,3,u004,7
+P-047,Account-opening document check - payments operations,4,u023,5
+P-048,Complaint routing - deposit servicing,1,u025,8
+P-049,Wire exception summary - card operations,2,u039,4
+P-050,Dispute triage - deposit servicing,3,u022,4
+P-051,Payment return coding - payments operations,3,u028,4
+P-052,Statement inquiry reply - client onboarding,4,u012,8
+P-053,Chargeback evidence pack - card operations,1,u027,7
+P-054,Address-change screening - payments operations,1,u012,5
+P-055,Account-opening document check - client onboarding,1,u009,2
+P-056,Sanctions alert narrative - payments operations,4,u014,2
+P-057,Wire exception summary - client onboarding,2,u029,0
+P-058,Loan-document tie-out - payments operations,1,u033,5
+P-059,Sanctions alert narrative - lending operations,1,u028,4
+P-060,Sanctions alert narrative - client onboarding,3,u020,6

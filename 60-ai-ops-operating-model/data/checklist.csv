@@ -1,0 +1,24 @@
+item_id,stage,stage_name,item,evidence,min_tier,cycle_days,independent,day_window,must_show,source
+I01,1,Find the work,Build brief,"Build brief that classes each step as AGENT, AGENT_HITL, HUMAN_JUDGMENT or HUMAN_CONTROL",1,180,no,30,every step has a class and the control screen names the worker-data limits,section 1 stage 1; project 26
+I02,2,Admit and tier,Tier record,Recomputed tier with a named line-1 owner,1,180,no,30,the tier is recomputed from the form questions and not copied from the sponsor,section 4; project 11
+I03,2,Admit and tier,Evidence status,READY or HOLD against the evidence owed at the tier,1,90,no,60,each missing item is listed by id,section 1 stage 2 and section 4; project 11
+I04,2,Admit and tier,Vendor rating,Vendor rating with exit readiness,3,365,no,60,"the rating states criticality, data access and the upstream provider",section 4 E08; project 18
+I05,3,Commit capacity,Board status,Board status with reasons computed from evidence,1,30,no,60,the reasons cite evidence and not the owner's color,section 1 stage 3; project 24
+I06,3,Commit capacity,Reviewer capacity row,Capacity row for the review team the program needs,2,90,no,60,planned demand is set against supply for the quarter,section 1 stage 3; project 24
+I07,3,Commit capacity,Benefit baseline,Benefit baseline with a named finance partner,2,90,no,60,the baseline period and the holdout are stated,section 1 stage 3; project 12
+I08,4,Build and prove,Permissions record,Tool inventory with one least-privilege credential and one owner per tool,1,90,no,90,each tool maps to one credential and one owner,"section 9 row 2; projects 23, 27"
+I09,4,Build and prove,Offline test report,Eval results from a clean checkout with the probe-set version,2,90,no,90,the probe-set version and the failing cases are listed,section 4 E03; project 04
+I10,4,Build and prove,Independent validation,Validation with effective challenge by a person other than the builder,3,365,yes,90,the challenge points and how each was resolved,section 4 E05; project 11
+I11,4,Build and prove,Shadow scorecard,"Agreement with people on the shadow run, with the known-miss list",2,90,no,90,each known miss has an owner,section 1 stage 4; project 27
+I12,5,Limited rollout,Human review design,Routing rules and review floors for the cases that go to a person,3,180,no,0,the floors and the escalation path are written down,section 4 E06; project 08
+I13,5,Limited rollout,Rollout report,Weekly report against the exit criteria,1,7,no,0,"scope violations and unapproved resubmits are counted, including a count of zero",section 1 stage 5; project 27
+I14,5,Limited rollout,Decision lineage plan,"What is logged per decision, from prompt version to reviewer and outcome",3,180,no,0,the log fields cover the decision from input to outcome,section 4 E07; project 09
+I15,6,Hand off,Signed hand-off record,"Hand-off signed by the owning team lead, naming the brief version",1,365,yes,0,the signer is on the owning team and the brief version is named,section 9 row 1; project 27
+I16,6,Hand off,Rehearsed runbook,Kill switch and rollback to human-only rehearsed by someone other than the builder,2,45,yes,0,both steps were run and left an audit trace,"section 9 row 6; projects 25, 27"
+I17,6,Hand off,Fallback and exit plan,Plan for returning the work to people and for leaving the vendor,4,365,no,0,the trip conditions and a named approver for restoring,section 4 E10; project 25
+I18,6,Hand off,Monitors wired,"Queue depth, tool errors, scope blocks and kill-switch state alert on-call",1,90,no,0,each listed signal alerts into platform monitoring,section 9 row 7; project 05
+I19,7,Run and watch,Run-health report,Scheduled drift and run-health report,1,30,no,0,the latest report ends in a named decision and not only charts,"section 5 stage 7; projects 02, 05"
+I20,7,Run and watch,Permission usage diff,Grants set against calls in the window,2,90,no,0,grants with no call are listed with an owner decision,section 5 stage 4; project 23
+I21,7,Run and watch,Incident clock policy,Notification hours confirmed with counsel and a named determination role,3,365,no,0,the hours are dated and the determination role is a person,section 9 row 9; project 19
+I22,8,Review,Review record,"Widen, fix, hold or retire decision with the evidence it rested on",1,90,no,0,the decision is one of the four and cites evidence,section 1 stage 8; project 24
+I23,8,Review,Benefit statement,Benefit against a holdout with a hard-cash column,2,90,no,0,hard cash and soft capacity are shown apart,section 1 stage 8 and section 5; project 12
