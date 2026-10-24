@@ -1,0 +1,232 @@
+{
+ "after_purchase_types": [
+  "delivery_signature",
+  "delivery_tracking",
+  "digital_access_log",
+  "refund_record"
+ ],
+ "amount_types": [
+  "billing_history",
+  "order_record"
+ ],
+ "max_pages": 12,
+ "note": "Invented for this prototype. These are not any card network's reason codes, lists or deadlines.",
+ "reason_codes": {
+  "RC-01": {
+   "name": "Unauthorized transaction",
+   "slots": [
+    {
+     "accept": [
+      "order_record"
+     ],
+     "id": "order",
+     "label": "order record",
+     "required": true
+    },
+    {
+     "accept": [
+      "payment_auth_log"
+     ],
+     "id": "auth",
+     "label": "authorization log",
+     "required": true
+    },
+    {
+     "accept": [
+      "device_match",
+      "prior_orders"
+     ],
+     "id": "link",
+     "label": "link to the cardholder",
+     "required": true
+    },
+    {
+     "accept": [
+      "customer_comms"
+     ],
+     "id": "comms",
+     "label": "customer messages",
+     "required": false
+    }
+   ],
+   "window_days": 20
+  },
+  "RC-02": {
+   "name": "Goods or services not received",
+   "slots": [
+    {
+     "accept": [
+      "order_record"
+     ],
+     "id": "order",
+     "label": "order record",
+     "required": true
+    },
+    {
+     "accept": [
+      "delivery_tracking",
+      "digital_access_log"
+     ],
+     "id": "delivery",
+     "label": "delivery proof",
+     "required": true
+    },
+    {
+     "accept": [
+      "delivery_signature"
+     ],
+     "id": "signature",
+     "label": "signed receipt",
+     "required": false
+    },
+    {
+     "accept": [
+      "customer_comms"
+     ],
+     "id": "comms",
+     "label": "customer messages",
+     "required": false
+    }
+   ],
+   "window_days": 30
+  },
+  "RC-03": {
+   "name": "Not as described",
+   "slots": [
+    {
+     "accept": [
+      "order_record"
+     ],
+     "id": "order",
+     "label": "order record",
+     "required": true
+    },
+    {
+     "accept": [
+      "product_description"
+     ],
+     "id": "listing",
+     "label": "listing as shown at purchase",
+     "required": true
+    },
+    {
+     "accept": [
+      "return_policy"
+     ],
+     "id": "policy",
+     "label": "return policy",
+     "required": true
+    },
+    {
+     "accept": [
+      "customer_comms"
+     ],
+     "id": "comms",
+     "label": "customer messages",
+     "required": false
+    }
+   ],
+   "window_days": 30
+  },
+  "RC-04": {
+   "name": "Duplicate charge",
+   "slots": [
+    {
+     "accept": [
+      "order_record"
+     ],
+     "id": "order",
+     "label": "order record",
+     "required": true
+    },
+    {
+     "accept": [
+      "duplicate_ledger"
+     ],
+     "id": "ledger",
+     "label": "ledger of distinct charges",
+     "required": true
+    },
+    {
+     "accept": [
+      "refund_record"
+     ],
+     "id": "refund",
+     "label": "refund record",
+     "required": false
+    }
+   ],
+   "window_days": 14
+  },
+  "RC-05": {
+   "name": "Refund not processed",
+   "slots": [
+    {
+     "accept": [
+      "order_record"
+     ],
+     "id": "order",
+     "label": "order record",
+     "required": true
+    },
+    {
+     "accept": [
+      "refund_record",
+      "return_policy"
+     ],
+     "id": "outcome",
+     "label": "refund record or return policy",
+     "required": true
+    },
+    {
+     "accept": [
+      "customer_comms"
+     ],
+     "id": "comms",
+     "label": "customer messages",
+     "required": false
+    }
+   ],
+   "window_days": 21
+  },
+  "RC-06": {
+   "name": "Cancelled subscription",
+   "slots": [
+    {
+     "accept": [
+      "billing_history"
+     ],
+     "id": "billing",
+     "label": "billing history",
+     "required": true
+    },
+    {
+     "accept": [
+      "cancellation_terms"
+     ],
+     "id": "terms",
+     "label": "cancellation terms",
+     "required": true
+    },
+    {
+     "accept": [
+      "cancel_request_log"
+     ],
+     "id": "cancel_log",
+     "label": "cancellation request log",
+     "required": true
+    },
+    {
+     "accept": [
+      "customer_comms"
+     ],
+     "id": "comms",
+     "label": "customer messages",
+     "required": false
+    }
+   ],
+   "window_days": 30
+  }
+ },
+ "version": "synthetic-1"
+}
