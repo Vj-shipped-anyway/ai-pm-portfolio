@@ -1,12 +1,12 @@
 # Staged issue draft. Not submitted.
 
-Target: the MITRE ATLAS data repository (`mitre-atlas/atlas-data`), or the contribution page that its `CONTRIBUTING.md` points to. I have not read that page's submission steps (the fetch returned HTTP 404 on 2026-10-24), so the first job is to find the right channel.
+Target: the MITRE ATLAS data repository (`mitre-atlas/atlas-data`), or the contribution page that its `CONTRIBUTING.md` points to. The contribution page at atlas.mitre.org/contribute returns HTTP 404 to a plain fetch but renders in a browser. Its case-study form builds a YAML file that the submitter emails to the ATLAS team, and CONTRIBUTING.md also invites issues on this repository.
 
 **Title:** Question on scope: is a retry-loop failure in a tool-calling agent a fit for a case study?
 
 **Body**
 
-I have a small tool that drafts a case study from the trace of one agent run, using the study fields in `dist/schemas/atlas_contribution_schema.json` (version 1.1 of the case-study schema, collection 2026.09). Before I offer a real case study I would like to ask three things.
+I have a small tool that drafts a case study from the trace of one agent run, using the study fields in `dist/schemas/atlas_contribution_schema.json` (its $version is 1.0.0; the website case-study schema is 1.1; the data file I read is collection 2026.09). Before I offer a real case study I would like to ask three things.
 
 1. Scope. In the trace I work from, the agent calls one tool again and again after a bad response, and the run is cut off when its cost reaches a cap. The trace shows effects (a loop, a cost overrun) and does not show an adversary. In one variant an upstream scanner flags the bad response as instruction-like. Is a failure with no confirmed adversary in scope, or only incidents where an adversary is known?
 2. Mapping. For the effects I used AML.T0029 (Denial of AI Service) and AML.T0034 (Cost Harvesting), and AML.T0051.001 (Indirect) for the flagged response. Would you map them differently?

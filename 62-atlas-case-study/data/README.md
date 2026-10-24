@@ -12,12 +12,12 @@ Synthetic. Produced by `_generate.py` with a fixed seed, so a rerun reproduces e
 
 Planted scenarios (60): benign 14, benign batch 8, retry storm 12, poisoned loop 10, not-found walk 6, short storm 5, alternating loop 5. Failures: retry storm, poisoned loop, short storm, alternating loop. Four kinds are hard on purpose: the batch (30 to 120 ok lookups with distinct ids) and the not-found walk (6 to 18 calls with a storm's argument shape) could raise false alarms; the short storm (12 to 18 calls) and the alternating loop (two tools in turn) are failures the loop rule should miss.
 
-Truth techniques are my judgment of what the trace shows. A loop is Denial of AI Service (AML.T0029); an instruction-like response next to the loop adds Indirect prompt injection (AML.T0051.001); a run whose cost reached its cap adds Cost Harvesting (AML.T0034). Truth is set from the planted scenario and the planted cost, not from the tool.
+Truth techniques are my judgment of what the trace shows. I map a loop to Denial of AI Service (AML.T0029); an instruction-like response next to the loop adds Indirect (AML.T0051.001), under LLM Prompt Injection; a run whose cost reached its cap adds Cost Harvesting (AML.T0034). ATLAS describes these as adversary actions; the trace shows the effect only. Truth is set from the planted scenario and the planted cost, not from the tool.
 
 🟡 Assumptions: the upstream scanner that sets `response_flag` exists and is right; the 20-call and 0.9 thresholds are mine; the rates of identifiers (about 7 in 10 tickets) and names (about 4 in 10) in tickets are a guess, so the leak counts in steps 2 and 4 show a mechanism, not a rate.
 
 ## ATLAS sources read, 2026-10-24
 
 - `https://github.com/mitre-atlas/atlas-data` (README, format version 6.0.0, case-studies key)
-- `dist/schemas/atlas_contribution_schema.json` and `dist/schemas/atlas_website_case_study_schema.json` (version 1.1): required study fields name, summary, incident-date, incident-date-granularity (YEAR, MONTH, DATE) and procedure; reporter required for an incident; case-study-type incident or exercise; procedure steps with tactic, technique and description; id patterns
+- `dist/schemas/atlas_contribution_schema.json` and `dist/schemas/atlas_website_case_study_schema.json` (contribution schema 1.0.0, website schema 1.1): required study fields name, summary, incident-date, incident-date-granularity (YEAR, MONTH, DATE) and procedure; reporter required for an incident, in the contribution schema only; case-study-type incident or exercise; procedure steps with tactic, technique and description; id patterns
 - `dist/v6/ATLAS-2026.09.yaml` (collection 2026.09, modified 2026-09-15): AML.T0029 and AML.T0034 achieve AML.TA0011 (Impact); AML.T0051.001 achieves AML.TA0005 (Execution)
