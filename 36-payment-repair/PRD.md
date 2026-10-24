@@ -11,7 +11,7 @@ The payments-operations lead who owns the repair queue, and the reviewer who app
 2. Proposes a value only from a table the policy allows, and records the source.
 3. Applies it without a person only for fields that do not change where the money goes (tier AUTO).
 4. Holds a plan that changes routing or the payment's identity until an approval carries the digest of that exact plan, from an active person with the reviewer role who did not enter the order (tier APPROVAL).
-5. Returns the message whole, with the reasons, when any field has no allowed source (tier NEVER): amount, currency, names, account numbers.
+5. Returns the message whole, with the reasons, when any field has no allowed source (tier NEVER): amount, currency, creditor name, account numbers.
 6. Writes one audit row per applied change and exits non-zero when something is held or returned.
 
 ## Out of scope

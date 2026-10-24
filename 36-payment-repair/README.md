@@ -1,6 +1,6 @@
 # 🧾 payment-repair (AgentKit extension): a repair agent for pacs.008-style messages, with approval gates
 
-**I wanted to know how much of a missing-field queue a repair agent can clear without guessing, and where it has to stop. This is a command-line tool and a synthetic set of 500 pacs.008-style payment messages. It finds the required fields that are missing, blank, placeholders or malformed, fills the ones a bank table can prove, holds the ones that decide where the money goes until a person approves that exact change, and sends back the rest untouched.** It extends [27 AgentKit](../27-agentkit-reference-agent-and-playbook/) with a message set and a repair tool, and imports nothing from it.
+**I wanted to know how much of a missing-field queue a repair agent can clear without guessing, and where it has to stop. This is a command-line tool and a synthetic set of 500 pacs.008-style payment messages. It finds the required fields that are missing, blank, placeholders or malformed, fills the ones a bank table can supply, holds the ones that decide where the money goes until a person approves that exact change, and sends back the rest untouched.** It extends [27 AgentKit](../27-agentkit-reference-agent-and-playbook/) with a message set and a repair tool, and imports nothing from it.
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
