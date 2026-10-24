@@ -10,9 +10,9 @@ Synthetic. Produced by `_generate.py` with a fixed seed, so a rerun reproduces e
 | `identifier_keys.json` | The fields whose values are identifiers, in the run and in call arguments |
 | `example_bundle.json` | One run in the bundle shape the tool reads; the worked example behind `python3 atlas_case_study.py --demo` (the shortest poisoned run that reached its cost cap) |
 
-Planted scenarios (60): benign 14, benign batch 8, retry storm 12, poisoned loop 10, not-found walk 6, short storm 5, alternating loop 5. Failures: retry storm, poisoned loop, short storm, alternating loop. The last four kinds are hard on purpose: the batch (30 to 120 ok lookups with distinct ids) and the not-found walk (6 to 18 calls with a storm's argument shape) could raise false alarms; the short storm (12 to 18 calls) and the alternating loop (two tools in turn) are failures the loop rule should miss.
+Planted scenarios (60): benign 14, benign batch 8, retry storm 12, poisoned loop 10, not-found walk 6, short storm 5, alternating loop 5. Failures: retry storm, poisoned loop, short storm, alternating loop. Four kinds are hard on purpose: the batch (30 to 120 ok lookups with distinct ids) and the not-found walk (6 to 18 calls with a storm's argument shape) could raise false alarms; the short storm (12 to 18 calls) and the alternating loop (two tools in turn) are failures the loop rule should miss.
 
-Truth techniques are my judgement of what the trace shows. A loop is Denial of AI Service (AML.T0029); an instruction-like response next to the loop adds Indirect prompt injection (AML.T0051.001); a run whose cost reached its cap adds Cost Harvesting (AML.T0034). Truth is set from the planted scenario and the planted cost, not from the tool.
+Truth techniques are my judgment of what the trace shows. A loop is Denial of AI Service (AML.T0029); an instruction-like response next to the loop adds Indirect prompt injection (AML.T0051.001); a run whose cost reached its cap adds Cost Harvesting (AML.T0034). Truth is set from the planted scenario and the planted cost, not from the tool.
 
 🟡 Assumptions: the upstream scanner that sets `response_flag` exists and is right; the 20-call and 0.9 thresholds are mine; the rates of identifiers (about 7 in 10 tickets) and names (about 4 in 10) in tickets are a guess, so the leak counts in steps 2 and 4 show a mechanism, not a rate.
 

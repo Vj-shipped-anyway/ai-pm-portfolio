@@ -1,14 +1,14 @@
 # PRD: ATLAS case-study drafter
 
 ## Problem
-An agent run goes wrong and an on-call engineer writes a ticket. The trace holds what happened, the ticket holds what someone thought, and neither is in a form a public threat catalogue can use. Writing the case study by hand is slow, and a draft written from the ticket copies identifiers and names into a public place.
+An agent run goes wrong and an on-call engineer writes a ticket. The trace holds what happened, the ticket holds what someone thought, and neither is in a form a public threat catalog can use. Writing the case study by hand is slow, and a draft written from the ticket copies identifiers and names into a public place.
 
 ## Who it is for
 An engineer or program owner who has a trace of an agent failure, permission to share it, and wants a first draft to edit before offering it to the MITRE ATLAS maintainers.
 
 ## What it does
 1. Splits the calls of one run into phases of the same tool and argument shape and finds loops.
-2. Writes up to three procedure steps (injection, denial of service, cost) with a tactic, a technique and the call numbers behind each.
+2. Writes procedure steps with a tactic, a technique and the call numbers behind each: a denial-of-service step for each loop, plus an injection step and a cost step where the trace shows them.
 3. Redacts declared identifiers and never copies the ticket note.
 4. Lints the draft against the rules of the ATLAS contribution schema and says which fields a person still owes.
 
