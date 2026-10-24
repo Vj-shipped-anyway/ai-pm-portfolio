@@ -1,0 +1,32 @@
+theme,phrase
+model inventory,model inventory
+model inventory,inventory attestation
+independent validation,independent validation
+independent validation,validation team
+independent validation,challenger model
+ongoing monitoring,performance monitoring
+ongoing monitoring,drift dashboard
+ongoing monitoring,model monitoring
+human oversight,human review
+human oversight,override log
+human oversight,human in the loop
+change management,change board
+change management,release review
+change management,change approval
+vendor model oversight,vendor model assessment
+vendor model oversight,purchased model
+vendor model oversight,vendor attestation
+data quality,data quality
+data quality,data lineage
+data quality,data reconciliation
+data quality,data use approval
+user disclosure,ai disclosure
+user disclosure,user notice
+user disclosure,instructions for use
+fairness testing,disparity testing
+fairness testing,proxy screening
+fairness testing,fairness review
+incident response,incident response plan
+incident response,incident playbook
+decision explanations,reason code
+decision explanations,decline reason

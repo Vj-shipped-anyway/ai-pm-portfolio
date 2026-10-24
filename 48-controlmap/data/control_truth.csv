@@ -1,0 +1,56 @@
+control_id,serves_theme,kind
+CT-01,model inventory,dict
+CT-02,fairness testing,dict
+CT-03,human oversight,off_dictionary
+CT-04,incident response,retired
+CT-05,fairness testing,off_dictionary
+CT-06,human oversight,dict
+CT-07,decision explanations,retired
+CT-08,,lookalike
+CT-09,,orphan
+CT-10,user disclosure,dict
+CT-11,model retirement,unlisted_theme
+CT-12,,wrong_sense
+CT-13,,lookalike
+CT-14,vendor model oversight,dict
+CT-15,data quality,dict
+CT-16,user disclosure,dict
+CT-17,change management,off_dictionary
+CT-18,,negated_decoy
+CT-19,ongoing monitoring,off_dictionary
+CT-20,human oversight,dict
+CT-21,model retirement,unlisted_theme
+CT-22,decision explanations,retired
+CT-23,independent validation,dict
+CT-24,fairness testing,dict
+CT-25,change management,dict
+CT-26,change management,dict
+CT-27,,negated_decoy
+CT-28,vendor model oversight,dict
+CT-29,ongoing monitoring,dict
+CT-30,,orphan
+CT-31,independent validation,off_dictionary
+CT-32,data quality,dict
+CT-33,,wrong_sense
+CT-34,,lookalike
+CT-35,change management,dict
+CT-36,,negated_decoy
+CT-37,independent validation,dict
+CT-38,ongoing monitoring,dict
+CT-39,,orphan
+CT-40,user disclosure,dict
+CT-41,model inventory,dict
+CT-42,,orphan
+CT-43,data quality,dict
+CT-44,,lookalike
+CT-45,,orphan
+CT-46,,orphan
+CT-47,model inventory,retired
+CT-48,model inventory,dict
+CT-49,human oversight,dict
+CT-50,model inventory,off_dictionary
+CT-51,independent validation,dict
+CT-52,vendor model oversight,dict
+CT-53,fairness testing,dict
+CT-54,human oversight,negated_true
+CT-55,ongoing monitoring,dict

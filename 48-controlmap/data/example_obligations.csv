@@ -1,0 +1,7 @@
+obligation_id,theme,statement,applies_to
+EX-1,model inventory,"Keep an inventory entry, with a named owner, for every AI system used in credit decisions.",credit_decision
+EX-2,ongoing monitoring,Watch the performance of the AI system used for credit decisions and fraud scoring after release and act on drift.,credit_decision;fraud_scoring
+EX-3,human oversight,"Make sure a person can review, challenge and override the output of the system used for customer chat and the internal copilot.",customer_chat;internal_copilot
+EX-4,incident response,Have a written plan to respond to a failure or harmful output of the system used for fraud scoring.,fraud_scoring
+EX-5,model retirement,Retire the system used for document summaries in an orderly way and keep its records.,doc_summary
+EX-6,change management,Approve changes to the system used for fraud scoring before they reach production.,fraud_scoring

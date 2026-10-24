@@ -1,0 +1,12 @@
+{
+ "as_of": "2026-06-30",
+ "classes": [
+  "credit_decision",
+  "fraud_scoring",
+  "customer_chat",
+  "doc_summary",
+  "internal_copilot"
+ ],
+ "grace": 1.5,
+ "seed": 48
+}
