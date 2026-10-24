@@ -71,6 +71,33 @@ class CliTests(unittest.TestCase):
     def test_missing_file_exits_2(self):
         self.assertEqual(run(["check", "nope.json", "nope2.json"])[0], 2)
 
+    def test_malformed_schema_exits_2_not_1(self):
+        # exit 1 means BLOCK; a crash on bad input must not look like one
+        empty = self.write("empty.json", {})
+        as_list = self.write("list.json", [1, 2])
+        self.assertEqual(run(["check", empty, empty])[0], 2)
+        self.assertEqual(run(["check", as_list, as_list])[0], 2)
+        bad_spec = self.write("bad.json", {"parameters": {"properties": {"a": 5}}})
+        self.assertEqual(run(["check", bad_spec, bad_spec])[0], 2)
+
+    def test_hostile_parameter_name_cannot_forge_an_annotation(self):
+        new = json.loads(json.dumps(OLD))
+        new["parameters"]["properties"] = {"b\n::error title=forged::approved": {"type": "string", "description": "x"}}
+        o, n = self.write("old.json", OLD), self.write("new.json", new)
+        _, out, _ = run(["check", o, n, "--format", "github", "--fail-on", "never"])
+        commands = [ln for ln in out.splitlines() if ln.startswith("::")]
+        self.assertEqual(len(commands), 2)          # the finding and the notice, nothing forged
+        self.assertNotIn("title=forged", "\n".join(commands[:1]).split("::", 2)[1])
+        self.assertIn("%0A", commands[0])
+
+    def test_calls_file_with_no_rows_for_the_tool_says_so(self):
+        o, n = self.pair(["p", "q", "r"])
+        calls = os.path.join(self.dir.name, "other.csv")
+        with open(calls, "w", encoding="utf-8") as fh:
+            fh.write('call_id,tool,args_json\n1,other_tool,"{}"\n')
+        _, out, _ = run(["check", o, n, "--calls", calls])
+        self.assertIn("nothing was replayed", out)
+
     def test_demo_runs(self):
         code, out, _ = run(["--demo"])
         self.assertEqual(code, 0)

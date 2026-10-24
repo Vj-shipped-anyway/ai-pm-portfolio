@@ -6,7 +6,7 @@ Command line (from src/):
     python3 tool_schema_drift.py check OLD.json NEW.json [--calls CALLS.csv] [--fail-on block|review|never]
                                                          [--format text|github]
 
-Exit status: 0 when the decision is below --fail-on, 1 when it is at or above it, 2 for bad input.
+Exit status: 0 when the decision is below --fail-on, 1 when it is at or above it, 2 for bad or malformed input.
 A decision is BLOCK (a breaking change), REVIEW (the structure still validates but the meaning may
 have moved) or ALLOW. There is no model in this file: the diff, the unit check, the replay and the
 gate are plain rules. The classifier is the one from project 15 (SchemaWatch) plus bound checks.
@@ -273,15 +273,36 @@ def load_calls(path: str, tool: str | None = None) -> list:
 
 
 # ---------------------------------------------------------------- command line
-def render(old, new, findings, decision, broken, total_calls, fmt) -> str:
+def check_shape(schema, label: str) -> None:
+    """Raise ValueError when a schema lacks the fields the diff reads, so bad input exits 2 instead of crashing."""
+    if not isinstance(schema, dict):
+        raise ValueError(f"{label}: expected a JSON object, got {type(schema).__name__}")
+    params = schema.get("parameters")
+    if not isinstance(params, dict) or not isinstance(params.get("properties"), dict):
+        raise ValueError(f"{label}: missing parameters.properties")
+    if not isinstance(params.get("required", []), list):
+        raise ValueError(f"{label}: parameters.required must be a list")
+    for name, spec in params["properties"].items():
+        if not isinstance(spec, dict):
+            raise ValueError(f"{label}: property {name!r} must be an object")
+
+
+def escape_annotation(text: str) -> str:
+    """Escape a workflow-command message the way GitHub documents, so schema text cannot start a new command."""
+    return str(text).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+
+
+def render(old, new, findings, decision, broken, total_calls, fmt, calls_given=False) -> str:
     lines = []
     if fmt == "github":
         for f in findings:
             if f["class"] in ("breaking", "behavior_risk"):
                 level = "error" if f["class"] == "breaking" else "warning"
-                lines.append(f"::{level} title=tool-schema-drift {f['kind']}::{new.get('name', '')}.{f['param']}: {f['reason']}")
+                lines.append(f"::{level} title=tool-schema-drift {f['kind']}::"
+                             + escape_annotation(f"{new.get('name', '')}.{f['param']}: {f['reason']}"))
         lines.append(f"::notice title=tool-schema-drift::decision {decision}"
-                     + (f"; {len(broken)} of {total_calls} recorded calls fail on the new schema" if total_calls else ""))
+                     + (f"; {len(broken)} of {total_calls} recorded calls fail on the new schema" if total_calls else "")
+                     + ("; no recorded calls for this tool were found, so nothing was replayed" if calls_given and not total_calls else ""))
         return "\n".join(lines)
     lines.append(f"tool: {new.get('name', '?')}   version {old.get('version', '?')} -> {new.get('version', '?')}")
     for f in findings:
@@ -290,6 +311,8 @@ def render(old, new, findings, decision, broken, total_calls, fmt) -> str:
         lines.append("  no structural or description change")
     if total_calls:
         lines.append(f"replay: {len(broken)} of {total_calls} recorded calls fail on the new schema")
+    elif calls_given:
+        lines.append(f"replay: no recorded calls for tool {new.get('name', '?')!r} in the calls file, so nothing was replayed")
     lines.append(f"decision: {decision}")
     return "\n".join(lines)
 
@@ -298,16 +321,18 @@ def run_check(old_path, new_path, calls_path, fail_on, fmt) -> int:
     try:
         with open(old_path, encoding="utf-8") as fo, open(new_path, encoding="utf-8") as fn:
             old, new = json.load(fo), json.load(fn)
+        check_shape(old, old_path)
+        check_shape(new, new_path)
         calls = load_calls(calls_path, new.get("name")) if calls_path else []
-    except (OSError, ValueError, KeyError, TypeError) as e:
+        findings = diff_schemas(old, new)
+        broken = replay(new, calls) if calls else {}
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as e:
         print(f"input error: {e}", file=sys.stderr)
         return 2
-    findings = diff_schemas(old, new)
-    broken = replay(new, calls) if calls else {}
     decision = decide(findings)
     if broken and decision != "BLOCK":
         decision = "BLOCK"
-    print(render(old, new, findings, decision, broken, len(calls), fmt))
+    print(render(old, new, findings, decision, broken, len(calls), fmt, calls_given=bool(calls_path)))
     if fail_on == "never":
         return 0
     return 1 if DECISION_RANK[decision] >= DECISION_RANK[{"block": "BLOCK", "review": "REVIEW"}[fail_on]] else 0
