@@ -360,7 +360,10 @@ def write_outputs(result: dict, out_dir: str) -> list:
 
 # ---------------------------------------------------------------- scoring
 def _read_csv(blob: bytes, label: str, needed: tuple) -> list:
-    reader = csv.DictReader(io.StringIO(blob.decode("utf-8")))
+    text = blob.decode("utf-8")
+    if "\x00" in text:
+        raise csv.Error(f"{label}: contains a NUL byte")   # csv.reader refused NUL only before Python 3.11
+    reader = csv.DictReader(io.StringIO(text))
     fields = reader.fieldnames or []
     for f in needed:
         _need(f in fields, f"{label} has no '{f}' column")
