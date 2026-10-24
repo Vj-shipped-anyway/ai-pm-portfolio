@@ -129,7 +129,7 @@ The writer is a library inside the agent service; the verifier is a short-lived 
 
 ## 6. Alignment and posture
 
-Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [NIST AI Risk Management Framework 1.0](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) (2023), the MANAGE function, whose Core page on NIST's AI Resource Center I read on 2026-10-23. Subcategory MANAGE 4.3 asks that incidents and errors are communicated to relevant AI actors and that the processes for tracking, responding to and recovering from them are followed and documented. The framework does not prescribe a log format or a hash chain.
+Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [NIST AI Risk Management Framework 1.0](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) (2023), the MANAGE function, whose Core page on NIST's AIRC site I read on 2026-10-23. Subcategory MANAGE 4.3 asks that incidents and errors are communicated to relevant AI actors and that the processes for tracking, responding to and recovering from them are followed and documented. The framework does not prescribe a log format or a hash chain.
 
 - **What the design does.** An incident record is useful in review only if the reviewer can tell it was not changed afterwards. This is one way to give them that check.
 - **What it does not claim.** It makes no claim of conformity to the framework or any other standard, holds no certification, and I have not read or mapped any other source.
