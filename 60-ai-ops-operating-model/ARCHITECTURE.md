@@ -142,7 +142,7 @@ Alignment, not certification. The README's "Aligned to" section cites two source
 - The Financial Stability Board's [Sound Practices for Responsible Adoption of Artificial Intelligence](https://www.fsb.org/uploads/P151026-1.pdf) (final report, 15 October 2026; I read the full text on 24 October 2026). Sound Practice 3 asks institutions to document AI use and to assess materiality and risk; Sound Practice 5 asks for that assessment at inception and after; Sound Practice 9 asks for performance evaluation in proportion to materiality and risk, including ongoing monitoring.
 - [SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (Federal Reserve, OCC and FDIC, 17 April 2026; I read the attached guidance on 24 October 2026). It says it sets no enforceable standards or prescriptive requirements, and says in a footnote that generative AI and agentic AI models are outside its scope while a bank's own risk management and governance practices should guide their controls.
 
-- **What the design does.** The tier that sets what is owed, the evidence register and the renewal cycle are one way to make the three practices concrete, as a design for a bank's own governance.
+- **What the design does.** The tier that sets what is owed, the evidence register and the renewal cycle point the same way as the three practices, as a design for a bank's own governance; the command checks that evidence exists and is current, not how well a use case performs.
 - **What it does not claim.** It does not map to the FSB report's section on stages or to SR 26-2 clause by clause, makes no claim of conformity to either, holds no certification, and I have read and mapped no other source.
 
 ---
