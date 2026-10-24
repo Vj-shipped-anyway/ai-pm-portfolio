@@ -1,0 +1,81 @@
+{
+ "documents": [
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D1",
+   "source": "dms",
+   "title": "Payments runbook [DOC-0001]"
+  },
+  {
+   "acl": [
+    "grp-hr"
+   ],
+   "doc_id": "D2",
+   "source": "dms",
+   "title": "Pay band guide [DOC-0002]"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D3",
+   "source": "dms",
+   "title": "Onboarding guide [DOC-0003]"
+  },
+  {
+   "acl": [
+    "grp-eng",
+    "-grp-contractors-eng"
+   ],
+   "doc_id": "D4",
+   "source": "dms",
+   "title": "Vendor shortlist [DOC-0004]"
+  },
+  {
+   "acl": [
+    "grp-hr"
+   ],
+   "doc_id": "D5",
+   "source": "minutes",
+   "title": "Board minutes [DOC-0005]"
+  }
+ ],
+ "groups": [
+  {
+   "child": "grp-eng",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-hr",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-contractors-eng",
+   "parent": "grp-contractors"
+  }
+ ],
+ "users": [
+  {
+   "direct_groups": [
+    "grp-eng"
+   ],
+   "user_id": "U1"
+  },
+  {
+   "direct_groups": [
+    "grp-contractors-eng",
+    "grp-eng"
+   ],
+   "user_id": "U2"
+  },
+  {
+   "direct_groups": [
+    "grp-hr"
+   ],
+   "user_id": "U3"
+  }
+ ]
+}

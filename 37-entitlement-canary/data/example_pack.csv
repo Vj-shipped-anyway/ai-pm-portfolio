@@ -1,0 +1,7 @@
+canary_id,user_id,doc_id,query,stratum,source,prime_user
+CAN-001,U2,D1,Payments runbook [DOC-0001],nested_deny,dms,U3
+CAN-002,U2,D4,Vendor shortlist [DOC-0004],direct_deny,dms,U1
+CAN-003,U1,D2,Pay band guide [DOC-0002],ordinary,dms,U3
+CAN-004,U1,D5,Board minutes [DOC-0005],ordinary,minutes,U3
+CAN-005,U2,D2,Pay band guide [DOC-0002],ordinary,dms,U3
+CAN-006,U2,D5,Board minutes [DOC-0005],ordinary,minutes,U3

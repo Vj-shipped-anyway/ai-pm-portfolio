@@ -1,0 +1,1792 @@
+{
+ "documents": [
+  {
+   "acl": [
+    "grp-legal",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-legal"
+   ],
+   "doc_id": "D0001",
+   "source": "dms",
+   "title": "Records retention: destruction log (Checklist) [DOC-0001]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0002",
+   "source": "policy",
+   "title": "Transaction monitoring: source feed (Standard) [DOC-0002]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-retail",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-retail",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0003",
+   "source": "dms",
+   "title": "Card disputes: network rules (Standard) [DOC-0003]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-risk-model",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-risk-model"
+   ],
+   "doc_id": "D0004",
+   "source": "tickets",
+   "title": "Operational loss: reporting cadence (Standard) [DOC-0004]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0005",
+   "source": "dms",
+   "title": "Records retention: storage location (Standard) [DOC-0005]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0006",
+   "source": "wiki",
+   "title": "Fraud alerts: device signal (Checklist) [DOC-0006]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0007",
+   "source": "tickets",
+   "title": "Access reviews: leaver removal (Standard) [DOC-0007]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-risk-model"
+   ],
+   "acl_at_index": [
+    "grp-risk-model"
+   ],
+   "doc_id": "D0008",
+   "source": "minutes",
+   "title": "Operational loss: root cause (FAQ) [DOC-0008]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-hr",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-hr",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0009",
+   "source": "wiki",
+   "title": "Compensation review: calibration notes (Standard) [DOC-0009]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit"
+   ],
+   "doc_id": "D0010",
+   "source": "tickets",
+   "title": "Credit limits: rating override (Checklist) [DOC-0010]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-tech-platform"
+   ],
+   "acl_at_index": [
+    "grp-tech-platform"
+   ],
+   "doc_id": "D0011",
+   "source": "dms",
+   "title": "Access reviews: leaver removal (Procedure) [DOC-0011]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-hr",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-hr"
+   ],
+   "doc_id": "D0012",
+   "source": "minutes",
+   "title": "Compensation review: calibration notes (FAQ) [DOC-0012]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-risk"
+   ],
+   "acl_at_index": [
+    "grp-risk"
+   ],
+   "doc_id": "D0013",
+   "source": "tickets",
+   "title": "Model validation: approval memo (Procedure) [DOC-0013]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0014",
+   "source": "tickets",
+   "title": "Model validation: benchmark test (Checklist) [DOC-0014]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-hr",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-hr",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0015",
+   "source": "wiki",
+   "title": "Compensation review: band mapping (Checklist) [DOC-0015]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-risk-model"
+   ],
+   "acl_at_index": [
+    "grp-risk-model"
+   ],
+   "doc_id": "D0016",
+   "source": "dms",
+   "title": "Model validation: benchmark test (Guidance) [DOC-0016]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-compliance"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-legal"
+   ],
+   "doc_id": "D0017",
+   "source": "tickets",
+   "title": "Transaction monitoring: scenario backtest (FAQ) [DOC-0017]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0018",
+   "source": "tickets",
+   "title": "Compensation review: pay equity (Procedure) [DOC-0018]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0019",
+   "source": "policy",
+   "title": "Credit limits: covenant check (Checklist) [DOC-0019]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-retail-cards-fraud",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards-fraud",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0020",
+   "source": "tickets",
+   "title": "Fraud alerts: false positive (Guidance) [DOC-0020]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-retail-cards-fraud"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-retail-cards-fraud"
+   ],
+   "doc_id": "D0021",
+   "source": "wiki",
+   "title": "Fraud alerts: case triage (Standard) [DOC-0021]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-retail-branch",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-retail-branch",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0022",
+   "source": "wiki",
+   "title": "Complaint handling: response deadline (FAQ) [DOC-0022]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-risk",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-risk",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0023",
+   "source": "wiki",
+   "title": "Model validation: input data (FAQ) [DOC-0023]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "grp-legal"
+   ],
+   "doc_id": "D0024",
+   "source": "tickets",
+   "title": "Records retention: archive schedule (FAQ) [DOC-0024]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-tech-platform"
+   ],
+   "acl_at_index": [
+    "grp-tech-platform"
+   ],
+   "doc_id": "D0025",
+   "source": "tickets",
+   "title": "Change management: rollback plan (Checklist) [DOC-0025]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0026",
+   "source": "dms",
+   "title": "Records retention: archive schedule (Guidance) [DOC-0026]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-retail",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-retail",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0027",
+   "source": "wiki",
+   "title": "Card disputes: chargeback timeline (Procedure) [DOC-0027]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-risk-model"
+   ],
+   "acl_at_index": [
+    "grp-risk-model"
+   ],
+   "doc_id": "D0028",
+   "source": "dms",
+   "title": "Model validation: monitoring plan (Guidance) [DOC-0028]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-hr",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-hr",
+    "-grp-retail-cards"
+   ],
+   "doc_id": "D0029",
+   "source": "dms",
+   "title": "Compensation review: bonus pool (Checklist) [DOC-0029]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-tech"
+   ],
+   "acl_at_index": [
+    "grp-tech"
+   ],
+   "doc_id": "D0030",
+   "source": "dms",
+   "title": "Change management: approval record (FAQ) [DOC-0030]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-tech"
+   ],
+   "acl_at_index": [
+    "grp-tech"
+   ],
+   "doc_id": "D0031",
+   "source": "dms",
+   "title": "Change management: emergency change (Guidance) [DOC-0031]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0032",
+   "source": "wiki",
+   "title": "Complaint handling: redress payment (FAQ) [DOC-0032]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-retail-cards"
+   ],
+   "doc_id": "D0033",
+   "source": "dms",
+   "title": "Records retention: legal hold (FAQ) [DOC-0033]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-tech-platform"
+   ],
+   "acl_at_index": [
+    "grp-tech-platform"
+   ],
+   "doc_id": "D0034",
+   "source": "dms",
+   "title": "Access reviews: quarterly recertification (Guidance) [DOC-0034]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0035",
+   "source": "dms",
+   "title": "Compensation review: pay equity (Checklist) [DOC-0035]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-hr"
+   ],
+   "doc_id": "D0036",
+   "source": "wiki",
+   "title": "Credit limits: rating override (FAQ) [DOC-0036]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "grp-legal"
+   ],
+   "doc_id": "D0037",
+   "source": "dms",
+   "title": "Change management: emergency change (Standard) [DOC-0037]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-compliance-aml"
+   ],
+   "acl_at_index": [
+    "grp-compliance-aml"
+   ],
+   "doc_id": "D0038",
+   "source": "dms",
+   "title": "Transaction monitoring: case narrative (Procedure) [DOC-0038]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0039",
+   "source": "tickets",
+   "title": "Credit limits: covenant check (Standard) [DOC-0039]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-risk-model"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-risk-model"
+   ],
+   "doc_id": "D0040",
+   "source": "dms",
+   "title": "Operational loss: rating heatmap (FAQ) [DOC-0040]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-risk",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-risk"
+   ],
+   "doc_id": "D0041",
+   "source": "wiki",
+   "title": "Operational loss: reporting cadence (Checklist) [DOC-0041]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-risk-model",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-risk-model",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0042",
+   "source": "wiki",
+   "title": "Model validation: approval memo (Guidance) [DOC-0042]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0043",
+   "source": "wiki",
+   "title": "Transaction monitoring: source feed (Procedure) [DOC-0043]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-commercial",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-commercial",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0044",
+   "source": "dms",
+   "title": "Credit limits: exception approval (Guidance) [DOC-0044]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-compliance-aml",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-compliance-aml",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0045",
+   "source": "minutes",
+   "title": "Transaction monitoring: alert threshold (Guidance) [DOC-0045]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-risk-model"
+   ],
+   "acl_at_index": [
+    "grp-risk-model"
+   ],
+   "doc_id": "D0046",
+   "source": "wiki",
+   "title": "Model validation: monitoring plan (Standard) [DOC-0046]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0047",
+   "source": "dms",
+   "title": "Access reviews: owner attestation (Standard) [DOC-0047]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0048",
+   "source": "dms",
+   "title": "Access reviews: exception log (Standard) [DOC-0048]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0049",
+   "source": "dms",
+   "title": "Vendor onboarding: due diligence (Checklist) [DOC-0049]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-retail-cards"
+   ],
+   "doc_id": "D0050",
+   "source": "dms",
+   "title": "Credit limits: annual review (Guidance) [DOC-0050]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0051",
+   "source": "dms",
+   "title": "Complaint handling: trend report (FAQ) [DOC-0051]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0052",
+   "source": "wiki",
+   "title": "Card disputes: network rules (FAQ) [DOC-0052]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "grp-legal"
+   ],
+   "doc_id": "D0053",
+   "source": "dms",
+   "title": "Model validation: limitation notice (Guidance) [DOC-0053]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-compliance-aml"
+   ],
+   "acl_at_index": [
+    "grp-compliance-aml",
+    "grp-hr"
+   ],
+   "doc_id": "D0054",
+   "source": "dms",
+   "title": "Transaction monitoring: case narrative (FAQ) [DOC-0054]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-tech"
+   ],
+   "acl_at_index": [
+    "grp-tech"
+   ],
+   "doc_id": "D0055",
+   "source": "dms",
+   "title": "Access reviews: privileged accounts (Checklist) [DOC-0055]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0056",
+   "source": "tickets",
+   "title": "Vendor onboarding: exit plan (Standard) [DOC-0056]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0057",
+   "source": "tickets",
+   "title": "Vendor onboarding: risk tiering (Guidance) [DOC-0057]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-tech",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-tech"
+   ],
+   "doc_id": "D0058",
+   "source": "wiki",
+   "title": "Change management: release window (FAQ) [DOC-0058]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-retail"
+   ],
+   "acl_at_index": [
+    "grp-retail"
+   ],
+   "doc_id": "D0059",
+   "source": "wiki",
+   "title": "Complaint handling: escalation path (Procedure) [DOC-0059]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors-ops"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors-ops"
+   ],
+   "doc_id": "D0060",
+   "source": "policy",
+   "title": "Card disputes: chargeback timeline (FAQ) [DOC-0060]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-commercial"
+   ],
+   "acl_at_index": [
+    "grp-commercial"
+   ],
+   "doc_id": "D0061",
+   "source": "wiki",
+   "title": "Vendor onboarding: contract terms (Guidance) [DOC-0061]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-retail"
+   ],
+   "acl_at_index": [
+    "grp-retail"
+   ],
+   "doc_id": "D0062",
+   "source": "wiki",
+   "title": "Card disputes: provisional credit (Procedure) [DOC-0062]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-retail-cards-fraud",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards-fraud",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0063",
+   "source": "policy",
+   "title": "Fraud alerts: case triage (FAQ) [DOC-0063]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-tech"
+   ],
+   "acl_at_index": [
+    "grp-tech"
+   ],
+   "doc_id": "D0064",
+   "source": "dms",
+   "title": "Access reviews: owner attestation (Guidance) [DOC-0064]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-retail",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-retail",
+    "-grp-retail-cards"
+   ],
+   "doc_id": "D0065",
+   "source": "dms",
+   "title": "Complaint handling: intake form (Standard) [DOC-0065]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0066",
+   "source": "wiki",
+   "title": "Complaint handling: trend report (Guidance) [DOC-0066]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-commercial",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-commercial",
+    "-grp-hr"
+   ],
+   "doc_id": "D0067",
+   "source": "wiki",
+   "title": "Vendor onboarding: due diligence (Standard) [DOC-0067]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-retail-cards"
+   ],
+   "doc_id": "D0068",
+   "source": "dms",
+   "title": "Card disputes: customer notice (Guidance) [DOC-0068]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors-tech"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0069",
+   "source": "dms",
+   "title": "Vendor onboarding: data sharing (Procedure) [DOC-0069]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards"
+   ],
+   "doc_id": "D0070",
+   "source": "wiki",
+   "title": "Fraud alerts: device signal (Procedure) [DOC-0070]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0071",
+   "source": "wiki",
+   "title": "Change management: freeze period (Procedure) [DOC-0071]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0072",
+   "source": "dms",
+   "title": "Access reviews: exception log (Procedure) [DOC-0072]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0073",
+   "source": "dms",
+   "title": "Operational loss: escalation owner (Procedure) [DOC-0073]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-tech"
+   ],
+   "acl_at_index": [
+    "grp-tech"
+   ],
+   "doc_id": "D0074",
+   "source": "tickets",
+   "title": "Change management: approval record (Standard) [DOC-0074]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-legal"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-legal"
+   ],
+   "doc_id": "D0075",
+   "source": "wiki",
+   "title": "Records retention: review cycle (Guidance) [DOC-0075]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0076",
+   "source": "wiki",
+   "title": "Credit limits: collateral value (FAQ) [DOC-0076]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-tech-platform"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-tech-platform"
+   ],
+   "doc_id": "D0077",
+   "source": "tickets",
+   "title": "Change management: rollback plan (FAQ) [DOC-0077]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-tech",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-tech",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0078",
+   "source": "wiki",
+   "title": "Access reviews: privileged accounts (FAQ) [DOC-0078]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0079",
+   "source": "policy",
+   "title": "Operational loss: root cause (Standard) [DOC-0079]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0080",
+   "source": "tickets",
+   "title": "Complaint handling: response deadline (Guidance) [DOC-0080]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0081",
+   "source": "wiki",
+   "title": "Complaint handling: redress payment (Procedure) [DOC-0081]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit"
+   ],
+   "doc_id": "D0082",
+   "source": "dms",
+   "title": "Credit limits: annual review (FAQ) [DOC-0082]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0083",
+   "source": "wiki",
+   "title": "Access reviews: quarterly recertification (Standard) [DOC-0083]",
+   "topic": "Access reviews"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0084",
+   "source": "dms",
+   "title": "Compensation review: exception request (Procedure) [DOC-0084]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0085",
+   "source": "tickets",
+   "title": "Credit limits: exception approval (Procedure) [DOC-0085]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0086",
+   "source": "wiki",
+   "title": "Operational loss: recovery tracking (FAQ) [DOC-0086]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0087",
+   "source": "dms",
+   "title": "Vendor onboarding: risk tiering (FAQ) [DOC-0087]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0088",
+   "source": "dms",
+   "title": "Vendor onboarding: exit plan (FAQ) [DOC-0088]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-legal",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-legal",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0089",
+   "source": "tickets",
+   "title": "Records retention: review cycle (Standard) [DOC-0089]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-tech-platform"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-tech-platform"
+   ],
+   "doc_id": "D0090",
+   "source": "tickets",
+   "title": "Change management: freeze period (Standard) [DOC-0090]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0091",
+   "source": "dms",
+   "title": "Compensation review: band mapping (FAQ) [DOC-0091]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0092",
+   "source": "policy",
+   "title": "Vendor onboarding: contract terms (Standard) [DOC-0092]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-compliance"
+   ],
+   "doc_id": "D0093",
+   "source": "policy",
+   "title": "Transaction monitoring: scenario backtest (Guidance) [DOC-0093]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-hr"
+   ],
+   "doc_id": "D0094",
+   "source": "dms",
+   "title": "Compensation review: exception request (FAQ) [DOC-0094]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-risk"
+   ],
+   "acl_at_index": [
+    "grp-risk"
+   ],
+   "doc_id": "D0095",
+   "source": "wiki",
+   "title": "Model validation: limitation notice (Procedure) [DOC-0095]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0096",
+   "source": "policy",
+   "title": "Operational loss: rating heatmap (Guidance) [DOC-0096]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-retail",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-retail",
+    "-grp-hr"
+   ],
+   "doc_id": "D0097",
+   "source": "tickets",
+   "title": "Complaint handling: intake form (Checklist) [DOC-0097]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "-grp-hr"
+   ],
+   "doc_id": "D0098",
+   "source": "tickets",
+   "title": "Transaction monitoring: filing decision (FAQ) [DOC-0098]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0099",
+   "source": "policy",
+   "title": "Card disputes: provisional credit (Guidance) [DOC-0099]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-risk-model",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-risk-model",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0100",
+   "source": "dms",
+   "title": "Operational loss: escalation owner (Standard) [DOC-0100]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors-tech"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors-tech"
+   ],
+   "doc_id": "D0101",
+   "source": "wiki",
+   "title": "Card disputes: merchant evidence (FAQ) [DOC-0101]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-retail-cards-fraud"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards-fraud"
+   ],
+   "doc_id": "D0102",
+   "source": "wiki",
+   "title": "Fraud alerts: analyst queue (Procedure) [DOC-0102]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors-tech"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors-tech"
+   ],
+   "doc_id": "D0103",
+   "source": "policy",
+   "title": "Change management: release window (Procedure) [DOC-0103]",
+   "topic": "Change management"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0104",
+   "source": "dms",
+   "title": "Credit limits: collateral value (Standard) [DOC-0104]",
+   "topic": "Credit limits"
+  },
+  {
+   "acl": [
+    "grp-retail"
+   ],
+   "acl_at_index": [
+    "grp-retail"
+   ],
+   "doc_id": "D0105",
+   "source": "dms",
+   "title": "Card disputes: merchant evidence (Guidance) [DOC-0105]",
+   "topic": "Card disputes"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0106",
+   "source": "dms",
+   "title": "Records retention: legal hold (Checklist) [DOC-0106]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-retail-branch"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-retail-branch"
+   ],
+   "doc_id": "D0107",
+   "source": "dms",
+   "title": "Complaint handling: escalation path (Standard) [DOC-0107]",
+   "topic": "Complaint handling"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "grp-legal"
+   ],
+   "doc_id": "D0108",
+   "source": "wiki",
+   "title": "Records retention: destruction log (Procedure) [DOC-0108]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0109",
+   "source": "dms",
+   "title": "Compensation review: bonus pool (Guidance) [DOC-0109]",
+   "topic": "Compensation review"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-risk-model"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-risk-model"
+   ],
+   "doc_id": "D0110",
+   "source": "wiki",
+   "title": "Operational loss: recovery tracking (Guidance) [DOC-0110]",
+   "topic": "Operational loss"
+  },
+  {
+   "acl": [
+    "grp-legal"
+   ],
+   "acl_at_index": [
+    "grp-legal"
+   ],
+   "doc_id": "D0111",
+   "source": "dms",
+   "title": "Records retention: storage location (FAQ) [DOC-0111]",
+   "topic": "Records retention"
+  },
+  {
+   "acl": [
+    "grp-compliance"
+   ],
+   "acl_at_index": [
+    "grp-compliance"
+   ],
+   "doc_id": "D0112",
+   "source": "tickets",
+   "title": "Transaction monitoring: alert threshold (Procedure) [DOC-0112]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-all-staff",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0113",
+   "source": "dms",
+   "title": "Fraud alerts: analyst queue (Standard) [DOC-0113]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-compliance",
+    "grp-retail-cards-fraud",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-compliance",
+    "grp-retail-cards-fraud",
+    "-grp-retail-cards"
+   ],
+   "doc_id": "D0114",
+   "source": "tickets",
+   "title": "Fraud alerts: rule tuning (Procedure) [DOC-0114]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards"
+   ],
+   "doc_id": "D0115",
+   "source": "dms",
+   "title": "Fraud alerts: rule tuning (Guidance) [DOC-0115]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards"
+   ],
+   "doc_id": "D0116",
+   "source": "dms",
+   "title": "Fraud alerts: false positive (Standard) [DOC-0116]",
+   "topic": "Fraud alerts"
+  },
+  {
+   "acl": [
+    "grp-commercial-credit",
+    "-grp-hr"
+   ],
+   "acl_at_index": [
+    "grp-commercial-credit",
+    "-grp-hr"
+   ],
+   "doc_id": "D0117",
+   "source": "wiki",
+   "title": "Vendor onboarding: data sharing (Standard) [DOC-0117]",
+   "topic": "Vendor onboarding"
+  },
+  {
+   "acl": [
+    "grp-compliance-aml",
+    "-grp-contractors"
+   ],
+   "acl_at_index": [
+    "grp-compliance-aml",
+    "-grp-contractors"
+   ],
+   "doc_id": "D0118",
+   "source": "tickets",
+   "title": "Transaction monitoring: filing decision (Procedure) [DOC-0118]",
+   "topic": "Transaction monitoring"
+  },
+  {
+   "acl": [
+    "grp-all-staff"
+   ],
+   "acl_at_index": [
+    "grp-all-staff"
+   ],
+   "doc_id": "D0119",
+   "source": "tickets",
+   "title": "Model validation: input data (Guidance) [DOC-0119]",
+   "topic": "Model validation"
+  },
+  {
+   "acl": [
+    "grp-retail-cards",
+    "-grp-retail-cards"
+   ],
+   "acl_at_index": [
+    "grp-retail-cards"
+   ],
+   "doc_id": "D0120",
+   "source": "wiki",
+   "title": "Card disputes: customer notice (Procedure) [DOC-0120]",
+   "topic": "Card disputes"
+  }
+ ],
+ "groups": [
+  {
+   "child": "grp-retail",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-commercial",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-risk",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-compliance",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-tech",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-hr",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-legal",
+   "parent": "grp-all-staff"
+  },
+  {
+   "child": "grp-retail-cards",
+   "parent": "grp-retail"
+  },
+  {
+   "child": "grp-retail-branch",
+   "parent": "grp-retail"
+  },
+  {
+   "child": "grp-retail-cards-fraud",
+   "parent": "grp-retail-cards"
+  },
+  {
+   "child": "grp-commercial-credit",
+   "parent": "grp-commercial"
+  },
+  {
+   "child": "grp-risk-model",
+   "parent": "grp-risk"
+  },
+  {
+   "child": "grp-compliance-aml",
+   "parent": "grp-compliance"
+  },
+  {
+   "child": "grp-compliance-aml",
+   "parent": "grp-legal"
+  },
+  {
+   "child": "grp-tech-platform",
+   "parent": "grp-tech"
+  },
+  {
+   "child": "grp-contractors-tech",
+   "parent": "grp-contractors"
+  },
+  {
+   "child": "grp-contractors-ops",
+   "parent": "grp-contractors"
+  }
+ ],
+ "users": [
+  {
+   "direct_groups": [
+    "grp-contractors-tech",
+    "grp-tech"
+   ],
+   "role": "contractor",
+   "user_id": "U001"
+  },
+  {
+   "direct_groups": [
+    "grp-contractors-tech",
+    "grp-tech"
+   ],
+   "role": "contractor",
+   "user_id": "U002"
+  },
+  {
+   "direct_groups": [
+    "grp-contractors-ops",
+    "grp-retail"
+   ],
+   "role": "contractor",
+   "user_id": "U003"
+  },
+  {
+   "direct_groups": [
+    "grp-contractors-ops",
+    "grp-commercial"
+   ],
+   "role": "contractor",
+   "user_id": "U004"
+  },
+  {
+   "direct_groups": [
+    "grp-contractors-ops",
+    "grp-commercial"
+   ],
+   "role": "contractor",
+   "user_id": "U005"
+  },
+  {
+   "direct_groups": [
+    "grp-contractors-tech",
+    "grp-retail"
+   ],
+   "role": "contractor",
+   "user_id": "U006"
+  },
+  {
+   "direct_groups": [
+    "grp-commercial"
+   ],
+   "role": "employee",
+   "user_id": "U007"
+  },
+  {
+   "direct_groups": [
+    "grp-legal"
+   ],
+   "role": "employee",
+   "user_id": "U008"
+  },
+  {
+   "direct_groups": [
+    "grp-risk"
+   ],
+   "role": "employee",
+   "user_id": "U009"
+  },
+  {
+   "direct_groups": [
+    "grp-compliance-aml"
+   ],
+   "role": "employee",
+   "user_id": "U010"
+  },
+  {
+   "direct_groups": [
+    "grp-commercial-credit"
+   ],
+   "role": "employee",
+   "user_id": "U011"
+  },
+  {
+   "direct_groups": [
+    "grp-retail-branch"
+   ],
+   "role": "employee",
+   "user_id": "U012"
+  },
+  {
+   "direct_groups": [
+    "grp-risk-model"
+   ],
+   "role": "employee",
+   "user_id": "U013"
+  },
+  {
+   "direct_groups": [
+    "grp-retail-cards-fraud"
+   ],
+   "role": "employee",
+   "user_id": "U014"
+  },
+  {
+   "direct_groups": [
+    "grp-compliance",
+    "grp-retail-cards"
+   ],
+   "role": "employee",
+   "user_id": "U015"
+  },
+  {
+   "direct_groups": [
+    "grp-hr"
+   ],
+   "role": "employee",
+   "user_id": "U016"
+  },
+  {
+   "direct_groups": [
+    "grp-retail-cards"
+   ],
+   "role": "employee",
+   "user_id": "U017"
+  },
+  {
+   "direct_groups": [
+    "grp-tech-platform"
+   ],
+   "role": "employee",
+   "user_id": "U018"
+  },
+  {
+   "direct_groups": [
+    "grp-tech"
+   ],
+   "role": "employee",
+   "user_id": "U019"
+  },
+  {
+   "direct_groups": [
+    "grp-commercial"
+   ],
+   "role": "employee",
+   "user_id": "U020"
+  }
+ ]
+}
