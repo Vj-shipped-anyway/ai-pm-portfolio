@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">chargeback-packet: one dispute packet checked against the evidence list, the response clock and its own documents, ending in READY, FIX or LATE</title>
+  <desc id="desc">Four-stage flow showing how a dispute case and its packet move through a load and validate step, a completeness check against the evidence list for the reason code, a response clock check and a consistency check on the documents, ending in one decision of READY, FIX or LATE that sets the exit code of the send step. A dashed box marks the pieces that are design only. A comparison strip contrasts having no check, counting documents and the three checks together on 100 synthetic dispute cases.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">chargeback-packet - one packet, checked before the window closes</text>
+  <text x="20" y="52" class="subheader">Three checks read a case and an evidence list. The strictest finding sets the decision.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="360" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 100 dispute cases, $103,404.68 disputed</text>
+
+  <rect x="20" y="100" width="202" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read the files</text>
+  <text x="30" y="162" class="stage-sub">case file and evidence list</text>
+  <text x="30" y="177" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+  <line x1="224" y1="166" x2="246" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="246" y="100" width="202" height="132" rx="8" class="stage-box-block"/>
+  <text x="256" y="120" class="stage-num">2 . EVIDENCE LIST</text>
+  <text x="256" y="142" class="stage-title">Required items?</text>
+  <text x="256" y="162" class="stage-sub">reason code picks the list</text>
+  <text x="256" y="177" class="stage-sub">either-or items allowed</text>
+  <text x="256" y="192" class="stage-sub">missing item: FIX</text>
+  <text x="256" y="212" class="meta-block">alone: 10 of 34 faults</text>
+  <line x1="450" y1="166" x2="472" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="472" y="100" width="202" height="132" rx="8" class="stage-box-gate"/>
+  <text x="482" y="120" class="stage-num">3 . CLOCK</text>
+  <text x="482" y="142" class="stage-title">Days left?</text>
+  <text x="482" y="162" class="stage-sub">calendar days from receipt</text>
+  <text x="482" y="177" class="stage-sub">last day counts</text>
+  <text x="482" y="192" class="stage-sub">window closed: LATE</text>
+  <text x="482" y="212" class="meta-strong">alone: 14 of 14 late</text>
+  <line x1="676" y1="166" x2="698" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="698" y="100" width="202" height="132" rx="8" class="stage-box-block"/>
+  <text x="708" y="120" class="stage-num">4 . CONSISTENCY</text>
+  <text x="708" y="142" class="stage-title">Documents agree?</text>
+  <text x="708" y="162" class="stage-sub">order id, dates, amount</text>
+  <text x="708" y="177" class="stage-sub">and page limit</text>
+  <text x="708" y="192" class="stage-sub">any mismatch: FIX</text>
+  <text x="708" y="212" class="meta-block">alone: 24 of 34 faults</text>
+
+  <!-- Arrow from stage 4 down to the decision -->
+  <path d="M 799 232 L 799 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: DECISION -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">5 . DECISION</text>
+  <text x="262" y="313" class="stage-title">READY . FIX . LATE</text>
+  <text x="262" y="330" class="stage-sub">LATE beats FIX - exit 1 unless every packet is READY</text>
+  <text x="262" y="344" class="meta-strong">34 of 34 to FIX, 14 of 14 LATE, 0 of 43 ready flagged</text>
+
+  <!-- Send step box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">SEND STEP</text>
+  <text x="32" y="313" class="stage-title">Hold or send</text>
+  <text x="32" y="330" class="stage-sub">packet owner reads</text>
+  <text x="32" y="344" class="stage-sub">the findings and fixes</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">reviewed acquirer list</text>
+  <text x="742" y="328" class="stage-sub">dispute export adapter</text>
+  <text x="742" y="343" class="stage-sub">decision ledger</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">No check</text>
+  <text x="32" y="406" class="meta-block">57 of 100 packets leave faulty</text>
+  <text x="32" y="424" class="stage-sub">$58,502.91 of value inside them</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Counting documents</text>
+  <text x="332" y="406" class="meta-block">37 of 57 faulty packets sent</text>
+  <text x="332" y="424" class="stage-sub">holds back 2 of 43 ready ones</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Three checks together</text>
+  <text x="632" y="406" class="meta-strong">34 of 34 to FIX, 14 of 14 LATE</text>
+  <text x="632" y="424" class="stage-sub">known miss: 9 wrong-file packets pass</text>
+</svg>
