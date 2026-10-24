@@ -28,7 +28,7 @@ Standard library only, Python 3.9 or newer. To check your own plan: `terraform s
 **What it shows** (🟢 measured on synthetic data: 86 planted plans with 388 resource changes; the script is named in brackets):
 
 - 🟢 No plan check: 0 of 86 plans stopped, and 42 of 86 apply a risky resource unchecked (`step_01`)
-- 🟢 A text search with 8 patterns flags 58 of 86 plans; 23 of those 58 flags (39.7%) are harmless, and 17 of 52 risky plans are never flagged (`step_02`)
+- 🟢 A text search with 8 patterns flags 58 of 86 plans; 23 of those 58 flags (39.7%) are harmless, and 17 of the 52 plans that should be blocked or sent to review are never flagged (`step_02`)
 - 🟢 Rules that ignore each resource's action block 7 of 34 harmless plans, all deleted or unchanged resources; rules that treat a value unknown until apply as fine flag only 3 of 10 plans that need a look (`step_03`)
 - 🟢 Parser, ten rules and unknown handling together: 33 of 42 risky plans blocked, each on the planted resource with the expected rule; 10 of 10 need-a-look plans sent to review; 0 of 34 harmless plans blocked; a person reads 46 of 86 plans where the text search sent 58 (`step_04`)
 
