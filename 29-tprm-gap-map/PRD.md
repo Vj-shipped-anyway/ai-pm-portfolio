@@ -36,7 +36,7 @@
 
 | Rank | Item | R | I | C | E | RICE | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | **Tiering by the text's own examples** (named service types, share of activity) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype |
+| 1 | **Tiering by a text-examples rule** (service types the text names as central, and a share-of-activity line I set) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype |
 | 2 | **Vendor-file validation** (a non-numeric or missing column exits 2) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype |
 | 3 | **Close the silent paths** (header-only file, unknown service type, incident log without a material column) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype; rejecting an unknown service type against a registry list is v0.2 |
 | 4 | **Test against the incident log** (caught, missed, false alarms, per characteristic) | 60 vendors | 3 | 0.7 | 2 | 63.0 | Built in prototype |

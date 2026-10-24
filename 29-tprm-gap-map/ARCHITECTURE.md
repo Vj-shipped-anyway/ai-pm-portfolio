@@ -25,7 +25,7 @@ Eight components: three decide the outcome, five support or report.
 | `tgm-report` | Prints the tiers, the characteristic table and the scores. | Python. Prototype: `run_tier`, `safe` | No | No |
 | `tgm-ledger` | Appends one record per run (design). Prototype analog: `src/out/step_04_vendors.csv`. | PostgreSQL plus object storage with a retention lock (design) | No | Stateful |
 
-**What decides the outcome.** The numeric checks on the input, the concentration share and the tier rules. The map, the term count, the scores, the report and the ledger inform or record. The tier rules are plain: a named service type or a share of activity of 30 or more, or one of four flags on an AI-enabled service.
+**What decides the outcome.** The numeric checks on the input, the concentration share and the tier rules. The map, the term count, the scores, the report and the ledger inform or record. The tier rules are plain: one of the service types the text names as central, or a share of activity of 30 or more (a line I chose), or one of four flags on an AI-enabled service.
 
 **Repo structure** (production shape):
 
@@ -155,7 +155,7 @@ Alignment, not certification. The README's "Aligned to" section cites one source
 - **Two material-incident vendors that stay LOWER.** 🟢 2 of 24 (`step_04_with_ai_fields.py`).
 - **Fewer false alarms.** 🟢 19 against 13 once the characteristics are added (`step_04_with_ai_fields.py`).
 - **A tuned concentration line.** The 30% line is a choice; at 20% the catch is 23 of 24.
-- **Concentration across several vendors in the text.** The text covers it inside one third party. Several vendors sharing one provider is not named.
+- **Concentration across several vendors in the text.** The text mentions concentration risk once, in a footnote, about relying on one third party for extensive services. Several vendors sharing one provider is not mentioned.
 - **A settled reading.** The map is my reading of one proposed text, and the classification of each row is a judgment.
 - **Predicting examiner behavior, scoring real vendors, or submitting a comment.** Out of scope, as is any model call.
 
