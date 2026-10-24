@@ -128,7 +128,7 @@ The tool is one short-lived batch task that runs when the evidence export lands.
 Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the Federal Reserve's [SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm), issued with the OCC and the FDIC on April 17, 2026, with the [attached guidance](https://www.federalreserve.gov/supervisionreg/srletters/SR2602a1.pdf). I read both on 2026-10-24.
 
 - **What the design does.** It names the areas the text names: independent challenge, validation by conceptual soundness, outcomes analysis and ongoing monitoring, vendor products, and a scope item for rules, generative and agentic use cases. It dates the evidence and records the result.
-- **What it does not claim.** The guidance sets no tiers, test lists or evidence windows, and says it is not an enforceable standard, so the plan is my assumption. It is most relevant to banks with more than $30 billion in total assets; this prototype does not test that. It makes no claim of conformity to the guidance, holds no certification, and I have not read or mapped any other source.
+- **What it does not claim.** The guidance sets no tiers, test lists or evidence windows, and says it is not an enforceable standard, so the plan is my assumption. It is expected to be most relevant to banks with more than $30 billion in total assets; this prototype does not test that. It makes no claim of conformity to the guidance, holds no certification, and I have not read or mapped any other source.
 
 ---
 
