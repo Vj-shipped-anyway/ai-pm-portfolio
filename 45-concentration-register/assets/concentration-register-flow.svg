@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">Concentration Register: a register of services, each provider and region taken out in turn, ending in one decision</title>
+  <desc id="desc">Five-stage flow showing how a services file and a dependencies file move through a load and validate step, a graph build that rejects hard-dependency cycles, one outage scenario per provider and per provider-region, a propagation step that follows hard dependencies and standbys, and a limit check, ending in one decision of OVER LIMIT or WITHIN LIMIT that sets the exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts the register alone, a direct share by provider and Concentration Register on a synthetic register of 64 services.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">Concentration Register - one register, every provider and region taken out</text>
+  <text x="20" y="52" class="subheader">Hard dependencies and standbys are followed. A scenario over the limit sets the decision.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 64 services, 25 critical, 12 scenarios</text>
+
+  <!-- Stage 1: LOAD -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read the register</text>
+  <text x="30" y="162" class="stage-sub">services, dependencies</text>
+  <text x="30" y="177" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="192" class="stage-sub">no critical: exit 2</text>
+  <text x="30" y="212" class="meta-strong">55 of 64 placed</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: GRAPH -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . GRAPH</text>
+  <text x="209" y="142" class="stage-title">Index the edges</text>
+  <text x="209" y="162" class="stage-sub">hard and soft kinds</text>
+  <text x="209" y="177" class="stage-sub">hard cycle: exit 2</text>
+  <text x="209" y="212" class="meta-strong">96 hard edges listed</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: SCENARIOS -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . SCENARIOS</text>
+  <text x="388" y="142" class="stage-title">One outage each</text>
+  <text x="388" y="162" class="stage-sub">every provider and</text>
+  <text x="388" y="177" class="stage-sub">every provider region</text>
+  <text x="388" y="212" class="meta-block">0 of 12 measured today</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: PROPAGATE -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="567" y="120" class="stage-num">4 . PROPAGATE</text>
+  <text x="567" y="142" class="stage-title">Follow the fallout</text>
+  <text x="567" y="162" class="stage-sub">hard dependencies lost</text>
+  <text x="567" y="177" class="stage-sub">a standby that holds</text>
+  <text x="567" y="192" class="stage-sub">keeps a service up</text>
+  <text x="567" y="212" class="meta-strong">64 of 74 lost pairs</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: LIMIT -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="746" y="120" class="stage-num">5 . LIMIT</text>
+  <text x="746" y="142" class="stage-title">Over the limit?</text>
+  <text x="746" y="162" class="stage-sub">more than 30% of</text>
+  <text x="746" y="177" class="stage-sub">critical services lost</text>
+  <text x="746" y="192" class="stage-sub">flags the scenario</text>
+  <text x="746" y="212" class="meta-strong">4 of 4 over, flagged</text>
+
+  <!-- Arrow from stage 5 down to the decision -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: DECISION -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . DECISION</text>
+  <text x="262" y="313" class="stage-title">OVER LIMIT . WITHIN LIMIT</text>
+  <text x="262" y="330" class="stage-sub">any scenario over exits 1, bad input exits 2</text>
+  <text x="262" y="344" class="meta-strong">4 of 4 flagged, 0 false flags</text>
+
+  <!-- Risk review box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">RISK REVIEW</text>
+  <text x="32" y="313" class="stage-title">Reads the finding</text>
+  <text x="32" y="330" class="stage-sub">scenario and services lost</text>
+  <text x="32" y="344" class="stage-sub">unplaced named, a floor</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">reviewed limit config</text>
+  <text x="742" y="328" class="stage-sub">register export feed</text>
+  <text x="742" y="343" class="stage-sub">result ledger</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">Register alone</text>
+  <text x="32" y="406" class="meta-block">0 of 12 scenarios measured</text>
+  <text x="32" y="424" class="stage-sub">4 of 12 truly lose over 30%</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Direct share by provider</text>
+  <text x="332" y="406" class="meta-block">1 of 4 over-limit scenarios caught</text>
+  <text x="332" y="424" class="stage-sub">P:CP-3 shows 12.0%, loses 52.0%</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Concentration Register</text>
+  <text x="632" y="406" class="meta-strong">4 of 4 caught, 0 false flags</text>
+  <text x="632" y="424" class="stage-sub">known miss: 10 of 74 pairs</text>
+</svg>
