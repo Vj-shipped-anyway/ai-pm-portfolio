@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">AI ops operating model review: the stage a program claims, checked against the evidence it filed, ending in CONFIRMED, OVERCLAIM or UNDERCLAIM</title>
+  <desc id="desc">Five-stage flow showing how a checklist, a programs file with a claimed stage and an evidence register are loaded with a review date, how the list of items owed at the program tier is built, how each owed item is judged on a row existing, a real reference, a date not in the future, an age within 1.5 times the cycle and a producer other than the builder, how the stage reached is found as the last stage whose owed items all pass, and how that stage is compared with the claim. The result is a report of gaps, a first-90-days count and an exit code. A staged skill collects the evidence. A dashed box marks the pieces that are design only. A comparison strip contrasts the owners report, a flat checklist and the five checks on 60 synthetic programs.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">AI ops operating model review - claimed stage against evidence</text>
+  <text x="20" y="52" class="subheader">The skill collects references. The command reads the register and compares the stage it reaches with the claim.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="420" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 60 programs, 23 checklist items, 677 evidence rows</text>
+
+  <!-- Stage 1: LOAD -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="140" class="stage-title">Read the files</text>
+  <text x="30" y="158" class="stage-sub">checklist, programs,</text>
+  <text x="30" y="172" class="stage-sub">evidence, review date</text>
+  <text x="30" y="186" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="200" class="stage-sub">unknown item: exit 2</text>
+  <text x="30" y="220" class="meta-strong">never a silent pass</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: OWED LIST -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . OWED LIST</text>
+  <text x="209" y="140" class="stage-title">Tier-aware list</text>
+  <text x="209" y="158" class="stage-sub">a tier-1 program is</text>
+  <text x="209" y="172" class="stage-sub">not asked for what</text>
+  <text x="209" y="186" class="stage-sub">only tier 3 owes</text>
+  <text x="209" y="220" class="meta-block">flat: 220 extra asks</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: JUDGE -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . JUDGE</text>
+  <text x="388" y="140" class="stage-title">Each owed item</text>
+  <text x="388" y="158" class="stage-sub">row exists, real ref,</text>
+  <text x="388" y="172" class="stage-sub">not future-dated,</text>
+  <text x="388" y="186" class="stage-sub">age within 1.5 cycles,</text>
+  <text x="388" y="200" class="stage-sub">producer not builder</text>
+  <text x="388" y="220" class="meta-block">hollow: 0 of 19</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: STAGE -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="567" y="120" class="stage-num">4 . STAGE</text>
+  <text x="567" y="140" class="stage-title">Stage reached</text>
+  <text x="567" y="158" class="stage-sub">stage k is reached</text>
+  <text x="567" y="172" class="stage-sub">when every owed item</text>
+  <text x="567" y="186" class="stage-sub">up to k is OK</text>
+  <text x="567" y="220" class="meta-strong">45 of 60 match truth</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: COMPARE -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="746" y="120" class="stage-num">5 . COMPARE</text>
+  <text x="746" y="140" class="stage-title">Claim vs evidence</text>
+  <text x="746" y="158" class="stage-sub">above: OVERCLAIM</text>
+  <text x="746" y="172" class="stage-sub">equal: CONFIRMED</text>
+  <text x="746" y="186" class="stage-sub">below: UNDERCLAIM</text>
+  <text x="746" y="220" class="meta-strong">30 of 36 overclaims</text>
+
+  <!-- Arrow from stage 5 down to the report -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: REPORT -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . REPORT</text>
+  <text x="262" y="313" class="stage-title">Gaps, first 90 days, exit code</text>
+  <text x="262" y="330" class="stage-sub">exit 1 on an overclaim, 2 on input it cannot read</text>
+  <text x="262" y="344" class="meta-strong">none of the 24 other claims flagged</text>
+
+  <!-- Known misses box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">KNOWN MISSES</text>
+  <text x="32" y="313" class="stage-title">Reads rows only</text>
+  <text x="32" y="330" class="stage-sub">hollow artifacts: 0 of 19</text>
+  <text x="32" y="344" class="stage-sub">6 of 36 overclaims pass</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">register with history</text>
+  <text x="742" y="328" class="stage-sub">audit sample queue</text>
+  <text x="742" y="343" class="stage-sub">decision record</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">Owners' report</text>
+  <text x="32" y="406" class="meta-block">16 of 60 at the true stage</text>
+  <text x="32" y="424" class="stage-sub">36 of 60 report above it</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Flat checklist, row exists</text>
+  <text x="332" y="406" class="meta-block">19 of 60 at the true stage</text>
+  <text x="332" y="424" class="stage-sub">flags 11 of 24 fair claims</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">The five checks</text>
+  <text x="632" y="406" class="meta-strong">45 of 60 at the true stage</text>
+  <text x="632" y="424" class="stage-sub">flags 0 of 24 fair claims</text>
+</svg>
