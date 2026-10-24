@@ -20,7 +20,7 @@ complaint_escalations    2.7      5   53%          4       7     7  ok
 decision: SHORT on 2 of 3 queues with a current_headcount
 ```
 
-`seats` is reviewers at the desk, `mean-only` is Erlang C on the mean rate alone, `roster` is seats divided by one minus shrinkage, rounded up. Standard library only, Python 3.9 or newer. To size your own queues: `python3 review_capacity.py size queues.csv`, where each row holds the assumptions for one queue (the columns are listed at the top of the file). It exits 1 when a queue is short, and `--format github` prints annotations. `python3 review_capacity.py fit caselog.csv --days 1-10` measures the arrival and handling columns from a case log and leaves the target columns at defaults for you to edit.
+`seats` is reviewers at the desk, `mean-only` is Erlang C on the mean rate alone, `roster` is seats divided by one minus shrinkage, rounded up. Standard library only, Python 3.9 or newer. To size your own queues: `python3 review_capacity.py size queues.csv`, where each row holds the assumptions for one queue (the columns are listed at the top of `src/review_capacity.py`). It exits 1 when a queue is short, and `--format github` prints annotations. `python3 review_capacity.py fit caselog.csv --days 1-10` measures the arrival and handling columns from a case log and prints a queues CSV with the target columns at defaults for you to edit; redirect it to a file.
 
 ## What the numbers say
 
@@ -33,11 +33,11 @@ decision: SHORT on 2 of 3 queues with a current_headcount
 - `step_04`: 🟢 Two hard negatives, queues that look risky on paper, are not over-staffed: 2 of 2
 - `step_04`: 🟢 With the assumptions measured on the previous 10 days instead of the replayed ones: 7 of 13 land on the true number, 12 of 13 within one, and 10 of 13 meet both limits
 - 🟡 Modeled, assumptions named: the wait targets, the 0.85 utilization cap and the 25% shrinkage are my choices, set in `data/queues.csv`. The roster column is arithmetic on the shrinkage and is not tested against a replay.
-- 🔴 Hypothetical: that a reviewer who runs near the cap reviews worse. 08 plants that effect in its data; nothing here measures it, so the cap is a policy choice and not a finding.
+- 🔴 Hypothetical: that a reviewer who runs near the cap reviews worse. 08 models rubber-stamped reviews but not as a function of load, and nothing here measures that link, so the cap is a policy choice and not a finding.
 
 ## What it still gets wrong
 
-- `step_04` and `step_03`: 🟢 One bursty queue is still one reviewer short: `card_dispute_wave` gets 5 where 6 were needed, with 10.6% of its cases late against 10% allowed. The tool reads the spread of the gaps between arrivals, 1.64 for that queue, and busy and quiet spells hide inside a gap statistic: its hourly arrival counts have a variance over mean of 3.66, against 0.80 for a plain queue. One queue sitting just over the line cannot prove that is the cause.
+- `step_04` and `step_03`: 🟢 One bursty queue is still one reviewer short: `card_dispute_wave` gets 5 where 6 were needed, with 10.6% of its cases late against 10% allowed. The tool reads the spread of the gaps between arrivals, 1.64 for that queue. Busy and quiet spells hide inside a gap statistic: its hourly arrival counts have a variance over mean of 3.66, against 0.80 for a plain queue. One queue sitting just over the line cannot prove that is the cause.
 - `step_04`: 🟢 Two queues get one reviewer more than needed, `onboarding_review` and `dispute_summary_check`, each with 5 against 4.
 - `step_03`: 🟢 The variability term is not shown to help. It changed 2 of 13 answers, one better and one worse. I kept it because it is the standard form and the near-constant handling queue needs it; 13 queues cannot settle it.
 - `step_04`: 🟢 A change after the history was taken is invisible to any method fitted on the history. `payment_limit_exceptions` ran at 5.31 live cases an hour on days 1 to 10 and 6.78 on days 11 to 20; fitted on days 1 to 10 the tool says 4 reviewers and 5 were needed.
