@@ -1,0 +1,13 @@
+account_id,account_name,default_cost_center,shared
+410000000001,deposits-prod,CC-1001,no
+410000000002,cards-prod,CC-1002,no
+410000000003,payments-prod,CC-1003,no
+410000000004,fraud-prod,CC-1004,no
+410000000005,lending-prod,CC-1005,no
+410000000006,wealth-prod,CC-1006,no
+410000000007,treasury-prod,CC-1007,no
+410000000008,support-prod,CC-1008,no
+410000000009,platform-shared,,yes
+410000000010,data-lake-shared,,yes
+410000000011,sandbox-shared,,yes
+410000000012,tooling-shared,,yes

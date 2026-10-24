@@ -1,0 +1,15 @@
+cost_center,name,business_line,owner_team,active
+CC-1001,Retail Deposits,retail,team-deposits,true
+CC-1002,Card Services,cards,team-cards,true
+CC-1003,Payments Operations,payments,team-payments,true
+CC-1004,Fraud Analytics,risk,team-fraud,true
+CC-1005,Consumer Lending,lending,team-lending,true
+CC-1006,Wealth Platforms,wealth,team-wealth,true
+CC-1007,Treasury Systems,treasury,team-treasury,true
+CC-1008,Customer Support Tooling,operations,team-support,true
+CC-1009,Data Platform,technology,team-data,true
+CC-1010,Security Engineering,technology,team-security,true
+CC-1011,Regulatory Reporting,finance,team-regreport,true
+CC-1012,Digital Channels,retail,team-digital,true
+CC-1013,Branch Systems,retail,team-branch,false
+CC-1014,Legacy Cards Migration,cards,team-legacy-cards,false

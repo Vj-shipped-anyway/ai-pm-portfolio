@@ -1,0 +1,38 @@
+{
+  "required_tags": [
+    {
+      "key": "cost-center",
+      "aliases": [
+        "CostCenter",
+        "cost_center"
+      ],
+      "values": "registry"
+    },
+    {
+      "key": "app",
+      "aliases": [
+        "Application"
+      ],
+      "values": "any"
+    },
+    {
+      "key": "env",
+      "aliases": [
+        "Environment"
+      ],
+      "values": [
+        "prod",
+        "stage",
+        "dev",
+        "test"
+      ]
+    }
+  ],
+  "shared_services": [
+    "Support Plan",
+    "Security Monitoring",
+    "Network Backbone",
+    "Log Archive"
+  ],
+  "max_unallocated_pct": 10.0
+}

@@ -1,0 +1,1285 @@
+line_id,usage_date,account_id,service,resource_id,usage_type,cost_usd,tags_json
+L00001,2026-03-08,410000000001,Kubernetes,res-1a3edfc6,Cluster hours,207.89,"{""CostCenter"":""CC-1001"",""app"":""ledger-03"",""env"":""prod""}"
+L00002,2026-03-08,410000000001,Analytics,res-1aeab20f,Query units,207.23,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00003,2026-03-08,410000000001,Object Storage,res-3359b784,Storage GB-month,100.84,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00004,2026-03-08,410000000001,Analytics,res-374c876d,Query units,100.04,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00005,2026-03-08,410000000001,Object Storage,res-3f863af2,Storage GB-month,136.72,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00006,2026-03-08,410000000001,Load Balancer,res-44cd03dd,Capacity units,818.15,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00007,2026-03-08,410000000001,Load Balancer,res-64d2a4b0,Capacity units,1345.56,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00008,2026-03-08,410000000001,Load Balancer,res-6869c5b1,Capacity units,96.38,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00009,2026-03-08,410000000001,Load Balancer,res-779f5610,Capacity units,156.03,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""dev""}"
+L00010,2026-03-08,410000000001,Object Storage,res-7f622212,Storage GB-month,584.45,"{""app"":""ledger-03"",""cost-center"":"" CC-1001"",""env"":""prod""}"
+L00011,2026-03-08,410000000001,Queue,res-826316c6,Requests,377.68,"{""app"":""reporting-25"",""env"":""stage""}"
+L00012,2026-03-08,410000000001,Queue,res-8ccb1c36,Requests,224.32,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00013,2026-03-08,410000000001,Queue,res-93040b3e,Requests,4808.38,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00014,2026-03-08,410000000001,Object Storage,res-9f941a7f,Storage GB-month,199.11,"{""cost-center"":""CC-1001"",""env"":""stage""}"
+L00015,2026-03-08,410000000001,Kubernetes,res-9fa7525d,Cluster hours,92.56,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""prod""}"
+L00016,2026-03-08,410000000001,Queue,res-a84a2eec,Requests,197.88,"{""app"":""reporting-25"",""env"":""prod""}"
+L00017,2026-03-08,410000000001,Compute,res-ac2f543f,Instance hours,280.36,{}
+L00018,2026-03-08,410000000001,Kubernetes,res-b128dd76,Cluster hours,51.02,"{""env"":""prod""}"
+L00019,2026-03-08,410000000001,Queue,res-d732195c,Requests,199.05,"{""app"":""gateway-01"",""cost-center"":""cc-1001"",""env"":""dev""}"
+L00020,2026-03-08,410000000001,Queue,res-dadb1c0f,Requests,49.03,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00021,2026-03-08,410000000001,Object Storage,res-dfbc2c11,Storage GB-month,2133.16,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""test""}"
+L00022,2026-03-08,410000000001,Load Balancer,res-e72df0e8,Capacity units,907.59,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00023,2026-03-08,410000000001,Database,res-e9ba52d2,Instance hours,210.93,"{""app"":""gateway-01"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00024,2026-03-08,410000000001,Queue,res-f3aba2f1,Requests,150.08,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""stage""}"
+L00025,2026-03-08,410000000002,Database,free-022,Free tier,0.00,{}
+L00026,2026-03-08,410000000002,Load Balancer,res-03b58bbb,Capacity units,3124.33,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00027,2026-03-08,410000000002,Queue,res-11524a7e,Requests,113.76,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00028,2026-03-08,410000000002,Analytics,res-164b7ec0,Query units,35.53,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00029,2026-03-08,410000000002,Kubernetes,res-3ca33f8a,Cluster hours,1948.20,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00030,2026-03-08,410000000002,Queue,res-40caeb7a,Requests,149.51,{}
+L00031,2026-03-08,410000000002,Queue,res-45f7cf27,Requests,248.90,"{""app"":""rules-engine-04"",""cost-center"":"" CC-1002"",""env"":""dev""}"
+L00032,2026-03-08,410000000002,Object Storage,res-6e872e56,Storage GB-month,148.00,"{""CostCenter"":""CC-1007"",""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00033,2026-03-08,410000000002,Analytics,res-7313cddd,Query units,627.50,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00034,2026-03-08,410000000002,Kubernetes,res-80fd5dfe,Cluster hours,44.90,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00035,2026-03-08,410000000002,Analytics,res-84655f5a,Query units,206.91,"{""app"":""reporting-06"",""cost-center"":""""}"
+L00036,2026-03-08,410000000002,Load Balancer,res-904a2940,Capacity units,323.93,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00037,2026-03-08,410000000002,Load Balancer,res-99e04cc9,Capacity units,61.13,"{""app"":""limits-05"",""cost-center"":"""",""env"":""production""}"
+L00038,2026-03-08,410000000002,Database,res-9d733bd0,Instance hours,92.72,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00039,2026-03-08,410000000002,Queue,res-ad369a2d,Requests,797.14,"{""app"":""reporting-06"",""costcentre"":""CC-1002""}"
+L00040,2026-03-08,410000000002,Database,res-b918e8d7,Instance hours,1181.43,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00041,2026-03-08,410000000002,Kubernetes,res-cd3bb011,Cluster hours,194.76,"{""app"":""reporting-06"",""cost-center"":"""",""env"":""stage""}"
+L00042,2026-03-08,410000000002,Object Storage,res-cf3414f7,Storage GB-month,271.89,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00043,2026-03-08,410000000002,Database,res-e3463d23,Instance hours,5321.14,"{""app"":""limits-05"",""cost-center"":""cc-1002"",""env"":""dev""}"
+L00044,2026-03-08,410000000003,Analytics,res-2f74028a,Query units,178.41,{}
+L00045,2026-03-08,410000000003,Compute,res-3242fc1f,Instance hours,178.29,"{""app"":""rules-engine-07"",""cost-center"":"""",""env"":""prod""}"
+L00046,2026-03-08,410000000003,Queue,res-3b7f844e,Requests,459.89,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00047,2026-03-08,410000000003,Load Balancer,res-46ff5bb0,Capacity units,248.02,"{""CostCenter"":""CC-1003"",""app"":""reporting-09"",""env"":""dev""}"
+L00048,2026-03-08,410000000003,Compute,res-536f33a4,Instance hours,502.30,"{""Cost Center"":""CC-1003"",""app"":""reporting-09"",""env"":""test""}"
+L00049,2026-03-08,410000000003,Object Storage,res-5e131e2c,Storage GB-month,207.82,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00050,2026-03-08,410000000003,Compute,res-6bf724a7,Instance hours,309.51,"{""cost-center"":"" CC-1003"",""env"":""stage""}"
+L00051,2026-03-08,410000000003,Load Balancer,res-6cf8e885,Capacity units,136.11,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00052,2026-03-08,410000000003,Analytics,res-7ae17af1,Query units,219.15,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00053,2026-03-08,410000000003,Database,res-84a938da,Instance hours,54.78,"{""app"":""reporting-09"",""env"":""dev""}"
+L00054,2026-03-08,410000000003,Database,res-8761e1bd,Instance hours,289.94,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00055,2026-03-08,410000000003,Database,res-8ea1e484,Instance hours,228.94,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00056,2026-03-08,410000000003,Database,res-96cbf0b4,Instance hours,466.13,"{""CostCenter"":""CC-1012"",""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00057,2026-03-08,410000000003,Kubernetes,res-9837226a,Cluster hours,253.85,"{""app"":""reporting-09"",""cost_center"":""CC-1003"",""env"":""prod""}"
+L00058,2026-03-08,410000000003,Load Balancer,res-b2831fb9,Capacity units,1430.34,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00059,2026-03-08,410000000003,Compute,res-dfe7cf7c,Instance hours,95.02,"{""app"":""onboarding-08"",""cost-center"":""CC-1003 ""}"
+L00060,2026-03-08,410000000003,Queue,res-ead5d38b,Requests,140.36,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00061,2026-03-08,410000000003,Object Storage,res-ec10900f,Storage GB-month,107.22,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00062,2026-03-08,410000000004,Analytics,res-099e3ec4,Query units,58.99,"{""app"":""statements-11"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00063,2026-03-08,410000000004,Load Balancer,res-0d640f95,Capacity units,670.67,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00064,2026-03-08,410000000004,Queue,res-2029c761,Requests,901.33,"{""app"":""limits-26"",""env"":""prod""}"
+L00065,2026-03-08,410000000004,Kubernetes,res-23d6cee0,Cluster hours,687.28,"{""app"":""reporting-12""}"
+L00066,2026-03-08,410000000004,Queue,res-391d9ec2,Requests,112.22,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00067,2026-03-08,410000000004,Analytics,res-3f959f4f,Query units,66.04,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L00068,2026-03-08,410000000004,Compute,res-67c193ef,Instance hours,281.04,{}
+L00069,2026-03-08,410000000004,Queue,res-789dca52,Requests,1499.10,"{""app"":""limits-26"",""env"":""prod""}"
+L00070,2026-03-08,410000000004,Compute,res-80b05810,Instance hours,1337.72,"{""app"":""reporting-12"",""cost-center"":""CC-1199"",""env"":""prod""}"
+L00071,2026-03-08,410000000004,Object Storage,res-8193063f,Storage GB-month,85.00,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00072,2026-03-08,410000000004,Kubernetes,res-86efe8ef,Cluster hours,68.48,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00073,2026-03-08,410000000004,Object Storage,res-9bbced1c,Storage GB-month,583.72,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00074,2026-03-08,410000000004,Queue,res-abb411ae,Requests,546.01,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00075,2026-03-08,410000000004,Load Balancer,res-ae8f117a,Capacity units,178.97,{}
+L00076,2026-03-08,410000000004,Load Balancer,res-b3417af8,Capacity units,5287.58,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00077,2026-03-08,410000000004,Compute,res-ba0527a4,Instance hours,2036.55,"{""app"":""archive-10"",""env"":""prod""}"
+L00078,2026-03-08,410000000004,Object Storage,res-bb86549f,Storage GB-month,5166.26,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00079,2026-03-08,410000000004,Analytics,res-be66b228,Query units,984.82,"{""cost-center"":""CC-1004"",""env"":""stage""}"
+L00080,2026-03-08,410000000004,Kubernetes,res-c9720b7e,Cluster hours,1191.74,"{""CostCenter"":""CC-1010"",""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00081,2026-03-08,410000000004,Load Balancer,res-ce3e487b,Capacity units,162.21,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00082,2026-03-08,410000000004,Compute,res-dd79946e,Instance hours,5534.12,"{""app"":""archive-10"",""cost-center"":""CC-1004 "",""env"":""prod""}"
+L00083,2026-03-08,410000000004,Compute,res-e0998b99,Instance hours,204.15,"{""app"":""archive-10"",""cost-center"":""CC-1004""}"
+L00084,2026-03-08,410000000004,Database,res-ed50fe2a,Instance hours,548.29,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00085,2026-03-08,410000000004,Compute,res-fc3b70c1,Instance hours,249.84,"{""app"":""limits-26"",""env"":""prod""}"
+L00086,2026-03-08,410000000005,Analytics,res-27d0b40f,Query units,275.67,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00087,2026-03-08,410000000005,Kubernetes,res-2d5fbcd5,Cluster hours,775.52,"{""app"":""ledger-14"",""cost-center"":""CC-1005 "",""env"":""dev""}"
+L00088,2026-03-08,410000000005,Compute,res-3176bcec,Instance hours,51.17,{}
+L00089,2026-03-08,410000000005,Kubernetes,res-3e6985f0,Cluster hours,127.77,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00090,2026-03-08,410000000005,Database,res-3f231e0e,Instance hours,1466.72,"{""cost-center"":""CC-1005"",""env"":""prod""}"
+L00091,2026-03-08,410000000005,Load Balancer,res-556c6ac9,Capacity units,1171.09,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00092,2026-03-08,410000000005,Queue,res-667e8cd0,Requests,127.47,"{""app"":""ledger-14"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00093,2026-03-08,410000000005,Load Balancer,res-68549a24,Capacity units,2665.13,"{""app"":""archive-13"",""env"":""prod""}"
+L00094,2026-03-08,410000000005,Load Balancer,res-754830ba,Capacity units,518.69,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00095,2026-03-08,410000000005,Database,res-7e96d85b,Instance hours,49.11,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00096,2026-03-08,410000000005,Object Storage,res-87f68b83,Storage GB-month,1261.03,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00097,2026-03-08,410000000005,Compute,res-8901c6bc,Instance hours,253.63,"{""app"":""ledger-14"",""cost-center"":""CC-1006""}"
+L00098,2026-03-08,410000000005,Analytics,res-ca79caad,Query units,1087.20,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00099,2026-03-08,410000000005,Database,res-d674d50c,Instance hours,282.14,"{""app"":""archive-13"",""cost_center"":""CC-1005"",""env"":""prod""}"
+L00100,2026-03-08,410000000005,Analytics,res-e2c4d110,Query units,75.50,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00101,2026-03-08,410000000005,Kubernetes,res-eed02872,Cluster hours,248.49,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00102,2026-03-08,410000000005,Object Storage,res-f8024383,Storage GB-month,279.82,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00103,2026-03-08,410000000005,Database,res-f81a6708,Instance hours,41.73,"{""app"":""archive-15"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L00104,2026-03-08,410000000006,Kubernetes,free-011,Free tier,0.00,{}
+L00105,2026-03-08,410000000006,Analytics,res-068d13d2,Query units,228.96,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00106,2026-03-08,410000000006,Queue,res-06d35688,Requests,93.80,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00107,2026-03-08,410000000006,Database,res-0d684fb0,Instance hours,146.40,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00108,2026-03-08,410000000006,Database,res-1697caba,Instance hours,265.77,{}
+L00109,2026-03-08,410000000006,Object Storage,res-19247098,Storage GB-month,268.91,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L00110,2026-03-08,410000000006,Object Storage,res-30bc5020,Storage GB-month,2250.24,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L00111,2026-03-08,410000000006,Database,res-4fd729f9,Instance hours,269.84,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00112,2026-03-08,410000000006,Database,res-538a63bb,Instance hours,862.95,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00113,2026-03-08,410000000006,Queue,res-5ea0d693,Requests,4134.96,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00114,2026-03-08,410000000006,Compute,res-6f81f079,Instance hours,2404.02,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00115,2026-03-08,410000000006,Kubernetes,res-8d38b07d,Cluster hours,1180.55,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L00116,2026-03-08,410000000006,Load Balancer,res-8fab1d00,Capacity units,149.21,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00117,2026-03-08,410000000006,Analytics,res-9205d604,Query units,402.63,"{""app"":""search-16"",""costcentre"":""CC-1006"",""env"":""prod""}"
+L00118,2026-03-08,410000000006,Load Balancer,res-9b5019e3,Capacity units,174.27,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00119,2026-03-08,410000000006,Queue,res-9c49de72,Requests,3763.61,"{""app"":""limits-18"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00120,2026-03-08,410000000006,Queue,res-a82d96cc,Requests,684.99,"{""app"":""limits-18"",""cost-center"":""CC-1013"",""env"":""production""}"
+L00121,2026-03-08,410000000006,Queue,res-b25f9ec0,Requests,204.56,"{""app"":""limits-18"",""env"":""stage""}"
+L00122,2026-03-08,410000000006,Compute,res-bdf0ba66,Instance hours,134.40,"{""CostCenter"":""CC-1006"",""app"":""limits-18""}"
+L00123,2026-03-08,410000000006,Analytics,res-c727fe3c,Query units,304.93,"{""app"":""search-16"",""env"":""prod""}"
+L00124,2026-03-08,410000000006,Analytics,res-c7c6c358,Query units,1101.73,"{""app"":""search-16"",""cost_center"":""CC-1006"",""env"":""stage""}"
+L00125,2026-03-08,410000000006,Database,res-cba84b50,Instance hours,160.73,"{""app"":""gateway-27"",""env"":""prod""}"
+L00126,2026-03-08,410000000006,Queue,res-ce36b33d,Requests,96.21,"{""app"":""gateway-27"",""env"":""stage""}"
+L00127,2026-03-08,410000000006,Database,res-ea115946,Instance hours,409.77,"{""app"":""gateway-27"",""env"":""prod""}"
+L00128,2026-03-08,410000000006,Database,res-fca1bcc6,Instance hours,853.05,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00129,2026-03-08,410000000007,Object Storage,free-018,Free tier,0.00,{}
+L00130,2026-03-08,410000000007,Queue,free-021,Free tier,0.00,{}
+L00131,2026-03-08,410000000007,Database,res-13050d9b,Instance hours,117.37,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00132,2026-03-08,410000000007,Analytics,res-1da1a1a0,Query units,235.88,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00133,2026-03-08,410000000007,Database,res-2f579c02,Instance hours,119.32,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00134,2026-03-08,410000000007,Database,res-372ef045,Instance hours,129.85,"{""app"":""recon-20"",""cost-center"":""CC-1007 "",""env"":""dev""}"
+L00135,2026-03-08,410000000007,Compute,res-38b3034c,Instance hours,1016.42,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00136,2026-03-08,410000000007,Compute,res-3925ead7,Instance hours,49.26,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00137,2026-03-08,410000000007,Analytics,res-39eecd61,Query units,41.90,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00138,2026-03-08,410000000007,Database,res-42d584e4,Instance hours,58.98,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00139,2026-03-08,410000000007,Kubernetes,res-458587b1,Cluster hours,298.27,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00140,2026-03-08,410000000007,Database,res-51037807,Instance hours,81.64,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00141,2026-03-08,410000000007,Queue,res-8648da1b,Requests,1011.24,"{""cost-center"":""CC-1007"",""env"":""prod""}"
+L00142,2026-03-08,410000000007,Load Balancer,res-95e6b484,Capacity units,835.03,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00143,2026-03-08,410000000007,Load Balancer,res-95f27e7d,Capacity units,163.69,"{""app"":""search-19"",""env"":""dev""}"
+L00144,2026-03-08,410000000007,Queue,res-9a2920aa,Requests,942.77,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00145,2026-03-08,410000000007,Database,res-9da0b0d6,Instance hours,1224.15,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00146,2026-03-08,410000000007,Object Storage,res-bdbde4e0,Storage GB-month,317.52,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00147,2026-03-08,410000000007,Queue,res-cbe740d9,Requests,302.59,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00148,2026-03-08,410000000007,Database,res-fe27f34c,Instance hours,1670.80,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00149,2026-03-08,410000000008,Compute,res-12c59ad5,Instance hours,223.27,{}
+L00150,2026-03-08,410000000008,Load Balancer,res-22d610eb,Capacity units,370.43,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00151,2026-03-08,410000000008,Compute,res-2baca76a,Instance hours,383.92,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00152,2026-03-08,410000000008,Object Storage,res-4bf3bec7,Storage GB-month,5584.23,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00153,2026-03-08,410000000008,Database,res-4dc857a6,Instance hours,243.90,"{""app"":""search-22"",""cost-center"":""CC-1008""}"
+L00154,2026-03-08,410000000008,Compute,res-61de27f8,Instance hours,335.29,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00155,2026-03-08,410000000008,Compute,res-626d4231,Instance hours,1158.30,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00156,2026-03-08,410000000008,Queue,res-715a6e0a,Requests,942.62,"{""app"":""batch-24"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L00157,2026-03-08,410000000008,Queue,res-75dd90cc,Requests,260.07,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00158,2026-03-08,410000000008,Compute,res-8368cd10,Instance hours,287.39,"{""app"":""ledger-23"",""env"":""prod""}"
+L00159,2026-03-08,410000000008,Compute,res-90850e08,Instance hours,84.62,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00160,2026-03-08,410000000008,Queue,res-9b1c4279,Requests,260.16,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00161,2026-03-08,410000000008,Database,res-ab76528f,Instance hours,595.42,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00162,2026-03-08,410000000008,Compute,res-c3c3bc26,Instance hours,5721.53,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""production""}"
+L00163,2026-03-08,410000000008,Load Balancer,res-c4eb4ff4,Capacity units,207.37,"{""app"":""search-22"",""cost-center"":""CC-1132"",""env"":""dev""}"
+L00164,2026-03-08,410000000008,Compute,res-ca8330e5,Instance hours,272.89,"{""app"":""search-22"",""cost-center"":"" CC-1008"",""env"":""dev""}"
+L00165,2026-03-08,410000000008,Queue,res-d35fa246,Requests,1513.03,"{""app"":""search-22"",""costcentre"":""CC-1008"",""env"":""test""}"
+L00166,2026-03-08,410000000008,Database,res-eca6c158,Instance hours,171.79,"{""app"":""ledger-23"",""env"":""stage""}"
+L00167,2026-03-08,410000000009,Compute,free-014,Free tier,0.00,{}
+L00168,2026-03-08,410000000009,Compute,res-059fb299,Instance hours,141.97,"{""app"":""scoring-31"",""env"":""prod""}"
+L00169,2026-03-08,410000000009,Analytics,res-06b60437,Query units,222.13,"{""cost-center"":""CC-1007"",""env"":""stage""}"
+L00170,2026-03-08,410000000009,Load Balancer,res-20527431,Capacity units,65.63,"{""app"":""ledger-29"",""cost-center"":""CC-1014"",""env"":""dev""}"
+L00171,2026-03-08,410000000009,Database,res-28d1ebf1,Instance hours,252.31,"{""cost-center"":""CC-1002"",""env"":""stage""}"
+L00172,2026-03-08,410000000009,Database,res-2e7f68fc,Instance hours,1112.67,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00173,2026-03-08,410000000009,Compute,res-511c1560,Instance hours,704.59,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00174,2026-03-08,410000000009,Load Balancer,res-5281fd46,Capacity units,693.86,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""test""}"
+L00175,2026-03-08,410000000009,Load Balancer,res-581e3948,Capacity units,203.10,"{""app"":""limits-30"",""env"":""dev""}"
+L00176,2026-03-08,410000000009,Kubernetes,res-5fce4c51,Cluster hours,736.95,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00177,2026-03-08,410000000009,Kubernetes,res-6cd01974,Cluster hours,201.27,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00178,2026-03-08,410000000009,Load Balancer,res-6e49ff50,Capacity units,63.09,"{""app"":""ledger-29"",""costcentre"":""CC-1002"",""env"":""prod""}"
+L00179,2026-03-08,410000000009,Object Storage,res-7b30f4eb,Storage GB-month,235.33,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00180,2026-03-08,410000000009,Queue,res-7c4b2119,Requests,134.15,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00181,2026-03-08,410000000009,Analytics,res-83fed6a5,Query units,1101.20,"{""app"":""ledger-29""}"
+L00182,2026-03-08,410000000009,Load Balancer,res-a135171e,Capacity units,144.59,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00183,2026-03-08,410000000009,Load Balancer,res-abd0a62e,Capacity units,151.95,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00184,2026-03-08,410000000009,Kubernetes,res-aed79233,Cluster hours,267.22,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00185,2026-03-08,410000000009,Analytics,res-c9b45097,Query units,87.55,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""production""}"
+L00186,2026-03-08,410000000009,Queue,res-dabdadb5,Requests,4244.43,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00187,2026-03-08,410000000009,Load Balancer,res-df17645c,Capacity units,274.35,"{""app"":""vault-28"",""cost-center"":""cc-1007"",""env"":""prod""}"
+L00188,2026-03-08,410000000009,Queue,res-ebff8a92,Requests,1335.11,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00189,2026-03-08,410000000009,Database,res-f02d21a3,Instance hours,176.91,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00190,2026-03-08,410000000009,Compute,res-feb4c588,Instance hours,1429.16,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00191,2026-03-08,410000000009,Compute,res-feda9c1f,Instance hours,4983.12,{}
+L00192,2026-03-08,410000000009,Network Backbone,shared-network-backbone,Monthly charge,4274.42,{}
+L00193,2026-03-08,410000000009,Security Monitoring,shared-security-monitoring,Monthly charge,3014.59,{}
+L00194,2026-03-08,410000000010,Kubernetes,free-016,Free tier,0.00,{}
+L00195,2026-03-08,410000000010,Object Storage,res-04ad2ecf,Storage GB-month,277.91,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00196,2026-03-08,410000000010,Queue,res-15ea4668,Requests,69.65,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""test""}"
+L00197,2026-03-08,410000000010,Analytics,res-18e9a7b7,Query units,276.22,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L00198,2026-03-08,410000000010,Load Balancer,res-215f6551,Capacity units,885.91,"{""CostCenter"":""CC-1006"",""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00199,2026-03-08,410000000010,Object Storage,res-27779b37,Storage GB-month,91.58,"{""app"":""search-35"",""cost-center"":""CC-1141"",""env"":""dev""}"
+L00200,2026-03-08,410000000010,Kubernetes,res-2db45cee,Cluster hours,57.83,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00201,2026-03-08,410000000010,Kubernetes,res-34a4f003,Cluster hours,444.99,"{""app"":""ledger-34"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00202,2026-03-08,410000000010,Compute,res-3d1e1567,Instance hours,53.40,"{""app"":""search-35"",""cost-center"":""CC-1005""}"
+L00203,2026-03-08,410000000010,Kubernetes,res-3e3de524,Cluster hours,83.29,"{""Cost Center"":""CC-1012"",""app"":""archive-32"",""env"":""stage""}"
+L00204,2026-03-08,410000000010,Load Balancer,res-44dc9675,Capacity units,53.04,"{""app"":""notifications-33"",""cost-center"":""CC-1006 "",""env"":""prod""}"
+L00205,2026-03-08,410000000010,Analytics,res-5158b506,Query units,266.99,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00206,2026-03-08,410000000010,Compute,res-62640827,Instance hours,256.26,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00207,2026-03-08,410000000010,Object Storage,res-62c5cbf4,Storage GB-month,752.03,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00208,2026-03-08,410000000010,Analytics,res-849cf7e6,Query units,252.68,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00209,2026-03-08,410000000010,Compute,res-aae0d3ba,Instance hours,723.90,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L00210,2026-03-08,410000000010,Kubernetes,res-b6950e39,Cluster hours,234.25,"{""CostCenter"":""CC-1012"",""app"":""archive-32"",""env"":""prod""}"
+L00211,2026-03-08,410000000010,Load Balancer,res-c18ba822,Capacity units,3894.29,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00212,2026-03-08,410000000010,Load Balancer,res-d1b4dc71,Capacity units,145.50,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L00213,2026-03-08,410000000010,Queue,res-d5fc8b7d,Requests,1079.48,"{""app"":""archive-32"",""cost-center"":""CC-1012 ""}"
+L00214,2026-03-08,410000000010,Object Storage,res-d99f1125,Storage GB-month,226.29,"{""app"":""ledger-34"",""env"":""prod""}"
+L00215,2026-03-08,410000000010,Analytics,res-e5e73422,Query units,799.17,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00216,2026-03-08,410000000010,Kubernetes,res-e6bad489,Cluster hours,331.75,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00217,2026-03-08,410000000010,Object Storage,res-f43a408b,Storage GB-month,193.34,"{""app"":""ledger-34"",""cost-center"":""CC-1014"",""env"":""test""}"
+L00218,2026-03-08,410000000010,Queue,res-fddfc630,Requests,1410.46,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00219,2026-03-08,410000000011,Kubernetes,free-017,Free tier,0.00,{}
+L00220,2026-03-08,410000000011,Queue,res-0451b383,Requests,232.34,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00221,2026-03-08,410000000011,Compute,res-09bc543c,Instance hours,667.71,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00222,2026-03-08,410000000011,Load Balancer,res-09dab3d4,Capacity units,559.01,"{""CostCenter"":""CC-1002"",""app"":""notifications-39"",""env"":""stage""}"
+L00223,2026-03-08,410000000011,Database,res-19a06a38,Instance hours,59.42,"{""app"":""batch-36"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00224,2026-03-08,410000000011,Database,res-26c680a3,Instance hours,153.92,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L00225,2026-03-08,410000000011,Database,res-455e29cc,Instance hours,142.11,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00226,2026-03-08,410000000011,Database,res-49d5e8e8,Instance hours,132.39,"{""CostCenter"":""CC-1006"",""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00227,2026-03-08,410000000011,Database,res-4d5d4069,Instance hours,486.31,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00228,2026-03-08,410000000011,Kubernetes,res-4e08fbd0,Cluster hours,64.14,"{""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00229,2026-03-08,410000000011,Analytics,res-5945601b,Query units,40.59,"{""app"":""notifications-39"",""cost-center"":""CC-1161"",""env"":""prod""}"
+L00230,2026-03-08,410000000011,Compute,res-7567a18e,Instance hours,210.53,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00231,2026-03-08,410000000011,Database,res-7fed15b6,Instance hours,263.78,"{""app"":""onboarding-37"",""env"":""prod""}"
+L00232,2026-03-08,410000000011,Kubernetes,res-8804c578,Cluster hours,805.37,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00233,2026-03-08,410000000011,Load Balancer,res-8b8d5d64,Capacity units,522.59,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00234,2026-03-08,410000000011,Load Balancer,res-8de24790,Capacity units,237.86,"{""app"":""scoring-38"",""cost-center"":"" CC-1002"",""env"":""stage""}"
+L00235,2026-03-08,410000000011,Queue,res-9bc2f60e,Requests,85.31,"{""app"":""notifications-39"",""cost-center"":""CC-1002""}"
+L00236,2026-03-08,410000000011,Compute,res-b193335f,Instance hours,200.15,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00237,2026-03-08,410000000011,Load Balancer,res-b630b2b8,Capacity units,117.94,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L00238,2026-03-08,410000000011,Object Storage,res-c69e9db9,Storage GB-month,302.56,"{""CostCenter"":""CC-1002"",""app"":""scoring-38"",""env"":""test""}"
+L00239,2026-03-08,410000000011,Kubernetes,res-c83b7afb,Cluster hours,76.87,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L00240,2026-03-08,410000000011,Compute,res-e6938643,Instance hours,133.19,"{""app"":""onboarding-37"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00241,2026-03-08,410000000011,Queue,res-e9610c28,Requests,515.19,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00242,2026-03-08,410000000011,Database,res-f25b0b20,Instance hours,50.20,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00243,2026-03-08,410000000011,Analytics,res-fda8b29b,Query units,177.77,"{""app"":""notifications-39"",""cost-center"":""CC-1100"",""env"":""stage""}"
+L00244,2026-03-08,410000000012,Compute,res-00888bc3,Instance hours,5188.60,"{""CostCenter"":""CC-1010"",""app"":""search-42"",""env"":""stage""}"
+L00245,2026-03-08,410000000012,Analytics,res-028ee256,Query units,227.31,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00246,2026-03-08,410000000012,Kubernetes,res-0424539d,Cluster hours,90.07,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00247,2026-03-08,410000000012,Queue,res-1cf44b47,Requests,782.29,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00248,2026-03-08,410000000012,Load Balancer,res-21d0451c,Capacity units,1189.97,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L00249,2026-03-08,410000000012,Object Storage,res-30e2d9f6,Storage GB-month,309.96,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""production""}"
+L00250,2026-03-08,410000000012,Compute,res-3a27f6a1,Instance hours,94.66,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00251,2026-03-08,410000000012,Load Balancer,res-3c960178,Capacity units,104.67,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00252,2026-03-08,410000000012,Object Storage,res-4743e020,Storage GB-month,169.62,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L00253,2026-03-08,410000000012,Queue,res-4d2b059a,Requests,2826.64,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00254,2026-03-08,410000000012,Database,res-5b9c0398,Instance hours,223.76,"{""app"":""feeds-41"",""env"":""test""}"
+L00255,2026-03-08,410000000012,Load Balancer,res-69b4e06f,Capacity units,98.37,"{""app"":""portal-40"",""env"":""stage""}"
+L00256,2026-03-08,410000000012,Compute,res-70228481,Instance hours,199.21,"{""app"":""alerts-43"",""cost-center"":""CC-1013"",""env"":""prod""}"
+L00257,2026-03-08,410000000012,Load Balancer,res-76dc2eda,Capacity units,1023.84,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""prod""}"
+L00258,2026-03-08,410000000012,Object Storage,res-86b76106,Storage GB-month,273.21,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00259,2026-03-08,410000000012,Queue,res-ac58ff5c,Requests,272.39,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00260,2026-03-08,410000000012,Analytics,res-c60cbcc4,Query units,1682.55,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00261,2026-03-08,410000000012,Compute,res-d17b9173,Instance hours,1403.68,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00262,2026-03-08,410000000012,Analytics,res-d1fe42ac,Query units,1285.86,{}
+L00263,2026-03-08,410000000012,Compute,res-d80bf98e,Instance hours,45.74,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00264,2026-03-08,410000000012,Compute,res-deb35211,Instance hours,1302.06,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00265,2026-03-08,410000000012,Analytics,res-f21819d4,Query units,174.55,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00266,2026-03-08,410000000012,Compute,res-f7b657bf,Instance hours,250.15,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00267,2026-03-08,410000000012,Compute,res-ff4c79f8,Instance hours,1181.63,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""production""}"
+L00268,2026-03-08,410000000012,Log Archive,shared-log-archive,Monthly charge,2681.80,{}
+L00269,2026-03-08,410000000012,Support Plan,shared-support-plan,Monthly charge,3571.17,{}
+L00270,2026-03-15,410000000001,Analytics,free-004,Free tier,0.00,{}
+L00271,2026-03-15,410000000001,Kubernetes,res-1a3edfc6,Cluster hours,192.07,"{""CostCenter"":""CC-1001"",""app"":""ledger-03"",""env"":""prod""}"
+L00272,2026-03-15,410000000001,Analytics,res-1aeab20f,Query units,209.49,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00273,2026-03-15,410000000001,Object Storage,res-3359b784,Storage GB-month,92.17,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00274,2026-03-15,410000000001,Analytics,res-374c876d,Query units,104.67,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00275,2026-03-15,410000000001,Object Storage,res-3f863af2,Storage GB-month,135.20,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00276,2026-03-15,410000000001,Load Balancer,res-44cd03dd,Capacity units,905.53,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00277,2026-03-15,410000000001,Load Balancer,res-64d2a4b0,Capacity units,1401.05,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00278,2026-03-15,410000000001,Load Balancer,res-6869c5b1,Capacity units,105.25,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00279,2026-03-15,410000000001,Data Transfer,res-779f5610,Data transfer out,12.55,{}
+L00280,2026-03-15,410000000001,Load Balancer,res-779f5610,Capacity units,156.03,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""dev""}"
+L00281,2026-03-15,410000000001,Object Storage,res-7f622212,Storage GB-month,522.93,"{""app"":""ledger-03"",""cost-center"":"" CC-1001"",""env"":""prod""}"
+L00282,2026-03-15,410000000001,Data Transfer,res-826316c6,Data transfer out,35.54,{}
+L00283,2026-03-15,410000000001,Queue,res-826316c6,Requests,462.10,"{""app"":""reporting-25"",""env"":""stage""}"
+L00284,2026-03-15,410000000001,Queue,res-8ccb1c36,Requests,222.18,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00285,2026-03-15,410000000001,Queue,res-93040b3e,Requests,4543.70,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00286,2026-03-15,410000000001,Object Storage,res-9f941a7f,Storage GB-month,209.06,"{""cost-center"":""CC-1001"",""env"":""stage""}"
+L00287,2026-03-15,410000000001,Data Transfer,res-9fa7525d,Data transfer out,4.40,{}
+L00288,2026-03-15,410000000001,Kubernetes,res-9fa7525d,Cluster hours,93.44,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""prod""}"
+L00289,2026-03-15,410000000001,Data Transfer,res-a84a2eec,Data transfer out,8.07,{}
+L00290,2026-03-15,410000000001,Queue,res-a84a2eec,Requests,173.65,"{""app"":""reporting-25"",""env"":""prod""}"
+L00291,2026-03-15,410000000001,Compute,res-ac2f543f,Instance hours,274.64,{}
+L00292,2026-03-15,410000000001,Kubernetes,res-b128dd76,Cluster hours,47.65,"{""env"":""prod""}"
+L00293,2026-03-15,410000000001,Queue,res-d732195c,Requests,180.58,"{""app"":""gateway-01"",""cost-center"":""cc-1001"",""env"":""dev""}"
+L00294,2026-03-15,410000000001,Data Transfer,res-dadb1c0f,Data transfer out,1.00,{}
+L00295,2026-03-15,410000000001,Queue,res-dadb1c0f,Requests,45.18,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00296,2026-03-15,410000000001,Object Storage,res-dfbc2c11,Storage GB-month,2559.80,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""test""}"
+L00297,2026-03-15,410000000001,Load Balancer,res-e72df0e8,Capacity units,794.14,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00298,2026-03-15,410000000001,Database,res-e9ba52d2,Instance hours,253.59,"{""app"":""gateway-01"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00299,2026-03-15,410000000001,Data Transfer,res-f3aba2f1,Data transfer out,6.76,{}
+L00300,2026-03-15,410000000001,Queue,res-f3aba2f1,Requests,155.49,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""stage""}"
+L00301,2026-03-15,410000000002,Load Balancer,res-03b58bbb,Capacity units,3328.09,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00302,2026-03-15,410000000002,Queue,res-11524a7e,Requests,108.70,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00303,2026-03-15,410000000002,Analytics,res-164b7ec0,Query units,40.78,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00304,2026-03-15,410000000002,Data Transfer,res-164b7ec0,Data transfer out,1.00,{}
+L00305,2026-03-15,410000000002,Data Transfer,res-3ca33f8a,Data transfer out,90.61,{}
+L00306,2026-03-15,410000000002,Kubernetes,res-3ca33f8a,Cluster hours,2423.92,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00307,2026-03-15,410000000002,Data Transfer,res-40caeb7a,Data transfer out,9.10,{}
+L00308,2026-03-15,410000000002,Queue,res-40caeb7a,Requests,132.61,{}
+L00309,2026-03-15,410000000002,Queue,res-45f7cf27,Requests,223.50,"{""app"":""rules-engine-04"",""cost-center"":"" CC-1002"",""env"":""dev""}"
+L00310,2026-03-15,410000000002,Data Transfer,res-6e872e56,Data transfer out,10.15,{}
+L00311,2026-03-15,410000000002,Object Storage,res-6e872e56,Storage GB-month,153.80,"{""CostCenter"":""CC-1007"",""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00312,2026-03-15,410000000002,Analytics,res-7313cddd,Query units,654.78,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00313,2026-03-15,410000000002,Data Transfer,res-7313cddd,Data transfer out,54.56,{}
+L00314,2026-03-15,410000000002,Data Transfer,res-80fd5dfe,Data transfer out,1.24,{}
+L00315,2026-03-15,410000000002,Kubernetes,res-80fd5dfe,Cluster hours,44.07,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00316,2026-03-15,410000000002,Analytics,res-84655f5a,Query units,218.04,"{""app"":""reporting-06"",""cost-center"":""""}"
+L00317,2026-03-15,410000000002,Load Balancer,res-904a2940,Capacity units,323.93,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00318,2026-03-15,410000000002,Load Balancer,res-99e04cc9,Capacity units,49.59,"{""app"":""limits-05"",""cost-center"":"""",""env"":""production""}"
+L00319,2026-03-15,410000000002,Data Transfer,res-9d733bd0,Data transfer out,4.10,{}
+L00320,2026-03-15,410000000002,Database,res-9d733bd0,Instance hours,86.16,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00321,2026-03-15,410000000002,Data Transfer,res-ad369a2d,Data transfer out,16.43,{}
+L00322,2026-03-15,410000000002,Queue,res-ad369a2d,Requests,764.27,"{""app"":""reporting-06"",""costcentre"":""CC-1002""}"
+L00323,2026-03-15,410000000002,Database,res-b918e8d7,Instance hours,1415.12,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00324,2026-03-15,410000000002,Kubernetes,res-cd3bb011,Cluster hours,199.29,"{""app"":""reporting-06"",""cost-center"":"""",""env"":""stage""}"
+L00325,2026-03-15,410000000002,Data Transfer,res-cf3414f7,Data transfer out,8.96,{}
+L00326,2026-03-15,410000000002,Object Storage,res-cf3414f7,Storage GB-month,283.85,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00327,2026-03-15,410000000002,Database,res-e3463d23,Instance hours,6267.12,"{""app"":""limits-05"",""cost-center"":""cc-1002"",""env"":""dev""}"
+L00328,2026-03-15,410000000003,Analytics,res-2f74028a,Query units,143.39,{}
+L00329,2026-03-15,410000000003,Data Transfer,res-2f74028a,Data transfer out,8.33,{}
+L00330,2026-03-15,410000000003,Compute,res-3242fc1f,Instance hours,196.32,"{""app"":""rules-engine-07"",""cost-center"":"""",""env"":""prod""}"
+L00331,2026-03-15,410000000003,Queue,res-3b7f844e,Requests,391.91,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00332,2026-03-15,410000000003,Load Balancer,res-46ff5bb0,Capacity units,215.87,"{""CostCenter"":""CC-1003"",""app"":""reporting-09"",""env"":""dev""}"
+L00333,2026-03-15,410000000003,Compute,res-536f33a4,Instance hours,508.14,"{""Cost Center"":""CC-1003"",""app"":""reporting-09"",""env"":""test""}"
+L00334,2026-03-15,410000000003,Data Transfer,res-536f33a4,Data transfer out,40.88,{}
+L00335,2026-03-15,410000000003,Object Storage,res-5e131e2c,Storage GB-month,237.81,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00336,2026-03-15,410000000003,Compute,res-6bf724a7,Instance hours,272.26,"{""cost-center"":"" CC-1003"",""env"":""stage""}"
+L00337,2026-03-15,410000000003,Load Balancer,res-6cf8e885,Capacity units,159.85,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00338,2026-03-15,410000000003,Analytics,res-7ae17af1,Query units,232.85,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00339,2026-03-15,410000000003,Data Transfer,res-7ae17af1,Data transfer out,13.69,{}
+L00340,2026-03-15,410000000003,Database,res-84a938da,Instance hours,52.29,"{""app"":""reporting-09"",""env"":""dev""}"
+L00341,2026-03-15,410000000003,Database,res-8761e1bd,Instance hours,325.44,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00342,2026-03-15,410000000003,Database,res-8ea1e484,Instance hours,243.11,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00343,2026-03-15,410000000003,Data Transfer,res-96cbf0b4,Data transfer out,10.47,{}
+L00344,2026-03-15,410000000003,Database,res-96cbf0b4,Instance hours,576.12,"{""CostCenter"":""CC-1012"",""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00345,2026-03-15,410000000003,Data Transfer,res-9837226a,Data transfer out,7.54,{}
+L00346,2026-03-15,410000000003,Kubernetes,res-9837226a,Cluster hours,289.04,"{""app"":""reporting-09"",""cost_center"":""CC-1003"",""env"":""prod""}"
+L00347,2026-03-15,410000000003,Load Balancer,res-b2831fb9,Capacity units,1547.11,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00348,2026-03-15,410000000003,Compute,res-dfe7cf7c,Instance hours,95.02,"{""app"":""onboarding-08"",""cost-center"":""CC-1003 ""}"
+L00349,2026-03-15,410000000003,Data Transfer,res-dfe7cf7c,Data transfer out,6.85,{}
+L00350,2026-03-15,410000000003,Data Transfer,res-ead5d38b,Data transfer out,3.97,{}
+L00351,2026-03-15,410000000003,Queue,res-ead5d38b,Requests,152.28,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00352,2026-03-15,410000000003,Data Transfer,res-ec10900f,Data transfer out,4.08,{}
+L00353,2026-03-15,410000000003,Object Storage,res-ec10900f,Storage GB-month,109.26,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00354,2026-03-15,410000000004,Compute,free-013,Free tier,0.00,{}
+L00355,2026-03-15,410000000004,Kubernetes,free-015,Free tier,0.00,{}
+L00356,2026-03-15,410000000004,Analytics,res-099e3ec4,Query units,68.71,"{""app"":""statements-11"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00357,2026-03-15,410000000004,Data Transfer,res-0d640f95,Data transfer out,29.41,{}
+L00358,2026-03-15,410000000004,Load Balancer,res-0d640f95,Capacity units,641.25,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00359,2026-03-15,410000000004,Data Transfer,res-2029c761,Data transfer out,42.41,{}
+L00360,2026-03-15,410000000004,Queue,res-2029c761,Requests,1177.03,"{""app"":""limits-26"",""env"":""prod""}"
+L00361,2026-03-15,410000000004,Kubernetes,res-23d6cee0,Cluster hours,586.21,"{""app"":""reporting-12""}"
+L00362,2026-03-15,410000000004,Data Transfer,res-391d9ec2,Data transfer out,1.96,{}
+L00363,2026-03-15,410000000004,Queue,res-391d9ec2,Requests,100.40,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00364,2026-03-15,410000000004,Analytics,res-3f959f4f,Query units,56.78,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L00365,2026-03-15,410000000004,Compute,res-67c193ef,Instance hours,245.22,{}
+L00366,2026-03-15,410000000004,Queue,res-789dca52,Requests,1385.96,"{""app"":""limits-26"",""env"":""prod""}"
+L00367,2026-03-15,410000000004,Compute,res-80b05810,Instance hours,1350.34,"{""app"":""reporting-12"",""cost-center"":""CC-1199"",""env"":""prod""}"
+L00368,2026-03-15,410000000004,Data Transfer,res-80b05810,Data transfer out,50.48,{}
+L00369,2026-03-15,410000000004,Object Storage,res-8193063f,Storage GB-month,88.12,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00370,2026-03-15,410000000004,Data Transfer,res-86efe8ef,Data transfer out,3.20,{}
+L00371,2026-03-15,410000000004,Kubernetes,res-86efe8ef,Cluster hours,59.52,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00372,2026-03-15,410000000004,Object Storage,res-9bbced1c,Storage GB-month,578.55,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00373,2026-03-15,410000000004,Queue,res-abb411ae,Requests,528.20,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00374,2026-03-15,410000000004,Load Balancer,res-ae8f117a,Capacity units,217.17,{}
+L00375,2026-03-15,410000000004,Data Transfer,res-b3417af8,Data transfer out,231.91,{}
+L00376,2026-03-15,410000000004,Load Balancer,res-b3417af8,Capacity units,4916.52,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00377,2026-03-15,410000000004,Compute,res-ba0527a4,Instance hours,1995.41,"{""app"":""archive-10"",""env"":""prod""}"
+L00378,2026-03-15,410000000004,Object Storage,res-bb86549f,Storage GB-month,5575.46,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00379,2026-03-15,410000000004,Analytics,res-be66b228,Query units,925.73,"{""cost-center"":""CC-1004"",""env"":""stage""}"
+L00380,2026-03-15,410000000004,Data Transfer,res-be66b228,Data transfer out,49.24,{}
+L00381,2026-03-15,410000000004,Data Transfer,res-c9720b7e,Data transfer out,53.56,{}
+L00382,2026-03-15,410000000004,Kubernetes,res-c9720b7e,Cluster hours,1419.38,"{""CostCenter"":""CC-1010"",""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00383,2026-03-15,410000000004,Load Balancer,res-ce3e487b,Capacity units,175.31,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00384,2026-03-15,410000000004,Compute,res-dd79946e,Instance hours,5312.75,"{""app"":""archive-10"",""cost-center"":""CC-1004 "",""env"":""prod""}"
+L00385,2026-03-15,410000000004,Compute,res-e0998b99,Instance hours,206.34,"{""app"":""archive-10"",""cost-center"":""CC-1004""}"
+L00386,2026-03-15,410000000004,Data Transfer,res-e0998b99,Data transfer out,17.56,{}
+L00387,2026-03-15,410000000004,Database,res-ed50fe2a,Instance hours,635.52,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00388,2026-03-15,410000000004,Compute,res-fc3b70c1,Instance hours,199.87,"{""app"":""limits-26"",""env"":""prod""}"
+L00389,2026-03-15,410000000004,Data Transfer,res-fc3b70c1,Data transfer out,9.08,{}
+L00390,2026-03-15,410000000005,Object Storage,free-002,Free tier,0.00,{}
+L00391,2026-03-15,410000000005,Object Storage,free-005,Free tier,0.00,{}
+L00392,2026-03-15,410000000005,Analytics,res-27d0b40f,Query units,269.86,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00393,2026-03-15,410000000005,Data Transfer,res-27d0b40f,Data transfer out,17.41,{}
+L00394,2026-03-15,410000000005,Kubernetes,res-2d5fbcd5,Cluster hours,680.41,"{""app"":""ledger-14"",""cost-center"":""CC-1005 "",""env"":""dev""}"
+L00395,2026-03-15,410000000005,Compute,res-3176bcec,Instance hours,43.49,{}
+L00396,2026-03-15,410000000005,Data Transfer,res-3e6985f0,Data transfer out,2.69,{}
+L00397,2026-03-15,410000000005,Kubernetes,res-3e6985f0,Cluster hours,125.08,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00398,2026-03-15,410000000005,Database,res-3f231e0e,Instance hours,1201.31,"{""cost-center"":""CC-1005"",""env"":""prod""}"
+L00399,2026-03-15,410000000005,Load Balancer,res-556c6ac9,Capacity units,1102.20,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00400,2026-03-15,410000000005,Data Transfer,res-667e8cd0,Data transfer out,10.37,{}
+L00401,2026-03-15,410000000005,Queue,res-667e8cd0,Requests,139.33,"{""app"":""ledger-14"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00402,2026-03-15,410000000005,Data Transfer,res-68549a24,Data transfer out,108.78,{}
+L00403,2026-03-15,410000000005,Load Balancer,res-68549a24,Capacity units,2746.72,"{""app"":""archive-13"",""env"":""prod""}"
+L00404,2026-03-15,410000000005,Load Balancer,res-754830ba,Capacity units,579.12,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00405,2026-03-15,410000000005,Database,res-7e96d85b,Instance hours,53.81,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00406,2026-03-15,410000000005,Data Transfer,res-87f68b83,Data transfer out,80.49,{}
+L00407,2026-03-15,410000000005,Object Storage,res-87f68b83,Storage GB-month,1475.68,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00408,2026-03-15,410000000005,Compute,res-8901c6bc,Instance hours,206.07,"{""app"":""ledger-14"",""cost-center"":""CC-1006""}"
+L00409,2026-03-15,410000000005,Data Transfer,res-8901c6bc,Data transfer out,15.85,{}
+L00410,2026-03-15,410000000005,Analytics,res-ca79caad,Query units,1176.73,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00411,2026-03-15,410000000005,Database,res-d674d50c,Instance hours,368.45,"{""app"":""archive-13"",""cost_center"":""CC-1005"",""env"":""prod""}"
+L00412,2026-03-15,410000000005,Analytics,res-e2c4d110,Query units,71.11,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00413,2026-03-15,410000000005,Data Transfer,res-e2c4d110,Data transfer out,2.93,{}
+L00414,2026-03-15,410000000005,Kubernetes,res-eed02872,Cluster hours,210.62,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00415,2026-03-15,410000000005,Data Transfer,res-f8024383,Data transfer out,19.58,{}
+L00416,2026-03-15,410000000005,Object Storage,res-f8024383,Storage GB-month,260.23,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00417,2026-03-15,410000000005,Database,res-f81a6708,Instance hours,45.01,"{""app"":""archive-15"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L00418,2026-03-15,410000000006,Analytics,res-068d13d2,Query units,182.32,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00419,2026-03-15,410000000006,Queue,res-06d35688,Requests,90.71,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00420,2026-03-15,410000000006,Database,res-0d684fb0,Instance hours,158.11,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00421,2026-03-15,410000000006,Data Transfer,res-1697caba,Data transfer out,14.44,{}
+L00422,2026-03-15,410000000006,Database,res-1697caba,Instance hours,326.44,{}
+L00423,2026-03-15,410000000006,Object Storage,res-19247098,Storage GB-month,278.61,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L00424,2026-03-15,410000000006,Object Storage,res-30bc5020,Storage GB-month,2230.33,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L00425,2026-03-15,410000000006,Database,res-4fd729f9,Instance hours,332.11,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00426,2026-03-15,410000000006,Data Transfer,res-538a63bb,Data transfer out,63.33,{}
+L00427,2026-03-15,410000000006,Database,res-538a63bb,Instance hours,815.45,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00428,2026-03-15,410000000006,Queue,res-5ea0d693,Requests,4343.79,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00429,2026-03-15,410000000006,Compute,res-6f81f079,Instance hours,2377.89,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00430,2026-03-15,410000000006,Data Transfer,res-8d38b07d,Data transfer out,62.79,{}
+L00431,2026-03-15,410000000006,Kubernetes,res-8d38b07d,Cluster hours,1130.31,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L00432,2026-03-15,410000000006,Load Balancer,res-8fab1d00,Capacity units,154.13,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00433,2026-03-15,410000000006,Analytics,res-9205d604,Query units,362.36,"{""app"":""search-16"",""costcentre"":""CC-1006"",""env"":""prod""}"
+L00434,2026-03-15,410000000006,Data Transfer,res-9b5019e3,Data transfer out,8.46,{}
+L00435,2026-03-15,410000000006,Load Balancer,res-9b5019e3,Capacity units,189.50,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00436,2026-03-15,410000000006,Data Transfer,res-9c49de72,Data transfer out,79.23,{}
+L00437,2026-03-15,410000000006,Queue,res-9c49de72,Requests,3961.70,"{""app"":""limits-18"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00438,2026-03-15,410000000006,Queue,res-a82d96cc,Requests,708.61,"{""app"":""limits-18"",""cost-center"":""CC-1013"",""env"":""production""}"
+L00439,2026-03-15,410000000006,Queue,res-b25f9ec0,Requests,215.92,"{""app"":""limits-18"",""env"":""stage""}"
+L00440,2026-03-15,410000000006,Compute,res-bdf0ba66,Instance hours,150.21,"{""CostCenter"":""CC-1006"",""app"":""limits-18""}"
+L00441,2026-03-15,410000000006,Data Transfer,res-bdf0ba66,Data transfer out,6.58,{}
+L00442,2026-03-15,410000000006,Analytics,res-c727fe3c,Query units,296.30,"{""app"":""search-16"",""env"":""prod""}"
+L00443,2026-03-15,410000000006,Data Transfer,res-c727fe3c,Data transfer out,8.63,{}
+L00444,2026-03-15,410000000006,Analytics,res-c7c6c358,Query units,1156.81,"{""app"":""search-16"",""cost_center"":""CC-1006"",""env"":""stage""}"
+L00445,2026-03-15,410000000006,Data Transfer,res-cba84b50,Data transfer out,9.01,{}
+L00446,2026-03-15,410000000006,Database,res-cba84b50,Instance hours,151.72,"{""app"":""gateway-27"",""env"":""prod""}"
+L00447,2026-03-15,410000000006,Queue,res-ce36b33d,Requests,95.34,"{""app"":""gateway-27"",""env"":""stage""}"
+L00448,2026-03-15,410000000006,Database,res-ea115946,Instance hours,470.30,"{""app"":""gateway-27"",""env"":""prod""}"
+L00449,2026-03-15,410000000006,Data Transfer,res-fca1bcc6,Data transfer out,40.23,{}
+L00450,2026-03-15,410000000006,Database,res-fca1bcc6,Instance hours,772.57,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00451,2026-03-15,410000000007,Data Transfer,res-13050d9b,Data transfer out,8.05,{}
+L00452,2026-03-15,410000000007,Database,res-13050d9b,Instance hours,121.97,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00453,2026-03-15,410000000007,Analytics,res-1da1a1a0,Query units,220.59,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00454,2026-03-15,410000000007,Data Transfer,res-2f579c02,Data transfer out,8.79,{}
+L00455,2026-03-15,410000000007,Database,res-2f579c02,Instance hours,108.02,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00456,2026-03-15,410000000007,Data Transfer,res-372ef045,Data transfer out,3.05,{}
+L00457,2026-03-15,410000000007,Database,res-372ef045,Instance hours,140.54,"{""app"":""recon-20"",""cost-center"":""CC-1007 "",""env"":""dev""}"
+L00458,2026-03-15,410000000007,Compute,res-38b3034c,Instance hours,971.44,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00459,2026-03-15,410000000007,Data Transfer,res-38b3034c,Data transfer out,17.98,{}
+L00460,2026-03-15,410000000007,Compute,res-3925ead7,Instance hours,53.93,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00461,2026-03-15,410000000007,Analytics,res-39eecd61,Query units,40.63,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00462,2026-03-15,410000000007,Database,res-42d584e4,Instance hours,60.97,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00463,2026-03-15,410000000007,Kubernetes,res-458587b1,Cluster hours,264.82,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00464,2026-03-15,410000000007,Database,res-51037807,Instance hours,87.34,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00465,2026-03-15,410000000007,Queue,res-8648da1b,Requests,1075.79,"{""cost-center"":""CC-1007"",""env"":""prod""}"
+L00466,2026-03-15,410000000007,Data Transfer,res-95e6b484,Data transfer out,14.64,{}
+L00467,2026-03-15,410000000007,Load Balancer,res-95e6b484,Capacity units,666.56,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00468,2026-03-15,410000000007,Data Transfer,res-95f27e7d,Data transfer out,11.16,{}
+L00469,2026-03-15,410000000007,Load Balancer,res-95f27e7d,Capacity units,210.20,"{""app"":""search-19"",""env"":""dev""}"
+L00470,2026-03-15,410000000007,Queue,res-9a2920aa,Requests,1024.76,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00471,2026-03-15,410000000007,Data Transfer,res-9da0b0d6,Data transfer out,110.03,{}
+L00472,2026-03-15,410000000007,Database,res-9da0b0d6,Instance hours,1375.45,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00473,2026-03-15,410000000007,Object Storage,res-bdbde4e0,Storage GB-month,308.62,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00474,2026-03-15,410000000007,Data Transfer,res-cbe740d9,Data transfer out,11.75,{}
+L00475,2026-03-15,410000000007,Queue,res-cbe740d9,Requests,320.22,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00476,2026-03-15,410000000007,Database,res-fe27f34c,Instance hours,1655.33,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00477,2026-03-15,410000000008,Compute,res-12c59ad5,Instance hours,238.89,{}
+L00478,2026-03-15,410000000008,Data Transfer,res-22d610eb,Data transfer out,26.73,{}
+L00479,2026-03-15,410000000008,Load Balancer,res-22d610eb,Capacity units,324.60,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00480,2026-03-15,410000000008,Compute,res-2baca76a,Instance hours,332.04,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00481,2026-03-15,410000000008,Data Transfer,res-2baca76a,Data transfer out,24.21,{}
+L00482,2026-03-15,410000000008,Object Storage,res-4bf3bec7,Storage GB-month,6430.32,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00483,2026-03-15,410000000008,Database,res-4dc857a6,Instance hours,209.39,"{""app"":""search-22"",""cost-center"":""CC-1008""}"
+L00484,2026-03-15,410000000008,Compute,res-61de27f8,Instance hours,291.17,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00485,2026-03-15,410000000008,Compute,res-626d4231,Instance hours,1116.93,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00486,2026-03-15,410000000008,Data Transfer,res-715a6e0a,Data transfer out,65.57,{}
+L00487,2026-03-15,410000000008,Queue,res-715a6e0a,Requests,852.45,"{""app"":""batch-24"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L00488,2026-03-15,410000000008,Queue,res-75dd90cc,Requests,239.05,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00489,2026-03-15,410000000008,Compute,res-8368cd10,Instance hours,295.93,"{""app"":""ledger-23"",""env"":""prod""}"
+L00490,2026-03-15,410000000008,Data Transfer,res-8368cd10,Data transfer out,14.22,{}
+L00491,2026-03-15,410000000008,Compute,res-90850e08,Instance hours,82.27,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00492,2026-03-15,410000000008,Data Transfer,res-90850e08,Data transfer out,1.56,{}
+L00493,2026-03-15,410000000008,Queue,res-9b1c4279,Requests,312.20,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00494,2026-03-15,410000000008,Database,res-ab76528f,Instance hours,723.47,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00495,2026-03-15,410000000008,Compute,res-c3c3bc26,Instance hours,5231.11,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""production""}"
+L00496,2026-03-15,410000000008,Data Transfer,res-c4eb4ff4,Data transfer out,3.91,{}
+L00497,2026-03-15,410000000008,Load Balancer,res-c4eb4ff4,Capacity units,185.85,"{""app"":""search-22"",""cost-center"":""CC-1132"",""env"":""dev""}"
+L00498,2026-03-15,410000000008,Compute,res-ca8330e5,Instance hours,258.06,"{""app"":""search-22"",""cost-center"":"" CC-1008"",""env"":""dev""}"
+L00499,2026-03-15,410000000008,Queue,res-d35fa246,Requests,1438.86,"{""app"":""search-22"",""costcentre"":""CC-1008"",""env"":""test""}"
+L00500,2026-03-15,410000000008,Database,res-eca6c158,Instance hours,185.01,"{""app"":""ledger-23"",""env"":""stage""}"
+L00501,2026-03-15,410000000009,Compute,res-059fb299,Instance hours,141.97,"{""app"":""scoring-31"",""env"":""prod""}"
+L00502,2026-03-15,410000000009,Analytics,res-06b60437,Query units,231.30,"{""cost-center"":""CC-1007"",""env"":""stage""}"
+L00503,2026-03-15,410000000009,Data Transfer,res-06b60437,Data transfer out,13.74,{}
+L00504,2026-03-15,410000000009,Data Transfer,res-20527431,Data transfer out,2.43,{}
+L00505,2026-03-15,410000000009,Load Balancer,res-20527431,Capacity units,58.33,"{""app"":""ledger-29"",""cost-center"":""CC-1014"",""env"":""dev""}"
+L00506,2026-03-15,410000000009,Data Transfer,res-28d1ebf1,Data transfer out,10.29,{}
+L00507,2026-03-15,410000000009,Database,res-28d1ebf1,Instance hours,252.31,"{""cost-center"":""CC-1002"",""env"":""stage""}"
+L00508,2026-03-15,410000000009,Database,res-2e7f68fc,Instance hours,953.72,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00509,2026-03-15,410000000009,Compute,res-511c1560,Instance hours,729.17,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00510,2026-03-15,410000000009,Data Transfer,res-511c1560,Data transfer out,32.77,{}
+L00511,2026-03-15,410000000009,Load Balancer,res-5281fd46,Capacity units,623.77,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""test""}"
+L00512,2026-03-15,410000000009,Data Transfer,res-581e3948,Data transfer out,6.48,{}
+L00513,2026-03-15,410000000009,Load Balancer,res-581e3948,Capacity units,233.35,"{""app"":""limits-30"",""env"":""dev""}"
+L00514,2026-03-15,410000000009,Data Transfer,res-5fce4c51,Data transfer out,34.68,{}
+L00515,2026-03-15,410000000009,Kubernetes,res-5fce4c51,Cluster hours,832.32,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00516,2026-03-15,410000000009,Data Transfer,res-6cd01974,Data transfer out,12.57,{}
+L00517,2026-03-15,410000000009,Kubernetes,res-6cd01974,Cluster hours,176.11,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00518,2026-03-15,410000000009,Data Transfer,res-6e49ff50,Data transfer out,5.60,{}
+L00519,2026-03-15,410000000009,Load Balancer,res-6e49ff50,Capacity units,79.22,"{""app"":""ledger-29"",""costcentre"":""CC-1002"",""env"":""prod""}"
+L00520,2026-03-15,410000000009,Data Transfer,res-7b30f4eb,Data transfer out,13.44,{}
+L00521,2026-03-15,410000000009,Object Storage,res-7b30f4eb,Storage GB-month,251.02,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00522,2026-03-15,410000000009,Queue,res-7c4b2119,Requests,140.11,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00523,2026-03-15,410000000009,Analytics,res-83fed6a5,Query units,1222.21,"{""app"":""ledger-29""}"
+L00524,2026-03-15,410000000009,Load Balancer,res-a135171e,Capacity units,173.51,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00525,2026-03-15,410000000009,Load Balancer,res-abd0a62e,Capacity units,132.25,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00526,2026-03-15,410000000009,Kubernetes,res-aed79233,Cluster hours,298.97,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00527,2026-03-15,410000000009,Analytics,res-c9b45097,Query units,76.61,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""production""}"
+L00528,2026-03-15,410000000009,Data Transfer,res-c9b45097,Data transfer out,5.89,{}
+L00529,2026-03-15,410000000009,Data Transfer,res-dabdadb5,Data transfer out,316.07,{}
+L00530,2026-03-15,410000000009,Queue,res-dabdadb5,Requests,5012.04,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00531,2026-03-15,410000000009,Data Transfer,res-df17645c,Data transfer out,5.08,{}
+L00532,2026-03-15,410000000009,Load Balancer,res-df17645c,Capacity units,215.92,"{""app"":""vault-28"",""cost-center"":""cc-1007"",""env"":""prod""}"
+L00533,2026-03-15,410000000009,Data Transfer,res-ebff8a92,Data transfer out,70.26,{}
+L00534,2026-03-15,410000000009,Queue,res-ebff8a92,Requests,1264.84,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00535,2026-03-15,410000000009,Data Transfer,res-f02d21a3,Data transfer out,4.16,{}
+L00536,2026-03-15,410000000009,Database,res-f02d21a3,Instance hours,201.88,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00537,2026-03-15,410000000009,Compute,res-feb4c588,Instance hours,1115.74,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00538,2026-03-15,410000000009,Data Transfer,res-feb4c588,Data transfer out,100.29,{}
+L00539,2026-03-15,410000000009,Compute,res-feda9c1f,Instance hours,5398.39,{}
+L00540,2026-03-15,410000000009,Data Transfer,res-feda9c1f,Data transfer out,155.72,{}
+L00541,2026-03-15,410000000009,Network Backbone,shared-network-backbone,Monthly charge,3910.37,{}
+L00542,2026-03-15,410000000009,Security Monitoring,shared-security-monitoring,Monthly charge,4377.10,{}
+L00543,2026-03-15,410000000010,Object Storage,res-04ad2ecf,Storage GB-month,236.63,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00544,2026-03-15,410000000010,Queue,res-15ea4668,Requests,70.30,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""test""}"
+L00545,2026-03-15,410000000010,Analytics,res-18e9a7b7,Query units,302.53,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L00546,2026-03-15,410000000010,Load Balancer,res-215f6551,Capacity units,1059.24,"{""CostCenter"":""CC-1006"",""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00547,2026-03-15,410000000010,Data Transfer,res-27779b37,Data transfer out,5.38,{}
+L00548,2026-03-15,410000000010,Object Storage,res-27779b37,Storage GB-month,95.17,"{""app"":""search-35"",""cost-center"":""CC-1141"",""env"":""dev""}"
+L00549,2026-03-15,410000000010,Kubernetes,res-2db45cee,Cluster hours,47.82,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00550,2026-03-15,410000000010,Data Transfer,res-34a4f003,Data transfer out,17.97,{}
+L00551,2026-03-15,410000000010,Kubernetes,res-34a4f003,Cluster hours,476.45,"{""app"":""ledger-34"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00552,2026-03-15,410000000010,Compute,res-3d1e1567,Instance hours,52.21,"{""app"":""search-35"",""cost-center"":""CC-1005""}"
+L00553,2026-03-15,410000000010,Data Transfer,res-3d1e1567,Data transfer out,4.15,{}
+L00554,2026-03-15,410000000010,Kubernetes,res-3e3de524,Cluster hours,72.29,"{""Cost Center"":""CC-1012"",""app"":""archive-32"",""env"":""stage""}"
+L00555,2026-03-15,410000000010,Load Balancer,res-44dc9675,Capacity units,52.52,"{""app"":""notifications-33"",""cost-center"":""CC-1006 "",""env"":""prod""}"
+L00556,2026-03-15,410000000010,Analytics,res-5158b506,Query units,250.64,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00557,2026-03-15,410000000010,Data Transfer,res-5158b506,Data transfer out,5.44,{}
+L00558,2026-03-15,410000000010,Compute,res-62640827,Instance hours,205.01,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00559,2026-03-15,410000000010,Object Storage,res-62c5cbf4,Storage GB-month,862.86,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00560,2026-03-15,410000000010,Analytics,res-849cf7e6,Query units,210.56,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00561,2026-03-15,410000000010,Compute,res-aae0d3ba,Instance hours,640.62,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L00562,2026-03-15,410000000010,Data Transfer,res-aae0d3ba,Data transfer out,44.84,{}
+L00563,2026-03-15,410000000010,Kubernetes,res-b6950e39,Cluster hours,208.92,"{""CostCenter"":""CC-1012"",""app"":""archive-32"",""env"":""prod""}"
+L00564,2026-03-15,410000000010,Load Balancer,res-c18ba822,Capacity units,4476.20,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00565,2026-03-15,410000000010,Load Balancer,res-d1b4dc71,Capacity units,144.13,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L00566,2026-03-15,410000000010,Data Transfer,res-d5fc8b7d,Data transfer out,97.03,{}
+L00567,2026-03-15,410000000010,Queue,res-d5fc8b7d,Requests,1067.35,"{""app"":""archive-32"",""cost-center"":""CC-1012 ""}"
+L00568,2026-03-15,410000000010,Object Storage,res-d99f1125,Storage GB-month,292.85,"{""app"":""ledger-34"",""env"":""prod""}"
+L00569,2026-03-15,410000000010,Analytics,res-e5e73422,Query units,807.86,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00570,2026-03-15,410000000010,Data Transfer,res-e6bad489,Data transfer out,17.77,{}
+L00571,2026-03-15,410000000010,Kubernetes,res-e6bad489,Cluster hours,263.62,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00572,2026-03-15,410000000010,Data Transfer,res-f43a408b,Data transfer out,10.17,{}
+L00573,2026-03-15,410000000010,Object Storage,res-f43a408b,Storage GB-month,177.06,"{""app"":""ledger-34"",""cost-center"":""CC-1014"",""env"":""test""}"
+L00574,2026-03-15,410000000010,Data Transfer,res-fddfc630,Data transfer out,94.03,{}
+L00575,2026-03-15,410000000010,Queue,res-fddfc630,Requests,1356.73,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00576,2026-03-15,410000000011,Object Storage,free-007,Free tier,0.00,{}
+L00577,2026-03-15,410000000011,Queue,res-0451b383,Requests,195.00,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00578,2026-03-15,410000000011,Compute,res-09bc543c,Instance hours,727.07,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00579,2026-03-15,410000000011,Data Transfer,res-09bc543c,Data transfer out,59.35,{}
+L00580,2026-03-15,410000000011,Load Balancer,res-09dab3d4,Capacity units,669.52,"{""CostCenter"":""CC-1002"",""app"":""notifications-39"",""env"":""stage""}"
+L00581,2026-03-15,410000000011,Data Transfer,res-19a06a38,Data transfer out,2.22,{}
+L00582,2026-03-15,410000000011,Database,res-19a06a38,Instance hours,62.76,"{""app"":""batch-36"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00583,2026-03-15,410000000011,Database,res-26c680a3,Instance hours,161.61,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L00584,2026-03-15,410000000011,Database,res-455e29cc,Instance hours,149.83,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00585,2026-03-15,410000000011,Database,res-49d5e8e8,Instance hours,135.24,"{""CostCenter"":""CC-1006"",""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00586,2026-03-15,410000000011,Database,res-4d5d4069,Instance hours,481.97,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00587,2026-03-15,410000000011,Kubernetes,res-4e08fbd0,Cluster hours,57.79,"{""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00588,2026-03-15,410000000011,Analytics,res-5945601b,Query units,40.59,"{""app"":""notifications-39"",""cost-center"":""CC-1161"",""env"":""prod""}"
+L00589,2026-03-15,410000000011,Data Transfer,res-5945601b,Data transfer out,2.67,{}
+L00590,2026-03-15,410000000011,Compute,res-7567a18e,Instance hours,247.25,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00591,2026-03-15,410000000011,Database,res-7fed15b6,Instance hours,266.41,"{""app"":""onboarding-37"",""env"":""prod""}"
+L00592,2026-03-15,410000000011,Kubernetes,res-8804c578,Cluster hours,930.65,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00593,2026-03-15,410000000011,Load Balancer,res-8b8d5d64,Capacity units,507.22,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00594,2026-03-15,410000000011,Load Balancer,res-8de24790,Capacity units,197.47,"{""app"":""scoring-38"",""cost-center"":"" CC-1002"",""env"":""stage""}"
+L00595,2026-03-15,410000000011,Queue,res-9bc2f60e,Requests,85.31,"{""app"":""notifications-39"",""cost-center"":""CC-1002""}"
+L00596,2026-03-15,410000000011,Compute,res-b193335f,Instance hours,212.15,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00597,2026-03-15,410000000011,Load Balancer,res-b630b2b8,Capacity units,105.47,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L00598,2026-03-15,410000000011,Object Storage,res-c69e9db9,Storage GB-month,329.52,"{""CostCenter"":""CC-1002"",""app"":""scoring-38"",""env"":""test""}"
+L00599,2026-03-15,410000000011,Data Transfer,res-c83b7afb,Data transfer out,2.40,{}
+L00600,2026-03-15,410000000011,Kubernetes,res-c83b7afb,Cluster hours,73.67,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L00601,2026-03-15,410000000011,Compute,res-e6938643,Instance hours,137.84,"{""app"":""onboarding-37"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00602,2026-03-15,410000000011,Data Transfer,res-e9610c28,Data transfer out,32.19,{}
+L00603,2026-03-15,410000000011,Queue,res-e9610c28,Requests,456.16,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00604,2026-03-15,410000000011,Database,res-f25b0b20,Instance hours,57.60,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00605,2026-03-15,410000000011,Analytics,res-fda8b29b,Query units,184.74,"{""app"":""notifications-39"",""cost-center"":""CC-1100"",""env"":""stage""}"
+L00606,2026-03-15,410000000012,Compute,res-00888bc3,Instance hours,5499.91,"{""CostCenter"":""CC-1010"",""app"":""search-42"",""env"":""stage""}"
+L00607,2026-03-15,410000000012,Analytics,res-028ee256,Query units,207.05,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00608,2026-03-15,410000000012,Data Transfer,res-0424539d,Data transfer out,4.50,{}
+L00609,2026-03-15,410000000012,Kubernetes,res-0424539d,Cluster hours,87.36,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00610,2026-03-15,410000000012,Queue,res-1cf44b47,Requests,908.73,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00611,2026-03-15,410000000012,Load Balancer,res-21d0451c,Capacity units,1062.89,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L00612,2026-03-15,410000000012,Object Storage,res-30e2d9f6,Storage GB-month,274.61,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""production""}"
+L00613,2026-03-15,410000000012,Compute,res-3a27f6a1,Instance hours,76.75,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00614,2026-03-15,410000000012,Data Transfer,res-3a27f6a1,Data transfer out,5.11,{}
+L00615,2026-03-15,410000000012,Load Balancer,res-3c960178,Capacity units,111.64,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00616,2026-03-15,410000000012,Data Transfer,res-4743e020,Data transfer out,8.85,{}
+L00617,2026-03-15,410000000012,Object Storage,res-4743e020,Storage GB-month,134.22,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L00618,2026-03-15,410000000012,Queue,res-4d2b059a,Requests,2918.81,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00619,2026-03-15,410000000012,Database,res-5b9c0398,Instance hours,248.63,"{""app"":""feeds-41"",""env"":""test""}"
+L00620,2026-03-15,410000000012,Load Balancer,res-69b4e06f,Capacity units,96.23,"{""app"":""portal-40"",""env"":""stage""}"
+L00621,2026-03-15,410000000012,Compute,res-70228481,Instance hours,219.34,"{""app"":""alerts-43"",""cost-center"":""CC-1013"",""env"":""prod""}"
+L00622,2026-03-15,410000000012,Data Transfer,res-70228481,Data transfer out,4.02,{}
+L00623,2026-03-15,410000000012,Load Balancer,res-76dc2eda,Capacity units,881.39,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""prod""}"
+L00624,2026-03-15,410000000012,Object Storage,res-86b76106,Storage GB-month,256.81,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00625,2026-03-15,410000000012,Queue,res-ac58ff5c,Requests,243.72,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00626,2026-03-15,410000000012,Analytics,res-c60cbcc4,Query units,1884.45,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00627,2026-03-15,410000000012,Data Transfer,res-c60cbcc4,Data transfer out,117.77,{}
+L00628,2026-03-15,410000000012,Compute,res-d17b9173,Instance hours,1572.12,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00629,2026-03-15,410000000012,Data Transfer,res-d17b9173,Data transfer out,84.22,{}
+L00630,2026-03-15,410000000012,Analytics,res-d1fe42ac,Query units,1548.88,{}
+L00631,2026-03-15,410000000012,Compute,res-d80bf98e,Instance hours,42.53,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00632,2026-03-15,410000000012,Compute,res-deb35211,Instance hours,1120.90,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00633,2026-03-15,410000000012,Data Transfer,res-deb35211,Data transfer out,90.57,{}
+L00634,2026-03-15,410000000012,Analytics,res-f21819d4,Query units,135.93,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00635,2026-03-15,410000000012,Compute,res-f7b657bf,Instance hours,273.36,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00636,2026-03-15,410000000012,Compute,res-ff4c79f8,Instance hours,1168.65,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""production""}"
+L00637,2026-03-15,410000000012,Log Archive,shared-log-archive,Monthly charge,1617.65,{}
+L00638,2026-03-15,410000000012,Support Plan,shared-support-plan,Monthly charge,2833.36,{}
+L00639,2026-03-22,410000000001,Kubernetes,res-1a3edfc6,Cluster hours,248.56,"{""CostCenter"":""CC-1001"",""app"":""ledger-03"",""env"":""prod""}"
+L00640,2026-03-22,410000000001,Analytics,res-1aeab20f,Query units,236.52,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00641,2026-03-22,410000000001,Object Storage,res-3359b784,Storage GB-month,124.70,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00642,2026-03-22,410000000001,Analytics,res-374c876d,Query units,80.58,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00643,2026-03-22,410000000001,Object Storage,res-3f863af2,Storage GB-month,138.24,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00644,2026-03-22,410000000001,Load Balancer,res-44cd03dd,Capacity units,738.72,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00645,2026-03-22,410000000001,Load Balancer,res-64d2a4b0,Capacity units,1428.79,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00646,2026-03-22,410000000001,Load Balancer,res-6869c5b1,Capacity units,114.11,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00647,2026-03-22,410000000001,Load Balancer,res-779f5610,Capacity units,152.44,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""dev""}"
+L00648,2026-03-22,410000000001,Object Storage,res-7f622212,Storage GB-month,471.66,"{""app"":""ledger-03"",""cost-center"":"" CC-1001"",""env"":""prod""}"
+L00649,2026-03-22,410000000001,Queue,res-826316c6,Requests,479.87,"{""app"":""reporting-25"",""env"":""stage""}"
+L00650,2026-03-22,410000000001,Queue,res-8ccb1c36,Requests,228.59,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00651,2026-03-22,410000000001,Queue,res-93040b3e,Requests,3793.76,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00652,2026-03-22,410000000001,Object Storage,res-9f941a7f,Storage GB-month,197.11,"{""cost-center"":""CC-1001"",""env"":""stage""}"
+L00653,2026-03-22,410000000001,Kubernetes,res-9fa7525d,Cluster hours,101.38,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""prod""}"
+L00654,2026-03-22,410000000001,Queue,res-a84a2eec,Requests,218.07,"{""app"":""reporting-25"",""env"":""prod""}"
+L00655,2026-03-22,410000000001,Compute,res-ac2f543f,Instance hours,314.69,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""production""}"
+L00656,2026-03-22,410000000001,Kubernetes,res-b128dd76,Cluster hours,43.32,"{""env"":""prod""}"
+L00657,2026-03-22,410000000001,Queue,res-d732195c,Requests,203.15,"{""app"":""gateway-01"",""cost-center"":""cc-1001"",""env"":""dev""}"
+L00658,2026-03-22,410000000001,Queue,res-dadb1c0f,Requests,44.22,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00659,2026-03-22,410000000001,Object Storage,res-dfbc2c11,Storage GB-month,2290.34,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""test""}"
+L00660,2026-03-22,410000000001,Load Balancer,res-e72df0e8,Capacity units,837.78,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00661,2026-03-22,410000000001,Database,res-e9ba52d2,Instance hours,227.52,"{""app"":""gateway-01"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00662,2026-03-22,410000000001,Queue,res-f3aba2f1,Requests,121.68,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""stage""}"
+L00663,2026-03-22,410000000002,Load Balancer,res-03b58bbb,Capacity units,3362.05,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00664,2026-03-22,410000000002,Queue,res-11524a7e,Requests,121.34,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00665,2026-03-22,410000000002,Analytics,res-164b7ec0,Query units,35.53,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00666,2026-03-22,410000000002,Kubernetes,res-3ca33f8a,Cluster hours,2333.31,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00667,2026-03-22,410000000002,Queue,res-40caeb7a,Requests,123.50,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00668,2026-03-22,410000000002,Queue,res-45f7cf27,Requests,284.45,"{""app"":""rules-engine-04"",""cost-center"":"" CC-1002"",""env"":""dev""}"
+L00669,2026-03-22,410000000002,Object Storage,res-6e872e56,Storage GB-month,152.35,"{""CostCenter"":""CC-1007"",""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00670,2026-03-22,410000000002,Analytics,res-7313cddd,Query units,763.91,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00671,2026-03-22,410000000002,Kubernetes,res-80fd5dfe,Cluster hours,37.00,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00672,2026-03-22,410000000002,Analytics,res-84655f5a,Query units,231.38,"{""app"":""reporting-06"",""cost-center"":""""}"
+L00673,2026-03-22,410000000002,Load Balancer,res-904a2940,Capacity units,264.77,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00674,2026-03-22,410000000002,Load Balancer,res-99e04cc9,Capacity units,57.09,"{""app"":""limits-05"",""cost-center"":"""",""env"":""production""}"
+L00675,2026-03-22,410000000002,Database,res-9d733bd0,Instance hours,83.70,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00676,2026-03-22,410000000002,Queue,res-ad369a2d,Requests,723.18,"{""app"":""reporting-06"",""costcentre"":""CC-1002""}"
+L00677,2026-03-22,410000000002,Database,res-b918e8d7,Instance hours,1155.46,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00678,2026-03-22,410000000002,Kubernetes,res-cd3bb011,Cluster hours,197.02,"{""app"":""reporting-06"",""cost-center"":"""",""env"":""stage""}"
+L00679,2026-03-22,410000000002,Object Storage,res-cf3414f7,Storage GB-month,277.87,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00680,2026-03-22,410000000002,Database,res-e3463d23,Instance hours,6444.49,"{""app"":""limits-05"",""cost-center"":""cc-1002"",""env"":""dev""}"
+L00681,2026-03-22,410000000003,Object Storage,free-001,Free tier,0.00,{}
+L00682,2026-03-22,410000000003,Analytics,res-2f74028a,Query units,175.07,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00683,2026-03-22,410000000003,Compute,res-3242fc1f,Instance hours,230.37,"{""app"":""rules-engine-07"",""cost-center"":"""",""env"":""prod""}"
+L00684,2026-03-22,410000000003,Queue,res-3b7f844e,Requests,439.90,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00685,2026-03-22,410000000003,Load Balancer,res-46ff5bb0,Capacity units,211.27,"{""CostCenter"":""CC-1003"",""app"":""reporting-09"",""env"":""dev""}"
+L00686,2026-03-22,410000000003,Compute,res-536f33a4,Instance hours,549.02,"{""Cost Center"":""CC-1003"",""app"":""reporting-09"",""env"":""test""}"
+L00687,2026-03-22,410000000003,Object Storage,res-5e131e2c,Storage GB-month,218.53,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00688,2026-03-22,410000000003,Compute,res-6bf724a7,Instance hours,323.84,"{""cost-center"":"" CC-1003"",""env"":""stage""}"
+L00689,2026-03-22,410000000003,Load Balancer,res-6cf8e885,Capacity units,172.51,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00690,2026-03-22,410000000003,Analytics,res-7ae17af1,Query units,205.46,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00691,2026-03-22,410000000003,Database,res-84a938da,Instance hours,55.27,"{""app"":""reporting-09"",""env"":""dev""}"
+L00692,2026-03-22,410000000003,Database,res-8761e1bd,Instance hours,251.48,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00693,2026-03-22,410000000003,Database,res-8ea1e484,Instance hours,236.03,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00694,2026-03-22,410000000003,Database,res-96cbf0b4,Instance hours,570.88,"{""CostCenter"":""CC-1012"",""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00695,2026-03-22,410000000003,Kubernetes,res-9837226a,Cluster hours,241.28,"{""app"":""reporting-09"",""cost_center"":""CC-1003"",""env"":""prod""}"
+L00696,2026-03-22,410000000003,Load Balancer,res-b2831fb9,Capacity units,1678.47,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00697,2026-03-22,410000000003,Compute,res-dfe7cf7c,Instance hours,96.00,"{""app"":""onboarding-08"",""cost-center"":""CC-1003 ""}"
+L00698,2026-03-22,410000000003,Queue,res-ead5d38b,Requests,120.50,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00699,2026-03-22,410000000003,Object Storage,res-ec10900f,Storage GB-month,90.88,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00700,2026-03-22,410000000004,Analytics,res-099e3ec4,Query units,62.88,"{""app"":""statements-11"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00701,2026-03-22,410000000004,Load Balancer,res-0d640f95,Capacity units,605.95,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00702,2026-03-22,410000000004,Queue,res-2029c761,Requests,1208.84,"{""app"":""limits-26"",""env"":""prod""}"
+L00703,2026-03-22,410000000004,Kubernetes,res-23d6cee0,Cluster hours,741.19,"{""app"":""reporting-12""}"
+L00704,2026-03-22,410000000004,Queue,res-391d9ec2,Requests,109.26,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00705,2026-03-22,410000000004,Analytics,res-3f959f4f,Query units,55.54,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L00706,2026-03-22,410000000004,Compute,res-67c193ef,Instance hours,294.81,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00707,2026-03-22,410000000004,Queue,res-789dca52,Requests,1329.39,"{""app"":""limits-26"",""env"":""prod""}"
+L00708,2026-03-22,410000000004,Compute,res-80b05810,Instance hours,1249.38,"{""app"":""reporting-12"",""cost-center"":""CC-1199"",""env"":""prod""}"
+L00709,2026-03-22,410000000004,Object Storage,res-8193063f,Storage GB-month,77.21,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00710,2026-03-22,410000000004,Kubernetes,res-86efe8ef,Cluster hours,55.04,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00711,2026-03-22,410000000004,Object Storage,res-9bbced1c,Storage GB-month,444.25,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00712,2026-03-22,410000000004,Queue,res-abb411ae,Requests,611.29,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00713,2026-03-22,410000000004,Load Balancer,res-ae8f117a,Capacity units,213.15,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00714,2026-03-22,410000000004,Load Balancer,res-b3417af8,Capacity units,4452.70,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00715,2026-03-22,410000000004,Compute,res-ba0527a4,Instance hours,1913.13,"{""app"":""archive-10"",""env"":""prod""}"
+L00716,2026-03-22,410000000004,Object Storage,res-bb86549f,Storage GB-month,5268.56,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00717,2026-03-22,410000000004,Analytics,res-be66b228,Query units,876.48,"{""cost-center"":""CC-1004"",""env"":""stage""}"
+L00718,2026-03-22,410000000004,Kubernetes,res-c9720b7e,Cluster hours,1432.77,"{""CostCenter"":""CC-1010"",""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00719,2026-03-22,410000000004,Load Balancer,res-ce3e487b,Capacity units,167.12,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00720,2026-03-22,410000000004,Compute,res-dd79946e,Instance hours,5202.07,"{""app"":""archive-10"",""cost-center"":""CC-1004 "",""env"":""prod""}"
+L00721,2026-03-22,410000000004,Compute,res-e0998b99,Instance hours,210.73,"{""app"":""archive-10"",""cost-center"":""CC-1004""}"
+L00722,2026-03-22,410000000004,Database,res-ed50fe2a,Instance hours,591.90,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00723,2026-03-22,410000000004,Compute,res-fc3b70c1,Instance hours,247.57,"{""app"":""limits-26"",""env"":""prod""}"
+L00724,2026-03-22,410000000005,Analytics,res-27d0b40f,Query units,266.96,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00725,2026-03-22,410000000005,Kubernetes,res-2d5fbcd5,Cluster hours,665.78,"{""app"":""ledger-14"",""cost-center"":""CC-1005 "",""env"":""dev""}"
+L00726,2026-03-22,410000000005,Compute,res-3176bcec,Instance hours,43.49,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00727,2026-03-22,410000000005,Kubernetes,res-3e6985f0,Cluster hours,122.39,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00728,2026-03-22,410000000005,Database,res-3f231e0e,Instance hours,1243.22,"{""cost-center"":""CC-1005"",""env"":""prod""}"
+L00729,2026-03-22,410000000005,Load Balancer,res-556c6ac9,Capacity units,1056.27,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00730,2026-03-22,410000000005,Queue,res-667e8cd0,Requests,146.74,"{""app"":""ledger-14"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00731,2026-03-22,410000000005,Load Balancer,res-68549a24,Capacity units,2964.28,"{""app"":""archive-13"",""env"":""prod""}"
+L00732,2026-03-22,410000000005,Load Balancer,res-754830ba,Capacity units,513.66,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00733,2026-03-22,410000000005,Database,res-7e96d85b,Instance hours,52.77,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00734,2026-03-22,410000000005,Object Storage,res-87f68b83,Storage GB-month,1274.45,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00735,2026-03-22,410000000005,Compute,res-8901c6bc,Instance hours,246.84,"{""app"":""ledger-14"",""cost-center"":""CC-1006""}"
+L00736,2026-03-22,410000000005,Analytics,res-ca79caad,Query units,1279.06,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00737,2026-03-22,410000000005,Database,res-d674d50c,Instance hours,378.41,"{""app"":""archive-13"",""cost_center"":""CC-1005"",""env"":""prod""}"
+L00738,2026-03-22,410000000005,Analytics,res-e2c4d110,Query units,74.04,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00739,2026-03-22,410000000005,Kubernetes,res-eed02872,Cluster hours,243.75,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00740,2026-03-22,410000000005,Object Storage,res-f8024383,Storage GB-month,263.03,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00741,2026-03-22,410000000005,Database,res-f81a6708,Instance hours,45.48,"{""app"":""archive-15"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L00742,2026-03-22,410000000006,Analytics,res-068d13d2,Query units,195.04,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00743,2026-03-22,410000000006,Queue,res-06d35688,Requests,114.41,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00744,2026-03-22,410000000006,Database,res-0d684fb0,Instance hours,146.40,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00745,2026-03-22,410000000006,Database,res-1697caba,Instance hours,291.77,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00746,2026-03-22,410000000006,Object Storage,res-19247098,Storage GB-month,210.77,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L00747,2026-03-22,410000000006,Object Storage,res-30bc5020,Storage GB-month,2210.42,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L00748,2026-03-22,410000000006,Database,res-4fd729f9,Instance hours,252.05,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00749,2026-03-22,410000000006,Database,res-538a63bb,Instance hours,744.19,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00750,2026-03-22,410000000006,Queue,res-5ea0d693,Requests,4552.63,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00751,2026-03-22,410000000006,Compute,res-6f81f079,Instance hours,2404.02,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00752,2026-03-22,410000000006,Kubernetes,res-8d38b07d,Cluster hours,1230.79,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L00753,2026-03-22,410000000006,Load Balancer,res-8fab1d00,Capacity units,167.24,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00754,2026-03-22,410000000006,Analytics,res-9205d604,Query units,362.36,"{""app"":""search-16"",""costcentre"":""CC-1006"",""env"":""prod""}"
+L00755,2026-03-22,410000000006,Load Balancer,res-9b5019e3,Capacity units,147.20,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00756,2026-03-22,410000000006,Queue,res-9c49de72,Requests,4001.31,"{""app"":""limits-18"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00757,2026-03-22,410000000006,Queue,res-a82d96cc,Requests,905.45,"{""app"":""limits-18"",""cost-center"":""CC-1013"",""env"":""production""}"
+L00758,2026-03-22,410000000006,Queue,res-b25f9ec0,Requests,198.88,"{""app"":""limits-18"",""env"":""stage""}"
+L00759,2026-03-22,410000000006,Compute,res-bdf0ba66,Instance hours,114.63,"{""CostCenter"":""CC-1006"",""app"":""limits-18""}"
+L00760,2026-03-22,410000000006,Analytics,res-c727fe3c,Query units,247.39,"{""app"":""search-16"",""env"":""prod""}"
+L00761,2026-03-22,410000000006,Analytics,res-c7c6c358,Query units,958.50,"{""app"":""search-16"",""cost_center"":""CC-1006"",""env"":""stage""}"
+L00762,2026-03-22,410000000006,Database,res-cba84b50,Instance hours,172.75,"{""app"":""gateway-27"",""env"":""prod""}"
+L00763,2026-03-22,410000000006,Queue,res-ce36b33d,Requests,95.34,"{""app"":""gateway-27"",""env"":""stage""}"
+L00764,2026-03-22,410000000006,Database,res-ea115946,Instance hours,419.08,"{""app"":""gateway-27"",""env"":""prod""}"
+L00765,2026-03-22,410000000006,Database,res-fca1bcc6,Instance hours,901.34,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00766,2026-03-22,410000000007,Database,res-13050d9b,Instance hours,124.27,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00767,2026-03-22,410000000007,Analytics,res-1da1a1a0,Query units,207.48,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00768,2026-03-22,410000000007,Database,res-2f579c02,Instance hours,113.04,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00769,2026-03-22,410000000007,Database,res-372ef045,Instance hours,166.51,"{""app"":""recon-20"",""cost-center"":""CC-1007 "",""env"":""dev""}"
+L00770,2026-03-22,410000000007,Compute,res-38b3034c,Instance hours,926.47,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00771,2026-03-22,410000000007,Compute,res-3925ead7,Instance hours,48.74,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L00772,2026-03-22,410000000007,Analytics,res-39eecd61,Query units,42.75,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00773,2026-03-22,410000000007,Database,res-42d584e4,Instance hours,68.26,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00774,2026-03-22,410000000007,Kubernetes,res-458587b1,Cluster hours,239.73,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00775,2026-03-22,410000000007,Database,res-51037807,Instance hours,95.88,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00776,2026-03-22,410000000007,Queue,res-8648da1b,Requests,1075.79,"{""cost-center"":""CC-1007"",""env"":""prod""}"
+L00777,2026-03-22,410000000007,Load Balancer,res-95e6b484,Capacity units,732.49,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00778,2026-03-22,410000000007,Load Balancer,res-95f27e7d,Capacity units,208.34,"{""app"":""search-19"",""env"":""dev""}"
+L00779,2026-03-22,410000000007,Queue,res-9a2920aa,Requests,1137.48,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00780,2026-03-22,410000000007,Database,res-9da0b0d6,Instance hours,1389.20,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00781,2026-03-22,410000000007,Object Storage,res-bdbde4e0,Storage GB-month,335.32,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00782,2026-03-22,410000000007,Queue,res-cbe740d9,Requests,267.33,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L00783,2026-03-22,410000000007,Database,res-fe27f34c,Instance hours,1330.45,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00784,2026-03-22,410000000008,Analytics,free-019,Free tier,0.00,{}
+L00785,2026-03-22,410000000008,Compute,res-12c59ad5,Instance hours,256.76,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00786,2026-03-22,410000000008,Load Balancer,res-22d610eb,Capacity units,374.25,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00787,2026-03-22,410000000008,Compute,res-2baca76a,Instance hours,394.30,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00788,2026-03-22,410000000008,Object Storage,res-4bf3bec7,Storage GB-month,6204.70,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00789,2026-03-22,410000000008,Database,res-4dc857a6,Instance hours,250.80,"{""app"":""search-22"",""cost-center"":""CC-1008""}"
+L00790,2026-03-22,410000000008,Compute,res-61de27f8,Instance hours,252.94,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00791,2026-03-22,410000000008,Compute,res-626d4231,Instance hours,1106.59,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00792,2026-03-22,410000000008,Queue,res-715a6e0a,Requests,721.30,"{""app"":""batch-24"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L00793,2026-03-22,410000000008,Queue,res-75dd90cc,Requests,244.31,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00794,2026-03-22,410000000008,Compute,res-8368cd10,Instance hours,267.47,"{""app"":""ledger-23"",""env"":""prod""}"
+L00795,2026-03-22,410000000008,Compute,res-90850e08,Instance hours,86.97,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00796,2026-03-22,410000000008,Queue,res-9b1c4279,Requests,232.78,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L00797,2026-03-22,410000000008,Database,res-ab76528f,Instance hours,608.22,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00798,2026-03-22,410000000008,Compute,res-c3c3bc26,Instance hours,6157.46,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""production""}"
+L00799,2026-03-22,410000000008,Load Balancer,res-c4eb4ff4,Capacity units,181.94,"{""app"":""search-22"",""cost-center"":""CC-1132"",""env"":""dev""}"
+L00800,2026-03-22,410000000008,Compute,res-ca8330e5,Instance hours,275.86,"{""app"":""search-22"",""cost-center"":"" CC-1008"",""env"":""dev""}"
+L00801,2026-03-22,410000000008,Queue,res-d35fa246,Requests,1468.53,"{""app"":""search-22"",""costcentre"":""CC-1008"",""env"":""test""}"
+L00802,2026-03-22,410000000008,Database,res-eca6c158,Instance hours,175.10,"{""app"":""ledger-23"",""env"":""stage""}"
+L00803,2026-03-22,410000000009,Compute,res-059fb299,Instance hours,133.25,"{""app"":""scoring-31"",""env"":""prod""}"
+L00804,2026-03-22,410000000009,Analytics,res-06b60437,Query units,245.04,"{""cost-center"":""CC-1007"",""env"":""stage""}"
+L00805,2026-03-22,410000000009,Load Balancer,res-20527431,Capacity units,54.08,"{""app"":""ledger-29"",""cost-center"":""CC-1014"",""env"":""dev""}"
+L00806,2026-03-22,410000000009,Database,res-28d1ebf1,Instance hours,296.07,"{""cost-center"":""CC-1002"",""env"":""stage""}"
+L00807,2026-03-22,410000000009,Database,res-2e7f68fc,Instance hours,1133.86,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00808,2026-03-22,410000000009,Compute,res-511c1560,Instance hours,704.59,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00809,2026-03-22,410000000009,Load Balancer,res-5281fd46,Capacity units,630.78,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""test""}"
+L00810,2026-03-22,410000000009,Load Balancer,res-581e3948,Capacity units,194.46,"{""app"":""limits-30"",""env"":""dev""}"
+L00811,2026-03-22,410000000009,Kubernetes,res-5fce4c51,Cluster hours,884.35,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00812,2026-03-22,410000000009,Kubernetes,res-6cd01974,Cluster hours,177.91,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00813,2026-03-22,410000000009,Load Balancer,res-6e49ff50,Capacity units,71.51,"{""app"":""ledger-29"",""costcentre"":""CC-1002"",""env"":""prod""}"
+L00814,2026-03-22,410000000009,Object Storage,res-7b30f4eb,Storage GB-month,237.57,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00815,2026-03-22,410000000009,Queue,res-7c4b2119,Requests,140.11,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00816,2026-03-22,410000000009,Analytics,res-83fed6a5,Query units,1161.70,"{""app"":""ledger-29""}"
+L00817,2026-03-22,410000000009,Load Balancer,res-a135171e,Capacity units,149.16,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00818,2026-03-22,410000000009,Load Balancer,res-abd0a62e,Capacity units,123.81,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00819,2026-03-22,410000000009,Kubernetes,res-aed79233,Cluster hours,296.32,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00820,2026-03-22,410000000009,Analytics,res-c9b45097,Query units,92.60,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""production""}"
+L00821,2026-03-22,410000000009,Queue,res-dabdadb5,Requests,4605.66,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L00822,2026-03-22,410000000009,Load Balancer,res-df17645c,Capacity units,221.00,"{""app"":""vault-28"",""cost-center"":""cc-1007"",""env"":""prod""}"
+L00823,2026-03-22,410000000009,Queue,res-ebff8a92,Requests,1171.15,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00824,2026-03-22,410000000009,Database,res-f02d21a3,Instance hours,178.99,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00825,2026-03-22,410000000009,Compute,res-feb4c588,Instance hours,1065.60,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00826,2026-03-22,410000000009,Compute,res-feda9c1f,Instance hours,5035.03,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00827,2026-03-22,410000000009,Network Backbone,shared-network-backbone,Monthly charge,3844.43,{}
+L00828,2026-03-22,410000000009,Security Monitoring,shared-security-monitoring,Monthly charge,2618.84,{}
+L00829,2026-03-22,410000000010,Compute,free-009,Free tier,0.00,{}
+L00830,2026-03-22,410000000010,Object Storage,res-04ad2ecf,Storage GB-month,288.91,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00831,2026-03-22,410000000010,Queue,res-15ea4668,Requests,63.79,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""test""}"
+L00832,2026-03-22,410000000010,Analytics,res-18e9a7b7,Query units,278.85,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L00833,2026-03-22,410000000010,Load Balancer,res-215f6551,Capacity units,857.02,"{""CostCenter"":""CC-1006"",""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00834,2026-03-22,410000000010,Object Storage,res-27779b37,Storage GB-month,97.87,"{""app"":""search-35"",""cost-center"":""CC-1141"",""env"":""dev""}"
+L00835,2026-03-22,410000000010,Kubernetes,res-2db45cee,Cluster hours,55.61,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00836,2026-03-22,410000000010,Kubernetes,res-34a4f003,Cluster hours,404.54,"{""app"":""ledger-34"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00837,2026-03-22,410000000010,Compute,res-3d1e1567,Instance hours,52.81,"{""app"":""search-35"",""cost-center"":""CC-1005""}"
+L00838,2026-03-22,410000000010,Kubernetes,res-3e3de524,Cluster hours,81.72,"{""Cost Center"":""CC-1012"",""app"":""archive-32"",""env"":""stage""}"
+L00839,2026-03-22,410000000010,Load Balancer,res-44dc9675,Capacity units,56.72,"{""app"":""notifications-33"",""cost-center"":""CC-1006 "",""env"":""prod""}"
+L00840,2026-03-22,410000000010,Analytics,res-5158b506,Query units,272.44,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L00841,2026-03-22,410000000010,Compute,res-62640827,Instance hours,222.84,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00842,2026-03-22,410000000010,Object Storage,res-62c5cbf4,Storage GB-month,839.11,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00843,2026-03-22,410000000010,Analytics,res-849cf7e6,Query units,206.13,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00844,2026-03-22,410000000010,Compute,res-aae0d3ba,Instance hours,653.43,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L00845,2026-03-22,410000000010,Kubernetes,res-b6950e39,Cluster hours,213.15,"{""CostCenter"":""CC-1012"",""app"":""archive-32"",""env"":""prod""}"
+L00846,2026-03-22,410000000010,Load Balancer,res-c18ba822,Capacity units,4341.91,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00847,2026-03-22,410000000010,Load Balancer,res-d1b4dc71,Capacity units,148.25,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L00848,2026-03-22,410000000010,Queue,res-d5fc8b7d,Requests,1382.70,"{""app"":""archive-32"",""cost-center"":""CC-1012 ""}"
+L00849,2026-03-22,410000000010,Object Storage,res-d99f1125,Storage GB-month,282.20,"{""app"":""ledger-34"",""env"":""prod""}"
+L00850,2026-03-22,410000000010,Analytics,res-e5e73422,Query units,825.23,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L00851,2026-03-22,410000000010,Kubernetes,res-e6bad489,Cluster hours,278.43,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L00852,2026-03-22,410000000010,Object Storage,res-f43a408b,Storage GB-month,207.59,"{""app"":""ledger-34"",""cost-center"":""CC-1014"",""env"":""test""}"
+L00853,2026-03-22,410000000010,Queue,res-fddfc630,Requests,1289.56,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00854,2026-03-22,410000000011,Queue,res-0451b383,Requests,186.70,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00855,2026-03-22,410000000011,Compute,res-09bc543c,Instance hours,845.77,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00856,2026-03-22,410000000011,Load Balancer,res-09dab3d4,Capacity units,572.01,"{""CostCenter"":""CC-1002"",""app"":""notifications-39"",""env"":""stage""}"
+L00857,2026-03-22,410000000011,Database,res-19a06a38,Instance hours,63.87,"{""app"":""batch-36"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00858,2026-03-22,410000000011,Database,res-26c680a3,Instance hours,166.23,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L00859,2026-03-22,410000000011,Database,res-455e29cc,Instance hours,165.28,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00860,2026-03-22,410000000011,Database,res-49d5e8e8,Instance hours,156.59,"{""CostCenter"":""CC-1006"",""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00861,2026-03-22,410000000011,Database,res-4d5d4069,Instance hours,412.49,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00862,2026-03-22,410000000011,Kubernetes,res-4e08fbd0,Cluster hours,59.06,"{""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00863,2026-03-22,410000000011,Analytics,res-5945601b,Query units,48.17,"{""app"":""notifications-39"",""cost-center"":""CC-1161"",""env"":""prod""}"
+L00864,2026-03-22,410000000011,Compute,res-7567a18e,Instance hours,247.25,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L00865,2026-03-22,410000000011,Database,res-7fed15b6,Instance hours,282.24,"{""app"":""onboarding-37"",""env"":""prod""}"
+L00866,2026-03-22,410000000011,Kubernetes,res-8804c578,Cluster hours,832.21,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00867,2026-03-22,410000000011,Load Balancer,res-8b8d5d64,Capacity units,435.49,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00868,2026-03-22,410000000011,Load Balancer,res-8de24790,Capacity units,244.59,"{""app"":""scoring-38"",""cost-center"":"" CC-1002"",""env"":""stage""}"
+L00869,2026-03-22,410000000011,Queue,res-9bc2f60e,Requests,75.53,"{""app"":""notifications-39"",""cost-center"":""CC-1002""}"
+L00870,2026-03-22,410000000011,Compute,res-b193335f,Instance hours,190.14,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00871,2026-03-22,410000000011,Load Balancer,res-b630b2b8,Capacity units,104.33,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L00872,2026-03-22,410000000011,Object Storage,res-c69e9db9,Storage GB-month,332.52,"{""CostCenter"":""CC-1002"",""app"":""scoring-38"",""env"":""test""}"
+L00873,2026-03-22,410000000011,Kubernetes,res-c83b7afb,Cluster hours,70.47,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L00874,2026-03-22,410000000011,Compute,res-e6938643,Instance hours,171.91,"{""app"":""onboarding-37"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L00875,2026-03-22,410000000011,Queue,res-e9610c28,Requests,574.22,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00876,2026-03-22,410000000011,Database,res-f25b0b20,Instance hours,56.02,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""production""}"
+L00877,2026-03-22,410000000011,Analytics,res-fda8b29b,Query units,188.23,"{""app"":""notifications-39"",""cost-center"":""CC-1100"",""env"":""stage""}"
+L00878,2026-03-22,410000000012,Compute,res-00888bc3,Instance hours,5499.91,"{""CostCenter"":""CC-1010"",""app"":""search-42"",""env"":""stage""}"
+L00879,2026-03-22,410000000012,Analytics,res-028ee256,Query units,216.05,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00880,2026-03-22,410000000012,Kubernetes,res-0424539d,Cluster hours,76.55,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00881,2026-03-22,410000000012,Queue,res-1cf44b47,Requests,829.71,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00882,2026-03-22,410000000012,Load Balancer,res-21d0451c,Capacity units,1247.74,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L00883,2026-03-22,410000000012,Object Storage,res-30e2d9f6,Storage GB-month,304.52,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""production""}"
+L00884,2026-03-22,410000000012,Compute,res-3a27f6a1,Instance hours,94.66,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00885,2026-03-22,410000000012,Load Balancer,res-3c960178,Capacity units,116.30,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00886,2026-03-22,410000000012,Object Storage,res-4743e020,Storage GB-month,129.80,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L00887,2026-03-22,410000000012,Queue,res-4d2b059a,Requests,3164.61,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00888,2026-03-22,410000000012,Database,res-5b9c0398,Instance hours,214.72,"{""app"":""feeds-41"",""env"":""test""}"
+L00889,2026-03-22,410000000012,Load Balancer,res-69b4e06f,Capacity units,117.62,"{""app"":""portal-40"",""env"":""stage""}"
+L00890,2026-03-22,410000000012,Compute,res-70228481,Instance hours,225.37,"{""app"":""alerts-43"",""cost-center"":""CC-1013"",""env"":""prod""}"
+L00891,2026-03-22,410000000012,Load Balancer,res-76dc2eda,Capacity units,890.30,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""prod""}"
+L00892,2026-03-22,410000000012,Object Storage,res-86b76106,Storage GB-month,259.54,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00893,2026-03-22,410000000012,Queue,res-ac58ff5c,Requests,269.52,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00894,2026-03-22,410000000012,Analytics,res-c60cbcc4,Query units,1598.42,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L00895,2026-03-22,410000000012,Compute,res-d17b9173,Instance hours,1347.53,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L00896,2026-03-22,410000000012,Analytics,res-d1fe42ac,Query units,1446.59,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""production""}"
+L00897,2026-03-22,410000000012,Compute,res-d80bf98e,Instance hours,35.71,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00898,2026-03-22,410000000012,Compute,res-deb35211,Instance hours,1041.65,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L00899,2026-03-22,410000000012,Analytics,res-f21819d4,Query units,160.64,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00900,2026-03-22,410000000012,Compute,res-f7b657bf,Instance hours,232.10,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L00901,2026-03-22,410000000012,Compute,res-ff4c79f8,Instance hours,1220.59,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""production""}"
+L00902,2026-03-22,410000000012,Log Archive,shared-log-archive,Monthly charge,3509.21,{}
+L00903,2026-03-22,410000000012,Support Plan,shared-support-plan,Monthly charge,2423.77,{}
+L00904,2026-03-29,410000000001,Load Balancer,free-003,Free tier,0.00,{}
+L00905,2026-03-29,410000000001,Analytics,free-008,Free tier,0.00,{}
+L00906,2026-03-29,410000000001,Kubernetes,res-1a3edfc6,Cluster hours,203.37,"{""CostCenter"":""CC-1001"",""app"":""ledger-03"",""env"":""prod""}"
+L00907,2026-03-29,410000000001,Analytics,res-1aeab20f,Query units,234.27,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00908,2026-03-29,410000000001,Object Storage,res-3359b784,Storage GB-month,95.42,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00909,2026-03-29,410000000001,Analytics,res-374c876d,Query units,91.70,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00910,2026-03-29,410000000001,Object Storage,res-3f863af2,Storage GB-month,161.03,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L00911,2026-03-29,410000000001,Load Balancer,res-44cd03dd,Capacity units,722.84,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00912,2026-03-29,410000000001,Load Balancer,res-64d2a4b0,Capacity units,1581.38,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""stage""}"
+L00913,2026-03-29,410000000001,Load Balancer,res-6869c5b1,Capacity units,103.03,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00914,2026-03-29,410000000001,Data Transfer,res-779f5610,Snapshot copy,12.55,{}
+L00915,2026-03-29,410000000001,Load Balancer,res-779f5610,Capacity units,188.31,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""dev""}"
+L00916,2026-03-29,410000000001,Object Storage,res-7f622212,Storage GB-month,502.42,"{""app"":""ledger-03"",""cost-center"":"" CC-1001"",""env"":""prod""}"
+L00917,2026-03-29,410000000001,Data Transfer,res-826316c6,Snapshot copy,13.32,{}
+L00918,2026-03-29,410000000001,Queue,res-826316c6,Requests,488.76,"{""app"":""reporting-25"",""env"":""stage""}"
+L00919,2026-03-29,410000000001,Queue,res-8ccb1c36,Requests,196.54,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00920,2026-03-29,410000000001,Queue,res-93040b3e,Requests,4190.79,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L00921,2026-03-29,410000000001,Object Storage,res-9f941a7f,Storage GB-month,193.13,"{""cost-center"":""CC-1001"",""env"":""stage""}"
+L00922,2026-03-29,410000000001,Data Transfer,res-9fa7525d,Snapshot copy,6.17,{}
+L00923,2026-03-29,410000000001,Kubernetes,res-9fa7525d,Cluster hours,85.51,"{""app"":""reporting-25"",""cost-center"":""CC-1009"",""env"":""prod""}"
+L00924,2026-03-29,410000000001,Data Transfer,res-a84a2eec,Snapshot copy,14.13,{}
+L00925,2026-03-29,410000000001,Queue,res-a84a2eec,Requests,207.97,"{""app"":""reporting-25"",""env"":""prod""}"
+L00926,2026-03-29,410000000001,Compute,res-ac2f543f,Instance hours,329.00,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""production""}"
+L00927,2026-03-29,410000000001,Kubernetes,res-b128dd76,Cluster hours,52.47,"{""env"":""prod""}"
+L00928,2026-03-29,410000000001,Queue,res-d732195c,Requests,205.21,"{""app"":""gateway-01"",""cost-center"":""cc-1001"",""env"":""dev""}"
+L00929,2026-03-29,410000000001,Data Transfer,res-dadb1c0f,Snapshot copy,1.92,{}
+L00930,2026-03-29,410000000001,Queue,res-dadb1c0f,Requests,49.51,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00931,2026-03-29,410000000001,Object Storage,res-dfbc2c11,Storage GB-month,2537.34,"{""app"":""gateway-01"",""cost-center"":""CC-1001"",""env"":""test""}"
+L00932,2026-03-29,410000000001,Load Balancer,res-e72df0e8,Capacity units,942.50,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L00933,2026-03-29,410000000001,Database,res-e9ba52d2,Instance hours,267.81,"{""app"":""gateway-01"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L00934,2026-03-29,410000000001,Data Transfer,res-f3aba2f1,Snapshot copy,9.46,{}
+L00935,2026-03-29,410000000001,Queue,res-f3aba2f1,Requests,143.32,"{""app"":""archive-02"",""cost-center"":""CC1001"",""env"":""stage""}"
+L00936,2026-03-29,410000000002,Load Balancer,res-03b58bbb,Capacity units,3701.66,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00937,2026-03-29,410000000002,Queue,res-11524a7e,Requests,141.56,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00938,2026-03-29,410000000002,Analytics,res-164b7ec0,Query units,35.53,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00939,2026-03-29,410000000002,Data Transfer,res-164b7ec0,Snapshot copy,1.00,{}
+L00940,2026-03-29,410000000002,Data Transfer,res-3ca33f8a,Snapshot copy,181.22,{}
+L00941,2026-03-29,410000000002,Kubernetes,res-3ca33f8a,Cluster hours,2174.73,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00942,2026-03-29,410000000002,Data Transfer,res-40caeb7a,Snapshot copy,10.40,{}
+L00943,2026-03-29,410000000002,Queue,res-40caeb7a,Requests,148.21,"{""app"":""reporting-06"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00944,2026-03-29,410000000002,Queue,res-45f7cf27,Requests,261.59,"{""app"":""rules-engine-04"",""cost-center"":"" CC-1002"",""env"":""dev""}"
+L00945,2026-03-29,410000000002,Data Transfer,res-6e872e56,Snapshot copy,4.35,{}
+L00946,2026-03-29,410000000002,Object Storage,res-6e872e56,Storage GB-month,133.49,"{""CostCenter"":""CC-1007"",""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00947,2026-03-29,410000000002,Analytics,res-7313cddd,Query units,654.78,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L00948,2026-03-29,410000000002,Data Transfer,res-7313cddd,Snapshot copy,47.74,{}
+L00949,2026-03-29,410000000002,Data Transfer,res-80fd5dfe,Snapshot copy,1.24,{}
+L00950,2026-03-29,410000000002,Kubernetes,res-80fd5dfe,Cluster hours,40.74,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00951,2026-03-29,410000000002,Analytics,res-84655f5a,Query units,195.79,"{""app"":""reporting-06"",""cost-center"":""""}"
+L00952,2026-03-29,410000000002,Load Balancer,res-904a2940,Capacity units,264.77,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L00953,2026-03-29,410000000002,Load Balancer,res-99e04cc9,Capacity units,49.59,"{""app"":""limits-05"",""cost-center"":"""",""env"":""production""}"
+L00954,2026-03-29,410000000002,Data Transfer,res-9d733bd0,Snapshot copy,6.56,{}
+L00955,2026-03-29,410000000002,Database,res-9d733bd0,Instance hours,77.13,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00956,2026-03-29,410000000002,Data Transfer,res-ad369a2d,Snapshot copy,24.65,{}
+L00957,2026-03-29,410000000002,Queue,res-ad369a2d,Requests,912.19,"{""app"":""reporting-06"",""costcentre"":""CC-1002""}"
+L00958,2026-03-29,410000000002,Database,res-b918e8d7,Instance hours,1415.12,"{""app"":""rules-engine-04"",""cost-center"":""CC-1002"",""env"":""production""}"
+L00959,2026-03-29,410000000002,Kubernetes,res-cd3bb011,Cluster hours,253.64,"{""app"":""reporting-06"",""cost-center"":"""",""env"":""stage""}"
+L00960,2026-03-29,410000000002,Data Transfer,res-cf3414f7,Snapshot copy,20.91,{}
+L00961,2026-03-29,410000000002,Object Storage,res-cf3414f7,Storage GB-month,328.66,"{""app"":""limits-05"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L00962,2026-03-29,410000000002,Database,res-e3463d23,Instance hours,5498.51,"{""app"":""limits-05"",""cost-center"":""cc-1002"",""env"":""dev""}"
+L00963,2026-03-29,410000000003,Database,free-010,Free tier,0.00,{}
+L00964,2026-03-29,410000000003,Kubernetes,free-023,Free tier,0.00,{}
+L00965,2026-03-29,410000000003,Analytics,res-2f74028a,Query units,145.06,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00966,2026-03-29,410000000003,Data Transfer,res-2f74028a,Snapshot copy,11.67,{}
+L00967,2026-03-29,410000000003,Compute,res-3242fc1f,Instance hours,224.36,"{""app"":""rules-engine-07"",""cost-center"":"""",""env"":""prod""}"
+L00968,2026-03-29,410000000003,Queue,res-3b7f844e,Requests,391.91,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00969,2026-03-29,410000000003,Load Balancer,res-46ff5bb0,Capacity units,222.76,"{""CostCenter"":""CC-1003"",""app"":""reporting-09"",""env"":""dev""}"
+L00970,2026-03-29,410000000003,Compute,res-536f33a4,Instance hours,671.68,"{""Cost Center"":""CC-1003"",""app"":""reporting-09"",""env"":""test""}"
+L00971,2026-03-29,410000000003,Data Transfer,res-536f33a4,Snapshot copy,11.68,{}
+L00972,2026-03-29,410000000003,Object Storage,res-5e131e2c,Storage GB-month,201.39,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00973,2026-03-29,410000000003,Compute,res-6bf724a7,Instance hours,263.66,"{""cost-center"":"" CC-1003"",""env"":""stage""}"
+L00974,2026-03-29,410000000003,Load Balancer,res-6cf8e885,Capacity units,136.11,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L00975,2026-03-29,410000000003,Analytics,res-7ae17af1,Query units,241.98,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00976,2026-03-29,410000000003,Data Transfer,res-7ae17af1,Snapshot copy,6.84,{}
+L00977,2026-03-29,410000000003,Database,res-84a938da,Instance hours,45.31,"{""app"":""reporting-09"",""env"":""dev""}"
+L00978,2026-03-29,410000000003,Database,res-8761e1bd,Instance hours,289.94,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00979,2026-03-29,410000000003,Database,res-8ea1e484,Instance hours,252.55,"{""app"":""rules-engine-07"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00980,2026-03-29,410000000003,Data Transfer,res-96cbf0b4,Snapshot copy,36.66,{}
+L00981,2026-03-29,410000000003,Database,res-96cbf0b4,Instance hours,523.75,"{""CostCenter"":""CC-1012"",""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00982,2026-03-29,410000000003,Data Transfer,res-9837226a,Snapshot copy,17.59,{}
+L00983,2026-03-29,410000000003,Kubernetes,res-9837226a,Cluster hours,289.04,"{""app"":""reporting-09"",""cost_center"":""CC-1003"",""env"":""prod""}"
+L00984,2026-03-29,410000000003,Load Balancer,res-b2831fb9,Capacity units,1298.99,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00985,2026-03-29,410000000003,Compute,res-dfe7cf7c,Instance hours,107.75,"{""app"":""onboarding-08"",""cost-center"":""CC-1003 ""}"
+L00986,2026-03-29,410000000003,Data Transfer,res-dfe7cf7c,Snapshot copy,1.95,{}
+L00987,2026-03-29,410000000003,Data Transfer,res-ead5d38b,Snapshot copy,5.29,{}
+L00988,2026-03-29,410000000003,Queue,res-ead5d38b,Requests,144.33,"{""app"":""onboarding-08"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00989,2026-03-29,410000000003,Data Transfer,res-ec10900f,Snapshot copy,5.10,{}
+L00990,2026-03-29,410000000003,Object Storage,res-ec10900f,Storage GB-month,89.86,"{""app"":""reporting-09"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L00991,2026-03-29,410000000004,Analytics,res-099e3ec4,Query units,72.60,"{""app"":""statements-11"",""cost-center"":""CC1004"",""env"":""prod""}"
+L00992,2026-03-29,410000000004,Data Transfer,res-0d640f95,Snapshot copy,23.53,{}
+L00993,2026-03-29,410000000004,Load Balancer,res-0d640f95,Capacity units,664.79,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L00994,2026-03-29,410000000004,Data Transfer,res-2029c761,Snapshot copy,53.01,{}
+L00995,2026-03-29,410000000004,Queue,res-2029c761,Requests,1219.44,"{""app"":""limits-26"",""env"":""prod""}"
+L00996,2026-03-29,410000000004,Kubernetes,res-23d6cee0,Cluster hours,613.16,"{""app"":""reporting-12""}"
+L00997,2026-03-29,410000000004,Data Transfer,res-391d9ec2,Snapshot copy,1.96,{}
+L00998,2026-03-29,410000000004,Queue,res-391d9ec2,Requests,103.36,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L00999,2026-03-29,410000000004,Analytics,res-3f959f4f,Query units,68.50,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L01000,2026-03-29,410000000004,Compute,res-67c193ef,Instance hours,256.24,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L01001,2026-03-29,410000000004,Queue,res-789dca52,Requests,1202.11,"{""app"":""limits-26"",""env"":""prod""}"
+L01002,2026-03-29,410000000004,Compute,res-80b05810,Instance hours,1375.58,"{""app"":""reporting-12"",""cost-center"":""CC-1199"",""env"":""prod""}"
+L01003,2026-03-29,410000000004,Data Transfer,res-80b05810,Snapshot copy,75.72,{}
+L01004,2026-03-29,410000000004,Object Storage,res-8193063f,Storage GB-month,73.31,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01005,2026-03-29,410000000004,Data Transfer,res-86efe8ef,Snapshot copy,1.28,{}
+L01006,2026-03-29,410000000004,Kubernetes,res-86efe8ef,Cluster hours,71.04,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""production""}"
+L01007,2026-03-29,410000000004,Object Storage,res-9bbced1c,Storage GB-month,516.57,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L01008,2026-03-29,410000000004,Queue,res-abb411ae,Requests,611.29,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01009,2026-03-29,410000000004,Load Balancer,res-ae8f117a,Capacity units,213.15,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01010,2026-03-29,410000000004,Data Transfer,res-b3417af8,Snapshot copy,185.52,{}
+L01011,2026-03-29,410000000004,Load Balancer,res-b3417af8,Capacity units,5148.43,"{""app"":""statements-11"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01012,2026-03-29,410000000004,Compute,res-ba0527a4,Instance hours,1933.70,"{""app"":""archive-10"",""env"":""prod""}"
+L01013,2026-03-29,410000000004,Object Storage,res-bb86549f,Storage GB-month,4450.14,"{""app"":""limits-26"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L01014,2026-03-29,410000000004,Analytics,res-be66b228,Query units,1093.15,"{""cost-center"":""CC-1004"",""env"":""stage""}"
+L01015,2026-03-29,410000000004,Data Transfer,res-be66b228,Snapshot copy,39.39,{}
+L01016,2026-03-29,410000000004,Data Transfer,res-c9720b7e,Snapshot copy,26.78,{}
+L01017,2026-03-29,410000000004,Kubernetes,res-c9720b7e,Cluster hours,1178.35,"{""CostCenter"":""CC-1010"",""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01018,2026-03-29,410000000004,Load Balancer,res-ce3e487b,Capacity units,163.85,"{""app"":""reporting-12"",""cost-center"":""CC-1004"",""env"":""production""}"
+L01019,2026-03-29,410000000004,Compute,res-dd79946e,Instance hours,6032.19,"{""app"":""archive-10"",""cost-center"":""CC-1004 "",""env"":""prod""}"
+L01020,2026-03-29,410000000004,Compute,res-e0998b99,Instance hours,243.66,"{""app"":""archive-10"",""cost-center"":""CC-1004""}"
+L01021,2026-03-29,410000000004,Data Transfer,res-e0998b99,Snapshot copy,13.17,{}
+L01022,2026-03-29,410000000004,Database,res-ed50fe2a,Instance hours,542.06,"{""app"":""archive-10"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01023,2026-03-29,410000000004,Compute,res-fc3b70c1,Instance hours,252.11,"{""app"":""limits-26"",""env"":""prod""}"
+L01024,2026-03-29,410000000004,Data Transfer,res-fc3b70c1,Snapshot copy,15.89,{}
+L01025,2026-03-29,410000000005,Analytics,res-27d0b40f,Query units,264.06,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L01026,2026-03-29,410000000005,Data Transfer,res-27d0b40f,Snapshot copy,8.70,{}
+L01027,2026-03-29,410000000005,Kubernetes,res-2d5fbcd5,Cluster hours,673.09,"{""app"":""ledger-14"",""cost-center"":""CC-1005 "",""env"":""dev""}"
+L01028,2026-03-29,410000000005,Compute,res-3176bcec,Instance hours,55.26,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01029,2026-03-29,410000000005,Data Transfer,res-3e6985f0,Snapshot copy,4.03,{}
+L01030,2026-03-29,410000000005,Kubernetes,res-3e6985f0,Cluster hours,115.67,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01031,2026-03-29,410000000005,Database,res-3f231e0e,Instance hours,1187.34,"{""cost-center"":""CC-1005"",""env"":""prod""}"
+L01032,2026-03-29,410000000005,Load Balancer,res-556c6ac9,Capacity units,1182.57,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L01033,2026-03-29,410000000005,Data Transfer,res-667e8cd0,Snapshot copy,4.44,{}
+L01034,2026-03-29,410000000005,Queue,res-667e8cd0,Requests,125.99,"{""app"":""ledger-14"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L01035,2026-03-29,410000000005,Data Transfer,res-68549a24,Snapshot copy,163.17,{}
+L01036,2026-03-29,410000000005,Load Balancer,res-68549a24,Capacity units,2773.92,"{""app"":""archive-13"",""env"":""prod""}"
+L01037,2026-03-29,410000000005,Load Balancer,res-754830ba,Capacity units,458.26,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01038,2026-03-29,410000000005,Database,res-7e96d85b,Instance hours,51.72,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01039,2026-03-29,410000000005,Data Transfer,res-87f68b83,Snapshot copy,67.07,{}
+L01040,2026-03-29,410000000005,Object Storage,res-87f68b83,Storage GB-month,1422.02,"{""app"":""archive-15"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L01041,2026-03-29,410000000005,Compute,res-8901c6bc,Instance hours,249.10,"{""app"":""ledger-14"",""cost-center"":""CC-1006""}"
+L01042,2026-03-29,410000000005,Data Transfer,res-8901c6bc,Snapshot copy,4.52,{}
+L01043,2026-03-29,410000000005,Analytics,res-ca79caad,Query units,1125.57,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L01044,2026-03-29,410000000005,Database,res-d674d50c,Instance hours,358.49,"{""app"":""archive-13"",""cost_center"":""CC-1005"",""env"":""prod""}"
+L01045,2026-03-29,410000000005,Analytics,res-e2c4d110,Query units,76.97,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L01046,2026-03-29,410000000005,Data Transfer,res-e2c4d110,Snapshot copy,1.46,{}
+L01047,2026-03-29,410000000005,Kubernetes,res-eed02872,Cluster hours,217.72,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L01048,2026-03-29,410000000005,Data Transfer,res-f8024383,Snapshot copy,8.39,{}
+L01049,2026-03-29,410000000005,Object Storage,res-f8024383,Storage GB-month,307.80,"{""app"":""ledger-14"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L01050,2026-03-29,410000000005,Database,res-f81a6708,Instance hours,51.11,"{""app"":""archive-15"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L01051,2026-03-29,410000000006,Kubernetes,free-012,Free tier,0.00,{}
+L01052,2026-03-29,410000000006,Analytics,res-068d13d2,Query units,203.52,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L01053,2026-03-29,410000000006,Queue,res-06d35688,Requests,111.32,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01054,2026-03-29,410000000006,Database,res-0d684fb0,Instance hours,136.15,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L01055,2026-03-29,410000000006,Data Transfer,res-1697caba,Snapshot copy,11.55,{}
+L01056,2026-03-29,410000000006,Database,res-1697caba,Instance hours,257.11,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01057,2026-03-29,410000000006,Object Storage,res-19247098,Storage GB-month,232.57,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L01058,2026-03-29,410000000006,Object Storage,res-30bc5020,Storage GB-month,2110.85,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L01059,2026-03-29,410000000006,Database,res-4fd729f9,Instance hours,335.07,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L01060,2026-03-29,410000000006,Data Transfer,res-538a63bb,Snapshot copy,63.33,{}
+L01061,2026-03-29,410000000006,Database,res-538a63bb,Instance hours,910.45,"{""app"":""limits-18"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01062,2026-03-29,410000000006,Queue,res-5ea0d693,Requests,3884.35,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01063,2026-03-29,410000000006,Compute,res-6f81f079,Instance hours,2247.24,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01064,2026-03-29,410000000006,Data Transfer,res-8d38b07d,Snapshot copy,25.11,{}
+L01065,2026-03-29,410000000006,Kubernetes,res-8d38b07d,Cluster hours,1281.02,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""dev""}"
+L01066,2026-03-29,410000000006,Load Balancer,res-8fab1d00,Capacity units,157.41,"{""app"":""gateway-27"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L01067,2026-03-29,410000000006,Analytics,res-9205d604,Query units,377.01,"{""app"":""search-16"",""costcentre"":""CC-1006"",""env"":""prod""}"
+L01068,2026-03-29,410000000006,Data Transfer,res-9b5019e3,Snapshot copy,13.53,{}
+L01069,2026-03-29,410000000006,Load Balancer,res-9b5019e3,Capacity units,191.19,"{""app"":""search-16"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L01070,2026-03-29,410000000006,Data Transfer,res-9c49de72,Snapshot copy,277.31,{}
+L01071,2026-03-29,410000000006,Queue,res-9c49de72,Requests,4040.93,"{""app"":""limits-18"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01072,2026-03-29,410000000006,Queue,res-a82d96cc,Requests,803.09,"{""app"":""limits-18"",""cost-center"":""CC-1013"",""env"":""production""}"
+L01073,2026-03-29,410000000006,Queue,res-b25f9ec0,Requests,208.35,"{""app"":""limits-18"",""env"":""stage""}"
+L01074,2026-03-29,410000000006,Compute,res-bdf0ba66,Instance hours,140.99,"{""CostCenter"":""CC-1006"",""app"":""limits-18""}"
+L01075,2026-03-29,410000000006,Data Transfer,res-bdf0ba66,Snapshot copy,9.22,{}
+L01076,2026-03-29,410000000006,Analytics,res-c727fe3c,Query units,284.79,"{""app"":""search-16"",""env"":""prod""}"
+L01077,2026-03-29,410000000006,Data Transfer,res-c727fe3c,Snapshot copy,20.13,{}
+L01078,2026-03-29,410000000006,Analytics,res-c7c6c358,Query units,1035.62,"{""app"":""search-16"",""cost_center"":""CC-1006"",""env"":""stage""}"
+L01079,2026-03-29,410000000006,Data Transfer,res-cba84b50,Snapshot copy,7.51,{}
+L01080,2026-03-29,410000000006,Database,res-cba84b50,Instance hours,165.24,"{""app"":""gateway-27"",""env"":""prod""}"
+L01081,2026-03-29,410000000006,Queue,res-ce36b33d,Requests,80.61,"{""app"":""gateway-27"",""env"":""stage""}"
+L01082,2026-03-29,410000000006,Database,res-ea115946,Instance hours,470.30,"{""app"":""gateway-27"",""env"":""prod""}"
+L01083,2026-03-29,410000000006,Data Transfer,res-fca1bcc6,Snapshot copy,16.09,{}
+L01084,2026-03-29,410000000006,Database,res-fca1bcc6,Instance hours,917.43,"{""app"":""vault-17"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L01085,2026-03-29,410000000007,Database,free-006,Free tier,0.00,{}
+L01086,2026-03-29,410000000007,Kubernetes,free-024,Free tier,0.00,{}
+L01087,2026-03-29,410000000007,Data Transfer,res-13050d9b,Snapshot copy,5.75,{}
+L01088,2026-03-29,410000000007,Database,res-13050d9b,Instance hours,128.87,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L01089,2026-03-29,410000000007,Analytics,res-1da1a1a0,Query units,190.01,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L01090,2026-03-29,410000000007,Data Transfer,res-2f579c02,Snapshot copy,3.76,{}
+L01091,2026-03-29,410000000007,Database,res-2f579c02,Instance hours,124.35,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L01092,2026-03-29,410000000007,Data Transfer,res-372ef045,Snapshot copy,6.11,{}
+L01093,2026-03-29,410000000007,Database,res-372ef045,Instance hours,172.63,"{""app"":""recon-20"",""cost-center"":""CC-1007 "",""env"":""dev""}"
+L01094,2026-03-29,410000000007,Compute,res-38b3034c,Instance hours,944.46,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01095,2026-03-29,410000000007,Data Transfer,res-38b3034c,Snapshot copy,35.97,{}
+L01096,2026-03-29,410000000007,Compute,res-3925ead7,Instance hours,53.93,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""stage""}"
+L01097,2026-03-29,410000000007,Analytics,res-39eecd61,Query units,45.71,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01098,2026-03-29,410000000007,Database,res-42d584e4,Instance hours,64.29,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01099,2026-03-29,410000000007,Kubernetes,res-458587b1,Cluster hours,281.54,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01100,2026-03-29,410000000007,Database,res-51037807,Instance hours,104.43,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01101,2026-03-29,410000000007,Queue,res-8648da1b,Requests,1215.64,"{""cost-center"":""CC-1007"",""env"":""prod""}"
+L01102,2026-03-29,410000000007,Data Transfer,res-95e6b484,Snapshot copy,43.94,{}
+L01103,2026-03-29,410000000007,Load Balancer,res-95e6b484,Capacity units,769.11,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01104,2026-03-29,410000000007,Data Transfer,res-95f27e7d,Snapshot copy,3.72,{}
+L01105,2026-03-29,410000000007,Load Balancer,res-95f27e7d,Capacity units,210.20,"{""app"":""search-19"",""env"":""dev""}"
+L01106,2026-03-29,410000000007,Queue,res-9a2920aa,Requests,891.54,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01107,2026-03-29,410000000007,Data Transfer,res-9da0b0d6,Snapshot copy,55.01,{}
+L01108,2026-03-29,410000000007,Database,res-9da0b0d6,Instance hours,1306.67,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L01109,2026-03-29,410000000007,Object Storage,res-bdbde4e0,Storage GB-month,261.14,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L01110,2026-03-29,410000000007,Data Transfer,res-cbe740d9,Snapshot copy,23.50,{}
+L01111,2026-03-29,410000000007,Queue,res-cbe740d9,Requests,317.28,"{""app"":""statements-21"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L01112,2026-03-29,410000000007,Database,res-fe27f34c,Instance hours,1732.68,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01113,2026-03-29,410000000008,Compute,res-12c59ad5,Instance hours,256.76,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L01114,2026-03-29,410000000008,Data Transfer,res-22d610eb,Snapshot copy,30.55,{}
+L01115,2026-03-29,410000000008,Load Balancer,res-22d610eb,Capacity units,362.79,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L01116,2026-03-29,410000000008,Compute,res-2baca76a,Instance hours,297.45,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01117,2026-03-29,410000000008,Data Transfer,res-2baca76a,Snapshot copy,13.83,{}
+L01118,2026-03-29,410000000008,Object Storage,res-4bf3bec7,Storage GB-month,5640.64,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01119,2026-03-29,410000000008,Database,res-4dc857a6,Instance hours,204.78,"{""app"":""search-22"",""cost-center"":""CC-1008""}"
+L01120,2026-03-29,410000000008,Compute,res-61de27f8,Instance hours,270.59,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01121,2026-03-29,410000000008,Compute,res-626d4231,Instance hours,982.49,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L01122,2026-03-29,410000000008,Data Transfer,res-715a6e0a,Snapshot copy,57.37,{}
+L01123,2026-03-29,410000000008,Queue,res-715a6e0a,Requests,942.62,"{""app"":""batch-24"",""cost-center"":""CC-1013"",""env"":""stage""}"
+L01124,2026-03-29,410000000008,Queue,res-75dd90cc,Requests,296.85,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L01125,2026-03-29,410000000008,Compute,res-8368cd10,Instance hours,295.93,"{""app"":""ledger-23"",""env"":""prod""}"
+L01126,2026-03-29,410000000008,Data Transfer,res-8368cd10,Snapshot copy,19.91,{}
+L01127,2026-03-29,410000000008,Compute,res-90850e08,Instance hours,76.00,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L01128,2026-03-29,410000000008,Data Transfer,res-90850e08,Snapshot copy,5.48,{}
+L01129,2026-03-29,410000000008,Queue,res-9b1c4279,Requests,271.12,"{""app"":""search-22"",""cost-center"":""CC-1008"",""env"":""dev""}"
+L01130,2026-03-29,410000000008,Database,res-ab76528f,Instance hours,589.02,"{""app"":""batch-24"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01131,2026-03-29,410000000008,Compute,res-c3c3bc26,Instance hours,5122.13,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""production""}"
+L01132,2026-03-29,410000000008,Data Transfer,res-c4eb4ff4,Snapshot copy,11.73,{}
+L01133,2026-03-29,410000000008,Load Balancer,res-c4eb4ff4,Capacity units,221.07,"{""app"":""search-22"",""cost-center"":""CC-1132"",""env"":""dev""}"
+L01134,2026-03-29,410000000008,Compute,res-ca8330e5,Instance hours,338.15,"{""app"":""search-22"",""cost-center"":"" CC-1008"",""env"":""dev""}"
+L01135,2026-03-29,410000000008,Queue,res-d35fa246,Requests,1661.37,"{""app"":""search-22"",""costcentre"":""CC-1008"",""env"":""test""}"
+L01136,2026-03-29,410000000008,Database,res-eca6c158,Instance hours,145.36,"{""app"":""ledger-23"",""env"":""stage""}"
+L01137,2026-03-29,410000000009,Compute,res-059fb299,Instance hours,125.78,"{""app"":""scoring-31"",""env"":""prod""}"
+L01138,2026-03-29,410000000009,Analytics,res-06b60437,Query units,215.26,"{""cost-center"":""CC-1007"",""env"":""stage""}"
+L01139,2026-03-29,410000000009,Data Transfer,res-06b60437,Snapshot copy,18.32,{}
+L01140,2026-03-29,410000000009,Data Transfer,res-20527431,Snapshot copy,1.82,{}
+L01141,2026-03-29,410000000009,Load Balancer,res-20527431,Capacity units,56.51,"{""app"":""ledger-29"",""cost-center"":""CC-1014"",""env"":""dev""}"
+L01142,2026-03-29,410000000009,Data Transfer,res-28d1ebf1,Snapshot copy,5.14,{}
+L01143,2026-03-29,410000000009,Database,res-28d1ebf1,Instance hours,257.46,"{""cost-center"":""CC-1002"",""env"":""stage""}"
+L01144,2026-03-29,410000000009,Database,res-2e7f68fc,Instance hours,1017.30,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L01145,2026-03-29,410000000009,Compute,res-511c1560,Instance hours,770.14,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L01146,2026-03-29,410000000009,Data Transfer,res-511c1560,Snapshot copy,32.77,{}
+L01147,2026-03-29,410000000009,Load Balancer,res-5281fd46,Capacity units,658.81,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""test""}"
+L01148,2026-03-29,410000000009,Data Transfer,res-581e3948,Snapshot copy,15.12,{}
+L01149,2026-03-29,410000000009,Load Balancer,res-581e3948,Capacity units,231.19,"{""app"":""limits-30"",""env"":""dev""}"
+L01150,2026-03-29,410000000009,Data Transfer,res-5fce4c51,Snapshot copy,17.34,{}
+L01151,2026-03-29,410000000009,Kubernetes,res-5fce4c51,Cluster hours,927.70,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L01152,2026-03-29,410000000009,Data Transfer,res-6cd01974,Snapshot copy,3.59,{}
+L01153,2026-03-29,410000000009,Kubernetes,res-6cd01974,Cluster hours,194.08,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01154,2026-03-29,410000000009,Data Transfer,res-6e49ff50,Snapshot copy,5.60,{}
+L01155,2026-03-29,410000000009,Load Balancer,res-6e49ff50,Capacity units,65.90,"{""app"":""ledger-29"",""costcentre"":""CC-1002"",""env"":""prod""}"
+L01156,2026-03-29,410000000009,Data Transfer,res-7b30f4eb,Snapshot copy,15.68,{}
+L01157,2026-03-29,410000000009,Object Storage,res-7b30f4eb,Storage GB-month,221.88,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01158,2026-03-29,410000000009,Queue,res-7c4b2119,Requests,131.17,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01159,2026-03-29,410000000009,Analytics,res-83fed6a5,Query units,1391.62,"{""app"":""ledger-29""}"
+L01160,2026-03-29,410000000009,Load Balancer,res-a135171e,Capacity units,144.59,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L01161,2026-03-29,410000000009,Load Balancer,res-abd0a62e,Capacity units,123.81,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01162,2026-03-29,410000000009,Kubernetes,res-aed79233,Cluster hours,253.99,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L01163,2026-03-29,410000000009,Analytics,res-c9b45097,Query units,88.39,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""production""}"
+L01164,2026-03-29,410000000009,Data Transfer,res-c9b45097,Snapshot copy,5.05,{}
+L01165,2026-03-29,410000000009,Data Transfer,res-dabdadb5,Snapshot copy,361.22,{}
+L01166,2026-03-29,410000000009,Queue,res-dabdadb5,Requests,4470.20,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01167,2026-03-29,410000000009,Data Transfer,res-df17645c,Snapshot copy,10.16,{}
+L01168,2026-03-29,410000000009,Load Balancer,res-df17645c,Capacity units,226.08,"{""app"":""vault-28"",""cost-center"":""cc-1007"",""env"":""prod""}"
+L01169,2026-03-29,410000000009,Data Transfer,res-ebff8a92,Snapshot copy,46.84,{}
+L01170,2026-03-29,410000000009,Queue,res-ebff8a92,Requests,1229.70,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L01171,2026-03-29,410000000009,Data Transfer,res-f02d21a3,Snapshot copy,4.16,{}
+L01172,2026-03-29,410000000009,Database,res-f02d21a3,Instance hours,203.96,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01173,2026-03-29,410000000009,Compute,res-feb4c588,Instance hours,1190.96,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01174,2026-03-29,410000000009,Data Transfer,res-feb4c588,Snapshot copy,75.21,{}
+L01175,2026-03-29,410000000009,Compute,res-feda9c1f,Instance hours,4827.40,"{""app"":""scoring-31"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L01176,2026-03-29,410000000009,Data Transfer,res-feda9c1f,Snapshot copy,207.63,{}
+L01177,2026-03-29,410000000009,Network Backbone,shared-network-backbone,Monthly charge,2031.82,{}
+L01178,2026-03-29,410000000009,Security Monitoring,shared-security-monitoring,Monthly charge,3696.32,{}
+L01179,2026-03-29,410000000010,Object Storage,res-04ad2ecf,Storage GB-month,277.91,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01180,2026-03-29,410000000010,Queue,res-15ea4668,Requests,72.26,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""test""}"
+L01181,2026-03-29,410000000010,Analytics,res-18e9a7b7,Query units,247.28,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""stage""}"
+L01182,2026-03-29,410000000010,Load Balancer,res-215f6551,Capacity units,914.80,"{""CostCenter"":""CC-1006"",""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""prod""}"
+L01183,2026-03-29,410000000010,Data Transfer,res-27779b37,Snapshot copy,2.69,{}
+L01184,2026-03-29,410000000010,Object Storage,res-27779b37,Storage GB-month,76.32,"{""app"":""search-35"",""cost-center"":""CC-1141"",""env"":""dev""}"
+L01185,2026-03-29,410000000010,Kubernetes,res-2db45cee,Cluster hours,50.04,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01186,2026-03-29,410000000010,Data Transfer,res-34a4f003,Snapshot copy,8.98,{}
+L01187,2026-03-29,410000000010,Kubernetes,res-34a4f003,Cluster hours,462.97,"{""app"":""ledger-34"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L01188,2026-03-29,410000000010,Compute,res-3d1e1567,Instance hours,66.46,"{""app"":""search-35"",""cost-center"":""CC-1005""}"
+L01189,2026-03-29,410000000010,Data Transfer,res-3d1e1567,Snapshot copy,1.78,{}
+L01190,2026-03-29,410000000010,Kubernetes,res-3e3de524,Cluster hours,73.86,"{""Cost Center"":""CC-1012"",""app"":""archive-32"",""env"":""stage""}"
+L01191,2026-03-29,410000000010,Load Balancer,res-44dc9675,Capacity units,45.69,"{""app"":""notifications-33"",""cost-center"":""CC-1006 "",""env"":""prod""}"
+L01192,2026-03-29,410000000010,Analytics,res-5158b506,Query units,307.85,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""dev""}"
+L01193,2026-03-29,410000000010,Data Transfer,res-5158b506,Snapshot copy,21.79,{}
+L01194,2026-03-29,410000000010,Compute,res-62640827,Instance hours,189.41,"{""app"":""search-35"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01195,2026-03-29,410000000010,Object Storage,res-62c5cbf4,Storage GB-month,831.20,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L01196,2026-03-29,410000000010,Analytics,res-849cf7e6,Query units,232.73,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L01197,2026-03-29,410000000010,Compute,res-aae0d3ba,Instance hours,595.77,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L01198,2026-03-29,410000000010,Data Transfer,res-aae0d3ba,Snapshot copy,12.81,{}
+L01199,2026-03-29,410000000010,Kubernetes,res-b6950e39,Cluster hours,179.38,"{""CostCenter"":""CC-1012"",""app"":""archive-32"",""env"":""prod""}"
+L01200,2026-03-29,410000000010,Load Balancer,res-c18ba822,Capacity units,3894.29,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01201,2026-03-29,410000000010,Load Balancer,res-d1b4dc71,Capacity units,137.27,"{""app"":""archive-32"",""cost-center"":""CC-1012"",""env"":""dev""}"
+L01202,2026-03-29,410000000010,Data Transfer,res-d5fc8b7d,Snapshot copy,36.38,{}
+L01203,2026-03-29,410000000010,Queue,res-d5fc8b7d,Requests,1297.80,"{""app"":""archive-32"",""cost-center"":""CC-1012 ""}"
+L01204,2026-03-29,410000000010,Object Storage,res-d99f1125,Storage GB-month,306.16,"{""app"":""ledger-34"",""env"":""prod""}"
+L01205,2026-03-29,410000000010,Analytics,res-e5e73422,Query units,972.91,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""prod""}"
+L01206,2026-03-29,410000000010,Data Transfer,res-e6bad489,Snapshot copy,11.84,{}
+L01207,2026-03-29,410000000010,Kubernetes,res-e6bad489,Cluster hours,337.67,"{""app"":""notifications-33"",""cost-center"":""CC-1006"",""env"":""stage""}"
+L01208,2026-03-29,410000000010,Data Transfer,res-f43a408b,Snapshot copy,4.07,{}
+L01209,2026-03-29,410000000010,Object Storage,res-f43a408b,Storage GB-month,177.06,"{""app"":""ledger-34"",""cost-center"":""CC-1014"",""env"":""test""}"
+L01210,2026-03-29,410000000010,Data Transfer,res-fddfc630,Snapshot copy,67.16,{}
+L01211,2026-03-29,410000000010,Queue,res-fddfc630,Requests,1195.53,"{""app"":""ledger-34"",""cost-center"":""CC-1010"",""env"":""prod""}"
+L01212,2026-03-29,410000000011,Database,free-020,Free tier,0.00,{}
+L01213,2026-03-29,410000000011,Queue,res-0451b383,Requests,190.85,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L01214,2026-03-29,410000000011,Compute,res-09bc543c,Instance hours,660.29,"{""app"":""notifications-39"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L01215,2026-03-29,410000000011,Data Transfer,res-09bc543c,Snapshot copy,37.09,{}
+L01216,2026-03-29,410000000011,Load Balancer,res-09dab3d4,Capacity units,715.02,"{""CostCenter"":""CC-1002"",""app"":""notifications-39"",""env"":""stage""}"
+L01217,2026-03-29,410000000011,Data Transfer,res-19a06a38,Snapshot copy,4.44,{}
+L01218,2026-03-29,410000000011,Database,res-19a06a38,Instance hours,58.87,"{""app"":""batch-36"",""cost-center"":""CC1004"",""env"":""prod""}"
+L01219,2026-03-29,410000000011,Database,res-26c680a3,Instance hours,138.52,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L01220,2026-03-29,410000000011,Database,res-455e29cc,Instance hours,134.38,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L01221,2026-03-29,410000000011,Database,res-49d5e8e8,Instance hours,132.39,"{""CostCenter"":""CC-1006"",""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""prod""}"
+L01222,2026-03-29,410000000011,Database,res-4d5d4069,Instance hours,438.55,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01223,2026-03-29,410000000011,Kubernetes,res-4e08fbd0,Cluster hours,57.79,"{""app"":""onboarding-37"",""cost-center"":""CC-1001"",""env"":""stage""}"
+L01224,2026-03-29,410000000011,Analytics,res-5945601b,Query units,38.36,"{""app"":""notifications-39"",""cost-center"":""CC-1161"",""env"":""prod""}"
+L01225,2026-03-29,410000000011,Data Transfer,res-5945601b,Snapshot copy,2.67,{}
+L01226,2026-03-29,410000000011,Compute,res-7567a18e,Instance hours,227.67,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01227,2026-03-29,410000000011,Database,res-7fed15b6,Instance hours,250.59,"{""app"":""onboarding-37"",""env"":""prod""}"
+L01228,2026-03-29,410000000011,Kubernetes,res-8804c578,Cluster hours,1020.14,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""prod""}"
+L01229,2026-03-29,410000000011,Load Balancer,res-8b8d5d64,Capacity units,507.22,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L01230,2026-03-29,410000000011,Load Balancer,res-8de24790,Capacity units,204.20,"{""app"":""scoring-38"",""cost-center"":"" CC-1002"",""env"":""stage""}"
+L01231,2026-03-29,410000000011,Queue,res-9bc2f60e,Requests,95.97,"{""app"":""notifications-39"",""cost-center"":""CC-1002""}"
+L01232,2026-03-29,410000000011,Compute,res-b193335f,Instance hours,218.16,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""dev""}"
+L01233,2026-03-29,410000000011,Load Balancer,res-b630b2b8,Capacity units,130.42,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""stage""}"
+L01234,2026-03-29,410000000011,Object Storage,res-c69e9db9,Storage GB-month,302.56,"{""CostCenter"":""CC-1002"",""app"":""scoring-38"",""env"":""test""}"
+L01235,2026-03-29,410000000011,Data Transfer,res-c83b7afb,Snapshot copy,5.60,{}
+L01236,2026-03-29,410000000011,Kubernetes,res-c83b7afb,Cluster hours,85.68,"{""app"":""onboarding-37"",""cost-center"":""CC-1001""}"
+L01237,2026-03-29,410000000011,Compute,res-e6938643,Instance hours,164.17,"{""app"":""onboarding-37"",""cost-center"":""CC-1003"",""env"":""stage""}"
+L01238,2026-03-29,410000000011,Data Transfer,res-e9610c28,Snapshot copy,16.09,{}
+L01239,2026-03-29,410000000011,Queue,res-e9610c28,Requests,611.79,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""dev""}"
+L01240,2026-03-29,410000000011,Database,res-f25b0b20,Instance hours,55.49,"{""app"":""batch-36"",""cost-center"":""CC-1004"",""env"":""production""}"
+L01241,2026-03-29,410000000011,Analytics,res-fda8b29b,Query units,196.94,"{""app"":""notifications-39"",""cost-center"":""CC-1100"",""env"":""stage""}"
+L01242,2026-03-29,410000000012,Compute,res-00888bc3,Instance hours,4721.62,"{""CostCenter"":""CC-1010"",""app"":""search-42"",""env"":""stage""}"
+L01243,2026-03-29,410000000012,Analytics,res-028ee256,Query units,202.55,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01244,2026-03-29,410000000012,Data Transfer,res-0424539d,Snapshot copy,5.40,{}
+L01245,2026-03-29,410000000012,Kubernetes,res-0424539d,Cluster hours,99.97,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01246,2026-03-29,410000000012,Queue,res-1cf44b47,Requests,806.00,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L01247,2026-03-29,410000000012,Load Balancer,res-21d0451c,Capacity units,1166.87,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L01248,2026-03-29,410000000012,Object Storage,res-30e2d9f6,Storage GB-month,290.93,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""production""}"
+L01249,2026-03-29,410000000012,Compute,res-3a27f6a1,Instance hours,86.13,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L01250,2026-03-29,410000000012,Data Transfer,res-3a27f6a1,Snapshot copy,2.55,{}
+L01251,2026-03-29,410000000012,Load Balancer,res-3c960178,Capacity units,127.93,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L01252,2026-03-29,410000000012,Data Transfer,res-4743e020,Snapshot copy,5.90,{}
+L01253,2026-03-29,410000000012,Object Storage,res-4743e020,Storage GB-month,137.17,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""dev""}"
+L01254,2026-03-29,410000000012,Queue,res-4d2b059a,Requests,3133.88,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01255,2026-03-29,410000000012,Database,res-5b9c0398,Instance hours,255.41,"{""app"":""feeds-41"",""env"":""test""}"
+L01256,2026-03-29,410000000012,Load Balancer,res-69b4e06f,Capacity units,100.51,"{""app"":""portal-40"",""env"":""stage""}"
+L01257,2026-03-29,410000000012,Compute,res-70228481,Instance hours,227.38,"{""app"":""alerts-43"",""cost-center"":""CC-1013"",""env"":""prod""}"
+L01258,2026-03-29,410000000012,Data Transfer,res-70228481,Snapshot copy,16.09,{}
+L01259,2026-03-29,410000000012,Load Balancer,res-76dc2eda,Capacity units,765.65,"{""app"":""search-42"",""cost_center"":""CC-1010"",""env"":""prod""}"
+L01260,2026-03-29,410000000012,Object Storage,res-86b76106,Storage GB-month,267.74,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01261,2026-03-29,410000000012,Queue,res-ac58ff5c,Requests,263.79,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""dev""}"
+L01262,2026-03-29,410000000012,Analytics,res-c60cbcc4,Query units,1632.07,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""stage""}"
+L01263,2026-03-29,410000000012,Data Transfer,res-c60cbcc4,Snapshot copy,134.60,{}
+L01264,2026-03-29,410000000012,Compute,res-d17b9173,Instance hours,1207.16,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01265,2026-03-29,410000000012,Data Transfer,res-d17b9173,Snapshot copy,112.29,{}
+L01266,2026-03-29,410000000012,Analytics,res-d1fe42ac,Query units,1431.98,"{""app"":""search-42"",""cost-center"":""CC-1010"",""env"":""production""}"
+L01267,2026-03-29,410000000012,Compute,res-d80bf98e,Instance hours,41.33,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L01268,2026-03-29,410000000012,Compute,res-deb35211,Instance hours,1120.90,"{""app"":""feeds-41"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01269,2026-03-29,410000000012,Data Transfer,res-deb35211,Snapshot copy,56.61,{}
+L01270,2026-03-29,410000000012,Analytics,res-f21819d4,Query units,177.64,"{""app"":""portal-40"",""cost-center"":""CC-1003"",""env"":""prod""}"
+L01271,2026-03-29,410000000012,Compute,res-f7b657bf,Instance hours,226.94,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""stage""}"
+L01272,2026-03-29,410000000012,Compute,res-ff4c79f8,Instance hours,1480.29,"{""app"":""alerts-43"",""cost-center"":""CC-1005"",""env"":""production""}"
+L01273,2026-03-29,410000000012,Log Archive,shared-log-archive,Monthly charge,2392.46,{}
+L01274,2026-03-29,410000000012,Support Plan,shared-support-plan,Monthly charge,2366.71,{}
+L01275,2026-03-31,410000000001,Queue,res-8ccb1c36,Credit: committed use,-34.18,"{""app"":""ledger-03"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L01276,2026-03-31,410000000001,Queue,res-93040b3e,Credit: committed use,-441.13,"{""app"":""archive-02"",""cost-center"":""CC-1001"",""env"":""dev""}"
+L01277,2026-03-31,410000000005,Load Balancer,res-754830ba,Credit: committed use,-55.39,"{""app"":""archive-13"",""cost-center"":""CC-1005"",""env"":""prod""}"
+L01278,2026-03-31,410000000007,Database,res-2f579c02,Credit: committed use,-12.56,"{""app"":""recon-20"",""cost-center"":""CC-1007"",""env"":""dev""}"
+L01279,2026-03-31,410000000007,Database,res-51037807,Credit: committed use,-8.54,"{""app"":""search-19"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01280,2026-03-31,410000000008,Compute,res-61de27f8,Credit: committed use,-17.64,"{""app"":""ledger-23"",""cost-center"":""CC-1008"",""env"":""prod""}"
+L01281,2026-03-31,410000000009,Compute,res-511c1560,Credit: committed use,-163.86,"{""app"":""ledger-29"",""cost-center"":""CC-1002"",""env"":""stage""}"
+L01282,2026-03-31,410000000009,Queue,res-dabdadb5,Credit: committed use,-270.92,"{""app"":""vault-28"",""cost-center"":""CC-1007"",""env"":""prod""}"
+L01283,2026-03-31,410000000009,Database,res-f02d21a3,Credit: committed use,-14.56,"{""app"":""limits-30"",""cost-center"":""CC-1004"",""env"":""prod""}"
+L01284,2026-03-31,410000000011,Kubernetes,res-8804c578,Credit: committed use,-71.58,"{""app"":""scoring-38"",""cost-center"":""CC-1002"",""env"":""prod""}"

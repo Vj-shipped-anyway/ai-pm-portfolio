@@ -1,0 +1,15 @@
+line_id,usage_date,account_id,service,resource_id,usage_type,cost_usd,tags_json
+E01,2026-03-10,410000000001,Compute,res-demo-01,Instance hours,1200.00,"{""app"":""ledger-01"",""cost-center"":""CC-1001"",""env"":""prod""}"
+E02,2026-03-11,410000000009,Database,res-demo-02,Instance hours,2500.00,"{""CostCenter"":""CC-1004"",""app"":""scoring-02"",""env"":""prod""}"
+E03,2026-03-12,410000000009,Kubernetes,res-demo-03,Cluster hours,1800.00,"{""app"":""batch-03"",""cost-center"":"" cc-1005 "",""env"":""stage""}"
+E04,2026-03-13,410000000009,Data Transfer,res-demo-02,Data transfer out,140.00,{}
+E05,2026-03-14,410000000003,Compute,res-demo-04,Instance hours,900.00,{}
+E06,2026-03-15,410000000010,Object Storage,res-demo-05,Storage GB-month,650.00,{}
+E07,2026-03-16,410000000009,Database,res-demo-06,Instance hours,1100.00,"{""app"":""portal-04"",""cost-center"":""CC-1013"",""env"":""prod""}"
+E08,2026-03-17,410000000011,Queue,res-demo-07,Requests,300.00,"{""app"":""feeds-05"",""cost-center"":""CC-1099"",""env"":""dev""}"
+E09,2026-03-18,410000000012,Compute,res-demo-08,Instance hours,700.00,"{""CostCenter"":""CC-1006"",""app"":""gateway-06"",""cost-center"":""CC-1002"",""env"":""prod""}"
+E10,2026-03-19,410000000012,Support Plan,shared-support-plan,Monthly charge,1000.00,{}
+E11,2026-03-20,410000000001,Compute,res-demo-01,Credit: committed use,-100.00,"{""app"":""ledger-01"",""cost-center"":""CC-1001"",""env"":""prod""}"
+E12,2026-03-21,410000000010,Object Storage,free-demo-01,Free tier,0.00,{}
+E13,2026-03-22,410000000002,Compute,res-demo-09,Instance hours,800.00,"{""app"":""alerts-07"",""cost-center"":""CC-1002"",""env"":""prod""}"
+E14,2026-03-23,410000000009,Compute,res-demo-10,Instance hours,500.00,"{""app"":""vault-08"",""costcentre"":""CC-1007"",""env"":""prod""}"
