@@ -1,6 +1,6 @@
 ---
 name: inventory-check
-description: Test an inventory of generative and agentic AI systems for completeness (required fields, the fields an agent needs, evidence by risk tier), staleness (review and evaluation dates against a cadence per tier, the recorded model id against gateway traffic) and coverage (systems that call a model with no inventory record, retired systems still running, production systems with no traffic). Use when asked to check, audit or sanity-test an AI system inventory or model inventory, to find gaps before a review, or to run the same tests in a pipeline. Wraps the standard-library command-line tool inventory_check.py. A prototype on synthetic data, aligned to a bank's own governance practice and not compliant with or certified against any rule.
+description: Test an inventory of generative and agentic AI systems for completeness (required fields, the fields an agent needs, evidence by risk tier), staleness (review and evaluation dates against a cadence per tier, the recorded model id against gateway traffic) and coverage (systems that call a model with no inventory record, retired systems still running, production systems with no traffic). Use when asked to check, audit or sanity-test an AI system inventory or model inventory, to find gaps before a review, or to run the same tests in a pipeline. Wraps the standard-library command-line tool inventory_check.py. A prototype on synthetic data, aligned to a bank's own governance practice, with no claim of conformity to any rule.
 ---
 
 # inventory-check
