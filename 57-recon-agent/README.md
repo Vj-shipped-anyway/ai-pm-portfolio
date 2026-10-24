@@ -50,7 +50,7 @@ open items: 14
 posted 5 (3 on their own, 2 on approval); waiting 2; rejected 1; blocked by the check 0; approvals refused 2
 ```
 
-Standard library only, Python 3.9 or newer. To run it on your own two CSV files: `python3 recon_agent.py reconcile bank.csv book.csv --approvals approvals.csv --out out/`, then `python3 recon_agent.py verify bank.csv book.csv out/matches.csv` to re-check the finished list. `verify` exits 1 when a posted match no longer re-checks; bad input exits 2 with one line.
+Standard library only, Python 3.9 or newer. To run it on your own two CSV files: `python3 recon_agent.py reconcile bank.csv book.csv --approvals approvals.csv --out out/`, then `python3 recon_agent.py verify bank.csv book.csv out/matches.csv` to re-check the finished list. `verify` exits 1 when a posted match no longer re-checks, and `reconcile --fail-on-open` exits 1 when any line is still open; bad input exits 2 with one line.
 
 ## What the numbers say
 
@@ -88,7 +88,7 @@ Standard library only, Python 3.9 or newer. To run it on your own two CSV files:
 
 Run any of them from `src/`. Step 4 writes `src/out/` (git-ignored), and `python3 _build_demo.py` turns that into `demo.html`. The data comes from [`data/_generate.py`](./data/README.md); `tools/check_repo.py` confirms that a rerun reproduces every file and that the green numbers above appear in a script's output.
 
-The five rules, in order: `ref_exact` (same reference, amount, currency, within the window; posts on its own below the limit when the names agree), `ref_fee` (reference equal, amount short by a scheduled fee), `batch_sum` (the bank reference is the explicit batch id on 2 to 6 book lines that add up), `ref_near` (references one edit apart), `name_amount` (no reference on one side; same name and amount). Every rule except the first waits for a person. When two book lines fit equally well and are not identical, the bank line is parked for a person instead of guessed. Each proposal prints a key such as `ref_fee:BK-000002:GL-000002:499850`; an approval binds to exactly that key.
+The five rules, in order: `ref_exact` (same reference, amount, currency, within the window; posts on its own at or below the limit when the names agree), `ref_fee` (reference equal, amount short by a scheduled fee), `batch_sum` (the bank reference is the explicit batch id on 2 to 6 book lines that add up), `ref_near` (references one edit apart), `name_amount` (no reference on one side; same name and amount). Every rule except the first waits for a person. When two book lines fit equally well and are not identical, the bank line is parked for a person instead of guessed. Each proposal prints a key such as `ref_fee:BK-000002:GL-000002:499850`; an approval binds to exactly that key.
 
 ## Aligned to
 
