@@ -1,0 +1,7 @@
+use_case_id,title,model_type,vendor_model,customer_facing,decision_autonomy,data_class,regulatory_scope,financial_exposure_band,developer_unit,deployed_version,declared_tier
+EX-01,Branch cash demand forecast,statistical,none,no,advisory,internal,none,lt_1m,Treasury,2.1,1
+EX-02,Merchant risk scoring,ml,vendor_api,no,assisted,confidential,aml,1m_10m,Cards,1.3,2
+EX-03,Complaint summarisation assistant,generative,vendor_api,no,advisory,confidential,privacy,lt_1m,Digital Channels,1.0,2
+EX-04,Sanctions list screening rules,rules,none,no,automated,restricted,aml,10m_50m,Payments Operations,3.2,3
+EX-05,Payment exception resolution agent,agentic,vendor_api,yes,automated,restricted,udaap,gt_50m,Payments Operations,1.1,4
+EX-06,Overdraft fee waiver rules,rules,none,yes,advisory,internal,none,lt_1m,Retail Lending,2.0,1
