@@ -2,7 +2,7 @@
 
 Synthetic. Written by `_generate.py` with a fixed seed (`SEED = 44`), so a rerun reproduces every file byte for byte. The generator uses only the Python standard library and one seeded `random.Random`. Nothing here comes from a real inventory, bank, vendor, gateway or employer. System names, owner codes, evaluation references and model ids are invented, and the usage export has the shape I chose for it.
 
-**The truth is separate from the rules.** Each record is built as one case (a clean record, or a clean record with one planted change). The label in `inventory_truth.csv` is the case, not the output of `src/inventory_check.py`. The generator and the checker share two assumptions, the cadence by tier and the as-of date, so their agreement on those holds by construction. The part that is not by construction is whether a field-level or traffic-level rule recognises the planted change.
+**The truth is separate from the rules.** Each record is built as one case (a clean record, or a clean record with one planted change). The label in `inventory_truth.csv` is the case, not the output of `src/inventory_check.py`. The generator and the checker share two assumptions, the cadence by tier and the as-of date, so their agreement on those holds by construction. The part that is not by construction is whether a field-level or traffic-level rule recognizes the planted change.
 
 ## Files
 
@@ -19,7 +19,7 @@ Synthetic. Written by `_generate.py` with a fixed seed (`SEED = 44`), so a rerun
 
 Required on every record: `system_id`, `name`, `kind` (generative or agentic), `status` (development, pilot, production or retired), `business_owner`, `technical_owner`, `risk_tier` (1 to 4), `purpose`, `provider_type` (vendor_api or self_hosted), `model_id`, `data_class` (public, internal, confidential or restricted), `customer_facing` (yes or no) and `last_reviewed` (YYYY-MM-DD).
 
-Required by condition: `tools`, `permission_scope` (read_only, read_write or transact) and `human_approval` (none, on_exception or before_action) for an agentic system. For a production system: `evaluation_ref` and `last_evaluated` from tier 2, `independent_review_date` from tier 3, and `fallback_plan` of yes at tier 4. The tiers are the four-step scale of [project 11](../11-tiergate-ai-usecase-intake/), and the evidence that grows with the tier follows its checklist. I did not import it.
+Required by condition: `tools`, `permission_scope` (read_only, read_write or transact) and `human_approval` (none, on_exception or before_action) for an agentic system. For a production system: `evaluation_ref` and `last_evaluated` from tier 2, `independent_review_date` from tier 3, and `fallback_plan` of yes at tier 4. The tiers are the four-step scale of [project 11](../../11-tiergate-ai-usecase-intake/), and the evidence that grows with the tier follows its checklist. I did not import it.
 
 ## 🟡 Assumptions
 
@@ -32,7 +32,7 @@ None of these comes from a rule. SR 26-2 places generative and agentic AI outsid
 | A retired system seen more recently than this is reported still running | 30 days |
 | Placeholder words (whole value only) | tbd, tba, tbc, n/a, na, none, unknown, null, nil, todo, -, --, ?, ??, xxx |
 
-The staleness idea (a date is stale once it is older than a multiple of its cycle) comes from [project 16](../16-controlmap-ai-obligation-crosswalk/), which uses 1.5 times the test cycle. Here the cadence is the limit itself.
+The staleness idea (a date is stale once it is older than a multiple of its cycle) comes from [project 16](../../16-controlmap-ai-obligation-crosswalk/), which uses 1.5 times the test cycle. Here the cadence is the limit itself.
 
 ## The 100 records, by case
 
@@ -55,7 +55,7 @@ Every record has exactly one case. The case decides the status, the tier and the
 ## What this data does not do
 
 - It does not model real inventories. Real fields are free text, copied between sheets, and wrong in ways nobody planted.
-- Every defect is single. A real record can be stale, incomplete and mislabelled at once.
+- Every defect is single. A real record can be stale, incomplete and mislabeled at once.
 - The usage export is complete and well formed. A real gateway drops calls, logs model aliases and shares keys.
 - Owners are codes. Whether an owner still works at the bank is not in the data and not in the checks.
 
