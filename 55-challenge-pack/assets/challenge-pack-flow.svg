@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">challenge-pack: a use-case export and an evidence export turned into a tiered test plan and a reconciled gap list</title>
+  <desc id="desc">Four-stage flow showing how a use-case export and an evidence export move through a read and validate step, a tier recompute from the form, a tier table with vendor and scope overlays, and a dated, versioned reconciliation of missing, wrong-version, not-independent and stale evidence, ending in one memo per use case, a summary file and an exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts one generic checklist, the tier table on the declared tier and challenge-pack on 150 synthetic use cases.</desc>
+
+  <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+      </marker>
+      <style>
+        .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+        .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+        .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+        .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+        .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+        .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+        .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+        .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+        .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+        .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+        .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+        .arrow-head { fill: #5a5a5a; }
+        .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+        .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+        .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+        .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+        .badge-bg { fill: #E6F1FB; }
+        .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+        @media (prefers-color-scheme: dark) {
+          .stage-box { fill: #161b22; stroke: #8b9bc7; }
+          .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+          .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+          .stage-box-block { fill: #161b22; stroke: #f07878; }
+          .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+          .stage-box-design { stroke: #9ca3af; }
+          .strip-box { fill: #1c2128; stroke: #3b434d; }
+          .stage-title { fill: #e6edf3; }
+          .stage-sub { fill: #a8b3bf; }
+          .stage-num { fill: #b6c4ee; }
+          .arrow-line { stroke: #a8b3bf; }
+          .arrow-head { fill: #a8b3bf; }
+          .meta-strong { fill: #6ee7a0; }
+          .meta-block { fill: #fca5a5; }
+          .header { fill: #e6edf3; }
+          .subheader { fill: #a8b3bf; }
+          .badge-bg { fill: #1f2d44; }
+          .badge-text { fill: #cfe0f7; }
+        }
+      </style>
+    </defs>
+
+  <text x="20" y="32" class="header">challenge-pack - a tier turned into a test plan, evidence reconciled</text>
+  <text x="20" y="52" class="subheader">Four steps read a use-case export, an evidence export and a date. A person challenges the content.</text>
+
+  <rect x="20" y="66" width="380" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 150 use cases, 1486 owed items, 437 planted defects</text>
+
+  <rect x="20" y="100" width="205" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . READ</text>
+  <text x="30" y="142" class="stage-title">Read both files</text>
+  <text x="30" y="162" class="stage-sub">use cases and evidence</text>
+  <text x="30" y="177" class="stage-sub">bad date or id: exit 2</text>
+  <text x="30" y="192" class="stage-sub">no match is reported</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+  <line x1="227" y1="166" x2="243" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="245" y="100" width="205" height="132" rx="8" class="stage-box-gate"/>
+  <text x="255" y="120" class="stage-num">2 . TIER</text>
+  <text x="255" y="142" class="stage-title">Recompute the tier</text>
+  <text x="255" y="162" class="stage-sub">rubric on the form</text>
+  <text x="255" y="177" class="stage-sub">higher of declared and</text>
+  <text x="255" y="192" class="stage-sub">recomputed tier is used</text>
+  <text x="255" y="212" class="meta-block">42 of 150 low, 16 after</text>
+  <line x1="452" y1="166" x2="468" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="470" y="100" width="205" height="132" rx="8" class="stage-box-gate"/>
+  <text x="480" y="120" class="stage-num">3 . PLAN</text>
+  <text x="480" y="142" class="stage-title">Tier table, overlays</text>
+  <text x="480" y="162" class="stage-sub">core items by tier</text>
+  <text x="480" y="177" class="stage-sub">vendor overlay V01 V02</text>
+  <text x="480" y="192" class="stage-sub">scope item G01</text>
+  <text x="480" y="212" class="meta-strong">asks for 1403 of 1486</text>
+  <line x1="677" y1="166" x2="693" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="695" y="100" width="205" height="132" rx="8" class="stage-box-block"/>
+  <text x="705" y="120" class="stage-num">4 . RECONCILE</text>
+  <text x="705" y="142" class="stage-title">Dated, versioned</text>
+  <text x="705" y="162" class="stage-sub">missing, wrong version</text>
+  <text x="705" y="177" class="stage-sub">same unit as developer</text>
+  <text x="705" y="192" class="stage-sub">stale on latest date</text>
+  <text x="705" y="212" class="meta-strong">finds 360 of 437</text>
+
+  <path d="M 797 232 L 797 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">5 . MEMO AND EXIT</text>
+  <text x="262" y="313" class="stage-title">One memo per use case</text>
+  <text x="262" y="330" class="stage-sub">summary.csv - exit 1 on a gap, exit 2 on bad input</text>
+  <text x="262" y="344" class="meta-strong">130 with gaps and 20 complete of 150</text>
+
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">AGENT OR CI</text>
+  <text x="32" y="313" class="stage-title">Runs the command</text>
+  <text x="32" y="330" class="stage-sub">exit 1 when a gap exists</text>
+  <text x="32" y="344" class="stage-sub">skill staged, not loaded</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">use case registry feed</text>
+  <text x="742" y="328" class="stage-sub">evidence store feed</text>
+  <text x="742" y="343" class="stage-sub">pack record</text>
+
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">One generic checklist</text>
+  <text x="32" y="406" class="meta-block">asks for 876 of 1486 owed</text>
+  <text x="32" y="424" class="stage-sub">finds 0 of 437 defects</text>
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Tier table, declared tier</text>
+  <text x="332" y="406" class="meta-block">asks for 1080 of 1486 owed</text>
+  <text x="332" y="424" class="stage-sub">42 of 150 declared below truth</text>
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">challenge-pack</text>
+  <text x="632" y="406" class="meta-strong">asks 1403 of 1486, finds 360 of 437</text>
+  <text x="632" y="424" class="stage-sub">known miss: 77 of 437 not found</text>
+</svg>
