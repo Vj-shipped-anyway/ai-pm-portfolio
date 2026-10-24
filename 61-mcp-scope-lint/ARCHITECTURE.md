@@ -138,7 +138,7 @@ Recovery is a re-run from the same versioned manifest and policy.
 
 Alignment, not certification. The README cites two sources, restated with the same wording about what was read: the [MCP specification's security best practices](https://modelcontextprotocol.io/specification/draft/basic/security_best_practices) (draft version, read 2026-10-24), section "Scope Minimization", which describes the harm of broad tokens, lists publishing every scope and using wildcard or omnibus scopes as common mistakes, and recommends a progressive, least-privilege model; and the [OWASP MCP Top 10](https://owasp.org/www-project-mcp-top-10/) (read 2026-10-24; the page shows a 2025 designation and a beta phase), item MCP02, privilege escalation via scope creep.
 
-- **What the design does.** It checks the static part of that guidance: a grant no tool needs, a wildcard used in part, a tool that asks for more than it says it does, and a smaller grant that never adds a scope.
+- **What the design does.** It checks four static things near that guidance: a grant no tool needs, a wildcard used in part, a tool that asks for more than it says it does, and a smaller grant that never adds a scope. It leaves a fully used wildcard alone.
 - **What it does not claim.** It does not model the run-time step-up flow. It is not compliant with either source or any other standard, holds no certification, and I have not read or mapped any other source.
 
 ---

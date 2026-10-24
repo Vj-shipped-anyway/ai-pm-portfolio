@@ -217,7 +217,7 @@ python3 step_04_with_lint.py
 
 ## Aligned to
 
-- The [MCP specification's security best practices](https://modelcontextprotocol.io/specification/draft/basic/security_best_practices) (draft version, read 2026-10-24), section "Scope Minimization". It describes the harm of broad tokens and lists as common mistakes publishing every scope and using wildcard or omnibus scopes, and it recommends a progressive, least-privilege model. This lint checks the static part of that: a grant no tool needs, a wildcard used in part, a tool that asks for more than it says it does. It does not model the run-time step-up flow.
+- The [MCP specification's security best practices](https://modelcontextprotocol.io/specification/draft/basic/security_best_practices) (draft version, read 2026-10-24), section "Scope Minimization". It describes the harm of broad tokens and lists as common mistakes publishing every scope and using wildcard or omnibus scopes, and it recommends a progressive, least-privilege model. This lint checks three static things that sit close to that: a grant no tool needs, a wildcard used in part, a tool that asks for more than it says it does. It leaves a fully used wildcard alone, although the page lists wildcard scopes as a mistake. It does not model the run-time step-up flow.
 - The [OWASP MCP Top 10](https://owasp.org/www-project-mcp-top-10/) (read 2026-10-24; the page shows a 2025 designation and a beta phase), item MCP02, privilege escalation via scope creep.
 
 This is a prototype, aligned to that guidance. It makes no claim of conformity to that guidance. I read both pages; the paraphrases are mine.
