@@ -1,0 +1,13 @@
+customer_id,truth,entity_id,planted_as
+S01,match,EX1,order_swap
+S02,match,EX1,translit
+S03,match,EX2,initial
+S04,match,EX3,dropped_middle
+S05,match,EX4,alias_unlisted
+S06,clear,,shared_surname
+S07,clear,,near_name
+S08,clear,,random
+S09,clear,,random
+S10,clear,,shared_surname
+S11,clear,,random
+S12,clear,,random
