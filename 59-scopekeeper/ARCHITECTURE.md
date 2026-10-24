@@ -140,7 +140,7 @@ One short-lived batch job runs per review cycle or per pull request that changes
 Alignment, not certification. The README's "Aligned to" section cites two sources, restated with the same wording about what was read.
 
 - The [OWASP Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/), dated December 9, 2025. I read the PDF the page links to on 2026-10-24. ASI03, Identity and Privilege Abuse, says an agent without a distinct, governed identity works in an attribution gap that makes true least privilege impossible; that is the shared service account here. ASI02, Tool Misuse and Exploitation, lists per-tool least-privilege profiles as its first mitigation.
-- The [NIST AI Agent Standards Initiative](https://www.nist.gov/caisi/ai-agent-standards-initiative). I read the page on 2026-10-24. It lists industry-led standards, community-led protocols and research on agent authentication and identity infrastructure. This tool implements none of it; it is a usage-side check on whatever authorization a platform grants.
+- The [NIST AI Agent Standards Initiative](https://www.nist.gov/caisi/ai-agent-standards-initiative). I read the page on 2026-10-24. It lists industry-led standards, community-led protocols and research. This tool implements none of it; it is a usage-side check on whatever authorization a platform grants.
 
 - **What the design does.** It measures how far a scope list sits from what was used, names the shared-account gap, and keeps a person in the loop for every removal.
 - **What it does not claim.** It makes no claim of conformity to either source, holds no certification, and I have read and mapped no other.
