@@ -66,7 +66,7 @@ Standard library only, Python 3.9 or newer. To check your own files: `python3 to
 
 ## Use it in CI
 
-[`action/`](./action/README.md) holds a staged GitHub Action and the steps to publish it from its own repository, which a Marketplace listing requires. It has not been published and has not run on GitHub. What is tested is the command it wraps (`tests/test_cli.py`; the whole suite has 28 tests).
+[`action/`](./action/README.md) holds a staged GitHub Action and the steps to publish it from its own repository, which a Marketplace listing requires. It has not been published and has not run on GitHub. What is tested is the command it wraps (`tests/test_cli.py`; the whole suite has 31 tests).
 
 ## How the four steps fit
 
@@ -194,7 +194,7 @@ The PM artifacts that show how I would run this product if I owned the seat. Thi
 - [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
 - [`data/`](./data/): the 10 tool schemas, the 67 synthetic pull requests with their planted truth, the 400 recorded calls and the seeded generator. `data/README.md` explains how the truth is set.
 - [`src/`](./src/): `tool_schema_drift.py`, `common.py`, the four step scripts and the demo builder.
-- [`tests/`](./tests/): 28 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+- [`tests/`](./tests/): 31 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
 - [`action/`](./action/README.md): the staged GitHub Action and the steps to publish it. Not published, not run on GitHub.
 
 Run the four steps end to end:

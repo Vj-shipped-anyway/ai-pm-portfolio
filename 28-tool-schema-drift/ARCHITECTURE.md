@@ -21,7 +21,7 @@ Eight components: five decide the outcome, three support or report.
 | `tsd-units` | Reads the (number, unit) pairs in a changed description. A different pair is a behavior_risk finding. | Python. Prototype: `description_signature`, `fmt_signature` | Yes | No |
 | `tsd-replay` | Validates each recorded call against the new schema. | Python. Prototype: `strict_validate`, `replay` | Yes | No |
 | `tsd-verdict` | Takes the highest class, forces BLOCK on a failed replay, maps the decision to an exit code. | Python. Prototype: `decide`, `DECISION_RANK`, `run_check` | Yes | No |
-| `tsd-report` | Prints text or GitHub annotations, escaped. The staged Action wraps this command. | Python. Prototype: `render`, `escape_annotation`; `action/action.yml` (staged) | No | No |
+| `tsd-report` | Prints text or GitHub annotations, escaped. The staged Action wraps this command. | Python. Prototype: `render`, `escape_annotation`, `safe`; `action/action.yml` (staged) | No | No |
 | `tsd-calllog` | Captures production calls, name and arguments, as the replay input (design). Prototype analog: `data/recorded_calls.csv`. | Log pipeline to object storage (design) | No, but it bounds what replay sees | Stateful |
 | `tsd-ledger` | Appends one record per decision (design). Prototype analog: `src/out/step_04_decisions.csv`. | PostgreSQL plus object storage with a retention lock (design) | No | Stateful |
 
@@ -109,7 +109,7 @@ Recovery is a re-run from the same schemas and calls snapshot.
 
 | Threat | Example | Mitigation in the design |
 | --- | --- | --- |
-| Hostile string in a schema field echoed into a log or annotation | A parameter name holding a newline and text that looks like a workflow command | `escape_annotation` rewrites `%`, carriage return and newline in `--format github`; `tests/test_cli.py` covers a hostile parameter name. The text format prints strings as they are (I checked: a newline in a parameter name starts a new output line), so CI runs `--format github`, as the staged Action does. Escaping the text format is not built |
+| Hostile string in a schema field echoed into a log or annotation | A parameter name holding a newline and text that looks like a workflow command | `escape_annotation` rewrites `%`, carriage return and newline in `--format github`; `safe` writes control characters and line separators as visible escapes (`\n`, `\r`, `\x1b`, `\u2028`) in the text format and in the one-line input error. `tests/test_cli.py` covers a hostile parameter name, tool name and description in both formats, and the error line |
 | The reference schema or the calls file is edited in the same pull request | The old file is changed, or rows for the changed parameter are removed | Read the old schema from the base branch; calls come from `tsd-calllog` with a hash; an empty-rows line is an alert |
 | A description carries instructions for the agent | A reworded description telling the agent to ignore a rule | Not read. The check flags a moved number or unit only; a scan is queued in the backlog |
 

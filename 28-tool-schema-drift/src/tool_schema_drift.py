@@ -291,6 +291,19 @@ def escape_annotation(text: str) -> str:
     return str(text).replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
 
 
+_CONTROL = re.compile("[\x00-\x1f\x7f\x85\u2028\u2029]")
+_NAMED = {"\n": "\\n", "\r": "\\r", "\t": "\\t"}
+
+
+def safe(text) -> str:
+    """One line of text for the log: control characters and line separators become visible escapes, so
+    schema text cannot start a new line there (a line that begins ::error:: would be read as a command)."""
+    def esc(m):
+        c = m.group()
+        return _NAMED.get(c) or ("\\x%02x" % ord(c) if ord(c) < 256 else "\\u%04x" % ord(c))
+    return _CONTROL.sub(esc, str(text))
+
+
 def render(old, new, findings, decision, broken, total_calls, fmt, calls_given=False) -> str:
     lines = []
     if fmt == "github":
@@ -303,15 +316,15 @@ def render(old, new, findings, decision, broken, total_calls, fmt, calls_given=F
                      + (f"; {len(broken)} of {total_calls} recorded calls fail on the new schema" if total_calls else "")
                      + ("; no recorded calls for this tool were found, so nothing was replayed" if calls_given and not total_calls else ""))
         return "\n".join(lines)
-    lines.append(f"tool: {new.get('name', '?')}   version {old.get('version', '?')} -> {new.get('version', '?')}")
+    lines.append(f"tool: {safe(new.get('name', '?'))}   version {safe(old.get('version', '?'))} -> {safe(new.get('version', '?'))}")
     for f in findings:
-        lines.append(f"  [{f['class']:<13}] {f['kind']:<22} {f['param'] or '(tool)':<16} {f['reason']}")
+        lines.append(f"  [{f['class']:<13}] {f['kind']:<22} {safe(f['param']) or '(tool)':<16} {safe(f['reason'])}")
     if not findings:
         lines.append("  no structural or description change")
     if total_calls:
         lines.append(f"replay: {len(broken)} of {total_calls} recorded calls fail on the new schema")
     elif calls_given:
-        lines.append(f"replay: no recorded calls for tool {new.get('name', '?')!r} in the calls file, so nothing was replayed")
+        lines.append(f"replay: no recorded calls for tool {safe(new.get('name', '?'))!r} in the calls file, so nothing was replayed")
     lines.append(f"decision: {decision}")
     return "\n".join(lines)
 
@@ -326,7 +339,7 @@ def run_check(old_path, new_path, calls_path, fail_on, fmt) -> int:
         findings = diff_schemas(old, new)
         broken = replay(new, calls) if calls else {}
     except (OSError, ValueError, KeyError, TypeError, AttributeError) as e:
-        print(f"input error: {e}", file=sys.stderr)
+        print(f"input error: {safe(e)}", file=sys.stderr)
         return 2
     decision = decide(findings)
     if broken and decision != "BLOCK":

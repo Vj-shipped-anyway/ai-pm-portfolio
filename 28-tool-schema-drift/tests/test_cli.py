@@ -90,6 +90,32 @@ class CliTests(unittest.TestCase):
         self.assertNotIn("title=forged", "\n".join(commands[:1]).split("::", 2)[1])
         self.assertIn("%0A", commands[0])
 
+    def test_hostile_text_cannot_forge_a_command_in_text_mode(self):
+        new = json.loads(json.dumps(OLD))
+        new["name"] = "t\n::error::forged-name"
+        new["parameters"]["properties"] = {
+            "b\n::error title=forged::approved\r::warning::x ::notice::y": {"type": "string", "description": "x"},
+            "a": {"type": "string", "description": "x\n::error::forged-description", "enum": ["p", "q"]}}
+        o, n = self.write("old.json", OLD), self.write("new.json", new)
+        code, out, _ = run(["check", o, n, "--fail-on", "never"])
+        self.assertEqual(code, 0)
+        for ln in out.splitlines():
+            self.assertFalse(ln.lstrip().startswith("::"), ln)
+        self.assertNotIn("\r", out)
+        self.assertNotIn(" ", out)
+        self.assertIn("\\n::error title=forged", out)        # still readable, as an escape on the same line
+        self.assertIn("tool: t\\n::error::forged-name", out)
+
+    def test_safe_escapes_control_characters_and_leaves_ordinary_text(self):
+        self.assertEqual(tsd.safe("a\nb\r\tc\x1b "), "a\\nb\\r\\tc\\x1b\\u2028")
+        plain = 'the "unit" word, `x`, 50% and a café'
+        self.assertEqual(tsd.safe(plain), plain)
+
+    def test_input_error_message_is_one_line(self):
+        _, _, err = run(["check", "no\n::error::such-file.json", "also-missing.json"])
+        self.assertEqual(len(err.strip().splitlines()), 1)
+        self.assertTrue(err.startswith("input error:"))
+
     def test_calls_file_with_no_rows_for_the_tool_says_so(self):
         o, n = self.pair(["p", "q", "r"])
         calls = os.path.join(self.dir.name, "other.csv")
