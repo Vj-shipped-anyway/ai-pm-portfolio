@@ -17,7 +17,7 @@ The tool expects the body an issue form produces: a `### label` heading, a blank
 
 1. Create a public repo named `intake-tier-action`. Check that the name `Intake Tier Action` is free on the Marketplace.
 2. Copy `action.yml` from this folder and `../src/intake_tier_action.py` into the root of that repo.
-3. Add a README with the usage below, a test workflow and a licence.
+3. Add a README with the set-up steps below, a test workflow and a licence.
 4. Draft a release, tick "Publish this Action to the GitHub Marketplace" (two-factor authentication is required), and tag `v1.0.0`.
 5. Run it once on a throwaway issue before telling anyone.
 
@@ -25,7 +25,7 @@ The tool expects the body an issue form produces: a `### label` heading, a blank
 
 1. Copy `ai-intake.yml` to `.github/ISSUE_TEMPLATE/ai-intake.yml`. Keep the field labels as they are.
 2. Create the labels once: `ai-intake`, `ai-tier:1`, `ai-tier:2`, `ai-tier:3`, `ai-tier:4`, `needs-info`, `tier-mismatch`. For example, `gh label create ai-tier:3`.
-3. Put a catalog CSV (`dataset_name,catalog_class`) and, if you have one, a registry CSV (`issue_number,vendor_model`) in the repository. Both are optional.
+3. Put a catalog CSV (`dataset_name,catalog_class`) and, if you have one, a registry CSV (`issue_number,vendor_model`) in the repository. Both are optional. The example workflow reads them from `.github/ai-intake/catalog.csv` and `.github/ai-intake/registry.csv`.
 4. Save `example-workflow.yml` as `.github/workflows/ai-intake-tier.yml`. It needs `issues: write`.
 
 ## Safety notes
