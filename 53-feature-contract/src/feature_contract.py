@@ -27,6 +27,7 @@ Not supported: patterns, formats, cross-field rules, distributions.
 """
 from __future__ import annotations
 
+import io
 import argparse
 import csv
 import json
@@ -227,13 +228,22 @@ def load_contract(path: str) -> dict:
     return c
 
 
+def _open_csv(path: str, label: str):
+    """Open a CSV as text. A NUL byte is refused here because csv.reader refused it only before Python 3.11."""
+    with open(path, newline="", encoding="utf-8-sig") as fh:
+        text = fh.read()
+    if "\x00" in text:
+        raise ValueError(f"{label}: contains a NUL byte")
+    return io.StringIO(text, newline="")
+
+
 def read_batch(path: str):
     """Return (columns, rows, typed) from a .csv or .jsonl file. Raises ValueError for anything that is not a clean table."""
     label = os.path.basename(path)
     typed = path.endswith(".jsonl")
     if path.endswith(".csv"):
         try:
-            with open(path, newline="", encoding="utf-8-sig") as fh:
+            with _open_csv(path, label) as fh:
                 table = [r for r in csv.reader(fh) if r]
         except csv.Error as e:
             raise ValueError(f"{label}: not readable as CSV ({e})")
