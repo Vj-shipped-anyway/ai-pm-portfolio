@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">runbook-dryrun: one incident runbook, walked against a state snapshot with every approval gate held, ending in one verdict</title>
+  <desc id="desc">Four-stage flow showing how a runbook, a state snapshot, approval records and a requester move through a strict parse of the runbook, a lint of the runbook alone, a state walk against a copy of the snapshot, and an approval gate bound to the exact rendered command, ending in one verdict of READY, WAITING or BLOCKED that sets the exit code of the CI job. Nothing is executed. A dashed box marks the pieces that are design only. A comparison strip contrasts a runbook followed by hand, a dry run that prints every command and runbook-dryrun on 94 synthetic drill cases.</desc>
+
+  <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+      </marker>
+      <style>
+        .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+        .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+        .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+        .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+        .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+        .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+        .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+        .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+        .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+        .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+        .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+        .arrow-head { fill: #5a5a5a; }
+        .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+        .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+        .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+        .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+        .badge-bg { fill: #E6F1FB; }
+        .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+        @media (prefers-color-scheme: dark) {
+          .stage-box { fill: #161b22; stroke: #8b9bc7; }
+          .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+          .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+          .stage-box-block { fill: #161b22; stroke: #f07878; }
+          .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+          .stage-box-design { stroke: #9ca3af; }
+          .strip-box { fill: #1c2128; stroke: #3b434d; }
+          .stage-title { fill: #e6edf3; }
+          .stage-sub { fill: #a8b3bf; }
+          .stage-num { fill: #b6c4ee; }
+          .arrow-line { stroke: #a8b3bf; }
+          .arrow-head { fill: #a8b3bf; }
+          .meta-strong { fill: #6ee7a0; }
+          .meta-block { fill: #fca5a5; }
+          .header { fill: #e6edf3; }
+          .subheader { fill: #a8b3bf; }
+          .badge-bg { fill: #1f2d44; }
+          .badge-text { fill: #cfe0f7; }
+        }
+      </style>
+    </defs>
+
+  <text x="20" y="32" class="header">runbook-dryrun - one runbook, walked with every gate held</text>
+  <text x="20" y="52" class="subheader">Lint, state and gate read a runbook, a snapshot and approval records. Nothing is executed.</text>
+
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 94 drill cases, one runbook each</text>
+
+  <rect x="20" y="100" width="205" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . PARSE</text>
+  <text x="30" y="142" class="stage-title">Read the runbook</text>
+  <text x="30" y="162" class="stage-sub">strict YAML subset</text>
+  <text x="30" y="177" class="stage-sub">unknown key: exit 2</text>
+  <text x="30" y="192" class="stage-sub">anchors and tabs refused</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+  <line x1="227" y1="166" x2="243" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="245" y="100" width="205" height="132" rx="8" class="stage-box-gate"/>
+  <text x="255" y="120" class="stage-num">2 . LINT</text>
+  <text x="255" y="142" class="stage-title">Runbook alone</text>
+  <text x="255" y="162" class="stage-sub">unfilled parameter</text>
+  <text x="255" y="177" class="stage-sub">high-risk write, no gate</text>
+  <text x="255" y="192" class="stage-sub">duplicate step id</text>
+  <text x="255" y="212" class="meta-block">alone: 17 of 53 caught</text>
+  <line x1="452" y1="166" x2="468" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="470" y="100" width="205" height="132" rx="8" class="stage-box-block"/>
+  <text x="480" y="120" class="stage-num">3 . STATE</text>
+  <text x="480" y="142" class="stage-title">Walk the snapshot</text>
+  <text x="480" y="162" class="stage-sub">precondition false: stop</text>
+  <text x="480" y="177" class="stage-sub">key missing: stop</text>
+  <text x="480" y="192" class="stage-sub">number as text: stop</text>
+  <text x="480" y="212" class="meta-block">alone: 17 of 53 caught</text>
+  <line x1="677" y1="166" x2="693" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="695" y="100" width="205" height="132" rx="8" class="stage-box-block"/>
+  <text x="705" y="120" class="stage-num">4 . GATE</text>
+  <text x="705" y="142" class="stage-title">Approval on file?</text>
+  <text x="705" y="162" class="stage-sub">different person, role</text>
+  <text x="705" y="177" class="stage-sub">digest of this command</text>
+  <text x="705" y="192" class="stage-sub">inside its time limit</text>
+  <text x="705" y="212" class="meta-block">alone: 16 of 53 caught</text>
+
+  <path d="M 797 232 L 797 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">5 . VERDICT</text>
+  <text x="262" y="313" class="stage-title">READY . WAITING . BLOCKED</text>
+  <text x="262" y="330" class="stage-sub">BLOCKED exits 1, bad input exits 2, an open gate waits</text>
+  <text x="262" y="344" class="meta-strong">46 of 53 caught, 8 of 8 held at the gate</text>
+
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">CI JOB</text>
+  <text x="32" y="313" class="stage-title">Step fails or passes</text>
+  <text x="32" y="330" class="stage-sub">fails at the chosen level</text>
+  <text x="32" y="344" class="stage-sub">annotations on request</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">reviewed runbook repo</text>
+  <text x="742" y="328" class="stage-sub">snapshot collector</text>
+  <text x="742" y="343" class="stage-sub">approval capture</text>
+
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">Followed by hand</text>
+  <text x="32" y="406" class="meta-block">53 of 94 go wrong in the run</text>
+  <text x="32" y="424" class="stage-sub">25 with no valid approval</text>
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Dry run prints commands</text>
+  <text x="332" y="406" class="meta-block">5 of 53 problems shown</text>
+  <text x="332" y="424" class="stage-sub">0 of 16 invalid approvals noticed</text>
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">runbook-dryrun</text>
+  <text x="632" y="406" class="meta-strong">46 of 53 caught, 3 of 41 blocked wrongly</text>
+  <text x="632" y="424" class="stage-sub">known miss: 7 of 53 pass</text>
+</svg>
