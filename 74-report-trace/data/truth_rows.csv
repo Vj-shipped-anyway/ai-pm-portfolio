@@ -1,0 +1,74 @@
+cell_id,loan_id,change_kind,detail
+,L000185,null_dpd,"open, booked before the as-of date, days_past_due blank"
+,L000842,null_dpd,"open, booked before the as-of date, days_past_due blank"
+,L000999,null_dpd,"open, booked before the as-of date, days_past_due blank"
+,L001588,null_dpd,"open, booked before the as-of date, days_past_due blank"
+,L002806,null_dpd,"open, booked before the as-of date, days_past_due blank"
+,L003525,null_dpd,"open, booked before the as-of date, days_past_due blank"
+,L003533,null_dpd,"open, booked before the as-of date, days_past_due blank"
+auto.d01_29,L003688,new_after_asof,"booked 2026-08-06, after the as-of date"
+auto.d01_29,L003689,new_after_asof,"booked 2026-08-03, after the as-of date"
+auto.d01_29,L003690,new_after_asof,"booked 2026-07-27, after the as-of date"
+auto.d30_59,L003691,new_after_asof,"booked 2026-08-13, after the as-of date"
+auto.d30_59,L003692,new_after_asof,"booked 2026-07-07, after the as-of date"
+auto.d30_59,L003693,new_after_asof,"booked 2026-08-03, after the as-of date"
+auto.d60_89,L000156,source_error,"recorded days_past_due 85 (d60_89), true value 171 (d90_179)"
+auto.d90_179,L001700,source_error,"recorded days_past_due 161 (d90_179), true value 475 (d180_plus)"
+card.d01_29,L000161,balance_restated,balance_cents 211828 -> 241483
+card.d60_89,L001751,offset_down,balance_cents -57165
+card.d60_89,L002554,offset_up,balance_cents +57165
+card.d90_179,L003694,late_arrival,"booked 2026-06-21, loaded after filing"
+heloc.current,L000131,balance_restated,balance_cents 187060 -> 172096
+heloc.d30_59,L002485,source_error,"recorded days_past_due 42 (d30_59), true value 64 (d60_89)"
+mortgage.current,L003695,new_after_asof,"booked 2026-08-09, after the as-of date"
+mortgage.current,L003696,new_after_asof,"booked 2026-07-13, after the as-of date"
+mortgage.current,L003697,new_after_asof,"booked 2026-07-27, after the as-of date"
+mortgage.d01_29,L001298,offset_up,balance_cents +247181
+mortgage.d01_29,L002943,offset_down,balance_cents -247181
+mortgage.d180_plus,L003704,new_after_asof,"booked 2026-07-20, after the as-of date"
+mortgage.d180_plus,L003705,new_after_asof,"booked 2026-07-24, after the as-of date"
+mortgage.d180_plus,L003706,new_after_asof,"booked 2026-08-10, after the as-of date"
+mortgage.d30_59,L003698,new_after_asof,"booked 2026-08-06, after the as-of date"
+mortgage.d30_59,L003699,new_after_asof,"booked 2026-07-31, after the as-of date"
+mortgage.d30_59,L003700,new_after_asof,"booked 2026-07-19, after the as-of date"
+mortgage.d60_89,L003701,new_after_asof,"booked 2026-07-28, after the as-of date"
+mortgage.d60_89,L003702,new_after_asof,"booked 2026-07-09, after the as-of date"
+mortgage.d60_89,L003703,new_after_asof,"booked 2026-07-23, after the as-of date"
+mortgage.d90_179,L000076,note_changed,servicer_note changed; the cell rule does not read it
+mortgage.d90_179,L003225,note_changed,servicer_note changed; the cell rule does not read it
+overdraft.d01_29,L000862,row_removed,row deleted from the source
+overdraft.d180_plus,L003712,new_after_asof,"booked 2026-07-21, after the as-of date"
+overdraft.d180_plus,L003713,new_after_asof,"booked 2026-08-02, after the as-of date"
+overdraft.d180_plus,L003714,new_after_asof,"booked 2026-07-30, after the as-of date"
+overdraft.d30_59,L002484,row_removed,row deleted from the source
+overdraft.d60_89,L003707,new_after_asof,"booked 2026-07-17, after the as-of date"
+overdraft.d60_89,L003708,new_after_asof,"booked 2026-07-16, after the as-of date"
+overdraft.d60_89,L003709,new_after_asof,"booked 2026-07-12, after the as-of date"
+overdraft.d90_179,L003710,late_arrival,"booked 2026-06-25, loaded after filing"
+overdraft.d90_179,L003711,late_arrival,"booked 2026-06-11, loaded after filing"
+personal.d01_29,L000090,offset_down,balance_cents -150561
+personal.d01_29,L002942,offset_up,balance_cents +150561
+personal.d180_plus,L003715,new_after_asof,"booked 2026-07-06, after the as-of date"
+personal.d180_plus,L003716,new_after_asof,"booked 2026-08-10, after the as-of date"
+personal.d180_plus,L003717,new_after_asof,"booked 2026-08-08, after the as-of date"
+personal.d30_59,L001307,source_error,"recorded days_past_due 51 (d30_59), true value 76 (d60_89)"
+personal.d60_89,L002099,balance_restated,balance_cents 554331 -> 515528
+personal.d90_179,L002144,note_changed,servicer_note changed; the cell rule does not read it
+personal.d90_179,L002207,note_changed,servicer_note changed; the cell rule does not read it
+small_business.d01_29,L003718,late_arrival,"booked 2026-06-27, loaded after filing"
+small_business.d180_plus,L002994,note_changed,servicer_note changed; the cell rule does not read it
+small_business.d180_plus,L003187,note_changed,servicer_note changed; the cell rule does not read it
+small_business.d30_59,L001734,note_changed,servicer_note changed; the cell rule does not read it
+small_business.d30_59,L002788,note_changed,servicer_note changed; the cell rule does not read it
+small_business.d60_89,L003173,balance_restated,balance_cents 2307820 -> 2215508
+small_business.d90_179,L003719,new_after_asof,"booked 2026-08-01, after the as-of date"
+small_business.d90_179,L003720,new_after_asof,"booked 2026-08-13, after the as-of date"
+small_business.d90_179,L003721,new_after_asof,"booked 2026-07-16, after the as-of date"
+student.current,L003722,new_after_asof,"booked 2026-07-15, after the as-of date"
+student.current,L003723,new_after_asof,"booked 2026-07-06, after the as-of date"
+student.current,L003724,new_after_asof,"booked 2026-08-06, after the as-of date"
+student.d01_29,L003725,new_after_asof,"booked 2026-07-24, after the as-of date"
+student.d01_29,L003726,new_after_asof,"booked 2026-07-27, after the as-of date"
+student.d01_29,L003727,new_after_asof,"booked 2026-08-01, after the as-of date"
+student.d30_59,L003127,balance_restated,balance_cents 452057 -> 483700
+student.d90_179,L002659,row_removed,row deleted from the source

@@ -1,0 +1,42 @@
+loan_id,product,status,booked_date,days_past_due,balance_cents,servicer_note
+L000001,card,open,2023-08-08,0,520334,
+L000002,card,open,2021-10-27,157,434546,dispute open
+L000003,card,open,2024-12-27,31,480611,
+L000004,card,open,2025-10-08,229,252688,
+L000005,auto,open,2025-12-16,328,565713,contact attempted
+L000006,card,open,2019-12-08,18,420430,skip trace
+L000007,card,open,2021-07-30,0,411776,skip trace
+L000008,card,open,2022-12-08,94,462121,promise to pay
+L000009,auto,open,2021-05-05,0,930539,dispute open
+L000010,card,open,2025-03-08,34,457478,dispute open
+L000011,card,open,2024-12-08,0,413981,promise to pay
+L000012,auto,open,2025-05-24,292,1250301,contact attempted
+L000013,auto,open,2025-07-31,7,1047777,payment arrangement
+L000014,card,closed,2022-05-04,191,316028,skip trace
+L000015,auto,closed,2021-11-10,288,448864,payment arrangement
+L000016,card,open,2024-02-11,0,173548,promise to pay
+L000017,auto,open,2021-09-09,55,707986,dispute open
+L000018,card,open,2024-08-19,47,257644,hardship plan
+L000019,auto,open,2021-06-05,0,348325,
+L000020,card,open,2019-12-05,0,399190,contact attempted
+L000021,card,closed,2024-03-07,26,591155,promise to pay
+L000022,card,open,2020-10-31,0,368544,hardship plan
+L000023,auto,open,2024-10-02,28,1152666,payment arrangement
+L000024,auto,open,2024-03-24,0,847598,skip trace
+L000025,auto,open,2024-10-13,0,1469640,contact attempted
+L000026,auto,open,2020-01-16,304,1046886,hardship plan
+L000027,card,open,2021-04-21,0,584392,contact attempted
+L000028,auto,open,2022-04-16,0,801044,payment arrangement
+L000029,auto,open,2025-12-10,,632694,payment arrangement
+L000030,auto,open,2023-08-19,37,733244,contact attempted
+L000031,auto,open,2024-04-20,199,999279,payment arrangement
+L000032,card,open,2021-12-14,262,533788,
+L000033,card,open,2020-03-24,0,616087,promise to pay
+L000034,card,open,2023-10-08,0,709085,dispute open
+L000035,auto,open,2020-01-22,52,1096999,
+L000036,auto,open,2025-02-17,0,582237,promise to pay
+L000037,card,open,2022-03-16,0,525025,skip trace
+L000038,card,open,2023-07-25,6,520039,
+L000039,card,open,2022-08-20,28,436013,skip trace
+L000040,auto,open,2025-06-13,0,1361118,hardship plan
+L000041,auto,open,2021-12-09,0,518933,hardship plan
