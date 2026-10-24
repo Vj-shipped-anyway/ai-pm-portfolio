@@ -6,6 +6,7 @@ Command line (from src/):
     python3 chargeback_packet.py check CASE_OR_CASES.json [--rules RULES.json] [--as-of YYYY-MM-DD]
 
 Exit status: 0 when every packet is READY, 1 when any packet is FIX or LATE, 2 for bad or malformed input.
+The demo always exits 0 so it can be shown in a README.
 A packet is READY (nothing the checker can see is wrong), FIX (the clock is still running and the packet
 has problems) or LATE (the response window has closed, whatever else is true). There is no model in this
 file: the checklist, the clock and the consistency checks are plain rules read from rules.json.
@@ -226,7 +227,7 @@ def main(argv=None) -> int:
     ap.add_argument("--demo", action="store_true", help="run the bundled example (data/example_case.json)")
     sub = ap.add_subparsers(dest="cmd")
     c = sub.add_parser("check", help="check one case, or a JSON list of cases")
-    c.add_argument("cases")
+    c.add_argument("cases", help="JSON file holding one case or a list of cases")
     c.add_argument("--rules", help="evidence list (default: the bundled data/rules.json)")
     c.add_argument("--as-of", dest="as_of", help="date of the check as YYYY-MM-DD (default: today); a submitted packet uses its own submitted_date")
     a = ap.parse_args(argv)

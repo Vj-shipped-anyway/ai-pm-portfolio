@@ -40,7 +40,7 @@ Standard library only, Python 3.9 or newer. To check your own file: `python3 cha
 - 🟢 Nine of the 43 defective packets pass: 6 carry a document that belongs to another case and 3 carry an unreadable scan, and every one has the right label, reference, date and page count (`step_04` prints each one). The checker never opens a file.
 - **The data and the rules share an author.** I wrote the recipe for a good packet and the rules, in separate tables so that a mistake in one shows up as a false alarm, but I wrote both. 0 of 43 ready packets flagged shows they agree with each other. It does not show that they match any real network, and the numbers are a ceiling for these rules, not a rate on real disputes.
 - 🟡 The evidence lists, the windows (14 to 30 days), the last-day-counts rule and the page limit are invented. The window is counted in calendar days. There is no weekend, holiday, time-zone or extension rule. Real lists differ by network and change over time; load the one your acquirer publishes into `data/rules.json` before relying on any output.
-- Document types are a fixed vocabulary. A misspelt type shows up as a missing item and a note that the type is on no list; the checker does not guess what was meant.
+- Document types are a fixed vocabulary. A misspelled type shows up as a missing item and a note that the type is on no list; the checker does not guess what was meant.
 - One reason code per case. No second presentment, no pre-arbitration stage, no partial evidence value: a packet with one weak document and a packet with a strong one are both READY.
 - It checks page counts, not file size or format.
 

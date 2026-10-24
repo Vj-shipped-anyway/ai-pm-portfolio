@@ -16,7 +16,7 @@ Assumptions (🟡), all in `rules.json`:
 - Response windows, counted in calendar days from the day the dispute was received, with the last day counting: RC-01 20, RC-02 30, RC-03 30, RC-04 14, RC-05 21, RC-06 30. No weekend or holiday rule.
 - Evidence items per code, which are required and which are optional, and which document types may stand in for each other.
 - The page limit for a packet: 12.
-- Which document types cannot be dated before the purchase (signed receipt, delivery tracking, digital access log, refund record), and which carry an amount that must cover the disputed amount (order record, billing history).
+- Which document types cannot be dated before the purchase (`delivery_signature`, `delivery_tracking`, `digital_access_log`, `refund_record`), and which carry an amount that must cover the disputed amount (`order_record`, `billing_history`).
 
 Planted cases (100), by truth class:
 
