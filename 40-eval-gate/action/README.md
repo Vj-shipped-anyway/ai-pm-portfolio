@@ -7,7 +7,7 @@ This folder is the staging copy of a GitHub Action. It has not been published to
 1. Create a public repo named `eval-gate-action`. Check that the name `Eval Gate` is not already taken on the Marketplace (the metadata `name` must be unique).
 2. Copy `action.yml` from this folder and `../src/eval_gate.py` into the root of that repo.
 3. Add a README with the usage below, a test workflow, and a license.
-4. Draft a release, tick "Publish this Action to the GitHub Marketplace" (two-factor authentication is required), and tag `v1.0.0`.
+4. Draft a release, tick "Publish this Action to the GitHub Marketplace" (two-factor authentication is required), and tag `v1.0.0`. Also create the moving tag `v1` on the same commit, because the usage below points at `@v1`.
 5. Run it once on a throwaway pull request before telling anyone.
 
 ## Usage
