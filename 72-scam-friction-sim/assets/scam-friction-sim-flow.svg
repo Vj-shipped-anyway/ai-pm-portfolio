@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">scam-friction-sim: 12000 payments replayed against a hold policy, ending in a table of scam value stopped and legitimate payments held</title>
+  <desc id="desc">Five-stage flow showing how a payments file, a truth file and an assumptions file move through a load and validate step, a risk score from features alone, a tier of hold, warn or pass, an assumed customer response and a measure of scam value stopped against legitimate payments held, ending in a table of policies side by side that sets the exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts no hold, a blanket hold and a scored hold on 12000 synthetic payments.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">scam-friction-sim - what a hold stops, and who waits</text>
+  <text x="20" y="52" class="subheader">The stop side rests on invented probabilities. The friction side is what a bank controls.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 12000 payments, 330 of them scams</text>
+
+  <!-- Stage 1: LOAD -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read three files</text>
+  <text x="30" y="162" class="stage-sub">payments, truth,</text>
+  <text x="30" y="177" class="stage-sub">assumptions</text>
+  <text x="30" y="192" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: SCORE -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="209" y="120" class="stage-num">2 . SCORE</text>
+  <text x="209" y="142" class="stage-title">Risk score</text>
+  <text x="209" y="162" class="stage-sub">amount, payee age,</text>
+  <text x="209" y="177" class="stage-sub">hour, call, new device</text>
+  <text x="209" y="192" class="stage-sub">weights are mine</text>
+  <text x="209" y="212" class="meta-strong">scenario never read</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: TIER -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . TIER</text>
+  <text x="388" y="142" class="stage-title">Hold, warn or pass</text>
+  <text x="388" y="162" class="stage-sub">hold at 8 or more</text>
+  <text x="388" y="177" class="stage-sub">warn at 6 and 7</text>
+  <text x="388" y="192" class="stage-sub">or a blanket rule</text>
+  <text x="388" y="212" class="meta-block">52 held, not 336</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: RESPONSE -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="567" y="120" class="stage-num">4 . RESPONSE</text>
+  <text x="567" y="142" class="stage-title">Customer response</text>
+  <text x="567" y="162" class="stage-sub">stored draw against</text>
+  <text x="567" y="177" class="stage-sub">an assumed give-up</text>
+  <text x="567" y="192" class="stage-sub">chance, coaching 0.2</text>
+  <text x="567" y="212" class="meta-block">invented inputs</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: MEASURE -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="746" y="120" class="stage-num">5 . MEASURE</text>
+  <text x="746" y="142" class="stage-title">Stopped vs held</text>
+  <text x="746" y="162" class="stage-sub">scam value stopped,</text>
+  <text x="746" y="177" class="stage-sub">legitimate held, lost,</text>
+  <text x="746" y="192" class="stage-sub">minutes waited</text>
+  <text x="746" y="212" class="meta-strong">20.1% stopped, 52 held</text>
+
+  <!-- Arrow from stage 5 down to the result -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: POLICY TABLE -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . POLICY TABLE</text>
+  <text x="262" y="313" class="stage-title">Policies side by side</text>
+  <text x="262" y="330" class="stage-sub">exit 1 if a budget flag is broken, 2 for bad input</text>
+  <text x="262" y="344" class="meta-strong">blanket 21.6% and 336 held, scored 20.1% and 52</text>
+
+  <!-- Product owner box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">PRODUCT OWNER</text>
+  <text x="32" y="313" class="stage-title">Decides on both</text>
+  <text x="32" y="330" class="stage-sub">friction budget flag</text>
+  <text x="32" y="344" class="stage-sub">stop target flag</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">controlled trial</text>
+  <text x="742" y="328" class="stage-sub">reviewed assumptions</text>
+  <text x="742" y="343" class="stage-sub">run record</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">No hold</text>
+  <text x="32" y="406" class="meta-block">0.0% of scam value stopped</text>
+  <text x="32" y="424" class="stage-sub">scams are 12.6% of value moved</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Blanket hold</text>
+  <text x="332" y="406" class="meta-block">21.6% stopped, 336 held</text>
+  <text x="332" y="424" class="stage-sub">6.6 legit holds per scam stopped</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Scored hold</text>
+  <text x="632" y="406" class="meta-strong">20.1% stopped, 52 held</text>
+  <text x="632" y="424" class="stage-sub">known miss: 60 of 60 known payees pass</text>
+</svg>
