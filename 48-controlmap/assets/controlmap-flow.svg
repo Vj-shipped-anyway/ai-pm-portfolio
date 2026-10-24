@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">controlmap: obligations, controls and a dictionary, matched by phrase, ending in one status each</title>
+  <desc id="desc">Five-stage flow showing how an obligations file, a controls file and a theme dictionary move through a load and validate step, a dictionary phrase match on active controls that skips denied phrases, a scope check that labels a match full or partial, an evidence age check against a multiple of the test cycle, and a status step, ending in one status per obligation of COVERED, STALE, PARTIAL, UNCOVERED or UNMAPPED plus review lists. A dashed box marks the pieces that are design only. A comparison strip contrasts a hand-typed register column, a keyword sheet and controlmap on 56 synthetic obligations.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">controlmap - which control meets each obligation, and is the evidence current</text>
+  <text x="20" y="52" class="subheader">Plain rules on phrases, scope and dates. When the dictionary has no row it says UNMAPPED.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="430" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 56 obligations, 55 controls, 31 dictionary phrases</text>
+
+  <!-- Stage 1: LOAD -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read three files</text>
+  <text x="30" y="162" class="stage-sub">56 obligations</text>
+  <text x="30" y="177" class="stage-sub">55 controls</text>
+  <text x="30" y="192" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">31 dictionary phrases</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: MATCH -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . MATCH</text>
+  <text x="209" y="142" class="stage-title">Dictionary phrase</text>
+  <text x="209" y="162" class="stage-sub">active controls only</text>
+  <text x="209" y="177" class="stage-sub">denied phrase skipped</text>
+  <text x="209" y="192" class="stage-sub">no row: UNMAPPED</text>
+  <text x="209" y="212" class="meta-strong">0 decoys linked</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: SCOPE -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . SCOPE</text>
+  <text x="388" y="142" class="stage-title">Full or partial</text>
+  <text x="388" y="162" class="stage-sub">every class covered:</text>
+  <text x="388" y="177" class="stage-sub">full. some: partial.</text>
+  <text x="388" y="192" class="stage-sub">none: ignored</text>
+  <text x="388" y="212" class="meta-strong">PARTIAL 8 of 13 right</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: EVIDENCE -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="567" y="120" class="stage-num">4 . EVIDENCE AGE</text>
+  <text x="567" y="142" class="stage-title">Fresh or stale</text>
+  <text x="567" y="162" class="stage-sub">newest item within</text>
+  <text x="567" y="177" class="stage-sub">1.5 test cycles</text>
+  <text x="567" y="192" class="stage-sub">else STALE</text>
+  <text x="567" y="212" class="meta-strong">STALE 12 of 16 right</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: STATUS -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="746" y="120" class="stage-num">5 . STATUS</text>
+  <text x="746" y="142" class="stage-title">One status each</text>
+  <text x="746" y="162" class="stage-sub">COVERED, STALE, PARTIAL</text>
+  <text x="746" y="177" class="stage-sub">UNCOVERED, UNMAPPED</text>
+  <text x="746" y="192" class="stage-sub">plus review lists</text>
+  <text x="746" y="212" class="meta-strong">42 of 56 right</text>
+
+  <!-- Arrow from stage 5 down to the output -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: STATUSES AND LISTS -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . OUTPUT</text>
+  <text x="262" y="313" class="stage-title">COVERED . STALE . PARTIAL . UNCOVERED . UNMAPPED</text>
+  <text x="262" y="330" class="stage-sub">plus orphan controls, dead phrases, one ask per control</text>
+  <text x="262" y="344" class="meta-strong">13 of 15 orphans listed, exit 1 at the chosen level</text>
+
+  <!-- Reviewer box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">SECOND LINE</text>
+  <text x="32" y="313" class="stage-title">Reads the lists</text>
+  <text x="32" y="330" class="stage-sub">UNMAPPED themes first</text>
+  <text x="32" y="344" class="stage-sub">then STALE requests</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">reviewed dictionary</text>
+  <text x="742" y="328" class="stage-sub">export feed</text>
+  <text x="742" y="343" class="stage-sub">crosswalk ledger</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">Typed register column</text>
+  <text x="32" y="406" class="meta-block">22 of 56 right status</text>
+  <text x="32" y="424" class="stage-sub">6 of 52 typed rows serve nothing</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Keyword sheet</text>
+  <text x="332" y="406" class="meta-block">19 of 56 right status</text>
+  <text x="332" y="424" class="stage-sub">precision 32.3%, recall 36.0%</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">controlmap</text>
+  <text x="632" y="406" class="meta-strong">42 of 56 right status</text>
+  <text x="632" y="424" class="stage-sub">known miss: 14 of 56 wrong, 10 silent</text>
+</svg>
