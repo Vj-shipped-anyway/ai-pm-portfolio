@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">spread-extraction-eval: an extractor's predictions on financial statements scored layout by layout and gated on drift, ending in PASS or FAIL with the failing layout named</title>
+  <desc id="desc">Four-stage flow showing how statements with a layout column, true values and an extractor's predictions move through a load and validate step, a field-level score by layout, a tie-out check on accounting identities that needs no truth, and a drift gate with a floor, a gap to the best layout and a minimum number of statements, ending in PASS or FAIL with the failing layout named and an exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts a pilot on one layout, one pooled number and the layout-level gate on 120 synthetic statements.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">spread-extraction-eval - one extractor, scored layout by layout</text>
+  <text x="20" y="52" class="subheader">Predictions are scored by layout, then gated. The pooled number is printed beside the worst layout.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="360" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 120 statements, 6 layouts, 5280 values</text>
+
+  <rect x="20" y="100" width="202" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read the files</text>
+  <text x="30" y="162" class="stage-sub">documents, truth,</text>
+  <text x="30" y="177" class="stage-sub">predictions</text>
+  <text x="30" y="192" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+  <line x1="224" y1="166" x2="246" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="246" y="100" width="202" height="132" rx="8" class="stage-box-eval"/>
+  <text x="256" y="120" class="stage-num">2 . SCORE</text>
+  <text x="256" y="142" class="stage-title">Accuracy by layout</text>
+  <text x="256" y="162" class="stage-sub">right within half a</text>
+  <text x="256" y="177" class="stage-sub">dollar, per field and</text>
+  <text x="256" y="192" class="stage-sub">error class</text>
+  <text x="256" y="212" class="meta-block">worst layout 68.4%</text>
+  <line x1="450" y1="166" x2="472" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="472" y="100" width="202" height="132" rx="8" class="stage-box-gate"/>
+  <text x="482" y="120" class="stage-num">3 . TIE-OUT</text>
+  <text x="482" y="142" class="stage-title">Do identities hold?</text>
+  <text x="482" y="162" class="stage-sub">ten accounting checks</text>
+  <text x="482" y="177" class="stage-sub">on the predictions</text>
+  <text x="482" y="192" class="stage-sub">alone, no truth</text>
+  <text x="482" y="212" class="meta-block">passes 15 of 100 wrong</text>
+  <line x1="676" y1="166" x2="698" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="698" y="100" width="202" height="132" rx="8" class="stage-box-block"/>
+  <text x="708" y="120" class="stage-num">4 . GATE</text>
+  <text x="708" y="142" class="stage-title">Floor and gap</text>
+  <text x="708" y="162" class="stage-sub">floor 95.0%, within</text>
+  <text x="708" y="177" class="stage-sub">3.0 points of the best</text>
+  <text x="708" y="192" class="stage-sub">10 statements to gate</text>
+  <text x="708" y="212" class="meta-strong">names note_column</text>
+
+  <!-- Arrow from stage 4 down to the decision -->
+  <path d="M 799 232 L 799 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: DECISION -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">5 . DECISION</text>
+  <text x="262" y="313" class="stage-title">PASS . FAIL</text>
+  <text x="262" y="330" class="stage-sub">FAIL exits 1, bad input exits 2, the failing layouts are named</text>
+  <text x="262" y="344" class="meta-strong">alias_aware: passes 5 development layouts, fails all 6</text>
+
+  <!-- Model change box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">MODEL CHANGE</text>
+  <text x="32" y="313" class="stage-title">Hold or release</text>
+  <text x="32" y="330" class="stage-sub">a failing layout goes</text>
+  <text x="32" y="344" class="stage-sub">to manual spreading</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">labeled-set registry</text>
+  <text x="742" y="328" class="stage-sub">extraction job hand-off</text>
+  <text x="742" y="343" class="stage-sub">gate record</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">Pilot on one layout</text>
+  <text x="32" y="406" class="meta-block">880 of 880 values right</text>
+  <text x="32" y="424" class="stage-sub">100 of 120 statements untouched</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">One pooled number</text>
+  <text x="332" y="406" class="meta-block">94.7% for alias_aware</text>
+  <text x="332" y="424" class="stage-sub">worst layout 68.4% hidden</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Gate by layout</text>
+  <text x="632" y="406" class="meta-strong">names note_column, 31.6 points down</text>
+  <text x="632" y="424" class="stage-sub">known miss: tie-out passes 15 of 100</text>
+</svg>
