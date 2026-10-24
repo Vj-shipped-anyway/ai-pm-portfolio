@@ -1,0 +1,26 @@
+dataset_name,steward_unit,catalog_class,true_class,catalog_status
+branch_hours_feed,Retail Banking,public,public,current
+product_fee_schedule,Product,public,public,current
+published_rate_sheets,Product,public,public,current
+marketing_copy_library,Marketing,public,public,current
+policy_manual_corpus,Operations,internal,internal,current
+it_service_tickets,Technology,internal,internal,current
+procedure_wiki,Operations,internal,internal,current
+staff_directory,People,confidential,internal,stale_overstated
+training_material_index,People,internal,internal,current
+complaint_case_notes,Customer Care,confidential,confidential,current
+call_transcripts,Contact Centre,confidential,confidential,current
+card_dispute_log,Disputes,internal,confidential,stale_understated
+payments_exceptions_queue,Payments,confidential,confidential,current
+loan_application_files,Lending,confidential,confidential,current
+collections_contact_history,Collections,internal,confidential,stale_understated
+merchant_onboarding_files,Merchant Services,confidential,confidential,current
+wealth_client_notes,Wealth,confidential,confidential,current
+branch_cash_forecasts,Retail Banking,restricted,confidential,stale_overstated
+audit_workpapers,Internal Audit,confidential,confidential,current
+account_master_extract,Core Banking,restricted,restricted,current
+transaction_history,Core Banking,restricted,restricted,current
+credit_bureau_pulls,Credit Risk,restricted,restricted,current
+sanctions_screening_hits,Financial Crime,restricted,restricted,current
+suspicious_activity_drafts,Financial Crime,confidential,restricted,stale_understated
+trading_book_positions,Markets,restricted,restricted,current
