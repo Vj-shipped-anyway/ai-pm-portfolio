@@ -33,14 +33,10 @@ for name in ("concentrated_upstream", "no_model_change_notice", "trains_on_bank_
     s = score(high_text | extra, truth)
     print(f"    {name:<24} catches {s['caught']} of {s['truth']}, false alarms {s['false_alarms']}")
 print("  concentration threshold sensitivity (catches, false alarms):")
-import tprm_gap_map as t
 for thr in (0.20, 0.30, 0.50):
-    t.CONCENTRATION_HIGH = thr
-    sh = t.upstream_shares(vendors)
-    h = {v["vendor_id"] for v in vendors if t.tier_ai(v, sh) == "HIGH"}
+    h = {v["vendor_id"] for v in vendors if tier_ai(v, shares, thr) == "HIGH"}
     s = score(h, truth)
     print(f"    {thr:.0%}: {s['caught']} of {s['truth']}, {s['false_alarms']}")
-t.CONCENTRATION_HIGH = 0.30
 left = [v for v in vendors if v["vendor_id"] in truth - high_ai]
 print(f"  still LOWER but had a material incident: {len(left)} of {len(truth)}")
 for v in left:

@@ -43,14 +43,16 @@ def load_vendors(path):
 
 
 def upstream_shares(vendors):
-    """{provider: share of its group's activity}. A group is the provider's first letter (P models, C clouds)."""
+    """{(service_type, provider): share of that service type's activity that sits on the provider}.
+    Grouping by service type keeps model providers and cloud providers apart whatever they are called."""
     total, by = {}, {}
     for v in vendors:
         up = v.get("upstream_provider", "")
         if up:
-            total[up[0]] = total.get(up[0], 0) + v["activity_share_pct"]
-            by[up] = by.get(up, 0) + v["activity_share_pct"]
-    return {up: by[up] / total[up[0]] for up in by}
+            key = (v["service_type"], up)
+            total[v["service_type"]] = total.get(v["service_type"], 0) + v["activity_share_pct"]
+            by[key] = by.get(key, 0) + v["activity_share_pct"]
+    return {key: by[key] / total[key[0]] for key in by}
 
 
 def passes_questionnaire(v) -> bool:
@@ -62,18 +64,18 @@ def tier_text(v) -> str:
     return "HIGH" if v["service_type"] in NAMED_ESSENTIAL or v["activity_share_pct"] >= SHARE_HIGH else "LOWER"
 
 
-def indicators(v, shares) -> dict:
+def indicators(v, shares, concentration_high=CONCENTRATION_HIGH) -> dict:
     """AI-specific candidate characteristics. Only AI-enabled services carry them."""
     if v["service_type"] != "ai_enabled_service":
         return {}
-    return {"concentrated_upstream": shares.get(v["upstream_provider"], 0) >= CONCENTRATION_HIGH,
+    return {"concentrated_upstream": shares.get((v["service_type"], v["upstream_provider"]), 0) >= concentration_high,
             "no_model_change_notice": v["model_change_notice_days"] == 0,
             "trains_on_bank_data": v["trains_on_bank_data"] == "yes",
             "long_data_retention": (v["bank_data_retained_days"] or 0) >= 365}
 
 
-def tier_ai(v, shares) -> str:
-    return "HIGH" if tier_text(v) == "HIGH" or any(indicators(v, shares).values()) else "LOWER"
+def tier_ai(v, shares, concentration_high=CONCENTRATION_HIGH) -> str:
+    return "HIGH" if tier_text(v) == "HIGH" or any(indicators(v, shares, concentration_high).values()) else "LOWER"
 
 
 def material_vendors(incidents) -> set:
@@ -106,7 +108,11 @@ def run_tier(vendors_path, incidents_path) -> int:
     high_ai = {v["vendor_id"] for v in vendors if tier_ai(v, shares) == "HIGH"}
     print(f"vendors: {len(vendors)}   AI-enabled: {sum(1 for v in vendors if v['service_type'] == 'ai_enabled_service')}")
     print(f"HIGH under the text's examples: {len(high_text)}   with AI characteristics added: {len(high_ai)}")
-    print("upstream concentration (share of the group's activity): " + ", ".join(f"{k} {s:.0%}" for k, s in sorted(shares.items())))
+    print("upstream concentration (share of the service type's activity): "
+          + ", ".join(f"{k[1]} ({k[0]}) {s:.0%}" for k, s in sorted(shares.items())))
+    unknown = [v for v in vendors if v["service_type"] == "ai_enabled_service" and not v["upstream_provider"]]
+    if unknown:
+        print(f"AI-enabled vendors with no upstream provider on file: {len(unknown)} (they cannot show as concentrated)")
     ind = {v["vendor_id"]: indicators(v, shares) for v in vendors}
     truth = material_vendors(incidents) if incidents else None
     print("candidate characteristic: vendors with it" + (", of which had a material incident" if truth is not None else ""))

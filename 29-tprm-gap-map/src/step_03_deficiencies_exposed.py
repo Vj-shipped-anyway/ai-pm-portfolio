@@ -23,9 +23,10 @@ for v in missed:
           f"notice {v['model_change_notice_days']} -> {truth_rows[v['vendor_id']]['material_causes']}")
 shares = upstream_shares(vendors)
 ai = [v for v in vendors if v["service_type"] == "ai_enabled_service"]
-top = max((k for k in shares if k.startswith("P")), key=lambda k: shares[k])
+top_key = max((k for k in shares if k[0] == "ai_enabled_service"), key=lambda k: shares[k])
+top = top_key[1]
 on_top = [v for v in ai if v["upstream_provider"] == top]
-print(f"  one upstream model provider ({top}) carries {shares[top]:.1%} of AI-enabled activity across {len(on_top)} of {len(ai)} AI-enabled vendors")
+print(f"  one upstream model provider ({top}) carries {shares[top_key]:.1%} of AI-enabled activity across {len(on_top)} of {len(ai)} AI-enabled vendors")
 on_top_ids = {v["vendor_id"] for v in on_top}
 reached = {}
 for r in incidents:

@@ -37,6 +37,19 @@ class CliAndMapTests(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertIn("Subcontractors", out)
 
+    def test_tier_reports_ai_vendors_with_no_upstream_on_file(self):
+        import tempfile
+        cols = ["vendor_id", "service_type", "activity_share_pct", "upstream_provider", "model_change_notice_days",
+                "trains_on_bank_data", "bank_data_retained_days", "soc_report", "insurance", "financial_ok", "key_personnel"]
+        with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False, encoding="utf-8", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(cols)
+            w.writerow(["V1", "ai_enabled_service", 10, "", 30, "no", 30, "yes", "yes", "yes", "yes"])
+        self.addCleanup(os.unlink, f.name)
+        code, out = run(["tier", f.name])
+        self.assertEqual(code, 0)
+        self.assertIn("no upstream provider on file: 1", out)
+
     def test_missing_file_exits_2(self):
         self.assertEqual(run(["tier", "nope.csv"])[0], 2)
         self.assertEqual(run(["terms", "nope.txt"])[0], 2)
