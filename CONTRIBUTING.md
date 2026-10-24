@@ -1,6 +1,6 @@
 # Contributing
 
-This is a personal portfolio of twenty-seven prototypes, so it is small on purpose. The most useful thing you can send is a report that something does not run, or does not match what its README says.
+This is a personal portfolio of seventy-seven prototypes, so it is small on purpose. The most useful thing you can send is a report that something does not run, or does not match what its README says.
 
 ## Reports I want
 
