@@ -145,14 +145,14 @@ def run_terms(path) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="tprm_gap_map")
-    ap.add_argument("--demo", action="store_true")
+    ap.add_argument("--demo", action="store_true", help="tier the bundled synthetic vendors against the bundled incident log")
     sub = ap.add_subparsers(dest="cmd")
-    sub.add_parser("map")
-    t = sub.add_parser("tier")
-    t.add_argument("vendors")
-    t.add_argument("--incidents")
-    x = sub.add_parser("terms")
-    x.add_argument("file")
+    sub.add_parser("map", help="print the guidance map (data/guidance_map.csv)")
+    t = sub.add_parser("tier", help="tier your vendors and, with a log, test the characteristics")
+    t.add_argument("vendors", help="vendors CSV (columns in data/README.md)")
+    t.add_argument("--incidents", help="incident log CSV (columns in data/README.md)")
+    x = sub.add_parser("terms", help="count AI wording in a text file you extracted from the guidance")
+    x.add_argument("file", help="plain-text file")
     a = ap.parse_args(argv)
     if a.demo:
         return run_tier(os.path.join(DATA, "vendors.csv"), os.path.join(DATA, "incident_log.csv"))

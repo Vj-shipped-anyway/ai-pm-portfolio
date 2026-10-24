@@ -15,7 +15,7 @@ A third-party risk or AI governance lead at a bank, and anyone drafting a commen
 Legal advice; predicting examiner behavior; scoring real vendors; any model call; submitting a comment.
 
 ## Success, as the scripts print it
-The text's examples catch 17 of 24 material-incident vendors; with four characteristics, 22 of 24; false alarms rise from 13 to 19; two vendors still pass; the method runs on a bank's own files.
+The text's examples catch 17 of 24 material-incident vendors; with four characteristics, 22 of 24; false alarms rise from 13 to 19; two material-incident vendors are still marked LOWER; the method runs on a bank's own files.
 
 ## Risks
 The incident log is simulated from my hazard rates, so the numbers show a method. The map is a reading of one proposal, and the proposal can change.

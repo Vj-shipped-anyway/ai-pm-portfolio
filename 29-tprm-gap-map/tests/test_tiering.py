@@ -41,7 +41,7 @@ class TieringTests(unittest.TestCase):
 
     def test_provider_names_do_not_have_to_start_with_p_or_c(self):
         # four AI-enabled vendors on four different providers: none is concentrated
-        names = ["OpenAI", "Gemini", "Acme", "Zeta"]
+        names = ["Atlas", "Borealis", "Meridian", "Zephyr"]
         vs = [vendor(vendor_id=f"V{i}", upstream_provider=n, activity_share_pct=25) for i, n in enumerate(names)]
         sh = t.upstream_shares(vs)
         self.assertTrue(all(abs(s - 0.25) < 1e-9 for s in sh.values()))
