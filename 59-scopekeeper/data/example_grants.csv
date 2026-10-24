@@ -1,0 +1,10 @@
+agent_id,scope,granted_on,ticket_id
+EX-01,accounts:*,2026-01-12,TKT-9000
+EX-01,customers:read_profile,2026-01-12,TKT-9001
+EX-01,notices:send_sms,2026-01-12,TKT-9002
+EX-02,ledger:read_entry,2026-01-12,TKT-9003
+EX-02,payments:initiate_payment,2026-01-12,TKT-9004
+EX-03,cases:close_case,2026-01-12,TKT-9005
+EX-03,ledger:post_entry,2026-01-12,TKT-9006
+EX-03,payments:initiate_payment,2026-01-12,TKT-9007
+EX-03,payments:release_wire,2026-01-12,TKT-9008

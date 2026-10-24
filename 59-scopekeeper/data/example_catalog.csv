@@ -1,0 +1,2 @@
+scope,reaches
+accounts:*,accounts:close_account;accounts:place_hold;accounts:read_balance;accounts:read_history;accounts:release_hold

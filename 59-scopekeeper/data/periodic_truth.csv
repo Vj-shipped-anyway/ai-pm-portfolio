@@ -1,0 +1,11 @@
+agent_id,scope,last_use_date,cycle_days,next_use_date,calls_next_quarter,why
+AG-02,ledger:read_entry,2026-07-17,120,2026-11-14,6,quarterly chargeback true-up
+AG-04,ledger:reverse_entry,2026-07-17,119,2026-11-13,3,quarter-end correction run
+AG-05,ledger:post_entry,2026-07-22,111,2026-11-10,2,quarterly fee posting
+AG-06,payments:initiate_payment,2026-07-16,123,2026-11-16,2,quarterly fee sweep
+AG-07,reports:publish_report,2026-07-17,121,2026-11-15,6,quarter-end reconciliation pack
+AG-08,accounts:read_history,2026-07-15,110,2026-11-02,7,quarter-end tie-out
+AG-08,reports:publish_report,2026-07-25,96,2026-10-29,9,quarter-end close pack
+AG-11,cases:close_case,2026-07-24,113,2026-11-14,3,quarterly stale-case sweep
+AG-12,reports:publish_report,2026-07-17,100,2026-10-25,7,quarterly regulatory extract
+AG-14,sanctions:clear_alert,2026-07-16,107,2026-10-31,3,quarterly list re-screen
