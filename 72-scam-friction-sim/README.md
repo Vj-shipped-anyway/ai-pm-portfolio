@@ -32,7 +32,7 @@ Standard library only, Python 3.9 or newer. To score your own files: `python3 sc
 - 🟢 Scale the assumed give-up probabilities by 0.5, 1 and 1.5 and the same blanket rule stops 15.5%, 21.6% and 31.3% of scam value; coaching at 0, 0.2, 0.5 and 0.8 gives 26.2%, 21.6%, 15.5% and 9.4% (`step_03`)
 - 🟢 If scams are one-tenth as common the blanket rule holds 65.9 legitimate payments per scam payment stopped, and at one-hundredth, 658.8 (`step_03`)
 - 🟢 A scored hold (hold at 8 or more, warn at 6 and 7, chosen by a 0.5% friction budget) stops 20.1% of scam value, holds 52 legitimate payments and loses 2, against 21.6%, 336 and 10 for the blanket rule; legitimate holds per scam payment stopped fall from 6.6 to 1.1 (`step_04`)
-- 🟢 Holding only, at the blanket rule's friction (289 legitimate payments held, score 6 or more), the scored rule stops 22.9% of scam value, so at equal friction the gain is small and the gain is mostly in the friction cut (`step_04`)
+- 🟢 Holding only, at the blanket rule's friction (289 legitimate payments held, score 6 or more), the scored rule stops 22.9% of scam value, so at near-equal friction (289 held against 336) the gain in value stopped is small, and the gain is mostly the cut in friction (`step_04`)
 - 🟢 The scored rule holds 51 of the 330 large legitimate first payments, against 262 (`step_04`)
 - 🟢 Under coaching at 0.5 the scored rule stops 14.2% and the blanket rule 15.5%; at 0.8, 8.3% and 9.4%. With scams one-tenth as common, the scored rule holds 10.8 legitimate payments per scam payment stopped, against 65.9 (`step_04`)
 
@@ -73,8 +73,8 @@ Vice Chair for Supervision Michelle Bowman's speech on consumer fraud, ["A Coord
 
 ## Data and limits
 
-Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, customer, payment rail or bank. A prototype on synthetic data with invented customer behaviour, not a production case study. See [`data/README.md`](./data/README.md) for every assumption and the planted scenarios.
+Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, customer, payment rail or bank. A prototype on synthetic data with invented customer behavior, not a production case study. See [`data/README.md`](./data/README.md) for every assumption and the planted scenarios.
 
 ## Fork it
 
-Replace `data/assumptions.json` with your own beliefs and rerun any step, or swap `data/payments.csv` and `data/truth.csv` for your own labelled history and keep the columns. The truth file needs an explicit `scenario` column for scams, and the stored draws can be any uniform numbers from 0 up to 1. Read the [PRD](./PRD.md) for the scope I held to.
+Replace `data/assumptions.json` with your own beliefs and rerun any step, or swap `data/payments.csv` and `data/truth.csv` for your own labeled history and keep the columns. The truth file needs an explicit `scenario` column for scams, and the stored draws can be any uniform numbers from 0 up to 1. Read the [PRD](./PRD.md) for the scope I held to.

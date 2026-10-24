@@ -32,12 +32,12 @@ td.n{text-align:right;white-space:nowrap}th.n{text-align:right}
 tr.pick td{font-weight:600}
 </style></head><body><main>
 <h1>Scam friction sim: a 20-minute hold</h1>
-<p class="s">Synthetic data, invented customer behaviour. Each row is a policy applied to the same 12,000 payments. Change the two assumptions and watch the numbers move.</p>
+<p class="s">Synthetic data, invented customer behavior. Each row is a policy applied to the same 12,000 payments. Change the two assumptions and watch the numbers move.</p>
 <label>Share of victims coached through the hold <select id="c"><option value="0.0">none</option><option value="0.2" selected>0.2 (the default assumption)</option><option value="0.5">0.5</option><option value="0.8">0.8</option></select></label>
 <label>How common scams are <select id="w"><option value="1" selected>as drawn (330 in 12,000)</option><option value="10">one-tenth as common</option></select></label>
 <div class="wrap"><table><thead><tr><th>Policy</th><th class="n">Scam value stopped</th><th class="n">Legitimate held</th><th class="n">Legitimate lost</th><th class="n">Holds per scam stopped</th></tr></thead><tbody id="b"></tbody></table></div>
 <p class="s" id="note"></p>
-<p class="s">Known limit: scams to a payee the customer has paid for weeks are never held by any row. Source: <code>python3 step_04_scored_hold.py</code>.</p>
+<p class="s">Known limit: the blanket row and the bold row never hold a scam to a payee the customer has paid for weeks. Only the lowest score thresholds do, and they also hold a large share of legitimate payments. Source: <code>python3 step_04_scored_hold.py</code>.</p>
 </main>
 <script>
 var ROWS=__ROWS__, SUM=__SUM__;

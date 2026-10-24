@@ -9,7 +9,7 @@ payment to a new payee, a night payment from a new device, a payment made while 
 scams that look like ordinary payments (a payee the customer has paid for weeks).
 
 No rate in these files is a real rate. The share of scams is set far above anything real so that the
-counts are big enough to read. The assumptions file holds the invented behaviour of customers under
+counts are big enough to read. The assumptions file holds the invented behavior of customers under
 a hold; every number in it is an assumption, named as such in the READMEs.
 
 Run (from data/):  python3 _generate.py

@@ -1,4 +1,4 @@
-"""scam_friction_sim: replay a day-sized batch of real-time payments against a hold policy and count
+"""scam_friction_sim: replay a batch of real-time payments against a hold policy and count
 what the hold stops and what it costs the customers who were not being scammed. Standard library
 only. Python 3.9 or newer.
 

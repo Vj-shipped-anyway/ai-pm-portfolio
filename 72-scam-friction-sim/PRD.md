@@ -22,4 +22,4 @@ Scam value stopped and legitimate payments held, side by side for each policy (2
 The stop side rests on invented probabilities and the model has no hold-length curve. The data and the rules share an author, so the numbers are a ceiling for these rules, not a rate on real payments. The share of scams is far above any real share, which flatters the ratio of holds to stops.
 
 ## Next
-Replace the assumptions with results from a controlled trial the owner is allowed to run; add repeat attempts and a second rail; test a score fitted on real labelled data.
+Replace the assumptions with results from a controlled trial the owner is allowed to run; add repeat attempts and a second rail; test a score fitted on real labeled data.
