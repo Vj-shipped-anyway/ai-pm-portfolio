@@ -1,0 +1,161 @@
+issue_number,archetype,dataset_name,body_kind,hostile,loose_values,crlf,edited,true_customer_facing,true_decision_autonomy,true_data_class,true_vendor_model,true_regulatory_scope,true_financial_exposure_band,form_data_class,pasted_data_class,reference_score,reference_tier
+101,Pricing recommendation tool,d_pricing_models,ok,0,0,0,0,no,automated,confidential,none,udaap,lt_1m,internal,,7,2
+102,Credit limit suggestion,d_account_ledgers,ok,1,0,0,0,yes,automated,restricted,none,fair_lending,1m_10m,restricted,,12,4
+103,Identity document extractor,d_kyc_documents,ok,0,0,0,0,no,assisted,restricted,none,aml,gt_50m,restricted,,9,3
+104,Fraud alert narrator,d_fraud_alerts,ok,1,0,0,1,no,automated,restricted,self_hosted,aml,1m_10m,restricted,,10,3
+105,Pricing recommendation tool,d_pricing_models,ok,0,0,0,1,no,automated,confidential,none,fair_lending,1m_10m,confidential,,9,3
+106,Pricing recommendation tool,d_pricing_models,ok,0,0,0,0,no,automated,confidential,self_hosted,fair_lending,lt_1m,internal,,9,3
+107,Pricing recommendation tool,d_rate_sheets,ok,1,0,0,0,no,automated,public,vendor_api,fair_lending,10m_50m,public,,10,3
+108,Identity document extractor,d_customer_pii_master,ok,0,0,0,0,no,assisted,restricted,vendor_api,aml,lt_1m,restricted,,8,3
+109,Pricing recommendation tool,d_rate_sheets,ok,0,0,0,0,no,automated,public,vendor_api,udaap,lt_1m,public,,7,2
+110,Pricing recommendation tool,d_rate_sheets,ok,0,0,0,0,no,automated,public,vendor_api,fair_lending,1m_10m,public,,9,3
+111,Branch FAQ bot,d_product_brochures,ok,0,1,0,0,yes,advisory,public,vendor_api,privacy,10m_50m,public,,7,2
+112,Contract summariser,d_vendor_contracts,ok,0,0,0,1,no,advisory,internal,self_hosted,none,lt_1m,internal,,2,1
+113,Credit limit suggestion,d_credit_bureau_pulls,ok,0,0,0,0,yes,automated,restricted,vendor_api,fair_lending,gt_50m,restricted,,16,4
+114,Meeting minutes drafter,d_meeting_minutes,truncated,0,0,0,0,no,advisory,internal,none,none,1m_10m,internal,,2,1
+115,Audit finding classifier,d_audit_findings,ok,0,0,0,1,no,advisory,confidential,self_hosted,none,1m_10m,internal,,4,2
+116,Meeting minutes drafter,d_meeting_minutes,ok,0,1,0,0,no,advisory,internal,self_hosted,none,10m_50m,internal,,4,2
+117,Training quiz generator,d_training_content,ok,1,0,0,0,no,advisory,internal,vendor_api,none,lt_1m,internal,,3,1
+118,Policy search assistant,d_policy_library,ok,0,0,1,0,no,advisory,internal,self_hosted,none,10m_50m,internal,,4,2
+119,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,self_hosted,none,1m_10m,internal,,3,1
+120,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,none,none,1m_10m,internal,,2,1
+121,Payment exception triage,d_wire_transfers,ok,0,1,1,0,no,automated,restricted,none,aml,lt_1m,restricted,,8,3
+122,Collections call coach,d_call_transcripts,ok,0,0,0,0,no,assisted,confidential,vendor_api,udaap,lt_1m,internal,,7,2
+123,Credit limit suggestion,d_account_ledgers,ok,0,0,0,0,yes,automated,restricted,self_hosted,fair_lending,1m_10m,restricted,,13,4
+124,Identity document extractor,d_kyc_documents,ok,0,0,0,0,no,automated,restricted,vendor_api,privacy,lt_1m,restricted,,9,3
+125,Identity document extractor,d_kyc_documents,ok,0,0,0,0,no,automated,restricted,vendor_api,aml,1m_10m,restricted,,11,3
+126,Training quiz generator,d_training_content,renamed_heading,0,0,0,0,no,advisory,internal,vendor_api,none,lt_1m,internal,,3,1
+127,Complaint theme summariser,d_complaint_notes,ok,0,0,0,0,no,advisory,confidential,vendor_api,udaap,1m_10m,confidential,,7,2
+128,Pricing recommendation tool,d_pricing_models,ok,0,0,0,0,no,assisted,confidential,none,udaap,lt_1m,confidential,,5,2
+129,IT ticket router,d_it_tickets,truncated,0,0,1,0,no,automated,internal,self_hosted,none,lt_1m,internal,,5,2
+130,Identity document extractor,d_kyc_documents,pasted_heading,0,0,0,0,no,assisted,restricted,self_hosted,privacy,10m_50m,confidential,public,8,3
+131,Case narrative drafter,d_sar_case_files,ok,0,0,0,0,no,assisted,restricted,self_hosted,aml,10m_50m,restricted,,9,3
+132,Case narrative drafter,d_sar_case_files,ok,0,0,0,1,no,assisted,restricted,vendor_api,aml,1m_10m,confidential,,9,3
+133,IT ticket router,d_it_tickets,ok,0,0,1,0,no,automated,internal,self_hosted,none,1m_10m,internal,,6,2
+134,Branch FAQ bot,d_branch_hours,truncated,0,0,0,1,yes,advisory,public,vendor_api,privacy,lt_1m,public,,5,2
+135,Pricing recommendation tool,d_rate_sheets,no_form,0,0,0,0,no,assisted,public,vendor_api,udaap,1m_10m,public,,6,2
+136,Policy search assistant,d_policy_library,ok,0,0,0,0,no,advisory,internal,self_hosted,none,lt_1m,internal,,2,1
+137,Meeting minutes drafter,d_meeting_minutes,ok,0,1,0,0,no,advisory,internal,self_hosted,privacy,1m_10m,internal,,4,2
+138,Contract summariser,d_vendor_contracts,ok,0,0,0,0,no,advisory,internal,vendor_api,none,gt_50m,internal,,6,2
+139,Loan file checklist reviewer,d_credit_bureau_pulls,ok,0,0,0,0,no,assisted,restricted,none,privacy,10m_50m,confidential,,7,2
+140,Policy search assistant,d_policy_library,ok,0,0,0,0,no,advisory,internal,self_hosted,none,1m_10m,internal,,3,1
+141,Fraud alert narrator,d_fraud_alerts,ok,0,0,0,0,no,assisted,restricted,vendor_api,aml,lt_1m,confidential,,8,3
+142,Audit finding classifier,d_audit_findings,ok,0,0,0,0,no,advisory,confidential,vendor_api,none,lt_1m,confidential,,4,2
+143,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,1m_10m,internal,,4,2
+144,Complaint theme summariser,d_complaint_notes,ok,0,0,0,0,no,advisory,confidential,self_hosted,none,1m_10m,confidential,,4,2
+145,Collections call coach,d_collections_notes,ok,0,0,0,0,no,assisted,confidential,self_hosted,udaap,10m_50m,confidential,,8,3
+146,Pricing recommendation tool,d_pricing_models,ok,1,1,0,0,no,assisted,confidential,vendor_api,udaap,lt_1m,confidential,,7,2
+147,Card dispute intake assistant,d_card_disputes,ok,0,0,0,0,yes,assisted,confidential,none,udaap,lt_1m,confidential,,7,2
+148,IT ticket router,d_it_tickets,ok,0,0,1,0,no,automated,internal,vendor_api,none,1m_10m,internal,,7,2
+149,IT ticket router,d_it_tickets,ok,0,0,0,0,no,automated,internal,vendor_api,none,10m_50m,internal,,8,3
+150,Identity document extractor,d_customer_pii_master,ok,0,0,0,0,no,automated,restricted,vendor_api,aml,10m_50m,restricted,,12,4
+151,Contract summariser,d_vendor_contracts,ok,0,0,0,1,no,advisory,internal,vendor_api,none,10m_50m,public,,5,2
+152,Complaint theme summariser,d_call_transcripts,ok,0,0,0,0,no,advisory,confidential,none,udaap,lt_1m,confidential,,4,2
+153,Loan file checklist reviewer,d_credit_bureau_pulls,ok,0,0,0,1,no,assisted,restricted,vendor_api,privacy,lt_1m,confidential,,7,2
+154,Training quiz generator,d_training_content,ok,0,0,1,0,no,advisory,internal,self_hosted,none,lt_1m,internal,,2,1
+155,Complaint theme summariser,d_call_transcripts,ok,0,0,0,1,no,advisory,confidential,self_hosted,privacy,lt_1m,internal,,4,2
+156,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,none,none,1m_10m,internal,,2,1
+157,Contract summariser,d_vendor_contracts,ok,0,0,0,0,no,advisory,internal,vendor_api,none,lt_1m,internal,,3,1
+158,Card dispute intake assistant,d_payment_instructions,ok,0,0,0,1,yes,assisted,restricted,vendor_api,udaap,1m_10m,restricted,,11,3
+159,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,vendor_api,none,lt_1m,internal,,3,1
+160,Audit finding classifier,d_audit_findings,ok,0,0,0,0,no,advisory,confidential,vendor_api,none,lt_1m,confidential,,4,2
+161,Loan file checklist reviewer,d_credit_bureau_pulls,pasted_heading,0,0,0,0,no,assisted,restricted,vendor_api,fair_lending,1m_10m,restricted,public,10,3
+162,Card dispute intake assistant,d_payment_instructions,ok,0,0,0,0,yes,automated,restricted,vendor_api,udaap,1m_10m,restricted,,13,4
+163,Branch FAQ bot,d_branch_hours,truncated,0,1,0,0,yes,advisory,public,vendor_api,privacy,lt_1m,public,,5,2
+164,Card dispute intake assistant,d_payment_instructions,ok,0,0,0,0,yes,automated,restricted,vendor_api,privacy,1m_10m,restricted,,12,4
+165,Collections call coach,d_call_transcripts,ok,0,0,0,0,no,assisted,confidential,none,udaap,1m_10m,confidential,,6,2
+166,Credit limit suggestion,d_account_ledgers,no_form,0,0,0,1,yes,automated,restricted,none,fair_lending,lt_1m,confidential,,11,3
+167,Card dispute intake assistant,d_payment_instructions,ok,0,0,0,1,yes,assisted,restricted,vendor_api,privacy,1m_10m,confidential,,10,3
+168,Fraud alert narrator,d_account_ledgers,ok,0,0,0,0,no,assisted,restricted,none,none,lt_1m,restricted,,4,2
+169,Complaint theme summariser,d_call_transcripts,ok,0,0,0,1,no,advisory,confidential,self_hosted,privacy,10m_50m,internal,,6,2
+170,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,1m_10m,public,,4,2
+171,Card dispute intake assistant,d_card_disputes,ok,0,0,0,0,yes,assisted,confidential,none,udaap,lt_1m,confidential,,7,2
+172,Audit finding classifier,d_audit_findings,ok,0,0,1,0,no,advisory,confidential,vendor_api,none,lt_1m,confidential,,4,2
+173,Branch FAQ bot,d_rate_sheets,pasted_heading,1,0,0,1,yes,advisory,public,vendor_api,privacy,1m_10m,public,internal,6,2
+174,Payment exception triage,d_wire_transfers,ok,0,0,0,0,no,assisted,restricted,vendor_api,aml,lt_1m,restricted,,8,3
+175,IT ticket router,d_it_tickets,ok,0,0,0,0,no,automated,internal,none,none,lt_1m,internal,,4,2
+176,Fraud alert narrator,d_account_ledgers,truncated,1,0,1,0,no,assisted,restricted,vendor_api,aml,lt_1m,restricted,,8,3
+177,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,self_hosted,privacy,1m_10m,internal,,4,2
+178,Complaint theme summariser,d_call_transcripts,ok,0,0,0,0,no,advisory,confidential,vendor_api,privacy,10m_50m,confidential,,7,2
+179,Complaint theme summariser,d_call_transcripts,ok,0,1,0,0,no,advisory,confidential,none,udaap,10m_50m,confidential,,6,2
+180,Card dispute intake assistant,d_payment_instructions,ok,0,0,1,0,yes,assisted,restricted,none,udaap,gt_50m,restricted,,11,3
+181,Statement query assistant,d_customer_pii_master,ok,0,1,1,0,yes,assisted,restricted,vendor_api,privacy,1m_10m,restricted,,10,3
+182,Audit finding classifier,d_audit_findings,ok,0,0,0,0,no,advisory,confidential,self_hosted,none,10m_50m,confidential,,5,2
+183,Fraud alert narrator,d_fraud_alerts,ok,0,0,0,0,no,automated,restricted,vendor_api,none,10m_50m,confidential,,10,3
+184,Card dispute intake assistant,d_payment_instructions,renamed_heading,0,0,0,0,yes,automated,restricted,self_hosted,udaap,1m_10m,confidential,,12,4
+185,Statement query assistant,d_customer_pii_master,renamed_heading,0,0,0,0,yes,assisted,restricted,self_hosted,privacy,lt_1m,restricted,,8,3
+186,Branch FAQ bot,d_branch_hours,ok,0,1,0,0,yes,advisory,public,vendor_api,none,lt_1m,public,,4,2
+187,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,10m_50m,internal,,5,2
+188,Pricing recommendation tool,d_pricing_models,ok,0,0,0,1,no,assisted,confidential,self_hosted,fair_lending,1m_10m,internal,,8,3
+189,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,self_hosted,privacy,1m_10m,internal,,4,2
+190,Audit finding classifier,d_audit_findings,ok,0,0,1,0,no,advisory,confidential,none,none,gt_50m,confidential,,5,2
+191,Complaint theme summariser,d_call_transcripts,ok,0,0,0,0,no,advisory,confidential,vendor_api,udaap,10m_50m,confidential,,8,3
+192,Complaint theme summariser,d_complaint_notes,ok,0,0,0,0,no,advisory,confidential,self_hosted,privacy,1m_10m,confidential,,5,2
+193,Fraud alert narrator,d_account_ledgers,ok,0,0,1,0,no,assisted,restricted,none,none,1m_10m,restricted,,5,2
+194,Branch FAQ bot,d_branch_hours,ok,0,0,0,0,yes,advisory,public,self_hosted,privacy,gt_50m,public,,7,2
+195,Loan file checklist reviewer,d_loan_files,ok,0,0,0,0,no,assisted,confidential,self_hosted,fair_lending,1m_10m,internal,,8,3
+196,Contract summariser,d_vendor_contracts,ok,0,0,0,0,no,advisory,internal,vendor_api,none,lt_1m,public,,3,1
+197,Complaint theme summariser,d_call_transcripts,ok,0,0,0,1,no,advisory,confidential,vendor_api,privacy,lt_1m,internal,,5,2
+198,Audit finding classifier,d_audit_findings,no_form,0,0,1,0,no,advisory,confidential,vendor_api,none,10m_50m,confidential,,6,2
+199,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,gt_50m,public,,6,2
+200,Fraud alert narrator,d_fraud_alerts,ok,0,0,0,0,no,automated,restricted,self_hosted,none,gt_50m,restricted,,10,3
+201,Contract summariser,d_vendor_contracts,truncated,0,0,0,0,no,advisory,internal,vendor_api,none,1m_10m,internal,,4,2
+202,IT ticket router,d_it_tickets,ok,0,0,0,0,no,automated,internal,vendor_api,none,1m_10m,internal,,7,2
+203,Contract summariser,d_vendor_contracts,ok,0,0,0,0,no,advisory,internal,vendor_api,none,1m_10m,internal,,4,2
+204,Training quiz generator,d_training_content,pasted_heading,0,0,0,0,no,advisory,internal,self_hosted,none,1m_10m,internal,public,3,1
+205,IT ticket router,d_it_tickets,ok,0,0,0,1,no,automated,internal,none,none,gt_50m,public,,7,2
+206,Audit finding classifier,d_audit_findings,ok,0,1,0,0,no,advisory,confidential,vendor_api,none,lt_1m,confidential,,4,2
+207,Loan file checklist reviewer,d_credit_bureau_pulls,ok,0,0,0,0,no,assisted,restricted,vendor_api,privacy,1m_10m,restricted,,8,3
+208,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,1m_10m,internal,,4,2
+209,Audit finding classifier,d_audit_findings,ok,0,0,0,0,no,advisory,confidential,vendor_api,none,1m_10m,confidential,,5,2
+210,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,none,none,lt_1m,internal,,1,1
+211,Case narrative drafter,d_sar_case_files,ok,0,0,0,0,no,assisted,restricted,self_hosted,aml,1m_10m,restricted,,8,3
+212,Collections call coach,d_call_transcripts,ok,0,0,0,1,no,advisory,confidential,vendor_api,udaap,lt_1m,internal,,6,2
+213,Payment exception triage,d_payment_instructions,ok,0,0,0,0,no,assisted,restricted,vendor_api,aml,lt_1m,confidential,,8,3
+214,Collections call coach,d_collections_notes,ok,0,0,0,0,no,advisory,confidential,none,udaap,1m_10m,confidential,,5,2
+215,Fraud alert narrator,d_account_ledgers,ok,1,0,0,0,no,automated,restricted,self_hosted,aml,lt_1m,confidential,,9,3
+216,Loan file checklist reviewer,d_credit_bureau_pulls,ok,0,0,0,0,no,assisted,restricted,none,fair_lending,gt_50m,restricted,,10,3
+217,Training quiz generator,d_training_content,ok,0,1,0,0,no,advisory,internal,none,none,lt_1m,internal,,1,1
+218,Policy search assistant,d_policy_library,ok,0,0,0,0,no,advisory,internal,self_hosted,none,1m_10m,internal,,3,1
+219,Fraud alert narrator,d_account_ledgers,ok,0,0,0,0,no,automated,restricted,self_hosted,none,lt_1m,restricted,,7,2
+220,Pricing recommendation tool,d_rate_sheets,ok,0,0,0,0,no,automated,public,none,udaap,10m_50m,public,,7,2
+221,Collections call coach,d_collections_notes,ok,0,0,0,0,no,advisory,confidential,self_hosted,udaap,lt_1m,confidential,,5,2
+222,Pricing recommendation tool,d_pricing_models,ok,0,0,0,0,no,assisted,confidential,vendor_api,fair_lending,lt_1m,confidential,,8,3
+223,Pricing recommendation tool,d_pricing_models,renamed_heading,0,0,0,1,no,assisted,confidential,vendor_api,udaap,gt_50m,internal,,10,3
+224,Statement query assistant,d_account_ledgers,ok,0,0,0,0,yes,assisted,restricted,vendor_api,privacy,10m_50m,restricted,,11,3
+225,Policy search assistant,d_policy_library,ok,0,0,1,0,no,advisory,internal,vendor_api,none,1m_10m,internal,,4,2
+226,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,vendor_api,privacy,1m_10m,internal,,5,2
+227,Policy search assistant,d_policy_library,ok,0,0,0,0,no,advisory,internal,vendor_api,none,10m_50m,internal,,5,2
+228,Fraud alert narrator,d_account_ledgers,ok,0,0,0,0,no,assisted,restricted,vendor_api,aml,1m_10m,restricted,,9,3
+229,Branch FAQ bot,d_branch_hours,ok,0,1,0,1,yes,advisory,public,self_hosted,none,lt_1m,public,,3,1
+230,Case narrative drafter,d_sar_case_files,ok,0,0,0,0,no,assisted,restricted,vendor_api,aml,1m_10m,restricted,,9,3
+231,Case narrative drafter,d_sar_case_files,ok,0,0,1,1,no,assisted,restricted,vendor_api,aml,lt_1m,confidential,,8,3
+232,Pricing recommendation tool,d_rate_sheets,ok,0,0,0,1,no,assisted,public,vendor_api,udaap,1m_10m,public,,6,2
+233,Payment exception triage,d_payment_instructions,ok,0,0,0,0,no,assisted,restricted,self_hosted,aml,lt_1m,restricted,,7,2
+234,Card dispute intake assistant,d_payment_instructions,ok,0,0,0,0,yes,automated,restricted,self_hosted,privacy,lt_1m,confidential,,10,3
+235,Identity document extractor,d_kyc_documents,ok,1,0,0,0,no,automated,restricted,vendor_api,aml,gt_50m,restricted,,13,4
+236,Card dispute intake assistant,d_card_disputes,ok,0,0,0,0,yes,automated,confidential,none,udaap,10m_50m,confidential,,11,3
+237,Contract summariser,d_vendor_contracts,ok,0,0,1,0,no,advisory,internal,vendor_api,none,gt_50m,internal,,6,2
+238,Case narrative drafter,d_sar_case_files,ok,0,0,0,0,no,assisted,restricted,self_hosted,aml,1m_10m,restricted,,8,3
+239,Credit limit suggestion,d_credit_bureau_pulls,ok,0,0,1,0,yes,automated,restricted,vendor_api,fair_lending,1m_10m,confidential,,14,4
+240,Collections call coach,d_call_transcripts,ok,0,0,0,0,no,advisory,confidential,none,udaap,10m_50m,confidential,,6,2
+241,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,self_hosted,privacy,lt_1m,internal,,3,1
+242,Complaint theme summariser,d_call_transcripts,ok,0,1,0,0,no,advisory,confidential,vendor_api,privacy,1m_10m,internal,,6,2
+243,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,1m_10m,internal,,4,2
+244,Contract summariser,d_vendor_contracts,ok,0,0,0,0,no,advisory,internal,self_hosted,none,1m_10m,internal,,3,1
+245,Training quiz generator,d_training_content,ok,0,0,0,0,no,advisory,internal,vendor_api,none,lt_1m,internal,,3,1
+246,Fraud alert narrator,d_account_ledgers,ok,0,1,0,0,no,automated,restricted,vendor_api,aml,lt_1m,confidential,,10,3
+247,Collections call coach,d_call_transcripts,ok,0,0,0,0,no,advisory,confidential,self_hosted,udaap,lt_1m,internal,,5,2
+248,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,self_hosted,none,lt_1m,internal,,2,1
+249,Fraud alert narrator,d_account_ledgers,renamed_heading,0,0,0,1,no,assisted,restricted,self_hosted,none,1m_10m,restricted,,6,2
+250,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,self_hosted,privacy,lt_1m,internal,,3,1
+251,Pricing recommendation tool,d_pricing_models,ok,0,0,0,0,no,automated,confidential,self_hosted,udaap,lt_1m,confidential,,8,3
+252,Branch FAQ bot,d_branch_hours,ok,0,0,0,0,yes,advisory,public,vendor_api,privacy,1m_10m,public,,6,2
+253,Training quiz generator,d_training_content,ok,0,0,1,0,no,advisory,internal,none,none,lt_1m,internal,,1,1
+254,Meeting minutes drafter,d_meeting_minutes,ok,0,0,0,0,no,advisory,internal,self_hosted,privacy,1m_10m,internal,,4,2
+255,Policy search assistant,d_policy_library,ok,0,0,0,0,no,advisory,internal,none,none,1m_10m,internal,,2,1
+256,Contract summariser,d_vendor_contracts,ok,0,0,0,1,no,advisory,internal,self_hosted,none,10m_50m,public,,4,2
+257,Statement query assistant,d_customer_pii_master,ok,0,0,1,0,yes,assisted,restricted,vendor_api,udaap,1m_10m,restricted,,11,3
+258,Collections call coach,d_collections_notes,ok,0,0,0,0,no,assisted,confidential,vendor_api,udaap,gt_50m,confidential,,10,3
+259,Audit finding classifier,d_audit_findings,ok,0,0,0,0,no,advisory,confidential,vendor_api,none,lt_1m,confidential,,4,2
+260,Loan file checklist reviewer,d_credit_bureau_pulls,ok,0,0,0,0,no,assisted,restricted,self_hosted,privacy,1m_10m,confidential,,7,2
