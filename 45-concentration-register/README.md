@@ -57,7 +57,7 @@ Standard library only, Python 3.9 or newer. To check your own files: `python3 co
 - **Same author.** I wrote the world and the rules. The two propagation routines are separate code, but they share the idea, so agreement where the register is complete is by construction. The numbers are a ceiling for these rules on data I drew, not a rate on a real bank.
 - **The failover result rests on one service.** The generator makes a warm standby fail to take over with probability 0.30; this draw produced 1 among 15 and I kept it (see [data/README.md](./data/README.md)).
 - The model is binary and static: a service is up or lost. It has no capacity check on a standby, no recovery time, no shared control plane between regions of one provider, and nothing outside the register (a shared DNS or payment network is invisible unless it is a row). Provider and region names are compared exactly, so `CP-1` and `cp-1` count as two providers.
-- A region outage is a whole region of one provider. Partial failures, a single availability zone and a provider-wide control-plane event are not modelled.
+- A region outage is a whole region of one provider. Partial failures, a single availability zone and a provider-wide control-plane event are not modeled.
 
 ## How the four steps fit
 
