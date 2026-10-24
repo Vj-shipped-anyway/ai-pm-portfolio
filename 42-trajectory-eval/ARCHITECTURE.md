@@ -131,9 +131,9 @@ The grader is one short-lived batch job over a day's recorded runs. There is no 
 
 ## 6. Alignment and posture
 
-Alignment, not certification. The README's "Aligned to" section cites two pages from NIST, restated with the same wording about what was read. I read both on 2026-10-23. [Technical Blog: Strengthening AI Agent Hijacking Evaluations](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations) (published January 17, 2025, updated December 19, 2025) scores an attack by whether the agent completed the injected task, so it grades what the agent did. [Analyzing Transcripts from AI Agent Evaluations](https://www.nist.gov/blogs/caissi-research-blog/analyzing-transcripts-ai-agent-evaluations) (February 18, 2026) says transcript review helps evaluators find measurement issues.
+Alignment, not certification. The README's "Aligned to" section cites two pages from NIST, restated with the same wording about what was read. I read both on 2026-10-23. [Technical Blog: Strengthening AI Agent Hijacking Evaluations](https://www.nist.gov/news-events/news/2025/01/technical-blog-strengthening-ai-agent-hijacking-evaluations) (published January 17, 2025, updated December 19, 2025) scores an attack by whether the agent completed the injected task, so it grades what the agent did. [Analyzing Transcripts from AI Agent Evaluations](https://www.nist.gov/blogs/caissi-research-blog/analyzing-transcripts-ai-agent-evaluations) (February 18, 2026) says AI-enabled transcript analysis tools have the potential to help evaluators detect measurement issues at scale.
 
-- **What the design does.** It reads the calls, not only the answer, and keeps a record of which rubric graded which run. That is the direction of those two pages, taken on a small scale.
+- **What the design does.** It reads the calls, not only the answer, and keeps a record of which rubric graded which run. Those two pages look at what an agent did and at its transcripts; reading the calls resembles that loosely, on a small scale.
 - **What it does not claim.** It tests no hijacking, uses none of NIST's tasks, numbers or tools, and is not endorsed by NIST. It makes no claim of conformity to that guidance, holds no certification, and I have not read or mapped any other source.
 
 ---
