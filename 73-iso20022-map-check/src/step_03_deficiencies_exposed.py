@@ -1,4 +1,4 @@
-"""Step 3 - Where each half of the check fails when used alone.
+"""Step 3 - Where each part of the check fails when used alone.
 
 Three runs on the same 230 pairs, all with the transform-aware rules (padding and number formats are
 ignored, amounts compared as numbers):

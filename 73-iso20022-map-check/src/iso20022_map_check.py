@@ -443,10 +443,10 @@ def main(argv=None) -> int:
     ap.add_argument("--demo", action="store_true", help="check the bundled mapping and three bundled message pairs")
     sub = ap.add_subparsers(dest="cmd")
     c = sub.add_parser("check", help="check a mapping, and message pairs when given")
-    c.add_argument("dir")
+    c.add_argument("dir", help="folder holding legacy_fields.csv, iso_elements.csv, mapping.csv and code_tables.json")
     c.add_argument("--pairs", help="JSON file of source and target message pairs")
     p = sub.add_parser("probe", help="print legacy messages with every field at its limit")
-    p.add_argument("dir")
+    p.add_argument("dir", help="folder holding the four mapping files, as for check")
     a = ap.parse_args(argv)
     try:
         if a.demo:
