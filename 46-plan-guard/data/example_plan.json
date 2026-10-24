@@ -1,0 +1,189 @@
+{
+ "format_version": "1.2",
+ "resource_changes": [
+  {
+   "address": "aws_vpc.main",
+   "change": {
+    "actions": [
+     "create"
+    ],
+    "after": {
+     "cidr_block": "10.0.0.0/16"
+    },
+    "after_unknown": {
+     "id": true
+    },
+    "before": null
+   },
+   "mode": "managed",
+   "name": "main",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_vpc"
+  },
+  {
+   "address": "aws_security_group.bastion",
+   "change": {
+    "actions": [
+     "create"
+    ],
+    "after": {
+     "egress": [],
+     "ingress": [
+      {
+       "cidr_blocks": [
+        "0.0.0.0/0"
+       ],
+       "description": "",
+       "from_port": 22,
+       "ipv6_cidr_blocks": [],
+       "prefix_list_ids": [],
+       "protocol": "tcp",
+       "security_groups": [],
+       "self": false,
+       "to_port": 22
+      }
+     ],
+     "name": "sg-179",
+     "tags": {},
+     "vpc_id": "vpc-0a1b2c3d4e5f60718"
+    },
+    "after_unknown": {
+     "id": true
+    },
+    "before": null
+   },
+   "mode": "managed",
+   "name": "bastion",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_security_group"
+  },
+  {
+   "address": "aws_s3_bucket.exports",
+   "change": {
+    "actions": [
+     "create"
+    ],
+    "after": {
+     "acl": "public-read",
+     "bucket": "exports-4821",
+     "force_destroy": false,
+     "tags": {
+      "owner": "ops"
+     }
+    },
+    "after_unknown": {
+     "id": true
+    },
+    "before": null
+   },
+   "mode": "managed",
+   "name": "exports",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_s3_bucket"
+  },
+  {
+   "address": "aws_ebs_volume.ledger_data",
+   "change": {
+    "actions": [
+     "create"
+    ],
+    "after": {
+     "availability_zone": "us-east-1a",
+     "encrypted": true,
+     "size": 100,
+     "type": "gp3"
+    },
+    "after_unknown": {
+     "id": true
+    },
+    "before": null
+   },
+   "mode": "managed",
+   "name": "ledger_data",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_ebs_volume"
+  },
+  {
+   "address": "aws_lb_listener.web",
+   "change": {
+    "actions": [
+     "create"
+    ],
+    "after": {
+     "default_action": [
+      {
+       "redirect": [],
+       "target_group_arn": "arn:aws:elasticloadbalancing:us-east-1:111122223333:targetgroup/web/0123456789abcdef",
+       "type": "forward"
+      }
+     ],
+     "port": 80,
+     "protocol": "HTTP"
+    },
+    "after_unknown": {
+     "arn": true,
+     "default_action": [
+      {
+       "target_group_arn": true
+      }
+     ],
+     "id": true,
+     "load_balancer_arn": true
+    },
+    "before": null
+   },
+   "mode": "managed",
+   "name": "web",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_lb_listener"
+  },
+  {
+   "address": "aws_db_instance.reports",
+   "change": {
+    "actions": [
+     "create"
+    ],
+    "after": {
+     "allocated_storage": 100,
+     "engine": "postgres",
+     "identifier": "kyc-db-76",
+     "instance_class": "db.t3.medium",
+     "publicly_accessible": false,
+     "skip_final_snapshot": false
+    },
+    "after_unknown": {
+     "id": true,
+     "storage_encrypted": true
+    },
+    "before": null
+   },
+   "mode": "managed",
+   "name": "reports",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_db_instance"
+  },
+  {
+   "address": "aws_s3_bucket.old_public",
+   "change": {
+    "actions": [
+     "delete"
+    ],
+    "after": null,
+    "after_unknown": {},
+    "before": {
+     "acl": "public-read",
+     "bucket": "old-public-1207",
+     "force_destroy": false,
+     "tags": {
+      "owner": "ops"
+     }
+    }
+   },
+   "mode": "managed",
+   "name": "old_public",
+   "provider_name": "registry.terraform.io/hashicorp/aws",
+   "type": "aws_s3_bucket"
+  }
+ ],
+ "terraform_version": "1.x-synthetic"
+}

@@ -1,0 +1,25 @@
+name: 'Plan Guard'
+description: 'Check a Terraform plan in JSON form against ten policy rules and fail the step when a rule is broken by a resource the plan creates or updates.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'shield'
+  color: 'gray-dark'
+inputs:
+  plan:
+    description: 'Path to the plan in JSON form (the output of terraform show -json).'
+    required: true
+  fail-on:
+    description: 'block, review or never. The step fails at or above this decision.'
+    required: false
+    default: 'block'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check the plan
+      shell: bash
+      env:
+        PLAN: ${{ inputs.plan }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/plan_guard.py
+      run: |
+        python3 "$SCRIPT" check --fail-on "$FAIL_ON" --format github -- "$PLAN"
