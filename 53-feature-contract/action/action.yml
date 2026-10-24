@@ -1,0 +1,29 @@
+name: 'Feature Contract Gate'
+description: 'Fail a pull request or a pipeline step when a delivery of model-input data breaks its contract: a missing column, text where a number belongs, a range or null rate outside what the contract allows.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'check-circle'
+  color: 'gray-dark'
+inputs:
+  contract:
+    description: 'Path to the contract file (JSON).'
+    required: true
+  batch:
+    description: 'Path to the batch of data to check (.csv or .jsonl).'
+    required: true
+  fail-on:
+    description: 'fail, warn or never. The step fails at or above this decision.'
+    required: false
+    default: 'fail'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check the batch against the contract
+      shell: bash
+      env:
+        CONTRACT: ${{ inputs.contract }}
+        BATCH: ${{ inputs.batch }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/feature_contract.py
+      run: |
+        python3 "$SCRIPT" check --fail-on "$FAIL_ON" --format github -- "$CONTRACT" "$BATCH"

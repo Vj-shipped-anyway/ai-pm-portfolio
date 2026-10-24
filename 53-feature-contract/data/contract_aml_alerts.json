@@ -1,0 +1,57 @@
+{
+ "contract": "aml_alert_features",
+ "version": "1.0.0",
+ "unexpected_columns": "warn",
+ "max_bad_rate": 0.02,
+ "fields": [
+  {
+   "name": "alert_id",
+   "type": "string"
+  },
+  {
+   "name": "txn_total_30d_usd",
+   "type": "number",
+   "min": 0,
+   "max": 10000000,
+   "unit": "US dollars"
+  },
+  {
+   "name": "cash_ratio",
+   "type": "number",
+   "min": 0,
+   "max": 1,
+   "unit": "share of volume that is cash"
+  },
+  {
+   "name": "counterparty_count_30d",
+   "type": "integer",
+   "min": 0,
+   "max": 2000,
+   "unit": "counterparties"
+  },
+  {
+   "name": "customer_segment",
+   "type": "string",
+   "allowed": [
+    "retail",
+    "small_business",
+    "private"
+   ]
+  },
+  {
+   "name": "days_since_kyc_review",
+   "type": "integer",
+   "min": 0,
+   "max": 3650,
+   "unit": "days"
+  },
+  {
+   "name": "high_risk_geo_share",
+   "type": "number",
+   "min": 0,
+   "max": 1,
+   "unit": "share of volume",
+   "max_null_rate": 0.05
+  }
+ ]
+}
