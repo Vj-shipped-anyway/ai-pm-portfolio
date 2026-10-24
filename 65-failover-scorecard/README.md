@@ -212,7 +212,7 @@ python3 step_04_with_scorecard.py
 
 ## Aligned to
 
-The Basel Committee's [Principles for operational resilience](https://www.bis.org/bcbs/publ/d516.htm), published 31 March 2021 (page read 2026-10-24). That page says the principles aim to improve banks' ability to withstand events such as technology failures and cyber incidents. My fetch tool returned only that page and not the 12-page text, so I do not quote or cite any individual principle, and I did not read any Financial Stability Board text, so I cite none. No window, target or tier in this project comes from a published text; each is marked as my assumption in [`data/README.md`](./data/README.md). This is a prototype, aligned to the general aim of showing that recovery works. It makes no claim of conformity to that guidance.
+The Basel Committee's [Principles for operational resilience](https://www.bis.org/bcbs/publ/d516.htm), published 31 March 2021 (page read 2026-10-24). That page says the principles aim to improve banks' ability to withstand events such as technology failures and cyber incidents. My fetch tool returned only that page and not the 12-page text, so I do not quote or cite any individual principle, and I did not read any Financial Stability Board text, so I cite none. No window, target or tier in this project comes from a published text; each is marked as my assumption in [`data/README.md`](./data/README.md). This is a prototype, aligned to that general aim of withstanding operational disruption; its own contribution is a status that rests on a live recovery drill. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 

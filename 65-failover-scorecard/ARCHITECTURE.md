@@ -138,7 +138,7 @@ The scorecard is one short-lived process on a schedule, and again on a change to
 
 Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the Basel Committee's [Principles for operational resilience](https://www.bis.org/bcbs/publ/d516.htm), published 31 March 2021 (page read 2026-10-24). That page says the principles aim to improve banks' ability to withstand events such as technology failures and cyber incidents. My fetch tool returned only that page and not the 12-page text, so I cite no individual principle, and I read no Financial Stability Board text.
 
-- **What the design does.** It aims at the general purpose of showing that recovery works: a status per service that rests on a live drill, on today's region and config, inside a window, with records kept so a status can be reproduced.
+- **What the design does.** It points the same way as the page's general aim of withstanding operational disruption: a status per service that rests on a live drill, on today's region and config, inside a window, with records kept so a status can be reproduced.
 - **What it does not claim.** No window, target or tier comes from a published text; each is my assumption, marked in `data/README.md`. It makes no claim of conformity to the Basel text or any other standard, holds no certification, and I have not read or mapped any other source.
 
 ---
