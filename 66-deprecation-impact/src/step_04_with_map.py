@@ -52,7 +52,7 @@ fs_false = family - aff
 cleared_right = {k for k in fs_false if k not in migrate and k not in check_keys}
 print(f"  rows family search flags that are not affected and this tool leaves alone: {len(cleared_right)} of {len(fs_false)}")
 print(f"  features a person opens: {len(reads)} (family search: {len({k[0] for k in family})})")
-print(f"  dependencies of a feature that sunsets before its model retires, recognised: {len(sunsets)} of {len(sunset_truth)}")
+print(f"  dependencies of a feature that sunsets before its model retires, recognized: {len(sunsets)} of {len(sunset_truth)}")
 print("  tiers: " + ", ".join(f"{t} {tiers[t]}" for t in ("PAST", "LATE", "TIGHT", "ROOM", "SUNSETS")))
 print(f"  retirement calendar: {len(res['calendar'])} notices, {sum(1 for c in res['calendar'] if c['features'] == 0)} with no registered feature")
 print(f"  cost per month on the named successors: ${res['cost_now']:,.2f} -> ${res['cost_after']:,.2f}, {res['unpriced']} dependencies have no priced successor")

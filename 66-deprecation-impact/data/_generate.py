@@ -1,4 +1,4 @@
-"""Generate the synthetic data for project 66: a catalogue of model snapshots with retirement
+"""Generate the synthetic data for project 66: a catalog of model snapshots with retirement
 notices, 60 features that call them, the registry rows that say which model each feature uses, and
 the truth about what each feature really depends on.
 

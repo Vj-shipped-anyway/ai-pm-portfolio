@@ -7,7 +7,7 @@ A vendor announces that a model version retires on a date. The notice names a mo
 The person who runs the AI platform or the feature register, and the owners who get a ticket when a notice lands.
 
 ## What it does
-1. Reads a model catalogue with notice and retirement dates, an alias table, a feature register and the model each feature names in each role.
+1. Reads a model catalog with notice and retirement dates, an alias table, a feature register and the model each feature names in each role.
 2. Resolves every model string: exact id, alias (with the date it was recorded), family name, or the base model of a fine-tune. A string it cannot resolve goes to a check queue, never to clear.
 3. Prints a retirement calendar, a hit list with days left, the lead time the feature needs and a tier, and the monthly cost on the named successor.
 4. Exits 1 when the worst tier reaches a chosen level, so a scheduled job can fail; exits 2 on input it cannot read.

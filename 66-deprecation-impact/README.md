@@ -1,6 +1,6 @@
 # 📅 Deprecation Impact: which of your features a model retirement hits
 
-**A vendor writes that a model version retires on a date. I wanted to know which of my features call it, how long each one has to move, and what the move costs. This is a command-line tool: it reads a model catalogue, an alias table and a feature register, and prints a retirement calendar, a hit list with a tier per dependency, and a check queue for the strings it cannot resolve.** It takes the idea of a notice date and a successor from [13 SwapBrief](../13-swapbrief-model-migration/) and the shape of a feature register and a price table from [07 InferenceLens](../07-inferencelens-inference-finops/). I read their data files for the logic and wrote my own code and data; nothing is imported and no number is carried over.
+**A vendor writes that a model version retires on a date. I wanted to know which of my features call it, how long each one has to move, and what the move costs. This is a command-line tool: it reads a model catalog, an alias table and a feature register, and prints a retirement calendar, a hit list with a tier per dependency, and a check queue for the strings it cannot resolve.** It takes the idea of a notice date and a successor from [13 SwapBrief](../13-swapbrief-model-migration/) and the shape of a feature register and a price table from [07 InferenceLens](../07-inferencelens-inference-finops/). I read their data files for the logic and wrote my own code and data; nothing is imported and no number is carried over.
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
@@ -52,7 +52,7 @@ Tags: 🟢 measured by a script in this folder, 🟡 modeled with the assumption
 
 - 🟢 7 of the 42 affected dependencies pass with no flag, and `step_04` prints each one. Four are fallback models that no registry row records. Three are features whose alias entry (`va-large-default`) was recorded 12 days before the as-of date and does not match what the vendor serves. The tool trusts a recent alias table. The family-name search finds those three, because it matches the text and not the table.
 - 🟢 The check queue is noisy by design: 6 of 13 entries did not need a look. I take that over calling an unknown string clear.
-- **The data and the rules share an author.** I planted the dependencies and wrote the resolver, so 29 of 42 shows the rules cover what I planted. I added the hard cases after the first version: neighbouring family names, an alias that already points at a live snapshot, a fine-tune on a live base, features that sunset first, and the two misses above. Treat the result as a ceiling for these rules, not a rate on a real register, which I have not tested.
+- **The data and the rules share an author.** I planted the dependencies and wrote the resolver, so 29 of 42 shows the rules cover what I planted. I added the hard cases after the first version: neighboring family names, an alias that already points at a live snapshot, a fine-tune on a live base, features that sunset first, and the two misses above. Treat the result as a ceiling for these rules, not a rate on a real register, which I have not tested.
 - **The tool reads the registry.** A model chosen at run time from a list kept elsewhere is invisible unless the usage file says what it chooses from. Only three roles exist: primary, fallback and judge. Embedding models, and the cost of re-indexing after a swap, are not modeled.
 - **Tiers depend on lead times I assumed.** A real team's lead time depends on its change process, and a vendor can move a retirement date; the tool reads the date in the file.
 - **The cost view is a first pass.** It holds output tokens fixed. A successor that writes longer answers costs more than the view says. Fine-tunes have no priced successor because they must be retrained.
@@ -74,7 +74,7 @@ Nothing published. I claim no alignment with a standard, regulation or vendor po
 
 ## Data and limits
 
-Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, customer, bank or real model catalogue. A prototype on synthetic data.
+Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, customer, bank or real model catalog. A prototype on synthetic data.
 
 ## Fork it
 
