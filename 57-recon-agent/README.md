@@ -4,6 +4,31 @@
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
+[![The demo, first screen](./assets/demo-first-screen.png)](./demo.html)
+
+## Executive summary (90 seconds)
+
+**Problem.** The operations analyst who closes the month holds two ledgers for the same cash, the bank's and the company's, and the totals do not agree. 🟢 In the synthetic month that is 383 bank lines and 438 book lines, 821 to read side by side, and the USD totals differ by 139980.34 (`step_01_two_ledgers_unmatched.py`). The total does not say which lines are out. The usual first build is a lookup on amount and date. 🟢 It posts 316 matches, 291 right and 25 wrong, and records a reason beyond amount and date for 0 of 316 (`step_02_amount_and_date_lookup.py`). The ledgers look closer to agreeing, and nobody can tell which 25 are the wrong ones.
+
+**Product.** recon-agent is a command that matches a bank statement to a cash book with five rules in a fixed order: `ref_exact`, `ref_fee`, `batch_sum`, `ref_near` and `name_amount`. Every match prints the rule, the lines and the facts it rests on: reference, amount, date gap and counterparty. A check re-runs the rule on exactly those lines before anything posts. A gate then decides who may post it: only `ref_exact`, at or below 10000.00 and with the names agreeing, posts on its own. Every other match waits for a recorded approval from someone other than the agent, bound to that exact proposal. When two book lines fit equally well, the bank line is parked, not guessed. Every line that is not posted is listed with a reason. There is no model call; the proposer is a rule ladder you can read.
+
+**Measured and modeled performance.**
+
+- 🟢 **A lookup on amount and date posts 316 matches, 25 of them wrong,** and records a checkable reason for 0 of 316. Its wrong matches are currency_clash 5, lookalike_conflict 10, near_ref_distinct 6 and twin_payments 4 (`step_02_amount_and_date_lookup.py`, `step_03_deficiencies_exposed.py`).
+- 🟢 **The five-rule ladder alone, with every proposal posted at once, posts 319 matches, 6 wrong,** and 101 of them are matches the policy says a person must see (`step_03_deficiencies_exposed.py`).
+- 🟢 **With the check and the gate, 218 matches post on their own and 0 are wrong;** 101 wait for a person, 93 post on approval and 8 are rejected (`step_04_with_gate.py`).
+- 🟢 **The gate and the check refuse tampering.** Posted where the policy needs an approval and none is on record: 0. Self-approval by the agent is refused 101 of 101 times. A hand-edited finished list is caught: one book line swapped for another 299 of 299, an approved match relabelled as posted on its own 93 of 93, a match copied under a second id 311 of 311 (`step_04_with_gate.py`).
+- 🟢 **A person looks at 385 of 821 lines instead of 821,** and the 169 open lines each carry a reason (`step_04_with_gate.py`).
+- 🟢 **Known miss, two parts.** 18 true matches never get a proposal and sit in the open list. The scripted approver approved all 21 `ref_near` proposals, and 6 of them are distinct invoices one edit away from a real one, so 6 wrong matches posted with a name on them (`step_04_with_gate.py`).
+- 🟡 **Utility: (25 − 6) × 12 = 228 wrong matches a year not posted** compared with the amount-and-date lookup, assuming 12 month-end closes of this size a year.
+- 🔴 **Design target: a month-end run within 10 minutes of both exports landing, with an approval queue that shows the cited lines.** Designed in [`ARCHITECTURE.md`](./ARCHITECTURE.md), never built or timed.
+
+**What I would ask a head of operations to decide.** Whether a match whose references are one edit apart may post on a single approval. I set it to approval-only as my policy, not as a measurement, and my stand-in approver let 6 look-alike invoices through. My recommendation is to adopt the ladder, the check and the gate as written, pilot them on one real month with a named reviewer who must open the invoice for every `ref_near` match, and count the approvals that turn out wrong before any rule other than `ref_exact` is allowed to post on its own.
+
+**Call to action.** Fork the repo. Swap `data/ledger_a.csv` and `data/ledger_b.csv` for your own exports and keep the columns (bank: `a_id, value_date, amount, currency, counterparty, narrative, customer_ref`; book: `b_id, posting_date, amount, currency, counterparty, reference, batch_id, memo`). Set the window, the fee schedule and the approval limit in `Params` in `src/recon_agent.py`. To call it from code, import `reconcile` and `verify_matches`. Send findings by opening an issue: say which rule fired and how many lines, not the data itself.
+
+_A portfolio prototype on synthetic data. Nothing here is deployed, load-tested or used by anyone, and the approver is a script I wrote, not a person._
+
 ## Run one now
 
 ```bash
@@ -90,6 +115,138 @@ Run any of them from `src/`. Step 4 writes `src/out/` (git-ignored), and `python
 
 The five rules, in order: `ref_exact` (same reference, amount, currency, within the window; posts on its own at or below the limit when the names agree), `ref_fee` (reference equal, amount short by a scheduled fee), `batch_sum` (the bank reference is the explicit batch id on 2 to 6 book lines that add up), `ref_near` (references one edit apart), `name_amount` (no reference on one side; same name and amount). Every rule except the first waits for a person. When two book lines fit equally well and are not identical, the bank line is parked for a person instead of guessed. Each proposal prints a key such as `ref_fee:BK-000002:GL-000002:499850`; an approval binds to exactly that key.
 
+## Utility delivered
+
+The way I price product impact: **utility = (my solution − current state of the art) × the number of people or items it affects.**
+
+Here the item is a wrong match posted to the cash ledger in a month. Each one lands on the analyst who closes the month, the reviewer who approved it and whoever finds the difference later. The common basic approach is a lookup on amount and date; the table prices recon-agent against it.
+
+| Term | Value | Where it comes from |
+| --- | --- | --- |
+| Current state of the art (lookup on amount and date), wrong matches posted | 🟢 **25 wrong**, among 316 posted | `step_02_amount_and_date_lookup.py`; it records a reason beyond amount and date for 0 of 316 |
+| My solution (ladder, check and gate), wrong matches posted | 🟢 **6 wrong**: 0 on their own among 218, 6 among 93 posted on approval | `step_04_with_gate.py`; the 6 are near_ref_distinct, approved by the scripted approver |
+| Lift per month | 🟢 25 wrong minus 6 wrong | The lookup's 25 are currency_clash 5, lookalike_conflict 10, near_ref_distinct 6 and twin_payments 4 (`step_03_deficiencies_exposed.py`). The ladder removes all but the 6 near_ref_distinct |
+| Number it affects: month-end closes of this size in a year | 🟡 **12** | **Assumption, not a statistic.** Replace it with your own count of reconciliations a year at roughly this volume |
+| Assumption that makes the lift real | 🟡 The rules cover the cases a real month holds, and a real reviewer opens the invoice for a `ref_near` match | With this stand-in approver the gate does not lower the count of wrong matches below the ladder alone: 🟢 6 either way (`step_03_deficiencies_exposed.py`, `step_04_with_gate.py`). What the gate adds is a name on each approval and 0 posted without one |
+| **Utility** | 🟡 **(25 − 6) × 12 = 228 wrong matches a year not posted** compared with the lookup | Assumes the 12 months behave like the planted one |
+
+Sensitivity to the count assumption (🟡, same lift): 6 closes a year gives 114, 12 gives 228, 24 gives 456.
+
+🔴 What I have not measured: what a wrong match costs in rework or a misstated cash position, how long an approval takes, how many of the 101 held matches a real reviewer would reject or approve wrongly, or how the tool behaves on thousands of lines. The planted month is built to include hard cases on purpose; a real month has fewer. Treat the result as a property of this mix of cases, not a forecast.
+
+---
+
+## Architecture and call flow
+
+Component names match [`ARCHITECTURE.md`](./ARCHITECTURE.md). GitHub renders the diagrams natively.
+
+![recon-agent flow](./assets/recon-agent-flow.svg)
+
+**System topology:**
+
+```mermaid
+flowchart LR
+    subgraph SRC["Inputs - existing"]
+        BANK["Bank statement CSV"]
+        BOOK["Cash book CSV"]
+        APPR["Approvals CSV recorded by a person"]
+    end
+
+    subgraph RC["recon-agent - the prototype"]
+        INGEST["rc-ingest load and validate"]
+        PROPOSE["rc-propose five rules in order"]
+        CHECK["rc-check re-run the rule on the cited lines"]
+        GATE["rc-gate auto or approval"]
+        REPORT["rc-report open list with reasons, text and CSV"]
+        VERIFY["rc-check verify mode on a finished list"]
+    end
+
+    subgraph OUT["Outputs"]
+        MATCHES["matches.csv with evidence and approver"]
+        UNMATCHED["unmatched.csv with a reason per line"]
+        EXITCODE["Exit code 0 or 1 or 2"]
+    end
+
+    subgraph DES["Design only"]
+        QUEUE["rc-queue approver queue"]
+        LEDGER["rc-ledger decision record"]
+        TELE["Telemetry from rc-report"]
+        POSTING["Posting to the general ledger"]
+    end
+
+    BANK --> INGEST
+    BOOK --> INGEST
+    APPR --> INGEST
+    INGEST --> PROPOSE
+    PROPOSE --> CHECK
+    CHECK --> GATE
+    GATE --> REPORT
+    REPORT --> MATCHES
+    REPORT --> UNMATCHED
+    REPORT --> EXITCODE
+    MATCHES --> VERIFY
+    VERIFY --> EXITCODE
+    QUEUE -.-> APPR
+    GATE -.-> LEDGER
+    REPORT -.-> TELE
+    MATCHES -.-> POSTING
+```
+
+**Per-run sequence** (the `--demo` run, a worked month of 11 bank lines and 15 book lines):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant AN as Analyst
+    participant RA as recon_agent
+    participant LG as Ledger and approval files
+    participant RV as Reviewer
+
+    AN->>RA: reconcile the bank file and the book file with the approvals file
+    RA->>LG: read 11 bank lines and 15 book lines
+    LG-->>RA: rows loaded and validated
+    RA->>RA: M-0001 ref_exact INV-10453, 1250.00, names agree, posts on its own
+    RA->>RA: M-0002 ref_fee, 4998.50 plus fee 1.50 equals 5000.00, needs a person
+    RV-->>LG: approve M-0002 and M-0003 as reviewer-1, reject M-0005 as reviewer-2
+    LG-->>RA: five approval records
+    RA->>RA: M-0002 posted_approved, M-0005 rejected, both lines stay open
+    RA->>RA: M-0007 is 15000.00, above 10000.00, and the agent approving it is refused
+    RA-->>AN: posted 5, waiting 2, rejected 1, approvals refused 2, open items 14
+    Note over RA,RV: Values are the --demo output. The approval queue and the reviewer path are a design
+```
+
+**Interlocks (all red, designed, none built):**
+
+- [27 AgentKit](../27-agentkit-reference-agent-and-playbook/) is where the pattern came from: a person-held gate, a scripted stand-in for the person, and no approval from the agent itself. I wrote the matching rules here and copied no code from that folder.
+- [08 OversightOps](../08-oversightops-hitl-workflow/) is the possible home for the approver queue (`rc-queue`), including how many matches one reviewer can read in a day.
+- [09 LineageLog](../09-lineagelog-ai-decision-audit/) is a possible home for the decision record (`rc-ledger`).
+- [05 AgentWatch](../05-agentwatch-agent-observability/) would watch the run after release. recon-agent produces counts and rejections and does no monitoring of its own.
+
+---
+
+## PM artifacts
+
+The PM artifacts that show how I would run this product if I owned the seat. This README is the walkthrough; the rest of the folder holds:
+
+- [`PRD.md`](./PRD.md): the product requirements doc, with users, backlog, KPIs, rollout and open questions.
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md): the systems doc, with components, data model, security, failure behavior and operations. A design, not deployed.
+- [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
+- [`data/`](./data/): the synthetic bank statement and cash book, the answer key, the worked month behind `--demo` and the seeded generator. `data/README.md` explains how the key is made.
+- [`src/`](./src/): `recon_agent.py`, `common.py`, the four step scripts and the demo builder.
+- [`tests/`](./tests/): 91 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+
+Run the four steps end to end:
+
+```bash
+cd src
+python3 step_01_two_ledgers_unmatched.py
+python3 step_02_amount_and_date_lookup.py
+python3 step_03_deficiencies_exposed.py
+python3 step_04_with_gate.py
+```
+
+---
+
 ## Aligned to
 
 Nothing. I have not mapped this to a standard, a regulation or a published control, so I claim no alignment. It is a prototype on synthetic data.
@@ -103,3 +260,13 @@ Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, 
 ## Fork it
 
 Swap `data/ledger_a.csv` and `data/ledger_b.csv` for your own exports and keep the columns, or point `reconcile` at two files from your system. Change the window, the fee schedule or the limit in `Params`. Read the [PRD](./PRD.md) for the scope I held to.
+
+## Prereqs to run this on your laptop
+
+You need Python 3.9 or newer and nothing else. The tool, the four step scripts and the data generator use only the standard library, so there is nothing to install. There is no API key, no network call and no model call anywhere in the folder. To run the tests, use `python3 -m unittest discover -s tests` from this folder. The production pieces in [`ARCHITECTURE.md`](./ARCHITECTURE.md) (the approver queue, the decision record, telemetry, posting to a ledger system) are a design, not something you need or can run.
+
+## Author
+
+**Vijay Saharan**, Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms
+
+[LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
