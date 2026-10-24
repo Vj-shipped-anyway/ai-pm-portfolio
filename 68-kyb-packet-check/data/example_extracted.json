@@ -1,0 +1,50 @@
+{
+ "certification": {
+  "date": "2026-03-02",
+  "signed_by": "Imani Weller"
+ },
+ "control_person": {
+  "name": "Imani Weller",
+  "title": "Chief Executive Officer"
+ },
+ "holders": [
+  {
+   "kind": "individual",
+   "name": "Imani Weller",
+   "pct": 50
+  },
+  {
+   "kind": "individual",
+   "name": "Mateo L. Petrov",
+   "pct": 20
+  },
+  {
+   "kind": "individual",
+   "name": "Jonas R. Okafor",
+   "pct": 30
+  }
+ ],
+ "legal_name": "Harbor Lane Supply LLC",
+ "lookthrough": [],
+ "packet_id": "KYB-EX01",
+ "people": [
+  {
+   "address": "854 Ridge Avenue, Brookfield GA 98585",
+   "dob": "1979-06-25",
+   "id_last4": "3043",
+   "name": "Imani Weller"
+  },
+  {
+   "address": "967 Juniper Avenue, Ashford DE 94670",
+   "dob": "1974-08-06",
+   "id_last4": "7669",
+   "name": "Mateo L. Petrov"
+  },
+  {
+   "address": "729 Juniper Road, Brookfield GA 58827",
+   "dob": "1955-07-28",
+   "id_last4": "1361",
+   "name": "Jonas R. Okafor"
+  }
+ ]
+}
