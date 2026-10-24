@@ -28,6 +28,7 @@ path per line, for example the output of `git ls-files`.
 """
 from __future__ import annotations
 
+import io
 import argparse
 import csv
 import datetime
@@ -182,8 +183,17 @@ def parse_record(body: str) -> dict:
 
 
 # ---------------------------------------------------------------- tier table, registry, file listing
-def _read_csv(path: str, columns: list) -> list:
+def _open_csv(path: str):
+    """Open a CSV as text. A NUL byte is refused here because csv.reader refused it only before Python 3.11."""
     with open(path, newline="", encoding="utf-8-sig") as fh:
+        text = fh.read()
+    if "\x00" in text:
+        raise InputError(f"{clean(path)}: contains a NUL byte")
+    return io.StringIO(text, newline="")
+
+
+def _read_csv(path: str, columns: list) -> list:
+    with _open_csv(path) as fh:
         try:
             reader = csv.DictReader(fh)
             if reader.fieldnames is None:
