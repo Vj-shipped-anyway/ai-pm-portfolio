@@ -52,7 +52,7 @@ Standard library only, Python 3.9 or newer. To score your own extractor: `python
 
 ## What it still gets wrong
 
-- 🟢 The tie-out check passes 15 of the 100 statements `fixed_label` reads wrong, all in `thousands_parens` (`step_03` and `step_04` print it). That extractor ignores the "in thousands" header and swaps the two columns, and both mistakes keep every accounting identity true. Only a labelled sample sees it. I left this in on purpose.
+- 🟢 The tie-out check passes 15 of the 100 statements `fixed_label` reads wrong, all in `thousands_parens` (`step_03` and `step_04` print it). That extractor ignores the "in thousands" header and swaps the two columns, and both mistakes keep every accounting identity true. Only a labeled sample sees it. I left this in on purpose.
 - **The data and the rules share an author.** I wrote the generator and both extractors. `alias_aware` reaches 100.0% on five layouts because I fixed it against the error classes `fixed_label` printed on them. `note_column` was held out in the sense that no rule was written for it; I still designed it knowing what the rules look like. Treat every number as a ceiling for these rules, not a rate on real statements.
 - **The stand-ins are rules, not a model.** A model drifts for other reasons: it can invent a figure, it can differ between runs, it can read a scanned page worse than a clean one. Nothing here measures any model. What carries over is the scoring and the gate.
 - 20 statements per layout is thin. The 880 values in a layout come from 20 documents and are not independent, so the gate also prints how many statements are right in full.
@@ -80,4 +80,4 @@ Synthetic, seeded, byte-for-byte reproducible. Company names are invented. Nothi
 
 ## Fork it
 
-Replace `data/statements.csv` and `data/truth.csv` with your own labelled statements, keeping the columns (`doc_id`, `layout`, and `text` for `predict`; `doc_id`, `field`, `period`, `value` for truth). Write your extractor's output as a predictions file in the same shape as truth and run `score`. Group by whatever `layout` means to you: a template, a vendor, a country. Read the [data notes](./data/README.md) before you change the field list; the tie-out check expects the 22 field names.
+Replace `data/statements.csv` and `data/truth.csv` with your own labeled statements, keeping the columns (`doc_id`, `layout`, and `text` for `predict`; `doc_id`, `field`, `period`, `value` for truth). Write your extractor's output as a predictions file in the same shape as truth and run `score`. Group by whatever `layout` means to you: a template, a vendor, a country. Read the [data notes](./data/README.md) before you change the field list; the tie-out check expects the 22 field names.

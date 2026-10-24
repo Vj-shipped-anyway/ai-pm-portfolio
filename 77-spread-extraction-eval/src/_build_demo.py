@@ -53,7 +53,7 @@ ul{margin:6px 0;padding-left:20px}
 <h2>The same extractor under different mixes of incoming layouts</h2>
 <p class="s">Pooled accuracy of alias_aware when the share of the held-out layout changes. The shares are assumptions.</p>
 <div class="wrap"><table><thead><tr><th>Mix</th><th>Pooled accuracy</th></tr></thead><tbody id="m"></tbody></table></div>
-<p class="s">Known limit: the tie-out check (do the figures obey the accounting identities) passes a statement read in the wrong scale with its columns swapped. Only a labelled sample sees it. Source: <code>python3 step_04_layout_scorer.py</code>.</p>
+<p class="s">Known limit: the tie-out check (do the figures obey the accounting identities) passes a statement read in the wrong scale with its columns swapped. Only a labeled sample sees it. Source: <code>python3 step_04_layout_scorer.py</code>.</p>
 </main>
 <script>
 var D=__DATA__;

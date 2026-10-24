@@ -2,9 +2,9 @@
 
 Every value is scored against the truth, grouped by an explicit layout field. The gate fails a layout
 that sits under a floor or too far under the best layout (both limits are assumptions of this
-project). The tie-out check stays as a monitor for unlabelled traffic, with its limit stated.
+project). The tie-out check stays as a monitor for unlabeled traffic, with its limit stated.
 
-KNOWN LIMIT, still open after this step: a labelled sample is the only thing that sees an error that
+KNOWN LIMIT, still open after this step: a labeled sample is the only thing that sees an error that
 keeps the identities true. The tie-out check passes it (see step 3 and the last lines below).
 
 Run (from src/):  python3 step_04_layout_scorer.py

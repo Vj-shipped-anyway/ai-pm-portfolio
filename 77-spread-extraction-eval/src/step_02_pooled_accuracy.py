@@ -1,4 +1,4 @@
-"""Step 2 - The common basic approach: one pooled field accuracy on a mixed, labelled sample.
+"""Step 2 - The common basic approach: one pooled field accuracy on a mixed, labeled sample.
 
 After the pilot, the team scores every extractor on all 120 statements at once and reads one number.
 alias_aware was written after reading the errors fixed_label made on the other layouts. A tie-out
