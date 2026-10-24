@@ -24,7 +24,7 @@ Standard library only, Python 3.9 or newer. To score two names: `python3 name_ma
 
 **What it shows** (🟢 measured on synthetic data: 90 listed names for 60 entities, 400 customer names of which 150 are planted matches and 250 are different people; the script is named in brackets):
 
-- 🟢 Exact match on the normalised name catches 24 of 150 (16.0%) and raises 8 false alerts on 250 clear names (3.2%); all 8 are namesakes. It has no threshold to tune (`step_01`)
+- 🟢 Exact match on the normalized name catches 24 of 150 (16.0%) and raises 8 false alerts on 250 clear names (3.2%); all 8 are namesakes. It has no threshold to tune (`step_01`)
 - 🟢 Character edit similarity on the whole name: to keep false alerts on at most 10.0% of clear names the threshold has to be 0.93, and recall is then 36.0%. Recall of 85.0% is not reachable at any threshold from 0.30 to 1.00; at 0.30 recall is 81.3% and 99.2% of clear names alert (`step_02`)
 - 🟢 The edit matcher catches no more than 4 of 24 order swaps or 5 of 14 initials at the three thresholds I printed (0.60, 0.75, 0.93), and going from 0.60 to 0.93 takes shared_given alerts from 47 of 56 to 0 of 56 while translit hits fall from 22 of 22 to 14 of 22 (`step_03`)
 - 🟢 The word-based matcher at the same 10.0% limit: threshold 0.93, recall 57.3% (86 of 150) with 24 false alerts; edit similarity gets 54 of 150 with 25 false alerts. Order swaps go from 3 of 24 to 24 of 24 (`step_04`, `step_03`)

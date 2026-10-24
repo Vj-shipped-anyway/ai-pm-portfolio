@@ -40,7 +40,7 @@ svg text{fill:var(--mut);font-size:11px}
 <div><h2>Planted matches caught</h2><div class="wrap"><table><thead><tr><th>Planted change</th><th class="n">Caught</th></tr></thead><tbody id="mt"></tbody></table></div></div>
 <div><h2>Clear names that alert</h2><div class="wrap"><table><thead><tr><th>Planted kind</th><th class="n">Alerts</th></tr></thead><tbody id="ct"></tbody></table></div></div>
 </div>
-<p class="s">Known misses: alias_unlisted (the list does not carry the name) and namesake (the same name, a different person) at every threshold. The targets, 10.0% false alerts and 85.0% recall, are my assumptions. Source: <code>python3 step_04_token_matcher.py</code>.</p>
+<p class="s">Known misses: alias_unlisted (the list does not carry the name; at most 1 of 10 is caught at any threshold) and namesake (the same name, a different person; 8 of 8 alert at every threshold). The targets, 10.0% false alerts and 85.0% recall, are my assumptions. Source: <code>python3 step_04_token_matcher.py</code>.</p>
 </main>
 <script>
 var D=__DATA__;

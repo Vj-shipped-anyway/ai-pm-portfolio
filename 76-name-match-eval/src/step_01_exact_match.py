@@ -20,7 +20,7 @@ def main() -> None:
         hit = (r["best_true"] if r["truth"] == "match" else r["best"]) >= 1.0
         h, n = hits.get(r["kind"], (0, 0))
         hits[r["kind"]] = (h + hit, n + 1)
-    print("STEP 1 - exact match on the normalised name")
+    print("STEP 1 - exact match on the normalized name")
     print("  watchlist: %d names; customers screened: %d (%d are the same party as a listed entity, %d are not)"
           % (len(entries), len(customers), m["matches"], m["clear"]))
     print("  caught: %d of %d (%s)" % (m["caught"], m["matches"], pct(m["caught"], m["matches"])))

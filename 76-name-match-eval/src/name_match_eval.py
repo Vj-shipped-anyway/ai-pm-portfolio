@@ -11,8 +11,8 @@ Exit status: 0 when the sweep ran and a threshold meets both targets, 1 when no 
 2 for bad or malformed input.
 
 Three matchers, each a plain function of two names, no model:
-  exact   the normalised names are equal (score 0 or 1)
-  edit    character edit similarity of the whole normalised name
+  exact   the normalized names are equal (score 0 or 1)
+  edit    character edit similarity of the whole normalized name
   tokens  names split into words, each word folded to a spelling-insensitive key, words aligned in any
           order, initials credited, and each word weighted by how rare it is on the watchlist
 
@@ -69,7 +69,7 @@ def escape_log(text, limit: int = 80) -> str:
     return "".join(out) + ("..." if len(str(text)) > limit else "")
 
 
-# ---------------------------------------------------------------- normalising and folding
+# ---------------------------------------------------------------- normalizing and folding
 _LETTERS = str.maketrans({"ß": "ss", "æ": "ae", "œ": "oe", "ø": "o", "ł": "l",
                           "đ": "d", "ð": "d", "þ": "th"})
 _APOSTROPHES = {ord(c): None for c in "'’ʼ`´"}
@@ -94,7 +94,7 @@ def words(name: str) -> tuple:
 
 @functools.lru_cache(maxsize=None)
 def fold(word: str) -> str:
-    """A spelling-insensitive key for one normalised word: common transliteration pairs map to one form
+    """A spelling-insensitive key for one normalized word: common transliteration pairs map to one form
     and doubled letters collapse. The table is short on purpose; it does not know every variant."""
     for src, dst in _FOLD:
         word = word.replace(src, dst)
@@ -124,7 +124,7 @@ def edit_similarity(a: str, b: str) -> float:
 
 @functools.lru_cache(maxsize=None)
 def word_similarity(x: str, y: str) -> float:
-    """Similarity of two normalised words: 1 when equal, a fixed credit for an initial against a word
+    """Similarity of two normalized words: 1 when equal, a fixed credit for an initial against a word
     that starts with it, else folded edit similarity when it clears TOKEN_FLOOR, else 0."""
     if x == y:
         return 1.0
@@ -443,15 +443,15 @@ def main(argv=None) -> int:
     ap.add_argument("--demo", action="store_true", help="run the bundled sample (data/example_*.csv)")
     sub = ap.add_subparsers(dest="cmd")
     sc = sub.add_parser("score", help="score two names with the three matchers")
-    sc.add_argument("a")
-    sc.add_argument("b")
+    sc.add_argument("a", help="first name")
+    sc.add_argument("b", help="second name")
     sw = sub.add_parser("sweep", help="sweep the threshold over a watchlist, customers and truth")
-    sw.add_argument("watchlist")
-    sw.add_argument("customers")
-    sw.add_argument("truth")
-    sw.add_argument("--matcher", choices=MATCHERS, default="tokens")
-    sw.add_argument("--min-recall", type=float, default=0.85)
-    sw.add_argument("--max-false-alerts", type=float, default=0.10)
+    sw.add_argument("watchlist", help="CSV with entity_id, listed_name")
+    sw.add_argument("customers", help="CSV with customer_id, name")
+    sw.add_argument("truth", help="CSV with customer_id, truth (match or clear), entity_id")
+    sw.add_argument("--matcher", choices=MATCHERS, default="tokens", help="default tokens")
+    sw.add_argument("--min-recall", type=float, default=0.85, help="recall target, 0 to 1 (default 0.85)")
+    sw.add_argument("--max-false-alerts", type=float, default=0.10, help="share of clear names allowed to alert, 0 to 1 (default 0.10)")
     a = ap.parse_args(argv)
     try:
         if a.demo:

@@ -1,6 +1,6 @@
 """Step 2 - The common basic approach: character edit similarity on the whole name, with a threshold.
 
-Similarity is 1 minus the edit distance over the length of the longer normalised name. A customer is an
+Similarity is 1 minus the edit distance over the length of the longer normalized name. A customer is an
 alert when its best score against any listed name reaches the threshold. The sweep shows what each
 threshold costs. The two targets are assumptions (common.py): false alerts on at most 10.0% of clear
 names, and recall of at least 85.0%.
