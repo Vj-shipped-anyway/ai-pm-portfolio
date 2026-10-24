@@ -4,6 +4,31 @@
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
+[![The demo, first screen](./assets/demo-first-screen.png)](./demo.html)
+
+## Executive summary (90 seconds)
+
+**Problem.** The engineer or operations owner of an agent that calls tools in a regulated workflow at a modeled bank wants the agent to stop itself when it starts failing. Today an agent that starts failing keeps taking cases. A person sees it late, flips a switch that nothing flips back, and afterwards nobody can show what happened or why the agent was allowed back. 🟢 Across 5 agents, 7523 calls over three days and 25 planted faults, 312 calls are harmful and with no stop every one is served (`step_01_no_breaker.py`). 🟡 With a person who reads each agent's failure rate every 60 minutes, 247 of the 312 are still served. The cost is harm that continues after the failure is visible, and a second-line reader who asks how it was stopped and gets no answer.
+
+**Product.** agent-breaker is a standard-library module and command with one breaker per agent, taken from a field in the data. It has four states: CLOSED, OPEN, HALF_OPEN and FORCED_OPEN. It trips on one failure of a critical kind (a scope violation), on 5 failures in a row, or on a failure rate of 0.5 over a 30 minute window that holds at least 10 calls, and it warns at 0.75 of the trip level without switching anything. While open, the agent's calls go to a human queue for a hold of 30 minutes. The next calls are probes, and 3 good ones close the breaker; one failed probe re-opens it with a doubled hold, capped at 240 minutes. An operator switch engages and releases, and a release goes to probes, never straight to closed. Every call, transition, warn and control goes into a hash-chained log, and `verify` replays the calls through a fresh breaker to check it. It exits 1 when the breaker tripped or the log fails, and 2 for input it cannot read. There is no model call, and every threshold except two fractions copied from 25 is my assumption.
+
+**Measured and modeled performance.**
+
+- 🟢 **No stop: 312 of 7523 calls are harmful and every one is served** (`step_01_no_breaker.py`).
+- 🟢 **The common breaker (5 failures in a row, a fixed 30 minute hold, one probe) trips 9 of 14 must-trip faults and 2 of 7 must-not-trip faults,** and serves 168 of 312 harmful calls. It trips 0 of 3 scope violations, and 3 of its 15 closes are followed by a new trip within 15 minutes (`step_02_consecutive_count.py`, `step_03_deficiencies_exposed.py`).
+- 🟢 **agent_breaker trips 12 of 14 must-trip faults** (scope violations 3 of 3, flapping 2 of 2), a median of 13 minutes after the fault starts against 18 for the common breaker, and serves 142 of 312 harmful calls (`step_04_with_breaker.py`).
+- 🟢 **The price: 267 harmless calls go to the human queue against 140 for the common breaker,** which is 1.57 held per harmful call avoided against 0.97 (`step_04_with_breaker.py`).
+- 🟢 **The log: 7599 events, chain intact, replay agrees, 0 calls reached the agent while the breaker was open.** Of 4 tamper tests, 3 are detected from the log alone and 4 with the stored head hash (`step_04_with_breaker.py`).
+- 🟢 **Known misses:** 0 of 2 silent-error faults tripped (33 of 312 harmful calls were reported ok), 0 of 2 slow-burn faults tripped, and 0 of 2 must-trip faults on the low-volume agent tripped (`step_04_with_breaker.py`).
+- 🟡 **Utility: (12/14 − 9/14) × 28 = 6 must-trip faults a year stopped that the common breaker would miss,** assuming 28 must-trip faults reach the fleet each year.
+- 🔴 **Design target: a route decision for each call within 50 milliseconds.** Designed in [`ARCHITECTURE.md`](./ARCHITECTURE.md), never built or timed.
+
+**What I would ask a head of operations to decide.** How many harmless calls the human queue should absorb to stop harm sooner. Here the breaker holds 267 against 140 for the common one. My recommendation is to adopt the critical-failure and failures-in-a-row rules as written, back-test the rate rule on one real tool-call log before setting its line, and size the queue from that log, since I set the 0.5 trip rate before looking at the stream and moving it to 0.3 on this data would be tuning to my own faults.
+
+**Call to action.** Fork the repo. Swap `data/events.csv` for an export of your own agent's tool calls and keep the columns `t_min, agent, case_id, outcome, failure_kind`, pass your thresholds with `--policy`, and group by the `agent` field. To call it from a loop, use `Fleet.admit` and `Fleet.record` from `src/agent_breaker.py`. Make sure the export records a failure kind for the failures that must trip at once. Send findings by opening an issue: say which rule fired and on which kind of fault, not the calls themselves.
+
+_A portfolio prototype on synthetic data. Nothing here is deployed, load-tested or used by anyone, and no real agent or queue is connected._
+
 ## Run one now
 
 ```bash
@@ -67,9 +92,145 @@ if rec["route"] == "agent":
 
 Run any of them from `src/`. Data is produced by [`data/_generate.py`](./data/README.md); `tools/check_repo.py` confirms that a rerun reproduces every file and that the green numbers above appear in a script's output. The planted truth (which calls did harm, which faults must trip) comes from the generator; the rules in `agent_breaker.py` never read it.
 
+## Utility delivered
+
+The way I price product impact: **utility = (my solution − current state of the art) × the number of people or items it affects.**
+
+Here the item is a must-trip fault: an episode in which an agent should have been stopped. Each one lands on the owner of the agent, the people whose cases the agent was handling, and the second-line reader who asks how it was stopped. The common basic approach is a breaker that trips on 5 failures in a row; the table prices this breaker against it.
+
+| Term | Value | Where it comes from |
+| --- | --- | --- |
+| Current state of the art (5 failures in a row, a fixed 30 minute hold, one probe), must-trip faults tripped | 🟢 **9 of 14** | `step_02_consecutive_count.py`; it serves 168 of 312 harmful calls and sends 140 harmless calls to the human queue |
+| My solution (agent_breaker), must-trip faults tripped | 🟢 **12 of 14** | `step_04_with_breaker.py`; it serves 142 of 312 harmful calls and sends 267 harmless calls to the human queue |
+| Lift per must-trip fault | 🟢 12 of 14 minus 9 of 14 | The common breaker trips 0 of 3 scope violations, where agent_breaker trips 3 of 3 (`step_03_deficiencies_exposed.py`, `step_04_with_breaker.py`). The price is more held calls: 1.57 per harmful call avoided against 0.97 |
+| Number it affects: must-trip faults reaching the fleet in a year | 🟡 **28** | **Assumption, not a statistic.** Replace it with your own count of episodes a year in which an agent should have been stopped |
+| Assumption that makes the lift real | 🟡 The export records a failure kind, and a person works the human queue | If the export carries no failure kind, the critical rule has nothing to read and the scope violations stay missed: 🟢 0 of 3 tripped by the common breaker (`step_03_deficiencies_exposed.py`) |
+| **Utility** | 🟡 **(12/14 − 9/14) × 28 = 6 must-trip faults a year stopped that the common breaker would miss** | Assumes the 28 behave like the 14 planted ones |
+
+Sensitivity to the count assumption (🟡, same lift): 14 a year gives 3, 28 gives 6, 56 gives 12.
+
+🔴 What I have not measured: what a harmful call costs, what a held call costs the people who work the queue, how long a probe takes in a live loop, or how often a real fleet has a fault. The planted set is dense on purpose, 312 of 7523 calls are harmful (`step_01_no_breaker.py`); a real fleet sees far fewer. Treat the result as a property of this mix of faults, not a forecast.
+
+---
+
+## Architecture and call flow
+
+Component names match [`ARCHITECTURE.md`](./ARCHITECTURE.md). GitHub renders the diagrams natively.
+
+![agent-breaker flow](./assets/agent-breaker-flow.svg)
+
+**System topology:**
+
+```mermaid
+flowchart LR
+    subgraph SRC["Inputs - existing"]
+        EVENTS["Tool-call events with outcome and failure kind"]
+        CONTROLS["Operator engage and release actions"]
+        POLICYF["Policy thresholds"]
+    end
+
+    subgraph AB["agent-breaker - the prototype"]
+        INGEST["ab-ingest read and validate"]
+        POLICY["ab-policy checked thresholds"]
+        BREAKER["ab-breaker route trip hold probe"]
+        SWITCH["ab-switch engage and release"]
+        AUDIT["ab-audit hash chained log and replay"]
+        REPORT["ab-report text"]
+    end
+
+    subgraph OUT["Outputs"]
+        ROUTE["Route per call agent or human queue"]
+        LOG["Audit log with head hash"]
+        EXITCODE["Exit code 0 or 1 or 2"]
+    end
+
+    subgraph DES["Design only"]
+        WRAP["ab-wrap live loop wrapper"]
+        QUEUE["ab-queue human review queue"]
+        STORE["ab-store shared state and log storage"]
+        TELE["ab-telemetry"]
+    end
+
+    EVENTS --> INGEST
+    CONTROLS --> INGEST
+    POLICYF --> INGEST
+    INGEST --> POLICY
+    INGEST --> BREAKER
+    POLICY --> BREAKER
+    INGEST --> SWITCH
+    SWITCH --> BREAKER
+    BREAKER --> ROUTE
+    BREAKER --> AUDIT
+    AUDIT --> LOG
+    AUDIT --> REPORT
+    REPORT --> EXITCODE
+    WRAP -.-> EVENTS
+    ROUTE -.-> QUEUE
+    AUDIT -.-> STORE
+    REPORT -.-> TELE
+```
+
+**Per-run sequence** (the `--demo` run, one agent, 90 calls):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant CI as Caller
+    participant B as agent_breaker
+    participant F as Events and policy files
+    participant L as Audit log
+    participant R as Reviewer
+
+    CI->>B: run the example events for agent payment-repair
+    B->>F: read 90 calls and the policy
+    F-->>B: files loaded and validated
+    B->>L: log the policy, then every call
+    B->>B: t=68 CLOSED to OPEN, 5 failures in a row
+    B->>B: t=98 OPEN to HALF_OPEN, hold of 30 min is over
+    B->>B: t=98 HALF_OPEN to OPEN, probe failed after 0 good, next hold 60 min
+    B->>B: t=158 OPEN to HALF_OPEN, hold of 60 min is over
+    B->>B: t=162 HALF_OPEN to CLOSED, 3 probes passed
+    B->>L: 96 events, chain intact, replay agrees, head 99b9289be1c3a889
+    B-->>CI: 47 calls to the agent, 43 held for a person, TRIPPED 1 time
+    CI-->>R: a real run exits 1 on a trip and the held calls wait for a person
+    Note over B,R: Values are the --demo output. The demo runs with fail-on never and exits 0. The caller and the reviewer path are a design
+```
+
+**Interlocks (all red, designed, none built):**
+
+- [25 KillSwitch](../25-killswitch-ai-fallback-drills/) is where the warn and clear fractions come from. They are copied into `data/policy.csv`; this folder does not import or read its files.
+- [27 AgentKit](../27-agentkit-reference-agent-and-playbook/) holds the operator switch and audit chain this puts in one breaker. Wrapping its reference agent in `ab-wrap` is a design; no code here reads it.
+- [08 OversightOps](../08-oversightops-hitl-workflow/) is a possible home for the human queue (`ab-queue`), so held calls arrive as tasks with a reviewer.
+- [05 AgentWatch](../05-agentwatch-agent-observability/) watches an agent's outcomes in production. Its feed could supply the events; the breaker acts on them and does not monitor.
+
+---
+
+## PM artifacts
+
+The PM artifacts that show how I would run this product if I owned the seat. This README is the walkthrough; the rest of the folder holds:
+
+- [`PRD.md`](./PRD.md): the product requirements doc, with users, backlog, KPIs, rollout and open questions.
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md): the systems doc, with components, data model, security, failure behavior and operations. A design, not deployed.
+- [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
+- [`data/`](./data/): the synthetic call stream, the planted faults and truth, the policy and assumptions, and the seeded generator. `data/README.md` explains how the truth is set.
+- [`src/`](./src/): `agent_breaker.py`, `common.py`, the four step scripts and the demo builder.
+- [`tests/`](./tests/): 60 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+
+Run the four steps end to end:
+
+```bash
+cd src
+python3 step_01_no_breaker.py
+python3 step_02_consecutive_count.py
+python3 step_03_deficiencies_exposed.py
+python3 step_04_with_breaker.py
+```
+
+---
+
 ## Aligned to
 
-The [NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative) (page read 2026-10-24). It sets out three pillars: industry-led standards, community-led open protocols, and research into agent authentication, identity and security evaluation. It names no stop, hold or logging requirement and no threshold, so this prototype is aligned in direction only: a runtime control for an agent and an evidence trail that can be checked. Every number in `data/policy.csv` is my assumption except the warn and clear fractions, which come from [25](../25-killswitch-ai-fallback-drills/data/policy.csv). It is a prototype, aligned to that direction and not compliant with or certified against anything.
+The [NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative) (page read 2026-10-24). It sets out three pillars: industry-led standards, community-led open protocols, and research into agent authentication, identity and security evaluation. It names no stop, hold or logging requirement and no threshold, so this prototype is aligned in direction only: a runtime control for an agent and an evidence trail that can be checked. Every number in `data/policy.csv` is my assumption except the warn and clear fractions, which come from [25](../25-killswitch-ai-fallback-drills/data/policy.csv). It is a prototype, aligned to that direction. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 
@@ -78,3 +239,13 @@ Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, 
 ## Fork it
 
 Keep the five columns of `events.csv` (`t_min`, `agent`, `case_id`, `outcome`, `failure_kind`) and point `run` at an export of your own agent's tool calls, with `--policy` for your thresholds. Group by the `agent` field, not by naming. Read the [PRD](./PRD.md) for the scope I held to.
+
+## Prereqs to run this on your laptop
+
+You need Python 3.9 or newer and nothing else. The module, the four step scripts and the data generator use only the standard library, so there is nothing to install. There is no API key, no network call and no model call anywhere in the folder, and no agent is connected: the calls are recorded rows. To run the tests, use `python3 -m unittest discover -s tests` from this folder. The production pieces in [`ARCHITECTURE.md`](./ARCHITECTURE.md) (the live-loop wrapper, the human queue connector, shared state and log storage, telemetry) are a design, not something you need or can run.
+
+## Author
+
+**Vijay Saharan**, Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms
+
+[LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
