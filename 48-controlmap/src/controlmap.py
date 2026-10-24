@@ -15,7 +15,7 @@ Inputs (CSV, UTF-8, one header row):
 Rules, all plain code, no model:
     1. A control matches an obligation when it is active and its name or description contains a phrase the
        terms file lists for the obligation's theme. A phrase preceded within 3 words by no, not, without,
-       never, lacks, cannot, excludes, excluding or except does not count.
+       never, lacks, lacking, cannot, excludes, excluding or except does not count.
     2. The match is full when the control's scope includes every class the obligation applies to, partial
        when it includes some, and ignored when it includes none.
     3. Evidence is fresh when the newest item is no older than GRACE times the control's test cycle at the

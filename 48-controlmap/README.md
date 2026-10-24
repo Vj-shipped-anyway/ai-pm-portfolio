@@ -32,7 +32,7 @@ Standard library only, Python 3.9 or newer. On your own files:
 python3 controlmap.py check obligations.csv controls.csv --terms terms.csv --as-of 2026-09-30
 ```
 
-Columns are listed at the top of [`src/controlmap.py`](./src/controlmap.py). Options: `--grace` (evidence is fresh up to this many test cycles old), `--format text|csv`, and `--fail-on uncovered|gap|never`. It exits 1 when the chosen level is reached (`uncovered`, the default, counts UNCOVERED and UNMAPPED; `gap` counts anything but COVERED) and 2 on malformed input, with a one-line message on stderr. Text and CSV output escape control characters in your data, and CSV cells that start with `=`, `+`, `-` or `@` get a leading apostrophe.
+Columns are listed at the top of [`src/controlmap.py`](./src/controlmap.py). Options: `--as-of` (default: today), `--grace` (evidence is fresh up to this many test cycles old), `--format text|csv`, and `--fail-on uncovered|gap|never`. It exits 1 when the chosen level is reached (`uncovered`, the default, counts UNCOVERED and UNMAPPED; `gap` counts anything but COVERED) and 2 on malformed input, with a one-line message on stderr. Text and CSV output escape control characters in your data, and CSV cells that start with `=`, `+`, `-` or `@` get a leading apostrophe.
 
 ## What the numbers say
 
@@ -55,8 +55,9 @@ Columns are listed at the top of [`src/controlmap.py`](./src/controlmap.py). Opt
 - 🟢 14 of 56 statuses are wrong and 10 of them are silent (`step_04` prints each with its cause). Causes: 5 obligations from controls worded outside the dictionary (6 controls, 30 true pairs missed); 1 from a control that says "no exception to human review", which the negation rule drops; 4 from two controls that use a dictionary phrase in another sense (a drift dashboard for network switches, a data reconciliation for payment files); and 4 from a theme with no dictionary row, which the tool reports as UNMAPPED instead of guessing.
 - The negation rule is a window of three words before the phrase. It removes 15 false links and costs 5 true ones. A real library will phrase denials in ways it does not see.
 - **The data and the rules share an author.** I planted the controls, wrote the dictionary after reading them, and chose the rules. The tool misses what I planted as misses and catches what I planted as catchable, so 42 of 56 is a ceiling for this method, not a rate on a real library. Scope and freshness are definitions the generator and the tool share, so their agreement (132 of 132 on the scope label) is by construction.
+- The orphan list shows 9 controls that do serve a theme (the 6 off-dictionary ones, the denied one and 2 on the theme with no dictionary row), so an orphan is a prompt to check the wording, not a verdict (`step_04`).
 - A phrase used in another sense is linked, and nothing in the tool can see it. That is the known limit left in on purpose in steps 3 and 4.
-- The tool does not read the obligation statement. The theme is an input, and someone has to assign it. The keyword sheet reads statements; the tool does not.
+- The tool does not read the obligation statement. The theme is an input, and someone has to assign it. The keyword sheet does read statements.
 - Phrases match whole words, case-insensitive: "override log" does not match "overrides logged". Scope is an exact class name. Freshness uses the newest evidence date only.
 - Fresh evidence shows that someone collected something recently. It does not show that the control is well designed or that it works.
 
@@ -73,7 +74,7 @@ Run any of them from `src/`. Step 4 calls the same `analyze()` the command line 
 
 ## Aligned to
 
-I read these three public pages on 2026-10-24 and took from them the shape of the problem, not any identifier or text. This is a prototype, aligned to that shape and not compliant with or certified against anything.
+I read these three public pages on 2026-10-24 and took from them the shape of the problem, not any identifier or text. This is a prototype, aligned to that shape. It makes no claim of conformity to any of the three.
 
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework): voluntary; four core functions, Govern, Map, Measure and Manage; AI RMF 1.0 released January 26, 2023. The themes in my sample register are my own labels. I did not map any of them to an RMF category or subcategory.
 - [CSA AI Controls Matrix](https://cloudsecurityalliance.org/artifacts/ai-controls-matrix): version 1 released 07/09/2025 and updated 10/30/2025 (the page says v1.1 is newer), with 243 control objectives in 18 domains and mappings to ISO 42001, ISO 27001, NIST AI RMF 1.0 and BSI AIC4. I read the landing page, not the spreadsheet. A matrix that publishes mappings between its objectives and other frameworks is doing the join this project does at small scale, starting from a bank's own obligations and its own controls, with a status added.
@@ -85,4 +86,4 @@ Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, 
 
 ## Fork it
 
-Swap `data/obligations.csv`, `data/controls.csv` and `data/terms.csv` for exports from your register, your control library and a dictionary you write, and keep the columns. Start with the lists the tool prints rather than the statuses: UNMAPPED themes need a dictionary row, and phrases that matched no active control are dead rows. [`16-controlmap`](../16-controlmap-ai-obligation-crosswalk/) is where the status vocabulary, the full and partial scope idea and the 1.5-cycle freshness rule come from; I read its code and data and wrote this version and this data from scratch. Read the [PRD](./PRD.md) for the scope I held to.
+Swap `data/obligations.csv`, `data/controls.csv` and `data/terms.csv` for exports from your register, your control library and a dictionary you write, and keep the columns. Start with the lists the tool prints rather than the statuses: UNMAPPED themes need a dictionary row, and phrases that matched no active control are dead rows. [`16-controlmap-ai-obligation-crosswalk`](../16-controlmap-ai-obligation-crosswalk/) is where the status vocabulary, the full and partial scope idea and the 1.5-cycle freshness rule come from; I read its code and data and wrote this version and this data from scratch. Read the [PRD](./PRD.md) for the scope I held to.
