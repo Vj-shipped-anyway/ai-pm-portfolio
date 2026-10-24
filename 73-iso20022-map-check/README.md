@@ -222,7 +222,7 @@ python3 step_04_with_check.py
 
 ## Aligned to
 
-The Federal Reserve moved the Fedwire Funds Service to ISO 20022. Its press release of July 15, 2025, announces the completed migration ([Federal Reserve Financial Services, read 2026-10-24](https://www.frbservices.org/news/press-releases/071525-iso20022-migration-announcement/)). That release is the only Fed source I read. I did not read the Fedwire message specification or any FedNow format document, so nothing here states what either service requires, and the element lengths are mine. This is a prototype aligned to the migration problem. It makes no claim of conformity to that release.
+The Federal Reserve moved the Fedwire Funds Service to ISO 20022. Its press release of July 15, 2025, announces the completed migration ([Federal Reserve Financial Services, read 2026-10-24](https://www.frbservices.org/news/press-releases/071525-iso20022-migration-announcement/)). That release is the only Fed source I read. I did not read the Fedwire message specification or any FedNow format document, so nothing here states what either service requires, and the element lengths are mine. This is a prototype that addresses a problem any move to ISO 20022 raises; the release does not discuss it. It makes no claim of conformity to that release.
 
 ## Data and limits
 

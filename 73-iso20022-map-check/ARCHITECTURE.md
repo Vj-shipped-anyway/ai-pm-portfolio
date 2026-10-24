@@ -130,7 +130,7 @@ The check is one short-lived process in the pipeline that already builds the con
 
 Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the Federal Reserve moved the Fedwire Funds Service to ISO 20022, and its press release of July 15, 2025, announces the completed migration ([Federal Reserve Financial Services, read 2026-10-24](https://www.frbservices.org/news/press-releases/071525-iso20022-migration-announcement/)). That release is the only Fed source I read. I did not read the Fedwire message specification or any FedNow format document.
 
-- **What the design does.** It addresses the migration problem the release points at: it checks that a conversion keeps what the mapping says it keeps, and records the decision.
+- **What the design does.** It addresses a problem any move to ISO 20022 raises, which the release does not discuss: it checks that a conversion keeps what the mapping says it keeps, and records the decision.
 - **What it does not claim.** It states nothing about what Fedwire or FedNow require, and the element lengths are mine. It makes no claim of conformity to the release or to any message specification, holds no certification, and I have not read or mapped any other source.
 
 ---
