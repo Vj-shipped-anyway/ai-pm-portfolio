@@ -17,9 +17,9 @@
 - 🟢 **No plan check: 0 of 86 plans stopped.** 42 of 86 apply a risky resource unchecked (`step_01_no_gate.py`).
 - 🟢 **A text search with 8 patterns flags 58 of 86 plans.** 23 of those 58 flags (39.7%) are harmless, and 17 of the 52 plans that should be blocked or sent to review are never flagged (`step_02_text_search.py`).
 - 🟢 **Each half of the parser fails alone:** rules that ignore each resource's action block 7 of 34 harmless plans, and rules that treat an unknown value as fine flag only 3 of 10 plans that need a look (`step_03_deficiencies_exposed.py`).
-- 🟢 **Together: 33 of 42 risky plans blocked,** each on the planted resource with the expected rule (33 of 33), 10 of 10 need-a-look plans sent to review, 0 of 34 harmless plans blocked. A person reads 46 of 86 plans where the text search sent 58 (`step_04_with_guard.py`).
-- 🟢 **Known miss: 9 of 42 risky plans pass,** three split-CIDR plans, three with a permissive condition and three with a queue policy that has no rule. 3 of 34 harmless plans go to review (`step_04_with_guard.py`).
-- 🟢 **The decision matches the planted truth on 74 of 86 plans** (`step_04_with_guard.py`).
+- 🟢 **Together: 33 of 42 risky plans blocked,** each on the planted resource with the expected rule (33 of 33), 10 of 10 need-a-look plans sent to review, 0 of 34 harmless plans blocked. A person reads 47 of 86 plans where the text search sent 58 (`step_04_with_guard.py`).
+- 🟢 **Known miss: 9 of 42 risky plans pass,** three split-CIDR plans, three with a permissive condition and three with a queue policy that has no rule. 4 of 34 harmless plans go to review: three plain HTTP listeners and one plan the rules could read nothing in (`step_04_with_guard.py`).
+- 🟢 **The decision matches the planted truth on 73 of 86 plans** (`step_04_with_guard.py`).
 - 🟡 **Utility: (17/52 − 9/52) × 50 = 7.7 plans a year that a text search would pass and the guard stops or sends to review,** assuming 50 plans a year that should be blocked or reviewed reach the gate.
 - 🔴 **Design target: a decision within 30 seconds of the plan file landing.** Designed in [`ARCHITECTURE.md`](./ARCHITECTURE.md), never built or timed.
 
@@ -55,12 +55,12 @@ Standard library only, Python 3.9 or newer. To check your own plan: `terraform s
 - 🟢 No plan check: 0 of 86 plans stopped, and 42 of 86 apply a risky resource unchecked (`step_01`)
 - 🟢 A text search with 8 patterns flags 58 of 86 plans; 23 of those 58 flags (39.7%) are harmless, and 17 of the 52 plans that should be blocked or sent to review are never flagged (`step_02`)
 - 🟢 Rules that ignore each resource's action block 7 of 34 harmless plans, all deleted or unchanged resources; rules that treat a value unknown until apply as fine flag only 3 of 10 plans that need a look (`step_03`)
-- 🟢 Parser, ten rules and unknown handling together: 33 of 42 risky plans blocked, each on the planted resource with the expected rule; 10 of 10 need-a-look plans sent to review; 0 of 34 harmless plans blocked; a person reads 46 of 86 plans where the text search sent 58 (`step_04`)
+- 🟢 Parser, ten rules and unknown handling together: 33 of 42 risky plans blocked, each on the planted resource with the expected rule; 10 of 10 need-a-look plans sent to review; 0 of 34 harmless plans blocked; a person reads 47 of 86 plans where the text search sent 58 (`step_04`)
 
 ## What it still gets wrong
 
 - 🟢 9 of 42 risky plans pass (`step_04` prints each one). Three split the open internet into two half-range CIDRs (PLAN-019, PLAN-042 and PLAN-059): the rule reads exact world CIDRs, and the two halves together are the whole internet. Three allow a wildcard principal behind a condition that matches everything (PLAN-008, PLAN-029 and PLAN-057): any condition passes. Three are a world-open queue policy (PLAN-041, PLAN-049 and PLAN-060): there is no rule for that resource type. The text search from step 2 flags 6 of these 9 (`step_03`).
-- 🟢 3 of 34 harmless plans go to review (`step_04`). They are plain HTTP listeners on an internal load balancer. The rules look at one resource at a time and never join the listener to its load balancer.
+- 🟢 4 of 34 harmless plans go to review (`step_04`). Three are plain HTTP listeners on an internal load balancer: the rules look at one resource at a time and never join the listener to its load balancer. The fourth creates or updates only types with no rule, beside a violation that is a no-op, so the gate read nothing and says REVIEW (rule PG00). Until more rules exist, any plan that touches only types with no rule reads REVIEW; `--fail-on block`, the default, still exits 0 for it.
 - **The plans and the rules share an author.** I planted the changes and wrote the rules, so 33 of 42 shows the rules cover what I planted. The nine hard misses and the harmless look-alikes (a Deny policy for `*`, a deleted public bucket, port 443 open to the world, an unchanged risky resource) are in the data on purpose, so the score is not a clean sweep. Treat the result as a ceiling for these rules, not a rate on real plans, which I have not tested.
 - 🔴 **No plan here came from a Terraform run.** `data/_generate.py` writes plans in the shape of `terraform show -json` as I know it: `resource_changes`, each with `type`, `address` and a `change` holding `actions`, `before`, `after` and `after_unknown`. I did not check them against real output. How a real provider reports an unset attribute (absent, null or unknown) varies, so the three forms are all in the data.
 - 🟡 The parameters are my assumptions: admin ports 22 and 3389; database ports 1433, 1521, 3306, 5432, 6379 and 27017; three canned ACLs counted as public; an unset encryption flag read as off; one medium rule (a plain HTTP listener) and nine high. None is taken from a standard or a regulation. Account-wide defaults, such as default encryption set outside the plan, are not visible to the rules.
@@ -96,7 +96,7 @@ Here the item is a plan that should have been blocked or sent to a person. Each 
 | Assumption that makes the lift real | 🟡 Real `terraform show -json` output resembles the synthetic plans, and the pipeline step fails on BLOCK | No plan here came from a Terraform run. If real values reach the rules in a form they read as known, the unknown handling falls to what step 3 shows for a parser that lets unknowns pass: 🟢 3 of 10 need-a-look plans flagged (`step_03_deficiencies_exposed.py`) |
 | **Utility** | 🟡 **(17/52 − 9/52) × 50 = 7.7 plans a year that a text search would pass and the guard stops or sends to review** | Assumes the 50 behave like the 52 planted ones |
 
-Sensitivity to the count assumption (🟡, same lift): 20 plans a year gives 3.1, 50 gives 7.7, 100 gives 15.4. Not priced: a person reads 🟢 46 of 86 plans against 58 for the text search (`step_04_with_guard.py`).
+Sensitivity to the count assumption (🟡, same lift): 20 plans a year gives 3.1, 50 gives 7.7, 100 gives 15.4. Not priced: a person reads 🟢 47 of 86 plans against 58 for the text search (`step_04_with_guard.py`).
 
 🔴 What I have not measured: what a stopped plan is worth in money or in incidents avoided, how long a finding takes to read and clear, what a false review costs a release, or how often real plans carry these changes. The planted set is dense on purpose, 42 of 86 should be blocked and 10 more read by a person (`step_01_no_gate.py`); a real pipeline sees far fewer. Treat the result as a property of this mix of cases, not a forecast.
 
@@ -191,7 +191,7 @@ The PM artifacts that show how I would run this product if I owned the seat. Thi
 - [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
 - [`data/`](./data/): the 86 synthetic plans, their planted truth, the worked example and the seeded generator. `data/README.md` explains how the truth is set.
 - [`src/`](./src/): `plan_guard.py`, `common.py`, the four step scripts and the demo builder.
-- [`tests/`](./tests/): 46 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+- [`tests/`](./tests/): 48 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
 - [`action/`](./action/README.md): the staged GitHub Action and the steps to publish it. Not published, not run on GitHub.
 
 Run the four steps end to end:

@@ -95,7 +95,7 @@
   <text x="567" y="162" class="stage-sub">listener without a</text>
   <text x="567" y="177" class="stage-sub">redirect to HTTPS</text>
   <text x="567" y="192" class="stage-sub">hit gives REVIEW</text>
-  <text x="567" y="212" class="meta-block">3 of 34 harmless read</text>
+  <text x="567" y="212" class="meta-block">4 of 34 harmless read</text>
 
   <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
 

@@ -50,9 +50,9 @@ class GoldenTests(unittest.TestCase):
             s = json.load(fh)
         self.assertEqual((s["risky_blocked"], s["risky"]), (33, 42))
         self.assertEqual((s["review_flagged"], s["review"]), (10, 10))
-        self.assertEqual((s["harmless_blocked"], s["harmless_reviewed"], s["harmless"]), (0, 3, 34))
-        self.assertEqual((s["exact_match"], s["plans"]), (74, 86))
-        self.assertEqual((s["to_read"], s["missed_risky"]), (46, 9))
+        self.assertEqual((s["harmless_blocked"], s["harmless_reviewed"], s["harmless"]), (0, 4, 34))
+        self.assertEqual((s["exact_match"], s["plans"]), (73, 86))
+        self.assertEqual((s["to_read"], s["missed_risky"]), (47, 9))
 
     def test_step_04_prints_the_known_misses(self):
         out = run_script("step_04_with_guard.py")

@@ -4,6 +4,7 @@
   2. pick rules by the exact `type` field, never by the shape of the address
   3. a rule that cannot see its value because Terraform fills it in at apply says "unverified" (REVIEW)
   4. BLOCK if a high-severity rule is broken, REVIEW for a medium rule or an unverified value, else ALLOW
+  5. a plan that creates or updates only types with no rule is REVIEW (PG00): a gate that read nothing must not say ALLOW
 
 The command line and the GitHub Action in action/ run exactly this code (plan_guard.py).
 
@@ -29,7 +30,7 @@ for p in plans:
     on_target = [f for f in fs if f["address"] == p["target"]]
     rows.append({"plan_id": p["plan_id"], "kind": p["kind"], "truth": p["truth"], "decision": decide(fs),
                  "expected_hit": bool(p["expected"]) and any(f["rule"] == p["expected"] for f in on_target),
-                 "off_target": len(fs) - len(on_target), "checked": result["checked"],
+                 "off_target": len([f for f in fs if f["address"] not in (p["target"], "(plan)")]), "checked": result["checked"],
                  "findings": "; ".join(f"{f['rule']}:{f['address']}" for f in fs) or "none"})
 
 b = [r for r in rows if r["truth"] == "block"]

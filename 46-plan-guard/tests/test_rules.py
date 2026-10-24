@@ -169,13 +169,14 @@ class ScopeAndDecision(unittest.TestCase):
         self.assertEqual(found(r, flag_unknown=False), [])
 
     def test_type_field_decides_not_the_address(self):
-        self.assertEqual(found(rc("aws_instance", self.BAD, address="aws_ebs_volume.fake")), [])
+        self.assertEqual(found(rc("aws_instance", self.BAD, address="aws_ebs_volume.fake")), [("PG00", "review")])   # unruled type: nothing read
         self.assertEqual(found(rc("aws_ebs_volume", self.BAD, address="aws_instance.fake")), [("PG06", "block")])
         self.assertEqual(found(rc("aws_ebs_volume", self.BAD, address="module.a.module.b.aws_ebs_volume.v[3]")), [("PG06", "block")])
 
     def test_counts_and_decide(self):
         out = check_plan(plan(rc("aws_vpc", {}), rc("aws_ebs_volume", self.BAD), rc("aws_ebs_volume", {"encrypted": True}, name="y")))
-        self.assertEqual((out["changes"], out["checked"]), (3, 2))
+        self.assertEqual((out["changes"], out["checked"], out["unchecked"]), (3, 2, 1))
+        self.assertNotIn("PG00", [f["rule"] for f in out["findings"]])   # something was read, so no PG00
         self.assertEqual(decide([]), "ALLOW")
         self.assertEqual(decide([{"class": "review"}]), "REVIEW")
         self.assertEqual(decide([{"class": "review"}, {"class": "block"}]), "BLOCK")

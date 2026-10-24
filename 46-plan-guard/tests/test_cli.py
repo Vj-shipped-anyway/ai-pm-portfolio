@@ -116,10 +116,28 @@ class CliTests(unittest.TestCase):
         vpc = dict(GOOD_VOLUME, type="aws_vpc", address="aws_vpc.v")
         deleted = dict(BAD_VOLUME, change=dict(BAD_VOLUME["change"], actions=["delete"]))
         code, out, _ = run(["check", self.write(plan(vpc, deleted))])
-        self.assertEqual(code, 0)
-        self.assertIn("none of the 2 resource changes creates or updates a type that has a rule", out)
+        self.assertEqual(code, 0)                     # REVIEW does not fail the step unless --fail-on review
+        self.assertIn("1 of the 2 resource changes create or update a type that has no rule; nothing was checked", out)
+        self.assertIn("PG00 nothing_checked", out)
+        self.assertTrue(out.rstrip().endswith("decision: REVIEW"))
+        self.assertEqual(run(["check", self.write(plan(vpc, deleted)), "--fail-on", "review"])[0], 1)
         _, gh, _ = run(["check", self.write(plan(vpc)), "--format", "github"])
         self.assertIn("nothing was checked", gh)
+        self.assertIn("::warning title=plan-guard PG00::", gh)
+
+    def test_only_deletes_and_no_ops_need_no_check_and_are_allowed(self):
+        deleted = dict(BAD_VOLUME, change=dict(BAD_VOLUME["change"], actions=["delete"]))
+        noop = dict(GOOD_VOLUME, change=dict(GOOD_VOLUME["change"], actions=["no-op"]))
+        code, out, _ = run(["check", self.write(plan(deleted, noop)), "--fail-on", "review"])
+        self.assertEqual(code, 0)
+        self.assertIn("nothing was checked and nothing needed checking", out)
+        self.assertTrue(out.rstrip().endswith("decision: ALLOW"))
+
+    def test_a_plan_with_one_read_resource_and_one_unruled_is_not_pg00(self):
+        vpc = dict(GOOD_VOLUME, type="aws_vpc", address="aws_vpc.v")
+        _, out, _ = run(["check", self.write(plan(vpc, GOOD_VOLUME))])
+        self.assertNotIn("PG00", out)
+        self.assertTrue(out.rstrip().endswith("decision: ALLOW"))
 
     def test_hostile_address_cannot_forge_a_line_or_command(self):
         evil = dict(BAD_VOLUME, address="aws_ebs_volume.v\n::error title=forged::approved\r::notice::ok")

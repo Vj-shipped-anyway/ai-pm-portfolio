@@ -20,7 +20,7 @@
 | **Problem** | A Terraform plan can create a public bucket, open a database port to the internet or leave storage unencrypted, and every one of those is valid Terraform. `terraform validate` and the plan itself pass. The first time anyone looks is a scanner after apply, or a person reading plan text under time pressure. In the planted set, 🟢 a pipeline with no check stops 0 of 86 plans and 42 of 86 apply a risky resource unchecked (`step_01_no_gate.py`). |
 | **Solution** | Reads the JSON form of a plan (`terraform show -json`) and keeps resources the plan creates or updates. Applies ten rules chosen by the exact `type` field: public bucket ACL, public access block off, bucket policy open to everyone, world-open admin and database ports, unencrypted volume, database and file system, public database, plain HTTP listener. Says "unverified" and sends the plan to review when a value is only known after apply. Prints ALLOW, REVIEW or BLOCK, exits non-zero at a chosen level, and prints GitHub annotations on request. |
 | **North-star metric** | Share of production Terraform plans that pass through the gate with a recorded decision before apply. Target 🔴 100%. Today in this model: nothing reads the plan, and 🟢 0 of 86 plans are stopped (`step_01_no_gate.py`). |
-| **Measured metrics (synthetic)** | 🟢 33 of 42 risky plans blocked, each on the planted resource with the expected rule; 10 of 10 need-a-look plans sent to review; 0 of 34 harmless plans blocked and 3 of 34 sent to review; the decision matches the planted truth on 74 of 86 (`step_04_with_guard.py`). |
+| **Measured metrics (synthetic)** | 🟢 33 of 42 risky plans blocked, each on the planted resource with the expected rule; 10 of 10 need-a-look plans sent to review; 0 of 34 harmless plans blocked and 4 of 34 sent to review; the decision matches the planted truth on 73 of 86 (`step_04_with_guard.py`). |
 | **Modeled metrics** | 🟡 Utility (17/52 − 9/52) × 50 = 7.7 plans a year that a text search would pass and the guard stops or sends to review, assuming 50 plans a year that should be blocked or reviewed reach the gate. |
 | **Cost** | 🔴 Not estimated. The prototype is standard-library Python with no model call; the cost of the production pieces has not been sized. |
 | **Risk #1** | The planted set and the rules share an author, so the numbers are a ceiling. Mitigation: run it on one real plan stream and report the planted numbers and the real numbers apart. |
@@ -86,9 +86,9 @@
 
 **Outputs (lagging):** prototype baselines from the planted set.
 - Risky plans blocked. 🟢 33 of 42 with the gate, against 0 of 86 plans stopped with no check (`step_04_with_guard.py`, `step_01_no_gate.py`).
-- Harmless plans blocked. 🟢 0 of 34; 3 of 34 sent to review (`step_04_with_guard.py`).
+- Harmless plans blocked. 🟢 0 of 34; 4 of 34 sent to review (`step_04_with_guard.py`).
 - Need-a-look plans flagged. 🟢 10 of 10 (`step_04_with_guard.py`).
-- Plans a person reads. 🟢 46 of 86, where the text search sent 58 (`step_04_with_guard.py`).
+- Plans a person reads. 🟢 47 of 86, where the text search sent 58 (`step_04_with_guard.py`).
 - Known miss. 🟢 9 of 42 risky plans pass (`step_04_with_guard.py`).
 - Findings overturned after review: not measured; the planted set has no reviewer.
 
@@ -120,7 +120,7 @@
 **Reference architecture.** See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full systems doc. Headlines:
 
 - **One process in the pipeline.** The gate is stateless: it reads one plan file and returns a decision. Production adds a reviewed policy config, a decision ledger and a published Action, all designed and none built.
-- **Never silent.** A missing, empty or malformed plan exits 2 and fails the step, even with `--fail-on never`. A plan with no resource change, or none of a type that has a rule, says nothing was checked.
+- **Never silent.** A missing, empty or malformed plan exits 2 and fails the step, even with `--fail-on never`. A plan with nothing to create or update says nothing was checked and is allowed; a plan that creates or updates only types with no rule says so and is sent to REVIEW (PG00), because a gate that read nothing must not answer ALLOW.
 - **Strings from the plan are data.** Text output shows control characters as escapes and annotations are escaped, so a hostile resource address cannot forge a workflow command.
 - **Changes to a rule are changes to a number.** A golden test pins the planted-set numbers, so a rule change that moves the blocked count shows in the diff.
 

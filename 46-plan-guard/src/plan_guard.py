@@ -242,11 +242,15 @@ RULES = (
 
 # ---------------------------------------------------------------- the check
 def check_plan(plan: dict, changed_only: bool = True, flag_unknown: bool = True) -> dict:
-    """Run the rules over a validated plan. Returns {"findings", "changes", "checked"}.
+    """Run the rules over a validated plan. Returns {"findings", "changes", "checked", "unchecked"}.
+
+    "unchecked" counts the changes that create or update a resource the rules cannot read (a type with no rule).
+    When nothing was checked and something was unchecked, the plan gets a review finding: a gate that read
+    nothing must not answer ALLOW.
 
     changed_only=False also reads deletes and no-ops (step 3 shows what that costs); flag_unknown=False
     drops the hits for values the plan cannot know yet (step 3 shows what that hides)."""
-    findings, checked = [], 0
+    findings, checked, unchecked = [], 0, 0
     changes = plan.get("resource_changes", [])
     for rc in changes:
         if rc.get("mode") == "data":
@@ -257,6 +261,7 @@ def check_plan(plan: dict, changed_only: bool = True, flag_unknown: bool = True)
         state = change.get("after") if change.get("after") is not None else change.get("before")
         rules = [r for r in RULES if rc["type"] in r.types]
         if not rules or not isinstance(state, dict):
+            unchecked += 1
             continue
         checked += 1
         unk = change.get("after_unknown") or {}
@@ -267,7 +272,11 @@ def check_plan(plan: dict, changed_only: bool = True, flag_unknown: bool = True)
                 cls = "block" if kind == "violation" and rule.severity == "high" else "review"
                 findings.append({"rule": rule.id, "name": rule.name, "class": cls, "kind": kind,
                                  "address": rc["address"], "reason": text})
-    return {"findings": findings, "changes": len(changes), "checked": checked}
+    if checked == 0 and unchecked > 0:
+        findings.append({"rule": "PG00", "name": "nothing_checked", "class": "review", "kind": "unchecked",
+                         "address": "(plan)", "reason": f"{unchecked} resource changes create or update a type that has no rule, "
+                                                        "so nothing in this plan was read"})
+    return {"findings": findings, "changes": len(changes), "checked": checked, "unchecked": unchecked}
 
 
 def decide(findings: list) -> str:
@@ -328,9 +337,12 @@ def escape_annotation(text) -> str:
 def _scope_line(result: dict) -> str:
     if result["changes"] == 0:
         return "the plan has no resource changes; nothing was checked"
+    if result["checked"] == 0 and result["unchecked"] > 0:
+        return (f"{result['unchecked']} of the {result['changes']} resource changes create or update a type that has no rule; "
+                f"nothing was checked, so the decision is REVIEW")
     if result["checked"] == 0:
-        return (f"none of the {result['changes']} resource changes creates or updates a type that has a rule; "
-                f"nothing was checked")
+        return (f"none of the {result['changes']} resource changes creates or updates a resource; "
+                f"nothing was checked and nothing needed checking")
     return ""
 
 

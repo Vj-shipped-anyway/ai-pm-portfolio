@@ -17,7 +17,7 @@ Eight components: five decide the outcome (one as config), three carry or record
 | Component | Responsibility | Language or framework | Decides the outcome? | Stateful? |
 | --- | --- | --- | --- | --- |
 | `pg-ingest` | Loads the plan and checks its shape. Rejects bad input with a one-line message. | Python 3.9+, standard library. Prototype: `load_plan`, `check_shape` in `src/plan_guard.py` | Yes, by refusing: exit 2 | No |
-| `pg-scope` | Picks the changes read: create or update, not a data source, of a type with a rule. Says when nothing was checked. | Python. Prototype: `check_plan`, `CHANGING`, `_scope_line` | Yes | No |
+| `pg-scope` | Picks the changes read: create or update, not a data source, of a type with a rule. Says when nothing was checked, and sends a plan that creates or updates only unruled types to REVIEW (PG00). | Python. Prototype: `check_plan`, `CHANGING`, `_scope_line` | Yes | No |
 | `pg-rules` | Ten rules tied to exact types. A value known only after apply is `unverified`. | Python. Prototype: `RULES`, the `rule_*` functions, `_has_unknown` | Yes | No |
 | `pg-verdict` | Highest class wins; `--fail-on` maps the decision to an exit code. | Python. Prototype: `decide`, `DECISION_RANK`, `run_check` | Yes | No |
 | `pg-report` | Prints text or GitHub annotations. Escapes plan strings. | Python. Prototype: `render`, `visible`, `escape_annotation` | No | No |
@@ -57,7 +57,8 @@ One short-lived process in the pipeline that already runs `terraform plan`. Ther
 | --- | --- | --- |
 | Plan missing, empty, truncated, not an object, `format_version` not 1.x, or a change missing `address`, `type` or `actions` | Exit 2, one line on stderr, CI step fails | P2 if repeated on one repo, else P3 |
 | Deeply nested JSON | Exit 2, no traceback | P3 |
-| No resource changes, or none of a type with a rule | Output says nothing was checked; the decision is ALLOW. In the design a run that checks nothing on a production plan raises an alert | P4 |
+| A plan with nothing to create or update | Output says nothing was checked and nothing needed checking; the decision is ALLOW | P4 |
+| A plan that creates or updates only types with no rule | Finding PG00 and decision REVIEW: nothing in the plan was read. In the design a run that reads nothing on a production plan also raises an alert | P3 |
 | A value known only after apply | Finding `unverified`: REVIEW | P4 digest |
 | Ledger unavailable (design) | The decision and exit code stand; the record queues locally and the gap is listed | P3 |
 
@@ -103,7 +104,7 @@ One short-lived process in the pipeline that already runs `terraform plan`. Ther
 
 ## 5. Operational architecture
 
-**SLIs.** Decisions per level per repo per week (prototype baseline on harmless synthetic plans: 🟢 3 of 34 sent to review, `step_04_with_guard.py`); input rejections; changes checked over changes in the plan; runs that checked nothing; findings of kind `unverified`; time to decision.
+**SLIs.** Decisions per level per repo per week (prototype baseline on harmless synthetic plans: 🟢 4 of 34 sent to review, `step_04_with_guard.py`); input rejections; changes checked over changes in the plan; runs that checked nothing; findings of kind `unverified`; time to decision.
 
 **SLOs (all 🔴 design targets, none measured).**
 - A decision within 30 seconds of the plan file landing.
@@ -138,7 +139,7 @@ Alignment, not certification. The README's "Aligned to" section cites one source
 
 - **Anything but AWS.** Other providers, module configuration, `planned_values` and values Terraform marks sensitive are not read. Only `resource_changes` is.
 - **Resources already deployed.** A resource the plan does not touch is outside it, and so is any account-wide default.
-- **Joins between resources.** 🟢 3 of 34 harmless plans go to review because a listener is never joined to its load balancer (`step_04_with_guard.py`).
+- **Joins between resources.** 🟢 4 of 34 harmless plans go to review: three because a listener is never joined to its load balancer, one because the plan holds nothing the rules can read (`step_04_with_guard.py`).
 - **The three hard misses.** 🟢 9 of 42 risky plans pass: a split CIDR, a condition that matches everything and a queue policy with no rule (`step_04_with_guard.py`).
 - **A plan from a real Terraform run.** The data follows the shape I know; how a real provider reports an unset attribute varies, and the three forms are in the data.
 - **Standards-derived parameters.** Port lists, ACLs and severities are my assumptions. A bucket ACL granted through `access_control_policy` is not read; RDS is single-instance only.
