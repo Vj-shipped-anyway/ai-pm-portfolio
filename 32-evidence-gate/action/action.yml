@@ -1,0 +1,40 @@
+name: 'Evidence Gate'
+description: 'Fail a pull request that lacks the evidence its AI use-case tier requires, and send tier-label mismatches to a reviewer.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'check-square'
+  color: 'gray-dark'
+inputs:
+  tiers:
+    description: 'Path to the tier-to-evidence table (CSV: evidence_id, evidence_item, first_tier, max_age_days).'
+    required: true
+  registry:
+    description: 'Optional path to the use-case registry (CSV: use_case_id, tier). When a use case is listed, its registry tier sets the bar.'
+    required: false
+    default: ''
+  fail-on:
+    description: 'block, review or never. The step fails at or above this decision.'
+    required: false
+    default: 'block'
+runs:
+  using: 'composite'
+  steps:
+    - name: List repository files
+      shell: bash
+      env:
+        WORKSPACE: ${{ github.workspace }}
+      run: |
+        git -C "$WORKSPACE" ls-files > "$RUNNER_TEMP/evidence_gate_files.txt"
+    - name: Check the evidence
+      shell: bash
+      env:
+        TIERS: ${{ inputs.tiers }}
+        REGISTRY: ${{ inputs.registry }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/evidence_gate.py
+      run: |
+        args=(check --event "$GITHUB_EVENT_PATH" --tiers "$TIERS" --files "$RUNNER_TEMP/evidence_gate_files.txt" --fail-on "$FAIL_ON" --format github)
+        if [ -n "$REGISTRY" ]; then
+          args+=(--registry "$REGISTRY")
+        fi
+        python3 "$SCRIPT" "${args[@]}"

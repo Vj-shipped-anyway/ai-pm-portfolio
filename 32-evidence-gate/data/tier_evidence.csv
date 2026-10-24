@@ -1,0 +1,12 @@
+evidence_id,evidence_item,first_tier,max_age_days
+E01,Use-case card with named line-1 owner,1,365
+E02,Data-source attestation (dataset names and classes),1,180
+E03,Evaluation plan and results summary,2,90
+E04,Privacy and data-handling review,2,365
+E05,Independent validation with effective challenge,3,180
+E06,Human review design for the tier,3,180
+E07,Decision logging and lineage plan,3,180
+E08,Vendor and third-party due diligence,3,365
+E09,Regulatory-scope legal review,4,365
+E10,Fallback and exit plan,4,180
+E11,CRO sign-off,4,90
