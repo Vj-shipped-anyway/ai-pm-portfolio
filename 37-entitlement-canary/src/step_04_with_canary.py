@@ -2,7 +2,7 @@
 
   1. a stratified pack built from the access export (stale access list, nested deny, direct deny,
      ordinary, and at least three canaries per source)
-  2. each canary run with a control query by the user with the widest access first, then the probe
+  2. each canary run with a control query by the entitled user with the widest access first, then the probe
   3. every returned document checked against the resolver, not only the canary's target, using the
      access export from the pull request's branch, so a grant made in the same change is not a leak
   4. notes for a pack that cannot test: inert canaries, canaries run unprimed, sources with too few

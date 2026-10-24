@@ -46,7 +46,7 @@ Standard library only, Python 3.9 or newer. To use it on your own files: `python
 
 ## Use it in CI
 
-[`action/`](./action/README.md) holds a staged GitHub Action and the steps to publish it from its own repository, which a Marketplace listing requires. It has not been published and has not run on GitHub. What is tested is the command it wraps (`tests/test_check.py`, 41 tests in all).
+[`action/`](./action/README.md) holds a staged GitHub Action and the steps to publish it from its own repository, which a Marketplace listing requires. It has not been published and has not run on GitHub. What is tested is the command it wraps (`tests/test_check.py`; the whole suite has 41 tests).
 
 ## How the four steps fit
 
