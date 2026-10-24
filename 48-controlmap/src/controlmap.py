@@ -308,6 +308,9 @@ def run_check(ob_path, ctl_path, terms_path, as_of, grace, fail_on, fmt) -> int:
     except (OSError, ValueError, csv.Error) as e:
         print(f"input error: {clean(e)}", file=sys.stderr)
         return 2
+    if as_of is None:
+        print(f"note: no --as-of given, so evidence age is counted to today, {when.isoformat()}; "
+              "pass --as-of to make the run repeatable", file=sys.stderr)
     res = analyze(obligations, controls, terms, g)
     n_retired = sum(1 for c in controls if not c["active"])
     print(render_csv(res) if fmt == "csv" else render_text(res, when.isoformat(), len(controls), n_retired))

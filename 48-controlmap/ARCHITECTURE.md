@@ -58,7 +58,7 @@ One short-lived process, run after an export lands or on a monthly schedule. The
 | A bad status, test cycle, class list or date, evidence dated after the as-of date, or `--grace` not a positive number | Exit 2 with the reason | P3 |
 | A theme with no dictionary row | UNMAPPED, listed in the output | P4 digest |
 | No usable control for a theme | UNCOVERED, with any negated phrase noted in the reason | P3 when the count rises |
-| `--as-of` omitted | Today's date is used. In the design a scheduled run always records the date it used | None |
+| `--as-of` omitted | Today's date is used and a note on stderr names it, so a log shows which date a status was counted to. In the design a scheduled run always records the date it used | None |
 | Ledger unavailable (design) | The result and exit code stand; the record queues locally and the gap is listed | P3 |
 
 **Latency.** The prototype is untimed. 🔴 Design target: a crosswalk within 10 minutes of an export landing. Recovery is a re-run on the same files and as-of date.

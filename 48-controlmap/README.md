@@ -57,7 +57,7 @@ Standard library only, Python 3.9 or newer. On your own files:
 python3 controlmap.py check obligations.csv controls.csv --terms terms.csv --as-of 2026-09-30
 ```
 
-Columns are listed at the top of [`src/controlmap.py`](./src/controlmap.py). Options: `--as-of` (default: today), `--grace` (evidence is fresh up to this many test cycles old), `--format text|csv`, and `--fail-on uncovered|gap|never`. It exits 1 when the chosen level is reached (`uncovered`, the default, counts UNCOVERED and UNMAPPED; `gap` counts anything but COVERED) and 2 on malformed input, with a one-line message on stderr. Text and CSV output escape control characters in your data, and CSV cells that start with `=`, `+`, `-` or `@` get a leading apostrophe.
+Columns are listed at the top of [`src/controlmap.py`](./src/controlmap.py). Options: `--as-of` (default: today; the run then prints a note on stderr with the date it used), `--grace` (evidence is fresh up to this many test cycles old), `--format text|csv`, and `--fail-on uncovered|gap|never`. It exits 1 when the chosen level is reached (`uncovered`, the default, counts UNCOVERED and UNMAPPED; `gap` counts anything but COVERED) and 2 on malformed input, with a one-line message on stderr. Text and CSV output escape control characters in your data, and CSV cells that start with `=`, `+`, `-` or `@` get a leading apostrophe.
 
 ## What the numbers say
 
@@ -212,7 +212,7 @@ The PM artifacts that show how I would run this product if I owned the seat. Thi
 - [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
 - [`data/`](./data/): the synthetic obligations, controls, dictionary, the planted truth and the seeded generator. `data/README.md` explains how the truth is set.
 - [`src/`](./src/): `controlmap.py`, `common.py`, the four step scripts and the demo builder.
-- [`tests/`](./tests/): 47 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+- [`tests/`](./tests/): 48 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
 
 Run the four steps end to end:
 

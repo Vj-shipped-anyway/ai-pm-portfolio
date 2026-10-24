@@ -45,6 +45,19 @@ class CliCase(unittest.TestCase):
 
 
 class ExitCodeTests(CliCase):
+    def test_omitting_as_of_says_which_date_was_used(self):
+        import datetime
+        o, c, t = self.files()
+        today = datetime.date.today().isoformat()
+        code, out, err = run(["check", o, c, "--terms", t])
+        self.assertIn(code, (0, 1))
+        self.assertIn("no --as-of given", err)
+        self.assertIn(today, err)
+        self.assertIn("as of " + today, out.splitlines()[0])
+        code, out, err = run(["check", o, c, "--terms", t, "--as-of", "2026-06-30"])
+        self.assertEqual(err, "")
+        self.assertIn("as of 2026-06-30", out.splitlines()[0])
+
     def test_demo_runs_and_exits_0(self):
         code, out, _ = run(["--demo"])
         self.assertEqual(code, 0)
