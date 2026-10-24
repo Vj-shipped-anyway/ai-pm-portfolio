@@ -7,6 +7,7 @@ the floor stops and what it stops by mistake.
 
 Run (from src/):  python3 step_02_pass_rate_floor.py
 """
+import math
 from collections import Counter
 
 from common import load_runs
@@ -17,7 +18,7 @@ _, runs = load_runs()
 
 
 def floor_decision(run: dict) -> str:
-    rate = sum(r["passes"] / r["trials"] for r in run["rows"]) / len(run["rows"])
+    rate = math.fsum(r["passes"] / r["trials"] for r in run["rows"]) / len(run["rows"])   # exact sum: sum() changed its float rounding in Python 3.12
     return "BLOCK" if rate < FLOOR else "ALLOW"
 
 

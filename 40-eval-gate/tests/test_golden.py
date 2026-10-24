@@ -33,7 +33,7 @@ class GoldenTests(unittest.TestCase):
 
     def test_step_02(self):
         self.lines("step_02_pass_rate_floor.py", [
-            "should-block runs stopped: 13 of 25", "should-review runs stopped: 4 of 8", "fine runs stopped: 1 of 31",
+            "should-block runs stopped: 13 of 25", "should-review runs stopped: 3 of 8", "fine runs stopped: 1 of 31",
             "silent_swap_flat 6"])
 
     def test_step_03(self):

@@ -22,6 +22,7 @@ The thresholds are assumptions (see the README), not values from a standard.
 """
 from __future__ import annotations
 
+import math
 import argparse
 import csv
 import json
@@ -160,8 +161,8 @@ def evaluate(probes: list, rows: list, pin: str, review_drop: float = REVIEW_DRO
                                  f"{len(missing)} of {len(by_id)} probes have no result ({shown}); {len(high)} of them high severity."))
 
     rates = {r["probe_id"]: r["passes"] / r["trials"] for r in scored}
-    current = sum(rates.values()) / len(rates)
-    baseline = sum(by_id[i]["baseline_rate"] for i in rates) / len(rates)
+    current = math.fsum(rates.values()) / len(rates)   # exact sum: sum() changed its float rounding in Python 3.12
+    baseline = math.fsum(by_id[i]["baseline_rate"] for i in rates) / len(rates)
     drop = round(baseline - current, 4)
     if drop > review_drop:
         findings.append(_finding("overall_drop", "BLOCK" if drop > block_drop else "REVIEW", "",
