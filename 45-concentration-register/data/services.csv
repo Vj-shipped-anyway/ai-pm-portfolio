@@ -1,0 +1,65 @@
+service_id,name,owner_type,criticality,provider,region,resilience,standby_provider,standby_region
+P-01,identity platform,saas,critical,CP-3,R1,warm_standby,CP-3,R2
+P-02,message bus,internal,critical,CP-1,R1,single,,
+P-03,primary ledger database,internal,critical,CP-2,R2,single,,
+P-04,secrets vault,saas,important,,,,,
+P-05,api gateway,internal,important,CP-3,R2,active_active,CP-1,R1
+P-06,file transfer hub,internal,important,CP-1,R2,warm_standby,CP-3,R1
+P-07,observability stack,saas,important,CP-3,R1,single,,
+P-08,document store,internal,important,CP-2,R1,single,,
+P-09,job scheduler,internal,important,CP-1,R1,single,,
+P-10,notification relay,saas,important,,,,,
+P-11,analytics warehouse,saas,important,CP-1,R1,single,,
+P-12,edge cache,internal,important,CP-4,R1,warm_standby,CP-1,R1
+S-01,card authorization api,internal,standard,CP-1,R1,single,,
+S-02,card authorization portal,internal,important,CP-3,R1,warm_standby,CP-1,R2
+S-03,card authorization batch,internal,critical,CP-1,R1,single,,
+S-04,card authorization engine,internal,critical,CP-1,R2,active_active,CP-4,R1
+S-05,wire transfers api,internal,standard,CP-3,R1,warm_standby,CP-3,R2
+S-06,wire transfers portal,internal,important,CP-2,R2,single,,
+S-07,wire transfers batch,internal,standard,CP-2,R1,single,,
+S-08,wire transfers engine,saas,important,,,,,
+S-09,retail payments api,internal,important,CP-4,R1,active_active,CP-1,R1
+S-10,retail payments portal,internal,critical,CP-1,R1,active_active,CP-3,R2
+S-11,retail payments batch,internal,important,CP-3,R1,single,,
+S-12,retail payments engine,internal,standard,CP-4,R1,single,,
+S-13,loan origination api,saas,critical,CP-1,R1,active_active,CP-2,R1
+S-14,loan origination portal,internal,critical,CP-4,R1,warm_standby,CP-2,R1
+S-15,loan origination batch,internal,critical,CP-2,R1,single,,
+S-16,loan origination engine,saas,standard,,,,,
+S-17,fraud screening api,internal,critical,CP-1,R3,active_active,CP-2,R2
+S-18,fraud screening portal,internal,important,CP-3,R1,active_active,CP-2,R1
+S-19,fraud screening batch,internal,critical,CP-2,R1,single,,
+S-20,fraud screening engine,internal,standard,CP-1,R1,warm_standby,CP-4,R1
+S-21,customer onboarding api,internal,standard,CP-3,R2,single,,
+S-22,customer onboarding portal,internal,standard,CP-3,R2,single,,
+S-23,customer onboarding batch,internal,important,CP-2,R1,warm_standby,CP-1,R1
+S-24,customer onboarding engine,saas,important,,,,,
+S-25,statement delivery api,internal,standard,CP-1,R1,single,,
+S-26,statement delivery portal,internal,important,CP-2,R1,single,,
+S-27,statement delivery batch,internal,important,CP-1,R2,single,,
+S-28,statement delivery engine,internal,standard,CP-1,R1,single,,
+S-29,treasury reporting api,internal,important,CP-4,R1,single,,
+S-30,treasury reporting portal,internal,important,CP-2,R1,single,,
+S-31,treasury reporting batch,internal,important,CP-1,R1,warm_standby,CP-1,R2
+S-32,treasury reporting engine,saas,critical,CP-1,R1,active_active,CP-1,R3
+S-33,dispute handling api,internal,critical,CP-1,R1,single,,
+S-34,dispute handling portal,internal,standard,CP-1,R1,warm_standby,CP-2,R2
+S-35,dispute handling batch,internal,critical,CP-1,R2,warm_standby,CP-1,R1
+S-36,dispute handling engine,internal,standard,CP-3,R2,single,,
+S-37,mobile banking api,internal,critical,CP-4,R1,single,,
+S-38,mobile banking portal,internal,standard,CP-2,R1,single,,
+S-39,mobile banking batch,saas,standard,,,,,
+S-40,mobile banking engine,saas,critical,,,,,
+S-41,online banking api,internal,critical,CP-3,R2,single,,
+S-42,online banking portal,internal,critical,,,,,
+S-43,online banking batch,internal,important,CP-3,R2,active_active,CP-1,R1
+S-44,online banking engine,saas,critical,,,,,
+S-45,regulatory reporting api,internal,critical,CP-2,R1,warm_standby,CP-2,R2
+S-46,regulatory reporting portal,internal,critical,CP-4,R1,single,,
+S-47,regulatory reporting batch,internal,critical,CP-4,R1,active_active,CP-1,R1
+S-48,regulatory reporting engine,internal,critical,CP-2,R1,active_active,CP-2,R2
+S-49,kyc checks api,internal,critical,CP-4,R1,warm_standby,CP-4,R1
+S-50,kyc checks portal,internal,important,CP-1,R2,active_active,CP-3,R1
+S-51,kyc checks batch,internal,important,CP-3,R1,single,,
+S-52,kyc checks engine,internal,critical,CP-3,R1,single,,

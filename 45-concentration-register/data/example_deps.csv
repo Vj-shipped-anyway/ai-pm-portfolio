@@ -1,0 +1,10 @@
+service_id,depends_on,kind
+P-2,P-1,hard
+S-01,P-1,hard
+S-02,P-1,hard
+S-02,P-2,soft
+S-03,P-2,hard
+S-04,P-1,hard
+S-05,P-2,hard
+S-06,P-1,hard
+S-07,P-2,soft
