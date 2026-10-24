@@ -8,7 +8,7 @@ Command line (from src/):
 Exit status: 0 when no finding reaches --fail-on, 1 when one does, 2 for bad or malformed input.
 There is no model in this file: the parser, the rules, the breadth score and the proposal are plain rules.
 
-Manifest shape (my own, modelled on a tools/list answer plus the grant that sits behind it):
+Manifest shape (my own, modeled on a tools/list answer plus the grant that sits behind it):
     {"server": {"name": ...},
      "scope_catalog": [{"id": ..., "resource": ..., "access": "read|write|delete|admin|any"}],
      "granted_scopes": [scope ids the server holds],

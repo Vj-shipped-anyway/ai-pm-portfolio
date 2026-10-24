@@ -1,10 +1,11 @@
 """Step 4 - The fix: the full lint and a least-privilege proposal.
 
-Four rules read each manifest, all plain rules and no model:
+Five rules read each manifest, all plain rules and no model:
   unused_grant            a granted scope that no tool requires
   wildcard_narrowable     a wildcard grant of which the tools require only part
   tool_scope_above_hint   a tool asks for more access than its own hints allow
   tool_requires_wildcard  a tool with no hint asks for a wildcard
+  tool_scope_not_granted  a tool requires a scope the server is not granted (no manifest here raises it)
 The proposal keeps what a tool requires after the tools are cut back to their hints, narrows a wildcard
 to the scopes required and removes the rest. It never adds a scope.
 
