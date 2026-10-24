@@ -72,7 +72,7 @@ It exits 1 above the limit, so a pipeline step can fail on it, and 2 for malform
 - 🟢 24 lines use a key the policy does not list: $13,014.07 is recovered by the account default and $590.88 is left. 16 lines ($1,731.48) have the hyphen dropped from the value and are all left (`step_04`).
 - 🟢 What is left for a person: conflicting_tags $12,362.31, no_owner_found $10,431.25, unknown_cost_center $9,320.29, closed_cost_center $8,766.90 (`step_04`). A present tag that is bad is refused, not overridden by the account default, so these need a human.
 - **The data and the rules share an author.** I planted the defects and wrote the rules, so 89.9% is a ceiling for these rules on this mix, not a rate on a real bill. The mix itself is my guess. Four planted kinds are hard on purpose, and the rules miss all of them.
-- Not covered: bills that span months, commitment amortisation, tags on resources that bill under another resource id, and any cost center hierarchy. Matching ignores case and spaces and nothing else.
+- Not covered: bills that span months, commitment amortization, tags on resources that bill under another resource id, and any cost center hierarchy. Matching ignores case and spaces and nothing else.
 
 ## Modeled and hypothetical
 

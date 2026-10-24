@@ -13,7 +13,7 @@ The person in cloud finance who produces the monthly chargeback, and the platfor
 4. Prints the unallocated spend by reason and the largest unallocated resources, and exits 1 above a limit.
 
 ## Out of scope
-Fetching a real bill; amortising commitments; forecasting; choosing a shared-cost basis for the user; any model call; hosting.
+Fetching a real bill; amortizing commitments; forecasting; choosing a shared-cost basis for the user; any model call; hosting.
 
 ## Success, as the scripts print it
 Spend landing on the planted owner (89.9% against 64.0% for a plain tag report); allocated plus unallocated equal to the bill to the cent; hard negatives not refused or flagged; the known misses named with their dollars.
