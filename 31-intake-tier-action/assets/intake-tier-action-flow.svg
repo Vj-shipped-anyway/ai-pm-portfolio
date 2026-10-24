@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">Intake Tier Action: one AI intake issue read by its form headings, cross-checked and recomputed, ending in a tier label or needs-info</title>
+  <desc id="desc">Five-stage flow showing how an AI intake issue body moves through a reader that uses the form headings and refuses to guess, a cross-check of data class and vendor model against a catalog and a registry, a recompute of the tier from six answers, a reconciliation of the labels the tool owns, and one comment, ending in a tier from 1 to 4 or needs-info that sets the labels and the exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts the declared tier as the label, an issue form read by a regex, and Intake Tier Action on 160 synthetic intake issues.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">Intake Tier Action - an issue form that recomputes its own tier</text>
+  <text x="20" y="52" class="subheader">The form is read by its headings. What cannot be read is not tiered.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="380" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 160 intake issues, 24 edited after opening</text>
+
+  <!-- Stage 1: READ -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="30" y="120" class="stage-num">1 . READ</text>
+  <text x="30" y="142" class="stage-title">Read the form</text>
+  <text x="30" y="162" class="stage-sub">by its own headings</text>
+  <text x="30" y="177" class="stage-sub">missing, blank or</text>
+  <text x="30" y="192" class="stage-sub">repeated: needs-info</text>
+  <text x="30" y="212" class="meta-strong">18 sent to needs-info</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: CROSS-CHECK -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="209" y="120" class="stage-num">2 . CROSS-CHECK</text>
+  <text x="209" y="142" class="stage-title">Cross-check</text>
+  <text x="209" y="162" class="stage-sub">data class: higher of</text>
+  <text x="209" y="177" class="stage-sub">form and catalog</text>
+  <text x="209" y="192" class="stage-sub">vendor: form, registry</text>
+  <text x="209" y="212" class="meta-block">32 forms below catalog</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: RUBRIC -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="388" y="120" class="stage-num">3 . RUBRIC</text>
+  <text x="388" y="142" class="stage-title">Recompute tier</text>
+  <text x="388" y="162" class="stage-sub">six answers add points</text>
+  <text x="388" y="177" class="stage-sub">tier 1 to 4, my rubric</text>
+  <text x="388" y="192" class="stage-sub">unsure counts as yes</text>
+  <text x="388" y="212" class="meta-strong">129 of 160 match</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: LABELS -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="567" y="120" class="stage-num">4 . LABELS</text>
+  <text x="567" y="142" class="stage-title">Reconcile labels</text>
+  <text x="567" y="162" class="stage-sub">add its own tier label</text>
+  <text x="567" y="177" class="stage-sub">remove only stale ones</text>
+  <text x="567" y="192" class="stage-sub">keep every other label</text>
+  <text x="567" y="212" class="meta-strong">160 of 160 one label</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: COMMENT -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="746" y="120" class="stage-num">5 . COMMENT</text>
+  <text x="746" y="142" class="stage-title">One comment</text>
+  <text x="746" y="162" class="stage-sub">marker line first</text>
+  <text x="746" y="177" class="stage-sub">checks and evidence</text>
+  <text x="746" y="192" class="stage-sub">only safe text echoed</text>
+  <text x="746" y="212" class="meta-strong">0 of 160 echo a tag</text>
+
+  <!-- Arrow from stage 5 down to the result -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: RESULT -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . RESULT</text>
+  <text x="262" y="313" class="stage-title">Tier 1 to 4 or needs-info</text>
+  <text x="262" y="330" class="stage-sub">labels to add and remove, one comment, exit 0, 1 or 2</text>
+  <text x="262" y="344" class="meta-strong">46 of 57 tier 3-4 found, 4 put at tier 1-2</text>
+
+  <!-- Workflow box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">WORKFLOW</text>
+  <text x="32" y="313" class="stage-title">Applies the plan</text>
+  <text x="32" y="330" class="stage-sub">edits labels with gh</text>
+  <text x="32" y="344" class="stage-sub">edits the one comment</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">published Action</text>
+  <text x="742" y="328" class="stage-sub">live catalog feeds</text>
+  <text x="742" y="343" class="stage-sub">decision ledger</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">Declared tier as label</text>
+  <text x="32" y="406" class="meta-block">21 of 55 tier 3-4 at tier 1-2</text>
+  <text x="32" y="424" class="stage-sub">103 of 151 equal the reference</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Form plus a regex</text>
+  <text x="332" y="406" class="meta-block">18 of 57 tier 3-4 at tier 1-2</text>
+  <text x="332" y="424" class="stage-sub">14 of 160 unreadable still labeled</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Intake Tier Action</text>
+  <text x="632" y="406" class="meta-strong">4 of 57 tier 3-4 at tier 1-2</text>
+  <text x="632" y="424" class="stage-sub">known limit: 11 tiered low, 2 wrong</text>
+</svg>
