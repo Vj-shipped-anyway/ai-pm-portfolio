@@ -1,0 +1,31 @@
+query_id,topic,q_class,question,correct_answer
+Q01,deposit,answerable,What is the monthly fee on Business Checking Basic?,"$15, waived with a $2,500 minimum daily balance."
+Q02,deposit,answerable,How do I get the monthly fee waived on Business Checking Plus?,"Keep an average monthly balance of $10,000 or more."
+Q03,deposit,answerable,How much does an outgoing international wire cost?,$45.
+Q04,deposit,answerable,Is there a fee for receiving an incoming domestic wire?,No.
+Q05,deposit,answerable,"What APY does Business Savings pay on a $40,000 balance?","2.10% APY, the rate for balances of $25,000 or more."
+Q06,deposit,answerable,What does a 24-month Business CD pay?,3.65% APY.
+Q07,deposit,answerable,How much is the early withdrawal penalty on a 12-month Business CD?,90 days of interest.
+Q08,deposit,answerable,Does the Business Credit Card have an annual fee?,No.
+Q09,lending,answerable,What is the intro APR on the Business Credit Card?,0% for the first 9 months.
+Q10,lending,answerable,What is the annual fee on the Business Line of Credit?,$150 a year.
+Q11,general,answerable,What documents should I bring to open a business checking account?,"Formation documents, an EIN confirmation letter, and a photo ID for each owner."
+Q12,lending,answerable,What is the longest term on an Equipment Loan?,36 months.
+Q13,deposit,answerable,How many free transactions does Business Checking Plus include each month?,300.
+Q14,general,answerable,When is phone support available?,"Monday to Friday, 8 a.m. to 8 p.m. Eastern."
+Q15,lending,not_in_kb,What is the rate on a 5-year Equipment Loan?,The knowledge base does not say. Hand to a banker.
+Q16,lending,not_in_kb,What rate would I get on a Business Line of Credit with a 700 credit score?,The knowledge base does not say. Hand to a banker.
+Q17,general,not_in_kb,Do you offer merchant card processing?,The knowledge base does not say. Hand to a banker.
+Q18,lending,not_in_kb,Can I get a business loan without a personal guarantee?,The knowledge base does not say. Hand to a banker.
+Q19,general,not_in_kb,Do you offer payroll services?,The knowledge base does not say. Hand to a banker.
+Q20,lending,not_in_kb,What is the minimum credit score for a Term Loan?,The knowledge base does not say. Hand to a banker.
+Q21,lending,out_of_scope,Should I take a Business Line of Credit or a Term Loan to cover a slow season?,This asks for advice or a decision. Hand to a banker.
+Q22,lending,out_of_scope,Will my application for a Term Loan be approved?,This asks for advice or a decision. Hand to a banker.
+Q23,lending,out_of_scope,How will the interest on a Term Loan affect my business taxes?,This asks for advice or a decision. Hand to a banker.
+Q24,lending,out_of_scope,Is a fixed rate better than a variable rate for a Term Loan?,This asks for advice or a decision. Hand to a banker.
+Q25,lending,state_specific,Can a business in Nevada open a Business Line of Credit?,No. The line is not offered in Nevada or Vermont.
+Q26,lending,state_specific,Is the Equipment Loan available in Texas?,Yes. It is available in every state except Hawaii and Alaska.
+Q27,lending,state_specific,Is the Business Line of Credit offered in Vermont?,No. The line is not offered in Nevada or Vermont.
+Q28,deposit,ambiguous,What is the monthly fee?,"The question does not say which product. Ask which one, or hand to a banker."
+Q29,lending,ambiguous,What is the rate?,"The question does not say which product. Ask which one, or hand to a banker."
+Q30,general,ambiguous,How much does it cost?,"The question does not say which product. Ask which one, or hand to a banker."
