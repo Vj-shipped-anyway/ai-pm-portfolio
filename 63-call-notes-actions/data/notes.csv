@@ -1,0 +1,706 @@
+note_id,client_id,call_date,sent_id,text
+N-001,CL-008,2026-10-15,1,Spoke with Ms. Gallagher for 16 minutes about the mortgage rate.
+N-001,CL-008,2026-10-15,2,She asked me to hold off calling her until January.
+N-001,CL-008,2026-10-15,3,I'll schedule the annual review with Ms. Gallagher for 26 October.
+N-001,CL-008,2026-10-15,4,Agreed that I forward the fee schedule by 26 October.
+N-002,CL-015,2026-10-14,1,Spoke with Ms. Novak for 16 minutes about the mortgage rate.
+N-002,CL-015,2026-10-14,2,I already sent Ms. Novak the product summary last week.
+N-002,CL-015,2026-10-14,3,She complained about the wire fee.
+N-002,CL-015,2026-10-14,4,I will send Ms. Novak the product summary by tomorrow.
+N-002,CL-015,2026-10-14,5,I'll phone Ms. Novak on 26 October to talk through the overdraft.
+N-003,CL-022,2026-10-26,1,Spoke with Ms. Umarova for 19 minutes about the mortgage rate.
+N-003,CL-022,2026-10-26,2,I'll phone Ms. Umarova on 3 November to talk through the overdraft.
+N-003,CL-022,2026-10-26,3,I'll schedule the annual review with Ms. Umarova for Thursday.
+N-003,CL-022,2026-10-26,4,She now prefers contact by phone.
+N-003,CL-022,2026-10-26,5,"If the term deposit rate moves by more than 15 basis points, she wants me to call her."
+N-003,CL-022,2026-10-26,6,She turned down the increase of the wire limit to $90k.
+N-004,CL-029,2026-10-06,1,Spoke with Ms. Bianchi for 15 minutes about the wire limit.
+N-004,CL-029,2026-10-06,2,I will send Ms. Bianchi the account statement by 19 October.
+N-004,CL-029,2026-10-06,3,She returned the address proof last week.
+N-004,CL-029,2026-10-06,4,She turned down the increase of the overdraft limit to $30k.
+N-004,CL-029,2026-10-06,5,I'll phone Ms. Bianchi on Friday to talk through the card replacement.
+N-004,CL-029,2026-10-06,6,Rates were discussed at length.
+N-004,CL-029,2026-10-06,7,She travels in November and reads email in the evening.
+N-004,CL-029,2026-10-06,8,She will upload the signed mandate by 15 October.
+N-005,CL-006,2026-10-26,1,Spoke with Mr. Eriksen for 11 minutes about the overdraft.
+N-005,CL-006,2026-10-26,2,He was pleased with the last statement.
+N-005,CL-006,2026-10-26,3,"He turned down the increase of the overdraft limit to $70,000."
+N-005,CL-006,2026-10-26,4,He will return the signed mandate if the branch confirms the fee.
+N-005,CL-006,2026-10-26,5,He returned the income proof last week.
+N-005,CL-006,2026-10-26,6,He will upload the signed mandate by 3 November.
+N-006,CL-013,2026-10-19,1,Spoke with Ms. Lindqvist for 26 minutes about the card replacement.
+N-006,CL-013,2026-10-19,2,She turned down the increase of the wire limit to $15k.
+N-006,CL-013,2026-10-19,3,She was unhappy about the wire fee and wants it logged.
+N-006,CL-013,2026-10-19,4,I will call her on 29 October about the overdraft.
+N-006,CL-013,2026-10-19,5,She runs a small catering business.
+N-006,CL-013,2026-10-19,6,I might send the fee schedule next month if there is time.
+N-006,CL-013,2026-10-19,7,She now prefers contact by phone.
+N-006,CL-013,2026-10-19,8,She asked me to hold off calling her until January.
+N-007,CL-020,2026-10-06,1,Spoke with Ms. Santos for 20 minutes about the card replacement.
+N-007,CL-020,2026-10-06,2,Rates were discussed at length.
+N-007,CL-020,2026-10-06,3,She said there is no need to send the rate sheet.
+N-007,CL-020,2026-10-06,4,I will book the rate review for Monday.
+N-007,CL-020,2026-10-06,5,"She wants the wire limit increased to $75,000; I will submit the request by Monday."
+N-007,CL-020,2026-10-06,6,She declined the offer to raise the overdraft limit to $55k.
+N-007,CL-020,2026-10-06,7,She asked me to hold off calling her until January.
+N-008,CL-027,2026-10-02,1,Spoke with Ms. Zielinski for 18 minutes about the term deposit.
+N-008,CL-027,2026-10-02,2,She wants the overdraft limit increased to $40k; I will submit the request by 13 October.
+N-008,CL-027,2026-10-02,3,I'll schedule the annual review with Ms. Zielinski for Friday.
+N-008,CL-027,2026-10-02,4,I will send Ms. Zielinski the account statement by 14 October; she does not need anything else.
+N-008,CL-027,2026-10-02,5,I'll try to send the rate sheet by Monday.
+N-008,CL-027,2026-10-02,6,She is considering a larger deposit in the new year.
+N-008,CL-027,2026-10-02,7,Rates were discussed at length.
+N-009,CL-004,2026-10-19,1,Spoke with Ms. Chen for 10 minutes about the mortgage rate.
+N-009,CL-004,2026-10-19,2,"She declined the offer to raise the overdraft limit to $40,000."
+N-009,CL-004,2026-10-19,3,She wants the wire limit increased to $95k; I will submit the request by 29 October.
+N-009,CL-004,2026-10-19,4,She asked me to hold off calling her until January.
+N-009,CL-004,2026-10-19,5,"Ms. Chen will return the signed mandate by 26 October, and I will send the account statement by 30 October."
+N-010,CL-011,2026-10-12,1,Spoke with Ms. Jansen for 11 minutes about the term deposit.
+N-010,CL-011,2026-10-12,2,She runs a small catering business.
+N-010,CL-011,2026-10-12,3,She turned down the increase of the wire limit to thirty thousand dollars.
+N-010,CL-011,2026-10-12,4,I already sent Ms. Jansen the term sheet last week.
+N-010,CL-011,2026-10-12,5,"Ms. Jansen will return the income proof by Monday, and I will send the product summary by Friday."
+N-011,CL-018,2026-10-01,1,Spoke with Ms. Quinn for 24 minutes about the card replacement.
+N-011,CL-018,2026-10-01,2,I will book the rate review for Friday.
+N-011,CL-018,2026-10-01,3,She asked me to ring her on 12 October about the term deposit.
+N-011,CL-018,2026-10-01,4,"She declined the offer to raise the wire limit to $95,000."
+N-011,CL-018,2026-10-01,5,I will send Ms. Quinn the product summary once she confirms the amount.
+N-012,CL-025,2026-10-08,1,Spoke with Ms. Xu for 13 minutes about the term deposit.
+N-012,CL-025,2026-10-08,2,I'll try to send the account statement by 16 October.
+N-012,CL-025,2026-10-08,3,I will book the portfolio review for 19 October.
+N-012,CL-025,2026-10-08,4,"If the term deposit rate moves by more than 10 basis points, she wants me to call her."
+N-012,CL-025,2026-10-08,5,She now prefers contact by phone.
+N-012,CL-025,2026-10-08,6,She asked me to ring her on Wednesday about the overdraft.
+N-013,CL-002,2026-10-08,1,Spoke with Mr. Alvarez for 22 minutes about the card replacement.
+N-013,CL-002,2026-10-08,2,He now prefers contact by post.
+N-013,CL-002,2026-10-08,3,He travels in November and reads email in the evening.
+N-013,CL-002,2026-10-08,4,He does not want a follow-up call this quarter.
+N-013,CL-002,2026-10-08,5,He said there is no need to send the account statement.
+N-014,CL-009,2026-10-01,1,Spoke with Mr. Haddad for 24 minutes about the wire limit.
+N-014,CL-009,2026-10-01,2,I will send Mr. Haddad the product summary by Thursday.
+N-014,CL-009,2026-10-01,3,He will upload the KYC form by 13 October.
+N-014,CL-009,2026-10-01,4,I will try to call him on Monday about the term deposit.
+N-014,CL-009,2026-10-01,5,I already sent Mr. Haddad the term sheet last week.
+N-015,CL-016,2026-10-26,1,Spoke with Mr. Oyelaran for 8 minutes about the wire limit.
+N-015,CL-016,2026-10-26,2,I will try to call him on 6 November about the mortgage rate.
+N-015,CL-016,2026-10-26,3,Mr. Oyelaran will return the KYC form by 4 November.
+N-015,CL-016,2026-10-26,4,He asked to be contacted by post from now on.
+N-015,CL-016,2026-10-26,5,He declined the offer to raise the wire limit to $65k.
+N-015,CL-016,2026-10-26,6,Rates were discussed at length.
+N-016,CL-023,2026-10-05,1,Spoke with Ms. Varga for 18 minutes about the wire limit.
+N-016,CL-023,2026-10-05,2,I'll try to send the rate sheet by 13 October.
+N-016,CL-023,2026-10-05,3,I will call her on 12 October about the wire limit.
+N-016,CL-023,2026-10-05,4,She wants the wire limit increased to $65k; I will submit the request by tomorrow.
+N-016,CL-023,2026-10-05,5,"If the mortgage rate moves by more than 50 basis points, she wants me to call her."
+N-016,CL-023,2026-10-05,6,She complained about the statement error.
+N-017,CL-030,2026-10-26,1,Spoke with Mr. Castillo for 29 minutes about the wire limit.
+N-017,CL-030,2026-10-26,2,I'll email the rate sheet to Mr. Castillo by 5 November.
+N-017,CL-030,2026-10-26,3,I'll phone Mr. Castillo on 9 November to talk through the wire limit.
+N-017,CL-030,2026-10-26,4,He returned the signed mandate last week.
+N-017,CL-030,2026-10-26,5,He does not want a follow-up call this quarter.
+N-017,CL-030,2026-10-26,6,He complained about the statement error.
+N-017,CL-030,2026-10-26,7,He said there is no need to send the fee schedule.
+N-018,CL-007,2026-10-05,1,Spoke with Mr. Farouk for 12 minutes about the term deposit.
+N-018,CL-007,2026-10-05,2,He asked to be contacted by post from now on.
+N-018,CL-007,2026-10-05,3,I will book the annual review for 9 October.
+N-018,CL-007,2026-10-05,4,I already sent Mr. Farouk the product summary last week.
+N-018,CL-007,2026-10-05,5,He returned the KYC form last week.
+N-019,CL-014,2026-10-12,1,Spoke with Mr. Moreau for 13 minutes about the card replacement.
+N-019,CL-014,2026-10-12,2,I'll phone Mr. Moreau on 19 October to talk through the card replacement.
+N-019,CL-014,2026-10-12,3,He said there is no need to send the rate sheet.
+N-020,CL-021,2026-10-19,1,Spoke with Mr. Tanaka for 8 minutes about the overdraft.
+N-020,CL-021,2026-10-19,2,He declined the offer to raise the wire limit to seventy-five thousand dollars.
+N-020,CL-021,2026-10-19,3,"He wants the overdraft limit increased to $20,000; I will submit the request by 29 October."
+N-020,CL-021,2026-10-19,4,I will call him on Monday about the wire limit.
+N-020,CL-021,2026-10-19,5,He was pleased with the last statement.
+N-020,CL-021,2026-10-19,6,"He turned down the increase of the overdraft limit to $40,000."
+N-020,CL-021,2026-10-19,7,He is considering a larger deposit in the new year.
+N-020,CL-021,2026-10-19,8,He declined the offer to raise the wire limit to $75k.
+N-020,CL-021,2026-10-19,9,I'll email the product summary to Mr. Tanaka by tomorrow.
+N-021,CL-028,2026-10-19,1,Spoke with Mr. Abebe for 18 minutes about the card replacement.
+N-021,CL-028,2026-10-19,2,He was unhappy about the statement error and wants it logged.
+N-021,CL-028,2026-10-19,3,I'll phone Mr. Abebe on 28 October to talk through the wire limit.
+N-021,CL-028,2026-10-19,4,I will send Mr. Abebe the rate sheet once he confirms the amount.
+N-022,CL-005,2026-10-12,1,Spoke with Ms. Dubois for 16 minutes about the card replacement.
+N-022,CL-005,2026-10-12,2,She asked to be contacted by phone from now on.
+N-022,CL-005,2026-10-12,3,She holds a term deposit and a current account with us.
+N-022,CL-005,2026-10-12,4,I will send Ms. Dubois the account statement by 26 October.
+N-022,CL-005,2026-10-12,5,I might send the rate sheet next month if there is time.
+N-022,CL-005,2026-10-12,6,She does not want a follow-up call this quarter.
+N-022,CL-005,2026-10-12,7,Ms. Dubois will return the KYC form by Monday.
+N-022,CL-005,2026-10-12,8,She runs a small catering business.
+N-023,CL-012,2026-10-07,1,Spoke with Mr. Kowalski for 10 minutes about the overdraft.
+N-023,CL-012,2026-10-07,2,He was unhappy about the card replacement delay and wants it logged.
+N-023,CL-012,2026-10-07,3,He will upload the signed mandate by 19 October.
+N-023,CL-012,2026-10-07,4,He asked me to hold off calling him until January.
+N-024,CL-019,2026-10-22,1,Spoke with Mr. Rahman for 29 minutes about the mortgage rate.
+N-024,CL-019,2026-10-22,2,I will call him on Wednesday about the mortgage rate.
+N-024,CL-019,2026-10-22,3,I called him yesterday about the card replacement.
+N-024,CL-019,2026-10-22,4,Rates were discussed at length.
+N-024,CL-019,2026-10-22,5,He asked to be contacted by post from now on.
+N-024,CL-019,2026-10-22,6,He travels in November and reads email in the evening.
+N-024,CL-019,2026-10-22,7,I'll email the product summary to Mr. Rahman by 2 November.
+N-025,CL-026,2026-10-26,1,Spoke with Mr. Yilmaz for 12 minutes about the card replacement.
+N-025,CL-026,2026-10-26,2,He will return the KYC form if the branch confirms the fee.
+N-025,CL-026,2026-10-26,3,I might send the rate sheet next month if there is time.
+N-025,CL-026,2026-10-26,4,"Mr. Yilmaz will return the signed mandate by Tuesday, and I will send the rate sheet by 3 November."
+N-025,CL-026,2026-10-26,5,He holds a term deposit and a current account with us.
+N-025,CL-026,2026-10-26,6,I will try to call him on 5 November about the term deposit.
+N-025,CL-026,2026-10-26,7,"I will submit the request to raise the overdraft limit to $10,000 by Wednesday."
+N-026,CL-003,2026-10-26,1,Spoke with Mr. Brandt for 17 minutes about the overdraft.
+N-026,CL-003,2026-10-26,2,I will send Mr. Brandt the product summary by Thursday; he does not need anything else.
+N-026,CL-003,2026-10-26,3,He complained about the statement error.
+N-026,CL-003,2026-10-26,4,He returned the address proof last week.
+N-026,CL-003,2026-10-26,5,He will return the signed mandate if the branch confirms the fee.
+N-027,CL-010,2026-10-05,1,Spoke with Ms. Ito for 27 minutes about the term deposit.
+N-027,CL-010,2026-10-05,2,I'll schedule the portfolio review with Ms. Ito for Thursday.
+N-027,CL-010,2026-10-05,3,I'll phone Ms. Ito on Monday to talk through the wire limit.
+N-027,CL-010,2026-10-05,4,I'll try to send the product summary by 15 October.
+N-027,CL-010,2026-10-05,5,Rates were discussed at length.
+N-027,CL-010,2026-10-05,6,She declined the offer to raise the overdraft limit to $10k.
+N-028,CL-017,2026-10-19,1,Spoke with Mr. Petrov for 21 minutes about the term deposit.
+N-028,CL-017,2026-10-19,2,I might send the account statement next month if there is time.
+N-028,CL-017,2026-10-19,3,I'll phone Mr. Petrov on 21 October to talk through the card replacement.
+N-028,CL-017,2026-10-19,4,Rates were discussed at length.
+N-028,CL-017,2026-10-19,5,I'll email the rate sheet to Mr. Petrov by 28 October.
+N-029,CL-024,2026-10-05,1,Spoke with Mr. Walsh for 9 minutes about the mortgage rate.
+N-029,CL-024,2026-10-05,2,"He declined the offer to raise the overdraft limit to $80,000."
+N-029,CL-024,2026-10-05,3,I'll schedule the portfolio review with Mr. Walsh for 19 October.
+N-029,CL-024,2026-10-05,4,Rates were discussed at length.
+N-030,CL-001,2026-10-19,1,Spoke with Ms. Okafor for 28 minutes about the mortgage rate.
+N-030,CL-001,2026-10-19,2,I will send Ms. Okafor the rate sheet by 27 October; she does not need anything else.
+N-030,CL-001,2026-10-19,3,I might send the rate sheet next month if there is time.
+N-030,CL-001,2026-10-19,4,She was unhappy about the wire fee and wants it logged.
+N-030,CL-001,2026-10-19,5,I might send the account statement next month if there is time.
+N-030,CL-001,2026-10-19,6,She does not want a follow-up call this quarter.
+N-031,CL-008,2026-10-05,1,Spoke with Ms. Gallagher for 17 minutes about the overdraft.
+N-031,CL-008,2026-10-05,2,I might send the product summary next month if there is time.
+N-031,CL-008,2026-10-05,3,"She wants the wire limit increased to $70,000; I will submit the request by 8 October."
+N-031,CL-008,2026-10-05,4,She asked to be contacted by post from now on.
+N-031,CL-008,2026-10-05,5,She declined the offer to raise the wire limit to $35k.
+N-031,CL-008,2026-10-05,6,She holds a term deposit and a current account with us.
+N-031,CL-008,2026-10-05,7,She does not want a follow-up call this quarter.
+N-032,CL-015,2026-10-21,1,Spoke with Ms. Novak for 27 minutes about the term deposit.
+N-032,CL-015,2026-10-21,2,She turned down the increase of the overdraft limit to $65k.
+N-032,CL-015,2026-10-21,3,She wants the wire limit increased to $80k; I will submit the request by 30 October.
+N-032,CL-015,2026-10-21,4,She will upload the KYC form by 29 October.
+N-032,CL-015,2026-10-21,5,She travels in November and reads email in the evening.
+N-032,CL-015,2026-10-21,6,"She turned down the increase of the overdraft limit to $20,000."
+N-033,CL-022,2026-10-07,1,Spoke with Ms. Umarova for 26 minutes about the mortgage rate.
+N-033,CL-022,2026-10-07,2,I will book the annual review for 15 October.
+N-033,CL-022,2026-10-07,3,I called her yesterday about the card replacement.
+N-033,CL-022,2026-10-07,4,She will return the signed mandate if the branch confirms the fee.
+N-033,CL-022,2026-10-07,5,She complained about the wire fee.
+N-033,CL-022,2026-10-07,6,She travels in November and reads email in the evening.
+N-034,CL-029,2026-10-02,1,Spoke with Ms. Bianchi for 25 minutes about the card replacement.
+N-034,CL-029,2026-10-02,2,She runs a small catering business.
+N-034,CL-029,2026-10-02,3,I will try to call her on 12 October about the card replacement.
+N-034,CL-029,2026-10-02,4,I will send Ms. Bianchi the rate sheet by 12 October.
+N-034,CL-029,2026-10-02,5,She will upload the address proof by 12 October.
+N-034,CL-029,2026-10-02,6,She was pleased with the last statement.
+N-034,CL-029,2026-10-02,7,I called her yesterday about the wire limit.
+N-035,CL-006,2026-10-05,1,Spoke with Mr. Eriksen for 20 minutes about the wire limit.
+N-035,CL-006,2026-10-05,2,He returned the income proof last week.
+N-035,CL-006,2026-10-05,3,I'll schedule the portfolio review with Mr. Eriksen for 12 October.
+N-035,CL-006,2026-10-05,4,He now prefers contact by post.
+N-035,CL-006,2026-10-05,5,He is considering a larger deposit in the new year.
+N-035,CL-006,2026-10-05,6,He was pleased with the last statement.
+N-036,CL-013,2026-10-20,1,Spoke with Ms. Lindqvist for 13 minutes about the card replacement.
+N-036,CL-013,2026-10-20,2,She is considering a larger deposit in the new year.
+N-036,CL-013,2026-10-20,3,"Ms. Lindqvist will return the KYC form by 26 October, and I will send the product summary by 21 October."
+N-036,CL-013,2026-10-20,4,She will return the income proof if the branch confirms the fee.
+N-037,CL-020,2026-10-19,1,Spoke with Ms. Santos for 18 minutes about the term deposit.
+N-037,CL-020,2026-10-19,2,She is considering a larger deposit in the new year.
+N-037,CL-020,2026-10-19,3,I will send Ms. Santos the product summary once she confirms the amount.
+N-037,CL-020,2026-10-19,4,"She turned down the increase of the wire limit to $50,000."
+N-037,CL-020,2026-10-19,5,She declined the offer to raise the overdraft limit to $100k.
+N-037,CL-020,2026-10-19,6,She now prefers contact by phone.
+N-038,CL-027,2026-10-23,1,Spoke with Ms. Zielinski for 29 minutes about the overdraft.
+N-038,CL-027,2026-10-23,2,"She turned down the increase of the overdraft limit to $25,000."
+N-038,CL-027,2026-10-23,3,She asked to be contacted by phone from now on.
+N-038,CL-027,2026-10-23,4,"She declined the offer to raise the wire limit to $10,000."
+N-039,CL-004,2026-10-22,1,Spoke with Ms. Chen for 26 minutes about the wire limit.
+N-039,CL-004,2026-10-22,2,I already sent Ms. Chen the rate sheet last week.
+N-039,CL-004,2026-10-22,3,I'll schedule the portfolio review with Ms. Chen for 26 October.
+N-039,CL-004,2026-10-22,4,"Ms. Chen will return the KYC form by 3 November, and I will send the fee schedule by Thursday."
+N-040,CL-011,2026-10-02,1,Spoke with Ms. Jansen for 22 minutes about the term deposit.
+N-040,CL-011,2026-10-02,2,"Ms. Jansen will return the address proof by 12 October, and I will send the fee schedule by Monday."
+N-040,CL-011,2026-10-02,3,Rates were discussed at length.
+N-040,CL-011,2026-10-02,4,She asked me to hold off calling her until January.
+N-040,CL-011,2026-10-02,5,She travels in November and reads email in the evening.
+N-040,CL-011,2026-10-02,6,She turned down the increase of the overdraft limit to forty thousand dollars.
+N-041,CL-018,2026-10-19,1,Spoke with Ms. Quinn for 23 minutes about the term deposit.
+N-041,CL-018,2026-10-19,2,I will try to call her on 26 October about the overdraft.
+N-041,CL-018,2026-10-19,3,"She wants the wire limit increased to $55,000; I will submit the request by 28 October."
+N-041,CL-018,2026-10-19,4,"Ms. Quinn will return the address proof by Friday, and I will send the account statement by 26 October."
+N-041,CL-018,2026-10-19,5,Rates were discussed at length.
+N-042,CL-025,2026-10-26,1,Spoke with Ms. Xu for 19 minutes about the card replacement.
+N-042,CL-025,2026-10-26,2,She does not want a follow-up call this quarter.
+N-042,CL-025,2026-10-26,3,She asked to be contacted by email from now on.
+N-042,CL-025,2026-10-26,4,She travels in November and reads email in the evening.
+N-042,CL-025,2026-10-26,5,I will book the rate review for tomorrow.
+N-042,CL-025,2026-10-26,6,"She declined the offer to raise the wire limit to $15,000."
+N-043,CL-002,2026-10-15,1,Spoke with Mr. Alvarez for 13 minutes about the wire limit.
+N-043,CL-002,2026-10-15,2,He is considering a larger deposit in the new year.
+N-043,CL-002,2026-10-15,3,I'll email the account statement to Mr. Alvarez by Monday.
+N-043,CL-002,2026-10-15,4,"He declined the offer to raise the overdraft limit to $15,000."
+N-043,CL-002,2026-10-15,5,"He turned down the increase of the wire limit to $85,000."
+N-043,CL-002,2026-10-15,6,He now prefers contact by phone.
+N-044,CL-009,2026-10-23,1,Spoke with Mr. Haddad for 27 minutes about the term deposit.
+N-044,CL-009,2026-10-23,2,He runs a small catering business.
+N-044,CL-009,2026-10-23,3,I will send Mr. Haddad the account statement once he confirms the amount.
+N-044,CL-009,2026-10-23,4,"He turned down the increase of the wire limit to $90,000."
+N-044,CL-009,2026-10-23,5,I'll phone Mr. Haddad on 3 November to talk through the wire limit.
+N-044,CL-009,2026-10-23,6,Rates were discussed at length.
+N-044,CL-009,2026-10-23,7,He will return the income proof if the branch confirms the fee.
+N-044,CL-009,2026-10-23,8,He is going to send the income proof by Monday.
+N-044,CL-009,2026-10-23,9,He complained about the wire fee.
+N-045,CL-016,2026-10-09,1,Spoke with Mr. Oyelaran for 18 minutes about the mortgage rate.
+N-045,CL-016,2026-10-09,2,He turned down the increase of the wire limit to $90k.
+N-045,CL-016,2026-10-09,3,He wants the overdraft limit increased to $70k; I will submit the request by 19 October.
+N-045,CL-016,2026-10-09,4,He travels in November and reads email in the evening.
+N-045,CL-016,2026-10-09,5,I will send Mr. Oyelaran the account statement once he confirms the amount.
+N-045,CL-016,2026-10-09,6,"Mr. Oyelaran will return the KYC form by 13 October, and I will send the rate sheet by 19 October."
+N-046,CL-023,2026-10-15,1,Spoke with Ms. Varga for 26 minutes about the card replacement.
+N-046,CL-023,2026-10-15,2,She was pleased with the last statement.
+N-046,CL-023,2026-10-15,3,"If the mortgage rate moves by more than 15 basis points, she wants me to call her."
+N-046,CL-023,2026-10-15,4,She travels in November and reads email in the evening.
+N-046,CL-023,2026-10-15,5,"Ms. Varga will return the income proof by 26 October, and I will send the product summary by 27 October."
+N-047,CL-030,2026-10-23,1,Spoke with Mr. Castillo for 29 minutes about the mortgage rate.
+N-047,CL-030,2026-10-23,2,He asked to be contacted by post from now on.
+N-047,CL-030,2026-10-23,3,He does not want a follow-up call this quarter.
+N-047,CL-030,2026-10-23,4,Agreed that I forward the account statement by Monday.
+N-047,CL-030,2026-10-23,5,He wants the overdraft limit increased to fifty thousand dollars; I will submit the request by Monday.
+N-047,CL-030,2026-10-23,6,"He declined the offer to raise the wire limit to $65,000."
+N-047,CL-030,2026-10-23,7,I called him yesterday about the card replacement.
+N-048,CL-007,2026-10-21,1,Spoke with Mr. Farouk for 12 minutes about the mortgage rate.
+N-048,CL-007,2026-10-21,2,He runs a small catering business.
+N-048,CL-007,2026-10-21,3,He asked me to hold off calling him until January.
+N-048,CL-007,2026-10-21,4,"Mr. Farouk will return the signed mandate by 2 November, and I will send the fee schedule by Tuesday."
+N-048,CL-007,2026-10-21,5,I will book the annual review for Wednesday.
+N-048,CL-007,2026-10-21,6,Rates were discussed at length.
+N-049,CL-014,2026-10-01,1,Spoke with Mr. Moreau for 20 minutes about the overdraft.
+N-049,CL-014,2026-10-01,2,"If the mortgage rate moves by more than 25 basis points, he wants me to call him."
+N-049,CL-014,2026-10-01,3,I will book the rate review for 12 October.
+N-049,CL-014,2026-10-01,4,He wants the overdraft limit increased to ninety-five thousand dollars; I will submit the request by Friday.
+N-049,CL-014,2026-10-01,5,I'll try to send the rate sheet by Monday.
+N-050,CL-021,2026-10-19,1,Spoke with Mr. Tanaka for 19 minutes about the mortgage rate.
+N-050,CL-021,2026-10-19,2,He wants the overdraft limit increased to seventy thousand dollars; I will submit the request by 21 October.
+N-050,CL-021,2026-10-19,3,He declined the offer to raise the overdraft limit to $100k.
+N-050,CL-021,2026-10-19,4,I'll try to send the product summary by 27 October.
+N-050,CL-021,2026-10-19,5,Mr. Tanaka will return the address proof by Tuesday.
+N-051,CL-028,2026-10-20,1,Spoke with Mr. Abebe for 29 minutes about the term deposit.
+N-051,CL-028,2026-10-20,2,He asked to be contacted by email from now on.
+N-051,CL-028,2026-10-20,3,Rates were discussed at length.
+N-051,CL-028,2026-10-20,4,"He declined the offer to raise the overdraft limit to $80,000."
+N-051,CL-028,2026-10-20,5,He will return the signed mandate if the branch confirms the fee.
+N-051,CL-028,2026-10-20,6,He does not want a follow-up call this quarter.
+N-051,CL-028,2026-10-20,7,He is considering a larger deposit in the new year.
+N-052,CL-005,2026-10-26,1,Spoke with Ms. Dubois for 11 minutes about the card replacement.
+N-052,CL-005,2026-10-26,2,"She turned down the increase of the overdraft limit to $55,000."
+N-052,CL-005,2026-10-26,3,I'll try to send the term sheet by 3 November.
+N-052,CL-005,2026-10-26,4,"Ms. Dubois will return the signed mandate by 9 November, and I will send the rate sheet by Wednesday."
+N-053,CL-012,2026-10-05,1,Spoke with Mr. Kowalski for 23 minutes about the mortgage rate.
+N-053,CL-012,2026-10-05,2,He was pleased with the last statement.
+N-053,CL-012,2026-10-05,3,He runs a small catering business.
+N-053,CL-012,2026-10-05,4,He declined the offer to raise the wire limit to $45k.
+N-053,CL-012,2026-10-05,5,I will call him on 12 October about the mortgage rate.
+N-053,CL-012,2026-10-05,6,He wants the overdraft limit increased to $15k; I will submit the request by 16 October.
+N-054,CL-019,2026-10-14,1,Spoke with Mr. Rahman for 20 minutes about the mortgage rate.
+N-054,CL-019,2026-10-14,2,"If the term deposit rate moves by more than 25 basis points, he wants me to call him."
+N-054,CL-019,2026-10-14,3,He will return the KYC form if the branch confirms the fee.
+N-054,CL-019,2026-10-14,4,"Mr. Rahman will return the KYC form by 22 October, and I will send the account statement by Tuesday."
+N-055,CL-026,2026-10-20,1,Spoke with Mr. Yilmaz for 16 minutes about the mortgage rate.
+N-055,CL-026,2026-10-20,2,"I will submit the request to raise the wire limit to $85,000 by 2 November."
+N-055,CL-026,2026-10-20,3,He runs a small catering business.
+N-055,CL-026,2026-10-20,4,I might send the account statement next month if there is time.
+N-055,CL-026,2026-10-20,5,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+N-055,CL-026,2026-10-20,6,He holds a term deposit and a current account with us.
+N-055,CL-026,2026-10-20,7,"He declined the offer to raise the wire limit to $10,000."
+N-056,CL-003,2026-10-23,1,Spoke with Mr. Brandt for 28 minutes about the overdraft.
+N-056,CL-003,2026-10-23,2,He wants the wire limit increased to forty-five thousand dollars; I will submit the request by 26 October.
+N-056,CL-003,2026-10-23,3,I will send Mr. Brandt the rate sheet once he confirms the amount.
+N-056,CL-003,2026-10-23,4,He was unhappy about the branch queue time and wants it logged.
+N-056,CL-003,2026-10-23,5,"If the term deposit rate moves by more than 50 basis points, he wants me to call him."
+N-056,CL-003,2026-10-23,6,He is considering a larger deposit in the new year.
+N-057,CL-010,2026-10-12,1,Spoke with Ms. Ito for 29 minutes about the overdraft.
+N-057,CL-010,2026-10-12,2,She runs a small catering business.
+N-057,CL-010,2026-10-12,3,She holds a term deposit and a current account with us.
+N-057,CL-010,2026-10-12,4,She turned down the increase of the wire limit to $20k.
+N-057,CL-010,2026-10-12,5,I will book the portfolio review for Thursday.
+N-057,CL-010,2026-10-12,6,"I will submit the request to raise the overdraft limit to $60,000 by Thursday."
+N-058,CL-017,2026-10-05,1,Spoke with Mr. Petrov for 27 minutes about the mortgage rate.
+N-058,CL-017,2026-10-05,2,I'll try to send the account statement by 15 October.
+N-058,CL-017,2026-10-05,3,I called him yesterday about the overdraft.
+N-058,CL-017,2026-10-05,4,I'll schedule the rate review with Mr. Petrov for 13 October.
+N-058,CL-017,2026-10-05,5,He runs a small catering business.
+N-059,CL-024,2026-10-26,1,Spoke with Mr. Walsh for 26 minutes about the wire limit.
+N-059,CL-024,2026-10-26,2,I might send the account statement next month if there is time.
+N-059,CL-024,2026-10-26,3,"Mr. Walsh will return the signed mandate by Monday, and I will send the account statement by 6 November."
+N-059,CL-024,2026-10-26,4,Rates were discussed at length.
+N-059,CL-024,2026-10-26,5,He was unhappy about the statement error and wants it logged.
+N-060,CL-001,2026-10-06,1,Spoke with Ms. Okafor for 10 minutes about the wire limit.
+N-060,CL-001,2026-10-06,2,I might send the rate sheet next month if there is time.
+N-060,CL-001,2026-10-06,3,She is going to send the income proof by 19 October.
+N-060,CL-001,2026-10-06,4,She is considering a larger deposit in the new year.
+N-060,CL-001,2026-10-06,5,She holds a term deposit and a current account with us.
+N-061,CL-008,2026-10-05,1,Spoke with Ms. Gallagher for 28 minutes about the term deposit.
+N-061,CL-008,2026-10-05,2,I will try to call her on 19 October about the card replacement.
+N-061,CL-008,2026-10-05,3,She was pleased with the last statement.
+N-061,CL-008,2026-10-05,4,I'll schedule the portfolio review with Ms. Gallagher for 16 October.
+N-061,CL-008,2026-10-05,5,I will submit the request to raise the wire limit to fifty-five thousand dollars by 12 October.
+N-061,CL-008,2026-10-05,6,I will try to call her on Thursday about the wire limit.
+N-062,CL-015,2026-10-19,1,Spoke with Ms. Novak for 21 minutes about the term deposit.
+N-062,CL-015,2026-10-19,2,I will call her on 21 October about the mortgage rate.
+N-062,CL-015,2026-10-19,3,"If the mortgage rate moves by more than 50 basis points, she wants me to call her."
+N-062,CL-015,2026-10-19,4,I might send the product summary next month if there is time.
+N-062,CL-015,2026-10-19,5,"Ms. Novak will return the income proof by 27 October, and I will send the fee schedule by 22 October."
+N-062,CL-015,2026-10-19,6,Rates were discussed at length.
+N-062,CL-015,2026-10-19,7,She runs a small catering business.
+N-063,CL-022,2026-10-05,1,Spoke with Ms. Umarova for 30 minutes about the wire limit.
+N-063,CL-022,2026-10-05,2,She will return the address proof if the branch confirms the fee.
+N-063,CL-022,2026-10-05,3,I'll try to send the rate sheet by 14 October.
+N-063,CL-022,2026-10-05,4,She asked me to ring her on 19 October about the term deposit.
+N-063,CL-022,2026-10-05,5,She was pleased with the last statement.
+N-063,CL-022,2026-10-05,6,I called her yesterday about the card replacement.
+N-063,CL-022,2026-10-05,7,"I will submit the request to raise the wire limit to $85,000 by 16 October."
+N-064,CL-029,2026-10-26,1,Spoke with Ms. Bianchi for 17 minutes about the mortgage rate.
+N-064,CL-029,2026-10-26,2,"Ms. Bianchi will return the signed mandate by 2 November, and I will send the account statement by Thursday."
+N-064,CL-029,2026-10-26,3,I called her yesterday about the card replacement.
+N-065,CL-006,2026-10-06,1,Spoke with Mr. Eriksen for 29 minutes about the wire limit.
+N-065,CL-006,2026-10-06,2,He now prefers contact by email.
+N-065,CL-006,2026-10-06,3,"I will submit the request to raise the wire limit to $45,000 by 14 October."
+N-065,CL-006,2026-10-06,4,"He declined the offer to raise the overdraft limit to $55,000."
+N-065,CL-006,2026-10-06,5,Rates were discussed at length.
+N-065,CL-006,2026-10-06,6,I called him yesterday about the term deposit.
+N-066,CL-013,2026-10-13,1,Spoke with Ms. Lindqvist for 11 minutes about the wire limit.
+N-066,CL-013,2026-10-13,2,She is considering a larger deposit in the new year.
+N-066,CL-013,2026-10-13,3,She asked me to hold off calling her until January.
+N-066,CL-013,2026-10-13,4,I'll email the account statement to Ms. Lindqvist by 26 October.
+N-066,CL-013,2026-10-13,5,She asked me to ring her on 21 October about the overdraft.
+N-066,CL-013,2026-10-13,6,She holds a term deposit and a current account with us.
+N-066,CL-013,2026-10-13,7,I called her yesterday about the card replacement.
+N-067,CL-020,2026-10-09,1,Spoke with Ms. Santos for 29 minutes about the wire limit.
+N-067,CL-020,2026-10-09,2,Rates were discussed at length.
+N-067,CL-020,2026-10-09,3,She will upload the signed mandate by Monday.
+N-067,CL-020,2026-10-09,4,She asked me to ring her on Thursday about the term deposit.
+N-067,CL-020,2026-10-09,5,I already sent Ms. Santos the term sheet last week.
+N-068,CL-027,2026-10-05,1,Spoke with Ms. Zielinski for 17 minutes about the card replacement.
+N-068,CL-027,2026-10-05,2,"She declined the offer to raise the overdraft limit to $25,000."
+N-068,CL-027,2026-10-05,3,She holds a term deposit and a current account with us.
+N-068,CL-027,2026-10-05,4,I'll schedule the portfolio review with Ms. Zielinski for Wednesday.
+N-068,CL-027,2026-10-05,5,I will send Ms. Zielinski the account statement once she confirms the amount.
+N-068,CL-027,2026-10-05,6,She will upload the KYC form by 12 October.
+N-068,CL-027,2026-10-05,7,She runs a small catering business.
+N-068,CL-027,2026-10-05,8,I'll try to send the term sheet by Monday.
+N-069,CL-004,2026-10-26,1,Spoke with Ms. Chen for 20 minutes about the overdraft.
+N-069,CL-004,2026-10-26,2,She asked me to ring her on 9 November about the mortgage rate.
+N-069,CL-004,2026-10-26,3,She is going to send the signed mandate by 9 November.
+N-069,CL-004,2026-10-26,4,She was unhappy about the statement error and wants it logged.
+N-069,CL-004,2026-10-26,5,I will send Ms. Chen the rate sheet once she confirms the amount.
+N-070,CL-011,2026-10-08,1,Spoke with Ms. Jansen for 8 minutes about the card replacement.
+N-070,CL-011,2026-10-08,2,She asked me to hold off calling her until January.
+N-070,CL-011,2026-10-08,3,She was pleased with the last statement.
+N-070,CL-011,2026-10-08,4,She runs a small catering business.
+N-070,CL-011,2026-10-08,5,"Ms. Jansen will return the KYC form by 19 October, and I will send the product summary by 16 October."
+N-071,CL-018,2026-10-13,1,Spoke with Ms. Quinn for 15 minutes about the term deposit.
+N-071,CL-018,2026-10-13,2,She will return the income proof if the branch confirms the fee.
+N-071,CL-018,2026-10-13,3,She will return the address proof if the branch confirms the fee.
+N-071,CL-018,2026-10-13,4,"She wants the wire limit increased to $85,000; I will submit the request by tomorrow."
+N-071,CL-018,2026-10-13,5,She runs a small catering business.
+N-072,CL-025,2026-10-23,1,Spoke with Ms. Xu for 13 minutes about the mortgage rate.
+N-072,CL-025,2026-10-23,2,I called her yesterday about the wire limit.
+N-072,CL-025,2026-10-23,3,I'll phone Ms. Xu on Tuesday to talk through the term deposit.
+N-072,CL-025,2026-10-23,4,She now prefers contact by phone.
+N-072,CL-025,2026-10-23,5,She will return the KYC form if the branch confirms the fee.
+N-073,CL-002,2026-10-05,1,Spoke with Mr. Alvarez for 29 minutes about the overdraft.
+N-073,CL-002,2026-10-05,2,He returned the signed mandate last week.
+N-073,CL-002,2026-10-05,3,I will try to call him on 13 October about the term deposit.
+N-073,CL-002,2026-10-05,4,He asked me to ring him on 19 October about the term deposit.
+N-073,CL-002,2026-10-05,5,He was unhappy about the wire fee and wants it logged.
+N-074,CL-009,2026-10-19,1,Spoke with Mr. Haddad for 28 minutes about the wire limit.
+N-074,CL-009,2026-10-19,2,I'll schedule the rate review with Mr. Haddad for tomorrow.
+N-074,CL-009,2026-10-19,3,Rates were discussed at length.
+N-074,CL-009,2026-10-19,4,He runs a small catering business.
+N-074,CL-009,2026-10-19,5,He declined the offer to raise the overdraft limit to sixty-five thousand dollars.
+N-074,CL-009,2026-10-19,6,"I will submit the request to raise the wire limit to $15,000 by 2 November."
+N-075,CL-016,2026-10-06,1,Spoke with Mr. Oyelaran for 23 minutes about the wire limit.
+N-075,CL-016,2026-10-06,2,"He turned down the increase of the wire limit to $50,000."
+N-075,CL-016,2026-10-06,3,He returned the address proof last week.
+N-075,CL-016,2026-10-06,4,"I will submit the request to raise the overdraft limit to $10,000 by Tuesday."
+N-076,CL-023,2026-10-07,1,Spoke with Ms. Varga for 10 minutes about the term deposit.
+N-076,CL-023,2026-10-07,2,I will send Ms. Varga the fee schedule by Monday; she does not need anything else.
+N-076,CL-023,2026-10-07,3,She asked to be contacted by post from now on.
+N-076,CL-023,2026-10-07,4,She does not want a follow-up call this quarter.
+N-076,CL-023,2026-10-07,5,She said there is no need to send the rate sheet.
+N-076,CL-023,2026-10-07,6,I will call her on 16 October about the card replacement.
+N-077,CL-030,2026-10-07,1,Spoke with Mr. Castillo for 17 minutes about the wire limit.
+N-077,CL-030,2026-10-07,2,I'll schedule the annual review with Mr. Castillo for 19 October.
+N-077,CL-030,2026-10-07,3,He complained about the card replacement delay.
+N-077,CL-030,2026-10-07,4,He runs a small catering business.
+N-077,CL-030,2026-10-07,5,I'll phone Mr. Castillo on 16 October to talk through the term deposit.
+N-077,CL-030,2026-10-07,6,"If the term deposit rate moves by more than 50 basis points, he wants me to call him."
+N-078,CL-007,2026-10-12,1,Spoke with Mr. Farouk for 23 minutes about the overdraft.
+N-078,CL-007,2026-10-12,2,He asked me to ring him on Thursday about the card replacement.
+N-078,CL-007,2026-10-12,3,I might send the account statement next month if there is time.
+N-078,CL-007,2026-10-12,4,Agreed that I forward the account statement by Thursday.
+N-078,CL-007,2026-10-12,5,He is considering a larger deposit in the new year.
+N-079,CL-014,2026-10-21,1,Spoke with Mr. Moreau for 21 minutes about the overdraft.
+N-079,CL-014,2026-10-21,2,I called him yesterday about the card replacement.
+N-079,CL-014,2026-10-21,3,I'll schedule the portfolio review with Mr. Moreau for 2 November.
+N-079,CL-014,2026-10-21,4,Rates were discussed at length.
+N-079,CL-014,2026-10-21,5,He travels in November and reads email in the evening.
+N-079,CL-014,2026-10-21,6,I called him yesterday about the wire limit.
+N-080,CL-021,2026-10-13,1,Spoke with Mr. Tanaka for 23 minutes about the wire limit.
+N-080,CL-021,2026-10-13,2,Rates were discussed at length.
+N-080,CL-021,2026-10-13,3,I'll try to send the account statement by 16 October.
+N-080,CL-021,2026-10-13,4,I will submit the request to raise the overdraft limit to $55k by Monday.
+N-080,CL-021,2026-10-13,5,He holds a term deposit and a current account with us.
+N-080,CL-021,2026-10-13,6,I will call him on 19 October about the term deposit.
+N-081,CL-028,2026-10-14,1,Spoke with Mr. Abebe for 19 minutes about the term deposit.
+N-081,CL-028,2026-10-14,2,I already sent Mr. Abebe the term sheet last week.
+N-081,CL-028,2026-10-14,3,I will book the portfolio review for 19 October.
+N-081,CL-028,2026-10-14,4,He was unhappy about the wire fee and wants it logged.
+N-081,CL-028,2026-10-14,5,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+N-082,CL-005,2026-10-13,1,Spoke with Ms. Dubois for 23 minutes about the mortgage rate.
+N-082,CL-005,2026-10-13,2,I already sent Ms. Dubois the product summary last week.
+N-082,CL-005,2026-10-13,3,I called her yesterday about the overdraft.
+N-082,CL-005,2026-10-13,4,I will send Ms. Dubois the rate sheet by 26 October.
+N-082,CL-005,2026-10-13,5,"She wants the wire limit increased to $10,000; I will submit the request by 21 October."
+N-082,CL-005,2026-10-13,6,She asked me to ring her on 26 October about the term deposit.
+N-082,CL-005,2026-10-13,7,Rates were discussed at length.
+N-083,CL-012,2026-10-26,1,Spoke with Mr. Kowalski for 16 minutes about the term deposit.
+N-083,CL-012,2026-10-26,2,I will book the rate review for 9 November.
+N-083,CL-012,2026-10-26,3,He does not want a follow-up call this quarter.
+N-083,CL-012,2026-10-26,4,He was pleased with the last statement.
+N-084,CL-019,2026-10-26,1,Spoke with Mr. Rahman for 21 minutes about the term deposit.
+N-084,CL-019,2026-10-26,2,He travels in November and reads email in the evening.
+N-084,CL-019,2026-10-26,3,He was pleased with the last statement.
+N-084,CL-019,2026-10-26,4,He declined the offer to raise the overdraft limit to $15k.
+N-084,CL-019,2026-10-26,5,He now prefers contact by email.
+N-084,CL-019,2026-10-26,6,He turned down the increase of the wire limit to $85k.
+N-084,CL-019,2026-10-26,7,He asked me to hold off calling him until January.
+N-084,CL-019,2026-10-26,8,"He wants the overdraft limit increased to $15,000; I will submit the request by 4 November."
+N-084,CL-019,2026-10-26,9,I'll schedule the rate review with Mr. Rahman for Wednesday.
+N-085,CL-026,2026-10-21,1,Spoke with Mr. Yilmaz for 14 minutes about the overdraft.
+N-085,CL-026,2026-10-21,2,I will book the portfolio review for 30 October.
+N-085,CL-026,2026-10-21,3,I'll email the product summary to Mr. Yilmaz by 26 October.
+N-085,CL-026,2026-10-21,4,He does not want a follow-up call this quarter.
+N-085,CL-026,2026-10-21,5,He said there is no need to send the product summary.
+N-086,CL-003,2026-10-08,1,Spoke with Mr. Brandt for 24 minutes about the mortgage rate.
+N-086,CL-003,2026-10-08,2,He complained about the wire fee.
+N-086,CL-003,2026-10-08,3,"He turned down the increase of the overdraft limit to $20,000."
+N-086,CL-003,2026-10-08,4,"Mr. Brandt will return the KYC form by tomorrow, and I will send the term sheet by 19 October."
+N-087,CL-010,2026-10-19,1,Spoke with Ms. Ito for 22 minutes about the card replacement.
+N-087,CL-010,2026-10-19,2,She was pleased with the last statement.
+N-087,CL-010,2026-10-19,3,"If the mortgage rate moves by more than 15 basis points, she wants me to call her."
+N-087,CL-010,2026-10-19,4,She runs a small catering business.
+N-087,CL-010,2026-10-19,5,"Ms. Ito will return the signed mandate by 22 October, and I will send the account statement by Monday."
+N-088,CL-017,2026-10-05,1,Spoke with Mr. Petrov for 28 minutes about the card replacement.
+N-088,CL-017,2026-10-05,2,He runs a small catering business.
+N-088,CL-017,2026-10-05,3,He asked me to hold off calling him until January.
+N-088,CL-017,2026-10-05,4,I might send the term sheet next month if there is time.
+N-088,CL-017,2026-10-05,5,He complained about the card replacement delay.
+N-088,CL-017,2026-10-05,6,I will submit the request to raise the overdraft limit to $45k by 13 October.
+N-088,CL-017,2026-10-05,7,He was pleased with the last statement.
+N-089,CL-024,2026-10-14,1,Spoke with Mr. Walsh for 12 minutes about the overdraft.
+N-089,CL-024,2026-10-14,2,He runs a small catering business.
+N-089,CL-024,2026-10-14,3,He now prefers contact by post.
+N-089,CL-024,2026-10-14,4,I will send Mr. Walsh the account statement by 23 October; he does not need anything else.
+N-089,CL-024,2026-10-14,5,He turned down the increase of the overdraft limit to eighty-five thousand dollars.
+N-089,CL-024,2026-10-14,6,"If the mortgage rate moves by more than 10 basis points, he wants me to call him."
+N-089,CL-024,2026-10-14,7,Rates were discussed at length.
+N-090,CL-001,2026-10-06,1,Spoke with Ms. Okafor for 30 minutes about the card replacement.
+N-090,CL-001,2026-10-06,2,She was pleased with the last statement.
+N-090,CL-001,2026-10-06,3,She said there is no need to send the fee schedule.
+N-090,CL-001,2026-10-06,4,She returned the KYC form last week.
+N-090,CL-001,2026-10-06,5,I will book the annual review for 16 October.
+N-090,CL-001,2026-10-06,6,She is considering a larger deposit in the new year.
+N-090,CL-001,2026-10-06,7,She now prefers contact by email.
+N-091,CL-008,2026-10-08,1,Spoke with Ms. Gallagher for 22 minutes about the term deposit.
+N-091,CL-008,2026-10-08,2,I called her yesterday about the term deposit.
+N-091,CL-008,2026-10-08,3,I'll schedule the annual review with Ms. Gallagher for Wednesday.
+N-091,CL-008,2026-10-08,4,"I will submit the request to raise the wire limit to $40,000 by Monday."
+N-091,CL-008,2026-10-08,5,She does not want a follow-up call this quarter.
+N-092,CL-015,2026-10-13,1,Spoke with Ms. Novak for 8 minutes about the overdraft.
+N-092,CL-015,2026-10-13,2,She complained about the statement error.
+N-092,CL-015,2026-10-13,3,I'll schedule the annual review with Ms. Novak for 21 October.
+N-092,CL-015,2026-10-13,4,She returned the signed mandate last week.
+N-092,CL-015,2026-10-13,5,I'll phone Ms. Novak on 23 October to talk through the term deposit.
+N-092,CL-015,2026-10-13,6,I will send Ms. Novak the account statement once she confirms the amount.
+N-093,CL-022,2026-10-01,1,Spoke with Ms. Umarova for 18 minutes about the card replacement.
+N-093,CL-022,2026-10-01,2,"Ms. Umarova will return the address proof by 9 October, and I will send the term sheet by 13 October."
+N-093,CL-022,2026-10-01,3,She does not want a follow-up call this quarter.
+N-093,CL-022,2026-10-01,4,She will return the income proof if the branch confirms the fee.
+N-093,CL-022,2026-10-01,5,I'll schedule the annual review with Ms. Umarova for 12 October.
+N-093,CL-022,2026-10-01,6,She is considering a larger deposit in the new year.
+N-094,CL-029,2026-10-19,1,Spoke with Ms. Bianchi for 20 minutes about the wire limit.
+N-094,CL-029,2026-10-19,2,I called her yesterday about the wire limit.
+N-094,CL-029,2026-10-19,3,I will call her on 26 October about the card replacement.
+N-094,CL-029,2026-10-19,4,She turned down the increase of the overdraft limit to $35k.
+N-094,CL-029,2026-10-19,5,"She wants the overdraft limit increased to $25,000; I will submit the request by 23 October."
+N-094,CL-029,2026-10-19,6,Rates were discussed at length.
+N-095,CL-006,2026-10-06,1,Spoke with Mr. Eriksen for 12 minutes about the term deposit.
+N-095,CL-006,2026-10-06,2,He complained about the statement error.
+N-095,CL-006,2026-10-06,3,He said there is no need to send the rate sheet.
+N-095,CL-006,2026-10-06,4,Rates were discussed at length.
+N-095,CL-006,2026-10-06,5,He turned down the increase of the wire limit to $65k.
+N-095,CL-006,2026-10-06,6,He returned the signed mandate last week.
+N-096,CL-013,2026-10-14,1,Spoke with Ms. Lindqvist for 26 minutes about the mortgage rate.
+N-096,CL-013,2026-10-14,2,She wants the wire limit increased to fifteen thousand dollars; I will submit the request by 15 October.
+N-096,CL-013,2026-10-14,3,I might send the fee schedule next month if there is time.
+N-096,CL-013,2026-10-14,4,She holds a term deposit and a current account with us.
+N-096,CL-013,2026-10-14,5,She declined the offer to raise the wire limit to $25k.
+N-097,CL-020,2026-10-19,1,Spoke with Ms. Santos for 25 minutes about the term deposit.
+N-097,CL-020,2026-10-19,2,Rates were discussed at length.
+N-097,CL-020,2026-10-19,3,She turned down the increase of the overdraft limit to $100k.
+N-097,CL-020,2026-10-19,4,Agreed that I forward the fee schedule by Monday.
+N-097,CL-020,2026-10-19,5,"She wants the overdraft limit increased to $65,000; I will submit the request by Friday."
+N-097,CL-020,2026-10-19,6,She returned the KYC form last week.
+N-097,CL-020,2026-10-19,7,I'll schedule the rate review with Ms. Santos for Tuesday.
+N-098,CL-027,2026-10-05,1,Spoke with Ms. Zielinski for 29 minutes about the overdraft.
+N-098,CL-027,2026-10-05,2,I'll try to send the fee schedule by 7 October.
+N-098,CL-027,2026-10-05,3,She now prefers contact by post.
+N-098,CL-027,2026-10-05,4,I will book the portfolio review for 13 October.
+N-098,CL-027,2026-10-05,5,She complained about the wire fee.
+N-098,CL-027,2026-10-05,6,Rates were discussed at length.
+N-098,CL-027,2026-10-05,7,I will send Ms. Zielinski the product summary once she confirms the amount.
+N-099,CL-004,2026-10-19,1,Spoke with Ms. Chen for 21 minutes about the card replacement.
+N-099,CL-004,2026-10-19,2,She will upload the address proof by Thursday.
+N-099,CL-004,2026-10-19,3,She runs a small catering business.
+N-099,CL-004,2026-10-19,4,I will send Ms. Chen the account statement once she confirms the amount.
+N-099,CL-004,2026-10-19,5,She asked me to hold off calling her until January.
+N-099,CL-004,2026-10-19,6,I will call her on Monday about the term deposit.
+N-100,CL-011,2026-10-01,1,Spoke with Ms. Jansen for 28 minutes about the mortgage rate.
+N-100,CL-011,2026-10-01,2,She said there is no need to send the product summary.
+N-100,CL-011,2026-10-01,3,"If the term deposit rate moves by more than 15 basis points, she wants me to call her."
+N-100,CL-011,2026-10-01,4,She now prefers contact by post.
+N-100,CL-011,2026-10-01,5,I'll schedule the rate review with Ms. Jansen for Monday.
+N-101,CL-018,2026-10-07,1,Spoke with Ms. Quinn for 11 minutes about the wire limit.
+N-101,CL-018,2026-10-07,2,She does not want a follow-up call this quarter.
+N-101,CL-018,2026-10-07,3,She wants the wire limit increased to $80k; I will submit the request by 16 October.
+N-101,CL-018,2026-10-07,4,She complained about the card replacement delay.
+N-101,CL-018,2026-10-07,5,She is considering a larger deposit in the new year.
+N-101,CL-018,2026-10-07,6,I called her yesterday about the wire limit.
+N-101,CL-018,2026-10-07,7,She travels in November and reads email in the evening.
+N-101,CL-018,2026-10-07,8,She asked me to hold off calling her until January.
+N-102,CL-025,2026-10-14,1,Spoke with Ms. Xu for 22 minutes about the card replacement.
+N-102,CL-025,2026-10-14,2,I will book the portfolio review for 19 October.
+N-102,CL-025,2026-10-14,3,She runs a small catering business.
+N-102,CL-025,2026-10-14,4,She returned the address proof last week.
+N-102,CL-025,2026-10-14,5,She is going to send the KYC form by Monday.
+N-102,CL-025,2026-10-14,6,She holds a term deposit and a current account with us.
+N-102,CL-025,2026-10-14,7,She turned down the increase of the wire limit to $75k.
+N-103,CL-002,2026-10-07,1,Spoke with Mr. Alvarez for 16 minutes about the card replacement.
+N-103,CL-002,2026-10-07,2,I called him yesterday about the overdraft.
+N-103,CL-002,2026-10-07,3,"I will submit the request to raise the wire limit to $40,000 by 15 October."
+N-103,CL-002,2026-10-07,4,I will try to call him on Monday about the overdraft.
+N-103,CL-002,2026-10-07,5,He was pleased with the last statement.
+N-103,CL-002,2026-10-07,6,I'll schedule the annual review with Mr. Alvarez for 19 October.
+N-104,CL-009,2026-10-19,1,Spoke with Mr. Haddad for 28 minutes about the term deposit.
+N-104,CL-009,2026-10-19,2,He is considering a larger deposit in the new year.
+N-104,CL-009,2026-10-19,3,I will submit the request to raise the wire limit to sixty thousand dollars by 30 October.
+N-104,CL-009,2026-10-19,4,I might send the account statement next month if there is time.
+N-104,CL-009,2026-10-19,5,I already sent Mr. Haddad the account statement last week.
+N-104,CL-009,2026-10-19,6,He was pleased with the last statement.
+N-105,CL-016,2026-10-15,1,Spoke with Mr. Oyelaran for 25 minutes about the overdraft.
+N-105,CL-016,2026-10-15,2,He declined the offer to raise the overdraft limit to $85k.
+N-105,CL-016,2026-10-15,3,I called him yesterday about the overdraft.
+N-105,CL-016,2026-10-15,4,He runs a small catering business.
+N-105,CL-016,2026-10-15,5,He complained about the branch queue time.
+N-106,CL-023,2026-10-14,1,Spoke with Ms. Varga for 10 minutes about the overdraft.
+N-106,CL-023,2026-10-14,2,I will send Ms. Varga the term sheet by 16 October.
+N-106,CL-023,2026-10-14,3,She returned the KYC form last week.
+N-106,CL-023,2026-10-14,4,I might send the rate sheet next month if there is time.
+N-106,CL-023,2026-10-14,5,"I will submit the request to raise the overdraft limit to $75,000 by 26 October."
+N-106,CL-023,2026-10-14,6,She was unhappy about the wire fee and wants it logged.
+N-107,CL-030,2026-10-05,1,Spoke with Mr. Castillo for 21 minutes about the term deposit.
+N-107,CL-030,2026-10-05,2,"He declined the offer to raise the overdraft limit to $95,000."
+N-107,CL-030,2026-10-05,3,He said there is no need to send the product summary.
+N-107,CL-030,2026-10-05,4,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+N-107,CL-030,2026-10-05,5,He will upload the KYC form by Wednesday.
+N-107,CL-030,2026-10-05,6,He runs a small catering business.
+N-108,CL-007,2026-10-21,1,Spoke with Mr. Farouk for 23 minutes about the wire limit.
+N-108,CL-007,2026-10-21,2,I might send the product summary next month if there is time.
+N-108,CL-007,2026-10-21,3,He returned the income proof last week.
+N-108,CL-007,2026-10-21,4,I already sent Mr. Farouk the fee schedule last week.
+N-108,CL-007,2026-10-21,5,"Mr. Farouk will return the address proof by 29 October, and I will send the account statement by 23 October."
+N-108,CL-007,2026-10-21,6,He holds a term deposit and a current account with us.
+N-108,CL-007,2026-10-21,7,He was unhappy about the statement error and wants it logged.
+N-109,CL-014,2026-10-09,1,Spoke with Mr. Moreau for 23 minutes about the term deposit.
+N-109,CL-014,2026-10-09,2,He travels in November and reads email in the evening.
+N-109,CL-014,2026-10-09,3,"He declined the offer to raise the wire limit to $60,000."
+N-109,CL-014,2026-10-09,4,I will try to call him on 19 October about the overdraft.
+N-109,CL-014,2026-10-09,5,He turned down the increase of the wire limit to $25k.
+N-109,CL-014,2026-10-09,6,He now prefers contact by phone.
+N-109,CL-014,2026-10-09,7,I will submit the request to raise the overdraft limit to $55k by 21 October.
+N-110,CL-021,2026-10-01,1,Spoke with Mr. Tanaka for 29 minutes about the term deposit.
+N-110,CL-021,2026-10-01,2,He holds a term deposit and a current account with us.
+N-110,CL-021,2026-10-01,3,I already sent Mr. Tanaka the product summary last week.
+N-110,CL-021,2026-10-01,4,"He wants the overdraft limit increased to $15,000; I will submit the request by Thursday."
+N-110,CL-021,2026-10-01,5,He is going to send the signed mandate by 12 October.
+N-110,CL-021,2026-10-01,6,I might send the rate sheet next month if there is time.
+N-110,CL-021,2026-10-01,7,He runs a small catering business.
+N-110,CL-021,2026-10-01,8,He was unhappy about the wire fee and wants it logged.
+N-111,CL-028,2026-10-13,1,Spoke with Mr. Abebe for 30 minutes about the term deposit.
+N-111,CL-028,2026-10-13,2,He complained about the statement error.
+N-111,CL-028,2026-10-13,3,I'll schedule the annual review with Mr. Abebe for 21 October.
+N-111,CL-028,2026-10-13,4,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+N-112,CL-005,2026-10-12,1,Spoke with Ms. Dubois for 30 minutes about the mortgage rate.
+N-112,CL-005,2026-10-12,2,"She turned down the increase of the overdraft limit to $15,000."
+N-112,CL-005,2026-10-12,3,Ms. Dubois will return the address proof by tomorrow.
+N-112,CL-005,2026-10-12,4,I will call her on 26 October about the term deposit.
+N-112,CL-005,2026-10-12,5,I called her yesterday about the overdraft.
+N-112,CL-005,2026-10-12,6,She holds a term deposit and a current account with us.
+N-112,CL-005,2026-10-12,7,"She turned down the increase of the overdraft limit to $10,000."
+N-113,CL-012,2026-10-02,1,Spoke with Mr. Kowalski for 16 minutes about the mortgage rate.
+N-113,CL-012,2026-10-02,2,I will send Mr. Kowalski the rate sheet once he confirms the amount.
+N-113,CL-012,2026-10-02,3,"If the mortgage rate moves by more than 10 basis points, he wants me to call him."
+N-113,CL-012,2026-10-02,4,He complained about the wire fee.
+N-113,CL-012,2026-10-02,5,He now prefers contact by email.
+N-113,CL-012,2026-10-02,6,He is going to send the income proof by 14 October.
+N-113,CL-012,2026-10-02,7,He runs a small catering business.
+N-113,CL-012,2026-10-02,8,He travels in November and reads email in the evening.
+N-114,CL-019,2026-10-22,1,Spoke with Mr. Rahman for 21 minutes about the overdraft.
+N-114,CL-019,2026-10-22,2,He holds a term deposit and a current account with us.
+N-114,CL-019,2026-10-22,3,He runs a small catering business.
+N-114,CL-019,2026-10-22,4,He asked me to hold off calling him until January.
+N-114,CL-019,2026-10-22,5,I will send Mr. Rahman the fee schedule by Monday.
+N-114,CL-019,2026-10-22,6,I called him yesterday about the overdraft.
+N-114,CL-019,2026-10-22,7,I'll schedule the portfolio review with Mr. Rahman for Monday.
+N-114,CL-019,2026-10-22,8,I'll phone Mr. Rahman on Wednesday to talk through the card replacement.
+N-115,CL-026,2026-10-26,1,Spoke with Mr. Yilmaz for 23 minutes about the wire limit.
+N-115,CL-026,2026-10-26,2,He holds a term deposit and a current account with us.
+N-115,CL-026,2026-10-26,3,He was pleased with the last statement.
+N-115,CL-026,2026-10-26,4,I might send the rate sheet next month if there is time.
+N-115,CL-026,2026-10-26,5,He returned the income proof last week.
+N-115,CL-026,2026-10-26,6,He is going to send the KYC form by 2 November.
+N-116,CL-003,2026-10-26,1,Spoke with Mr. Brandt for 20 minutes about the term deposit.
+N-116,CL-003,2026-10-26,2,He travels in November and reads email in the evening.
+N-116,CL-003,2026-10-26,3,He asked me to hold off calling him until January.
+N-116,CL-003,2026-10-26,4,Mr. Brandt will return the income proof by 29 October.
+N-116,CL-003,2026-10-26,5,He returned the KYC form last week.
+N-116,CL-003,2026-10-26,6,He was pleased with the last statement.
+N-116,CL-003,2026-10-26,7,I will book the rate review for Monday.
+N-117,CL-010,2026-10-26,1,Spoke with Ms. Ito for 18 minutes about the wire limit.
+N-117,CL-010,2026-10-26,2,She turned down the increase of the overdraft limit to $50k.
+N-117,CL-010,2026-10-26,3,She said there is no need to send the product summary.
+N-117,CL-010,2026-10-26,4,She will return the signed mandate if the branch confirms the fee.
+N-117,CL-010,2026-10-26,5,"Ms. Ito will return the address proof by Friday, and I will send the account statement by 9 November."
+N-117,CL-010,2026-10-26,6,She was pleased with the last statement.
+N-117,CL-010,2026-10-26,7,She now prefers contact by post.
+N-118,CL-017,2026-10-22,1,Spoke with Mr. Petrov for 30 minutes about the overdraft.
+N-118,CL-017,2026-10-22,2,He declined the offer to raise the overdraft limit to $100k.
+N-118,CL-017,2026-10-22,3,I'll try to send the fee schedule by 2 November.
+N-118,CL-017,2026-10-22,4,Rates were discussed at length.
+N-118,CL-017,2026-10-22,5,"Mr. Petrov will return the KYC form by Wednesday, and I will send the fee schedule by 3 November."
+N-119,CL-024,2026-10-13,1,Spoke with Mr. Walsh for 27 minutes about the term deposit.
+N-119,CL-024,2026-10-13,2,"Mr. Walsh will return the signed mandate by Friday, and I will send the term sheet by Monday."
+N-119,CL-024,2026-10-13,3,He said there is no need to send the rate sheet.
+N-119,CL-024,2026-10-13,4,I will book the portfolio review for Monday.
+N-120,CL-001,2026-10-26,1,Spoke with Ms. Okafor for 14 minutes about the mortgage rate.
+N-120,CL-001,2026-10-26,2,Ms. Okafor will return the KYC form by 9 November.
+N-120,CL-001,2026-10-26,3,She declined the offer to raise the overdraft limit to $35k.
+N-120,CL-001,2026-10-26,4,She does not want a follow-up call this quarter.
+N-120,CL-001,2026-10-26,5,Rates were discussed at length.
+N-120,CL-001,2026-10-26,6,I'll phone Ms. Okafor on 4 November to talk through the mortgage rate.

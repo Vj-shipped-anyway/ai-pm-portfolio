@@ -1,0 +1,441 @@
+cand_id,note_id,action_type,owner,due,subject,amount,cite_sent_id,cite_quote
+C-001,N-001,schedule_review,rm,2026-10-29,annual review,,3,I'll schedule the annual review with Ms. Gallagher for 26 October.
+C-002,N-001,send_document,rm,2026-10-26,fee schedule,,4,agreed that I forward the fee schedule by 26 October.
+C-003,N-002,send_document,rm,,product summary,,2,I already sent Ms. Novak the product summary last week.
+C-004,N-002,log_complaint,rm,,wire fee,,3,She complained about the wire fee.
+C-005,N-002,send_document,rm,2026-10-15,product summary,,5,I'll phone Ms. Novak on 26 October to talk through the overdraft.
+C-006,N-002,callback,rm,2026-10-26,overdraft,,1,Spoke with Ms. Novak for 16 minutes about the mortgage rate.
+C-007,N-003,callback,rm,2026-11-03,overdraft,,2,i'll phone Ms. Umarova on 3 November to talk through the overdraft.
+C-008,N-003,schedule_review,client,2026-10-29,annual review,,3,I'll schedule the annual review with Ms. Umarova for Thursday.
+C-009,N-003,update_preference,rm,,phone,,4,She now prefers contact by phone.
+C-010,N-003,callback,rm,,term deposit rate,,5,"If the term deposit rate moves by more than 15 basis points, she wants me to call her."
+C-011,N-003,limit_request,rm,,wire limit,90000,6,She turned down the increase of the wire limit to $90k.
+C-012,N-004,callback,rm,,wire limit,,1,Spoke with Ms. Bianchi for 15 minutes about the wire limit.
+C-013,N-004,send_document,rm,2026-10-19,account statement,,2,I will send Ms. Bianchi the account statement by 19 October.
+C-014,N-004,await_document,client,,address proof,,3,She returned the address proof last week.
+C-015,N-004,limit_request,rm,,overdraft limit,30000,4,She turned down the increase of the overdraft limit to $30k.
+C-016,N-004,callback,client,2026-10-09,card replacement,,5,I'll phone Ms. Bianchi on Friday to talk through the card replacement.
+C-017,N-004,await_document,client,2026-10-15,signed mandate,,8,She will upload the signed mandate by 15 October.
+C-018,N-005,limit_request,rm,,overdraft limit,70000,3,"He turned down the increase of the overdraft limit to $70,000."
+C-019,N-005,await_document,client,,signed mandate,,4,He will return the signed mandate if the branch confirms the fee.
+C-020,N-005,await_document,client,2026-11-03,signed mandate,,6,He will upload the signed mandate by 3 November.
+C-021,N-006,limit_request,rm,,wire limit,15000,2,She turned down the increase of the wire limit to $15k.
+C-022,N-006,log_complaint,rm,,wire fee,,3,She was unhappy about the wire…
+C-023,N-006,callback,rm,2026-10-29,overdraft,,4,I will call her on 29 October about the overdraft.
+C-024,N-006,send_document,rm,,fee schedule,,6,I might send the fee schedule next month if there is time.
+C-025,N-006,update_preference,rm,,phone,,7,She now prefers contact by phone.
+C-026,N-007,log_complaint,rm,,card replacement delay,,1,Spoke with Ms. Santos for 20 minutes about the card replacement.
+C-027,N-007,schedule_review,rm,2026-10-16,rate review,,4,I will book the rate review for Monday.
+C-028,N-007,limit_request,rm,2026-10-12,wire limit,75000,5,"She wants the wire limit increased to $75,000; I will submit the request by Monday."
+C-029,N-007,limit_request,rm,,overdraft limit,55000,6,She declined the offer to raise the overdraft limit to $55k.
+C-030,N-008,await_document,client,,signed mandate,,1,Spoke with Ms. Zielinski for 18 minutes about the term deposit.
+C-031,N-008,limit_request,rm,2026-10-13,overdraft limit,40000,2,She wants the overdraft limit increased to $40k; I will submit personally the request by 13 October.
+C-032,N-008,schedule_review,rm,2026-10-12,annual review,,3,I'll schedule the annual review with Ms. Zielinski for Friday.
+C-033,N-008,send_document,rm,2026-10-14,account statement,,4,I will send Ms. Zielinski the account statement by 14 October; she does not need anything else.
+C-034,N-008,send_document,rm,2026-10-05,rate sheet,,5,I'll try to send the rate sheet by Monday.
+C-035,N-009,limit_request,rm,,overdraft limit,40000,2,"She declined the offer to raise the overdraft limit to $40,000."
+C-036,N-009,limit_request,rm,2026-10-29,wire limit,95000,3,she wants the wire limit increased to $95k; I will submit the request by 29 October.
+C-037,N-009,callback,rm,,,,4,She asked me to hold off calling her until January.
+C-038,N-009,await_document,client,2026-10-26,signed mandate,,5,"Ms. Chen will return the signed mandate by 26 October, and I will send the account statement by 30 October."
+C-039,N-009,send_document,rm,2026-10-30,signed mandate,,5,"Ms. Chen will return the signed mandate by 26 October, and I will send the account statement by 30 October."
+C-040,N-010,limit_request,rm,,wire limit,30000,3,She turned down the increase of the wire limit to thirty thousand dollars.
+C-041,N-010,send_document,rm,,term sheet,,4,I already sent Ms. Jansen the term sheet last week.
+C-042,N-010,await_document,client,2026-10-19,income proof,,5,"Ms. Jansen will return the income proof by Monday, and I will send the product summary by Friday."
+C-043,N-010,send_document,rm,2026-10-16,product summary,,5,"Ms. Jansen will return the income proof by Monday, and I will send the product summary by Friday."
+C-044,N-011,schedule_review,rm,2026-10-02,rate review,,2,I will book the rate review for Friday.
+C-045,N-011,callback,rm,2026-10-12,term deposit,,3,she asked me to ring her on 12 October about the term deposit.
+C-046,N-011,limit_request,rm,,wire limit,95000,4,"She declined the offer to raise the wire limit to $95,000."
+C-047,N-011,send_document,rm,,product summary,,5,I will send Ms. Quinn the product summary once she confirms the amount.
+C-048,N-012,send_document,rm,2026-10-16,account statement,,2,I'll try to send the account statement by 16 October.
+C-049,N-012,schedule_review,rm,2026-10-19,portfolio review,,3,I will book the portfolio review for 19 October.
+C-050,N-012,callback,rm,,term deposit rate,,4,"If the term deposit rate moves by more than 10 basis points, she wants me to call her."
+C-051,N-012,update_preference,rm,,phone,,5,She now prefers contact by phone.
+C-052,N-012,callback,rm,2026-10-17,overdraft,,6,She asked me to ring her on Wednesday about the overdraft.
+C-053,N-013,update_preference,rm,,post,,2,He now prefers contact by post.
+C-054,N-013,callback,rm,,,,4,He does not want a follow-up call this quarter.
+C-055,N-013,send_document,rm,,account statement,,5,He said there is no need to send the account statement.
+C-056,N-014,send_document,rm,2026-10-08,product summary,,2,I will send Mr. Haddad the product summary by Thursday.
+C-057,N-014,await_document,client,2026-10-13,KYC form,,3,He will upload the KYC form by 13 October.
+C-058,N-014,callback,rm,2026-10-05,term deposit,,4,I will try to call him on Monday about the term deposit.
+C-059,N-014,send_document,rm,,term sheet,,5,I already sent Mr. Haddad the term sheet last week.
+C-060,N-015,schedule_review,rm,,annual review,,1,Spoke with Mr. Oyelaran for 8 minutes about the wire limit.
+C-061,N-015,await_document,client,2026-11-04,KYC form,,3,Mr. Oyelaran will return the KYC form by 4 November.
+C-062,N-015,update_preference,rm,,post,,4,he asked to be contacted by post from now on.
+C-063,N-015,limit_request,rm,,wire limit,65000,5,He declined the offer to raise the wire limit to $65k.
+C-064,N-016,send_document,rm,2026-10-13,rate sheet,,2,I'll try to send the rate sheet by 13 October.
+C-065,N-016,callback,rm,2026-10-12,wire limit,,7,I will call her on 12 October about the wire limit.
+C-066,N-016,limit_request,rm,2026-10-06,wire limit,65000,4,She wants the wire limit increased to $65k; I will submit the request by tomorrow.
+C-067,N-016,log_complaint,rm,,statement error,,6,She complained about the statement error.
+C-068,N-017,send_document,rm,2026-11-07,rate sheet,,2,I'll email the rate sheet to Mr. Castillo by 5 November.
+C-069,N-017,callback,rm,2026-11-09,wire limit,,3,I'll phone Mr. Castillo on 9 November to talk through the wire limit.
+C-070,N-017,await_document,client,,signed mandate,,4,He returned the signed mandate last week.
+C-071,N-017,callback,rm,,,,5,He does not want a follow-up call this quarter.
+C-072,N-017,log_complaint,rm,,statement error,,6,He complained about the statement error.
+C-073,N-018,update_preference,rm,,post,,2,He asked to be contacted by post from now on.
+C-074,N-018,schedule_review,rm,2026-10-14,annual review,,3,I will book the annual review for 9 October.
+C-075,N-018,send_document,rm,,product summary,,4,I already sent Mr. Farouk the product summary last week.
+C-076,N-018,await_document,client,,KYC form,,5,He returned the KYC form last week.
+C-077,N-019,callback,rm,2026-10-19,card replacement,,2,I'll phone Mr. Moreau on 19 October to talk through the card replacement.
+C-078,N-019,send_document,rm,,rate sheet,,3,He said there is no need to send the rate sheet.
+C-079,N-020,limit_request,rm,,wire limit,75000,2,He declined the offer to raise the wire limit to seventy-five thousand dollars.
+C-080,N-020,limit_request,rm,2026-10-29,overdraft limit,20000,3,"He  wants the overdraft limit increased to $20,000; I will submit the request by 29 October."
+C-081,N-020,await_document,client,,income proof,,5,He was pleased with the last statement.
+C-082,N-020,send_document,rm,2026-10-20,product summary,,10,I'll email the product summary to Mr. Tanaka by tomorrow.
+C-083,N-021,log_complaint,rm,,statement error,,2,He was unhappy about the statement error and wants it logged.
+C-084,N-021,callback,rm,2026-10-28,wire limit,,3,I'll phone Mr. Abebe on 28 October to talk through the wire limit.
+C-085,N-021,send_document,rm,,rate sheet,,4,I will send Mr. Abebe the rate sheet once he confirms the amount.
+C-086,N-022,update_preference,rm,,phone,,3,She holds a term deposit and a current account with us.
+C-087,N-022,send_document,rm,2026-10-28,account statement,,4,I will send Ms. Dubois the account statement by 26 October.
+C-088,N-022,await_document,client,2026-10-19,KYC form,,7,Ms.  Dubois will return the KYC form by Monday.
+C-089,N-022,await_document,client,,KYC form,,8,She runs a small catering business.
+C-090,N-023,log_complaint,rm,,card replacement delay,,2,He was unhappy about the card replacement delay and wants it logged.
+C-091,N-023,await_document,client,2026-10-19,signed mandate,,7,He will upload the signed mandate by 19 October.
+C-092,N-023,callback,rm,,,,4,He asked me to hold off calling him until January.
+C-093,N-024,callback,rm,2026-10-28,mortgage rate,,2,I will call him on Wednesday about the mortgage rate.
+C-094,N-024,callback,rm,,card replacement,,3,I called him yesterday about the card replacement.
+C-095,N-024,update_preference,rm,,post,,5,He asked to be contacted by post from now on.
+C-096,N-024,send_document,rm,2026-11-02,product summary,,7,I'll email the product summary to Mr. Rahman by 2 November.
+C-097,N-025,await_document,client,,KYC form,,2,He will return the KYC form if the branch confirms the fee.
+C-098,N-025,send_document,rm,,rate sheet,,3,I might send the rate sheet next month if there is time.
+C-099,N-025,await_document,client,2026-10-27,signed mandate,,4,"Mr. Yilmaz will return the signed mandate by Tuesday, and I will send the rate sheet by 3 November."
+C-100,N-025,send_document,rm,2026-11-03,rate sheet,,4,"Mr. Yilmaz will return the signed mandate by Tuesday, and I will send the rate sheet by 3 November."
+C-101,N-025,callback,rm,2026-11-05,term deposit,,6,I will try to call him on 5 November about the term deposit.
+C-102,N-025,limit_request,rm,2026-10-30,overdraft limit,10000,7,"I will submit the request to raise the overdraft limit to $10,000 by Wednesday."
+C-103,N-026,send_document,rm,2026-10-29,product summary,,2,I  will send Mr. Brandt the product summary by Thursday; he does not need anything else.
+C-104,N-026,log_complaint,rm,,statement error,,3,He complained about the statement error.
+C-105,N-026,await_document,client,,address proof,,4,He returned the address proof last week.
+C-106,N-026,await_document,client,,signed mandate,,5,He will return the signed mandate if the branch confirms the fee.
+C-107,N-027,schedule_review,rm,2026-10-08,portfolio review,,2,I'll schedule the portfolio review with Ms. Ito for Thursday.
+C-108,N-027,callback,rm,2026-10-12,wire limit,,3,I'll phone Ms. Ito on Monday to talk through the wire limit.
+C-109,N-027,send_document,rm,2026-10-15,product summary,,4,I'll try to send the product summary by 15 October.
+C-110,N-028,callback,rm,2026-10-21,card replacement,,3,I'll phone Mr. Petrov on 21 October to talk through the card replacement.
+C-111,N-028,send_document,rm,2026-10-28,rate sheet,,5,I'll  email the rate sheet to Mr. Petrov by 28 October.
+C-112,N-029,limit_request,rm,,overdraft limit,80000,2,"He declined the offer to raise the overdraft limit to $80,000."
+C-113,N-029,schedule_review,rm,2026-10-24,portfolio review,,3,I'll schedule the portfolio review with Mr. Walsh for 19 October.
+C-114,N-030,send_document,rm,2026-10-27,rate sheet,,2,I  will send Ms. Okafor the rate sheet by 27 October; she does not need anything else.
+C-115,N-030,send_document,rm,,rate sheet,,3,I might send the rate sheet next month if there is time.
+C-116,N-030,log_complaint,rm,,wire fee,,4,She was unhappy about the wire fee and wants it logged.
+C-117,N-031,send_document,rm,,product summary,,2,I might send the product summary next month if there is time.
+C-118,N-031,limit_request,rm,2026-10-08,wire limit,70000,3,"She wants the wire limit increased to $70,000; I will submit the request by 8 October."
+C-119,N-031,update_preference,rm,,post,,4,She asked to be contacted by post from now on.
+C-120,N-031,limit_request,rm,,wire limit,35000,5,She declined the offer to raise the wire limit to $35k.
+C-121,N-032,limit_request,rm,2026-10-30,wire limit,80000,3,She wants the wire limit increased to $80k; I will submit the request by 30 October.
+C-122,N-032,await_document,client,2026-10-29,KYC form,,2,She turned down the increase of the overdraft limit to $65k.
+C-123,N-032,limit_request,rm,,overdraft limit,20000,6,"She turned down the increase of the overdraft limit to $20,000."
+C-124,N-033,schedule_review,rm,2026-10-15,annual review,,2,I will book the annual review for 15 October.
+C-125,N-033,callback,rm,,card replacement,,3,I called her yesterday about the card replacement.
+C-126,N-033,await_document,client,,signed mandate,,4,She will return the signed mandate if the branch confirms the fee.
+C-127,N-033,log_complaint,rm,,wire fee,,5,She complained about the wire fee.
+C-128,N-034,callback,rm,2026-10-12,card replacement,,3,I will try to call her on 12 October about the card replacement.
+C-129,N-034,send_document,rm,2026-10-12,rate sheet,,4,I  will send Ms. Bianchi the rate sheet by 12 October.
+C-130,N-034,await_document,client,2026-10-12,address proof,,5,She will upload the address proof by 12 October.
+C-131,N-034,callback,rm,,wire limit,,7,I called her yesterday about the wire limit.
+C-132,N-035,schedule_review,rm,2026-10-12,portfolio review,,3,I'll schedule the portfolio review with Mr. Eriksen for 12 October.
+C-133,N-035,update_preference,rm,,post,,7,He now prefers contact by post.
+C-134,N-035,await_document,client,,signed mandate,,6,He was pleased with the last statement.
+C-135,N-036,await_document,client,2026-10-26,KYC form,,3,"Ms. Lindqvist will return the KYC form by 26 October, and I will send the product summary by 21 October."
+C-136,N-036,send_document,rm,2026-10-21,KYC form,,3,"Ms. Lindqvist will return the KYC form by 26 October, and I will send the product summary by 21 October."
+C-137,N-036,await_document,client,,income proof,,4,She will return the income proof if the branch confirms the fee.
+C-138,N-037,send_document,rm,,product summary,,3,I will send Ms. Santos the product summary once she confirms the amount.
+C-139,N-037,limit_request,rm,,wire limit,50000,4,"She turned down the increase of the wire limit to $50,000."
+C-140,N-037,limit_request,rm,,overdraft limit,100000,5,She declined the offer to raise the overdraft limit to $100k.
+C-141,N-037,update_preference,rm,,phone,,9,She now prefers contact by phone.
+C-142,N-038,update_preference,rm,,phone,,3,She asked to be contacted by phone from now on.
+C-143,N-038,limit_request,rm,,wire limit,10000,4,"She declined the offer to raise the wire limit to $10,000."
+C-144,N-039,send_document,rm,,rate sheet,,2,I already sent Ms. Chen the rate sheet last week.
+C-145,N-039,schedule_review,rm,2026-10-26,portfolio review,,3,I'll schedule the portfolio review with Ms. Chen for 26 October.
+C-146,N-039,await_document,client,2026-11-03,KYC form,,4,"Ms. Chen will return the KYC form by 3 November, and I will send the fee schedule by Thursday."
+C-147,N-039,send_document,rm,2026-10-29,fee schedule,,4,"Ms. Chen will return the KYC form by 3 November, and I will send the fee schedule by Thursday."
+C-148,N-040,await_document,client,2026-10-12,address proof,,2,"Ms. Jansen will return the address proof by 12 October, and I will send the fee schedule by Monday."
+C-149,N-040,send_document,rm,2026-10-05,fee schedule,,2,"Ms. Jansen will return the address proof by 12 October, and I will send the fee schedule by Monday."
+C-150,N-040,callback,rm,,,,4,She asked me to hold off calling her until January.
+C-151,N-040,limit_request,rm,,overdraft limit,40000,6,She turned down the increase of the overdraft limit to forty thousand dollars.
+C-152,N-041,callback,rm,2026-10-26,overdraft,,2,I will try to call her on 26 October about the overdraft.
+C-153,N-041,limit_request,rm,2026-10-28,wire limit,55000,3,"She wants the wire limit increased to $55,000; I will submit the request by 28 October."
+C-154,N-041,await_document,client,2026-10-23,address proof,,4,"Ms. Quinn will return the address proof by Friday, and I will send the account statement by 26 October."
+C-155,N-041,send_document,rm,2026-10-26,account statement,,4,"Ms. Quinn will return the address proof by Friday, and I will send the account statement by 26 October."
+C-156,N-042,callback,rm,,,,2,She does not want a follow-up call this quarter.
+C-157,N-042,update_preference,rm,,email,,3,She  asked to be contacted by email from now on.
+C-158,N-042,send_document,rm,,account statement,,4,She travels in November and reads email in the evening.
+C-159,N-042,limit_request,rm,,wire limit,15000,6,"She declined the offer to raise the wire limit to $15,000."
+C-160,N-043,send_document,rm,2026-10-19,account statement,,3,I'll email the account statement to Mr. Alvarez by Monday.
+C-161,N-043,limit_request,rm,,overdraft limit,15000,4,"He declined the offer to raise the overdraft limit to $15,000."
+C-162,N-043,limit_request,rm,,wire limit,85000,5,"He turned down the increase of the wire limit to $85,000."
+C-163,N-044,send_document,rm,,account statement,,3,I will send Mr. Haddad the account statement once he confirms the amount.
+C-164,N-044,limit_request,rm,,wire limit,90000,4,"He turned down the increase of the wire limit to $90,000."
+C-165,N-044,update_preference,rm,,post,,6,Rates were discussed at length.
+C-166,N-044,await_document,client,2026-10-26,income proof,,8,He is going to send the income proof by Monday.
+C-167,N-044,log_complaint,rm,,wire fee,,9,He complained about the wire fee.
+C-168,N-045,limit_request,rm,2026-10-24,overdraft limit,70000,3,He wants the overdraft limit increased to $70k; I will submit the request by 19 October.
+C-169,N-045,send_document,rm,,account statement,,5,I will send Mr. Oyelaran the account statement once he confirms the amount.
+C-170,N-045,await_document,client,2026-10-13,KYC form,,6,"Mr. Oyelaran will return the KYC form by 13 October, and I will send the rate sheet by 19 October."
+C-171,N-045,send_document,rm,2026-10-19,rate sheet,,6,"Mr. Oyelaran will return the KYC form by 13 October, and I will send the rate sheet by 19 October."
+C-172,N-046,schedule_review,rm,,rate review,,2,She was pleased with the last statement.
+C-173,N-046,await_document,client,2026-10-26,income proof,,5,"Ms. Varga will return the income proof by 26 October, and I will send the product summary by 27 October."
+C-174,N-046,send_document,rm,2026-10-27,product summary,,5,"Ms. Varga will return the income proof by 26 October, and I will send the product summary by 27 October."
+C-175,N-047,update_preference,rm,,post,,2,He asked to be contacted by post from now on.
+C-176,N-047,callback,rm,,,,3,He does not want a follow-up call this quarter.
+C-177,N-047,send_document,rm,2026-10-26,account statement,,4,Agreed that I forward the account statement by Monday.
+C-178,N-047,limit_request,rm,2026-10-30,overdraft limit,50000,5,He wants the overdraft limit increased to fifty thousand dollars; I will submit the request by Monday.
+C-179,N-047,limit_request,rm,,wire limit,65000,6,"He declined the offer to raise the wire limit to $65,000."
+C-180,N-047,callback,rm,,card replacement,,7,I called him yesterday about the card replacement.
+C-181,N-048,callback,rm,,,,3,He asked me to hold off calling him until January.
+C-182,N-048,await_document,client,2026-11-02,signed mandate,,4,"Mr. Farouk will return the signed mandate by 2 November, and I will send the fee schedule by Tuesday."
+C-183,N-048,send_document,rm,2026-10-27,signed mandate,,4,"Mr. Farouk will return the signed mandate by 2 November, and I will send the fee schedule by Tuesday."
+C-184,N-048,schedule_review,rm,2026-10-28,annual review,,5,I will book the…
+C-185,N-048,log_complaint,rm,,statement error,,6,Rates were discussed at length.
+C-186,N-049,callback,rm,,mortgage rate,,2,"If the mortgage rate moves by more than 25 basis points, he wants me to call him."
+C-187,N-049,limit_request,rm,2026-10-02,overdraft limit,95000,4,He wants the overdraft limit increased to ninety-five thousand dollars;…
+C-188,N-050,limit_request,rm,2026-10-21,overdraft limit,70000,2,He wants the overdraft limit increased to seventy thousand dollars; I will submit the request by 21 October.
+C-189,N-050,limit_request,rm,,overdraft limit,100000,3,He declined the offer to raise the overdraft limit to $100k.
+C-190,N-050,await_document,client,2026-10-20,address proof,,5,Mr. Tanaka will return the address proof by Tuesday.
+C-191,N-051,update_preference,rm,,email,,4,"He declined the offer to raise the overdraft limit to $80,000."
+C-192,N-051,await_document,client,,signed mandate,,5,He will return the signed mandate if the branch confirms the fee.
+C-193,N-052,limit_request,rm,,overdraft limit,55000,2,"She turned down the increase of the overdraft limit to $55,000."
+C-194,N-052,send_document,rm,2026-11-03,term sheet,,3,I'll try to send the term sheet by 3 November.
+C-195,N-052,await_document,client,2026-10-28,signed mandate,,4,"Ms. Dubois will return the signed mandate by 9 November, and I will send the rate sheet by Wednesday."
+C-196,N-052,send_document,rm,2026-10-28,rate sheet,,4,"Ms. Dubois will return the signed mandate by 9 November, and I will send the rate sheet by Wednesday."
+C-197,N-053,callback,rm,2026-10-12,mortgage rate,,5,I will call him on 12 October about the mortgage rate.
+C-198,N-053,limit_request,rm,2026-10-16,overdraft limit,15000,6,He wants the overdraft limit increased to $15k; I will submit the request by 16 October.
+C-199,N-054,limit_request,rm,,wire limit,,1,Spoke with Mr. Rahman for 20 minutes about the mortgage rate.
+C-200,N-054,callback,rm,,term deposit rate,,2,"If the term deposit rate moves by more than 25 basis points, he wants me to call him."
+C-201,N-054,await_document,client,,KYC form,,3,He will return the KYC form if the branch confirms the fee.
+C-202,N-054,await_document,client,2026-10-22,KYC form,,4,"Mr. Rahman will return the KYC form by 22 October, and I will send the account statement by Tuesday."
+C-203,N-054,send_document,rm,2026-10-20,account statement,,4,"Mr. Rahman will return the KYC form by 22 October, and I will send the account statement by Tuesday."
+C-204,N-055,limit_request,rm,2026-11-02,wire limit,85000,3,He runs a small catering business.
+C-205,N-055,send_document,rm,,account statement,,4,I might send the account statement next month if there is time.
+C-206,N-055,callback,rm,,mortgage rate,,5,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+C-207,N-055,limit_request,rm,,wire limit,10000,7,"He declined the offer to raise the wire limit to $10,000."
+C-208,N-056,limit_request,rm,2026-10-26,wire limit,45000,2,He wants the wire limit increased to forty-five thousand dollars; I will submit the request by 26 October.
+C-209,N-056,send_document,rm,,rate sheet,,3,I will send Mr. Brandt the rate sheet once he confirms the amount.
+C-210,N-056,log_complaint,rm,,branch queue time,,4,He was unhappy about the branch queue time and wants it logged.
+C-211,N-056,callback,rm,,term deposit rate,,5,"If the term deposit rate moves by more than 50 basis points, he wants me to call him."
+C-212,N-057,limit_request,rm,,wire limit,20000,4,She turned down the increase of the wire limit to $20k.
+C-213,N-057,schedule_review,rm,2026-10-15,portfolio review,,5,I will book the portfolio review for Thursday.
+C-214,N-057,limit_request,rm,2026-10-15,overdraft limit,60000,6,"I will submit the request to raise the overdraft limit to $60,000 by Thursday."
+C-215,N-058,limit_request,rm,,wire limit,,1,Spoke with Mr. Petrov for 27 minutes about the mortgage rate.
+C-216,N-058,callback,rm,,overdraft,,3,I called him yesterday about the overdraft.
+C-217,N-058,schedule_review,rm,2026-10-13,rate review,,4,I'll schedule the rate review with Mr. Petrov for 13 October.
+C-218,N-059,send_document,rm,,account statement,,2,I might send the account statement next month if there is time.
+C-219,N-059,await_document,client,2026-11-02,signed mandate,,3,"Mr. Walsh will return the signed mandate by Monday, and I will send the account statement by 6 November."
+C-220,N-059,send_document,rm,2026-11-06,account statement,,3,"Mr. Walsh will return the signed mandate by Monday, and I will send the account statement by 6 November."
+C-221,N-059,log_complaint,rm,,statement error,,5,He was unhappy about the statement error and wants it logged.
+C-222,N-060,send_document,rm,,rate sheet,,2,I might send the rate sheet next month if there is time.
+C-223,N-060,await_document,client,2026-10-19,income proof,,3,She is going to send the income proof by 19 October.
+C-224,N-061,callback,rm,2026-10-19,card replacement,,2,I will try to call her on 19 October about the card replacement.
+C-225,N-061,schedule_review,rm,2026-10-16,portfolio review,,4,I'll schedule the portfolio review with Ms. Gallagher for 16 October.
+C-226,N-061,limit_request,rm,2026-10-12,wire limit,55000,5,I will submit the request to raise the wire limit to fifty-five thousand dollars by 12 October.
+C-227,N-061,callback,rm,2026-10-08,wire limit,,6,I will try to call her on Thursday about the wire limit.
+C-228,N-062,callback,rm,,mortgage rate,,3,"If the mortgage rate moves by more than 50 basis points, she wants me to call her."
+C-229,N-062,await_document,client,2026-10-27,income proof,,5,"Ms. Novak will return the income proof by 27 October, and I will send the fee schedule by 22 October."
+C-230,N-062,send_document,rm,2026-10-22,fee schedule,,5,"Ms. Novak will return the income proof by 27 October, and I will send the fee schedule by 22 October."
+C-231,N-063,send_document,rm,2026-10-14,rate sheet,,3,I'll try to send the rate sheet by 14 October.
+C-232,N-063,callback,rm,2026-10-23,term deposit,,4,She asked me to ring her on 19 October about the term deposit.
+C-233,N-063,limit_request,client,2026-10-16,wire limit,85000,7,"I will submit the request to raise the wire limit to $85,000 by 16 October."
+C-234,N-064,await_document,client,2026-11-02,signed mandate,,2,"Ms. Bianchi will return the signed mandate by 2 November, and I will send the account statement by Thursday."
+C-235,N-064,send_document,rm,2026-11-02,account statement,,2,"Ms. Bianchi will return the signed mandate by 2 November, and I will send the account statement by Thursday."
+C-236,N-064,callback,rm,,card replacement,,3,I called her yesterday about the card replacement.
+C-237,N-065,update_preference,rm,,email,,2,He now prefers contact by email.
+C-238,N-065,limit_request,rm,2026-10-14,wire limit,45000,3,"I  will submit the request to raise the wire limit to $45,000 by 14 October."
+C-239,N-065,limit_request,rm,,overdraft limit,55000,4,"He declined the offer to raise the overdraft limit to $55,000."
+C-240,N-066,send_document,rm,2026-10-26,account statement,,4,I'll email the account statement to Ms. Lindqvist by 26 October.
+C-241,N-066,callback,rm,2026-10-21,overdraft,,5,She  asked me to ring her on 21 October about the overdraft.
+C-242,N-066,callback,rm,,card replacement,,7,I called her yesterday about the card replacement.
+C-243,N-067,await_document,client,2026-10-12,signed mandate,,3,She will upload the signed mandate by Monday.
+C-244,N-067,callback,rm,2026-10-17,term deposit,,4,She asked me to ring her on Thursday about the term deposit.
+C-245,N-067,send_document,rm,,term sheet,,5,I already sent Ms. Santos the term sheet last week.
+C-246,N-068,limit_request,rm,,overdraft limit,25000,2,"She declined the offer to raise the overdraft limit to $25,000."
+C-247,N-068,schedule_review,rm,2026-10-07,portfolio review,,4,I'll schedule the portfolio review with Ms. Zielinski for Wednesday.
+C-248,N-068,send_document,rm,,account statement,,5,I will send Ms. Zielinski the account statement once she confirms the amount.
+C-249,N-068,await_document,client,2026-10-12,KYC form,,4,I'll schedule the portfolio review with Ms. Zielinski for Wednesday.
+C-250,N-068,send_document,rm,2026-10-12,term sheet,,8,I'll try to send the term sheet by Monday.
+C-251,N-069,callback,rm,2026-11-09,mortgage rate,,2,She asked me to ring her on 9 November about the mortgage rate.
+C-252,N-069,await_document,client,2026-11-09,signed mandate,,3,She is going to send the…
+C-253,N-069,log_complaint,rm,,statement error,,4,She was unhappy about the statement error and wants it logged.
+C-254,N-069,send_document,rm,,rate sheet,,5,I will send Ms. Chen the rate sheet once she confirms the amount.
+C-255,N-070,callback,rm,,,,2,She asked me to hold off calling her until January.
+C-256,N-070,await_document,client,,address proof,,4,She runs a small catering business.
+C-257,N-070,await_document,client,2026-10-16,KYC form,,5,"Ms. Jansen will return the KYC form by 19 October, and I will send the product summary by 16 October."
+C-258,N-070,send_document,rm,2026-10-16,product summary,,5,"Ms. Jansen will return the KYC form by 19 October, and I will send the product summary by 16 October."
+C-259,N-071,await_document,client,,income proof,,2,She will return the income proof if the branch confirms the fee.
+C-260,N-071,limit_request,rm,2026-10-14,wire limit,85000,4,"She  wants the wire limit increased to $85,000; I will submit the request by tomorrow."
+C-261,N-072,await_document,client,,signed mandate,,1,Spoke with Ms. Xu for 13 minutes about the mortgage rate.
+C-262,N-072,callback,rm,2026-10-27,term deposit,,5,She will return the KYC form if the branch confirms the fee.
+C-263,N-072,update_preference,rm,,phone,,4,She now prefers contact by phone.
+C-264,N-072,await_document,client,,KYC form,,5,She will return the KYC form if the branch confirms the fee.
+C-265,N-073,await_document,client,,signed mandate,,2,He returned the signed mandate last week.
+C-266,N-073,log_complaint,rm,,wire fee,,5,He was unhappy about the wire fee and wants it logged.
+C-267,N-074,schedule_review,rm,2026-10-20,rate review,,2,I'll schedule the rate review with Mr. Haddad for tomorrow.
+C-268,N-074,limit_request,rm,,overdraft limit,65000,5,He declined the offer to raise the overdraft limit to sixty-five thousand dollars.
+C-269,N-075,limit_request,rm,,wire limit,50000,2,"He turned down the increase of the wire limit to $50,000."
+C-270,N-075,await_document,client,,address proof,,3,He returned the address proof last week.
+C-271,N-075,limit_request,rm,2026-10-13,overdraft limit,10000,4,"I will submit the request to raise the overdraft limit to $10,000 by Tuesday."
+C-272,N-076,send_document,rm,2026-10-12,fee schedule,,2,I will send Ms. Varga the fee schedule by Monday; she does not need anything else.
+C-273,N-076,update_preference,rm,,post,,3,She asked to be contacted by post from now on.
+C-274,N-076,callback,rm,,,,4,She does not want a follow-up call this quarter.
+C-275,N-076,callback,rm,2026-10-16,card replacement,,6,I will call her on 16 October about the card replacement.
+C-276,N-077,schedule_review,rm,2026-10-19,annual review,,2,I'll schedule the annual review with Mr. Castillo for 19 October.
+C-277,N-077,log_complaint,rm,,card replacement delay,,3,He complained about the card replacement delay.
+C-278,N-077,schedule_review,rm,,annual review,,4,He runs a small catering business.
+C-279,N-077,callback,rm,2026-10-16,term deposit,,5,I'll phone Mr. Castillo on 16 October to talk through the term deposit.
+C-280,N-078,callback,rm,2026-10-15,card replacement,,2,He asked me to ring him on Thursday about the card replacement.
+C-281,N-078,send_document,rm,,account statement,,3,I might send the account statement next month if there is time.
+C-282,N-078,send_document,rm,2026-10-15,account statement,,4,Agreed that I forward the account statement by Thursday.
+C-283,N-079,schedule_review,rm,2026-11-02,portfolio review,,3,i'll schedule the portfolio review with Mr. Moreau for 2 November.
+C-284,N-079,schedule_review,rm,,portfolio review,,4,Rates were discussed at length.
+C-285,N-079,callback,rm,,wire limit,,6,I called him yesterday about the wire limit.
+C-286,N-080,callback,rm,2026-10-19,term deposit,,6,I will call him on 19 October about the term deposit.
+C-287,N-081,send_document,rm,,term sheet,,2,I already sent Mr. Abebe the term sheet last week.
+C-288,N-081,schedule_review,rm,2026-10-19,portfolio review,,3,I will book the portfolio review for 19 October.
+C-289,N-081,log_complaint,rm,,wire fee,,1,Spoke with Mr. Abebe for 19 minutes about the term deposit.
+C-290,N-082,send_document,rm,,product summary,,2,I already sent Ms. Dubois the product summary last week.
+C-291,N-082,callback,rm,,overdraft,,3,I called her yesterday about the overdraft.
+C-292,N-082,send_document,rm,2026-10-26,rate sheet,,4,I will send Ms. Dubois the rate sheet by 26 October.
+C-293,N-082,limit_request,rm,2026-10-26,wire limit,10000,5,"She wants the wire limit increased to $10,000; I will submit the request by 21 October."
+C-294,N-082,callback,rm,2026-10-26,term deposit,,6,She asked me to ring her on 26 October about the term deposit.
+C-295,N-082,update_preference,rm,,email,,7,Rates were discussed at length.
+C-296,N-083,schedule_review,rm,2026-11-09,rate review,,3,He does not want a follow-up call this quarter.
+C-297,N-083,callback,rm,,,,3,He does not want a follow-up call this quarter.
+C-298,N-084,update_preference,rm,,email,,5,He now prefers contact by email.
+C-299,N-084,limit_request,rm,,wire limit,85000,6,He turned down the increase of the wire limit to $85k.
+C-300,N-084,limit_request,rm,2026-11-04,overdraft limit,15000,8,"He wants the overdraft limit increased to $15,000; I will submit the request by 4 November."
+C-301,N-084,schedule_review,rm,2026-10-28,rate review,,9,I'll schedule the rate review with Mr. Rahman for Wednesday.
+C-302,N-085,schedule_review,rm,2026-10-30,portfolio review,,2,I will book the portfolio review for 30 October.
+C-303,N-085,send_document,client,2026-10-26,product summary,,3,I'll email the product summary to Mr. Yilmaz by 26 October.
+C-304,N-085,callback,rm,,,,4,He does not want a follow-up call this quarter.
+C-305,N-085,send_document,rm,,product summary,,5,He said there is no need to send the product summary.
+C-306,N-086,log_complaint,rm,,wire fee,,2,He complained about the wire fee.
+C-307,N-086,limit_request,rm,,overdraft limit,20000,3,"He turned down the increase of the overdraft limit to $20,000."
+C-308,N-086,await_document,client,2026-10-09,KYC form,,4,"Mr. Brandt will return the KYC form by tomorrow, and I will send the term sheet by 19 October."
+C-309,N-086,send_document,rm,2026-10-19,term sheet,,4,"Mr. Brandt will return the KYC form by tomorrow, and I will send the term sheet by 19 October."
+C-310,N-087,callback,rm,,mortgage rate,,3,"If the mortgage rate moves by more than 15 basis points, she wants me to call her."
+C-311,N-087,await_document,client,2026-10-26,signed mandate,,5,"Ms. Ito will return the signed mandate by 22 October, and I will send the account statement by Monday."
+C-312,N-087,send_document,rm,2026-10-22,account statement,,5,"Ms. Ito will return the signed mandate by 22 October, and I will send the account statement by Monday."
+C-313,N-088,send_document,rm,,term sheet,,4,I might send the term sheet next month if there is time.
+C-314,N-088,log_complaint,rm,,card replacement delay,,5,He complained about the card replacement delay.
+C-315,N-088,limit_request,rm,2026-10-13,overdraft limit,45000,6,I  will submit the request to raise the overdraft limit to $45k by 13 October.
+C-316,N-089,limit_request,rm,,overdraft limit,,1,Spoke with Mr. Walsh for 12 minutes about the overdraft.
+C-317,N-089,update_preference,rm,,post,,3,He now prefers contact personally by post.
+C-318,N-090,send_document,rm,,fee schedule,,3,She said there is no need to send the fee schedule.
+C-319,N-090,await_document,client,,KYC form,,4,She returned the KYC form last week.
+C-320,N-090,schedule_review,rm,2026-10-16,annual review,,5,I will book the annual review for 16 October.
+C-321,N-090,update_preference,rm,,email,,7,She now prefers contact by email.
+C-322,N-091,callback,rm,,term deposit,,2,I called her yesterday about the term deposit.
+C-323,N-091,schedule_review,rm,2026-10-14,annual review,,3,I'll schedule the annual review with Ms. Gallagher for Wednesday.
+C-324,N-091,limit_request,rm,2026-10-12,wire limit,40000,4,"I will submit the request to raise the wire limit to $40,000 by Monday."
+C-325,N-091,callback,rm,,,,5,She does not want a follow-up call this quarter.
+C-326,N-092,log_complaint,rm,,statement error,,2,She  complained about the statement error.
+C-327,N-092,schedule_review,rm,2026-10-21,annual review,,3,I'll schedule the annual review with Ms. Novak for 21 October.
+C-328,N-092,send_document,rm,,account statement,,6,I will send Ms. Novak the account statement once she confirms the amount.
+C-329,N-093,await_document,client,2026-10-09,address proof,,2,"Ms. Umarova will return the address proof by 9 October, and I will send the term sheet by 13 October."
+C-330,N-093,send_document,rm,2026-10-09,term sheet,,2,"Ms. Umarova will return the address proof by 9 October, and I will send the term sheet by 13 October."
+C-331,N-093,callback,rm,,,,3,She does not want a follow-up call this quarter.
+C-332,N-093,schedule_review,rm,2026-10-12,annual review,,5,I’ll schedule the annual review with Ms. Umarova for 12 October.
+C-333,N-094,callback,rm,,wire limit,,2,I called her yesterday about the wire limit.
+C-334,N-094,callback,rm,2026-10-26,card replacement,,3,I will call her on 26 October about the card replacement.
+C-335,N-094,limit_request,rm,,overdraft limit,35000,4,She turned down the increase of the overdraft limit to $35k.
+C-336,N-094,limit_request,rm,2026-10-23,overdraft limit,25000,5,"She wants the overdraft limit increased to $25,000; I will submit the request by 23 October."
+C-337,N-095,log_complaint,rm,,statement error,,2,He complained about the statement error.
+C-338,N-095,send_document,rm,,rate sheet,,3,He said there is no need to send the rate sheet.
+C-339,N-095,limit_request,rm,,wire limit,65000,5,He turned down the increase of the wire limit to $65k.
+C-340,N-095,await_document,client,,signed mandate,,6,He returned the signed mandate last week.
+C-341,N-096,limit_request,rm,2026-10-17,wire limit,15000,2,She wants the wire limit increased to fifteen thousand dollars; I will submit the request by 15 October.
+C-342,N-096,send_document,rm,,fee schedule,,3,I might send the fee schedule next month if there is time.
+C-343,N-096,limit_request,rm,,wire limit,25000,5,She declined the offer to raise the wire limit to $25k.
+C-344,N-097,limit_request,rm,,overdraft limit,100000,3,She turned down the increase of the overdraft limit to $100k.
+C-345,N-097,send_document,rm,2026-10-26,fee schedule,,10,Agreed that I forward the fee schedule by Monday.
+C-346,N-097,limit_request,rm,2026-10-23,overdraft limit,65000,5,"She wants the overdraft limit increased to $65,000; I will submit the request by Friday."
+C-347,N-097,schedule_review,rm,2026-10-20,rate review,,7,I'll schedule the rate review with Ms. Santos for Tuesday.
+C-348,N-098,send_document,rm,2026-10-07,fee schedule,,2,I'll try to send the fee schedule by 7 October.
+C-349,N-098,update_preference,rm,,post,,3,She now prefers contact by post.
+C-350,N-098,schedule_review,rm,2026-10-13,portfolio review,,4,I will book the portfolio review for 13 October.
+C-351,N-098,log_complaint,rm,,wire fee,,5,She complained about the wire fee.
+C-352,N-099,await_document,client,2026-10-22,address proof,,2,She will upload the address proof by Thursday.
+C-353,N-099,callback,rm,,,,5,She asked me to hold off calling her until January.
+C-354,N-099,callback,rm,2026-10-26,term deposit,,6,I will call her on Monday about the term deposit.
+C-355,N-100,send_document,rm,,product summary,,2,She said there is no need to send the product summary.
+C-356,N-100,callback,rm,,term deposit rate,,3,"If the term deposit rate moves by more than 15 basis points, she wants me to call her."
+C-357,N-100,update_preference,rm,,post,,4,She now prefers contact by post.
+C-358,N-100,schedule_review,rm,2026-10-05,rate review,,5,I'll schedule the rate review with Ms. Jansen for Monday.
+C-359,N-101,limit_request,rm,2026-10-16,wire limit,80000,11,She wants the wire limit increased to $80k; I will submit the request by 16 October.
+C-360,N-101,log_complaint,rm,,card replacement delay,,4,She complained about the card replacement delay.
+C-361,N-101,callback,rm,,wire limit,,6,I called her yesterday about the wire limit.
+C-362,N-101,callback,rm,,,,8,She asked me to hold off calling her until January.
+C-363,N-102,schedule_review,rm,2026-10-19,portfolio review,,2,I will book the portfolio review for 19 October.
+C-364,N-102,await_document,client,,address proof,,4,She returned the address proof last week.
+C-365,N-102,await_document,client,2026-10-19,KYC form,,5,She  is going to send the KYC form by Monday.
+C-366,N-102,schedule_review,rm,,portfolio review,,6,She holds a term deposit and a current account with us.
+C-367,N-102,limit_request,rm,,wire limit,75000,7,She turned down the increase of the wire limit to $75k.
+C-368,N-103,callback,rm,,overdraft,,2,I called him yesterday about the overdraft.
+C-369,N-103,limit_request,rm,2026-10-15,wire limit,40000,3,"I will submit the request to raise the wire limit to $40,000 by 15 October."
+C-370,N-103,callback,rm,2026-10-12,overdraft,,4,I will try to call him on Monday about the overdraft.
+C-371,N-103,schedule_review,rm,2026-10-22,annual review,,6,I'll schedule the annual review with Mr. Alvarez for 19 October.
+C-372,N-104,limit_request,rm,,overdraft limit,,1,Spoke with Mr. Haddad for 28 minutes about the term deposit.
+C-373,N-104,limit_request,rm,2026-10-30,wire limit,60000,3,I will submit the request to raise the wire limit to sixty thousand dollars by 30 October.
+C-374,N-104,send_document,rm,,account statement,,4,I might send the account statement next month if there is time.
+C-375,N-104,send_document,rm,,account statement,,5,I already sent Mr. Haddad the account statement last week.
+C-376,N-105,update_preference,rm,,email,,1,Spoke with Mr. Oyelaran for 25 minutes about the overdraft.
+C-377,N-105,limit_request,rm,,overdraft limit,85000,2,He declined the offer to raise the overdraft limit to $85k.
+C-378,N-105,callback,rm,,overdraft,,3,I called him yesterday about the overdraft.
+C-379,N-105,log_complaint,rm,,branch queue time,,5,He complained about the branch queue time.
+C-380,N-106,send_document,rm,2026-10-16,term sheet,,2,I will send Ms. Varga the…
+C-381,N-106,await_document,client,,KYC form,,3,She returned the KYC form last week.
+C-382,N-106,send_document,rm,,rate sheet,,4,I might send the rate sheet next month if there is time.
+C-383,N-106,limit_request,rm,2026-10-26,overdraft limit,75000,5,"I will submit the request to raise the overdraft limit definitely to $75,000 by 26 October."
+C-384,N-106,log_complaint,rm,,wire fee,,6,She was unhappy about the wire fee and wants it logged.
+C-385,N-107,send_document,rm,,product summary,,3,He said there is no need to send the product summary.
+C-386,N-107,callback,rm,,mortgage rate,,4,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+C-387,N-107,await_document,client,2026-10-11,KYC form,,5,He will upload the KYC form by Wednesday.
+C-388,N-108,send_document,rm,,fee schedule,,4,I already sent Mr. Farouk the fee schedule last week.
+C-389,N-108,await_document,client,2026-10-23,address proof,,5,"Mr. Farouk will return the address proof by 29 October, and I will send the account statement by 23 October."
+C-390,N-108,send_document,rm,2026-10-23,account statement,,5,"Mr. Farouk will return the address proof by 29 October, and I will send the account statement by 23 October."
+C-391,N-108,log_complaint,rm,,statement error,,7,He was unhappy about the statement error and wants it logged.
+C-392,N-109,log_complaint,rm,,branch queue time,,1,Spoke with Mr. Moreau for 23 minutes about the term deposit.
+C-393,N-109,limit_request,rm,,wire limit,60000,3,"He declined the offer to raise the wire limit to $60,000."
+C-394,N-109,callback,rm,2026-10-19,overdraft,,4,I will try to call him on 19 October about the overdraft.
+C-395,N-109,limit_request,rm,,wire limit,25000,5,He turned down the increase of the wire limit to $25k.
+C-396,N-109,update_preference,rm,,phone,,6,He now prefers definitely contact by phone.
+C-397,N-109,limit_request,rm,2026-10-21,overdraft limit,55000,7,I  will submit the request to raise the overdraft limit to $55k by 21 October.
+C-398,N-110,send_document,rm,,term sheet,,2,He holds a term deposit and a current account with us.
+C-399,N-110,send_document,rm,,product summary,,3,I already sent Mr. Tanaka the product summary last week.
+C-400,N-110,limit_request,rm,2026-10-08,overdraft limit,15000,4,"He wants the overdraft limit increased to $15,000; I will submit the request by Thursday."
+C-401,N-110,await_document,client,2026-10-12,signed mandate,,11,He is going to send the signed mandate by 12 October.
+C-402,N-110,log_complaint,rm,,wire fee,,8,He was unhappy about the wire fee and wants it logged.
+C-403,N-111,log_complaint,rm,,statement error,,2,He  complained about the statement error.
+C-404,N-111,schedule_review,rm,2026-10-21,annual review,,3,I'll schedule the annual review with Mr. Abebe for 21 October.
+C-405,N-111,callback,rm,,mortgage rate,,4,"If the mortgage rate moves by more than 50 basis points, he wants me to call him."
+C-406,N-112,await_document,client,2026-10-13,address proof,,3,Ms. Dubois will return the address proof by tomorrow.
+C-407,N-112,callback,rm,2026-10-26,term deposit,,4,I will call her on 26 October about the term deposit.
+C-408,N-112,limit_request,rm,,overdraft limit,10000,7,"She turned down the increase of the overdraft limit to $10,000."
+C-409,N-113,send_document,rm,,rate sheet,,2,I will send Mr. Kowalski the rate sheet once he confirms the amount.
+C-410,N-113,log_complaint,rm,,wire fee,,4,He complained about the wire promptly fee.
+C-411,N-113,update_preference,rm,,email,,5,He now prefers…
+C-412,N-114,send_document,rm,2026-10-26,fee schedule,,5,I will send Mr. Rahman the fee schedule by Monday.
+C-413,N-114,callback,rm,,overdraft,,6,I called him yesterday about the overdraft.
+C-414,N-114,schedule_review,rm,2026-10-26,portfolio review,,7,I'll schedule the portfolio review with Mr. Rahman for personally Monday.
+C-415,N-114,callback,rm,2026-10-28,card replacement,,5,I will send Mr. Rahman the fee schedule by Monday.
+C-416,N-115,send_document,rm,,rate sheet,,4,I might send the rate sheet next month if there is time.
+C-417,N-115,await_document,client,,income proof,,5,He returned the income proof last week.
+C-418,N-115,await_document,client,2026-11-02,KYC form,,6,He is going to send the…
+C-419,N-116,log_complaint,rm,,card replacement delay,,1,Spoke with Mr. Brandt for 20 minutes about the term deposit.
+C-420,N-116,log_complaint,rm,,branch queue time,,2,He travels in November and reads email in the evening.
+C-421,N-116,callback,rm,,,,3,He asked me to hold off calling him until January.
+C-422,N-116,await_document,client,2026-11-01,income proof,,4,Mr. Brandt will return the income proof by 29 October.
+C-423,N-116,await_document,client,,KYC form,,5,He returned the KYC form last week.
+C-424,N-117,limit_request,rm,,overdraft limit,50000,2,She turned down the increase of the overdraft limit to $50k.
+C-425,N-117,send_document,rm,,product summary,,3,She said there is no need to send the product summary.
+C-426,N-117,await_document,client,,signed mandate,,4,She will return the signed mandate if the branch confirms the fee.
+C-427,N-117,await_document,client,2026-11-09,address proof,,5,"Ms. Ito will return the address proof by Friday, and I will send the account statement by 9 November."
+C-428,N-117,send_document,rm,2026-10-30,account statement,,5,"Ms. Ito will return the address proof by Friday, and I will send the account statement by 9 November."
+C-429,N-117,update_preference,rm,,post,,7,She now prefers contact by post.
+C-430,N-118,limit_request,rm,,wire limit,,1,Spoke with Mr. Petrov for 30 minutes about the overdraft.
+C-431,N-118,limit_request,rm,,overdraft limit,100000,2,He declined the offer to raise the overdraft limit to $100k.
+C-432,N-118,send_document,rm,2026-11-02,fee schedule,,3,I'll try to send the fee schedule by 2 November.
+C-433,N-118,await_document,client,2026-10-28,KYC form,,5,"Mr. Petrov will return the KYC form by Wednesday, and I will send the fee schedule by 3 November."
+C-434,N-118,send_document,rm,2026-10-28,fee schedule,,5,"Mr. Petrov will return the KYC form by Wednesday, and I will send the fee schedule by 3 November."
+C-435,N-119,await_document,client,2026-10-16,signed mandate,,2,"Mr. Walsh will return the signed mandate by Friday, and I will send the term sheet by Monday."
+C-436,N-119,send_document,rm,2026-10-19,term sheet,,2,"Mr. Walsh will return the signed mandate by Friday, and I will send the term sheet by Monday."
+C-437,N-119,send_document,rm,,rate sheet,,3,He said there is no need to send the rate sheet.
+C-438,N-120,await_document,client,2026-11-09,KYC form,,2,Ms. Okafor will return the KYC form by 9 November.
+C-439,N-120,callback,rm,,,,4,She does not want a follow-up call this quarter.
+C-440,N-120,callback,rm,2026-11-04,mortgage rate,,6,I'll phone Ms. Okafor on 4 November to talk through the mortgage rate.
