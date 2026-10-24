@@ -25,6 +25,7 @@ Times are YYYY-MM-DDTHH:MM:SSZ. Amounts are plain decimals with at most two plac
 """
 from __future__ import annotations
 
+import io
 import argparse
 import csv
 import hashlib
@@ -182,11 +183,20 @@ def load_mandates(path: str) -> dict:
         return parse_mandates(json.load(fh), os.path.basename(path))
 
 
+def _open_csv(path, name):
+    """Open a CSV as text. A NUL byte is refused here because csv.reader refused it only before Python 3.11."""
+    with open(path, newline="", encoding="utf-8-sig") as fh:
+        text = fh.read()
+    if "\x00" in text:
+        raise ValueError(f"{name}: contains a NUL byte")
+    return io.StringIO(text, newline="")
+
+
 def load_instructions(path: str) -> list:
     """Read the instruction CSV. Raises ValueError (or OSError) on a file that cannot be read as one."""
     name = os.path.basename(path)
     rows, seen = [], set()
-    with open(path, newline="", encoding="utf-8-sig") as fh:
+    with _open_csv(path, name) as fh:
         reader = csv.DictReader(fh)
         missing = [c for c in INSTRUCTION_COLUMNS if c not in (reader.fieldnames or [])]
         if missing:
