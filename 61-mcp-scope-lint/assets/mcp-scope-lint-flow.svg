@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">MCP Scope Lint: one tool manifest, read against its grant, ending in findings, a smaller proposed grant and an exit code</title>
+  <desc id="desc">Five-stage flow showing how a tool manifest moves through a parse and validate step, a wildcard expansion step, five rules, a breadth score and a least-privilege proposal, ending in findings, a proposal and an exit code that sets the result of the CI step. A dashed box marks the pieces that are design only. A comparison strip contrasts no lint, a blocklist of wildcard, delete and admin grants, and MCP Scope Lint on 30 synthetic manifests.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">MCP Scope Lint - one manifest, read against its grant</text>
+  <text x="20" y="52" class="subheader">Five rules compare the tools with the grant. The proposal only ever removes or narrows.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 30 manifests, 218 tools</text>
+
+  <!-- Stage 1: PARSE -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . PARSE</text>
+  <text x="30" y="142" class="stage-title">Read the manifest</text>
+  <text x="30" y="162" class="stage-sub">catalog, grant, tools</text>
+  <text x="30" y="177" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: EXPAND -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . EXPAND</text>
+  <text x="209" y="142" class="stage-title">Wildcards to scopes</text>
+  <text x="209" y="162" class="stage-sub">234 granted scopes</text>
+  <text x="209" y="177" class="stage-sub">27 are wildcards</text>
+  <text x="209" y="212" class="meta-block">260 scopes reachable</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: RULES -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . RULES</text>
+  <text x="388" y="142" class="stage-title">Five rules</text>
+  <text x="388" y="162" class="stage-sub">unused grant, tool</text>
+  <text x="388" y="177" class="stage-sub">above its hint, wildcard</text>
+  <text x="388" y="192" class="stage-sub">use, scope not granted</text>
+  <text x="388" y="212" class="meta-block">38 errors, 12 warnings</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: BREADTH -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="567" y="120" class="stage-num">4 . BREADTH</text>
+  <text x="567" y="142" class="stage-title">Slack in the grant</text>
+  <text x="567" y="162" class="stage-sub">reachable scopes that</text>
+  <text x="567" y="177" class="stage-sub">no tool requires</text>
+  <text x="567" y="212" class="meta-block">38 of 260 on the files</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: PROPOSE -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="746" y="120" class="stage-num">5 . PROPOSE</text>
+  <text x="746" y="142" class="stage-title">A smaller grant</text>
+  <text x="746" y="162" class="stage-sub">keep, narrow, remove</text>
+  <text x="746" y="177" class="stage-sub">never adds a scope</text>
+  <text x="746" y="212" class="meta-strong">260 to 196 reachable</text>
+
+  <!-- Arrow from stage 5 down to the output -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: REPORT -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . REPORT</text>
+  <text x="262" y="313" class="stage-title">Findings . proposal . exit code</text>
+  <text x="262" y="330" class="stage-sub">error exits 1 by default, bad input exits 2, text or annotations</text>
+  <text x="262" y="344" class="meta-strong">61 of 83 unneeded cut, 3 needed cut</text>
+
+  <!-- CI job box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">CI STEP</text>
+  <text x="32" y="313" class="stage-title">Step fails or passes</text>
+  <text x="32" y="330" class="stage-sub">fails at the chosen level</text>
+  <text x="32" y="344" class="stage-sub">annotations on request</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">manifest export</text>
+  <text x="742" y="328" class="stage-sub">reviewed policy</text>
+  <text x="742" y="343" class="stage-sub">lint record</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">No lint</text>
+  <text x="32" y="406" class="meta-block">83 of 260 reachable not needed</text>
+  <text x="32" y="424" class="stage-sub">17 of 30 grant an unused scope</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Blocklist</text>
+  <text x="332" y="406" class="meta-block">cuts 53 of 83, and 18 needed</text>
+  <text x="332" y="424" class="stage-sub">wildcard, delete and admin grants</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">MCP Scope Lint</text>
+  <text x="632" y="406" class="meta-strong">cuts 61 of 83, and 3 needed</text>
+  <text x="632" y="424" class="stage-sub">known miss: 22 of 83 stay reachable</text>
+</svg>
