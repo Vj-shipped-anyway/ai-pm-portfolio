@@ -4,13 +4,13 @@
   2. count abstentions as misses next to the first-report rate, with a 95% interval
   3. compare with a rule that always proposes the most common outcome
   4. split by outcome class, segment, week, reviewer and stated confidence, and judge a group only
-     when it has 30 proposals
+     when it has at least 30 proposals
   5. count the pairs I marked risky
   6. print PASS, FAIL or SKIP for each check and HOLD or CLEAR for the whole
 
 The command line tool (shadow_score.py) runs exactly this code. The thresholds are my assumptions.
 
-KNOWN LIMITS, left in on purpose: a planted problem that sits one point above the floor passes, and
+KNOWN LIMITS, left in on purpose: a planted problem that sits half a point above the floor passes, and
 cases where the agent and the person agree and are both wrong are invisible. The script prints both.
 
 Run (from src/):  python3 step_04_with_scorecard.py

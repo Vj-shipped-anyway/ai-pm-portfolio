@@ -15,7 +15,7 @@ The scenario: a card-dispute agent proposes one of four outcomes (REFUND, DENY, 
 
 The truth of each case is drawn first, from a mix per segment. The agent's proposal and the person's outcome are then drawn from the truth by two separate processes with their own error rates, and the scorecard sees only the two results. 🟡 The rates are design values that I set to make each planted problem large enough to see in a group of 60 to 75 cases. I ran the scorecard and changed some of them (case count, size of the drift, how strict one reviewer is, the value-error rate) before settling. The seed was not re-rolled.
 
-Planted real problems (5):
+Planted real problems (5; weeks 12 and 13 count as two):
 
 - `joint_account` segment: agent error rate 0.18 against 0.01 to 0.02 elsewhere
 - weeks 12 and 13: 0.20 added to the agent error rate, as after a model change
