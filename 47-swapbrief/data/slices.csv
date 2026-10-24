@@ -1,0 +1,7 @@
+slice,critical,n_items,description
+card_disputes,1,130,Card dispute case notes: which reason code applies
+wire_exceptions,1,100,Wire exceptions: what the operator does next
+address_changes,0,130,Address-change requests: which checks are required
+kyc_refresh,1,90,Periodic customer-review files that cite several documents
+fee_waivers,0,110,Fee-waiver requests: whether policy allows it
+account_closure,0,40,Account-closure cases (few items: slow to grade)

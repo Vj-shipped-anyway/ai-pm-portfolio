@@ -1,0 +1,8 @@
+{
+ "successor_answer_length_multiplier": 2.4,
+ "successor_price_ratio": 0.85,
+ "successor_slow_path_rate": 0.1,
+ "true_cost_per_correct_ratio": 1.35,
+ "true_p50_ratio": 1.001,
+ "true_p95_ratio": 2.018
+}

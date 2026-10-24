@@ -1,0 +1,7 @@
+slice,true_accuracy_incumbent,true_accuracy_successor,true_change_pp
+card_disputes,0.84,0.89,+5.0
+wire_exceptions,0.78,0.84,+6.0
+address_changes,0.91,0.94,+3.0
+kyc_refresh,0.72,0.79,+7.0
+fee_waivers,0.77,0.81,+4.0
+account_closure,0.80,0.72,-8.0
