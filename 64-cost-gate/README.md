@@ -4,6 +4,31 @@
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
+[![The demo, first screen](./assets/demo-first-screen.png)](./demo.html)
+
+## Executive summary (90 seconds)
+
+**Problem.** A pull request changes a prompt, a retrieval depth or a model. The eval gate, if there is one, reports accuracy. Nothing reports what a right answer now costs, so an overspend shows up on the next invoice, after the merge. The engineer who owns the prompt and the reviewer who approves the change see accuracy and nothing about cost per right answer. 🟢 On 40 synthetic change requests, each with an eval run of 236 items, a pipeline with no cost check stops 0 of 40, while 21 of 40 are over budget, 15 of those 21 on the whole run and 6 of 21 only inside one slice (`step_01_no_gate.py`). A check on cost per call does not fix this: it passes a cheaper model that is right less often.
+
+**Product.** Cost Gate is a command and a staged GitHub Action that reads an eval results CSV and a budget file. The CSV holds one row per item with `item_id`, `slice`, `model`, `correct`, `input_tokens` and `output_tokens`; the budget holds a price per model, `min_items`, a ceiling for the whole run and a ceiling for each slice. Cost per correct answer is the money spent on every call, right or wrong, divided by the number of right answers. The gate computes it for the whole run and for each slice with a 95% interval (the delta method for a ratio of means). FAIL: the interval's lower end is above the ceiling. WARN: the estimate is above the ceiling but the interval still reaches it, or a slice is in the results and not in the budget, or the other way round. PASS: the estimate is at or under the ceiling. THIN: a slice under `min_items` is printed, not judged alone, and still counted in the whole run. The highest status sets the decision. The command exits 1 at the level you choose (FAIL by default) and 2 for input it cannot read. There is no model call and no random number; the rules are plain code you can read.
+
+**Measured and modeled performance.**
+
+- 🟢 **No cost check: 0 of 40 change requests stopped,** 21 of 40 over budget, 15 of those 21 on the whole run and 6 of 21 only inside one slice (`step_01_no_gate.py`).
+- 🟢 **Failing on cost per call (more than 10% over the baseline run) stops 12 of 40:** it catches 8 of 21 over-budget change requests, passes 13 of 21, and fails 4 of 19 within-budget ones; 6 of the 21 over-budget change requests cost less per call than the baseline (`step_02_cost_per_call.py`).
+- 🟢 **Each part fails alone:** the measured cost per correct answer with no interval fails 18 of 21 over-budget change requests and wrongly fails 2 of 19 within budget; an interval on the whole run alone fails 9 of 21 and cannot see the 6 of 21 that are over only inside a slice (`step_03_deficiencies_exposed.py`).
+- 🟢 **Together: FAIL on 13 of 21 over-budget change requests, WARN on 5, PASS on 3;** of 19 within budget, 0 stopped, 2 warned, 17 passed; a person reads 20 of 40 (`step_04_with_cost_gate.py`).
+- 🟢 **4 of 4 planted slice regressions fail on a slice ceiling,** although the whole-run status was PASS on all 4 (`step_04_with_cost_gate.py`).
+- 🟢 **Known miss: 3 of 21 over-budget change requests still PASS,** CR-010 and CR-024 inside a 12-item slice and CR-029 at 1.018 times its ceiling (`step_04_with_cost_gate.py`).
+- 🟡 **Utility: (13/21 − 8/21) × 12 = 2.9 more over-budget change requests a year stopped than a cost-per-call check would stop,** assuming 12 over-budget change requests reach the gate each year.
+- 🔴 **Design target: a decision within 60 seconds of the eval results file landing.** Designed in [`ARCHITECTURE.md`](./ARCHITECTURE.md), never built or timed.
+
+**What I would ask a head of operations to decide.** Whether a change that is over its cost ceiling with confidence should stop the merge, and whether a WARN should stop it too. With the default `--fail-on fail` the gate stops 13 of 21 over-budget change requests; with `--fail-on warn` it stops 18 of 21 and also 2 of 19 within budget (`step_04_with_cost_gate.py`). My recommendation is to start in advisory mode on one feature's eval export, set the ceilings from that feature's own baseline run with the finance partner who owns the budget, keep `fail` as the default, and choose `warn` only where one missed overspend costs more than the reviews it adds.
+
+**Call to action.** Fork the repo. Export your eval harness results to `item_id, slice, model, correct, input_tokens, output_tokens` (tokens as billed, retries included), and write a budget file in the shape of `data/budget.json` with your own prices and ceilings. To call it from code, import `evaluate` from `src/cost_gate.py`. Keep the prices in the budget file current, since the gate measures the prices it is given. Send findings by opening an issue: say which scope and which status, not the eval data.
+
+_A portfolio prototype on synthetic data. Nothing here is deployed, load-tested or used by anyone, and the Action is staged and has not run on GitHub._
+
 ## Run one now
 
 ```bash
@@ -75,11 +100,135 @@ A slice that is in the results but not in the budget, or in the budget but not i
 
 Run any of them from `src/`. Data is generated by [`data/_generate.py`](./data/README.md); `tools/check_repo.py` confirms that a rerun reproduces every file and that the green numbers above appear in a script's output.
 
+## Utility delivered
+
+The way I price product impact: **utility = (my solution − current state of the art) × the number of people or items it affects.**
+
+Here the item is a change request that should have been stopped for cost. Each one lands on the engineer who owns the prompt, the reviewer who approved it, and the finance partner who finds it on the invoice. The common basic approach is to fail on cost per call; the table prices the gate against it.
+
+| Term | Value | Where it comes from |
+| --- | --- | --- |
+| Current state of the art (fail when cost per call rises more than 10% over the baseline), over-budget change requests stopped | 🟢 **8 of 21** | `step_02_cost_per_call.py`; it also fails 4 of 19 within-budget change requests |
+| My solution (Cost Gate), over-budget change requests stopped | 🟢 **13 of 21** | `step_04_with_cost_gate.py`; 0 of 19 within-budget change requests stopped |
+| Lift per over-budget change request | 🟢 13 of 21 minus 8 of 21 | The cost-per-call check passes these, by planted change: accuracy_drop 3, cheaper_but_worse 3, slice_regression 4, small_overshoot 1, thin_slice_regression 2 (`step_02_cost_per_call.py`) |
+| Number it affects: over-budget change requests reaching the gate in a year | 🟡 **12** | **Assumption, not a statistic.** Replace it with your own count of changes in a year that pushed cost per correct answer over a ceiling |
+| Assumption that makes the lift real | 🟡 The budget file carries current prices and ceilings set from a baseline run, and the eval set looks like the feature's traffic | If a vendor price changes and the file does not, the gate measures a stale price. Without the slice ceilings the gate stops only what the whole-run interval stops: 🟢 9 of 21 (`step_03_deficiencies_exposed.py`) |
+| **Utility** | 🟡 **(13/21 − 8/21) × 12 = 2.9 more over-budget change requests a year stopped than a cost-per-call check would stop** | Assumes the 12 behave like the 21 planted ones |
+
+Sensitivity to the count assumption (🟡, same lift): 6 over-budget change requests a year gives 1.4, 12 gives 2.9, 24 gives 5.7.
+
+🔴 What I have not measured: what an overspend costs in money, how long a FAIL takes to read and clear, what a false hold costs a release, or how often prices change. The planted set is dense on purpose, 21 of 40 change requests are over budget (`step_01_no_gate.py`); a real pipeline sees far fewer. Treat the result as a property of this mix of cases, not a forecast.
+
+---
+
+## Architecture and call flow
+
+Component names match [`ARCHITECTURE.md`](./ARCHITECTURE.md). GitHub renders the diagrams natively.
+
+![Cost Gate flow](./assets/cost-gate-flow.svg)
+
+**System topology:**
+
+```mermaid
+flowchart LR
+    subgraph SRC["Inputs - existing"]
+        RESULTS["Eval results CSV with slice model correct and tokens"]
+        BUDGET["Budget file with prices min_items and ceilings"]
+    end
+
+    subgraph CG["Cost Gate - the prototype"]
+        INGEST["cg-ingest load and validate"]
+        COST["cg-cost cost per correct answer and interval"]
+        JUDGE["cg-judge status per scope"]
+        VERDICT["cg-verdict highest status wins"]
+        REPORT["cg-report text or annotations"]
+    end
+
+    subgraph OUT["Outputs"]
+        DECISION["PASS WARN or FAIL"]
+        EXITCODE["Exit code 0 or 1 or 2"]
+        NOTES["GitHub annotations on request"]
+    end
+
+    subgraph DES["Design only"]
+        ACTION["cg-action staged and unpublished"]
+        BUDGETREV["cg-budget reviewed ceilings and price age check"]
+        LEDGER["cg-ledger decision record"]
+    end
+
+    RESULTS --> INGEST
+    BUDGET --> INGEST
+    INGEST --> COST
+    COST --> JUDGE
+    JUDGE --> VERDICT
+    VERDICT --> REPORT
+    REPORT --> DECISION
+    REPORT --> NOTES
+    VERDICT --> EXITCODE
+    ACTION -.-> INGEST
+    BUDGETREV -.-> BUDGET
+    VERDICT -.-> LEDGER
+```
+
+**Per-run sequence** (the `--demo` run, a slice over its ceiling while the whole run is inside):
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant CI as CI step
+    participant G as cost_gate
+    participant F as Results and budget files
+    participant R as Reviewer
+
+    CI->>G: check results and budget
+    G->>F: read 236 items in 5 slices and the budget
+    F-->>G: rows loaded and validated
+    G->>G: whole run costs 0.00655 per correct answer against a ceiling of 0.00670, PASS
+    G->>G: card_services costs 0.00823 with an interval of 0.00703 to 0.00943 against 0.00610, FAIL
+    G->>G: wire_exceptions has 12 items, below min_items 30, THIN
+    G-->>CI: decision FAIL, exit 1 at the default fail-on fail
+    CI-->>R: step fails and the annotation names card_services
+    Note over G,R: Values are the --demo output. The demo itself uses fail-on never. The CI step and the reviewer path are a design
+```
+
+**Interlocks (all red, designed, none built):**
+
+- [13 SwapBrief](../13-swapbrief-model-migration/) is where the cost-per-correct-answer measure and the two synthetic price points come from. After a deliberate model move it says go or no-go; Cost Gate would then guard each later change. This folder copies no code from it.
+- [07 InferenceLens](../07-inferencelens-inference-finops/) does the tokens-times-price accounting on live spend. It would be a possible source for the price table that the budget file carries.
+- [40 Eval Gate](../40-eval-gate/) is the accuracy-side gate. Cost Gate does not judge quality, so the two would run side by side on the same pull request.
+- [04 EvalForge](../04-evalforge-llm-eval-platform/) would supply the eval run that the results file is exported from.
+
+---
+
+## PM artifacts
+
+The PM artifacts that show how I would run this product if I owned the seat. This README is the walkthrough; the rest of the folder holds:
+
+- [`PRD.md`](./PRD.md): the product requirements doc, with users, backlog, KPIs, rollout and open questions.
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md): the systems doc, with components, data model, security, failure behavior and operations. A design, not deployed.
+- [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
+- [`data/`](./data/): the synthetic baseline run, the 40 change requests, the budget file, their planted truth, and the seeded generator. `data/README.md` explains how the truth is set.
+- [`src/`](./src/): `cost_gate.py`, `common.py`, the four step scripts and the demo builder.
+- [`tests/`](./tests/): 50 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+- [`action/`](./action/README.md): the staged GitHub Action and the steps to publish it. Not published, not run on GitHub.
+
+Run the four steps end to end:
+
+```bash
+cd src
+python3 step_01_no_gate.py
+python3 step_02_cost_per_call.py
+python3 step_03_deficiencies_exposed.py
+python3 step_04_with_cost_gate.py
+```
+
+---
+
 ## Aligned to
 
 The [FinOps Foundation framework](https://www.finops.org/framework/), which I read on 2026-10-24 (the pages show no revision date). Its Unit Economics capability pairs spend with a measure of value and gives cost per token as a resource-efficiency unit metric and cost per case resolved as a business unit metric. Cost per correct answer is my reading of a unit metric between the two, measured on an eval rather than on live traffic. Its Budgeting capability expects spend limits, a comparison of actual spend with the limit, and a defined response when spend nears a budget line, such as an alert, an approval gate or a throttle. This gate is the approval gate, applied to a pull request before the spend exists. The page also lists suggested variance limits of 20%, 15% and 12% by maturity level; those describe the gap between budget and actual spend, and I did not derive my ceilings from them.
 
-This is a prototype, aligned to that framework's vocabulary and not compliant with or certified against anything.
+This is a prototype, aligned to that framework's vocabulary. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 
@@ -88,3 +237,13 @@ Synthetic, seeded, byte-for-byte reproducible. Nothing comes from any employer, 
 ## Fork it
 
 Export your eval harness results to `item_id, slice, model, correct, input_tokens, output_tokens` (tokens as billed, retries included). Write a budget file in the shape of [`data/budget.json`](./data/budget.json) with your own prices and ceilings; a baseline run on your main branch is the place to start. Extra columns in the CSV are ignored. Read the [PRD](./PRD.md) for the scope I held to.
+
+## Prereqs to run this on your laptop
+
+You need Python 3.9 or newer and nothing else. The gate, the four step scripts and the data generator use only the standard library, so there is nothing to install. There is no API key, no network call and no model call anywhere in the folder. To run the tests, use `python3 -m unittest discover -s tests` from this folder. The production pieces in [`ARCHITECTURE.md`](./ARCHITECTURE.md) (the reviewed budget file, the price age check, the decision record, a published Action) are a design, not something you need or can run.
+
+## Author
+
+**Vijay Saharan**, Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms
+
+[LinkedIn](https://www.linkedin.com/in/vijaysaharan/)
