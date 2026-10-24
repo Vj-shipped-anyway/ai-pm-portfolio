@@ -16,7 +16,7 @@ Planted changes (90 batches): 47 bad and 43 ok.
 - bad: column dropped 4, column renamed 4, numbers sent as text such as `$1,234.50` or `34.5%` 5, integer sent with a fraction 3, null surge to 25 to 40 rows 5, ratio sent as a percent 5, sentinel -999 in 5 to 8 rows 5, unseen category in 15 to 30 rows 4, dollars sent as cents 4, days sent as weeks or months as years 5, missing values zero-filled in 15 to 20 rows 3
 - ok: unchanged 15, columns reordered 5, harmless extra column 5, exactly 4 nulls in a field that allows 5.0% 5, values exactly on a bound 4, integers written as `12.0` 4, one or two rows with a typo far outside the range 5
 
-The last four ok kinds are hard on purpose: each is something a stricter check could mistake for a problem. Three bad kinds are hard in the other direction: zero-fill, days sent as weeks and months sent as years stay inside the declared type, range and null rate, and the checker cannot see them.
+The last four ok kinds are hard on purpose: each is something a stricter check could mistake for a problem. Two bad kinds are hard in the other direction: zero-fill, and days sent as weeks or months as years, stay inside the declared type, range and null rate, and the checker cannot see them. A third, dollars sent as cents, passes when the field's declared range is wide enough to hold the new scale (2 of 4).
 
 ## Assumptions (🟡 modeled, mine, not taken from any rule)
 
