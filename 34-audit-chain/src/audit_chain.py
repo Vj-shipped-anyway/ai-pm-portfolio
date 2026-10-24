@@ -92,6 +92,23 @@ def dumps_event(event: dict) -> str:
     return json.dumps(event, sort_keys=True, ensure_ascii=True, allow_nan=False)
 
 
+MAX_DETAIL_DEPTH = 64
+
+
+def _nesting_depth(value) -> int:
+    """Depth of nested dicts and lists, counted without recursion so the answer does not depend on the Python version."""
+    deepest, stack = 0, [(value, 1)]
+    while stack:
+        item, depth = stack.pop()
+        if isinstance(item, dict):
+            deepest = max(deepest, depth)
+            stack.extend((v, depth + 1) for v in item.values())
+        elif isinstance(item, list):
+            deepest = max(deepest, depth)
+            stack.extend((v, depth + 1) for v in item)
+    return deepest
+
+
 class AuditLog:
     """In memory. Appending is the only write operation: there is no update, delete or insert."""
 
@@ -113,6 +130,8 @@ class AuditLog:
             detail = {}
         if not isinstance(detail, dict):
             raise AuditError("detail must be a JSON object")
+        if _nesting_depth(detail) > MAX_DETAIL_DEPTH:
+            raise AuditError(f"detail is nested more than {MAX_DETAIL_DEPTH} levels")
         try:
             detail = json.loads(json.dumps(detail, allow_nan=False))
         except (TypeError, ValueError, RecursionError) as e:
