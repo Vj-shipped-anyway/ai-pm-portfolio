@@ -1,0 +1,9 @@
+system_id,model_id,first_seen,last_seen,calls
+AI-901,vendor-a-large-2026-03,2026-02-11,2026-09-29,48210
+AI-902,vendor-b-chat-2026-07,2026-08-01,2026-09-30,23877
+AI-903,selfhost-open-70b-v3,2026-04-19,2026-09-28,3302
+AI-904,vendor-a-small-2026-03,2026-03-02,2026-07-30,6120
+AI-904,vendor-a-small-2026-08,2026-08-02,2026-09-27,4417
+AI-905,selfhost-open-8b-v4,2026-08-15,2026-09-26,912
+AI-906,vendor-c-reason-2026-09,2026-09-06,2026-09-29,388
+scratch-notes-bot,vendor-a-small-2026-03,2026-07-14,2026-09-28,412
