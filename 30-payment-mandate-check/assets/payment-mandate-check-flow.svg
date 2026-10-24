@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">Payment Mandate Check: one payment instruction checked against the customer mandate and a ledger of releases, ending in RELEASE, HOLD or REJECT with an audit record</title>
+  <desc id="desc">Five-stage flow showing how a mandate file and a batch of payment instructions move through a load and validate step, a check of agent and validity window, a check of payee, pinned account, currency, rail and category, a check of amount against the per-payment limit and the confirmation threshold, and a ledger check of the daily limit, repeated instruction ids and near-duplicates, ending in one decision of RELEASE, HOLD or REJECT with a hash-chained audit record. A dashed box marks the pieces that are design only. A comparison strip contrasts a gateway with no mandate check, a flat cap with a payee name list, and Payment Mandate Check on 475 synthetic instructions.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">Payment Mandate Check - is this payment inside what the customer delegated?</text>
+  <text x="20" y="52" class="subheader">Mandate rules and a ledger read each instruction. The worst reason sets the decision.</text>
+
+  <!-- Input badge -->
+  <rect x="20" y="66" width="360" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 475 instructions against 14 mandates</text>
+
+  <!-- Stage 1: LOAD -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read the files</text>
+  <text x="30" y="162" class="stage-sub">14 mandates</text>
+  <text x="30" y="177" class="stage-sub">475 instructions</text>
+  <text x="30" y="192" class="stage-sub">bad file: exit 2</text>
+  <text x="30" y="212" class="meta-strong">in received order</text>
+
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2: AGENT AND WINDOW -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="209" y="120" class="stage-num">2 . AGENT AND WINDOW</text>
+  <text x="209" y="142" class="stage-title">Agent and window</text>
+  <text x="209" y="162" class="stage-sub">mandate, agent, dates</text>
+  <text x="209" y="177" class="stage-sub">not expired or revoked</text>
+  <text x="209" y="192" class="stage-sub">any miss: REJECT</text>
+  <text x="209" y="212" class="meta-block">14 expired stopped</text>
+
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3: PAYEE AND TERMS -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="388" y="120" class="stage-num">3 . PAYEE AND TERMS</text>
+  <text x="388" y="142" class="stage-title">Payee and terms</text>
+  <text x="388" y="162" class="stage-sub">payee, pinned account,</text>
+  <text x="388" y="177" class="stage-sub">currency, rail and</text>
+  <text x="388" y="192" class="stage-sub">category must match</text>
+  <text x="388" y="212" class="meta-block">12 look-alikes caught</text>
+
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4: AMOUNT -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="567" y="120" class="stage-num">4 . AMOUNT</text>
+  <text x="567" y="142" class="stage-title">Inside the limits?</text>
+  <text x="567" y="162" class="stage-sub">over the limit: REJECT</text>
+  <text x="567" y="177" class="stage-sub">over the confirm line:</text>
+  <text x="567" y="192" class="stage-sub">HOLD for a person</text>
+  <text x="567" y="212" class="meta-strong">46 of 62 held</text>
+
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5: LEDGER -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="746" y="120" class="stage-num">5 . LEDGER</text>
+  <text x="746" y="142" class="stage-title">Ledger of releases</text>
+  <text x="746" y="162" class="stage-sub">daily limit, repeated</text>
+  <text x="746" y="177" class="stage-sub">id, same payee and</text>
+  <text x="746" y="192" class="stage-sub">amount in 600 s</text>
+  <text x="746" y="212" class="meta-strong">10 breaches stopped</text>
+
+  <!-- Arrow from stage 5 down to the decision -->
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Output: DECISION -->
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . DECISION AND AUDIT</text>
+  <text x="262" y="313" class="stage-title">RELEASE . HOLD . REJECT</text>
+  <text x="262" y="330" class="stage-sub">worst reason wins - one hash-chained audit record per decision</text>
+  <text x="262" y="344" class="meta-strong">156 of 164 rejected, 0 of 249 legitimate stopped</text>
+
+  <!-- Gateway box -->
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">GATEWAY</text>
+  <text x="32" y="313" class="stage-title">Pays or waits</text>
+  <text x="32" y="330" class="stage-sub">RELEASE: goes on to pay</text>
+  <text x="32" y="344" class="stage-sub">HOLD: a person answers</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Design only box -->
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">mandate registry</text>
+  <text x="742" y="328" class="stage-sub">hold queue</text>
+  <text x="742" y="343" class="stage-sub">fail-closed call</text>
+
+  <!-- Comparison strip -->
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">No mandate check</text>
+  <text x="32" y="406" class="meta-block">475 of 475 released</text>
+  <text x="32" y="424" class="stage-sub">164 forbidden, 62 needed a person</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Flat cap and name list</text>
+  <text x="332" y="406" class="meta-block">136 of 164 forbidden released</text>
+  <text x="332" y="424" class="stage-sub">12 of 12 look-alike payees pass</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Payment Mandate Check</text>
+  <text x="632" y="406" class="meta-strong">156 of 164 rejected, 49 of 49 kept</text>
+  <text x="632" y="424" class="stage-sub">known miss: 24 of 475 released</text>
+</svg>
