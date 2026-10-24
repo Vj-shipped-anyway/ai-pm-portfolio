@@ -44,7 +44,7 @@ The far clause of a `crossref`, `restated` or `nested` rule sits at a fixed othe
 
 ## `probes.csv`: 210 questions
 
-70 per manual: 30 `plain`, 90 `applies` (the applicant meets the condition, so the exception value is the answer), 75 `not_met` (the applicant is below the threshold, so the rule value is the answer) and 15 `carved_out` (the applicant meets the condition but had a payment default recorded in the last 12 months, so the rule value is the answer).
+70 per manual, 210 in all: 30 `plain`, 90 `applies` (the applicant meets the condition, so the exception value is the answer), 75 `not_met` (the applicant is below the threshold, so the rule value is the answer) and 15 `carved_out` (the applicant meets the condition but had a payment default recorded in the last 12 months, so the rule value is the answer).
 
 | Column | Meaning |
 |---|---|

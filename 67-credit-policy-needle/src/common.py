@@ -1,8 +1,9 @@
 """Shared loading and the four stub readers for the step scripts of project 67.
 
 READ THIS FIRST: nothing here is a model and nothing calls one. Each reader is a small deterministic
-function with one fault written in on purpose, so the checks in credit_policy_needle.py can be tried
-against faults that are known to be there. They are written against the synthetic wording of data/.
+function, and all but the control have one fault written in on purpose, so the checks in
+credit_policy_needle.py can be tried against faults that are known to be there. They are written against
+the synthetic wording of data/.
 The reader interface is one function: reader(document_text, question) -> answer_text.
 """
 from __future__ import annotations

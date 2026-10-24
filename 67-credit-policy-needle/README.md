@@ -1,6 +1,6 @@
 # 🔎 Credit Policy Needle: where an assistant loses the exception clause
 
-**I wanted to know whether an assistant that answers from a 300-page credit policy finds the exception that changes the answer, and where in the document it stops finding it. This is a small command-line tool that lists the clauses that read as exceptions and scores an assistant's answers by form of exception and depth, plus four stub readers with planted faults to try it against.** It extends [14 PolicyNeedle](../14-policyneedle-long-context-fidelity/) from planted facts to planted exceptions in a synthetic credit policy.
+**I wanted to know whether an assistant that answers from a 300-page credit policy finds the exception that changes the answer, and where in the document it stops finding it. This is a small command-line tool that lists the clauses that read as exceptions and scores an assistant's answers by form of exception and depth, plus four stub readers to try it against: a control and three with a planted fault.** It extends [14 PolicyNeedle](../14-policyneedle-long-context-fidelity/) from planted facts to planted exceptions in a synthetic credit policy.
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 

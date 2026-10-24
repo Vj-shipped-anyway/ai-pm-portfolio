@@ -9,7 +9,7 @@ The owner of a policy-grounded assistant for credit staff, and the model risk or
 ## What it does
 1. Lists the clauses in a manual that read as exceptions, and says which of them do not name the rule they change.
 2. Scores an assistant's answers against exact expected answers, flags the form-by-length-by-depth cells that fail, and prints PASS or FAIL with an exit code.
-3. Ships four stub readers with planted faults and a synthetic set of three manuals, so the checks can be tried against faults that are known to be there.
+3. Ships four stub readers (a control and three with a planted fault) and a synthetic set of three manuals, so the checks can be tried against faults that are known to be there.
 
 ## Out of scope
 Any model call; scoring free-text answers; exceptions that tighten a limit or stack on one rule; tables and amendments; real policy text; hosting.
