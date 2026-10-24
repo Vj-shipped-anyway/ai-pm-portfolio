@@ -1,6 +1,6 @@
 # 🧭 prompt-diff-risk (PR check): classify a prompt change before it merges
 
-**I wanted to know what a pull request that edits a system prompt really changes, and how much of the probe set it puts at risk. This is a command-line check and a staged GitHub Action: it compares two revisions of a prompt, sorts each change into rules, scope, tone or tools, prints ALLOW, REVIEW or BLOCK, and names the probe slices to run before the change merges.** It takes the probe-set shape from [04 EvalForge](../04-evalforge-llm-eval-platform/), the slice table from [13 SwapBrief](../13-swapbrief-model-migration/) and the gate layout from [28 Tool Schema Drift](../28-tool-schema-drift/); the prompts, the rules and the data are new.
+**I wanted to know what a pull request that edits a system prompt really changes, and how much of the probe set it puts at risk. This is a command-line check and a staged GitHub Action: it compares two revisions of a prompt, sorts each change into constraints, scope, tone or tools, prints ALLOW, REVIEW or BLOCK, and names the probe slices to run before the change merges.** It takes the probe-set shape from [04 EvalForge](../04-evalforge-llm-eval-platform/), the slice table from [13 SwapBrief](../13-swapbrief-model-migration/) and the gate layout from [28 Tool Schema Drift](../28-tool-schema-drift/); the prompts, the rules and the data are new.
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
@@ -23,7 +23,7 @@ probes to run: 12 of 54 (advice_boundary, scope_boundary)
 decision: BLOCK
 ```
 
-Standard library only, Python 3.9 or newer. To check your own files: `python3 prompt_diff_risk.py check old.txt new.txt --tools tools.json --probes probes.csv`. It exits 1 on BLOCK, so a CI step fails; `--format github` prints annotations. BLOCK fails the CI step. The tool does not run the probes and does not know whether anyone signed off; what clears a BLOCK is your own process.
+Standard library only, Python 3.9 or newer. To check your own files: `python3 prompt_diff_risk.py check old.txt new.txt --tools tools.json --probes probes.csv`. It exits 1 on BLOCK, so a CI step fails; `--format github` prints annotations. The tool does not run the probes and does not know whether anyone signed off; what clears a BLOCK is your own process.
 
 ## What it reads
 

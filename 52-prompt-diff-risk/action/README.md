@@ -7,7 +7,7 @@ This folder is the staging copy of a GitHub Action. It has not been published to
 1. Create a public repo named `prompt-diff-risk-action`. Check that the name `Prompt Diff Risk` is not already taken on the Marketplace (the metadata `name` must be unique).
 2. Copy `action.yml` from this folder and `../src/prompt_diff_risk.py` into the root of that repo.
 3. Add a README with the usage below, a test workflow, and a licence.
-4. Draft a release, tick "Publish this Action to the GitHub Marketplace" (two-factor authentication is required), and tag `v1.0.0`.
+4. Draft a release, tick "Publish this Action to the GitHub Marketplace" (two-factor authentication is required), and tag `v1.0.0`. The usage below pins `@v1`, so also create a `v1` tag on the same commit.
 5. Run it once on a throwaway pull request before telling anyone.
 
 ## Usage

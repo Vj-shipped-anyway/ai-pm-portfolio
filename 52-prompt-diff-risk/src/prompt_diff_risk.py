@@ -8,7 +8,7 @@ Command line (from src/):
 
 Exit status: 0 when the decision is below --fail-on, 1 when it is at or above it, 2 for bad or malformed input.
 Decision per change:
-    BLOCK   a rule was removed or weakened, a write tool was granted, or a guard on a write tool was dropped
+    BLOCK   a rule was removed, weakened or given an exception, a write tool was granted, or a guard on a write tool was dropped
     REVIEW  the behavior may have moved: scope, tone, a number, a new rule, a read tool, an unclassified sentence
     ALLOW   nothing but wording, comments or headings changed
 There is no model in this file. Four dimensions are read from the text with word lists: constraints (rule
