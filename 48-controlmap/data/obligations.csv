@@ -1,0 +1,57 @@
+obligation_id,source,theme,statement,applies_to,claimed_controls
+OB-001,Third-party standard,vendor model oversight,Require the supplier of the model used for customer chat and document summaries to notify us of material changes.,customer_chat;doc_summary,CT-14;CT-28;CT-52
+OB-002,Third-party standard,vendor model oversight,Keep an exit plan for the supplier of the model used for customer chat.,customer_chat,CT-14;CT-28
+OB-003,AI policy,human oversight,Train the people who review output from the system used for customer chat and the internal copilot.,customer_chat;internal_copilot,CT-06;CT-54
+OB-004,AI policy,data quality,Check that the data used to build and test the system for credit decisions and document summaries is relevant and free of known errors.,credit_decision;doc_summary,CT-15;CT-32;CT-43
+OB-005,AI policy,human oversight,"Make sure a person can review, challenge and override the output of the system used for fraud scoring and the internal copilot.",fraud_scoring;internal_copilot,CT-03
+OB-006,Model risk standard,change management,Test a change to the system used for customer chat and document summaries against the validated version before release.,customer_chat;doc_summary,CT-25;CT-26;CT-35
+OB-007,AI policy,model inventory,Confirm each year that the inventory entries for fraud scoring are complete and still correct.,fraud_scoring,CT-01;CT-41;CT-48
+OB-008,Consumer protection procedure,decision explanations,Give the customer the specific reasons for an adverse decision made with fraud scoring.,fraud_scoring,
+OB-009,Third-party standard,vendor model oversight,Assess a purchased AI model for document summaries before contract signature and each year after.,doc_summary,CT-14;CT-23;CT-28;CT-52;CT-988
+OB-010,Consumer protection procedure,decision explanations,Check that the reasons given for fraud scoring match the factors the system used.,fraud_scoring,CT-941
+OB-011,AI policy,model inventory,Record a new AI system for fraud scoring and the internal copilot in the inventory before it goes live.,fraud_scoring;internal_copilot,CT-41;CT-47;CT-50
+OB-012,Consumer protection procedure,fairness testing,Screen the inputs of the system used for credit decisions and document summaries for proxies of protected traits.,credit_decision;doc_summary,CT-02;CT-05
+OB-013,Model risk standard,ongoing monitoring,Set alert thresholds for the system used for customer chat and the internal copilot and review breaches.,customer_chat;internal_copilot,CT-29;CT-38;CT-55
+OB-014,AI policy,data quality,Keep track of where the data used for document summaries and the internal copilot came from.,doc_summary;internal_copilot,CT-15
+OB-015,Model risk standard,change management,Approve changes to the system used for credit decisions before they reach production.,credit_decision,CT-17;CT-25;CT-26;CT-35
+OB-016,Consumer protection procedure,user disclosure,Keep the wording of AI notices for credit decisions and customer chat under review.,credit_decision;customer_chat,
+OB-017,Consumer protection procedure,user disclosure,Tell people when they are dealing with an AI system in credit decisions.,credit_decision,CT-10;CT-40
+OB-018,Model risk standard,ongoing monitoring,Watch the performance of the AI system used for the internal copilot after release and act on drift.,internal_copilot,CT-19;CT-29;CT-38;CT-55
+OB-019,Model risk standard,change management,Approve changes to the system used for credit decisions and the internal copilot before they reach production.,credit_decision;internal_copilot,CT-26;CT-35;CT-904
+OB-020,Consumer protection procedure,fairness testing,Act on the results of fairness tests for the internal copilot and record the decision.,internal_copilot,CT-02;CT-05;CT-24;CT-952
+OB-021,AI policy,incident response,"Practise the response plan for credit decisions, fraud scoring and customer chat at least once a year.",credit_decision;fraud_scoring;customer_chat,
+OB-022,AI policy,model inventory,"Confirm each year that the inventory entries for fraud scoring, customer chat and the internal copilot are complete and still correct.",fraud_scoring;customer_chat;internal_copilot,CT-01;CT-41
+OB-023,AI policy,incident response,"Have a written plan to respond to a failure or harmful output of the system used for credit decisions, fraud scoring and document summaries.",credit_decision;fraud_scoring;doc_summary,CT-04
+OB-024,AI policy,model inventory,"Keep an inventory entry, with a named owner, for every AI system used in document summaries.",doc_summary,CT-41;CT-47;CT-48;CT-50
+OB-025,Consumer protection procedure,decision explanations,Give the customer the specific reasons for an adverse decision made with credit decisions.,credit_decision,CT-22
+OB-026,Consumer protection procedure,fairness testing,Test the system used for fraud scoring for different outcomes between groups of people.,fraud_scoring,CT-02;CT-05;CT-24
+OB-027,Model risk standard,model retirement,"Retire the system used for credit decisions, fraud scoring and the internal copilot in an orderly way and keep its records.",credit_decision;fraud_scoring;internal_copilot,CT-11
+OB-028,Model risk standard,ongoing monitoring,Watch the performance of the AI system used for credit decisions and customer chat after release and act on drift.,credit_decision;customer_chat,CT-38;CT-55
+OB-029,Model risk standard,ongoing monitoring,"Set alert thresholds for the system used for fraud scoring, customer chat and document summaries and review breaches.",fraud_scoring;customer_chat;doc_summary,CT-19;CT-49;CT-55
+OB-030,Consumer protection procedure,user disclosure,"Tell people when they are dealing with an AI system in credit decisions, document summaries and the internal copilot.",credit_decision;doc_summary;internal_copilot,CT-10;CT-16
+OB-031,Model risk standard,model retirement,Switch off access to a retired system for fraud scoring and the internal copilot and confirm no calls remain.,fraud_scoring;internal_copilot,CT-11;CT-21;CT-34
+OB-032,AI policy,incident response,Report incidents involving the system used for credit decisions and fraud scoring to senior management.,credit_decision;fraud_scoring,CT-04
+OB-033,Model risk standard,ongoing monitoring,Report monitoring results for fraud scoring to the owner each month.,fraud_scoring,CT-29;CT-38;CT-55
+OB-034,AI policy,data quality,Check that the data used to build and test the system for fraud scoring is relevant and free of known errors.,fraud_scoring,CT-32
+OB-035,AI policy,human oversight,"Make sure a person can review, challenge and override the output of the system used for customer chat.",customer_chat,CT-06;CT-49;CT-54
+OB-036,AI policy,human oversight,"Train the people who review output from the system used for customer chat, document summaries and the internal copilot.",customer_chat;doc_summary;internal_copilot,CT-03;CT-06;CT-20;CT-942
+OB-037,Third-party standard,vendor model oversight,Assess a purchased AI model for credit decisions and document summaries before contract signature and each year after.,credit_decision;doc_summary,CT-14
+OB-038,Consumer protection procedure,decision explanations,Keep reason wording for the internal copilot in plain language.,internal_copilot,CT-07
+OB-039,Model risk standard,change management,"Keep a record of each change to the system used for fraud scoring, including who approved it.",fraud_scoring,CT-17;CT-25;CT-26;CT-35
+OB-040,Consumer protection procedure,user disclosure,Give plain instructions on what the system used for credit decisions can and cannot do.,credit_decision,CT-10;CT-16;CT-40;CT-43
+OB-041,Third-party standard,vendor model oversight,"Require the supplier of the model used for credit decisions, fraud scoring and the internal copilot to notify us of material changes.",credit_decision;fraud_scoring;internal_copilot,CT-25;CT-28;CT-52
+OB-042,Model risk standard,model retirement,"Archive the final validation file of a retired system for credit decisions, document summaries and the internal copilot.",credit_decision;doc_summary;internal_copilot,CT-11
+OB-043,AI policy,data quality,"Keep track of where the data used for credit decisions, customer chat and the internal copilot came from.",credit_decision;customer_chat;internal_copilot,CT-32;CT-43
+OB-044,Model risk standard,change management,"Keep a record of each change to the system used for document summaries and the internal copilot, including who approved it.",doc_summary;internal_copilot,CT-17;CT-25
+OB-045,Model risk standard,independent validation,Re-validate the model used for credit decisions after any material change.,credit_decision,CT-23;CT-37
+OB-046,Model risk standard,independent validation,"Have people who did not build the model validate it before it is used for fraud scoring, document summaries and the internal copilot.",fraud_scoring;doc_summary;internal_copilot,CT-37;CT-51
+OB-047,Model risk standard,independent validation,Have people who did not build the model validate it before it is used for fraud scoring.,fraud_scoring,CT-01;CT-23;CT-51
+OB-048,Model risk standard,independent validation,Document the validation of the model used for document summaries and its open findings.,doc_summary,CT-31;CT-37
+OB-049,Model risk standard,independent validation,Re-validate the model used for fraud scoring and the internal copilot after any material change.,fraud_scoring;internal_copilot,CT-23;CT-31;CT-37
+OB-050,Consumer protection procedure,fairness testing,Test the system used for credit decisions and the internal copilot for different outcomes between groups of people.,credit_decision;internal_copilot,CT-02;CT-24
+OB-051,Consumer protection procedure,fairness testing,Screen the inputs of the system used for fraud scoring and the internal copilot for proxies of protected traits.,fraud_scoring;internal_copilot,CT-02;CT-05;CT-24;CT-53
+OB-052,AI policy,human oversight,Record each case where a person overrode the system used for customer chat.,customer_chat,CT-06;CT-20;CT-49;CT-54
+OB-053,AI policy,incident response,Have a written plan to respond to a failure or harmful output of the system used for credit decisions and customer chat.,credit_decision;customer_chat,
+OB-054,AI policy,model inventory,"Keep an inventory entry, with a named owner, for every AI system used in fraud scoring, customer chat and the internal copilot.",fraud_scoring;customer_chat;internal_copilot,CT-47;CT-978
+OB-055,AI policy,data quality,"Reconcile the data fed to the system for customer chat, document summaries and the internal copilot with the source each month.",customer_chat;doc_summary;internal_copilot,CT-32
+OB-056,Model risk standard,model retirement,Retire the system used for customer chat in an orderly way and keep its records.,customer_chat,CT-06;CT-11;CT-21

@@ -1,0 +1,76 @@
+packet_id,entity,scenario,defect,true_beneficial_owners,true_control_person,planted_detail
+KYB-001,Bayfield Landscaping LLC,nominee_note,1,Dana Brennan; Imani Weller,Sofia Quigley,Sofia Quigley holds 35 percent as nominee for Dana Brennan
+KYB-002,Redfern Landscaping Corp.,owner_dropped,1,Felix J. Moreau; Marcus M. Haddad,Hiro Underhill,Felix J. Moreau (60) left out
+KYB-003,Stonebridge Logistics LLC,clean_direct,0,Owen K. Ibarra,Marcus Zielinski,
+KYB-004,Pinecrest Tool and Die Inc.,clean_name_variant,0,Dana M. Santoro; Mei E. Takahashi; Priya C. Ibarra; Tariq C. Tanaka,Oscar P. Weller,names written in form 2
+KYB-005,Cedar Ridge Tool and Die LLC,clean_direct,0,Bianca Lindqvist; Oscar Vargas,Oscar Vargas,
+KYB-006,Larkspur Logistics LLC,entity_no_lookthrough,1,Elena A. Mbeki; Leila Tanaka,Rosa Moreau,"entity listed as the owner, individuals behind it not read"
+KYB-007,Larkspur Logistics LLC,dob_misread,1,Jonas S. Vargas; Marcus F. Okafor; Owen Kessler,Declan Petrov,month and day of Owen Kessler swapped
+KYB-008,Foxglove Cleaning Services LLC,clean_lookthrough,0,Declan Adeyemi; Hiro Quigley; Oscar R. Sorensen,Declan Adeyemi,
+KYB-009,Northgate Logistics Corp.,clean_lookthrough,0,Marcus D. Moreau; Mateo Petrov,Felix Kessler,
+KYB-010,Harbor Lane Machine Works Inc.,name_misread,1,Leila Volkov; Mateo Brennan,Rosa G. Whitfield,legal name misread (Harbor)
+KYB-011,Cedar Ridge Logistics LLC,pct_swapped,1,Owen K. Zielinski,Owen K. Zielinski,percents of Owen K. Zielinski and Dana Brennan swapped
+KYB-012,Quarry Hill Supply Inc.,clean_name_variant,0,Amara J. Ramanathan; Lucia E. Whitfield,Bianca K. Nair,names written in form 1
+KYB-013,Pinecrest Supply Inc.,clean_lookthrough,0,Oscar Osei; Sofia Petrov,Greta B. Takahashi,
+KYB-014,Bayfield Bakery LLC,clean_entity_minor,0,Mateo C. Mbeki; Tariq Novak,Clara J. Vargas,
+KYB-015,Cedar Ridge Logistics Corp.,pct_decimal_slip,1,Lucia Tanaka; Marcus Zielinski,Lucia Tanaka,Lucia Tanaka 35 read as 3.5
+KYB-016,Northgate Printing Corp.,control_person_missing,1,Elena Volkov; Leila S. Moreau,Imani N. Adeyemi,control person not read
+KYB-017,Larkspur Printing Inc.,control_person_missing,1,Felix N. Lindqvist; Imani Castellanos,Felix N. Lindqvist,control person not read
+KYB-018,Kestrel Electric LLC,clean_rounding,0,Greta N. Reyes; Imani P. Vargas; Leila Lindqvist,Clara A. Castellanos,
+KYB-019,Redfern Bakery Corp.,owner_dropped,1,Greta Yilmaz; Marcus G. Whitfield,Priya Reyes,Greta Yilmaz (45) left out
+KYB-020,Kestrel Tool and Die LLC,field_missing,1,Felix G. Lindqvist; Priya Tanaka; Ravi Brennan,Felix G. Lindqvist,dob of Ravi Brennan not read
+KYB-021,Ironwood Bakery Inc.,pct_swapped,1,Rosa Sorensen,Tariq R. Reyes,percents of Rosa Sorensen and Imani Brennan swapped
+KYB-022,Harbor Lane Tool and Die LLC,cert_incomplete,1,Priya F. Lindqvist; Sofia Reyes,Declan F. Petrov,signature or date not read
+KYB-023,Millbrook Tool and Die Inc.,clean_rounding,0,,Owen E. Osei,
+KYB-024,Pinecrest Foods LLC,clean_lookthrough,0,Dmitri Ramanathan; Sofia Castellanos,Owen Whitfield,
+KYB-025,Quarry Hill Logistics Corp.,field_missing,1,Felix Quigley; Ravi Okafor,Felix Quigley,id_last4 of Felix Quigley not read
+KYB-026,Stonebridge Cleaning Services Corp.,name_misread,1,Anil Castellanos; Jonas Ramanathan; Mei S. Lindqvist,Anil Castellanos,surname Lindqvist misread
+KYB-027,Pinecrest Foods Inc.,pct_swapped,1,Clara D. Ramanathan; Dmitri B. Lindqvist,Dmitri B. Lindqvist,percents of Clara D. Ramanathan and Nadia A. Moreau swapped
+KYB-028,Foxglove Landscaping LLC,owner_dropped,1,Jonas T. Nair,Jonas T. Nair,Sofia M. Yilmaz (10) left out
+KYB-029,Cedar Ridge Tool and Die LLC,clean_lookthrough,0,Elena Weller; Priya P. Haddad,Priya P. Haddad,
+KYB-030,Bayfield Landscaping Corp.,dob_misread,1,Oscar Tanaka,Oscar Tanaka,month and day of Oscar Tanaka swapped
+KYB-031,Harbor Lane Machine Works Inc.,entity_no_lookthrough,1,Jonas Nair; Priya Okafor; Tomas C. Moreau,Jonas Nair,"entity listed as the owner, individuals behind it not read"
+KYB-032,Redfern Bakery Corp.,nominee_note,1,Elena Yilmaz; Tomas Moreau,Hiro S. Takahashi,Oscar S. Weller holds 45 percent as nominee for Elena Yilmaz
+KYB-033,Quarry Hill Cleaning Services Corp.,pct_swapped,1,Nadia A. Whitfield; Rosa Okafor,Imani K. Prescott,percents of Rosa Okafor and Nadia A. Whitfield swapped
+KYB-034,Alder Point Supply Corp.,clean_direct,0,Leila B. Quigley,Bianca Mbeki,
+KYB-035,Bayfield Logistics LLC,pct_decimal_slip,1,Owen Takahashi,Owen Takahashi,Owen Takahashi 80 read as 8.0
+KYB-036,Redfern Landscaping LLC,clean_rounding,0,,Lucia E. Marsh,
+KYB-037,Larkspur Bakery Inc.,clean_direct,0,Anil C. Zielinski; Marcus Vargas,Anil C. Zielinski,
+KYB-038,Cedar Ridge Logistics Corp.,owner_dropped,1,Elena Santoro,Elena Santoro,Elena Santoro (80) left out
+KYB-039,Northgate Dental Group LLC,clean_direct,0,Elena Haddad; Mei S. Osei,Hiro C. Weller,
+KYB-040,Foxglove Dental Group LLC,pct_decimal_slip,1,Dmitri A. Ibarra; Priya Nair,Hiro A. Reyes,Dmitri A. Ibarra 50 read as 5.0
+KYB-041,Pinecrest Printing Inc.,clean_direct,0,Jonas C. Brennan; Rosa L. Quigley,Jonas C. Brennan,
+KYB-042,Quarry Hill Logistics LLC,cert_incomplete,1,Dana J. Osei; Tariq F. Moreau,Declan F. Brennan,signature or date not read
+KYB-043,Harbor Lane Electric Inc.,clean_name_variant,0,Jonas S. Adeyemi; Tariq K. Okafor,Tariq K. Okafor,names written in form 0
+KYB-044,Bayfield Tool and Die Corp.,name_misread,1,Hiro S. Okafor; Noor Santoro,Hiro S. Okafor,surname Okafor misread
+KYB-045,Cedar Ridge Dental Group LLC,clean_name_variant,0,Hiro M. Okafor; Kofi S. Haddad,Dana B. Nair,names written in form 4
+KYB-046,Larkspur Machine Works LLC,clean_name_variant,0,Ivan H. Whitfield; Kofi L. Vargas; Ravi H. Petrov,Marcus B. Sorensen,names written in form 3
+KYB-047,Larkspur Foods LLC,dob_misread,1,Hiro Whitfield; Mei Vargas,Hiro Whitfield,month and day of Mei Vargas swapped
+KYB-048,Pinecrest Tool and Die LLC,clean_direct,0,Hiro Vargas; Ravi Novak,Dmitri Tanaka,
+KYB-049,Northgate Tool and Die LLC,control_person_missing,1,Hiro Prescott; Oscar H. Mbeki; Rosa Brennan,Rosa Brennan,control person not read
+KYB-050,Pinecrest Logistics LLC,entity_no_lookthrough,1,Nadia Ramanathan; Owen Okafor,Owen Okafor,"entity listed as the owner, individuals behind it not read"
+KYB-051,Alder Point Tool and Die LLC,clean_lookthrough,0,Clara Whitfield; Priya B. Takahashi; Rosa Ibarra,Priya B. Takahashi,
+KYB-052,Millbrook Machine Works LLC,clean_direct,0,Marcus L. Osei,Greta Okafor,
+KYB-053,Alder Point Electric LLC,owner_dropped,1,Elena Yilmaz; Ivan Underhill; Owen Ibarra,Elena Yilmaz,Elena Yilmaz (30) left out
+KYB-054,Foxglove Foods Corp.,entity_no_lookthrough,1,Clara H. Ramanathan; Ivan G. Santoro,Felix P. Adeyemi,"entity listed as the owner, individuals behind it not read"
+KYB-055,Northgate Printing LLC,clean_direct,0,Imani B. Yilmaz; Sofia Haddad,Leila Mbeki,
+KYB-056,Millbrook Electric LLC,clean_direct,0,Anil Nair; Jonas B. Moreau; Kofi R. Zielinski,Jonas B. Moreau,
+KYB-057,Pinecrest Cleaning Services LLC,nominee_note,1,Anil Novak,Kofi Mbeki,Hiro B. Sorensen holds 65 percent as nominee for Anil Novak
+KYB-058,Pinecrest Bakery LLC,cert_incomplete,1,Owen B. Santoro; Sofia Novak; Tariq Volkov,Tariq Volkov,signature or date not read
+KYB-059,Bayfield Cleaning Services LLC,clean_direct,0,Dmitri D. Quigley; Jonas C. Adeyemi,Jonas C. Adeyemi,
+KYB-060,Quarry Hill Electric LLC,clean_entity_minor,0,Amara J. Haddad; Anil C. Lindqvist,Amara J. Haddad,
+KYB-061,Foxglove Freight Inc.,dob_misread,1,Amara Whitfield; Dana F. Brennan,Amara Whitfield,month and day of Amara Whitfield swapped
+KYB-062,Pinecrest Machine Works LLC,pct_decimal_slip,1,Ravi G. Novak,Ravi G. Novak,Ravi G. Novak 65 read as 6.5
+KYB-063,Ironwood Dental Group LLC,clean_direct,0,Felix P. Novak; Greta G. Lindqvist; Kofi Brennan; Mateo C. Osei,Dana Moreau,
+KYB-064,Cedar Ridge Freight Inc.,clean_lookthrough,0,Anil Petrov; Felix P. Marsh,Felix P. Marsh,
+KYB-065,Cedar Ridge Logistics LLC,clean_rounding,0,Amara E. Mbeki; Hiro B. Ramanathan; Leila Yilmaz,Kofi Vargas,
+KYB-066,Bayfield Logistics Corp.,pct_swapped,1,Leila Osei; Rosa Yilmaz,Ravi Mbeki,percents of Rosa Yilmaz and Leila Osei swapped
+KYB-067,Ironwood Tool and Die LLC,field_missing,1,Elena A. Marsh; Greta Weller,Dana F. Santoro,address of Greta Weller not read
+KYB-068,Kestrel Logistics Corp.,pct_swapped,1,Clara Santoro; Ravi R. Vargas,Ravi R. Vargas,percents of Clara Santoro and Anil Novak swapped
+KYB-069,Larkspur Machine Works Corp.,pct_decimal_slip,1,Dmitri G. Vargas; Felix Whitfield; Leila Santoro,Ivan Reyes,Leila Santoro 50 read as 5.0
+KYB-070,Stonebridge Printing Inc.,field_missing,1,Elena C. Lindqvist,Mateo M. Vargas,dob of Elena C. Lindqvist not read
+KYB-071,Kestrel Dental Group Inc.,control_person_missing,1,Dana Volkov; Rosa D. Castellanos,Ivan H. Okafor,control person not read
+KYB-072,Foxglove Freight Inc.,clean_entity_minor,0,Ivan Marsh; Mei K. Castellanos,Rosa E. Underhill,
+KYB-073,Harbor Lane Tool and Die Inc.,clean_lookthrough,0,Tomas A. Weller,Amara Okafor,
+KYB-074,Millbrook Bakery LLC,name_misread,1,Hiro N. Ramanathan; Priya T. Marsh,Felix Brennan,surname Brennan misread
+KYB-075,Cedar Ridge Dental Group LLC,field_missing,1,Dmitri A. Underhill; Elena D. Okafor,Amara K. Takahashi,address of Dmitri A. Underhill not read

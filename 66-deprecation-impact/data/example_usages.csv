@@ -1,0 +1,8 @@
+usage_id,feature_id,role,model_ref,config_path,monthly_calls,avg_input_tokens,avg_output_tokens
+X-1,EX-1,primary,va-fast@2025-03,svc/dispute-summary/config.yaml:primary_model,400000,1200,250
+X-2,EX-1,fallback,vb-mini@2025-04,svc/dispute-summary/config.yaml:fallback_model,12000,1200,250
+X-3,EX-2,primary,vb-core-stable,svc/kyc-doc-reader/config.yaml:primary_model,60000,2400,180
+X-4,EX-3,primary,va-fast,svc/complaint-classifier/config.yaml:primary_model,25000,700,60
+X-5,EX-4,primary,vc-chat@2025-08,svc/fee-query-answerer/config.yaml:primary_model,150000,900,220
+X-6,EX-5,primary,ft-dispute-v2,svc/statement-explainer/config.yaml:primary_model,90000,1500,400
+X-7,EX-5,judge,vc-reason@2025-02,svc/statement-explainer/config.yaml:judge_model,3000,1900,120

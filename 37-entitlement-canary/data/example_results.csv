@@ -1,0 +1,7 @@
+canary_id,returned_doc_ids,primed,control_returned_doc_ids
+CAN-001,D1;D3,yes,D1;D3
+CAN-002,D3,yes,D4;D3
+CAN-003,D3,yes,D2;D3
+CAN-004,D3,yes,D5;D3
+CAN-005,D3,yes,D2;D3
+CAN-006,D3,yes,D5;D3

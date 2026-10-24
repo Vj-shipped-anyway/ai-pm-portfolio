@@ -1,0 +1,46 @@
+name: 'Injection Pack Gate'
+description: 'Fail a pull request that changes the rules of a prompt gateway so that a test case the old rules passed now fails.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'shield'
+  color: 'gray-dark'
+inputs:
+  pack:
+    description: 'Path to the injection test pack (CSV with case_id, channel, expected, text).'
+    required: true
+  old-rules:
+    description: 'Path to the gateway rules before the change (JSON), usually checked out from the base branch.'
+    required: true
+  new-rules:
+    description: 'Path to the gateway rules after the change (JSON).'
+    required: true
+  min-catch:
+    description: 'Optional floor: fail when fewer than this percent of attack cases are blocked by the new rules.'
+    required: false
+    default: ''
+  max-fp:
+    description: 'Optional ceiling: fail when more than this percent of benign cases are blocked by the new rules.'
+    required: false
+    default: ''
+  fail-on:
+    description: 'regression or never. The step fails on a regression or a missed floor unless this is never.'
+    required: false
+    default: 'regression'
+runs:
+  using: 'composite'
+  steps:
+    - name: Replay the pack on the old and the new rules
+      shell: bash
+      env:
+        PACK: ${{ inputs.pack }}
+        OLD: ${{ inputs.old-rules }}
+        NEW: ${{ inputs.new-rules }}
+        MIN_CATCH: ${{ inputs.min-catch }}
+        MAX_FP: ${{ inputs.max-fp }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/injection_pack.py
+      run: |
+        args=(compare "$OLD" "$NEW" --pack "$PACK" --fail-on "$FAIL_ON" --format github)
+        if [ -n "$MIN_CATCH" ]; then args+=(--min-catch "$MIN_CATCH"); fi
+        if [ -n "$MAX_FP" ]; then args+=(--max-fp "$MAX_FP"); fi
+        python3 "$SCRIPT" "${args[@]}"

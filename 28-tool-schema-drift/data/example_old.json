@@ -1,0 +1,32 @@
+{
+ "description": "Block a card.",
+ "name": "block_card",
+ "parameters": {
+  "properties": {
+   "card_id": {
+    "description": "Card identifier.",
+    "type": "string"
+   },
+   "notify_customer": {
+    "description": "Send a notification to the customer.",
+    "type": "boolean"
+   },
+   "reason": {
+    "description": "Why the card is blocked.",
+    "enum": [
+     "lost",
+     "stolen",
+     "fraud_suspected",
+     "customer_request"
+    ],
+    "type": "string"
+   }
+  },
+  "required": [
+   "card_id",
+   "reason"
+  ],
+  "type": "object"
+ },
+ "version": "1.0.0"
+}

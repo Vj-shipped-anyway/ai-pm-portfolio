@@ -1,0 +1,101 @@
+system_id,case_kind,truth_class,detail
+AI-001,rubber_stamp,defective,"date refreshed in bulk on 2026-09-26; last real review 2025-02-06, tier 1 cadence 365"
+AI-002,review_overdue,defective,tier 2 cadence 270; reviewed 356 days ago
+AI-003,seasonal_quiet,clean,"production process that runs once a quarter, last traffic 156 days ago"
+AI-004,retired_running,defective,"retired, last traffic 16 days ago"
+AI-005,evidence_gap,defective,last_evaluated missing at tier 3
+AI-006,case_only_model_id,clean,record has a trailing space in the model id
+AI-007,pre_production_no_evidence,clean,development at tier 3 with no evaluation yet
+AI-008,invalid_value,defective,invalid future_date
+AI-009,review_overdue,defective,tier 2 cadence 270; reviewed 353 days ago
+AI-010,misclassified_kind,defective,generative record lists tools
+AI-011,placeholder_novel,defective,technical_owner set to a placeholder the word list does not hold
+AI-012,clean,clean,
+AI-013,clean,clean,
+AI-014,evaluation_overdue,defective,tier 3 cadence 180; evaluated 353 days ago
+AI-015,review_overdue,defective,tier 1 cadence 365; reviewed 519 days ago
+AI-016,listed_no_traffic,defective,"production, no usage rows"
+AI-017,rubber_stamp,defective,"date refreshed in bulk on 2026-09-26; last real review 2025-07-13, tier 2 cadence 270"
+AI-018,boundary_eval_age,clean,"evaluated exactly 180 days ago, the tier 3 cadence"
+AI-019,placeholder_known,defective,model_id set to a listed placeholder
+AI-020,retired_old_traffic,clean,"retired, last traffic 31 days ago, old review date"
+AI-021,model_changed,defective,traffic moved from vendor-b-chat-2026-01 to vendor-b-chat-2026-07; the record still says vendor-b-chat-2026-01
+AI-022,agent_gap,defective,permission_scope missing on an agentic record
+AI-023,clean,clean,
+AI-024,agent_gap,defective,"human_approval, tools missing on an agentic record"
+AI-025,boundary_eval_age,clean,"evaluated exactly 180 days ago, the tier 3 cadence"
+AI-026,agent_gap,defective,"human_approval, permission_scope, tools missing on an agentic record"
+AI-027,clean,clean,
+AI-028,invalid_value,defective,invalid tier
+AI-029,missing_required,defective,provider_type spaces
+AI-030,missing_required,defective,model_id empty
+AI-031,rubber_stamp,defective,"date refreshed in bulk on 2026-09-26; last real review 2025-05-06, tier 1 cadence 365"
+AI-032,retired_running,defective,"retired, last traffic 1 days ago"
+AI-033,case_only_model_id,clean,record has a trailing space in the model id
+AI-034,model_changed,defective,traffic moved from selfhost-open-70b-v2 to selfhost-open-70b-v3; the record still says selfhost-open-70b-v2
+AI-035,clean,clean,
+AI-036,pre_production_no_evidence,clean,development at tier 3 with no evaluation yet
+AI-037,placeholder_in_sentence,clean,purpose is a sentence that contains a placeholder word
+AI-038,model_migrated_recorded,clean,traffic moved from vendor-c-reason-2026-05 to vendor-c-reason-2026-09; the record says vendor-c-reason-2026-09
+AI-039,case_only_model_id,clean,record has a trailing space in the model id
+AI-040,review_overdue,defective,tier 1 cadence 365; reviewed 447 days ago
+AI-041,boundary_review_age,clean,"reviewed exactly 270 days ago, the tier 2 cadence"
+AI-042,evidence_gap,defective,evaluation_ref missing at tier 4
+AI-043,evidence_gap,defective,"evaluation_ref, last_evaluated missing at tier 3"
+AI-044,idle_boundary,clean,"production, last traffic exactly 90 days ago"
+AI-045,idle_boundary,clean,"production, last traffic exactly 90 days ago"
+AI-046,retired_old_traffic,clean,"retired, last traffic 293 days ago, old review date"
+AI-047,misclassified_kind,defective,generative record lists tools
+AI-048,placeholder_in_sentence,clean,purpose is a sentence that contains a placeholder word
+AI-049,retired_old_traffic,clean,"retired, last traffic 130 days ago, old review date"
+AI-050,missing_required,defective,purpose empty
+AI-051,clean,clean,
+AI-052,listed_no_traffic,defective,"production, last traffic 151 days ago"
+AI-053,agent_gap,defective,"human_approval, permission_scope, tools missing on an agentic record"
+AI-054,listed_no_traffic,defective,"production, no usage rows"
+AI-055,agent_gap,defective,"permission_scope, tools missing on an agentic record"
+AI-056,clean,clean,
+AI-057,boundary_review_age,clean,"reviewed exactly 270 days ago, the tier 2 cadence"
+AI-058,model_migrated_recorded,clean,traffic moved from vendor-b-chat-2026-01 to vendor-b-chat-2026-07; the record says vendor-b-chat-2026-07
+AI-059,boundary_review_age,clean,"reviewed exactly 365 days ago, the tier 1 cadence"
+AI-060,review_overdue,defective,tier 3 cadence 180; reviewed 199 days ago
+AI-061,invalid_value,defective,invalid date_format
+AI-062,evidence_gap,defective,independent_review_date missing at tier 3
+AI-063,clean,clean,
+AI-064,missing_required,defective,last_reviewed empty
+AI-065,clean,clean,
+AI-066,placeholder_known,defective,purpose set to a listed placeholder
+AI-067,model_changed,defective,traffic moved from vendor-c-reason-2026-05 to vendor-c-reason-2026-09; the record still says vendor-c-reason-2026-05
+AI-068,review_overdue,defective,tier 4 cadence 90; reviewed 159 days ago
+AI-069,clean,clean,
+AI-070,invalid_value,defective,invalid enum_case
+AI-071,seasonal_quiet,clean,"production process that runs once a quarter, last traffic 167 days ago"
+AI-072,clean,clean,
+AI-073,clean,clean,
+AI-074,evaluation_overdue,defective,tier 4 cadence 90; evaluated 240 days ago
+AI-075,model_changed,defective,traffic moved from vendor-a-large-2026-03 to vendor-a-large-2026-08; the record still says vendor-a-large-2026-03
+AI-076,invalid_value,defective,invalid future_date
+AI-077,retired_running,defective,"retired, last traffic 15 days ago"
+AI-078,model_changed,defective,traffic moved from vendor-a-large-2026-03 to vendor-a-large-2026-08; the record still says vendor-a-large-2026-03
+AI-079,placeholder_novel,defective,purpose set to a placeholder the word list does not hold
+AI-080,retired_old_traffic,clean,"retired, last traffic 31 days ago, old review date"
+AI-081,clean,clean,
+AI-082,placeholder_in_sentence,clean,purpose is a sentence that contains a placeholder word
+AI-083,evaluation_overdue,defective,tier 2 cadence 270; evaluated 469 days ago
+AI-084,model_migrated_recorded,clean,traffic moved from vendor-a-small-2026-03 to vendor-a-small-2026-08; the record says vendor-a-small-2026-08
+AI-085,evidence_gap,defective,independent_review_date missing at tier 3
+AI-086,placeholder_known,defective,model_id set to a listed placeholder
+AI-087,missing_required,defective,kind empty
+AI-088,pre_production_no_evidence,clean,pilot at tier 3 with no evaluation yet
+AI-089,clean,clean,
+AI-090,clean,clean,
+AI-091,missing_required,defective,risk_tier absent
+AI-092,evaluation_overdue,defective,tier 2 cadence 270; evaluated 371 days ago
+AI-093,misclassified_kind,defective,generative record lists tools
+AI-094,listed_no_traffic,defective,"production, no usage rows"
+AI-095,evidence_gap,defective,fallback_plan is no at tier 4
+AI-096,placeholder_known,defective,model_id set to a listed placeholder
+AI-097,clean,clean,
+AI-098,pre_production_no_evidence,clean,development at tier 3 with no evaluation yet
+AI-099,model_migrated_recorded,clean,traffic moved from vendor-a-large-2026-03 to vendor-a-large-2026-08; the record says vendor-a-large-2026-08
+AI-100,placeholder_novel,defective,purpose set to a placeholder the word list does not hold

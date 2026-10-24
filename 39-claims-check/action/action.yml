@@ -1,0 +1,44 @@
+name: 'Claims Check'
+description: 'Fail a pull request when a number tagged as measured in a README is not printed by a script.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'check-circle'
+  color: 'gray-dark'
+inputs:
+  readme:
+    description: 'Path to the README to check.'
+    required: false
+    default: 'README.md'
+  evidence:
+    description: 'Files or glob patterns holding what your scripts printed, one pattern per line. A pattern that matches no file fails the step.'
+    required: true
+  fail-on:
+    description: 'unsupported or never. The step fails when a number is not printed (unsupported).'
+    required: false
+    default: 'unsupported'
+  min-digits:
+    description: 'Skip numbers with fewer digits than this.'
+    required: false
+    default: '2'
+  pairs:
+    description: 'true requires "a of b" to be printed as a pair on one line. false checks the two numbers separately.'
+    required: false
+    default: 'true'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check README numbers against script output
+      shell: bash
+      env:
+        README: ${{ inputs.readme }}
+        EVIDENCE: ${{ inputs.evidence }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        MIN_DIGITS: ${{ inputs.min-digits }}
+        PAIRS: ${{ inputs.pairs }}
+        SCRIPT: ${{ github.action_path }}/claims_check.py
+      run: |
+        args=(check "$README" --evidence "$EVIDENCE" --fail-on "$FAIL_ON" --min-digits "$MIN_DIGITS" --format github)
+        if [ "$PAIRS" = "false" ]; then
+          args+=(--no-pairs)
+        fi
+        python3 "$SCRIPT" "${args[@]}"

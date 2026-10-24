@@ -1,0 +1,13 @@
+scenario_id,kind,provider,region,services_lost,critical_lost,critical_total,critical_lost_ids
+P:CP-1,provider,CP-1,,37,15,25,P-02;S-03;S-04;S-14;S-15;S-17;S-32;S-33;S-35;S-37;S-41;S-44;S-45;S-47;S-52
+P:CP-2,provider,CP-2,,26,10,25,P-03;S-15;S-19;S-32;S-33;S-37;S-41;S-42;S-45;S-48
+P:CP-3,provider,CP-3,,39,13,25,P-01;S-04;S-10;S-13;S-14;S-19;S-35;S-40;S-41;S-45;S-47;S-48;S-52
+P:CP-4,provider,CP-4,,7,4,25,S-14;S-37;S-46;S-49
+R:CP-1/R1,region,CP-1,R1,35,13,25,P-02;S-03;S-04;S-14;S-15;S-17;S-33;S-37;S-41;S-44;S-45;S-47;S-52
+R:CP-1/R2,region,CP-1,R2,1,0,25,
+R:CP-1/R3,region,CP-1,R3,0,0,25,
+R:CP-2/R1,region,CP-2,R1,12,4,25,S-15;S-19;S-32;S-42
+R:CP-2/R2,region,CP-2,R2,16,6,25,P-03;S-33;S-37;S-41;S-42;S-45
+R:CP-3/R1,region,CP-3,R1,10,4,25,S-19;S-40;S-48;S-52
+R:CP-3/R2,region,CP-3,R2,4,1,25,S-41
+R:CP-4/R1,region,CP-4,R1,7,4,25,S-14;S-37;S-46;S-49

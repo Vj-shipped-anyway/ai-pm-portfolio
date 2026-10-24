@@ -1,0 +1,156 @@
+{
+ "as_of": "2026-06-30",
+ "status": "open",
+ "products": [
+  "auto",
+  "card"
+ ],
+ "buckets": [
+  {
+   "name": "current",
+   "min": 0,
+   "max": 0
+  },
+  {
+   "name": "d01_59",
+   "min": 1,
+   "max": 59
+  },
+  {
+   "name": "d60_plus",
+   "min": 60,
+   "max": null
+  }
+ ],
+ "cells": [
+  {
+   "id": "auto.current",
+   "kind": "leaf",
+   "label": "auto / current",
+   "product": "auto",
+   "bucket": "current"
+  },
+  {
+   "id": "auto.d01_59",
+   "kind": "leaf",
+   "label": "auto / d01_59",
+   "product": "auto",
+   "bucket": "d01_59"
+  },
+  {
+   "id": "auto.d60_plus",
+   "kind": "leaf",
+   "label": "auto / d60_plus",
+   "product": "auto",
+   "bucket": "d60_plus"
+  },
+  {
+   "id": "card.current",
+   "kind": "leaf",
+   "label": "card / current",
+   "product": "card",
+   "bucket": "current"
+  },
+  {
+   "id": "card.d01_59",
+   "kind": "leaf",
+   "label": "card / d01_59",
+   "product": "card",
+   "bucket": "d01_59"
+  },
+  {
+   "id": "card.d60_plus",
+   "kind": "leaf",
+   "label": "card / d60_plus",
+   "product": "card",
+   "bucket": "d60_plus"
+  },
+  {
+   "id": "ROW.auto",
+   "kind": "derived",
+   "label": "auto total",
+   "op": "sum",
+   "inputs": [
+    "auto.current",
+    "auto.d01_59",
+    "auto.d60_plus"
+   ]
+  },
+  {
+   "id": "ROW.card",
+   "kind": "derived",
+   "label": "card total",
+   "op": "sum",
+   "inputs": [
+    "card.current",
+    "card.d01_59",
+    "card.d60_plus"
+   ]
+  },
+  {
+   "id": "COL.current",
+   "kind": "derived",
+   "label": "current total",
+   "op": "sum",
+   "inputs": [
+    "auto.current",
+    "card.current"
+   ]
+  },
+  {
+   "id": "COL.d01_59",
+   "kind": "derived",
+   "label": "d01_59 total",
+   "op": "sum",
+   "inputs": [
+    "auto.d01_59",
+    "card.d01_59"
+   ]
+  },
+  {
+   "id": "COL.d60_plus",
+   "kind": "derived",
+   "label": "d60_plus total",
+   "op": "sum",
+   "inputs": [
+    "auto.d60_plus",
+    "card.d60_plus"
+   ]
+  },
+  {
+   "id": "ALL",
+   "kind": "derived",
+   "label": "all products total",
+   "op": "sum",
+   "inputs": [
+    "COL.current",
+    "COL.d01_59",
+    "COL.d60_plus"
+   ]
+  },
+  {
+   "id": "RATE.auto",
+   "kind": "derived",
+   "label": "auto share at d60_plus or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "auto.d60_plus"
+   ],
+   "denominator": [
+    "ROW.auto"
+   ]
+  },
+  {
+   "id": "RATE.card",
+   "kind": "derived",
+   "label": "card share at d60_plus or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "card.d60_plus"
+   ],
+   "denominator": [
+    "ROW.card"
+   ]
+  }
+ ]
+}

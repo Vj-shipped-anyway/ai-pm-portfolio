@@ -1,0 +1,6 @@
+key,decision,approver,note
+ref_fee:BK-000002:GL-000002:499850,approve,reviewer-1,remittance advice shows a 1.50 fee
+batch_sum:BK-000003:GL-000003+GL-000004+GL-000005:300000,approve,reviewer-1,three invoices in one remittance
+ref_near:BK-000005:GL-000007:220000,reject,reviewer-2,two different invoices
+name_amount:BK-000006:GL-000016:640000,approve,reviewer-1,approved against a line that is not the one proposed
+ref_exact:BK-000010:GL-000013:1500000,approve,recon-agent,above the limit

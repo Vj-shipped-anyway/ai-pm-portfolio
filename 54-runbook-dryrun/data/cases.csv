@@ -1,0 +1,3942 @@
+case_id,requester,params_json,world_json,approvals_json,runbook_yaml
+C-001,kofi,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": ""14""}","[{""age_minutes"": 7, ""approver"": ""lena"", ""digest"": ""9de0572c6907"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-001
+title: ""Quarantine the retrieval index (policy-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: policy-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-002,ines,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 12, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 18, ""approver"": ""tomas"", ""digest"": ""da8b1e2ffd69"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-002
+title: ""Roll the model back to the previous version (scorer-v7)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: scorer-v7
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{chan}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-003,omar,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 21}",[],"runbook: rb-003
+title: ""Quarantine the retrieval index (policy-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: policy-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-004,ines,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 29, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 9, ""approver"": ""lena"", ""digest"": ""4560b9841de2"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-004
+title: ""Rotate the credential (tool-api-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: tool-api-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-005,dana,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 5, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 21, ""approver"": ""kofi"", ""digest"": ""47ef827dbfa1"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-005
+title: ""Roll the model back to the previous version (summarizer-v2)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: summarizer-v2
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+    note: ""Ask {{vendor}} to confirm before this step.""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-006,kofi,{},"{""agent.blocked_calls_per_hour"": 31, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""on""}","[{""age_minutes"": 15, ""approver"": ""omar"", ""digest"": ""d5ef0a04a766"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-006
+title: ""Switch off the agent's payment tool (refund-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: refund-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-007,dana,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 17, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 16, ""approver"": ""priya"", ""digest"": ""3f3438f713f5"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-007
+title: ""Roll the model back to the previous version (scorer-v7)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: scorer-v7
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s3
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-008,marta,"{""target"": ""refund-agent""}","{""agent.blocked_calls_per_hour"": 35, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 25, ""approver"": ""omar"", ""digest"": ""35199c627f8e"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-008
+title: ""Switch off the agent's payment tool (dispute-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: dispute-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-009,omar,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 37, ""policy.mode"": ""base""}","[{""age_minutes"": 2, ""approver"": ""ines"", ""digest"": ""951ccaea0824"", ""role"": ""duty-manager"", ""step"": ""s3""}]","runbook: rb-009
+title: ""Add the blocking pattern to the input policy (faq-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: faq-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-010,dana,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 35, ""job.mode"": ""running""}",[],"runbook: rb-010
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-011,marta,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 43, ""policy.mode"": ""base""}","[{""age_minutes"": 25, ""approver"": ""kofi"", ""digest"": ""bb31b557f90e"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-011
+title: ""Add the blocking pattern to the input policy (assistant-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: assistant-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-012,tomas,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 31, ""job.mode"": ""running""}","[{""age_minutes"": 4, ""approver"": ""tomas"", ""digest"": ""8db7bb65fe84"", ""role"": ""incident-commander"", ""step"": ""s3""}, {""age_minutes"": 4, ""approver"": ""kofi"", ""digest"": ""8db7bb65fe84"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-012
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-013,marta,{},"{""agent.blocked_calls_per_hour"": 18, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 18, ""approver"": ""omar"", ""digest"": ""403bcdc0e340"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-013
+title: ""Switch off the agent's payment tool (refund-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: refund-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-014,marta,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 49, ""job.mode"": ""running""}","[{""age_minutes"": 22, ""approver"": ""lena"", ""digest"": ""cd7fd3908ec1"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-014
+title: ""Pause the batch job (report-build)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: report-build
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-015,dana,{},"{""change.freeze"": ""on"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 39, ""job.mode"": ""running""}","[{""age_minutes"": 11, ""approver"": ""priya"", ""digest"": ""31660e631897"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-015
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-016,lena,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 23, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 17, ""approver"": ""kofi"", ""digest"": ""72579e6cc642"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-016
+title: ""Move traffic to the fallback model (advisor-chat)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: advisor-chat
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{chan}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-017,kofi,{},"{""agent.blocked_calls_per_hour"": 26, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}",[],"runbook: rb-017
+title: ""Switch off the agent's payment tool (refund-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: refund-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-018,omar,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 34, ""policy.mode"": ""base""}",[],"runbook: rb-018
+title: ""Add the blocking pattern to the input policy (advisor-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: advisor-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-019,kofi,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 35, ""policy.mode"": ""base""}","[{""age_minutes"": 5, ""approver"": ""kofi"", ""digest"": ""b6418c8ba6dc"", ""role"": ""incident-commander"", ""step"": ""s3""}, {""age_minutes"": 5, ""approver"": ""omar"", ""digest"": ""b6418c8ba6dc"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-019
+title: ""Add the blocking pattern to the input policy (assistant-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: assistant-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-020,lena,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": ""32"", ""job.mode"": ""running""}","[{""age_minutes"": 14, ""approver"": ""kofi"", ""digest"": ""a54330fd1a97"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-020
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-021,marta,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 22}","[{""age_minutes"": 20, ""approver"": ""ines"", ""digest"": ""c3520ca4c29b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-021
+title: ""Quarantine the retrieval index (product-faq)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: product-faq
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s4a
+    title: ""Add a note to the ticket""
+    effect: write
+    risk: low
+    run: ""ticketctl comment --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-022,tomas,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 20}","[{""age_minutes"": 11, ""approver"": ""omar"", ""digest"": ""c5da18c8eb9a"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-022
+title: ""Quarantine the retrieval index (product-faq)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: product-faq
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == live""]
+"
+C-023,ines,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 16}","[{""age_minutes"": 30, ""approver"": ""omar"", ""digest"": ""92a36b4a3817"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-023
+title: ""Quarantine the retrieval index (product-faq)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: product-faq
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-024,ines,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 28, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}",[],"runbook: rb-024
+title: ""Rotate the credential (gateway-signing-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: gateway-signing-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: read
+    risk: low
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-025,marta,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 14}","[{""age_minutes"": 18, ""approver"": ""omar"", ""digest"": ""3c131353a53e"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-025
+title: ""Quarantine the retrieval index (procedures-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: procedures-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_helth == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-026,dana,{},"{""agent.blocked_calls_per_hour"": 40, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 12, ""approver"": ""kofi"", ""digest"": ""3d3d522be788"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-026
+title: ""Switch off the agent's payment tool (dispute-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: dispute-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == enabled""]
+"
+C-027,omar,"{""target"": ""advisor-chat""}","{""change.freeze"": ""off"", ""route.error_rate_pct"": 11, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 14, ""approver"": ""priya"", ""digest"": ""0eb254848142"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-027
+title: ""Move traffic to the fallback model (assistant-api)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: assistant-api
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-028,omar,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 12, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 10, ""approver"": ""lena"", ""digest"": ""d48549a2c9a0"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-028
+title: ""Roll the model back to the previous version (triage-v3)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: triage-v3
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{chan}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-029,marta,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 22, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 22, ""approver"": ""lena"", ""digest"": ""e3b9525e880c"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-029
+title: ""Roll the model back to the previous version (triage-v3)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: triage-v3
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == current""]
+"
+C-030,omar,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 21, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 21, ""approver"": ""lena"", ""digest"": ""81729083e593"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-030
+title: ""Move traffic to the fallback model (assistant-api)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: assistant-api
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s3
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-031,lena,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 9, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}",[],"runbook: rb-031
+title: ""Roll the model back to the previous version (triage-v3)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: triage-v3
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-032,dana,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 506}","[{""age_minutes"": 8, ""approver"": ""ines"", ""digest"": ""c321c99c191a"", ""role"": ""duty-manager"", ""step"": ""s3""}]","runbook: rb-032
+title: ""Shed half the load on the route (batch-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: batch-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-033,omar,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": ""508""}","[{""age_minutes"": 3, ""approver"": ""lena"", ""digest"": ""5c51ac24ca65"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-033
+title: ""Shed half the load on the route (batch-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: batch-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-034,tomas,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 47, ""job.mode"": ""running""}","[{""age_minutes"": 14, ""approver"": ""priya"", ""digest"": ""52af910e1076"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-034
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-035,lena,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 21, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 6, ""approver"": ""marta"", ""digest"": ""1357bcbcf9d3"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-035
+title: ""Roll the model back to the previous version (triage-v3)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: triage-v3
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-036,lena,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 508}","[{""age_minutes"": 6, ""approver"": ""lena"", ""digest"": ""ec01af78ca2f"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-036
+title: ""Shed half the load on the route (search-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: search-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-037,lena,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 518}",[],"runbook: rb-037
+title: ""Shed half the load on the route (search-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: search-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-038,priya,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 20}",[],"runbook: rb-038
+title: ""Quarantine the retrieval index (procedures-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: procedures-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: read
+    risk: low
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-039,lena,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 11, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 20, ""approver"": ""lena"", ""digest"": ""e65edc5f2adc"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-039
+title: ""Move traffic to the fallback model (assistant-api)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: assistant-api
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-040,tomas,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 509}",[],"runbook: rb-040
+title: ""Shed half the load on the route (search-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: search-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-041,lena,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 16, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 30, ""approver"": ""dana"", ""digest"": ""de3524390761"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-041
+title: ""Rotate the credential (tool-api-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: tool-api-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-042,omar,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 508}","[{""age_minutes"": 19, ""approver"": ""dana"", ""digest"": ""e924df564c16"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-042
+title: ""Shed half the load on the route (chat-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: chat-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-043,omar,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 512}",[],"runbook: rb-043
+title: ""Shed half the load on the route (search-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: search-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-044,dana,{},"{""change.freeze"": ""on"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 33, ""policy.mode"": ""base""}","[{""age_minutes"": 1, ""approver"": ""kofi"", ""digest"": ""07bfa4839e08"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-044
+title: ""Add the blocking pattern to the input policy (advisor-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: advisor-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-045,marta,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 10, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 21, ""approver"": ""ines"", ""digest"": ""002af2a134a1"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-045
+title: ""Roll the model back to the previous version (summarizer-v2)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: summarizer-v2
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-046,dana,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 15, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 9, ""approver"": ""kofi"", ""digest"": ""dd1cd407b6b1"", ""role"": ""duty-manager"", ""step"": ""s3""}]","runbook: rb-046
+title: ""Move traffic to the fallback model (advisor-chat)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: advisor-chat
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-047,omar,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 50, ""job.mode"": ""running""}","[{""age_minutes"": 25, ""approver"": ""dana"", ""digest"": ""6039649bb095"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-047
+title: ""Pause the batch job (report-build)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: report-build
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{chan}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-048,tomas,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 16, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 19, ""approver"": ""priya"", ""digest"": ""292c3202ec0b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-048
+title: ""Rotate the credential (vector-db-token)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: vector-db-token
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == active""]
+"
+C-049,tomas,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 7}","[{""age_minutes"": 8, ""approver"": ""kofi"", ""digest"": ""865f3f9d44b8"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-049
+title: ""Quarantine the retrieval index (policy-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: policy-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-050,tomas,{},"{""agent.blocked_calls_per_hour"": 28, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 21, ""approver"": ""dana"", ""digest"": ""dc017f9ccdf9"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-050
+title: ""Switch off the agent's payment tool (dispute-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: dispute-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s4a
+    title: ""Add a note to the ticket""
+    effect: write
+    risk: low
+    run: ""ticketctl comment --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-051,kofi,"{""target"": ""report-build""}","{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 40, ""job.mode"": ""running""}","[{""age_minutes"": 22, ""approver"": ""ines"", ""digest"": ""5d63a3190817"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-051
+title: ""Pause the batch job (nightly-scoring)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: nightly-scoring
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-052,dana,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 18, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 22, ""approver"": ""lena"", ""digest"": ""a4694b649bea"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-052
+title: ""Move traffic to the fallback model (faq-bot)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: faq-bot
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s4a
+    title: ""Add a note to the ticket""
+    effect: write
+    risk: low
+    run: ""ticketctl comment --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-053,tomas,{},"{""agent.blocked_calls_per_hour"": 25, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 14, ""approver"": ""marta"", ""digest"": ""b5d79c039670"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-053
+title: ""Switch off the agent's payment tool (kyc-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: kyc-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+    note: ""Ask {{vendor}} to confirm before this step.""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-054,marta,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 5, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 18, ""approver"": ""tomas"", ""digest"": ""873356cc9734"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-054
+title: ""Roll the model back to the previous version (summarizer-v2)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: summarizer-v2
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-055,kofi,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 32, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 20, ""approver"": ""lena"", ""digest"": ""57a9411a85eb"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-055
+title: ""Rotate the credential (tool-api-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: tool-api-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-056,dana,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 26}","[{""age_minutes"": 20, ""approver"": ""ines"", ""digest"": ""774b95914885"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-056
+title: ""Quarantine the retrieval index (product-faq)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: product-faq
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-057,tomas,"{""target"": ""summarizer-v2""}","{""change.freeze"": ""off"", ""model.error_rate_pct"": 22, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 11, ""approver"": ""kofi"", ""digest"": ""efcf72bc599b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-057
+title: ""Roll the model back to the previous version (triage-v3)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: triage-v3
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-058,marta,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 28, ""policy.mode"": ""base""}",[],"runbook: rb-058
+title: ""Add the blocking pattern to the input policy (assistant-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: assistant-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-059,tomas,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 29, ""policy.mode"": ""base""}","[{""age_minutes"": 52, ""approver"": ""ines"", ""digest"": ""544d4eeca757"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-059
+title: ""Add the blocking pattern to the input policy (advisor-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: advisor-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-060,ines,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 26}","[{""age_minutes"": 7, ""approver"": ""kofi"", ""digest"": ""a6ca26610a09"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-060
+title: ""Quarantine the retrieval index (policy-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: policy-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+    note: ""Ask {{vendor}} to confirm before this step.""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-061,lena,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 34, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 17, ""approver"": ""lena"", ""digest"": ""cebc39436f4a"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-061
+title: ""Rotate the credential (vector-db-token)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: vector-db-token
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-062,ines,{},"{""agent.blocked_calls_per_hour"": 29, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 11, ""approver"": ""tomas"", ""digest"": ""e03ae7472293"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-062
+title: ""Switch off the agent's payment tool (refund-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: refund-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{chan}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-063,kofi,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 11, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 70, ""approver"": ""priya"", ""digest"": ""d4a5d261e81b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-063
+title: ""Roll the model back to the previous version (scorer-v7)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: scorer-v7
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-064,priya,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 33, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}",[],"runbook: rb-064
+title: ""Rotate the credential (vector-db-token)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: vector-db-token
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-065,tomas,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 511}","[{""age_minutes"": 14, ""approver"": ""lena"", ""digest"": ""2d038fda83dd"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-065
+title: ""Shed half the load on the route (batch-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: batch-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-066,kofi,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 13}","[{""age_minutes"": 1, ""approver"": ""lena"", ""digest"": ""a88729b00fc4"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-066
+title: ""Quarantine the retrieval index (policy-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: policy-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-067,priya,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 13, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 21, ""approver"": ""marta"", ""digest"": ""d03c99b5821d"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-067
+title: ""Roll the model back to the previous version (summarizer-v2)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: summarizer-v2
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s3
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-068,tomas,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 20}",[],"runbook: rb-068
+title: ""Quarantine the retrieval index (procedures-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: procedures-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: read
+    risk: low
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-069,ines,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 25, ""secret.mode"": ""active""}","[{""age_minutes"": 16, ""approver"": ""lena"", ""digest"": ""a3fa50a5ba10"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-069
+title: ""Rotate the credential (gateway-signing-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: gateway-signing-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-070,kofi,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 23, ""secret.mode"": ""active""}","[{""age_minutes"": 10, ""approver"": ""marta"", ""digest"": ""cae12f605193"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-070
+title: ""Rotate the credential (tool-api-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: tool-api-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-071,kofi,{},"{""change.freeze"": ""off"", ""policy.flagged_prompts_per_hour"": 28, ""policy.mode"": ""base""}","[{""age_minutes"": 7, ""approver"": ""marta"", ""digest"": ""0e16ee3eb2f4"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-071
+title: ""Add the blocking pattern to the input policy (advisor-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: advisor-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-072,kofi,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 19}",[],"runbook: rb-072
+title: ""Quarantine the retrieval index (procedures-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: procedures-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: read
+    risk: low
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-073,tomas,{},"{""agent.blocked_calls_per_hour"": 27, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 68, ""approver"": ""marta"", ""digest"": ""a437fd98431b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-073
+title: ""Switch off the agent's payment tool (dispute-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: dispute-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-074,tomas,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 25, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 6, ""approver"": ""kofi"", ""digest"": ""2f1e35946539"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-074
+title: ""Move traffic to the fallback model (advisor-chat)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: advisor-chat
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-075,omar,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 28, ""policy.mode"": ""base""}","[{""age_minutes"": 17, ""approver"": ""ines"", ""digest"": ""312f9f298428"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-075
+title: ""Add the blocking pattern to the input policy (faq-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: faq-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_helth == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-076,dana,{},"{""agent.blocked_calls_per_hour"": 31, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""off""}","[{""age_minutes"": 53, ""approver"": ""priya"", ""digest"": ""5837e507fb73"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-076
+title: ""Switch off the agent's payment tool (kyc-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: kyc-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-077,lena,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 15, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 25, ""approver"": ""marta"", ""digest"": ""2bd860d46240"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-077
+title: ""Move traffic to the fallback model (assistant-api)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: assistant-api
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_helth == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-078,priya,{},"{""change.freeze"": ""off"", ""gateway.fallback_health"": ""healthy"", ""gateway.mode"": ""normal"", ""gateway.queue_depth"": 503}","[{""age_minutes"": 18, ""approver"": ""omar"", ""digest"": ""ae04111d6ea1"", ""role"": ""duty-manager"", ""step"": ""s3""}]","runbook: rb-078
+title: ""Shed half the load on the route (chat-route)""
+reads: [gateway.queue_depth, gateway.fallback_health, change.freeze]
+params:
+  target: chat-route
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.queue_depth >= 500""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""gatewayctl health --target {{target}} --fallback""
+    requires: [""gateway.fallback_health == healthy""]
+  - id: s3
+    title: ""Shed half the load on the route""
+    effect: write
+    risk: high
+    run: ""gatewayctl shed --route {{target}} --percent 50""
+    requires: [""change.freeze == off""]
+    sets: {gateway.mode: shedding}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""gatewayctl unshed --route {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""gatewayctl status --target {{target}}""
+    requires: [""gateway.mode == shedding""]
+"
+C-079,lena,{},"{""change.freeze"": ""off"", ""index.fallback_health"": ""healthy"", ""index.mode"": ""live"", ""index.stale_docs_pct"": 29}","[{""age_minutes"": 10, ""approver"": ""tomas"", ""digest"": ""d74d258bbfea"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-079
+title: ""Quarantine the retrieval index (policy-index)""
+reads: [index.stale_docs_pct, index.fallback_health, change.freeze]
+params:
+  target: policy-index
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.stale_docs_pct >= 10""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""ragctl health --target {{target}} --fallback""
+    requires: [""index.fallback_health == healthy""]
+  - id: s3
+    title: ""Quarantine the retrieval index""
+    effect: write
+    risk: high
+    run: ""ragctl quarantine --index {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {index.mode: quarantined}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""ragctl release --index {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""ragctl status --target {{target}}""
+    requires: [""index.mode == quarantined""]
+"
+C-080,marta,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 17, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 10, ""approver"": ""dana"", ""digest"": ""a10bca2435fd"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-080
+title: ""Move traffic to the fallback model (faq-bot)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: faq-bot
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-081,priya,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 35, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}",[],"runbook: rb-081
+title: ""Rotate the credential (vector-db-token)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: vector-db-token
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-082,kofi,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 40, ""job.mode"": ""running""}","[{""age_minutes"": 30, ""approver"": ""priya"", ""digest"": ""232ee2b8887d"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-082
+title: ""Pause the batch job (report-build)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: report-build
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-083,kofi,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 43, ""job.mode"": ""running""}","[{""age_minutes"": 6, ""approver"": ""priya"", ""digest"": ""57bc6917018c"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-083
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-084,dana,{},"{""change.freeze"": ""off"", ""policy.fallback_health"": ""healthy"", ""policy.flagged_prompts_per_hour"": 33, ""policy.mode"": ""base""}","[{""age_minutes"": 14, ""approver"": ""kofi"", ""digest"": ""23b601b6357f"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-084
+title: ""Add the blocking pattern to the input policy (advisor-input)""
+reads: [policy.flagged_prompts_per_hour, policy.fallback_health, change.freeze]
+params:
+  target: advisor-input
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.flagged_prompts_per_hour >= 25""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""guardctl health --target {{target}} --fallback""
+    requires: [""policy.fallback_health == healthy""]
+  - id: s3
+    title: ""Add the blocking pattern to the input policy""
+    effect: write
+    risk: high
+    run: ""guardctl add-pattern --policy {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {policy.mode: patched}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""guardctl remove-pattern --policy {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""guardctl status --target {{target}}""
+    requires: [""policy.mode == patched""]
+"
+C-085,lena,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 47, ""job.mode"": ""running""}","[{""age_minutes"": 16, ""approver"": ""priya"", ""digest"": ""3ab9d9e8f16a"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-085
+title: ""Pause the batch job (embedding-refresh)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: embedding-refresh
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_helth == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-086,tomas,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 24, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 13, ""approver"": ""omar"", ""digest"": ""5c970a389d9a"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-086
+title: ""Rotate the credential (gateway-signing-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: gateway-signing-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-087,lena,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 8, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 18, ""approver"": ""dana"", ""digest"": ""5876430de57b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-087
+title: ""Roll the model back to the previous version (scorer-v7)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: scorer-v7
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s4a
+    title: ""Add a note to the ticket""
+    effect: write
+    risk: low
+    run: ""ticketctl comment --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-088,ines,{},"{""change.freeze"": ""off"", ""model.error_rate_pct"": 16, ""model.fallback_health"": ""healthy"", ""model.mode"": ""current""}","[{""age_minutes"": 3, ""approver"": ""ines"", ""digest"": ""72677d5ae1bc"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-088
+title: ""Roll the model back to the previous version (triage-v3)""
+reads: [model.error_rate_pct, model.fallback_health, change.freeze]
+params:
+  target: triage-v3
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.error_rate_pct >= 4""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""modelctl health --target {{target}} --fallback""
+    requires: [""model.fallback_health == healthy""]
+  - id: s3
+    title: ""Roll the model back to the previous version""
+    effect: write
+    risk: high
+    run: ""modelctl rollback --target {{target}} --to previous""
+    requires: [""change.freeze == off""]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""modelctl rollback --target {{target}} --to current""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""modelctl status --target {{target}}""
+    requires: [""model.mode == rolled_back""]
+"
+C-089,ines,{},"{""change.freeze"": ""off"", ""job.fallback_health"": ""healthy"", ""job.late_minutes"": 31, ""job.mode"": ""running""}","[{""age_minutes"": 25, ""approver"": ""kofi"", ""digest"": ""ae1ec3c33c9b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-089
+title: ""Pause the batch job (report-build)""
+reads: [job.late_minutes, job.fallback_health, change.freeze]
+params:
+  target: report-build
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.late_minutes >= 30""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""schedctl health --target {{target}} --fallback""
+    requires: [""job.fallback_health == healthy""]
+  - id: s3
+    title: ""Pause the batch job""
+    effect: write
+    risk: high
+    run: ""schedctl pause --job {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {job.mode: paused}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""schedctl resume --job {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""schedctl status --target {{target}}""
+    requires: [""job.mode == paused""]
+"
+C-090,tomas,{},"{""agent.blocked_calls_per_hour"": 33, ""agent.fallback_health"": ""healthy"", ""agent.mode"": ""enabled"", ""change.freeze"": ""on""}","[{""age_minutes"": 4, ""approver"": ""kofi"", ""digest"": ""43d965e92d21"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-090
+title: ""Switch off the agent's payment tool (refund-agent)""
+reads: [agent.blocked_calls_per_hour, agent.fallback_health, change.freeze]
+params:
+  target: refund-agent
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.blocked_calls_per_hour >= 20""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""agentctl health --target {{target}} --fallback""
+    requires: [""agent.fallback_health == healthy""]
+  - id: s3
+    title: ""Switch off the agent's payment tool""
+    effect: write
+    risk: high
+    run: ""agentctl disable-tool --agent {{target}} --tool payments.submit""
+    requires: [""change.freeze == off""]
+    sets: {agent.mode: disabled}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""agentctl enable-tool --agent {{target}} --tool payments.submit""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""agentctl status --target {{target}}""
+    requires: [""agent.mode == disabled""]
+"
+C-091,dana,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 35, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}",[],"runbook: rb-091
+title: ""Rotate the credential (tool-api-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: tool-api-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-092,ines,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 23, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}",[],"runbook: rb-092
+title: ""Rotate the credential (tool-api-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: tool-api-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"
+C-093,lena,{},"{""change.freeze"": ""off"", ""route.error_rate_pct"": 20, ""route.fallback_health"": ""healthy"", ""route.mode"": ""primary""}","[{""age_minutes"": 8, ""approver"": ""kofi"", ""digest"": ""f993e53d7b6b"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-093
+title: ""Move traffic to the fallback model (assistant-api)""
+reads: [route.error_rate_pct, route.fallback_health, change.freeze]
+params:
+  target: assistant-api
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.error_rate_pct >= 5""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""routectl health --target {{target}} --fallback""
+    requires: [""route.fallback_health == healthy""]
+  - id: s3
+    title: ""Move traffic to the fallback model""
+    effect: write
+    risk: high
+    run: ""routectl set --target {{target}} --mode fallback""
+    requires: [""change.freeze == off""]
+    sets: {route.mode: fallback}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""routectl set --target {{target}} --mode primary""
+    note: ""Ask {{vendor}} to confirm before this step.""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""routectl status --target {{target}}""
+    requires: [""route.mode == fallback""]
+"
+C-094,omar,{},"{""change.freeze"": ""off"", ""secret.failed_auth_per_min"": 32, ""secret.fallback_health"": ""healthy"", ""secret.mode"": ""active""}","[{""age_minutes"": 3, ""approver"": ""omar"", ""digest"": ""c25e19989db4"", ""role"": ""incident-commander"", ""step"": ""s3""}, {""age_minutes"": 3, ""approver"": ""kofi"", ""digest"": ""c25e19989db4"", ""role"": ""incident-commander"", ""step"": ""s3""}]","runbook: rb-094
+title: ""Rotate the credential (gateway-signing-key)""
+reads: [secret.failed_auth_per_min, secret.fallback_health, change.freeze]
+params:
+  target: gateway-signing-key
+  channel: ai-incident
+steps:
+  - id: s1
+    title: ""Confirm the metric is over the line""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.failed_auth_per_min >= 15""]
+  - id: s2
+    title: ""Confirm the fallback is healthy""
+    effect: read
+    risk: low
+    run: ""secretctl health --target {{target}} --fallback""
+    requires: [""secret.fallback_health == healthy""]
+  - id: s3
+    title: ""Rotate the credential""
+    effect: write
+    risk: high
+    run: ""secretctl rotate --name {{target}}""
+    requires: [""change.freeze == off""]
+    sets: {secret.mode: rotated}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: ""secretctl restore --name {{target}}""
+  - id: s4
+    title: ""Tell the incident channel""
+    effect: notify
+    risk: low
+    run: ""chatctl post --channel {{channel}} --text 'mitigation applied to {{target}}'""
+  - id: s5
+    title: ""Verify the change""
+    effect: read
+    risk: low
+    run: ""secretctl status --target {{target}}""
+    requires: [""secret.mode == rotated""]
+"

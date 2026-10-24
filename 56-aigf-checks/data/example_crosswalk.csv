@@ -1,0 +1,6 @@
+row_id,risk_id,check_id,covers,claim_label,claim_value,note
+ROW-1,R-01,C-01,full,cases caught,38 of 40,Run it from the project folder.
+ROW-2,R-02,C-01,full,retrieved cases caught,17 of 20,
+ROW-3,R-09,C-08,full,regressions flagged,6 of 6,Compliant with the framework requirement.
+ROW-4,R-15,C-13,full,scopes cut,9 of 12,
+ROW-5,R-01,C-01,full,cases caught,38 of 40,

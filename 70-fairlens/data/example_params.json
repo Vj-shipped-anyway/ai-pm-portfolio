@@ -1,0 +1,6 @@
+{
+ "case_id": "C19",
+ "cutoff": 126,
+ "proxy_code": "R05",
+ "proxy_column": "postcode_points"
+}

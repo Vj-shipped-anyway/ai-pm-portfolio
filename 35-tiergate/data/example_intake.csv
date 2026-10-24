@@ -1,0 +1,7 @@
+use_case_id,sponsor_unit,title,description,dataset_name,customer_facing,decision_autonomy,data_class,vendor_model,regulatory_scope,financial_exposure_band,self_declared_tier
+IN-D01,Retail Banking,Branch hours assistant,Chat assistant answers questions from customers about branch hours.,branch_hours_feed,yes,advisory,public,none,none,lt_1m,1
+IN-D02,Payments,Card dispute drafting aide,Drafts dispute outcome letters for cardholders from the case log.,card_dispute_log,yes,assisted,internal,none,udaap,1m_10m,2
+IN-D03,Technology,IT ticket router,Routes internal service tickets to the right resolver group.,it_service_tickets,no,automated,internal,self_hosted,none,lt_1m,2
+IN-D04,Operations,Policy search for staff,Answers staff questions from the policy manual.,policy_manual_corpus,no,advisory,internal,none,none,lt_1m,1
+IN-D05,Credit Risk,Credit memo drafting,Drafts credit memo sections from bureau pulls for the analyst.,credit_bureau_pulls,no,advisory,restricted,vendor_api,fair_lending,10m_50m,3
+IN-D06,Commercial Banking,Loan file completeness check,Checks loan application files for missing documents before underwriting.,loan_application_files,no,assisted,confidential,none,fair_lending,1m_10m,2

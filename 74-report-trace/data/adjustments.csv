@@ -1,0 +1,5 @@
+adj_id,cell_id,amount_cents,reason
+ADJ-001,auto.current,-3893000,top-side entry for a late recovery
+ADJ-002,heloc.d90_179,-2811000,correction after a reconciliation break
+ADJ-003,overdraft.current,6899000,top-side entry for a late recovery
+ADJ-004,student.d60_89,-1116000,correction after a reconciliation break

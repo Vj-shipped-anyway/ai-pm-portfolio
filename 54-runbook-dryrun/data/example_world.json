@@ -1,0 +1,5 @@
+{
+ "change.freeze": "off",
+ "model.error_rate_pct": 12,
+ "model.previous_health": "healthy"
+}

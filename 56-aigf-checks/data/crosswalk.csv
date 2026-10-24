@@ -1,0 +1,74 @@
+row_id,risk_id,check_id,covers,claim_label,claim_value,note
+ROW-001,R-01,C-91,full,drift flagged,7 of 55,Run it from the project folder.
+ROW-002,R-01,C-02,full,sources matched,2 of 51,Run it from the project folder.
+ROW-003,R-10,C-08,full,versions compared,47 of 48,Reads the synthetic cases in data/.
+ROW-004,R-20,C-14,full,claims traced,106,Run it from the project folder.
+ROW-005,R-04,C-03,full,events logged,5 of 50,Run it from the project folder.
+ROW-006,R-04,C-03,full,events logged,5 of 50,Run it from the project folder.
+ROW-007,R-13,C-12,full,sources matched,90.5%,Reads the synthetic cases in data/.
+ROW-008,R-04,C-03,full,groups compared,6 of 20,Prints the line cited here.
+ROW-009,R-23,C-15,partial,figures tied,93.7%,
+ROW-010,R-15,C-19,full,alerts raised,18 of 28,Run it from the project folder.
+ROW-011,R-20,C-13,full,drift flagged,79.4%,Run it from the project folder.
+ROW-012,R-23,C-16,full,sources matched,854 of 1386,Reads the synthetic cases in data/.
+ROW-013,R-02,C-01,full,events logged,54.8%,Run it from the project folder.
+ROW-014,R-14,C-14,full,versions compared,7 of 9,Checked by hand once.
+ROW-015,R-15,C-92,full,drift flagged,17 of 50,Reads the synthetic cases in data/.
+ROW-016,R-15,C-12,full,sources matched,90.5%,Prints the line cited here.
+ROW-017,R-03,C-01,full,approvals found,54.8%,Also lists non-compliant rows in its output.
+ROW-018,R-17,C-03,full,alerts raised,76.8%,
+ROW-019,R-23,C-16,full,alerts raised,1347 of 1547,Run it from the project folder.
+ROW-020,R-14,C-13,full,scopes cut,25 of 47,
+ROW-021,R-01,C-01,full,calls replayed,6 of 12,
+ROW-022,R-11,C-11,full,figures tied,75,Reads the synthetic cases in data/.
+ROW-023,R-10,C-08,full,claims traced,2 of 10,Checked by hand once.
+ROW-024,R-01,C-01,full,approvals found,4.8%,Run it from the project folder.
+ROW-025,R-13,C-12,full,events logged,37 of 52,Proves the control is effective.
+ROW-026,R-20,C-07,full,scopes cut,27 of 50,Reads the synthetic cases in data/.
+ROW-027,R-01,C-02,full,cases caught,36 of 45,Meets the standard for this risk.
+ROW-028,R-11,C-11,full,alerts raised,43 of 46,
+ROW-029,R-08,C-05,full,sources matched,14 of 51,Prints the line cited here.
+ROW-030,R-20,C-14,full,rows read,5 of 9,Also lists non-compliant rows in its output.
+ROW-031,R-92,C-15,full,rows read,30,Prints the line cited here.
+ROW-032,R-01,C-01,full,groups compared,14 of 44,Reads the synthetic cases in data/.
+ROW-033,R-22,C-11,partial,sources matched,4 of 20,Reads the synthetic cases in data/.
+ROW-034,R-09,C-09,full,scopes cut,23 of 32,Prints the line cited here.
+ROW-035,R-13,C-13,full,drift flagged,79.4%,Reads the synthetic cases in data/.
+ROW-036,R-93,C-07,full,alerts raised,35 of 55,Checked by hand once.
+ROW-037,R-10,C-03,full,figures tied,13 of 19,Reads the synthetic cases in data/.
+ROW-038,R-16,C-16,full,calls replayed,1600 of 1767,Reads the synthetic cases in data/.
+ROW-039,R-03,C-02,partial,events logged,100,Reads the synthetic cases in data/.
+ROW-040,R-23,C-16,full,calls replayed,1600 of 1767,Prints the line cited here.
+ROW-041,R-01,C-01,full,groups compared,14 of 44,Reads the synthetic cases in data/.
+ROW-042,R-10,C-08,full,rows read,37 of 58,Also lists non-compliant rows in its output.
+ROW-043,R-10,C-09,full,calls replayed,1 of 31,Prints the line cited here.
+ROW-044,R-05,C-04,full,cases caught,20 of 58,Run it from the project folder.
+ROW-045,R-11,C-10,full,false alarms,70.4%,The check guarantees detection of this risk.
+ROW-046,R-06,C-05,full,alerts raised,2 of 43,
+ROW-047,R-02,C-01,full,groups compared,14 of 44,Prints the line cited here.
+ROW-048,R-21,C-01,partial,calls replayed,6 of 12,Reads the synthetic cases in data/.
+ROW-049,R-91,C-03,full,events logged,5 of 50,
+ROW-050,R-09,C-08,full,versions compared,46 of 48,Prints the line cited here.
+ROW-051,R-03,C-01,full,cases caught,27 of 42,The check guarantees detection of this risk.
+ROW-052,R-13,C-12,full,alerts raised,17 of 33,
+ROW-053,R-08,C-07,full,alerts raised,35 of 55,Run it from the project folder.
+ROW-054,R-21,C-03,full,alerts raised,76.8%,
+ROW-055,R-23,C-16,full,cases caught,1869 of 2743,
+ROW-056,R-07,C-07,full,scopes cut,27 of 50,Meets the standard for this risk.
+ROW-057,R-13,C-18,full,figures tied,21 of 33,Checked by hand once.
+ROW-058,R-07,C-05,full,versions compared,45 of 58,Reads the synthetic cases in data/.
+ROW-059,R-16,C-16,full,sources matched,854 of 1386,Run it from the project folder.
+ROW-060,R-18,C-18,full,figures tied,21 of 33,
+ROW-061,R-14,C-19,full,approvals found,48 of 56,Run it from the project folder.
+ROW-062,R-20,C-07,full,alerts raised,35 of 55,Run it from the project folder.
+ROW-063,R-20,C-14,full,versions compared,7 of 9,Run it from the project folder.
+ROW-064,R-03,C-01,full,groups compared,4 of 44,Run it from the project folder.
+ROW-065,R-06,C-05,full,drift flagged,5 of 58,Reads the synthetic cases in data/.
+ROW-066,R-18,C-03,partial,groups compared,6 of 20,Checked by hand once.
+ROW-067,R-13,C-13,full,drift flagged,79.4%,Reads the synthetic cases in data/.
+ROW-068,R-01,C-02,full,events logged,100,The check guarantees detection of this risk.
+ROW-069,R-08,C-93,full,tools reviewed,25 of 54,Checked by hand once.
+ROW-070,R-15,C-13,full,sources matched,9 of 36,Compliant with the framework requirement for this risk.
+ROW-071,R-21,C-04,full,false alarms,30 of 42,
+ROW-072,R-10,C-08,full,calls replayed,7 of 39,Reads the synthetic cases in data/.
+ROW-073,R-01,C-01,full,events logged,54.8%,Checked by hand once.

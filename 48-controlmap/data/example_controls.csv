@@ -1,0 +1,7 @@
+control_id,name,description,owner,scope,test_cycle_days,last_evidence_on,status
+CT-A1,Model inventory attestation,Owners confirm each quarter that their entries in the model inventory are complete and current.,Model Risk Management,credit_decision;customer_chat,90,2026-05-21,active
+CT-B1,Drift dashboard,A drift dashboard tracks input and output distributions and notifies the model owner when they move beyond thresholds.,Model Risk Management,credit_decision;fraud_scoring,90,2025-09-03,active
+CT-C1,Chat answer review,A trained reviewer checks flagged chat answers in the human review queue.,AI Platform Team,customer_chat,180,2026-06-10,active
+CT-D1,Call recording retention,Retention of call recordings follows the legal schedule; it is not a change approval step.,Records Management,fraud_scoring,365,2026-03-01,active
+CT-E1,Data centre badge review,Facilities reviews badge access to the data centre every quarter.,Facilities,credit_decision,90,2026-06-01,active
+CT-F1,Spreadsheet inventory check,Annual check of the model inventory spreadsheet. Retired when the inventory moved to the platform.,Model Risk Management,credit_decision,365,2025-02-01,retired

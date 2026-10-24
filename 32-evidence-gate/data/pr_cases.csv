@@ -1,0 +1,1731 @@
+pr_id,body
+PR-001,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-003
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | date: 2026-06-17
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-003/E02-data-source-attestation.md | date: 2026-05-05
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-003/E03-evaluation-results.md | date: 2026-10-04
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-003/E04-privacy-review.md | date: 2025-11-02
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-003/E05-independent-validation.md | date: 2026-08-18
+- [x] E06 Human review design for the tier | ref: evidence/UC-003/E06-human-review-design.md | date: 2026-09-30
+- [x] E07 Decision logging and lineage plan | date: 2026-10-06
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-003/E08-vendor-due-diligence.md | date: 2026-06-20
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-002,"## AI change record
+
+Use case: UC-025
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-025/E01-use-case-card.md | date: 2026-06-24
+- [ ] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-025/E02-data-source-attestation.md | date: 2026-08-11
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-003,"## AI change record
+
+Use case: UC-004
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-004/E01-use-case-card.md | date: 2025-12-13
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-004/E02-data-source-attestation.md | date: 2026-08-06
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-004/E03-evaluation-results.md | date: 2026-07-23
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-004/E04-privacy-review.md | date: 2026-06-14
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-004/E05-independent-validation.md | date: 2026-09-09
+- [x] E06 Human review design for the tier | ref: evidence/UC-004/E06-human-review-design.md | date: 2026-07-20
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-004/E07-decision-logging-plan.md | date: 2026-07-27
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-004/E08-vendor-due-diligence.md | date: 2026-03-08
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-004/E09-legal-review.md | date: 2026-05-01
+- [x] E10 Fallback and exit plan | ref: evidence/UC-004/E10-fallback-exit-plan.md | date: 2027-05-04
+- [x] E11 CRO sign-off | ref: evidence/UC-004/E11-cro-signoff.md | date: 2026-08-05
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-004,"## AI change record
+
+(to be completed)"
+PR-005,"## AI change record
+
+**Use case:** UC-028
+**Declared tier:** 1
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-028/E01-use-case-card.md  |  date: 2026-4-8
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-028/E02-data-source-attestation.md  |  date: 2026-9-28
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-006,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-030
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-030/E01-use-case-card.md | date: 2026-09-06
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-008/E02-data-source-attestation.md | date: 2026-05-01
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-007,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-018
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-018/E01-use-case-card.md | date: 2025-11-28
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-018/E02-data-source-attestation.md | date: 2026-08-30
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-018/E03-evaluation-results.md | date: 2026-10-07
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-018/E04-privacy-review.md | date: 2026-06-24
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-018/E07-decision-logging-plan.md | date: 2026-04-30
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-018/E08-vendor-due-diligence.md | date: 2025-11-04
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-008,"## AI change record
+
+Use case: UC-005
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-005/E01-use-case-card.md | date: 2026-08-11
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-005/E02-data-source-attestation.md | date: 2026-10-02
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-005/E03-evaluation-results.md | date: 2026-08-09
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-005/E04-privacy-review.md | date: 2025-11-08
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-018/E05-independent-validation.md | date: 2026-05-21
+- [x] E06 Human review design for the tier | ref: evidence/UC-005/E06-human-review-design.md | date: 2026-09-27
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-005/E07-decision-logging-plan.md | date: 2026-08-31
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-005/E08-vendor-due-diligence.md | date: 2026-01-01
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-009,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-029
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-029/E01-use-case-card.md | date: 2025-10-15
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-029/E02-data-source-attestation.md | date: 2026-07-19
+
+### What changed
+Logs the prompt version with every decision record."
+PR-010,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-020
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-020/E01-use-case-card.md | date: 2026-06-24
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-020/E02-data-source-attestation.md | date: 2026-10-02
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-020/E03-evaluation-results.md | date: 2026-09-04
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-020/E04-privacy-review.md | date: 2025-10-25
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-011,"## AI change record
+
+Use case: UC-008
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-008/E01-use-case-card.md | date: 2026-04-30
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-008/E02-data-source-attestation.md | date: 2026-07-04
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-008/E03-evaluation-results.md | date: 2026-10-02
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-008/E04-privacy-review.md | date: 2025-10-28
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-008/E07-decision-logging-plan.md | date: 2026-09-28
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-008/E08-vendor-due-diligence.md | date: 2026-02-21
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-012,"## AI change record
+
+Use case: UC-006
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-006/E01-use-case-card.md | date: 2025-12-02
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-006/E02-data-source-attestation.md | date: 2026-10-11
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-006/E03-evaluation-results.md | date: 2026-07-26
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-006/E04-privacy-review.md | date: 2025-10-25
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-006/E05-independent-validation.md | date: 2026-07-12
+- [x] E06 Human review design for the tier | ref: evidence/UC-006/E06-human-review-design.md | date: 2026-10-11
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-006/E07-decision-logging-plan.md | date: 2026-10-08
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-006/E08-vendor-due-diligence.md | date: 2025-12-30
+
+### What changed
+Logs the prompt version with every decision record."
+PR-013,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+**Use case:** UC-023
+**Declared tier:** 1
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-023/E01-use-case-card.md  |  date: 2026-9-2
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-023/E02-data-source-attestation.md  |  date: 2026-6-21
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-014,"## AI change record
+
+Use case: UC-020
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-020/E01-use-case-card-v2.md | date: 2026-05-03
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-020/E02-data-source-attestation.md | date: 2026-09-25
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-020/E03-evaluation-results.md | date: 2026-08-16
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-020/E04-privacy-review.md | date: 2026-07-14
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-015,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-011
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-011/E01-use-case-card.md | date: 2026-03-05
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-011/E02-data-source-attestation.md | date: 2026-09-01
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-011/E03-evaluation-results.md | date: 2026-08-28
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-011/E04-privacy-review.md | date: 2026-05-11
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-011/E05-independent-validation.md | date: 2026-09-22
+- [x] E06 Human review design for the tier | ref: evidence/UC-011/E06-human-review-design.md | date: 2026-06-07
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-011/E07-decision-logging-plan.md | date: 2026-08-21
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-011/E08-vendor-due-diligence.md | date: 2026-08-08
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-011/E09-legal-review.md | date: 2025-10-24
+- [x] E10 Fallback and exit plan | ref: evidence/UC-011/E10-fallback-exit-plan.md | date: 2026-05-17
+- [x] E11 CRO sign-off | ref: evidence/UC-011/E11-cro-signoff.md | date: 2026-09-10
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-016,"## AI change record
+
+Use case: UC-012
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-012/E01-use-case-card.md | date: 2026-05-08
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-012/E02-data-source-attestation.md | date: 2027-07-09
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-012/E03-evaluation-results.md | date: 2026-09-16
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-012/E04-privacy-review.md | date: 2025-11-19
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-017,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-009
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | date: 2026-06-22
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-009/E02-data-source-attestation.md | date: 2026-06-29
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-009/E03-evaluation-results.md | date: 2026-08-28
+- [x] E04 Privacy and data-handling review | ref:  | date: 2025-11-29
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-018,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: https://wiki.example.invalid/ai/UC-007/E01 | date: 2026-06-24
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-007/E02-data-source-attestation.md | date: 2026-05-06
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-007/E03-evaluation-results.md | date: 2026-10-08
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-007/E04-privacy-review.md | date: 2026-05-12
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-019,"## AI change record
+
+Use case: UC-035
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-035/E01-use-case-card.md | date: 2026-06-16
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-035/E02-data-source-attestation.md | date: 2026-06-06
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-035/E03-evaluation-results.md | date: 2026-07-24
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-035/E04-privacy-review.md | date: 2026-02-25
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-020,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-011
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-011/E01-use-case-card.md | date: 2026-07-08
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-011/E02-data-source-attestation.md | date: 2026-04-29
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-011/E03-evaluation-results.md | date: 2026-09-24
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-011/E04-privacy-review.md | date: 2026-06-18
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-011/E05-independent-validation.md | date: 2026-05-08
+- [x] E06 Human review design for the tier | ref: evidence/UC-011/E06-human-review-design.md | date: 2026-06-22
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-011/E07-decision-logging-plan.md | date: 2026-09-29
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-011/E08-vendor-due-diligence.md | date: 2026-02-25
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-011/E09-legal-review.md | date: 2025-10-30
+- [x] E10 Fallback and exit plan | ref: evidence/UC-011/E10-fallback-exit-plan.md | date: 2026-10-07
+- [x] E11 CRO sign-off | ref: evidence/UC-011/E11-cro-signoff.md | date: 2026-10-13
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-021,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-023
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-023/E01-use-case-card.md | date: 2026-04-01
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-023/E02-data-source-attestation.md | date: 2026-04-19
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-022,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-006
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-006/E01-use-case-card.md | date: 2026-04-28
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-006/E02-data-source-attestation.md | date: 2026-07-30
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-006/E03-evaluation-results.md | date: 2026-09-06
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-006/E04-privacy-review.md | date: 2026-02-22
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-006/E05-independent-validation.md | date: 2026-04-25
+- [x] E06 Human review design for the tier | ref: evidence/UC-006/E06-human-review-design.md | date: 2026-07-07
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-006/E07-decision-logging-plan.md | date: 2026-10-11
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-006/E08-vendor-due-diligence.md | date: 2026-01-15
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-023,"## AI change record
+
+Use case: UC-021
+Declared tier: 1
+
+### Evidence
+- [ ] E01 Use-case card with named line-1 owner | ref: evidence/UC-021/E01-use-case-card.md | date: 2025-10-21
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-021/E02-data-source-attestation.md | date: 2026-07-23
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-024,"## AI change record
+
+Use case: UC-002
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-002/E01-use-case-card.md | date: 2025-10-27
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-002/E02-data-source-attestation.md | date: 2026-08-08
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-002/E03-evaluation-results.md | date: 2026-07-21
+- [x] E04 Privacy and data-handling review | ref: https://wiki.example.invalid/ai/UC-002/E04 | date: 2026-09-13
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-025,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-014
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-014/E01-use-case-card.md | date: 2026-09-03
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-014/E02-data-source-attestation.md | date: 2026-09-16
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-014/E03-evaluation-results.md | date: 2026-09-20
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-014/E04-privacy-review.md | date: 2026-09-18
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-014/E05-independent-validation.md | date: 2025-12-25
+- [x] E06 Human review design for the tier | ref: evidence/UC-014/E06-human-review-design.md | date: 2026-05-11
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-014/E07-decision-logging-plan.md | date: 2026-08-02
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-014/E08-vendor-due-diligence.md | date: 2026-08-04
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-014/E09-legal-review.md | date: 2026-08-13
+- [x] E10 Fallback and exit plan | ref: evidence/UC-014/E10-fallback-exit-plan.md | date: 2026-09-05
+- [x] E11 CRO sign-off | ref: evidence/UC-014/E11-cro-signoff.md | date: 2026-09-04
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-026,"## AI change record
+
+**Use case:** UC-010
+**Declared tier:** 2
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-010/E01-use-case-card.md  |  date: 2025-11-22
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-010/E02-data-source-attestation.md  |  date: 2026-9-5
+* [X] e03 Evaluation plan and results summary  |  ref: evidence/UC-010/E03-evaluation-results.md  |  date: 2026-8-18
+* [X] e04 Privacy and data-handling review  |  ref: evidence/UC-010/E04-privacy-review.md  |  date: 2025-12-13
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-027,"## AI change record
+
+Use case: UC-035
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-035/E01-use-case-card.md | date: 2026-08-28
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-035/E02-data-source-attestation.md | date: 2026-07-03
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-028,"## AI change record
+
+Use case: UC-005
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-005/E01-use-case-card.md | date: 2026-02-07
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-005/E02-data-source-attestation.md | date: 2026-07-19
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-005/E03-evaluation-results.md | date: 2026-09-13
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-005/E04-privacy-review.md | date: 2025-10-30
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-005/E05-independent-validation.md | date: 2025-12-03
+- [x] E06 Human review design for the tier | ref: evidence/UC-005/E06-human-review-design.md | date: 2026-04-27
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-005/E07-decision-logging-plan.md | date: 2026-10-04
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-005/E08-vendor-due-diligence.md | date: 2025-11-24
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-029,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-034
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-034/E01-use-case-card.md | date: 2026-09-09
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-034/E02-data-source-attestation.md | date: 2026-08-05
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-030,"## AI change record
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | date: 2026-01-23
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-007/E02-data-source-attestation.md | date: 2026-08-11
+- [x] E03 Evaluation plan and results summary | date: 2026-08-28
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-007/E04-privacy-review.md | date: 2026-09-23
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-031,"## AI change record
+
+Use case: UC-032
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-032/E01-use-case-card.md | date: 2025-12-12
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-032/E02-data-source-attestation.md | date: 2026-08-27
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-032/E03-evaluation-results.md | date: 2026-09-08
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-032/E04-privacy-review.md | date: 2025-12-15
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-032,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-017
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-017/E01-use-case-card.md | date: 2026-09-22
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-017/E02-data-source-attestation.md | date: 2026-05-26
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-017/E03-evaluation-results.md | date: 2026-07-21
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-017/E04-privacy-review.md | date: 2026-04-27
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-017/E05-independent-validation.md | date: 2026-08-14
+- [x] E06 Human review design for the tier | ref: evidence/UC-017/E06-human-review-design.md | date: 2026-08-23
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-017/E07-decision-logging-plan.md | date: 2026-09-23
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-017/E08-vendor-due-diligence-v2.md | date: 2026-03-19
+
+### What changed
+Logs the prompt version with every decision record."
+PR-033,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-028
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-028/E01-use-case-card.md | date: 2026-07-05
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-028/E02-data-source-attestation.md | date: 2026-07-28
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-034,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-031
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-031/E01-use-case-card.md | date: 2026-03-25
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-031/E02-data-source-attestation.md | date: 2026-09-22
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-031/E03-evaluation-results.md | date: 2026-08-11
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-031/E04-privacy-review.md | date: 2026-04-28
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-035,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-017
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-017/E01-use-case-card.md | date: 2026-01-01
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-017/E02-data-source-attestation.md | date: 2026-04-29
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-017/E03-evaluation-results.md | date: 2026-08-10
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-017/E05-independent-validation.md | date: 2026-06-15
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-017/E07-decision-logging-plan.md | date: 2026-09-14
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-017/E08-vendor-due-diligence.md | date: 2025-12-04
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-036,"## AI change record
+
+Use case: UC-004
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-004/E01-use-case-card.md | date: 2026-08-30
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-004/E02-data-source-attestation.md | date: 2026-04-22
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-004/E03-evaluation-results.md | date: 2026-07-24
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-004/E04-privacy-review.md | date: 2026-06-20
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-004/E05-independent-validation.md | date: 2026-07-09
+- [x] E06 Human review design for the tier | ref: evidence/UC-004/E06-human-review-design.md | date: 2026-05-21
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-004/E07-decision-logging-plan.md | date: 2026-06-14
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-004/E08-vendor-due-diligence.md | date: 2026-09-16
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-004/E09-legal-review.md | date: 2025-11-22
+- [x] E10 Fallback and exit plan | ref: evidence/UC-004/E10-fallback-exit-plan.md | date: 2026-05-02
+- [x] E11 CRO sign-off | ref: evidence/UC-004/E11-cro-signoff.md | date: 2026-08-08
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-037,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-007/E01-use-case-card.md | date: 2026-08-10
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-005/E02-data-source-attestation.md | date: 2026-10-12
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-007/E03-evaluation-results.md | date: 2026-08-27
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-007/E04-privacy-review.md | date: 2026-02-19
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-038,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-001
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-001/E01-use-case-card.md | date: 2026-06-02
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-001/E02-data-source-attestation.md | date: 2026-07-12
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-001/E03-evaluation-results.md | date: 2026-08-12
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-001/E04-privacy-review.md | date: 2026-02-11
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-037/E05-independent-validation.md | date: 2026-07-20
+- [x] E06 Human review design for the tier | ref: evidence/UC-001/E06-human-review-design.md | date: 2026-06-20
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-001/E07-decision-logging-plan.md | date: 2026-05-08
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-001/E08-vendor-due-diligence.md | date: 2026-07-09
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-001/E09-legal-review.md | date: 2025-11-21
+- [x] E10 Fallback and exit plan | ref: evidence/UC-001/E10-fallback-exit-plan.md | date: 2026-06-24
+- [x] E11 CRO sign-off | ref: evidence/UC-001/E11-cro-signoff.md | date: 2026-08-26
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-039,"## AI change record
+
+Use case: UC-030
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-030/E01-use-case-card.md | date: 2026-03-26
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-030/E02-data-source-attestation.md | date: 2026-08-09
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-040,"## AI change record
+
+Use case: UC-001
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-001/E01-use-case-card.md | date: 2026-01-05
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-001/E02-data-source-attestation.md | date: 2026-09-26
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-001/E03-evaluation-results.md | date: 2026-09-27
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-001/E04-privacy-review.md | date: 2026-04-18
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-001/E05-independent-validation.md | date: 2026-09-22
+- [x] E06 Human review design for the tier | ref: evidence/UC-001/E06-human-review-design.md | date: 2026-09-13
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-001/E07-decision-logging-plan.md | date: 2026-06-07
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-001/E08-vendor-due-diligence.md | date: 2026-06-22
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-001/E09-legal-review.md | date: 2025-10-31
+- [x] E10 Fallback and exit plan | ref: evidence/UC-001/E10-fallback-exit-plan.md | date: 2026-07-19
+- [x] E11 CRO sign-off | ref: evidence/UC-001/E11-cro-signoff.md | date: 2026-07-24
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-041,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-005
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-005/E01-use-case-card.md | date: 2026-09-08
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-005/E02-data-source-attestation.md | date: 2026-05-13
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-005/E03-evaluation-results.md | date: 2026-09-14
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-005/E04-privacy-review.md | date: 2026-07-13
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-005/E05-independent-validation.md | date: 2026-09-22
+- [x] E06 Human review design for the tier | ref: evidence/UC-005/E06-human-review-design.md | date: 2026-09-09
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-005/E07-decision-logging-plan.md | date: 2026-09-17
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-005/E08-vendor-due-diligence.md | date: 2026-03-01
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-042,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-016
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-016/E01-use-case-card.md | date: 2026-07-15
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-016/E02-data-source-attestation.md | date: 2026-06-15
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-043,"## AI change record
+
+Use case: UC-001
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-001/E01-use-case-card.md | date: 2026-03-03
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-001/E02-data-source-attestation.md | date: 2026-09-08
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-001/E03-evaluation-results.md | date: 2026-10-12
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-001/E04-privacy-review.md | date: 2026-02-22
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-001/E05-independent-validation.md
+- [x] E06 Human review design for the tier | ref: evidence/UC-001/E06-human-review-design.md | date: 2026-07-17
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-001/E07-decision-logging-plan.md | date: 2026-07-18
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-001/E08-vendor-due-diligence.md | date: 2026-07-25
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-001/E09-legal-review.md | date: 2026-07-01
+- [x] E10 Fallback and exit plan | ref: evidence/UC-001/E10-fallback-exit-plan.md | date: 2026-07-31
+- [x] E11 CRO sign-off | ref: evidence/UC-001/E11-cro-signoff.md | date: 2026-08-12
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-044,"## AI change record
+
+Use case: UC-027
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-027/E01-use-case-card.md | date: 2026-09-24
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-027/E02-data-source-attestation.md | date: 2026-07-23
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-027/E03-evaluation-results.md | date: 2026-08-17
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-027/E04-privacy-review.md | date: 2026-01-03
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-045,"## AI change record
+
+Use case: UC-007
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-007/E01-use-case-card.md | date: 2026-02-12
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-007/E02-data-source-attestation.md | date: 2026-07-29
+
+### What changed
+Logs the prompt version with every decision record."
+PR-046,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-022
+Declared tier: 1
+
+### Evidence
+| Item | Ref | Date |
+|---|---|---|
+| E01 | evidence/UC-022/E01-use-case-card.md | 2025-11-25 |
+| E02 | evidence/UC-022/E02-data-source-attestation.md | 2026-05-09 |
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-047,"## AI change record
+
+Use case: UC-008
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-008/E01-use-case-card.md | date: 2026-04-09
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-008/E02-data-source-attestation.md | date: 2026-08-26
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-048,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-017
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-017/E01-use-case-card.md | date: 2026-07-25
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-017/E02-data-source-attestation.md | date: 2026-07-04
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-017/E03-evaluation-results.md | date: 2026-07-28
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-017/E04-privacy-review.md | date: 2026-02-16
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-017/E05-independent-validation.md | date: 2026-08-17
+- [x] E06 Human review design for the tier | ref: evidence/UC-017/E06-human-review-design.md | date: 2026-04-24
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-017/E07-decision-logging-plan.md | date: 2026-05-23
+Format I used for this one:
+```
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-017/E08-vendor-due-diligence.md | date: 2025-10-31
+```
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-049,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-009
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-009/E01-use-case-card.md | date: 2025-12-20
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-009/E02-data-source-attestation.md | date: 2026-07-24
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-050,"## AI change record
+
+Use case: UC-025
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-025/E01-use-case-card.md | date: 2026-05-05
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-025/E02-data-source-attestation.md | date: 2026-06-29
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-051,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-037
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-037/E01-use-case-card.md | date: 2025-11-29
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-037/E02-data-source-attestation.md | date: 2026-09-12
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-037/E03-evaluation-results.md | date: 2026-08-07
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-037/E04-privacy-review.md | date: 2026-06-05
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-052,"## AI change record
+
+Use case: UC-013
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-013/E01-use-case-card.md | date: 2026-09-15
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-013/E02-data-source-attestation.md | date: 2026-08-25
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-013/E03-evaluation-results.md | date: 2026-07-30
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-013/E04-privacy-review.md | date: 2026-09-25
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-013/E05-independent-validation.md | date: 2026-06-10
+- [x] E06 Human review design for the tier | ref: evidence/UC-013/E06-human-review-design.md | date: 2026-10-12
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-013/E07-decision-logging-plan.md | date: 2026-06-06
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-013/E08-vendor-due-diligence.md | date: 2026-01-18
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-013/E09-legal-review.md | date: 2025-10-26
+- [x] E10 Fallback and exit plan | ref: evidence/UC-013/E10-fallback-exit-plan.md | date: 2026-07-22
+- [x] E11 CRO sign-off | ref: evidence/UC-013/E11-cro-signoff.md | date: 2026-08-28
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-053,"## AI change record
+
+Use case: UC-017
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-017/E01-use-case-card.md | date: 2026-08-21
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-017/E02-data-source-attestation.md | date: 2026-07-16
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-017/E03-evaluation-results.md | date: 2026-08-26
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-017/E04-privacy-review.md | date: 2025-12-09
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-017/E05-independent-validation.md | date: 2026-08-24
+- [x] E06 Human review design for the tier | ref: evidence/UC-017/E06-human-review-design.md | date: 2026-09-19
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-017/E07-decision-logging-plan.md | date: 2026-05-05
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-017/E08-vendor-due-diligence.md | date: 2025-12-10
+
+### What changed
+Logs the prompt version with every decision record."
+PR-054,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+**Use case:** UC-004
+**Declared tier:** 4
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-004/E01-use-case-card.md  |  date: 2025-12-31
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-004/E02-data-source-attestation.md  |  date: 2026-8-24
+* [X] e03 Evaluation plan and results summary  |  ref: evidence/UC-004/E03-evaluation-results.md  |  date: 2026-9-7
+* [X] e04 Privacy and data-handling review  |  ref: evidence/UC-004/E04-privacy-review.md  |  date: 2026-2-18
+* [X] e05 Independent validation with effective challenge  |  ref: evidence/UC-004/E05-independent-validation.md  |  date: 2026-8-21
+* [X] e06 Human review design for the tier  |  ref: evidence/UC-004/E06-human-review-design.md  |  date: 2026-7-18
+* [X] e07 Decision logging and lineage plan  |  ref: evidence/UC-004/E07-decision-logging-plan.md  |  date: 2026-8-13
+* [X] e08 Vendor and third-party due diligence  |  ref: evidence/UC-004/E08-vendor-due-diligence.md  |  date: 2026-6-7
+* [X] e09 Regulatory-scope legal review  |  ref: evidence/UC-004/E09-legal-review.md  |  date: 2026-9-23
+* [X] e10 Fallback and exit plan  |  ref: evidence/UC-004/E10-fallback-exit-plan.md  |  date: 2026-8-15
+* [X] e11 CRO sign-off  |  ref: evidence/UC-004/E11-cro-signoff.md  |  date: 2026-8-22
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-055,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-021
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | date: 2026-03-11
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-021/E02-data-source-attestation.md | date: 2026-07-11
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-056,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-016
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-016/E01-use-case-card.md | date: 2026-03-04
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-016/E02-data-source-attestation.md | date: 2026-09-28
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-016/E03-evaluation-results.md | date: 2026-07-27
+- [ ] E04 Privacy and data-handling review | ref: evidence/UC-016/E04-privacy-review.md | date: 2026-03-05
+- [ ] E05 Independent validation with effective challenge | ref: evidence/UC-016/E05-independent-validation.md | date: 2026-07-20
+- [x] E06 Human review design for the tier | ref: evidence/UC-016/E06-human-review-design.md | date: 2026-06-13
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-016/E07-decision-logging-plan.md | date: 2026-08-03
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-016/E08-vendor-due-diligence.md | date: 2025-11-04
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-057,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-020
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-020/E01-use-case-card.md | date: 2025-11-05
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-020/E03-evaluation-results.md | date: 2026-10-10
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-020/E04-privacy-review.md | date: 2026-02-22
+Format I used for this one:
+```
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-020/E02-data-source-attestation.md | date: 2026-07-10
+```
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-058,"## AI change record
+
+Use case: UC-013
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-013/E01-use-case-card.md | date: 2026-08-27
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-013/E02-data-source-attestation.md | date: 2026-10-05
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-013/E03-evaluation-results.md | date: 2026-07-28
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-013/E04-privacy-review.md | date: 2026-07-12
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-013/E05-independent-validation.md | date: 2026-10-13
+- [x] E06 Human review design for the tier | ref: evidence/UC-013/E06-human-review-design.md | date: 2026-10-01
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-013/E07-decision-logging-plan.md | date: 2026-05-13
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-013/E08-vendor-due-diligence.md | date: 2026-07-04
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-013/E09-legal-review.md | date: 2025-11-02
+- [x] E10 Fallback and exit plan | ref: evidence/UC-013/E10-fallback-exit-plan.md | date: 2026-05-31
+- [x] E11 CRO sign-off | ref: evidence/UC-013/E11-cro-signoff.md | date: 2026-09-02
+
+### What changed
+Logs the prompt version with every decision record."
+PR-059,
+PR-060,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-006
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-006/E01-use-case-card.md | date: 2026-10-01
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-006/E02-data-source-attestation.md | date: 2026-08-15
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-061,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-026
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-026/E01-use-case-card.md | date: 2026-06-17
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-026/E02-data-source-attestation.md | date: 2026-06-28
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-026/E03-evaluation-results.md | date: 2026-09-12
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-026/E04-privacy-review.md | date: 2026-08-31
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-026/E05-independent-validation.md | date: 2026-05-10
+- [x] E06 Human review design for the tier | ref: evidence/UC-026/E06-human-review-design.md | date: 2026-10-12
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-026/E07-decision-logging-plan.md | date: 2026-05-11
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-026/E08-vendor-due-diligence.md | date: 2025-10-28
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-062,"## AI change record
+
+Use case: UC-027
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-027/E01-use-case-card.md | date: 2026-04-27
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-027/E02-data-source-attestation.md | date: 2026-06-17
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-027/E03-evaluation-results.md | date: 2026-04-11
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-027/E04-privacy-review.md | date: 2025-11-18
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-063,"## AI change record
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-007/E01-use-case-card.md | date: 2026-05-07
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-007/E02-data-source-attestation.md | date: 2026-09-02
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-007/E03-evaluation-results.md | date: 2026-07-26
+- [x] E04 Privacy and data-handling review | ref: https://wiki.example.invalid/ai/UC-007/E04 | date: 2026-04-30
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-064,"## AI change record
+
+Use case: UC-011
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-011/E01-use-case-card.md | date: 2026-06-23
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-011/E02-data-source-attestation.md | date: 2026-07-26
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-011/E03-evaluation-results.md | date: 2026-08-06
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-011/E04-privacy-review.md | date: 2026-01-22
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-011/E05-independent-validation.md | date: 2026-08-30
+- [x] E06 Human review design for the tier | ref: evidence/UC-011/E06-human-review-design.md | date: 2026-05-17
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-011/E07-decision-logging-plan.md | date: 2026-09-26
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-011/E08-vendor-due-diligence.md | date: 2026-01-07
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-011/E09-legal-review.md | date: 2025-12-06
+- [x] E10 Fallback and exit plan | ref: evidence/UC-011/E10-fallback-exit-plan.md | date: 2026-04-18
+- [x] E11 CRO sign-off | ref: evidence/UC-011/E11-cro-signoff.md | date: 2026-09-29
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-065,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+| Item | Ref | Date |
+|---|---|---|
+| E01 | evidence/UC-007/E01-use-case-card.md | 2026-07-06 |
+| E02 | evidence/UC-007/E02-data-source-attestation.md | 2026-06-23 |
+| E03 | evidence/UC-007/E03-evaluation-results.md | 2026-08-19 |
+| E04 | evidence/UC-007/E04-privacy-review.md | 2026-03-13 |
+
+### What changed
+Logs the prompt version with every decision record."
+PR-066,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-019
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-019/E01-use-case-card.md | date: 2026-04-07
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-019/E02-data-source-attestation.md | date: 2026-08-25
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-019/E03-evaluation-results.md | date: 2026-08-09
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-019/E04-privacy-review.md | date: 2026-08-09
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-067,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-033
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-033/E01-use-case-card.md | date: 2026-03-18
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-033/E02-data-source-attestation.md | date: 2026-08-17
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-033/E03-evaluation-results.md | date: 2026-09-16
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-033/E04-privacy-review.md | date: 2025-12-07
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-033/E05-independent-validation.md | date: 2026-06-03
+- [x] E06 Human review design for the tier | ref: evidence/UC-033/E06-human-review-design.md | date: 2026-06-04
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-033/E07-decision-logging-plan.md | date: 2026-06-30
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-033/E08-vendor-due-diligence.md | date: 2026-02-18
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-068,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-020
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-020/E01-use-case-card.md | date: 2026-05-01
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-020/E02-data-source-attestation.md | date: 2026-06-01
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-020/E03-evaluation-results.md | date: 2026-08-01
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-020/E04-privacy-review.md | date: 2026-01-26
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-069,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-007/E02-data-source-attestation.md | date: 2026-07-05
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-007/E03-evaluation-results.md | date: 2026-09-29
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-007/E04-privacy-review.md | date: 2026-01-31
+<!--
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-007/E01-use-case-card.md | date: 2025-12-29
+-->
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-070,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-012
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-012/E01-use-case-card.md | date: 2026-03-18
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-012/E02-data-source-attestation.md | date: 2026-04-19
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-012/E03-evaluation-results.md | date: 2026-08-20
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-012/E04-privacy-review.md | date: 2026-01-26
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-071,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-008
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-008/E01-use-case-card.md | date: 2026-02-13
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-008/E02-data-source-attestation.md | date: 2026-09-03
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-008/E03-evaluation-results.md | date: 2026-08-08
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-008/E04-privacy-review.md | date: 2026-05-27
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-008/E05-independent-validation.md | date: 2027-05-13
+- [x] E06 Human review design for the tier | ref: evidence/UC-008/E06-human-review-design.md | date: 2026-08-23
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-008/E07-decision-logging-plan.md | date: 2026-09-16
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-008/E08-vendor-due-diligence.md | date: 2026-01-21
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-072,"## AI change record
+
+Use case: UC-026
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-026/E01-use-case-card.md | date: 2026-03-03
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-026/E02-data-source-attestation.md | date: 2026-08-10
+- [ ] E03 Evaluation plan and results summary | ref: evidence/UC-026/E03-evaluation-results.md | date: 2026-08-05
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-026/E04-privacy-review.md | date: 2026-06-20
+- [ ] E05 Independent validation with effective challenge | ref: evidence/UC-026/E05-independent-validation.md | date: 2026-06-19
+- [x] E06 Human review design for the tier | ref: evidence/UC-026/E06-human-review-design.md | date: 2026-08-12
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-026/E07-decision-logging-plan.md | date: 2026-07-22
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-026/E08-vendor-due-diligence.md | date: 2026-06-09
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-073,"## AI change record
+
+Use case: UC-013
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-013/E01-use-case-card.md | date: 2026-01-13
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-013/E02-data-source-attestation.md | date: 2026-07-06
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-013/E03-evaluation-results.md | date: 2026-09-12
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-013/E04-privacy-review.md | date: 2025-10-27
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-013/E05-independent-validation.md | date: 2026-08-27
+- [x] E06 Human review design for the tier | ref: evidence/UC-013/E06-human-review-design.md | date: 2026-09-17
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-013/E07-decision-logging-plan.md | date: 2026-07-19
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-013/E08-vendor-due-diligence.md | date: 03/09/2026
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-013/E09-legal-review.md | date: 2026-06-09
+- [x] E10 Fallback and exit plan | ref: evidence/UC-013/E10-fallback-exit-plan.md | date: 2026-07-15
+- [x] E11 CRO sign-off | ref: evidence/UC-013/E11-cro-signoff.md | date: 2026-08-03
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-074,"## AI change record
+
+Use case: UC-028
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-028/E01-use-case-card.md | date: 2026-01-07
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-028/E02-data-source-attestation.md | date: 2026-05-19
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-075,"## AI change record
+
+**Use case:** UC-013
+**Declared tier:** 4
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-013/E01-use-case-card.md  |  date: 2026-9-3
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-013/E02-data-source-attestation.md  |  date: 2026-9-2
+* [X] e03 Evaluation plan and results summary  |  ref: evidence/UC-013/E03-evaluation-results.md  |  date: 2026-8-3
+* [X] e04 Privacy and data-handling review  |  ref: evidence/UC-013/E04-privacy-review.md  |  date: 2025-11-29
+* [X] e05 Independent validation with effective challenge  |  ref: evidence/UC-013/E05-independent-validation.md  |  date: 2026-9-1
+* [X] e06 Human review design for the tier  |  ref: evidence/UC-013/E06-human-review-design.md  |  date: 2026-8-29
+* [X] e07 Decision logging and lineage plan  |  ref: evidence/UC-013/E07-decision-logging-plan.md  |  date: 2026-9-10
+* [X] e08 Vendor and third-party due diligence  |  ref: evidence/UC-013/E08-vendor-due-diligence.md  |  date: 2026-3-18
+* [X] e09 Regulatory-scope legal review  |  ref: evidence/UC-013/E09-legal-review.md  |  date: 2026-2-27
+* [X] e10 Fallback and exit plan  |  ref: evidence/UC-013/E10-fallback-exit-plan.md  |  date: 2026-5-26
+* [X] e11 CRO sign-off  |  ref: evidence/UC-013/E11-cro-signoff.md  |  date: 2026-8-5
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-076,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-010
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-010/E01-use-case-card.md | date: 2026-04-04
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-010/E02-data-source-attestation.md | date: 2026-06-01
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-010/E03-evaluation-results.md | date: 2026-08-12
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-010/E04-privacy-review.md | date: 2026-04-10
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-077,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-002
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-002/E01-use-case-card.md | date: 2026-03-28
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-002/E03-evaluation-results.md | date: 2026-10-06
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-078,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-010
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-010/E01-use-case-card.md | date: 2025-10-29
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-010/E02-data-source-attestation.md | date: 2026-08-26
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-010/E03-evaluation-results.md | date: 2026-07-27
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-010/E04-privacy-review.md | date: 2025-10-10
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-079,"## AI change record
+
+Use case: UC-028
+Declared tier: 1
+
+### Evidence
+| Item | Ref | Date |
+|---|---|---|
+| E01 | evidence/UC-028/E01-use-case-card.md | 2026-02-22 |
+| E02 | evidence/UC-028/E02-data-source-attestation.md | 2026-07-27 |
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-080,"## AI change record
+
+Use case: UC-006
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-006/E01-use-case-card.md | date: 2026-09-23
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-006/E02-data-source-attestation.md | date: 2026-07-13
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-006/E03-evaluation-results-v2.md | date: 2026-09-16
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-006/E04-privacy-review.md | date: 2026-05-05
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-006/E05-independent-validation.md | date: 2026-06-06
+- [x] E06 Human review design for the tier | ref: evidence/UC-006/E06-human-review-design.md | date: 2026-09-16
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-006/E07-decision-logging-plan.md | date: 2026-07-09
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-006/E08-vendor-due-diligence.md | date: 2026-06-02
+
+### What changed
+Logs the prompt version with every decision record."
+PR-081,"## AI change record
+
+**Use case:** UC-012
+**Declared tier:** 2
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-012/E01-use-case-card.md  |  date: 2026-3-14
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-012/E02-data-source-attestation.md  |  date: 2026-8-24
+* [X] e03 Evaluation plan and results summary  |  ref: evidence/UC-012/E03-evaluation-results.md  |  date: 2026-9-21
+* [X] e04 Privacy and data-handling review  |  ref: evidence/UC-012/E04-privacy-review.md  |  date: 2026-8-12
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-082,"## AI change record
+
+Use case: UC-023
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-023/E01-use-case-card.md | date: 2026-02-24
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-023/E02-data-source-attestation-v2.md | date: 2026-07-27
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-083,"## AI change record
+
+Use case: UC-027
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-027/E01-use-case-card.md | date: 2026-03-24
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-027/E02-data-source-attestation.md | date: 2026-05-02
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-027/E03-evaluation-results.md | date: 2026-10-13
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-027/E04-privacy-review.md | date: TBD
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-084,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-027
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-027/E01-use-case-card.md | date: 2025-12-09
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-027/E02-data-source-attestation.md | date: 2026-10-04
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-027/E03-evaluation-results.md | date: 2026-09-20
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-027/E04-privacy-review.md | date: 2026-06-25
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-085,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+**Use case:** UC-018
+**Declared tier:** 3
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-018/E01-use-case-card.md  |  date: 2026-3-8
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-018/E02-data-source-attestation.md  |  date: 2026-4-25
+* [X] e03 Evaluation plan and results summary  |  ref: evidence/UC-018/E03-evaluation-results.md  |  date: 2026-10-2
+* [X] e04 Privacy and data-handling review  |  ref: evidence/UC-018/E04-privacy-review.md  |  date: 2026-4-13
+* [X] e05 Independent validation with effective challenge  |  ref: evidence/UC-018/E05-independent-validation.md  |  date: 2026-6-30
+* [X] e06 Human review design for the tier  |  ref: evidence/UC-018/E06-human-review-design.md  |  date: 2026-9-17
+* [X] e07 Decision logging and lineage plan  |  ref: evidence/UC-018/E07-decision-logging-plan.md  |  date: 2026-8-18
+* [X] e08 Vendor and third-party due diligence  |  ref: evidence/UC-018/E08-vendor-due-diligence.md  |  date: 2026-8-2
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-086,"## AI change record
+
+Use case: UC-027
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-027/E01-use-case-card.md | date: 2026-07-31
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-027/E04-privacy-review.md | date: 2025-10-26
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-087,"## AI change record
+
+Use case: UC-020
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-020/E01-use-case-card.md | date: 2026-06-09
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-020/E02-data-source-attestation.md | date: 2026-10-13
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-020/E03-evaluation-results.md | date: 2026-08-11
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-020/E04-privacy-review.md | date: 2026-09-29
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-088,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-001
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-001/E01-use-case-card.md | date: 2026-10-10
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-001/E02-data-source-attestation.md | date: 2026-08-23
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-001/E04-privacy-review.md | date: 2026-05-06
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-001/E05-independent-validation.md | date: 2026-07-24
+- [x] E06 Human review design for the tier | ref: evidence/UC-001/E06-human-review-design.md | date: 2026-08-10
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-001/E07-decision-logging-plan.md | date: 2026-06-27
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-001/E08-vendor-due-diligence.md | date: 2026-10-11
+- [x] E09 Regulatory-scope legal review | ref: evidence/UC-001/E09-legal-review.md | date: 2026-07-11
+- [x] E10 Fallback and exit plan | ref: evidence/UC-001/E10-fallback-exit-plan.md | date: 2026-08-13
+- [x] E11 CRO sign-off | ref: evidence/UC-001/E11-cro-signoff.md | date: 2026-09-30
+<!--
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-001/E03-evaluation-results.md | date: 2026-07-30
+-->
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-089,"## AI change record
+
+Use case: UC-011
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-011/E01-use-case-card.md | date: 2025-10-27
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-011/E02-data-source-attestation.md | date: 2026-08-14
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-011/E03-evaluation-results.md | date: 2026-08-28
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-011/E04-privacy-review.md | date: 2026-04-16
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-090,"## AI change record
+
+Use case: UC-005
+Declared tier: 3
+
+### Evidence
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-005/E02-data-source-attestation.md | date: 2026-08-21
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-005/E03-evaluation-results.md | date: 2026-08-27
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-005/E04-privacy-review.md | date: 2026-06-16
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-005/E05-independent-validation.md | date: 2026-06-03
+- [x] E06 Human review design for the tier | ref: evidence/UC-005/E06-human-review-design.md | date: 2026-08-03
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-005/E07-decision-logging-plan.md | date: 2026-09-04
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-091,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-003
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-003/E01-use-case-card.md | date: 2026-01-01
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-003/E02-data-source-attestation.md | date: 2026-06-07
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-092,"## AI change record
+
+Use case: UC-010
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-010/E01-use-case-card.md | date: 2025-10-22
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-010/E02-data-source-attestation.md | date: 2026-08-14
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-010/E03-evaluation-results.md | date: 2026-10-13
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-010/E04-privacy-review.md | date: 2025-10-22
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-093,"## AI change record
+
+(to be completed)"
+PR-094,"## AI change record
+
+Use case: UC-037
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-037/E01-use-case-card.md | date: 2025-12-01
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-037/E02-data-source-attestation.md | date: 2026-05-25
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-037/E03-evaluation-results.md | date: 2026-10-02
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-037/E04-privacy-review.md | date: 2026-03-01
+
+### What changed
+Logs the prompt version with every decision record."
+PR-095,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-008
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-008/E01-use-case-card.md | date: 2026-01-29
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-008/E02-data-source-attestation.md | date: 2026-09-27
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-008/E03-evaluation-results.md | date: 2026-10-01
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-008/E04-privacy-review.md | date: 2026-07-11
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-008/E05-independent-validation.md | date: 2026-10-09
+- [x] E06 Human review design for the tier | ref: evidence/UC-008/E06-human-review-design.md | date: 2026-10-09
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-008/E07-decision-logging-plan.md | date: 2026-08-11
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-008/E08-vendor-due-diligence.md | date: 2026-05-03
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-096,"## AI change record
+
+Use case: UC-016
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-016/E01-use-case-card.md | date: 2026-05-12
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-016/E02-data-source-attestation.md | date: 2026-05-30
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-016/E03-evaluation-results.md | date: 2026-09-28
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-016/E04-privacy-review.md | date: 2026-09-30
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-016/E05-independent-validation.md | date: 2026-05-31
+- [x] E06 Human review design for the tier | ref: evidence/UC-016/E06-human-review-design.md | date: 2026-07-11
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-016/E07-decision-logging-plan.md | date: 2026-06-22
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-016/E08-vendor-due-diligence.md | date: 2026-08-04
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-097,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-015
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-015/E01-use-case-card.md | date: 2025-10-19
+- [x] E02 Data-source attestation (dataset names and classes) | ref: https://wiki.example.invalid/ai/UC-015/E02 | date: 2026-08-06
+
+### What changed
+Updates the evaluation set with this quarter's cases."
+PR-098,"## AI change record
+
+Use case: UC-018
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-018/E01-use-case-card.md | date: 2026-02-16
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-018/E02-data-source-attestation.md | date: 2026-05-08
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-018/E03-evaluation-results.md | date: 2026-09-24
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-018/E04-privacy-review.md | date: 2026-03-26
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-018/E05-independent-validation.md | date: 2026-08-13
+- [x] E06 Human review design for the tier | ref: evidence/UC-018/E06-human-review-design.md | date: 2026-10-11
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-018/E07-decision-logging-plan.md | date: 2026-07-19
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-018/E08-vendor-due-diligence.md | date: 2025-12-01
+
+### What changed
+Adds a retry step to the dispute summary prompt."
+PR-099,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-016
+Declared tier: 3
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref:  | date: 2026-01-19
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-016/E02-data-source-attestation.md | date: 2026-08-13
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-016/E03-evaluation-results.md | date: 2026-08-29
+- [x] E04 Privacy and data-handling review | ref:  | date: 2026-08-10
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-016/E05-independent-validation.md | date: 2026-04-23
+- [x] E06 Human review design for the tier | ref: evidence/UC-016/E06-human-review-design.md | date: 2026-05-10
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-016/E07-decision-logging-plan.md | date: 2026-07-25
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-016/E08-vendor-due-diligence.md | date: 2026-01-21
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-100,"## AI change record
+
+Use case: UC-007
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-007/E01-use-case-card-v2.md | date: 2026-08-15
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-007/E02-data-source-attestation.md | date: 2026-04-29
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-007/E03-evaluation-results.md | date: 2026-07-22
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-007/E04-privacy-review.md | date: 2025-12-27
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-101,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-010
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-010/E01-use-case-card.md | date: 2026-04-04
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-010/E02-data-source-attestation.md | date: 2026-08-22
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-102,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-027
+Declared tier: 2
+
+### Evidence
+- [ ] E01 Use-case card with named line-1 owner | ref: evidence/UC-027/E01-use-case-card.md | date: 2026-03-16
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-027/E02-data-source-attestation.md | date: 2026-08-19
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-027/E03-evaluation-results.md | date: 2026-08-05
+- [ ] E04 Privacy and data-handling review | ref: evidence/UC-027/E04-privacy-review.md | date: 2026-07-13
+
+### What changed
+Adds a reviewer queue for low-confidence answers."
+PR-103,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-034
+Declared tier: 1
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-034/E01-use-case-card.md | date: 2026-09-10
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-034/E02-data-source-attestation.md | date: 2026-04-25
+
+### What changed
+Moves the triage model to the new gateway route."
+PR-104,"## AI change record
+
+Use case: UC-009
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-009/E01-use-case-card.md | date: 2026-02-20
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-009/E04-privacy-review.md | date: 2026-02-03
+
+### What changed
+Replaces the keyword filter with the shared classifier."
+PR-105,"## AI change record
+
+Use case: UC-016
+Declared tier: 4
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-016/E01-use-case-card.md | date: 2025-12-18
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-016/E02-data-source-attestation.md | date: 2026-06-12
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-016/E03-evaluation-results.md | date: 2026-08-04
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-016/E04-privacy-review.md | date: 2026-06-20
+- [x] E05 Independent validation with effective challenge | ref: evidence/UC-016/E05-independent-validation.md | date: 2026-05-23
+- [x] E06 Human review design for the tier | ref: evidence/UC-016/E06-human-review-design.md | date: 2026-07-20
+- [x] E07 Decision logging and lineage plan | ref: evidence/UC-016/E07-decision-logging-plan.md | date: 2026-10-07
+- [x] E08 Vendor and third-party due diligence | ref: evidence/UC-016/E08-vendor-due-diligence.md | date: 2026-02-22
+
+### What changed
+Narrows the tool list the assistant can call."
+PR-106,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+**Use case:** UC-024
+**Declared tier:** 2
+
+### Evidence
+* [X] e01 Use-case card with named line-1 owner  |  ref: evidence/UC-024/E01-use-case-card.md  |  date: 2026-5-29
+* [X] e02 Data-source attestation (dataset names and classes)  |  ref: evidence/UC-024/E02-data-source-attestation.md  |  date: 2026-7-20
+* [X] e03 Evaluation plan and results summary  |  ref: evidence/UC-024/E03-evaluation-results.md  |  date: 2026-9-28
+* [X] e04 Privacy and data-handling review  |  ref: evidence/UC-024/E04-privacy-review.md  |  date: 2026-1-18
+
+### What changed
+Raises the retrieval cut-off from 5 to 8 passages."
+PR-107,"## AI change record
+
+<!-- One line per evidence item, for example:
+- [x] E01 Use-case card | ref: evidence/UC-000/E01-use-case-card.md | date: 2026-01-31
+Delete this comment before you submit. -->
+
+Use case: UC-020
+Declared tier: 2
+
+### Evidence
+- [x] E01 Use-case card with named line-1 owner | ref: evidence/UC-020/E01-use-case-card.md | date: 2026-02-27
+- [x] E02 Data-source attestation (dataset names and classes) | ref: evidence/UC-020/E02-data-source-attestation.md | date: 2026-08-02
+- [x] E03 Evaluation plan and results summary | ref: evidence/UC-020/E03-evaluation-results.md | date: 2026-08-21
+- [x] E04 Privacy and data-handling review | ref: evidence/UC-020/E04-privacy-review.md | date: 2025-11-04
+
+### What changed
+Adds a reviewer queue for low-confidence answers."

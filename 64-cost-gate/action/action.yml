@@ -1,0 +1,29 @@
+name: 'Cost Gate'
+description: 'Fail a pull request when the cost per correct answer of an eval run goes over the budget file, for the whole run or for a slice.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'dollar-sign'
+  color: 'gray-dark'
+inputs:
+  results:
+    description: 'Path to the eval results CSV (item_id, slice, model, correct, input_tokens, output_tokens).'
+    required: true
+  budget:
+    description: 'Path to the budget file (JSON: model prices, min_items, an overall ceiling, a ceiling per slice).'
+    required: true
+  fail-on:
+    description: 'fail, warn or never. The step fails at or above this decision.'
+    required: false
+    default: 'fail'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check the cost per correct answer
+      shell: bash
+      env:
+        RESULTS: ${{ inputs.results }}
+        BUDGET: ${{ inputs.budget }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/cost_gate.py
+      run: |
+        python3 "$SCRIPT" check --fail-on "$FAIL_ON" --format github -- "$RESULTS" "$BUDGET"

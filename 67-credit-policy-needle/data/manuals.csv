@@ -1,0 +1,4 @@
+manual_id,file,length_pages,chars,approx_pages,sections,clauses,exception_blocks,decoys,register_starts_at
+manual_050p,manuals/manual_050p.txt,50,89650,49.8,17,452,35,12,88947
+manual_150p,manuals/manual_150p.txt,150,269944,150.0,46,1284,35,12,269204
+manual_300p,manuals/manual_300p.txt,300,540390,300.2,92,2569,35,12,539669

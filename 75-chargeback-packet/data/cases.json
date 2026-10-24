@@ -1,0 +1,3355 @@
+[
+ {
+  "amount_cents": 88311,
+  "case_id": "CB-0001",
+  "docs": [
+   {
+    "amount_cents": 88311,
+    "doc_date": "2025-11-02",
+    "doc_id": "CB-0001-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-746474"
+   },
+   {
+    "doc_date": "2025-11-02",
+    "doc_id": "CB-0001-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-746474"
+   },
+   {
+    "doc_date": "2025-11-02",
+    "doc_id": "CB-0001-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-746474"
+   },
+   {
+    "doc_date": "2025-11-08",
+    "doc_id": "CB-0001-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-746474"
+   }
+  ],
+  "order_id": "O-746474",
+  "reason_code": "RC-03",
+  "received_date": "2025-12-13",
+  "submitted_date": "2026-01-10",
+  "txn_date": "2025-11-02"
+ },
+ {
+  "amount_cents": 163101,
+  "case_id": "CB-0002",
+  "docs": [
+   {
+    "amount_cents": 163101,
+    "doc_date": "2026-01-18",
+    "doc_id": "CB-0002-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-689322"
+   },
+   {
+    "doc_date": "2026-01-23",
+    "doc_id": "CB-0002-D2",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-689322"
+   },
+   {
+    "doc_date": "2026-01-26",
+    "doc_id": "CB-0002-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-250006"
+   }
+  ],
+  "order_id": "O-689322",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-19",
+  "submitted_date": "",
+  "txn_date": "2026-01-18"
+ },
+ {
+  "amount_cents": 118127,
+  "case_id": "CB-0003",
+  "docs": [
+   {
+    "amount_cents": 118127,
+    "doc_date": "2026-01-24",
+    "doc_id": "CB-0003-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-996928"
+   },
+   {
+    "doc_date": "2025-07-12",
+    "doc_id": "CB-0003-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 2,
+    "ref_id": "O-929128"
+   },
+   {
+    "doc_date": "2026-02-27",
+    "doc_id": "CB-0003-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 1,
+    "ref_id": "O-929128"
+   }
+  ],
+  "order_id": "O-929128",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-01-24"
+ },
+ {
+  "amount_cents": 97240,
+  "case_id": "CB-0004",
+  "docs": [
+   {
+    "amount_cents": 97240,
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0004-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-262744"
+   },
+   {
+    "doc_date": "2026-03-02",
+    "doc_id": "CB-0004-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-262744"
+   }
+  ],
+  "order_id": "O-262744",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-04",
+  "submitted_date": "",
+  "txn_date": "2026-02-17"
+ },
+ {
+  "amount_cents": 103196,
+  "case_id": "CB-0005",
+  "docs": [
+   {
+    "amount_cents": 103196,
+    "doc_date": "2025-11-27",
+    "doc_id": "CB-0005-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-255156"
+   },
+   {
+    "doc_date": "2025-11-27",
+    "doc_id": "CB-0005-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-255156"
+   },
+   {
+    "doc_date": "2025-12-01",
+    "doc_id": "CB-0005-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-255156"
+   }
+  ],
+  "order_id": "O-255156",
+  "reason_code": "RC-03",
+  "received_date": "2025-12-18",
+  "submitted_date": "2026-01-26",
+  "txn_date": "2025-11-27"
+ },
+ {
+  "amount_cents": 179312,
+  "case_id": "CB-0006",
+  "docs": [
+   {
+    "amount_cents": 179312,
+    "doc_date": "2026-01-29",
+    "doc_id": "CB-0006-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-600382"
+   },
+   {
+    "doc_date": "2026-01-11",
+    "doc_id": "CB-0006-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 1,
+    "ref_id": "O-600382"
+   },
+   {
+    "doc_date": "2026-02-04",
+    "doc_id": "CB-0006-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-600382"
+   }
+  ],
+  "order_id": "O-600382",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-12",
+  "submitted_date": "",
+  "txn_date": "2026-01-29"
+ },
+ {
+  "amount_cents": 57232,
+  "case_id": "CB-0007",
+  "docs": [
+   {
+    "amount_cents": 57232,
+    "doc_date": "2026-01-08",
+    "doc_id": "CB-0007-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-509992"
+   },
+   {
+    "doc_date": "2026-01-08",
+    "doc_id": "CB-0007-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-509992"
+   },
+   {
+    "doc_date": "2026-01-11",
+    "doc_id": "CB-0007-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-509992"
+   }
+  ],
+  "order_id": "O-509992",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-01-08"
+ },
+ {
+  "amount_cents": 51687,
+  "case_id": "CB-0008",
+  "docs": [
+   {
+    "amount_cents": 51687,
+    "doc_date": "2026-02-27",
+    "doc_id": "CB-0008-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-871729"
+   },
+   {
+    "doc_date": "2026-03-05",
+    "doc_id": "CB-0008-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-871729"
+   }
+  ],
+  "order_id": "O-871729",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-10",
+  "submitted_date": "",
+  "txn_date": "2026-02-27"
+ },
+ {
+  "amount_cents": 99878,
+  "case_id": "CB-0009",
+  "docs": [
+   {
+    "amount_cents": 99878,
+    "doc_date": "2026-02-26",
+    "doc_id": "CB-0009-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-302427"
+   },
+   {
+    "doc_date": "2026-03-02",
+    "doc_id": "CB-0009-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-302427"
+   }
+  ],
+  "order_id": "O-302427",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-11",
+  "submitted_date": "",
+  "txn_date": "2026-02-26"
+ },
+ {
+  "amount_cents": 140511,
+  "case_id": "CB-0010",
+  "docs": [
+   {
+    "amount_cents": 140511,
+    "doc_date": "2026-02-05",
+    "doc_id": "CB-0010-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-928854"
+   },
+   {
+    "doc_date": "2026-02-13",
+    "doc_id": "CB-0010-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-928854"
+   },
+   {
+    "doc_date": "2026-02-09",
+    "doc_id": "CB-0010-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-928854"
+   }
+  ],
+  "order_id": "O-928854",
+  "reason_code": "RC-02",
+  "received_date": "2026-02-22",
+  "submitted_date": "",
+  "txn_date": "2026-02-05"
+ },
+ {
+  "amount_cents": 38482,
+  "case_id": "CB-0011",
+  "docs": [
+   {
+    "amount_cents": 38482,
+    "doc_date": "2026-01-01",
+    "doc_id": "CB-0011-D1",
+    "doc_type": "billing_history",
+    "pages": 1,
+    "ref_id": "O-587905"
+   },
+   {
+    "doc_date": "2025-09-22",
+    "doc_id": "CB-0011-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 1,
+    "ref_id": "O-587905"
+   },
+   {
+    "doc_date": "2026-02-02",
+    "doc_id": "CB-0011-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-587905"
+   },
+   {
+    "doc_date": "2026-01-02",
+    "doc_id": "CB-0011-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-587905"
+   }
+  ],
+  "order_id": "O-587905",
+  "reason_code": "RC-06",
+  "received_date": "2026-02-03",
+  "submitted_date": "2026-03-05",
+  "txn_date": "2026-01-01"
+ },
+ {
+  "amount_cents": 142336,
+  "case_id": "CB-0012",
+  "docs": [
+   {
+    "amount_cents": 142336,
+    "doc_date": "2026-02-28",
+    "doc_id": "CB-0012-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-155295"
+   },
+   {
+    "doc_date": "2026-02-28",
+    "doc_id": "CB-0012-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-155295"
+   },
+   {
+    "doc_date": "2026-02-28",
+    "doc_id": "CB-0012-D3",
+    "doc_type": "device_match",
+    "pages": 1,
+    "ref_id": "O-155295"
+   },
+   {
+    "doc_date": "2026-03-03",
+    "doc_id": "CB-0012-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-155295"
+   }
+  ],
+  "order_id": "O-155295",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-14",
+  "submitted_date": "",
+  "txn_date": "2026-02-28"
+ },
+ {
+  "amount_cents": 166394,
+  "case_id": "CB-0013",
+  "docs": [
+   {
+    "amount_cents": 169464,
+    "doc_date": "2025-11-03",
+    "doc_id": "CB-0013-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-261955"
+   },
+   {
+    "doc_date": "2025-11-03",
+    "doc_id": "CB-0013-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-261955"
+   },
+   {
+    "doc_date": "2025-11-03",
+    "doc_id": "CB-0013-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-261955"
+   }
+  ],
+  "order_id": "O-261955",
+  "reason_code": "RC-01",
+  "received_date": "2025-12-02",
+  "submitted_date": "2025-12-09",
+  "txn_date": "2025-11-03"
+ },
+ {
+  "amount_cents": 90567,
+  "case_id": "CB-0014",
+  "docs": [
+   {
+    "amount_cents": 90567,
+    "doc_date": "2025-12-26",
+    "doc_id": "CB-0014-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-325844"
+   },
+   {
+    "doc_date": "2025-12-26",
+    "doc_id": "CB-0014-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-325844"
+   },
+   {
+    "doc_date": "2025-12-26",
+    "doc_id": "CB-0014-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-325844"
+   },
+   {
+    "doc_date": "2025-12-30",
+    "doc_id": "CB-0014-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-325844"
+   }
+  ],
+  "order_id": "O-325844",
+  "reason_code": "RC-01",
+  "received_date": "2026-01-06",
+  "submitted_date": "2026-02-03",
+  "txn_date": "2025-12-26"
+ },
+ {
+  "amount_cents": 149277,
+  "case_id": "CB-0015",
+  "docs": [
+   {
+    "amount_cents": 149277,
+    "doc_date": "2026-01-04",
+    "doc_id": "CB-0015-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-987828"
+   },
+   {
+    "doc_date": "2026-01-12",
+    "doc_id": "CB-0015-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-987828"
+   },
+   {
+    "doc_date": "2026-01-06",
+    "doc_id": "CB-0015-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-987828"
+   }
+  ],
+  "order_id": "O-987828",
+  "reason_code": "RC-05",
+  "received_date": "2026-02-23",
+  "submitted_date": "2026-03-16",
+  "txn_date": "2026-01-04"
+ },
+ {
+  "amount_cents": 13337,
+  "case_id": "CB-0016",
+  "docs": [
+   {
+    "amount_cents": 13337,
+    "doc_date": "2026-02-15",
+    "doc_id": "CB-0016-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-210637"
+   },
+   {
+    "doc_date": "2026-02-03",
+    "doc_id": "CB-0016-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 1,
+    "ref_id": "O-210637"
+   },
+   {
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0016-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-210637"
+   }
+  ],
+  "order_id": "O-210637",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-07",
+  "submitted_date": "",
+  "txn_date": "2026-02-15"
+ },
+ {
+  "amount_cents": 161219,
+  "case_id": "CB-0017",
+  "docs": [
+   {
+    "amount_cents": 160592,
+    "doc_date": "2026-01-15",
+    "doc_id": "CB-0017-D1",
+    "doc_type": "billing_history",
+    "pages": 1,
+    "ref_id": "O-915940"
+   },
+   {
+    "doc_date": "2025-11-01",
+    "doc_id": "CB-0017-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 1,
+    "ref_id": "O-915940"
+   },
+   {
+    "doc_date": "2026-02-28",
+    "doc_id": "CB-0017-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-915940"
+   }
+  ],
+  "order_id": "O-915940",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-01-15"
+ },
+ {
+  "amount_cents": 97350,
+  "case_id": "CB-0018",
+  "docs": [
+   {
+    "amount_cents": 97350,
+    "doc_date": "2026-02-15",
+    "doc_id": "CB-0018-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-989062"
+   },
+   {
+    "doc_date": "2026-02-15",
+    "doc_id": "CB-0018-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-989062"
+   },
+   {
+    "doc_date": "2026-02-15",
+    "doc_id": "CB-0018-D3",
+    "doc_type": "prior_orders",
+    "pages": 1,
+    "ref_id": "O-989062"
+   },
+   {
+    "doc_date": "2026-02-23",
+    "doc_id": "CB-0018-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-989062"
+   }
+  ],
+  "order_id": "O-989062",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-15",
+  "submitted_date": "",
+  "txn_date": "2026-02-15"
+ },
+ {
+  "amount_cents": 21412,
+  "case_id": "CB-0019",
+  "docs": [
+   {
+    "amount_cents": 21412,
+    "doc_date": "2025-10-25",
+    "doc_id": "CB-0019-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-993659"
+   },
+   {
+    "doc_date": "2025-10-25",
+    "doc_id": "CB-0019-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-993659"
+   },
+   {
+    "doc_date": "2025-10-25",
+    "doc_id": "CB-0019-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-993659"
+   }
+  ],
+  "order_id": "O-993659",
+  "reason_code": "RC-01",
+  "received_date": "2025-12-10",
+  "submitted_date": "2025-12-16",
+  "txn_date": "2025-10-25"
+ },
+ {
+  "amount_cents": 59552,
+  "case_id": "CB-0020",
+  "docs": [
+   {
+    "amount_cents": 59552,
+    "doc_date": "2026-01-05",
+    "doc_id": "CB-0020-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-739411"
+   },
+   {
+    "doc_date": "2025-12-05",
+    "doc_id": "CB-0020-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 1,
+    "ref_id": "O-739411"
+   },
+   {
+    "doc_date": "2026-02-28",
+    "doc_id": "CB-0020-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-739411"
+   }
+  ],
+  "order_id": "O-739411",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-01-05"
+ },
+ {
+  "amount_cents": 154810,
+  "case_id": "CB-0021",
+  "docs": [
+   {
+    "amount_cents": 154810,
+    "doc_date": "2026-01-23",
+    "doc_id": "CB-0021-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-290446"
+   },
+   {
+    "doc_date": "2026-01-23",
+    "doc_id": "CB-0021-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-290446"
+   },
+   {
+    "doc_date": "2026-01-23",
+    "doc_id": "CB-0021-D3",
+    "doc_type": "return_policy",
+    "pages": 2,
+    "ref_id": "O-290446"
+   }
+  ],
+  "order_id": "O-290446",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-14",
+  "submitted_date": "",
+  "txn_date": "2026-01-23"
+ },
+ {
+  "amount_cents": 164138,
+  "case_id": "CB-0022",
+  "docs": [
+   {
+    "amount_cents": 164138,
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0022-D1",
+    "doc_type": "order_record",
+    "pages": 11,
+    "ref_id": "O-285495"
+   },
+   {
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0022-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-285495"
+   },
+   {
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0022-D3",
+    "doc_type": "return_policy",
+    "pages": 2,
+    "ref_id": "O-285495"
+   }
+  ],
+  "order_id": "O-285495",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-02-17"
+ },
+ {
+  "amount_cents": 86190,
+  "case_id": "CB-0023",
+  "docs": [
+   {
+    "amount_cents": 86190,
+    "doc_date": "2025-12-26",
+    "doc_id": "CB-0023-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-481714"
+   },
+   {
+    "doc_date": "2025-12-26",
+    "doc_id": "CB-0023-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-481714"
+   },
+   {
+    "doc_date": "2025-12-26",
+    "doc_id": "CB-0023-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-481714"
+   },
+   {
+    "doc_date": "2026-01-01",
+    "doc_id": "CB-0023-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-481714"
+   }
+  ],
+  "order_id": "O-481714",
+  "reason_code": "RC-03",
+  "received_date": "2026-01-25",
+  "submitted_date": "2026-02-10",
+  "txn_date": "2025-12-26"
+ },
+ {
+  "amount_cents": 154497,
+  "case_id": "CB-0024",
+  "docs": [
+   {
+    "amount_cents": 154497,
+    "doc_date": "2025-12-21",
+    "doc_id": "CB-0024-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-318156"
+   },
+   {
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0024-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-318156"
+   },
+   {
+    "doc_date": "2025-12-24",
+    "doc_id": "CB-0024-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-318156"
+   }
+  ],
+  "order_id": "O-318156",
+  "reason_code": "RC-04",
+  "received_date": "2026-02-19",
+  "submitted_date": "2026-03-05",
+  "txn_date": "2025-12-21"
+ },
+ {
+  "amount_cents": 152253,
+  "case_id": "CB-0025",
+  "docs": [
+   {
+    "amount_cents": 152253,
+    "doc_date": "2025-11-12",
+    "doc_id": "CB-0025-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-543525"
+   },
+   {
+    "doc_date": "2025-11-12",
+    "doc_id": "CB-0025-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-543525"
+   },
+   {
+    "doc_date": "2025-11-12",
+    "doc_id": "CB-0025-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-543525"
+   }
+  ],
+  "order_id": "O-543525",
+  "reason_code": "RC-01",
+  "received_date": "2025-12-07",
+  "submitted_date": "2025-12-11",
+  "txn_date": "2025-11-12"
+ },
+ {
+  "amount_cents": 66854,
+  "case_id": "CB-0026",
+  "docs": [
+   {
+    "amount_cents": 66854,
+    "doc_date": "2026-01-25",
+    "doc_id": "CB-0026-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-257815"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0026-D3",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-257815"
+   }
+  ],
+  "order_id": "O-257815",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-11",
+  "submitted_date": "",
+  "txn_date": "2026-01-25"
+ },
+ {
+  "amount_cents": 155568,
+  "case_id": "CB-0027",
+  "docs": [
+   {
+    "amount_cents": 155568,
+    "doc_date": "2026-01-12",
+    "doc_id": "CB-0027-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-742329"
+   },
+   {
+    "doc_date": "2026-01-18",
+    "doc_id": "CB-0027-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-208447"
+   }
+  ],
+  "order_id": "O-208447",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-09",
+  "submitted_date": "",
+  "txn_date": "2026-01-12"
+ },
+ {
+  "amount_cents": 74930,
+  "case_id": "CB-0028",
+  "docs": [
+   {
+    "amount_cents": 74930,
+    "doc_date": "2026-01-26",
+    "doc_id": "CB-0028-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-800720"
+   },
+   {
+    "doc_date": "2026-01-28",
+    "doc_id": "CB-0028-D2",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-800720"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0028-D3",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-800720"
+   }
+  ],
+  "order_id": "O-800720",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-14",
+  "submitted_date": "",
+  "txn_date": "2026-01-26"
+ },
+ {
+  "amount_cents": 36201,
+  "case_id": "CB-0029",
+  "docs": [
+   {
+    "amount_cents": 36201,
+    "doc_date": "2026-01-06",
+    "doc_id": "CB-0029-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-283072"
+   },
+   {
+    "doc_date": "2026-01-08",
+    "doc_id": "CB-0029-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 11,
+    "ref_id": "O-283072"
+   }
+  ],
+  "order_id": "O-283072",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-07",
+  "submitted_date": "",
+  "txn_date": "2026-01-06"
+ },
+ {
+  "amount_cents": 153603,
+  "case_id": "CB-0030",
+  "docs": [
+   {
+    "amount_cents": 153603,
+    "doc_date": "2026-01-27",
+    "doc_id": "CB-0030-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-127530"
+   },
+   {
+    "doc_date": "2026-01-27",
+    "doc_id": "CB-0030-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-127530"
+   },
+   {
+    "doc_date": "2026-01-27",
+    "doc_id": "CB-0030-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-127530"
+   },
+   {
+    "doc_date": "2026-04-02",
+    "doc_id": "CB-0030-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-127530"
+   }
+  ],
+  "order_id": "O-127530",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-07",
+  "submitted_date": "",
+  "txn_date": "2026-01-27"
+ },
+ {
+  "amount_cents": 91101,
+  "case_id": "CB-0031",
+  "docs": [
+   {
+    "amount_cents": 91101,
+    "doc_date": "2025-12-23",
+    "doc_id": "CB-0031-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-343408"
+   },
+   {
+    "doc_date": "2025-12-27",
+    "doc_id": "CB-0031-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-343408"
+   },
+   {
+    "doc_date": "2025-12-24",
+    "doc_id": "CB-0031-D3",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-343408"
+   }
+  ],
+  "order_id": "O-343408",
+  "reason_code": "RC-02",
+  "received_date": "2026-01-30",
+  "submitted_date": "2026-03-05",
+  "txn_date": "2025-12-23"
+ },
+ {
+  "amount_cents": 139438,
+  "case_id": "CB-0032",
+  "docs": [
+   {
+    "amount_cents": 139438,
+    "doc_date": "2026-02-07",
+    "doc_id": "CB-0032-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-828239"
+   },
+   {
+    "doc_date": "2026-02-11",
+    "doc_id": "CB-0032-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-828239"
+   },
+   {
+    "doc_date": "2026-02-16",
+    "doc_id": "CB-0032-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-828239"
+   }
+  ],
+  "order_id": "O-828239",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-05",
+  "submitted_date": "",
+  "txn_date": "2026-02-07"
+ },
+ {
+  "amount_cents": 136678,
+  "case_id": "CB-0033",
+  "docs": [
+   {
+    "amount_cents": 152926,
+    "doc_date": "2026-01-19",
+    "doc_id": "CB-0033-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-454502"
+   },
+   {
+    "doc_date": "2026-01-22",
+    "doc_id": "CB-0033-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 1,
+    "ref_id": "O-454502"
+   },
+   {
+    "doc_date": "2026-01-24",
+    "doc_id": "CB-0033-D3",
+    "doc_type": "delivery_signature",
+    "pages": 2,
+    "ref_id": "O-454502"
+   }
+  ],
+  "order_id": "O-454502",
+  "reason_code": "RC-02",
+  "received_date": "2026-02-19",
+  "submitted_date": "2026-03-06",
+  "txn_date": "2026-01-19"
+ },
+ {
+  "amount_cents": 94472,
+  "case_id": "CB-0034",
+  "docs": [
+   {
+    "amount_cents": 94472,
+    "doc_date": "2025-10-25",
+    "doc_id": "CB-0034-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-450286"
+   },
+   {
+    "doc_date": "2025-11-01",
+    "doc_id": "CB-0034-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-450286"
+   }
+  ],
+  "order_id": "O-450286",
+  "reason_code": "RC-04",
+  "received_date": "2025-12-23",
+  "submitted_date": "2026-01-15",
+  "txn_date": "2025-10-25"
+ },
+ {
+  "amount_cents": 7840,
+  "case_id": "CB-0035",
+  "docs": [
+   {
+    "amount_cents": 7840,
+    "doc_date": "2026-01-30",
+    "doc_id": "CB-0035-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-355013"
+   }
+  ],
+  "order_id": "O-355013",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-21",
+  "submitted_date": "",
+  "txn_date": "2026-01-30"
+ },
+ {
+  "amount_cents": 157149,
+  "case_id": "CB-0036",
+  "docs": [
+   {
+    "amount_cents": 157149,
+    "doc_date": "2026-01-17",
+    "doc_id": "CB-0036-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-246948"
+   },
+   {
+    "doc_date": "2026-02-05",
+    "doc_id": "CB-0036-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-246948"
+   }
+  ],
+  "order_id": "O-246948",
+  "reason_code": "RC-04",
+  "received_date": "2026-02-07",
+  "submitted_date": "2026-02-14",
+  "txn_date": "2026-01-17"
+ },
+ {
+  "amount_cents": 99682,
+  "case_id": "CB-0037",
+  "docs": [
+   {
+    "amount_cents": 99682,
+    "doc_date": "2025-10-10",
+    "doc_id": "CB-0037-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-473287"
+   },
+   {
+    "doc_date": "2025-10-10",
+    "doc_id": "CB-0037-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-473287"
+   },
+   {
+    "doc_date": "2025-10-10",
+    "doc_id": "CB-0037-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-473287"
+   }
+  ],
+  "order_id": "O-473287",
+  "reason_code": "RC-03",
+  "received_date": "2025-11-28",
+  "submitted_date": "2025-12-11",
+  "txn_date": "2025-10-10"
+ },
+ {
+  "amount_cents": 28840,
+  "case_id": "CB-0038",
+  "docs": [
+   {
+    "amount_cents": 28840,
+    "doc_date": "2026-02-16",
+    "doc_id": "CB-0038-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-479086"
+   },
+   {
+    "doc_date": "2026-02-16",
+    "doc_id": "CB-0038-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-479086"
+   },
+   {
+    "doc_date": "2026-02-16",
+    "doc_id": "CB-0038-D3",
+    "doc_type": "prior_orders",
+    "pages": 2,
+    "ref_id": "O-479086"
+   },
+   {
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0038-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-479086"
+   }
+  ],
+  "order_id": "O-479086",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-15",
+  "submitted_date": "",
+  "txn_date": "2026-02-16"
+ },
+ {
+  "amount_cents": 13839,
+  "case_id": "CB-0039",
+  "docs": [
+   {
+    "amount_cents": 13839,
+    "doc_date": "2025-10-11",
+    "doc_id": "CB-0039-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-819873"
+   },
+   {
+    "doc_date": "2025-12-08",
+    "doc_id": "CB-0039-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-819873"
+   },
+   {
+    "doc_date": "2025-10-19",
+    "doc_id": "CB-0039-D3",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-819873"
+   }
+  ],
+  "order_id": "O-819873",
+  "reason_code": "RC-04",
+  "received_date": "2025-12-10",
+  "submitted_date": "2025-12-16",
+  "txn_date": "2025-10-11"
+ },
+ {
+  "amount_cents": 53582,
+  "case_id": "CB-0040",
+  "docs": [
+   {
+    "amount_cents": 53582,
+    "doc_date": "2026-01-23",
+    "doc_id": "CB-0040-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-294582"
+   },
+   {
+    "doc_date": "2026-02-27",
+    "doc_id": "CB-0040-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-294582"
+   },
+   {
+    "doc_date": "2026-01-25",
+    "doc_id": "CB-0040-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-294582"
+   }
+  ],
+  "order_id": "O-294582",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-01",
+  "submitted_date": "2026-03-15",
+  "txn_date": "2026-01-23"
+ },
+ {
+  "amount_cents": 169446,
+  "case_id": "CB-0041",
+  "docs": [
+   {
+    "amount_cents": 169446,
+    "doc_date": "2026-01-28",
+    "doc_id": "CB-0041-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-135977"
+   },
+   {
+    "doc_date": "2026-02-06",
+    "doc_id": "CB-0041-D2",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-135977"
+   }
+  ],
+  "order_id": "O-135977",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-10",
+  "submitted_date": "",
+  "txn_date": "2026-01-28"
+ },
+ {
+  "amount_cents": 141651,
+  "case_id": "CB-0042",
+  "docs": [
+   {
+    "amount_cents": 141651,
+    "doc_date": "2026-02-11",
+    "doc_id": "CB-0042-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-633115"
+   },
+   {
+    "doc_date": "2026-03-28",
+    "doc_id": "CB-0042-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-633115"
+   },
+   {
+    "doc_date": "2026-02-13",
+    "doc_id": "CB-0042-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-633115"
+   },
+   {
+    "doc_date": "2026-02-12",
+    "doc_id": "CB-0042-D4",
+    "doc_type": "shipping_label",
+    "pages": 1,
+    "ref_id": "O-633115"
+   }
+  ],
+  "order_id": "O-633115",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-31",
+  "submitted_date": "",
+  "txn_date": "2026-02-11"
+ },
+ {
+  "amount_cents": 150426,
+  "case_id": "CB-0043",
+  "docs": [
+   {
+    "amount_cents": 150426,
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0043-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-726115"
+   },
+   {
+    "doc_date": "2026-02-13",
+    "doc_id": "CB-0043-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-726115"
+   },
+   {
+    "doc_date": "2026-02-20",
+    "doc_id": "CB-0043-D3",
+    "doc_type": "delivery_signature",
+    "pages": 1,
+    "ref_id": "O-726115"
+   },
+   {
+    "doc_date": "2026-02-18",
+    "doc_id": "CB-0043-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-726115"
+   }
+  ],
+  "order_id": "O-726115",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-13",
+  "submitted_date": "",
+  "txn_date": "2026-02-17"
+ },
+ {
+  "amount_cents": 31185,
+  "case_id": "CB-0044",
+  "docs": [
+   {
+    "amount_cents": 51124,
+    "doc_date": "2025-11-17",
+    "doc_id": "CB-0044-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-935853"
+   },
+   {
+    "doc_date": "2025-11-20",
+    "doc_id": "CB-0044-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-935853"
+   },
+   {
+    "doc_date": "2025-11-26",
+    "doc_id": "CB-0044-D3",
+    "doc_type": "delivery_signature",
+    "pages": 1,
+    "ref_id": "O-935853"
+   },
+   {
+    "doc_date": "2025-11-22",
+    "doc_id": "CB-0044-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-935853"
+   }
+  ],
+  "order_id": "O-935853",
+  "reason_code": "RC-02",
+  "received_date": "2025-12-12",
+  "submitted_date": "2025-12-28",
+  "txn_date": "2025-11-17"
+ },
+ {
+  "amount_cents": 32011,
+  "case_id": "CB-0045",
+  "docs": [
+   {
+    "amount_cents": 32011,
+    "doc_date": "2026-03-09",
+    "doc_id": "CB-0045-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-311361"
+   },
+   {
+    "doc_date": "2026-03-20",
+    "doc_id": "CB-0045-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-311361"
+   },
+   {
+    "doc_date": "2026-03-18",
+    "doc_id": "CB-0045-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-311361"
+   },
+   {
+    "doc_date": "2026-03-10",
+    "doc_id": "CB-0045-D4",
+    "doc_type": "shipping_label",
+    "pages": 1,
+    "ref_id": "O-311361"
+   }
+  ],
+  "order_id": "O-311361",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-23",
+  "submitted_date": "",
+  "txn_date": "2026-03-09"
+ },
+ {
+  "amount_cents": 80020,
+  "case_id": "CB-0046",
+  "docs": [
+   {
+    "amount_cents": 80020,
+    "doc_date": "2026-02-03",
+    "doc_id": "CB-0046-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-990766"
+   },
+   {
+    "doc_date": "2026-02-03",
+    "doc_id": "CB-0046-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-990766"
+   },
+   {
+    "doc_date": "2026-02-08",
+    "doc_id": "CB-0046-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-990766"
+   }
+  ],
+  "order_id": "O-990766",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-12",
+  "submitted_date": "",
+  "txn_date": "2026-02-03"
+ },
+ {
+  "amount_cents": 137029,
+  "case_id": "CB-0047",
+  "docs": [
+   {
+    "amount_cents": 137029,
+    "doc_date": "2026-01-12",
+    "doc_id": "CB-0047-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-911848"
+   },
+   {
+    "doc_date": "2026-01-12",
+    "doc_id": "CB-0047-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-911848"
+   }
+  ],
+  "order_id": "O-911848",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-07",
+  "submitted_date": "",
+  "txn_date": "2026-01-12"
+ },
+ {
+  "amount_cents": 102706,
+  "case_id": "CB-0048",
+  "docs": [
+   {
+    "amount_cents": 102706,
+    "doc_date": "2025-12-06",
+    "doc_id": "CB-0048-D1",
+    "doc_type": "billing_history",
+    "pages": 1,
+    "ref_id": "O-789961"
+   },
+   {
+    "doc_date": "2025-07-30",
+    "doc_id": "CB-0048-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 2,
+    "ref_id": "O-789961"
+   },
+   {
+    "doc_date": "2026-01-31",
+    "doc_id": "CB-0048-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 1,
+    "ref_id": "O-789961"
+   }
+  ],
+  "order_id": "O-789961",
+  "reason_code": "RC-06",
+  "received_date": "2026-02-03",
+  "submitted_date": "2026-03-05",
+  "txn_date": "2025-12-06"
+ },
+ {
+  "amount_cents": 140637,
+  "case_id": "CB-0049",
+  "docs": [
+   {
+    "amount_cents": 140637,
+    "doc_date": "2026-01-13",
+    "doc_id": "CB-0049-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-161569"
+   },
+   {
+    "doc_date": "2026-01-16",
+    "doc_id": "CB-0049-D2",
+    "doc_type": "digital_access_log",
+    "pages": 2,
+    "ref_id": "O-161569"
+   },
+   {
+    "doc_date": "2026-01-17",
+    "doc_id": "CB-0049-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-161569"
+   }
+  ],
+  "order_id": "O-161569",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-08",
+  "submitted_date": "",
+  "txn_date": "2026-01-13"
+ },
+ {
+  "amount_cents": 78664,
+  "case_id": "CB-0050",
+  "docs": [
+   {
+    "amount_cents": 78664,
+    "doc_date": "2026-02-05",
+    "doc_id": "CB-0050-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-370961"
+   },
+   {
+    "doc_date": "2025-10-05",
+    "doc_id": "CB-0050-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 2,
+    "ref_id": "O-370961"
+   },
+   {
+    "doc_date": "2026-03-03",
+    "doc_id": "CB-0050-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-370961"
+   }
+  ],
+  "order_id": "O-370961",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-04",
+  "submitted_date": "",
+  "txn_date": "2026-02-05"
+ },
+ {
+  "amount_cents": 166550,
+  "case_id": "CB-0051",
+  "docs": [
+   {
+    "amount_cents": 166550,
+    "doc_date": "2025-12-21",
+    "doc_id": "CB-0051-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-436295"
+   },
+   {
+    "doc_date": "2025-12-21",
+    "doc_id": "CB-0051-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-436295"
+   },
+   {
+    "doc_date": "2025-12-21",
+    "doc_id": "CB-0051-D3",
+    "doc_type": "return_policy",
+    "pages": 2,
+    "ref_id": "O-436295"
+   }
+  ],
+  "order_id": "O-436295",
+  "reason_code": "RC-03",
+  "received_date": "2026-01-05",
+  "submitted_date": "2026-01-24",
+  "txn_date": "2025-12-21"
+ },
+ {
+  "amount_cents": 174996,
+  "case_id": "CB-0052",
+  "docs": [
+   {
+    "amount_cents": 192663,
+    "doc_date": "2025-11-28",
+    "doc_id": "CB-0052-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-985996"
+   },
+   {
+    "doc_date": "2025-11-28",
+    "doc_id": "CB-0052-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-985996"
+   },
+   {
+    "doc_date": "2025-11-28",
+    "doc_id": "CB-0052-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-985996"
+   },
+   {
+    "doc_date": "2025-12-02",
+    "doc_id": "CB-0052-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-985996"
+   }
+  ],
+  "order_id": "O-985996",
+  "reason_code": "RC-03",
+  "received_date": "2026-01-01",
+  "submitted_date": "2026-01-29",
+  "txn_date": "2025-11-28"
+ },
+ {
+  "amount_cents": 88711,
+  "case_id": "CB-0053",
+  "docs": [
+   {
+    "amount_cents": 88711,
+    "doc_date": "2026-01-05",
+    "doc_id": "CB-0053-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-205084"
+   },
+   {
+    "doc_date": "2026-01-13",
+    "doc_id": "CB-0053-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-205084"
+   }
+  ],
+  "order_id": "O-205084",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-01-05"
+ },
+ {
+  "amount_cents": 35377,
+  "case_id": "CB-0054",
+  "docs": [
+   {
+    "amount_cents": 35377,
+    "doc_date": "2025-12-13",
+    "doc_id": "CB-0054-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-476496"
+   },
+   {
+    "doc_date": "2025-12-13",
+    "doc_id": "CB-0054-D3",
+    "doc_type": "device_match",
+    "pages": 1,
+    "ref_id": "O-476496"
+   }
+  ],
+  "order_id": "O-476496",
+  "reason_code": "RC-01",
+  "received_date": "2026-01-11",
+  "submitted_date": "2026-02-03",
+  "txn_date": "2025-12-13"
+ },
+ {
+  "amount_cents": 42186,
+  "case_id": "CB-0055",
+  "docs": [
+   {
+    "amount_cents": 42186,
+    "doc_date": "2025-12-21",
+    "doc_id": "CB-0055-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-913859"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0055-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-913859"
+   }
+  ],
+  "order_id": "O-913859",
+  "reason_code": "RC-04",
+  "received_date": "2026-02-02",
+  "submitted_date": "2026-02-20",
+  "txn_date": "2025-12-21"
+ },
+ {
+  "amount_cents": 53817,
+  "case_id": "CB-0056",
+  "docs": [
+   {
+    "amount_cents": 53817,
+    "doc_date": "2026-01-27",
+    "doc_id": "CB-0056-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-354437"
+   },
+   {
+    "doc_date": "2026-01-27",
+    "doc_id": "CB-0056-D2",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-354437"
+   },
+   {
+    "doc_date": "2026-01-31",
+    "doc_id": "CB-0056-D3",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-354437"
+   }
+  ],
+  "order_id": "O-354437",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-18",
+  "submitted_date": "",
+  "txn_date": "2026-01-27"
+ },
+ {
+  "amount_cents": 108418,
+  "case_id": "CB-0057",
+  "docs": [
+   {
+    "amount_cents": 108418,
+    "doc_date": "2026-02-10",
+    "doc_id": "CB-0057-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-523548"
+   },
+   {
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0057-D2",
+    "doc_type": "digital_access_log",
+    "pages": 2,
+    "ref_id": "O-523548"
+   },
+   {
+    "doc_date": "2026-02-11",
+    "doc_id": "CB-0057-D3",
+    "doc_type": "delivery_signature",
+    "pages": 1,
+    "ref_id": "O-523548"
+   },
+   {
+    "doc_date": "2026-02-15",
+    "doc_id": "CB-0057-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-523548"
+   }
+  ],
+  "order_id": "O-523548",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-10",
+  "submitted_date": "",
+  "txn_date": "2026-02-10"
+ },
+ {
+  "amount_cents": 87737,
+  "case_id": "CB-0058",
+  "docs": [
+   {
+    "amount_cents": 87737,
+    "doc_date": "2026-02-26",
+    "doc_id": "CB-0058-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-587255"
+   },
+   {
+    "doc_date": "2026-02-07",
+    "doc_id": "CB-0058-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-587255"
+   }
+  ],
+  "order_id": "O-587255",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-13",
+  "submitted_date": "",
+  "txn_date": "2026-02-26"
+ },
+ {
+  "amount_cents": 16379,
+  "case_id": "CB-0059",
+  "docs": [
+   {
+    "amount_cents": 16379,
+    "doc_date": "2025-11-03",
+    "doc_id": "CB-0059-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-322061"
+   },
+   {
+    "doc_date": "2025-11-03",
+    "doc_id": "CB-0059-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-322061"
+   },
+   {
+    "doc_date": "2025-11-03",
+    "doc_id": "CB-0059-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-322061"
+   },
+   {
+    "doc_date": "2025-11-04",
+    "doc_id": "CB-0059-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-322061"
+   }
+  ],
+  "order_id": "O-322061",
+  "reason_code": "RC-01",
+  "received_date": "2026-01-01",
+  "submitted_date": "2026-01-05",
+  "txn_date": "2025-11-03"
+ },
+ {
+  "amount_cents": 59191,
+  "case_id": "CB-0060",
+  "docs": [
+   {
+    "amount_cents": 59191,
+    "doc_date": "2026-03-04",
+    "doc_id": "CB-0060-D1",
+    "doc_type": "order_record",
+    "pages": 15,
+    "ref_id": "O-238051"
+   },
+   {
+    "doc_date": "2026-03-15",
+    "doc_id": "CB-0060-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-238051"
+   },
+   {
+    "doc_date": "2026-03-09",
+    "doc_id": "CB-0060-D3",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-238051"
+   }
+  ],
+  "order_id": "O-238051",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-18",
+  "submitted_date": "",
+  "txn_date": "2026-03-04"
+ },
+ {
+  "amount_cents": 106651,
+  "case_id": "CB-0061",
+  "docs": [
+   {
+    "doc_date": "2026-03-24",
+    "doc_id": "CB-0061-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-944548"
+   },
+   {
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0061-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-944548"
+   }
+  ],
+  "order_id": "O-944548",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-26",
+  "submitted_date": "",
+  "txn_date": "2026-02-13"
+ },
+ {
+  "amount_cents": 101046,
+  "case_id": "CB-0062",
+  "docs": [
+   {
+    "amount_cents": 101046,
+    "doc_date": "2026-02-02",
+    "doc_id": "CB-0062-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-471259"
+   },
+   {
+    "doc_date": "2025-10-23",
+    "doc_id": "CB-0062-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 1,
+    "ref_id": "O-471259"
+   },
+   {
+    "doc_date": "2026-03-03",
+    "doc_id": "CB-0062-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 1,
+    "ref_id": "O-471259"
+   },
+   {
+    "doc_date": "2026-02-10",
+    "doc_id": "CB-0062-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-471259"
+   }
+  ],
+  "order_id": "O-471259",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-05",
+  "submitted_date": "",
+  "txn_date": "2026-02-02"
+ },
+ {
+  "amount_cents": 109417,
+  "case_id": "CB-0063",
+  "docs": [
+   {
+    "amount_cents": 109417,
+    "doc_date": "2026-02-14",
+    "doc_id": "CB-0063-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-743984"
+   },
+   {
+    "doc_date": "2026-02-16",
+    "doc_id": "CB-0063-D2",
+    "doc_type": "digital_access_log",
+    "pages": 2,
+    "ref_id": "O-743984"
+   },
+   {
+    "doc_date": "2026-02-20",
+    "doc_id": "CB-0063-D3",
+    "doc_type": "delivery_signature",
+    "pages": 2,
+    "ref_id": "O-743984"
+   },
+   {
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0063-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-743984"
+   }
+  ],
+  "order_id": "O-743984",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-13",
+  "submitted_date": "",
+  "txn_date": "2026-02-14"
+ },
+ {
+  "amount_cents": 157423,
+  "case_id": "CB-0064",
+  "docs": [
+   {
+    "amount_cents": 157423,
+    "doc_date": "2025-12-27",
+    "doc_id": "CB-0064-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-286551"
+   },
+   {
+    "doc_date": "2026-01-02",
+    "doc_id": "CB-0064-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-286551"
+   },
+   {
+    "doc_date": "2025-12-30",
+    "doc_id": "CB-0064-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-286551"
+   }
+  ],
+  "order_id": "O-286551",
+  "reason_code": "RC-05",
+  "received_date": "2026-02-20",
+  "submitted_date": "2026-03-02",
+  "txn_date": "2025-12-27"
+ },
+ {
+  "amount_cents": 61167,
+  "case_id": "CB-0065",
+  "docs": [
+   {
+    "amount_cents": 61167,
+    "doc_date": "2026-02-10",
+    "doc_id": "CB-0065-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-243114"
+   },
+   {
+    "doc_date": "2025-10-08",
+    "doc_id": "CB-0065-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 11,
+    "ref_id": "O-243114"
+   },
+   {
+    "doc_date": "2026-03-10",
+    "doc_id": "CB-0065-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 1,
+    "ref_id": "O-243114"
+   },
+   {
+    "doc_date": "2026-02-18",
+    "doc_id": "CB-0065-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-243114"
+   }
+  ],
+  "order_id": "O-243114",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-12",
+  "submitted_date": "",
+  "txn_date": "2026-02-10"
+ },
+ {
+  "amount_cents": 117005,
+  "case_id": "CB-0066",
+  "docs": [
+   {
+    "amount_cents": 117005,
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0066-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-551515"
+   },
+   {
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0066-D2",
+    "doc_type": "return_policy",
+    "pages": 2,
+    "ref_id": "O-551515"
+   },
+   {
+    "doc_date": "2026-02-25",
+    "doc_id": "CB-0066-D3",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-551515"
+   }
+  ],
+  "order_id": "O-551515",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-14",
+  "submitted_date": "",
+  "txn_date": "2026-02-22"
+ },
+ {
+  "amount_cents": 33526,
+  "case_id": "CB-0067",
+  "docs": [
+   {
+    "amount_cents": 33526,
+    "doc_date": "2026-03-07",
+    "doc_id": "CB-0067-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-813081"
+   },
+   {
+    "doc_date": "2026-03-17",
+    "doc_id": "CB-0067-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-813081"
+   },
+   {
+    "doc_date": "2026-03-16",
+    "doc_id": "CB-0067-D3",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-813081"
+   }
+  ],
+  "order_id": "O-813081",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-20",
+  "submitted_date": "",
+  "txn_date": "2026-03-07"
+ },
+ {
+  "amount_cents": 137809,
+  "case_id": "CB-0068",
+  "docs": [
+   {
+    "amount_cents": 137809,
+    "doc_date": "2026-02-28",
+    "doc_id": "CB-0068-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-277638"
+   },
+   {
+    "doc_date": "2025-09-24",
+    "doc_id": "CB-0068-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 1,
+    "ref_id": "O-277638"
+   },
+   {
+    "doc_date": "2026-03-07",
+    "doc_id": "CB-0068-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-277638"
+   },
+   {
+    "doc_date": "2026-03-02",
+    "doc_id": "CB-0068-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-277638"
+   }
+  ],
+  "order_id": "O-277638",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-10",
+  "submitted_date": "",
+  "txn_date": "2026-02-28"
+ },
+ {
+  "amount_cents": 125718,
+  "case_id": "CB-0069",
+  "docs": [
+   {
+    "amount_cents": 125718,
+    "doc_date": "2026-02-25",
+    "doc_id": "CB-0069-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-850899"
+   },
+   {
+    "doc_date": "2026-02-25",
+    "doc_id": "CB-0069-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-850899"
+   },
+   {
+    "doc_date": "2026-02-25",
+    "doc_id": "CB-0069-D3",
+    "doc_type": "prior_orders",
+    "pages": 2,
+    "ref_id": "O-850899"
+   },
+   {
+    "doc_date": "2026-02-27",
+    "doc_id": "CB-0069-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-850899"
+   }
+  ],
+  "order_id": "O-850899",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-12",
+  "submitted_date": "",
+  "txn_date": "2026-02-25"
+ },
+ {
+  "amount_cents": 83082,
+  "case_id": "CB-0070",
+  "docs": [
+   {
+    "amount_cents": 83082,
+    "doc_date": "2026-04-07",
+    "doc_id": "CB-0070-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-165663"
+   },
+   {
+    "doc_date": "2026-02-11",
+    "doc_id": "CB-0070-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-165663"
+   },
+   {
+    "doc_date": "2026-02-11",
+    "doc_id": "CB-0070-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-165663"
+   }
+  ],
+  "order_id": "O-165663",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-05",
+  "submitted_date": "",
+  "txn_date": "2026-02-11"
+ },
+ {
+  "amount_cents": 67637,
+  "case_id": "CB-0071",
+  "docs": [
+   {
+    "amount_cents": 67637,
+    "doc_date": "2025-10-16",
+    "doc_id": "CB-0071-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-519540"
+   },
+   {
+    "doc_date": "2025-10-16",
+    "doc_id": "CB-0071-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-519540"
+   },
+   {
+    "doc_date": "2025-10-16",
+    "doc_id": "CB-0071-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-519540"
+   }
+  ],
+  "order_id": "O-519540",
+  "reason_code": "RC-01",
+  "received_date": "2025-12-04",
+  "submitted_date": "2025-12-18",
+  "txn_date": "2025-10-16"
+ },
+ {
+  "amount_cents": 102819,
+  "case_id": "CB-0072",
+  "docs": [
+   {
+    "amount_cents": 122105,
+    "doc_date": "2026-01-05",
+    "doc_id": "CB-0072-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-961233"
+   },
+   {
+    "doc_date": "2026-01-13",
+    "doc_id": "CB-0072-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-961233"
+   },
+   {
+    "doc_date": "2026-01-06",
+    "doc_id": "CB-0072-D3",
+    "doc_type": "delivery_signature",
+    "pages": 2,
+    "ref_id": "O-961233"
+   }
+  ],
+  "order_id": "O-961233",
+  "reason_code": "RC-02",
+  "received_date": "2026-01-21",
+  "submitted_date": "2026-01-26",
+  "txn_date": "2026-01-05"
+ },
+ {
+  "amount_cents": 165109,
+  "case_id": "CB-0073",
+  "docs": [
+   {
+    "amount_cents": 164949,
+    "doc_date": "2026-01-30",
+    "doc_id": "CB-0073-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-255222"
+   },
+   {
+    "doc_date": "2026-01-30",
+    "doc_id": "CB-0073-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-255222"
+   },
+   {
+    "doc_date": "2026-01-30",
+    "doc_id": "CB-0073-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-255222"
+   },
+   {
+    "doc_date": "2026-02-07",
+    "doc_id": "CB-0073-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-255222"
+   }
+  ],
+  "order_id": "O-255222",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-20",
+  "submitted_date": "",
+  "txn_date": "2026-01-30"
+ },
+ {
+  "amount_cents": 45634,
+  "case_id": "CB-0074",
+  "docs": [
+   {
+    "amount_cents": 45634,
+    "doc_date": "2026-04-10",
+    "doc_id": "CB-0074-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-419731"
+   },
+   {
+    "doc_date": "2026-03-20",
+    "doc_id": "CB-0074-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-419731"
+   },
+   {
+    "doc_date": "2026-03-12",
+    "doc_id": "CB-0074-D3",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-419731"
+   }
+  ],
+  "order_id": "O-419731",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-21",
+  "submitted_date": "",
+  "txn_date": "2026-03-03"
+ },
+ {
+  "amount_cents": 19118,
+  "case_id": "CB-0075",
+  "docs": [
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0075-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-232405"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0075-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-232405"
+   },
+   {
+    "doc_date": "2026-02-08",
+    "doc_id": "CB-0075-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-232405"
+   }
+  ],
+  "order_id": "O-232405",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-08",
+  "submitted_date": "",
+  "txn_date": "2026-02-01"
+ },
+ {
+  "amount_cents": 126098,
+  "case_id": "CB-0076",
+  "docs": [
+   {
+    "amount_cents": 126098,
+    "doc_date": "2025-12-16",
+    "doc_id": "CB-0076-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-170469"
+   },
+   {
+    "doc_date": "2026-02-04",
+    "doc_id": "CB-0076-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-170469"
+   },
+   {
+    "doc_date": "2025-12-23",
+    "doc_id": "CB-0076-D3",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-170469"
+   }
+  ],
+  "order_id": "O-170469",
+  "reason_code": "RC-04",
+  "received_date": "2026-02-06",
+  "submitted_date": "2026-02-16",
+  "txn_date": "2025-12-16"
+ },
+ {
+  "amount_cents": 178591,
+  "case_id": "CB-0077",
+  "docs": [
+   {
+    "doc_date": "2026-02-21",
+    "doc_id": "CB-0077-D2",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-124794"
+   },
+   {
+    "doc_date": "2026-02-20",
+    "doc_id": "CB-0077-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-124794"
+   }
+  ],
+  "order_id": "O-124794",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-24",
+  "submitted_date": "",
+  "txn_date": "2026-02-13"
+ },
+ {
+  "amount_cents": 164768,
+  "case_id": "CB-0078",
+  "docs": [
+   {
+    "amount_cents": 164768,
+    "doc_date": "2025-12-20",
+    "doc_id": "CB-0078-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-928662"
+   },
+   {
+    "doc_date": "2025-12-20",
+    "doc_id": "CB-0078-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-928662"
+   },
+   {
+    "doc_date": "2025-12-20",
+    "doc_id": "CB-0078-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-928662"
+   },
+   {
+    "doc_date": "2025-12-23",
+    "doc_id": "CB-0078-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-928662"
+   }
+  ],
+  "order_id": "O-928662",
+  "reason_code": "RC-01",
+  "received_date": "2026-01-06",
+  "submitted_date": "2026-01-26",
+  "txn_date": "2025-12-20"
+ },
+ {
+  "amount_cents": 171507,
+  "case_id": "CB-0079",
+  "docs": [
+   {
+    "amount_cents": 170943,
+    "doc_date": "2026-02-24",
+    "doc_id": "CB-0079-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-839320"
+   },
+   {
+    "doc_date": "2026-02-26",
+    "doc_id": "CB-0079-D2",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-839320"
+   }
+  ],
+  "order_id": "O-839320",
+  "reason_code": "RC-05",
+  "received_date": "2026-03-22",
+  "submitted_date": "",
+  "txn_date": "2026-02-24"
+ },
+ {
+  "amount_cents": 117333,
+  "case_id": "CB-0080",
+  "docs": [
+   {
+    "amount_cents": 117333,
+    "doc_date": "2026-02-21",
+    "doc_id": "CB-0080-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-212191"
+   },
+   {
+    "doc_date": "2026-03-24",
+    "doc_id": "CB-0080-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-212191"
+   }
+  ],
+  "order_id": "O-212191",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-25",
+  "submitted_date": "",
+  "txn_date": "2026-02-21"
+ },
+ {
+  "amount_cents": 56025,
+  "case_id": "CB-0081",
+  "docs": [
+   {
+    "amount_cents": 56025,
+    "doc_date": "2026-01-23",
+    "doc_id": "CB-0081-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-151847"
+   },
+   {
+    "doc_date": "2026-01-30",
+    "doc_id": "CB-0081-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-151847"
+   }
+  ],
+  "order_id": "O-151847",
+  "reason_code": "RC-05",
+  "received_date": "2026-02-22",
+  "submitted_date": "2026-03-25",
+  "txn_date": "2026-01-23"
+ },
+ {
+  "amount_cents": 54686,
+  "case_id": "CB-0082",
+  "docs": [
+   {
+    "amount_cents": 53690,
+    "doc_date": "2026-02-15",
+    "doc_id": "CB-0082-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-475079"
+   },
+   {
+    "doc_date": "2026-03-24",
+    "doc_id": "CB-0082-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-475079"
+   },
+   {
+    "doc_date": "2026-02-21",
+    "doc_id": "CB-0082-D3",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-475079"
+   }
+  ],
+  "order_id": "O-475079",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-25",
+  "submitted_date": "",
+  "txn_date": "2026-02-15"
+ },
+ {
+  "amount_cents": 143694,
+  "case_id": "CB-0083",
+  "docs": [
+   {
+    "amount_cents": 143694,
+    "doc_date": "2026-02-21",
+    "doc_id": "CB-0083-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-740957"
+   },
+   {
+    "doc_date": "2026-03-15",
+    "doc_id": "CB-0083-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-740957"
+   },
+   {
+    "doc_date": "2026-02-27",
+    "doc_id": "CB-0083-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-740957"
+   }
+  ],
+  "order_id": "O-740957",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-17",
+  "submitted_date": "",
+  "txn_date": "2026-02-21"
+ },
+ {
+  "amount_cents": 29963,
+  "case_id": "CB-0084",
+  "docs": [
+   {
+    "amount_cents": 29963,
+    "doc_date": "2025-11-18",
+    "doc_id": "CB-0084-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-628157"
+   },
+   {
+    "doc_date": "2025-11-24",
+    "doc_id": "CB-0084-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-628157"
+   },
+   {
+    "doc_date": "2025-11-26",
+    "doc_id": "CB-0084-D3",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-628157"
+   }
+  ],
+  "order_id": "O-628157",
+  "reason_code": "RC-02",
+  "received_date": "2025-12-12",
+  "submitted_date": "2026-01-11",
+  "txn_date": "2025-11-18"
+ },
+ {
+  "amount_cents": 24437,
+  "case_id": "CB-0085",
+  "docs": [
+   {
+    "amount_cents": 24437,
+    "doc_date": "2025-12-30",
+    "doc_id": "CB-0085-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-772183"
+   },
+   {
+    "doc_date": "2025-12-30",
+    "doc_id": "CB-0085-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 1,
+    "ref_id": "O-772183"
+   },
+   {
+    "doc_date": "2025-12-30",
+    "doc_id": "CB-0085-D3",
+    "doc_type": "device_match",
+    "pages": 1,
+    "ref_id": "O-772183"
+   },
+   {
+    "doc_date": "2026-01-07",
+    "doc_id": "CB-0085-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-772183"
+   }
+  ],
+  "order_id": "O-772183",
+  "reason_code": "RC-01",
+  "received_date": "2026-01-13",
+  "submitted_date": "2026-02-02",
+  "txn_date": "2025-12-30"
+ },
+ {
+  "amount_cents": 112986,
+  "case_id": "CB-0086",
+  "docs": [
+   {
+    "amount_cents": 112986,
+    "doc_date": "2026-01-25",
+    "doc_id": "CB-0086-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-199083"
+   },
+   {
+    "doc_date": "2026-01-25",
+    "doc_id": "CB-0086-D2",
+    "doc_type": "product_description",
+    "pages": 2,
+    "ref_id": "O-199083"
+   },
+   {
+    "doc_date": "2026-01-25",
+    "doc_id": "CB-0086-D3",
+    "doc_type": "return_policy",
+    "pages": 2,
+    "ref_id": "O-199083"
+   },
+   {
+    "doc_date": "2026-01-26",
+    "doc_id": "CB-0086-D4",
+    "doc_type": "shipping_label",
+    "pages": 1,
+    "ref_id": "O-199083"
+   }
+  ],
+  "order_id": "O-199083",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-05",
+  "submitted_date": "",
+  "txn_date": "2026-01-25"
+ },
+ {
+  "amount_cents": 179822,
+  "case_id": "CB-0087",
+  "docs": [
+   {
+    "amount_cents": 179822,
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0087-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-552722"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0087-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-552722"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0087-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-552722"
+   }
+  ],
+  "order_id": "O-552722",
+  "reason_code": "RC-01",
+  "received_date": "2026-02-22",
+  "submitted_date": "2026-02-23",
+  "txn_date": "2026-02-01"
+ },
+ {
+  "amount_cents": 133011,
+  "case_id": "CB-0088",
+  "docs": [
+   {
+    "amount_cents": 133011,
+    "doc_date": "2026-02-07",
+    "doc_id": "CB-0088-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-771330"
+   },
+   {
+    "doc_date": "2026-03-09",
+    "doc_id": "CB-0088-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-771330"
+   },
+   {
+    "doc_date": "2026-02-11",
+    "doc_id": "CB-0088-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-771330"
+   }
+  ],
+  "order_id": "O-771330",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-11",
+  "submitted_date": "",
+  "txn_date": "2026-02-07"
+ },
+ {
+  "amount_cents": 161044,
+  "case_id": "CB-0089",
+  "docs": [
+   {
+    "amount_cents": 161044,
+    "doc_date": "2026-01-22",
+    "doc_id": "CB-0089-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-585021"
+   },
+   {
+    "doc_date": "2026-01-26",
+    "doc_id": "CB-0089-D2",
+    "doc_type": "refund_record",
+    "pages": 1,
+    "ref_id": "O-585021"
+   },
+   {
+    "doc_date": "2026-01-29",
+    "doc_id": "CB-0089-D3",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-585021"
+   }
+  ],
+  "order_id": "O-585021",
+  "reason_code": "RC-05",
+  "received_date": "2026-02-20",
+  "submitted_date": "2026-03-23",
+  "txn_date": "2026-01-22"
+ },
+ {
+  "amount_cents": 177340,
+  "case_id": "CB-0090",
+  "docs": [
+   {
+    "amount_cents": 177340,
+    "doc_date": "2025-12-28",
+    "doc_id": "CB-0090-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-110011"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0090-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 1,
+    "ref_id": "O-110011"
+   },
+   {
+    "doc_date": "2026-01-04",
+    "doc_id": "CB-0090-D3",
+    "doc_type": "refund_record",
+    "pages": 2,
+    "ref_id": "O-110011"
+   }
+  ],
+  "order_id": "O-110011",
+  "reason_code": "RC-04",
+  "received_date": "2026-02-03",
+  "submitted_date": "2026-02-19",
+  "txn_date": "2025-12-28"
+ },
+ {
+  "amount_cents": 125814,
+  "case_id": "CB-0091",
+  "docs": [
+   {
+    "amount_cents": 123975,
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0091-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-639160"
+   },
+   {
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0091-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-639160"
+   },
+   {
+    "doc_date": "2026-02-22",
+    "doc_id": "CB-0091-D3",
+    "doc_type": "return_policy",
+    "pages": 1,
+    "ref_id": "O-639160"
+   }
+  ],
+  "order_id": "O-639160",
+  "reason_code": "RC-03",
+  "received_date": "2026-03-07",
+  "submitted_date": "",
+  "txn_date": "2026-02-22"
+ },
+ {
+  "amount_cents": 96977,
+  "case_id": "CB-0092",
+  "docs": [
+   {
+    "amount_cents": 96977,
+    "doc_date": "2026-02-17",
+    "doc_id": "CB-0092-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-943110"
+   },
+   {
+    "doc_date": "2026-03-24",
+    "doc_id": "CB-0092-D2",
+    "doc_type": "duplicate_ledger",
+    "pages": 2,
+    "ref_id": "O-943110"
+   }
+  ],
+  "order_id": "O-943110",
+  "reason_code": "RC-04",
+  "received_date": "2026-03-25",
+  "submitted_date": "",
+  "txn_date": "2026-02-17"
+ },
+ {
+  "amount_cents": 110291,
+  "case_id": "CB-0093",
+  "docs": [
+   {
+    "amount_cents": 110291,
+    "doc_date": "2025-12-11",
+    "doc_id": "CB-0093-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-154883"
+   },
+   {
+    "doc_date": "2025-09-22",
+    "doc_id": "CB-0093-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 2,
+    "ref_id": "O-154883"
+   },
+   {
+    "doc_date": "2026-01-12",
+    "doc_id": "CB-0093-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 2,
+    "ref_id": "O-154883"
+   }
+  ],
+  "order_id": "O-154883",
+  "reason_code": "RC-06",
+  "received_date": "2026-01-14",
+  "submitted_date": "2026-02-23",
+  "txn_date": "2025-12-11"
+ },
+ {
+  "amount_cents": 145595,
+  "case_id": "CB-0094",
+  "docs": [
+   {
+    "amount_cents": 145595,
+    "doc_date": "2026-01-25",
+    "doc_id": "CB-0094-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-329290"
+   },
+   {
+    "doc_date": "2026-01-22",
+    "doc_id": "CB-0094-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 1,
+    "ref_id": "O-329290"
+   },
+   {
+    "doc_date": "2026-02-01",
+    "doc_id": "CB-0094-D3",
+    "doc_type": "delivery_signature",
+    "pages": 2,
+    "ref_id": "O-329290"
+   },
+   {
+    "doc_date": "2026-01-28",
+    "doc_id": "CB-0094-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-329290"
+   }
+  ],
+  "order_id": "O-329290",
+  "reason_code": "RC-02",
+  "received_date": "2026-03-07",
+  "submitted_date": "",
+  "txn_date": "2026-01-25"
+ },
+ {
+  "amount_cents": 35249,
+  "case_id": "CB-0095",
+  "docs": [
+   {
+    "amount_cents": 35249,
+    "doc_date": "2026-02-03",
+    "doc_id": "CB-0095-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-933620"
+   },
+   {
+    "doc_date": "2026-02-03",
+    "doc_id": "CB-0095-D2",
+    "doc_type": "product_description",
+    "pages": 1,
+    "ref_id": "O-933620"
+   },
+   {
+    "doc_date": "2026-02-03",
+    "doc_id": "CB-0095-D3",
+    "doc_type": "return_policy",
+    "pages": 2,
+    "ref_id": "O-933620"
+   },
+   {
+    "doc_date": "2026-02-08",
+    "doc_id": "CB-0095-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-933620"
+   }
+  ],
+  "order_id": "O-933620",
+  "reason_code": "RC-03",
+  "received_date": "2026-02-16",
+  "submitted_date": "",
+  "txn_date": "2026-02-03"
+ },
+ {
+  "amount_cents": 132873,
+  "case_id": "CB-0096",
+  "docs": [
+   {
+    "amount_cents": 132873,
+    "doc_date": "2026-01-13",
+    "doc_id": "CB-0096-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-121813"
+   },
+   {
+    "doc_date": "2026-01-14",
+    "doc_id": "CB-0096-D2",
+    "doc_type": "delivery_tracking",
+    "pages": 2,
+    "ref_id": "O-121813"
+   },
+   {
+    "doc_date": "2026-01-18",
+    "doc_id": "CB-0096-D3",
+    "doc_type": "delivery_signature",
+    "pages": 2,
+    "ref_id": "O-121813"
+   },
+   {
+    "doc_date": "2026-01-20",
+    "doc_id": "CB-0096-D4",
+    "doc_type": "customer_comms",
+    "pages": 2,
+    "ref_id": "O-121813"
+   }
+  ],
+  "order_id": "O-121813",
+  "reason_code": "RC-02",
+  "received_date": "2026-01-26",
+  "submitted_date": "2026-02-22",
+  "txn_date": "2026-01-13"
+ },
+ {
+  "amount_cents": 68091,
+  "case_id": "CB-0097",
+  "docs": [
+   {
+    "amount_cents": 68091,
+    "doc_date": "2026-02-04",
+    "doc_id": "CB-0097-D1",
+    "doc_type": "order_record",
+    "pages": 1,
+    "ref_id": "O-258809"
+   },
+   {
+    "doc_date": "2026-02-04",
+    "doc_id": "CB-0097-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-258809"
+   },
+   {
+    "doc_date": "2026-02-04",
+    "doc_id": "CB-0097-D3",
+    "doc_type": "device_match",
+    "pages": 1,
+    "ref_id": "O-953529"
+   },
+   {
+    "doc_date": "2026-02-06",
+    "doc_id": "CB-0097-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-258809"
+   }
+  ],
+  "order_id": "O-258809",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-24",
+  "submitted_date": "",
+  "txn_date": "2026-02-04"
+ },
+ {
+  "amount_cents": 88524,
+  "case_id": "CB-0098",
+  "docs": [
+   {
+    "amount_cents": 88524,
+    "doc_date": "2026-03-08",
+    "doc_id": "CB-0098-D1",
+    "doc_type": "order_record",
+    "pages": 2,
+    "ref_id": "O-737193"
+   },
+   {
+    "doc_date": "2026-03-08",
+    "doc_id": "CB-0098-D2",
+    "doc_type": "payment_auth_log",
+    "pages": 2,
+    "ref_id": "O-737193"
+   },
+   {
+    "doc_date": "2026-03-08",
+    "doc_id": "CB-0098-D3",
+    "doc_type": "device_match",
+    "pages": 2,
+    "ref_id": "O-297511"
+   },
+   {
+    "doc_date": "2026-03-11",
+    "doc_id": "CB-0098-D4",
+    "doc_type": "customer_comms",
+    "pages": 1,
+    "ref_id": "O-737193"
+   }
+  ],
+  "order_id": "O-737193",
+  "reason_code": "RC-01",
+  "received_date": "2026-03-22",
+  "submitted_date": "",
+  "txn_date": "2026-03-08"
+ },
+ {
+  "amount_cents": 152168,
+  "case_id": "CB-0099",
+  "docs": [
+   {
+    "amount_cents": 152168,
+    "doc_date": "2026-01-29",
+    "doc_id": "CB-0099-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-621143"
+   },
+   {
+    "doc_date": "2025-10-09",
+    "doc_id": "CB-0099-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 2,
+    "ref_id": "O-621143"
+   },
+   {
+    "doc_date": "2026-03-10",
+    "doc_id": "CB-0099-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 1,
+    "ref_id": "O-621143"
+   },
+   {
+    "doc_date": "2026-02-05",
+    "doc_id": "CB-0099-D4",
+    "doc_type": "customer_comms",
+    "pages": 12,
+    "ref_id": "O-621143"
+   }
+  ],
+  "order_id": "O-621143",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-12",
+  "submitted_date": "",
+  "txn_date": "2026-01-29"
+ },
+ {
+  "amount_cents": 163097,
+  "case_id": "CB-0100",
+  "docs": [
+   {
+    "amount_cents": 163097,
+    "doc_date": "2026-02-13",
+    "doc_id": "CB-0100-D1",
+    "doc_type": "billing_history",
+    "pages": 2,
+    "ref_id": "O-634500"
+   },
+   {
+    "doc_date": "2025-08-19",
+    "doc_id": "CB-0100-D2",
+    "doc_type": "cancellation_terms",
+    "pages": 1,
+    "ref_id": "O-634500"
+   },
+   {
+    "doc_date": "2026-02-27",
+    "doc_id": "CB-0100-D3",
+    "doc_type": "cancel_request_log",
+    "pages": 1,
+    "ref_id": "O-308754"
+   }
+  ],
+  "order_id": "O-634500",
+  "reason_code": "RC-06",
+  "received_date": "2026-03-02",
+  "submitted_date": "",
+  "txn_date": "2026-02-13"
+ }
+]

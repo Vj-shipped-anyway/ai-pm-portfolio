@@ -1,0 +1,6 @@
+cases routed to the right queue: 412 of 480
+median days to close: 3.42
+rows loaded: 1240
+documents classified without a person: 14 of 50
+disputes reopened within a week: 158
+alerts closed on first touch: 37/91

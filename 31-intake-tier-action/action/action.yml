@@ -1,0 +1,60 @@
+name: 'Intake Tier Action'
+description: 'Recompute the risk tier of an AI intake issue from its form fields, then set one tier label and keep one comment up to date.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
+inputs:
+  catalog:
+    description: 'Optional path to a CSV (dataset_name, catalog_class) in the calling repository.'
+    required: false
+    default: ''
+  registry:
+    description: 'Optional path to a CSV (issue_number, vendor_model) in the calling repository.'
+    required: false
+    default: ''
+  github-token:
+    description: 'Token used to edit labels and comments. Needs issues: write.'
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Recompute the tier
+      shell: bash
+      env:
+        ISSUE_BODY: ${{ github.event.issue.body }}
+        ISSUE_NUMBER: ${{ github.event.issue.number }}
+        LABELS_JSON: ${{ toJSON(github.event.issue.labels.*.name) }}
+        CATALOG: ${{ inputs.catalog }}
+        REGISTRY: ${{ inputs.registry }}
+        SCRIPT: ${{ github.action_path }}/intake_tier_action.py
+        OUT: ${{ runner.temp }}/intake-tier
+      run: |
+        mkdir -p "$OUT"
+        printf '%s' "$LABELS_JSON" > "$OUT/current_labels.json"
+        args=(--issue-number "$ISSUE_NUMBER" --labels "$OUT/current_labels.json" --out-dir "$OUT" --format github)
+        if [ -n "$CATALOG" ]; then args+=(--catalog "$CATALOG"); fi
+        if [ -n "$REGISTRY" ]; then args+=(--registry "$REGISTRY"); fi
+        printf '%s' "$ISSUE_BODY" | python3 "$SCRIPT" check - "${args[@]}"
+    - name: Apply labels and comment
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        GH_REPO: ${{ github.repository }}
+        ISSUE_NUMBER: ${{ github.event.issue.number }}
+        OUT: ${{ runner.temp }}/intake-tier
+      run: |
+        while IFS= read -r label; do
+          if [ -n "$label" ]; then gh issue edit "$ISSUE_NUMBER" --remove-label "$label"; fi
+        done < "$OUT/labels_remove.txt"
+        while IFS= read -r label; do
+          if [ -n "$label" ]; then gh issue edit "$ISSUE_NUMBER" --add-label "$label"; fi
+        done < "$OUT/labels_add.txt"
+        id=$(gh api "repos/$GH_REPO/issues/$ISSUE_NUMBER/comments" --paginate \
+          --jq '.[] | select(.body | startswith("<!-- intake-tier-action -->")) | .id' | head -n 1)
+        if [ -n "$id" ]; then
+          gh api --method PATCH "repos/$GH_REPO/issues/comments/$id" --field body=@"$OUT/comment.md"
+        else
+          gh issue comment "$ISSUE_NUMBER" --body-file "$OUT/comment.md"
+        fi

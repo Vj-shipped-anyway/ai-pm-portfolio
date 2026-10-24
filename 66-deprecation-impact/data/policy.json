@@ -1,0 +1,12 @@
+{
+ "alias_max_age_days": 90,
+ "finetune_extra_days": 45,
+ "judge_extra_days": 14,
+ "lead_days": {
+  "critical": 60,
+  "low": 14,
+  "standard": 30
+ },
+ "no_eval_set_extra_days": 30,
+ "tight_margin_days": 30
+}

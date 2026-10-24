@@ -1,0 +1,9 @@
+service_id,name,domain,tier,primary_region,secondary_region,failover_mode,rto_target_min,config_version,depends_on,accepted_risk,failover_plan
+S01,payments-orchestrator,payments,1,region-a,region-b,warm_standby,30,3,S02,no,yes
+S02,payments-ledger-posting,payments,1,region-a,region-b,active_active,30,2,,no,yes
+S03,cards-auth-gateway,cards,1,region-a,region-b,warm_standby,30,5,,no,yes
+S04,channels-mobile-bff,channels,1,region-b,region-a,active_active,60,4,S03,no,yes
+S05,onboarding-identity-check,onboarding,1,region-a,region-c,warm_standby,60,1,,no,yes
+S06,payments-fx-quotes,payments,2,region-a,region-b,warm_standby,120,2,,no,yes
+S07,cards-statement-batch,cards,2,region-b,region-a,cold_restore,240,1,,no,yes
+S08,data-platform-reporting-mart,data-platform,3,region-a,,none,480,1,,yes,no

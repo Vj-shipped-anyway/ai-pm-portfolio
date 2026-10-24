@@ -1,0 +1,42 @@
+name: 'Eval Gate'
+description: 'Fail a deploy when the model snapshot that answered the probe set is not the pinned one, or when the probe results regress.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'shield'
+  color: 'gray-dark'
+inputs:
+  probes:
+    description: 'Path to the probe file (CSV with probe_id, severity, baseline_rate).'
+    required: true
+  results:
+    description: 'Path to the results file (CSV with probe_id, passes, trials, served_model).'
+    required: true
+  pin:
+    description: 'The snapshot id this deploy is meant to use. Move it only after reading the vendor notice.'
+    required: true
+  run-id:
+    description: 'Which run to read when the results file holds several (needs a run_id column).'
+    required: false
+    default: ''
+  fail-on:
+    description: 'block, review or never. The step fails at or above this decision.'
+    required: false
+    default: 'block'
+runs:
+  using: 'composite'
+  steps:
+    - name: Gate the probe results
+      shell: bash
+      env:
+        PROBES: ${{ inputs.probes }}
+        RESULTS: ${{ inputs.results }}
+        PIN: ${{ inputs.pin }}
+        RUN_ID: ${{ inputs.run-id }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/eval_gate.py
+      run: |
+        args=(check "--pin=$PIN" "--fail-on=$FAIL_ON" --format=github)
+        if [ -n "$RUN_ID" ]; then
+          args+=("--run-id=$RUN_ID")
+        fi
+        python3 "$SCRIPT" "${args[@]}" -- "$PROBES" "$RESULTS"

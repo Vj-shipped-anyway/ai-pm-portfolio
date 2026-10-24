@@ -1,0 +1,726 @@
+{
+ "as_of": "2026-06-30",
+ "status": "open",
+ "products": [
+  "auto",
+  "card",
+  "heloc",
+  "mortgage",
+  "overdraft",
+  "personal",
+  "small_business",
+  "student"
+ ],
+ "buckets": [
+  {
+   "name": "current",
+   "min": 0,
+   "max": 0
+  },
+  {
+   "name": "d01_29",
+   "min": 1,
+   "max": 29
+  },
+  {
+   "name": "d30_59",
+   "min": 30,
+   "max": 59
+  },
+  {
+   "name": "d60_89",
+   "min": 60,
+   "max": 89
+  },
+  {
+   "name": "d90_179",
+   "min": 90,
+   "max": 179
+  },
+  {
+   "name": "d180_plus",
+   "min": 180,
+   "max": null
+  }
+ ],
+ "cells": [
+  {
+   "id": "auto.current",
+   "kind": "leaf",
+   "label": "auto / current",
+   "product": "auto",
+   "bucket": "current"
+  },
+  {
+   "id": "auto.d01_29",
+   "kind": "leaf",
+   "label": "auto / d01_29",
+   "product": "auto",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "auto.d30_59",
+   "kind": "leaf",
+   "label": "auto / d30_59",
+   "product": "auto",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "auto.d60_89",
+   "kind": "leaf",
+   "label": "auto / d60_89",
+   "product": "auto",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "auto.d90_179",
+   "kind": "leaf",
+   "label": "auto / d90_179",
+   "product": "auto",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "auto.d180_plus",
+   "kind": "leaf",
+   "label": "auto / d180_plus",
+   "product": "auto",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "card.current",
+   "kind": "leaf",
+   "label": "card / current",
+   "product": "card",
+   "bucket": "current"
+  },
+  {
+   "id": "card.d01_29",
+   "kind": "leaf",
+   "label": "card / d01_29",
+   "product": "card",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "card.d30_59",
+   "kind": "leaf",
+   "label": "card / d30_59",
+   "product": "card",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "card.d60_89",
+   "kind": "leaf",
+   "label": "card / d60_89",
+   "product": "card",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "card.d90_179",
+   "kind": "leaf",
+   "label": "card / d90_179",
+   "product": "card",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "card.d180_plus",
+   "kind": "leaf",
+   "label": "card / d180_plus",
+   "product": "card",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "heloc.current",
+   "kind": "leaf",
+   "label": "heloc / current",
+   "product": "heloc",
+   "bucket": "current"
+  },
+  {
+   "id": "heloc.d01_29",
+   "kind": "leaf",
+   "label": "heloc / d01_29",
+   "product": "heloc",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "heloc.d30_59",
+   "kind": "leaf",
+   "label": "heloc / d30_59",
+   "product": "heloc",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "heloc.d60_89",
+   "kind": "leaf",
+   "label": "heloc / d60_89",
+   "product": "heloc",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "heloc.d90_179",
+   "kind": "leaf",
+   "label": "heloc / d90_179",
+   "product": "heloc",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "heloc.d180_plus",
+   "kind": "leaf",
+   "label": "heloc / d180_plus",
+   "product": "heloc",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "mortgage.current",
+   "kind": "leaf",
+   "label": "mortgage / current",
+   "product": "mortgage",
+   "bucket": "current"
+  },
+  {
+   "id": "mortgage.d01_29",
+   "kind": "leaf",
+   "label": "mortgage / d01_29",
+   "product": "mortgage",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "mortgage.d30_59",
+   "kind": "leaf",
+   "label": "mortgage / d30_59",
+   "product": "mortgage",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "mortgage.d60_89",
+   "kind": "leaf",
+   "label": "mortgage / d60_89",
+   "product": "mortgage",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "mortgage.d90_179",
+   "kind": "leaf",
+   "label": "mortgage / d90_179",
+   "product": "mortgage",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "mortgage.d180_plus",
+   "kind": "leaf",
+   "label": "mortgage / d180_plus",
+   "product": "mortgage",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "overdraft.current",
+   "kind": "leaf",
+   "label": "overdraft / current",
+   "product": "overdraft",
+   "bucket": "current"
+  },
+  {
+   "id": "overdraft.d01_29",
+   "kind": "leaf",
+   "label": "overdraft / d01_29",
+   "product": "overdraft",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "overdraft.d30_59",
+   "kind": "leaf",
+   "label": "overdraft / d30_59",
+   "product": "overdraft",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "overdraft.d60_89",
+   "kind": "leaf",
+   "label": "overdraft / d60_89",
+   "product": "overdraft",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "overdraft.d90_179",
+   "kind": "leaf",
+   "label": "overdraft / d90_179",
+   "product": "overdraft",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "overdraft.d180_plus",
+   "kind": "leaf",
+   "label": "overdraft / d180_plus",
+   "product": "overdraft",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "personal.current",
+   "kind": "leaf",
+   "label": "personal / current",
+   "product": "personal",
+   "bucket": "current"
+  },
+  {
+   "id": "personal.d01_29",
+   "kind": "leaf",
+   "label": "personal / d01_29",
+   "product": "personal",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "personal.d30_59",
+   "kind": "leaf",
+   "label": "personal / d30_59",
+   "product": "personal",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "personal.d60_89",
+   "kind": "leaf",
+   "label": "personal / d60_89",
+   "product": "personal",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "personal.d90_179",
+   "kind": "leaf",
+   "label": "personal / d90_179",
+   "product": "personal",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "personal.d180_plus",
+   "kind": "leaf",
+   "label": "personal / d180_plus",
+   "product": "personal",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "small_business.current",
+   "kind": "leaf",
+   "label": "small_business / current",
+   "product": "small_business",
+   "bucket": "current"
+  },
+  {
+   "id": "small_business.d01_29",
+   "kind": "leaf",
+   "label": "small_business / d01_29",
+   "product": "small_business",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "small_business.d30_59",
+   "kind": "leaf",
+   "label": "small_business / d30_59",
+   "product": "small_business",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "small_business.d60_89",
+   "kind": "leaf",
+   "label": "small_business / d60_89",
+   "product": "small_business",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "small_business.d90_179",
+   "kind": "leaf",
+   "label": "small_business / d90_179",
+   "product": "small_business",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "small_business.d180_plus",
+   "kind": "leaf",
+   "label": "small_business / d180_plus",
+   "product": "small_business",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "student.current",
+   "kind": "leaf",
+   "label": "student / current",
+   "product": "student",
+   "bucket": "current"
+  },
+  {
+   "id": "student.d01_29",
+   "kind": "leaf",
+   "label": "student / d01_29",
+   "product": "student",
+   "bucket": "d01_29"
+  },
+  {
+   "id": "student.d30_59",
+   "kind": "leaf",
+   "label": "student / d30_59",
+   "product": "student",
+   "bucket": "d30_59"
+  },
+  {
+   "id": "student.d60_89",
+   "kind": "leaf",
+   "label": "student / d60_89",
+   "product": "student",
+   "bucket": "d60_89"
+  },
+  {
+   "id": "student.d90_179",
+   "kind": "leaf",
+   "label": "student / d90_179",
+   "product": "student",
+   "bucket": "d90_179"
+  },
+  {
+   "id": "student.d180_plus",
+   "kind": "leaf",
+   "label": "student / d180_plus",
+   "product": "student",
+   "bucket": "d180_plus"
+  },
+  {
+   "id": "ROW.auto",
+   "kind": "derived",
+   "label": "auto total",
+   "op": "sum",
+   "inputs": [
+    "auto.current",
+    "auto.d01_29",
+    "auto.d30_59",
+    "auto.d60_89",
+    "auto.d90_179",
+    "auto.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.card",
+   "kind": "derived",
+   "label": "card total",
+   "op": "sum",
+   "inputs": [
+    "card.current",
+    "card.d01_29",
+    "card.d30_59",
+    "card.d60_89",
+    "card.d90_179",
+    "card.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.heloc",
+   "kind": "derived",
+   "label": "heloc total",
+   "op": "sum",
+   "inputs": [
+    "heloc.current",
+    "heloc.d01_29",
+    "heloc.d30_59",
+    "heloc.d60_89",
+    "heloc.d90_179",
+    "heloc.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.mortgage",
+   "kind": "derived",
+   "label": "mortgage total",
+   "op": "sum",
+   "inputs": [
+    "mortgage.current",
+    "mortgage.d01_29",
+    "mortgage.d30_59",
+    "mortgage.d60_89",
+    "mortgage.d90_179",
+    "mortgage.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.overdraft",
+   "kind": "derived",
+   "label": "overdraft total",
+   "op": "sum",
+   "inputs": [
+    "overdraft.current",
+    "overdraft.d01_29",
+    "overdraft.d30_59",
+    "overdraft.d60_89",
+    "overdraft.d90_179",
+    "overdraft.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.personal",
+   "kind": "derived",
+   "label": "personal total",
+   "op": "sum",
+   "inputs": [
+    "personal.current",
+    "personal.d01_29",
+    "personal.d30_59",
+    "personal.d60_89",
+    "personal.d90_179",
+    "personal.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.small_business",
+   "kind": "derived",
+   "label": "small_business total",
+   "op": "sum",
+   "inputs": [
+    "small_business.current",
+    "small_business.d01_29",
+    "small_business.d30_59",
+    "small_business.d60_89",
+    "small_business.d90_179",
+    "small_business.d180_plus"
+   ]
+  },
+  {
+   "id": "ROW.student",
+   "kind": "derived",
+   "label": "student total",
+   "op": "sum",
+   "inputs": [
+    "student.current",
+    "student.d01_29",
+    "student.d30_59",
+    "student.d60_89",
+    "student.d90_179",
+    "student.d180_plus"
+   ]
+  },
+  {
+   "id": "COL.current",
+   "kind": "derived",
+   "label": "current total",
+   "op": "sum",
+   "inputs": [
+    "auto.current",
+    "card.current",
+    "heloc.current",
+    "mortgage.current",
+    "overdraft.current",
+    "personal.current",
+    "small_business.current",
+    "student.current"
+   ]
+  },
+  {
+   "id": "COL.d01_29",
+   "kind": "derived",
+   "label": "d01_29 total",
+   "op": "sum",
+   "inputs": [
+    "auto.d01_29",
+    "card.d01_29",
+    "heloc.d01_29",
+    "mortgage.d01_29",
+    "overdraft.d01_29",
+    "personal.d01_29",
+    "small_business.d01_29",
+    "student.d01_29"
+   ]
+  },
+  {
+   "id": "COL.d30_59",
+   "kind": "derived",
+   "label": "d30_59 total",
+   "op": "sum",
+   "inputs": [
+    "auto.d30_59",
+    "card.d30_59",
+    "heloc.d30_59",
+    "mortgage.d30_59",
+    "overdraft.d30_59",
+    "personal.d30_59",
+    "small_business.d30_59",
+    "student.d30_59"
+   ]
+  },
+  {
+   "id": "COL.d60_89",
+   "kind": "derived",
+   "label": "d60_89 total",
+   "op": "sum",
+   "inputs": [
+    "auto.d60_89",
+    "card.d60_89",
+    "heloc.d60_89",
+    "mortgage.d60_89",
+    "overdraft.d60_89",
+    "personal.d60_89",
+    "small_business.d60_89",
+    "student.d60_89"
+   ]
+  },
+  {
+   "id": "COL.d90_179",
+   "kind": "derived",
+   "label": "d90_179 total",
+   "op": "sum",
+   "inputs": [
+    "auto.d90_179",
+    "card.d90_179",
+    "heloc.d90_179",
+    "mortgage.d90_179",
+    "overdraft.d90_179",
+    "personal.d90_179",
+    "small_business.d90_179",
+    "student.d90_179"
+   ]
+  },
+  {
+   "id": "COL.d180_plus",
+   "kind": "derived",
+   "label": "d180_plus total",
+   "op": "sum",
+   "inputs": [
+    "auto.d180_plus",
+    "card.d180_plus",
+    "heloc.d180_plus",
+    "mortgage.d180_plus",
+    "overdraft.d180_plus",
+    "personal.d180_plus",
+    "small_business.d180_plus",
+    "student.d180_plus"
+   ]
+  },
+  {
+   "id": "ALL",
+   "kind": "derived",
+   "label": "all products total",
+   "op": "sum",
+   "inputs": [
+    "COL.current",
+    "COL.d01_29",
+    "COL.d30_59",
+    "COL.d60_89",
+    "COL.d90_179",
+    "COL.d180_plus"
+   ]
+  },
+  {
+   "id": "RATE.auto",
+   "kind": "derived",
+   "label": "auto share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "auto.d30_59",
+    "auto.d60_89",
+    "auto.d90_179",
+    "auto.d180_plus"
+   ],
+   "denominator": [
+    "ROW.auto"
+   ]
+  },
+  {
+   "id": "RATE.card",
+   "kind": "derived",
+   "label": "card share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "card.d30_59",
+    "card.d60_89",
+    "card.d90_179",
+    "card.d180_plus"
+   ],
+   "denominator": [
+    "ROW.card"
+   ]
+  },
+  {
+   "id": "RATE.heloc",
+   "kind": "derived",
+   "label": "heloc share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "heloc.d30_59",
+    "heloc.d60_89",
+    "heloc.d90_179",
+    "heloc.d180_plus"
+   ],
+   "denominator": [
+    "ROW.heloc"
+   ]
+  },
+  {
+   "id": "RATE.mortgage",
+   "kind": "derived",
+   "label": "mortgage share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "mortgage.d30_59",
+    "mortgage.d60_89",
+    "mortgage.d90_179",
+    "mortgage.d180_plus"
+   ],
+   "denominator": [
+    "ROW.mortgage"
+   ]
+  },
+  {
+   "id": "RATE.overdraft",
+   "kind": "derived",
+   "label": "overdraft share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "overdraft.d30_59",
+    "overdraft.d60_89",
+    "overdraft.d90_179",
+    "overdraft.d180_plus"
+   ],
+   "denominator": [
+    "ROW.overdraft"
+   ]
+  },
+  {
+   "id": "RATE.personal",
+   "kind": "derived",
+   "label": "personal share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "personal.d30_59",
+    "personal.d60_89",
+    "personal.d90_179",
+    "personal.d180_plus"
+   ],
+   "denominator": [
+    "ROW.personal"
+   ]
+  },
+  {
+   "id": "RATE.small_business",
+   "kind": "derived",
+   "label": "small_business share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "small_business.d30_59",
+    "small_business.d60_89",
+    "small_business.d90_179",
+    "small_business.d180_plus"
+   ],
+   "denominator": [
+    "ROW.small_business"
+   ]
+  },
+  {
+   "id": "RATE.student",
+   "kind": "derived",
+   "label": "student share at d30_59 or later, bps of total",
+   "op": "ratio_bps",
+   "numerator": [
+    "student.d30_59",
+    "student.d60_89",
+    "student.d90_179",
+    "student.d180_plus"
+   ],
+   "denominator": [
+    "ROW.student"
+   ]
+  }
+ ]
+}

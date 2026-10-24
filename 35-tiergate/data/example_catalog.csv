@@ -1,0 +1,7 @@
+dataset_name,catalog_class
+branch_hours_feed,public
+card_dispute_log,confidential
+it_service_tickets,internal
+policy_manual_corpus,internal
+credit_bureau_pulls,restricted
+loan_application_files,confidential

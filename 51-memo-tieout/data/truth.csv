@@ -1,0 +1,309 @@
+memo_id,line,col,kind,expected,text
+M01,7,38,half_up_edge,ok,$1.7 million
+M01,8,52,exact_thousand,ok,"$2,486 thousand"
+M01,9,44,million_rounded,ok,$10.84 million
+M01,10,43,unit_slip,flag,"$1,650 million"
+M01,14,37,untied,flag,1.3x
+M01,15,40,covenant_round,flag,2.55x
+M01,16,39,ratio_ok,ok,1.6x
+M01,17,46,wrong_line,flag,2.1x
+M01,21,20,term_untagged,ok,51%
+M01,22,32,term_untagged,ok,1.35x
+M01,23,21,term_marked,ok,51%
+M02,7,36,million_rounded,ok,$18.8 million
+M02,8,38,half_up_edge,ok,$1.6 million
+M02,9,29,million_rounded,ok,$4.5 million
+M02,10,43,million_rounded,ok,$7.3 million
+M02,14,32,wrong_line,flag,6.1%
+M02,15,32,covenant_round,flag,1.80x
+M02,16,45,wrong_period,flag,1.13x
+M02,17,36,untied,flag,1.9x
+M02,18,38,covenant_round,flag,1.88x
+M02,19,34,untied,flag,11.6%
+M02,20,37,ratio_ok,ok,1.79x
+M03,7,47,million_rounded,ok,$3.4 million
+M03,8,31,wrong_line,flag,"$5,146 thousand"
+M03,9,42,untied,flag,$3.0 million
+M03,10,25,prose_tag_mismatch,flag,"$5,146,000"
+M03,11,26,million_rounded,ok,$81.1 million
+M03,12,37,exact_thousand,ok,"$47,912 thousand"
+M03,13,38,million_rounded,ok,$16.5 million
+M03,17,32,ratio_ok,ok,1.5x
+M03,18,46,prose_tag_mismatch,flag,2.1x
+M03,19,37,ratio_ok,ok,1.20x
+M03,20,45,ratio_ok,ok,3.71x
+M04,7,38,million_rounded,ok,$8.95 million
+M04,8,43,million_rounded,ok,$2.6 million
+M04,9,44,million_rounded,ok,$1.75 million
+M04,10,42,unparsed_form,flag,USD 8.9m
+M04,11,38,exact_thousand,ok,"$12,537 thousand"
+M04,12,35,dollars_plain,ok,"$1,962,000"
+M04,13,29,typo,flag,"$43,346 thousand"
+M04,17,46,ratio_ok,ok,2.3x
+M04,18,39,growth_wrong,flag,9.7%
+M04,19,33,growth_wrong,flag,9.7%
+M04,23,21,term_marked,ok,75%
+M05,7,38,half_up_edge,ok,$1.0 million
+M05,8,53,million_rounded,ok,$1.27 million
+M05,9,35,million_rounded,ok,$3.5 million
+M05,10,37,million_rounded,ok,$0.9 million
+M05,11,37,unit_slip,flag,$47.5 million
+M05,15,39,wrong_period,flag,1.13x
+M05,16,36,pct_ok,ok,39.4%
+M05,17,45,prose_tag_mismatch,flag,1.13x
+M05,18,45,ratio_ok,ok,2.1x
+M05,19,33,covenant_round,flag,1.12x
+M05,20,31,untied,flag,1.3x
+M06,7,33,typo,flag,"$17,379 thousand"
+M06,8,44,million_rounded,ok,$7.58 million
+M06,9,35,dollars_plain,ok,"$40,102,000"
+M06,13,39,growth_ok,ok,1.5%
+M06,14,35,untied,flag,36.3%
+M06,15,37,untied,flag,1.7x
+M06,16,31,pct_ok,ok,30.7%
+M06,17,29,prose_tag_mismatch,flag,34.3%
+M06,18,33,ratio_ok,ok,1.7x
+M06,19,37,pct_ok,ok,34.3%
+M06,23,28,term_marked,ok,3.25%
+M07,7,43,exact_thousand,ok,"$6,506 thousand"
+M07,8,47,typo,flag,"$2,635 thousand"
+M07,9,38,million_rounded,ok,$9.40 million
+M07,10,37,dollars_plain,ok,"$19,141,000"
+M07,11,43,unit_slip,flag,"$30,486 million"
+M07,12,40,exact_thousand,ok,"$2,774 thousand"
+M07,16,32,ratio_ok,ok,1.69x
+M07,17,38,growth_wrong,flag,-24.0%
+M07,18,40,stale_denominator,flag,1.83x
+M07,19,40,stale_denominator,flag,1.83x
+M07,20,36,pct_ok,ok,33.0%
+M08,7,43,typo,flag,"$3,066 thousand"
+M08,8,34,untied,flag,$8.60 million
+M08,9,23,exact_thousand,ok,$946 thousand
+M08,10,37,exact_thousand,ok,"$5,010 thousand"
+M08,14,44,unparsed_form,flag,4.3 turns
+M08,15,38,unparsed_form,flag,1.5 turns
+M08,16,37,pct_ok,ok,25.3%
+M08,17,38,covenant_round,flag,0.77x
+M08,18,38,untied,flag,1.88x
+M08,19,37,prose_tag_mismatch,flag,16.2%
+M08,20,35,untied,flag,44.2%
+M09,7,30,unparsed_form,flag,2.7 million dollars
+M09,8,47,exact_thousand,ok,"$4,996 thousand"
+M09,9,37,million_rounded,ok,$13.0 million
+M09,10,43,million_rounded,ok,$3.15 million
+M09,11,37,dollars_plain,ok,"$25,727,000"
+M09,12,36,exact_thousand,ok,"$29,425 thousand"
+M09,13,42,dollars_plain,ok,"$44,877,000"
+M09,17,29,wrong_line,flag,-2.8%
+M09,18,39,growth_ok,ok,-1.0%
+M09,22,23,term_untagged,ok,$4.0 million
+M09,23,28,term_marked,ok,3.25%
+M10,7,43,exact_thousand,ok,"$18,059 thousand"
+M10,8,41,dollars_plain,ok,"$3,303,000"
+M10,12,37,pct_ok,ok,36.2%
+M10,13,31,pct_ok,ok,33.9%
+M10,14,38,wrong_period,flag,22.7%
+M10,15,38,growth_ok,ok,0.9%
+M10,16,45,prose_tag_mismatch,flag,1.50x
+M10,17,36,untied,flag,22.7%
+M10,18,44,ratio_ok,ok,2.3x
+M10,19,37,wrong_period,flag,1.5x
+M10,23,23,term_untagged,ok,$7.5 million
+M11,7,43,exact_thousand,ok,"$13,713 thousand"
+M11,8,26,million_rounded,ok,$20.0 million
+M11,12,45,ratio_ok,ok,1.5x
+M11,13,39,growth_ok,ok,4.1%
+M11,14,46,ratio_ok,ok,1.55x
+M11,15,40,bad_tag,flag,2.3x
+M11,19,20,term_untagged,ok,40%
+M11,20,24,term_marked,ok,$10.0 million
+M11,21,21,term_marked,ok,51%
+M11,22,33,term_marked,ok,1.25x
+M11,23,27,term_untagged,ok,3.75%
+M12,7,36,typo,flag,"$2,261 thousand"
+M12,8,40,typo,flag,"$4,382 thousand"
+M12,9,44,typo,flag,"$15,086 thousand"
+M12,10,37,dollars_plain,ok,"$11,724,000"
+M12,11,35,wrong_period,flag,"$4,386 thousand"
+M12,12,29,million_rounded,ok,$9.51 million
+M12,13,53,exact_thousand,ok,"$5,161 thousand"
+M12,17,32,ratio_ok,ok,1.1x
+M12,18,44,stale_denominator,flag,3.0x
+M12,19,31,prose_tag_mismatch,flag,8.2%
+M12,20,33,growth_wrong,flag,27.6%
+M13,7,36,exact_thousand,ok,"$3,579 thousand"
+M13,8,37,unit_slip,flag,$2.9 million
+M13,9,36,unit_slip,flag,$29.2 million
+M13,10,38,exact_thousand,ok,"$2,050 thousand"
+M13,11,36,wrong_period,flag,$29.4 million
+M13,15,35,pct_ok,ok,8.4%
+M13,16,38,ratio_ok,ok,1.15x
+M13,17,38,bad_tag,flag,25.3%
+M13,18,40,ratio_ok,ok,3.98x
+M13,22,28,term_marked,ok,2.75%
+M13,23,21,term_marked,ok,60%
+M14,7,36,dollars_plain,ok,"$26,405,000"
+M14,8,34,bad_tag,flag,"$41,957 thousand"
+M14,9,26,million_rounded,ok,$60.6 million
+M14,10,43,exact_thousand,ok,"$9,959 thousand"
+M14,11,31,bad_tag,flag,$16.81 million
+M14,12,53,unit_slip,flag,$0.3 million
+M14,16,37,pct_ok,ok,37.1%
+M14,17,32,pct_ok,ok,25.3%
+M14,18,45,wrong_period,flag,2.7x
+M14,19,38,unparsed_form,flag,3.4 turns
+M14,23,27,term_untagged,ok,3.75%
+M15,7,29,unit_slip,flag,"$23,241 million"
+M15,8,44,half_up_edge,ok,$1.2 million
+M15,12,45,bad_tag,flag,2.2x
+M15,13,37,wrong_period,flag,23.6%
+M15,14,40,ratio_ok,ok,2.8x
+M15,15,40,stale_denominator,flag,3.1x
+M15,16,37,ratio_ok,ok,1.6x
+M15,17,44,untied,flag,2.87x
+M15,18,37,pct_ok,ok,15.8%
+M15,19,39,growth_wrong,flag,46.5%
+M15,23,33,term_marked,ok,1.20x
+M16,7,31,million_rounded,ok,$16.2 million
+M16,8,31,typo,flag,"$1,194 thousand"
+M16,9,29,exact_thousand,ok,"$2,314 thousand"
+M16,10,28,typo,flag,"$2,414 thousand"
+M16,11,38,half_up_edge,ok,$1.2 million
+M16,12,30,wrong_line,flag,"$30,914,000"
+M16,16,32,wrong_line,flag,3.6x
+M16,17,45,ratio_ok,ok,4.52x
+M16,18,37,pct_ok,ok,16.5%
+M16,19,35,pct_ok,ok,8.7%
+M16,20,44,covenant_round,flag,4.51x
+M17,7,34,exact_thousand,ok,"$58,747 thousand"
+M17,8,25,unit_slip,flag,$120.1 million
+M17,9,30,million_rounded,ok,$12.0 million
+M17,13,33,ratio_ok,ok,1.9x
+M17,14,36,pct_ok,ok,43.8%
+M17,15,38,pct_ok,ok,18.7%
+M17,16,38,prose_tag_mismatch,flag,35.3%
+M17,17,37,covenant_round,flag,1.11x
+M17,21,32,term_untagged,ok,1.20x
+M17,22,33,term_marked,ok,1.20x
+M17,23,21,term_marked,ok,60%
+M18,7,43,exact_thousand,ok,"$2,750 thousand"
+M18,8,25,million_rounded,ok,$19.22 million
+M18,9,26,million_rounded,ok,$66.4 million
+M18,10,43,dollars_plain,ok,"$12,747,000"
+M18,14,30,unparsed_form,flag,44.3 percent
+M18,15,38,ratio_ok,ok,1.3x
+M18,16,35,pct_ok,ok,6.1%
+M18,17,38,growth_ok,ok,9.2%
+M18,18,33,wrong_line,flag,1.9x
+M18,19,33,ratio_ok,ok,1.71x
+M18,23,21,term_marked,ok,51%
+M19,7,28,million_rounded,ok,$9.4 million
+M19,8,44,half_up_edge,ok,$2.1 million
+M19,9,37,unit_slip,flag,"$13,468 million"
+M19,13,35,unparsed_form,flag,38.4 percent
+M19,14,38,growth_ok,ok,4.7%
+M19,15,36,pct_ok,ok,37.0%
+M19,16,39,growth_ok,ok,13.4%
+M19,17,37,pct_ok,ok,37.0%
+M19,18,38,unparsed_form,flag,4.7 per cent
+M19,22,27,term_untagged,ok,3.75%
+M19,23,28,term_marked,ok,3.25%
+M20,7,38,exact_thousand,ok,$650 thousand
+M20,8,44,half_up_edge,ok,$0.7 million
+M20,9,31,typo,flag,"$9,417 thousand"
+M20,13,45,stale_denominator,flag,3.6x
+M20,14,45,stale_denominator,flag,3.6x
+M20,15,31,bad_tag,flag,"$1,612,000"
+M20,16,34,pct_ok,ok,10.1%
+M20,17,35,pct_ok,ok,7.7%
+M20,18,38,growth_wrong,flag,-15.3%
+M20,19,39,ratio_ok,ok,2.42x
+M20,20,33,growth_ok,ok,11.3%
+M21,7,43,half_up_edge,ok,$3.4 million
+M21,8,25,wrong_line,flag,$26.7 million
+M21,9,44,half_up_edge,ok,$3.4 million
+M21,10,35,exact_thousand,ok,"$8,771 thousand"
+M21,11,43,exact_thousand,ok,"$1,650 thousand"
+M21,15,32,pct_ok,ok,21.3%
+M21,16,39,growth_ok,ok,11.4%
+M21,17,31,pct_ok,ok,37.0%
+M21,18,39,ratio_ok,ok,1.28x
+M21,19,46,prose_tag_mismatch,flag,3.08x
+M21,20,45,wrong_line,flag,4.0x
+M22,7,36,wrong_period,flag,"$4,526,000"
+M22,8,37,wrong_period,flag,$2.5 million
+M22,9,43,exact_thousand,ok,"$2,650 thousand"
+M22,13,37,pct_ok,ok,18.2%
+M22,14,38,growth_wrong,flag,45.4%
+M22,15,38,growth_ok,ok,-0.4%
+M22,16,33,ratio_ok,ok,1.34x
+M22,17,33,growth_ok,ok,-0.9%
+M22,18,38,covenant_round,flag,1.61x
+M22,19,39,wrong_line,flag,4.45x
+M22,23,24,term_marked,ok,$4.0 million
+M23,7,43,exact_thousand,ok,"$1,350 thousand"
+M23,8,34,exact_thousand,ok,"$8,253 thousand"
+M23,12,38,growth_ok,ok,13.4%
+M23,13,44,stale_denominator,flag,2.4x
+M23,14,29,pct_ok,ok,6.4%
+M23,15,38,wrong_period,flag,11.3%
+M23,16,38,growth_ok,ok,11.3%
+M23,17,34,bad_tag,flag,"$17,799 thousand"
+M23,18,29,pct_ok,ok,8.3%
+M23,19,36,pct_ok,ok,33.8%
+M23,23,33,term_marked,ok,1.35x
+M24,7,35,typo,flag,"$30,468 thousand"
+M24,8,37,dollars_plain,ok,"$17,559,000"
+M24,9,41,unit_slip,flag,$0.1 million
+M24,10,43,million_rounded,ok,$1.2 million
+M24,11,29,typo,flag,"$3,413 thousand"
+M24,15,44,untied,flag,2.64x
+M24,16,38,covenant_round,flag,2.05x
+M24,17,44,ratio_ok,ok,3.3x
+M24,18,39,covenant_round,flag,3.26x
+M24,19,37,pct_ok,ok,44.2%
+M24,23,27,term_untagged,ok,2.25%
+M25,7,35,exact_thousand,ok,"$6,394 thousand"
+M25,8,52,million_rounded,ok,$2.31 million
+M25,9,31,million_rounded,ok,$43.02 million
+M25,10,35,million_rounded,ok,$1.1 million
+M25,11,43,exact_thousand,ok,"$24,351 thousand"
+M25,15,46,wrong_line,flag,1.1x
+M25,16,46,wrong_line,flag,1.3x
+M25,17,32,prose_tag_mismatch,flag,1.3x
+M25,18,37,ratio_ok,ok,1.13x
+M25,19,45,stale_denominator,flag,2.01x
+M25,20,45,ratio_ok,ok,3.9x
+M26,7,37,unit_slip,flag,$276.0 million
+M26,8,36,exact_thousand,ok,"$2,532 thousand"
+M26,9,35,unit_slip,flag,$0.8 million
+M26,10,35,typo,flag,"$7,745 thousand"
+M26,11,44,half_up_edge,ok,$2.2 million
+M26,12,53,exact_thousand,ok,"$3,086 thousand"
+M26,16,32,ratio_ok,ok,1.20x
+M26,17,32,ratio_ok,ok,1.4x
+M26,18,40,stale_denominator,flag,4.1x
+M26,19,33,growth_ok,ok,9.8%
+M26,23,27,term_untagged,ok,2.25%
+M27,7,43,exact_thousand,ok,"$44,463 thousand"
+M27,8,47,million_rounded,ok,$4.2 million
+M27,9,32,exact_thousand,ok,"$70,915 thousand"
+M27,10,29,wrong_period,flag,$3.21 million
+M27,11,39,typo,flag,"$12,664 thousand"
+M27,12,35,unparsed_form,flag,USD 26.5m
+M27,16,32,untied,flag,2.29x
+M27,17,39,wrong_period,flag,3.1x
+M27,18,38,growth_ok,ok,-0.9%
+M27,19,33,bad_tag,flag,1.7x
+M27,23,27,term_untagged,ok,2.25%
+M28,7,26,wrong_period,flag,$86.9 million
+M28,8,34,unparsed_form,flag,2.7 million dollars
+M28,9,30,untied,flag,$23.7 million
+M28,13,45,stale_denominator,flag,1.8x
+M28,14,36,untied,flag,38.3%
+M28,15,38,growth_ok,ok,11.5%
+M28,16,34,pct_ok,ok,6.6%
+M28,17,37,pct_ok,ok,30.4%
+M28,18,46,ratio_ok,ok,2.12x
+M28,19,33,growth_wrong,flag,70.2%
+M28,20,38,pct_ok,ok,25.8%

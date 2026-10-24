@@ -1,0 +1,8 @@
+txn_id,case_id,date,amount,direction,channel,counterparty
+T-E001,EX-1,2026-02-02,4900.00,in,cash,
+T-E002,EX-1,2026-02-03,4950.00,in,cash,
+T-E003,EX-1,2026-02-05,4875.00,in,cash,
+T-E004,EX-1,2026-02-06,14500.00,out,wire,Tessel Trading Ltd.
+T-E005,EX-1,2026-02-10,2300.00,in,ach,Brindle Foods Inc.
+T-E006,EX-1,2026-02-12,3100.00,out,wire,Ostrel Marine LLC
+T-E101,EX-2,2026-03-01,9000.00,out,wire,Kestrel Row Imports

@@ -1,0 +1,72 @@
+"""Build demo.html from the files in out/. Run step_04_with_claims_check.py first. Run (from src/): python3 _build_demo.py"""
+import csv
+import json
+import os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+OUT = os.path.join(HERE, "out")
+with open(os.path.join(OUT, "step_04_results.csv"), newline="", encoding="utf-8") as fh:
+    rows = list(csv.DictReader(fh))
+with open(os.path.join(OUT, "step_04_summary.json"), encoding="utf-8") as fh:
+    summary = json.load(fh)
+with open(os.path.join(OUT, "demo_run.txt"), encoding="utf-8") as fh:
+    demo_run = fh.read()
+
+
+def embed(obj):
+    return json.dumps(obj).replace("</", "<\\/")
+
+
+page = """<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims Check: README numbers against script output</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#5b6470;--line:#d9dde3;--bad:#b3261e;--warn:#8a5a00;--good:#1e6b3a;--code:#f3f4f6}
+@media (prefers-color-scheme: dark){:root{--bg:#14161a;--fg:#e8eaed;--mut:#9aa3ad;--line:#2c3138;--bad:#ff8a80;--warn:#ffc266;--good:#7fd49a;--code:#1d2026}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:24px 16px}
+h1{font-size:22px;margin:0 0 6px}h2{font-size:16px;margin:22px 0 6px}p.s{color:var(--mut);margin:0 0 16px}
+.k{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.k div{border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:120px}.k b{font-size:20px;display:block}
+pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;font-size:13px}
+label{margin-right:12px;color:var(--mut);display:inline-block;margin-bottom:6px}
+select{background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:4px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;min-width:640px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;white-space:nowrap}
+.flag{color:var(--bad);font-weight:600}.pass{color:var(--good);font-weight:600}.miss,.alarm{color:var(--warn);font-weight:600}
+.wrap{overflow-x:auto}
+</style></head><body><main>
+<h1>Claims Check: README numbers against script output</h1>
+<p class="s">Synthetic data. Each row is a green bullet in a made-up README. The expected column is how I built the bullet; the next two columns are what each check printed.</p>
+<div class="k" id="k"></div>
+<h2>One run on the bundled example</h2>
+<pre id="demo"></pre>
+<h2>All planted bullets</h2>
+<div><label>Planted kind <select id="kind"><option value="">all</option></select></label>
+<label>Expected <select id="exp"><option value="">all</option><option value="flag">flag</option><option value="ok">ok</option></select></label>
+<label>claims-check call <select id="call"><option value="">all</option><option value="correct">correct</option><option value="missed">missed</option><option value="false alarm">false alarm</option></select></label>
+<span id="n" class="s"></span></div>
+<div class="wrap"><table><thead><tr><th>Project</th><th>Line</th><th>Planted kind</th><th>Expected</th><th>claims-check</th><th>grep</th><th>Call</th></tr></thead><tbody id="b"></tbody></table></div>
+<p class="s">Known misses: coincidence (a wrong number that equals another printed number) and single_digit (numbers of one digit are skipped). Known false alarm: pair_split (both numbers printed, on separate lines). Source: <code>python3 step_04_with_claims_check.py</code>.</p>
+</main>
+<script>
+var ROWS=__ROWS__, SUM=__SUM__, RUN=__RUN__;
+function call(r){if(r.expected==='flag')return r.claims_check==='flag'?'correct':'missed';return r.claims_check==='flag'?'false alarm':'correct';}
+var k=document.getElementById('k');
+[[SUM.caught+' of '+SUM.unsupported,'unsupported caught'],[SUM.false_alarms+' of '+SUM.supported,'fine flagged'],[SUM.grep_caught+' of '+SUM.unsupported,'caught by grep'],[SUM.to_open+' of '+SUM.bullets,'bullets to open']].forEach(function(x){
+var d=document.createElement('div'),b=document.createElement('b');b.textContent=x[0];d.appendChild(b);d.appendChild(document.createTextNode(x[1]));k.appendChild(d);});
+document.getElementById('demo').textContent=RUN;
+var kinds=[];ROWS.forEach(function(r){if(kinds.indexOf(r.kind)<0)kinds.push(r.kind);});kinds.sort();
+var ks=document.getElementById('kind');kinds.forEach(function(x){var o=document.createElement('option');o.value=x;o.textContent=x;ks.appendChild(o);});
+function draw(){var kv=ks.value,ev=document.getElementById('exp').value,cv=document.getElementById('call').value,b=document.getElementById('b');b.textContent='';var c=0;
+ROWS.forEach(function(r){var cl=call(r);if((kv&&r.kind!==kv)||(ev&&r.expected!==ev)||(cv&&cl!==cv))return;c++;var tr=document.createElement('tr');
+[r.project_id,r.line_start,r.kind,r.expected,r.claims_check,r.grep,cl].forEach(function(v,i){var td=document.createElement('td');td.textContent=v;
+if(i===4||i===5)td.className=v;if(i===6&&v!=='correct')td.className=v==='missed'?'miss':'alarm';tr.appendChild(td);});b.appendChild(tr);});
+document.getElementById('n').textContent=c+' shown';}
+['kind','exp','call'].forEach(function(id){document.getElementById(id).onchange=draw;});draw();
+</script></body></html>
+"""
+page = page.replace("__ROWS__", embed(rows)).replace("__SUM__", embed(summary)).replace("__RUN__", embed(demo_run))
+with open(os.path.join(HERE, "..", "demo.html"), "w", encoding="utf-8", newline="\n") as fh:
+    fh.write(page)
+print("Wrote demo.html")

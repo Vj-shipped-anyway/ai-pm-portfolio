@@ -1,0 +1,151 @@
+use_case_id,title,model_type,vendor_model,customer_facing,decision_autonomy,data_class,regulatory_scope,financial_exposure_band,developer_unit,deployed_version,declared_tier
+UC-001,Wire limit rule engine (Digital Channels),rules,vendor_api,yes,advisory,confidential,udaap,10m_50m,Digital Channels,2.4,3
+UC-002,Transaction anomaly detector (Fraud Strategy),ml,none,yes,automated,confidential,none,1m_10m,Fraud Strategy,3.2,3
+UC-003,Dispute letter drafting assistant (Payments Operations),generative,vendor_api,no,assisted,internal,udaap,lt_1m,Payments Operations,1.4,2
+UC-004,Loan loss reserve estimator (Fraud Strategy),statistical,vendor_api,yes,assisted,confidential,aml,10m_50m,Fraud Strategy,1.1,3
+UC-005,Dispute letter drafting assistant (Treasury),generative,vendor_api,no,automated,public,privacy,lt_1m,Treasury,2.4,2
+UC-006,Branch cash demand forecast (Payments Operations),statistical,none,no,assisted,confidential,fair_lending,10m_50m,Payments Operations,1.2,3
+UC-007,Loan loss reserve estimator (Treasury),statistical,none,no,automated,public,none,lt_1m,Treasury,2.1,1
+UC-008,Card spend seasonality model (Retail Lending),statistical,none,no,assisted,confidential,fair_lending,10m_50m,Retail Lending,1.4,3
+UC-009,Statement query agent (Retail Lending),agentic,vendor_api,no,assisted,confidential,privacy,lt_1m,Retail Lending,3.3,2
+UC-010,Call note summariser (Collections),generative,none,no,advisory,internal,none,1m_10m,Collections,1.3,1
+UC-011,Overdraft fee waiver rules (Fraud Strategy),rules,none,no,automated,internal,privacy,1m_10m,Fraud Strategy,1.3,2
+UC-012,Merchant risk scoring (Retail Lending),ml,vendor_api,no,assisted,internal,aml,lt_1m,Retail Lending,3.2,1
+UC-013,Payment exception resolution agent (Digital Channels),agentic,vendor_api,no,assisted,restricted,privacy,1m_10m,Digital Channels,2.3,2
+UC-014,Deposit attrition forecast (Collections),statistical,vendor_api,no,advisory,internal,none,10m_50m,Collections,2.0,2
+UC-015,Branch cash demand forecast (Payments Operations),statistical,none,yes,automated,internal,privacy,1m_10m,Payments Operations,3.1,3
+UC-016,Dispute letter drafting assistant (Cards),generative,none,no,advisory,internal,none,lt_1m,Cards,1.2,1
+UC-017,Dispute letter drafting assistant (Payments Operations),generative,vendor_api,yes,assisted,restricted,privacy,1m_10m,Payments Operations,2.0,3
+UC-018,Procedure search assistant (Fraud Strategy),generative,self_hosted,no,advisory,confidential,aml,lt_1m,Fraud Strategy,1.4,1
+UC-019,Early-warning delinquency score (Collections),ml,none,no,advisory,internal,privacy,lt_1m,Collections,2.2,1
+UC-020,Collections roll-rate model (Cards),statistical,none,no,advisory,confidential,aml,1m_10m,Cards,3.0,2
+UC-021,Transaction anomaly detector (Cards),ml,self_hosted,no,assisted,confidential,none,gt_50m,Cards,3.3,1
+UC-022,Branch cash demand forecast (Payments Operations),statistical,none,no,automated,public,none,lt_1m,Payments Operations,1.2,1
+UC-023,Customer churn propensity (Treasury),ml,none,no,assisted,restricted,udaap,1m_10m,Treasury,2.0,1
+UC-024,Reconciliation break agent (Fraud Strategy),agentic,none,yes,advisory,restricted,none,10m_50m,Fraud Strategy,2.3,2
+UC-025,Dispute letter drafting assistant (Cards),generative,self_hosted,yes,advisory,internal,fair_lending,gt_50m,Cards,2.0,3
+UC-026,Branch cash demand forecast (Cards),statistical,none,no,assisted,confidential,aml,1m_10m,Cards,1.3,2
+UC-027,KYC refresh outreach agent (Treasury),agentic,vendor_api,no,assisted,confidential,fair_lending,gt_50m,Treasury,3.2,3
+UC-028,Payment fraud scoring (Cards),ml,none,no,advisory,public,fair_lending,lt_1m,Cards,2.0,1
+UC-029,KYC refresh outreach agent (Collections),agentic,vendor_api,no,assisted,confidential,privacy,1m_10m,Collections,1.4,2
+UC-030,Call note summariser (Fraud Strategy),generative,none,yes,assisted,confidential,privacy,gt_50m,Fraud Strategy,3.2,3
+UC-031,Deposit attrition forecast (Digital Channels),statistical,none,no,assisted,internal,none,lt_1m,Digital Channels,3.0,1
+UC-032,Sanctions list screening rules (Treasury),rules,none,no,advisory,restricted,udaap,1m_10m,Treasury,3.2,2
+UC-033,Customer churn propensity (Retail Lending),ml,vendor_api,no,advisory,confidential,aml,lt_1m,Retail Lending,1.4,2
+UC-034,Early-warning delinquency score (Collections),ml,none,no,assisted,confidential,privacy,1m_10m,Collections,2.1,2
+UC-035,Early-warning delinquency score (Treasury),ml,none,yes,advisory,restricted,privacy,10m_50m,Treasury,2.1,3
+UC-036,Statement query agent (Fraud Strategy),agentic,none,yes,advisory,restricted,fair_lending,1m_10m,Fraud Strategy,2.3,3
+UC-037,Procedure search assistant (Digital Channels),generative,none,yes,advisory,public,udaap,gt_50m,Digital Channels,3.2,2
+UC-038,Payment fraud scoring (Fraud Strategy),ml,none,yes,assisted,confidential,none,lt_1m,Fraud Strategy,3.2,2
+UC-039,Loan loss reserve estimator (Payments Operations),statistical,self_hosted,no,automated,restricted,aml,1m_10m,Payments Operations,3.2,3
+UC-040,Collections roll-rate model (Cards),statistical,none,no,automated,internal,udaap,1m_10m,Cards,3.2,2
+UC-041,Procedure search assistant (Retail Lending),generative,none,no,advisory,public,privacy,1m_10m,Retail Lending,3.4,1
+UC-042,Customer churn propensity (Retail Lending),ml,vendor_api,yes,assisted,restricted,udaap,gt_50m,Retail Lending,3.4,3
+UC-043,Early-warning delinquency score (Digital Channels),ml,vendor_api,yes,assisted,public,aml,lt_1m,Digital Channels,3.4,2
+UC-044,Complaint summarisation assistant (Payments Operations),generative,vendor_api,yes,assisted,public,privacy,10m_50m,Payments Operations,1.3,3
+UC-045,Complaint summarisation assistant (Fraud Strategy),generative,self_hosted,yes,automated,internal,privacy,10m_50m,Fraud Strategy,1.4,3
+UC-046,Deposit attrition forecast (Treasury),statistical,none,no,advisory,restricted,aml,10m_50m,Treasury,3.3,1
+UC-047,Payment exception resolution agent (Fraud Strategy),agentic,none,no,assisted,restricted,aml,lt_1m,Fraud Strategy,2.3,2
+UC-048,Card spend seasonality model (Retail Lending),statistical,self_hosted,no,automated,restricted,udaap,1m_10m,Retail Lending,2.0,2
+UC-049,Card spend seasonality model (Retail Lending),statistical,vendor_api,yes,assisted,restricted,privacy,gt_50m,Retail Lending,2.2,4
+UC-050,Transaction anomaly detector (Treasury),ml,vendor_api,no,assisted,internal,aml,gt_50m,Treasury,2.2,3
+UC-051,Call note summariser (Payments Operations),generative,vendor_api,no,automated,restricted,none,10m_50m,Payments Operations,3.0,3
+UC-052,Transaction anomaly detector (Treasury),ml,none,yes,automated,public,fair_lending,10m_50m,Treasury,1.3,3
+UC-053,Customer churn propensity (Treasury),ml,none,no,automated,confidential,privacy,gt_50m,Treasury,2.1,3
+UC-054,Policy question assistant (Retail Lending),generative,none,yes,assisted,restricted,udaap,1m_10m,Retail Lending,2.0,2
+UC-055,Card spend seasonality model (Fraud Strategy),statistical,vendor_api,no,advisory,internal,aml,10m_50m,Fraud Strategy,3.4,2
+UC-056,Early-warning delinquency score (Cards),ml,none,no,assisted,public,none,10m_50m,Cards,1.1,1
+UC-057,Loan loss reserve estimator (Fraud Strategy),statistical,self_hosted,yes,assisted,confidential,fair_lending,lt_1m,Fraud Strategy,1.3,2
+UC-058,Transaction anomaly detector (Retail Lending),ml,vendor_api,no,advisory,restricted,privacy,10m_50m,Retail Lending,1.2,3
+UC-059,Wire limit rule engine (Digital Channels),rules,none,yes,assisted,internal,aml,gt_50m,Digital Channels,2.2,3
+UC-060,Overdraft fee waiver rules (Treasury),rules,self_hosted,no,advisory,public,aml,1m_10m,Treasury,1.2,2
+UC-061,Early-warning delinquency score (Treasury),ml,none,no,assisted,internal,none,10m_50m,Treasury,2.1,1
+UC-062,Complaint summarisation assistant (Digital Channels),generative,none,no,assisted,restricted,privacy,1m_10m,Digital Channels,1.2,2
+UC-063,Overdraft fee waiver rules (Digital Channels),rules,none,no,automated,internal,privacy,10m_50m,Digital Channels,3.4,2
+UC-064,Card spend seasonality model (Digital Channels),statistical,none,no,automated,internal,privacy,lt_1m,Digital Channels,3.2,2
+UC-065,Early-warning delinquency score (Digital Channels),ml,vendor_api,no,automated,internal,aml,10m_50m,Digital Channels,1.4,3
+UC-066,Customer churn propensity (Collections),ml,self_hosted,no,automated,confidential,fair_lending,1m_10m,Collections,1.3,3
+UC-067,Procedure search assistant (Treasury),generative,vendor_api,no,automated,internal,none,gt_50m,Treasury,1.3,3
+UC-068,Wire limit rule engine (Collections),rules,vendor_api,yes,assisted,confidential,privacy,1m_10m,Collections,2.0,3
+UC-069,Branch cash demand forecast (Digital Channels),statistical,none,no,automated,confidential,udaap,10m_50m,Digital Channels,3.0,2
+UC-070,Dormant account flagging rules (Cards),rules,none,yes,assisted,internal,none,gt_50m,Cards,1.2,1
+UC-071,Deposit attrition forecast (Digital Channels),statistical,none,no,assisted,public,none,lt_1m,Digital Channels,3.1,1
+UC-072,Dispute letter drafting assistant (Digital Channels),generative,vendor_api,yes,automated,restricted,privacy,1m_10m,Digital Channels,2.2,4
+UC-073,Card spend seasonality model (Collections),statistical,none,no,advisory,internal,udaap,gt_50m,Collections,2.0,1
+UC-074,Customer churn propensity (Treasury),ml,none,yes,advisory,restricted,fair_lending,10m_50m,Treasury,2.1,3
+UC-075,Overdraft fee waiver rules (Fraud Strategy),rules,none,no,advisory,internal,none,10m_50m,Fraud Strategy,3.3,1
+UC-076,Dormant account flagging rules (Treasury),rules,none,no,assisted,restricted,udaap,10m_50m,Treasury,2.4,3
+UC-077,Procedure search assistant (Treasury),generative,vendor_api,yes,advisory,confidential,udaap,lt_1m,Treasury,3.3,3
+UC-078,Sanctions list screening rules (Fraud Strategy),rules,vendor_api,yes,assisted,internal,none,1m_10m,Fraud Strategy,2.3,2
+UC-079,Reconciliation break agent (Treasury),agentic,self_hosted,yes,advisory,restricted,udaap,lt_1m,Treasury,1.2,3
+UC-080,Reconciliation break agent (Retail Lending),agentic,vendor_api,no,assisted,confidential,udaap,1m_10m,Retail Lending,1.2,2
+UC-081,Transaction anomaly detector (Cards),ml,none,no,advisory,confidential,udaap,10m_50m,Cards,1.2,1
+UC-082,Call note summariser (Fraud Strategy),generative,vendor_api,no,assisted,public,fair_lending,gt_50m,Fraud Strategy,3.0,3
+UC-083,Complaint summarisation assistant (Digital Channels),generative,self_hosted,yes,automated,internal,udaap,lt_1m,Digital Channels,2.1,3
+UC-084,Dispute letter drafting assistant (Digital Channels),generative,none,yes,automated,confidential,privacy,10m_50m,Digital Channels,2.4,3
+UC-085,Card spend seasonality model (Digital Channels),statistical,none,no,advisory,confidential,privacy,gt_50m,Digital Channels,2.0,2
+UC-086,Payment fraud scoring (Retail Lending),ml,none,no,automated,restricted,udaap,10m_50m,Retail Lending,3.2,3
+UC-087,Merchant risk scoring (Retail Lending),ml,none,no,assisted,internal,none,lt_1m,Retail Lending,1.2,1
+UC-088,Payment exception resolution agent (Digital Channels),agentic,self_hosted,no,automated,public,none,1m_10m,Digital Channels,1.3,2
+UC-089,Early-warning delinquency score (Retail Lending),ml,self_hosted,yes,advisory,confidential,none,lt_1m,Retail Lending,3.1,2
+UC-090,Customer churn propensity (Collections),ml,vendor_api,no,assisted,restricted,aml,10m_50m,Collections,3.2,2
+UC-091,Policy question assistant (Digital Channels),generative,vendor_api,no,automated,internal,aml,10m_50m,Digital Channels,3.0,2
+UC-092,Card spend seasonality model (Payments Operations),statistical,none,no,automated,confidential,none,1m_10m,Payments Operations,1.3,2
+UC-093,Branch cash demand forecast (Treasury),statistical,vendor_api,no,automated,internal,privacy,1m_10m,Treasury,2.2,3
+UC-094,Loan loss reserve estimator (Treasury),statistical,none,no,advisory,restricted,aml,10m_50m,Treasury,2.1,2
+UC-095,Branch cash demand forecast (Fraud Strategy),statistical,none,no,automated,public,fair_lending,1m_10m,Fraud Strategy,1.2,1
+UC-096,Overdraft fee waiver rules (Digital Channels),rules,none,no,assisted,internal,udaap,1m_10m,Digital Channels,1.4,2
+UC-097,Collections roll-rate model (Collections),statistical,none,yes,assisted,restricted,udaap,1m_10m,Collections,1.2,3
+UC-098,Dispute letter drafting assistant (Treasury),generative,vendor_api,no,assisted,restricted,privacy,10m_50m,Treasury,1.4,3
+UC-099,KYC refresh outreach agent (Payments Operations),agentic,vendor_api,yes,assisted,internal,privacy,1m_10m,Payments Operations,1.1,3
+UC-100,Collections roll-rate model (Treasury),statistical,none,no,advisory,restricted,none,lt_1m,Treasury,2.2,1
+UC-101,Merchant risk scoring (Collections),ml,none,yes,assisted,internal,fair_lending,lt_1m,Collections,3.2,2
+UC-102,Customer churn propensity (Cards),ml,vendor_api,no,automated,public,aml,10m_50m,Cards,1.3,3
+UC-103,Merchant risk scoring (Digital Channels),ml,vendor_api,no,advisory,confidential,privacy,1m_10m,Digital Channels,1.1,3
+UC-104,Policy question assistant (Digital Channels),generative,vendor_api,no,assisted,public,none,10m_50m,Digital Channels,3.0,2
+UC-105,Dispute letter drafting assistant (Collections),generative,vendor_api,no,assisted,restricted,privacy,10m_50m,Collections,1.3,3
+UC-106,Branch cash demand forecast (Digital Channels),statistical,none,no,advisory,restricted,none,10m_50m,Digital Channels,1.0,1
+UC-107,Call note summariser (Cards),generative,vendor_api,yes,assisted,confidential,none,gt_50m,Cards,1.1,3
+UC-108,Transaction anomaly detector (Treasury),ml,vendor_api,yes,assisted,restricted,aml,gt_50m,Treasury,2.1,3
+UC-109,Collections roll-rate model (Payments Operations),statistical,none,no,assisted,public,privacy,10m_50m,Payments Operations,3.3,2
+UC-110,Card spend seasonality model (Collections),statistical,none,no,assisted,public,privacy,gt_50m,Collections,1.0,1
+UC-111,Customer churn propensity (Cards),ml,vendor_api,yes,automated,restricted,none,10m_50m,Cards,1.2,4
+UC-112,Card spend seasonality model (Digital Channels),statistical,none,no,automated,restricted,privacy,lt_1m,Digital Channels,1.3,2
+UC-113,Deposit attrition forecast (Retail Lending),statistical,none,no,assisted,internal,fair_lending,1m_10m,Retail Lending,2.0,2
+UC-114,Customer churn propensity (Retail Lending),ml,none,yes,automated,internal,none,gt_50m,Retail Lending,2.1,2
+UC-115,Call note summariser (Payments Operations),generative,vendor_api,yes,automated,confidential,udaap,lt_1m,Payments Operations,1.1,3
+UC-116,Policy question assistant (Payments Operations),generative,vendor_api,no,advisory,restricted,aml,10m_50m,Payments Operations,3.2,3
+UC-117,Transaction anomaly detector (Digital Channels),ml,vendor_api,no,assisted,confidential,aml,lt_1m,Digital Channels,2.2,1
+UC-118,Early-warning delinquency score (Cards),ml,self_hosted,yes,advisory,internal,fair_lending,10m_50m,Cards,2.4,3
+UC-119,Procedure search assistant (Fraud Strategy),generative,vendor_api,yes,automated,confidential,aml,1m_10m,Fraud Strategy,3.2,4
+UC-120,Procedure search assistant (Collections),generative,self_hosted,no,automated,public,none,1m_10m,Collections,2.1,2
+UC-121,Dispute letter drafting assistant (Fraud Strategy),generative,self_hosted,yes,assisted,confidential,aml,10m_50m,Fraud Strategy,2.3,3
+UC-122,Policy question assistant (Payments Operations),generative,none,no,assisted,confidential,privacy,1m_10m,Payments Operations,3.4,2
+UC-123,Merchant risk scoring (Retail Lending),ml,self_hosted,yes,advisory,confidential,fair_lending,1m_10m,Retail Lending,3.1,3
+UC-124,Early-warning delinquency score (Fraud Strategy),ml,none,yes,advisory,restricted,privacy,lt_1m,Fraud Strategy,1.1,2
+UC-125,Merchant risk scoring (Treasury),ml,none,yes,advisory,restricted,privacy,gt_50m,Treasury,1.1,3
+UC-126,Transaction anomaly detector (Payments Operations),ml,vendor_api,yes,assisted,restricted,fair_lending,lt_1m,Payments Operations,2.0,3
+UC-127,Card spend seasonality model (Payments Operations),statistical,vendor_api,yes,automated,internal,privacy,10m_50m,Payments Operations,2.3,3
+UC-128,Call note summariser (Collections),generative,vendor_api,yes,advisory,internal,udaap,1m_10m,Collections,2.4,3
+UC-129,Deposit attrition forecast (Cards),statistical,self_hosted,yes,assisted,public,privacy,gt_50m,Cards,1.0,2
+UC-130,Branch cash demand forecast (Collections),statistical,none,no,advisory,restricted,privacy,lt_1m,Collections,3.4,2
+UC-131,Policy question assistant (Cards),generative,none,no,assisted,restricted,fair_lending,1m_10m,Cards,3.2,2
+UC-132,Branch cash demand forecast (Collections),statistical,none,no,assisted,confidential,aml,lt_1m,Collections,1.0,1
+UC-133,Deposit attrition forecast (Retail Lending),statistical,self_hosted,yes,automated,confidential,aml,10m_50m,Retail Lending,3.0,4
+UC-134,Merchant risk scoring (Fraud Strategy),ml,vendor_api,no,advisory,confidential,aml,10m_50m,Fraud Strategy,3.3,3
+UC-135,KYC refresh outreach agent (Treasury),agentic,none,no,assisted,internal,fair_lending,1m_10m,Treasury,2.0,2
+UC-136,Call note summariser (Digital Channels),generative,vendor_api,yes,assisted,internal,none,1m_10m,Digital Channels,3.3,2
+UC-137,Transaction anomaly detector (Fraud Strategy),ml,self_hosted,yes,automated,confidential,fair_lending,lt_1m,Fraud Strategy,1.0,2
+UC-138,Policy question assistant (Fraud Strategy),generative,vendor_api,no,automated,internal,udaap,gt_50m,Fraud Strategy,2.0,3
+UC-139,Overdraft fee waiver rules (Treasury),rules,vendor_api,no,assisted,internal,udaap,1m_10m,Treasury,3.1,1
+UC-140,Early-warning delinquency score (Payments Operations),ml,none,no,assisted,restricted,none,lt_1m,Payments Operations,3.3,2
+UC-141,Complaint summarisation assistant (Digital Channels),generative,none,yes,automated,internal,udaap,lt_1m,Digital Channels,1.2,3
+UC-142,Call note summariser (Retail Lending),generative,none,no,automated,confidential,privacy,10m_50m,Retail Lending,3.1,3
+UC-143,Sanctions list screening rules (Treasury),rules,vendor_api,yes,advisory,confidential,none,10m_50m,Treasury,1.0,3
+UC-144,Payment fraud scoring (Fraud Strategy),ml,none,yes,advisory,confidential,privacy,10m_50m,Fraud Strategy,1.1,2
+UC-145,Dispute letter drafting assistant (Digital Channels),generative,vendor_api,no,automated,public,privacy,1m_10m,Digital Channels,3.4,2
+UC-146,Loan loss reserve estimator (Fraud Strategy),statistical,self_hosted,no,automated,internal,fair_lending,1m_10m,Fraud Strategy,3.4,2
+UC-147,Merchant risk scoring (Collections),ml,vendor_api,no,assisted,restricted,privacy,1m_10m,Collections,3.3,3
+UC-148,Merchant risk scoring (Retail Lending),ml,vendor_api,no,automated,internal,udaap,1m_10m,Retail Lending,2.0,4
+UC-149,Loan loss reserve estimator (Collections),statistical,none,no,advisory,internal,privacy,1m_10m,Collections,2.2,1
+UC-150,Complaint summarisation assistant (Collections),generative,vendor_api,yes,advisory,public,udaap,1m_10m,Collections,2.3,2

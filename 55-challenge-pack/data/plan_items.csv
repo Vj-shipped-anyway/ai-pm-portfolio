@@ -1,0 +1,17 @@
+item_id,min_tier,independent,overlay
+CH01,1,0,
+CH02,1,0,
+CH03,1,0,
+CH04,2,0,
+CH05,2,0,
+CH06,2,0,
+CH07,3,1,
+CH08,3,1,
+CH09,3,0,
+CH10,3,1,
+CH11,4,1,
+CH12,4,1,
+CH13,4,1,
+V01,1,0,vendor
+V02,2,1,vendor
+G01,1,1,scope

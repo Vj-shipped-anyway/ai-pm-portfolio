@@ -1,0 +1,14 @@
+queue_id,kind,true_seats,late_share_at_truth,utilization_at_truth,planted
+onboarding_review,plain,4,0.0953,0.7486,"Poisson arrivals, handling times near the exponential case Erlang C assumes"
+complaint_triage,plain,4,0.0289,0.5294,"same as above, shorter handling"
+payment_exception_review,plain,5,0.0316,0.7866,"same as above, longer handling, looser share"
+sanctions_alert_review,variable_handling,4,0.0156,0.6354,"most alerts clear in minutes, one in eight takes an hour and a half"
+dispute_summary_check,variable_handling,4,0.0983,0.6656,one long-tailed handling distribution
+fraud_alert_review,opening_batch,7,0.0900,0.2720,an overnight scoring run drops about 30 cases at open
+kyc_refresh_review,opening_batch,7,0.0511,0.3279,a periodic-review batch lands at open
+card_dispute_wave,bursty_arrivals,6,0.0430,0.4477,busy and quiet spells of about 45 minutes alternate
+model_override_audit,low_variance,5,0.0147,0.7704,handling times close to constant
+adverse_media_review,hard_negative,4,0.0069,0.6840,"a batch and long-tailed handling, but a four-hour target absorbs both"
+policy_qa_escalations,hard_negative,2,0.0844,0.4967,bursty arrivals on a light load with a loose target
+payment_limit_exceptions,drift,5,0.0037,0.6822,live volume is 1.4 times higher on days 11 to 20; the history cannot show it
+document_extraction_exceptions,heavy_tail,4,0.0223,0.5944,one case in twenty-five takes two hours; ten days hold about thirty of them

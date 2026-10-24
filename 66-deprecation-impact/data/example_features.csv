@@ -1,0 +1,6 @@
+feature_id,feature_name,owner_team,business_line,criticality,has_eval_set,sunset_date
+EX-1,dispute-summary,team-cards,cards,critical,yes,
+EX-2,kyc-doc-reader,team-retail,retail,standard,no,
+EX-3,complaint-classifier,team-retail,retail,low,yes,
+EX-4,fee-query-answerer,team-cards,cards,standard,yes,
+EX-5,statement-explainer,team-payments,payments,critical,yes,

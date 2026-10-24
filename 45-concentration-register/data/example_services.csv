@@ -1,0 +1,11 @@
+service_id,name,owner_type,criticality,provider,region,resilience,standby_provider,standby_region
+P-1,identity platform,saas,critical,CP-2,R1,single,,
+P-2,message bus,internal,important,CP-2,R1,single,,
+S-01,card authorization api,internal,critical,CP-1,R1,single,,
+S-02,wire transfers engine,internal,critical,CP-1,R2,warm_standby,CP-3,R1
+S-03,retail payments api,internal,critical,CP-3,R1,single,,
+S-04,online banking portal,internal,critical,CP-3,R2,active_active,CP-1,R1
+S-05,fraud screening engine,saas,critical,,,,,
+S-06,statement delivery batch,internal,important,CP-1,R1,warm_standby,CP-1,R1
+S-07,treasury reporting portal,internal,standard,CP-1,R2,single,,
+S-08,dispute handling portal,internal,critical,CP-1,R1,single,,

@@ -1,0 +1,8 @@
+submission_id,instruction_id,mandate_id,agent_id,received_at,payee_id,payee_name,payee_account_ref,amount,currency,rail,category,memo
+S-0001,D-01,M-DEMO,AG-DEMO,2026-05-12T09:02:11Z,PY-D1,Halvern Power,AC-D1,180.00,USD,ach,utilities,demo
+S-0002,D-02,M-DEMO,AG-DEMO,2026-05-12T09:40:03Z,PY-D2,Orsen Provisions,AC-D2,320.00,USD,card,groceries,demo
+S-0003,D-03,M-DEMO,AG-DEMO,2026-05-12T10:15:45Z,PY-D1,Halvern Power,AC-D1,240.00,USD,ach,utilities,demo
+S-0004,D-04,M-DEMO,AG-DEMO,2026-05-12T11:05:20Z,PY-X9,Corvane Supplies,AC-X9,90.00,USD,ach,groceries,demo
+S-0005,D-05,M-DEMO,AG-DEMO,2026-05-12T13:30:00Z,PY-D2,Orsen Provisions,AC-D2,240.00,USD,card,groceries,demo
+S-0006,D-06,M-DEMO,AG-DEMO,2026-05-12T14:00:30Z,PY-D1,Halvern Power,AC-D1,240.00,USD,ach,utilities,demo
+S-0007,D-07,M-DEMO,AG-DEMO,2026-05-12T15:20:12Z,PY-D2,Orsen Provisions,AC-D2,100.00,USD,card,groceries,demo

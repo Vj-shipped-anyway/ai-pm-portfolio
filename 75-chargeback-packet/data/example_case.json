@@ -1,0 +1,26 @@
+{
+ "amount_cents": 12900,
+ "case_id": "CB-DEMO",
+ "docs": [
+  {
+   "amount_cents": 12900,
+   "doc_date": "2026-01-10",
+   "doc_id": "CB-DEMO-D1",
+   "doc_type": "order_record",
+   "pages": 1,
+   "ref_id": "O-482910"
+  },
+  {
+   "doc_date": "2026-01-15",
+   "doc_id": "CB-DEMO-D2",
+   "doc_type": "customer_comms",
+   "pages": 2,
+   "ref_id": "O-482910"
+  }
+ ],
+ "order_id": "O-482910",
+ "reason_code": "RC-02",
+ "received_date": "2026-02-02",
+ "submitted_date": "",
+ "txn_date": "2026-01-10"
+}

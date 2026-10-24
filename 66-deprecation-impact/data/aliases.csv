@@ -1,0 +1,8 @@
+alias,model_id,recorded_on
+va-fast-latest,va-fast@2025-09,2026-08-10
+vb-core-stable,vb-core@2025-01,2026-08-12
+vc-reason-prod,vc-reason@2025-02,2026-08-25
+va-large-default,va-large@2026-05,2026-08-20
+vb-mini-edge,vb-mini@2025-04,2026-03-02
+vc-chat-default,vc-chat@2025-08,2026-02-14
+ft-dispute-live,ft-dispute-v2,2026-08-15

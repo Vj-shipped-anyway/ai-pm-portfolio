@@ -1,0 +1,26 @@
+{
+  "coach_rate": 0.2,
+  "hold_minutes": 20,
+  "legit_abandon_on_hold": 0.03,
+  "legit_abandon_on_warn": 0.005,
+  "scam_scenarios": {
+    "coached_live": {
+      "human_scammer": true,
+      "p_abandon": 0.4
+    },
+    "known_payee": {
+      "human_scammer": true,
+      "p_abandon": 0.15
+    },
+    "romance_invest": {
+      "human_scammer": true,
+      "p_abandon": 0.1
+    },
+    "takeover": {
+      "human_scammer": false,
+      "p_abandon": 0.35
+    }
+  },
+  "warn_factor": 0.3,
+  "warn_minutes": 0.5
+}

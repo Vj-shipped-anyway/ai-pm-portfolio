@@ -1,0 +1,4 @@
+check_id,project,command,exercises
+C-01,inject-lab,python3 inject_lab.py --demo,direct_input;retrieved_content
+C-08,swap-lab,python3 swap_lab.py --demo,version_change
+C-13,scope-lab,python3 scope_lab.py --demo,permission_scope

@@ -1,0 +1,8 @@
+parameter,value,unit,set_by,note
+manual_review_interval_min,60,minutes,assumption of a modeled bank,"A person reads each agent's failure rate this often (the status quo with only an operator switch, as in 27-agentkit-reference-agent-and-playbook)."
+manual_lookback_min,60,minutes,assumption of a modeled bank,"The person reads the failure rate over this many minutes before the review."
+manual_min_calls,10,calls,assumption of a modeled bank,"The person does not act on fewer calls than this."
+manual_trip_failure_rate,0.5,fraction of calls,assumption of a modeled bank,"The person engages the switch at this rate. Set equal to the breaker's trip rate so the comparison is about timing, not the line."
+manual_hold_min,120,minutes,assumption of a modeled bank,"An engaged agent is released this long after the review that engaged it, whatever happened."
+justify_grace_min,10,minutes,scoring,"A trip counts as justified if a fault of that agent was running, or had ended less than this many minutes before."
+premature_close_window_min,15,minutes,scoring,"A close counts as premature if the agent trips again within this many minutes."

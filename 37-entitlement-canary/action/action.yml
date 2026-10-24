@@ -1,0 +1,38 @@
+name: 'Entitlement Canary'
+description: 'Fail a pull request when a retrieval system returns a document to a user who may not open it. Checks the results of a canary run against an access export.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'lock'
+  color: 'gray-dark'
+inputs:
+  access:
+    description: 'Path to the access export (JSON) as it stands on the pull request branch.'
+    required: true
+  pack:
+    description: 'Path to the canary pack (CSV, built with entitlement_canary.py build-pack).'
+    required: true
+  results:
+    description: 'Path to the results your test harness wrote (CSV: canary_id, returned_doc_ids, primed, control_returned_doc_ids).'
+    required: true
+  fail-on:
+    description: 'block, review or never. The step fails at or above this decision.'
+    required: false
+    default: 'block'
+  min-per-source:
+    description: 'Fewest canaries every document source must have in the pack. 0 turns the coverage note off.'
+    required: false
+    default: '1'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check the canary results
+      shell: bash
+      env:
+        ACCESS: ${{ inputs.access }}
+        PACK: ${{ inputs.pack }}
+        RESULTS: ${{ inputs.results }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        MIN_PER_SOURCE: ${{ inputs.min-per-source }}
+        SCRIPT: ${{ github.action_path }}/entitlement_canary.py
+      run: |
+        python3 "$SCRIPT" check "$ACCESS" "$PACK" "$RESULTS" --min-per-source "$MIN_PER_SOURCE" --fail-on "$FAIL_ON" --format github

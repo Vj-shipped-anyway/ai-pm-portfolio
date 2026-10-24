@@ -1,0 +1,479 @@
+txn_id,case_id,date,amount,direction,channel,counterparty
+T-0001,C-001,2026-01-13,6536.11,in,cash,
+T-0002,C-001,2026-01-20,4955.26,in,cash,
+T-0003,C-001,2026-02-04,23108.76,out,wire,Oakmere Tools Ltd.
+T-0004,C-001,2026-02-12,2762.49,in,cash,
+T-0005,C-001,2026-02-13,2388.51,out,cash,
+T-0006,C-001,2026-02-16,6182.68,in,ach,Oakmere Tools Ltd.
+T-0007,C-001,2026-03-11,6122.11,out,ach,Corvane Textiles Inc.
+T-0008,C-001,2026-03-27,4095.59,in,check,Quillon Freight Inc.
+T-0009,C-001,2026-04-27,17045.08,out,wire,Brindle Foods Inc.
+T-0010,C-001,2026-06-03,1522.59,out,check,Oakmere Tools Ltd.
+T-0011,C-001,2026-06-04,31659.01,out,wire,Pellam Imports LLC
+T-0012,C-001,2026-06-12,7700.12,in,ach,Marlow Freight Holdings
+T-0013,C-001,2026-06-21,6677.50,out,ach,Quillon Freight Inc.
+T-0014,C-002,2026-01-08,8321.57,out,wire,Quillon Freight Inc.
+T-0015,C-002,2026-01-12,1073.20,out,cash,
+T-0016,C-002,2026-01-24,2538.56,in,ach,Oakmere Tools Ltd.
+T-0017,C-002,2026-02-09,2189.21,out,check,Ostrel Holdings
+T-0018,C-002,2026-02-19,8386.42,in,cash,
+T-0019,C-002,2026-03-17,40096.33,out,wire,Sorrel Point Imports
+T-0020,C-002,2026-03-28,3734.96,in,ach,Brindle Foods Inc.
+T-0021,C-002,2026-04-17,4886.34,out,ach,Marlow Freight Holdings
+T-0022,C-002,2026-04-23,5808.39,in,cash,
+T-0023,C-002,2026-05-02,15759.65,in,check,Wexcombe Trading
+T-0024,C-002,2026-05-03,1229.68,out,card,Ostrel Holdings
+T-0025,C-002,2026-05-21,935.12,out,cash,
+T-0026,C-002,2026-05-23,9010.12,in,cash,
+T-0027,C-002,2026-06-21,4893.46,in,cash,
+T-0028,C-003,2026-01-21,1222.40,out,card,Brindle Foods Inc.
+T-0029,C-003,2026-02-05,8278.21,in,cash,
+T-0030,C-003,2026-02-13,6093.95,out,ach,Marlow Freight
+T-0031,C-003,2026-03-04,7220.00,in,cash,
+T-0032,C-003,2026-03-06,4939.10,in,ach,Brindle Foods Inc.
+T-0033,C-003,2026-03-07,7819.84,out,check,Pellam Imports LLC
+T-0034,C-003,2026-03-30,19980.53,out,wire,Quillon Freight Inc.
+T-0035,C-003,2026-04-13,17839.79,out,wire,Corvane Textiles Inc.
+T-0036,C-003,2026-05-05,7379.06,in,cash,
+T-0037,C-003,2026-05-11,7112.60,out,ach,Sorrel Point Imports
+T-0038,C-003,2026-05-25,39497.61,out,wire,Oakmere Tools Ltd.
+T-0039,C-003,2026-05-30,2379.34,in,check,Tessel Trading Ltd.
+T-0040,C-003,2026-06-13,34529.34,out,wire,Sorrel Point Imports
+T-0041,C-003,2026-06-24,1622.58,out,cash,
+T-0042,C-004,2026-01-23,6701.81,out,ach,Harbor Lane Supply Ltd.
+T-0043,C-004,2026-02-20,962.07,out,check,Nethrin Tools
+T-0044,C-004,2026-03-05,8610.60,in,cash,
+T-0045,C-004,2026-03-09,5525.84,in,ach,Harbor Lane Supply Ltd.
+T-0046,C-004,2026-03-20,4581.12,in,ach,Ildren Textiles LLC
+T-0047,C-004,2026-04-11,501.56,out,card,Kestrel Row Foods
+T-0048,C-004,2026-04-27,6484.75,in,cash,
+T-0049,C-004,2026-05-05,631.47,out,card,Quillon Freight Inc.
+T-0050,C-004,2026-05-06,38602.81,out,wire,Harbor Lane Supply Ltd.
+T-0051,C-004,2026-05-08,3557.08,in,cash,
+T-0052,C-004,2026-05-11,36462.77,out,wire,Quillon Freight Inc.
+T-0053,C-004,2026-05-30,661.90,out,card,Quillon Freight Inc.
+T-0054,C-004,2026-06-06,14545.75,in,check,Pellam Imports LLC
+T-0055,C-005,2026-01-15,8207.67,out,ach,Tessel Trading Ltd.
+T-0056,C-005,2026-01-21,41821.25,out,wire,Oakmere Tools Ltd.
+T-0057,C-005,2026-02-20,6909.40,out,check,Quillon Freight Inc.
+T-0058,C-005,2026-02-22,3113.04,in,cash,
+T-0059,C-005,2026-03-16,5192.32,in,cash,
+T-0060,C-005,2026-04-09,6075.75,in,cash,
+T-0061,C-005,2026-05-09,6909.79,in,ach,Quillon Freight Inc.
+T-0062,C-005,2026-05-10,15543.92,in,check,Dunmore Marine LLC
+T-0063,C-005,2026-05-22,36224.90,out,wire,Wexcombe Trading
+T-0064,C-005,2026-05-30,4155.65,out,check,Sorrel Point Imports
+T-0065,C-006,2026-01-08,17518.80,out,wire,Quillon Freight Inc.
+T-0066,C-006,2026-01-09,5816.90,out,ach,Pellam Imports LLC
+T-0067,C-006,2026-01-18,4870.41,in,cash,
+T-0068,C-006,2026-01-21,5626.70,in,cash,
+T-0069,C-006,2026-02-04,10306.51,out,check,Oakmere Tools Ltd.
+T-0070,C-006,2026-02-23,38902.40,out,wire,Sorrel Point Imports
+T-0071,C-006,2026-03-24,7073.47,in,cash,
+T-0072,C-006,2026-03-26,59756.36,in,wire,Pellam Imports LLC
+T-0073,C-006,2026-03-28,16210.35,in,check,Nethrin Tools
+T-0074,C-006,2026-04-23,7204.07,in,ach,Tessel Trading Ltd.
+T-0075,C-007,2026-01-22,6024.40,out,wire,Corvane Textiles Inc.
+T-0076,C-007,2026-01-28,7094.27,out,ach,Kestrel Row Foods
+T-0077,C-007,2026-02-13,4450.12,in,cash,
+T-0078,C-007,2026-03-13,5917.85,in,cash,
+T-0079,C-007,2026-03-15,6347.89,in,cash,
+T-0080,C-007,2026-03-19,5920.19,in,ach,Corvane Textiles Inc.
+T-0081,C-007,2026-03-20,15237.33,in,check,Ostrel Holdings
+T-0082,C-007,2026-03-24,8177.84,out,wire,Marlow Freight Holdings
+T-0083,C-007,2026-04-18,4125.30,in,cash,
+T-0084,C-007,2026-05-24,6612.63,out,check,Harbor Lane Supply Ltd.
+T-0085,C-007,2026-05-31,6780.47,out,wire,Kestrel Row Foods
+T-0086,C-008,2026-01-09,27684.56,out,wire,Brindle Foods Inc.
+T-0087,C-008,2026-01-26,678.54,out,cash,
+T-0088,C-008,2026-01-27,3604.85,in,cash,
+T-0089,C-008,2026-01-28,7675.25,in,ach,Corvane Textiles Inc.
+T-0090,C-008,2026-03-16,8749.33,in,cash,
+T-0091,C-008,2026-04-25,38959.95,out,wire,Tessel Trading Ltd.
+T-0092,C-008,2026-04-30,8933.64,in,check,Valdane Supply
+T-0093,C-008,2026-05-02,2394.52,out,ach,Ildren Textiles LLC
+T-0094,C-008,2026-05-25,16973.31,in,check,Kestrel Row Foods
+T-0095,C-008,2026-05-30,11300.60,out,check,Tessel Trading Ltd.
+T-0096,C-008,2026-06-22,9294.65,in,cash,
+T-0097,C-009,2026-01-06,436.85,out,card,Kestrel Row Foods
+T-0098,C-009,2026-01-23,2951.19,in,cash,
+T-0099,C-009,2026-01-25,7373.53,in,check,Marlow Freight
+T-0100,C-009,2026-02-02,686.75,out,card,Kestrel Row Foods
+T-0101,C-009,2026-02-06,2728.60,in,ach,Quillon Freight Inc.
+T-0102,C-009,2026-02-11,5135.38,in,cash,
+T-0103,C-009,2026-02-17,2889.74,in,ach,Tessel Trading Ltd.
+T-0104,C-009,2026-02-18,4308.26,out,check,Tessel Trading Ltd.
+T-0105,C-009,2026-03-09,43386.59,out,wire,Oakmere Tools Ltd.
+T-0106,C-009,2026-03-10,4538.40,in,cash,
+T-0107,C-009,2026-04-04,22832.30,out,wire,Nethrin Tools
+T-0108,C-009,2026-05-11,5311.62,out,ach,Pellam Imports LLC
+T-0109,C-009,2026-05-27,29450.35,out,wire,Marlow Freight
+T-0110,C-009,2026-06-03,4847.85,in,ach,Tessel Trading Ltd.
+T-0111,C-010,2026-01-26,2540.50,out,ach,Dunmore Marine LLC
+T-0112,C-010,2026-01-27,12305.24,in,check,Quillon Freight Inc.
+T-0113,C-010,2026-02-02,11168.18,in,check,Sorrel Point Imports
+T-0114,C-010,2026-02-13,1851.96,out,check,Ostrel Holdings
+T-0115,C-010,2026-03-05,5183.29,out,ach,Sorrel Point Imports
+T-0116,C-010,2026-03-07,13305.81,out,wire,Harbor Lane Supply Ltd.
+T-0117,C-010,2026-03-12,8425.85,in,cash,
+T-0118,C-010,2026-03-19,6496.91,in,cash,
+T-0119,C-010,2026-03-20,3621.80,in,cash,
+T-0120,C-010,2026-03-27,15951.60,out,wire,Valdane Supply
+T-0121,C-010,2026-04-03,3386.14,out,cash,
+T-0122,C-010,2026-05-02,1869.94,in,check,Brindle Foods Inc.
+T-0123,C-010,2026-05-08,13954.91,in,check,Wexcombe Trading
+T-0124,C-010,2026-05-23,3241.15,in,ach,Harbor Lane Supply Ltd.
+T-0125,C-011,2026-01-13,1962.97,out,cash,
+T-0126,C-011,2026-01-17,11607.56,out,check,Oakmere Tools Ltd.
+T-0127,C-011,2026-01-19,16652.54,out,wire,Brindle Foods Inc.
+T-0128,C-011,2026-02-17,6685.52,in,cash,
+T-0129,C-011,2026-03-29,6520.85,in,cash,
+T-0130,C-011,2026-04-17,3698.33,in,ach,Quillon Freight Inc.
+T-0131,C-011,2026-04-22,3027.24,out,cash,
+T-0132,C-011,2026-05-05,8273.11,out,ach,Sorrel Point Imports
+T-0133,C-011,2026-05-23,2220.86,in,cash,
+T-0134,C-011,2026-06-01,5551.48,in,check,Tessel Trading Ltd.
+T-0135,C-011,2026-06-07,30824.55,out,wire,Corvane Textiles Inc.
+T-0136,C-011,2026-06-08,9859.00,out,wire,Harbor Lane Supply Ltd.
+T-0137,C-011,2026-06-15,8689.37,out,ach,Kestrel Row Foods
+T-0138,C-012,2026-01-06,3168.32,out,check,Tessel Trading Ltd.
+T-0139,C-012,2026-01-17,6894.57,in,cash,
+T-0140,C-012,2026-01-31,9020.98,in,cash,
+T-0141,C-012,2026-02-06,14332.16,in,check,Marlow Freight
+T-0142,C-012,2026-02-14,7480.60,out,ach,Marlow Freight
+T-0143,C-012,2026-04-16,3735.02,in,check,Oakmere Tools Ltd.
+T-0144,C-012,2026-05-02,9469.35,in,cash,
+T-0145,C-012,2026-05-10,3234.47,out,check,Valdane Supply
+T-0146,C-012,2026-05-15,3650.30,in,cash,
+T-0147,C-012,2026-05-21,12742.85,out,wire,Quillon Freight Inc.
+T-0148,C-012,2026-06-09,637.51,out,ach,Oakmere Tools Ltd.
+T-0149,C-012,2026-06-15,1375.45,in,ach,Corvane Textiles Inc.
+T-0150,C-012,2026-06-17,38711.20,out,wire,Brindle Foods Inc.
+T-0151,C-012,2026-06-23,1117.67,out,ach,Dunmore Marine LLC
+T-0152,C-013,2026-01-07,14562.54,in,check,Wexcombe Trading
+T-0153,C-013,2026-01-10,3551.54,in,cash,
+T-0154,C-013,2026-02-24,4293.69,out,check,Pellam Imports LLC
+T-0155,C-013,2026-03-12,4990.01,out,ach,Marlow Freight Holdings
+T-0156,C-013,2026-03-13,8873.65,in,cash,
+T-0157,C-013,2026-04-01,1374.16,out,card,Oakmere Tools Ltd.
+T-0158,C-013,2026-04-21,3792.18,in,cash,
+T-0159,C-013,2026-05-06,21425.27,out,wire,Brindle Foods Inc.
+T-0160,C-013,2026-05-15,7893.42,in,ach,Quillon Freight Inc.
+T-0161,C-013,2026-05-18,440.04,out,card,Tessel Trading Ltd.
+T-0162,C-013,2026-05-23,2805.17,in,ach,Pellam Imports LLC
+T-0163,C-013,2026-06-06,9092.39,in,cash,
+T-0164,C-013,2026-06-16,5004.75,out,ach,Marlow Freight
+T-0165,C-013,2026-06-20,26760.97,out,wire,Brindle Foods Inc.
+T-0166,C-014,2026-01-07,2190.08,in,cash,
+T-0167,C-014,2026-01-08,10132.01,out,check,Pellam Imports LLC
+T-0168,C-014,2026-03-03,9224.88,in,cash,
+T-0169,C-014,2026-03-15,32151.55,out,wire,Tessel Trading Ltd.
+T-0170,C-014,2026-04-04,20871.52,out,wire,Marlow Freight
+T-0171,C-014,2026-04-23,2099.78,out,check,Dunmore Marine LLC
+T-0172,C-014,2026-05-17,15567.76,in,check,Kestrel Row Foods
+T-0173,C-014,2026-05-23,4518.78,in,cash,
+T-0174,C-014,2026-05-25,1795.72,in,ach,Harbor Lane Supply Ltd.
+T-0175,C-014,2026-06-02,3346.49,in,cash,
+T-0176,C-014,2026-06-04,37797.30,out,wire,Marlow Freight
+T-0177,C-014,2026-06-10,8922.81,out,ach,Pellam Imports LLC
+T-0178,C-015,2026-01-05,5400.52,in,ach,Corvane Textiles Inc.
+T-0179,C-015,2026-01-16,812.51,out,ach,Nethrin Tools
+T-0180,C-015,2026-01-25,3097.78,in,cash,
+T-0181,C-015,2026-02-02,8834.39,in,cash,
+T-0182,C-015,2026-04-09,992.46,out,ach,Ferrow Logistics
+T-0183,C-015,2026-04-21,2033.67,in,ach,Corvane Textiles Inc.
+T-0184,C-015,2026-04-27,21168.11,out,wire,Tessel Trading Ltd.
+T-0185,C-015,2026-05-19,22572.69,out,wire,Marlow Freight
+T-0186,C-015,2026-05-20,6525.33,in,cash,
+T-0187,C-015,2026-05-28,42434.98,out,wire,Ildren Textiles LLC
+T-0188,C-015,2026-06-06,5913.40,out,check,Brindle Foods Inc.
+T-0189,C-015,2026-06-16,7380.78,in,check,Brindle Foods Inc.
+T-0190,C-016,2026-01-12,2136.99,in,ach,Tessel Trading Ltd.
+T-0191,C-016,2026-01-22,2003.45,in,cash,
+T-0192,C-016,2026-02-28,8763.35,in,cash,
+T-0193,C-016,2026-03-01,8246.91,out,wire,Quillon Freight Inc.
+T-0194,C-016,2026-03-10,8170.98,in,cash,
+T-0195,C-016,2026-04-08,4804.48,out,check,Ostrel Holdings
+T-0196,C-016,2026-04-15,33922.65,out,wire,Wexcombe Trading
+T-0197,C-016,2026-04-17,28152.50,out,wire,Marlow Freight Holdings
+T-0198,C-016,2026-06-02,2217.91,out,ach,Nethrin Tools
+T-0199,C-016,2026-06-04,7111.09,in,ach,Ildren Textiles LLC
+T-0200,C-016,2026-06-22,15729.08,in,check,Valdane Supply
+T-0201,C-017,2026-01-19,396.75,out,card,Oakmere Tools Ltd.
+T-0202,C-017,2026-01-24,9801.20,in,cash,
+T-0203,C-017,2026-02-13,2177.92,in,ach,Oakmere Tools Ltd.
+T-0204,C-017,2026-03-03,24909.30,out,wire,Oakmere Tools Ltd.
+T-0205,C-017,2026-03-04,36154.79,in,wire,Dunmore Marine LLC
+T-0206,C-017,2026-04-03,6606.78,in,cash,
+T-0207,C-017,2026-04-12,5931.99,out,ach,Sorrel Point Imports
+T-0208,C-017,2026-04-27,5404.01,out,check,Ostrel Holdings
+T-0209,C-017,2026-05-02,18519.74,out,wire,Kestrel Row Foods
+T-0210,C-017,2026-05-16,8965.28,in,cash,
+T-0211,C-017,2026-06-01,42936.89,out,wire,Corvane Textiles Inc.
+T-0212,C-017,2026-06-02,10280.81,in,check,Quillon Freight Inc.
+T-0213,C-017,2026-06-13,3334.84,out,cash,
+T-0214,C-018,2026-02-03,22842.89,out,wire,Brindle Foods Inc.
+T-0215,C-018,2026-02-07,6967.15,in,cash,
+T-0216,C-018,2026-02-17,6585.78,out,ach,Wexcombe Trading
+T-0217,C-018,2026-02-18,3477.41,in,cash,
+T-0218,C-018,2026-02-19,8065.80,in,cash,
+T-0219,C-018,2026-02-27,1026.01,out,check,Quillon Freight Inc.
+T-0220,C-018,2026-03-23,4237.33,in,ach,Quillon Freight Inc.
+T-0221,C-018,2026-04-10,2238.68,out,cash,
+T-0222,C-018,2026-04-15,506.16,out,card,Dunmore Marine LLC
+T-0223,C-018,2026-04-19,3634.59,in,cash,
+T-0224,C-018,2026-04-27,37143.83,out,wire,Ildren Textiles LLC
+T-0225,C-018,2026-06-14,6173.90,in,check,Brindle Foods Inc.
+T-0226,C-018,2026-06-15,36775.76,out,wire,Wexcombe Trading
+T-0227,C-018,2026-06-18,1098.21,out,card,Wexcombe Trading
+T-0228,C-019,2026-01-08,2047.20,in,cash,
+T-0229,C-019,2026-01-24,10297.06,out,check,Ostrel Holdings
+T-0230,C-019,2026-01-31,3455.85,in,check,Pellam Imports LLC
+T-0231,C-019,2026-02-05,14710.17,out,wire,Tessel Trading Ltd.
+T-0232,C-019,2026-02-27,3884.91,in,cash,
+T-0233,C-019,2026-03-02,4563.70,in,cash,
+T-0234,C-019,2026-04-24,9588.01,out,wire,Nethrin Tools
+T-0235,C-019,2026-04-27,2133.07,in,ach,Corvane Textiles Inc.
+T-0236,C-019,2026-05-02,7483.27,out,ach,Dunmore Marine LLC
+T-0237,C-019,2026-06-10,481.94,out,card,Brindle Foods Inc.
+T-0238,C-020,2026-02-27,7916.13,in,cash,
+T-0239,C-020,2026-03-10,2062.84,out,check,Pellam Imports LLC
+T-0240,C-020,2026-03-19,525.06,out,ach,Valdane Supply
+T-0241,C-020,2026-04-05,44081.55,out,wire,Oakmere Tools Ltd.
+T-0242,C-020,2026-04-08,8644.94,out,ach,Tessel Trading Ltd.
+T-0243,C-020,2026-04-11,2112.94,in,ach,Tessel Trading Ltd.
+T-0244,C-020,2026-04-28,2189.94,in,cash,
+T-0245,C-020,2026-05-11,2602.89,in,check,Quillon Freight Inc.
+T-0246,C-020,2026-06-08,9020.91,in,cash,
+T-0247,C-020,2026-06-18,1475.36,out,check,Nethrin Tools
+T-0248,C-020,2026-06-20,15520.33,out,wire,Marlow Freight Holdings
+T-0249,C-021,2026-02-02,8468.05,out,ach,Quillon Freight Inc.
+T-0250,C-021,2026-02-03,3961.70,in,cash,
+T-0251,C-021,2026-02-19,5087.54,in,cash,
+T-0252,C-021,2026-02-26,18760.48,in,check,Ostrel Holdings
+T-0253,C-021,2026-03-18,9268.83,out,wire,Quillon Freight Inc.
+T-0254,C-021,2026-03-24,5119.41,in,ach,Brindle Foods Inc.
+T-0255,C-021,2026-04-01,35704.79,out,wire,Dunmore Marine LLC
+T-0256,C-021,2026-05-04,13527.89,out,wire,Tessel Trading Ltd.
+T-0257,C-021,2026-05-13,6250.25,in,cash,
+T-0258,C-021,2026-06-05,8374.60,out,check,Ferrow Logistics
+T-0259,C-022,2026-01-13,20473.99,out,wire,Tessel Trading Ltd.
+T-0260,C-022,2026-01-15,1538.15,out,check,Harbor Lane Supply Ltd.
+T-0261,C-022,2026-01-25,19874.86,out,wire,Sorrel Point Imports
+T-0262,C-022,2026-02-01,7853.62,in,cash,
+T-0263,C-022,2026-02-07,2821.44,in,cash,
+T-0264,C-022,2026-02-21,8588.67,in,check,Tessel Trading Ltd.
+T-0265,C-022,2026-03-11,2595.47,in,cash,
+T-0266,C-022,2026-03-19,5117.09,in,cash,
+T-0267,C-022,2026-04-14,3715.30,in,cash,
+T-0268,C-022,2026-05-21,3606.58,in,ach,Tessel Trading Ltd.
+T-0269,C-022,2026-06-18,4671.01,out,ach,Brindle Foods Inc.
+T-0270,C-023,2026-01-15,5048.02,out,check,Marlow Freight Holdings
+T-0271,C-023,2026-03-02,10216.58,out,wire,Corvane Textiles Inc.
+T-0272,C-023,2026-04-12,9398.28,out,check,Marlow Freight
+T-0273,C-023,2026-04-14,10827.39,out,check,Oakmere Tools Ltd.
+T-0274,C-023,2026-04-21,6722.77,in,cash,
+T-0275,C-023,2026-04-26,4229.78,out,ach,Wexcombe Trading
+T-0276,C-023,2026-05-11,9250.93,in,cash,
+T-0277,C-023,2026-05-12,12778.72,in,check,Pellam Imports LLC
+T-0278,C-023,2026-05-24,18622.37,out,wire,Tessel Trading Ltd.
+T-0279,C-023,2026-06-22,3684.28,in,cash,
+T-0280,C-023,2026-06-25,6097.26,in,ach,Harbor Lane Supply Ltd.
+T-0281,C-024,2026-01-14,14436.25,out,wire,Brindle Foods Inc.
+T-0282,C-024,2026-02-01,37790.71,out,wire,Dunmore Marine LLC
+T-0283,C-024,2026-02-22,23309.42,out,wire,Marlow Freight
+T-0284,C-024,2026-03-23,5499.91,in,cash,
+T-0285,C-024,2026-03-29,5074.23,in,cash,
+T-0286,C-024,2026-04-02,4450.66,in,ach,Tessel Trading Ltd.
+T-0287,C-024,2026-04-27,7906.82,out,ach,Marlow Freight Holdings
+T-0288,C-024,2026-05-16,1921.46,out,cash,
+T-0289,C-024,2026-05-18,2253.64,in,cash,
+T-0290,C-024,2026-06-01,8639.27,out,check,Ferrow Logistics
+T-0291,C-024,2026-06-02,7761.25,in,check,Tessel Trading Ltd.
+T-0292,C-024,2026-06-13,9636.04,in,check,Ferrow Logistics
+T-0293,C-025,2026-01-11,43172.69,out,wire,Harbor Lane Supply Ltd.
+T-0294,C-025,2026-01-12,3973.24,in,ach,Harbor Lane Supply Ltd.
+T-0295,C-025,2026-01-23,3940.83,in,cash,
+T-0296,C-025,2026-01-31,7179.13,out,wire,Dunmore Marine LLC
+T-0297,C-025,2026-02-10,2218.72,out,cash,
+T-0298,C-025,2026-02-13,11558.22,out,check,Oakmere Tools Ltd.
+T-0299,C-025,2026-02-19,2040.32,in,cash,
+T-0300,C-025,2026-02-24,4581.62,out,ach,Ferrow Logistics
+T-0301,C-025,2026-03-22,4982.68,in,check,Valdane Supply
+T-0302,C-025,2026-04-18,31112.32,out,wire,Ildren Textiles LLC
+T-0303,C-025,2026-04-24,2096.32,out,check,Pellam Imports LLC
+T-0304,C-025,2026-04-30,2587.00,in,cash,
+T-0305,C-026,2026-01-20,4735.44,in,cash,
+T-0306,C-026,2026-01-25,2819.95,out,check,Quillon Freight Inc.
+T-0307,C-026,2026-01-28,5077.42,in,check,Corvane Textiles Inc.
+T-0308,C-026,2026-02-12,6950.65,out,ach,Kestrel Row Foods
+T-0309,C-026,2026-02-17,35633.04,out,wire,Harbor Lane Supply Ltd.
+T-0310,C-026,2026-03-05,23593.50,out,wire,Tessel Trading Ltd.
+T-0311,C-026,2026-05-04,3351.07,in,ach,Quillon Freight Inc.
+T-0312,C-026,2026-05-16,3211.76,in,cash,
+T-0313,C-026,2026-06-06,9877.00,in,cash,
+T-0314,C-026,2026-06-12,17190.74,out,wire,Brindle Foods Inc.
+T-0315,C-027,2026-01-21,5053.10,in,ach,Brindle Foods Inc.
+T-0316,C-027,2026-03-09,16481.26,in,check,Brindle Foods Inc.
+T-0317,C-027,2026-03-23,6778.62,in,cash,
+T-0318,C-027,2026-04-19,8634.68,out,check,Pellam Imports LLC
+T-0319,C-027,2026-04-27,30480.56,out,wire,Oakmere Tools Ltd.
+T-0320,C-027,2026-04-28,2216.73,out,cash,
+T-0321,C-027,2026-05-14,7602.01,in,cash,
+T-0322,C-027,2026-05-21,10750.16,out,wire,Oakmere Tools Ltd.
+T-0323,C-027,2026-05-26,7912.32,out,ach,Oakmere Tools Ltd.
+T-0324,C-027,2026-06-09,4784.62,in,cash,
+T-0325,C-028,2026-01-16,1337.27,out,card,Pellam Imports LLC
+T-0326,C-028,2026-03-07,4159.97,in,cash,
+T-0327,C-028,2026-03-14,5634.45,in,cash,
+T-0328,C-028,2026-03-21,5001.90,in,cash,
+T-0329,C-028,2026-03-25,2506.81,in,ach,Brindle Foods Inc.
+T-0330,C-028,2026-04-01,31474.91,out,wire,Quillon Freight Inc.
+T-0331,C-028,2026-04-19,11518.37,out,check,Quillon Freight Inc.
+T-0332,C-028,2026-04-29,3218.61,in,cash,
+T-0333,C-028,2026-05-15,4163.91,in,cash,
+T-0334,C-028,2026-05-20,4436.61,out,ach,Ostrel Holdings
+T-0335,C-028,2026-05-21,6381.65,in,check,Wexcombe Trading
+T-0336,C-028,2026-06-11,42778.71,out,wire,Corvane Textiles Inc.
+T-0337,C-028,2026-06-21,51538.52,in,wire,Ferrow Logistics
+T-0338,C-029,2026-01-06,1184.64,out,ach,Wexcombe Trading
+T-0339,C-029,2026-02-23,12279.48,in,check,Wexcombe Trading
+T-0340,C-029,2026-03-04,5129.48,in,cash,
+T-0341,C-029,2026-03-07,29816.06,out,wire,Harbor Lane Supply Ltd.
+T-0342,C-029,2026-03-16,2566.69,in,cash,
+T-0343,C-029,2026-04-07,8451.07,in,cash,
+T-0344,C-029,2026-04-13,1915.37,in,ach,Tessel Trading Ltd.
+T-0345,C-029,2026-04-20,8485.92,out,wire,Dunmore Marine LLC
+T-0346,C-029,2026-05-09,7854.47,out,check,Ildren Textiles LLC
+T-0347,C-029,2026-06-06,6062.01,in,cash,
+T-0348,C-030,2026-01-25,6903.49,in,cash,
+T-0349,C-030,2026-02-01,1034.97,out,check,Tessel Trading Ltd.
+T-0350,C-030,2026-02-20,3348.63,in,ach,Corvane Textiles Inc.
+T-0351,C-030,2026-02-28,9963.05,in,check,Ildren Textiles LLC
+T-0352,C-030,2026-03-23,6957.76,in,cash,
+T-0353,C-030,2026-04-04,8225.39,out,wire,Brindle Foods Inc.
+T-0354,C-030,2026-04-06,20514.25,out,wire,Harbor Lane Supply Ltd.
+T-0355,C-030,2026-04-22,1823.34,out,ach,Dunmore Marine LLC
+T-0356,C-030,2026-05-02,5550.82,in,ach,Valdane Supply
+T-0357,C-030,2026-05-24,5218.85,in,ach,Marlow Freight
+T-0358,C-030,2026-06-07,5190.93,in,cash,
+T-0359,C-031,2026-01-12,1309.17,out,card,Marlow Freight Holdings
+T-0360,C-031,2026-01-30,3594.52,out,ach,Oakmere Tools Ltd.
+T-0361,C-031,2026-02-05,7509.35,in,cash,
+T-0362,C-031,2026-02-22,19307.82,in,check,Kestrel Row Foods
+T-0363,C-031,2026-02-28,8902.35,in,cash,
+T-0364,C-031,2026-03-01,8186.26,in,cash,
+T-0365,C-031,2026-04-02,8072.52,in,cash,
+T-0366,C-031,2026-05-01,33639.68,out,wire,Harbor Lane Supply Ltd.
+T-0367,C-031,2026-05-19,8219.18,out,check,Sorrel Point Imports
+T-0368,C-031,2026-05-28,39313.46,out,wire,Ferrow Logistics
+T-0369,C-031,2026-06-11,1383.67,out,card,Marlow Freight
+T-0370,C-031,2026-06-17,1279.04,in,ach,Corvane Textiles Inc.
+T-0371,C-032,2026-01-06,7539.38,out,check,Marlow Freight Holdings
+T-0372,C-032,2026-01-13,4623.58,in,cash,
+T-0373,C-032,2026-02-12,3309.71,in,cash,
+T-0374,C-032,2026-02-23,2539.66,in,cash,
+T-0375,C-032,2026-04-19,6842.19,out,check,Quillon Freight Inc.
+T-0376,C-032,2026-04-30,33620.06,out,wire,Tessel Trading Ltd.
+T-0377,C-032,2026-05-07,1648.90,out,ach,Harbor Lane Supply Ltd.
+T-0378,C-032,2026-05-09,5995.78,in,check,Tessel Trading Ltd.
+T-0379,C-032,2026-06-20,3584.52,in,ach,Harbor Lane Supply Ltd.
+T-0380,C-032,2026-06-24,28741.30,out,wire,Brindle Foods Inc.
+T-0381,C-033,2026-01-09,59453.17,in,wire,Oakmere Tools Ltd.
+T-0382,C-033,2026-01-27,5721.47,out,ach,Ostrel Holdings
+T-0383,C-033,2026-02-09,15025.41,in,check,Sorrel Point Imports
+T-0384,C-033,2026-02-18,742.80,out,card,Quillon Freight Inc.
+T-0385,C-033,2026-02-24,33828.71,out,wire,Brindle Foods Inc.
+T-0386,C-033,2026-02-27,23706.89,out,wire,Corvane Textiles Inc.
+T-0387,C-033,2026-03-03,11980.13,out,check,Sorrel Point Imports
+T-0388,C-033,2026-03-24,7115.45,in,ach,Quillon Freight Inc.
+T-0389,C-033,2026-03-27,4500.42,in,cash,
+T-0390,C-033,2026-05-05,5950.07,in,cash,
+T-0391,C-033,2026-06-19,9384.32,in,cash,
+T-0392,C-034,2026-01-31,9704.02,in,cash,
+T-0393,C-034,2026-02-01,2031.98,out,ach,Pellam Imports LLC
+T-0394,C-034,2026-02-20,3194.89,out,check,Ferrow Logistics
+T-0395,C-034,2026-03-11,5105.95,in,cash,
+T-0396,C-034,2026-04-04,7329.25,out,ach,Brindle Foods Inc.
+T-0397,C-034,2026-04-25,15208.71,out,wire,Quillon Freight Inc.
+T-0398,C-034,2026-05-08,3711.16,in,ach,Quillon Freight Inc.
+T-0399,C-034,2026-05-18,16718.87,in,check,Marlow Freight
+T-0400,C-034,2026-05-22,41535.63,out,wire,Corvane Textiles Inc.
+T-0401,C-034,2026-05-29,1727.45,out,cash,
+T-0402,C-034,2026-05-30,17650.84,in,check,Ostrel Holdings
+T-0403,C-034,2026-06-10,2080.55,in,ach,Kestrel Row Foods
+T-0404,C-034,2026-06-15,3980.97,in,cash,
+T-0405,C-035,2026-01-26,864.21,out,check,Nethrin Tools
+T-0406,C-035,2026-02-16,3020.58,in,ach,Corvane Textiles Inc.
+T-0407,C-035,2026-03-11,3126.04,in,cash,
+T-0408,C-035,2026-03-20,24438.43,out,wire,Tessel Trading Ltd.
+T-0409,C-035,2026-03-28,3707.62,in,cash,
+T-0410,C-035,2026-04-12,2512.09,out,cash,
+T-0411,C-035,2026-05-12,6197.01,in,ach,Tessel Trading Ltd.
+T-0412,C-035,2026-05-18,668.90,out,ach,Quillon Freight Inc.
+T-0413,C-035,2026-05-26,44193.13,out,wire,Corvane Textiles Inc.
+T-0414,C-035,2026-06-07,9200.24,out,check,Marlow Freight Holdings
+T-0415,C-035,2026-06-22,4169.35,in,check,Corvane Textiles Inc.
+T-0416,C-035,2026-06-24,2400.66,in,cash,
+T-0417,C-036,2026-01-27,25722.82,out,wire,Harbor Lane Supply Ltd.
+T-0418,C-036,2026-02-14,19423.71,in,check,Sorrel Point Imports
+T-0419,C-036,2026-02-15,7127.60,in,ach,Brindle Foods Inc.
+T-0420,C-036,2026-03-25,9218.20,in,cash,
+T-0421,C-036,2026-04-02,10525.36,out,check,Brindle Foods Inc.
+T-0422,C-036,2026-04-25,9666.76,in,cash,
+T-0423,C-036,2026-05-05,8893.66,out,ach,Ostrel Holdings
+T-0424,C-036,2026-05-22,6135.09,out,wire,Dunmore Marine LLC
+T-0425,C-036,2026-06-02,6263.24,in,cash,
+T-0426,C-036,2026-06-22,13100.65,out,wire,Marlow Freight Holdings
+T-0427,C-036,2026-06-25,5318.20,in,ach,Quillon Freight Inc.
+T-0428,C-037,2026-01-05,485.59,out,ach,Nethrin Tools
+T-0429,C-037,2026-01-27,4111.86,out,check,Oakmere Tools Ltd.
+T-0430,C-037,2026-03-01,2932.35,out,cash,
+T-0431,C-037,2026-04-09,4771.72,in,cash,
+T-0432,C-037,2026-04-19,2172.23,in,cash,
+T-0433,C-037,2026-04-29,922.75,out,ach,Ferrow Logistics
+T-0434,C-037,2026-05-02,5277.22,in,cash,
+T-0435,C-037,2026-05-25,3345.03,out,cash,
+T-0436,C-037,2026-05-29,2210.96,in,ach,Oakmere Tools Ltd.
+T-0437,C-037,2026-06-03,2442.68,in,check,Oakmere Tools Ltd.
+T-0438,C-037,2026-06-08,13700.93,out,wire,Harbor Lane Supply Ltd.
+T-0439,C-037,2026-06-21,32575.98,out,wire,Ferrow Logistics
+T-0440,C-037,2026-06-22,10653.60,out,check,Ferrow Logistics
+T-0441,C-038,2026-01-09,9826.00,out,check,Ferrow Logistics
+T-0442,C-038,2026-01-25,6108.43,out,ach,Wexcombe Trading
+T-0443,C-038,2026-01-26,11018.50,in,check,Oakmere Tools Ltd.
+T-0444,C-038,2026-01-30,2152.64,in,ach,Quillon Freight Inc.
+T-0445,C-038,2026-02-16,9066.77,in,cash,
+T-0446,C-038,2026-02-18,2215.89,in,ach,Dunmore Marine LLC
+T-0447,C-038,2026-03-28,6202.27,in,cash,
+T-0448,C-038,2026-03-29,2065.98,out,cash,
+T-0449,C-038,2026-04-09,4303.06,in,cash,
+T-0450,C-038,2026-04-22,25072.84,out,wire,Quillon Freight Inc.
+T-0451,C-038,2026-05-07,36537.83,in,wire,Ferrow Logistics
+T-0452,C-038,2026-06-17,1461.77,out,card,Sorrel Point Imports
+T-0453,C-038,2026-06-23,7664.11,out,ach,Dunmore Marine LLC
+T-0454,C-038,2026-06-24,28919.60,out,wire,Kestrel Row Foods
+T-0455,C-039,2026-01-15,8276.39,out,ach,Corvane Textiles Inc.
+T-0456,C-039,2026-01-18,6196.72,out,ach,Harbor Lane Supply Ltd.
+T-0457,C-039,2026-02-03,13772.84,in,check,Ferrow Logistics
+T-0458,C-039,2026-02-20,3237.01,in,cash,
+T-0459,C-039,2026-02-25,9537.18,in,cash,
+T-0460,C-039,2026-04-18,37781.42,out,wire,Tessel Trading Ltd.
+T-0461,C-039,2026-04-19,1584.89,in,ach,Brindle Foods Inc.
+T-0462,C-039,2026-04-22,16421.66,out,wire,Nethrin Tools
+T-0463,C-039,2026-04-30,4890.05,out,check,Tessel Trading Ltd.
+T-0464,C-039,2026-06-06,4447.59,in,cash,
+T-0465,C-040,2026-01-08,18278.13,in,check,Sorrel Point Imports
+T-0466,C-040,2026-02-01,4500.27,in,cash,
+T-0467,C-040,2026-02-02,1578.63,in,ach,Tessel Trading Ltd.
+T-0468,C-040,2026-02-25,5204.61,in,check,Pellam Imports LLC
+T-0469,C-040,2026-03-10,31923.71,out,wire,Oakmere Tools Ltd.
+T-0470,C-040,2026-03-18,6233.32,out,check,Sorrel Point Imports
+T-0471,C-040,2026-03-20,51404.58,in,wire,Nethrin Tools
+T-0472,C-040,2026-04-02,8606.69,out,ach,Corvane Textiles Inc.
+T-0473,C-040,2026-04-07,4554.42,in,cash,
+T-0474,C-040,2026-04-13,5780.58,in,cash,
+T-0475,C-040,2026-05-11,4375.07,in,ach,Corvane Textiles Inc.
+T-0476,C-040,2026-05-15,15187.27,out,wire,Marlow Freight Holdings
+T-0477,C-040,2026-06-19,1333.98,out,ach,Kestrel Row Foods
+T-0478,C-040,2026-06-20,5513.22,in,cash,

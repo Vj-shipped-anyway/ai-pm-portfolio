@@ -1,0 +1,55 @@
+{
+ "base_rows": 600,
+ "behaviors": [
+  {
+   "count": 24,
+   "distinct_effects": 1,
+   "id": "duplicate_posting",
+   "role": "positive"
+  },
+  {
+   "count": 18,
+   "distinct_effects": 1,
+   "id": "amount_in_cents",
+   "role": "positive"
+  },
+  {
+   "count": 16,
+   "distinct_effects": 4,
+   "id": "posted_before_purchase",
+   "role": "positive"
+  },
+  {
+   "count": 14,
+   "distinct_effects": 3,
+   "id": "memo_injection_plain",
+   "role": "positive"
+  },
+  {
+   "count": 12,
+   "distinct_effects": 3,
+   "id": "memo_injection_paraphrase",
+   "role": "positive"
+  },
+  {
+   "count": 20,
+   "distinct_effects": 1,
+   "id": "repeat_purchase_new_ref",
+   "role": "negative"
+  },
+  {
+   "count": 10,
+   "distinct_effects": 4,
+   "id": "memo_ignore_previous_legit",
+   "role": "negative"
+  }
+ ],
+ "data_sha256": "b2534df479c1b81fae00570e61a2391a3209b7cb1a3e6e49017048011f165577",
+ "name": "demo",
+ "planted_rows": 114,
+ "rows": 644,
+ "seed": 58,
+ "spec_sha256": "c1a7ff221eaaf283405adaad8085412c810c73a700b38f5f6a6a21f3310c2f63",
+ "tool": "plant",
+ "truth_sha256": "9be2692a6906b8f7663701d232e1d5122cc6ca5c76cf7cebf49bffc60e94a066"
+}

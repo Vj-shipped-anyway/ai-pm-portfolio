@@ -1,0 +1,8 @@
+cand_id,note_id,action_type,owner,due,subject,amount,cite_sent_id,cite_quote
+E01,EX-1,send_document,rm,2026-10-16,rate sheet,,2,I will send Ms. Okafor the rate sheet by Friday.
+E02,EX-1,await_document,client,2026-10-21,KYC form,,3,She will return the KYC form by 21 October.
+E03,EX-1,callback,rm,,term deposit,,4,"If the term deposit rate moves by more than 25 basis points, she wants me to call her."
+E04,EX-1,log_complaint,rm,,card replacement delay,,5,She complained about the card replacement delay.
+E05,EX-1,send_document,rm,,fee schedule,,6,I already sent the fee schedule last week.
+E06,EX-1,send_document,rm,2026-10-17,rate sheet,,2,I will send Ms. Okafor the rate sheet by Friday.
+E07,EX-1,schedule_review,rm,2026-10-20,annual review,,7,I will book the annual review for 20 October.

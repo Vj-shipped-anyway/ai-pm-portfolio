@@ -1,0 +1,188 @@
+{
+ "granted_scopes": [
+  "accounts:read",
+  "accounts:write",
+  "ledger:*",
+  "payments:*",
+  "reports:read"
+ ],
+ "scope_catalog": [
+  {
+   "access": "read",
+   "id": "accounts:read",
+   "resource": "accounts"
+  },
+  {
+   "access": "write",
+   "id": "accounts:write",
+   "resource": "accounts"
+  },
+  {
+   "access": "delete",
+   "id": "accounts:delete",
+   "resource": "accounts"
+  },
+  {
+   "access": "any",
+   "id": "accounts:*",
+   "resource": "accounts"
+  },
+  {
+   "access": "read",
+   "id": "payments:read",
+   "resource": "payments"
+  },
+  {
+   "access": "write",
+   "id": "payments:write",
+   "resource": "payments"
+  },
+  {
+   "access": "delete",
+   "id": "payments:delete",
+   "resource": "payments"
+  },
+  {
+   "access": "any",
+   "id": "payments:*",
+   "resource": "payments"
+  },
+  {
+   "access": "read",
+   "id": "ledger:read",
+   "resource": "ledger"
+  },
+  {
+   "access": "write",
+   "id": "ledger:write",
+   "resource": "ledger"
+  },
+  {
+   "access": "delete",
+   "id": "ledger:delete",
+   "resource": "ledger"
+  },
+  {
+   "access": "any",
+   "id": "ledger:*",
+   "resource": "ledger"
+  },
+  {
+   "access": "read",
+   "id": "reports:read",
+   "resource": "reports"
+  },
+  {
+   "access": "any",
+   "id": "reports:*",
+   "resource": "reports"
+  }
+ ],
+ "server": {
+  "name": "demo-ledger-desk",
+  "version": "1.0.0"
+ },
+ "tools": [
+  {
+   "annotations": {
+    "readOnlyHint": true
+   },
+   "description": "Return the balance of one account.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "get_balance",
+   "requires_scopes": [
+    "accounts:read"
+   ]
+  },
+  {
+   "annotations": {
+    "readOnlyHint": true
+   },
+   "description": "List recent transactions on one account.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "list_transactions",
+   "requires_scopes": [
+    "accounts:read",
+    "accounts:write"
+   ]
+  },
+  {
+   "annotations": {
+    "destructiveHint": false,
+    "readOnlyHint": false
+   },
+   "description": "Start one payment.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "initiate_payment",
+   "requires_scopes": [
+    "payments:write"
+   ]
+  },
+  {
+   "description": "Return where one payment is.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "get_payment_status",
+   "requires_scopes": [
+    "payments:read"
+   ]
+  },
+  {
+   "description": "Post one ledger entry.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "post_ledger_entry",
+   "requires_scopes": [
+    "ledger:*"
+   ]
+  }
+ ]
+}

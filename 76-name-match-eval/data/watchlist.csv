@@ -1,0 +1,91 @@
+entry_id,entity_id,listed_name,name_type
+L001,E001,Ahmed Al Belkor,primary
+L002,E001,Ahmed Al Belqor,alias
+L003,E001,Ahmet Al Belkor,alias
+L004,E002,Khalid De Remshomi,primary
+L005,E003,Ivan Womfa,primary
+L006,E004,Rania Khalid Al Busslek,primary
+L007,E004,Rania Khalid Al Bussleck,alias
+L008,E005,Bashir Qoshisov,primary
+L009,E006,Wasim Homzikov,primary
+L010,E007,Sofia Samir Konbikouf,primary
+L011,E008,Dmitri Tavari,primary
+L012,E008,"Tavari, Dmitri",alias
+L013,E009,Viktor Norvel,primary
+L014,E010,Karim Nikolai Tavari,primary
+L015,E011,Bashir Pavel Zandri,primary
+L016,E011,Bashir Zandri,alias
+L017,E012,Leila Ahmed Wadtom,primary
+L018,E013,Josef Marov,primary
+L019,E013,Josef Marof,alias
+L020,E014,Viktor Shikshak,primary
+L021,E014,"Shikshak, Viktor",alias
+L022,E014,Veektor Shikshak,alias
+L023,E015,David Geedpoouf,primary
+L024,E016,Josef Hadani,primary
+L025,E017,Omar Al Qalhicki,primary
+L026,E017,"Al Qalhicki, Omar",alias
+L027,E018,Dmitri Zandri,primary
+L028,E019,Farid De Marov,primary
+L029,E019,Farid De Maruv,alias
+L030,E020,Hasan Al Lasburani,primary
+L031,E021,Malik Katya Jasmamski,primary
+L032,E022,Ivan Tavari,primary
+L033,E022,Ivan Tavary,alias
+L034,E023,Olga Sholladi,primary
+L035,E023,"Sholladi, Olga",alias
+L036,E024,Irina Kissriani,primary
+L037,E024,Irina Qissriani,alias
+L038,E025,Sofia Sudwusani,primary
+L039,E026,Khalid Hasan De Shilze,primary
+L040,E027,Hasan Marov,primary
+L041,E028,Pavel Zandri,primary
+L042,E029,Viktor Leila Penlekani,primary
+L043,E030,Amira Omar Tokqicki,primary
+L044,E031,Olga Van Jishissi,primary
+L045,E031,Olgha Van Jishissi,alias
+L046,E031,"Van Jishissi, Olga",alias
+L047,E032,Hasan Karim Gassbosouf,primary
+L048,E032,"Gassbosouf, Hasan Karim",alias
+L049,E032,Hasan Karim Gassbosuf,alias
+L050,E033,Omar Tomas Posfoulyan,primary
+L051,E034,Yusuf De Virsheei,primary
+L052,E034,Yussuf De Virsheei,alias
+L053,E035,Bashir Khalid Dockzodouf,primary
+L054,E036,Omar Hockhiouf,primary
+L055,E036,"Hockhiouf, Omar",alias
+L056,E037,Ahmed Hadani,primary
+L057,E038,Ahmed Farid Moududski,primary
+L058,E038,"Moududski, Ahmed Farid",alias
+L059,E038,Ahmed Moududski,alias
+L060,E039,Yusuf Sakkhacki,primary
+L061,E039,"Sakkhacki, Yusuf",alias
+L062,E040,Yusuf Juwass,primary
+L063,E041,Karim Forpanev,primary
+L064,E042,Ivan Gerhackski,primary
+L065,E043,Anna Khirfaski,primary
+L066,E043,"Khirfaski, Anna",alias
+L067,E044,Viktor Belkor,primary
+L068,E044,Vyktor Belkor,alias
+L069,E045,Amira Karim Qokrimov,primary
+L070,E046,Ivan Belkor,primary
+L071,E047,David Belkor,primary
+L072,E048,Tomas Birqimov,primary
+L073,E049,Samir Marta Marov,primary
+L074,E050,Hasan Viktor Al Marov,primary
+L075,E051,Nikolai Jenfonev,primary
+L076,E051,"Jenfonev, Nikolai",alias
+L077,E052,Khalid Ahmed Belkor,primary
+L078,E052,Khalid Belkor,alias
+L079,E053,Nikolai Dmitri Tisfe,primary
+L080,E054,Rania Gavouov,primary
+L081,E054,Rania Kavouov,alias
+L082,E055,Tariq Jodjocki,primary
+L083,E056,Karim Zandri,primary
+L084,E057,Viktor Marov,primary
+L085,E058,Tomas Yusuf Vejassouf,primary
+L086,E058,"Vejassouf, Tomas Yusuf",alias
+L087,E058,Tomas Vejassouf,alias
+L088,E059,Lena Khisbinov,primary
+L089,E059,Lena Khizbinov,alias
+L090,E060,David Anna Sisjinski,primary

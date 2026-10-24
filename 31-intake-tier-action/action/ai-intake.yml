@@ -1,0 +1,73 @@
+# Issue form for AI use-case intake. Staged: copy to .github/ISSUE_TEMPLATE/ai-intake.yml in the repository
+# that runs the Action. The labels of each field are the headings the tool reads, so keep them as they are.
+name: AI use-case intake
+description: Register an AI use case so it can be tiered and routed for review.
+title: "[AI intake] "
+labels: ["ai-intake"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Use case summary
+      description: What it does, for whom, and the scope of the pilot. Do not paste headings from other documents here.
+    validations:
+      required: true
+  - type: input
+    id: unit
+    attributes:
+      label: Sponsor unit
+  - type: input
+    id: dataset
+    attributes:
+      label: Dataset name
+      description: The catalog name of the main dataset it reads.
+  - type: dropdown
+    id: customer_facing
+    attributes:
+      label: Customer-facing
+      options: ["yes", "no", "unsure"]
+    validations:
+      required: true
+  - type: dropdown
+    id: autonomy
+    attributes:
+      label: Decision autonomy
+      options: ["advisory", "assisted", "automated"]
+    validations:
+      required: true
+  - type: dropdown
+    id: data_class
+    attributes:
+      label: Data class
+      options: ["public", "internal", "confidential", "restricted"]
+    validations:
+      required: true
+  - type: dropdown
+    id: vendor
+    attributes:
+      label: Vendor model
+      options: ["none", "self_hosted", "vendor_api"]
+    validations:
+      required: true
+  - type: dropdown
+    id: regulatory
+    attributes:
+      label: Regulatory scope
+      options: ["none", "privacy", "aml", "udaap", "fair_lending"]
+    validations:
+      required: true
+  - type: dropdown
+    id: exposure
+    attributes:
+      label: Financial exposure band
+      options: ["lt_1m", "1m_10m", "10m_50m", "gt_50m"]
+    validations:
+      required: true
+  - type: dropdown
+    id: declared
+    attributes:
+      label: Declared tier
+      description: Your own estimate. The Action recomputes the tier and labels the issue with its own result.
+      options: ["1", "2", "3", "4"]
+    validations:
+      required: true

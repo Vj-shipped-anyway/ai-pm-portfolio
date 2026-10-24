@@ -1,0 +1,21 @@
+check_id,project,command,exercises
+C-01,inject-lab,python3 inject_lab.py --demo,direct_input;retrieved_content
+C-02,inject-lab,python3 step_04_replay.py,direct_input
+C-03,tool-gate,python3 tool_gate.py --demo,tool_parameters;supplier_change
+C-04,tool-gate,python3 step_04_gate.py,tool_parameters
+C-05,ground-lab,python3 ground_lab.py --demo,unsupported_claim;number_error
+C-06,ground-lab,python3 step_04_trace.py,unsupported_claim
+C-07,figure-tie,python3 figure_tie.py --demo,number_error;audit_record
+C-08,swap-lab,python3 swap_lab.py --demo,version_change;supplier_change
+C-09,swap-lab,python3 step_04_brief.py,version_change
+C-10,drift-lab,python3 drift_lab.py --demo,data_shift
+C-11,drift-lab,python3 step_04_monitor.py,data_shift;audit_record
+C-12,scope-lab,python3 scope_lab.py --demo,permission_scope
+C-13,scope-lab,python3 step_04_review.py,permission_scope;approval_step
+C-14,approval-lab,python3 approval_lab.py --demo,approval_step;audit_record
+C-15,fair-lab,python3 fair_lab.py --demo,group_gap
+C-16,fair-lab,python3 step_04_gap.py,group_gap;version_change
+C-17,trail-lab,python3 trail_lab.py --demo,audit_record
+C-18,supplier-lab,python3 supplier_lab.py --demo,supplier_change;retrieved_content;permission_scope
+C-19,breaker-lab,python3 breaker_lab.py --demo,tool_parameters;permission_scope;approval_step
+C-20,steer-lab,python3 steer_lab.py --demo,direct_input;tool_parameters

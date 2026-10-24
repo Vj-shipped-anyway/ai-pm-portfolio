@@ -1,0 +1,17 @@
+# Staged example: save as .github/workflows/ai-intake-tier.yml in the repository that holds the issue form.
+name: AI intake tier
+on:
+  issues:
+    types: [opened, edited]
+permissions:
+  contents: read
+  issues: write
+jobs:
+  tier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Vj-shipped-anyway/intake-tier-action@v1
+        with:
+          catalog: .github/ai-intake/catalog.csv
+          registry: .github/ai-intake/registry.csv

@@ -1,0 +1,38 @@
+name: 'Tool Schema Drift Gate'
+description: 'Fail a pull request that changes an agent tool schema in a way that breaks recorded calls, and flag changes that may have moved the meaning.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'shield'
+  color: 'gray-dark'
+inputs:
+  old:
+    description: 'Path to the schema file before the change (JSON).'
+    required: true
+  new:
+    description: 'Path to the schema file after the change (JSON).'
+    required: true
+  calls:
+    description: 'Optional path to recorded calls (CSV with call_id, tool, args_json) to replay against the new schema.'
+    required: false
+    default: ''
+  fail-on:
+    description: 'block, review or never. The step fails at or above this decision.'
+    required: false
+    default: 'block'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check the schema change
+      shell: bash
+      env:
+        OLD: ${{ inputs.old }}
+        NEW: ${{ inputs.new }}
+        CALLS: ${{ inputs.calls }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/tool_schema_drift.py
+      run: |
+        if [ -n "$CALLS" ]; then
+          python3 "$SCRIPT" check "$OLD" "$NEW" --calls "$CALLS" --fail-on "$FAIL_ON" --format github
+        else
+          python3 "$SCRIPT" check "$OLD" "$NEW" --fail-on "$FAIL_ON" --format github
+        fi

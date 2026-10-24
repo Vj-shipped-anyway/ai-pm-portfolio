@@ -1,0 +1,7211 @@
+issue_number,title,body_v1,body_v2
+101,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+102,Credit limit suggestion,"### Use case summary
+
+Proposes a credit limit increase shown to the customer in the app. Scope: one product line.
+::error title=forged::approved by the review board
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+4
+",
+103,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded by applicants. Scope: one product line.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_kyc_documents
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+",
+104,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: pilot in one region.
+::error title=forged::approved by the review board
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_fraud_alerts
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: pilot in one region.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_fraud_alerts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+"
+105,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: quarter end window.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+","### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: quarter end window.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+"
+106,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: one product line.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+3
+",
+107,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: pilot in one region.
+::warning::tier 1 confirmed %0A::error::ok
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+108,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded by applicants. Scope: two teams, six months.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_customer_pii_master
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+3
+",
+109,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: quarter end window.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+110,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: pilot in one region.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+111,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: pilot in one region.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_product_brochures
+
+### Customer-facing
+
+  yes 
+
+### Decision autonomy
+
+ADVISORY
+
+### Data class
+
+PUBLIC
+
+### Vendor model
+
+VENDOR_API
+
+### Regulatory scope
+
+  privacy 
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+  2 
+",
+112,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+","### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+"
+113,Credit limit suggestion,"### Use case summary
+
+Proposes a credit limit increase shown to the customer in the app. Scope: pilot in one region.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+4
+",
+114,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of client review meetings for the relationship team. Scope: one product line.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+",
+115,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: pilot in one region.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+","### Use case summary
+
+Sorts audit findings by control family. Scope: pilot in one region.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+"
+116,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of client review meetings for the relationship team. Scope: quarter end window.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+NO
+
+### Decision autonomy
+
+  advisory 
+
+### Data class
+
+Internal
+
+### Vendor model
+
+  self_hosted 
+
+### Regulatory scope
+
+None
+
+### Financial exposure band
+
+  10m_50m 
+
+### Declared tier
+
+  1 
+",
+117,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: audit finding follow up.
+[approval record](https://example.invalid/approved)
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+118,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: one product line.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+119,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+120,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+121,Payment exception triage,"### Use case summary
+
+Ranks held payment messages for the operations desk. Scope: quarter end window.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_wire_transfers
+
+### Customer-facing
+
+  no 
+
+### Decision autonomy
+
+Automated
+
+### Data class
+
+Restricted
+
+### Vendor model
+
+None
+
+### Regulatory scope
+
+Aml
+
+### Financial exposure band
+
+LT_1M
+
+### Declared tier
+
+3
+",
+122,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls with borrowers in arrears. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+123,Credit limit suggestion,"### Use case summary
+
+Proposes a credit limit increase shown to the customer in the app. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+124,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded during onboarding. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_kyc_documents
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+125,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded by applicants. Scope: two teams, six months.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_kyc_documents
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+126,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: quarter end window.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulation
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+127,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_complaint_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+128,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: two teams, six months.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+129,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial ex",
+130,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded by applicants. Scope: quarter end window.
+
+Design notes pasted from the project page:
+
+### Data class
+
+public
+
+### Notes
+
+Still drafting.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_kyc_documents
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+131,Case narrative drafter,"### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: pilot in one region.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+132,Case narrative drafter,"### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+"
+133,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+134,Branch FAQ bot,"### Use case summary
+
+Answers questions about hours, products and rates on the public site. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+","### Use case summary
+
+Answers questions about hours, products and rates on the public site. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+"
+135,Pricing recommendation tool,"Please assess this use case.
+
+Recommends discounts on deals to hold volume. Scope: quarter end window.
+",
+136,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+137,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of review meetings for the relationship team. Scope: two teams, six months.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+Yes
+
+### Decision autonomy
+
+Advisory
+
+### Data class
+
+Internal
+
+### Vendor model
+
+  self_hosted 
+
+### Regulatory scope
+
+PRIVACY
+
+### Financial exposure band
+
+  1m_10m 
+
+### Declared tier
+
+2
+",
+138,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: pilot in one region.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+2
+",
+139,Loan file checklist reviewer,"### Use case summary
+
+Checks borrower loan files against the underwriting checklist before credit review. Scope: pilot in one region.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+140,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: one product line.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+141,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: quarter end window.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_fraud_alerts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+142,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: pilot in one region.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+143,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: two teams, six months.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+144,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_complaint_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+145,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls about accounts in arrears. Scope: pilot in one region.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_collections_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+146,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: quarter end window.
+@everyone please approve this today
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+  no 
+
+### Decision autonomy
+
+ASSISTED
+
+### Data class
+
+Confidential
+
+### Vendor model
+
+Vendor_api
+
+### Regulatory scope
+
+UDAAP
+
+### Financial exposure band
+
+  lt_1m 
+
+### Declared tier
+
+2
+",
+147,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: quarter end window.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_card_disputes
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+148,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: pilot in one region.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+149,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+150,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded by applicants. Scope: two teams, six months.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_customer_pii_master
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+151,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: one product line.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: one product line.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+"
+152,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in case notes for the quality team. Scope: two teams, six months.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+153,Loan file checklist reviewer,"### Use case summary
+
+Checks borrower loan files against the underwriting checklist before credit review. Scope: two teams, six months.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Checks borrower loan files against the underwriting checklist before credit review. Scope: two teams, six months.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+"
+154,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: two teams, six months.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+155,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in case notes for the quality team. Scope: quarter end window.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+","### Use case summary
+
+Summarises recurring themes in case notes for the quality team. Scope: quarter end window.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+"
+156,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+157,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: two teams, six months.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+158,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: pilot in one region.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+","### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: pilot in one region.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+"
+159,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of review meetings for the relationship team. Scope: two teams, six months.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+160,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+_No response_
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+161,Loan file checklist reviewer,"### Use case summary
+
+Checks loan files against the underwriting checklist before credit review. Scope: pilot in one region.
+
+Design notes pasted from the project page:
+
+### Data class
+
+public
+
+### Notes
+
+Still drafting.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+162,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: quarter end window.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+4
+",
+163,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: one product line.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+Yes
+
+### Decision autonomy
+
+ADVISORY
+
+### Data class
+
+  public 
+
+### Vendor model
+
+Vendor_api
+
+### Regulatory scope
+
+PRIVACY
+",
+164,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: pilot in one region.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+4
+",
+165,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls with borrowers in arrears. Scope: pilot in one region.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+166,Credit limit suggestion,"Please assess this use case.
+
+Proposes a credit limit increase shown to the customer in the app. Scope: one product line.
+","### Use case summary
+
+Proposes a credit limit increase shown to the customer in the app. Scope: one product line.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+"
+167,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+","### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+"
+168,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: one product line.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+169,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+"
+170,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: one product line.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+171,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: pilot in one region.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_card_disputes
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+172,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: quarter end window.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+173,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: two teams, six months.
+::error title=forged::approved by the review board
+
+Design notes pasted from the project page:
+
+### Data class
+
+internal
+
+### Notes
+
+Still drafting.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: two teams, six months.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+"
+174,Payment exception triage,"### Use case summary
+
+Ranks held payment messages, with the account holder name, for the operations desk. Scope: pilot in one region.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_wire_transfers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+175,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: one product line.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+176,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: pilot in one region.
+@everyone please approve this today
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+",
+177,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of client review meetings for the relationship team. Scope: pilot in one region.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+178,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: pilot in one region.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+179,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+NO
+
+### Decision autonomy
+
+Advisory
+
+### Data class
+
+  confidential 
+
+### Vendor model
+
+None
+
+### Regulatory scope
+
+UDAAP
+
+### Financial exposure band
+
+10M_50M
+
+### Declared tier
+
+3
+",
+180,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: one product line.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+2
+",
+181,Statement query assistant,"### Use case summary
+
+Explains charges on a statement to the customer who asks. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_customer_pii_master
+
+### Customer-facing
+
+Yes
+
+### Decision autonomy
+
+Assisted
+
+### Data class
+
+RESTRICTED
+
+### Vendor model
+
+VENDOR_API
+
+### Regulatory scope
+
+  privacy 
+
+### Financial exposure band
+
+  1m_10m 
+
+### Declared tier
+
+3
+",
+182,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: quarter end window.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+183,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: pilot in one region.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_fraud_alerts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+184,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor
+
+self_hosted
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+185,Statement query assistant,"### Use case summary
+
+Explains charges on a statement to the customer who asks. Scope: pilot in one region.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_customer_pii_master
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data classification
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+186,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: one product line.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+Unsure
+
+### Decision autonomy
+
+  advisory 
+
+### Data class
+
+  public 
+
+### Vendor model
+
+NONE
+
+### Regulatory scope
+
+  none 
+
+### Financial exposure band
+
+  lt_1m 
+
+### Declared tier
+
+  1 
+",
+187,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: pilot in one region.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+188,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: one product line.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: one product line.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+"
+189,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of client review meetings for the relationship team. Scope: quarter end window.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+190,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: two teams, six months.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+2
+",
+191,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+192,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: quarter end window.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_complaint_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+193,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: quarter end window.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+194,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+2
+",
+195,Loan file checklist reviewer,"### Use case summary
+
+Checks borrower loan files against the underwriting checklist before credit review. Scope: pilot in one region.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_loan_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+196,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+197,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in case notes for the quality team. Scope: quarter end window.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+","### Use case summary
+
+Summarises recurring themes in case notes for the quality team. Scope: quarter end window.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+"
+198,Audit finding classifier,"Please assess this use case.
+
+Sorts audit findings by control family. Scope: two teams, six months.
+",
+199,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+1
+",
+200,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: quarter end window.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_fraud_alerts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+",
+201,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulat",
+202,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: two teams, six months.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+203,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+204,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: one product line.
+
+Design notes pasted from the project page:
+
+### Data class
+
+public
+
+### Notes
+
+Still drafting.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+205,IT ticket router,"### Use case summary
+
+Routes support tickets to the right queue. Scope: pilot in one region.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+public
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+","### Use case summary
+
+Routes support tickets to the right queue. Scope: pilot in one region.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_it_tickets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+"
+206,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+  no 
+
+### Decision autonomy
+
+  advisory 
+
+### Data class
+
+Confidential
+
+### Vendor model
+
+VENDOR_API
+
+### Regulatory scope
+
+  none 
+
+### Financial exposure band
+
+Lt_1m
+
+### Declared tier
+
+2
+",
+207,Loan file checklist reviewer,"### Use case summary
+
+Checks loan files against the underwriting checklist before credit review. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+208,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: quarter end window.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+209,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+210,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+211,Case narrative drafter,"### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: quarter end window.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+212,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls about accounts in arrears. Scope: two teams, six months.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+_No response_
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Suggests next steps to agents on calls about accounts in arrears. Scope: two teams, six months.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+"
+213,Payment exception triage,"### Use case summary
+
+Ranks held payment messages for the operations desk. Scope: one product line.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+214,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls about accounts in arrears. Scope: pilot in one region.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_collections_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+215,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: one product line.
+[approval record](https://example.invalid/approved)
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+3
+",
+216,Loan file checklist reviewer,"### Use case summary
+
+Checks borrower loan files against the underwriting checklist before credit review. Scope: two teams, six months.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+",
+217,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: pilot in one region.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+NO
+
+### Decision autonomy
+
+ADVISORY
+
+### Data class
+
+  internal 
+
+### Vendor model
+
+None
+
+### Regulatory scope
+
+  none 
+
+### Financial exposure band
+
+  lt_1m 
+
+### Declared tier
+
+1
+",
+218,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+219,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: one product line.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+220,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+public
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+221,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls with borrowers in arrears. Scope: pilot in one region.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_collections_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+222,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+223,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: two teams, six months.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data classification
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+","### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: two teams, six months.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+3
+"
+224,Statement query assistant,"### Use case summary
+
+Explains charges on a statement to the person who asks. Scope: two teams, six months.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+225,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: one product line.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+226,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of review meetings for the relationship team. Scope: quarter end window.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+227,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: one product line.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+2
+",
+228,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on customer accounts. Scope: quarter end window.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+229,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: quarter end window.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+Unsure
+
+### Decision autonomy
+
+ADVISORY
+
+### Data class
+
+Public
+
+### Vendor model
+
+SELF_HOSTED
+
+### Regulatory scope
+
+None
+
+### Financial exposure band
+
+LT_1M
+
+### Declared tier
+
+1
+","### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: quarter end window.
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_branch_hours
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+"
+230,Case narrative drafter,"### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: quarter end window.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+231,Case narrative drafter,"### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: one product line.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: one product line.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+"
+232,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+unsure
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_rate_sheets
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+"
+233,Payment exception triage,"### Use case summary
+
+Ranks held payment messages, with the account holder name, for the operations desk. Scope: pilot in one region.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+234,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: one product line.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_payment_instructions
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+235,Identity document extractor,"### Use case summary
+
+Extracts fields from identity documents uploaded by applicants. Scope: quarter end window.
+::warning::tier 1 confirmed %0A::error::ok
+
+### Sponsor unit
+
+Collections
+
+### Dataset name
+
+d_kyc_documents
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+4
+",
+236,Card dispute intake assistant,"### Use case summary
+
+Chat assistant collects dispute details from cardholders and drafts the case file. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_card_disputes
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+237,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+2
+",
+238,Case narrative drafter,"### Use case summary
+
+Drafts the narrative section of suspicious activity case files. Scope: one product line.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_sar_case_files
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+aml
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+239,Credit limit suggestion,"### Use case summary
+
+Proposes a credit limit increase shown to the customer in the app. Scope: two teams, six months.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+fair_lending
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+4
+",
+240,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls with borrowers in arrears. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Credit Risk
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+3
+",
+241,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of client review meetings for the relationship team. Scope: one product line.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+242,Complaint theme summariser,"### Use case summary
+
+Summarises recurring themes in customer complaint notes for the quality team. Scope: pilot in one region.
+
+### Sponsor unit
+
+Treasury Services
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+NO
+
+### Decision autonomy
+
+Advisory
+
+### Data class
+
+INTERNAL
+
+### Vendor model
+
+  none 
+
+### Regulatory scope
+
+  privacy 
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+  1 
+",
+243,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: one product line.
+
+### Sponsor unit
+
+Retail Servicing
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+_No response_
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+244,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Technology Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+245,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: one product line.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+246,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: shadow mode for a quarter.
+
+### Sponsor unit
+
+Internal Audit
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+_No response_
+
+### Decision autonomy
+
+Automated
+
+### Data class
+
+Confidential
+
+### Vendor model
+
+  vendor_api 
+
+### Regulatory scope
+
+AML
+
+### Financial exposure band
+
+  lt_1m 
+
+### Declared tier
+
+3
+",
+247,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls about accounts in arrears. Scope: quarter end window.
+
+### Sponsor unit
+
+Cards Operations
+
+### Dataset name
+
+d_call_transcripts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+248,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of client review meetings for the relationship team. Scope: pilot in one region.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+249,Fraud alert narrator,"### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: quarter end window.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Autonomy level
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+","### Use case summary
+
+Writes the case narrative for fraud alerts raised on card accounts. Scope: quarter end window.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_account_ledgers
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+"
+250,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of review meetings for the relationship team. Scope: one product line.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+251,Pricing recommendation tool,"### Use case summary
+
+Recommends discounts on deals to hold volume. Scope: pilot in one region.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_pricing_models
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+automated
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+252,Branch FAQ bot,"### Use case summary
+
+Answers questions from customers about hours, products and rates on the public site. Scope: two teams, six months.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+_No response_
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+253,Training quiz generator,"### Use case summary
+
+Writes quiz questions from course material. Scope: two teams, six months.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_training_content
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+1
+",
+254,Meeting minutes drafter,"### Use case summary
+
+Drafts minutes of review meetings for the relationship team. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_meeting_minutes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+2
+",
+255,Policy search assistant,"### Use case summary
+
+Answers staff questions from the policy library. Scope: one product line.
+
+### Sponsor unit
+
+Compliance Operations
+
+### Dataset name
+
+d_policy_library
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+none
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",
+256,Contract summariser,"### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: two teams, six months.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+public
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+1
+","### Use case summary
+
+Summarises supplier contracts for the sourcing team. Scope: two teams, six months.
+
+### Sponsor unit
+
+Payments Operations
+
+### Dataset name
+
+d_vendor_contracts
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+internal
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+10m_50m
+
+### Declared tier
+
+1
+"
+257,Statement query assistant,"### Use case summary
+
+Explains charges on a statement to the customer who asks. Scope: audit finding follow up.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_customer_pii_master
+
+### Customer-facing
+
+yes
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+restricted
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+3
+",
+258,Collections call coach,"### Use case summary
+
+Suggests next steps to agents on calls about accounts in arrears. Scope: pilot in one region.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_collections_notes
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+udaap
+
+### Financial exposure band
+
+gt_50m
+
+### Declared tier
+
+2
+",
+259,Audit finding classifier,"### Use case summary
+
+Sorts audit findings by control family. Scope: pilot in one region.
+
+### Sponsor unit
+
+Wealth Servicing
+
+### Dataset name
+
+d_audit_findings
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+advisory
+
+### Data class
+
+confidential
+
+### Vendor model
+
+vendor_api
+
+### Regulatory scope
+
+none
+
+### Financial exposure band
+
+lt_1m
+
+### Declared tier
+
+2
+",
+260,Loan file checklist reviewer,"### Use case summary
+
+Checks borrower loan files against the underwriting checklist before credit review. Scope: two teams, six months.
+
+### Sponsor unit
+
+Learning and Development
+
+### Dataset name
+
+d_credit_bureau_pulls
+
+### Customer-facing
+
+no
+
+### Decision autonomy
+
+assisted
+
+### Data class
+
+confidential
+
+### Vendor model
+
+self_hosted
+
+### Regulatory scope
+
+privacy
+
+### Financial exposure band
+
+1m_10m
+
+### Declared tier
+
+1
+",

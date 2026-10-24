@@ -1,0 +1,95 @@
+case_id,case_kind,case_group,truth_verdict,real_run,problem_index,writes_before,expect_warning,detail
+C-001,hn_numeric_text,hard_negative,READY,completes,0,1,no,the snapshot holds the metric as text; a person reads it as the number it is
+C-002,undefined_param,lint,BLOCKED,garbled,4,1,no,s4 uses {{chan}} but params defines channel
+C-003,write_ungated,lint,BLOCKED,unsafe,3,0,no,the high-risk write has no approval gate
+C-004,no_rollback,warning,READY,completes,0,1,yes,the high-risk write names no rollback
+C-005,hn_note_placeholder,hard_negative,READY,completes,0,1,no,"a placeholder with no param sits in a note, which is never run"
+C-006,precondition_false,state,BLOCKED,stops,3,0,no,"a change freeze is on, so s3 cannot start"
+C-007,duplicate_id,lint,BLOCKED,stops,4,1,no,the notify step reuses the id s3
+C-008,digest_mismatch,approval,BLOCKED,unsafe,3,0,no,the approval was given for dispute-agent and the run is for refund-agent
+C-009,wrong_role,approval,BLOCKED,unsafe,3,0,no,the approver holds a role the gate does not accept
+C-010,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-011,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-012,hn_two_approvals_one_self,hard_negative,READY,completes,0,1,no,"the requester also signed, which does not count, and a second person signed correctly"
+C-013,precondition_false,state,BLOCKED,stops,1,0,no,"the metric is under the line, so s1 stops the run"
+C-014,no_rollback,warning,READY,completes,0,1,yes,the high-risk write names no rollback
+C-015,precondition_false,state,BLOCKED,stops,3,0,no,"a change freeze is on, so s3 cannot start"
+C-016,undefined_param,lint,BLOCKED,garbled,4,1,no,s4 uses {{chan}} but params defines channel
+C-017,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-018,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-019,hn_two_approvals_one_self,hard_negative,READY,completes,0,1,no,"the requester also signed, which does not count, and a second person signed correctly"
+C-020,hn_numeric_text,hard_negative,READY,completes,0,1,no,the snapshot holds the metric as text; a person reads it as the number it is
+C-021,hn_low_risk_write,hard_negative,READY,completes,0,2,no,a low-risk write with no gate and no rollback is within the policy
+C-022,self_blocking,state,BLOCKED,stops,5,1,no,s5 checks for the state s3 just changed
+C-023,hn_ttl_boundary,hard_negative,READY,completes,0,1,no,"the approval is exactly as old as the limit, which is still valid"
+C-024,mislabeled_effect,hard_miss,BLOCKED,unsafe,3,0,no,"s3 changes production but is labeled a read, so nothing gates it"
+C-025,undeclared_state_key,lint,BLOCKED,stops,2,0,no,a typo in the key s2 reads
+C-026,self_blocking,state,BLOCKED,stops,5,1,no,s5 checks for the state s3 just changed
+C-027,digest_mismatch,approval,BLOCKED,unsafe,3,0,no,the approval was given for assistant-api and the run is for advisor-chat
+C-028,undefined_param,lint,BLOCKED,garbled,4,1,no,s4 uses {{chan}} but params defines channel
+C-029,self_blocking,state,BLOCKED,stops,5,1,no,s5 checks for the state s3 just changed
+C-030,duplicate_id,lint,BLOCKED,stops,4,1,no,the notify step reuses the id s3
+C-031,write_ungated,lint,BLOCKED,unsafe,3,0,no,the high-risk write has no approval gate
+C-032,wrong_role,approval,BLOCKED,unsafe,3,0,no,the approver holds a role the gate does not accept
+C-033,hn_numeric_text,hard_negative,READY,completes,0,1,no,the snapshot holds the metric as text; a person reads it as the number it is
+C-034,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-035,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-036,self_approval,approval,BLOCKED,unsafe,3,0,no,the only approval is from the requester
+C-037,write_ungated,lint,BLOCKED,unsafe,3,0,no,the high-risk write has no approval gate
+C-038,mislabeled_effect,hard_miss,BLOCKED,unsafe,3,0,no,"s3 changes production but is labeled a read, so nothing gates it"
+C-039,self_approval,approval,BLOCKED,unsafe,3,0,no,the only approval is from the requester
+C-040,write_ungated,lint,BLOCKED,unsafe,3,0,no,the high-risk write has no approval gate
+C-041,hn_ttl_boundary,hard_negative,READY,completes,0,1,no,"the approval is exactly as old as the limit, which is still valid"
+C-042,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-043,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-044,precondition_false,state,BLOCKED,stops,3,0,no,"a change freeze is on, so s3 cannot start"
+C-045,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-046,wrong_role,approval,BLOCKED,unsafe,3,0,no,the approver holds a role the gate does not accept
+C-047,undefined_param,lint,BLOCKED,garbled,4,1,no,s4 uses {{chan}} but params defines channel
+C-048,self_blocking,state,BLOCKED,stops,5,1,no,s5 checks for the state s3 just changed
+C-049,precondition_false,state,BLOCKED,stops,1,0,no,"the metric is under the line, so s1 stops the run"
+C-050,hn_low_risk_write,hard_negative,READY,completes,0,2,no,a low-risk write with no gate and no rollback is within the policy
+C-051,digest_mismatch,approval,BLOCKED,unsafe,3,0,no,the approval was given for nightly-scoring and the run is for report-build
+C-052,hn_low_risk_write,hard_negative,READY,completes,0,2,no,a low-risk write with no gate and no rollback is within the policy
+C-053,hn_note_placeholder,hard_negative,READY,completes,0,1,no,"a placeholder with no param sits in a note, which is never run"
+C-054,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-055,world_drift,hard_miss,BLOCKED,stops,3,0,no,change.freeze turned on 14 minutes after the snapshot was taken
+C-056,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-057,digest_mismatch,approval,BLOCKED,unsafe,3,0,no,the approval was given for triage-v3 and the run is for summarizer-v2
+C-058,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-059,stale_approval,approval,BLOCKED,unsafe,3,0,no,the approval is 52 minutes old against a limit of 30
+C-060,hn_note_placeholder,hard_negative,READY,completes,0,1,no,"a placeholder with no param sits in a note, which is never run"
+C-061,self_approval,approval,BLOCKED,unsafe,3,0,no,the only approval is from the requester
+C-062,undefined_param,lint,BLOCKED,garbled,4,1,no,s4 uses {{chan}} but params defines channel
+C-063,stale_approval,approval,BLOCKED,unsafe,3,0,no,the approval is 70 minutes old against a limit of 30
+C-064,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-065,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-066,no_rollback,warning,READY,completes,0,1,yes,the high-risk write names no rollback
+C-067,duplicate_id,lint,BLOCKED,stops,4,1,no,the notify step reuses the id s3
+C-068,mislabeled_effect,hard_miss,BLOCKED,unsafe,3,0,no,"s3 changes production but is labeled a read, so nothing gates it"
+C-069,missing_state_key,state,BLOCKED,stops,2,0,no,the snapshot was exported without the key s2 reads
+C-070,missing_state_key,state,BLOCKED,stops,2,0,no,the snapshot was exported without the key s2 reads
+C-071,missing_state_key,state,BLOCKED,stops,2,0,no,the snapshot was exported without the key s2 reads
+C-072,mislabeled_effect,hard_miss,BLOCKED,unsafe,3,0,no,"s3 changes production but is labeled a read, so nothing gates it"
+C-073,stale_approval,approval,BLOCKED,unsafe,3,0,no,the approval is 68 minutes old against a limit of 30
+C-074,world_drift,hard_miss,BLOCKED,stops,3,0,no,change.freeze turned on 14 minutes after the snapshot was taken
+C-075,undeclared_state_key,lint,BLOCKED,stops,2,0,no,a typo in the key s2 reads
+C-076,stale_approval,approval,BLOCKED,unsafe,3,0,no,the approval is 53 minutes old against a limit of 30
+C-077,undeclared_state_key,lint,BLOCKED,stops,2,0,no,a typo in the key s2 reads
+C-078,wrong_role,approval,BLOCKED,unsafe,3,0,no,the approver holds a role the gate does not accept
+C-079,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-080,no_rollback,warning,READY,completes,0,1,yes,the high-risk write names no rollback
+C-081,write_ungated,lint,BLOCKED,unsafe,3,0,no,the high-risk write has no approval gate
+C-082,hn_ttl_boundary,hard_negative,READY,completes,0,1,no,"the approval is exactly as old as the limit, which is still valid"
+C-083,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-084,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-085,undeclared_state_key,lint,BLOCKED,stops,2,0,no,a typo in the key s2 reads
+C-086,world_drift,hard_miss,BLOCKED,stops,3,0,no,change.freeze turned on 14 minutes after the snapshot was taken
+C-087,hn_low_risk_write,hard_negative,READY,completes,0,2,no,a low-risk write with no gate and no rollback is within the policy
+C-088,self_approval,approval,BLOCKED,unsafe,3,0,no,the only approval is from the requester
+C-089,clean_ready,clean,READY,completes,0,1,no,nothing planted
+C-090,precondition_false,state,BLOCKED,stops,3,0,no,"a change freeze is on, so s3 cannot start"
+C-091,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-092,waiting_no_approval,waiting,WAITING,parks,3,0,no,"no approval record on file for s3, so the run parks there"
+C-093,hn_note_placeholder,hard_negative,READY,completes,0,1,no,"a placeholder with no param sits in a note, which is never run"
+C-094,hn_two_approvals_one_self,hard_negative,READY,completes,0,1,no,"the requester also signed, which does not count, and a second person signed correctly"

@@ -1,0 +1,42 @@
+runbook: scorer-rollback
+title: "Roll the scoring model back to the previous version"
+reads: [model.error_rate_pct, model.previous_health, change.freeze]
+params:
+  target: scorer-v7
+  previous: scorer-v6
+  channel: ai-incident
+steps:
+  - id: s1
+    title: "Confirm the error rate"
+    effect: read
+    risk: low
+    run: "modelctl status --target {{target}}"
+    requires: ["model.error_rate_pct >= 5"]
+  - id: s2
+    title: "Confirm the previous version is healthy"
+    effect: read
+    risk: low
+    run: "modelctl health --target {{previous}}"
+    requires: ["model.previous_health == healthy"]
+  - id: s3
+    title: "Roll back to the previous version"
+    effect: write
+    risk: high
+    run: "modelctl rollback --target {{target}} --to {{previous}}"
+    requires: ["change.freeze == off"]
+    sets: {model.mode: rolled_back}
+    approval:
+      role: incident-commander
+      ttl_minutes: 30
+    rollback: "modelctl rollback --target {{previous}} --to {{target}}"
+  - id: s4
+    title: "Tell the incident channel"
+    effect: notify
+    risk: low
+    run: "chatctl post --channel {{channel}} --text 'rolled back {{target}}'"
+  - id: s5
+    title: "Verify the rollback"
+    effect: read
+    risk: low
+    run: "modelctl status --target {{previous}}"
+    requires: ["model.mode == rolled_back"]

@@ -1,0 +1,59 @@
+{
+ "contract": "card_fraud_features",
+ "version": "1.0.0",
+ "unexpected_columns": "warn",
+ "max_bad_rate": 0.02,
+ "fields": [
+  {
+   "name": "txn_id",
+   "type": "string"
+  },
+  {
+   "name": "txn_amount_usd",
+   "type": "number",
+   "min": 0.01,
+   "max": 25000,
+   "unit": "US dollars"
+  },
+  {
+   "name": "merchant_category",
+   "type": "string",
+   "allowed": [
+    "grocery",
+    "fuel",
+    "restaurants",
+    "travel",
+    "online_retail",
+    "utilities",
+    "health",
+    "entertainment"
+   ]
+  },
+  {
+   "name": "txn_count_24h",
+   "type": "integer",
+   "min": 0,
+   "max": 500,
+   "unit": "transactions"
+  },
+  {
+   "name": "account_age_days",
+   "type": "integer",
+   "min": 0,
+   "max": 20000,
+   "unit": "days"
+  },
+  {
+   "name": "is_international",
+   "type": "boolean"
+  },
+  {
+   "name": "device_risk_score",
+   "type": "number",
+   "min": 0,
+   "max": 1,
+   "unit": "score from 0 to 1",
+   "max_null_rate": 0.05
+  }
+ ]
+}

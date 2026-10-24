@@ -1,0 +1,16 @@
+b_id,posting_date,amount,currency,counterparty,reference,batch_id,memo
+GL-000001,2026-03-02,1250.00,USD,Brindle Foods Limited,INV-10453,,Receipt from Brindle Foods Limited
+GL-000002,2026-03-03,5000.00,USD,Corvan Textiles Inc,INV-10460,,Receipt from Corvan Textiles Inc
+GL-000003,2026-03-04,1000.00,USD,Halden Freight Co,INV-10462,BT-0304,Receipt from Halden Freight Co
+GL-000004,2026-03-04,1200.00,USD,Halden Freight Co,INV-10463,BT-0304,Receipt from Halden Freight Co
+GL-000005,2026-03-04,800.00,USD,Halden Freight Co,INV-10464,BT-0304,Receipt from Halden Freight Co
+GL-000006,2026-03-04,-780.00,USD,Optrel Plastics LLC,PMT-4517,,Payment to Optrel Plastics LLC
+GL-000007,2026-03-06,2200.00,USD,Sunmere Tooling Limited,INV-10418,,Receipt from Sunmere Tooling Limited
+GL-000008,2026-03-09,6400.00,USD,Brindle Foods Limited,INV-10477,,Receipt from Brindle Foods Limited
+GL-000009,2026-03-09,900.00,USD,Corvan Textiles Inc,,,Receipt from Corvan Textiles Inc
+GL-000010,2026-03-11,900.00,USD,Corvan Textiles Inc,,,Receipt from Corvan Textiles Inc
+GL-000011,2026-03-13,-2150.00,USD,Halden Freight Co,PMT-004530,,Payment to Halden Freight Co
+GL-000012,2026-03-16,1200.00,USD,Optrel Plastics LLC,INV-11911,,Receipt from Optrel Plastics LLC
+GL-000013,2026-03-18,15000.00,USD,Sunmere Tooling Limited,INV-10500,,Receipt from Sunmere Tooling Limited
+GL-000014,2026-03-20,410.00,USD,Brindle Foods Limited,INV-10490,,Receipt from Brindle Foods Limited
+GL-000015,2026-03-20,410.00,USD,Brindle Foods Limited,INV-10490,,Receipt from Brindle Foods Limited

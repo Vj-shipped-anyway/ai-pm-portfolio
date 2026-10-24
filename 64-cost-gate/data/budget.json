@@ -1,0 +1,37 @@
+{
+ "min_items": 30,
+ "overall": {
+  "max_cost_per_correct_usd": 0.0067
+ },
+ "prices_usd_per_1k_tokens": {
+  "model-a": {
+   "input": 0.003,
+   "output": 0.015
+  },
+  "model-b": {
+   "input": 0.0024,
+   "output": 0.012
+  },
+  "model-c": {
+   "input": 0.0051,
+   "output": 0.0255
+  }
+ },
+ "slices": {
+  "balance_inquiry": {
+   "max_cost_per_correct_usd": 0.00382
+  },
+  "card_services": {
+   "max_cost_per_correct_usd": 0.0061
+  },
+  "dispute_status": {
+   "max_cost_per_correct_usd": 0.01034
+  },
+  "fee_questions": {
+   "max_cost_per_correct_usd": 0.00768
+  },
+  "wire_exceptions": {
+   "max_cost_per_correct_usd": 0.02081
+  }
+ }
+}

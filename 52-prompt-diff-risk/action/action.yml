@@ -1,0 +1,42 @@
+name: 'Prompt Diff Risk'
+description: 'Classify a change to an agent system prompt (rules, scope, tone, tools) and name the probe slices to run before it merges.'
+author: 'Vijay Saharan'
+branding:
+  icon: 'git-pull-request'
+  color: 'gray-dark'
+inputs:
+  old:
+    description: 'Path to the prompt file before the change (UTF-8 text).'
+    required: true
+  new:
+    description: 'Path to the prompt file after the change (UTF-8 text).'
+    required: true
+  tools:
+    description: 'Optional path to a tool catalogue (JSON list of objects with name and access, read or write). Without it tool grants are not checked.'
+    required: false
+    default: ''
+  probes:
+    description: 'Optional path to the probe set (CSV with probe_id and slice). Without it only slice names are printed.'
+    required: false
+    default: ''
+  fail-on:
+    description: 'block, review or never. The step fails at or above this decision.'
+    required: false
+    default: 'block'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check the prompt change
+      shell: bash
+      env:
+        OLD: ${{ inputs.old }}
+        NEW: ${{ inputs.new }}
+        TOOLS: ${{ inputs.tools }}
+        PROBES: ${{ inputs.probes }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SCRIPT: ${{ github.action_path }}/prompt_diff_risk.py
+      run: |
+        args=(check "$OLD" "$NEW" --fail-on "$FAIL_ON" --format github)
+        if [ -n "$TOOLS" ]; then args+=(--tools "$TOOLS"); fi
+        if [ -n "$PROBES" ]; then args+=(--probes "$PROBES"); fi
+        python3 "$SCRIPT" "${args[@]}"

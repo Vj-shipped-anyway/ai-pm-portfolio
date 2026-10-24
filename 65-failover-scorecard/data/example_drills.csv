@@ -1,0 +1,8 @@
+drill_id,service_id,drill_date,drill_type,scenario,target_region,config_version,minutes_to_recover,outcome,failure_reason
+D01,S01,2026-09-02,live,region_failover,region-b,3,22,pass,
+D02,S02,2026-08-19,live,region_failover,region-b,2,14,pass,
+D03,S03,2026-08-11,live,region_failover,region-b,5,,fail,traffic switch not applied in the secondary region
+D04,S04,2026-07-07,live,region_failover,region-a,4,41,pass,
+D05,S05,2026-06-15,tabletop,region_failover,region-c,1,,pass,
+D06,S06,2026-05-12,live,region_failover,region-b,2,140,pass,
+D07,S07,2025-08-14,live,backup_restore,region-a,1,190,pass,

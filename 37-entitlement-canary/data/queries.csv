@@ -1,0 +1,97 @@
+query_id,user_id,text,relevant_doc_ids
+Q001,U003,where is the procedure for complaint handling escalation path,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q002,U018,guidance on fraud alerts device signal,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q003,U010,what is the rule for access reviews privileged accounts,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q004,U008,guidance on card disputes merchant evidence,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q005,U010,where is the procedure for complaint handling response deadline,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q006,U005,where is the procedure for complaint handling trend report,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q007,U007,what is the rule for model validation input data,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q008,U010,where is the procedure for transaction monitoring source feed,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q009,U013,guidance on transaction monitoring filing decision,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q010,U002,how do we handle credit limits rating override,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q011,U020,where is the procedure for operational loss root cause,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q012,U003,what is the rule for card disputes merchant evidence,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q013,U019,what is the rule for fraud alerts false positive,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q014,U017,what is the rule for card disputes merchant evidence,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q015,U016,how do we handle compensation review pay equity,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q016,U014,guidance on operational loss reporting cadence,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q017,U013,how do we handle vendor onboarding data sharing,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q018,U003,guidance on fraud alerts rule tuning,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q019,U014,how do we handle operational loss root cause,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q020,U008,guidance on transaction monitoring filing decision,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q021,U017,guidance on records retention legal hold,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q022,U020,where is the procedure for operational loss escalation owner,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q023,U002,guidance on vendor onboarding risk tiering,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q024,U013,how do we handle compensation review bonus pool,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q025,U015,what is the rule for change management emergency change,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q026,U014,where is the procedure for vendor onboarding risk tiering,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q027,U014,how do we handle compensation review calibration notes,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q028,U016,where is the procedure for access reviews quarterly recertification,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q029,U001,where is the procedure for access reviews owner attestation,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q030,U018,what is the rule for model validation benchmark test,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q031,U010,how do we handle change management approval record,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q032,U015,where is the procedure for transaction monitoring filing decision,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q033,U011,where is the procedure for model validation input data,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q034,U017,what is the rule for records retention archive schedule,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q035,U009,how do we handle operational loss recovery tracking,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q036,U010,what is the rule for operational loss recovery tracking,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q037,U001,what is the rule for records retention destruction log,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q038,U005,guidance on complaint handling redress payment,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q039,U009,what is the rule for credit limits collateral value,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q040,U002,where is the procedure for card disputes chargeback timeline,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q041,U017,guidance on compensation review pay equity,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q042,U004,what is the rule for vendor onboarding contract terms,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q043,U008,what is the rule for transaction monitoring scenario backtest,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q044,U007,how do we handle fraud alerts case triage,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q045,U012,how do we handle model validation limitation notice,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q046,U018,guidance on access reviews privileged accounts,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q047,U010,what is the rule for transaction monitoring scenario backtest,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q048,U009,how do we handle card disputes customer notice,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q049,U013,where is the procedure for records retention review cycle,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q050,U001,how do we handle fraud alerts rule tuning,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q051,U009,what is the rule for model validation limitation notice,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q052,U008,what is the rule for fraud alerts device signal,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q053,U018,guidance on compensation review exception request,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q054,U020,guidance on compensation review band mapping,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q055,U006,how do we handle operational loss root cause,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q056,U016,how do we handle access reviews owner attestation,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q057,U004,how do we handle credit limits collateral value,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q058,U003,what is the rule for fraud alerts case triage,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q059,U014,what is the rule for access reviews quarterly recertification,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q060,U004,what is the rule for change management release window,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q061,U001,how do we handle model validation limitation notice,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q062,U007,where is the procedure for complaint handling response deadline,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q063,U018,what is the rule for change management emergency change,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q064,U020,how do we handle transaction monitoring filing decision,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q065,U008,guidance on change management freeze period,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q066,U003,how do we handle records retention archive schedule,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q067,U009,what is the rule for fraud alerts device signal,D0006;D0020;D0021;D0063;D0070;D0102;D0113;D0114;D0115;D0116
+Q068,U015,what is the rule for credit limits rating override,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q069,U004,guidance on access reviews owner attestation,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q070,U002,guidance on vendor onboarding exit plan,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q071,U015,what is the rule for model validation approval memo,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q072,U004,where is the procedure for credit limits annual review,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q073,U007,what is the rule for operational loss escalation owner,D0004;D0008;D0040;D0041;D0073;D0079;D0086;D0096;D0100;D0110
+Q074,U015,how do we handle change management emergency change,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q075,U004,what is the rule for access reviews owner attestation,D0007;D0011;D0034;D0047;D0048;D0055;D0064;D0072;D0078;D0083
+Q076,U005,what is the rule for credit limits covenant check,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q077,U009,what is the rule for complaint handling escalation path,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q078,U009,how do we handle compensation review band mapping,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q079,U013,what is the rule for complaint handling intake form,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q080,U005,what is the rule for model validation input data,D0013;D0014;D0016;D0023;D0028;D0042;D0046;D0053;D0095;D0119
+Q081,U003,how do we handle transaction monitoring source feed,D0002;D0017;D0038;D0043;D0045;D0054;D0093;D0098;D0112;D0118
+Q082,U020,how do we handle complaint handling response deadline,D0022;D0032;D0051;D0059;D0065;D0066;D0080;D0081;D0097;D0107
+Q083,U002,guidance on vendor onboarding contract terms,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q084,U002,guidance on credit limits covenant check,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q085,U006,how do we handle credit limits covenant check,D0010;D0019;D0036;D0039;D0044;D0050;D0076;D0082;D0085;D0104
+Q086,U016,how do we handle card disputes chargeback timeline,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q087,U007,guidance on records retention review cycle,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q088,U012,how do we handle records retention archive schedule,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111
+Q089,U001,where is the procedure for compensation review pay equity,D0009;D0012;D0015;D0018;D0029;D0035;D0084;D0091;D0094;D0109
+Q090,U013,what is the rule for card disputes merchant evidence,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q091,U005,what is the rule for card disputes chargeback timeline,D0003;D0027;D0052;D0060;D0062;D0068;D0099;D0101;D0105;D0120
+Q092,U018,where is the procedure for vendor onboarding exit plan,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q093,U010,how do we handle change management rollback plan,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q094,U011,what is the rule for change management freeze period,D0025;D0030;D0031;D0037;D0058;D0071;D0074;D0077;D0090;D0103
+Q095,U009,guidance on vendor onboarding data sharing,D0049;D0056;D0057;D0061;D0067;D0069;D0087;D0088;D0092;D0117
+Q096,U017,how do we handle records retention legal hold,D0001;D0005;D0024;D0026;D0033;D0075;D0089;D0106;D0108;D0111

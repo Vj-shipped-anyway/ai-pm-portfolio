@@ -1,0 +1,12 @@
+parameter,value,unit,set_by,note
+window_min,30,minutes,assumption,"Time window of calls the failure rate is read over. Project 25 pools 3 hours; an agent call is faster than a decision-service hour."
+min_window_calls,10,calls,assumption,"Below this many calls in the window the rate is not scored. Project 25 uses 60 decisions for the same reason: too few to judge."
+trip_failure_rate,0.5,fraction of calls,assumption,"Trip when this share of the window failed. Project 25 fits its trip level on held-out days; this project does not fit anything, step_04 prints what moving it does."
+warn_fraction,0.75,fraction of trip level,design from project 25,"Warn level = warn_fraction x trip rate. A warn tells a person; nothing switches. Copied from 25-killswitch-ai-fallback-drills/data/policy.csv."
+clear_fraction,0.5,fraction of trip level,design from project 25,"A warn re-arms once the rate falls under clear_fraction x trip rate. Copied from 25-killswitch-ai-fallback-drills/data/policy.csv."
+consecutive_trip,5,failures,assumption,"Trip on this many failures in a row. Catches an outage before the window has enough calls."
+critical_kinds,scope_violation,failure kinds separated by semicolons,assumption,"One failure of this kind trips at once: an action outside the agent's scope is not a rate."
+hold_min,30,minutes,assumption,"Minimum time calls go to the human queue after a trip. Project 25 holds a segment 6 hours; here the clock is minutes."
+hold_backoff,2,multiplier,assumption,"A failed probe multiplies the next hold by this."
+max_hold_min,240,minutes,assumption,"The hold never grows past this."
+probe_calls,3,calls,assumption,"This many probe calls must all pass before the breaker closes. One failed probe re-opens it."

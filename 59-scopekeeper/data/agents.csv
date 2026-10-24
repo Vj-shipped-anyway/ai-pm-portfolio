@@ -1,0 +1,15 @@
+agent_id,owner,purpose,service_account,launched_on
+AG-01,T-11 Retail Servicing,Answers balance and transaction questions,SVC-01,2025-02-10
+AG-02,T-14 Cards,Triages card dispute intake,SVC-02,2025-03-24
+AG-03,T-16 Payments,Tells customers where a payment is,SVC-03,2025-04-14
+AG-04,T-16 Payments,Prepares routine payments for operator release,SVC-04,2025-05-05
+AG-05,T-16 Payments,Drafts wires for human release,SVC-04,2025-06-02
+AG-06,T-16 Payments,Schedules recurring transfers,SVC-04,2025-07-21
+AG-07,T-18 Finance Operations,Matches ledger entries to payment confirmations,SVC-05,2025-03-03
+AG-08,T-18 Finance Operations,Posts month-end accrual adjustments,SVC-06,2025-08-11
+AG-09,T-12 Contact Centre,Drafts and sends customer email replies,SVC-07,2025-04-28
+AG-10,T-13 Collections,Sends payment reminders to late accounts,SVC-07,2025-09-15
+AG-11,T-15 Compliance Operations,Collects periodic KYC refresh documents,SVC-08,2025-10-06
+AG-12,T-19 Treasury,Builds the daily liquidity summary,SVC-09,2025-12-01
+AG-13,T-12 Contact Centre,Logs and routes customer complaints,SVC-09,2026-01-12
+AG-14,T-15 Compliance Operations,Triages sanctions screening alerts,SVC-10,2026-03-09
