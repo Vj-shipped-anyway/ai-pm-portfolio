@@ -1,0 +1,11 @@
+build,defect,legacy_field,iso_path,param,benign,description
+B01,none,,,,,"clean converter, no variation"
+B02,none,,,,pad|amount_min,"clean, but pads text with spaces and writes amounts without trailing zeros"
+B03,cut_early,ORGNM,Dbtr/Nm,33,,originator name cut at 33 characters; the limit is 140
+B04,cut_early,ORGAD2,Dbtr/PstlAdr/AdrLine[1],33,,second originator address line cut at 33 characters; the limit is 70
+B05,drop_field,RCVID,InstdAgt/MmbId,,,receiver identifier never written
+B06,amount_round,AMT,IntrBkSttlmAmt,,,amount rounded to whole units
+B07,date_swap,VALDT,IntrBkSttlmDt,,,month and day swapped in the value date
+B08,strip_zeros,BENACC,CdtrAcct/Id/Othr/Id,,,leading zeros removed from the beneficiary account
+B09,lines_swapped,ORGAD1,Dbtr/PstlAdr/AdrLine[0],,,first two originator address lines swapped
+B10,cond_drop,BENACC,CdtrAcct/Id/Othr/Id,TYP=16 and CHGS=S,,beneficiary account dropped when TYP is 16 and CHGS is S

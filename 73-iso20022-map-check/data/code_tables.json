@@ -1,0 +1,11 @@
+{
+ "chgs": {
+  "B": "DEBT",
+  "S": "SHAR"
+ },
+ "typ": {
+  "10": "CUSTOMER",
+  "15": "BANK",
+  "16": "DRAWDOWN"
+ }
+}

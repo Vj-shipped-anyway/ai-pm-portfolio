@@ -1,0 +1,9 @@
+kind,subject,planted
+legacy_unmapped,ORGAD3,yes
+iso_mandatory_unsourced,GrpHdr/MsgId,yes
+code_not_covered,CHGS=O,yes
+capacity_overflow,CdtrAcct/Id/Othr/Id,yes
+capacity_overflow,RmtInf/Ustrd,yes
+legacy_unmapped,INTNOTE,no
+iso_mandatory_unsourced,PmtId/EndToEndId,no
+iso_mandatory_unsourced,IntrBkSttlmAmt@Ccy,no
