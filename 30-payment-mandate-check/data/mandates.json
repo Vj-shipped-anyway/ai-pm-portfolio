@@ -1,0 +1,683 @@
+[
+ {
+  "agent_id": "AG-01",
+  "categories": [
+   "groceries",
+   "office_supplies",
+   "telecom"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0001",
+  "daily_limit": "960.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "300.00",
+  "mandate_id": "M-001",
+  "payees": [
+   {
+    "account_ref": "AC-80109798",
+    "name": "Ombra Provisions",
+    "payee_id": "PY-0001"
+   },
+   {
+    "account_ref": "AC-90470873",
+    "name": "Kelom Mobile",
+    "payee_id": "PY-0002"
+   },
+   {
+    "account_ref": "AC-13155467",
+    "name": "Fasyarom Office Supply",
+    "payee_id": "PY-0003"
+   },
+   {
+    "account_ref": "AC-22816024",
+    "name": "Tavqui Foods",
+    "payee_id": "PY-0004"
+   },
+   {
+    "account_ref": "AC-27360429",
+    "name": "Yarwexnel Broadband",
+    "payee_id": "PY-0005"
+   },
+   {
+    "account_ref": "AC-28567426",
+    "name": "Rentavpol Stationery",
+    "payee_id": "PY-0006"
+   }
+  ],
+  "per_payment_limit": "500.00",
+  "rails": [
+   "ach",
+   "card",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-02",
+  "categories": [
+   "groceries",
+   "telecom",
+   "travel"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0001",
+  "daily_limit": "960.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "480.00",
+  "mandate_id": "M-002",
+  "payees": [
+   {
+    "account_ref": "AC-19161110",
+    "name": "Polbradul Broadband",
+    "payee_id": "PY-0007"
+   },
+   {
+    "account_ref": "AC-45102725",
+    "name": "Wexnel Rail Services",
+    "payee_id": "PY-0008"
+   },
+   {
+    "account_ref": "AC-34860083",
+    "name": "Tavtavgal Foods",
+    "payee_id": "PY-0009"
+   },
+   {
+    "account_ref": "AC-99311423",
+    "name": "Polren Broadband",
+    "payee_id": "PY-0010"
+   },
+   {
+    "account_ref": "AC-67946845",
+    "name": "Silnel Rail Services",
+    "payee_id": "PY-0011"
+   },
+   {
+    "account_ref": "AC-96410991",
+    "name": "Polhovhov Market",
+    "payee_id": "PY-0012"
+   }
+  ],
+  "per_payment_limit": "800.00",
+  "rails": [
+   "ach",
+   "wire",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-03",
+  "categories": [
+   "software",
+   "travel",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0002",
+  "daily_limit": "800.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": null,
+  "mandate_id": "M-003",
+  "payees": [
+   {
+    "account_ref": "AC-88055050",
+    "name": "Wexdul Travel",
+    "payee_id": "PY-0013"
+   },
+   {
+    "account_ref": "AC-69424612",
+    "name": "Hovyarvar Gas Supply",
+    "payee_id": "PY-0014"
+   },
+   {
+    "account_ref": "AC-45520118",
+    "name": "Junnel Cloud Services",
+    "payee_id": "PY-0015"
+   },
+   {
+    "account_ref": "AC-80791011",
+    "name": "Poljunjun Rail Services",
+    "payee_id": "PY-0016"
+   },
+   {
+    "account_ref": "AC-64695678",
+    "name": "Dulkel Power",
+    "payee_id": "PY-0017"
+   },
+   {
+    "account_ref": "AC-61094304",
+    "name": "Keljunqui Systems",
+    "payee_id": "PY-0018"
+   }
+  ],
+  "per_payment_limit": "250.00",
+  "rails": [
+   "ach",
+   "card"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-04",
+  "categories": [
+   "groceries",
+   "software",
+   "telecom"
+  ],
+  "currency": "EUR",
+  "customer_id": "CUST-0002",
+  "daily_limit": "480.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "240.00",
+  "mandate_id": "M-004",
+  "payees": [
+   {
+    "account_ref": "AC-54633868",
+    "name": "Nelgalwex Mobile",
+    "payee_id": "PY-0019"
+   },
+   {
+    "account_ref": "AC-73968690",
+    "name": "Hovwexsil Systems",
+    "payee_id": "PY-0020"
+   },
+   {
+    "account_ref": "AC-33118652",
+    "name": "Wexhov Provisions",
+    "payee_id": "PY-0021"
+   },
+   {
+    "account_ref": "AC-86012232",
+    "name": "Polfas Mobile",
+    "payee_id": "PY-0022"
+   },
+   {
+    "account_ref": "AC-35561215",
+    "name": "Faspol Cloud Services",
+    "payee_id": "PY-0023"
+   }
+  ],
+  "per_payment_limit": "400.00",
+  "rails": [
+   "wire",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-05",
+  "categories": [
+   "telecom",
+   "travel",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0003",
+  "daily_limit": "2880.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "900.00",
+  "mandate_id": "M-005",
+  "payees": [
+   {
+    "account_ref": "AC-65701816",
+    "name": "Silgal Broadband",
+    "payee_id": "PY-0024"
+   },
+   {
+    "account_ref": "AC-48859570",
+    "name": "Renkel Rail Services",
+    "payee_id": "PY-0025"
+   },
+   {
+    "account_ref": "AC-26139738",
+    "name": "Hovtav Gas Supply",
+    "payee_id": "PY-0026"
+   },
+   {
+    "account_ref": "AC-84660749",
+    "name": "Tavwexqui Broadband",
+    "payee_id": "PY-0027"
+   },
+   {
+    "account_ref": "AC-16028546",
+    "name": "Nelom Travel",
+    "payee_id": "PY-0028"
+   }
+  ],
+  "per_payment_limit": "1500.00",
+  "rails": [
+   "ach",
+   "wire"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-06",
+  "categories": [
+   "insurance",
+   "travel",
+   "utilities"
+  ],
+  "currency": "GBP",
+  "customer_id": "CUST-0003",
+  "daily_limit": "1080.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "300.00",
+  "mandate_id": "M-006",
+  "payees": [
+   {
+    "account_ref": "AC-53104950",
+    "name": "Fasgal Rail Services",
+    "payee_id": "PY-0029"
+   },
+   {
+    "account_ref": "AC-18924477",
+    "name": "Braquiom Power",
+    "payee_id": "PY-0030"
+   },
+   {
+    "account_ref": "AC-24501572",
+    "name": "Kelkel Mutual",
+    "payee_id": "PY-0031"
+   },
+   {
+    "account_ref": "AC-57542849",
+    "name": "Galrenkel Rail Services",
+    "payee_id": "PY-0032"
+   }
+  ],
+  "per_payment_limit": "500.00",
+  "rails": [
+   "ach",
+   "wire",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-01",
+  "categories": [
+   "insurance",
+   "office_supplies",
+   "travel"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0004",
+  "daily_limit": "1280.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": null,
+  "mandate_id": "M-007",
+  "payees": [
+   {
+    "account_ref": "AC-19409713",
+    "name": "Hovgal Rail Services",
+    "payee_id": "PY-0033"
+   },
+   {
+    "account_ref": "AC-80156926",
+    "name": "Hovqui Stationery",
+    "payee_id": "PY-0034"
+   },
+   {
+    "account_ref": "AC-93344260",
+    "name": "Fasquiom Mutual",
+    "payee_id": "PY-0035"
+   },
+   {
+    "account_ref": "AC-31420116",
+    "name": "Nelkel Rail Services",
+    "payee_id": "PY-0036"
+   },
+   {
+    "account_ref": "AC-79132390",
+    "name": "Dulhovgal Stationery",
+    "payee_id": "PY-0037"
+   }
+  ],
+  "per_payment_limit": "400.00",
+  "rails": [
+   "card",
+   "wire",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-02",
+  "categories": [
+   "telecom",
+   "travel",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0004",
+  "daily_limit": "1344.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "480.00",
+  "mandate_id": "M-008",
+  "payees": [
+   {
+    "account_ref": "AC-40335685",
+    "name": "Morjunjun Travel",
+    "payee_id": "PY-0038"
+   },
+   {
+    "account_ref": "AC-39993769",
+    "name": "Wexdul Mobile",
+    "payee_id": "PY-0039"
+   },
+   {
+    "account_ref": "AC-79990554",
+    "name": "Polvar Water",
+    "payee_id": "PY-0040"
+   },
+   {
+    "account_ref": "AC-32218163",
+    "name": "Wexpolmor Rail Services",
+    "payee_id": "PY-0041"
+   },
+   {
+    "account_ref": "AC-37884600",
+    "name": "Wexdulgal Mobile",
+    "payee_id": "PY-0042"
+   },
+   {
+    "account_ref": "AC-40255551",
+    "name": "Nelgalvar Power",
+    "payee_id": "PY-0043"
+   }
+  ],
+  "per_payment_limit": "800.00",
+  "rails": [
+   "card",
+   "wire",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-03",
+  "categories": [
+   "telecom",
+   "travel",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0005",
+  "daily_limit": "960.00",
+  "expires_at": "2026-05-14T17:00:00Z",
+  "human_confirm_above": "300.00",
+  "mandate_id": "M-009",
+  "payees": [
+   {
+    "account_ref": "AC-53381973",
+    "name": "Renhov Rail Services",
+    "payee_id": "PY-0044"
+   },
+   {
+    "account_ref": "AC-43421920",
+    "name": "Wexbra Power",
+    "payee_id": "PY-0045"
+   },
+   {
+    "account_ref": "AC-23555991",
+    "name": "Nelnelgal Broadband",
+    "payee_id": "PY-0046"
+   },
+   {
+    "account_ref": "AC-21600949",
+    "name": "Quigaljun Travel",
+    "payee_id": "PY-0047"
+   },
+   {
+    "account_ref": "AC-43279547",
+    "name": "Renqui Water",
+    "payee_id": "PY-0048"
+   }
+  ],
+  "per_payment_limit": "500.00",
+  "rails": [
+   "ach",
+   "card"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-04",
+  "categories": [
+   "insurance",
+   "software",
+   "telecom"
+  ],
+  "currency": "EUR",
+  "customer_id": "CUST-0005",
+  "daily_limit": "540.00",
+  "expires_at": "2026-05-20T12:00:00Z",
+  "human_confirm_above": "150.00",
+  "mandate_id": "M-010",
+  "payees": [
+   {
+    "account_ref": "AC-32364392",
+    "name": "Dultav Broadband",
+    "payee_id": "PY-0049"
+   },
+   {
+    "account_ref": "AC-61921903",
+    "name": "Omgalqui Cloud Services",
+    "payee_id": "PY-0050"
+   },
+   {
+    "account_ref": "AC-27979843",
+    "name": "Renbradul Assurance",
+    "payee_id": "PY-0051"
+   },
+   {
+    "account_ref": "AC-26956557",
+    "name": "Renqui Mobile",
+    "payee_id": "PY-0052"
+   }
+  ],
+  "per_payment_limit": "250.00",
+  "rails": [
+   "card",
+   "wire",
+   "instant"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-05",
+  "categories": [
+   "groceries",
+   "insurance",
+   "software"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0006",
+  "daily_limit": "768.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "240.00",
+  "mandate_id": "M-011",
+  "payees": [
+   {
+    "account_ref": "AC-19129357",
+    "name": "Quiqui Cloud Services",
+    "payee_id": "PY-0053"
+   },
+   {
+    "account_ref": "AC-57528307",
+    "name": "Hovneltav Assurance",
+    "payee_id": "PY-0054"
+   },
+   {
+    "account_ref": "AC-24330585",
+    "name": "Morrendul Provisions",
+    "payee_id": "PY-0055"
+   },
+   {
+    "account_ref": "AC-19810409",
+    "name": "Quikelkel Cloud Services",
+    "payee_id": "PY-0056"
+   },
+   {
+    "account_ref": "AC-26468819",
+    "name": "Galvarhov Mutual",
+    "payee_id": "PY-0057"
+   },
+   {
+    "account_ref": "AC-56096598",
+    "name": "Fasgal Market",
+    "payee_id": "PY-0058"
+   }
+  ],
+  "per_payment_limit": "400.00",
+  "rails": [
+   "ach",
+   "card",
+   "instant"
+  ],
+  "revoked_at": "2026-05-13T09:00:00Z",
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-06",
+  "categories": [
+   "groceries",
+   "travel",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0006",
+  "daily_limit": "2880.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": null,
+  "mandate_id": "M-012",
+  "payees": [
+   {
+    "account_ref": "AC-94670130",
+    "name": "Junom Travel",
+    "payee_id": "PY-0059"
+   },
+   {
+    "account_ref": "AC-22979520",
+    "name": "Morsil Foods",
+    "payee_id": "PY-0060"
+   },
+   {
+    "account_ref": "AC-54109926",
+    "name": "Quinel Gas Supply",
+    "payee_id": "PY-0061"
+   },
+   {
+    "account_ref": "AC-59394090",
+    "name": "Omdul Travel",
+    "payee_id": "PY-0062"
+   }
+  ],
+  "per_payment_limit": "800.00",
+  "rails": [
+   "ach",
+   "card",
+   "instant"
+  ],
+  "revoked_at": "2026-05-21T15:30:00Z",
+  "valid_from": "2026-04-01T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-01",
+  "categories": [
+   "insurance",
+   "office_supplies",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0007",
+  "daily_limit": "720.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "300.00",
+  "mandate_id": "M-013",
+  "payees": [
+   {
+    "account_ref": "AC-96379112",
+    "name": "Varhov Stationery",
+    "payee_id": "PY-0063"
+   },
+   {
+    "account_ref": "AC-17989504",
+    "name": "Poltav Assurance",
+    "payee_id": "PY-0064"
+   },
+   {
+    "account_ref": "AC-69165379",
+    "name": "Omrenkel Power",
+    "payee_id": "PY-0065"
+   },
+   {
+    "account_ref": "AC-21189826",
+    "name": "Yarrenkel Office Supply",
+    "payee_id": "PY-0066"
+   }
+  ],
+  "per_payment_limit": "500.00",
+  "rails": [
+   "ach",
+   "card",
+   "wire"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-05-18T00:00:00Z"
+ },
+ {
+  "agent_id": "AG-02",
+  "categories": [
+   "office_supplies",
+   "telecom",
+   "travel"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-0007",
+  "daily_limit": "3240.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "900.00",
+  "mandate_id": "M-014",
+  "payees": [
+   {
+    "account_ref": "AC-59120213",
+    "name": "Wexnel Office Supply",
+    "payee_id": "PY-0067"
+   },
+   {
+    "account_ref": "AC-75551439",
+    "name": "Quiwexqui Rail Services",
+    "payee_id": "PY-0068"
+   },
+   {
+    "account_ref": "AC-22504811",
+    "name": "Quihov Broadband",
+    "payee_id": "PY-0069"
+   },
+   {
+    "account_ref": "AC-53755064",
+    "name": "Yarnel Office Supply",
+    "payee_id": "PY-0070"
+   }
+  ],
+  "per_payment_limit": "1500.00",
+  "rails": [
+   "ach",
+   "card"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-04-01T00:00:00Z"
+ }
+]

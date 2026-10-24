@@ -1,0 +1,34 @@
+[
+ {
+  "agent_id": "AG-DEMO",
+  "categories": [
+   "groceries",
+   "utilities"
+  ],
+  "currency": "USD",
+  "customer_id": "CUST-DEMO",
+  "daily_limit": "900.00",
+  "expires_at": "2026-12-31T23:59:59Z",
+  "human_confirm_above": "250.00",
+  "mandate_id": "M-DEMO",
+  "payees": [
+   {
+    "account_ref": "AC-D1",
+    "name": "Halvern Power",
+    "payee_id": "PY-D1"
+   },
+   {
+    "account_ref": "AC-D2",
+    "name": "Orsen Provisions",
+    "payee_id": "PY-D2"
+   }
+  ],
+  "per_payment_limit": "400.00",
+  "rails": [
+   "ach",
+   "card"
+  ],
+  "revoked_at": null,
+  "valid_from": "2026-05-01T00:00:00Z"
+ }
+]
