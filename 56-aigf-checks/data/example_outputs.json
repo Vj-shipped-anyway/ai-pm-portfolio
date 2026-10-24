@@ -1,0 +1,5 @@
+{
+ "C-01": "CHECK C-01 (inject-lab) - synthetic output\n  cases caught: 38 of 40\n  retrieved cases caught: 15 of 20\n  false alarms: 2 of 60\n",
+ "C-08": "CHECK C-08 (swap-lab) - synthetic output\n  regressions flagged: 6 of 6\n",
+ "C-13": "CHECK C-13 (scope-lab) - synthetic output\n  scopes cut: 9 of 12\n"
+}

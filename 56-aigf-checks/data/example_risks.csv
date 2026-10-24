@@ -1,0 +1,5 @@
+risk_id,title,summary,aspects
+R-01,Instructions hidden in user input,A user types text that tells the assistant to ignore its rules.,direct_input
+R-02,Instructions hidden in retrieved documents,A document the assistant reads carries instructions meant for it.,retrieved_content
+R-09,Provider changes the model without notice,Behaviour moves although nobody on the team changed anything.,version_change
+R-15,Agent exceeds scope and skips approval,Both failures at once on the same action.,permission_scope;approval_step

@@ -1,0 +1,25 @@
+risk_id,title,summary,aspects
+R-01,Instructions hidden in user input,A user types text that tells the assistant to ignore its rules.,direct_input
+R-02,Instructions hidden in retrieved documents,A document the assistant reads carries instructions meant for it.,retrieved_content
+R-03,Prompt manipulation across input and documents,Instructions arrive both from the user and from retrieved text.,direct_input;retrieved_content
+R-04,Tool call with altered arguments,The arguments of a tool call are changed on the way to the tool.,tool_parameters
+R-05,Agent chains tools past its brief,Calls that are each allowed combine into an outcome nobody allowed.,tool_parameters;permission_scope
+R-06,Answer states what the sources do not say,A generated answer asserts something no source supports.,unsupported_claim
+R-07,Figures in an answer do not match the record,A number in generated text differs from the number in the record.,number_error
+R-08,Narrative with unsupported claims or wrong figures,A generated narrative mixes claims with no source and figures that are off.,unsupported_claim;number_error
+R-09,Provider changes the model without notice,Behaviour moves although nobody on the team changed anything.,version_change
+R-10,Model upgrade changes behaviour and supplier terms,A planned upgrade moves quality and the terms of supply together.,version_change;supplier_change
+R-11,Input data moves away from the training data,Production inputs stop resembling what the model was built on.,data_shift
+R-12,Quality decays and nobody can show when,Quality falls over months and the record cannot date the fall.,data_shift;audit_record
+R-13,Agent holds more permissions than it uses,"The grant is wider than the work, so a mistake has a wider reach.",permission_scope
+R-14,Agent skips an approval step,An action that needs a person's approval runs without it.,approval_step
+R-15,Agent exceeds scope and skips approval,Both failures at once on the same action.,permission_scope;approval_step
+R-16,Outputs differ across customer groups,The same request gets a worse result for one group.,group_gap
+R-17,Supplier alters a tool definition,The description or schema of a supplied tool changes under the agent.,supplier_change;tool_parameters
+R-18,Supplier compromise reaches the agent,A compromised supplier feeds the agent content and widens its reach.,supplier_change;retrieved_content;permission_scope
+R-19,Decisions cannot be reconstructed afterwards,The record of a decision is too thin to replay it.,audit_record
+R-20,Record of an approved action is missing or altered,The approval happened but the record of it cannot be trusted.,audit_record;approval_step
+R-21,Hidden instructions steer tool choice,Text in the input changes which tool the agent calls.,direct_input;tool_parameters
+R-22,Answers cite a source that does not exist,A citation points at a document that is not in the corpus.,unsupported_claim;audit_record
+R-23,Fairness gap appears after a model change,A group gap opens when the model version moves.,group_gap;version_change
+R-24,Model endpoint is unavailable at peak,The service cannot be reached when demand is highest.,availability

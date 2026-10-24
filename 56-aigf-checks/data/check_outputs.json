@@ -1,0 +1,19 @@
+{
+ "C-01": "CHECK C-01 (inject-lab) - synthetic output\n  cases caught: 27 of 42\n  approvals found: 54.8%\n  calls replayed: 6 of 12\n  groups compared: 14 of 44\n",
+ "C-02": "CHECK C-02 (inject-lab) - synthetic output\n  cases caught: 36 of 45\n  sources matched: 2 of 51\n  events logged: 100\n  figures tied: 49\n",
+ "C-03": "CHECK C-03 (tool-gate) - synthetic output\n  figures tied: 13 of 19\n  events logged: 5 of 50\n  alerts raised: 76.8%\n  groups compared: 6 of 20\n",
+ "C-05": "CHECK C-05 (ground-lab) - synthetic output\n  alerts raised: 32 of 43\n  sources matched: 14 of 51\n  drift flagged: 45 of 58\n  figures tied: 4 of 8\n",
+ "C-06": "CHECK C-06 (ground-lab) - synthetic output\n  Events Logged  :   796 of 1,533\n  Claims Traced  :   2,139 of 2,199\n  Alerts Raised  :   1,726 of 3,084\n  Rows Read  :   3,107 of 3,372\n",
+ "C-07": "CHECK C-07 (figure-tie) - synthetic output\n  events logged: 9 of 11\n  alerts raised: 35 of 55\n  sources matched: 2 of 21\n  scopes cut: 27 of 50\n",
+ "C-08": "CHECK C-08 (swap-lab) - synthetic output\n  rows read: 37 of 58\n  versions compared: 46 of 48\n  claims traced: 1 of 10\n  calls replayed: 17 of 39\n",
+ "C-10": "CHECK C-10 (drift-lab) - synthetic output\n  approvals found: 56.8%\n  figures tied: 36 of 55\n  events logged: 14 of 22\n  false alarms: 70.4%\n",
+ "C-11": "CHECK C-11 (drift-lab) - synthetic output\n  figures tied: 75\n  alerts raised: 42 of 46\n  sources matched: 4 of 20\n  versions compared: 35 of 35\n",
+ "C-12": "CHECK C-12 (scope-lab) - synthetic output\n  events logged: 37 of 52\n  versions compared: 35 of 50\n  alerts raised: 16 of 33\n  sources matched: 90.5%\n",
+ "C-13": "CHECK C-13 (scope-lab) - synthetic output\n  versions compared: 91\n  drift flagged: 79.4%\n  sources matched: 9 of 36\n  scopes cut: 24 of 47\n",
+ "C-14": "CHECK C-14 (approval-lab) - synthetic output\n  versions compared: 7 of 9\n  rows read: 5 of 9\n  figures tied: 15 of 52\n  groups compared: 106\n",
+ "C-15": "CHECK C-15 (fair-lab) - synthetic output\n  rows read: 30\n  figures tied: 93.7%\n  scopes cut: 52.6%\n  drift flagged: 12 of 22\n",
+ "C-16": "CHECK C-16 (fair-lab) - synthetic output\n  Cases Caught  :   1,869 of 2,743\n  Sources Matched  :   854 of 1,386\n  Calls Replayed  :   1,600 of 1,767\n  Alerts Raised  :   1,347 of 1,547\n",
+ "C-18": "CHECK C-18 (supplier-lab) - synthetic output\n  cases caught: 125\n  figures tied: 21 of 33\n  events logged: 16 of 27\n  scopes cut: 6 of 44\n",
+ "C-19": "CHECK C-19 (breaker-lab) - synthetic output\n  false alarms: 43 of 51\n  alerts raised: 18 of 28\n  approvals found: 48 of 56\n  cases caught: 6 of 21\n",
+ "C-20": "CHECK C-20 (steer-lab) - synthetic output\n  Calls Replayed  :   1,523 of 2,191\n  Rows Read  :   3,330 of 3,566\n  Claims Traced  :   2,257 of 2,958\n  Sources Matched  :   2,110 of 2,988\n"
+}
