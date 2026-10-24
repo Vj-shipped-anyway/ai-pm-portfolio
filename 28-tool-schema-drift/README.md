@@ -211,7 +211,7 @@ python3 step_04_with_gate.py
 
 ## Aligned to
 
-The [MCP specification's security guidance](https://modelcontextprotocol.io/specification/draft/basic/security_best_practices) and the OWASP MCP Top 10 treat tool definitions as inputs that need review when they change. This gate is one review step. It is a prototype, aligned to that guidance. It makes no claim of conformity to that guidance.
+The [OWASP MCP Top 10](https://owasp.org/www-project-mcp-top-10/) lists tool poisoning (MCP03:2025), where an adversary compromises the tools, plugins or outputs a model depends on. This gate is one review step on a changed tool definition. It is a prototype, aligned to that guidance. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 

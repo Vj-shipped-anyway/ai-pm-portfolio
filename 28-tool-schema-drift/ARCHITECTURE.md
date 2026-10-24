@@ -141,10 +141,10 @@ Recovery is a re-run from the same schemas and calls snapshot.
 
 ## 6. Alignment and posture
 
-Alignment, not certification. The README's "Aligned to" section cites two sources: the [MCP specification's security guidance](https://modelcontextprotocol.io/specification/draft/basic/security_best_practices) and the OWASP MCP Top 10 (linked in the README at https://owasp.org/www-project-mcp-top-10/). It says they treat tool definitions as inputs that need review when they change, and says nothing more about how much of either I read, so I add nothing here.
+Alignment, not certification. The README's "Aligned to" section cites one source: the OWASP MCP Top 10 (linked in the README at https://owasp.org/www-project-mcp-top-10/). It lists tool poisoning (MCP03:2025), where an adversary compromises the tools, plugins or outputs a model depends on, and says nothing more about how much of it I read, so I add nothing here.
 
 - **What the design does.** It makes the review of a changed tool definition a step in the pull request: a classified diff, a check of numbers and units, and a replay of recorded calls, with the decision recorded.
-- **What it does not claim.** It does not read a description for malicious instructions and maps to no control identifier in either source. It is not compliant with the guidance or any other standard, holds no certification, and I have not read or mapped any other source.
+- **What it does not claim.** It does not read a description for malicious instructions and maps to no control identifier in that source. It is not compliant with the guidance or any other standard, holds no certification, and I have not read or mapped any other source.
 
 ---
 
