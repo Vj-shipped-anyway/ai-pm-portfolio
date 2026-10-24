@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">Shadow Score: one shadow run, two files joined on case id, checked ten ways, ending in HOLD or CLEAR</title>
+  <desc id="desc">Five-stage flow showing how a proposals file and an outcomes file move through a join on case id, a rate step with an interval and a baseline, a split by outcome class, segment, week, reviewer and confidence, a check on risky disagreements and ten PASS, FAIL or SKIP checks, ending in one decision of HOLD or CLEAR that sets the exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts one agreement rate, the same rate with its interval, and the Shadow Score scorecard on 986 synthetic matched cases.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">Shadow Score - one shadow run, scored ten ways, ending in HOLD or CLEAR</text>
+  <text x="20" y="52" class="subheader">Two files join on case id. The checks read rates, splits and risky pairs. Any FAIL gives HOLD.</text>
+
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 1000 proposals, 989 outcomes, 986 matched</text>
+
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . JOIN</text>
+  <text x="30" y="142" class="stage-title">Join on case_id</text>
+  <text x="30" y="162" class="stage-sub">986 matched cases</text>
+  <text x="30" y="177" class="stage-sub">14 proposals pending</text>
+  <text x="30" y="192" class="stage-sub">3 outcomes unmatched</text>
+  <text x="30" y="212" class="meta-strong">bad input: exit 2</text>
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . RATES</text>
+  <text x="209" y="142" class="stage-title">Rate and interval</text>
+  <text x="209" y="162" class="stage-sub">851 of 930 = 91.5%</text>
+  <text x="209" y="177" class="stage-sub">interval 89.5 to 93.1</text>
+  <text x="209" y="192" class="stage-sub">abstain as miss 86.3%</text>
+  <text x="209" y="212" class="meta-strong">always REFUND 60.1%</text>
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . SPLITS</text>
+  <text x="388" y="142" class="stage-title">Split the number</text>
+  <text x="388" y="162" class="stage-sub">class, segment, week</text>
+  <text x="388" y="177" class="stage-sub">reviewer, confidence</text>
+  <text x="388" y="192" class="stage-sub">judged at 30 or more</text>
+  <text x="388" y="212" class="meta-block">min 30: 6 alarms to 3</text>
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="567" y="120" class="stage-num">4 . RISKY PAIRS</text>
+  <text x="567" y="142" class="stage-title">Costly misses</text>
+  <text x="567" y="162" class="stage-sub">pairs set with --risky</text>
+  <text x="567" y="177" class="stage-sub">demo marks three pairs</text>
+  <text x="567" y="192" class="stage-sub">e.g. REFUND vs DENY</text>
+  <text x="567" y="212" class="meta-block">11 of 930 proposals</text>
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="746" y="120" class="stage-num">5 . CHECKS</text>
+  <text x="746" y="142" class="stage-title">Ten checks</text>
+  <text x="746" y="162" class="stage-sub">PASS, FAIL or SKIP</text>
+  <text x="746" y="177" class="stage-sub">thresholds are mine</text>
+  <text x="746" y="192" class="stage-sub">every skip is printed</text>
+  <text x="746" y="212" class="meta-block">6 of 10 fail</text>
+
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . DECISION</text>
+  <text x="262" y="313" class="stage-title">HOLD . CLEAR</text>
+  <text x="262" y="330" class="stage-sub">any FAIL gives HOLD, exit 1 - bad input exits 2</text>
+  <text x="262" y="344" class="meta-strong">4 of 5 planted problems found, 0 of 3 look-alikes failed</text>
+
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">READOUT</text>
+  <text x="32" y="313" class="stage-title">Pilot owner reads</text>
+  <text x="32" y="330" class="stage-sub">tables with --detail</text>
+  <text x="32" y="344" class="stage-sub">JSON with --format json</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">reviewed thresholds</text>
+  <text x="742" y="328" class="stage-sub">shadow log feed</text>
+  <text x="742" y="343" class="stage-sub">decision ledger</text>
+
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">One agreement rate</text>
+  <text x="32" y="406" class="meta-block">91.5% passes the 90% bar</text>
+  <text x="32" y="424" class="stage-sub">splits the number by nothing</text>
+
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Rate with interval</text>
+  <text x="332" y="406" class="meta-block">89.5% to 93.1%, bar sits inside</text>
+  <text x="332" y="424" class="stage-sub">abstentions counted as misses: 86.3%</text>
+
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Shadow Score, ten checks</text>
+  <text x="632" y="406" class="meta-strong">HOLD: 6 of 10 checks fail</text>
+  <text x="632" y="424" class="stage-sub">found 4 of 5, miss: week 13 at 85.5%</text>
+
+</svg>
