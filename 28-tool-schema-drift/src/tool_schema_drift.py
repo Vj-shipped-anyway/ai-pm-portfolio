@@ -23,7 +23,6 @@ import json
 import os
 import re
 import sys
-from collections import Counter
 
 RENAME_SIMILARITY = 0.5
 DECISION_RANK = {"ALLOW": 0, "REVIEW": 1, "BLOCK": 2}

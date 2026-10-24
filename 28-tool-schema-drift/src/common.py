@@ -15,7 +15,7 @@ TRUTH_TO_DECISION = {"breaking": "BLOCK", "behavior_risk": "REVIEW", "non_breaki
 
 
 def load_cases() -> list:
-    """The 60 pull requests with their planted truth."""
+    """The 67 pull requests with their planted truth."""
     truth = {}
     with open(os.path.join(DATA, "pr_truth.csv"), newline="", encoding="utf-8") as fh:
         for r in csv.DictReader(fh):

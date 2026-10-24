@@ -8,7 +8,8 @@ Decision per pull request: BLOCK if anything breaks, REVIEW if the meaning may h
 The command-line tool and the GitHub Action in action/ run exactly this code (tool_schema_drift.py).
 
 KNOWN LIMIT, left in on purpose: a change in meaning that carries no number and no unit
-("exclusive of the end date") is allowed. The script prints those pull requests.
+("exclusive of the end date") is allowed, and so is a scale change that keeps the unit word
+("in dollars" becoming "in thousands of dollars"). The script prints those pull requests.
 
 Run (from src/):  python3 step_04_with_gate.py
 Output: a report, plus out/step_04_decisions.csv and out/step_04_summary.json

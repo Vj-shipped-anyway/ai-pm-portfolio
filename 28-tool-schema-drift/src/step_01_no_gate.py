@@ -1,14 +1,14 @@
 """Step 1 - Status quo: nothing in CI looks at the tool schema.
 
-Sixty pull requests each change one tool schema. The unit tests pass on all of them, because the
+Sixty-seven pull requests each change one tool schema. The unit tests pass on all of them, because the
 tests exercise the code behind the tool, not the schema the agent was told. This step merges all
-sixty in turn and replays the 400 recorded calls against each new schema, to show what the agent
+67 in turn and replays the 400 recorded calls against each new schema, to show what the agent
 would have met. The data is synthetic (data/_generate.py), and the truth label of each pull
 request is the change that was planted.
 
 Run (from src/):  python3 step_01_no_gate.py
 """
-from common import load_cases, calls_by_tool, replay_counts, TRUTH_TO_DECISION
+from common import load_cases, calls_by_tool, replay_counts
 from collections import Counter
 
 cases, calls = load_cases(), calls_by_tool()

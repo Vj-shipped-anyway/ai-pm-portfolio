@@ -33,7 +33,7 @@ Standard library only, Python 3.9 or newer. To check your own files: `python3 to
 
 ## What it still gets wrong
 
-- 🟢 Six of the 15 behavior-risk changes pass (`step_04` prints each one). Three are rewordings such as "exclusive of the end date" that carry no number and no unit (PR-027, PR-038 and PR-053). Three are scale changes such as "in dollars" becoming "in thousands of dollars": the unit word is the same, so the unit check sees nothing (PR-003, PR-004 and PR-028).
+- 🟢 Six of the 15 behavior-risk changes pass (`step_04` prints each one). Three are meaning flips such as "exclusive of the end date" that carry no number and no unit (PR-027, PR-038 and PR-053). Three are scale changes such as "in dollars" becoming "in thousands of dollars": the unit word is the same, so the unit check sees nothing (PR-003, PR-004 and PR-028).
 - **The test set and the classifier share an author.** I planted the changes and wrote the rules, so 25 of 25 shows the rules cover what I planted. The first version of the set was easier; I then added seven hard cases, four rewordings that keep the same numbers (all four allowed, so none was a false alarm) and three scale changes (all missed). Treat the result as a ceiling for these rules, not a rate on a real tool catalogue, which I have not tested.
 - **Replay is only as good as the calls you recorded.** The 3-call run above shows the cost of a thin log; the structural check does not depend on it.
 - Supported keywords are type, enum, required, minimum, maximum, maxLength, default and items. Not supported: pattern, format, oneOf, anyOf, nested objects. The unit list is short and English only. There is no semantic-version check.
@@ -41,7 +41,7 @@ Standard library only, Python 3.9 or newer. To check your own files: `python3 to
 
 ## Use it in CI
 
-[`action/`](./action/README.md) holds a staged GitHub Action and the steps to publish it from its own repository, which a Marketplace listing requires. It has not been published and has not run on GitHub. What is tested is the command it wraps (`tests/test_cli.py`, 28 tests in all).
+[`action/`](./action/README.md) holds a staged GitHub Action and the steps to publish it from its own repository, which a Marketplace listing requires. It has not been published and has not run on GitHub. What is tested is the command it wraps (`tests/test_cli.py`; the whole suite has 28 tests).
 
 ## How the four steps fit
 

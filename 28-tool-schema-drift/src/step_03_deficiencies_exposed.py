@@ -5,7 +5,7 @@ Two gates, each with one idea:
   structure only    classify the schema change and block on a breaking one, with no description check
                     and no replay
 
-The truth is known, so each gate is scored on the same sixty pull requests. KNOWN LIMIT, left in on
+The truth is known, so each gate is scored on the same 67 pull requests. KNOWN LIMIT, left in on
 purpose: a change in meaning with no number and no unit ("exclusive of the end date") is caught by
 neither gate, and step 4 does not catch it either.
 
