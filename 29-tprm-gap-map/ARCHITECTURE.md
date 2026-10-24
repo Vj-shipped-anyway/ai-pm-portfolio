@@ -16,13 +16,13 @@ Eight components: three decide the outcome, five support or report.
 
 | Component | Responsibility | Language or framework | Decides the outcome? | Stateful? |
 | --- | --- | --- | --- | --- |
-| `tgm-ingest` | Loads the vendor file and the incident log and turns the numeric fields into numbers. | Python 3.9+, stdlib. Prototype: `read_csv`, `load_vendors` in `src/tprm_gap_map.py` | Partly: refuses bad numbers with exit 2 | No |
+| `tgm-ingest` | Loads the vendor file and the incident log and turns the numeric fields into numbers. | Python 3.9+, stdlib. Prototype: `read_table`, `load_vendors` in `src/tprm_gap_map.py` | Partly: refuses bad numbers with exit 2 | No |
 | `tgm-map` | The guidance map: each stage of the proposed text, its section, how the text prompts it, the evidence an AI-enabled vendor needs. | Hand-written CSV. Prototype: `data/guidance_map.csv`, `run_map` | No, it names the gaps | Stateful, in git |
 | `tgm-terms` | Counts AI wording in a text file the user extracted. | Python. Prototype: `ai_term_hits`, `run_terms` | No | No |
 | `tgm-concentration` | The share of a service type's activity that sits on each upstream provider, grouped by service type. | Python. Prototype: `upstream_shares` | Yes, feeds one characteristic | No |
 | `tgm-tier` | HIGH under the text's examples (`tier_text`), and HIGH when any of four characteristics holds for an AI-enabled service (`indicators`, `tier_ai`). | Python. Prototype: those three functions | Yes | No |
 | `tgm-test` | Scores a tier against the incident log: caught, missed, false alarms. | Python. Prototype: `material_vendors`, `score` | No, the owner decides what to adopt | No |
-| `tgm-report` | Prints the tiers, the characteristic table and the scores. | Python. Prototype: `run_tier` | No | No |
+| `tgm-report` | Prints the tiers, the characteristic table and the scores. | Python. Prototype: `run_tier`, `safe` | No | No |
 | `tgm-ledger` | Appends one record per run (design). Prototype analog: `src/out/step_04_vendors.csv`. | PostgreSQL plus object storage with a retention lock (design) | No | Stateful |
 
 **What decides the outcome.** The numeric checks on the input, the concentration share and the tier rules. The map, the term count, the scores, the report and the ledger inform or record. The tier rules are plain: a named service type or a share of activity of 30 or more, or one of four flags on an AI-enabled service.
@@ -52,16 +52,16 @@ A scheduled batch job that runs when the vendor inventory or the incident log re
 | `tgm-map`, config | Files in the repo | Same | Same | A change lands in history with its reviewer |
 | `tgm-ledger` | Cloud SQL for PostgreSQL | RDS for PostgreSQL | Azure Database for PostgreSQL | The platform team already runs it |
 
-**Failure behavior (the decision that matters most).** The tool must never silently pass: an input it cannot trust should stop the run with a reason, not produce a tier. The prototype does this for some inputs and not others, and I list both.
+**Failure behavior (the decision that matters most).** The tool must never silently pass: an input it cannot trust should stop the run with a reason, not produce a tier. The prototype stops on every input it cannot read, and names the ones it can read but cannot score; the table lists each, with what is still only a design.
 
 | Failure | Prototype today | Design | Alert |
 | --- | --- | --- | --- |
 | Vendor or incident file missing, or a non-numeric share or day count | Exit 2, one `input error` line | Same | P3 |
-| Vendor file missing a column | Exit 2 | Same | P3 |
-| Incident log with rows but no `material` or `vendor_id` column | A KeyError traceback, not exit 2 | Exit 2 with the reason | P3 |
-| Header-only vendor file | Prints zero vendors, exit 0 | Exit 2: no vendors | P3 |
-| Header-only incident log | Tiers are printed, nothing is scored, no notice | Print that nothing was tested | P3 |
-| Service type outside the eight listed, such as a typo | Tiered LOWER unless the share is high | Reject the value | P3 |
+| Vendor file missing a column the tiering reads, or a short row | Exit 2, one line naming the column | Same | P3 |
+| Incident log with rows but no `material` or `vendor_id` column | Exit 2, one line naming the column | Same | P3 |
+| Header-only vendor file | Exit 2: a header and no vendor rows | Same | P3 |
+| Header-only incident log | Tiers are printed and a line says the characteristics were not scored | Same | P3 |
+| Service type outside the eight listed, such as a typo | Tiered LOWER unless the share is high, and a line names the value and its count | Reject the value against the registry's list of service types | P3 |
 | AI-enabled vendor with no upstream provider | Printed as a count: it cannot show as concentrated | Same, and list the vendors | P4 |
 | Ledger or feed unavailable | Not built | The tiers stand; the record queues locally | P3 |
 
@@ -109,7 +109,7 @@ A scheduled batch job that runs when the vendor inventory or the incident log re
 
 | Threat | Example | Mitigation in the design |
 | --- | --- | --- |
-| Hostile string in a vendor field echoed into a log | An `upstream_provider` holding a newline and text that looks like a log line | The prototype prints these fields as they are and has no hostile-string test. The design escapes control characters before any log line; not built |
+| Hostile string in a vendor field echoed into a log | An `upstream_provider` holding a newline and text that looks like a log line | `safe` writes control characters and line separators as visible escapes in the concentration line, and `tests/test_cli_and_map.py` covers a hostile provider name and a hostile service type. The design applies the same escape to every field before it reaches a log line |
 | A vendor flag is edited to avoid HIGH | `bank_data_retained_days` lowered by hand | Extracts come from the inventory with a hash; a changed hash for a finished run is an alert |
 | The incident log is trimmed so a marker looks good | Months or causes dropped | The record stores the log hash and the window; the report prints both |
 | A simulated result is quoted as evidence about real vendors | The counts in this README cited for a real bank | Every output and README says synthetic; the design adds the data source to the report header |

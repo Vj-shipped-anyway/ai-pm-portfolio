@@ -38,7 +38,7 @@
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | **Tiering by the text's own examples** (named service types, share of activity) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype |
 | 2 | **Vendor-file validation** (a non-numeric or missing column exits 2) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype |
-| 3 | **Close the silent paths** (header-only file, unknown service type, incident log without a material column) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Sequenced for v0.2 |
+| 3 | **Close the silent paths** (header-only file, unknown service type, incident log without a material column) | 60 vendors | 2 | 0.9 | 1 | 108.0 | Built in prototype; rejecting an unknown service type against a registry list is v0.2 |
 | 4 | **Test against the incident log** (caught, missed, false alarms, per characteristic) | 60 vendors | 3 | 0.7 | 2 | 63.0 | Built in prototype |
 | 5 | **Four AI-specific characteristics** (concentration, notice, training, retention) | 60 vendors | 3 | 0.6 | 2 | 54.0 | Built in prototype |
 | 6 | **Calibrate the 30% and 365-day lines on a real log** | 60 vendors | 3 | 0.5 | 3 | 30.0 | Sequenced for v0.2 |
@@ -120,7 +120,7 @@
 **Reference architecture.** See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full systems doc. Headlines:
 
 - **One process, run on demand.** The tool is stateless: it reads a vendor file and an incident log and prints tiers and a table. Production adds feeds, a reviewed characteristic config and a tiering ledger, all designed and none built.
-- **Never silent, as a design.** The prototype exits 2 for an unreadable file or a non-numeric field, but a header-only file, an unknown service type and an empty incident log pass without a word. The design closes those paths; the PRD lists it as backlog item 3.
+- **Never silent, as a design.** The prototype exits 2 for an unreadable file, a non-numeric field, a missing column, a short row and a header-only vendor file, and it prints a line for a header-only incident log and for a service type it does not recognize. It still tiers an unrecognized service type LOWER unless the share is high; rejecting it against a registry list is the design (backlog item 3).
 - **The guidance map is data.** It is a hand-written file with the section of the proposal on each row, so a change in the final text is a change to a file.
 - **Changes to a rule are changes to a number.** A golden test pins the synthetic-set numbers, so a change that moves the catch or false-alarm count shows in the diff.
 

@@ -24,7 +24,25 @@ DD_ITEMS = ("soc_report", "insurance", "financial_ok", "key_personnel")
 NAMED_ESSENTIAL = {"core_processing", "cloud_hosting", "compliance_tool", "fintech_partner"}   # the examples the text names
 SHARE_HIGH = 30            # a vendor carrying this share of activity or more is treated as higher risk
 CONCENTRATION_HIGH = 0.30  # share of an upstream group's activity that sits on one provider
+VENDOR_COLUMNS = ("vendor_id", "service_type", "activity_share_pct", "upstream_provider", "model_change_notice_days",
+                  "trains_on_bank_data", "bank_data_retained_days")      # what `tier` reads; the questionnaire columns are for the steps
+INCIDENT_COLUMNS = ("vendor_id", "material")
+OTHER_SERVICE_TYPES = {"data_provider", "call_center", "facilities"}      # in the synthetic data; tiered by activity share only
+KNOWN_SERVICE_TYPES = NAMED_ESSENTIAL | OTHER_SERVICE_TYPES | {"ai_enabled_service"}
 AI_WORDS = re.compile(r"(?i:artificial intelligence|machine learning|generative|algorithm|large language|neural|\bLLM\b)|\bAI\b")
+
+
+_CONTROL = re.compile("[\x00-\x1f\x7f\x85\u2028\u2029]")
+_NAMED = {"\n": "\\n", "\r": "\\r", "\t": "\\t"}
+
+
+def safe(text) -> str:
+    """One line of text for the log: control characters and line separators become visible escapes, so a
+    provider name from the vendor file cannot start a new line there."""
+    def esc(m):
+        c = m.group()
+        return _NAMED.get(c) or ("\\x%02x" % ord(c) if ord(c) < 256 else "\\u%04x" % ord(c))
+    return _CONTROL.sub(esc, str(text))
 
 
 def read_csv(path):
@@ -32,9 +50,22 @@ def read_csv(path):
         return list(csv.DictReader(fh))
 
 
+def read_table(path, required):
+    """Rows of a CSV that must carry the given columns. Raises ValueError, so bad input exits 2 and is never a traceback."""
+    with open(path, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(fh)
+        missing = [c for c in required if c not in (reader.fieldnames or [])]
+        if missing:
+            raise ValueError(f"{path!r} is missing column(s): {', '.join(missing)}")
+        return list(reader)
+
+
 def load_vendors(path):
     out = []
-    for r in read_csv(path):
+    rows = read_table(path, VENDOR_COLUMNS)
+    if not rows:
+        raise ValueError(f"{path!r} has a header and no vendor rows")
+    for r in rows:
         r["activity_share_pct"] = int(r["activity_share_pct"])
         for k in ("model_change_notice_days", "bank_data_retained_days"):
             r[k] = int(r[k]) if r.get(k, "") != "" else None
@@ -99,8 +130,9 @@ def run_map() -> int:
 def run_tier(vendors_path, incidents_path) -> int:
     try:
         vendors = load_vendors(vendors_path)
-        incidents = read_csv(incidents_path) if incidents_path else None
-    except (OSError, ValueError, KeyError) as e:
+        incidents = read_table(incidents_path, INCIDENT_COLUMNS) if incidents_path else None
+        truth = material_vendors(incidents) if incidents else None
+    except (OSError, ValueError, KeyError, TypeError, csv.Error) as e:
         print(f"input error: {e}", file=sys.stderr)
         return 2
     shares = upstream_shares(vendors)
@@ -109,12 +141,20 @@ def run_tier(vendors_path, incidents_path) -> int:
     print(f"vendors: {len(vendors)}   AI-enabled: {sum(1 for v in vendors if v['service_type'] == 'ai_enabled_service')}")
     print(f"HIGH under the text's examples: {len(high_text)}   with AI characteristics added: {len(high_ai)}")
     print("upstream concentration (share of the service type's activity): "
-          + ", ".join(f"{k[1]} ({k[0]}) {s:.0%}" for k, s in sorted(shares.items())))
+          + ", ".join(f"{safe(k[1])} ({safe(k[0])}) {s:.0%}" for k, s in sorted(shares.items())))
+    other = {}
+    for v in vendors:
+        if v["service_type"] not in KNOWN_SERVICE_TYPES:
+            other[v["service_type"]] = other.get(v["service_type"], 0) + 1
+    if other:
+        print("service types the tool does not recognize: " + ", ".join(f"{k!r} ({n})" for k, n in sorted(other.items()))
+              + f"; they are HIGH only through an activity share of {SHARE_HIGH}% or more (check the spelling)")
     unknown = [v for v in vendors if v["service_type"] == "ai_enabled_service" and not v["upstream_provider"]]
     if unknown:
         print(f"AI-enabled vendors with no upstream provider on file: {len(unknown)} (they cannot show as concentrated)")
     ind = {v["vendor_id"]: indicators(v, shares) for v in vendors}
-    truth = material_vendors(incidents) if incidents else None
+    if incidents is not None and not incidents:
+        print("incident log has a header and no rows: the characteristics were not scored against it")
     print("candidate characteristic: vendors with it" + (", of which had a material incident" if truth is not None else ""))
     for name in ("concentrated_upstream", "no_model_change_notice", "trains_on_bank_data", "long_data_retention"):
         have = {vid for vid, d in ind.items() if d.get(name)}
