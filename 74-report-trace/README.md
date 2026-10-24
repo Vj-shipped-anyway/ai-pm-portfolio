@@ -28,7 +28,16 @@ cell card.d01_59   card / d01_59   leaf   filed 25,722.15
   verdict: SOURCE_CHANGED
 ```
 
-Standard library only, Python 3.9 or newer. On your own files: `build` captures the lineage from the source as it stood at filing, `verify` checks every cell against a current copy, `trace` prints one cell's path. `verify` exits 1 when a cell needs a person, 2 on malformed input, and `--format github` prints annotations. The report is an invented loan schedule, not any regulator's form.
+Standard library only, Python 3.9 or newer. On your own files: `build` captures the lineage from the source as it stood at filing, `verify` checks every cell against a current copy, `trace` prints one cell's path.
+
+```bash
+python3 report_trace.py build --source loans_filed.csv --spec report_spec.json --filed report_filed.csv \
+  --adjustments adjustments.csv --out lineage.json
+python3 report_trace.py verify --lineage lineage.json --source loans_now.csv
+python3 report_trace.py trace --lineage lineage.json --cell auto.d60_89 --source loans_now.csv
+```
+
+`verify` exits 1 when a cell needs a person, 2 on malformed input, and `--format github` prints annotations. The report is an invented loan schedule, not any regulator's form.
 
 ## What the numbers say
 
