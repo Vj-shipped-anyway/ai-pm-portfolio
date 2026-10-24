@@ -40,10 +40,10 @@ class OwnEvidenceTests(unittest.TestCase):
         s = svc(tier=3, mode="none", secondary="", accepted=True)
         self.assertEqual(status_of([s], [])["status"], "NOT_REQUIRED")
 
-    def test_accepted_risk_on_tier_1_is_not_honoured(self):
+    def test_accepted_risk_on_tier_1_is_not_honored(self):
         r = status_of([svc(tier=1, mode="none", secondary="", accepted=True)], [])
         self.assertEqual(r["status"], "NO_PATH")
-        self.assertIn("not honoured", r["reason"])
+        self.assertIn("not honored", r["reason"])
 
     def test_no_drill_is_untested(self):
         self.assertEqual(status_of([svc()], [])["status"], "UNTESTED")

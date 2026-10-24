@@ -11,7 +11,7 @@ tested way back, 2 for bad input or when the scope matched no service (nothing w
 
 The readiness rule is plain code, no model. A service is READY only when all of these hold:
   1. it has a secondary region and a failover mode (or its owner formally accepted having none, which
-     the rule honours for the tiers in the policy and reports as NOT_REQUIRED);
+     the rule honors for the tiers in the policy and reports as NOT_REQUIRED);
   2. its latest LIVE drill of the scenario its mode needs (region_failover, or backup_restore for
      cold_restore) passed; tabletop drills and availability-zone drills do not count;
   3. that drill recovered within the service's own recovery-time target;
@@ -171,9 +171,9 @@ def _own_status(svc: dict, mine: list, as_of: date, policy: dict) -> tuple:
     """Status and reason from the service's own record, before dependencies are looked at."""
     skip = policy["skip"]
     if svc["accepted_risk"] and svc["tier"] in policy["accept_tiers"]:
-        return "NOT_REQUIRED", "owner accepted having no way back; the rule honours that for this tier"
+        return "NOT_REQUIRED", "owner accepted having no way back; the rule honors that for this tier"
     if not svc["secondary_region"] or svc["failover_mode"] == "none" or svc["secondary_region"] == svc["primary_region"]:
-        note = f"risk acceptance is not honoured for tier {svc['tier']}" if svc["accepted_risk"] else "no accepted risk"
+        note = f"risk acceptance is not honored for tier {svc['tier']}" if svc["accepted_risk"] else "no accepted risk"
         return "NO_PATH", f"no secondary region distinct from the primary, or no failover mode; {note}"
     want = SCENARIO_FOR_MODE[svc["failover_mode"]]
     counted = mine if "type_and_scenario" in skip else [d for d in mine if d["type"] == "live" and d["scenario"] == want]
