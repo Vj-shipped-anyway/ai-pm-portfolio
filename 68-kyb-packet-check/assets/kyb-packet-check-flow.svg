@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">KYB Packet Check: a model's reading of a business filing compared with the filing itself, ending in PASS or REVIEW</title>
+  <desc id="desc">Five-stage flow showing how the text of an onboarding packet and a model's extraction of it move through a load and validate step, a completeness check on the details of each owner and the control person, an arithmetic check on the percentages and the look-through, a grounding check that each name, percentage and detail sits on a filing line for the same person, and a findings step that never repeats a date of birth, address or ID number. Any finding gives REVIEW, which sets the exit code. A dashed box marks the pieces that are design only. A comparison strip contrasts no check, a shape check, and KYB Packet Check on 75 synthetic packets of which 43 carry a planted misread.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">KYB Packet Check - the filing against the model's reading of it</text>
+  <text x="20" y="52" class="subheader">Three families of check read a packet text and an extraction. Any finding sends the packet to a person.</text>
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 75 packets, 43 with a planted misread</text>
+
+  <!-- Stage 1 -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read both files</text>
+  <text x="30" y="162" class="stage-sub">packet text</text>
+  <text x="30" y="176" class="stage-sub">extraction JSON</text>
+  <text x="30" y="190" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">never a silent pass</text>
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . COMPLETENESS</text>
+  <text x="209" y="142" class="stage-title">Details there?</text>
+  <text x="209" y="162" class="stage-sub">each 25% owner, the</text>
+  <text x="209" y="176" class="stage-sub">control person, and a</text>
+  <text x="209" y="190" class="stage-sub">signed, dated cert</text>
+  <text x="209" y="206" class="meta-strong">field_missing 5 of 5</text>
+  <text x="209" y="220" class="meta-strong">cert_incomplete 3 of 3</text>
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . ARITHMETIC</text>
+  <text x="388" y="142" class="stage-title">Does it add up?</text>
+  <text x="388" y="162" class="stage-sub">percents add to 100</text>
+  <text x="388" y="176" class="stage-sub">within a tolerance;</text>
+  <text x="388" y="190" class="stage-sub">entity needs owners</text>
+  <text x="388" y="206" class="meta-block">tolerance 0.0: 4 of 32</text>
+  <text x="388" y="220" class="meta-strong">tolerance 0.1: 0 of 32</text>
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4 -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="567" y="120" class="stage-num">4 . GROUNDING</text>
+  <text x="567" y="142" class="stage-title">On the filing?</text>
+  <text x="567" y="162" class="stage-sub">each name, percent and</text>
+  <text x="567" y="176" class="stage-sub">detail must sit on a</text>
+  <text x="567" y="190" class="stage-sub">line for that person</text>
+  <text x="567" y="206" class="meta-strong">dob_misread 4 of 4</text>
+  <text x="567" y="220" class="meta-strong">name_misread 4 of 4</text>
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5 -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="746" y="120" class="stage-num">5 . FINDINGS</text>
+  <text x="746" y="142" class="stage-title">Say what held</text>
+  <text x="746" y="162" class="stage-sub">1 to 3 per packet,</text>
+  <text x="746" y="176" class="stage-sub">never a birth date,</text>
+  <text x="746" y="190" class="stage-sub">address or ID number</text>
+  <text x="746" y="212" class="meta-block">40 of 75 to a person</text>
+
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . DECISION</text>
+  <text x="262" y="313" class="stage-title">PASS . REVIEW</text>
+  <text x="262" y="330" class="stage-sub">any finding is REVIEW and exits 1, bad input exits 2, no model call</text>
+  <text x="262" y="344" class="meta-strong">40 of 43 misreads flagged, 0 of 32 clean flagged</text>
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">RUN</text>
+  <text x="32" y="313" class="stage-title">Pass or review</text>
+  <text x="32" y="330" class="stage-sub">REVIEW: a person looks</text>
+  <text x="32" y="344" class="stage-sub">exit 2 on bad input</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">review queue</text>
+  <text x="742" y="328" class="stage-sub">decision record</text>
+  <text x="742" y="343" class="stage-sub">telemetry</text>
+
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">No check</text>
+  <text x="32" y="406" class="meta-block">0 of 75 packets stopped</text>
+  <text x="32" y="424" class="stage-sub">20 of 75 files list the wrong people</text>
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Shape check</text>
+  <text x="332" y="406" class="meta-block">12 of 43 misreads flagged</text>
+  <text x="332" y="424" class="stage-sub">31 pass, 18 list the wrong people</text>
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">KYB Packet Check, three families</text>
+  <text x="632" y="406" class="meta-strong">40 of 43 flagged, 0 of 32 clean flagged</text>
+  <text x="632" y="424" class="stage-sub">known miss: 3 nominee notes pass</text>
+</svg>
