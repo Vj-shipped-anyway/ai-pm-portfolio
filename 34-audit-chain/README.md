@@ -1,6 +1,6 @@
 # 🔗 audit-chain (hash-chained log): an append-only trail for agent actions, checked with one command
 
-**I wanted to know how much of an agent's audit trail a reviewer can trust once someone with write access to the file wants it to say something else, and which edits a single command can find. This is a command-line tool: an append-only JSON-lines log where each event carries the hash of the one before it, a `verify` command, and an anchor you keep outside the log. I took the log from the [AgentKit audit module](../27-agentkit-reference-agent-and-playbook/) and attacked it with 101 planted edits.** The chain finds a changed, removed, reordered or inserted event anywhere in the file. It cannot see a cut from the end or a rewrite that recomputes every hash; an anchor can, but only up to the event it was taken at.
+**I wanted to know how much of an agent's audit trail a reviewer can trust once someone with write access to the file wants it to say something else, and which edits a single command can find. This is a command-line tool: an append-only JSON-lines log where each event carries the hash of the one before it, a `verify` command, and an anchor you keep outside the log. I took the log from the [AgentKit audit module](../27-agentkit-reference-agent-and-playbook/) and attacked it with 101 planted edits.** The chain finds a changed, removed, reordered or inserted event anywhere in the file, except that the last event can be rewritten with its own hash recomputed. It cannot see a cut from the end or a rewrite that recomputes every hash; an anchor can, but only up to the event it was taken at.
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
@@ -53,7 +53,7 @@ python3 audit_chain.py verify agent.jsonl --anchor anchor.json
 - 🟢 A forged append and a real one are the same bytes: 0 of 6 forged appends flagged, 6 of 6 legitimate appends accepted (`step_03`). Telling them apart needs a key held by the writer, so a forged event fails to verify. I have not built that.
 - **The anchor is only as good as where you keep it.** If the person who can edit the log can also edit the anchor, nothing is detected. The tool writes and reads an anchor file; it does not store it anywhere safe.
 - **An action that was never logged leaves no trace.** AgentKit checks the log against the orchestrator's own counts; I did not copy that check here.
-- **The sequence number is not a clock.** The chain proves order, not time. A timestamp in `detail` is only as true as the writer.
+- **The sequence number is not a clock.** The chain shows order, not time. A timestamp in `detail` is only as true as the writer.
 - **Single writer.** There is no file locking. Two writers fork the chain, and `verify` reports it. `append` reads the whole file each time.
 - **The hash is defined over Python's JSON encoding** (sorted keys, compact separators, ASCII). The generator in `data/` is a second writer, but it is also Python. I have not tested a log written by another language.
 - **The planted edits and the checks share an author.** I chose which edits to plant and wrote the rules, so 76 of 91 shows the checks cover what I thought of, not what an attacker would try. The set includes the cases I expected to miss and the harmless rewrites I expected to pass, but it is a ceiling, not a rate on real logs.
