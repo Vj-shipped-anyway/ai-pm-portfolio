@@ -136,21 +136,21 @@ The twenty-seven case studies above ask what breaks when AI gets into bank opera
 | [28 Tool Schema Drift](./28-tool-schema-drift/) | GitHub Action (staged) | A pull-request gate for the schema an agent was told | 25 of 25 breaking pull requests blocked and 0 of 27 harmless ones; 9 of 15 behavior-risk changes sent to review |
 | [31 Intake Tier Action](./31-intake-tier-action/) | GitHub Action (staged) | An issue form that recomputes its own risk tier | 142 of 160 issues tiered and 18 sent to needs-info; 46 of 57 tier 3 and 4 issues found; 0 forged commands from hostile text |
 | [32 Evidence Gate](./32-evidence-gate/) | GitHub Action (staged) | No merge without the evidence the tier requires | Blocks 49 of 59 pull requests missing required evidence, against 8 of 59 for an all-boxes-ticked check; 7 of 59 still pass |
-| [33 Shadow Score](./33-shadow-score/) | Command line | Agent versus human outcome | First-report agreement 91.5% (851 of 930 proposals); 4 of 5 planted problems found, 0 of 3 look-alikes fail; decision HOLD |
-| [34 audit-chain](./34-audit-chain/) | Command line | An append-only trail for agent actions, checked with one command | Chain plus anchor flags 76 of 91 planted tampering edits and 0 of 10 harmless changes; 15 of 91 still pass |
-| [35 TierGate Intake Check](./35-tiergate/) | Agent Skill (staged) | Recompute the tier a sponsor declared | Recomputed tier matches the reference on 170 of 200 forms (85.0%), against 137 (68.5%) as declared |
-| [37 Entitlement Canary](./37-entitlement-canary/) | GitHub Action (staged) | Leak test for retrieval | Blocks 27 of 28 leaking pull requests and 0 of 22 clean ones; a relevance eval stops 7 of 28 |
+| [33 Shadow Score](./33-shadow-score/) | Command line | Agent proposals scored against the human outcome | First-report agreement 91.5% (851 of 930 proposals); 4 of 5 planted problems found, 0 of 3 look-alikes fail; decision HOLD |
+| [34 Audit Chain](./34-audit-chain/) | Command line | An append-only trail for agent actions, checked with one command | Chain plus anchor flags 76 of 91 planted tampering edits and 0 of 10 harmless changes; 15 of 91 still pass |
+| [35 TierGate Skill](./35-tiergate/) | Agent Skill (staged) | Recomputes the risk tier a sponsor declared on an intake form | Recomputed tier matches the reference on 170 of 200 forms (85.0%), against 137 (68.5%) as declared |
+| [37 Entitlement Canary](./37-entitlement-canary/) | GitHub Action (staged) | A leak test for retrieval: can a user get a document they cannot open | Blocks 27 of 28 leaking pull requests and 0 of 22 clean ones; a relevance eval stops 7 of 28 |
 | [38 Injection Pack](./38-injection-pack/) | GitHub Action (staged) | A regression suite for the rules of a prompt gateway | 21 of 25 harmful rule changes stopped and 1 of 26 harmless ones; a six-string smoke test stops 3 of 25 |
 | [39 Claims Check](./39-claims-check/) | GitHub Action (staged) | Fail the build when a README number is not printed by a script | Catches 80 of 98 wrong README numbers with 8 of 186 false alarms; a plain grep catches 38 of 98 |
 | [40 Eval Gate](./40-eval-gate/) | GitHub Action (staged) | A CI gate on probe-set regression | 25 of 25 should-block deploys stopped and 0 of 31 fine ones; a 0.90 pass-rate floor stops 13 of 25 |
 | [42 Trajectory Eval](./42-trajectory-eval/) | Project folder | Grade the steps an agent took, not only the answer it gave | Catches 90 of 96 defective runs, 78 of the 84 whose final answer was right; a final-answer check catches 12 of 96 |
-| [43 agent-breaker](./43-agent-breaker/) | Command line | A circuit breaker for an agent | Trips 12 of 14 must-trip faults; 142 harmful calls served against 168 for a common breaker; 2 of 7 long blips trip falsely |
-| [47 swapbrief](./47-swapbrief/) | Command line | A go or no-go brief for a model migration, from two files | False GO on 2 of 45 problem migrations, against 41 of 45 for a headline-average rule |
-| [50 Review Capacity](./50-review-capacity/) | Command line | How many reviewers does the human-in-the-loop queue need? | Meets both limits on 12 queues of 13 with 3.7% of cases late; average-workload staffing meets 0 of 13 with 32.6% late |
-| [52 prompt-diff-risk](./52-prompt-diff-risk/) | GitHub Action (staged) | Classify a prompt change before it merges | Blocks 19 of 22 high-risk prompt changes and 2 of 18 harmless ones; reading every diff means 70 reads |
-| [54 runbook-dryrun](./54-runbook-dryrun/) | Command line | An incident runbook you can dry-run, with the approval gate held | Catches 46 of 53 cases that go wrong only during the run; an echo-style dry run catches 5 of 53 |
-| [58 plant](./58-plant/) | Command line | Plant the failure, keep the key | Tuned checker precision 0.90 against 0.56 for the naive one on a planted answer key; recall stays 0.86 across five seeds |
-| [59 scopekeeper](./59-scopekeeper/) | Command line | A usage-versus-grant diff for agent permissions | Removes 46 of 62 unneeded grants (74.2%) against 4 of 62 for the annual review; 0 of 5210 calls newly denied |
+| [43 Agent Breaker](./43-agent-breaker/) | Command line | A circuit breaker for an agent | Trips 12 of 14 must-trip faults; 142 harmful calls served against 168 for a common breaker; 2 of 7 long blips trip falsely |
+| [47 SwapBrief](./47-swapbrief/) | Command line | A go or no-go brief for a model migration, from two files | False GO on 2 of 45 problem migrations, against 41 of 45 for a headline-average rule |
+| [50 Review Capacity](./50-review-capacity/) | Command line | How many reviewers the human-in-the-loop queue needs | Meets both limits on 12 queues of 13 with 3.7% of cases late; average-workload staffing meets 0 of 13 with 32.6% late |
+| [52 Prompt Diff Risk](./52-prompt-diff-risk/) | GitHub Action (staged) | Classify a prompt change before it merges | Blocks 19 of 22 high-risk prompt changes and 2 of 18 harmless ones; reading every diff means 70 reads |
+| [54 Runbook Dry Run](./54-runbook-dryrun/) | Command line | An incident runbook you can dry-run, with the approval gate held | Catches 46 of 53 cases that go wrong only during the run; an echo-style dry run catches 5 of 53 |
+| [58 Plant](./58-plant/) | Command line | Synthetic data with a planted failure and its answer key | Tuned checker precision 0.90 against 0.56 for the naive one on a planted answer key; recall stays 0.86 across five seeds |
+| [59 ScopeKeeper](./59-scopekeeper/) | Command line | A usage-versus-grant diff for agent permissions | Removes 46 of 62 unneeded grants (74.2%) against 4 of 62 for the annual review; 0 of 5210 calls newly denied |
 | [60 AI Ops Operating Model Review](./60-ai-ops-operating-model/) | Agent Skill (staged) | A skill that asks for evidence at each stage | A five-check review matches the true stage on 45 of 60 programs; the owners' own claims match 16 of 60 |
 | [61 MCP Scope Lint](./61-mcp-scope-lint/) | Command line | A tool manifest linter for grants nobody needs | Cuts 61 of 83 unneeded scopes and raises 0 findings on three groups built to look risky and be needed |
 | [62 ATLAS Case Study](./62-atlas-case-study/) | Project folder | From the trace of one agent run to a draft a threat catalogue can read | Drafts 22 of 32 failures and 0 of 28 harmless runs; 0 identifiers leaked; 10 of 32 failures get no draft |
@@ -162,35 +162,35 @@ The twenty-seven case studies above ask what breaks when AI gets into bank opera
 | --- | --- | --- | --- |
 | [29 TPRM Gap Map](./29-tprm-gap-map/) | Project folder | What the proposed third-party guidance prompts for an AI-enabled vendor | The text's own examples catch 17 of 24 vendors with a material incident; four AI-specific characteristics catch 22 of 24, with 19 false alarms against 13 |
 | [44 Inventory Check](./44-inventory-check/) | Agent Skill (staged) | Completeness, staleness and coverage tests for an inventory of generative and agentic systems | Flags 51 of 57 defective records and 2 of 43 clean ones; a blank-cell check finds 8 of 57 |
-| [48 controlmap](./48-controlmap/) | Command line | An obligation-to-control crosswalk that says when it cannot decide | Right status on 42 of 56 obligations, against 19 of 56 for a keyword sheet |
-| [55 challenge-pack](./55-challenge-pack/) | Agent Skill (staged) | A second-line test plan by tier | Finds 360 of 437 planted defects (82.4%) with 0 false alarms; a generic checklist finds 0 of 437 |
-| [56 aigf-checks](./56-aigf-checks/) | Project folder | From a framework risk to a check you can run | Finds 38 of 45 defective crosswalk rows and flags 0 of 28 harmless ones; a grep for the number finds 11 of 45 |
-| [70 fairlens](./70-fairlens/) | Command line | A six-test pack for a scorecard, run from a scores file | The proxy ablation marks 7 of 14 planted-proxy portfolios FAIL; the reason-code check alone passes 13 of 14 |
+| [48 ControlMap](./48-controlmap/) | Command line | An obligation-to-control crosswalk that says when it cannot decide | Right status on 42 of 56 obligations, against 19 of 56 for a keyword sheet |
+| [55 Challenge Pack](./55-challenge-pack/) | Agent Skill (staged) | A second-line test plan by tier | Finds 360 of 437 planted defects (82.4%) with 0 false alarms; a generic checklist finds 0 of 437 |
+| [56 AIGF Checks](./56-aigf-checks/) | Project folder | From a framework risk to a check you can run | Finds 38 of 45 defective crosswalk rows and flags 0 of 28 harmless ones; a grep for the number finds 11 of 45 |
+| [70 FairLens](./70-fairlens/) | Command line | A six-test pack for a scorecard, run from a scores file | The proxy ablation marks 7 of 14 planted-proxy portfolios FAIL; the reason-code check alone passes 13 of 14 |
 
 ### Payments
 
 | Project | Form | What it checks | What the script printed |
 | --- | --- | --- | --- |
-| [30 Payment Mandate Check](./30-payment-mandate-check/) | Command line | Does the agent have the authority to pay this? | 249 of 249 legitimate instructions released and 156 of 164 forbidden ones rejected; 24 of 475 still released that should not be |
-| [36 payment-repair](./36-payment-repair/) | Project folder | A repair agent for pacs.008-style messages, with approval gates | 488 of 500 routes match the planted intent and 90 of 90 repairs without a person are correct; 21 of 371 released messages still carry a wrong value |
-| [57 recon-agent](./57-recon-agent/) | Project folder | A ledger reconciler that has to show why two lines are one | 218 postings made on their own with 0 wrong, 101 held for a person; self-approval refused 101 of 101 |
+| [30 Payment Mandate Check](./30-payment-mandate-check/) | Command line | Whether the agent has the authority to pay this instruction | 249 of 249 legitimate instructions released and 156 of 164 forbidden ones rejected; 24 of 475 still released that should not be |
+| [36 Payment Repair](./36-payment-repair/) | Project folder | A repair agent for pacs.008-style messages, with approval gates | 488 of 500 routes match the planted intent and 90 of 90 repairs without a person are correct; 21 of 371 released messages still carry a wrong value |
+| [57 Recon Agent](./57-recon-agent/) | Project folder | A ledger reconciler that has to show why two lines are one | 218 postings made on their own with 0 wrong, 101 held for a person; self-approval refused 101 of 101 |
 | [73 ISO 20022 Map Check](./73-iso20022-map-check/) | Command line | Gaps and truncation in a legacy-to-ISO field mapping | Finds 5 of 5 planted mapping defects and 212 of 212 converter defects in pairs; schema validation alone passes 113 of 129 defective pairs |
 
 ### Fraud, disputes and financial crime
 
 | Project | Form | What it checks | What the script printed |
 | --- | --- | --- | --- |
-| [41 narrative-trace](./41-narrative-trace/) | Command line | Every sentence of a case narrative, traced to a transaction | Flags 120 of 140 planted defects in case narratives and 10 of 268 fine sentences; a bracket-pattern check flags 44 of 140 |
-| [49 dispute-clock](./49-dispute-clock/) | Command line | The deadlines of a dispute, counted in business days | Matches the planted status on 519 of 524 clocks (99.0%), against 454 (86.6%) for a calendar-day countdown |
-| [72 scam-friction-sim](./72-scam-friction-sim/) | Project folder | What a 20-minute hold stops, and who waits | 1.1 legitimate holds per scam stopped, against 6.6 for a blanket hold rule |
-| [76 name-match-eval](./76-name-match-eval/) | Command line | What a screening threshold costs in missed names and false alerts | At a 10.0% false-alert limit the word matcher recalls 57.3% of true matches, edit similarity 36.0% |
+| [41 Narrative Trace](./41-narrative-trace/) | Command line | Every sentence of a case narrative, traced to a transaction | Flags 120 of 140 planted defects in case narratives and 10 of 268 fine sentences; a bracket-pattern check flags 44 of 140 |
+| [49 Dispute Clock](./49-dispute-clock/) | Command line | The deadlines of a dispute, counted in business days | Matches the planted status on 519 of 524 clocks (99.0%), against 454 (86.6%) for a calendar-day countdown |
+| [72 Scam Friction Sim](./72-scam-friction-sim/) | Project folder | What a 20-minute hold stops, and who waits | 1.1 legitimate holds per scam stopped, against 6.6 for a blanket hold rule |
+| [76 Name Match Eval](./76-name-match-eval/) | Command line | What a screening threshold costs in missed names and false alerts | At a 10.0% false-alert limit the word matcher recalls 57.3% of true matches, edit similarity 36.0% |
 
 ### Cloud and cost
 
 | Project | Form | What it checks | What the script printed |
 | --- | --- | --- | --- |
 | [45 Concentration Register](./45-concentration-register/) | Command line | Which critical services sit on one cloud provider or one region | Flags 4 of 4 outage scenarios that truly lose more than 30% of critical services, against 1 of 4 by direct share |
-| [46 plan-guard](./46-plan-guard/) | GitHub Action (staged) | A gate between terraform plan and apply | Blocks 33 of 42 risky plans and 0 of 34 harmless ones; a text search flags 58 plans, 23 of them harmless |
+| [46 Plan Guard](./46-plan-guard/) | GitHub Action (staged) | A gate between terraform plan and apply | Blocks 33 of 42 risky plans and 0 of 34 harmless ones; a text search flags 58 plans, 23 of them harmless |
 | [64 Cost Gate](./64-cost-gate/) | GitHub Action (staged) | An inference budget in CI | 4 of 4 planted slice regressions caught while the whole run passed; 3 of 21 over-budget runs still pass |
 | [65 Failover Scorecard](./65-failover-scorecard/) | Project folder | Which services have a tested way back | Flags 25 of 28 not-ready services and 0 of 16 ready ones; a latest-drill-passed view shows 20 of 36 green that would not recover |
 | [71 Tag Chargeback](./71-tag-chargeback/) | Command line | Who pays for the cloud bill when the tags are typed by hand | 89.9% of spend charged to the right team, against 55.8% by account; 5.2% left for a person |
@@ -199,20 +199,20 @@ The twenty-seven case studies above ask what breaks when AI gets into bank opera
 
 | Project | Form | What it checks | What the script printed |
 | --- | --- | --- | --- |
-| [53 feature-contract](./53-feature-contract/) | GitHub Action (staged) | A data contract for model inputs | Stops 37 of 47 bad batches and blocks 0 of 43 harmless ones |
-| [74 report-trace](./74-report-trace/) | Project folder | Lineage for report cells | Finds 21 of 21 planted problems with 0 false alarms on 46 cells; a reviewer reads 18 rows against 611 |
+| [53 Feature Contract](./53-feature-contract/) | GitHub Action (staged) | A data contract for model inputs | Stops 37 of 47 bad batches and blocks 0 of 43 harmless ones |
+| [74 Report Trace](./74-report-trace/) | Project folder | Lineage from a report cell back to its source rows | Finds 21 of 21 planted problems with 0 false alarms on 46 cells; a reviewer reads 18 rows against 611 |
 
 ### Commercial and business banking
 
 | Project | Form | What it checks | What the script printed |
 | --- | --- | --- | --- |
 | [51 Memo Tieout](./51-memo-tieout/) | Command line | Every figure in a credit memo, tied back to the spread | Catches 104 of 124 wrong figures in credit memos, with 12 of 184 false alarms |
-| [63 call-notes-actions](./63-call-notes-actions/) | Project folder | Every CRM action has to point at a sentence | Writes 175 of 184 grounded actions and 38 of 256 ungrounded ones; with no check all 256 are written |
+| [63 Call Notes Actions](./63-call-notes-actions/) | Project folder | Whether every CRM action points at a sentence of the call note | Writes 175 of 184 grounded actions and 38 of 256 ungrounded ones; with no check all 256 are written |
 | [67 Credit Policy Needle](./67-credit-policy-needle/) | Project folder | Where an assistant loses the exception clause | The gate fails 3 of 3 faulty readers and passes the control reader |
 | [68 KYB Packet Check](./68-kyb-packet-check/) | Project folder | The beneficial owner a model misread (synthetic documents) | Flags 40 of 43 misread packets and 0 of 32 clean ones; a field-presence check flags 12 of 43 |
-| [69 smb-faq-abstain](./69-smb-faq-abstain/) | Project folder | An FAQ assistant that hands off instead of guessing | 3 of 30 wrong answers served, against 18 when every draft is served; 15 of 18 wrong drafts held back |
-| [75 chargeback-packet](./75-chargeback-packet/) | Project folder | The packet checked against the list before the clock runs out | 34 of 34 visible faults sent to fix, 14 of 14 late packets caught, 0 of 43 ready packets flagged; 9 of 9 wrong-file packets still pass |
-| [77 spread-extraction-eval](./77-spread-extraction-eval/) | Project folder | Where extraction drifts across layouts | A fixed-label extractor pools 43.2% correct across six layouts, the alias-aware one 94.7%, with its worst layout at 68.4% |
+| [69 SMB FAQ Abstain](./69-smb-faq-abstain/) | Project folder | An FAQ assistant that hands off instead of guessing | 3 of 30 wrong answers served, against 18 when every draft is served; 15 of 18 wrong drafts held back |
+| [75 Chargeback Packet](./75-chargeback-packet/) | Project folder | The packet checked against the list before the clock runs out | 34 of 34 visible faults sent to fix, 14 of 14 late packets caught, 0 of 43 ready packets flagged; 9 of 9 wrong-file packets still pass |
+| [77 Spread Extraction Eval](./77-spread-extraction-eval/) | Project folder | Where extraction drifts across layouts | A fixed-label extractor pools 43.2% correct across six layouts, the alias-aware one 94.7%, with its worst layout at 68.4% |
 
 ---
 
