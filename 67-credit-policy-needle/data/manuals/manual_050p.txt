@@ -1,0 +1,953 @@
+Synthetic Credit Policy Manual, Issue 14. Effective 2026-07-01. This is invented text for a test. It describes no real lender, customer or product.
+
+A limit stated in a clause can be changed by an exception. The exception may sit inside the clause, in the clause that follows, in another section that cites the clause number, or as an entry in the register in Appendix A. Entries in the register are effective from the date shown.
+
+Section 1. Quality Checks: Auto Finance
+
+1.1 The maximum debt-to-income ratio for Basalt Personal Loan is 44%.
+
+1.2 The file reviewer checks the file for missing pages before it moves on as the procedure sheet describes. The servicing team checks the file for missing pages before it moves on. The quality reviewer files the correspondence in the order it was received as the procedure sheet describes.
+
+1.3 The quality reviewer sends a reminder to the sender when a document is overdue before the end of the working day. The servicing team sends a reminder to the sender when a document is overdue and signs the record. The branch officer passes the file to the next reviewer once the checks are complete as the procedure sheet describes.
+
+1.4 The maximum debt-to-income ratio for Cobalt Credit Card is 39%.
+
+1.5 Exception to clause 1.4: the maximum debt-to-income ratio for Cobalt Credit Card is 44% for an applicant with verified annual income of at least $40,000.
+
+1.6 The approving officer notes the reason for any delay in the case log, and the queue is cleared each day. The case handler marks the file for second review when the documents do not agree.
+
+1.7 The maximum loan term for Umber Personal Loan is 36 months.
+
+1.8 The maximum loan term for Iris Auto Loan is 60 months.
+
+1.9 Exception to clause 1.8: the maximum loan term for Iris Auto Loan is 84 months for an applicant with an initial payment of at least 25% of the purchase price.
+
+1.10 The collections desk records the outcome in the case log on the day it is known. The verification team passes the file to the next reviewer once the checks are complete before the end of the working day.
+
+1.11 The documentation clerk closes the task in the queue after the record is saved before the end of the working day. The operations lead returns an incomplete file to the sender with a note of what is missing. The branch officer notes the reason for any delay in the case log and signs the record.
+
+1.12 The verification team notes the reason for any delay in the case log.
+
+1.13 The file reviewer updates the status of the file at each stage and keeps a note of who acted. The approving officer returns an incomplete file to the sender with a note of what is missing. The credit analyst checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+1.14 The minimum credit score for Indigo Personal Loan is 640 points.
+
+1.15 The maximum credit limit for Maple Credit Card is $3,000.
+
+1.16 The branch officer marks the file for second review when the documents do not agree as the procedure sheet describes. The verification team confirms that each identity check on the file is dated and initialed.
+
+1.17 The maximum loan amount for Sable Auto Loan is $12,500, except that it is $17,500 for an applicant with a customer relationship of at least 36 months.
+
+1.18 For an applicant with annual business revenue of at least $100,000, the limit in clause 8.19 is $5,000.
+
+1.19 Clause 9.17 does not apply to an applicant with a payment default recorded in the prior 12 months.
+
+1.20 The collections desk updates the status of the file at each stage as the procedure sheet describes. The collections desk closes the task in the queue after the record is saved, and the queue is cleared each day.
+
+1.21 The maximum loan term for Zephyr Personal Loan is 72 months.
+
+1.22 Except for the routing slip, every page of the file carries the reviewer's initials.
+
+1.23 The credit analyst keeps the signed copy in the folder set up for that purpose and signs the record. The case handler sends a reminder to the sender when a document is overdue.
+
+1.24 Notwithstanding clause 9.3, the limit stated there is 84 months for an applicant with annual business revenue of at least $250,000.
+
+1.25 The documentation clerk updates the status of the file at each stage and keeps a note of who acted. The verification team keeps the signed copy in the folder set up for that purpose.
+
+1.26 The documentation clerk returns an incomplete file to the sender with a note of what is missing before the end of the working day. The operations lead sends a reminder to the sender when a document is overdue.
+
+1.27 The case handler closes the task in the queue after the record is saved and keeps a note of who acted. The credit analyst checks the file for missing pages before it moves on.
+
+1.28 The credit analyst keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The verification team marks the file for second review when the documents do not agree.
+
+Section 2. Record Keeping: Consumer Lending
+
+2.1 The branch officer returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The quality reviewer returns an incomplete file to the sender with a note of what is missing and signs the record. The underwriting lead notes the reason for any delay in the case log, and the date is entered in full.
+
+2.2 The collections desk passes the file to the next reviewer once the checks are complete and signs the record. The operations lead notes the reason for any delay in the case log.
+
+2.3 The file reviewer marks the file for second review when the documents do not agree, and the date is entered in full.
+
+2.4 The documentation clerk keeps the signed copy in the folder set up for that purpose, and the date is entered in full. The verification team confirms that each identity check on the file is dated and initialed and signs the record. The approving officer files the correspondence in the order it was received as the procedure sheet describes.
+
+2.5 The credit analyst closes the task in the queue after the record is saved and signs the record.
+
+2.6 Except for the envelope, every item in the file is logged on receipt.
+
+2.7 The approving officer notes the reason for any delay in the case log. The documentation clerk records the outcome in the case log on the day it is known, and the date is entered in full.
+
+2.8 The file reviewer files the correspondence in the order it was received, and the queue is cleared each day.
+
+2.9 The quality reviewer files the correspondence in the order it was received.
+
+2.10 The documentation clerk sends a reminder to the sender when a document is overdue as the procedure sheet describes. The verification team passes the file to the next reviewer once the checks are complete as the procedure sheet describes.
+
+2.11 The servicing team notes the reason for any delay in the case log. The collections desk notes the reason for any delay in the case log.
+
+2.12 The verification team notes the reason for any delay in the case log, and the date is entered in full. The servicing team keeps the signed copy in the folder set up for that purpose.
+
+2.13 The verification team sends a reminder to the sender when a document is overdue. The branch officer checks the file for missing pages before it moves on and keeps a note of who acted.
+
+2.14 The underwriting lead files the correspondence in the order it was received and keeps a note of who acted. The credit analyst checks the file for missing pages before it moves on.
+
+2.15 The verification team keeps the signed copy in the folder set up for that purpose. The credit analyst updates the status of the file at each stage as the procedure sheet describes.
+
+2.16 The collections desk returns an incomplete file to the sender with a note of what is missing as the procedure sheet describes. The approving officer records the outcome in the case log on the day it is known as the procedure sheet describes. The approving officer checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+2.17 The credit analyst confirms that each identity check on the file is dated and initialed. The verification team returns an incomplete file to the sender with a note of what is missing. The approving officer keeps the signed copy in the folder set up for that purpose before the end of the working day.
+
+2.18 The verification team records the outcome in the case log on the day it is known. The quality reviewer notes the reason for any delay in the case log.
+
+2.19 The file reviewer checks the file for missing pages before it moves on and keeps a note of who acted. The file reviewer sends a reminder to the sender when a document is overdue as the procedure sheet describes. The file reviewer returns an incomplete file to the sender with a note of what is missing and keeps a note of who acted.
+
+2.20 The approving officer sends a reminder to the sender when a document is overdue, and the date is entered in full. The quality reviewer passes the file to the next reviewer once the checks are complete as the procedure sheet describes.
+
+2.21 The underwriting lead sends a reminder to the sender when a document is overdue and signs the record. The file reviewer closes the task in the queue after the record is saved and signs the record. The verification team passes the file to the next reviewer once the checks are complete and signs the record.
+
+2.22 The servicing team checks the file for missing pages before it moves on and keeps a note of who acted. The servicing team confirms that each identity check on the file is dated and initialed and signs the record.
+
+2.23 The quality reviewer keeps the signed copy in the folder set up for that purpose and signs the record. The verification team notes the reason for any delay in the case log.
+
+2.24 The quality reviewer checks the file for missing pages before it moves on. The case handler files the correspondence in the order it was received and keeps a note of who acted.
+
+2.25 The file reviewer records the outcome in the case log on the day it is known and keeps a note of who acted. The underwriting lead keeps the signed copy in the folder set up for that purpose.
+
+2.26 The credit analyst notes the reason for any delay in the case log and signs the record.
+
+2.27 The operations lead notes the reason for any delay in the case log. The approving officer sends a reminder to the sender when a document is overdue and signs the record. The documentation clerk closes the task in the queue after the record is saved, and the queue is cleared each day.
+
+2.28 The collections desk marks the file for second review when the documents do not agree and signs the record. The underwriting lead sends a reminder to the sender when a document is overdue and signs the record. The operations lead returns an incomplete file to the sender with a note of what is missing and signs the record.
+
+Section 3. Archive Handling: Consumer Lending
+
+3.1 The case handler notes the reason for any delay in the case log before the end of the working day. The credit analyst passes the file to the next reviewer once the checks are complete before the end of the working day.
+
+3.2 The underwriting lead closes the task in the queue after the record is saved. The verification team files the correspondence in the order it was received, and the date is entered in full. The operations lead keeps the signed copy in the folder set up for that purpose as the procedure sheet describes.
+
+3.3 The servicing team passes the file to the next reviewer once the checks are complete, and the date is entered in full.
+
+3.4 The credit analyst passes the file to the next reviewer once the checks are complete as the procedure sheet describes. The documentation clerk files the correspondence in the order it was received.
+
+3.5 The case handler checks the file for missing pages before it moves on. The credit analyst files the correspondence in the order it was received and keeps a note of who acted.
+
+3.6 The approving officer checks the file for missing pages before it moves on as the procedure sheet describes.
+
+3.7 The documentation clerk updates the status of the file at each stage before the end of the working day. The underwriting lead checks the file for missing pages before it moves on and keeps a note of who acted.
+
+3.8 The collections desk confirms that each identity check on the file is dated and initialed, and the queue is cleared each day. The quality reviewer confirms that each identity check on the file is dated and initialed as the procedure sheet describes.
+
+3.9 The collections desk confirms that each identity check on the file is dated and initialed. The credit analyst closes the task in the queue after the record is saved and signs the record.
+
+3.10 The case handler updates the status of the file at each stage and keeps a note of who acted. The verification team records the outcome in the case log on the day it is known. The underwriting lead confirms that each identity check on the file is dated and initialed, and the queue is cleared each day.
+
+3.11 The approving officer sends a reminder to the sender when a document is overdue as the procedure sheet describes.
+
+3.12 The operations lead files the correspondence in the order it was received. The branch officer passes the file to the next reviewer once the checks are complete.
+
+3.13 The documentation clerk closes the task in the queue after the record is saved and signs the record. The quality reviewer notes the reason for any delay in the case log as the procedure sheet describes. The underwriting lead records the outcome in the case log on the day it is known, and the queue is cleared each day.
+
+3.14 The quality reviewer closes the task in the queue after the record is saved before the end of the working day. The servicing team confirms that each identity check on the file is dated and initialed.
+
+3.15 The credit analyst keeps the signed copy in the folder set up for that purpose. The underwriting lead returns an incomplete file to the sender with a note of what is missing.
+
+3.16 The documentation clerk files the correspondence in the order it was received and signs the record. The credit analyst marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+3.17 The branch officer closes the task in the queue after the record is saved and signs the record. The operations lead confirms that each identity check on the file is dated and initialed.
+
+3.18 The servicing team confirms that each identity check on the file is dated and initialed, and the queue is cleared each day. The credit analyst files the correspondence in the order it was received and keeps a note of who acted.
+
+3.19 The file reviewer confirms that each identity check on the file is dated and initialed before the end of the working day. The case handler keeps the signed copy in the folder set up for that purpose as the procedure sheet describes.
+
+3.20 The branch officer updates the status of the file at each stage before the end of the working day.
+
+3.21 Reviewers cite clause 8.13 in the case log, except for files closed with no decision.
+
+3.22 The collections desk files the correspondence in the order it was received. The quality reviewer marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+3.23 The operations lead keeps the signed copy in the folder set up for that purpose before the end of the working day.
+
+3.24 The quality reviewer updates the status of the file at each stage and keeps a note of who acted.
+
+3.25 The branch officer sends a reminder to the sender when a document is overdue before the end of the working day.
+
+3.26 The documentation clerk passes the file to the next reviewer once the checks are complete.
+
+3.27 The branch officer updates the status of the file at each stage.
+
+3.28 The servicing team files the correspondence in the order it was received and signs the record.
+
+Section 4. Staff Training: Card Services
+
+4.1 The quality reviewer returns an incomplete file to the sender with a note of what is missing. The quality reviewer marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+4.2 The approving officer files the correspondence in the order it was received as the procedure sheet describes.
+
+4.3 The servicing team files the correspondence in the order it was received. The approving officer passes the file to the next reviewer once the checks are complete and keeps a note of who acted.
+
+4.4 The operations lead checks the file for missing pages before it moves on.
+
+4.5 The case handler sends a reminder to the sender when a document is overdue, and the queue is cleared each day. The verification team marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+4.6 The documentation clerk keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The underwriting lead notes the reason for any delay in the case log, and the date is entered in full.
+
+4.7 The approving officer confirms that each identity check on the file is dated and initialed before the end of the working day. The servicing team marks the file for second review when the documents do not agree and keeps a note of who acted.
+
+4.8 The underwriting lead passes the file to the next reviewer once the checks are complete, and the queue is cleared each day.
+
+4.9 The case handler passes the file to the next reviewer once the checks are complete, and the date is entered in full. The file reviewer returns an incomplete file to the sender with a note of what is missing, and the date is entered in full.
+
+4.10 The credit analyst passes the file to the next reviewer once the checks are complete, and the queue is cleared each day. The file reviewer sends a reminder to the sender when a document is overdue as the procedure sheet describes.
+
+4.11 The servicing team keeps the signed copy in the folder set up for that purpose. The documentation clerk keeps the signed copy in the folder set up for that purpose and keeps a note of who acted.
+
+4.12 The case handler checks the file for missing pages before it moves on. The underwriting lead checks the file for missing pages before it moves on before the end of the working day. The branch officer keeps the signed copy in the folder set up for that purpose.
+
+4.13 The case handler confirms that each identity check on the file is dated and initialed and signs the record. The approving officer marks the file for second review when the documents do not agree, and the date is entered in full.
+
+4.14 Reviewers cite clause 2.26 in the case log, except for files closed with no decision.
+
+4.15 The collections desk records the outcome in the case log on the day it is known before the end of the working day. The approving officer returns an incomplete file to the sender with a note of what is missing before the end of the working day.
+
+4.16 The case handler marks the file for second review when the documents do not agree, and the date is entered in full. The verification team returns an incomplete file to the sender with a note of what is missing. The collections desk sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+4.17 The verification team files the correspondence in the order it was received before the end of the working day. The servicing team sends a reminder to the sender when a document is overdue and signs the record.
+
+4.18 The servicing team checks the file for missing pages before it moves on before the end of the working day. The collections desk returns an incomplete file to the sender with a note of what is missing and keeps a note of who acted.
+
+4.19 The operations lead keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day. The verification team sends a reminder to the sender when a document is overdue. The approving officer passes the file to the next reviewer once the checks are complete and keeps a note of who acted.
+
+4.20 The maximum credit limit for Elm Credit Card is $19,000.
+
+4.21 Exception to clause 4.20: the maximum credit limit for Elm Credit Card is $22,000 for an applicant with a customer relationship of at least 36 months.
+
+4.22 The case handler files the correspondence in the order it was received and signs the record.
+
+4.23 The maximum loan amount for Harbor Auto Loan is $37,500.
+
+4.24 The minimum credit score for Velvet Auto Loan is 700 points.
+
+4.25 The quality reviewer records the outcome in the case log on the day it is known. The collections desk passes the file to the next reviewer once the checks are complete, and the queue is cleared each day.
+
+4.26 The credit analyst marks the file for second review when the documents do not agree, and the queue is cleared each day. The file reviewer keeps the signed copy in the folder set up for that purpose.
+
+4.27 Clause 13.8 does not apply to an applicant with a payment default recorded in the prior 12 months.
+
+4.28 The documentation clerk keeps the signed copy in the folder set up for that purpose before the end of the working day.
+
+Section 5. Record Keeping: Card Services
+
+5.1 For an applicant with verified annual income of at least $60,000, the limit in clause 12.21 is 60 months.
+
+5.2 The approving officer records the outcome in the case log on the day it is known, and the date is entered in full. The verification team records the outcome in the case log on the day it is known and keeps a note of who acted.
+
+5.3 The maximum credit limit for Nectar Business Line is $14,000.
+
+5.4 Exception to clause 5.3: the maximum credit limit for Nectar Business Line is $16,000 for an applicant with annual business revenue of at least $250,000.
+
+5.5 The file reviewer notes the reason for any delay in the case log, and the queue is cleared each day. The approving officer marks the file for second review when the documents do not agree, and the date is entered in full.
+
+5.6 The operations lead confirms that each identity check on the file is dated and initialed as the procedure sheet describes. The approving officer updates the status of the file at each stage before the end of the working day.
+
+5.7 The credit analyst marks the file for second review when the documents do not agree, and the date is entered in full. The quality reviewer closes the task in the queue after the record is saved.
+
+5.8 Notwithstanding clause 12.24, the limit stated there is 48 months for an applicant with a customer relationship of at least 12 months.
+
+5.9 The quality reviewer returns an incomplete file to the sender with a note of what is missing and signs the record. The case handler checks the file for missing pages before it moves on, and the queue is cleared each day. The documentation clerk passes the file to the next reviewer once the checks are complete and signs the record.
+
+5.10 The approving officer notes the reason for any delay in the case log as the procedure sheet describes. The underwriting lead notes the reason for any delay in the case log, and the queue is cleared each day.
+
+5.11 The file reviewer records the outcome in the case log on the day it is known and keeps a note of who acted. The approving officer confirms that each identity check on the file is dated and initialed.
+
+5.12 The maximum loan amount for Nutmeg Personal Loan is $30,000.
+
+5.13 The documentation clerk returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The servicing team checks the file for missing pages before it moves on before the end of the working day.
+
+5.14 The maximum credit limit for Yarrow Credit Card is $12,000.
+
+5.15 The collections desk updates the status of the file at each stage, and the queue is cleared each day. The servicing team closes the task in the queue after the record is saved.
+
+5.16 The maximum loan term for Tamarack Auto Loan is 60 months.
+
+5.17 The quality reviewer passes the file to the next reviewer once the checks are complete, and the queue is cleared each day. The branch officer checks the file for missing pages before it moves on and keeps a note of who acted.
+
+5.18 The case handler confirms that each identity check on the file is dated and initialed, and the queue is cleared each day.
+
+5.19 The servicing team checks the file for missing pages before it moves on. The collections desk passes the file to the next reviewer once the checks are complete and signs the record.
+
+5.20 The branch officer marks the file for second review when the documents do not agree and keeps a note of who acted. The operations lead sends a reminder to the sender when a document is overdue.
+
+5.21 The maximum loan term for Xenon Business Line is 72 months, except that it is 84 months for an applicant with a customer relationship of at least 36 months.
+
+5.22 The quality reviewer checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+5.23 The documentation clerk confirms that each identity check on the file is dated and initialed before the end of the working day. The underwriting lead marks the file for second review when the documents do not agree.
+
+5.24 The servicing team checks the file for missing pages before it moves on before the end of the working day. The operations lead closes the task in the queue after the record is saved, and the queue is cleared each day. The underwriting lead records the outcome in the case log on the day it is known.
+
+5.25 The verification team passes the file to the next reviewer once the checks are complete and signs the record. The approving officer sends a reminder to the sender when a document is overdue and signs the record. The operations lead closes the task in the queue after the record is saved, and the queue is cleared each day.
+
+5.26 The collections desk keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The branch officer sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+5.27 The quality reviewer notes the reason for any delay in the case log, and the date is entered in full. The underwriting lead updates the status of the file at each stage.
+
+5.28 The underwriting lead files the correspondence in the order it was received and signs the record. The credit analyst passes the file to the next reviewer once the checks are complete. The operations lead passes the file to the next reviewer once the checks are complete and keeps a note of who acted.
+
+Section 6. Quality Checks: Card Services
+
+6.1 The servicing team records the outcome in the case log on the day it is known and signs the record. The collections desk marks the file for second review when the documents do not agree and signs the record.
+
+6.2 The verification team confirms that each identity check on the file is dated and initialed. The documentation clerk returns an incomplete file to the sender with a note of what is missing as the procedure sheet describes. The credit analyst returns an incomplete file to the sender with a note of what is missing.
+
+6.3 The operations lead confirms that each identity check on the file is dated and initialed and keeps a note of who acted. The credit analyst notes the reason for any delay in the case log and signs the record. The operations lead notes the reason for any delay in the case log as the procedure sheet describes.
+
+6.4 The verification team records the outcome in the case log on the day it is known and keeps a note of who acted. The case handler files the correspondence in the order it was received, and the date is entered in full.
+
+6.5 The documentation clerk updates the status of the file at each stage as the procedure sheet describes. The documentation clerk checks the file for missing pages before it moves on. The quality reviewer records the outcome in the case log on the day it is known as the procedure sheet describes.
+
+6.6 The documentation clerk passes the file to the next reviewer once the checks are complete and keeps a note of who acted. The collections desk files the correspondence in the order it was received.
+
+6.7 The case handler confirms that each identity check on the file is dated and initialed and keeps a note of who acted. The approving officer confirms that each identity check on the file is dated and initialed.
+
+6.8 The documentation clerk keeps the signed copy in the folder set up for that purpose. The quality reviewer checks the file for missing pages before it moves on, and the queue is cleared each day. The collections desk passes the file to the next reviewer once the checks are complete.
+
+6.9 The documentation clerk keeps the signed copy in the folder set up for that purpose. The operations lead checks the file for missing pages before it moves on and keeps a note of who acted. The collections desk returns an incomplete file to the sender with a note of what is missing and signs the record.
+
+6.10 The branch officer records the outcome in the case log on the day it is known, and the queue is cleared each day. The credit analyst notes the reason for any delay in the case log.
+
+6.11 The credit analyst confirms that each identity check on the file is dated and initialed, and the queue is cleared each day.
+
+6.12 The underwriting lead sends a reminder to the sender when a document is overdue, and the date is entered in full. The file reviewer marks the file for second review when the documents do not agree and signs the record.
+
+6.13 The credit analyst marks the file for second review when the documents do not agree. The collections desk notes the reason for any delay in the case log as the procedure sheet describes. The operations lead marks the file for second review when the documents do not agree before the end of the working day.
+
+6.14 The servicing team updates the status of the file at each stage and signs the record. The quality reviewer confirms that each identity check on the file is dated and initialed and keeps a note of who acted.
+
+6.15 The operations lead sends a reminder to the sender when a document is overdue. The collections desk keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day.
+
+6.16 The servicing team keeps the signed copy in the folder set up for that purpose. The underwriting lead files the correspondence in the order it was received as the procedure sheet describes.
+
+6.17 The branch officer marks the file for second review when the documents do not agree and keeps a note of who acted. The approving officer passes the file to the next reviewer once the checks are complete. The quality reviewer checks the file for missing pages before it moves on and keeps a note of who acted.
+
+6.18 The branch officer keeps the signed copy in the folder set up for that purpose.
+
+6.19 The branch officer confirms that each identity check on the file is dated and initialed before the end of the working day. The verification team closes the task in the queue after the record is saved and keeps a note of who acted. The collections desk confirms that each identity check on the file is dated and initialed.
+
+6.20 The quality reviewer files the correspondence in the order it was received. The collections desk confirms that each identity check on the file is dated and initialed and keeps a note of who acted. The verification team checks the file for missing pages before it moves on and signs the record.
+
+6.21 The underwriting lead returns an incomplete file to the sender with a note of what is missing. The documentation clerk updates the status of the file at each stage as the procedure sheet describes.
+
+6.22 The operations lead updates the status of the file at each stage as the procedure sheet describes. The quality reviewer updates the status of the file at each stage and keeps a note of who acted. The documentation clerk closes the task in the queue after the record is saved, and the queue is cleared each day.
+
+6.23 The documentation clerk closes the task in the queue after the record is saved, and the date is entered in full. The file reviewer files the correspondence in the order it was received as the procedure sheet describes. The underwriting lead sends a reminder to the sender when a document is overdue as the procedure sheet describes.
+
+6.24 The case handler sends a reminder to the sender when a document is overdue and keeps a note of who acted. The branch officer files the correspondence in the order it was received.
+
+6.25 The collections desk passes the file to the next reviewer once the checks are complete and signs the record. The branch officer passes the file to the next reviewer once the checks are complete and keeps a note of who acted. The file reviewer notes the reason for any delay in the case log, and the queue is cleared each day.
+
+6.26 The underwriting lead returns an incomplete file to the sender with a note of what is missing before the end of the working day.
+
+6.27 The credit analyst records the outcome in the case log on the day it is known and signs the record. The servicing team records the outcome in the case log on the day it is known and keeps a note of who acted. The underwriting lead records the outcome in the case log on the day it is known and keeps a note of who acted.
+
+6.28 The underwriting lead marks the file for second review when the documents do not agree before the end of the working day.
+
+Section 7. Record Keeping: Auto Finance
+
+7.1 The quality reviewer checks the file for missing pages before it moves on and signs the record. The case handler passes the file to the next reviewer once the checks are complete.
+
+7.2 The collections desk checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+7.3 The branch officer returns an incomplete file to the sender with a note of what is missing, and the queue is cleared each day. The quality reviewer checks the file for missing pages before it moves on.
+
+7.4 The underwriting lead files the correspondence in the order it was received.
+
+7.5 The file reviewer confirms that each identity check on the file is dated and initialed as the procedure sheet describes. The credit analyst records the outcome in the case log on the day it is known, and the queue is cleared each day. The branch officer sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+7.6 The operations lead keeps the signed copy in the folder set up for that purpose and signs the record.
+
+7.7 The operations lead marks the file for second review when the documents do not agree as the procedure sheet describes. The servicing team sends a reminder to the sender when a document is overdue.
+
+7.8 The underwriting lead records the outcome in the case log on the day it is known, and the date is entered in full. The verification team updates the status of the file at each stage.
+
+7.9 The underwriting lead files the correspondence in the order it was received as the procedure sheet describes. The approving officer marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+7.10 The collections desk checks the file for missing pages before it moves on. The servicing team keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day. The verification team returns an incomplete file to the sender with a note of what is missing, and the date is entered in full.
+
+7.11 The approving officer confirms that each identity check on the file is dated and initialed. The credit analyst updates the status of the file at each stage and signs the record.
+
+7.12 The verification team files the correspondence in the order it was received and signs the record. The underwriting lead returns an incomplete file to the sender with a note of what is missing, and the queue is cleared each day.
+
+7.13 The credit analyst notes the reason for any delay in the case log, and the date is entered in full. The collections desk notes the reason for any delay in the case log, and the queue is cleared each day. The servicing team marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+7.14 The underwriting lead confirms that each identity check on the file is dated and initialed. The approving officer files the correspondence in the order it was received. The documentation clerk marks the file for second review when the documents do not agree, and the date is entered in full.
+
+7.15 The verification team confirms that each identity check on the file is dated and initialed before the end of the working day.
+
+7.16 The case handler passes the file to the next reviewer once the checks are complete, and the queue is cleared each day. The branch officer returns an incomplete file to the sender with a note of what is missing. The servicing team closes the task in the queue after the record is saved, and the date is entered in full.
+
+7.17 The documentation clerk keeps the signed copy in the folder set up for that purpose before the end of the working day. The credit analyst checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+7.18 The collections desk keeps the signed copy in the folder set up for that purpose and keeps a note of who acted.
+
+7.19 The file reviewer marks the file for second review when the documents do not agree and keeps a note of who acted. The approving officer sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+7.20 The collections desk returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The file reviewer files the correspondence in the order it was received before the end of the working day.
+
+7.21 The operations lead notes the reason for any delay in the case log and signs the record.
+
+7.22 The servicing team marks the file for second review when the documents do not agree and keeps a note of who acted. The documentation clerk marks the file for second review when the documents do not agree.
+
+7.23 The case handler marks the file for second review when the documents do not agree.
+
+7.24 The file reviewer notes the reason for any delay in the case log and signs the record. The credit analyst sends a reminder to the sender when a document is overdue as the procedure sheet describes.
+
+7.25 The documentation clerk closes the task in the queue after the record is saved as the procedure sheet describes.
+
+7.26 The operations lead records the outcome in the case log on the day it is known before the end of the working day. The case handler passes the file to the next reviewer once the checks are complete.
+
+7.27 The branch officer records the outcome in the case log on the day it is known. The case handler sends a reminder to the sender when a document is overdue and signs the record. The servicing team notes the reason for any delay in the case log and keeps a note of who acted.
+
+7.28 The quality reviewer returns an incomplete file to the sender with a note of what is missing and keeps a note of who acted.
+
+Section 8. Channel Procedures: Auto Finance
+
+8.1 The quality reviewer keeps the signed copy in the folder set up for that purpose, and the date is entered in full. The file reviewer closes the task in the queue after the record is saved, and the queue is cleared each day.
+
+8.2 The verification team notes the reason for any delay in the case log and keeps a note of who acted. The file reviewer updates the status of the file at each stage.
+
+8.3 The case handler closes the task in the queue after the record is saved. The documentation clerk checks the file for missing pages before it moves on and keeps a note of who acted.
+
+8.4 The servicing team passes the file to the next reviewer once the checks are complete. The case handler returns an incomplete file to the sender with a note of what is missing.
+
+8.5 The file reviewer keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The servicing team records the outcome in the case log on the day it is known and keeps a note of who acted.
+
+8.6 The branch officer marks the file for second review when the documents do not agree and signs the record. The underwriting lead notes the reason for any delay in the case log and keeps a note of who acted.
+
+8.7 The collections desk passes the file to the next reviewer once the checks are complete and signs the record. The servicing team files the correspondence in the order it was received before the end of the working day.
+
+8.8 The documentation clerk sends a reminder to the sender when a document is overdue, and the queue is cleared each day. The file reviewer sends a reminder to the sender when a document is overdue as the procedure sheet describes.
+
+8.9 The approving officer keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The branch officer marks the file for second review when the documents do not agree and signs the record. The credit analyst records the outcome in the case log on the day it is known.
+
+8.10 The credit analyst closes the task in the queue after the record is saved and keeps a note of who acted.
+
+8.11 The credit analyst marks the file for second review when the documents do not agree and signs the record.
+
+8.12 The maximum loan amount for Larch Personal Loan is $25,000.
+
+8.13 The approving officer returns an incomplete file to the sender with a note of what is missing and signs the record.
+
+8.14 The approving officer updates the status of the file at each stage, and the date is entered in full. The verification team notes the reason for any delay in the case log, and the queue is cleared each day.
+
+8.15 The documentation clerk returns an incomplete file to the sender with a note of what is missing.
+
+8.16 The quality reviewer updates the status of the file at each stage, and the queue is cleared each day. The file reviewer updates the status of the file at each stage and keeps a note of who acted. The verification team returns an incomplete file to the sender with a note of what is missing, and the date is entered in full.
+
+8.17 The branch officer notes the reason for any delay in the case log as the procedure sheet describes. The branch officer closes the task in the queue after the record is saved, and the queue is cleared each day. The underwriting lead records the outcome in the case log on the day it is known, and the queue is cleared each day.
+
+8.18 The underwriting lead records the outcome in the case log on the day it is known and signs the record. The underwriting lead records the outcome in the case log on the day it is known, and the date is entered in full.
+
+8.19 The maximum credit limit for Pewter Business Line is $2,000.
+
+8.20 The underwriting lead marks the file for second review when the documents do not agree, and the queue is cleared each day. The verification team checks the file for missing pages before it moves on, and the queue is cleared each day. The collections desk checks the file for missing pages before it moves on and keeps a note of who acted.
+
+8.21 The approving officer returns an incomplete file to the sender with a note of what is missing before the end of the working day. The collections desk confirms that each identity check on the file is dated and initialed before the end of the working day. The credit analyst notes the reason for any delay in the case log.
+
+8.22 Clause 16.20 does not apply to an applicant with a payment default recorded in the prior 12 months.
+
+8.23 The verification team closes the task in the queue after the record is saved, and the date is entered in full.
+
+8.24 For an applicant with a customer relationship of at least 36 months, the limit in clause 1.7 is 60 months.
+
+8.25 The maximum credit limit for Russet Business Line is $4,000.
+
+8.26 The underwriting lead sends a reminder to the sender when a document is overdue before the end of the working day. The verification team keeps the signed copy in the folder set up for that purpose. The branch officer files the correspondence in the order it was received and keeps a note of who acted.
+
+8.27 The credit analyst confirms that each identity check on the file is dated and initialed and keeps a note of who acted.
+
+8.28 Clause 1.9 does not apply to an applicant with a payment default recorded in the prior 12 months.
+
+Section 9. Archive Handling: Auto Finance
+
+9.1 The underwriting lead checks the file for missing pages before it moves on as the procedure sheet describes. The approving officer closes the task in the queue after the record is saved, and the queue is cleared each day.
+
+9.2 The minimum credit score for Alder Auto Loan is 660 points, except that it is 630 points for an applicant with a customer relationship of at least 36 months.
+
+9.3 The maximum loan term for Dune Business Line is 60 months.
+
+9.4 The file reviewer closes the task in the queue after the record is saved before the end of the working day. The underwriting lead returns an incomplete file to the sender with a note of what is missing as the procedure sheet describes.
+
+9.5 The maximum loan term for Willow Personal Loan is 60 months.
+
+9.6 Exception to clause 9.5: the maximum loan term for Willow Personal Loan is 72 months for an applicant with verified annual income of at least $50,000.
+
+9.7 The case handler records the outcome in the case log on the day it is known, and the queue is cleared each day. The collections desk keeps the signed copy in the folder set up for that purpose. The approving officer files the correspondence in the order it was received, and the date is entered in full.
+
+9.8 Notwithstanding clause 16.27, the limit stated there is 52% for an applicant with a customer relationship of at least 36 months.
+
+9.9 The branch officer keeps the signed copy in the folder set up for that purpose, and the date is entered in full. The credit analyst closes the task in the queue after the record is saved and signs the record.
+
+9.10 Notwithstanding clause 1.15, the limit stated there is $8,000 for an applicant with a customer relationship of at least 12 months.
+
+9.11 The collections desk sends a reminder to the sender when a document is overdue, and the queue is cleared each day. The documentation clerk marks the file for second review when the documents do not agree, and the queue is cleared each day. The file reviewer closes the task in the queue after the record is saved as the procedure sheet describes.
+
+9.12 The documentation clerk returns an incomplete file to the sender with a note of what is missing before the end of the working day. The operations lead notes the reason for any delay in the case log, and the date is entered in full. The file reviewer notes the reason for any delay in the case log, and the queue is cleared each day.
+
+9.13 The branch officer checks the file for missing pages before it moves on. The quality reviewer sends a reminder to the sender when a document is overdue.
+
+9.14 The servicing team checks the file for missing pages before it moves on and keeps a note of who acted.
+
+9.15 The maximum credit limit for Granite Credit Card is $15,000.
+
+9.16 The minimum credit score for Garnet Personal Loan is 700 points.
+
+9.17 Exception to clause 9.16: the minimum credit score for Garnet Personal Loan is 670 points for an applicant with a customer relationship of at least 12 months.
+
+9.18 The underwriting lead returns an incomplete file to the sender with a note of what is missing and signs the record.
+
+9.19 For an applicant with annual business revenue of at least $100,000, the limit in clause 16.16 is 72 months.
+
+9.20 The case handler records the outcome in the case log on the day it is known before the end of the working day. The branch officer confirms that each identity check on the file is dated and initialed before the end of the working day. The verification team closes the task in the queue after the record is saved and keeps a note of who acted.
+
+9.21 The case handler passes the file to the next reviewer once the checks are complete as the procedure sheet describes. The servicing team files the correspondence in the order it was received and signs the record.
+
+9.22 The verification team keeps the signed copy in the folder set up for that purpose and signs the record.
+
+9.23 The approving officer closes the task in the queue after the record is saved, and the date is entered in full.
+
+9.24 The file reviewer confirms that each identity check on the file is dated and initialed as the procedure sheet describes. The documentation clerk marks the file for second review when the documents do not agree, and the queue is cleared each day. The branch officer sends a reminder to the sender when a document is overdue.
+
+9.25 The documentation clerk keeps the signed copy in the folder set up for that purpose as the procedure sheet describes. The approving officer confirms that each identity check on the file is dated and initialed, and the queue is cleared each day.
+
+9.26 The branch officer updates the status of the file at each stage. The case handler passes the file to the next reviewer once the checks are complete, and the date is entered in full. The servicing team files the correspondence in the order it was received before the end of the working day.
+
+9.27 The underwriting lead keeps the signed copy in the folder set up for that purpose, and the date is entered in full.
+
+9.28 The case handler passes the file to the next reviewer once the checks are complete and signs the record. The file reviewer marks the file for second review when the documents do not agree.
+
+Section 10. Correspondence: Auto Finance
+
+10.1 The credit analyst closes the task in the queue after the record is saved, and the date is entered in full.
+
+10.2 The branch officer keeps the signed copy in the folder set up for that purpose. The verification team records the outcome in the case log on the day it is known before the end of the working day.
+
+10.3 The branch officer marks the file for second review when the documents do not agree. The documentation clerk checks the file for missing pages before it moves on before the end of the working day.
+
+10.4 The collections desk records the outcome in the case log on the day it is known, and the date is entered in full.
+
+10.5 The underwriting lead keeps the signed copy in the folder set up for that purpose.
+
+10.6 The credit analyst confirms that each identity check on the file is dated and initialed as the procedure sheet describes. The case handler files the correspondence in the order it was received and signs the record.
+
+10.7 The case handler passes the file to the next reviewer once the checks are complete as the procedure sheet describes. The collections desk checks the file for missing pages before it moves on before the end of the working day. The file reviewer sends a reminder to the sender when a document is overdue, and the date is entered in full.
+
+10.8 The collections desk keeps the signed copy in the folder set up for that purpose and signs the record. The branch officer marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+10.9 The case handler checks the file for missing pages before it moves on.
+
+10.10 The servicing team confirms that each identity check on the file is dated and initialed.
+
+10.11 The underwriting lead closes the task in the queue after the record is saved and signs the record. The case handler notes the reason for any delay in the case log and signs the record. The approving officer passes the file to the next reviewer once the checks are complete, and the queue is cleared each day.
+
+10.12 The case handler checks the file for missing pages before it moves on and keeps a note of who acted. The collections desk notes the reason for any delay in the case log and keeps a note of who acted.
+
+10.13 The credit analyst sends a reminder to the sender when a document is overdue, and the date is entered in full. The case handler sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+10.14 The verification team notes the reason for any delay in the case log and keeps a note of who acted. The documentation clerk confirms that each identity check on the file is dated and initialed as the procedure sheet describes.
+
+10.15 The operations lead confirms that each identity check on the file is dated and initialed as the procedure sheet describes. The credit analyst returns an incomplete file to the sender with a note of what is missing. The file reviewer keeps the signed copy in the folder set up for that purpose and keeps a note of who acted.
+
+10.16 The file reviewer closes the task in the queue after the record is saved. The verification team records the outcome in the case log on the day it is known, and the date is entered in full.
+
+10.17 The collections desk updates the status of the file at each stage and signs the record.
+
+10.18 The quality reviewer closes the task in the queue after the record is saved and keeps a note of who acted. The verification team passes the file to the next reviewer once the checks are complete, and the date is entered in full.
+
+10.19 The operations lead notes the reason for any delay in the case log as the procedure sheet describes.
+
+10.20 The operations lead keeps the signed copy in the folder set up for that purpose as the procedure sheet describes.
+
+10.21 No exception to clause 10.15 is permitted without the written approval of the credit committee.
+
+10.22 The file reviewer marks the file for second review when the documents do not agree as the procedure sheet describes. The credit analyst notes the reason for any delay in the case log as the procedure sheet describes.
+
+10.23 No exception to clause 13.18 is permitted without the written approval of the credit committee.
+
+10.24 The approving officer passes the file to the next reviewer once the checks are complete and keeps a note of who acted. The file reviewer files the correspondence in the order it was received before the end of the working day.
+
+10.25 The case handler updates the status of the file at each stage.
+
+10.26 The operations lead returns an incomplete file to the sender with a note of what is missing.
+
+10.27 The branch officer closes the task in the queue after the record is saved, and the queue is cleared each day. The underwriting lead sends a reminder to the sender when a document is overdue, and the queue is cleared each day. The servicing team updates the status of the file at each stage, and the queue is cleared each day.
+
+10.28 The case handler closes the task in the queue after the record is saved.
+
+Section 11. Archive Handling: Small Business Lending
+
+11.1 The underwriting lead records the outcome in the case log on the day it is known. The underwriting lead returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The file reviewer marks the file for second review when the documents do not agree and keeps a note of who acted.
+
+11.2 The file reviewer updates the status of the file at each stage and keeps a note of who acted.
+
+11.3 The file reviewer files the correspondence in the order it was received before the end of the working day.
+
+11.4 The operations lead keeps the signed copy in the folder set up for that purpose as the procedure sheet describes. The collections desk files the correspondence in the order it was received, and the queue is cleared each day.
+
+11.5 The servicing team sends a reminder to the sender when a document is overdue, and the date is entered in full. The collections desk closes the task in the queue after the record is saved, and the date is entered in full.
+
+11.6 The documentation clerk closes the task in the queue after the record is saved before the end of the working day.
+
+11.7 The verification team updates the status of the file at each stage as the procedure sheet describes. The credit analyst updates the status of the file at each stage before the end of the working day. The verification team marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+11.8 The case handler marks the file for second review when the documents do not agree. The credit analyst checks the file for missing pages before it moves on before the end of the working day.
+
+11.9 The operations lead updates the status of the file at each stage as the procedure sheet describes. The file reviewer updates the status of the file at each stage before the end of the working day.
+
+11.10 The file reviewer checks the file for missing pages before it moves on, and the date is entered in full. The documentation clerk marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+11.11 The credit analyst sends a reminder to the sender when a document is overdue and signs the record. The file reviewer records the outcome in the case log on the day it is known before the end of the working day. The credit analyst sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+11.12 The underwriting lead returns an incomplete file to the sender with a note of what is missing. The branch officer confirms that each identity check on the file is dated and initialed, and the date is entered in full. The underwriting lead passes the file to the next reviewer once the checks are complete, and the queue is cleared each day.
+
+11.13 The quality reviewer checks the file for missing pages before it moves on, and the date is entered in full. The file reviewer passes the file to the next reviewer once the checks are complete. The servicing team keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day.
+
+11.14 The case handler files the correspondence in the order it was received. The documentation clerk notes the reason for any delay in the case log before the end of the working day.
+
+11.15 The file reviewer records the outcome in the case log on the day it is known and keeps a note of who acted.
+
+11.16 The underwriting lead confirms that each identity check on the file is dated and initialed. The quality reviewer marks the file for second review when the documents do not agree and keeps a note of who acted.
+
+11.17 The branch officer keeps the signed copy in the folder set up for that purpose before the end of the working day. The verification team passes the file to the next reviewer once the checks are complete before the end of the working day.
+
+11.18 No exception to clause 1.26 is permitted without the written approval of the credit committee.
+
+11.19 The branch officer returns an incomplete file to the sender with a note of what is missing and signs the record. The credit analyst closes the task in the queue after the record is saved and keeps a note of who acted.
+
+11.20 The approving officer marks the file for second review when the documents do not agree and signs the record. The documentation clerk checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+11.21 Reviewers cite clause 6.9 in the case log, except for files closed with no decision.
+
+11.22 The operations lead records the outcome in the case log on the day it is known. The file reviewer updates the status of the file at each stage, and the queue is cleared each day.
+
+11.23 The operations lead closes the task in the queue after the record is saved. The verification team files the correspondence in the order it was received.
+
+11.24 The collections desk notes the reason for any delay in the case log and signs the record.
+
+11.25 The file reviewer returns an incomplete file to the sender with a note of what is missing before the end of the working day. The documentation clerk sends a reminder to the sender when a document is overdue. The verification team marks the file for second review when the documents do not agree, and the date is entered in full.
+
+11.26 The case handler marks the file for second review when the documents do not agree and signs the record. The file reviewer confirms that each identity check on the file is dated and initialed, and the date is entered in full. The branch officer keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day.
+
+11.27 The case handler passes the file to the next reviewer once the checks are complete and keeps a note of who acted.
+
+11.28 The branch officer returns an incomplete file to the sender with a note of what is missing. The branch officer files the correspondence in the order it was received.
+
+Section 12. Channel Procedures: Auto Finance
+
+12.1 The quality reviewer notes the reason for any delay in the case log and signs the record. The operations lead marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+12.2 The credit analyst files the correspondence in the order it was received. The credit analyst checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+12.3 The documentation clerk returns an incomplete file to the sender with a note of what is missing.
+
+12.4 The file reviewer notes the reason for any delay in the case log. The documentation clerk sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+12.5 The servicing team files the correspondence in the order it was received as the procedure sheet describes.
+
+12.6 The verification team notes the reason for any delay in the case log and signs the record.
+
+12.7 The approving officer records the outcome in the case log on the day it is known, and the queue is cleared each day. The servicing team records the outcome in the case log on the day it is known.
+
+12.8 The quality reviewer marks the file for second review when the documents do not agree, and the queue is cleared each day. The collections desk checks the file for missing pages before it moves on before the end of the working day. The credit analyst returns an incomplete file to the sender with a note of what is missing, and the date is entered in full.
+
+12.9 The underwriting lead checks the file for missing pages before it moves on. The approving officer files the correspondence in the order it was received and signs the record.
+
+12.10 The approving officer keeps the signed copy in the folder set up for that purpose and signs the record. The approving officer files the correspondence in the order it was received and signs the record. The verification team checks the file for missing pages before it moves on as the procedure sheet describes.
+
+12.11 The servicing team returns an incomplete file to the sender with a note of what is missing and keeps a note of who acted. The branch officer marks the file for second review when the documents do not agree. The file reviewer updates the status of the file at each stage, and the date is entered in full.
+
+12.12 The quality reviewer checks the file for missing pages before it moves on and signs the record. The approving officer checks the file for missing pages before it moves on, and the date is entered in full.
+
+12.13 The maximum loan term for Cedar Business Line is 48 months.
+
+12.14 The documentation clerk closes the task in the queue after the record is saved, and the date is entered in full. The credit analyst confirms that each identity check on the file is dated and initialed. The approving officer keeps the signed copy in the folder set up for that purpose as the procedure sheet describes.
+
+12.15 The credit analyst closes the task in the queue after the record is saved as the procedure sheet describes.
+
+12.16 The collections desk checks the file for missing pages before it moves on and signs the record. The servicing team marks the file for second review when the documents do not agree as the procedure sheet describes.
+
+12.17 The underwriting lead sends a reminder to the sender when a document is overdue. The documentation clerk closes the task in the queue after the record is saved as the procedure sheet describes. The operations lead passes the file to the next reviewer once the checks are complete, and the date is entered in full.
+
+12.18 The verification team keeps the signed copy in the folder set up for that purpose as the procedure sheet describes.
+
+12.19 The maximum debt-to-income ratio for Juniper Personal Loan is 42%, except that it is 48% for an applicant with verified annual income of at least $60,000.
+
+12.20 The servicing team checks the file for missing pages before it moves on.
+
+12.21 The maximum loan term for Onyx Personal Loan is 48 months.
+
+12.22 The verification team confirms that each identity check on the file is dated and initialed as the procedure sheet describes.
+
+12.23 Clause 5.4 does not apply to an applicant with a payment default recorded in the prior 12 months.
+
+12.24 The maximum loan term for Lupine Personal Loan is 36 months.
+
+12.25 The collections desk confirms that each identity check on the file is dated and initialed, and the queue is cleared each day.
+
+12.26 Notwithstanding clause 5.16, the limit stated there is 84 months for an applicant with a customer relationship of at least 36 months.
+
+12.27 The approving officer returns an incomplete file to the sender with a note of what is missing, and the queue is cleared each day.
+
+12.28 The maximum loan term for Quill Personal Loan is 60 months.
+
+Section 13. Case Handling: Small Business Lending
+
+13.1 Exception to clause 12.28: the maximum loan term for Quill Personal Loan is 72 months for an applicant with a customer relationship of at least 18 months.
+
+13.2 The underwriting lead closes the task in the queue after the record is saved before the end of the working day. The underwriting lead checks the file for missing pages before it moves on and signs the record. The branch officer notes the reason for any delay in the case log as the procedure sheet describes.
+
+13.3 The case handler sends a reminder to the sender when a document is overdue before the end of the working day. The operations lead sends a reminder to the sender when a document is overdue before the end of the working day.
+
+13.4 Except for the cover sheet, each sheet of the file shows the case number in the margin.
+
+13.5 The branch officer sends a reminder to the sender when a document is overdue as the procedure sheet describes. The verification team returns an incomplete file to the sender with a note of what is missing, and the queue is cleared each day. The approving officer keeps the signed copy in the folder set up for that purpose.
+
+13.6 The case handler returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The collections desk sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+13.7 The maximum loan amount for Birch Personal Loan is $5,000.
+
+13.8 Exception to clause 13.7: the maximum loan amount for Birch Personal Loan is $12,500 for an applicant with a customer relationship of at least 12 months.
+
+13.9 Reviewers cite clause 11.15 in the case log, except for files closed with no decision.
+
+13.10 The documentation clerk records the outcome in the case log on the day it is known, and the queue is cleared each day. The branch officer checks the file for missing pages before it moves on as the procedure sheet describes.
+
+13.11 The branch officer marks the file for second review when the documents do not agree and keeps a note of who acted. The operations lead keeps the signed copy in the folder set up for that purpose and signs the record.
+
+13.12 For an applicant with a customer relationship of at least 18 months, the limit in clause 4.24 is 680 points.
+
+13.13 The minimum credit score for Fennel Business Line is 700 points.
+
+13.14 The verification team passes the file to the next reviewer once the checks are complete before the end of the working day.
+
+13.15 The quality reviewer checks the file for missing pages before it moves on. The case handler closes the task in the queue after the record is saved before the end of the working day.
+
+13.16 The quality reviewer returns an incomplete file to the sender with a note of what is missing as the procedure sheet describes. The underwriting lead files the correspondence in the order it was received before the end of the working day. The file reviewer sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+13.17 The maximum credit limit for Dahlia Credit Card is $2,000.
+
+13.18 The file reviewer closes the task in the queue after the record is saved, and the queue is cleared each day. The quality reviewer checks the file for missing pages before it moves on as the procedure sheet describes.
+
+13.19 The documentation clerk closes the task in the queue after the record is saved, and the date is entered in full. The approving officer marks the file for second review when the documents do not agree and keeps a note of who acted.
+
+13.20 The verification team closes the task in the queue after the record is saved, and the date is entered in full. The quality reviewer records the outcome in the case log on the day it is known, and the date is entered in full.
+
+13.21 The quality reviewer keeps the signed copy in the folder set up for that purpose. The underwriting lead confirms that each identity check on the file is dated and initialed, and the queue is cleared each day.
+
+13.22 The file reviewer notes the reason for any delay in the case log and keeps a note of who acted. The servicing team checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+13.23 The branch officer returns an incomplete file to the sender with a note of what is missing. The file reviewer confirms that each identity check on the file is dated and initialed before the end of the working day.
+
+13.24 The underwriting lead confirms that each identity check on the file is dated and initialed, and the queue is cleared each day. The case handler notes the reason for any delay in the case log as the procedure sheet describes.
+
+13.25 The approving officer updates the status of the file at each stage and signs the record.
+
+13.26 The credit analyst updates the status of the file at each stage. The verification team returns an incomplete file to the sender with a note of what is missing as the procedure sheet describes.
+
+13.27 The case handler marks the file for second review when the documents do not agree.
+
+13.28 No exception to clause 1.6 is permitted without the written approval of the credit committee.
+
+Section 14. Identity Checks: Card Services
+
+14.1 The quality reviewer passes the file to the next reviewer once the checks are complete and signs the record. The approving officer keeps the signed copy in the folder set up for that purpose, and the date is entered in full.
+
+14.2 The case handler checks the file for missing pages before it moves on, and the date is entered in full. The documentation clerk marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+14.3 The approving officer marks the file for second review when the documents do not agree before the end of the working day. The case handler notes the reason for any delay in the case log as the procedure sheet describes.
+
+14.4 The verification team records the outcome in the case log on the day it is known as the procedure sheet describes. The quality reviewer confirms that each identity check on the file is dated and initialed and signs the record. The servicing team checks the file for missing pages before it moves on and signs the record.
+
+14.5 The collections desk sends a reminder to the sender when a document is overdue, and the date is entered in full.
+
+14.6 The documentation clerk passes the file to the next reviewer once the checks are complete, and the date is entered in full. The servicing team closes the task in the queue after the record is saved as the procedure sheet describes.
+
+14.7 The collections desk returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The file reviewer files the correspondence in the order it was received, and the queue is cleared each day.
+
+14.8 The documentation clerk sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+14.9 The documentation clerk records the outcome in the case log on the day it is known before the end of the working day. The operations lead records the outcome in the case log on the day it is known before the end of the working day.
+
+14.10 The case handler closes the task in the queue after the record is saved and signs the record. The approving officer checks the file for missing pages before it moves on as the procedure sheet describes. The servicing team sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+14.11 The servicing team records the outcome in the case log on the day it is known, and the queue is cleared each day. The underwriting lead sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+14.12 The collections desk returns an incomplete file to the sender with a note of what is missing. The collections desk passes the file to the next reviewer once the checks are complete and keeps a note of who acted. The documentation clerk checks the file for missing pages before it moves on and keeps a note of who acted.
+
+14.13 The underwriting lead marks the file for second review when the documents do not agree and signs the record.
+
+14.14 The operations lead passes the file to the next reviewer once the checks are complete as the procedure sheet describes. The branch officer closes the task in the queue after the record is saved as the procedure sheet describes.
+
+14.15 The collections desk returns an incomplete file to the sender with a note of what is missing.
+
+14.16 The underwriting lead passes the file to the next reviewer once the checks are complete before the end of the working day. The documentation clerk updates the status of the file at each stage. The operations lead records the outcome in the case log on the day it is known as the procedure sheet describes.
+
+14.17 The operations lead marks the file for second review when the documents do not agree, and the queue is cleared each day. The verification team keeps the signed copy in the folder set up for that purpose. The file reviewer checks the file for missing pages before it moves on.
+
+14.18 The file reviewer files the correspondence in the order it was received as the procedure sheet describes. The case handler confirms that each identity check on the file is dated and initialed and signs the record.
+
+14.19 The operations lead keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day. The operations lead confirms that each identity check on the file is dated and initialed before the end of the working day.
+
+14.20 The operations lead sends a reminder to the sender when a document is overdue before the end of the working day.
+
+14.21 The underwriting lead files the correspondence in the order it was received, and the queue is cleared each day.
+
+14.22 The quality reviewer files the correspondence in the order it was received.
+
+14.23 The servicing team updates the status of the file at each stage. The quality reviewer sends a reminder to the sender when a document is overdue as the procedure sheet describes.
+
+14.24 The file reviewer files the correspondence in the order it was received, and the date is entered in full. The approving officer updates the status of the file at each stage.
+
+14.25 The underwriting lead files the correspondence in the order it was received and keeps a note of who acted. The servicing team keeps the signed copy in the folder set up for that purpose, and the queue is cleared each day.
+
+14.26 The servicing team closes the task in the queue after the record is saved and signs the record. The verification team marks the file for second review when the documents do not agree and keeps a note of who acted. The branch officer keeps the signed copy in the folder set up for that purpose and signs the record.
+
+14.27 The operations lead notes the reason for any delay in the case log, and the date is entered in full. The operations lead updates the status of the file at each stage.
+
+14.28 The documentation clerk confirms that each identity check on the file is dated and initialed, and the date is entered in full. The underwriting lead sends a reminder to the sender when a document is overdue.
+
+Section 15. Quality Checks: Card Services
+
+15.1 The underwriting lead confirms that each identity check on the file is dated and initialed before the end of the working day. The approving officer marks the file for second review when the documents do not agree as the procedure sheet describes. The file reviewer files the correspondence in the order it was received and keeps a note of who acted.
+
+15.2 The case handler checks the file for missing pages before it moves on as the procedure sheet describes. The collections desk returns an incomplete file to the sender with a note of what is missing, and the queue is cleared each day. The approving officer checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+15.3 The operations lead files the correspondence in the order it was received and signs the record. The approving officer updates the status of the file at each stage before the end of the working day.
+
+15.4 The documentation clerk updates the status of the file at each stage as the procedure sheet describes. The file reviewer sends a reminder to the sender when a document is overdue and keeps a note of who acted. The servicing team sends a reminder to the sender when a document is overdue and keeps a note of who acted.
+
+15.5 The approving officer files the correspondence in the order it was received and signs the record. The credit analyst passes the file to the next reviewer once the checks are complete.
+
+15.6 The verification team checks the file for missing pages before it moves on. The credit analyst updates the status of the file at each stage and signs the record. The collections desk marks the file for second review when the documents do not agree.
+
+15.7 The documentation clerk passes the file to the next reviewer once the checks are complete as the procedure sheet describes. The approving officer sends a reminder to the sender when a document is overdue.
+
+15.8 The underwriting lead files the correspondence in the order it was received.
+
+15.9 The documentation clerk keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The servicing team updates the status of the file at each stage and keeps a note of who acted.
+
+15.10 The servicing team notes the reason for any delay in the case log and signs the record. The approving officer records the outcome in the case log on the day it is known and signs the record.
+
+15.11 The verification team checks the file for missing pages before it moves on, and the queue is cleared each day. The file reviewer closes the task in the queue after the record is saved. The documentation clerk confirms that each identity check on the file is dated and initialed.
+
+15.12 The documentation clerk sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+15.13 The case handler sends a reminder to the sender when a document is overdue, and the queue is cleared each day.
+
+15.14 The branch officer files the correspondence in the order it was received, and the queue is cleared each day.
+
+15.15 The verification team checks the file for missing pages before it moves on before the end of the working day. The quality reviewer returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The quality reviewer updates the status of the file at each stage, and the queue is cleared each day.
+
+15.16 The file reviewer keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The collections desk notes the reason for any delay in the case log, and the queue is cleared each day.
+
+15.17 The documentation clerk records the outcome in the case log on the day it is known and keeps a note of who acted. The case handler keeps the signed copy in the folder set up for that purpose and signs the record.
+
+15.18 The branch officer passes the file to the next reviewer once the checks are complete and signs the record. The collections desk checks the file for missing pages before it moves on. The verification team records the outcome in the case log on the day it is known, and the queue is cleared each day.
+
+15.19 The file reviewer returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The file reviewer returns an incomplete file to the sender with a note of what is missing. The verification team notes the reason for any delay in the case log before the end of the working day.
+
+15.20 The approving officer marks the file for second review when the documents do not agree and keeps a note of who acted. The quality reviewer notes the reason for any delay in the case log before the end of the working day. The quality reviewer checks the file for missing pages before it moves on, and the queue is cleared each day.
+
+15.21 The approving officer returns an incomplete file to the sender with a note of what is missing and signs the record. The servicing team returns an incomplete file to the sender with a note of what is missing, and the queue is cleared each day.
+
+15.22 The verification team files the correspondence in the order it was received as the procedure sheet describes. The servicing team files the correspondence in the order it was received, and the date is entered in full.
+
+15.23 The documentation clerk checks the file for missing pages before it moves on before the end of the working day. The case handler passes the file to the next reviewer once the checks are complete, and the date is entered in full.
+
+15.24 The servicing team files the correspondence in the order it was received and keeps a note of who acted. The approving officer marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+15.25 The quality reviewer notes the reason for any delay in the case log before the end of the working day.
+
+15.26 The file reviewer checks the file for missing pages before it moves on and signs the record. The underwriting lead checks the file for missing pages before it moves on as the procedure sheet describes.
+
+15.27 The case handler passes the file to the next reviewer once the checks are complete, and the queue is cleared each day. The servicing team files the correspondence in the order it was received as the procedure sheet describes. The quality reviewer closes the task in the queue after the record is saved, and the date is entered in full.
+
+15.28 The credit analyst marks the file for second review when the documents do not agree as the procedure sheet describes. The verification team marks the file for second review when the documents do not agree.
+
+Section 16. Document Retention: Auto Finance
+
+16.1 The collections desk returns an incomplete file to the sender with a note of what is missing, and the date is entered in full. The case handler marks the file for second review when the documents do not agree.
+
+16.2 The file reviewer passes the file to the next reviewer once the checks are complete. The collections desk records the outcome in the case log on the day it is known and signs the record.
+
+16.3 The approving officer checks the file for missing pages before it moves on. The case handler returns an incomplete file to the sender with a note of what is missing before the end of the working day.
+
+16.4 The underwriting lead closes the task in the queue after the record is saved. The approving officer keeps the signed copy in the folder set up for that purpose. The approving officer files the correspondence in the order it was received and keeps a note of who acted.
+
+16.5 The collections desk passes the file to the next reviewer once the checks are complete and signs the record. The file reviewer notes the reason for any delay in the case log.
+
+16.6 The underwriting lead confirms that each identity check on the file is dated and initialed, and the queue is cleared each day. The servicing team keeps the signed copy in the folder set up for that purpose.
+
+16.7 The servicing team files the correspondence in the order it was received, and the queue is cleared each day. The documentation clerk passes the file to the next reviewer once the checks are complete before the end of the working day.
+
+16.8 The underwriting lead confirms that each identity check on the file is dated and initialed as the procedure sheet describes. The credit analyst marks the file for second review when the documents do not agree, and the queue is cleared each day.
+
+16.9 The servicing team updates the status of the file at each stage, and the queue is cleared each day. The case handler files the correspondence in the order it was received. The quality reviewer returns an incomplete file to the sender with a note of what is missing.
+
+16.10 The case handler records the outcome in the case log on the day it is known and keeps a note of who acted.
+
+16.11 The maximum loan term for Kelp Business Line is 60 months.
+
+16.12 The servicing team updates the status of the file at each stage and signs the record.
+
+16.13 The verification team checks the file for missing pages before it moves on as the procedure sheet describes.
+
+16.14 The approving officer marks the file for second review when the documents do not agree, and the queue is cleared each day. The case handler checks the file for missing pages before it moves on before the end of the working day.
+
+16.15 The collections desk updates the status of the file at each stage before the end of the working day. The quality reviewer records the outcome in the case log on the day it is known. The case handler records the outcome in the case log on the day it is known and signs the record.
+
+16.16 The maximum loan term for Jasper Business Line is 48 months.
+
+16.17 The credit analyst keeps the signed copy in the folder set up for that purpose and keeps a note of who acted. The branch officer sends a reminder to the sender when a document is overdue.
+
+16.18 The maximum debt-to-income ratio for Kestrel Credit Card is 42%.
+
+16.19 The maximum debt-to-income ratio for Amber Auto Loan is 46%.
+
+16.20 Exception to clause 16.19: the maximum debt-to-income ratio for Amber Auto Loan is 52% for an applicant with a customer relationship of at least 18 months.
+
+16.21 The credit analyst passes the file to the next reviewer once the checks are complete as the procedure sheet describes. The quality reviewer records the outcome in the case log on the day it is known, and the queue is cleared each day. The file reviewer updates the status of the file at each stage, and the queue is cleared each day.
+
+16.22 The minimum credit score for Ember Business Line is 660 points.
+
+16.23 The servicing team sends a reminder to the sender when a document is overdue before the end of the working day. The branch officer sends a reminder to the sender when a document is overdue, and the queue is cleared each day. The branch officer notes the reason for any delay in the case log, and the date is entered in full.
+
+16.24 The verification team notes the reason for any delay in the case log, and the queue is cleared each day.
+
+16.25 The maximum debt-to-income ratio for Fjord Personal Loan is 35%.
+
+16.26 Exception to clause 16.25: the maximum debt-to-income ratio for Fjord Personal Loan is 38% for an applicant with a customer relationship of at least 24 months.
+
+16.27 The maximum debt-to-income ratio for Marble Credit Card is 46%.
+
+16.28 Except for the index page, each page of the file is numbered in the footer.
+
+Section 17. Archive Handling: Consumer Lending
+
+17.1 The documentation clerk passes the file to the next reviewer once the checks are complete and signs the record.
+
+17.2 The documentation clerk returns an incomplete file to the sender with a note of what is missing, and the date is entered in full.
+
+17.3 The maximum debt-to-income ratio for Hazel Auto Loan is 34%, except that it is 37% for an applicant with an initial payment of at least 15% of the purchase price.
+
+17.4 The file reviewer notes the reason for any delay in the case log. The quality reviewer checks the file for missing pages before it moves on. The approving officer files the correspondence in the order it was received and keeps a note of who acted.
+
+Appendix A. Standing Exceptions Register
+
+R-1 Register entry (effective 2025-10-22): clause 1.1 is 50% for an applicant with verified annual income of at least $50,000.
+
+R-2 Register entry (effective 2025-12-03): clause 5.14 is $14,000 for an applicant with verified annual income of at least $30,000.
+
+R-3 Register entry (effective 2026-01-15): clause 9.15 is $18,000 for an applicant with verified annual income of at least $40,000.
+
+R-4 Register entry (effective 2026-03-10): clause 12.13 is 60 months for an applicant with a customer relationship of at least 18 months.
+
+R-5 Register entry (effective 2026-04-24): clause 16.18 is 47% for an applicant with verified annual income of at least $60,000.
