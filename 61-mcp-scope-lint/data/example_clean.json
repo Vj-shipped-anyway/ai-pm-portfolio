@@ -1,0 +1,119 @@
+{
+ "granted_scopes": [
+  "cases:read",
+  "cases:write",
+  "documents:read"
+ ],
+ "scope_catalog": [
+  {
+   "access": "read",
+   "id": "cases:read",
+   "resource": "cases"
+  },
+  {
+   "access": "write",
+   "id": "cases:write",
+   "resource": "cases"
+  },
+  {
+   "access": "delete",
+   "id": "cases:delete",
+   "resource": "cases"
+  },
+  {
+   "access": "any",
+   "id": "cases:*",
+   "resource": "cases"
+  },
+  {
+   "access": "read",
+   "id": "documents:read",
+   "resource": "documents"
+  },
+  {
+   "access": "write",
+   "id": "documents:write",
+   "resource": "documents"
+  },
+  {
+   "access": "delete",
+   "id": "documents:delete",
+   "resource": "documents"
+  },
+  {
+   "access": "any",
+   "id": "documents:*",
+   "resource": "documents"
+  }
+ ],
+ "server": {
+  "name": "demo-case-desk",
+  "version": "1.0.0"
+ },
+ "tools": [
+  {
+   "annotations": {
+    "readOnlyHint": true
+   },
+   "description": "Return one case.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "get_case",
+   "requires_scopes": [
+    "cases:read"
+   ]
+  },
+  {
+   "annotations": {
+    "destructiveHint": false,
+    "readOnlyHint": false
+   },
+   "description": "Change one case.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "update_case",
+   "requires_scopes": [
+    "cases:write"
+   ]
+  },
+  {
+   "annotations": {
+    "readOnlyHint": true
+   },
+   "description": "Return one document.",
+   "inputSchema": {
+    "properties": {
+     "record_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "record_id"
+    ],
+    "type": "object"
+   },
+   "name": "get_document",
+   "requires_scopes": [
+    "documents:read"
+   ]
+  }
+ ]
+}

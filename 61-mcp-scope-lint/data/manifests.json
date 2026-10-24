@@ -1,0 +1,7661 @@
+[
+ {
+  "granted_scopes": [
+   "accounts:delete",
+   "accounts:read",
+   "accounts:write",
+   "documents:read",
+   "documents:write",
+   "kyc:*",
+   "messages:read",
+   "messages:write",
+   "payments:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-01",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the thread on one messages record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_thread",
+    "requires_scopes": [
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_document",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payee for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_payee",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the thread for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_thread",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_check",
+    "requires_scopes": [
+     "kyc:*"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the thread for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_thread",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the transactions on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_transactions",
+    "requires_scopes": [
+     "accounts:write",
+     "accounts:delete"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the document on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_document",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "documents:delete",
+   "documents:read",
+   "documents:write",
+   "kyc:read",
+   "kyc:write",
+   "ledger:read",
+   "ledger:write",
+   "messages:read",
+   "messages:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-02",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_message",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the thread for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_thread",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_check",
+    "requires_scopes": [
+     "kyc:read",
+     "kyc:write"
+    ]
+   },
+   {
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the template for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_template",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "description": "Change the journal on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_journal",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the message on one messages record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_message",
+    "requires_scopes": [
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the statement on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_statement",
+    "requires_scopes": [
+     "documents:write",
+     "documents:delete"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "ledger:read",
+   "ledger:write",
+   "payments:*",
+   "reports:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-03",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Change the balance on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_balance",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_report",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the summary for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_summary",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the adjustment on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_adjustment",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:*",
+   "documents:*",
+   "kyc:read",
+   "kyc:write",
+   "messages:read",
+   "messages:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-04",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_attachment",
+    "requires_scopes": [
+     "cases:*"
+    ]
+   },
+   {
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_check",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_document",
+    "requires_scopes": [
+     "documents:*"
+    ]
+   },
+   {
+    "description": "Return the review for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_review",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the thread for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_thread",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return data from messages and kyc in one call.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "lookup_messages_and_kyc",
+    "requires_scopes": [
+     "messages:read",
+     "kyc:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the thread for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_thread",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "description": "Change the review on one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_review",
+    "requires_scopes": [
+     "kyc:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the draft on one messages record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_draft",
+    "requires_scopes": [
+     "messages:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:read",
+   "cases:write",
+   "kyc:read",
+   "messages:*",
+   "messages:read",
+   "messages:write",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-05",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_check",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_attachment",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_extract",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_message",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the message on one messages record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_message",
+    "requires_scopes": [
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Change the extract on one reports record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_extract",
+    "requires_scopes": [
+     "reports:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:*",
+   "accounts:read",
+   "cases:read",
+   "cases:write",
+   "kyc:read",
+   "kyc:write",
+   "ledger:read",
+   "ledger:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-06",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_check",
+    "requires_scopes": [
+     "kyc:read",
+     "kyc:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the profile for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_profile",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return data from cases and ledger in one call.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "lookup_cases_and_ledger",
+    "requires_scopes": [
+     "cases:read",
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_attachment",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the entry on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_entry",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the case on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_case",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "documents:read",
+   "documents:write",
+   "ledger:*",
+   "ledger:read",
+   "ledger:write",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-07",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the entry on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_entry",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_report",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the summary on one reports record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_summary",
+    "requires_scopes": [
+     "reports:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "cases:read",
+   "cases:write",
+   "documents:*",
+   "messages:read",
+   "payments:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-08",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Change the attachment on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_attachment",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   },
+   {
+    "description": "Change the transactions on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_transactions",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "description": "Return the payment for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_payment",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_statement",
+    "requires_scopes": [
+     "documents:*"
+    ]
+   },
+   {
+    "description": "Return the case for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_case",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_draft",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the note for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_note",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "documents:read",
+   "documents:write",
+   "ledger:read",
+   "ledger:write",
+   "payments:read",
+   "payments:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-09",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the profile on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_profile",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_document",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payment for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_payment",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payment for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_payment",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the entry on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_entry",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the payment on one payments record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_payment",
+    "requires_scopes": [
+     "payments:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the template on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_template",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "cases:read",
+   "cases:write",
+   "kyc:read",
+   "ledger:read",
+   "ledger:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-10",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_attachment",
+    "requires_scopes": [
+     "cases:read",
+     "cases:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_journal",
+    "requires_scopes": [
+     "ledger:read",
+     "ledger:write"
+    ]
+   },
+   {
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_check",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "description": "Change the transactions on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_transactions",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:read",
+   "cases:write",
+   "documents:*",
+   "documents:delete",
+   "documents:read",
+   "documents:write",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-11",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Change the report on one reports record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_report",
+    "requires_scopes": [
+     "reports:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_document",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_attachment",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "description": "Return the summary for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_summary",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the document on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_document",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Change the case on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_case",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   },
+   {
+    "description": "Remove the statement from one documents record.",
+    "inputSchema": {
+     "properties": {
+      "reason": {
+       "type": "string"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "reason"
+     ],
+     "type": "object"
+    },
+    "name": "void_statement",
+    "requires_scopes": [
+     "documents:delete"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "documents:read",
+   "keys:admin",
+   "keys:read",
+   "kyc:*",
+   "messages:read",
+   "messages:write",
+   "payments:read",
+   "payments:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "keys:read",
+    "resource": "keys"
+   },
+   {
+    "access": "admin",
+    "id": "keys:admin",
+    "resource": "keys"
+   },
+   {
+    "access": "any",
+    "id": "keys:*",
+    "resource": "keys"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-12",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_document",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "description": "Return the payment for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_payment",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_draft",
+    "requires_scopes": [
+     "messages:read",
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return data from payments and documents in one call.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "lookup_payments_and_documents",
+    "requires_scopes": [
+     "payments:read",
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": true,
+     "readOnlyHint": false
+    },
+    "description": "Change how the secret for the keys integration is issued.",
+    "inputSchema": {
+     "properties": {
+      "key_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "key_id"
+     ],
+     "type": "object"
+    },
+    "name": "revoke_secret",
+    "requires_scopes": [
+     "keys:admin"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_check",
+    "requires_scopes": [
+     "kyc:*"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the credential for one keys record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_credential",
+    "requires_scopes": [
+     "keys:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the payment on one payments record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_payment",
+    "requires_scopes": [
+     "payments:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:*",
+   "cases:delete",
+   "cases:read",
+   "cases:write",
+   "ledger:read",
+   "ledger:write",
+   "messages:read",
+   "messages:write",
+   "payments:*",
+   "reports:*"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-13",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the journal on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_journal",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_extract",
+    "requires_scopes": [
+     "reports:*"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the note for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_note",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_draft",
+    "requires_scopes": [
+     "messages:read",
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the entry for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_entry",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Change the attachment on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_attachment",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": true,
+     "readOnlyHint": false
+    },
+    "description": "Remove the attachment from one cases record.",
+    "inputSchema": {
+     "properties": {
+      "reason": {
+       "type": "string"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "reason"
+     ],
+     "type": "object"
+    },
+    "name": "void_attachment",
+    "requires_scopes": [
+     "cases:delete"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "documents:read",
+   "documents:write",
+   "kyc:read",
+   "kyc:write",
+   "ledger:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-14",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the entry for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_entry",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the profile for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_profile",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "description": "Return the template for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_template",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return data from documents and accounts in one call.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "lookup_documents_and_accounts",
+    "requires_scopes": [
+     "documents:read",
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the file for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_file",
+    "requires_scopes": [
+     "kyc:read",
+     "kyc:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the template on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_template",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:read",
+   "cases:write",
+   "messages:read",
+   "messages:write",
+   "payments:delete",
+   "payments:read",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-15",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Change the case on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_case",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the draft on one messages record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_draft",
+    "requires_scopes": [
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_report",
+    "requires_scopes": [
+     "reports:read",
+     "reports:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the case for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_case",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payee for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_payee",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_draft",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_message",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payment for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_payment",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "kyc:read",
+   "messages:*",
+   "messages:read",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-16",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Return the profile for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_profile",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "description": "Return the review for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_review",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_message",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_report",
+    "requires_scopes": [
+     "reports:read",
+     "reports:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the profile on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_profile",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:read",
+   "cases:write",
+   "payments:read",
+   "payments:write",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-17",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Change the case on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_case",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the note for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_note",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "description": "Return the payee for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_payee",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_report",
+    "requires_scopes": [
+     "reports:read",
+     "reports:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the payment on one payments record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_payment",
+    "requires_scopes": [
+     "payments:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "documents:read",
+   "documents:write",
+   "payments:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-18",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the profile for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_profile",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payment for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_payment",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the template for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_template",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the statement on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_statement",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:*",
+   "accounts:delete",
+   "accounts:read",
+   "accounts:write",
+   "kyc:read",
+   "ledger:read",
+   "reports:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-19",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Remove the balance from one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "reason": {
+       "type": "string"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "reason"
+     ],
+     "type": "object"
+    },
+    "name": "close_balance",
+    "requires_scopes": [
+     "accounts:delete"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_extract",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the check for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_check",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "description": "Return the review for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_review",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "description": "Change the balance on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_balance",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:*",
+   "accounts:read",
+   "accounts:write",
+   "documents:*",
+   "documents:read",
+   "documents:write",
+   "keys:admin",
+   "keys:read",
+   "reports:delete",
+   "reports:read"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "keys:read",
+    "resource": "keys"
+   },
+   {
+    "access": "admin",
+    "id": "keys:admin",
+    "resource": "keys"
+   },
+   {
+    "access": "any",
+    "id": "keys:*",
+    "resource": "keys"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-20",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the template for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_template",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_extract",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the secret for one keys record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_secret",
+    "requires_scopes": [
+     "keys:read"
+    ]
+   },
+   {
+    "description": "Change how the credential for the keys integration is issued.",
+    "inputSchema": {
+     "properties": {
+      "key_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "key_id"
+     ],
+     "type": "object"
+    },
+    "name": "reissue_credential",
+    "requires_scopes": [
+     "keys:admin"
+    ]
+   },
+   {
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the profile on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_profile",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   },
+   {
+    "description": "Change the statement on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_statement",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "documents:read",
+   "documents:write",
+   "reports:*"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-21",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the document on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_document",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the profile on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_profile",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_report",
+    "requires_scopes": [
+     "reports:*"
+    ]
+   },
+   {
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return data from documents and accounts in one call.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "lookup_documents_and_accounts",
+    "requires_scopes": [
+     "documents:read",
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the template for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_template",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "kyc:*",
+   "kyc:delete",
+   "kyc:read",
+   "kyc:write",
+   "ledger:read",
+   "ledger:write",
+   "payments:delete",
+   "payments:read",
+   "payments:write",
+   "reports:*"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-22",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the journal on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_journal",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "description": "Return the entry for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_entry",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the report for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_report",
+    "requires_scopes": [
+     "reports:*"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the file for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_file",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the payee for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_payee",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the file on one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_file",
+    "requires_scopes": [
+     "kyc:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the payment on one payments record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_payment",
+    "requires_scopes": [
+     "payments:write",
+     "payments:delete"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": true,
+     "readOnlyHint": false
+    },
+    "description": "Remove the file from one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "reason": {
+       "type": "string"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "reason"
+     ],
+     "type": "object"
+    },
+    "name": "void_file",
+    "requires_scopes": [
+     "kyc:delete"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "cases:read",
+   "cases:write",
+   "messages:read",
+   "messages:write",
+   "reports:*"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-23",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_attachment",
+    "requires_scopes": [
+     "cases:read",
+     "cases:write"
+    ]
+   },
+   {
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_draft",
+    "requires_scopes": [
+     "messages:read",
+     "messages:write"
+    ]
+   },
+   {
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the balance on one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_balance",
+    "requires_scopes": [
+     "accounts:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "documents:*",
+   "ledger:read",
+   "ledger:write",
+   "messages:*",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-24",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_extract",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_draft",
+    "requires_scopes": [
+     "messages:*"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the entry on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_entry",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:delete",
+   "accounts:read",
+   "keys:admin",
+   "keys:read",
+   "kyc:delete",
+   "kyc:read",
+   "kyc:write",
+   "ledger:read",
+   "ledger:write",
+   "messages:read",
+   "messages:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "keys:read",
+    "resource": "keys"
+   },
+   {
+    "access": "admin",
+    "id": "keys:admin",
+    "resource": "keys"
+   },
+   {
+    "access": "any",
+    "id": "keys:*",
+    "resource": "keys"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "kyc:read",
+    "resource": "kyc"
+   },
+   {
+    "access": "write",
+    "id": "kyc:write",
+    "resource": "kyc"
+   },
+   {
+    "access": "delete",
+    "id": "kyc:delete",
+    "resource": "kyc"
+   },
+   {
+    "access": "any",
+    "id": "kyc:*",
+    "resource": "kyc"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-25",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the credential for one keys record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_credential",
+    "requires_scopes": [
+     "keys:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Return the thread for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_thread",
+    "requires_scopes": [
+     "messages:read",
+     "messages:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the transactions for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_transactions",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": true,
+     "readOnlyHint": false
+    },
+    "description": "Change how the credential for the keys integration is issued.",
+    "inputSchema": {
+     "properties": {
+      "key_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "key_id"
+     ],
+     "type": "object"
+    },
+    "name": "rotate_credential",
+    "requires_scopes": [
+     "keys:admin"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "description": "Return the file for one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_file",
+    "requires_scopes": [
+     "kyc:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the adjustment on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_adjustment",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the check on one kyc record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_check",
+    "requires_scopes": [
+     "kyc:write",
+     "kyc:delete"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "documents:read",
+   "documents:write",
+   "ledger:read",
+   "messages:delete",
+   "messages:read",
+   "payments:read",
+   "payments:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-26",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_document",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the entry for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_entry",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_draft",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return data from documents and ledger in one call.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "lookup_documents_and_ledger",
+    "requires_scopes": [
+     "documents:read",
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the document for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_document",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "description": "Return the payee for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_payee",
+    "requires_scopes": [
+     "payments:read",
+     "payments:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "keys:admin",
+   "keys:read",
+   "ledger:read",
+   "ledger:write",
+   "messages:read",
+   "messages:write",
+   "payments:*",
+   "payments:delete",
+   "payments:read",
+   "payments:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "keys:read",
+    "resource": "keys"
+   },
+   {
+    "access": "admin",
+    "id": "keys:admin",
+    "resource": "keys"
+   },
+   {
+    "access": "any",
+    "id": "keys:*",
+    "resource": "keys"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-27",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the entry on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_entry",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the credential for one keys record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_credential",
+    "requires_scopes": [
+     "keys:read"
+    ]
+   },
+   {
+    "description": "Return the journal for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_journal",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_message",
+    "requires_scopes": [
+     "messages:read",
+     "messages:write"
+    ]
+   },
+   {
+    "description": "Change how the credential for the keys integration is issued.",
+    "inputSchema": {
+     "properties": {
+      "key_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "key_id"
+     ],
+     "type": "object"
+    },
+    "name": "rotate_credential",
+    "requires_scopes": [
+     "keys:admin"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the quote for one payments record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_quote",
+    "requires_scopes": [
+     "payments:read"
+    ]
+   },
+   {
+    "description": "Change the payee on one payments record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_payee",
+    "requires_scopes": [
+     "payments:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": true,
+     "readOnlyHint": false
+    },
+    "description": "Remove the payment from one payments record.",
+    "inputSchema": {
+     "properties": {
+      "reason": {
+       "type": "string"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "reason"
+     ],
+     "type": "object"
+    },
+    "name": "void_payment",
+    "requires_scopes": [
+     "payments:delete"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:delete",
+   "accounts:read",
+   "documents:*",
+   "documents:read",
+   "ledger:read",
+   "ledger:write",
+   "payments:*"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "payments:read",
+    "resource": "payments"
+   },
+   {
+    "access": "write",
+    "id": "payments:write",
+    "resource": "payments"
+   },
+   {
+    "access": "delete",
+    "id": "payments:delete",
+    "resource": "payments"
+   },
+   {
+    "access": "any",
+    "id": "payments:*",
+    "resource": "payments"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-28",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "description": "Return the profile for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_profile",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_adjustment",
+    "requires_scopes": [
+     "ledger:read",
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_balance",
+    "requires_scopes": [
+     "accounts:read"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "accounts:read",
+   "accounts:write",
+   "cases:read",
+   "cases:write",
+   "ledger:read",
+   "ledger:write",
+   "messages:read",
+   "messages:write",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "accounts:read",
+    "resource": "accounts"
+   },
+   {
+    "access": "write",
+    "id": "accounts:write",
+    "resource": "accounts"
+   },
+   {
+    "access": "delete",
+    "id": "accounts:delete",
+    "resource": "accounts"
+   },
+   {
+    "access": "any",
+    "id": "accounts:*",
+    "resource": "accounts"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "ledger:read",
+    "resource": "ledger"
+   },
+   {
+    "access": "write",
+    "id": "ledger:write",
+    "resource": "ledger"
+   },
+   {
+    "access": "delete",
+    "id": "ledger:delete",
+    "resource": "ledger"
+   },
+   {
+    "access": "any",
+    "id": "ledger:*",
+    "resource": "ledger"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-29",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "get_extract",
+    "requires_scopes": [
+     "reports:read",
+     "reports:write"
+    ]
+   },
+   {
+    "description": "Return the adjustment for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_adjustment",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Return the balance for one accounts record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_balance",
+    "requires_scopes": [
+     "accounts:read",
+     "accounts:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_message",
+    "requires_scopes": [
+     "messages:read",
+     "messages:write"
+    ]
+   },
+   {
+    "description": "Return the attachment for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_attachment",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the entry for one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_entry",
+    "requires_scopes": [
+     "ledger:read"
+    ]
+   },
+   {
+    "description": "Change the entry on one ledger record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_entry",
+    "requires_scopes": [
+     "ledger:write"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the case on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "update_case",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   }
+  ]
+ },
+ {
+  "granted_scopes": [
+   "cases:read",
+   "cases:write",
+   "documents:read",
+   "documents:write",
+   "messages:read",
+   "reports:*",
+   "reports:read",
+   "reports:write"
+  ],
+  "scope_catalog": [
+   {
+    "access": "read",
+    "id": "documents:read",
+    "resource": "documents"
+   },
+   {
+    "access": "write",
+    "id": "documents:write",
+    "resource": "documents"
+   },
+   {
+    "access": "delete",
+    "id": "documents:delete",
+    "resource": "documents"
+   },
+   {
+    "access": "any",
+    "id": "documents:*",
+    "resource": "documents"
+   },
+   {
+    "access": "read",
+    "id": "reports:read",
+    "resource": "reports"
+   },
+   {
+    "access": "write",
+    "id": "reports:write",
+    "resource": "reports"
+   },
+   {
+    "access": "delete",
+    "id": "reports:delete",
+    "resource": "reports"
+   },
+   {
+    "access": "any",
+    "id": "reports:*",
+    "resource": "reports"
+   },
+   {
+    "access": "read",
+    "id": "messages:read",
+    "resource": "messages"
+   },
+   {
+    "access": "write",
+    "id": "messages:write",
+    "resource": "messages"
+   },
+   {
+    "access": "delete",
+    "id": "messages:delete",
+    "resource": "messages"
+   },
+   {
+    "access": "any",
+    "id": "messages:*",
+    "resource": "messages"
+   },
+   {
+    "access": "read",
+    "id": "cases:read",
+    "resource": "cases"
+   },
+   {
+    "access": "write",
+    "id": "cases:write",
+    "resource": "cases"
+   },
+   {
+    "access": "delete",
+    "id": "cases:delete",
+    "resource": "cases"
+   },
+   {
+    "access": "any",
+    "id": "cases:*",
+    "resource": "cases"
+   }
+  ],
+  "server": {
+   "name": "synthetic-mcp-30",
+   "version": "1.0.0"
+  },
+  "tools": [
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the extract on one reports record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_extract",
+    "requires_scopes": [
+     "reports:write"
+    ]
+   },
+   {
+    "description": "Change the template on one documents record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "create_template",
+    "requires_scopes": [
+     "documents:write"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the extract for one reports record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_extract",
+    "requires_scopes": [
+     "reports:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the note for one cases record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_note",
+    "requires_scopes": [
+     "cases:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the statement for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "list_statement",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the draft for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_draft",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the message for one messages record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_message",
+    "requires_scopes": [
+     "messages:read"
+    ]
+   },
+   {
+    "annotations": {
+     "readOnlyHint": true
+    },
+    "description": "Return the template for one documents record.",
+    "inputSchema": {
+     "properties": {
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "record_id"
+     ],
+     "type": "object"
+    },
+    "name": "search_template",
+    "requires_scopes": [
+     "documents:read"
+    ]
+   },
+   {
+    "annotations": {
+     "destructiveHint": false,
+     "readOnlyHint": false
+    },
+    "description": "Change the note on one cases record.",
+    "inputSchema": {
+     "properties": {
+      "changes": {
+       "type": "object"
+      },
+      "record_id": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "changes"
+     ],
+     "type": "object"
+    },
+    "name": "submit_note",
+    "requires_scopes": [
+     "cases:write"
+    ]
+   }
+  ]
+ }
+]
