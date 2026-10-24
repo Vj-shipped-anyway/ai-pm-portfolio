@@ -71,7 +71,7 @@ Run any of them from `src/`. Data is produced by [`data/_generate.py`](./data/RE
 
 ## Aligned to
 
-Nothing. I am not claiming alignment with a standard or a regulation for this project, and I cite none. Approval gates and rollbacks are ordinary practice and the policy values above are mine. It is a prototype on synthetic data and is not compliant with or certified against anything.
+Nothing. I am not claiming alignment with a standard or a regulation for this project, and I cite none. Approval gates and rollbacks are ordinary practice and the policy values above are mine. It is a prototype on synthetic data and makes no claim of conformity to anything.
 
 ## Data and limits
 
