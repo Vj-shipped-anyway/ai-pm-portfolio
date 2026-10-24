@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+  <title id="title">Deprecation Impact: a model retirement notice resolved to the features that call it, dated by tier, ending in one decision</title>
+  <desc id="desc">Five-stage flow showing how a model catalog, an alias table, a feature register and a usage list move through a load and validate step, a step that resolves each model string by exact id, alias, family name or the base of a fine-tune, a check queue for strings it cannot resolve, a dating step that compares days left with the lead time each feature needs and gives a tier, and a pricing step that costs the move on the named successor. The worst tier is the decision and sets the exit code of the job. A dashed box marks the pieces that are design only. A comparison strip contrasts having no map, an exact id or family-name search, and Deprecation Impact on a synthetic register of 60 features.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrow-head"/>
+    </marker>
+    <style>
+      .stage-box { fill: #ffffff; stroke: #1c2541; stroke-width: 1.5; }
+      .stage-box-eval { fill: #ffffff; stroke: #1d4e89; stroke-width: 1.5; }
+      .stage-box-gate { fill: #ffffff; stroke: #d97706; stroke-width: 1.5; }
+      .stage-box-block { fill: #ffffff; stroke: #b91c1c; stroke-width: 1.5; }
+      .stage-box-ship { fill: #ffffff; stroke: #16a34a; stroke-width: 1.5; }
+      .stage-box-design { fill: none; stroke: #6b7280; stroke-width: 1.5; stroke-dasharray: 5 4; }
+      .strip-box { fill: #f6f5f2; stroke: #d6d3cc; stroke-width: 1; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 500; fill: #1a1a1a; }
+      .stage-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #4b5563; }
+      .stage-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      .arrow-line { stroke: #5a5a5a; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #5a5a5a; }
+      .meta-strong { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #14532d; }
+      .meta-block { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #7f1d1d; }
+      .header { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 18px; font-weight: 500; fill: #1a1a1a; }
+      .subheader { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; fill: #4b5563; }
+      .badge-bg { fill: #E6F1FB; }
+      .badge-text { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 11px; font-weight: 500; fill: #1c2541; }
+      @media (prefers-color-scheme: dark) {
+        .stage-box { fill: #161b22; stroke: #8b9bc7; }
+        .stage-box-eval { fill: #161b22; stroke: #6ea8e0; }
+        .stage-box-gate { fill: #161b22; stroke: #f0a63a; }
+        .stage-box-block { fill: #161b22; stroke: #f07878; }
+        .stage-box-ship { fill: #161b22; stroke: #4ade80; }
+        .stage-box-design { stroke: #9ca3af; }
+        .strip-box { fill: #1c2128; stroke: #3b434d; }
+        .stage-title { fill: #e6edf3; }
+        .stage-sub { fill: #a8b3bf; }
+        .stage-num { fill: #b6c4ee; }
+        .arrow-line { stroke: #a8b3bf; }
+        .arrow-head { fill: #a8b3bf; }
+        .meta-strong { fill: #6ee7a0; }
+        .meta-block { fill: #fca5a5; }
+        .header { fill: #e6edf3; }
+        .subheader { fill: #a8b3bf; }
+        .badge-bg { fill: #1f2d44; }
+        .badge-text { fill: #cfe0f7; }
+      }
+    </style>
+  </defs>
+
+  <text x="20" y="32" class="header">Deprecation Impact - from a retirement notice to a dated list of features</text>
+  <text x="20" y="52" class="subheader">A string it cannot resolve goes to a check queue, never to clear. Lead times are my assumptions.</text>
+  <rect x="20" y="66" width="330" height="22" rx="4" class="badge-bg"/>
+  <text x="28" y="81" class="badge-text">Input: 60 features, 80 registry rows</text>
+
+  <!-- Stage 1 -->
+  <rect x="20" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="30" y="120" class="stage-num">1 . LOAD</text>
+  <text x="30" y="142" class="stage-title">Read four files</text>
+  <text x="30" y="162" class="stage-sub">models and aliases</text>
+  <text x="30" y="176" class="stage-sub">features and usages</text>
+  <text x="30" y="190" class="stage-sub">bad input: exit 2</text>
+  <text x="30" y="212" class="meta-strong">never a silent clear</text>
+  <line x1="186" y1="166" x2="197" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 2 -->
+  <rect x="199" y="100" width="164" height="132" rx="8" class="stage-box-eval"/>
+  <text x="209" y="120" class="stage-num">2 . RESOLVE</text>
+  <text x="209" y="142" class="stage-title">Which model?</text>
+  <text x="209" y="162" class="stage-sub">exact id, alias, family</text>
+  <text x="209" y="176" class="stage-sub">fine-tune: its base</text>
+  <text x="209" y="190" class="stage-sub">retiring: a hit</text>
+  <text x="209" y="212" class="meta-strong">29 of 42 found</text>
+  <line x1="365" y1="166" x2="376" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 3 -->
+  <rect x="378" y="100" width="164" height="132" rx="8" class="stage-box-gate"/>
+  <text x="388" y="120" class="stage-num">3 . CHECK QUEUE</text>
+  <text x="388" y="142" class="stage-title">Cannot tell?</text>
+  <text x="388" y="162" class="stage-sub">unknown string, old alias</text>
+  <text x="388" y="176" class="stage-sub">or bare family name:</text>
+  <text x="388" y="190" class="stage-sub">CHECK, never clear</text>
+  <text x="388" y="212" class="meta-strong">6 more in the queue</text>
+  <line x1="544" y1="166" x2="555" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 4 -->
+  <rect x="557" y="100" width="164" height="132" rx="8" class="stage-box-block"/>
+  <text x="567" y="120" class="stage-num">4 . DATE AND TIER</text>
+  <text x="567" y="142" class="stage-title">Time to move?</text>
+  <text x="567" y="162" class="stage-sub">days left vs the lead</text>
+  <text x="567" y="176" class="stage-sub">time needed (assumed):</text>
+  <text x="567" y="190" class="stage-sub">PAST LATE TIGHT ROOM</text>
+  <text x="567" y="206" class="meta-block">1 PAST, 6 LATE</text>
+  <text x="567" y="220" class="meta-strong">3 TIGHT, 19 ROOM</text>
+  <line x1="723" y1="166" x2="734" y2="166" class="arrow-line" marker-end="url(#arrow)"/>
+
+  <!-- Stage 5 -->
+  <rect x="736" y="100" width="164" height="132" rx="8" class="stage-box"/>
+  <text x="746" y="120" class="stage-num">5 . PRICE</text>
+  <text x="746" y="142" class="stage-title">Cost of the move</text>
+  <text x="746" y="162" class="stage-sub">calls and tokens on</text>
+  <text x="746" y="176" class="stage-sub">the named successor</text>
+  <text x="746" y="190" class="stage-sub">made-up prices</text>
+  <text x="746" y="206" class="meta-strong">$96,964.34 now</text>
+  <text x="746" y="220" class="meta-strong">$82,901.51 after</text>
+
+  <path d="M 818 232 L 818 252 L 470 252 L 470 270" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="250" y="272" width="440" height="78" rx="8" class="stage-box-ship"/>
+  <text x="262" y="292" class="stage-num">6 . DECISION</text>
+  <text x="262" y="313" class="stage-title">The worst tier decides</text>
+  <text x="262" y="330" class="stage-sub">calendar, hit list, check queue - exit 1 at LATE or PAST, 2 on bad input</text>
+  <text x="262" y="344" class="meta-strong">0 of 29 hits are false alarms, 7 of 42 missed</text>
+  <rect x="20" y="272" width="190" height="78" rx="8" class="stage-box"/>
+  <text x="32" y="292" class="stage-num">RUN</text>
+  <text x="32" y="313" class="stage-title">Job fails or passes</text>
+  <text x="32" y="330" class="stage-sub">fails at the chosen tier</text>
+  <text x="32" y="344" class="stage-sub">exit 2 on bad input</text>
+  <line x1="248" y1="311" x2="214" y2="311" class="arrow-line" marker-end="url(#arrow)"/>
+  <rect x="730" y="272" width="170" height="78" rx="8" class="stage-box-design"/>
+  <text x="742" y="292" class="stage-num">DESIGN ONLY</text>
+  <text x="742" y="313" class="stage-sub">ticket per hit</text>
+  <text x="742" y="328" class="stage-sub">impact record</text>
+  <text x="742" y="343" class="stage-sub">telemetry</text>
+
+  <rect x="20" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="32" y="386" class="stage-title">No feature-to-model map</text>
+  <text x="32" y="406" class="meta-block">42 dependencies on retiring models</text>
+  <text x="32" y="424" class="stage-sub">in 36 of 60 features, 11,048,120 calls a month</text>
+  <rect x="320" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="332" y="386" class="stage-title">Exact id or family search</text>
+  <text x="332" y="406" class="meta-block">found 7 of 42, or 30 of 42</text>
+  <text x="332" y="424" class="stage-sub">family search: 32 flags not affected</text>
+  <rect x="620" y="366" width="280" height="80" rx="8" class="strip-box"/>
+  <text x="632" y="386" class="stage-title">Deprecation Impact</text>
+  <text x="632" y="406" class="meta-strong">29 of 42 found, 0 of 29 false alarms</text>
+  <text x="632" y="424" class="stage-sub">known miss: 7 pass with no flag</text>
+</svg>
