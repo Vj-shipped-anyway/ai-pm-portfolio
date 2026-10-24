@@ -10,7 +10,7 @@ cd data && python3 _generate.py     # about 6 seconds
 |---|---|
 | `results.csv` | The committed set and the first input file of the contract: 600 items scored under two systems, `incumbent` and `successor` (1,200 rows). Columns: `item_id`, `slice`, `system`, `correct`, `input_tokens`, `output_tokens`, `latency_ms`. |
 | `prices.csv` | The second input file: one row per system, `input_usd_per_1k` and `output_usd_per_1k`. Parameters, not vendor prices. The successor's list price is 0.85 of the incumbent's. |
-| `slices.csv` | The 6 slices of a back-office case-handling assistant, which are critical (`card_disputes`, `wire_exceptions`, `kyc_refresh`), their sizes and a one-line description. `account_closure` has 40 items on purpose, as if those cases were slow to grade. |
+| `slices.csv` | The 6 slices of a back-office case-handling assistant: a `critical` flag (`card_disputes`, `wire_exceptions` and `kyc_refresh` are critical), the size and a one-line description of each. `account_closure` has 40 items on purpose, as if those cases were slow to grade. |
 | `committed_truth.csv` | The planted true accuracy per slice for the committed set. Scoring only: no rule reads it. Five slices improve by 3 to 7 pp; `account_closure` falls 8.0 pp. |
 | `committed_world.json` | The planted answer-length multiplier (2.4), slow-path rate (0.10) and price ratio (0.85) of the committed set, and the true cost-per-correct-answer ratio (1.35), true p50 ratio (1.001) and true p95 ratio (2.018). |
 | `scenario_truth.csv` | 80 simulated migrations, each a different world: its size, answer length, slow-path rate, price ratio, the number of truly regressing slices, the true cost and p95 ratios, and four labels (`bad_slice`, `bad_cost`, `bad_p95`, `bad`). |
