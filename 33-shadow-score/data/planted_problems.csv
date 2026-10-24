@@ -1,0 +1,9 @@
+problem_id,kind,group_type,group,real,note
+P1,weak_segment,segment,joint_account,1,agent error rate 0.18 against 0.01 to 0.02 in the other segments
+P2,drift,week,12,1,0.20 added to the agent error rate
+P3,drift,week,13,1,0.20 added to the agent error rate
+P4,abstains_on_hard_class,class,ESCALATE_FRAUD,1,the agent abstains on 35% of these cases
+P5,strict_reviewer,reviewer,W07,1,the person deviates from the truth on 20% of cases against 0.5% for the others
+N1,tiny_segment,segment,intl_atm,0,"8 cases, 3 planted agent misses: too few to judge"
+N2,thin_week,week,6,0,"holiday week with few cases, 4 planted agent misses"
+N3,tiny_reviewer,reviewer,W09,0,"6 cases, 3 planted deviations by the person"
