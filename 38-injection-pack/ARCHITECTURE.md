@@ -126,7 +126,7 @@ One short-lived process in the pipeline that already tests the gateway repositor
 
 Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: [OWASP LLM01:2025 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/), read 2026-10-23. It separates direct injection from indirect injection, where external content such as a web page or a file carries instructions, and among its mitigations lists regular adversarial testing and attack simulations and input and output filtering.
 
-- **What the design does.** It keeps those tests as a regression check on the filter rules, on every rule change.
+- **What the design does.** It replays a fixed set of injection cases against the filter rules as a regression check, on every rule change. That is narrower than the testing the page describes.
 - **What it does not claim.** It does not test a live gateway or a classifier. It makes no claim of conformity to the page or to any standard, holds no certification, and I have not read or mapped any other source.
 
 ---

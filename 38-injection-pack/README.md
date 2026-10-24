@@ -212,7 +212,7 @@ python3 step_04_with_pack.py
 
 ## Aligned to
 
-[OWASP LLM01:2025 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) (read 2026-10-23) separates direct injection, where a user's prompt changes the model's behavior, from indirect injection, where external content such as a web page or a file carries instructions. Among its mitigations it lists regular adversarial testing and attack simulations and input and output filtering. This pack is one way to keep those tests as a regression check on the filter rules. It is a prototype, aligned to that page. It makes no claim of conformity to it.
+[OWASP LLM01:2025 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) (read 2026-10-23) separates direct injection, where a user's prompt changes the model's behavior, from indirect injection, where external content such as a web page or a file carries instructions. Among its mitigations it lists regular adversarial testing and attack simulations and input and output filtering. This pack is narrower than that testing: it replays a fixed set of injection cases against the filter rules as a regression check on each rule change. It is a prototype, aligned to that page. It makes no claim of conformity to it.
 
 ## Data and limits
 
