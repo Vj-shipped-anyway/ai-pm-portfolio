@@ -218,7 +218,7 @@ python3 step_04_scored_hold.py
 
 ## Aligned to
 
-Vice Chair for Supervision Michelle Bowman's speech on consumer fraud, ["A Coordinated Approach to Consumer Fraud Protection"](https://www.federalreserve.gov/newsevents/speech/bowman20260505a.htm), Federal Reserve Board, 2026-05-05 (read 2026-10-24). It treats fraud as a banking-system problem and describes a customer who goes ahead with a fraudulent transfer despite a bank employee's concern. I found no discussion of holding payments, hold lengths or customer friction in it, so this project does not borrow a parameter from it. It tests one mechanism a bank might use in that situation. It is a prototype, aligned to that framing. It makes no claim of conformity to that guidance.
+Vice Chair for Supervision Michelle Bowman's speech on consumer fraud, ["A Coordinated Approach to Consumer Fraud Protection"](https://www.federalreserve.gov/newsevents/speech/bowman20260505a.htm), Federal Reserve Board, 2026-05-05 (read 2026-10-24). It treats consumer fraud as a risk to the financial system, to banks and to payments and describes a customer at a teller window who goes ahead with a fraudulent transaction, coached by a scammer on the phone, despite the bank employee's concern. I found no discussion of holding payments or hold lengths in it; the nearest it comes is a bank employee who raises a concern, so this project does not borrow a parameter from it. It tests one mechanism a bank might use against scams on real-time payments, a channel the speech does not discuss. It is a prototype, aligned to that framing. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 

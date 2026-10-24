@@ -136,9 +136,9 @@ One offline job in the fraud analytics project, where the sensitive payment hist
 
 ## 6. Alignment and posture
 
-Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: Vice Chair for Supervision Michelle Bowman's speech on consumer fraud, ["A Coordinated Approach to Consumer Fraud Protection"](https://www.federalreserve.gov/newsevents/speech/bowman20260505a.htm), Federal Reserve Board, 2026-05-05 (read 2026-10-24). It treats fraud as a banking-system problem and describes a customer who goes ahead with a fraudulent transfer despite a bank employee's concern. I found no discussion of holding payments, hold lengths or customer friction in it, so the project borrows no parameter from it.
+Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: Vice Chair for Supervision Michelle Bowman's speech on consumer fraud, ["A Coordinated Approach to Consumer Fraud Protection"](https://www.federalreserve.gov/newsevents/speech/bowman20260505a.htm), Federal Reserve Board, 2026-05-05 (read 2026-10-24). It treats consumer fraud as a risk to the financial system, to banks and to payments and describes a customer at a teller window who goes ahead with a fraudulent transaction, coached by a scammer on the phone, despite the bank employee's concern. I found no discussion of holding payments or hold lengths in it; the nearest it comes is a bank employee who raises a concern, so the project borrows no parameter from it.
 
-- **What the design does.** It tests one mechanism a bank might use in that situation and shows what it costs the customers who were not being scammed.
+- **What the design does.** It tests one mechanism a bank might use against scams on real-time payments, a channel the speech does not discuss and shows what it costs the customers who were not being scammed.
 - **What it does not claim.** It makes no claim of conformity to that guidance. I read no rule that sets or limits a hold on a real-time payment and cite none, so nothing here says a 20-minute hold is permitted or advisable on any rail.
 
 ---
