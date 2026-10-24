@@ -357,7 +357,7 @@ def run_check(source_path: str, extraction_path: str, tolerance: float, fail_on:
         ex = parse_extraction(load_json(extraction_path, "extraction"))
         findings = check_parsed(source, ex, tolerance)
     except InputError as e:
-        print(f"input error: {e}", file=sys.stderr)
+        print(f"input error: {clean(e, 300)}", file=sys.stderr)
         return 2
     print(render(ex, findings, len([ln for ln in source.splitlines() if ln.strip()])))
     return 1 if findings and fail_on == "review" else 0

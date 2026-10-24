@@ -199,7 +199,7 @@ The PM artifacts that show how I would run this product if I owned the seat. Thi
 - [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step 4 output by `src/_build_demo.py`.
 - [`data/`](./data/): the 75 synthetic packets, a recorded extraction for each, the planted truth and the seeded generator. `data/README.md` explains the scenarios and the extraction format.
 - [`src/`](./src/): `kyb_packet_check.py`, `common.py`, the four step scripts and the demo builder.
-- [`tests/`](./tests/): 61 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+- [`tests/`](./tests/): 62 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
 
 Run the four steps end to end:
 

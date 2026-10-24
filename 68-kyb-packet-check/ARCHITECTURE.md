@@ -102,7 +102,7 @@ The check is one short-lived process, called once per packet by the onboarding w
 
 | Threat | Example | Mitigation in the design |
 | --- | --- | --- |
-| Hostile string in an extraction or filing echoed into a log | A name holding a newline and text that looks like a PASS line or a workflow command | `clean` shows control characters as escapes and cuts long text; filing text is never printed. `tests/test_hostile.py` covers hostile names, hostile text in the source and a hostile path in an error |
+| Hostile string in an extraction or filing echoed into a log | A name holding a newline and text that looks like a PASS line or a workflow command | `clean` shows control characters as escapes and cuts long text; filing text is never printed. The `input error` line is passed through `clean` as well, so a message built from untrusted text stays on one line. `tests/test_hostile.py` covers hostile names, hostile text in the source and a hostile path in an error; `tests/test_cli.py` covers a raw message with a newline |
 | Personal details copied into output | A finding that repeats a date of birth or an ID number | Findings name the holder and the percent only; the design keeps the same rule in the ledger and telemetry |
 | The extraction is edited after the model produced it | A percent changed to match the filing, or an owner added | The record stores the extraction hash; the workflow's case store versions it |
 | The tolerance or a phrase list is changed to clear a packet | `--tolerance` raised until a bad schedule passes | Pull request with a different approver; every record stores the tolerance it used |

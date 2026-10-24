@@ -22,6 +22,16 @@ class Cli(unittest.TestCase):
             json.dump(ex, fh)
         return s, e
 
+    def test_input_error_line_is_cleaned_even_when_the_message_was_not(self):
+        from unittest import mock
+        import kyb_packet_check as kpc
+        s, e = self.files(fresh())
+        with mock.patch.object(kpc, "read_text", side_effect=kpc.InputError("a\n::error::forged\r::notice::x")):
+            code, out, err = run(["check", s, e])
+        self.assertEqual((code, out), (2, ""))
+        self.assertEqual(len(err.strip().splitlines()), 1)
+        self.assertIn("a\\x0a::error::forged", err)
+
     def test_demo_prints_the_two_swapped_percents_and_exits_0(self):
         code, out, err = run(["--demo"])
         self.assertEqual((code, err), (0, ""))
