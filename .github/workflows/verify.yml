@@ -1,9 +1,10 @@
 name: Verify the projects
 
 # Runs every project's four step scripts, regenerates its data, parses its SVG,
-# checks its relative links and demo scripts, runs the unit tests in project 27,
+# checks its relative links and demo scripts, runs each project's unit tests,
 # and checks that the green numbers in each README appear in the printed output.
-# Project 02 needs numpy, pandas and scipy; the other twenty-six use the standard library only.
+# Project 02 needs numpy, pandas and scipy; every other project uses the standard library only.
+# The runner is pinned to ubuntu-24.04 because ubuntu-latest moved to 26.04, which has no Python 3.9 build.
 
 on:
   push:
@@ -18,7 +19,7 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
