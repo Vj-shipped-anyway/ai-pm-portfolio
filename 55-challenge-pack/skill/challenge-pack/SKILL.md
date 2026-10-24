@@ -13,7 +13,7 @@ This skill runs `src/challenge_pack.py` from the challenge-pack project on a use
 - A person asks what a second-line challenger should test at tier 1, 2, 3 or 4.
 - A person wants a draft challenge memo per use case to complete.
 
-Do not use it to approve or reject a use case, to sign off a validation, or to say that a use case complies with anything. It checks that evidence exists, is current, covers the deployed version and, where required, was prepared outside the developer's unit. A person challenges the content.
+Do not use it to approve or reject a use case, to sign off a validation, or to say that a use case meets any rule. It checks that evidence exists, is current, covers the deployed version and, where required, was prepared outside the developer's unit. A person challenges the content.
 
 ## What you need
 
