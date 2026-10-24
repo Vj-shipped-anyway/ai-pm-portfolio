@@ -1,6 +1,6 @@
 # 🚦 Eval Gate: a CI gate on probe-set regression
 
-**I wanted to know what stops a deploy when a model vendor changes the snapshot behind an API name and the pass rate on my probes barely moves. In most pipelines the answer is nothing. This is a command-line gate and a staged GitHub Action: it reads a probe file and a results file, compares the snapshot id each response reported with the one I pinned, and prints ALLOW, REVIEW or BLOCK.** It takes the CI gate in [04 EvalForge](../04-evalforge-llm-eval-platform/) and turns it into a command that reads two files, so any pipeline can run it. The 3 and 5 point lines are 04's; the rules around them are new.
+**I wanted to know what stops a deploy when a model vendor changes the snapshot behind an API name and the pass rate on my probes barely moves. In a pipeline that gates only on the pass rate, the answer is nothing. This is a command-line gate and a staged GitHub Action: it reads a probe file and a results file, compares the snapshot id each response reported with the one I pinned, and prints ALLOW, REVIEW or BLOCK.** It takes the CI gate in [04 EvalForge](../04-evalforge-llm-eval-platform/) and turns it into a command that reads two files, so any pipeline can run it. The 3 and 5 point lines are 04's; the rules around them are new.
 
 **▶ Static demo, no install:** [open demo.html](./demo.html)
 
@@ -37,7 +37,7 @@ Standard library only, Python 3.9 or newer. To check your own files: `python3 ev
 ## What it still gets wrong
 
 - 🟢 Three subtle drifts pass: RUN-042, RUN-052 and RUN-061 (`step_04_with_gate.py` prints each). The id is unchanged and the mean pass rate moved about two points, which ten trials per probe cannot tell from noise; the worst clean run sat 3.3 points under its baseline.
-- 🟢 1 of 31 fine runs goes to review on noise alone (`step_04_with_gate.py`), and one of the three moderate drifts reached BLOCK where I labelled it REVIEW.
+- 🟢 1 of 31 fine runs goes to review on noise alone (`step_04_with_gate.py`), and one of the three moderate drifts reached BLOCK where I labeled it REVIEW.
 - **The test set and the rules share an author.** I planted the events and wrote the rules, so 25 of 25 shows the rules cover what I planted. Treat it as a ceiling for these rules, not a rate on a real pipeline, which I have not tested.
 - **The blocking of a silent swap that scores the same is my policy.** The truth label says an id change nobody announced is read before it ships. If you would rather ship on a flat score, drop the first rule; the other three still run.
 - **The pin is only as good as the person who moves it.** Updating it without reading the vendor's notice turns rule one into a formality.

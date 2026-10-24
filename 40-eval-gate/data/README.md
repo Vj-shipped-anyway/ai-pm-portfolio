@@ -22,5 +22,5 @@ How the runs are generated (🟡 modeled: every size below is an assumption I ch
 
 - Each probe has a latent pass rate (0.95 to 1.0 high, 0.90 to 0.95 medium, 0.82 to 0.90 low). Passes are sampled, 10 trials each. The gate sees counts only.
 - Broad drop: every affected probe loses 8 to 15 points of latent rate. Moderate drift: 3.5 to 5 points. Subtle drift: 1.5 to 2.5 points. Collapse: one or two high-severity probes fall to a latent rate of 0.15 to 0.40.
-- Half of the silent flat and broad swaps are partial rollouts: only 10 to 20 of the 30 probes are served by the new id, the rest by the pin.
+- Each silent flat or broad swap has an even chance of being a partial rollout (7 of the 12 are): only 10 to 20 of the 30 probes are served by the new id, the rest by the pin.
 - The baseline in `probes.csv` carries its own sampling noise, as a real one would.
