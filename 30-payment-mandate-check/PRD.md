@@ -20,7 +20,7 @@ Capturing or signing the customer's consent; moving money; verifying that an acc
 Every legitimate instruction released (0 of 249 stopped); every hard negative released (49 of 49); held and rejected instructions found against the planted truth (46 of 62 held, 156 of 164 rejected); the known misses named (24 released that should not be); an edited audit record found.
 
 ## Risks
-The planted set and the rules share an author, so the numbers are a ceiling. The check trusts what the instruction says about itself (category, rail, account). Split payments under the threshold pass. The audit chain proves consistency, not authorship.
+The planted set and the rules share an author, so the numbers are a ceiling. The check trusts what the instruction says about itself (category, rail, account). Split payments under the threshold pass. The audit chain shows consistency, not authorship.
 
 ## Next
 Add a same-payee aggregate over a rolling window, which would hold the second and third piece of a split. Run the check on a log a payments team is allowed to share. Decide where the head hash of the audit chain is stored outside the gateway.
