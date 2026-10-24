@@ -1,0 +1,4 @@
+Between 2026-02-02 and 2026-02-05 the account received three deposits totalling $14,725.00 [txn: T-E001, T-E002, T-E003].
+On February 6, 2026 the customer sent a wire of $14,500.00 to Tessel Trading Ltd. [txn: T-E004]. The customer paid $14,500.00 to Tessel Trading Ltd. by ACH on 2026-02-06 [txn: T-E004].
+
+On 2026-02-10 the account received an ACH credit of $2,800.00 from Brindle Foods Inc. [txn: T-E005]. The customer moved the balance offshore the same week. On 2026-02-12 the customer sent a wire of $3,100.00 to Ostrel Marine LLC [txn: T-E101]. A further payment followed on 2026-02-20 [txn: T-E099]. The activity is inconsistent with the stated business of the customer [txn: T-E005].
