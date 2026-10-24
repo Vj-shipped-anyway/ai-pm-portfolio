@@ -9,7 +9,7 @@ Synthetic. Produced by `_generate.py` with a fixed seed, so a rerun reproduces e
 | `truth.csv` | One row per planted figure, 308 in all: `memo_id`, `line`, `col` (1-based position of the figure in the memo), `kind`, `expected` (`ok` or `flag`), `text`. The label comes from how the figure was built, not from the checker |
 | `example_memo.md`, `example_spread.csv` | The worked example behind `python3 memo_tieout.py --demo` |
 
-The spread lines are revenue, cogs, opex, depreciation, interest_expense, taxes, net_income, cash, current_assets, current_liabilities, total_debt, total_equity, capex and principal_payments. Capital expenditure always ends in 50, so a one-decimal million figure for it sits exactly on a rounding boundary.
+The spread lines are revenue, cogs, opex, depreciation, interest_expense, taxes, net_income, cash, current_assets, current_liabilities, total_debt, total_equity, capex and principal_payments. Capital expenditure always ends in 50 thousand dollars, so a one-decimal million figure for it sits exactly on a rounding boundary.
 
 Planted figures that are fine (184): exact_thousand 30, million_rounded 30, dollars_plain 10, ratio_ok 30, pct_ok 30, growth_ok 16, half_up_edge 10 (a one-decimal figure on an exact boundary, such as 1,250 thousand written as $1.3 million), term_marked 16 (a proposed term with a `term:` mark), term_untagged 12 (a proposed term or ownership share with no mark, which the tool flags as untied).
 
