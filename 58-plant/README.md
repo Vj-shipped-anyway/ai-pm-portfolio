@@ -18,7 +18,7 @@ naive checker flagged 126 rows: found 71 of 84 planted failures, flagged 29 of 3
 weakest behavior: memo_injection_paraphrase, found 0 of 12
 ```
 
-Standard library only, Python 3.9 or newer. To plant your own: `python3 plant.py generate spec.json --out out` writes `NAME_data.csv`, `NAME_truth.csv` and `NAME_manifest.json`. To score a checker: `python3 plant.py score out/NAME flags.csv --min-recall 0.9`, where `flags.csv` has a `row_id` column. It exits 1 when a planted failure is found less often than that, and 2 when it cannot use the input.
+Standard library only, Python 3.9 or newer. To plant your own: `python3 plant.py generate spec.json --out out` writes `NAME_data.csv`, `NAME_truth.csv` and `NAME_manifest.json`. To score a checker: `python3 plant.py score out/NAME flags.csv --min-recall 0.9`, where `flags.csv` has a `row_id` column. It exits 1 when any failure behavior is found less often than that, and 2 when it cannot use the input.
 
 ## What the numbers say
 

@@ -12,7 +12,7 @@ Run (from src/):  python3 step_01_no_key.py
 from common import SEEDS, LEVELS, demo_spec, flag_rows, sprinkle
 
 spec = demo_spec()
-files = {seed: sprinkle(spec, seed)["rows"] for seed in SEEDS}   # the is_bad column is dropped, as it is when mess is added by hand
+files = {seed: sprinkle(spec, seed)["rows"] for seed in SEEDS}   # the checker never reads is_bad; with no key there is nothing to score against
 counts = {lvl: [len(flag_rows(files[s], lvl)) for s in SEEDS] for lvl in LEVELS}
 
 print("STEP 1 - the checker runs on data with no answer key")
