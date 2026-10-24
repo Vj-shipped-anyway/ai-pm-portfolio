@@ -1,0 +1,40 @@
+study:
+  name: "Retry loop after an instruction-like tool response"
+  summary: "On 2026-03-24, a dispute reconciliation agent made 61 tool calls in one run. From call 4 it called the txn_lookup tool 58 times in a row with the same argument shape, and 56 of those responses were not ok. Run cost reached 153.43 USD against a 150.00 USD cap. The upstream scanner flagged a response as instruction-like next to the loop; the trace does not show who wrote the record."
+  incident-date: "2026-03-24"
+  incident-date-granularity: "DATE"
+  case-study-type: "incident"
+  reporter: "TODO(reporter): the person or team that submits this"
+  target: "dispute reconciliation agent"
+  actor: "TODO(actor): the trace does not show whether anyone caused the first bad response"
+  procedure:
+    - tactic: "AML.TA0005"
+      technique: "AML.T0051.001"
+      description: "At call 4, the response from the txn_lookup tool was flagged as instruction-like by the upstream scanner. A loop on the txn_lookup tool begins at call 4."
+    - tactic: "AML.TA0011"
+      technique: "AML.T0029"
+      description: "From call 4 to call 61, 58 consecutive calls to the txn_lookup tool with the same argument shape; 56 of them returned a response that was not ok (empty 12, malformed 44, ok 2)."
+    - tactic: "AML.TA0011"
+      technique: "AML.T0034"
+      description: "Cumulative cost reached 153.43 USD at call 61, over the 150.00 USD per-run cap."
+meta:
+  draft: true
+  synthetic: true
+  atlas_release_read: "2026.09"
+  mapping_basis: "effects seen in the trace; the trace does not show an adversary action"
+  evidence:
+    - step: 1
+      technique: "AML.T0051.001"
+      label: "response flagged instruction-like"
+      first_call: 4
+      last_call: 4
+    - step: 2
+      technique: "AML.T0029"
+      label: "loop of 58 calls"
+      first_call: 4
+      last_call: 61
+    - step: 3
+      technique: "AML.T0034"
+      label: "cumulative cost over the cap"
+      first_call: 61
+      last_call: 61

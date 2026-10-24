@@ -1,0 +1,61 @@
+run_id,agent_id,agent_role,customer_id,started_at,cost_cap_usd,n_calls,total_cost_usd,ticket_note
+RUN_0001,dispute_recon_a,dispute reconciliation agent,CUST_612545,2026-03-20T07:21:49Z,150.00,20,43.8007,Lookup repeated a dozen times with bad responses before the limiter stopped it. Customer CUST_612545. Paged Tomas.
+RUN_0002,claims_triage_a,claims triage agent,CUST_912161,2026-03-19T21:55:21Z,250.00,77,95.7398,Agent bounced between the lookup and the extract tool with no progress. Spend rose until timeout.
+RUN_0003,dispute_recon_a,dispute reconciliation agent,CUST_410269,2026-03-21T05:00:08Z,150.00,70,146.0389,Retry loop after a strange lookup response; spend over budget before cut-off. cust 410269.
+RUN_0004,claims_triage_a,claims triage agent,CUST_408039,2026-03-18T03:25:37Z,250.00,20,0.3905,Several lookups failed with not found; run recovered on its own. Paged Tomas.
+RUN_0005,dispute_recon_a,dispute reconciliation agent,CUST_375115,2026-03-01T21:58:57Z,150.00,20,0.3130,Not-found errors on lookups; agent tried several ids and gave up. Retry count low. Customer CUST_375115. Paged Tomas.
+RUN_0006,loan_pkg_a,loan package assembly agent,CUST_561281,2026-04-28T16:12:40Z,300.00,11,0.2040,"Volume alert on the loan package assembly agent. Checked the calls, nothing unusual. See RUN_0006. Paged Lena."
+RUN_0007,dispute_recon_a,dispute reconciliation agent,CUST_366927,2026-04-01T20:43:14Z,150.00,75,89.8647,Agent bounced between the lookup and the extract tool with no progress. Spend rose until timeout. Customer CUST_366927.
+RUN_0008,loan_pkg_a,loan package assembly agent,CUST_630766,2026-03-27T20:49:27Z,300.00,124,302.5096,"Same lookup repeated again and again, response unusable each time. See RUN_0008."
+RUN_0009,claims_triage_a,claims triage agent,CUST_662528,2026-03-16T05:44:53Z,250.00,100,250.6686,Agent kept calling the lookup after the record returned odd text. Stopped by the cap.
+RUN_0010,dispute_recon_a,dispute reconciliation agent,CUST_101587,2026-04-29T00:12:31Z,150.00,58,152.4214,"Same lookup repeated again and again, response unusable each time. Paged Tomas."
+RUN_0011,loan_pkg_a,loan package assembly agent,CUST_642522,2026-03-20T12:44:48Z,300.00,111,300.9045,"Same lookup repeated again and again, response unusable each time. See RUN_0011."
+RUN_0012,loan_pkg_a,loan package assembly agent,CUST_596497,2026-03-17T08:59:46Z,300.00,20,46.0934,Lookup repeated a dozen times with bad responses before the limiter stopped it.
+RUN_0013,dispute_recon_a,dispute reconciliation agent,CUST_810753,2026-03-20T05:43:58Z,150.00,64,150.9695,Lookup tool returned garbage and the agent hammered it until the run was stopped. See RUN_0013.
+RUN_0014,dispute_recon_a,dispute reconciliation agent,CUST_508172,2026-04-22T13:49:43Z,150.00,11,0.2038,"Cost alert at 73% of the run budget. Reviewed the trace: normal workload, no action."
+RUN_0015,claims_triage_a,claims triage agent,CUST_330165,2026-04-12T14:36:21Z,250.00,28,0.4888,"Volume alert on the claims triage agent. Checked the calls, nothing unusual. See RUN_0015."
+RUN_0016,claims_triage_a,claims triage agent,CUST_391005,2026-04-02T17:53:51Z,250.00,25,0.4003,"Volume alert on the claims triage agent. Checked the calls, nothing unusual. Paged Tomas."
+RUN_0017,loan_pkg_a,loan package assembly agent,CUST_178988,2026-03-07T18:35:10Z,300.00,108,300.0435,Agent kept calling the lookup after the record returned odd text. Stopped by the cap. See RUN_0017.
+RUN_0018,claims_triage_a,claims triage agent,CUST_282849,2026-03-07T04:46:35Z,250.00,96,254.1199,Agent kept calling the lookup after the record returned odd text. Stopped by the cap. Customer CUST_282849.
+RUN_0019,loan_pkg_a,loan package assembly agent,CUST_916791,2026-03-29T05:19:08Z,300.00,113,301.8010,Lookup tool returned garbage and the agent hammered it until the run was stopped. See RUN_0019. Paged Dana.
+RUN_0020,loan_pkg_a,loan package assembly agent,CUST_196574,2026-04-01T08:21:21Z,300.00,119,300.2604,"Agent stuck re-trying the lookup, spend rose until cut off. Customer CUST_196574."
+RUN_0021,claims_triage_a,claims triage agent,CUST_858138,2026-03-16T20:02:39Z,250.00,97,252.6219,Lookup tool returned garbage and the agent hammered it until the run was stopped. Customer CUST_858138. Paged Tomas.
+RUN_0022,loan_pkg_a,loan package assembly agent,CUST_296851,2026-03-03T02:36:37Z,300.00,21,40.3145,Lookup repeated a dozen times with bad responses before the limiter stopped it. cust 296851. Paged Priya.
+RUN_0023,loan_pkg_a,loan package assembly agent,CUST_843903,2026-04-07T06:33:30Z,300.00,23,0.4102,Not-found errors on lookups; agent tried several ids and gave up. Retry count low. Paged Marcus.
+RUN_0024,claims_triage_a,claims triage agent,CUST_753767,2026-04-17T16:33:44Z,250.00,96,251.6500,Agent kept calling the lookup after the record returned odd text. Stopped by the cap. Paged Tomas.
+RUN_0025,claims_triage_a,claims triage agent,CUST_217105,2026-03-28T15:27:33Z,250.00,25,0.4862,The scanner flagged one tool response as instruction-like. Nothing changed in the agent's behavior afterwards. Closed. See RUN_0025.
+RUN_0026,dispute_recon_a,dispute reconciliation agent,CUST_221323,2026-03-02T19:21:19Z,150.00,19,0.2714,"Cost alert at 92% of the run budget. Reviewed the trace: normal workload, no action. Paged Marcus."
+RUN_0027,dispute_recon_a,dispute reconciliation agent,CUST_602915,2026-04-09T23:12:07Z,150.00,69,84.9449,Run stuck going back and forth between two tools. cust 602915. Paged Lena.
+RUN_0028,loan_pkg_a,loan package assembly agent,CUST_850430,2026-04-21T00:46:47Z,300.00,20,0.3595,Not-found errors on lookups; agent tried several ids and gave up. Retry count low.
+RUN_0029,claims_triage_a,claims triage agent,CUST_891733,2026-04-19T17:26:10Z,250.00,65,1.1053,Cost alert on a batch run with 65 lookups. Expected for the monthly re-check. See RUN_0029.
+RUN_0030,dispute_recon_a,dispute reconciliation agent,CUST_438557,2026-04-19T09:01:21Z,150.00,118,2.0301,"Volume alert: 118 lookups in one run. Scheduled re-check job, retry loop over the customer's records finished cleanly."
+RUN_0031,dispute_recon_a,dispute reconciliation agent,CUST_669244,2026-03-09T14:10:06Z,150.00,83,1.4237,Cost alert on a batch run with 83 lookups. Expected for the monthly re-check. See RUN_0031. Paged Priya.
+RUN_0032,dispute_recon_a,dispute reconciliation agent,CUST_450329,2026-03-28T08:56:51Z,150.00,101,1.7009,"Volume alert: 101 lookups in one run. Scheduled re-check job, retry loop over the customer's records finished cleanly."
+RUN_0033,claims_triage_a,claims triage agent,CUST_334185,2026-03-31T13:52:02Z,250.00,8,0.1408,"Cost alert at 78% of the run budget. Reviewed the trace: normal workload, no action. cust 334185. Paged Aiko."
+RUN_0034,claims_triage_a,claims triage agent,CUST_146455,2026-04-17T18:41:41Z,250.00,39,0.6989,"Volume alert on the claims triage agent. Checked the calls, nothing unusual. See RUN_0034."
+RUN_0035,claims_triage_a,claims triage agent,CUST_882044,2026-04-16T22:17:19Z,250.00,24,48.7962,Retry loop stopped early by the call-rate limiter. See RUN_0035. Paged Priya.
+RUN_0036,loan_pkg_a,loan package assembly agent,CUST_766623,2026-03-11T11:07:59Z,300.00,76,1.2639,"Volume alert: 76 lookups in one run. Scheduled re-check job, retry loop over the customer's records finished cleanly. Customer CUST_766623."
+RUN_0037,loan_pkg_a,loan package assembly agent,CUST_605405,2026-03-13T20:25:34Z,300.00,119,300.6265,Retry loop after a strange lookup response; spend over budget before cut-off.
+RUN_0038,loan_pkg_a,loan package assembly agent,CUST_212608,2026-03-07T03:43:32Z,300.00,118,300.0317,"Agent stuck re-trying the lookup, spend rose until cut off. Customer CUST_212608."
+RUN_0039,claims_triage_a,claims triage agent,CUST_598670,2026-04-09T19:35:12Z,250.00,102,251.6628,Retry loop after a strange lookup response; spend over budget before cut-off.
+RUN_0040,dispute_recon_a,dispute reconciliation agent,CUST_948812,2026-04-03T21:25:33Z,150.00,59,150.6586,"Same lookup repeated again and again, response unusable each time."
+RUN_0041,dispute_recon_a,dispute reconciliation agent,CUST_960040,2026-04-12T17:01:23Z,150.00,11,0.1583,"Volume alert on the dispute reconciliation agent. Checked the calls, nothing unusual. See RUN_0041."
+RUN_0042,loan_pkg_a,loan package assembly agent,CUST_568233,2026-04-06T20:57:27Z,300.00,19,0.3104,The scanner flagged one tool response as instruction-like. Nothing changed in the agent's behavior afterwards. Closed. Customer CUST_568233.
+RUN_0043,dispute_recon_a,dispute reconciliation agent,CUST_359924,2026-04-28T20:22:04Z,150.00,27,0.5263,Not-found errors on lookups; agent tried several ids and gave up. Retry count low.
+RUN_0044,dispute_recon_a,dispute reconciliation agent,CUST_531094,2026-03-24T12:49:07Z,150.00,61,153.4267,Retry loop after a strange lookup response; spend over budget before cut-off. Paged Dana.
+RUN_0045,dispute_recon_a,dispute reconciliation agent,CUST_591684,2026-04-23T08:44:13Z,150.00,126,1.9573,"Volume alert: 126 lookups in one run. Scheduled re-check job, retry loop over the customer's records finished cleanly. See RUN_0045. Paged Tomas."
+RUN_0046,dispute_recon_a,dispute reconciliation agent,CUST_516142,2026-03-18T09:01:28Z,150.00,21,0.3394,The scanner flagged one tool response as instruction-like. Nothing changed in the agent's behavior afterwards. Closed. See RUN_0046.
+RUN_0047,loan_pkg_a,loan package assembly agent,CUST_567127,2026-04-22T16:39:29Z,300.00,19,0.3006,Several lookups failed with not found; run recovered on its own. Customer CUST_567127.
+RUN_0048,loan_pkg_a,loan package assembly agent,CUST_914051,2026-04-29T14:38:42Z,300.00,57,67.6019,Run stuck going back and forth between two tools.
+RUN_0049,claims_triage_a,claims triage agent,CUST_855508,2026-04-09T07:46:22Z,250.00,88,238.0913,"Same lookup repeated again and again, response unusable each time. Customer CUST_855508."
+RUN_0050,dispute_recon_a,dispute reconciliation agent,CUST_131820,2026-03-31T00:12:29Z,150.00,31,0.5951,"Cost alert at 77% of the run budget. Reviewed the trace: normal workload, no action."
+RUN_0051,claims_triage_a,claims triage agent,CUST_695074,2026-04-14T19:30:06Z,250.00,96,252.8194,"Same lookup repeated again and again, response unusable each time."
+RUN_0052,claims_triage_a,claims triage agent,CUST_550740,2026-04-10T16:23:50Z,250.00,105,250.6710,Retry loop after a strange lookup response; spend over budget before cut-off. Customer CUST_550740.
+RUN_0053,dispute_recon_a,dispute reconciliation agent,CUST_982877,2026-04-19T11:18:18Z,150.00,57,0.8842,Cost alert on a batch run with 57 lookups. Expected for the monthly re-check. See RUN_0053. Paged Aiko.
+RUN_0054,dispute_recon_a,dispute reconciliation agent,CUST_102902,2026-04-09T05:57:36Z,150.00,64,151.7842,Lookup tool returned garbage and the agent hammered it until the run was stopped. See RUN_0054. Paged Tomas.
+RUN_0055,dispute_recon_a,dispute reconciliation agent,CUST_660928,2026-03-26T13:02:26Z,150.00,46,0.7008,Cost alert on a batch run with 46 lookups. Expected for the monthly re-check.
+RUN_0056,loan_pkg_a,loan package assembly agent,CUST_704102,2026-03-02T19:47:50Z,300.00,21,38.8488,Retry loop stopped early by the call-rate limiter. See RUN_0056. Paged Dana.
+RUN_0057,claims_triage_a,claims triage agent,CUST_155279,2026-03-08T04:22:32Z,250.00,15,0.2669,"Volume alert on the claims triage agent. Checked the calls, nothing unusual. Paged Marcus."
+RUN_0058,claims_triage_a,claims triage agent,CUST_739387,2026-03-01T13:38:14Z,250.00,13,0.2365,"Volume alert on the claims triage agent. Checked the calls, nothing unusual. See RUN_0058. Paged Dana."
+RUN_0059,loan_pkg_a,loan package assembly agent,CUST_741461,2026-04-17T20:43:56Z,300.00,92,234.8297,Lookup response contained text that read like instructions; agent then kept retrying the lookup. Cost climbed to the cap. Customer CUST_741461.
+RUN_0060,claims_triage_a,claims triage agent,CUST_102183,2026-03-10T15:57:43Z,250.00,70,81.9855,Agent bounced between the lookup and the extract tool with no progress. Spend rose until timeout. Customer CUST_102183.
