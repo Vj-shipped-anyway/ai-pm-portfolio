@@ -33,7 +33,7 @@ from step_01_status_quo import (
     AS_OF, CADENCE_DAYS, DOC_TYPES, FLAT_CYCLE_DAYS, OUT_DIR, ALLOWED_EXIT_DAYS, answer_support,
     assessed_age_days, exit_in_window, load_all, modeled_exit_days,
 )
-from step_02_questionnaire_checklist import PASS_YES_PCT, passes, pct, yes_count
+from step_02_questionnaire_checklist import PASS_YES_PCT, passes, pct
 
 
 def concentration_view(data: dict) -> dict:
