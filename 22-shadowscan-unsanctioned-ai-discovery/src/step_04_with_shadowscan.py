@@ -40,7 +40,9 @@ import json
 import re
 from collections import Counter, defaultdict
 
-from step_01_status_quo import OUT_DIR, by_domain, exposure_index, fmt_int, load_all, true_label, visible_sessions
+from step_01_status_quo import (
+    OUT_DIR, exposure_index, fmt_int, load_all, true_label, visible_sessions,
+)
 from step_02_blocklist_baseline import run_blocklist
 from step_02_blocklist_baseline import summarize as summarize_step2
 
