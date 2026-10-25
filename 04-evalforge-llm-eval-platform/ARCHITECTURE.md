@@ -2,6 +2,8 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network controls, operational runbooks. What you'd hand to your CISO and your platform engineering lead on day one.
 
+> **Status.** This is a design, not a deployed system. The repo's step scripts and Streamlit app read the CSVs in `data/` and apply fixed gate thresholds to stored pass rates and kappas; none of the components, stores or services below exists in it, and no judge or assistant model is run. Figures here are design targets or illustrations unless a script prints them.
+
 EvalForge sits between the AI Platform team's prompt PR and the production deploy pipeline. It is a pre-deploy CI gate, not an observability tool — that distinction drives every architecture choice below.
 
 ---
@@ -103,8 +105,8 @@ Egress to vendor judges (Anthropic, Azure OpenAI):
 ### Region & DR
 
 - **Primary:** US-East. **DR:** US-West, active-passive, RTO 4h, RPO 15min.
-- **EU instance:** Frankfurt (GDPR — probe responses cannot egress region).
-- **India instance:** Mumbai (RBI data localization).
+- **EU instance:** Frankfurt (a data-residency design choice for GDPR: probe responses stay in region).
+- **India instance:** Mumbai (a design choice for RBI data-localization rules).
 
 ---
 
@@ -116,9 +118,9 @@ Egress to vendor judges (Anthropic, Azure OpenAI):
 | --- | --- | --- |
 | **PostgreSQL 15** | Probes (with version SHA), rubrics, eval runs, judge overrides, evidence bundles, audit log | Relational integrity; mature transactions. |
 | **ClickHouse** | Per-probe per-judge score time-series; high-cardinality kappa computation source data | Cheaper than RDS at this volume (modeled, not benchmarked); design target of sub-second p95 on the dashboard queries. |
-| **Snowflake / Databricks** (read-only) | Historical scoring data for the rubric-calibration model; cohort analysis | Already exists at every Tier-1 BFSI shop. |
+| **Snowflake / Databricks** (read-only) | Historical scoring data for the rubric-calibration model; cohort analysis | Already exists at most large banks. |
 | **Redis** | Session cache, idempotency keys, rate-limiting counters | TTL-based eviction. |
-| **GCS / S3 / Blob Storage** (Object Lock) | Immutable evidence bundles, audit log archive | WORM for 7-year retention. |
+| **GCS / S3 / Blob Storage** (Object Lock) | Immutable evidence bundles, audit log archive | WORM for a 7-year retention policy (a design default; confirm against the bank's schedule). |
 
 ### PostgreSQL schema (the consequential tables)
 
@@ -350,7 +352,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | Metrics | Prometheus + Grafana | RED-method dashboards per service |
 | LLM-specific traces | Langfuse (self-hosted) | Judge prompt traces |
 | Per-probe scores | ClickHouse | High-cardinality |
-| Audit log | PostgreSQL + GCS Object Lock | SR 11-7 retention |
+| Audit log | PostgreSQL + GCS Object Lock | Record-keeping |
 
 ### Alerting
 
@@ -368,7 +370,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 - **Object stores.** Object Lock + versioning + cross-region replication for bundles and audit log.
 - **DR drill cadence.** Quarterly. Full failover to US-West.
 
-### Runbooks
+### Runbooks (planned)
 
 - `vendor-judge-silent-update.md` — when the daily diff job flags a new judge snapshot
 - `kappa-collapse.md` — when cross-vendor kappa drops below floor
@@ -380,14 +382,16 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 
 ## 6. Compliance posture
 
+Alignment, not certification. This is a design; none of the frameworks below has been assessed against it.
+
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All six components in scope. Annual external audit. |
+| **SOC 2 Type II** | Design intent: all six components in scope of a SOC 2 Type II audit. No audit has been done. |
 | **PCI-DSS** | In scope only when the GenAI feature touches cardholder data; field-level encryption + tokenization. |
 | **GLBA** | Customer financial data: field-level encryption + access controls + audit trail. |
-| **SR 11-7** | Implementation surface for GenAI ongoing-monitoring expectations under the SR letter. |
-| **NIST AI RMF + EU AI Act Article 12** | EvalForge is the implementation of the 'Measure' function. Decision-grain lineage interlocks with Project 09 (LineageLog). |
-| **GDPR** | EU instance enforces data residency. Right-to-erasure cascades to probe-response hash deletion. |
+| **SR 11-7** | The design basis for the GenAI ongoing-monitoring features (see the README's regulatory note on SR 26-2). A paragraph-level mapping is not part of this prototype. |
+| **NIST AI RMF + EU AI Act Article 12** | Design: the closest fit is the 'Measure' function. Decision-grain lineage interlocks with Project 09 (LineageLog). |
+| **GDPR** | EU instance keeps data in region. Erasure requests cascade to probe-response hash deletion (design). |
 | **India RBI** | India regional instance only. No cross-border replication. |
 
 ---
@@ -442,5 +446,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
     "routed_to": "L2 trust-and-safety queue"
 }
 ```
+
+The ER012 values come from the prototype's data; the timestamps, bundle ids and URIs are illustrative.
 
 OpenAPI spec lives at `apps/api/openapi.yaml` and is the source of truth for the CLI, the UI, and the GitHub Action.

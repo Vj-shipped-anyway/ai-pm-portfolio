@@ -32,8 +32,9 @@ DEFICIENCY_DEFS = {
             "the engineer's head."
         ),
         "failure_mode": (
-            "ER001-ER008 ran probes-v0.7 with 30 probes; ER009 jumped to "
-            "probes-v0.8 with 45 probes. Nowhere is the diff captured - "
+            "ER001-ER004 ran probes-v0.7 with 30 probes; ER005 jumped to "
+            "probes-v0.8 with 45 probes, then ER009 to probes-v0.9 with 60. "
+            "Nowhere is the diff captured - "
             "which 15 probes were added, who reviewed them, what slice "
             "coverage changed. Six months later nobody can explain why "
             "the pass rate moved."
@@ -44,14 +45,14 @@ DEFICIENCY_DEFS = {
         "summary": (
             "The rubric ('is the answer correct?') has 3 different "
             "interpretations across 3 reviewers. Inter-rater agreement is "
-            "below 0.6 in practice."
+            "assumed to be below 0.6 (illustrative, not measured here)."
         ),
         "failure_mode": (
-            "Cluster of overrides on rubric R002 (Refusal Appropriateness) "
-            "in ER005-ER006 - three different reviewers gave different "
-            "scores on the same probes. Without calibration anchors, the "
-            "rubric is unstable - the judge score depends on which "
-            "reviewer trained the prompt."
+            "Seven overrides (OV004-OV010) land on ER005-ER006 from three "
+            "different reviewers across six rubrics and seven probes, with "
+            "no shared calibration anchor. Without anchors, the rubric is "
+            "unstable - the judge score depends on which reviewer trained "
+            "the prompt."
         ),
     },
     "no_judge_drift_detection": {
@@ -62,8 +63,9 @@ DEFICIENCY_DEFS = {
         ),
         "failure_mode": (
             "Inter-judge kappa drifted from 0.78 (ER001) to 0.70 (ER011) "
-            "while pass rate stayed flat at ~0.92. The judge was getting "
-            "more lenient. Then ER012's vendor update produced a real "
+            "while pass rate stayed near 0.92. Agreement between the two "
+            "judges was falling while the headline number held. Then "
+            "ER012's vendor update produced a real "
             "regression and the basic eval framework had no baseline "
             "calibration to compare against."
         ),
@@ -75,11 +77,12 @@ DEFICIENCY_DEFS = {
             "Engineering ships first, checks the dashboard later."
         ),
         "failure_mode": (
-            "ER012's vendor update on 2026-02-17 dropped pass rate from "
-            "0.91 to 0.86 - a real regression - but the eval ran two days "
-            "after deploy. With no pre-deploy CI gate, the regression went "
-            "live, customer complaints accumulated, the issue got "
-            "discovered via the complaint backlog 8 weeks later."
+            "ER012 (run 2026-02-17, on the 2026-02-14 vendor snapshot) "
+            "dropped pass rate from 0.91 to 0.86 - a real regression - but "
+            "the eval ran two days after deploy. With no pre-deploy CI gate, "
+            "the scenario has the regression going live, complaints "
+            "accumulating, and discovery via the complaint backlog 8 weeks "
+            "later (the complaint timeline is illustrative, not in the data)."
         ),
     },
     "no_behavioral_regression_suite": {
@@ -89,8 +92,9 @@ DEFICIENCY_DEFS = {
             "checked, not 'did the behavior shift on the edge cases.'"
         ),
         "failure_mode": (
-            "Eight probes in the high-severity slices (fraud_workflow, "
-            "account_specific, pii_refusal) regressed silently on ER012. "
+            "Illustrative scenario (the dataset stores no per-probe or "
+            "per-slice results): eight probes in the high-severity slices "
+            "(fraud_workflow, account_specific, pii_refusal) regress silently on ER012. "
             "Aggregate pass rate moved from 0.91 to 0.86 (-5pp). The "
             "fraud_workflow slice specifically moved from 0.95 to 0.78 "
             "(-17pp) - that is a customer-facing regression that hits the "
@@ -104,12 +108,12 @@ DEFICIENCY_DEFS = {
             "Calibration drift accumulates silently."
         ),
         "failure_mode": (
-            "Five overrides on rubric R010 (Identity Disclosure) clustered "
-            "on ER012-ER013 - all from the same reviewer, all with "
+            "Four overrides on rubric R010 (Identity Disclosure), in ER003, "
+            "ER009, ER012 and ER040 - all from the same reviewer, all with "
             "different stated reasons. Without an override audit, the "
-            "pattern is invisible. With one, you see 'reviewer.trust-"
-            "safety consistently downgrades R010 under the new vendor "
-            "snapshot' and you investigate why."
+            "pattern is invisible. With one, you see that reviewer.trust-"
+            "safety raised R010 scores three times and lowered it once, "
+            "after the new vendor snapshot, and you investigate why."
         ),
     },
 }
@@ -125,7 +129,8 @@ def main() -> None:
     print("Step 3 - Where this still breaks: 6 named eval-system deficiencies")
     print("=" * 80 + "\n")
     print("Six named failure modes the basic eval (Step 2) leaves on the table.")
-    print("Each is grounded in a real pattern in the historical eval-runs table.\n")
+    print("Each is grounded in the synthetic eval-runs and overrides tables, except #5,")
+    print("which is an illustrative scenario.\n")
 
     with open(probes_path) as f:
         probes = list(csv.DictReader(f))
@@ -185,8 +190,8 @@ def main() -> None:
         print("-" * 80)
         print("Headline regression in this dataset (which Step 2's basic eval missed):")
         print("-" * 80)
-        print(f"  ER011 (pre-update):  pass_rate={er011['pass_rate']}  kappa={er011['inter_judge_kappa']}  verdict={er011['ci_gate_verdict']}")
-        print(f"  ER012 (post-update): pass_rate={er012['pass_rate']}  kappa={er012['inter_judge_kappa']}  verdict={er012['ci_gate_verdict']}")
+        print(f"  ER011 (pre-update):  pass_rate={er011['pass_rate']}  kappa={er011['inter_judge_kappa']}  recorded verdict={er011['ci_gate_verdict']}")
+        print(f"  ER012 (post-update): pass_rate={er012['pass_rate']}  kappa={er012['inter_judge_kappa']}  recorded verdict={er012['ci_gate_verdict']}")
         print(f"  Delta pass_rate:     {delta_pass:+.2f}")
         print(f"  Delta kappa:         {delta_kappa:+.2f}")
         print(f"  Vendor snapshot change: vendor-balanced-4-20251101 -> vendor-balanced-4-20260214")

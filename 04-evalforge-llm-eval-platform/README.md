@@ -6,9 +6,9 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/04-evalforge-llm-eval-platform/demo.html)
 
-**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the step that prints each number is named):
 
-- 🟢 CI gate caught both silent vendor-snapshot updates on first run (2026-02-14 Anthropic update and 2026-05-20 Anthropic update both blocked in this dataset)
+- 🟢 CI gate caught both silent vendor-snapshot updates on first run (2026-02-14 vendor update and 2026-05-20 vendor update both blocked in this dataset; `step_04`). The gate applies fixed thresholds to pass rates and kappas stored in `data/eval_runs.csv`; no assistant or judge model runs
 - 🟢 Inter-judge kappa at 0.86 on the latest run (ER050); 🟢 kappa drifted from 0.78 (ER001) to 0.70 (ER011) ahead of the ER012 regression, and the Step 4 gate raised REVIEW on five of those runs (ER005, ER006, ER009, ER010, ER011)
 - 🟢 ER012, the first silent vendor update: pass rate 0.86 against a 0.92 baseline, verdict FAIL, deploy blocked (`step_04`)
 
@@ -73,7 +73,9 @@ The LLM eval space has a handful of well-known names — LangSmith, Braintrust, 
 | Human-override audit log with reason | ❌ | ❌ | ❌ | ✅ |
 | Evidence bundle routed to bank GRC tool | ❌ | ❌ | ❌ | ✅ |
 | 🟡 Silent regression rate on Tier-1 GenAI fleet (modeled; ~14% is the basic-eval baseline, no per-vendor rates were measured) | n/a | n/a | n/a | **<2%** |
-| 🔴 SR 11-7 GenAI ongoing-monitoring aligned (designed) | ❌ | ❌ | Partial | ✅ |
+| 🔴 Designed against SR 11-7 ongoing-monitoring expectations for GenAI | ❌ | ❌ | Partial | ✅ |
+
+*The LangSmith, Braintrust and Patronus columns are my reading of their public descriptions, not something tested here. Check each vendor's current features before relying on them. The EvalForge column shows what the step scripts print or what the design intends.*
 
 **Position:** *EvalForge doesn't replace LangSmith or Braintrust — it sits on top of them and provides the CI gate + calibrated-rubric + cross-vendor judge + audit-trail layer they leave to the customer's platform team to roll themselves.* This framing matters because it tells a buyer they can deploy this **without ripping out** what their data-science team already runs for experiment tracking.
 
@@ -81,7 +83,7 @@ The LLM eval space has a handful of well-known names — LangSmith, Braintrust, 
 
 ## The honest version (why this exists)
 
-The failure mode this product is designed against — a bank's GenAI customer service assistant works perfectly in dev, the vendor pushes a minor model update, the assistant starts giving subtly different answers (politer but less specific, or more refusing-prone, or quietly hallucinating fee waivers), and customer complaints accumulate for 8-12 weeks before anyone connects the dots — is the published shape of what BFSI shops are now catching on every major foundation-model vendor update.
+The failure mode this product is designed against — a bank's GenAI customer service assistant works perfectly in dev, the vendor pushes a minor model update, the assistant starts giving subtly different answers (politer but less specific, or more refusing-prone, or quietly hallucinating fee waivers), and customer complaints accumulate for 8-12 weeks before anyone connects the dots — is the shape of failure this product is designed against. This repo cites no incident data.
 
 I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk their AI platform lead or L2 Trust-and-Safety lead through — to show how I'd reason about the problem, not to claim a deployment I haven't done.
 
@@ -112,16 +114,16 @@ I'm a PM who follows this specific failure mode in industry research. The point 
 
 ## Executive summary (90 seconds)
 
-**Problem.** Tier-1 BFSI shops run 12-20 customer-facing GenAI features in production. ~14% of the deploys to those features produce a silent post-deploy regression — the model still answers, the answer is still plausible, but the answer is subtly worse than yesterday (more refusing, less specific, occasionally hallucinating fee waivers or eligibility floors). The legacy eval ("the spreadsheet a senior engineer maintains," or even "nightly cron that runs 30 probes and dumps to S3") cannot represent the failure modes that actually hit customers. The bleed: customer complaints surface the regression 8-12 weeks later, by which time tens of thousands of bad interactions have shipped. 🟡 Modeled exposure: **thousands of bad responses per regression × 14% × 12-20 features = the customer-trust and compliance tail that EvalForge is designed to shrink**.
+**Problem.** In this scenario, a Tier-1 BFSI shop runs 12-20 customer-facing GenAI features in production. 🟡 ~14% of the deploys to those features produce a silent post-deploy regression (an assumed rate, not measured) — the model still answers, the answer is still plausible, but the answer is subtly worse than yesterday (more refusing, less specific, occasionally hallucinating fee waivers or eligibility floors). The legacy eval ("the spreadsheet a senior engineer maintains," or even "nightly cron that runs 30 probes and dumps to S3") cannot represent the failure modes that actually hit customers. The bleed: customer complaints surface the regression 8-12 weeks later, by which time tens of thousands of bad interactions have shipped. 🟡 Modeled exposure: **thousands of bad responses per regression × 14% × 12-20 features = the customer-trust and compliance tail that EvalForge is designed to shrink**.
 
 **Product.** EvalForge — a four-layer pre-deploy console: **Versioned probe sets** (Git-style commits, severity-tagged, slice-labeled) + **Calibrated rubrics** (12 criteria with anchors at 1, 3, 5; inter-rater kappa target ≥ 0.78) + **Cross-vendor LLM-as-judge** (hosted vendor model primary + GPT-4o secondary; snapshot-pinned; kappa floor enforced) + **CI gate** (GitHub Actions / Argo CD pre-deploy hook; PASS / FAIL / REVIEW; FAIL blocks the merge).
 
 **Modeled performance (90-day pilot design, 1-feature pilot scaling to 12-feature fleet).**
 
 - 🟡 **Silent post-deploy regression rate: 14% → <2%** (modeled — assumes the synthetic 50-run dataset and a Tier-1-shaped GenAI fleet)
-- 🟢 **CI gate caught both silent vendor-snapshot updates on first run** (2026-02-14 Anthropic update and 2026-05-20 Anthropic update both blocked in this dataset)
+- 🟢 **CI gate caught both silent vendor-snapshot updates on first run** (2026-02-14 vendor update and 2026-05-20 vendor update both blocked in this dataset)
 - 🟢 **Inter-judge kappa at 0.86 on the latest run (ER050)**; 🟢 **kappa drifted from 0.78 (ER001) to 0.70 (ER011) ahead of the ER012 regression, and the Step 4 gate raised REVIEW on five of those runs (ER005, ER006, ER009, ER010, ER011)**
-- 🟡 **Time-to-detect: 8-12 weeks → first eval run** (modeled — assumes the published BFSI complaint-backlog lag)
+- 🟡 **Time-to-detect: 8-12 weeks → first eval run** (modeled — assumes an 8-12 week complaint-backlog lag; no source is cited)
 - 🟡 **Modeled CI gate FP rate: <5%** (assumes a false positive is a FAIL or REVIEW that human review overturns; the dataset records no sign-off outcomes, so this is a design target, not a measured rate)
 - 🟡 **Evidence bundle assembly: under 1 second on the prototype** (per-run JSON bundle written to disk, about 0.1 s for the whole Step 4 script, observed on one laptop run; no script prints it; production version writes to GCS Object Lock and routes to GRC)
 
@@ -154,11 +156,11 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 **A modeled Tier-1 US retail bank ($50B-asset). 14 customer-facing GenAI features in production.** 🔴 The session volume, refusal rates and complaint timeline in this scenario are illustrative, not measured.
 
-The flagship one — the use case this walkthrough is calibrated against — is the **customer-service assistant** running on a hosted Anthropic model with a RAG layer over the bank's policy library. It handles ~40,000 customer chat sessions per day across web, mobile, and IVR-handoff. It works perfectly in dev. It worked perfectly in production on launch day. Three months after launch, the L2 Trust-and-Safety lead notices the complaint volume on the GenAI feature has tripled. Investigation reveals: Anthropic pushed a minor snapshot update eight weeks earlier (`vendor-balanced-4-20251101` → `vendor-balanced-4-20260214`). The assistant's refusal rate moved from 4% to 11% on the refusal-edge slice. Customers were getting "I'm not able to help with that — let me connect you to a banker" when they previously got a clean answer. The complaint volume was the proxy.
+The flagship one — the use case this walkthrough is calibrated against — is the **customer-service assistant** running on a hosted vendor model with a RAG layer over the bank's policy library. It handles ~40,000 customer chat sessions per day across web, mobile, and IVR-handoff. It works perfectly in dev. It worked perfectly in production on launch day. Three months after launch, the L2 Trust-and-Safety lead notices the complaint volume on the GenAI feature has tripled. Investigation reveals: the vendor pushed a minor snapshot update eight weeks earlier (`vendor-balanced-4-20251101` → `vendor-balanced-4-20260214`). The assistant's refusal rate moved from 4% to 11% on the refusal-edge slice. Customers were getting "I'm not able to help with that — let me connect you to a banker" when they previously got a clean answer. The complaint volume was the proxy.
 
 By the time anyone connected the dots, eight weeks of customer trust had leaked.
 
-The design is anchored against that pattern. EvalForge's CI gate would have caught the snapshot update on the first nightly eval run — pass rate dropped from 0.91 to 0.86, kappa collapsed from 0.70 to 0.68, the gate flagged FAIL, the deploy was pinned to the prior snapshot until the rubric was recalibrated and the prompt patched.
+The design is anchored against that pattern. EvalForge's CI gate would have caught the snapshot update on the first nightly eval run — pass rate dropped from 0.91 to 0.86, kappa dipped from 0.70 to 0.68, the gate flagged FAIL, the deploy was pinned to the prior snapshot until the rubric was recalibrated and the prompt patched.
 
 The synthetic dataset in this repo replays exactly that pattern across 50 historical eval runs and 2 model-version transitions.
 
@@ -179,7 +181,7 @@ Four CSVs in [`data/`](./data/). Documented in detail in [`data/README.md`](./da
 
 **[`data/rubrics.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/rubrics.csv)** — 12 calibration rubric criteria with worked anchors at scores 1, 3, 5.
 
-**[`data/eval_runs.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/eval_runs.csv)** — 50 historical eval runs spanning 3 vendor model snapshots and 7 probe-set versions. The narrative arc: ER001-ER011 is the pre-EvalForge world (clean PASS streak but kappa quietly drifting); ER012 is the Anthropic Feb-14 silent update — EvalForge catches it, regression flagged, CI gate blocks; ER017-ER019 is the recalibration + patch; ER038 is the second silent update (Anthropic May-20) — EvalForge catches it again; ER050 is the current production baseline.
+**[`data/eval_runs.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/eval_runs.csv)** — 50 historical eval runs spanning 3 vendor model snapshots and 7 probe-set versions. The narrative arc: ER001-ER011 is the pre-EvalForge world (clean PASS streak but kappa quietly drifting); ER012 is the Feb-14 silent vendor update — EvalForge catches it, regression flagged, CI gate blocks; ER017-ER019 is the recalibration + patch; ER038 is the second silent update (May-20) — EvalForge catches it again; ER050 is the current production baseline.
 
 **[`data/judge_overrides.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/judge_overrides.csv)** — 30 cases where a human reviewer overrode the LLM judge's score, with reason. Clusters reveal calibration drift.
 
@@ -195,7 +197,7 @@ A senior engineer keeps a Google Sheet with 10 eval questions. Once a release, t
 python src/step_01_engineer_spreadsheet.py
 ```
 
-**Output:** 10 probes eyeballed, 7 marked PASS, 3 marked FAIL. Two probes are silently wrong on close read: P003 (marked PASS; echoed an account number) and P008 (hallucinated a FICO eligibility floor). On a fast read the answers sound plausible.
+**Output:** 10 probes eyeballed, 7 marked PASS, 3 marked FAIL. Two probes are flagged wrong on a close read: P003 (marked PASS; described as echoing an account number) and P008 (described as hallucinating a FICO eligibility floor; the simulated eyeball happens to mark it FAIL). The marks are a seeded random draw standing in for a fast eyeball, and the flags are set by hand: the repo stores no model answers.
 
 **The structural blindness:** no rubric means no calibration; no run log means no history; no slice breakdown means no early-warning signal. This is the world most BFSI GenAI shops ship in today.
 
@@ -224,14 +226,14 @@ python src/step_02_basic_eval_set.py
   Pre-deploy hook:            none - this is post-deploy reporting only
 ```
 
-Detection works on the easy failures. **A 100% pass rate looks healthy. Behind it:**
+The script simulates the cron: each probe passes on a seeded random draw (p = 0.93), so 30 of 30 is a draw and not a measurement of any assistant. Detection works on the easy failures. **A 100% pass rate looks healthy. Behind it:**
 
 - Slice level not computed — refusal-edge slice could be 60% and nobody would notice until customer complaints catch up.
 - Probe set v0.7 is 30 probes; 6 named behavioral classes need ~10 probes each minimum.
 - Judge is exact-match — any paraphrase variant fails. Paraphrase-blind in both directions: misses real regressions AND produces false alarms.
 - No CI gate — results are post-deploy reporting, not a pre-deploy block.
 
-Most banks ignore the dashboard after the second false positive.
+Engineers learn to ignore a dashboard that keeps raising false alarms.
 
 ---
 
@@ -241,8 +243,8 @@ Most banks ignore the dashboard after the second false positive.
 | --- | --- | --- | --- |
 | 1 | **No probe versioning** | Eval set is "the spreadsheet a senior engineer maintains." No version history. | ER001-ER004 ran probes-v0.7 (30 probes); ER005 jumped to v0.8 (45), then ER009 to v0.9 (60). No diff captured — which 15 probes were added, who reviewed them, what slice coverage changed. |
 | 2 | **No rubric calibration** | The rubric ("is the answer correct?") has 3 different interpretations across 3 reviewers; inter-rater agreement assumed <0.6 (🔴 illustrative, not measured here). | Seven overrides (OV004-OV010) land on ER005-ER006 from three different reviewers across six rubrics, on seven different probes — no shared anchor to calibrate against. |
-| 3 | **No judge drift detection** | LLM-as-judge model itself can update silently; judge scores drift without anyone noticing. | Inter-judge kappa drifted from 0.78 (ER001) to 0.70 (ER011) while pass rate stayed flat at ~0.92. The judge was getting more lenient. |
-| 4 | **No CI gate** | Eval runs as a manual ad-hoc activity, not a deployment gate. | ER012 (run 2026-02-17, on the 2026-02-14 vendor snapshot) dropped pass rate from 0.91 to 0.86 — but the eval ran two days after deploy. Customer complaints accumulated for 8 weeks before discovery. |
+| 3 | **No judge drift detection** | LLM-as-judge model itself can update silently; judge scores drift without anyone noticing. | Inter-judge kappa drifted from 0.78 (ER001) to 0.70 (ER011) while pass rate stayed flat at ~0.92. Judge agreement was falling while the headline number held. |
+| 4 | **No CI gate** | Eval runs as a manual ad-hoc activity, not a deployment gate. | ER012 (run 2026-02-17, on the 2026-02-14 vendor snapshot) dropped pass rate from 0.91 to 0.86 — but the eval ran two days after deploy. Customer complaints accumulated for 8 weeks before discovery (scenario, not in the data). |
 | 5 | **No behavioral regression suite** | When the prompt changes, only "did the answer change" gets checked, not "did the behavior shift on the edge cases." | Aggregate moved -5pp on ER012 (0.91 to 0.86). 🔴 Illustrative, not in the data: the dataset stores no per-probe or per-slice results, so the eight regressed probes and the -17pp fraud_workflow slice in step_03's text are a scenario (fraud_workflow has 4 probes, so a measured slice rate moves in 25pp steps). |
 | 6 | **No human override audit** | When a reviewer overrides the judge, no record of why. Calibration drift accumulates silently. | Four overrides on R010 (Identity Disclosure), in ER003, ER009, ER012 and ER040 — all from the same reviewer, all with different stated reasons. Pattern invisible without an override log. |
 
@@ -278,7 +280,9 @@ ER012 (2026-02-17, vendor-balanced-4-20260214 silent update):
 | REVIEW | 9 | L2 sign-off within 24h or auto-block |
 | FAIL | 5 | Deploy blocked |
 
-The five FAILs (ER012, ER013, ER014, ER038, ER039) include the first run on each silent vendor-snapshot update (ER012, ER038) — exactly the regressions the spreadsheet and the basic cron would have shipped. The nine REVIEWs are five runs with kappa below the 0.75 target (ER005, ER009, ER010, ER011, ER017) and four pass-rate drops of 3-4pp against the rolling baseline (ER006, ER015, ER016, ER040) — also invisible to the basic eval.
+The five FAILs (ER012, ER013, ER014, ER038, ER039) include the first run on each silent vendor-snapshot update (ER012, ER038) — exactly the regressions the spreadsheet and the basic cron would have shipped. The nine REVIEWs are five runs where only kappa is below the 0.75 target (ER005, ER009, ER010, ER011, ER017) and four pass-rate drops of 3-4pp against the rolling baseline (ER006, ER015, ER016, ER040), which the gate checks first; three of those four also have kappa below 0.75. All nine are invisible to the basic eval.
+
+The gate reads `pass_rate` and `inter_judge_kappa` from `data/eval_runs.csv`, where they are stored values written for this walkthrough. It applies fixed thresholds: a pass-rate floor of 0.88, REVIEW on a drop of more than 3pp or kappa under 0.75, FAIL on a drop of more than 5pp or kappa under 0.70. ER012, ER013, ER038 and ER039 trip the floor; ER014 trips the kappa floor. The versioned probes, calibrated rubrics and cross-vendor judge are design in this repo.
 
 ---
 
@@ -301,7 +305,7 @@ Cutting silent-regression rate from 14% to <2% is not an outcome. *Cutting it fr
 | 🔴 Modeled cost to deliver (90-day pilot) | ~$220K (compute + 1 PM + 0.5 FTE engineer + L2 partner time) |
 | 🟡 Per dollar of prevented complaint-cost | **< $0.01** (modeled — assumes pilot cost vs. modeled prevention at fleet scale; implies more than $22M of prevented complaint cost, $220K ÷ $0.01, and no dollar prevention figure is modeled in this repo) |
 
-🟡 The two silent vendor-snapshot updates in this synthetic dataset (Anthropic Feb-14 and May-20, 2026) are calibrated against the public shape of foundation-model vendor minor updates in 2025-2026 (Anthropic, Azure OpenAI, AWS Bedrock all push minor updates 3-6 times per year). At Tier-1 fleet scale, this is the regression class that drives most of the utility number.
+🟡 The two silent vendor-snapshot updates in this synthetic dataset (Feb-14 and May-20, 2026) are an assumption that hosted-model vendors change snapshots a few times a year; I cite no source. At Tier-1 fleet scale, this is the regression class that drives most of the utility number.
 
 ---
 
@@ -415,17 +419,16 @@ If you run it on real data and get something useful, open an issue or send me th
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
-[LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs eval-first GenAI surfaces under regulated constraint*
+[LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *AI Platform PM · Designs eval-first GenAI surfaces for regulated settings*
 
 ---
 
 ## 🙌 Acknowledgements
 
-- **[Hamel Husain — Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** — the eval-first thesis. The intellectual anchor of this product. The reason every probe and rubric in this repo is committed before any model code. *"Evals are the moat."* Hamel's writing is the single most-cited source in the EvalForge taxonomy.
+- **[Hamel Husain — Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)** — the eval-first thesis. The anchor for this product's approach, and the reason every probe and rubric in this repo is committed before any model code. The six-deficiency taxonomy itself is my own.
 - **[OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)** — LLM09 (Misinformation), LLM02 (Sensitive Information Disclosure), LLM05 (Improper Output Handling). The framing behind the high-severity slice weights.
 - **[Greg Kamradt — Needle-in-a-Haystack](https://github.com/gkamradt/LLMTest_NeedleInAHaystack)** — long-context fidelity work. Reason long-context fidelity probes are in the PRD backlog (rank 11, queued).
-- **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function maps cleanly onto versioned probe sets + calibrated rubrics + cross-vendor judge + CI gate. EvalForge is the implementation surface.
-- **[Karpathy on the moat](https://twitter.com/karpathy)** — *evals are the moat* — the Twitter-thread version of Hamel's argument; same conclusion arrived at independently.
-- **[Lilian Weng — LLM Patterns](https://lilianweng.github.io/)** — the canonical taxonomy of LLM failure modes that the six-deficiency taxonomy here builds against.
+- **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Measure' function is the closest fit for versioned probe sets + calibrated rubrics + cross-vendor judge + CI gate. This is a design mapping, not a claim of conformance.
+- **[Lilian Weng's blog](https://lilianweng.github.io/)** — background reading on LLM behavior and failure. The six-deficiency taxonomy here is my own.
 - **[Simon Willison](https://simonwillison.net/)** — weekly required reading on the practical operationalization of evals against real foundation-model behavior.
-- **SR 11-7 (Federal Reserve Supervisory Letter on Model Risk Management)** — the regulatory existence-proof for the GenAI ongoing-monitoring story that EvalForge implements alongside [DriftSentinel](../02-driftsentinel-model-drift-monitoring/).
+- **SR 11-7 (Federal Reserve Supervisory Letter on Model Risk Management)** — the supervisory guidance this design is written against, for the GenAI ongoing-monitoring story EvalForge covers alongside [DriftSentinel](../02-driftsentinel-model-drift-monitoring/).

@@ -21,8 +21,10 @@ Same eval runs, same probe set. Four layers added.
   it auto-blocks.
 
 This script reads the historical eval_runs table and replays it through
-the EvalForge composite, producing the CI gate verdict and the evidence
-bundle the deployment pipeline consumes.
+the CI gate, producing the verdict and the evidence bundle the deployment
+pipeline consumes. Only Layer 4 is implemented here: fixed thresholds applied
+to the pass_rate and inter_judge_kappa values stored in eval_runs.csv. Layers
+1 to 3 are design. No assistant or judge model is run.
 
 Run:
     python step_04_with_evalforge.py
@@ -232,8 +234,8 @@ def main() -> None:
     print("  Step 3 (deficiencies): 6 named failure modes the basic eval misses.")
     print(f"  Step 4 (EvalForge):    {blocked} deploys blocked.  Two of those are the")
     print("                         silent vendor-snapshot updates that would have")
-    print("                         shipped under Steps 1 and 2 and produced 8-12")
-    print("                         weeks of customer complaints before discovery.")
+    print("                         shipped under Steps 1 and 2 and, in the scenario,")
+    print("                         produced 8-12 weeks of complaints before discovery.")
     print()
 
     # Headline: the ER012 catch

@@ -17,9 +17,9 @@
 | **Stage** | Portfolio prototype; pre-MRM-committee read |
 | **Primary user** | AI Platform engineer shipping prompt edits or model updates |
 | **Secondary users** | L2 Trust-and-Safety reviewers; L3 Compliance; the model owner (PM) |
-| **Problem** | Tier-1 BFSI shops run 12-20 GenAI features in production. ~14% of their deploys produce silent post-deploy regressions. Customer complaints surface the regression 8-12 weeks later. The legacy eval ("spreadsheet a senior engineer maintains") cannot represent the failure modes that actually hit customers. |
+| **Problem** | In this scenario, a Tier-1 BFSI shop runs 12-20 GenAI features in production. 🟡 ~14% of its deploys produce silent post-deploy regressions (an assumed rate, not measured). Customer complaints surface the regression 8-12 weeks later (also assumed). The legacy eval ("spreadsheet a senior engineer maintains") cannot represent the failure modes that actually hit customers. |
 | **Solution** | Versioned probe sets + calibrated rubrics + cross-vendor LLM-as-judge + CI gate (GitHub Actions / Argo CD pre-deploy hook) that blocks deploys on regression. |
-| **North-star metric** | % of customer-facing GenAI deploys with EvalForge PASS verdict before production traffic. Target: 100%. Current SOTA: ~0% (no gate exists). |
+| **North-star metric** | % of customer-facing GenAI deploys with EvalForge PASS verdict before production traffic. Target: 100%. Baseline in the scenario: ~0% (no gate exists). |
 | **Modeled metrics** | 🟡 Silent post-deploy regression rate 14% → <2%; 🟡 time-to-detect 8-12 weeks → first eval run; 🟡 CI gate FP rate <5%; 🟢 inter-judge kappa 0.86 on the latest run (ER050), against a 0.78 target. |
 | **Cost** | 🔴 ~$220K for a 90-day pilot in a real engagement (compute + 1 PM + 0.5 FTE platform engineer + L2 partner time). Per-feature ongoing: ~$1.5K/month in judge compute. |
 | **Risk #1** | Engineering treats the CI gate as a speed bump, finds the bypass switch. Mitigation: gate is owned by L2, bypass requires named approver + audit log entry. |
@@ -116,11 +116,13 @@
 
 ## Build & scale notes
 
+*The figures in this section (call volumes, latency budget) are sizing assumptions and design targets. None was measured or load-tested in this repo.*
+
 **Reference architecture.** See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full systems doc. Headlines:
 
 - **Probe registry:** Postgres with row-level versioning; each probe is one row with a SHA pin.
 - **Rubric calibration:** Snowflake for historical scoring; Postgres for current anchor set.
-- **Judge orchestrator:** FastAPI on K8s; fan-out to an Anthropic model (primary) + Azure OpenAI GPT-4o (secondary) + in-VPC Llama 3.1 8B (tertiary).
+- **Judge orchestrator:** FastAPI on K8s; fan-out to a hosted vendor model (primary) + Azure OpenAI GPT-4o (secondary) + in-VPC Llama 3.1 8B (tertiary).
 - **CI gate:** GitHub Actions or Argo CD pre-deploy hook; verdict posted as a PR check.
 - **Storage:** Postgres for metadata; ClickHouse for high-cardinality per-probe scores; GCS / S3 Object Lock for immutable evidence bundles.
 

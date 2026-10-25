@@ -1,7 +1,7 @@
 """
 Step 2 - With basic evals: 30 probes run nightly via cron, results dumped to S3.
 
-This is what most engineering-mature BFSI shops have today. A nightly cron
+This is a common setup. A nightly cron
 runs a 30-probe regression test against the deployed assistant. Output is a
 binary pass/fail per probe, written to S3 as a JSON or CSV.
 
@@ -51,8 +51,9 @@ def main() -> None:
     rng = Random(123)
     rows = []
     for p in probes:
-        # The cron job calls the deployed assistant and a binary "matches expected behavior" check.
-        # Pass rate roughly 0.93 on this run - matches ER002 baseline.
+        # Stand-in for the cron job's binary "matches expected behavior" check:
+        # a seeded random draw with p = 0.93 per probe. No assistant is called, so
+        # the pass count is a draw, not a measurement.
         passed = rng.random() < 0.93
         rows.append({
             "probe_id": p["probe_id"],
@@ -120,7 +121,7 @@ def main() -> None:
     print(f"  CI gate:                    none (cron only - results dumped, not blocking)")
     print(f"  Pre-deploy hook:            none - this is post-deploy reporting only")
     print()
-    print("Reading: 93% pass rate on aggregate looks healthy. Behind it:")
+    print(f"Reading: {pass_rate*100:.0f}% pass rate on aggregate looks healthy. Behind it:")
     print("  - Slice level not computed - refusal-edge slice could be 60% and nobody")
     print("    would notice until customer complaints catch up.")
     print("  - Probe set v0.7 is 30 probes; 6 named behavioral classes need ~10 probes")

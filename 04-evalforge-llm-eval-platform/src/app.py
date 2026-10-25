@@ -8,7 +8,7 @@ Streamlit walkthrough:
   Findings    - per-rubric / per-slice breakdown + human overrides
   Source data - inline CSV viewers for the four sample-data files
   Glossary    - plain-English terms with hyperlinks to the canonical sources
-  Production  - Streamlit-vs-production reassessment
+  Production  - what this would look like as a product
 """
 
 from __future__ import annotations
@@ -229,9 +229,9 @@ if st.session_state.step == 1:
 st.markdown(
     "<div class='ef-card'><span class='ef-step-label'>Step 1</span>"
     "<h3>Pick an eval run to inspect</h3>"
-    "<p class='muted'>50 historical eval runs across 6 probe-set versions and 3 vendor model snapshots. "
-    "The default (ER012) is the headline catch: Anthropic's 2026-02-14 silent snapshot update. "
-    "Pass rate dropped 5pp, kappa collapsed, EvalForge's CI gate blocked the deploy.</p></div>",
+    "<p class='muted'>50 historical eval runs across 7 probe-set versions and 3 vendor model snapshots (synthetic; pass rate and kappa are stored values). "
+    "The default (ER012) is the headline catch: the synthetic 2026-02-14 silent snapshot update. "
+    "Pass rate dropped 5pp, kappa fell to 0.68, and the CI gate blocked the deploy.</p></div>",
     unsafe_allow_html=True,
 )
 
@@ -266,7 +266,7 @@ if st.session_state.step >= 2:
     if verdict == "PASS":
         verdict_class = "verdict-pass"
         risk = "LOW"
-        confidence = "HIGH (>95%)"
+        confidence = "HIGH - the gate passes this run"
         confidence_class = "confidence-high"
         tldr = (
             f"Pass rate {selected['pass_rate']:.2f} above the rolling baseline "
@@ -276,7 +276,7 @@ if st.session_state.step >= 2:
     elif verdict == "REVIEW":
         verdict_class = "verdict-review"
         risk = "MEDIUM"
-        confidence = "MEDIUM (70-95%)"
+        confidence = "MEDIUM - human sign-off required"
         confidence_class = "confidence-med"
         tldr = (
             f"Regression vs baseline {baseline:.2f} or kappa drift detected. "
@@ -285,7 +285,7 @@ if st.session_state.step >= 2:
     else:
         verdict_class = "verdict-flag"
         risk = "HIGH"
-        confidence = "LOW (<70%)"
+        confidence = "LOW - the gate blocks this run"
         confidence_class = "confidence-low"
         tldr = (
             f"CI gate blocked deploy. Pass rate {selected['pass_rate']:.2f} regressed "
@@ -383,12 +383,12 @@ if st.session_state.step >= 3:
     with st.expander("rubrics.csv - the 12 calibrated rubric criteria", expanded=False):
         st.caption(
             "The scoring rubric the LLM-as-judge applies. Each criterion has worked anchors at scores 1, 3, and 5 - "
-            "the calibration that drives inter-rater agreement above 0.78 in the historical dataset."
+            "the calibration designed to hold inter-judge kappa at 0.78 or higher. The historical dataset's kappa ranges from 0.68 to 0.86."
         )
         st.dataframe(DATA["rubrics"], use_container_width=True, hide_index=True)
         st.caption(f"{len(DATA['rubrics'])} rows. Source: data/rubrics.csv in the repo.")
 
-    with st.expander("eval_runs.csv - 50 historical eval runs across 6 model versions", expanded=False):
+    with st.expander("eval_runs.csv - 50 historical eval runs across 3 model snapshots", expanded=False):
         st.caption(
             "The flight log. Each row is one nightly or pre-deploy eval run with model snapshot, probe-set version, "
             "judge config, inter-judge kappa, and CI gate verdict. ER012 (2026-02-17) and ER038 (2026-06-01) are the "
@@ -452,7 +452,7 @@ if st.session_state.step >= 4:
             "- **Probe set:** [`data/probes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/probes.csv) (60 versioned probes)\n"
             "- **Rubric set:** [`data/rubrics.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/rubrics.csv) (12 calibrated criteria)\n"
             "- **Override log:** [`data/judge_overrides.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/data/judge_overrides.csv) (30 human-judge disagreements)\n"
-            "- **Primary judge:** a hosted Anthropic model (snapshot-pinned)\n"
+            "- **Primary judge:** a hosted vendor model (snapshot-pinned)\n"
             "- **Secondary judge:** Azure OpenAI GPT-4o (cross-vendor cross-check)\n"
             "- **CI gate:** GitHub Actions / Argo CD pre-deploy hook\n"
             "- **Audit trail handoff:** Project 09 LineageLog - decision lineage event emitted per run"
@@ -469,12 +469,12 @@ if st.session_state.step >= 4:
                 ("Probe set", "A Git-tagged collection of probes. The version pin matters: comparing ER001 to ER050 only makes sense if you know which probe set each used."),
                 ("Rubric", "The scoring criteria a judge (human or LLM) applies. Anchored at 1, 3, and 5 with worked examples so different judges score consistently."),
                 ("LLM-as-judge", "Using a second LLM (a hosted vendor model, GPT-4o) to score the primary model's output against a rubric. Cheaper and faster than human review; needs calibration and snapshot pinning."),
-                ("Inter-judge kappa", "Cohen's kappa - a statistical measure of agreement between two judges. Above 0.78 is solid; below 0.70 means the rubric is unstable."),
+                ("Inter-judge kappa", "Cohen's kappa - a statistical measure of agreement between two judges. In this walkthrough the target is 0.78 or higher, REVIEW starts below 0.75, and below 0.70 is a FAIL."),
                 ("CI gate", "Continuous-integration deployment gate. The eval result blocks or allows the production deploy. PASS / FAIL / REVIEW."),
                 ("Behavioral regression", "Same question, plausible answer, but subtly worse than yesterday. The class of regression a basic eval set misses."),
-                ("Vendor silent snapshot update", "When Anthropic, Azure OpenAI, or AWS Bedrock pushes a minor model update without changing the API contract. The reference incident here is Anthropic's 2026-02-14 update."),
+                ("Vendor silent snapshot update", "When a hosted-model vendor changes the model behind a name without changing the API contract. The reference incident here is the synthetic 2026-02-14 update."),
                 ("Calibration anchor", "A worked example for a specific rubric score. 'A score of 5 means refusal + correct routing; a score of 3 means refusal but no routing.' Closes the inter-rater gap."),
-                ("Rolling baseline", "The pass rate of the last green eval run. The CI gate compares each new run against the rolling baseline, not a fixed threshold."),
+                ("Rolling baseline", "The pass rate of the last green eval run. The CI gate compares each new run against the rolling baseline and also applies a fixed pass-rate floor of 0.88."),
                 ("Probe slice", "A behavioral subset of probes - refusal_edge, fraud_workflow, pii_refusal. Slice-level pass rate catches what aggregate hides."),
                 ("Human override audit", "The log of every time a reviewer overrode an LLM-as-judge score, with reason. The data behind catching calibration drift."),
                 ("Eval-first thesis", "Hamel Husain's framing: build the eval set before the model, treat it as the moat, run it on every change. See the link in the trust card."),
@@ -492,23 +492,23 @@ if st.session_state.step >= 4:
         )
 
     # ---------------------------------------------------------------------------
-    # PRODUCTION STACK REASSESSMENT
+    # PRODUCTION SHAPE
     # ---------------------------------------------------------------------------
     with st.expander("What this would look like as a client-facing SaaS"):
         st.markdown(
-            "**Production stack reassessment** - strengthening the Streamlit-vs-production framing with the SaaS shape a buyer would actually procure.\n\n"
+            "**Production shape (design, not built).** The SaaS shape a buyer would procure.\n\n"
             "If EvalForge were a real product shipping to a bank's AI platform org:\n\n"
             "- **Frontend:** Next.js 15 + Tailwind + shadcn/ui - embedded as a panel inside the bank's AI platform console (Vertex AI Studio, Azure AI Foundry, AWS SageMaker), not a standalone app.\n"
             "- **Auth:** SAML / OIDC with the bank's IdP (Okta, ForgeRock, PingFederate); RBAC mapping L1 product owner / L2 trust-and-safety / L3 compliance / L4 audit roles.\n"
             "- **Backend:** FastAPI on the bank's existing K8s footprint (EKS / GKE / AKS); microservice per check (probe runner, judge orchestrator, kappa calculator, CI gate evaluator, override audit).\n"
             "- **Probe registry:** Postgres with row-level versioning; probe set diffs surfaced as Git-style commits the L2 team reviews.\n"
             "- **Rubric calibration:** Snowflake for the historical scoring data; calibration anchor diffs surfaced as audit events.\n"
-            "- **Judge models:** an Anthropic model (primary) + Azure OpenAI GPT-4o (secondary) + a fine-tuned Llama 3.1 8B (tertiary, fully in-VPC). Cross-vendor kappa is the calibration signal.\n"
+            "- **Judge models:** a hosted vendor model (primary) + Azure OpenAI GPT-4o (secondary) + a fine-tuned Llama 3.1 8B (tertiary, fully in-VPC). Cross-vendor kappa is the calibration signal.\n"
             "- **CI gate:** GitHub Actions / Argo CD pre-deploy hook; verdict posted as a PR check. FAIL blocks merge; REVIEW requires L2 approval within 24h.\n"
             "- **Observability:** OpenTelemetry traces; Langfuse for judge prompt traces; Datadog for SLO breaches.\n"
             "- **Compliance:** SOC 2 Type II baseline; SR 11-7 alignment for the regression-detection layer; NIST AI RMF 'Measure' function as the design target.\n"
             "- **Governance:** Native integration with the bank's GRC tool (Archer, ServiceNow GRC, MetricStream); each blocked deploy auto-files an evidence bundle and routes to the correct L2 queue.\n\n"
-            "The Streamlit prototype here proves the *product mechanic* - that a versioned probe set + calibrated rubric + cross-vendor judge + CI gate catches silent vendor-snapshot regressions on first eval run. The production architecture above is what the seat I'm pursuing actually delivers."
+            "The Streamlit prototype here shows the *product mechanic* on stored data: fixed thresholds on a stored pass rate and kappa block the two silent vendor-snapshot runs. No assistant or judge model runs in this repo. The production architecture above is what the seat I'm pursuing actually delivers."
         )
 
     st.markdown(

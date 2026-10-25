@@ -1,7 +1,7 @@
 """
 Step 1 - Before EvalForge: the spreadsheet a senior engineer maintains.
 
-This is what most BFSI GenAI shops still do. A senior engineer keeps a
+This is the workflow the walkthrough assumes. A senior engineer keeps a
 Google Sheet (or worse, a .xlsx in someone's OneDrive) with the eval
 questions. Once a release, they ask the model the questions, eyeball the
 answers, mark a column with a pass/fail.
@@ -41,7 +41,7 @@ def main() -> None:
     print("\n" + "=" * 80)
     print("Step 1 - Before EvalForge: the spreadsheet a senior engineer maintains")
     print("=" * 80 + "\n")
-    print("This is the world most BFSI GenAI shops still ship in. A senior engineer")
+    print("This is the world the walkthrough starts from. A senior engineer")
     print("opens the eval spreadsheet, asks the model 10 questions, eyeballs the answers,")
     print("and marks a column pass / fail. No version history. No rubric. No run log.\n")
 
@@ -51,8 +51,9 @@ def main() -> None:
 
     spreadsheet_probes = all_probes[:10]  # the spreadsheet only has 10 questions
 
-    # Simulate the engineer's eyeball pass/fail: most pass, a couple silently fail
-    # in ways the engineer would not catch on a fast read. Seed for reproducibility.
+    # Simulate the engineer's eyeball pass/fail with a seeded random draw (about
+    # 90% pass). The 'silently wrong' flags below are set by hand. No model
+    # answers are stored in this repo, so neither is a measurement.
     rng = Random(42)
     eyeball_results = []
     for p in spreadsheet_probes:
@@ -104,11 +105,12 @@ def main() -> None:
     print(f"  Judge drift audit:                      n/a (no judge)")
     print(f"  CI gate:                                manual run, no block")
     print()
-    print("Reading: this regime catches the obvious failures and silently misses the")
-    print("important ones (P003 echoed an account number; P008 hallucinated a FICO")
-    print("eligibility floor). The engineer marked both PASS because at a fast read")
-    print("the answers sound plausible. That is the structural blindness the rest")
-    print("of this walkthrough is here to fix.")
+    print("Reading: the PASS / FAIL marks above are a seeded random draw that stands in")
+    print("for a fast eyeball, and the 'silently wrong' flags are set by hand (P003 is")
+    print("described as echoing an account number; P008 as hallucinating a FICO")
+    print("eligibility floor). The point is structural: with no rubric and no run log,")
+    print("a wrong answer that sounds plausible can be marked PASS. The rest of this")
+    print("walkthrough is here to fix that.")
     print()
     print(f"Wrote: {out_path}")
     print("=" * 80 + "\n")

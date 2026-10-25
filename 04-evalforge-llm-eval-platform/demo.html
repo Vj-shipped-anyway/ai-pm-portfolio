@@ -13,12 +13,12 @@
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EvalForge — Eval-First Console for Regulated AI">
 <meta name="twitter:description" content="Versioned probe sets, calibrated rubrics and a CI gate that blocks a deploy on regression.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/04-evalforge-llm-eval-platform/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
@@ -142,7 +142,7 @@
       <span class="badge">12 calibrated rubrics</span>
       <span class="badge">50 historical runs</span>
       <span class="badge">6 named deficiencies</span>
-      <span class="badge">CI gate aligned</span>
+      <span class="badge">fixed-threshold CI gate</span>
     </div>
   </header>
 
@@ -150,7 +150,7 @@
     <div class="stat"><p class="stat-label">Probe set version</p><p class="stat-value" id="stat-probeset">v0.7</p></div>
     <div class="stat"><p class="stat-label">Regressions caught</p><p class="stat-value" id="stat-caught">0</p></div>
     <div class="stat"><p class="stat-label">SOTA basic eval</p><p class="stat-value" id="stat-sota">0</p></div>
-    <div class="stat"><p class="stat-label">MTTD (weeks)</p><p class="stat-value" id="stat-mttd">— / —</p></div>
+    <div class="stat"><p class="stat-label">MTTD (weeks, modeled)</p><p class="stat-value" id="stat-mttd">— / —</p></div>
   </section>
 
   <div class="controls">
@@ -188,6 +188,8 @@
     <p style="margin: 8px 0 0;">Per-feature lift: 🟡 <b>~14% → &lt;2% post-deploy silent-regression rate</b> (modeled — assumes an industry baseline of ~14% silent post-deploy regression on GenAI features at Tier-1 BFSI shops, and the EvalForge CI gate catching the snapshot-update class on first run). Annualized at a Tier-1 BFSI shop (~12-20 GenAI features × ~tens of thousands of customer interactions per feature per day): 🟡 <b>tens of thousands to hundreds of thousands of bad responses caught before customer impact per year</b>. 🟡 Time-to-detect: 8-12 weeks via complaint backlog → first eval run. Modeled CI gate false-positive rate: &lt;5%.</p>
   </section>
 
+  <p style="margin: 16px 0 0; font-size: 13px; color: var(--text-secondary);">Synthetic data. Pass rates, kappas and gate verdicts come from the stored eval-run table through the Step 4 thresholds; no assistant or judge model was run. The 8-12 week detection lag, the ~14% regression rate and the false-positive rate are modeled assumptions.</p>
+
   <footer class="footer-links">
     <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/README.md">Full walkthrough README</a>
     <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/04-evalforge-llm-eval-platform/PRD.md">PRD</a>
@@ -204,7 +206,7 @@ const RUNS = [
     id: "ER001", date: "2026-01-04", model: "vendor-balanced-4-20251101", probeSet: "probes-v0.7", n: 30,
     passRate: 0.93, kappa: 0.78, verdict: "PASS", regressionFlagged: "no",
     before: { eyeballed: true, marked: "7 PASS / 3 FAIL", silentlyWrong: 2,
-              note: "Engineer eyeballed 10 probes (the spreadsheet). Marked 7 PASS and 3 FAIL. Two were silently wrong on close read (P003 echoed account number, P008 hallucinated FICO floor) — engineer did not notice." },
+              note: "Engineer eyeballed 10 probes (the spreadsheet). Marked 7 PASS and 3 FAIL (a seeded simulation). Two were flagged wrong on a close read (P003 described as echoing an account number, P008 as hallucinating a FICO floor); the eyeball marked P003 PASS." },
     sota: { ran: true, passRate: 0.93, sliceComputed: false, ciGate: false,
             note: "Nightly cron ran all 30 probes. Aggregate pass rate 93%. No slice breakdown. No CI gate. Result dumped to S3, no one looked." },
     shield: { passRate: 0.93, kappa: 0.78, baseline: 0.93, delta: "+0.0pp",
@@ -226,7 +228,7 @@ const RUNS = [
     id: "ER012", date: "2026-02-17", model: "vendor-balanced-4-20260214", probeSet: "probes-v0.9", n: 60,
     passRate: 0.86, kappa: 0.68, verdict: "FAIL", regressionFlagged: "yes",
     before: { eyeballed: false, marked: "ship anyway", silentlyWrong: "n/a",
-              note: "Vendor pushed Anthropic vendor-balanced-4-20260214 silently. Engineer did not re-run the spreadsheet — no trigger. A high-severity slice such as fraud_workflow would regress too (illustrative; the dataset stores no per-slice rates). No one would know for 8-12 weeks until customer complaints accumulated." },
+              note: "Vendor pushed vendor-balanced-4-20260214 silently. Engineer did not re-run the spreadsheet — no trigger. A high-severity slice such as fraud_workflow would regress too (illustrative; the dataset stores no per-slice rates). No one would know for 8-12 weeks until customer complaints accumulated." },
     sota: { ran: true, passRate: 0.86, sliceComputed: false, ciGate: false,
             note: "Cron ran 2 days post-deploy. Pass rate dropped from 0.91 to 0.86. The dashboard would show this but the deploy already shipped — no gate." },
     shield: { passRate: 0.86, kappa: 0.68, baseline: 0.92, delta: "-6.0pp",

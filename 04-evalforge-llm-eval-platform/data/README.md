@@ -1,6 +1,6 @@
 # Sample Data — EvalForge walkthrough
 
-Four CSVs that drive Steps 1 through 4 of the walkthrough. Everything here is synthetic, seeded, and reproducible. No customer data. No PII. The shapes are calibrated against published BFSI GenAI deployment patterns and Hamel Husain's eval-first writing.
+Four CSVs that drive Steps 1 through 4 of the walkthrough. Everything here is synthetic, hand-written, and reproducible. No customer data. No PII. The shapes are informed by general BFSI GenAI deployment patterns and by Hamel Husain's eval-first writing.
 
 ---
 
@@ -58,7 +58,7 @@ The flight log. Each row is one nightly or pre-deploy eval run, with the model s
 | `human_override_count` | How many judge scores got overridden by a human reviewer this run. |
 | `notes` | Free-text — vendor updates, rubric recalibration, probe-set bumps. |
 
-**The narrative arc inside this file.** ER001-ER011 is the pre-EvalForge world (clean PASS streak but inter-judge kappa quietly drifting from 0.78 to 0.70). ER012 is the Anthropic Feb-14, 2026 silent snapshot update — the probe set catches it, pass rate drops to 0.86, regression flags. ER017-ER019 is the rubric recalibration + prompt patch. ER021 introduces cross-vendor judging. ER038 is the second silent vendor update (vendor-balanced-4-20260520) — the CI gate blocks deploy on first run. ER050 is the current production baseline.
+**The narrative arc inside this file.** ER001-ER011 is the pre-EvalForge world (clean PASS streak but inter-judge kappa quietly drifting from 0.78 to 0.70). ER012 is the Feb-14, 2026 silent vendor snapshot update — the probe set catches it, pass rate drops to 0.86, regression flags. ER017-ER019 is the rubric recalibration + prompt patch. ER021 introduces cross-vendor judging. ER038 is the second silent vendor update (vendor-balanced-4-20260520) — the CI gate blocks deploy on first run. ER050 is the current production baseline.
 
 ---
 
