@@ -145,12 +145,12 @@ The twenty-seven case studies above ask what breaks when AI gets into bank opera
 | [40 Eval Gate](./40-eval-gate/) | GitHub Action (staged) | A CI gate on probe-set regression | 25 of 25 should-block deploys stopped and 0 of 31 fine ones; a 0.90 pass-rate floor stops 13 of 25 |
 | [42 Trajectory Eval](./42-trajectory-eval/) | Project folder | Grade the steps an agent took, not only the answer it gave | Catches 90 of 96 defective runs, 78 of the 84 whose final answer was right; a final-answer check catches 12 of 96 |
 | [43 Agent Breaker](./43-agent-breaker/) | Command line | A circuit breaker for an agent | Trips 12 of 14 must-trip faults; 142 harmful calls served against 168 for a common breaker; 2 of 7 long blips trip falsely |
-| [47 SwapBrief](./47-swapbrief/) | Command line | A go or no-go brief for a model migration, from two files | False GO on 2 of 45 problem migrations, against 41 of 45 for a headline-average rule |
+| [47 SwapBrief CLI](./47-swapbrief/) | Command line | A go or no-go brief for a model migration, from two files | False GO on 2 of 45 problem migrations, against 41 of 45 for a headline-average rule |
 | [50 Review Capacity](./50-review-capacity/) | Command line | How many reviewers the human-in-the-loop queue needs | Meets both limits on 12 queues of 13 with 3.7% of cases late; average-workload staffing meets 0 of 13 with 32.6% late |
 | [52 Prompt Diff Risk](./52-prompt-diff-risk/) | GitHub Action (staged) | Classify a prompt change before it merges | Blocks 19 of 22 high-risk prompt changes and 2 of 18 harmless ones; reading every diff means 70 reads |
 | [54 Runbook Dry Run](./54-runbook-dryrun/) | Command line | An incident runbook you can dry-run, with the approval gate held | Catches 46 of 53 cases that go wrong only during the run; an echo-style dry run catches 5 of 53 |
 | [58 Plant](./58-plant/) | Command line | Synthetic data with a planted failure and its answer key | Tuned checker precision 0.90 against 0.56 for the naive one on a planted answer key; recall stays 0.86 across five seeds |
-| [59 ScopeKeeper](./59-scopekeeper/) | Command line | A usage-versus-grant diff for agent permissions | Removes 46 of 62 unneeded grants (74.2%) against 4 of 62 for the annual review; 0 of 5210 calls newly denied |
+| [59 ScopeKeeper CLI](./59-scopekeeper/) | Command line | A usage-versus-grant diff for agent permissions | Removes 46 of 62 unneeded grants (74.2%) against 4 of 62 for the annual review; 0 of 5210 calls newly denied |
 | [60 AI Ops Operating Model Review](./60-ai-ops-operating-model/) | Agent Skill (staged) | A skill that asks for evidence at each stage | A five-check review matches the true stage on 45 of 60 programs; the owners' own claims match 16 of 60 |
 | [61 MCP Scope Lint](./61-mcp-scope-lint/) | Command line | A tool manifest linter for grants nobody needs | Cuts 61 of 83 unneeded scopes and raises 0 findings on three groups built to look risky and be needed |
 | [62 ATLAS Case Study](./62-atlas-case-study/) | Project folder | From the trace of one agent run to a draft a threat catalogue can read | Drafts 22 of 32 failures and 0 of 28 harmless runs; 0 identifiers leaked; 10 of 32 failures get no draft |
@@ -162,10 +162,10 @@ The twenty-seven case studies above ask what breaks when AI gets into bank opera
 | --- | --- | --- | --- |
 | [29 TPRM Gap Map](./29-tprm-gap-map/) | Project folder | What the proposed third-party guidance prompts for an AI-enabled vendor | The text's own examples catch 17 of 24 vendors with a material incident; four AI-specific characteristics catch 22 of 24, with 19 false alarms against 13 |
 | [44 Inventory Check](./44-inventory-check/) | Agent Skill (staged) | Completeness, staleness and coverage tests for an inventory of generative and agentic systems | Flags 51 of 57 defective records and 2 of 43 clean ones; a blank-cell check finds 8 of 57 |
-| [48 ControlMap](./48-controlmap/) | Command line | An obligation-to-control crosswalk that says when it cannot decide | Right status on 42 of 56 obligations, against 19 of 56 for a keyword sheet |
+| [48 ControlMap CLI](./48-controlmap/) | Command line | An obligation-to-control crosswalk that says when it cannot decide | Right status on 42 of 56 obligations, against 19 of 56 for a keyword sheet |
 | [55 Challenge Pack](./55-challenge-pack/) | Agent Skill (staged) | A second-line test plan by tier | Finds 360 of 437 planted defects (82.4%) with 0 false alarms; a generic checklist finds 0 of 437 |
 | [56 AIGF Checks](./56-aigf-checks/) | Project folder | From a framework risk to a check you can run | Finds 38 of 45 defective crosswalk rows and flags 0 of 28 harmless ones; a grep for the number finds 11 of 45 |
-| [70 FairLens](./70-fairlens/) | Command line | A six-test pack for a scorecard, run from a scores file | The proxy ablation marks 7 of 14 planted-proxy portfolios FAIL; the reason-code check alone passes 13 of 14 |
+| [70 FairLens CLI](./70-fairlens/) | Command line | A six-test pack for a scorecard, run from a scores file | The proxy ablation marks 7 of 14 planted-proxy portfolios FAIL; the reason-code check alone passes 13 of 14 |
 
 ### Payments
 
