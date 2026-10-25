@@ -1,6 +1,6 @@
 # 🔎 StepScout — Task Mining to Agent Candidates
 
-**A portfolio prototype for finding which steps of an operations workflow an AI agent can take over: task-level mining of desktop and system events, a readiness and control screen per step, a ranked candidate list with hours at stake, and a build brief an engineer can pick up. Written against the 'Map' function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework): know the context an AI system will work in before you point it at anything.**
+**A portfolio prototype for an operations lead who has to choose which steps of a workflow an AI agent can take over: task-level mining of desktop and system events, a readiness and control screen per step, a ranked candidate list with hours at stake, and a build brief an engineer can pick up. Written against the 'Map' function of the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework): know the context an AI system will work in before you point it at anything.**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/26-stepscout-task-mining-agent-candidates/demo.html)
 
@@ -11,6 +11,8 @@
 - 🟢 Interview map: 24.8% of cases, 1 of 151 real paths (`step_03`)
 - 🟢 Off-system work: 44.8% of touch time is outside the case system; the interview names 3 of the 6 applications (`step_03`)
 - 🟢 Known miss, left in on purpose: S14 choose_resolution_route is classified AGENT; the key says HUMAN_JUDGMENT. It ranks #10 (`step_04`)
+
+_In this README the answer key is the generator's own record of which steps an agent can take over, and a volume-first list is the usual candidate list: steps ranked by case count times elapsed time between statuses in the case system's log._
 
 _A portfolio prototype on synthetic data, not a production case study. A separate [real-data mode](#-real-data-mode-one-public-loan-application-log) asks the case-log questions of one public loan-application log. The framing and how to read the numbers are folded below._
 
@@ -75,7 +77,7 @@ Teams that want to put an agent on part of an operations queue usually pick the 
 | Hours at stake | 🟡 950 stated hours (cases times 38 minutes) | Elapsed hours, waiting included | Elapsed hours, waiting included | 🟡 Modeled touch hours with one named assumption, never measured |
 | Where it still fails | One expert's happy path | Cannot see a step that posts no status; counts waiting as work | Judgment steps rise to the top because they wait | A judgment made off the desktop looks like a rule: 🟢 S14 is the known miss |
 
-**Position:** *StepScout does not replace the interview, the case system's log or the intake process. It adds the step-level evidence that sits between "we should put an agent here" and an engineer's first line of code: how long each step really takes a person, what it looks like when a person does it, whether it touches a control, and what it is worth if an agent took it over. The interview says where to look, the log says what the case system saw, and this says what a person did.* It does not decide which pilots a bank funds or what an agent is permitted to do: those are owned by 11 TierGate and 12 ValueLedger (intake and the business case) and by 23 ScopeKeeper (agent permissions); see the interlocks below.
+**Position:** *StepScout does not replace the interview, the case system's log or the intake process. It adds the step-level evidence that sits between "we should put an agent here" and an engineer's first line of code: how long each step really takes a person, what it looks like when a person does it, whether it touches a control, and what it is worth if an agent took it over. The interview says where to look, the log says what the case system saw, and this says what a person did.* It does not decide which pilots a bank funds or what an agent is permitted to do: those are owned by 11 TierGate (intake), 12 ValueLedger (benefit tracking against the business case) and 23 ScopeKeeper (agent permissions); see the interlocks below.
 
 ---
 
@@ -826,7 +828,7 @@ To point it at your own queue, replace these files and keep their columns:
 - `data/cases.csv`: `case_id, created, first_closed, final_closed, reason_code, variant_id, reopened, primary_worker`. `true_path` and `offdesk_min_truth` are the generator's own record
 - `data/sme_process_map.csv`: your interview notes
 
-The functions that do the work take plain lists and dicts, so you can call them directly:
+`load_all` reads the generator-only columns too (`truth_class`, the `planted_*` columns, `true_path` and `offdesk_min_truth`), so on your own export fill them with placeholders (`0` for the numbers, blank for `truth_class` and `true_path`) or edit `split_catalog` and `load_all`. The answer-key scores in step 4 are then meaningless. The functions that do the work take plain lists and dicts, so you can call them directly:
 
 ```python
 # from src/

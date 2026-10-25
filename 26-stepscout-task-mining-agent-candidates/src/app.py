@@ -335,7 +335,7 @@ if st.session_state.step >= 3:
         tone, verdict = "verdict-pass", f"Matches the answer key ({esc(P['key'])})."
     elif P["agent_ready_pred"] and not P["agent_ready_key"]:
         tone = "verdict-review"
-        verdict = (f"MISSED. The key says {esc(P['key'])}. On the desktop this step is a short pick with tight timing, no free text and no overrides, "
+        verdict = (f"MISSED. The key says {esc(P['key'])}. On the desktop this step is a short pick with tight timing, no free text and almost no overrides, "
                    "so nothing observable separates it from a rule. The judgment happens in a phone call that no file records.")
     else:
         tone = "verdict-review"
@@ -416,7 +416,7 @@ if st.session_state.step >= 4:
     st.markdown("<div class='trust-card quiet'><h4>What it still gets wrong</h4><ul>" + "".join(f"<li>{esc(w)}</li>" for w in wrong if w) + "</ul></div>",
                 unsafe_allow_html=True)
 
-    st.markdown("**Touch hours by step, coloured by the class StepScout gave it**")
+    st.markdown("**Touch hours by step, colored by the class StepScout gave it**")
     st.caption("From desktop events. Blue steps are candidates; grey steps stay with a person.")
     colors = {"AGENT": "#059669", "AGENT_HITL": "#1f5fb0", "HUMAN_JUDGMENT": "#94a3b8", "HUMAN_CONTROL": "#64748b"}
     fig = go.Figure()
@@ -460,7 +460,6 @@ if st.session_state.step >= 4:
             "touch hours": round(r["touch_hours"], 1), "hours at stake (modeled)": round(r["hours_at_stake"], 1),
             "control screen": r["screen"]} for r in A["ranked"]]), use_container_width=True, hide_index=True)
         st.markdown("**The two top-10 lists side by side**")
-        vf = {r["step"]: r["rank"] for r in A["log"]["candidates"]}
         st.dataframe(pd.DataFrame([{
             "position": i + 1,
             "volume-first": f"{a} {DATA['register'][a]['name']}", "volume-first: agent-ready by key": "yes" if a in SC["true_ready"] else "no",

@@ -3,7 +3,7 @@
 The default walkthrough runs on synthetic data, where the generator knows the answer. This script asks
 the same questions of a real log, so the effect can be seen once without a planted signal. The log is
 the BPI Challenge 2012 event log of a loan-application process at a financial institution (van Dongen,
-2012, DOI 10.4121/uuid:3926db30-f712-4394-aebc-75976070e91f; licence: 4TU General Terms of Use).
+2012, DOI 10.4121/uuid:3926db30-f712-4394-aebc-75976070e91f; license: 4TU General Terms of Use).
 
 What it can answer from a case-system log alone:
   - how many real paths the cases take, and how much of the work the most common path covers

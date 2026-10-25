@@ -23,7 +23,7 @@ added here (S13 to S16). Two of them are decoys, and the printed answer key says
   S13 triage_beneficiary_bank_reply: HUMAN_JUDGMENT, high volume, long waits, posts a status, so a
       ranking by volume times time puts it near the top.
   S14 choose_resolution_route: HUMAN_JUDGMENT that looks rule-based. On the desktop it is a short,
-      tight-timed dropdown pick with no free text and no overrides. The judgment is made in a phone
+      tight-timed dropdown pick with no free text and almost no overrides. The judgment is made in a phone
       call before the pick, and no event file sees the call. It is the known miss.
 Everything is synthetic. No real bank, process, vendor or person. No model is used anywhere.
 

@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (merge, classify, screen, rank and brief, over synthetic events, with a Streamlit app). Nothing below is claimed as deployed or load-tested. The prototype's desktop and status events are written by a generator, so the collector and the labeler are a design and not a build. Where a figure is a design target, it says so (🔴).
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most bank technology estates run on AWS, GCP or Azure, and some on two of the three. GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![StepScout flow](./assets/stepscout-flow.svg)
 

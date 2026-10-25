@@ -14,10 +14,10 @@ What it does, in order
   4. RANK. Modeled hours at stake times readiness. Hours at stake is touch time in the 30 days times ONE
      named assumption: the share of a step's touch time an agent removes (REMOVAL_SHARE). It is modeled,
      never measured.
-  5. BRIEF. Write build-brief/v1 files for the top candidates and validate them with a stdlib check.
-  6. SCORE against the answer key, which is the generator's own: accuracy, precision and recall of
+  5. SCORE against the answer key, which is the generator's own: accuracy, precision and recall of
      agent-ready steps, the top 10 against the volume-first list, the share of handling time recovered,
      and the known miss.
+  6. BRIEF. Write build-brief/v1 files for the top candidates and validate them with a stdlib check.
 
 Run (from src/):
     python3 step_04_with_stepscout.py
@@ -50,7 +50,7 @@ N_BRIEFS = 3
 OCC_GAP_S = 600                      # two events of one step more than 10 minutes apart are two occurrences
 JUDGE_OVERRIDE, JUDGE_TEXT, JUDGE_REPEAT, JUDGE_CV, JUDGE_NEED = 0.20, 200.0, 1.30, 0.50, 2
 HITL_OVERRIDE, HITL_TEXT, HITL_WRITE, HITL_OUTWARD = 0.05, 80.0, 0.50, 0.50
-STATUS_TOLERANCE_S = (-5, 120)       # an occurrence ends from 5 seconds after to 120 seconds before its status event
+STATUS_TOLERANCE_S = (-5, 120)       # an occurrence ends from 120 seconds before to 5 seconds after its status event
 READ_ACTIONS = ("read", "search", "open", "copy")
 BRIEF_SCHEMA = "build-brief/v1"
 
@@ -229,7 +229,7 @@ def rank_candidates(classes: dict, stats: dict, register: dict, screen: dict) ->
 
 
 # ---------------------------------------------------------------------------
-# 5. Build briefs
+# 6. Build briefs (defined here; analyze() runs it after the scoring in step 5)
 # ---------------------------------------------------------------------------
 BRIEF_KEYS = ["schema", "brief_id", "candidate", "scope", "inputs", "tools", "controls", "acceptance", "test_plan",
               "rollout", "handoff", "estimate"]
@@ -440,7 +440,7 @@ def validate_brief(b: dict) -> list:
 
 
 # ---------------------------------------------------------------------------
-# 6. Score and assemble
+# 5. Score and assemble
 # ---------------------------------------------------------------------------
 def analyze(data: dict) -> dict:
     reg, key = data["register"], data["key"]
