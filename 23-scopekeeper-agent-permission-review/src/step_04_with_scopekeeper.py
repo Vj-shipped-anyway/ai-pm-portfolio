@@ -28,8 +28,9 @@ from __future__ import annotations
 import csv
 import json
 
-from step_01_status_quo import (IMPACT_ORDER, OUT_DIR, WINDOW_DAYS, expand, grant_usage, load_all, replay_calls,
-                                usage_index)
+from step_01_status_quo import (
+    OUT_DIR, WINDOW_DAYS, expand, grant_usage, load_all, replay_calls, usage_index,
+)
 from step_02_annual_recertification import summarize as summarize_step2
 from step_03_deficiencies_exposed import summarize as summarize_step3
 
