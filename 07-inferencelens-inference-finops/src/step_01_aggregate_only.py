@@ -109,10 +109,11 @@ def main() -> None:
     print("  - Whether the spend is paying for revenue or burning cash")
     print("  - Whether decommissioned features are still hitting the API")
     print()
-    print("The aggregate hides everything. A single feature burning $50k/day")
-    print("is invisible against the $4M monthly total. Step 2 (basic per-vendor")
-    print("dashboards) helps a little. Step 3 names the six deficiencies.")
-    print("Step 4 (InferenceLens) closes all six.")
+    print("The aggregate hides everything. A single feature's 3.7x daily-spend")
+    print("spike is invisible against the $4M monthly total. Step 2 (basic")
+    print("per-vendor dashboards) helps a little. Step 3 names the six")
+    print("deficiencies. Step 4 (InferenceLens) closes five and designs the")
+    print("sixth (per-tenant attribution; the shipped logs have no tenant column).")
     print()
 
     out_path = OUT_DIR / "step_01_aggregate_report.csv"

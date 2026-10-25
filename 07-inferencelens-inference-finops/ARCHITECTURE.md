@@ -2,7 +2,9 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network topology, operational runbooks. What you would hand to your CISO and your AI Platform engineering lead on day one.
 
-This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on AWS because most BFSI GenAI portfolios run on Bedrock for in-VPC inference and AWS for the data plane; GCP and Azure equivalents are called out inline.
+**This is a design, not a deployed system.** Nothing in this document has been built, audited or measured. The only measured numbers for InferenceLens are the ones the step scripts print, summarized in the [README](./README.md); SLOs, RTO/RPO, retention periods and stack choices below are design intent.
+
+This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on AWS because Bedrock gives in-VPC inference for data-residency-locked workloads; GCP and Azure equivalents are called out inline.
 
 ---
 
@@ -57,7 +59,7 @@ inferencelens/
 
 ### Runtime
 
-**Primary on AWS (matches most BFSI GenAI deployments via Bedrock):**
+**Primary on AWS:**
 
 | Component | Runtime | Why |
 | --- | --- | --- |
@@ -105,8 +107,8 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock billing):
 
 - **Primary:** US-East (us-east-1 AWS / us-east1 GCP / East US Azure)
 - **DR:** US-West (us-west-2 / us-west1 / West US 2). Active-passive. RTO 4h, RPO 1h for the ClickHouse cost-event table.
-- **EU instance:** Frankfurt (eu-central-1 / europe-west3 / Germany West Central). Required for EU AI Act and GDPR data-residency for EU customer-segment spend rollups.
-- **India instance:** Mumbai (ap-south-1 / asia-south1 / Central India). Required for RBI data localization on Indian retail-arm spend.
+- **EU instance:** Frankfurt (eu-central-1 / europe-west3 / Germany West Central). Included for EU AI Act and GDPR data-residency expectations on EU customer-segment spend rollups; whether a bank needs it is a legal question.
+- **India instance:** Mumbai (ap-south-1 / asia-south1 / Central India). Included for RBI data-localization expectations on Indian retail-arm spend, to be confirmed with the bank's legal team.
 - Each regional instance has its own ClickHouse cluster, its own KMS key ring, its own ALB. **Cross-region replication only for the executive view's read replica** — primary cost-event tables stay sovereign.
 
 ---
@@ -117,9 +119,9 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock billing):
 
 | Store | Purpose | Why this store |
 | --- | --- | --- |
-| **ClickHouse** (Aiven / Altinity managed) | `cost_events` table — one row per inference call (or aggregated bucket); per-feature daily rollup materialized view. | 10-50x cheaper than Postgres for time-series at this volume. The right substrate for per-feature cost at fleet scale (~500M calls/yr peak). Same engine [LineageLog](../09-lineagelog-ai-decision-audit/) uses for composer telemetry. |
+| **ClickHouse** (Aiven / Altinity managed) | `cost_events` table — one row per inference call (or aggregated bucket); per-feature daily rollup materialized view. | Assumed far cheaper than Postgres for time-series at this volume (not benchmarked). The right substrate for per-feature cost at fleet scale (~500M calls/yr peak). Same engine [LineageLog](../09-lineagelog-ai-decision-audit/) uses for composer telemetry. |
 | **PostgreSQL 15** (Aurora / Cloud SQL) | `feature_catalog` table — the source of truth for `(feature_id, model_used, status, owner_team, business_line, revenue_attribution_path)`. Plus the recommender's decision log. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. The feature catalog is the join key for everything. |
-| **Snowflake / Databricks** (read-only) | Revenue-attribution table per feature (joined nightly). Plus the bank's historical cost-allocation snapshots for cross-check. | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
+| **Snowflake / Databricks** (read-only) | Revenue-attribution table per feature (joined nightly). Plus the bank's historical cost-allocation snapshots for cross-check. | Already exists at most large banks. We don't introduce a third lake. |
 | **Redis** (ElastiCache / Memorystore) | Session cache (UI), idempotency keys (aggregator), rate-limit counters, pricing-snapshot cache. | TTL-based eviction. Multi-AZ for high availability. |
 | **S3 / GCS / Blob Storage** | Vendor billing-API raw exports, archived CFO packs, weekly fleet-rollup snapshots. | Cheap durable storage; cross-region replication for DR. |
 | **EventBridge / Pub/Sub / Event Hubs** | OTel-collector fan-in topic; vendor billing-API ingest topic. | Native to the cloud; ordered delivery within a partition; replay-able. |
@@ -264,7 +266,7 @@ The table that compiles the composition contract. Every cell maps a deficiency t
 
 ### Secrets management
 
-- **Primary store.** HashiCorp Vault (most BFSI shops already run it) or AWS Secrets Manager.
+- **Primary store.** HashiCorp Vault (which many BFSI shops already run) or AWS Secrets Manager.
 - **Application secrets** fetched at boot via Workload Identity Federation. No env-var secrets in container manifests. Rotation: 90 days, zero-downtime via dual-credential rolling.
 - **Service account keys.** None. IRSA (AWS) / Workload Identity (GCP) / Managed Identity (Azure).
 - **Vendor billing-API keys.** Stored in Vault with audit logging on every read; rotation 30 days.
@@ -337,9 +339,9 @@ Authorization via Open Policy Agent (OPA) + Rego policies. Every API call evalua
 - **ClickHouse.** Weekly backup to S3. ReplicatedMergeTree gives HA within region.
 - **PostgreSQL.** Continuous WAL streaming to S3. Daily snapshots, 35-day retention. Point-in-time recovery within retention window.
 - **Object stores.** Object Lock + versioning + cross-region replication for CFO-pack archive (within same regulatory region only).
-- **DR drill cadence.** Quarterly. Full failover to US-West, validate RTO 4h / RPO 1h for the ClickHouse aggregate, fail back. Runbook in `docs/runbooks/dr-failover.md`.
+- **DR drill cadence.** Quarterly. Full failover to US-West, validate RTO 4h / RPO 1h for the ClickHouse aggregate, fail back. Runbook: `docs/runbooks/dr-failover.md` in the product repo.
 
-### Runbooks (one paragraph each in the repo)
+### Runbooks (planned: one paragraph each in the product repo; none are in this portfolio folder)
 
 - `dr-failover.md` — full region failover
 - `aggregator-stuck.md` — when the OTel-tail fan-in stalls
@@ -350,16 +352,18 @@ Authorization via Open Policy Agent (OPA) + Rego policies. Every API call evalua
 
 ---
 
-## 6. Compliance posture
+## 6. Control alignment (design intent)
+
+None of this has been audited, attested or formally assessed. Each row says what the design is meant to line up with.
 
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All six components in scope. Annual external audit. |
+| **SOC 2 Type II** | Design intent: all six components in the audit scope, with an annual external audit once deployed. |
 | **PCI-DSS** | Out of scope (InferenceLens does not process card data; it composes cost about features that may). PCI scope minimization via tenant-hash + no raw customer IDs. |
 | **GLBA** | Customer financial-data adjacency only — we do not read inference payloads, only token counts. Access controls + audit trail apply. |
-| **FinOps Foundation framework** | [FinOps Foundation](https://www.finops.org/framework/) Level 3 maturity (Inform / Optimize / Operate phases) is the target posture for the AI / inference cost domain. |
+| **FinOps Foundation framework** | [FinOps Foundation](https://www.finops.org/framework/) Run-stage maturity (my shorthand: Level 3; Inform / Optimize / Operate phases) is the target posture for the AI / inference cost domain. |
 | **NIST AI RMF 1.0** | Govern function on kill-criterion (dead-feature flagger); Map function on per-feature attribution (every feature has a cost surface and an owner). |
-| **EU AI Act Article 12** | Per-feature cost is part of the record-keeping surface for high-risk AI systems. Interlocks with [LineageLog](../09-lineagelog-ai-decision-audit/) for the decision-grain side. |
+| **EU AI Act Article 12** | Per-feature cost could be part of the record-keeping surface for any feature the bank classes as high-risk. Interlocks with [LineageLog](../09-lineagelog-ai-decision-audit/) for the decision-grain side. |
 | **GDPR** | EU instance enforces data residency. No PII in InferenceLens — only `tenant_id` hash. |
 | **India RBI data localization** | Indian retail-arm features run on the India regional instance; cost-event data does not leave the region. |
 | **SOX (for the public BHC parent)** | AI line item in the cost report is auditable per-feature. Vendor billing-API reconcile provides the cross-check. |
@@ -434,4 +438,4 @@ That last list is the discipline. Every internal-build I have watched die has di
 }
 ```
 
-OpenAPI spec lives at `docs/api/openapi.yaml` and is the source of truth for both the CLI and the UI clients.
+In the product repo, the OpenAPI spec would live at `docs/api/openapi.yaml` and be the source of truth for both the CLI and the UI clients.

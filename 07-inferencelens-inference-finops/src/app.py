@@ -3,8 +3,8 @@
 Streamlit walkthrough:
   Step 1 - pick a feature (or use the FT_001 runaway as default)
   Step 2 - executive verdict card: HEALTHY / RUNAWAY / UNDERUTILIZED / DECOMMISSION
-  Step 3 - the six-deficiency view: each closed inline (attribution, runaway,
-            substitution, dead-feature, ROI)
+  Step 3 - the six-deficiency view: five computed inline (attribution, runaway,
+            substitution, dead-feature, ROI) and per-tenant shown as designed
   Step 4 - the CFO pack (CSV downloads + glossary + production stack reassessment)
 """
 
@@ -444,9 +444,9 @@ if st.session_state.step >= 2:
 if st.session_state.step >= 3:
     st.markdown(
         "<div class='il-card'><span class='il-step-label'>Step 3</span>"
-        "<h3>Six-deficiency composition - each closed inline</h3>"
+        "<h3>Six-deficiency composition - five computed, one designed</h3>"
         "<p class='muted'>Each row is one of the six deficiencies the product taxonomy names. "
-        "Green = closed by composition. Amber = recommendation present. Red = active alert. "
+        "Green = computed by the prototype. Amber = recommendation present. Red = active alert. "
         "The exact taxonomy is the product's intellectual property and is the lens through "
         "which a CFO reads the AI-platform spend report.</p></div>",
         unsafe_allow_html=True,
@@ -462,9 +462,9 @@ if st.session_state.step >= 3:
     )
     # 2. Per-tenant attribution
     st.markdown(
-        f"<div class='def-row'><div class='dlabel'>2. Per-tenant / segment attribution - RESOLVED</div>"
+        f"<div class='def-row'><div class='dlabel'>2. Per-tenant / segment attribution - DESIGNED, NOT COMPUTED</div>"
         f"<div class='dval'>owner={ft_row['owner_team']} - business_line={ft_row['business_line']} - "
-        f"production reads tenant_id from the OpenTelemetry span; demo aggregates by business_line</div></div>",
+        f"production reads tenant_id from the OpenTelemetry span; the shipped logs have no tenant column, so this row shows the feature's owner and business line only</div></div>",
         unsafe_allow_html=True,
     )
     # 3. Runaway detection
@@ -642,7 +642,7 @@ if st.session_state.step >= 4:
                 ("Dormant feature", "A feature with a trickle of traffic against a catalog status of 'dormant'. Governance smell."),
                 ("Per-feature ROI", "Modeled monthly revenue attributed to the feature, divided by modeled monthly cost. Lets you defend the AI roadmap with a per-feature number."),
                 ("FinOps", "The discipline of running cloud costs as an operating practice. Defined by the FinOps Foundation framework: Inform, Optimize, Operate."),
-                ("OpenTelemetry", "Industry-standard distributed tracing. The substrate every InferenceLens production deployment reads from."),
+                ("OpenTelemetry", "Industry-standard distributed tracing. The substrate an InferenceLens deployment would read from."),
                 ("ClickHouse", "A columnar database that handles high-cardinality cost events at scale. The right substrate for per-feature attribution at fleet scale."),
                 ("Retrieval depth", "The number of documents a RAG pipeline pulls per query. Misconfiguring this from 5 to 50 inflates input tokens ~7x and is the classic GenAI runaway cause."),
                 ("Per-token pricing", "The vendor's published cost per million input/output tokens. Anthropic, Azure OpenAI, and AWS Bedrock all publish this."),
@@ -667,9 +667,9 @@ if st.session_state.step >= 4:
     with st.expander("Production stack reassessment - what this would look like as client-facing SaaS"):
         st.markdown(
             """
-            The Streamlit prototype here proves the *product mechanic* - that per-feature attribution can
-            compress runaway detection from 6 weeks to 1 day, and that a cheaper-model substitution recommender
-            can drive a modeled 25-30% spend reduction. **If InferenceLens were a real product shipping to a
+            The Streamlit prototype here shows the *product mechanic* on synthetic data - per-feature attribution
+            flags the seeded runaway on its first anomalous day. The 6 weeks to 1 day lag and the modeled 25-30%
+            spend reduction are assumptions, not results. **If InferenceLens were a real product shipping to a
             Tier-1 bank's AI Platform team and Finance organization:**
 
             - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system) - embedded as a
@@ -679,8 +679,8 @@ if st.session_state.step >= 4:
               `il:viewer` -> `il:finops_analyst` -> `il:feature_owner` -> `il:cfo` -> `il:admin`.
             - **Backend:** FastAPI on the bank's existing K8s/EKS footprint; per-vendor billing-API ingesters
               run as Cloud Functions / Lambdas.
-            - **Data plane:** **ClickHouse** for the high-cardinality per-call cost events (10-50x cheaper
-              than Postgres for time-series at this volume); **Postgres** for the feature catalog and the
+            - **Data plane:** **ClickHouse** for the high-cardinality per-call cost events (assumed far cheaper
+              than Postgres for time-series at this volume; not benchmarked); **Postgres** for the feature catalog and the
               substitution recommender's decision log; **Snowflake** read-only for the revenue-attribution
               join. Interlocks with [LineageLog](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/tree/main/09-lineagelog-ai-decision-audit)
               on the decision-grain spine.
@@ -691,7 +691,7 @@ if st.session_state.step >= 4:
               probe-set pass rates per (feature, model) pair. Recommendations refresh nightly.
             - **Observability:** OpenTelemetry -> Datadog for service traces; the cost-event stream itself
               IS the observability for InferenceLens. PagerDuty on runaway-alert breaches.
-            - **Compliance:** SOC 2 Type II baseline. Aligned to FinOps Foundation framework's Inform /
+            - **Control alignment (design intent, not audited):** SOC 2 Type II baseline. Aligned to FinOps Foundation framework's Inform /
               Optimize / Operate phases. NIST AI RMF Govern function on kill-criterion.
             - **Governance:** Native integration with the bank's existing FinOps tooling (Apptio Cloudability,
               CloudHealth) - InferenceLens publishes per-feature spend; FinOps tooling aggregates with

@@ -93,9 +93,10 @@ DEFICIENCIES = [
             "across the model-pricing tiers."
         ),
         "consequence": (
-            "Modeled 27% of the fleet is over-tiered. ~$240k/mo of avoidable spend "
-            "across the customer-service-assistant + compliance-summarizer + branch-"
-            "banker-copilot + kyc-doc-reader. Pure inertia tax."
+            "Modeled: 6 of 18 features are over-tiered (customer-service-assistant, "
+            "compliance-summarizer, kyc-doc-reader, collections-script-generator, "
+            "branch-banker-copilot, marketing-copy-variants). Step 4 prints the "
+            "modeled savings. Pure inertia tax."
         ),
     },
     {
@@ -112,8 +113,8 @@ DEFICIENCIES = [
         ),
         "consequence": (
             "Leaked SDK key + a downstream batch job nobody remembered to decommission "
-            "is generating ~$28k/mo of zero-business-value inference cost. The dormant "
-            "FT_016 adds another ~$180/mo - small alone, governance smell at fleet scale."
+            "is generating ~$26k/mo of zero-business-value inference cost. The dormant "
+            "FT_016 adds about $1/mo in the sampled window - small alone, governance smell at fleet scale."
         ),
     },
     {

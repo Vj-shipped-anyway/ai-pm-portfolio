@@ -75,6 +75,8 @@ def main() -> None:
             feature_sample_counts.get(r["feature_id"], 0) + 1
         )
 
+    window_days = len({r["timestamp"][:10] for r in logs})
+
     # Aggregate by (api_key, model)
     by_key_model: dict[tuple[str, str], float] = defaultdict(float)
     by_day: dict[str, float] = defaultdict(float)
@@ -92,13 +94,13 @@ def main() -> None:
         model = r["model"]
         by_key_model[(api_key, model)] += modeled_cost
         day = r["timestamp"][:10]
-        by_day[day] += modeled_cost
+        by_day[day] += modeled_cost * window_days / 30  # scale the one-month equivalent up to the real window volume
 
     print("\n" + "=" * 80)
     print("Step 2 - The vendor-console view (per-API-key, per-model)")
     print("=" * 80)
     print()
-    print("Reporting period: May 15, 2026 - June 14, 2026")
+    print("Reporting period: April 15, 2026 - June 14, 2026 (60-day sample, scaled to one month of catalog volume)")
     print()
     print("-" * 80)
     print(f"  {'API key':<24} {'Model':<26} {'Modeled monthly':>18}")
@@ -113,7 +115,7 @@ def main() -> None:
     print("Daily aggregate (last 7 days the vendor console shows by default):")
     last_7 = sorted(by_day.keys())[-7:]
     for day in last_7:
-        bar = "#" * int(by_day[day] / 4000)
+        bar = "#" * int(by_day[day] / 1000)
         print(f"  {day}  ${by_day[day]:>10,.0f}  {bar}")
     print()
     print("Notice: even the daily view aggregates everything. The FT_001 runaway")

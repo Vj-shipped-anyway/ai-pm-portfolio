@@ -13,12 +13,12 @@
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="InferenceLens - Inference Economics for BFSI GenAI - Vijay Saharan">
 <meta name="twitter:description" content="Per-feature cost attribution, runaway detection and cheaper-model recommendations across a GenAI portfolio.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/07-inferencelens-inference-finops/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
@@ -213,7 +213,7 @@ const FEATURES = [
             note: "Anthropic console shows ak_retail_prod has a daily-spend uptick. Console cannot say WHICH feature inside the key is responsible (11 features share this key)." },
     lens: { attribution: "FT_001 modeled monthly spend ~$145k (up from ~$49k)",
             runaway: "ALERT - 3.7x baseline since 2026-05-01 - retrieval depth misconfig (50 docs, should be 5)",
-            substitution: "vendor-balanced-4-5 -> vendor-fast-4-5 - savings $182k/mo - accuracy delta -1.4pp",
+            substitution: "vendor-balanced-4-5 -> vendor-fast-4-5 - modeled savings $182k/mo (larger than the logged ~$145k/mo) - accuracy delta -1.4pp",
             dead: "Live - retail customer-service is the bank's highest-traffic GenAI surface",
             roi: "No revenue attribution; cost-center customer-service feature - kill the runaway, then substitute" }
   },
@@ -239,7 +239,7 @@ const FEATURES = [
             note: "Anthropic console shows model-mix; no recommendation engine. The 'is the frontier model the right tier' question is engineering judgment that nobody is paid to make." },
     lens: { attribution: "FT_006 modeled monthly spend $4,558 - small feature, expensive model",
             runaway: "Clear - steady volume",
-            substitution: "vendor-frontier-4-1 -> vendor-balanced-4-5 - savings $42k/mo at -3.1pp accuracy",
+            substitution: "vendor-frontier-4-1 -> vendor-balanced-4-5 - modeled savings $42k/mo at -3.1pp accuracy (larger than the logged $4,558/mo)",
             dead: "Live - compliance L2 uses it daily",
             roi: "Cost-center feature; kill the over-tier - re-evaluate the frontier model when accuracy delta materially drops" }
   },
@@ -323,7 +323,7 @@ function render(idx) {
   lensHtml += '<div class="field-row"><span class="field-label">Substitution</span><span class="field-value">' + escapeHtml(f.lens.substitution) + '</span></div>';
   lensHtml += '<div class="field-row"><span class="field-label">Dead-feature</span><span class="field-value">' + escapeHtml(f.lens.dead) + '</span></div>';
   lensHtml += '<div class="field-row"><span class="field-label">ROI</span><span class="field-value">' + escapeHtml(f.lens.roi) + '</span></div>';
-  lensHtml += '<div class="meta">All five views compose across the whole fleet in under 10ms on the prototype. Six deficiencies closed.</div>';
+  lensHtml += '<div class="meta">All five views compose across the whole fleet in under 10ms on the prototype. Five of six deficiencies closed; per-tenant (#2) is designed, not computed, because the shipped logs have no tenant column. Substitution savings are modeled inputs, not derived from the logs: for FT_001 and FT_006 the listed saving is larger than the logged monthly spend of the feature.</div>';
   if (f.status === 'ROI-POSITIVE') {
     lensHtml += '<div class="pill pill-ok">PASS - revenue-positive, right-sized</div>';
   } else if (f.status === 'RUNAWAY' || f.status === 'DEAD') {

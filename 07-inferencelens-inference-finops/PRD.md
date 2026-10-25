@@ -16,8 +16,8 @@
 | **Owner** | Vijay Saharan, Sr PM (AI Platform / FinOps). |
 | **Stage** | Portfolio prototype, designed for engagement. Synthetic data, no production deployment. |
 | **Users** | Primary: Head of FinOps, AI Platform PM. Secondary: CFO's office, individual feature owners (line-1 product managers), CTO. Tertiary: Procurement, vendor-relationship leads. |
-| **Problem** | Tier-1 BFSI shops run 12-20 customer-facing GenAI features against $8-30M/yr aggregate inference spend. Per-feature attribution is ~0%. A single misconfigured feature can run at 3.7x its baseline spend for 6 weeks before quarterly cost review notices. Cheaper-model substitutions are obvious in retrospect, invisible in the moment. Dead features rack up bill long after their UIs were shut down. CFO asks "what are we paying for?" — nobody can answer. |
-| **Solution** | Per-feature inference economics layer that reads OpenTelemetry span attributes (feature_id, tenant_id, model, tokens), reconciles against vendor billing APIs, and runs five derived views: per-feature attribution, runaway detection, cheaper-model substitution recommender, dead-feature flagger, per-feature ROI ranking. Six-deficiency taxonomy closed by design. |
+| **Problem** | Tier-1 BFSI shops run 12-20 customer-facing GenAI features against $8-30M/yr aggregate inference spend. Per-feature attribution is often missing (assumed; no survey cited). A single misconfigured feature can run at 3.7x its baseline spend for 6 weeks before quarterly cost review notices. Cheaper-model substitutions are obvious in retrospect, invisible in the moment. Dead features rack up bill long after their UIs were shut down. CFO asks "what are we paying for?" — nobody can answer. |
+| **Solution** | Per-feature inference economics layer that reads OpenTelemetry span attributes (feature_id, tenant_id, model, tokens), reconciles against vendor billing APIs, and runs five derived views: per-feature attribution, runaway detection, cheaper-model substitution recommender, dead-feature flagger, per-feature ROI ranking. The six-deficiency taxonomy is addressed by design; the prototype computes five of the six (per-tenant attribution needs a `tenant_id` column the shipped logs do not have). |
 | **North-star metric** | % of inference spend that is per-feature attributed within 24 hours of cost incurrence, with revenue-attribution joined within 7 days. |
 | **Modeled metrics (12-month horizon)** | 🟡 Per-feature attribution coverage: **0% → 100%** (assumes the OpenTelemetry span attributes ship on every feature). 🟡 Modeled spend reduction: **25-30%** (assumes cheaper-model substitutions on the over-tiered fleet + dead-feature pruning + runaway prevention; reference baseline is the synthetic 18-feature fleet). 🟡 Runaway detection lag: **6 weeks → 1 day** (modeled — assumes 3x trailing-7-day baseline threshold and per-feature alerting). |
 | **Modeled cost** | 🔴 ~$340k for a 90-day engagement in a real deployment (compute on existing ClickHouse footprint + 1 PM + 1.5 FTE engineers + 0.25 FTE Finance partner + Snowflake reads for revenue join) — designed, not executed. |
@@ -32,7 +32,7 @@
 
 | Role | Line | Stake | What they want from InferenceLens |
 | --- | --- | --- | --- |
-| **Head of FinOps** | Finance | Owns the cloud/AI cost discipline | Per-feature attribution, dead-feature flagger, substitution recommender. Lands the AI platform team's FinOps maturity at Level 3 (FinOps Foundation framework). |
+| **Head of FinOps** | Finance | Owns the cloud/AI cost discipline | Per-feature attribution, dead-feature flagger, substitution recommender. Lands the AI platform team's FinOps maturity at the framework's Run stage (my shorthand: Level 3). |
 | **CFO's office** | Finance | Owns the quarterly cost review | Per-feature monthly spend, per-feature ROI ranking, runaway alert. The "what are we paying for" answer that's been missing for two years. |
 | **CTO** | Platform | Owns the AI strategy + cost | Fleet-level health metric; aging-features-without-ROI report; cheaper-model substitution recommendations ranked by modeled savings. |
 | **AI Platform PM (me)** | Platform | Owns the platform substrate | The substrate that lets every feature owner self-serve their own ROI story. The dashboard that ends the "we are looking into it" pattern. |
@@ -45,7 +45,7 @@
 
 ## 3. RICE-prioritized backlog
 
-> RICE = (Reach × Impact × Confidence) ÷ Effort.
+> RICE = (Reach × Impact × Confidence) ÷ Effort. Reach is an assumed count of in-scope features.
 > Status: "Sequenced for v0.x" = committed to a release. "Queued" = will be sequenced after v0.5.
 
 | # | Item | Reach | Impact | Confidence | Effort | RICE | Status |
@@ -69,11 +69,11 @@
 
 ## 4. Why now
 
-- **GenAI portfolios at Tier-1 BFSI are at 12-20 customer-facing features.** Each one was built with the vendor SDK's default settings. None of them was instrumented for per-feature cost from day one.
+- **GenAI portfolios at Tier-1 BFSI are at 12-20 customer-facing features (assumed range).** Many were built with the vendor SDK's default settings and without per-feature cost instrumentation from day one.
 - **Aggregate inference spend is now CFO-attention-grabbing.** $8-30M/yr is in the range where Finance asks for an account, and nobody can give one.
 - **Vendor pricing differentials are real.** [Anthropic's fast model](https://www.anthropic.com/pricing) is 1/15 the cost of [its frontier model](https://www.anthropic.com/pricing) per output token. [gpt-4o-mini](https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/) is 1/17 the cost of gpt-4o. The substitution candidate space is wide and well-priced.
-- **OpenTelemetry has won.** Every modern LLM SDK either emits OTEL natively or has a community shim. The substrate exists; the composition layer is missing.
-- **FinOps Foundation framework** is the published industry reference. AI is currently in the framework's "emerging" tier; getting a bank to Level 3 maturity on AI/inference is now table stakes for the FinOps practice.
+- **OpenTelemetry has won.** Most modern LLM SDKs either emit OTEL natively or have a community shim. The substrate exists; the composition layer is missing.
+- **FinOps Foundation framework** is the published industry reference. I use its Run stage (my shorthand: Level 3) as the target maturity for AI inference spend; the framework does not set an AI-specific level.
 
 ## 5. Goals (12-month horizon)
 
@@ -96,7 +96,7 @@
 
 - **As Head of FinOps**, I want a per-feature monthly spend report so I can have the "what are we paying for" conversation at quarterly review with an answer.
 - **As a CFO**, I want a per-feature ROI ranking so I can defend the AI roadmap on a per-feature basis at the board offsite.
-- **As an AI Platform PM**, I want a runaway alert within 24 hours of a misconfig so I don't have to explain a $1.5M overspend at the next QBR.
+- **As an AI Platform PM**, I want a runaway alert within 24 hours of a misconfig so I don't have to explain a six-figure overspend, like the modeled $195k one, at the next QBR.
 - **As an individual feature owner (line-1 PM)**, I want to see my feature's modeled cost and the substitution recommender's verdict so I can act on cost reductions without waiting for a Finance ask.
 - **As a Procurement lead**, I want a vendor-mix report so I can negotiate the next Anthropic / Azure renewal with per-feature usage data in hand.
 
@@ -136,7 +136,7 @@ The product is a composition + detection layer. Each deficiency maps to a specif
 
 **Reference architecture.** Composition runs on Cloud Run (stateless) backed by Pub/Sub fan-in from the OpenTelemetry collector. ClickHouse (Aiven / Altinity managed) holds the high-cardinality cost-event table; Postgres holds the feature catalog; Snowflake is read-only for revenue join. The CFO pack is generated on-demand from the immutable ClickHouse aggregate + the latest feature catalog snapshot.
 
-**Throughput envelope.** ~50-500M inference calls/yr at Tier-1 BFSI fleet scale = ~1.5-16 calls/second average, ~16-150 calls/second peak. The cost-aggregator's 5-minute SLO is far from latency-critical; the constraint is completeness, not throughput.
+**Throughput envelope.** The shipped catalog sums to about 12M queries a month (about 150M a year). Assumed range for a Tier-1 BFSI fleet: ~50-500M inference calls/yr at Tier-1 BFSI fleet scale = ~1.5-16 calls/second average, ~16-150 calls/second peak. The cost-aggregator's 5-minute SLO is far from latency-critical; the constraint is completeness, not throughput.
 
 **Failure modes.**
 - *Vendor billing API down.* Reconciliation runs daily; if 24h pass without reconciliation, page operator. Cost-event table remains source-of-truth for InferenceLens; vendor invoice arrives later as a cross-check.

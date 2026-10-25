@@ -1,6 +1,6 @@
 # Sample Data — InferenceLens walkthrough
 
-Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic, seeded (`random.seed(20260601)`), and reproducible. No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's customer-facing GenAI portfolio actually looks like: ~18 deployed features, $8-30M/yr aggregate inference spend, monthly vendor invoice as the only feedback loop.
+Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic, seeded (`random.seed(20260601)`), and reproducible. No customer data. No PII. Shapes follow an assumed Tier-1 retail bank GenAI portfolio: ~18 deployed features, a monthly vendor invoice as the only feedback loop. The $8-30M/yr aggregate inference spend is an assumed range for a larger fleet; the shipped logs scale to about $206k a month.
 
 The headline runaway the walkthrough resolves is **`FT_001` (customer-service-assistant)** — retrieval depth misconfigured from 5 documents to 50 on 2026-05-01. Per-query cost jumps from ~$0.0117 to ~$0.0426. Daily spend on that one feature jumps from ~$1,632 to ~$5,966 (3.7x). The runaway buries itself in the bank's $4M aggregate monthly compute spend for 6 weeks before anyone notices. InferenceLens catches it on day 1 via per-feature attribution.
 
@@ -95,7 +95,7 @@ This is the feature the CFO would be ambushed by at the next quarterly cost revi
 | `features.csv` | `FT_001` (customer-service-assistant) on `vendor-balanced-4-5`; product team thinks retrieval depth is 5; volume is 4.2M queries/month. |
 | `inference_logs.csv` | Sampled per-query cost jumps from ~$0.0117 to ~$0.0426 starting 2026-05-01 (visible as a step function in the daily cost roll-up). |
 | `model_pricing.csv` | Balanced-model input pricing is $3.00/Mtok — the cost jump is consistent with input tokens ballooning ~6.7x, which is consistent with a retrieval-depth misconfiguration from 5 docs to 50 docs. |
-| `substitution_recommendations.csv` | Even after the runaway is fixed, `FT_001` should drop to the fast model — modeled savings $182k/mo at a -1.4pp accuracy delta. |
+| `substitution_recommendations.csv` | Even after the runaway is fixed, `FT_001` should drop to the fast model — modeled savings $182k/mo at a -1.4pp accuracy delta. This is a modeled input and is larger than the $145k a month the logs attribute to `FT_001`; the file was not derived from the logs. |
 
 In raw vendor-invoice form: invisible inside a $4M aggregate compute line. In InferenceLens: per-feature attribution flags a 3.7x daily-spend anomaly on day 1.
 

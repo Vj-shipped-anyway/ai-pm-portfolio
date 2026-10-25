@@ -279,7 +279,7 @@ def main() -> None:
     subs = load_substitutions()
 
     print("\n" + "=" * 80)
-    print("Step 4 - InferenceLens: five derived views, six deficiencies closed")
+    print("Step 4 - InferenceLens: five derived views, five of six deficiencies closed")
     print("=" * 80)
     print()
     print(f"Fleet size:              {len(features)} features")
@@ -293,7 +293,7 @@ def main() -> None:
     t0 = time.perf_counter()
     attr = per_feature_attribution(logs, features)
     print("-" * 80)
-    print("View 1 / 5 - Per-feature attribution (closes deficiencies #1 and #2)")
+    print("View 1 / 5 - Per-feature attribution (closes #1; #2 per-tenant is designed, not computed)")
     print("-" * 80)
     print(f"  {'Feature':<32} {'Model':<24} {'Monthly $':>14}")
     aggregate = 0.0
@@ -418,16 +418,15 @@ def main() -> None:
     print("  Step 1 (aggregate invoice):   0 of 6 deficiencies closed.")
     print("  Step 2 (vendor console):      0 of 6 deficiencies closed.")
     print("  Step 3 (deficiencies named):  6 of 6 illustrated; 0 of 6 closed.")
-    print(f"  Step 4 (InferenceLens):       6 of 6 closed in {elapsed*1000:.0f}ms.")
+    print(f"  Step 4 (InferenceLens):       5 of 6 closed in {elapsed*1000:.0f}ms; #2 per-tenant is designed, not computed (no tenant column in the logs).")
     print()
     print(f"  Headline runaway caught:     FT_001 retrieval-depth misconfig, day 1")
     print(f"  Modeled substitution savings:${total_savings:,.0f}/mo")
     print(f"  Modeled dead-feature spend:  ${total_dead:,.0f}/mo")
-    print(f"  Combined modeled spend reduction (substitution + dead + runaway fix):")
-    pre_runaway_baseline = 36000.0  # ~$1.2k/day * 30 days for FT_001 pre-misconfig
-    runaway_savings = sum(a["modeled_daily_spend_usd"] - 1200 for a in alerts[:1]) * 30 if alerts else 0
-    combined = total_savings + total_dead + runaway_savings
-    print(f"    ${combined:,.0f}/mo  ~  ${combined*12:,.0f}/yr")
+    print(f"  Logged fleet spend (View 1 total): ${aggregate + other:,.0f}/mo")
+    print("  The substitution savings are modeled inputs from substitution_recommendations.csv,")
+    print("  not computed from the log. They exceed the logged spend of the features they cover,")
+    print("  so do not add them to the other figures or read them as a share of the logged total.")
     print()
     print("=" * 80 + "\n")
 
