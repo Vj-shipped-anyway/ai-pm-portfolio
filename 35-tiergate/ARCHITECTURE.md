@@ -130,7 +130,7 @@ Flag codes: `DATA_CLASS_BELOW_CATALOG`, `DATA_CLASS_ABOVE_CATALOG`, `DATASET_NOT
 Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [FINOS AI Governance Framework](https://air-governance-framework.finos.org/) (v2, 20 October 2025). I read its page [A heuristic approach to identifying GenAI risks](https://air-governance-framework.finos.org/heuristic-assessment.html) on 2026-10-23. It asks a team to assess a use case on factors such as internal or customer-facing users, data sensitivity, third-party or in-house models, and advisory or automated decisions, and it covers applicable regulation.
 
 - **What the design does.** Five of the six rubric inputs map onto those factors; the financial exposure band is my own addition. It recomputes a tier from them where a second source exists.
-- **What it does not claim.** The page defines no numeric tiers or scores, so the points and cut-offs are my assumption and not a reading of that text. It makes no claim of conformity to that guidance or any other standard, holds no certification, and I have not read any other source.
+- **What it does not claim.** The page defines no numeric tiers or scores and gives its Low, Medium or High rating in its last step, after controls; this design tiers at intake, before any control, so its tier is not that rating, and the points and cut-offs are my assumption and not a reading of that text. It makes no claim of conformity to that guidance or any other standard, holds no certification, and I have not read any other source.
 
 ---
 
