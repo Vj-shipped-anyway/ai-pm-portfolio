@@ -35,7 +35,7 @@ from collections import Counter, defaultdict
 from bisect import bisect_left
 
 from step_01_interview_process_map import (
-    AGENT_READY, APP_LABEL, DATA_DIR, OUT_DIR, fnum, load_all, minutes, pct, read_csv, rnd, split_catalog,
+    AGENT_READY, APP_LABEL, DATA_DIR, OUT_DIR, load_all, minutes, pct, read_csv, split_catalog,
 )
 from step_02_system_log_mining import TOP_N, analyze as analyze_log
 from step_03_deficiencies_exposed import summarize as summarize_deficiencies

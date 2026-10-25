@@ -29,7 +29,7 @@ import statistics
 from collections import Counter
 
 from step_01_interview_process_map import (
-    AGENT_READY, APP_LABEL, APPS, OUT_DIR, fnum, load_all, minutes, pct, rnd,
+    AGENT_READY, APP_LABEL, APPS, OUT_DIR, fnum, load_all, minutes, pct,
 )
 from step_02_system_log_mining import TOP_N, analyze as analyze_log
 
