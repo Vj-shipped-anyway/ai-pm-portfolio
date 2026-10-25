@@ -34,10 +34,12 @@ import json
 import math
 from collections import defaultdict
 
-from step_01_rag_status_report import (OUT_DIR, PROGRAMS_PER_SPONSOR, STAGES, TEAM_LABEL, TEAMS, load_all, pct,
-                                       usd_m)
-from step_03_deficiencies_exposed import (WINDOW_WEEKS, capacity_grid, evidence_flags, review_waits,
-                                          slipped_programs, upstream_issues, wip_table)
+from step_01_rag_status_report import (
+    OUT_DIR, PROGRAMS_PER_SPONSOR, TEAM_LABEL, TEAMS, load_all, pct, usd_m,
+)
+from step_03_deficiencies_exposed import (
+    capacity_grid, evidence_flags, slipped_programs, upstream_issues, wip_table,
+)
 
 SEVERITY = {"RED": 0, "AMBER": 1, "GREEN": 2}
 TIER_NAME = {0: "clear", 1: "amber", 2: "blocked", 3: "red"}

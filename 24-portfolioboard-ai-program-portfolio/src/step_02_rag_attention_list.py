@@ -20,7 +20,7 @@ from __future__ import annotations
 import csv
 import json
 
-from step_01_rag_status_report import OUT_DIR, RAGS, load_all, pct, usd_m
+from step_01_rag_status_report import OUT_DIR, load_all, pct, usd_m
 
 COLORS = ["GREEN", "AMBER", "RED"]
 
