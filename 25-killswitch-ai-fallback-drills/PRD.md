@@ -73,7 +73,7 @@
 1. **As a service owner**, I want each customer segment tripped on its own signals, so a regression in a small segment is handled without moving every other segment to a weaker path.
 2. **As an operational-resilience lead**, I want every fallback scenario drilled on a fresh rules version and scored on three criteria, so "we have a fallback" is a statement I can show evidence for.
 3. **As an on-call engineer**, I want a trip to come with a timeline and a return rule, so I am not deciding at 3 a.m. whether it is safe to switch back.
-4. **As a model risk reviewer**, I want the thresholds, the fit period and the held-out results written down, so the ongoing-monitoring story under SR 26-2 and the NIST AI RMF 'Manage' function is documented per event and not only at attestation time.
+4. **As a model risk reviewer**, I want the thresholds, the fit period and the held-out results written down, so the ongoing-monitoring story is documented per event and not only at attestation time. SR 26-2 and the NIST AI RMF 'Manage' function are the design basis here, as analogy, not a claim of coverage.
 
 ---
 
@@ -150,4 +150,4 @@
 
 ---
 
-*This PRD interlocks with [Project 02 (DriftSentinel)](../02-driftsentinel-model-drift-monitoring/), [Project 05 (AgentWatch)](../05-agentwatch-agent-observability/), [Project 08 (OversightOps)](../08-oversightops-hitl-workflow/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/), plus Projects 19 (IncidentLedger) and 23 (ScopeKeeper). All interlocks are 🔴 designed, none built.*
+*This PRD interlocks with [Project 02 (DriftSentinel)](../02-driftsentinel-model-drift-monitoring/), [Project 05 (AgentWatch)](../05-agentwatch-agent-observability/), [Project 08 (OversightOps)](../08-oversightops-hitl-workflow/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/), plus [Project 19 (IncidentLedger)](../19-incidentledger-ai-incident-response/) and [Project 23 (ScopeKeeper)](../23-scopekeeper-agent-permission-review/). All interlocks are 🔴 designed, none built.*

@@ -730,8 +730,8 @@ See [`assets/killswitch-flow.svg`](./assets/killswitch-flow.svg) for a static vi
 - [05 AgentWatch](../05-agentwatch-agent-observability/) supplies error and latency signals. Same split: it detects, this decides, drills and recovers.
 - [08 OversightOps](../08-oversightops-hitl-workflow/) would own the human fallback queue: the people who take cases while a segment is on the rules path.
 - [15 SchemaWatch](../15-schemawatch-tool-schema-drift/) can tell KillSwitch that a tool the service calls changed shape, so an error spike after a release is labeled known drift before it trips a segment.
-- 19 IncidentLedger: a trip would open an incident with the timeline attached.
-- 23 ScopeKeeper: a review of what the rules path is permitted to do before it takes decisions.
+- [19 IncidentLedger](../19-incidentledger-ai-incident-response/): a trip would open an incident with the timeline attached.
+- [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/): a review of what the rules path is permitted to do before it takes decisions.
 
 ---
 
@@ -810,7 +810,7 @@ If you run it on a real incident history and get something useful, open an issue
 
 ## 🙌 Acknowledgements
 
-- **[SR 20-24](https://www.federalreserve.gov/supervisionreg/srletters/SR2024.htm)** — the interagency operational-resilience paper: the model-risk guidance the work is compared with on testing that recovery actually works. A fallback nobody has drilled is a plan, not a capability.
-- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance from the Federal Reserve, OCC and FDIC (April 2026), which replaced the 2011 predecessor, SR 11-7. The ongoing-monitoring and contingency theme is what the trip and the scorecard are written against. Obligation statements in this repo are paraphrases written for this exercise, not the text of the rule.
+- **[SR 20-24](https://www.federalreserve.gov/supervisionreg/srletters/SR2024.htm)** — the interagency operational-resilience paper the work is compared with on testing that recovery actually works. A fallback nobody has drilled is a plan, not a capability.
+- **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance from the Federal Reserve, OCC and FDIC (April 2026), which replaced the 2011 predecessor, SR 11-7. The ongoing-monitoring and contingency theme is what the trip and the scorecard are compared with, as an analogy (see the regulatory note). Obligation statements in this repo are paraphrases written for this exercise, not the text of the rule.
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Manage' function maps onto responding to a degraded system and recovering from it.
-- **Sibling projects in this repo** — [02 DriftSentinel](../02-driftsentinel-model-drift-monitoring/), [05 AgentWatch](../05-agentwatch-agent-observability/), [08 OversightOps](../08-oversightops-hitl-workflow/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), four of the interlocks.
+- **Sibling projects in this repo** — [02 DriftSentinel](../02-driftsentinel-model-drift-monitoring/), [05 AgentWatch](../05-agentwatch-agent-observability/), [08 OversightOps](../08-oversightops-hitl-workflow/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), [19 IncidentLedger](../19-incidentledger-ai-incident-response/) and [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/), the six interlocks.
