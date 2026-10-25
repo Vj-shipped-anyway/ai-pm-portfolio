@@ -123,7 +123,7 @@ For each user, the documents the user may read under today's ACL. **The generato
 | --- | --- |
 | `queries.csv` | Q003, asked by U031 (retail analyst): "loan covenant extension amortization collateral". |
 | `documents.csv` | D0153, labeled restricted, with an ACL that does not include any of the user's groups. |
-| `users.csv` and `groups.csv` | The user's direct group and the 3 groups it reaches through the tree. |
+| `users.csv` and `groups.csv` | The user's direct group and the 2 groups above it in the tree (3 groups in all). |
 | `entitlement_truth.csv` | The user may read 338 of 500 documents; D0153 is not one of them. |
 
 Run the walkthrough and you see the same thing three ways: a relevance-only assistant (it returns the document and the eval scores it as correct), the cheap guards (each fixes one failure and leaves another), and CorpusGate (3 better matches withheld, the user sees only what the ACL allows).

@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (an effective-ACL resolver, a drift check, a pre-filter, an ingestion scan and a canary runner, over synthetic data, with a plain TF-IDF stub as the retriever and a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic. Runtime choices are given as classes of managed service (managed functions, managed containers, managed PostgreSQL, object storage with retention lock) because every regulated shop is on one cloud or two and the mapping is mechanical.
+This doc is cloud-agnostic. Runtime choices are given as classes of managed service (managed functions, managed containers, managed PostgreSQL, object storage with retention lock) because most regulated shops run on one cloud or two and the mapping is mechanical.
 
 ![CorpusGate flow](./assets/corpusgate-flow.svg)
 

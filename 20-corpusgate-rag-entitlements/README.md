@@ -12,7 +12,7 @@
 - 🟢 Canary pack: 120 of 120 leak with no control, 7 of 120 with CorpusGate (`step_04`)
 - 🟢 Leakage: 291 of 1,000 results before, 11 after (`step_04`)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+_Built for the assistant platform owner and the information-security reviewer who have to answer whether a user could have seen a document the assistant retrieved. A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic documents: 500](https://img.shields.io/badge/synthetic%20documents-500-blue)
 ![Synthetic users: 40](https://img.shields.io/badge/synthetic%20users-40-blue)
@@ -558,8 +558,8 @@ See [`assets/corpusgate-flow.svg`](./assets/corpusgate-flow.svg) for a static vi
 - [06 PromptShield](../06-promptshield-prompt-injection-defense/) defends against instructions hidden in documents. CorpusGate decides which documents reach the model at all; it does not read their content for injection.
 - [09 LineageLog](../09-lineagelog-ai-decision-audit/) records which documents informed an answer. Each access decision from CorpusGate would carry the document ids and the ACL version used, so "could the user see that" has an answer.
 - [14 PolicyNeedle](../14-policyneedle-long-context-fidelity/) tests whether a model uses what is in a long context. CorpusGate is upstream of it and is not a duplicate of 14 or of 06: it decides which documents reach the context at all, not what a model does with them or what the documents say.
-- 16 ControlMap would map data-access obligations onto the controls that evidence them. The canary results and the decision record are candidate evidence.
-- 23 ScopeKeeper reviews what permissions an agent's tools hold. An agent that retrieves on a user's behalf would inherit the user's entitlement from the resolver instead of holding its own.
+- [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) would map data-access obligations onto the controls that evidence them. The canary results and the decision record are candidate evidence.
+- [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/) reviews what permissions an agent's tools hold. An agent that retrieves on a user's behalf would inherit the user's entitlement from the resolver instead of holding its own.
 
 ---
 
@@ -641,4 +641,4 @@ If you run it on a real estate and get something useful, open an issue or send m
 - **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the current model-risk guidance, which replaced its 2011 predecessor in April 2026; the model-risk guidance the work is compared with. A retrieval layer that shows a user a document they may not read is a control gap that ongoing monitoring has to be able to see. (That sentence is my paraphrase written for this exercise, not the text of the guidance.)
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the sensitive-information-disclosure theme behind treating retrieval as an access-controlled path.
 - **Access-control lists, nested groups and deny entries** — the directory conventions the synthetic data imitates, and the reason a flat group check is wrong in both directions.
-- **Sibling projects in this repo** — [01 HalluGuard](../01-halluguard-bank-chatbot-safety/), [06 PromptShield](../06-promptshield-prompt-injection-defense/), [09 LineageLog](../09-lineagelog-ai-decision-audit/) and [14 PolicyNeedle](../14-policyneedle-long-context-fidelity/), with 16 ControlMap and 23 ScopeKeeper as designed interlocks.
+- **Sibling projects in this repo** — [01 HalluGuard](../01-halluguard-bank-chatbot-safety/), [06 PromptShield](../06-promptshield-prompt-injection-defense/), [09 LineageLog](../09-lineagelog-ai-decision-audit/) and [14 PolicyNeedle](../14-policyneedle-long-context-fidelity/), [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) and [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/). All six are projects in this repo; the interlocks with CorpusGate are designed, none built.

@@ -475,7 +475,7 @@ if st.session_state.step >= 4:
         st.markdown(
             "This is a prototype on synthetic data. The production shape is an ACL sync from the source systems, a group "
             "resolver, a filter inside the vector query, an ingestion scan with a quarantine queue, and a scheduled canary "
-            "runner. It is a design, not deployed; see `ARCHITECTURE.md`. Related projects (designed, none built): "
+            "runner. It is a design, not deployed; see `ARCHITECTURE.md`. Interlocks with other projects in this repo (designed, none built): "
             "HalluGuard (01), PromptShield (06), LineageLog (09), PolicyNeedle (14), ControlMap (16), ScopeKeeper (23)."
         )
     st.markdown(

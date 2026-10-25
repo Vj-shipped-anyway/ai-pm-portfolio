@@ -70,7 +70,7 @@
 1. **As an assistant platform owner**, I want every retrieval call filtered by the asker's effective access before ranking, so that no user is shown a document they may not read and unreadable documents do not take result slots.
 2. **As an information-security reviewer**, I want a canary pack that runs on a schedule and on every ACL or index change, so that a leak is found by a test and not by a user.
 3. **As a privacy officer**, I want documents scanned for personal data before they are indexed, with a quarantine queue and an owner review, so that SSN-like and account-like values do not sit in text anyone can retrieve.
-4. **As a model risk reviewer**, I want each answer's retrieval decision recorded (user, documents returned, number withheld, ACL version used), so that the ongoing-monitoring story under SR 26-2 and the NIST AI RMF 'Measure' function is documented per question and not only at attestation time.
+4. **As a model risk reviewer**, I want each answer's retrieval decision recorded (user, documents returned, number withheld, ACL version used), so that ongoing monitoring (SR 26-2) and measurement of a deployed system (the NIST AI RMF 'Measure' function), the themes this work is written against, are documented per question and not only at attestation time.
 
 ---
 
@@ -145,4 +145,4 @@
 
 ---
 
-*This PRD interlocks (🔴 designed, none built) with [Project 01 (HalluGuard)](../01-halluguard-bank-chatbot-safety/), [Project 06 (PromptShield)](../06-promptshield-prompt-injection-defense/), [Project 09 (LineageLog)](../09-lineagelog-ai-decision-audit/) and [Project 14 (PolicyNeedle)](../14-policyneedle-long-context-fidelity/), and with 16 ControlMap and 23 ScopeKeeper.*
+*This PRD interlocks (🔴 designed, none built) with [Project 01 (HalluGuard)](../01-halluguard-bank-chatbot-safety/), [Project 06 (PromptShield)](../06-promptshield-prompt-injection-defense/), [Project 09 (LineageLog)](../09-lineagelog-ai-decision-audit/) and [Project 14 (PolicyNeedle)](../14-policyneedle-long-context-fidelity/), and with [Project 16 (ControlMap)](../16-controlmap-ai-obligation-crosswalk/) and [Project 23 (ScopeKeeper)](../23-scopekeeper-agent-permission-review/).*
