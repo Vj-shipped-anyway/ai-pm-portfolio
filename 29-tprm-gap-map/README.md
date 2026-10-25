@@ -210,7 +210,7 @@ The PM artifacts that show how I would run this product if I owned the seat. Thi
 - [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
 - [`data/`](./data/): the 60 synthetic vendors, the simulated incident log, the labels derived from it, the hand-written guidance map and the seeded generator. `data/README.md` explains how the labels are set.
 - [`src/`](./src/): `tprm_gap_map.py`, `common.py`, the four step scripts and the demo builder.
-- [`tests/`](./tests/): 24 unittest tests, including a golden test that pins the numbers above.
+- [`tests/`](./tests/): 26 unittest tests, including a golden test that pins the numbers above.
 
 Run the four steps end to end:
 

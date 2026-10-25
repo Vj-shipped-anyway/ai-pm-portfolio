@@ -142,6 +142,38 @@ class InputHandlingTests(unittest.TestCase):
         self.assertEqual(t.safe("a\nb\r\tc\x1b\u2028"), "a\\nb\\r\\tc\\x1b\\u2028")
         self.assertEqual(t.safe("P1 (cloud) 50%"), "P1 (cloud) 50%")
 
+    def test_map_with_a_column_missing_exits_2(self):
+        import tempfile
+        d = tempfile.mkdtemp()
+        with open(os.path.join(d, "guidance_map.csv"), "w", encoding="utf-8", newline="") as fh:
+            csv.writer(fh).writerows([["stage", "note"], ["Stage", "n"]])
+        old = t.DATA
+        t.DATA = d
+        try:
+            code, out, err = run_all(["map"])
+        finally:
+            t.DATA = old
+        self.assertEqual(code, 2)
+        self.assertIn("missing column(s)", err)
+        self.assertEqual(len(err.strip().splitlines()), 1)
+
+    def test_map_keeps_hostile_text_on_one_line(self):
+        import tempfile
+        d = tempfile.mkdtemp()
+        with open(os.path.join(d, "guidance_map.csv"), "w", encoding="utf-8", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow(t.MAP_COLUMNS)
+            w.writerow(["S\n::error::forged", "B.1", "named", "e\r::notice::x", "n\n::error::y"])
+        old = t.DATA
+        t.DATA = d
+        try:
+            code, out, _ = run_all(["map"])
+        finally:
+            t.DATA = old
+        self.assertEqual(code, 0)
+        for ln in out.splitlines():
+            self.assertFalse(ln.startswith("::"), ln)
+
     def test_a_hostile_service_type_stays_on_one_line(self):
         v = self.table(COLS, [AI_VENDOR, ["V2", "x\n::error::forged", 5, "", "", "", ""]])
         _, out, _ = run_all(["tier", v])

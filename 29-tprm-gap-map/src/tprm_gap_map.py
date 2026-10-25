@@ -27,6 +27,7 @@ CONCENTRATION_HIGH = 0.30  # share of an upstream group's activity that sits on 
 VENDOR_COLUMNS = ("vendor_id", "service_type", "activity_share_pct", "upstream_provider", "model_change_notice_days",
                   "trains_on_bank_data", "bank_data_retained_days")      # what `tier` reads; the questionnaire columns are for the steps
 INCIDENT_COLUMNS = ("vendor_id", "material")
+MAP_COLUMNS = ("stage", "section_of_proposed_guidance", "how_the_text_prompts_it", "evidence_for_an_ai_enabled_vendor", "note")
 OTHER_SERVICE_TYPES = {"data_provider", "call_center", "facilities"}      # in the synthetic data; tiered by activity share only
 KNOWN_SERVICE_TYPES = NAMED_ESSENTIAL | OTHER_SERVICE_TYPES | {"ai_enabled_service"}
 AI_WORDS = re.compile(r"(?i:artificial intelligence|machine learning|generative|algorithm|large language|neural|\bLLM\b)|\bAI\b")
@@ -119,11 +120,16 @@ def score(flagged: set, truth: set) -> dict:
 
 
 def run_map() -> int:
-    for r in read_csv(os.path.join(DATA, "guidance_map.csv")):
-        print(f"{r['stage']}  [{r['section_of_proposed_guidance']}]  text prompts it: {r['how_the_text_prompts_it']}")
-        print(f"    AI-enabled vendor evidence: {r['evidence_for_an_ai_enabled_vendor']}")
+    try:
+        rows = read_table(os.path.join(DATA, "guidance_map.csv"), MAP_COLUMNS)
+    except (OSError, ValueError, csv.Error) as e:
+        print(f"input error: {safe(e)}", file=sys.stderr)
+        return 2
+    for r in rows:
+        print(f"{safe(r['stage'])}  [{safe(r['section_of_proposed_guidance'])}]  text prompts it: {safe(r['how_the_text_prompts_it'])}")
+        print(f"    AI-enabled vendor evidence: {safe(r['evidence_for_an_ai_enabled_vendor'])}")
         if r["note"]:
-            print(f"    note: {r['note']}")
+            print(f"    note: {safe(r['note'])}")
     return 0
 
 
