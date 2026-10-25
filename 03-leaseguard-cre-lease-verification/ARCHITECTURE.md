@@ -194,7 +194,7 @@ CREATE TABLE audit_log (
 
 | Data class | Retention | Storage | Classification |
 | --- | --- | --- | --- |
-| Field decisions and resolutions | 7 years, matching the REIT data-retention expectation named in the README | Postgres hot for 90 days, then archive to Object Lock | Confidential |
+| Field decisions and resolutions | 7 years (design default; confirm against the operator's retention schedule) | Postgres hot for 90 days, then archive to Object Lock | Confidential |
 | Audit log | 7 years | Postgres partitioned, archive to Object Lock | Confidential |
 | Source documents (PDFs, redlines, side letters) | The operator's lease-file retention policy, usually longer | Object storage, versioned, Object Lock | Confidential, tenant-sensitive |
 | OCR artifacts | Same as the source document | Object storage | Confidential |
@@ -341,7 +341,7 @@ Run in shadow on one asset book first, starting with the redlined and non-standa
 - **Queue state.** Rebuildable from `field_verifications` and the document-set hashes.
 - **DR drill cadence.** Quarterly failover to the secondary region, validated against the operator's recovery objective.
 
-### Runbooks (one page each, in `docs/runbooks/`)
+### Runbooks (planned; one page each, in `docs/runbooks/` of the production repo)
 
 - `secondary-model-down.md` — fall back to rules and tripwires with the stricter routing policy
 - `queue-backlog.md` — triage queue age above SLA
@@ -357,10 +357,10 @@ Alignment, not certification.
 
 | Framework | How the design relates |
 | --- | --- |
-| **SOC 2 Type II** | All components in scope; the audit log and access reviews are the evidence |
+| **SOC 2 Type II** | Design intent: all components in scope; the audit log and access reviews would be the evidence. No audit has been done |
 | **Record retention** | Seven-year field-decision retention; immutable source documents |
 | **Data residency / GDPR** | Regional instances where lease content is in scope |
-| **SOX-adjacent controls for REIT reporting** | The resolution trail (who, what, which clause) is the control evidence for a changed lease record |
+| **SOX-adjacent controls for REIT reporting** | Design intent: the resolution trail (who, what, which clause) would be the control evidence for a changed lease record |
 
 ---
 

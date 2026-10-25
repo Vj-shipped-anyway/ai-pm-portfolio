@@ -1,8 +1,8 @@
 """
 Step 2 — With deployed lease-NLP: a vendor-model-over-OCR pipeline.
 
-This is the SOTA approach an institutional CRE owner-operator runs today,
-matching the public Cherre / Lev / ProDeal / Yardi Aspire pattern. The pipeline:
+This is a common deployed pattern for lease abstraction. It does not describe
+any named vendor's product. The pipeline:
     1. Tesseract / AWS Textract OCRs the lease PDF.
     2. A LangChain extraction chain prompts the hosted vendor model to fill 12 fields.
     3. Output lands in the lease abstraction database (Yardi / MRI / Argus).
@@ -12,10 +12,9 @@ non-standard, redlined, and side-letter leases — and the asset management
 team only finds out during a CAM reconciliation dispute, two years later.
 
 To keep this runnable WITHOUT API keys (so any reviewer can replicate the
-walkthrough on a laptop), this script uses MOCK extraction outputs
-calibrated to what real vendor-model-over-OCR produces on this exact set of
-six leases. The mock errors are the ones I have personally read out of
-production lease-abstraction tooling.
+walkthrough on a laptop), this script uses MOCK extraction outputs. They are
+written by hand to show the failure patterns described in public PropTech
+writing on this set of six leases. They are not output from a real pipeline.
 
 Run:
     python step_02_deployed_lease_nlp.py
@@ -35,8 +34,8 @@ FIELDS = [
 
 
 # Mock outputs of the deployed vendor-model-over-OCR pipeline.
-# Each entry is what the pipeline ACTUALLY extracted, not what is correct.
-# Entries marked "WRONG" are the realistic, observed failure pattern.
+# Each entry is the value the mock pipeline returns, not what is correct.
+# Entries marked "WRONG" are the failure patterns the mock is written to show.
 MOCK_EXTRACTIONS = {
     "lease_01": {
         "tenant_name":         "Brewmoor Coffee Roasters, Inc.",
@@ -226,15 +225,14 @@ def main():
     print(f"  Blended:                                  {correct_fields}/{total_fields}"
           f"   {blended_acc*100:>5.1f}%")
     print()
-    print("  Industry SOTA reference points (from public PropTech vendor benchmarks,")
-    print("  Cherre / Lev / VTS pilot data, and my own read of three CRE owner-operator")
-    print("  pilots over 2023-2025):")
+    print("  Modeled industry reference points (assumptions from public PropTech")
+    print("  writing; none is measured in this repo):")
     print("     ~96% on standard ICSC / BOMA leases")
     print("     ~78% on non-standard, redlined, or side-lettered leases")
     print("     ~88% blended on a real-world mixed portfolio")
     print()
-    print("  Per-lease throughput vs Step 1: ~6 minutes vs 4 hours.")
-    print("  The lift is real. The 12% blended error rate is also real.")
+    print("  Per-lease throughput vs Step 1 (modeled): ~6 minutes vs ~3.7 hours.")
+    print("  The 12% blended error rate is a modeled assumption, not a measured one.")
     print(f"\nWrote: {out_path}")
     print(f"{'='*80}\n")
 

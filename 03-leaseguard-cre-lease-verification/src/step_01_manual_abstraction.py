@@ -1,11 +1,10 @@
 """
 Step 1 — Before automated abstraction: a paralegal reads the lease.
 
-This is what most CRE owner-operators were doing as recently as 2022, and what
-many small-to-mid landlords are still doing today. A paralegal — typically
-junior, sometimes a contracted vendor (Donnelley, Yardi Aspire, an offshore
-abstraction shop) — reads each lease cover-to-cover, fills in a 12-field
-template, and a senior asset manager spot-checks 5-10% of the abstracts.
+This is the manual workflow the walkthrough assumes. A paralegal — typically
+junior, sometimes a contracted vendor or an offshore abstraction shop — reads
+each lease cover-to-cover, fills in a 12-field template, and a senior asset
+manager spot-checks 5-10% of the abstracts.
 
 It works. The fields are right. The bottleneck is time and cost.
 
@@ -20,8 +19,8 @@ from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
-# Calibrated from the BOMA Lease Abstracting Workshop materials and three
-# US-based abstraction vendors I priced in 2024.
+# Assumed values for the model. They are not taken from a vendor quote or a
+# published workshop, and nothing here is measured.
 HOURS_PER_PAGE = 0.10              # 6 minutes per page reading
 HOURS_PER_FIELD = 0.18             # ~11 minutes per field (read, locate, transcribe, double-check)
 COMPLEXITY_MULTIPLIER = {

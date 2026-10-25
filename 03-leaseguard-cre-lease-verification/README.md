@@ -8,10 +8,10 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/03-leaseguard-cre-lease-verification/demo.html)
 
-**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the step that prints each number is named):
 
 - 🟢 Deployed pipeline: 55/72 fields correct (76.4%) on the 6-lease sample (`step_02`)
-- 🟢 21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags
+- 🟢 21 of 72 fields routed to triage: 16 of the 17 wrong fields plus 5 false flags (`step_04`)
 
 _A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
@@ -37,7 +37,7 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 <details>
 <summary>Framing, how to read the numbers, and the regulatory note</summary>
 
-> **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes documented below are real and well-discussed in the PropTech literature; the production validation is what the next role does.
+> **Framing:** This is a portfolio prototype, not a production case study. CRE is a personal study interest for me, not an active investment practice — I am not an LP in any CRE portfolio. The deficiency taxonomy, the architecture, the synthetic leases, and the verification design reflect how I'd apply the same PM rigor I bring to enterprise AI to a domain I follow closely. The lease-NLP failure modes below are the ones public PropTech writing describes, reproduced here with hand-written mock outputs; the production validation is what the next role does.
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the 6-lease eval set in this repo), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
@@ -68,14 +68,14 @@ To run the Streamlit app locally instead, use `streamlit run app.py` from the sa
 
 ## 💰 Why this lands — competitive positioning
 
-Cherre, Lev, ProDeal, VTS, CompStak, CoStar, and Reonomy have publicly discussed lease-NLP working on standard leases and failing on non-standard ones (see Acknowledgements). The deployed pipelines described in that public writing rarely have a verification layer downstream of the extractor. I am not scoring any vendor's product here. The table compares four approaches, and the "deployed lease-NLP alone" column stands for the pattern those vendors describe.
+Public PropTech writing describes lease-NLP working on standard leases and failing on non-standard ones, and describes few deployed pipelines with a verification layer downstream of the extractor. This README cites no specific vendor statement. I am not scoring any vendor's product here. The table compares four approaches, and the "deployed lease-NLP alone" column stands for the generic deployed pattern.
 
 | Capability | Paralegal only | Deployed lease-NLP alone | Second model alone | **LeaseGuard (layered)** |
 | --- | --- | --- | --- | --- |
 | Per-field accuracy | \~96% (🟡 assumed in Step 1, not measured) | 🟢 76.4% (55/72) on this sample · 🟡 \~88% blended on a mixed portfolio | Not measured on its own in this repo | 🟢 98.6% (71/72) after triage · 🟡 98.2% projected at portfolio scale |
 | Says which fields to check | No. A senior reviewer spot-checks 5-10% of the work | No. A wrong extraction looks identical to a correct one | No. A second answer with nothing to compare it to | Yes. 🟢 21 of 72 fields routed, including 16 of the 17 wrong ones |
 | Rule checks and side-letter tripwire | n/a | Rarely present downstream of the extractor | None | Yes. 🟢 Tripwire fired 3 times (2 real misses, 1 false flag); rule validators fired 0 times on this sample |
-| Human time | Every field of every lease: 🟡 \~3.7 h and \~$278 per lease; stops scaling past \~500 assets | None. 🟡 \~6 minutes per lease | None | Flagged fields only. 🟢 21 of 72 on this deliberately hard sample |
+| Human time | Every field of every lease: 🟡 \~3.7 h and \~$278 per lease; stops scaling past \~500 assets (my assumption) | None. 🟡 \~6 minutes per lease | None | Flagged fields only. 🟢 21 of 72 on this deliberately hard sample |
 | Where it still fails | Fatigue and mis-transcription | Redlines, CPI-with-floor-and-cap escalations, buried CAM caps, multi-section kick-outs, side letters, all silently | Its own errors in different places; no single backend wins all six deficiencies (Step 3) | 🟢 1 of 17 wrong fields on this sample: both models return the same incomplete value (lease_06 kick-out) |
 | Touches the existing pipeline | n/a | n/a | Swaps the extractor | No. Primary untouched; write-back only after a field clears |
 
@@ -113,7 +113,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 
 ## Executive summary (90 seconds)
 
-**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: the hosted vendor model over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **\~88%** (public PropTech vendor benchmarks). 🟡 Modeled rent leakage at this portfolio shape: **\~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
+**Problem.** A modeled 220-asset CRE owner-operator runs a deployed lease-abstraction pipeline: the hosted vendor model over OCR'd PDFs, writing 12 fields per lease into the lease-record table. It is accurate on standard ICSC and BOMA leases and wrong on redlined, non-standard, and side-lettered ones, and the structured output looks identical to a correct extraction. The error surfaces two years later in a CAM reconciliation dispute. 🟡 Modeled blended accuracy on a real-world mixed portfolio: **\~88%** (an assumption drawn from public PropTech writing; no specific benchmark is cited). 🟡 Modeled rent leakage at this portfolio shape: **\~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute and missed-escalation loss patterns, and a 12% blended error rate).
 
 **Product.** LeaseGuard, a verification layer around the pipeline, not a replacement for it: **second-model re-extraction** (GPT-4o or a fine-tuned Mistral 7B over the same OCR text) + **rule validators** (dollar amounts, known escalation types, parseable dates, Yes/No flags) + a **side-letter tripwire** + a **router** (PASS / DISAGREEMENT / RULE_VIOLATION / MISSING / SIDE_LETTER_TRIPWIRE) that sends flagged fields to a **paralegal triage queue** with the source clause highlighted. Nothing is written back to the system of record until a flagged field clears.
 
@@ -136,7 +136,7 @@ I'm a PM who follows this failure mode as a study interest. The point of the lis
 1. **The use case** — a 220-asset CRE owner-operator with a deployed lease-NLP pipeline
 2. **The sample data** — 6 synthetic leases (clean, redlined, side-lettered, anchor) + ground truth + deficiency mapping
 3. **Step 1 — Before automated abstraction.** Manual paralegal workflow. Cost, time, accuracy.
-4. **Step 2 — With deployed lease-NLP.** The vendor-model-over-OCR pipeline already in production. 96% on standard leases, 78% on non-standard, 88% blended.
+4. **Step 2 — With deployed lease-NLP.** The vendor-model-over-OCR pipeline already in production. 🟢 On this sample: 100% on the two standard leases, 64.6% on the four non-standard ones, 76.4% blended. 🟡 Modeled industry reference: ~96%, ~78%, ~88%.
 5. **Step 3 — Where this still breaks.** Six named deficiencies; five have worked examples pulled from the sample leases (boilerplate paraphrase has 0 failures on this sample).
 6. **Step 4 — The fix.** LeaseGuard: an ensemble verification layer that catches what the primary missed.
 7. **Utility delivered.** The multiplied number, plus a modeled 28-day pilot design.
@@ -149,7 +149,7 @@ Total reading time: \~15 minutes for the full walkthrough. \~5 minutes if you sk
 
 **A modeled CRE owner-operator running a 220-asset retail-and-office portfolio.**
 
-The team has the standard tooling stack — Yardi Voyager for property accounting, Argus Enterprise for valuation modeling, MRI for some of the acquired-asset book, and a deployed lease-abstraction pipeline that pushes structured fields into the lease-record table. The pipeline itself is a LangChain extraction chain calling the hosted vendor model over OCR'd PDFs (Tesseract for the bulk; Textract for the harder ones). It looks like the kind of thing Cherre, Lev, ProDeal, VTS, or a Salesforce CRE Cloud integration would ship.
+The team has the standard tooling stack — Yardi Voyager for property accounting, Argus Enterprise for valuation modeling, MRI for some of the acquired-asset book, and a deployed lease-abstraction pipeline that pushes structured fields into the lease-record table. The pipeline itself is a LangChain extraction chain calling the hosted vendor model over OCR'd PDFs (Tesseract for the bulk; Textract for the harder ones). It stands for a common deployed pattern, not any named vendor's product.
 
 It works fine on standard ICSC retail and BOMA office leases. The asset-management team trusts it. The CAM reconciliation team trusts the database it writes to. The acquisitions team uses the abstracted data to underwrite.
 
@@ -162,9 +162,9 @@ It silently breaks on:
 
 The asset manager finds out two years later, during a CAM reconciliation dispute, when the tenant's lease counsel pulls out the redline and the landlord's abstracted record doesn't match. By then the recovery argument is already lost.
 
-🟡 **Modeled rent leakage at a portfolio of this shape: ~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute / missed-escalation loss patterns, and the 12% blended error rate from public PropTech vendor benchmarks) — escalations on the wrong base, uncapped CAM that should have been capped, missed kick-out windows, missed ROFOs that turn into lost expansion deals.
+🟡 **Modeled rent leakage at a portfolio of this shape: ~$4.2M/yr** (assumes a 220-asset retail-and-office mix, the published CAM-dispute / missed-escalation loss patterns, and the 12% blended error rate assumed above) — escalations on the wrong base, uncapped CAM that should have been capped, missed kick-out windows, missed ROFOs that turn into lost expansion deals.
 
-The PropTech-founder consensus on this has been public for two years. Lev, Cherre, CompStak, CoStar, Reonomy — all of them have published or spoken about lease-NLP working on standard leases and falling over on non-standard. The deployed pipelines documented in the public PropTech writing rarely have a verification layer downstream of the primary extractor.
+Public PropTech writing has long described lease-NLP working on standard leases and falling over on non-standard ones. In my reading, the deployed pipelines it describes rarely have a verification layer downstream of the primary extractor. I have not surveyed vendors.
 
 That gap is what LeaseGuard is designed to fill.
 
@@ -190,19 +190,19 @@ Six synthetic leases in [`data/leases/`](./data/leases/). They're written to mir
 | `tenant_name`, `premises_sf` | Identity. Wrong here = wrong everywhere. |
 | `base_rent_psf`, `lease_term_months`, `commencement_date` | The economic contract. |
 | `escalation_type`, `escalation_value` | Compounds over the term. CPI vs fixed-pct on a long lease changes NOI (size not measured in this repo). |
-| `cam_cap_psf`, `cam_base_year` | The classic recovery dispute. An uncapped record on a capped lease is a six-figure-per-year leak. |
+| `cam_cap_psf`, `cam_base_year` | The classic recovery dispute. An uncapped record on a capped lease can be a large annual leak (not sized in this repo). |
 | `kickout_clause`, `exclusivity_clause` | The disposition / redev surprise. Discovering one of these post-close turns a deal pencil upside down. |
 | `ROFO_present` | Lost expansion revenue at the next vacancy. |
 
 **`data/deficiency_classes.csv`** — for each lease, which of the six deficiencies trip on it. This is the AI-PM diagnostic — the moment you have this table, you know what containment has to catch.
 
-A typical commercial lease has 80-150 abstractable fields. We use 12 because they are the ones an asset-management team actually argues about during a recovery dispute. Get these 12 right and the operator has a fighting chance during reconciliation. Get the escalation type wrong or omit the CAM cap and the landlord has already lost the argument before the dispute starts.
+A commercial lease has many more abstractable fields (I estimate 80 to 150). We use 12 because they are the ones an asset-management team actually argues about during a recovery dispute. Get these 12 right and the operator has a fighting chance during reconciliation. Get the escalation type wrong or omit the CAM cap and the landlord has already lost the argument before the dispute starts.
 
 ---
 
 ## 🔧 Step 1 — Before automated abstraction: the paralegal workflow
 
-**In plain English:** A paralegal reads the lease cover-to-cover and fills in the 12 fields. A senior asset manager spot-checks 5-10% of the work. That was the operating model at most CRE owner-operators as recently as 2022. A lot of small-to-mid landlords are still doing this.
+**In plain English:** A paralegal reads the lease cover-to-cover and fills in the 12 fields. A senior asset manager spot-checks 5-10% of the work. That is the operating model Step 1 assumes.
 
 **It works.** Per-field accuracy is roughly 96%. Paralegals are accurate at this — the failure mode is fatigue and mis-transcription, not misunderstanding the lease.
 
@@ -242,7 +242,7 @@ python src/step_01_manual_abstraction.py
 
 **Result:** 🟡 Avg \~3.7 hours / lease, \~$278 / lease (paralegal time plus 0.5 h senior QC), \~96% per-field accuracy (modeled from blended paralegal rates and lease-page complexity multipliers; not measured against a deployed paralegal team). Across a 220-asset portfolio that's roughly **$61K per re-abstraction cycle, or \~$20K/yr amortized** at a 3-year amendment cadence.
 
-**Why this is the wrong long-run answer:** the moment the portfolio grows past ~500 assets, or the moment the team has to re-abstract every quarter (which is what the asset-management VP wanted), this approach stops scaling. That's why every operator has tried to automate it.
+**Why this is the wrong long-run answer:** the moment the portfolio grows past roughly 500 assets (my assumption, not a measured threshold), or the moment the team has to re-abstract every quarter (which is what the asset-management VP wanted), this approach stops scaling. That's why every operator has tried to automate it.
 
 ---
 
@@ -250,7 +250,7 @@ python src/step_01_manual_abstraction.py
 
 **In plain English:** Replace the paralegal with a LangChain extraction chain over the hosted vendor model, run on top of OCR'd PDFs. Per-lease throughput drops from \~3.7 hours (the Step 1 average) to \~6 minutes (🟡 modeled). Per-lease cost drops from \~$278 (the Step 1 average) to a model and OCR fee that this repo does not model.
 
-This is the public Cherre / Lev / ProDeal / Yardi Aspire pattern — the SOTA that any institutional CRE operator runs today. The code below is a simplified version; a real production pipeline would have retries, structured-output schemas, and a confidence threshold that does not save it from any of the failure modes in Step 3.
+This is a common deployed pattern, and I do not describe any named vendor's product. The code below is a simplified version; a real production pipeline would have retries, structured-output schemas, and a confidence threshold that does not save it from any of the failure modes in Step 3.
 
 **The code** ([`src/step_02_deployed_lease_nlp.py`](./src/step_02_deployed_lease_nlp.py), simplified):
 
@@ -283,7 +283,7 @@ python src/step_02_deployed_lease_nlp.py
 | `lease_06` anchor tenant complex | 8 / 12 | 67% |
 | 🟢 **Blended on this sample** | **55 / 72** | **76.4% on this sample** |
 
-The 6-lease sample is deliberately weighted toward the hard cases. 🟡 **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** (modeled from public PropTech vendor benchmarks: \~96% on standard leases, which dominate the mix, and \~78% on non-standard). The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
+The 6-lease sample is deliberately weighted toward the hard cases. 🟡 **On a real-world mixed CRE portfolio the blended accuracy is closer to 88%** (an assumption drawn from public PropTech writing, with no specific benchmark cited: \~96% on standard leases, which dominate the mix, and \~78% on non-standard). The numbers above are what the 88%-blended SOTA looks like on the *interesting* part of the distribution.
 
 **Result:** The pipeline handles standard leases well. **It returns the wrong CAM cap, the wrong escalation type, missed kick-outs, and missed exclusivity on the non-standard ones.** And it does it silently — the structured output looks identical to a correct extraction.
 
@@ -387,14 +387,15 @@ Reading this table tells you the answer for the operator: **no single backend wi
 
 ## 🛠️ Step 4 — The fix: LeaseGuard
 
-**In plain English:** Don't replace the deployed pipeline. Don't try to fine-tune the hosted vendor model on lease language (the published evidence on this is consistent — marginal lift on the standard slice, no lift on the side-letter slice). Wrap the pipeline in a verification layer that runs every extracted field through three independent checks and routes anything that disagrees, fails the rules, or comes back missing into a triage queue.
+**In plain English:** Don't replace the deployed pipeline. Don't try to fine-tune the hosted vendor model on lease language (my working assumption, not tested here: marginal lift on the standard slice, none on the side-letter slice). Wrap the pipeline in a verification layer that runs every extracted field through three independent checks and routes anything that disagrees, fails the rules, trips the side-letter wire, or comes back missing into a triage queue.
 
-Three layers + a queue:
+Three checks + a queue, around the untouched primary:
 
-1. **Primary extraction** — the existing deployed vendor-model-over-OCR pipeline. Untouched.
-2. **Re-extraction with a different model** — GPT-4o or a fine-tuned Mistral 7B Instruct over the same OCR'd text. Disagreement on a field flags it.
-3. **Rule-based field validators** — regex + structural rules per field type (rent must be a `$NN.NN` dollar amount, escalation must be in a known type set, dates must parse, ROFO must be Yes/No, term must be a sane number of months).
-4. **Triage queue** — flagged fields routed to a paralegal with the source clause highlighted alongside the primary extraction. The paralegal reviews and resolves. The CSV write to Yardi only happens after triage clears.
+0. **Primary extraction** — the existing deployed vendor-model-over-OCR pipeline. Untouched.
+1. **Re-extraction with a different model** — GPT-4o or a fine-tuned Mistral 7B Instruct over the same OCR'd text. Disagreement on a field flags it.
+2. **Rule-based field validators** — regex + structural rules per field type (rent must parse as a `NN.NN` dollar amount, escalation must be in a known type set, dates must parse, ROFO must be Yes/No, term must be a sane number of months).
+3. **Side-letter tripwire and missing-clause check** — if the text mentions a side letter, amendment, ROFO or ROFR but the primary says no ROFO, flag it. If the primary reports no kick-out or exclusivity clause but the text mentions one, flag it as MISSING.
+4. **Triage queue** — flagged fields routed to a paralegal with the source clause highlighted alongside the primary extraction (the highlight is a design; the prototype writes the queue to a CSV). The paralegal reviews and resolves. The write to Yardi only happens after triage clears (design, not built).
 
 The product is **NOT a replacement for the deployed lease-NLP**. It's a verification layer that catches what the primary missed.
 
@@ -452,7 +453,7 @@ Anything else is theatre. Going from 88% to 98% accuracy is not an outcome. *Goi
 
 | Term | Value | Where it comes from |
 | --- | --- | --- |
-| 🟡 Current state of the art (deployed lease-NLP, blended) | 88% accuracy | Public PropTech vendor benchmarks; published independent audits; calibrated against the 6-lease sample here |
+| 🟡 Current state of the art (deployed lease-NLP, blended) | 88% accuracy | Assumption drawn from public PropTech writing; no specific benchmark or audit is cited. The 6-lease sample is deliberately hard and does not calibrate it |
 | 🟡 LeaseGuard solution | 98.2% accuracy after triage | Step 4 results on the eval set + projected at portfolio scale with paralegal triage |
 | 🟡 Per-lease lift | **10.2 percentage points** of correctly-extracted fields | difference of the above |
 | Affected (modeled 220-asset portfolio) | 220 leases × 12 fields per cycle = 2,640 field extractions | 220-asset retail-and-office book shape |
@@ -653,8 +654,8 @@ If your seat involves shipping AI on top of a CRE operating book — or you're l
 
 ## 🙌 Acknowledgements
 
-- **The PropTech-founder consensus** — Cherre, Lev, ProDeal, VTS, CompStak, CoStar, Reonomy. Public discussion of lease-NLP failure modes on non-standard leases predates this project by two years; LeaseGuard is the verification-layer answer to a problem the field has been openly noting.
+- **Public PropTech writing on lease-NLP failure modes.** I cite no specific article or vendor statement here. LeaseGuard is a verification-layer answer to a problem that writing describes.
 - **ICSC** and **BOMA** — standard lease forms, the baseline against which "non-standard" is measured.
 - **Yardi Voyager**, **MRI**, **Argus Enterprise**, **Salesforce CRE Cloud** — the systems the corrected lease abstracts have to write back into.
 - [Hamel Husain](https://hamel.dev/blog/posts/evals/) — the eval-first thesis. Reason `data/expected_extractions.csv` exists before any model was tuned.
-- Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. The list of deficiency classes in Step 3 is calibrated against that published commentary.
+- Asset-management writing on CAM reconciliation disputes — public LinkedIn threads, ICSC panels, NAREIT commentary. I read it in general and cite no specific piece; it shaped the list of deficiency classes in Step 3.

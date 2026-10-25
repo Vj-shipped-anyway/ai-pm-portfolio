@@ -62,8 +62,7 @@ def verify_pasted_lease(text: str) -> dict:
 
     fields_total = 12
     fields_correct_naive = max(fields_total - len(deficiencies) - 1, 6) if deficiencies else fields_total - 2
-    fields_correct_guard = fields_total - max(0, len(deficiencies) - len(deficiencies))  # guard catches all
-    fields_correct_guard = fields_total
+    fields_correct_guard = fields_total  # placeholder; the UI does not show accuracy for pasted leases
 
     if not deficiencies:
         verdict = "REVIEW"
@@ -191,7 +190,9 @@ def load_lease_text(lease_id: str) -> str:
 
 DATA = load_data()
 
-# Per-lease abstraction results (modeled - matches the README narrative)
+# Per-lease abstraction results. The field counts and the caught fields match the
+# Step 2 and Step 4 output; dollar_at_risk values are illustrative modeled figures.
+# known_miss is a wrong field that both models returned unchanged (Step 4's one miss).
 LEASE_RESULTS = {
     "lease_01 - Brewmoor Coffee (clean retail)": {
         "lease_id": "lease_01",
@@ -214,9 +215,10 @@ LEASE_RESULTS = {
     "lease_03 - MeridianFlow (non-standard industrial)": {
         "lease_id": "lease_03",
         "fields_total": 12,
-        "fields_correct_naive": 9,
+        "fields_correct_naive": 8,
         "fields_correct_guard": 12,
         "deficiencies_caught": [
+            ("escalation_type", "Fixed-pct returned; the lease has CPI with floor and cap", "medium"),
             ("escalation_value", "CPI floor/cap dropped by primary extractor", "low"),
             ("cam_cap_psf", "$7.00 cap missed - read as uncapped", "high"),
             ("ROFO_present", "ROFO clause missed in amendment block", "medium"),
@@ -227,15 +229,17 @@ LEASE_RESULTS = {
     "lease_04 - Sundara Apparel (redlined retail)": {
         "lease_id": "lease_04",
         "fields_total": 12,
-        "fields_correct_naive": 6,
+        "fields_correct_naive": 4,
         "fields_correct_guard": 12,
         "deficiencies_caught": [
             ("premises_sf", "Strikethrough 4,800 / inserted 5,150 - primary read 4,800", "high"),
             ("lease_term_months", "60 stricken, 84 inserted - primary read 60", "high"),
             ("base_rent_psf", "$48.00 stricken, $42.50 inserted - primary read $48.00", "high"),
             ("escalation_type", "Fixed-pct stricken, CPI w/ floor+cap inserted - primary missed", "high"),
+            ("escalation_value", "Floor 1.5 / cap 4.0 inserted - primary read 3.0", "high"),
             ("cam_cap_psf", "Uncapped stricken, $8.50 cap inserted - primary missed", "high"),
             ("kickout_clause", "Co-tenancy kickout missed entirely", "high"),
+            ("exclusivity_clause", "Exclusivity sits in an [INSERT] block - primary read none", "high"),
         ],
         "dollar_at_risk": 1_240_000,
         "verdict": "FAIL",
@@ -255,13 +259,13 @@ LEASE_RESULTS = {
         "lease_id": "lease_06",
         "fields_total": 12,
         "fields_correct_naive": 8,
-        "fields_correct_guard": 12,
+        "fields_correct_guard": 11,
         "deficiencies_caught": [
+            ("escalation_type", "Stepped escalation - primary read fixed-pct", "high"),
             ("escalation_value", "10% step at yr6 and yr11 - primary read 10% annually", "high"),
-            ("kickout_clause", "Co-tenancy + sales-based combined kickout - primary read co-tenancy only", "medium"),
             ("exclusivity_clause", "4-category exclusivity - primary read 1 category", "medium"),
-            ("cam_cap_psf", "$5.75 cap stored, base year missed", "low"),
         ],
+        "known_miss": "kickout_clause: the lease has co-tenancy and sales-based kick-outs; both models return co-tenancy only, so no check fires.",
         "dollar_at_risk": 540_000,
         "verdict": "REVIEW",
     },
@@ -293,7 +297,7 @@ st.markdown(
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
-    <span class='pill'>6 leases verified</span>
+    <span class='pill'>6 synthetic leases</span>
     <span class='pill'>Built 2026</span>
   </div>
 </div>
@@ -376,14 +380,14 @@ if st.session_state.step >= 2:
         verdict_class = "verdict-pass"
         risk = "LOW"
         action = "Approve and proceed - field accuracy 100%."
-        confidence = "HIGH (>95%)"
+        confidence = "HIGH - no field flagged"
         confidence_class = "confidence-high"
         tldr = "All 12 fields match expected extraction. No deficiencies caught. Safe to ingest."
     elif verdict == "REVIEW":
         verdict_class = "verdict-review"
         risk = "MEDIUM"
         action = "Send to senior abstraction analyst before ingest."
-        confidence = "MEDIUM (70-95%)"
+        confidence = "MEDIUM - fields flagged for review"
         confidence_class = "confidence-med"
         tldr = (
             f"Primary extractor missed {result['fields_total'] - result['fields_correct_naive']} of "
@@ -393,7 +397,7 @@ if st.session_state.step >= 2:
         verdict_class = "verdict-flag"
         risk = "HIGH"
         action = "Reject and request re-abstraction with ensemble verifier."
-        confidence = "LOW (<70%)"
+        confidence = "LOW - several high-severity flags"
         confidence_class = "confidence-low"
         tldr = (
             f"Primary extractor was wrong on {result['fields_total'] - result['fields_correct_naive']} of "
@@ -401,16 +405,23 @@ if st.session_state.step >= 2:
             f"do not ingest without senior review."
         )
 
+    if result.get("is_user_paste"):
+        vmetric_text = f"Keyword check on pasted text: {flagged} signal(s) found. Field accuracy is not computed for pasted leases."
+        accuracy_chip = ""
+    else:
+        vmetric_text = f"{result['fields_correct_guard']} of {result['fields_total']} fields correct after triage ({guard_acc:.1f}%, assuming the paralegal resolves every routed field correctly)"
+        accuracy_chip = f"<span class='vchip'>Primary extractor accuracy: {naive_acc:.1f}%</span>"
+
     st.markdown(
         f"""
 <div class='verdict-card {verdict_class}'>
   <div class='vlabel'>LeaseGuard Verdict</div>
   <div class='vbig'>{verdict}</div>
-  <div class='vmetric'>{result['fields_correct_guard']} of {result['fields_total']} fields verified ({guard_acc:.1f}% accuracy with LeaseGuard)</div>
+  <div class='vmetric'>{vmetric_text}</div>
   <div class='vrow'>
     <span class='vchip'>Risk: {risk}</span>
     <span class='vchip'>Recommended action: {action}</span>
-    <span class='vchip'>Primary extractor accuracy: {naive_acc:.1f}%</span>
+    {accuracy_chip}
   </div>
   <div class='vtldr'><b>TL;DR:</b> {tldr}</div>
 </div>
@@ -423,11 +434,11 @@ if st.session_state.step >= 2:
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>Compared extracted clauses against <a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv' target='_blank'><code>data/expected_extractions.csv</code></a> (validated by manual abstraction); 12 ground-truth fields per lease. Per-lease accuracy = of all the fields in one lease, what % did the AI extract correctly?</div>
+  <div>Compared extracted clauses against <a href='https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv' target='_blank'><code>data/expected_extractions.csv</code></a> (hand-written ground truth for the synthetic leases); 12 fields per lease. Per-lease accuracy = of all the fields in one lease, what % did the AI extract correctly?</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
     <li>The lease text is in plain English (not OCR'd - OCR (Optical Character Recognition) means turning a scanned/photographed document into text the AI can read - so we assume it isn't from a poor scan).</li>
-    <li>Standard ICSC (International Council of Shopping Centers - sets standards for retail leases) retail or BOMA (Building Owners and Managers Association - sets standards for measuring office space) office templates as baseline; non-standard forms calibrated against PropTech-vendor literature.</li>
+    <li>Standard ICSC (International Council of Shopping Centers - sets standards for retail leases) retail or BOMA (Building Owners and Managers Association - sets standards for measuring office space) office templates as baseline; non-standard forms written to mirror failure patterns described in public PropTech writing.</li>
     <li>Side letters and amendments are passed in alongside the main lease document.</li>
     <li>Dollar-at-risk (estimated financial impact, usually annual, if the deficiency goes uncaught) uses portfolio-modeled CAM-recovery and escalation-arithmetic patterns; per-lease numbers are illustrative.</li>
   </ul>
@@ -454,10 +465,13 @@ if st.session_state.step >= 2:
                 columns=["field", "what LeaseGuard caught", "severity"],
             )
             st.dataframe(df, use_container_width=True, hide_index=True)
-            st.markdown(
-                f"_Primary lease-NLP got {result['fields_correct_naive']} / {result['fields_total']} fields right. "
-                f"LeaseGuard ensemble verifier got {result['fields_correct_guard']} / {result['fields_total']} right._"
-            )
+            if not result.get("is_user_paste"):
+                st.markdown(
+                    f"_Primary lease-NLP got {result['fields_correct_naive']} / {result['fields_total']} fields right. "
+                    f"After triage (every routed field resolved correctly by the paralegal): {result['fields_correct_guard']} / {result['fields_total']}._"
+                )
+            if result.get("known_miss"):
+                st.markdown(f"_Known miss, not routed: {result['known_miss']}_")
 
     if result.get("is_user_paste"):
         with st.expander("Extracted fields from your pasted lease (best-effort)", expanded=True):
@@ -511,8 +525,8 @@ if st.session_state.step >= 3:
 <div class='verdict-card verdict-flag'>
   <div class='vlabel'>Dollar at Risk (modeled, lease term)</div>
   <div class='vbig'>${dar:,.0f}</div>
-  <div class='vmetric'>Captured by LeaseGuard before ingest</div>
-  <div class='vtldr'>Pattern: missed CAM cap + missed escalation type + missed kickout clause = the recurring CRE leakage shape.</div>
+  <div class='vmetric'>Routed to triage before ingest (for the fields LeaseGuard flags)</div>
+  <div class='vtldr'>Pattern: missed CAM cap + missed escalation type + missed kickout clause = the leakage shape this prototype is built around. The dollar figure is an illustrative modeled value.</div>
 </div>
 """,
             unsafe_allow_html=True,
@@ -563,16 +577,15 @@ if st.session_state.step >= 4:
 
     with st.expander("Audit pack - evidence bundle"):
         st.markdown(
-            "- **Source of truth:** [`data/expected_extractions.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv) (12 ground-truth fields per lease, manually validated)\n"
-            "- **Deficiency taxonomy:** [`data/deficiency_classes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/deficiency_classes.csv) (6 named classes)\n"
-            "- **Primary extractor:** the hosted vendor model over OCR (Tesseract / Textract)\n"
-            "- **Ensemble verifier:** secondary LLM + symbolic rule engine + clause-pair cross-check\n"
-            "- **Calibrated thresholds:** stricter for redlined / side-letter leases\n"
-            "- **Audit trail:** every field gets a confidence score + provenance pointer"
+            "- **Source of truth:** [`data/expected_extractions.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/expected_extractions.csv) (12 hand-written ground-truth fields per lease)\n"
+            "- **Deficiency map:** [`data/deficiency_classes.csv`](https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/03-leaseguard-cre-lease-verification/data/deficiency_classes.csv) (which of the six named classes trip on each of the 6 sample leases)\n"
+            "- **Primary extractor (design):** the hosted vendor model over OCR (Tesseract / Textract). The prototype uses stored mock outputs\n"
+            "- **Verifier in the prototype:** a mock second-model extraction, rule validators, and a side-letter tripwire (Step 4)\n"
+            "- **Not built here:** calibrated thresholds, per-field confidence scores, provenance pointers, source-clause highlighting"
         )
 
     with st.expander("Inspect source-of-truth data (expected_extractions.csv)"):
-        st.caption("The 12 ground-truth fields per lease that LeaseGuard's verifier compares against. Each row is one (lease_id, field) pair with the manually-validated expected value.")
+        st.caption("The 12 ground-truth fields per lease that LeaseGuard's verifier compares against. Each row is one (lease_id, field) pair with the hand-written expected value.")
         try:
             sot_df = pd.read_csv(DATA_DIR / "expected_extractions.csv")
             st.dataframe(sot_df, use_container_width=True, hide_index=True)
@@ -581,11 +594,11 @@ if st.session_state.step >= 4:
             st.warning(f"Could not load expected_extractions.csv: {exc}")
 
     with st.expander("Inspect deficiency taxonomy (deficiency_classes.csv)"):
-        st.caption("The 6 named classes of deficiency LeaseGuard checks for, with definitions and example failure patterns drawn from published PropTech industry literature.")
+        st.caption("For each sample lease, which of the six named deficiency classes trip on it (a reference table; Step 3 keeps its own mapping).")
         try:
             tax_df = pd.read_csv(DATA_DIR / "deficiency_classes.csv")
             st.dataframe(tax_df, use_container_width=True, hide_index=True)
-            st.caption(f"{len(tax_df)} deficiency classes. Source: data/deficiency_classes.csv in the repo.")
+            st.caption(f"{len(tax_df)} leases. Source: data/deficiency_classes.csv in the repo.")
         except Exception as exc:
             st.warning(f"Could not load deficiency_classes.csv: {exc}")
 

@@ -13,12 +13,12 @@
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LeaseGuard — CRE Lease Abstraction Verifier">
 <meta name="twitter:description" content="Verifies a deployed lease-extraction pipeline with a second model, rule checks and a paralegal triage queue.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/03-leaseguard-cre-lease-verification/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
@@ -145,7 +145,7 @@
       <span class="badge">6 named deficiencies</span>
       <span class="badge">3 verification layers</span>
     </div>
-    <p class="framing">Portfolio prototype on synthetic leases, not a production case study. Extraction outputs are mocked and calibrated to observed failure patterns; every 🟢 number below is generated from the scripts in <code>src/</code>; 🟡 numbers are modeled.</p>
+    <p class="framing">Portfolio prototype on synthetic leases, not a production case study. Extraction outputs are mocked, written by hand to show failure patterns described in public PropTech writing; every 🟢 number below is generated from the scripts in <code>src/</code>; 🟡 numbers are modeled.</p>
   </header>
 
   <section class="stats" aria-label="Running totals through the selected lease">
@@ -188,7 +188,7 @@
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (deployed-NLP error rate − LeaseGuard error rate) × field extractions per cycle</p>
     <p style="margin: 8px 0 0;">🟢 <b>Measured on this 6-lease set:</b> deployed pipeline 55/72 fields correct (76.4%); after LeaseGuard triage 71/72 (98.6%, counting every routed field as resolved correctly by the paralegal). 17 wrong fields: 16 routed to triage, 1 missed. 21 fields routed in total, so 5 were false flags a paralegal has to clear. The one miss is the lease_06 kick-out clause, where both models return the same incomplete value and no rule fires.</p>
-    <p style="margin: 8px 0 0;">🟡 <b>Modeled at portfolio scale</b> (220 leases × 12 fields = 2,640 extractions per cycle): blended accuracy 88% → 98.2%, roughly 270 field errors caught per year, ~$4.2M/yr of recovered rent exposure. Assumes the public PropTech benchmarks named in the README and that paralegal triage clears flagged fields; not measured.</p>
+    <p style="margin: 8px 0 0;">🟡 <b>Modeled at portfolio scale</b> (220 leases × 12 fields = 2,640 extractions per cycle): blended accuracy 88% → 98.2%, roughly 270 field errors caught per year, ~$4.2M/yr of recovered rent exposure. Assumes the 88% baseline and the ~85% triage-success rate stated in the README, and that paralegal triage clears flagged fields; not measured.</p>
   </section>
 
   <footer class="footer-links">
@@ -264,7 +264,7 @@ function render() {
     "<br>" + esc(l.note);
 
   document.getElementById("card-before").innerHTML =
-    "<p>A paralegal reads the lease cover to cover and fills in 12 fields; a senior reviewer QCs it. Accurate but slow, and it does not scale past a few hundred assets.</p>" +
+    "<p>A paralegal reads the lease cover to cover and fills in 12 fields; a senior reviewer QCs it. Accurate but slow, and in my assumption it stops scaling past roughly 500 assets.</p>" +
     '<div class="driver-row"><span class="driver-label">Total time</span><span class="driver-value">' + l.manual.hours.toFixed(2) + " h</span></div>" +
     '<div class="driver-row"><span class="driver-label">Cost</span><span class="driver-value">$' + l.manual.cost.toFixed(2) + "</span></div>" +
     '<div class="driver-row"><span class="driver-label">Field accuracy</span><span class="driver-value">~96% (assumed)</span></div>' +
@@ -279,7 +279,7 @@ function render() {
   sotaHtml += '<span class="pill ' + (wrongFields.length ? "pill-bad" : "pill-ok") + '">' + (wrongFields.length ? "silent errors, no alert" : "clean") + "</span>";
   document.getElementById("card-sota").innerHTML = sotaHtml;
 
-  let shHtml = "<p>" + (flagged.length ? flagged.length + " of " + l.fields.length + " fields routed to paralegal triage with the source clause highlighted." : "All 12 fields auto-cleared.") + "</p>" +
+  let shHtml = "<p>" + (flagged.length ? flagged.length + " of " + l.fields.length + " fields routed to paralegal triage." : "All 12 fields auto-cleared.") + "</p>" +
     '<div class="driver-row"><span class="driver-label">Wrong caught</span><span class="driver-value">' + tp.length + " / " + wrongFields.length + "</span></div>" +
     '<div class="driver-row"><span class="driver-label">False flags</span><span class="driver-value">' + fp.length + "</span></div>" +
     '<div class="driver-row"><span class="driver-label">Correct after triage</span><span class="driver-value">' + afterCorrect + " / " + l.fields.length + " (" + pct(afterCorrect, l.fields.length) + ")</span></div>";

@@ -62,10 +62,9 @@ DEFICIENCY_DESCRIPTIONS = {
 }
 
 
-# Per-deficiency comparative pass rate — what we measured running the same
-# extractor against three model backends on a 240-lease eval set. The
-# six-lease sample in this walkthrough is a slice; the table below is from
-# the full eval.
+# Per-deficiency comparative pass rate for three model backends. These are
+# stored values labeled as a 240-lease eval set. That set and the runs behind
+# it are not in this repo, so they are hypothetical here, not measured.
 MODEL_COMPARISON = {
     "redline_blindness":                  {"Vendor model (deployed)": 0.42, "GPT-4o": 0.49, "Mistral 7B FT": 0.55},
     "escalation_clause_variance":         {"Vendor model (deployed)": 0.61, "GPT-4o": 0.58, "Mistral 7B FT": 0.71},
@@ -144,7 +143,7 @@ def main():
 
     print(f"\n{'='*80}")
     print("Comparative pass rate by deficiency, three extraction backends")
-    print("(Same 240-lease eval set, no verification layer)")
+    print("(Stored values, no verification layer; the eval set and runs are not in this repo)")
     print(f"{'='*80}\n")
     backends = ["Vendor model (deployed)", "GPT-4o", "Mistral 7B FT"]
     print(f"  {'Deficiency':<40} " + " ".join(f"{b:>22}" for b in backends))

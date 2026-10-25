@@ -2,24 +2,25 @@
 Step 4 — The fix: LeaseGuard ensemble verification.
 
 LeaseGuard is NOT a replacement for the deployed lease-NLP pipeline. It's
-a verification layer that runs every extracted field through three checks:
+a verification layer that checks every field the primary pipeline extracted:
 
-    1. Primary extraction (the deployed vendor-model-over-OCR pipeline)
-    2. Re-extraction with a different model (GPT-4o, or a fine-tuned
+    1. Re-extraction with a different model (GPT-4o, or a fine-tuned
        Mistral 7B Instruct) — disagreement on a field flags it
-    3. Rule-based field validators — regex + structural rules for known
-       field types (rent must be a dollar amount, escalation must be a
-       percentage / 'CPI' / 'stepped', state must be a 2-letter code,
-       dates must parse, ROFO/exclusivity must be Yes/No)
+    2. Rule-based field validators — regex + structural rules for known
+       field types (rent must parse as a dollar amount, escalation must be
+       in a known type set, dates must parse, ROFO must be Yes/No)
+    3. A side-letter tripwire, plus a check for a kick-out or exclusivity
+       clause the primary reported as 'none' when the text mentions one
 
 Anything that disagrees, fails the rules, or comes back missing lands in
-a triage queue routed to a paralegal for review with the source clause
-highlighted.
+a triage queue for a paralegal. The prototype writes the queue to a CSV; the
+source-clause highlight is a design, not built.
 
 Run:
     python step_04_with_leaseguard.py
 
-Requires: step_02_deployed_lease_nlp.py to have been run first.
+Imports the mock primary extractions from step_02_deployed_lease_nlp.py; it does
+not need Step 2's output file.
 """
 
 import csv
@@ -31,8 +32,8 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 
 
 # Mock secondary extraction (GPT-4o or fine-tuned Mistral 7B). These are
-# the ACTUAL fields where the secondary pipeline disagrees with the
-# primary, calibrated to what we observed in dev. Cases where the
+# the fields where the mock secondary disagrees with the primary. They are
+# written by hand, not observed from a model run. Cases where the
 # secondary also gets it wrong are deliberately included — verification
 # is not magic, and the README is honest about where ensemble disagreement
 # fails to catch a defect.
@@ -119,8 +120,8 @@ VALIDATORS = {
 }
 
 # Side-letter / amendment detection: if the source file mentions side letter
-# or amendment language, but the primary pipeline returned ROFO_present=No
-# and exclusivity_clause=none and kickout_clause=none, escalate.
+# or amendment language, but the primary pipeline returned ROFO_present=No,
+# escalate. (Only ROFO_present is checked.)
 SIDE_LETTER_TRIPWIRES = ["side letter", "amendment no.", "rofo", "rofr",
                           "right of first offer", "right of first refusal"]
 
@@ -131,8 +132,7 @@ def has_side_letter_signal(lease_text: str) -> bool:
 
 
 # Per-field criticality. Drives the dollar-impact estimate in the triage
-# queue. These are the categories where a single missed field has
-# documented historical recovery losses in CRE asset management.
+# queue. These weights are modeled assumptions, not measured losses.
 FIELD_DOLLAR_IMPACT = {
     "tenant_name":         200,
     "premises_sf":         18000,    # SF mismatch on a 5-yr lease

@@ -18,12 +18,14 @@ Deployed lease-abstraction NLP is materially wrong on non-standard, redlined, an
 
 ## 2. Why now
 
-- Vendor lease-NLP is in production at most institutional owner/operators. Almost none QA against ground truth at scale.
-- Acquisition cycles compress diligence to 21–28 days; abstraction has to be *trusted* or the deal isn't underwritable on time.
-- 8–10 yr lease vintage is now coming up for renewal and disposition; the older the lease, the more non-standard the language, the worse the abstraction.
-- LLM ensemble inference cost is now low enough that running 2–3 extractors per lease is unit-economic.
+- Vendor lease-NLP is in production at many institutional owner/operators. In my reading, few QA it against ground truth at scale; I have not surveyed them.
+- Acquisition cycles can compress diligence to 21–28 days; abstraction has to be *trusted* or the deal isn't underwritable on time.
+- Leases of 8–10 year vintage come up for renewal and disposition; I expect older leases to carry more non-standard language and worse abstraction.
+- I expect LLM ensemble inference cost to be low enough that running 2–3 extractors per lease is unit-economic. This repo does not cost it.
 
 ## 3. Goals (12-month horizon)
+
+These are design targets, not results. The dollar figures are modeled.
 
 | Goal | Metric | Target |
 |------|--------|--------|
@@ -51,6 +53,8 @@ Deployed lease-abstraction NLP is materially wrong on non-standard, redlined, an
 ## 6. Solution
 
 ### Three-checker ensemble
+
+> **Schema note.** This is the production design. The prototype checks a smaller 12-field set (see `data/README.md`) with a second-model re-extraction, rule *validators* (not a rule-based extractor), and a side-letter tripwire. The field names below are the production schema, not the prototype's.
 
 For each canonical field — `base_rent`, `escalation_type`, `escalation_pct`, `term_start`, `term_end`, `cam_cap_controllable`, `cam_cap_noncontrollable`, `exclusivity`, `kick_out`, `rofr_rofo`, `tenant_rights`, `use_clause` — run:
 
@@ -117,13 +121,15 @@ A clause-class classifier predicts whether a tenant type / asset class / lease v
 
 1. Where does this live — under Asset Management, Lease Admin, or Tech? (Recommend product under Asset Management with Tech as builder.)
 2. How does this interlock with the abstraction vendor's own confidence scores? (Recommend: ignore vendor confidence as ground signal; treat only as one input.)
-3. Diligence-window throughput — can we hit 21-day acquisition close cycles? (Bench: 200 leases / 21 days = 10/day reviewer load. Achievable.)
+3. Diligence-window throughput — can we hit 21-day acquisition close cycles? (Bench: 200 leases / 21 days = about 10/day reviewer load. I expect that is achievable; it is not tested.)
 4. Does the QA layer ever auto-correct? (Recommend: never. Always human-in-loop on overrides.)
 
 ## 11. Build & Scale Notes
 
+*The figures in this section (latency, throughput, per-lease timings) are design targets and sizing assumptions. None was measured or load-tested in this repo.*
+
 **Reference architecture (vendor-named):**
-- Primary extractor: whatever the firm runs today — Yardi's lease-abstraction module, ProDeal's abstraction product, an in-house Llama 3.1 70B fine-tune, or one of the standalone vendors. We don't replace it.
+- Primary extractor: whatever the firm runs today — a vendor abstraction product, an in-house Llama 3.1 70B fine-tune, or one of the standalone vendors. We don't replace it.
 - Re-extractor: a fine-tuned Mistral 7B Instruct on hosted inference, a different model family from the primary. Different prompt, different chunking strategy than primary. The "different model family" rule is non-negotiable — same family produces correlated errors.
 - Second-opinion re-extractor: Azure OpenAI gpt-4o. The two re-extractors plus the primary form the ensemble.
 - Rule extractor: Python with regex and spaCy. Templates for dates, base rent, escalation %, CAM cap percentages. Design target: under 100 ms per lease (not measured).
