@@ -23,7 +23,6 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.stats import ks_2samp
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 OUT_DIR = Path(__file__).parent / "out"
