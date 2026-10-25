@@ -6,9 +6,9 @@ BFSI shop today: a list of suspicious strings (`ignore previous`,
 `disregard`, `system prompt`, `DAN`, `jailbreak`, ...) and a regex
 gate that blocks any user input matching one of them.
 
-The catch rate floor of basic regex/keyword filtering on novel
-attacks is well-published: roughly 30-50% on OWASP-LLM01-style
-suites. The false-positive rate is also non-trivial — banker
+The catch rate of basic regex/keyword filtering on novel attacks is
+assumed here to be roughly 30-50% on OWASP-LLM01-style suites (no
+benchmark is cited). The false-positive rate is also non-trivial — banker
 queries that legitimately contain words like "previous quarter,"
 "override approval," or "redacted version" trip the filter and
 get blocked.
@@ -17,7 +17,8 @@ This script encodes the basic filter and runs it against:
   - attack_corpus.csv     -> measure catch rate
   - legitimate_prompts.csv -> measure false-positive rate
 
-Expected: ~30-50% catch on attacks, ~10-15% FP on legit.
+Assumed range: ~30-50% catch on attacks, ~10-15% FP on legit. The
+script prints the rates it actually measures on the shipped data.
 
 Run:
     python step_02_regex_keyword_filter.py
@@ -87,9 +88,10 @@ def main():
     print()
     print(f"Filter: {len(BASIC_TRIGGERS)} hand-tuned regex/keyword triggers.")
     print("Representative of what most BFSI shops' 'we have prompt-injection")
-    print("defense' actually means today. Public OWASP-LLM01 benchmarks for")
-    print("this approach: ~30-50% catch rate on attacks, ~10-15% FP rate on")
-    print("legitimate queries that happen to contain trigger words.")
+    print("defense' actually means today. Assumed range for this approach (no")
+    print("benchmark cited): ~30-50% catch rate on attacks, ~10-15% FP rate on")
+    print("legitimate queries that happen to contain trigger words. The measured")
+    print("rates on the shipped data are printed below.")
     print()
 
     attacks = load_corpus("attack_corpus.csv")
@@ -163,18 +165,19 @@ def main():
         print()
 
     # Note the deficiencies still open
-    print("Where this still breaks (Step 3 names them):")
+    print("Where this still breaks (Step 3 names the six classes):")
+    print("  - Direct injection, rephrased or encoded — base64, rot-13, pig latin")
+    print("    and 'set aside your prior directives' slip every keyword.")
     print("  - Indirect injection in retrieved documents — the filter never")
     print("    sees the retrieved content; it inspects only user input.")
-    print("  - Encoded / obfuscated attacks — base64, rot-13, pig latin slip")
-    print("    every keyword.")
-    print("  - Multi-turn drift — first prompt is benign, fourth turn flips.")
     print("  - Tool-call abuse — model invokes an outbound tool with attacker-")
     print("    controlled args; the filter is on the input path, not the tool")
     print("    boundary.")
     print("  - Egress channel — model's response contains exfil payloads; the")
     print("    filter never inspects responses.")
     print("  - Cross-session leakage — no concept of session boundary at all.")
+    print("  - Jailbreak via role-play — STAN, CompliantGPT and other variants")
+    print("    outside the blocklist.")
     print()
 
     # === Writes ===

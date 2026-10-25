@@ -2,6 +2,8 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network topology, operational runbooks, threat model. What you would hand to your CISO and your platform engineering lead on day one.
 
+**This is a design, not a deployed system.** Nothing in this document has been built, audited or measured. The only measured numbers for PromptShield are the ones the step scripts print, summarized in the [README](./README.md); latency budgets, SLOs, retention periods and stack choices below are design intent.
+
 This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the *Building secure multi-agent systems on Google Cloud* reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline.
 
 ---
@@ -116,8 +118,8 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock):
 
 - **Primary:** US-East (`us-east1` GCP / `us-east-1` AWS / East US Azure)
 - **DR:** US-West. Active-passive. RTO 30min, RPO 5min for the `attack_log` table; RPO 0 for L1-L4 (stateless).
-- **EU instance:** Frankfurt. Required for [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) and GDPR — lineage of EU bankers' queries cannot egress region.
-- **India instance:** Mumbai. Required for RBI data localization on Indian retail-arm copilots.
+- **EU instance:** Frankfurt. Included for [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) and GDPR data-residency expectations, so lineage of EU bankers' queries does not leave the region. Whether a given bank needs it is a question for its legal team.
+- **India instance:** Mumbai. Included for RBI data-localization expectations on Indian retail-arm copilots, to be confirmed with the bank's legal team.
 - Each regional instance has its own database, its own KMS key ring, its own Redis cluster. **No cross-region replication for the `attack_log` table** — each region is sovereign for its own request lineage.
 
 ---
@@ -129,8 +131,8 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock):
 | Store | Purpose | Why this store |
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | `attack_log` immutable table, OPA bundle audit log, policy-admin trail. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. Append-only via insert-only role + trigger guard. |
-| **Redis Cluster** (Memorystore / ElastiCache) | Per-session memory. TTL-based eviction. Multi-AZ for high availability. Keys: `(spiffe_id, session_id)`. | Sub-millisecond reads. Native TTL. Standard pattern at every Tier-1 shop. |
-| **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — per-layer fire-rate, per-pattern hit count, per-classifier-confidence histogram. | 10-50x cheaper than Postgres for time-series at this volume. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse. |
+| **Redis Cluster** (Memorystore / ElastiCache) | Per-session memory. TTL-based eviction. Multi-AZ for high availability. Keys: `(spiffe_id, session_id)`. | Sub-millisecond reads. Native TTL. A common pattern for session state. |
+| **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — per-layer fire-rate, per-pattern hit count, per-classifier-confidence histogram. | Assumed far cheaper than Postgres for time-series at this volume (not benchmarked). Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse. |
 | **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of the `attack_log` table** + classifier-corpus snapshots + OPA bundle history. | Object Lock = Write-Once-Read-Many for the 7-year retention. |
 | **Pub/Sub / Kinesis / Event Hubs** | Real-time stream of every block / allow decision. Composer-side fan-out to SOC pane + LineageLog + Datadog. | Native to the cloud; replay-able; decouples the gateway from downstream consumers. |
 
@@ -245,16 +247,16 @@ Cross-session reads are blocked by design — the L5 service rejects any read wh
 
 ### Six-deficiency → defense-layer mapping (threat model)
 
-The table that compiles the defense contract. Every cell maps a deficiency class to the layer that defends it and the secondary control.
+The table that compiles the defense contract. Every cell maps a deficiency class to the layer that defends it and the secondary control. The last column is design reasoning: the prototype scores L1, L2 and L5 on the attack suite and L3 on the 50-call set, and does not measure how often layers miss together.
 
 | # | Deficiency | Primary layer | Catch action | Secondary control | Failure mode if primary misses |
 | --- | --- | --- | --- | --- | --- |
 | 1 | Direct injection in user input | L1 Input classifier | Llama Guard 3 scores user prompt; refuse on score > threshold | L4 (catches if model leaks system prompt in response) | If both miss: classifier-pin verifier alerts on the regression next cycle |
-| 2 | Indirect injection in retrieved docs | L2 Retrieval scanner | Same classifier on every retrieved RAG chunk before model sees it | L3 (catches if model attempts the embedded tool call), L4 (catches embedded URL in response) | Three layers must miss; very low probability |
+| 2 | Indirect injection in retrieved docs | L2 Retrieval scanner | Same classifier on every retrieved RAG chunk before model sees it | L3 (catches if model attempts the embedded tool call), L4 (catches embedded URL in response) | Three layers must miss; joint miss rate not measured |
 | 3 | Tool-call abuse | L3 Tool-call gate | OPA / Rego evaluates every tool invocation against the bank's allow-list | L1 (catches the user-input variant), L4 (catches response leak) | Three layers must miss |
 | 4 | Egress channel | L4 Egress filter | DLP regex pack on response; refuse on PII / known-bad URL / markdown pixel | L1 (catches the user-input variant that asks for the exfil vector) | Two layers must miss |
 | 5 | Cross-session leak | L5 Session memory boundary | SPIFFE-keyed isolation; cross-session prompts cannot read another's state | L1 (catches the user-prompt variant) | Two layers must miss |
-| 6 | Jailbreak via role-play | L1 Input classifier | Same classifier — generalizes past hand-tuned regex to the long tail | L4 (catches if jailbroken model emits PII in response) | Two layers must miss |
+| 6 | Jailbreak via role-play | L1 Input classifier | Same classifier — designed to generalize past hand-tuned regex to the long tail | L4 (catches if jailbroken model emits PII in response) | Two layers must miss |
 
 ### ClickHouse schema (observability time-series)
 
@@ -346,7 +348,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | Compromised API token | Short-lived tokens, mTLS service-to-service, IdP-side revocation propagates <=5 min |
 | Insider — analyst pulls all `attack_log` rows | RBAC limits analyst to time-windowed sample queries; bulk export blocked |
 | Compromised `attack_log` row (poisoning) | Row-hash HSM-signed at write; immutability trigger; periodic re-verification job |
-| Vendor classifier silent update | Classifier-pin tracked per row; daily diff job; auto-rollback on catch-rate regression. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5 |
+| Vendor classifier silent update | Classifier-pin tracked per row; daily diff job; auto-rollback on catch-rate regression. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s vendor-version diff |
 | Database exfiltration via SQL injection | Parameterized queries only; ORM-only (SQLAlchemy + Pydantic) at the API boundary; Cloud Armor WAF rule set |
 | Egress data exfiltration | VPC Service Controls + Secure Web Proxy allow-list |
 | Tampering with immutable history | Database trigger denies UPDATE/DELETE on immutable fields; row-hash mismatch detection job runs nightly |
@@ -384,9 +386,9 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 - **ClickHouse.** Weekly backup to GCS / S3. ReplicatedMergeTree gives HA within region.
 - **Redis.** Multi-AZ replication. Snapshots every 6h. Note: session memory is ephemeral by design; a Redis loss is a session reset, not data loss.
 - **Object stores.** Object Lock + versioning + cross-region replication for the `attack_log` WORM archive (within the same regulatory region only — never US ↔ EU).
-- **DR drill cadence.** Quarterly. Full failover to US-West; validate RTO 30min / RPO 5min for the `attack_log` table; fail back. Runbook in `docs/runbooks/dr-failover.md`.
+- **DR drill cadence.** Quarterly. Full failover to US-West; validate RTO 30min / RPO 5min for the `attack_log` table; fail back. Runbook: `docs/runbooks/dr-failover.md` in the product repo.
 
-### Runbooks (one paragraph each in the repo)
+### Runbooks (planned: one paragraph each in the product repo; none are in this portfolio folder)
 
 - `dr-failover.md` — full region failover
 - `l1-down.md` — when the L1 classifier service is unavailable
@@ -399,17 +401,19 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 
 ---
 
-## 6. Compliance posture
+## 6. Control alignment (design intent)
+
+None of this has been audited, attested or formally assessed. Each row says what the design is meant to line up with.
 
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All eight components in scope. Annual external audit. |
+| **SOC 2 Type II** | Design intent: all eight components in the audit scope, with an annual external audit once deployed. |
 | **PCI-DSS** | In scope when the underlying copilot touches cardholder data. PromptShield itself does not process card data; it scans for cards in egress. PCI scope minimization via `user_id_hash` + KMS pepper. |
 | **GLBA Safeguards Rule** | Customer financial data handled with field-level hashing + access controls + audit trail. Right-to-be-forgotten cascades to lineage records via `user_id_hash` deletion (with legal-hold override). |
-| **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** | LLM01 (Prompt Injection), LLM02 (Sensitive Information Disclosure), LLM06 (Excessive Agency) directly addressed by L1-L5. |
-| **[MITRE ATLAS](https://atlas.mitre.org/)** | Calibrated against the published attacker-techniques catalog. Quarterly probe runs use ATLAS technique IDs. |
-| **[NIST AI RMF 1.0](https://www.nist.gov/itl/ai-risk-management-framework)** | PromptShield is the implementation surface for the framework's "Map" (threat-model the deployed copilots), "Measure" (catch rate / FP rate metrics), and "Manage" (continuous red-team + classifier retraining) functions. |
-| **[EU AI Act (Regulation 2024/1689)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** | EU instance enforces data residency. The `attack_log` is the record-keeping artifact for high-risk AI systems (internal BFSI copilots qualify under Annex III). |
+| **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** | LLM01 (Prompt Injection), LLM02 (Sensitive Information Disclosure), LLM06 (Excessive Agency) are the risks L1-L5 are designed to address. |
+| **[MITRE ATLAS](https://atlas.mitre.org/)** | Technique IDs from the published attacker-techniques catalog are used to label the threat model above. The design has quarterly probe runs tagged with ATLAS technique IDs. |
+| **[NIST AI RMF 1.0](https://www.nist.gov/itl/ai-risk-management-framework)** | PromptShield is designed as an implementation surface for the framework's "Map" (threat-model the deployed copilots), "Measure" (catch rate / FP rate metrics), and "Manage" (continuous red-team + classifier retraining) functions. |
+| **[EU AI Act (Regulation 2024/1689)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** | EU instance enforces data residency. The `attack_log` is designed as the record-keeping artifact for any copilot the bank classes as high-risk; whether an internal copilot qualifies under Annex III depends on its use and is a legal call. |
 | **GDPR** | EU instance enforces data residency. Right-to-erasure cascades to `user_id_hash` deletion with legal-hold override. DPO sign-off documented per region. |
 | **India RBI data localization** | Indian retail-arm copilots run on the India regional instance only. No cross-border replication. |
 | **[Google SAIF](https://safety.google/cybersecurity-advancements/saif/)** | Model controls (L1, L2), agent controls (L3, L5), supply-chain controls (classifier-pin verifier). |
@@ -471,7 +475,7 @@ That last list is the discipline. Every internal-build I have watched die has di
 }
 ```
 
-OpenAPI spec lives at `apps/api/openapi.yaml` and is the source of truth for the SDK clients.
+In the product repo, the OpenAPI spec would live at `apps/api/openapi.yaml` and be the source of truth for the SDK clients. The values in the sample above are illustrative.
 
 ## Appendix B — sample OPA policy (L3 tool-call gate)
 

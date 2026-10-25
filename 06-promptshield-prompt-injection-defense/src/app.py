@@ -224,7 +224,7 @@ SCENARIOS = [
                   "querystring) into its response. The egress filter scans the "
                   "response BEFORE it leaves the gateway and refuses the unsafe "
                   "payload. This is the silent-failure mode — the SMTP relay never "
-                  "fires, the data leaks via a customer's email client rendering "
+                  "fires, the data leaks when the banker's browser renders "
                   "the image. Egress filtering closes the loop."),
     },
     {
@@ -239,8 +239,8 @@ SCENARIOS = [
         "story": ("A banker asks the assistant about another user's session. The "
                   "per-session memory boundary refuses — sessions are cryptographically "
                   "isolated in production; conversational memory is scoped per "
-                  "SPIFFE identity with a Redis TTL. This is the failure mode that ate "
-                  "one of the biggest BFSI copilot rollouts in 2025."),
+                  "SPIFFE identity with a Redis TTL. A shared memory with no session "
+                  "isolation is how this leak happens."),
     },
     {
         "key": "jailbreak",
@@ -296,7 +296,7 @@ st.markdown(
 <div class='ps-hero'>
   <div class='brand'>🛡️ PromptShield</div>
   <h1>Catch the prompt injection at the door, the tool-call at the gate, and the exfil at the wire.</h1>
-  <div class='sub'>A five-layer prompt-injection and egress defense for internal BFSI copilots over confidential data. Defense-in-depth — input classifier, retrieval scanner, tool-call gate, egress filter, per-session memory boundary. Maps to <a href='https://genai.owasp.org/llm-top-10/' target='_blank'>OWASP LLM01</a>, <a href='https://www.nist.gov/itl/ai-risk-management-framework' target='_blank'>NIST AI RMF</a>, <a href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj' target='_blank'>EU AI Act</a>, and <a href='https://atlas.mitre.org/' target='_blank'>MITRE ATLAS</a>.</div>
+  <div class='sub'>A five-layer prompt-injection and egress defense for internal BFSI copilots over confidential data. Defense-in-depth — input classifier, retrieval scanner, tool-call gate, egress filter, per-session memory boundary. Aligned to <a href='https://genai.owasp.org/llm-top-10/' target='_blank'>OWASP LLM01</a>, <a href='https://www.nist.gov/itl/ai-risk-management-framework' target='_blank'>NIST AI RMF</a>, <a href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj' target='_blank'>EU AI Act</a>, and <a href='https://atlas.mitre.org/' target='_blank'>MITRE ATLAS</a>.</div>
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
@@ -515,7 +515,7 @@ if st.session_state.step >= 2:
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we tested against</span>
   <div>Four shipped CSVs: <a href='{REPO_BLOB}/data/attack_corpus.csv' target='_blank'><code>attack_corpus.csv</code></a> (100 synthetic attacks across 6 classes), <a href='{REPO_BLOB}/data/legitimate_prompts.csv' target='_blank'><code>legitimate_prompts.csv</code></a> (200 banker queries), <a href='{REPO_BLOB}/data/tool_calls.csv' target='_blank'><code>tool_calls.csv</code></a> (50 tool calls with allow/block ground truth), and <a href='{REPO_BLOB}/data/egress_destinations.csv' target='_blank'><code>egress_destinations.csv</code></a> (50 known-bad destinations and content regex patterns).</div>
-  <span class='tlabel'>Modeled fleet-level outcomes (from step_04 prototype run)</span>
+  <span class='tlabel'>Outcomes (🟢 measured in the step_04 prototype run; 🟡 modeled and 🔴 designed where tagged)</span>
   <ul>
     <li>🟢 99% catch rate on the 100-prompt attack suite (per-class breakdown in the README).</li>
     <li>🟢 1% false-positive rate on the 200-prompt legitimate corpus.</li>
@@ -640,7 +640,7 @@ if st.session_state.step >= 4:
             "- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework)\n"
             "- [EU AI Act (Regulation 2024/1689)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)\n"
             "- [MITRE ATLAS - adversarial threat landscape for AI](https://atlas.mitre.org/)\n"
-            "- [Google Cloud - Building secure multi-agent systems on Google Cloud](https://cloud.google.com/)\n"
+            "- [Google Cloud - Building secure multi-agent systems on Google Cloud](https://services.google.com/fh/files/events/agent_security.pdf)\n"
             "- [Simon Willison - prompt injection writeups](https://simonwillison.net/series/prompt-injection/)\n"
             "- [Meta Llama Guard 3](https://huggingface.co/meta-llama/Llama-Guard-3-8B)\n"
             "- [Microsoft Azure AI Content Safety / Prompt Shields](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/concepts/jailbreak-detection)"
@@ -650,13 +650,13 @@ if st.session_state.step >= 4:
     with st.expander("Production stack reassessment - what this would look like as client-facing SaaS"):
         st.markdown(
             """
-            The Streamlit prototype here proves the *product mechanic* — that defense-in-depth
-            against prompt injection can land 96%+ catch at a low single-digit FP rate. **If
+            The Streamlit prototype here shows the *product mechanic* on synthetic data. It does
+            not show production catch or FP rates; 96%+ is a modeled target. **If
             PromptShield were a real product shipping to a Tier-1 bank's CISO and Head of AI
             Platform:**
 
-            - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system —
-              JPMorgan Glaze, Capital One Cube) — embedded inside the bank's AI Platform's
+            - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's own design
+              system) — embedded inside the bank's AI Platform's
               gateway-policy console, not a standalone app.
             - **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate);
               fine-grained RBAC mapping `ps:viewer` -> `ps:analyst` -> `ps:policy_admin` ->
@@ -679,8 +679,8 @@ if st.session_state.step >= 4:
             - **Observability:** OpenTelemetry -> Datadog (the bank's standard); per-layer
               fire rate dashboards; PagerDuty on (catch_rate < SLO) or (FP_rate > SLO).
               Audit-grade trail of every block / allow decision via [LineageLog]({github}/tree/main/09-lineagelog-ai-decision-audit).
-            - **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal-counterparty
-              work demands it; alignment to [OWASP LLM01](https://genai.owasp.org/llm-top-10/),
+            - **Control alignment (design intent, not audited):** SOC 2 Type II baseline; FedRAMP
+              Moderate where federal-counterparty work demands it; alignment to [OWASP LLM01](https://genai.owasp.org/llm-top-10/),
               [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework),
               [MITRE ATLAS](https://atlas.mitre.org/), and
               [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj).

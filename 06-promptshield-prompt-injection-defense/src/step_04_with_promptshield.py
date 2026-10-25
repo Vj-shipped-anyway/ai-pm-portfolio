@@ -15,13 +15,15 @@ Defense layers:
 
 Each layer is an independent control with an independent failure mode.
 This is the defense-in-depth thesis: no single layer is a silver bullet;
-together they compress the attack surface to ~4% of what Step 2 leaves.
+together they leave far fewer attacks than Step 2 does. The rule packs
+contain phrases taken from the shipped rows, so the result is a fit to
+this suite, not an estimate for unseen attacks.
 
 Run:
     python step_04_with_promptshield.py
 
 Output:
-  - prints overall catch rate (~96%+), per-class breakdown, and FP rate (~4%)
+  - prints overall catch rate, per-class breakdown, FP rate and tool-gate accuracy
   - writes src/out/step_04_attack_outcomes.csv
   - writes src/out/step_04_legitimate_outcomes.csv
   - writes src/out/step_04_summary.json
@@ -556,7 +558,7 @@ def main():
 
     print("Compare to Steps 1, 2, 3:")
     print("  Step 1 (no defense):     0% catch, 0% FP — every attack succeeds.")
-    print("  Step 2 (regex filter):   ~30-50% catch, ~10-15% FP — the BFSI baseline.")
+    print("  Step 2 (regex filter):   see step 2 for the measured rates (assumed range ~30-50% catch, ~10-15% FP).")
     print("  Step 3 (named gaps):     6 deficiency classes the regex misses.")
     print(f"  Step 4 (PromptShield):   {overall_pct:.1f}% catch, {fp_rate:.1f}% FP — defense in depth.")
     print()

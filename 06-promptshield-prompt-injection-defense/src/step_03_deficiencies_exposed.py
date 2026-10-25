@@ -175,8 +175,8 @@ def main():
     print("Step 3 — Six named deficiencies the basic filter still leaves open")
     print("=" * 80)
     print()
-    print("Recap from Step 2: ~30-50% catch on attacks, ~10-15% FP on legitimate")
-    print("queries. The catch-rate ceiling is set by what regex/keyword filters")
+    print("Recap from Step 2: see its printed catch and FP rates (assumed range for")
+    print("such filters: ~30-50% catch, ~10-15% FP). The catch-rate ceiling is set by what regex/keyword filters")
     print("can recognize. Six classes the filter is structurally blind to:")
     print()
 
