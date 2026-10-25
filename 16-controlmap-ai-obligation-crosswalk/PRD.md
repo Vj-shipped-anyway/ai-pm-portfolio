@@ -147,4 +147,4 @@
 
 ---
 
-*This PRD interlocks with [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/), [Project 09 (LineageLog)](../09-lineagelog-ai-decision-audit/) and [Project 04 (EvalForge)](../04-evalforge-llm-eval-platform/); FairLens (17) and IncidentLedger (19) are named as designed interlocks (🔴 designed, none built).*
+*This PRD names interlocks with [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/), [Project 09 (LineageLog)](../09-lineagelog-ai-decision-audit/), [Project 04 (EvalForge)](../04-evalforge-llm-eval-platform/), [Project 17 (FairLens)](../17-fairlens-credit-model-fairness/) and [Project 19 (IncidentLedger)](../19-incidentledger-ai-incident-response/). All five are 🔴 designed, none built.*

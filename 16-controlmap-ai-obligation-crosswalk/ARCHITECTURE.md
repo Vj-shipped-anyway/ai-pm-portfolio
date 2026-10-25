@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (a theme dictionary, a scope check, an evidence-freshness check and a status, over synthetic data, with a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most bank platform teams run on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![ControlMap flow](./assets/controlmap-flow.svg)
 
@@ -377,7 +377,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 | Framework | How the design relates |
 | --- | --- |
 | **SR 26-2 / model risk management** (SR 11-7 was its 2011 predecessor) | The inventory, validation, monitoring and governance themes appear as obligations; ControlMap maps them to controls and dates the evidence. It does not decide whether a model is validated. SR 26-2 places generative and agentic AI outside its scope, so the modeled bank applies these themes to its AI systems by its own policy. |
-| **NIST AI RMF** | The govern, map, measure and manage themes appear as obligations; the map and manage functions are the gaps in the prototype's data. |
+| **NIST AI RMF** | The govern theme is filed under governance and policy; map, measure and manage appear as their own themes, and the map and manage obligations are gaps in the prototype's data. |
 | **EU AI Act** | Record-keeping, human oversight, transparency and risk-management themes appear as obligations; the record-keeping hook is the interlock with LineageLog (designed). |
 | **ECOA / Regulation B** | Adverse-action reasons and notice themes appear as obligations scoped to credit decisions; FairLens (17) is the designed source of adverse-action evidence. |
 | **SOC 2 Type II, GDPR, India data localization** | Regional instances, metadata-only evidence, append-only audit. |

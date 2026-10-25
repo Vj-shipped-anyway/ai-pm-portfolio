@@ -12,7 +12,7 @@
 - 🟢 Each part earns its place: the dictionary takes the right-status count to 31, the scope check to 39 and the freshness check to 46 (`step_04`)
 - 🟢 Pairs: precision 97.4%, recall 96.2% against the truth map, where the sheet scores 46.9% and 39.1% (`step_04`, `step_02`)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+_Built for the head of AI governance and the second-line reviewer who prepare for an exam from a keyword spreadsheet. A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic obligations: 48](https://img.shields.io/badge/synthetic%20obligations-48-blue)
 ![Synthetic controls: 60](https://img.shields.io/badge/synthetic%20controls-60-blue)
@@ -462,7 +462,7 @@ SCORED AGAINST truth_map.csv
 | Status | Truth | Keyword sheet | ControlMap |
 | --- | --- | --- | --- |
 | COVERED | 🟢 25 | marks 42 "covered" | 🟢 23 |
-| STALE | 🟢 7 | cannot say | 🟢 9 |
+| STALE | 🟢 7 | cannot say | 🟢 9 (7 right, plus 2 that are truly COVERED) |
 | PARTIAL | 🟢 8 | cannot say | 🟢 8 |
 | UNCOVERED | 🟢 8 | marks 6 of the 8 "covered" | 🟢 8 |
 
@@ -727,8 +727,8 @@ If you run it on a real library and get something useful, open an issue or send 
 
 ## 🙌 Acknowledgements
 
-- **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the govern, map, measure and manage themes are four of the 20 themes the obligations are filed under, and the map and manage obligations are the gaps in the prototype's data.
+- **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the govern theme is filed under governance and policy, and map, measure and manage are three of the 20 themes the obligations are filed under; the map and manage obligations are gaps in the prototype's data.
 - **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the April 2026 model-risk guidance from the Federal Reserve, OCC and FDIC, and the model-risk guidance the work is compared with on the inventory, validation, monitoring and governance themes. SR 11-7 was its 2011 predecessor.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the source of the record-keeping, human-oversight, transparency and risk-management themes in the EU rows, as paraphrased for this exercise.
 - **[Regulation B (CFPB)](https://www.consumerfinance.gov/rules-policy/regulations/1002/)** — the source of the adverse-action reasons and notice themes in the ECOA rows, as paraphrased for this exercise. The notice-timing and record-retention periods are left as "the period the bank has set" in the synthetic data; any real value would be an assumption of the bank, not legal advice.
-- **Sibling projects in this repo** — [11 TierGate](../11-tiergate-ai-usecase-intake/), [09 LineageLog](../09-lineagelog-ai-decision-audit/) and [04 EvalForge](../04-evalforge-llm-eval-platform/), the three interlocks that exist today; 17 FairLens and 19 IncidentLedger are designed interlocks, none built.
+- **Sibling projects in this repo** — [11 TierGate](../11-tiergate-ai-usecase-intake/), [09 LineageLog](../09-lineagelog-ai-decision-audit/), [04 EvalForge](../04-evalforge-llm-eval-platform/), [17 FairLens](../17-fairlens-credit-model-fairness/) and [19 IncidentLedger](../19-incidentledger-ai-incident-response/) are projects in this repo. The five interlocks with ControlMap are designed, none built.

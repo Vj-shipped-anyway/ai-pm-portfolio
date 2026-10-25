@@ -454,8 +454,8 @@ if st.session_state.step >= 4:
         st.markdown(
             "This is a prototype on synthetic data. The production shape is a crosswalk service that reads the obligation "
             "register and the control library, a dictionary a person maintains, and a nightly evidence-freshness job that reads "
-            "evidence dates from the systems that hold them. It is a design, not deployed; see `ARCHITECTURE.md`. Related "
-            "projects, all designed and none built: TierGate (11) sets which classes an obligation applies to, LineageLog (09) and "
+            "evidence dates from the systems that hold them. It is a design, not deployed; see `ARCHITECTURE.md`. Interlocks "
+            "with other projects in this repo, all designed and none built: TierGate (11) sets which classes an obligation applies to, LineageLog (09) and "
             "EvalForge (04) are evidence sources, FairLens (17) supplies adverse-action evidence, IncidentLedger (19) links incidents "
             "to controls."
         )
