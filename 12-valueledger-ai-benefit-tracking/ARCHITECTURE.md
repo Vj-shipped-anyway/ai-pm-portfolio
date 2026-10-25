@@ -392,7 +392,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 
 | Framework | How the design relates |
 | --- | --- |
-| **SR 11-7 / model risk management** | The estimators are a model in their own right: they take inputs and produce a number that informs an investment decision. They need an inventory entry, validation, and ongoing monitoring. The synthetic regression suite and the stored seed, cohort rule, and interval are the validation record. |
+| **SR 11-7 / model risk management** | The design treats the estimators as a model in their own right, by analogy: they take inputs and produce a number that informs an investment decision, so the design gives them an inventory entry, validation, and ongoing monitoring. The synthetic regression suite and the stored seed, cohort rule, and interval would be the validation record. This is not a claim that the guidance governs the prototype. |
 | **NIST AI RMF** | The Measure function maps to the holdout, the checks, and the interval; the Manage function maps to the guardrail hold and the sign-off. |
 | **FinOps Foundation framework** | The cost side of return follows cost-accountability practice: a benefit statement carries its cost beside it. |
 | **Employee data and privacy law** | Work-record use is governed by local law and, in some jurisdictions, by works-council agreements. The design aggregates at team level and hashes identifiers; a legal read is a precondition for any real data. |

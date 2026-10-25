@@ -1,7 +1,8 @@
 """
 Step 4 - The fix: ValueLedger.
 
-Six moves, each answering one deficiency from Step 3:
+Six moves. The first five each answer a deficiency from Step 3; the sixth puts
+an interval on the result:
 
   1. Holdout cohort and difference-in-differences. The effect is the change in
      minutes per task for treated teams MINUS the change for the holdout teams
@@ -10,7 +11,7 @@ Six moves, each answering one deficiency from Step 3:
      the holdout is a fair stand-in, and prints how it did.
   2. Net of rework. Minutes spent correcting copilot output are subtracted.
   3. A weekly effect curve with decay. Effect per distinct assisted task by week,
-     with an exponential fit, so the launch month is not annualised.
+     with an exponential fit, so the launch month is not annualized.
   4. Overlap deduplication. Tasks are counted once. Shared tasks are split
      equally between the two copilots (a policy choice, printed).
   5. A hard-versus-soft ledger tied to the budget table. Freed time only counts

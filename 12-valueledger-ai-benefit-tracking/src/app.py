@@ -702,7 +702,7 @@ if st.session_state.step >= 4:
                 ("Difference-in-differences", "Change in the treated group minus change in the holdout over the same weeks. The shared seasonal trend cancels."),
                 ("Parallel trends", "The assumption that, without the tool, both groups would have moved together. The pre-period check tests the part of it that can be seen."),
                 ("Selection bias", "Treated teams were chosen by enthusiasm, so they differ from the holdout before any tool arrives."),
-                ("Novelty decay", "Savings in the first weeks are larger than the steady state. Annualising the launch month overstates the run-rate."),
+                ("Novelty decay", "Savings in the first weeks are larger than the steady state. Annualizing the launch month overstates the run-rate."),
                 ("Rework", "Minutes spent correcting copilot output. Time saved minus rework is the net."),
                 ("Overlap", "Two tools logging the same task. Counting both logs counts one hour twice."),
                 ("Hard benefit", "Freed time that lands on a budget line with a cash lever, up to the addressable spend on that line."),

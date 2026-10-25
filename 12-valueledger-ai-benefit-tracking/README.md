@@ -8,9 +8,9 @@
 
 **What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
-- 🟢 Vendor-style claim: 5,166 h against 2,046 h true net: +152% (2.52x)
+- 🟢 Vendor-style claim: 5,166 h against 2,046 h true net: +152% (2.52x; `step_04_with_valueledger.py`)
 - 🟢 ValueLedger: 2,152 h, +5% (1.05x), 95% interval 1,784 to 2,559 h, which covers the answer key (`step_04_with_valueledger.py`)
-- 🟢 One known limit left in: a hidden change by the treated teams after launch is injected at 302 h (+15% of true net)
+- 🟢 One known limit left in: a hidden change by the treated teams after launch is injected at 302 h (+15% of true net; `step_04_with_valueledger.py`)
 
 _A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
@@ -394,7 +394,7 @@ Bridge from the claim to the answer key (hours):
 
 **In plain English:** Don't try to improve the multiplier. Compare the treated teams with teams that did not get the tool, subtract the time spent fixing the copilot's output, watch the effect week by week, count each task once, and only call hours "cash" where a budget line can absorb them. Then print the interval and the one thing the method cannot see.
 
-Six moves, each answering a deficiency from Step 3:
+Six moves. The first five each answer a deficiency from Step 3; the sixth puts an interval on the result:
 
 1. **Holdout and difference-in-differences** (a, b). The effect is the change in minutes per task for treated teams minus the change for holdout teams over the same weeks. The seasonal trend hits both groups, so it cancels, and so does the treated teams' baseline head start. A pre-period check (a gap slope and a placebo launch in week 7) says whether the holdout is a fair stand-in.
 2. **Net of rework** (d). Minutes spent correcting copilot output are subtracted.
@@ -757,8 +757,8 @@ If you run it on real work data and get something useful, open an issue or send 
 ## 🙌 Acknowledgements
 
 - **[FinOps Foundation framework](https://www.finops.org/framework/)** — the cost-accountability vocabulary the cost side of the ledger borrows. The reason a benefit statement carries its cost beside it.
-- **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the Measure function: the standard the benefit measurement would have to meet.
-- **SR 11-7** (the model risk management guidance, see the [SR 26-2, which replaced it](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — a model that informs an investment decision is in its scope, which is why the interval, the cohort rule, and the known limit travel with the number.
+- **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the Measure function is the vocabulary for benefit measurement. This project does not claim to meet it.
+- **SR 11-7** (the model risk management guidance, replaced by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — used as an analogy: an estimate that informs an investment decision should carry its method, its interval and its known limit, which is why the interval, the cohort rule, and the known limit travel with the number.
 - **Difference-in-differences, placebo tests, and cluster bootstrap** — standard methods from applied statistics, named here without a citation; the implementation in `src/step_04_with_valueledger.py` is mine and uses only the standard library.
 - **[EvalForge](../04-evalforge-llm-eval-platform/)** (Project 04) — the quality guardrail interlock: speed is not bought with errors.
 - **[InferenceLens](../07-inferencelens-inference-finops/)** (Project 07) — the cost side of return.
