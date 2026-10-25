@@ -1,8 +1,8 @@
 # Sample Data — AgentWatch walkthrough
 
-Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and was generated with `random.seed(20260512)`; the generator script is not shipped in this folder. No customer data. No PII. Shapes are calibrated against what a Tier-1 BFSI agent fleet actually looks like across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly.
+Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and was generated with `random.seed(20260512)`; the generator script is not shipped in this folder. No customer data. No PII. Shapes are modeled on the general layout of an agent fleet across claims triage, KYC refresh, dispute reconciliation, and loan-package assembly, not on any bank's data.
 
-The headline incident the walkthrough resolves is `INC_0001` on run `RUN_00095` — a `claims_triage_v3` runaway loop on **April 14, 2026** that burned **$4,218.34** of inference cost across **1,847 tool calls** before AgentWatch's runaway-detector fires. Without AgentWatch: the bank discovers it 3 weeks later in the FinOps review. With AgentWatch: bounded at 6 minutes, incident routed to a validator.
+The headline incident the walkthrough resolves is `INC_0001` on run `RUN_00095` — a `claims_triage_v3` runaway loop on **April 14, 2026** that burned **$4,218.34** of inference cost across **1,847 tool calls**. The incident's `detected_at` is 03:18:01, six minutes after the run started; the run record ends at 04:33:08. Without AgentWatch (the scenario): the bank discovers it 3 weeks later in the FinOps review. With AgentWatch: detected and routed at 6 minutes (a value seeded in the data).
 
 ---
 
@@ -77,10 +77,10 @@ The product's classification table. Every incident is mapped to one of the six n
 | `scenario_note` | string | One-line plain-English description. |
 | `severity` | string | `P1` / `P2` / `P3`. |
 | `agentwatch_action` | string | What AgentWatch's sidecar did. `auto_cutoff_at_blast_radius_cap`, `schema_validator_blocked`, `drift_alert_routed_to_owner`, `circuit_breaker_tripped`, `trace_replay_synthesized`, `cost_attributed_to_outcome`. |
-| `cost_at_cutoff_usd` | float | Dollar cost at the moment of the cut-off (the "bleed" capped by AgentWatch). |
+| `cost_at_cutoff_usd` | float | Dollar cost at the cut-off recorded in the data. 6 of the 24 land above the agent's `blast_radius_cap_usd`, so the cap is not what bounded them here. |
 | `tool_calls_at_cutoff` | int | Tool-call count at the cut-off. |
 | `mttr_minutes_with_agentwatch` | int | Mean-time-to-recover assumed for this synthetic incident (alert → mitigation routed). Seeded in this file; step_04 reads it and no script times a mitigation. |
-| `modeled_mttr_without_agentwatch_hours` | int | Modeled MTTR if AgentWatch were not present. Sourced from published BFSI agent-incident review intervals. |
+| `modeled_mttr_without_agentwatch_hours` | int | Modeled MTTR if AgentWatch were not present. An assumption; no source is cited. |
 
 24 rows distributed across the six deficiencies: 6 runaway loops, 4 hallucinated-args, 4 silent-drift, 3 blast-unbounded, 4 no-reasoning-trace, 3 cost-detached.
 
@@ -92,12 +92,12 @@ This is the incident the walkthrough resolves. Walk the four CSVs and you get th
 
 | Source | What it gives you |
 | --- | --- |
-| `agents.csv` | The agent is `claims_triage_v3` on an Anthropic balanced model on the LangGraph framework. Wired up with 9 tools. Per-incident dollar cap = $250. |
+| `agents.csv` | The agent is `claims_triage_v3` on a hosted vendor model on the LangGraph framework. Wired up with 9 tools. Per-incident dollar cap = $250. |
 | `agent_runs.csv` | Run `RUN_00095` started `2026-04-14T03:12:08Z`, ran for 4,860s (1h21m), made `1,847` tool calls, burned `$4,218.34` of inference cost, and was `BOUNDED_BY_AGENTWATCH`. |
 | `tool_calls.csv` | The agent kept calling `claim_lookup` with slightly different `claim_id` arguments. The first lookup returned a malformed response; the agent's planner retried with `retry=1`, `retry=2`, … forever. |
 | `incidents.csv` | AgentWatch classified this as `runaway_loop`, severity `P1`, action `auto_cutoff_at_blast_radius_cap`. MTTR with AgentWatch: 6 minutes. Modeled MTTR without AgentWatch: 240 hours (the FinOps review cycle). |
 
-In raw-log form: scattered across 3 vendors × 2 cloud accounts × the LLM trace tail. In AgentWatch: one record, indexed by `(agent_id, run_id, deficiency_class)`, the bleeding bounded in 6 minutes, the incident routed for human review.
+In raw-log form: scattered across several vendors, cloud accounts and the LLM trace tail. In AgentWatch: one record, indexed by `(agent_id, run_id, deficiency_class)`, detected in 6 minutes (seeded), the incident routed for human review.
 
 ## Model labels
 

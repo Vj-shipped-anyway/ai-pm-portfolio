@@ -1,9 +1,9 @@
 """
-Step 3 — Six deficiencies, each illustrated on real incidents from the data.
+Step 3 — Six deficiencies, each illustrated on incidents from the synthetic data.
 
 This script takes the 24 detected incidents and walks the six named deficiencies
-one by one. For each, it shows the agent failure mode in plain English, the
-real-feeling consequence, and what generic APM returned today.
+one by one. For each, it shows the agent failure mode in plain English, an
+illustrative consequence (assumed, not measured), and what generic APM returns.
 
 The point: each deficiency is a specific, named class — not a vague "we need
 better agent observability" wish. Step 4 closes all six with the AgentWatch
@@ -45,8 +45,8 @@ DEFICIENCIES = [
         "consequence": (
             "Per-incident cost $5-50k for runaway runs at Tier-1 BFSI scale. Customer-"
             "facing surfaces still get the bad response; the on-call has no replay UI to "
-            "diagnose what the agent was trying to do. Detection rate without AgentWatch: "
-            "~30% of runaways eventually surface."
+            "diagnose what the agent was trying to do. In Step 2, generic APM surfaces "
+            "3 of the 6 runaway loops in this data."
         ),
         "agentwatch_action": "auto_cutoff_at_blast_radius_cap (configurable per-agent dollar cap)",
     },
@@ -66,8 +66,8 @@ DEFICIENCIES = [
         ),
         "consequence": (
             "PII leak risk if the fabricated ID happens to belong to another customer. "
-            "Class-action exposure under GLBA. Modeled cost per leak: $25-100k in CFPB "
-            "settlements + remediation, before any reputational damage."
+            "Possible regulatory and remediation exposure. Assumed cost per leak: $25-100k "
+            "(an illustrative figure, not measured), before any reputational damage."
         ),
         "agentwatch_action": "schema_validator_blocked (every tool-call arg validated against SOT before fire)",
     },
@@ -87,8 +87,9 @@ DEFICIENCIES = [
         ),
         "consequence": (
             "Quality-of-decision degrades silently. The bank's MRM cycle is annual; by the "
-            "time the drift surfaces, the agent has scored ~50k customer interactions on a "
-            "regressed planner. Reattestation is mandatory under SR 11-7."
+            "time the drift surfaces, the agent could have scored tens of thousands of "
+            "customer interactions on a regressed planner (illustrative). The bank's own "
+            "model-risk policy would likely require reattestation."
         ),
         "agentwatch_action": "drift_alert_routed_to_owner (tool-call mix diff against baseline)",
     },
@@ -130,10 +131,10 @@ DEFICIENCIES = [
             "out after 7-15 days. For an incident reviewed at week 4, the trace is gone."
         ),
         "consequence": (
-            "The single most underrated trail in regulated AI. Without it, the bank "
-            "cannot do effective challenge (SR 11-7), cannot meet the EU AI Act Article 14 "
-            "human-oversight requirement, and cannot defend a customer complaint. The "
-            "agent gets pulled from production until the trace pipeline is rebuilt."
+            "A reasoning trail matters in regulated AI. Without it, the bank has a harder "
+            "time doing effective challenge (the SR 11-7 idea), supporting human oversight "
+            "(the EU AI Act Article 14 idea), and defending a customer complaint. In this "
+            "scenario the agent is pulled from production until the trace pipeline is rebuilt."
         ),
         "agentwatch_action": "trace_replay_synthesized (long-term trace store, queryable by run_id)",
     },
@@ -143,9 +144,9 @@ DEFICIENCIES = [
         "label": "Cost telemetry detached from outcomes",
         "description": (
             "The bank knows total agent spend (the FinOps dashboard). It cannot attribute "
-            "that spend to specific customer outcomes or business value. A $0.42 average "
-            "agent run gets approved at FinOps review — but the bank has no idea whether "
-            "the $0.42 produced a closed claim, a denied loan, or noise."
+            "that spend to specific customer outcomes or business value. A $0.78 average "
+            "routine run gets approved at FinOps review — but the bank has no idea whether "
+            "the $0.78 produced a closed claim, a denied loan, or noise."
         ),
         "apm_returns": (
             "Aggregate dollars per service. Aggregate token count. No attribution to the "
@@ -171,7 +172,7 @@ def main() -> None:
         by_def[inc["deficiency_class"]].append(inc)
 
     print("\n" + "=" * 80)
-    print("Step 3 — Six named agent deficiencies, each grounded in real incidents")
+    print("Step 3 — Six named agent deficiencies, each grounded in incidents from the synthetic data")
     print("=" * 80)
     print()
     print(f"Total incidents in the synthetic 30-day window: {len(incidents)}")
@@ -222,8 +223,8 @@ def main() -> None:
     print("Summary — six classes, six exam questions APM cannot answer")
     print("=" * 80)
     print(f"  Total deficiencies named:       {len(DEFICIENCIES)}")
-    print(f"  Caught by generic APM today:    ~30% of runaways only (Step 2)")
-    print(f"  Closed in Step 4 (AgentWatch):  all 6 by sidecar composition")
+    print(f"  Caught by generic APM today:    6 of 24 incidents, 3 of 6 runaway loops (Step 2)")
+    print(f"  Step 4 (AgentWatch):            composes a record for all 6 classes (read from labeled data)")
     print()
     print(f"Wrote: {out_csv}")
     print("=" * 80 + "\n")

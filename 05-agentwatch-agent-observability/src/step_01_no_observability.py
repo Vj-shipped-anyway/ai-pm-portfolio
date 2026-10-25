@@ -1,8 +1,8 @@
 """
 Step 1 — Before observability: 30 days of agent runs with no telemetry.
 
-This is what happens today at most BFSI shops deploying agents (LangGraph,
-Bedrock Agents, OpenAI Assistants, AutoGen) into ops workflows. The platform
+This is the starting point the walkthrough assumes for a bank deploying agents
+(LangGraph, Bedrock Agents, OpenAI Assistants, AutoGen) into ops workflows. The platform
 team ships the agent into production. It works. Then it stops working in a
 mode no one has seen before: a runaway loop, a hallucinated tool argument,
 a silent shift in the tool-call mix.
@@ -12,8 +12,8 @@ service traces. The bank discovers the incident weeks later when the FinOps
 review flags the line item, or when a customer complaint surfaces.
 
 This script reads the 30-day synthetic run log and prints the bleed that
-would have gone undetected. The headline: $42k of undetected runaway cost
-over 30 days across the four-agent fleet.
+would have gone undetected. The headline: about $48k of undetected runaway
+cost over 30 days across the four-agent fleet (the script prints the exact figure).
 
 Run:
     python step_01_no_observability.py
@@ -82,8 +82,8 @@ def main() -> None:
     for aid in sorted(per_agent.keys()):
         s = per_agent[aid]
         print(f"  {aid:<22}{s['runs']:>8}{s['tool_calls']:>14}"
-              f"${s['cost']:>12,.2f}{s['runaway_runs']:>12}"
-              f"${s['runaway_cost']:>12,.2f}")
+              f"{'$' + format(s['cost'], ',.2f'):>14}{s['runaway_runs']:>12}"
+              f"{'$' + format(s['runaway_cost'], ',.2f'):>14}")
         total_runaway += s["runaway_cost"]
         total_runaway_runs += s["runaway_runs"]
 

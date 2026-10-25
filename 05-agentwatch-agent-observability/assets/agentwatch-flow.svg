@@ -27,7 +27,7 @@
   </defs>
 
   <text x="20" y="32" class="header">AgentWatch — sidecar composition flow for one agent run</text>
-  <text x="20" y="52" class="subheader">RUN_00095 claims_triage_v3 runaway · Apr 14 03:12Z · cut off at $4,218 / 1,847 calls in 6 minutes.</text>
+  <text x="20" y="52" class="subheader">RUN_00095 claims_triage_v3 runaway · Apr 14 03:12Z · detected at 6 min (seeded); run record ends at $4,218 / 1,847 calls.</text>
 
   <!-- Trigger badge -->
   <rect x="20" y="78" width="320" height="22" rx="4" class="badge-bg"/>

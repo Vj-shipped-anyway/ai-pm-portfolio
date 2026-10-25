@@ -13,12 +13,12 @@
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AgentWatch — Agent Reliability &amp; Tool-Use Observability">
 <meta name="twitter:description" content="Classifies agent failures and enforces a per-incident dollar cap.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/05-agentwatch-agent-observability/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
@@ -168,8 +168,8 @@
   </div>
 
   <div class="utility-callout">
-    <b>The bleed.</b> Deployed agents fail in ways pre-LLM apps never did. Runaway tool loops can burn $5–50k per incident. Tool-call failures cascade silently. Most banks run agents with no continuous observability — they find out via the AWS bill or a customer complaint.<br><br>
-    <b>The fix.</b> AgentWatch is a sidecar that ingests the agent framework's OpenTelemetry export, classifies failures under a six-deficiency taxonomy, and enforces a per-incident dollar cap. The bleed stops in minutes, not weeks. <span class="formula">utility = (3 weeks - 6 minutes) × every deployed agent</span>
+    <b>The bleed.</b> Deployed agents fail in ways pre-LLM apps never did. Runaway tool loops can burn $5–50k per incident (an assumed range). Tool-call failures cascade silently. In this scenario the bank has no continuous agent observability and finds out via the AWS bill or a customer complaint.<br><br>
+    <b>The fix.</b> AgentWatch is a sidecar that ingests the agent framework's OpenTelemetry export, classifies failures under a six-deficiency taxonomy, and enforces a per-incident dollar cap. In the design, the bleed stops in minutes, not weeks. <span class="formula">utility = (3 weeks - 6 minutes) × every deployed agent</span>
   </div>
 
   <div class="controls">
@@ -199,6 +199,8 @@
       <div class="card-body" id="card-3-body"></div>
     </div>
   </div>
+
+  <p style="margin: 16px 0 0; font-size: 13px; color: var(--text-secondary);">Synthetic data. Each incident's class comes from the labeled incident table, and the sidecar record is composed from it; no detector runs. The 6-minute detection time is seeded in the data, the 3-week lag is an assumption, and the dollar cap did not hold in 6 of the 24 incidents.</p>
 
   <div class="footer-links">
     <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/05-agentwatch-agent-observability/README.md">README (full walkthrough)</a>
@@ -241,7 +243,7 @@ const RUNS = [
     duration_s: 350, calls: 75, cost: 1500.00,
     detected_at: "2026-04-15T15:26:28Z", action: "schema_validator_blocked",
     mttr_min: 8, mttr_hr_without: 96,
-    note: "Agent fabricated CUST_NNNNNN IDs that didn't exist in the system-of-truth. AgentWatch blocked the tool fire pre-flight.",
+    note: "Agent fabricated CUST_NNNNNN IDs that didn't exist in the system-of-truth. AgentWatch is designed to block the tool call pre-flight; the prototype labels this incident and does not run a validator.",
     fired: ["hallucinated_args"],
   },
   {
@@ -261,7 +263,7 @@ const RUNS = [
     duration_s: 350, calls: 105, cost: 2400.00,
     detected_at: "2026-04-29T06:14:11Z", action: "circuit_breaker_tripped",
     mttr_min: 4, mttr_hr_without: 168,
-    note: "11-tool agent with one malformed plan compounding across all of them. Circuit breaker tripped before the rate-lock fired.",
+    note: "11-tool agent with one malformed plan compounding across all of them. The circuit breaker is designed to trip before the rate-lock fires (labeled in the data, not simulated).",
     fired: ["blast_unbounded"],
   },
   {
@@ -271,7 +273,7 @@ const RUNS = [
     duration_s: 350, calls: 9, cost: 1.08,
     detected_at: "2026-04-13T23:06:29Z", action: "trace_replay_synthesized",
     mttr_min: 12, mttr_hr_without: 48,
-    note: "Underlying Langfuse trace TTL'd out before the post-mortem. AgentWatch's replay store synthesized the chain-of-thought.",
+    note: "Underlying Langfuse trace TTL'd out before the post-mortem. AgentWatch's replay store is designed to synthesize the chain-of-thought (labeled in the data, not built).",
     fired: ["no_reasoning_trace"],
   },
   {
@@ -341,7 +343,7 @@ function render(i) {
     `<div class="field-row"><span class="field-label">cost at cutoff</span><span class="field-value">$${r.cost.toLocaleString(undefined, {minimumFractionDigits:2,maximumFractionDigits:2})}</span></div>` +
     `<div class="field-row"><span class="field-label">MTTR with AW</span><span class="field-value">${r.mttr_min} min</span></div>` +
     `<div class="field-row"><span class="field-label">MTTR without AW</span><span class="field-value">~${r.mttr_hr_without} hr</span></div>` +
-    `<p class="meta">Incident pack routed to SRE on-call + the line-1 owner. Retained under SR 11-7 for 7 years.</p>` +
+    `<p class="meta">Incident pack routed to SRE on-call + the line-1 owner. Retention: 7 years, a design default.</p>` +
     `<span class="pill pill-ok">routed</span>`;
 }
 

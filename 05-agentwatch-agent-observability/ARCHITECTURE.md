@@ -2,7 +2,9 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network topology, operational runbooks. What you would hand to your CISO and your platform engineering lead on day one.
 
-This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the [*Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline. The substrate AgentWatch reads from is [OpenTelemetry](https://opentelemetry.io/) — which all four agent frameworks (LangGraph, AutoGen, Bedrock Agents, OpenAI Assistants) export to natively.
+> **Status.** This is a design, not a deployed system. The repo's step scripts and Streamlit app read the CSVs in `data/` and compose a record per labeled incident; none of the services, stores or controls below exists in it. Figures here are design targets or illustrations unless a script prints them, and none is measured.
+
+This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the [*Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline. The substrate AgentWatch reads from is [OpenTelemetry](https://opentelemetry.io/) — which I expect the four agent frameworks (LangGraph, AutoGen, Bedrock Agents, OpenAI Assistants) to export to; check each framework's current support.
 
 ---
 
@@ -119,10 +121,10 @@ Agent runtime emits OTel spans:
 | Store | Purpose | Why this store |
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | `agent_incidents` immutable table, attestation history, audit log, legal-hold flags. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. Append-only via insert-only role + trigger guard. |
-| **ClickHouse** (Aiven / Altinity managed) | High-cardinality reasoning-trace events — per-tool-call span with chain-of-thought text, drift baseline time-series. | 10-50x cheaper than Postgres for time-series at this volume. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse for shared drift-signal querying. |
-| **Snowflake / Databricks** (read-only) | Downstream business outcomes (claims platform, KYC case database, dispute system) for cost-attribution ETL. | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
+| **ClickHouse** (Aiven / Altinity managed) | High-cardinality reasoning-trace events — per-tool-call span with chain-of-thought text, drift baseline time-series. | Expected to be much cheaper than Postgres for time-series at this volume (a design expectation, not benchmarked). Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse for shared drift-signal querying. |
+| **Snowflake / Databricks** (read-only) | Downstream business outcomes (claims platform, KYC case database, dispute system) for cost-attribution ETL. | Already exists at most large banks. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (sidecar), rate-limit counters, SOT lookup cache for the schema validator. | TTL-based eviction. Multi-AZ for high availability. |
-| **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of incident packs** + reasoning-trace replays + 7-year SR 11-7 audit archive. | Object Lock = Write-Once-Read-Many for the SR 11-7 / EU AI Act seven-year retention. |
+| **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of incident packs** + reasoning-trace replays + 7-year audit archive. | Object Lock = Write-Once-Read-Many for a seven-year retention policy (a design default; confirm against the bank's schedule and applicable law). |
 | **Pub/Sub / Kinesis / Event Hubs** | OTel ingester topic. Sidecar + cap subscribe with at-least-once semantics; partition-sharded by `agent_id`. | Native to the cloud; ordered delivery within a partition; replay-able. |
 
 ### The agent-incident composition table
@@ -277,7 +279,7 @@ CREATE TABLE reasoning_trace_events (
 ) ENGINE = ReplicatedMergeTree('/clickhouse/tables/{shard}/reasoning_trace_events', '{replica}')
 PARTITION BY toYYYYMM(started_at)
 ORDER BY (run_id, started_at, span_id)
-TTL started_at + INTERVAL 2555 DAY DELETE;  -- 7 years per SR 11-7
+TTL started_at + INTERVAL 2555 DAY DELETE;  -- 7 years (design default)
 
 -- Per-agent tool-call-mix baseline. Updated daily by the scheduler.
 CREATE TABLE agent_tool_mix_baseline (
@@ -297,7 +299,7 @@ TTL snapshot_date + INTERVAL 730 DAY DELETE;  -- 2 years hot, archive to GCS the
 
 | Data class | Retention | Storage | Justification |
 | --- | --- | --- | --- |
-| `agent_incidents` rows | 7 years (10 years for EU) | Postgres hot for 12 months; archive to GCS Object Lock after | SR 11-7 ongoing-monitoring evidence |
+| `agent_incidents` rows | 7 years (10 years for EU), design defaults | Postgres hot for 12 months; archive to GCS Object Lock after | Ongoing-monitoring evidence; confirm against the bank's schedule |
 | Incident packs (JSON + text) | 7 years | GCS Object Lock + cross-region replication | Same |
 | Reasoning-trace events | 7 years | ClickHouse hot for 12 months; archive to GCS thereafter | Same |
 | Tool-call mix baseline | 2 years hot | ClickHouse; aggregate longer history archived | Operational |
@@ -378,7 +380,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | Metrics | Prometheus + Grafana (or Datadog metrics) | RED-method per service |
 | Reasoning-trace events | ClickHouse `reasoning_trace_events` | The product's own replay surface |
 | LLM-specific traces | Langfuse (self-hosted) for the GenAI proxy | Source signal for deficiency #5 |
-| Audit log | Postgres `audit_log` + GCS Object Lock | SR 11-7 retention |
+| Audit log | Postgres `audit_log` + GCS Object Lock | Record-keeping |
 
 ### Alerting
 
@@ -396,30 +398,32 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 - **Object stores.** Object Lock + versioning + cross-region replication for incident-pack WORM archive (within the same regulatory region only — never US ↔ EU).
 - **DR drill cadence.** Quarterly. Full failover to US-West, validate RTO 4h / RPO 5min for the `agent_incidents` table, fail back. Runbook in `docs/runbooks/dr-failover.md`.
 
-### Runbooks (one paragraph each in the repo)
+### Runbooks (planned; one paragraph each)
 
 - `dr-failover.md` — full region failover
 - `sidecar-stuck.md` — when the OTel ingester fan-in stalls
 - `cap-override.md` — line-1 owner requests a cap override with line-2 attestation
 - `incident-pack-export.md` — pulling a complete incident pack for an MRM review
 - `legal-hold-cascade.md` — applying legal hold when a customer files a complaint
-- `right-to-erasure.md` — GDPR-compliant cascading deletion (with legal-hold override)
+- `right-to-erasure.md` — cascading deletion for GDPR erasure requests (with legal-hold override)
 - `runaway-fleet-storm.md` — when multiple agents trip the cap simultaneously (typically a vendor model regression)
 
 ---
 
 ## 6. Compliance posture
 
+Alignment, not certification. This is a design; none of the frameworks below has been assessed against it.
+
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All six components in scope. Annual external audit. |
+| **SOC 2 Type II** | Design intent: all six components in scope of a SOC 2 Type II audit. No audit has been done. |
 | **PCI-DSS** | In scope only when the underlying agent touches cardholder data. AgentWatch itself doesn't process card data; it observes agents that may. PCI scope minimization via `customer_id_hash` + KMS pepper at the source. |
 | **GLBA** | Customer financial data handled with field-level hashing + access controls + audit trail. Right-to-be-forgotten cascades to incident records via `customer_id_hash` deletion (with legal-hold override). |
-| **SR 11-7 / OCC Bulletin 2011-12** | The per-incident reliability evidence is the missing piece for "documented ongoing monitoring" of deployed agents. PRD references the relevant supervisory expectations. |
-| **NIST AI RMF 1.0** | Per-agent incident composition maintained for the deployed fleet. AgentWatch is the implementation surface for the framework's "Measure" + "Manage" functions. |
-| **EU AI Act Article 14** | Human oversight requirement for high-risk AI systems. AgentWatch surfaces the human-vs-autonomous reviewer distinction; the incident pack is the audit evidence. EU instance enforces data residency. |
-| **OWASP LLM Top 10** | LLM02 (Sensitive Information Disclosure) and LLM09 (Misinformation) anchor the taxonomy. AgentWatch's schema validator catches the LLM02 / LLM09 surface that prompt-injection defense (PromptShield) misses. |
-| **GDPR** | EU instance enforces data residency. Right-to-erasure cascades to `customer_id_hash` deletion with legal-hold override. DPO sign-off documented per region. |
+| **SR 11-7 / OCC Bulletin 2011-12** | The design basis for the ongoing-monitoring features (see the README's regulatory note on SR 26-2, which places agentic AI outside its scope). A paragraph-level mapping is not part of this prototype. |
+| **NIST AI RMF 1.0** | Per-agent incident composition maintained for the deployed fleet. The closest fit is the framework's "Measure" + "Manage" functions (a design mapping, not a claim of conformance). |
+| **EU AI Act Article 14** | Human oversight requirement for high-risk AI systems. Design: AgentWatch surfaces the human-vs-autonomous reviewer distinction, and the incident pack would be audit evidence. Whether a given agent is high-risk is a legal question this repo does not answer. |
+| **OWASP LLM Top 10** | LLM02 (Sensitive Information Disclosure) and LLM09 (Misinformation) anchor the taxonomy. AgentWatch's schema validator is designed to cover the LLM02 / LLM09 surface that prompt-injection defense (PromptShield) does not; the prototype does not implement the validator. |
+| **GDPR** | EU instance keeps data in region (design). Erasure requests cascade to `customer_id_hash` deletion with legal-hold override. DPO sign-off is a launch gate per region. |
 | **India RBI data localization** | Indian retail-arm agent incidents run on the India regional instance only. No cross-border replication. |
 
 ---
@@ -499,7 +503,7 @@ That last list is the discipline. Every internal-build I have watched die has di
     "agent_identity_ref": "iam/agent-identity/RUN_00095",
 
     "composed_at": "2026-04-14T03:18:01Z",
-    "composition_seconds": 0.04,
+    "composition_seconds": 0.04,   # illustrative; the prototype prints its measured time
     "legal_hold": false,
     "row_hash": "sha256:c7d3...",
     "retention_until": "2033-04-14T03:18:01Z"

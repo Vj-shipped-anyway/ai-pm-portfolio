@@ -77,7 +77,7 @@ def compose_incident_record(incident: dict, corpus: dict) -> dict:
     return {
         "lineage_record_version": "1.0",
         "composed_at": incident["detected_at"],
-        "composition_seconds": 0.04,  # measured below
+        "composition_seconds": 0.0,  # overwritten with the measured time in main()
         "immutable": True,
         "incident": {
             "incident_id": incident["incident_id"],
@@ -154,7 +154,7 @@ def compose_incident_record(incident: dict, corpus: dict) -> dict:
         "agentwatch_action":         DEFICIENCY_ACTION[deficiency],
         "mttr_minutes_observed":     int(incident["mttr_minutes_with_agentwatch"]),
         "mttr_hours_without":        int(incident["modeled_mttr_without_agentwatch_hours"]),
-        "retention_policy":          "7 years (SR 11-7 ongoing monitoring evidence), WORM-bucketed",
+        "retention_policy":          "7 years (design default for ongoing-monitoring evidence), WORM-bucketed",
     }
 
 
@@ -242,7 +242,7 @@ def render_incident_pack(record: dict) -> str:
         f"Retention policy:   {record['retention_policy']}",
         f"Composed in:        {record['composition_seconds']}s on the prototype",
         "",
-        "This pack is immutable and hash-anchored. Interlocks with the bank's MRM workbench.",
+        "In production this pack is designed to be immutable and hash-anchored (here it is a JSON file).",
         "=" * 76,
     ]
     return "\n".join(lines)
@@ -253,7 +253,7 @@ def main() -> None:
     headline = next(i for i in corpus["incidents"] if i["incident_id"] == HEADLINE_INCIDENT_ID)
 
     print("\n" + "=" * 80)
-    print("Step 4 — AgentWatch sidecar: six deficiencies closed in one record")
+    print("Step 4 — AgentWatch sidecar: one composed record covering all six deficiencies")
     print("=" * 80)
     print()
 
@@ -305,26 +305,28 @@ def main() -> None:
     print(f"  Wall time (fleet):       {fleet_elapsed:.2f}s on the prototype")
     print(f"  Avg per incident:        {1000 * fleet_elapsed / max(1, len(fleet_rows)):.1f}ms")
     print()
-    print(f"  {'deficiency_class':<22}{'n':>4}{'$_capped':>14}{'avg_mttr_w/':>14}{'avg_mttr_w/o':>16}")
+    print(f"  {'deficiency_class':<22}{'n':>4}{'$_at_cutoff':>14}{'avg_mttr_w/':>14}{'avg_mttr_w/o':>16}")
     print("  " + "-" * 70)
     for k in sorted(by_class.keys()):
         c = by_class[k]
         avg_w = c["mttr_min_with"] / c["count"]
         avg_wo = c["mttr_hr_without"] / c["count"]
-        print(f"  {k:<22}{c['count']:>4}${c['cost_capped']:>12,.2f}{avg_w:>12.0f}m{avg_wo:>14.0f}h")
+        print(f"  {k:<22}{c['count']:>4}{'$' + format(c['cost_capped'], ',.2f'):>14}{avg_w:>13.0f}m{avg_wo:>15.0f}h")
 
     # Detection rate
     print()
     print("=" * 80)
     print("Compare to Steps 1, 2, 3")
     print("=" * 80)
-    print(f"  Step 1 (no observability):       0 of 24 incidents detected, "
-          f"~$42k undetected runaway cost over 30 days.")
-    print(f"  Step 2 (basic Datadog APM):      ~30% of runaways eventually surface via "
-          f"latency + cost p99 alerts.")
+    print(f"  Step 1 (no observability):       0 incidents detected, "
+          f"$47,978.34 undetected runaway cost over 30 days (13 runs by its rule).")
+    print(f"  Step 2 (basic Datadog APM):      6 of 24 incidents (3 of 6 runaway loops) surface via "
+          f"latency + cost alerts.")
     print(f"  Step 3 (named gaps):             6 deficiencies, 6 classes of consequence.")
     print(f"  Step 4 (AgentWatch):             {len(fleet_rows)} of {len(corpus['incidents'])} "
-          f"incidents bounded; per-incident cost capped; MTTR 4h+ -> 4-15 minutes.")
+          f"incident records composed from labeled data; MTTR 4-15 minutes is seeded in incidents.csv, not timed.")
+    print("                                   Cost is dollars at cutoff, not dollars saved; the labels, the")
+    print("                                   validation flags and the drift baseline are stored or stubbed values.")
     print()
 
     # Write JSON record for the headline

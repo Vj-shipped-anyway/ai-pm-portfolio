@@ -1,7 +1,7 @@
 """
 Step 2 — Basic Datadog metrics: latency, error rate, token count.
 
-Most banks call this "we have agent observability." The platform team wires
+Teams often call this "we have agent observability." The platform team wires
 the agent's HTTP service into Datadog APM. They get RED metrics — Rate, Errors,
 Duration — at the service level. Token-count gauges land alongside. Some teams
 add a Langfuse / Helicone trace for the GenAI proxy.
@@ -16,8 +16,10 @@ HTTP request.
 
 This script reads the same 30-day run log, applies generic-APM heuristics
 (latency thresholds, error-rate thresholds), and counts how many runaways
-those heuristics surface. The headline: ~30% of runaways eventually surface.
-The other 70% live and die quietly inside the FinOps bill.
+those heuristics surface. The headline: 6 of the 24 incidents (25%) surface;
+the other 75% live and die quietly inside the FinOps bill. The latency and cost
+thresholds are applied to the run log; the error-rate threshold is listed but
+not applied, because the data has no per-window error rate.
 
 Run:
     python step_02_basic_datadog.py
@@ -75,7 +77,7 @@ def main() -> None:
     print("Thresholds in the monitor:")
     print(f"  - duration p99 alert:        run took > {APM_LATENCY_ALERT_S}s")
     print(f"  - cost per run alert:        run spent > ${APM_TOKEN_BURN_USD:.0f}")
-    print(f"  - error-rate alert:          service > {APM_ERROR_RATE_ALERT*100:.0f}% errors in 5-min window")
+    print(f"  - error-rate alert:          service > {APM_ERROR_RATE_ALERT*100:.0f}% errors in 5-min window (listed, not applied: no per-window error rate in the data)")
     print()
 
     detected_count = 0
@@ -137,7 +139,7 @@ def main() -> None:
     print(f"  Mean detection lag (when caught):          ~12-48 hours (next-day digest)")
     print()
     print("  APM catches the LATENCY and COST symptoms when they're loud enough.")
-    print("  It misses ~70% of agent-shaped incidents — because the failure modes")
+    print("  It misses 75% of agent-shaped incidents — because the failure modes")
     print("  are not latency- or error-rate-shaped. They're agent-shaped: a tool")
     print("  loop, a fabricated argument, a mix shift, a compounded reach.")
     print()

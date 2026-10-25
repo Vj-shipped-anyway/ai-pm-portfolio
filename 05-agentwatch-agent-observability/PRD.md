@@ -23,7 +23,7 @@
 | **Modeled cost** | 🔴 ~$380k for a 90-day engagement in a real deployment (compute on existing OpenTelemetry / Datadog / Langfuse infra + 1 PM + 1.5 FTE engineers + 0.5 FTE SRE partner + 0.25 FTE FinOps partner) — designed, not executed. |
 | **Risk #1** | Sidecar back-pressure on the agent runtime. If the OTel export channel saturates, the agent's planner stalls. Solution: stateless sidecar consumers backed by Pub/Sub with at-least-once semantics; agent fails open (continues without observability rather than blocking). |
 | **Risk #2** | False-positive cap-tripping on legitimately long-running agents (loan-package assembly can legitimately take 20 minutes). Solution: per-agent dollar cap configurable at deploy time; cap audited under SR 11-7 change control; allow-list flow for known-long-running plans. |
-| **Risk #3** | LLM proxy trace TTL outpaces the post-mortem cycle. The vendor's trace store (Langfuse / Helicone) loses traces after 7-15 days; an incident reviewed at week 4 has no chain-of-thought to replay. Solution: AgentWatch's own long-term replay store, indexed by `run_id`, retained for 7 years under SR 11-7. |
+| **Risk #3** | LLM proxy trace TTL outpaces the post-mortem cycle. The vendor's trace store (Langfuse / Helicone) loses traces after 7-15 days; an incident reviewed at week 4 has no chain-of-thought to replay. Solution: AgentWatch's own long-term replay store, indexed by `run_id`, retained for 7 years (a design default). |
 | **Out of scope** | (1) Replacing the agent framework — we sidecar, we do not orchestrate. (2) Replacing Datadog / Langfuse — we read from them, we do not collect. (3) Adjudicating disputed agent decisions — we provide reliability, not adjudication. (4) On the request path — sidecar is off the hot path, with a 5-minute compose SLO. (5) Customer-facing surfaces — internal AI-platform tool only. (6) Building a new IdP — we integrate with the bank's existing Okta / Entra ID / Ping. |
 
 ---
@@ -40,14 +40,14 @@
 | **CRO** | L2 oversight | Owns model risk at the portfolio level | Fleet-level reliability metric (incidents bounded per agent per quarter); aging-runs-without-attribution report. |
 | **Cloud Security (CISO)** | Platform | Owns the bank's data-handling posture | Workload-identity-based sidecar; no long-lived service-account keys; egress restricted to the bank's VPC; aligns with Google's *Building secure multi-agent systems* pattern. |
 | **Line-1 Agent Owners** | L1 | Owns the deployed agent | Incident pack routed to their queue; replay UI showing the chain-of-thought that produced the failure. Retraining feedback loop closed. |
-| **Compliance** | L2 | Owns regulator response posture | Incident retention (7 years under SR 11-7); EU AI Act Article 14 (human oversight) audit evidence pulled on demand. |
+| **Compliance** | L2 | Owns regulator response posture | Incident retention (7 years, a design default); EU AI Act Article 14 (human oversight) audit evidence pulled on demand. |
 | **Legal (E&G)** | L2 | Owns disclosure and consent posture | Legal-hold cascade on incidents when a customer complaint is filed; GDPR right-to-erasure cascades to hash deletion. |
 
 ---
 
 ## 3. RICE-prioritized backlog
 
-> RICE = (Reach × Impact × Confidence) ÷ Effort.
+> RICE = (Reach × Impact × Confidence) ÷ Effort. Reach is an assumed fleet-scale figure, and the RICE column is computed with Reach in millions.
 > Status: "Sequenced for v0.x" = committed to a release. "Queued" = will be sequenced after v0.5.
 
 | # | Item | Reach | Impact | Confidence | Effort | RICE | Status |
@@ -71,11 +71,11 @@
 
 ## 4. Why now
 
-- **Agent deployment is moving from PoC to production at every Tier-1 BFSI shop.** LangGraph, AutoGen, Bedrock Agents, and OpenAI Assistants are all GA. Banks are wiring 6-11 internal tools to each agent. Failure modes that didn't exist 18 months ago are now live.
-- **Anthropic, OpenAI, and Microsoft all publish agent guidance that says the same thing.** Agents fail unpredictably in production. The remediation is per-incident cost bounding + reasoning-trace capture. AgentWatch is the implementation surface.
+- **Agent deployment is moving from PoC to production at many large banks.** LangGraph, AutoGen, Bedrock Agents, and OpenAI Assistants are all GA. Banks are wiring 6-11 internal tools to each agent. Failure modes that didn't exist 18 months ago are now live.
+- **Public vendor and framework documentation describes agent failure and cost-control practices.** I cite no specific document. My working view is that agents fail unpredictably in production and that per-incident cost bounding and reasoning-trace capture are the remedy this product is built around.
 - **[OpenTelemetry](https://opentelemetry.io/) on agent frameworks is now native.** LangGraph emits OTel spans by default. AutoGen exposes a logging hook. Bedrock Agents and OpenAI Assistants expose vendor-native trace tails. The substrate exists.
-- **Vendor model silent updates** make the cost-per-incident question harder every quarter. A silent Anthropic snapshot roll changes the agent's planning behavior; AgentWatch's tool-call-mix drift detector surfaces it.
-- **[EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** applies to deployed agents the same way it applies to deployed models. [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) places agentic AI outside its scope, so AgentWatch uses its ongoing-monitoring principle as an analogy, not as a requirement that governs agents.
+- **Vendor model silent updates** make the cost-per-incident question harder every quarter. A silent vendor snapshot roll can change the agent's planning behavior; AgentWatch's tool-call-mix drift detector surfaces it.
+- **[EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** (human oversight) may apply to agents that are high-risk AI systems; I have not done a legal analysis. [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) places agentic AI outside its scope, so AgentWatch uses its ongoing-monitoring principle as an analogy, not as a requirement that governs agents.
 
 ## 5. Goals (12-month horizon)
 
@@ -135,6 +135,8 @@ The product is a composition layer. Each deficiency maps to a specific source si
 4. **MRM workbench primary integration.** Archer, ServiceNow GRC, or MetricStream first? Depends on the bank's existing license. Default: build the integration as a generic OIDC-based push so the third one isn't a rewrite.
 
 ## 11. Build & scale notes
+
+*The figures in this section (run volumes, incident rates, the 5-minute compose SLO) are sizing assumptions and design targets. None was measured or load-tested in this repo.*
 
 **Reference architecture.** Sidecar runs on Cloud Run (stateless) or as a K8s deployment. Postgres (Cloud SQL with HA + read replicas) holds the immutable `agent_incidents` table; ClickHouse holds the high-cardinality reasoning-trace event stream; GCS Object Lock + cross-region replication holds the WORM archive. The incident pack is generated on-demand from the immutable Postgres row + reasoning-trace replay + cached vendor-snapshot diff.
 

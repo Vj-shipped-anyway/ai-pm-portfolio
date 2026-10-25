@@ -4,7 +4,7 @@ Streamlit walkthrough:
   Step 1 - pick an agent run (or use the headline INC_0001 runaway loop)
   Step 2 - executive verdict card: HEALTHY / RUNAWAY / DRIFTING with bounded cost
   Step 3 - the six-deficiency composition: each gap classified inline
-  Step 4 - the incident pack (text + JSON download + glossary + production stack reassessment)
+  Step 4 - the incident pack (text + JSON download + glossary + production shape)
 """
 
 from __future__ import annotations
@@ -296,7 +296,7 @@ st.markdown(
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
     <span class='pill'>500 synthetic runs</span>
     <span class='pill'>4 deployed agents</span>
-    <span class='pill'>24 detected incidents</span>
+    <span class='pill'>24 labeled incidents</span>
     <span class='pill'>Built 2026</span>
   </div>
 </div>
@@ -319,8 +319,8 @@ st.markdown(
     f"<h3>Pick an agent run the SRE on-call might page about</h3>"
     f"<p class='muted'>Default selection is <code>{HEADLINE_INCIDENT_ID}</code> / <code>{HEADLINE_RUN_ID}</code> - "
     f"the <code>claims_triage_v3</code> runaway loop on April 14, 2026 that burned $4,218 across "
-    f"1,847 redundant Anthropic API calls before AgentWatch's cap fired. "
-    f"Without AgentWatch: 3 weeks to discovery via FinOps review. With AgentWatch: 6 minutes.</p></div>",
+    f"1,847 redundant tool calls. The $250 cap did not hold in this synthetic data (cost at cutoff $4,218). "
+    f"Scenario: 3 weeks to discovery via FinOps review without AgentWatch; 6 minutes with it (a value seeded in the data).</p></div>",
     unsafe_allow_html=True,
 )
 
@@ -367,7 +367,7 @@ if st.session_state.step >= 2:
         verdict_word = "HEALTHY"
         risk = "LOW"
         action = "Agent run completed within all reliability bounds. Tool-call mix matches baseline. No sidecar action required."
-        confidence = "HIGH (>95%)"
+        confidence = "Not measured - labeled synthetic incident"
         confidence_class = "confidence-high"
         tldr = (
             f"All 6 deficiency checks clear for {chosen_run_id}. "
@@ -378,15 +378,15 @@ if st.session_state.step >= 2:
         verdict_class = "verdict-runaway"
         verdict_word = "RUNAWAY" if deficiency == "runaway_loop" else "BOUNDED"
         risk = "HIGH"
-        action = ("Per-incident dollar cap reached - AgentWatch terminated the run, captured the "
-                  "reasoning trace, and routed the incident to the on-call validator.")
-        confidence = "HIGH (>95%)"
+        action = ("In the scenario, AgentWatch terminates the run at the per-incident dollar cap, captures the "
+                  "reasoning trace, and routes the incident to the on-call validator.")
+        confidence = "Not measured - labeled synthetic incident"
         confidence_class = "confidence-high"
         tldr = (
-            f"Incident {inc['incident_id']} - {deficiency}. AgentWatch capped the run at "
+            f"Incident {inc['incident_id']} - {deficiency}. The data records a cutoff at "
             f"${float(inc['cost_at_cutoff_usd']):,.2f} of inference burn, "
             f"{int(inc['tool_calls_at_cutoff']):,} tool calls. "
-            f"MTTR with AgentWatch: {int(inc['mttr_minutes_with_agentwatch'])} minutes. "
+            f"MTTR with AgentWatch: {int(inc['mttr_minutes_with_agentwatch'])} minutes (seeded in the data). "
             f"Modeled MTTR without AgentWatch: ~{int(inc['modeled_mttr_without_agentwatch_hours'])} hours."
         )
     else:
@@ -396,12 +396,12 @@ if st.session_state.step >= 2:
                         "no_reasoning_trace": "TRACE_SYNTHESIZED",
                         "cost_detached": "ATTRIBUTING"}[deficiency]
         risk = "MEDIUM"
-        action = ("AgentWatch fired the named sidecar action, routed to the line-1 owner, "
-                  "and recorded a P2/P3 incident for follow-up.")
-        confidence = "HIGH (>95%)"
+        action = ("In the scenario, AgentWatch fires the named sidecar action, routes to the line-1 owner, "
+                  "and records a P2/P3 incident for follow-up.")
+        confidence = "Not measured - labeled synthetic incident"
         confidence_class = "confidence-high"
         tldr = (
-            f"Incident {inc['incident_id']} - {deficiency}. AgentWatch fired "
+            f"Incident {inc['incident_id']} - {deficiency}. The data labels the sidecar action "
             f"<code>{inc['agentwatch_action']}</code>. "
             f"MTTR with AgentWatch: {int(inc['mttr_minutes_with_agentwatch'])} minutes. "
             f"Modeled MTTR without AgentWatch: ~{int(inc['modeled_mttr_without_agentwatch_hours'])} hours."
@@ -432,7 +432,7 @@ if st.session_state.step >= 2:
   <div>The four CSVs in <a href='{REPO_BLOB}/data/agents.csv' target='_blank'><code>data/agents.csv</code></a>, <a href='{REPO_BLOB}/data/agent_runs.csv' target='_blank'><code>data/agent_runs.csv</code></a>, <a href='{REPO_BLOB}/data/tool_calls.csv' target='_blank'><code>data/tool_calls.csv</code></a>, and <a href='{REPO_BLOB}/data/incidents.csv' target='_blank'><code>data/incidents.csv</code></a> stand in for the four agent-log surfaces a real deployment composes (framework OpenTelemetry export, LLM proxy trace tail, Cloud Logging on the tool-call HTTP surface, Agent Identity log).</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
-    <li>The agent framework emits OpenTelemetry spans for every tool call. <a href='https://opentelemetry.io/' target='_blank'>OpenTelemetry</a> is the substrate; LangGraph, AutoGen, Bedrock Agents, and OpenAI Assistants all expose it natively or via SDK wrappers.</li>
+    <li>The agent framework emits OpenTelemetry spans for every tool call. <a href='https://opentelemetry.io/' target='_blank'>OpenTelemetry</a> is the substrate; I expect LangGraph, AutoGen, Bedrock Agents, and OpenAI Assistants to expose it natively or via SDK wrappers; check each framework's current support.</li>
     <li>The LLM proxy (Langfuse / Helicone / vendor-native) captures the reasoning trace at the model boundary. AgentWatch reads from there for the chain-of-thought waterfall.</li>
     <li>The schema validator on each tool call references the system-of-truth (BigQuery / Snowflake / mainframe DB2) - a fabricated <code>customer_id</code> is rejected pre-flight, not after the tool fires.</li>
     <li>The per-agent <code>blast_radius_cap_usd</code> is configurable at deploy time and audited under <a href='https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm' target='_blank'>SR 11-7</a> change control. Each agent in <code>agents.csv</code> carries its own cap.</li>
@@ -504,8 +504,8 @@ if st.session_state.step >= 4:
     st.markdown(
         "<div class='aw-card'><span class='aw-step-label'>Step 4</span>"
         "<h3>Auto-assembled incident pack</h3>"
-        "<p class='muted'>The on-call-facing artifact. Every field hash-anchored. "
-        "Stored under WORM retention for the SR 11-7 ongoing-monitoring evidence trail.</p>"
+        "<p class='muted'>The on-call-facing artifact. In production every field would be hash-anchored and stored under WORM retention (design). "
+        "Here it is a text and JSON download.</p>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -554,10 +554,10 @@ if st.session_state.step >= 4:
         f"  cloud_logging_ref:    projects/bank-prod/logs/agents/{chosen_run_id}",
         f"  agent_identity_ref:   iam/agent-identity/{chosen_run_id}",
         "",
-        "Retention policy:   7 years (SR 11-7 ongoing monitoring evidence), WORM-bucketed",
+        "Retention policy:   7 years (design default for ongoing-monitoring evidence), WORM-bucketed",
         "Composition time:   <50ms on the prototype",
         "",
-        "This pack is immutable and hash-anchored. Interlocks with the bank's MRM workbench.",
+        "In production this pack is designed to be immutable and hash-anchored (here it is a download).",
         "=" * 76,
     ])
     pack_text = "\n".join(pack_lines)
@@ -575,7 +575,7 @@ if st.session_state.step >= 4:
             "cloud_logging_ref":    f"projects/bank-prod/logs/agents/{chosen_run_id}",
             "agent_identity_ref":   f"iam/agent-identity/{chosen_run_id}",
         },
-        "retention_policy": "7 years (SR 11-7 ongoing monitoring evidence), WORM-bucketed",
+        "retention_policy": "7 years (design default for ongoing-monitoring evidence), WORM-bucketed",
     }
     json_bytes = json.dumps(json_record, indent=2, default=str).encode()
 
@@ -651,11 +651,11 @@ if st.session_state.step >= 4:
                 ("Bedrock Agents", "AWS's managed agent runtime. Action groups + knowledge bases + guardrails."),
                 ("OpenAI Assistants", "OpenAI's hosted agent runtime. Threads + tools + file search."),
                 ("OpenTelemetry", "Industry-standard distributed tracing. The substrate every agent framework above exports to."),
-                ("MTTR", "Mean time to recover. From incident detection to mitigation routed. AgentWatch compresses this from 3 weeks to under 10 minutes."),
-                ("SR 11-7", "Federal Reserve 2011 supervisory letter on model risk management. Requires ongoing monitoring of every production model — including agents."),
-                ("EU AI Act Article 14", "EU regulation requiring human oversight on high-risk AI systems — exactly the autonomous agents AgentWatch observes."),
+                ("MTTR", "Mean time to recover. From incident detection to mitigation routed. The design target is under 10 minutes, against an assumed 3-week baseline."),
+                ("SR 11-7", "Federal Reserve 2011 supervisory guidance on model risk management. This prototype uses its ongoing-monitoring expectations as a design basis (see the README's regulatory note on SR 26-2, which places agentic AI outside its scope)."),
+                ("EU AI Act Article 14", "EU AI Act provision on human oversight of high-risk AI systems. Whether a given agent is high-risk is a legal question this repo does not answer."),
                 ("OWASP LLM Top 10", "OWASP's canonical taxonomy of LLM application risks. LLM02 (sensitive info disclosure) and LLM09 (misinformation) anchor the AgentWatch taxonomy."),
-                ("NIST AI RMF", "NIST's AI Risk Management Framework. AgentWatch is the implementation surface for the framework's 'Measure' and 'Manage' functions."),
+                ("NIST AI RMF", "NIST's AI Risk Management Framework. The closest fit is the framework's 'Measure' and 'Manage' functions (a design mapping, not a claim of conformance)."),
             ],
             columns=["Term", "Plain English"],
         )
@@ -664,7 +664,7 @@ if st.session_state.step >= 4:
         st.markdown("**Official references** (click to read the source documents):")
         st.markdown(
             "- [OpenTelemetry — the agent-tracing substrate](https://opentelemetry.io/)\n"
-            "- [Google Cloud — *Building secure multi-agent systems on Google Cloud* (Kannan, Sizemore, Herriford et al., 2025)](https://cloud.google.com/)\n"
+            "- [Google Cloud — *Building secure multi-agent systems on Google Cloud* (Kannan, Sizemore, Herriford et al., 2025)](https://services.google.com/fh/files/events/agent_security.pdf)\n"
             "- [Google Cloud — Agent Identity primitives](https://cloud.google.com/iam/docs/workload-identity-federation)\n"
             "- [LangGraph — agent orchestration framework](https://langchain-ai.github.io/langgraph/)\n"
             "- [AutoGen — Microsoft's multi-agent framework](https://microsoft.github.io/autogen/)\n"
@@ -674,15 +674,15 @@ if st.session_state.step >= 4:
             "- [EU AI Act — Article 14 (human oversight on high-risk AI)](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)"
         )
 
-    # Production stack reassessment
-    with st.expander("Production stack reassessment - what this would look like as client-facing SaaS"):
+    # Production shape
+    with st.expander("Production shape - what this would look like as client-facing SaaS (design, not built)"):
         st.markdown(
             f"""
-            The Streamlit prototype here proves the *product mechanic* - that agent-shaped
-            observability can compress MTTR from 3 weeks to under 10 minutes and bound per-incident cost.
+            The Streamlit prototype here shows the *product mechanic* on stored data: one composed record per
+            labeled incident. It does not demonstrate MTTR or cost bounding.
             **If AgentWatch were a real product shipping to a Tier-1 bank's AI Platform team:**
 
-            - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system - JPMorgan Glaze, Capital One Cube) -
+            - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system) -
               embedded as a panel inside the SRE on-call workflow (PagerDuty, Datadog), not a standalone app.
             - **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate); fine-grained RBAC mapping
               <code>aw:viewer</code> -> <code>aw:agent_owner</code> -> <code>aw:validator</code> -> <code>aw:platform_admin</code> -> <code>aw:cro</code>.
@@ -697,7 +697,7 @@ if st.session_state.step >= 4:
             - **Observability:** [OpenTelemetry](https://opentelemetry.io/) -> Datadog (the bank's standard) for the service traces;
               Langfuse for the agent reasoning-trace tail; PagerDuty for SLO breaches.
             - **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it;
-              data residency configurable per region (US East, EU West, India for RBI compliance).
+              data residency configurable per region (US East, EU West, India for RBI data-localization rules).
             - **Governance:** Native integration with the bank's MRM workbench (Archer, ServiceNow GRC, MetricStream) -
               each incident gets a workflow ID, attestation routes to the line-2 validator's queue, evidence retention is automatic.
             - **Deployment:** Blue-green via Argo CD; canary rollout 1% -> 10% -> 50% -> 100% over 14 days;
