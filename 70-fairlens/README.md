@@ -1,4 +1,4 @@
-# 🔬 fairlens: a six-test pack for a scorecard, run from a scores file
+# 🔬 FairLens CLI: a six-test pack for a scorecard, run from a scores file
 
 **I wanted to know what a validator sees when the decline reasons on a scorecard look consistent across groups, and a feature inside the score still moves approvals by group. This is a command-line tool: give it a CSV of scores with a group column and it prints PASS, REVIEW or FAIL for six tests. On 36 synthetic portfolios, each with a planted mechanism, the reason-code check passed almost every planted proxy, and the proxy ablation caught about half of them.** It extends [17 FairLens](../17-fairlens-credit-model-fairness/): the six-test shape and the planted postcode proxy come from there, and the command line, the interval-based ratio test, the accuracy check on the ablation and the scored set with hard cases are new here.
 

@@ -1,4 +1,4 @@
-# Architecture: fairlens six-test pack
+# Architecture: FairLens CLI six-test pack
 
 > **Status.** This is the design for a production shape. The repo implements the product mechanic as a prototype: a command, `src/fairlens_pack.py`, that reads a scores file with a group column, runs six tests and prints PASS, REVIEW or FAIL for each, run over 36 synthetic portfolios with a planted mechanism each. There is no model, no hosted service and no real applicant data. Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 

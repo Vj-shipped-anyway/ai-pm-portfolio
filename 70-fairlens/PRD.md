@@ -1,4 +1,4 @@
-# PRD: fairlens six-test pack
+# PRD: FairLens CLI six-test pack
 
 **Author:** Vijay Saharan, Sr PM
 **Stage:** Portfolio prototype
