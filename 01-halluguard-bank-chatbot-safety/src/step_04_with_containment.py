@@ -6,10 +6,10 @@ the customer. It scores whether the chatbot's response actually matches
 the retrieved data. If the score is below a calibrated threshold, the
 response is rewritten to an abstention message.
 
-In production, the verifier is a LoRA fine-tune of Llama 3.1 8B trained
-specifically on the eight failure modes. For the walkthrough, we mock
-its behavior — flagging the same set of wrong answers that real verifier
-runs catch in pilot.
+In the production design, the verifier is a LoRA fine-tune of Llama 3.1 8B
+trained on the eight failure modes. No verifier has been trained or run for
+this repo. The walkthrough uses fixed scores, set by hand to match the design,
+so the result shows the threshold and routing logic, not a verifier's accuracy.
 
 Run:
     python step_04_with_containment.py
@@ -39,9 +39,9 @@ def threshold_for(question: str) -> float:
     return THRESHOLDS["general"]
 
 
-# Mock grounding verifier scores. In production, this is a LoRA-tuned
-# Llama 3.1 8B. The mock numbers reflect what the actual verifier produces
-# on this query set, calibrated by temperature scaling (T=1.34, ECE=0.07).
+# Mock grounding verifier scores. The production design is a LoRA-tuned
+# Llama 3.1 8B. These numbers are set by hand: no verifier was run, so no
+# calibration figure exists for them.
 VERIFIER_SCORES = {
     "Q01": 0.94,   # correct, high confidence
     "Q02": 0.31,   # NEGATION FLIP detected

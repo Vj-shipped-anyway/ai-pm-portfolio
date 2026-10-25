@@ -8,13 +8,13 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/01-halluguard-bank-chatbot-safety/demo.html)
 
-**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the script that prints each number is named):
 
-- 🟢 Rule-based router (Step 1): 2 of 30 answered, both only pointing to a product page; 28 of 30 (93.3%) sent to a page or a banker
-- 🟢 LLM only (Step 2): 11 of 30 correct; 19 wrong answers would reach the customer
-- 🟢 LLM + containment (Step 4): serves 11, ships 0 wrong, abstains on 19 (63.3% handed to a banker)
+- 🟢 Rule-based router (Step 1, `step_01_before_llm.py`): 2 of 30 answered, both only pointing to a product page; 28 of 30 (93.3%) sent to a page or a banker
+- 🟢 LLM only (Step 2, `step_02_with_llm.py`): 11 of 30 correct; 19 wrong answers would reach the customer
+- 🟢 LLM + containment (Step 4, `step_04_with_containment.py`): serves 11, ships 0 wrong, abstains on 19 (63.3% handed to a banker)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+_A portfolio prototype on synthetic data, not a production case study. The framing and how to read the numbers are folded below._
 
 **▶ 60-second interactive walkthrough:** [Click through HalluGuard on Arcade](https://app.arcade.software/share/daLEfWH7yD0sYutT3HTP)
 
@@ -36,9 +36,9 @@ Designed to be readable by **both technical and non-technical managers**. Each s
 > **▶ 30-second demo:** the [clickable demo](./demo.html) gets you the full story in 30 seconds with no install.
 
 <details>
-<summary>Framing, how to read the numbers, and the regulatory note</summary>
+<summary>Framing and how to read the numbers</summary>
 
-> **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. This README describes the approach I'd take; the metrics in this walkthrough are modeled against synthetic data and published industry baselines. Production validation is what the next role does.
+> **Framing:** This is a portfolio prototype, not a production case study. The deficiency taxonomy, the verifier design, the LoRA training plan, and the architecture are mine. This README describes the approach I'd take; the measured numbers come from the step scripts run on synthetic data, and the modeled numbers name their assumptions. Production validation is what the next role does.
 
 > **Reading the numbers — credibility tags inline.** Every number in this README and the live demo is tagged 🟢 **Measured** (real output from the step scripts in this repo, run on the 30-query synthetic eval set), 🟡 **Modeled** (extrapolated from the synthetic data + published industry baselines, with the assumption named), or 🔴 **Hypothetical** (designed and reasoned about, never tested in production). Full convention in the [master README's "Reading the numbers" section](../README.md#-reading-the-numbers).
 
@@ -98,7 +98,7 @@ If you have handled one of these incidents, fork this. The taxonomy and the arch
 
 You don't need a cluster, a cloud account, or an API key. You need:
 
-- **Python 3.** The repo's dev container uses 3.11. The four step scripts import only the Python standard library (`csv`, `os`, `pathlib`, `collections`), so they run without installing anything.
+- **Python 3.** The repo's dev container uses 3.11. The four step scripts import only the Python standard library (`csv`, `pathlib`, `collections`), so they run without installing anything.
 - **Git**, to clone the repo. `brew install git` on Mac, `winget install git` on Windows.
 - **The packages in `src/requirements.txt`, for the Streamlit prototype only.** `pip install -r src/requirements.txt` installs `streamlit`, `pandas`, `numpy`, and `plotly`. The step scripts do not use them.
 - **No API key for the step scripts.** The model answers in Step 2 are stored mock values (`MOCK_RESPONSES` in `src/step_02_with_llm.py`), and the verifier scores in Step 4 are fixed per-query values (`VERIFIER_SCORES` in `src/step_04_with_containment.py`). The scripts read the CSVs in `data/` and make no network calls. To run against a real model, replace `mock_llm_response()` in Step 2 with your own call.
@@ -415,7 +415,7 @@ Three guards:
 
 1. **Grounding verifier** — A small, fine-tuned model that scores: does this response actually match the retrieved data? Designed to be trained on the eight failure modes; this prototype uses fixed mock scores.
 2. **Calibrated abstention** — If the verifier confidence is low, the response is rewritten to: "I'm not certain on this. Let me get a banker." Threshold tuned per use case.
-3. **Vendor pinning + drift** — Lock the foundation model snapshot. Run the probe set nightly. The day Anthropic or OpenAI silently updates, the probe regression is the alert.
+3. **Vendor pinning + drift** — Lock the foundation model snapshot. Run the probe set nightly. If the vendor changes the model under the same name, the probe regression is the alert.
 
 **The code** ([`src/step_04_with_containment.py`](./src/step_04_with_containment.py), simplified):
 
@@ -587,7 +587,7 @@ sequenceDiagram
 - The **calibrator is per-use-case, not global** — rates and regulatory questions are stricter than general inquiries. One global threshold is the trap.
 - **Telemetry is async** — never in the customer's request path. Even a 5ms add-on multiplies across every chat turn at peak.
 - The **probe runner is nightly, not real-time** — it's a regression gate, not a live filter. Real-time probing is what the verifier does.
-- The **vendor snapshot pin** is the smallest-looking box and the most important architectural decision in the system. Anthropic and Azure OpenAI silently update their snapshots; without the pin, behavior changes invisibly.
+- The **vendor snapshot pin** is the smallest-looking box and the most important architectural decision in the system. A hosted model can change under the same name without notice; without the pin, behavior changes unseen.
 
 ---
 

@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (mock chatbot responses, fixed mock verifier scores, a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP, or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most banks run on AWS, GCP, or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![HalluGuard flow](./assets/halluguard-flow.svg)
 
@@ -343,7 +343,7 @@ HalluGuard is a glue layer. Every external dependency is listed with its protoco
 
 ### Rollout
 
-Shadow first: score and log, serve the draft unchanged, so the abstention rate and false-abstention rate are known before anyone is affected. Then canary 1% to 10% to 50% to 100%, with automatic rollback on probe regression, as outlined in the README.
+Shadow first: score and log, serve the draft unchanged, so the abstention rate and false-abstention rate are known before anyone is affected. Then canary 1% to 10% to 50% to 100%, with automatic rollback on probe regression. This is a design; the PRD holds the phase plan.
 
 ### Backup & DR
 
@@ -353,7 +353,7 @@ Shadow first: score and log, serve the draft unchanged, so the abstention rate a
 - **Verifier artifacts.** Versioned in the model registry; the previous version stays deployable for rollback.
 - **DR drill cadence.** Quarterly failover to the secondary region, validated against the chatbot's own recovery objective.
 
-### Runbooks (one page each, in `docs/runbooks/`)
+### Runbooks (planned; one page each, in `docs/runbooks/` of the production repo)
 
 - `vendor-snapshot-changed.md` — the daily diff flagged a new snapshot
 - `verifier-degraded.md` — error or timeout rate above threshold

@@ -6,13 +6,13 @@ Now we have an LLM. Two changes vs. Step 1:
   2. Generation: pass the rows + question to the LLM for a natural-language reply.
 
 To keep this runnable WITHOUT API keys (so any reviewer can replicate the
-walkthrough on a laptop), this script uses MOCK LLM RESPONSES that mirror
-what real foundation models actually produce on this query set. The mock
-responses are based on observed behavior of the hosted vendor model, GPT-4o, and
-Llama 3.1 70B run against this exact eval.
+walkthrough on a laptop), this script uses MOCK LLM RESPONSES. They are
+written by hand to show the failure patterns hosted models are known to
+produce on questions like these. They were not captured from live model runs
+in this repo.
 
-To swap in real LLM calls, replace `mock_llm_response()` with
-`call_anthropic()` / `call_openai()` etc.
+To swap in real LLM calls, replace `mock_llm_response()` with a call to your
+own model client.
 
 Note: retrieve() below is a naive word-overlap stub. main() prints the stored
 mock answers and does not call it; the production design uses pgvector with
@@ -48,10 +48,9 @@ def retrieve(question: str, products, rates, fees, top_k: int = 5):
     return relevant[:top_k]
 
 
-# Mock LLM responses, calibrated to the actual behavior we observed when
-# running these exact queries against the hosted vendor model in development.
-# These are approximately the responses real LLMs produced. The point of
-# the mock is reproducibility for any reviewer — same output every time.
+# Mock LLM responses, written by hand to show the failure patterns hosted
+# models are known to produce. They were not captured from live runs. The
+# point of the mock is reproducibility for any reviewer — same output every time.
 MOCK_RESPONSES = {
     "Q01": ("Currently, our 12-Month CD is paying 4.10% APY.", True),
     "Q02": ("Yes, the Premier Checking account has a monthly maintenance fee of $12.", False),  # NEGATION FLIP

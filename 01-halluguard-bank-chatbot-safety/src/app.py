@@ -4,7 +4,7 @@ Streamlit app that walks a non-technical reader through:
   Step 1 - pick a customer scenario
   Step 2 - watch the unguarded LLM hallucinate
   Step 3 - see HalluGuard catch it and abstain
-  Step 4 - see the 80-probe stress test result
+  Step 4 - see a stored 80-probe result (the probes and the run are not in this repo)
 """
 
 from __future__ import annotations
@@ -181,7 +181,8 @@ PERSONAS = {
     },
 }
 
-# 80-probe stress test - measured results
+# Stored 80-probe result. The 80 probes and the run behind it are not in this repo,
+# so this is an illustration, not a result anyone can reproduce here.
 STRESS_RESULT = {
     "total_probes": 80,
     "unguarded_wrong": 23,
@@ -226,7 +227,7 @@ st.markdown(
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
-    <span class='pill'>Live - 80 probes verified</span>
+    <span class='pill'>Synthetic data, mock scores</span>
     <span class='pill'>Built 2026</span>
   </div>
 </div>
@@ -247,8 +248,9 @@ if st.session_state.step == 1:
 st.markdown(
     "<div class='hg-card'><span class='hg-step-label'>Step 1</span>"
     "<h3>Pick a customer scenario</h3>"
-    "<p class='muted'>Six real customer questions, hand-curated from incident logs (PII scrubbed). "
-    "Each one trips a different LLM failure mode.</p></div>",
+    "<p class='muted'>Six synthetic customer questions from the 30-query set, each built to trip an LLM failure mode. "
+    "The bot answers and verifier scores shown here are written for this demo. They differ from the stored values in Steps 2 and 4 of the README "
+    "(for example, Q01 and Q06 are answered correctly there).</p></div>",
     unsafe_allow_html=True,
 )
 
@@ -318,9 +320,9 @@ if st.session_state.step >= 3:
         risk = "HIGH"
         action = "Abstain - rewrite to 'let me get a banker'"
         tldr = (
-            f"The chatbot tried to ship a wrong answer. HalluGuard's NLI verifier "
-            f"(Natural Language Inference - a small AI that checks 'does this answer match what "
-            f"the documents actually say?') scored grounding at {score:.2f} - below the "
+            f"The chatbot tried to ship a wrong answer. HalluGuard's grounding verifier "
+            f"(a small AI that checks 'does this answer match what "
+            f"the documents actually say?'; here a stored mock score) scored grounding at {score:.2f} - below the "
             f"{threshold:.2f} abstention threshold (how sure the AI must be before it tries to "
             f"answer; otherwise it hands off). Customer never sees the wrong number."
         )
@@ -363,7 +365,7 @@ if st.session_state.step >= 3:
     <li>Every customer query in this test set has exactly one correct answer in the rate card.</li>
     <li>The LLM does not refuse to answer due to other safety rules (PII, jailbreak, etc.).</li>
     <li>Threshold tuned per use case: 0.82 for rates / regulations, 0.65 for general inquiries.</li>
-    <li>Vendor snapshot pinned (the exact version of the outside AI we use, locked in writing) - probe set (a list of trick questions designed to expose the AI's weak spots) runs nightly to catch silent provider updates.</li>
+    <li>Design, not built here: the vendor snapshot is pinned (the exact version of the outside AI, locked) and the probe set (a list of trick questions designed to expose the AI's weak spots) runs nightly to catch provider updates.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='{confidence_class}'>{confidence_label}</div>
@@ -393,7 +395,7 @@ if st.session_state.step >= 3:
             f"- **Retrieval correctness:** PASS - the right rows were pulled from the rate card.\n"
             f"- **Generation correctness:** {'FAIL' if abstain else 'PASS'} - "
             f"the LLM's answer {'contradicts' if abstain else 'matches'} the retrieved facts.\n"
-            f"- **Grounding verifier (LoRA Llama 3.1 8B):** score {score:.2f}.\n"
+            f"- **Grounding verifier (design: LoRA Llama 3.1 8B; the score here is a stored mock value):** score {score:.2f}.\n"
             f"- **Calibrated threshold for this use case:** {threshold:.2f}.\n"
             f"- **Decision:** {'ABSTAIN -> rewrite' if abstain else 'SHIP'}.\n"
             f"- **Trace ID (Langfuse):** lf_{persona['query_id'].lower()}_{int(score*100):03d}_demo"
@@ -410,8 +412,8 @@ if st.session_state.step >= 3:
 if st.session_state.step >= 4:
     st.markdown(
         "<div class='hg-card'><span class='hg-step-label'>Step 4</span>"
-        "<h3>Proof at scale - the 80-probe stress test</h3>"
-        "<p class='muted'>Same containment layer, run across 80 probes balanced over the eight deficiency classes.</p>"
+        "<h3>A stored 80-probe result</h3>"
+        "<p class='muted'>Stored result for 80 probes balanced over the eight deficiency classes. The probe set and the run are not in this repo, so read it as an illustration, not a measurement.</p>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -423,13 +425,13 @@ if st.session_state.step >= 4:
 <div class='verdict-card verdict-pass'>
   <div class='vlabel'>Stress Test Verdict</div>
   <div class='vbig'>PASS</div>
-  <div class='vmetric'>0 wrong answers reach the customer across 80 probes (100% containment)</div>
+  <div class='vmetric'>0 wrong answers reach the customer across 80 probes (stored result)</div>
   <div class='vrow'>
     <span class='vchip'>Risk: LOW</span>
     <span class='vchip'>Caught: {sr['unguarded_wrong']} would-be hallucinations</span>
-    <span class='vchip'>Recommended action: Ship to pilot</span>
+    <span class='vchip'>Recommended action: Validate on real traffic</span>
   </div>
-  <div class='vtldr'><b>TL;DR:</b> The unguarded LLM produced wrong answers on {sr['unguarded_wrong']} of 80 probes ({pct_caught:.1f}%). HalluGuard caught every one and rewrote them as honest "let me get a banker" abstentions.</div>
+  <div class='vtldr'><b>TL;DR:</b> The unguarded LLM produced wrong answers on {sr['unguarded_wrong']} of 80 probes ({pct_caught:.1f}%). In the stored result, HalluGuard held back every one and rewrote them as "let me get a banker" abstentions.</div>
 </div>
 """,
         unsafe_allow_html=True,
@@ -440,15 +442,15 @@ if st.session_state.step >= 4:
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals (stress test)</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>The 80-probe set balanced across 8 deficiency classes; ground truth from the bank's rate card and authoritative regulation citations.</div>
+  <div>An 80-probe set balanced across 8 deficiency classes; ground truth from the synthetic rate card and the cited regulation names.</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
-    <li>The 80-probe set is representative of production query distribution.</li>
+    <li>The 80-probe set exercises each failure class. It is not representative of production traffic.</li>
     <li>Calibrated thresholds (0.82 rates, 0.65 general) hold on real traffic.</li>
     <li>Verifier remains stable across foundation-model snapshot changes.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
-  <div class='confidence-high'>HIGH (>95%) - all 80 probes contained, no false negatives.</div>
+  <div class='confidence-high'>Stored result: all 80 probes contained. Not reproducible from this repo.</div>
   <span class='tlabel'>What this does NOT cover</span>
   <ul>
     <li>Production-traffic shape (this is a curated diagnostic set).</li>
@@ -474,12 +476,12 @@ if st.session_state.step >= 4:
         st.markdown(
             "- **Probe corpus:** `probes/01_paraphrase_blindness.jsonl`, "
             "`probes/02_negation_flip.jsonl`, `probes/06_reg_citation_fabrication.jsonl` (samples committed)\n"
-            "- **Verifier:** LoRA Llama 3.1 8B served via vLLM on 2x L4 GPUs\n"
-            "- **Calibration:** thresholds set on a held-out 200-example calibration split. "
-            "We track the calibration curve (plots 'AI says I'm 80% sure' vs. 'was it actually right 80% of the time?').\n"
-            "- **Snapshot pin:** `vendor-balanced-4-20250215` (locked); nightly probe regression alerts on drift\n"
-            "- **Telemetry:** OpenTelemetry -> Langfuse + Datadog\n"
-            "- **MRM-ready evidence bundle:** MRM (Model Risk Management - the bank's internal team that approves every AI before deployment) gets the bundle per pilot, attached to the model risk file"
+            "- **Verifier (design):** LoRA Llama 3.1 8B served via vLLM on 2x L4 GPUs. Not built in this prototype\n"
+            "- **Calibration (design):** thresholds are fixed design values here; no calibration split exists in this repo. "
+            "A production build would track a calibration curve (plots 'AI says I'm 80% sure' vs. 'was it actually right 80% of the time?').\n"
+            "- **Snapshot pin (design):** `vendor-balanced-4-20250215` is an illustrative label; nightly probe regression would alert on drift\n"
+            "- **Telemetry (design):** OpenTelemetry -> Langfuse + Datadog\n"
+            "- **MRM-ready evidence bundle:** in a real engagement, MRM (Model Risk Management - the bank's internal team that reviews and validates models) would get the bundle per pilot, attached to the model risk file"
         )
 
     # ---------------------------------------------------------------------------
@@ -493,18 +495,18 @@ if st.session_state.step >= 4:
                 ("Abstention", "The AI says 'I don't know - let me get a banker' instead of guessing."),
                 ("Abstention threshold", "How sure the AI must be before it tries to answer (otherwise it hands off)."),
                 ("Ground truth", "The real, correct answer (from the bank's rate card or fee schedule)."),
-                ("NLI verifier", "A small AI that checks 'does this answer match what the documents actually say?' (Natural Language Inference)."),
+                ("Grounding verifier", "A small AI that checks 'does this answer match what the documents actually say?'"),
                 ("Probe set", "A list of trick questions designed to expose the AI's weak spots."),
                 ("Calibration curve", "Plots 'AI says I'm 80% sure' vs. 'was it actually right 80% of the time?'"),
                 ("Reg DD", "Truth in Savings Act - federal rule requiring banks to clearly disclose savings rates and fees."),
-                ("Reg E", "Electronic Funds Transfer Act - federal rule covering ATM, wire, and ACH error disputes."),
+                ("Reg E", "Electronic Fund Transfer Act - federal rule covering ATM, debit card, and ACH error disputes."),
                 ("UDAAP", "Unfair, Deceptive, or Abusive Acts or Practices - the rule that protects customers from misleading claims."),
-                ("FDIC", "Federal Deposit Insurance Corporation - insures bank deposits up to $250,000 per customer per institution."),
+                ("FDIC", "Federal Deposit Insurance Corporation - insures bank deposits up to $250,000 per depositor, per insured bank, per ownership category."),
                 ("CFPB", "Consumer Financial Protection Bureau - federal regulator that audits how banks handle customer issues."),
-                ("MRM", "Model Risk Management - the bank's internal team that approves every AI before deployment."),
+                ("MRM", "Model Risk Management - the bank's internal team that reviews and validates models."),
                 ("OWASP LLM Top 10", "OWASP's list of the top 10 security risks for applications using large language models."),
                 ("NIST AI RMF", "NIST's AI Risk Management Framework - voluntary guidance on managing AI risks."),
-                ("EU AI Act Article 12", "EU regulation requiring auditable logs of AI decisions."),
+                ("EU AI Act Article 12", "Record-keeping (automatic event logging) requirement for high-risk AI systems under the EU AI Act."),
             ],
             columns=["Term", "Plain English"],
         )
@@ -513,13 +515,13 @@ if st.session_state.step >= 4:
         st.markdown("**Official references** (click to read the source documents):")
         st.markdown(
             "- [Reg DD - Truth in Savings (12 CFR 1030)](https://www.consumerfinance.gov/rules-policy/regulations/1030/) - CFPB-administered rule on savings-rate and fee disclosure\n"
-            "- [Reg E - Electronic Funds Transfer (12 CFR 1005)](https://www.consumerfinance.gov/rules-policy/regulations/1005/) - CFPB-administered rule on ATM/wire/ACH error disputes\n"
+            "- [Reg E - Electronic Funds Transfer (12 CFR 1005)](https://www.consumerfinance.gov/rules-policy/regulations/1005/) - CFPB-administered rule on ATM, debit card, and ACH error disputes\n"
             "- [UDAAP - 12 USC 5531 (Dodd-Frank Section 1031)](https://www.consumerfinance.gov/compliance/supervisory-guidance/unfair-deceptive-abusive-acts-practices-udaaps/) - CFPB unfair, deceptive, or abusive acts or practices guidance\n"
             "- [FDIC Deposit Insurance overview](https://www.fdic.gov/resources/deposit-insurance/) - $250,000 coverage limits and rules\n"
             "- [CFPB Supervisory Guidance](https://www.consumerfinance.gov/compliance/supervisory-guidance/) - examination expectations for banks\n"
             "- [OWASP Top 10 for Large Language Model Applications](https://genai.owasp.org/llm-top-10/) - security risks for LLM-powered apps\n"
             "- [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) - voluntary AI risk guidance\n"
-            "- [EU AI Act - full text on EUR-Lex](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) - Article 12 covers auditable logging"
+            "- [EU AI Act - full text on EUR-Lex](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) - Article 12 covers record-keeping (logging) for high-risk AI systems"
         )
 
     st.markdown(

@@ -10,9 +10,9 @@
 
 ## 1. Problem
 
-Bank chatbots in production confidently misstate rates, fees, account terms, and regulations. The model is not the lever. Vendor models change underneath us, hallucination is structurally unsolved, and BFSI cannot wait on the research frontier. The lever is a containment layer that wraps the deployed chatbot and refuses to pass an ungrounded claim to a customer. Today, that layer is a thin disclaimer in the footer. The result is incident-after-incident, each handled as a one-off remediation while the underlying posture stays unchanged.
+Bank chatbots can confidently misstate rates, fees, account terms, and regulations. The model is not the lever. Vendor models can change underneath us, hallucination has no complete fix today, and a bank cannot wait on the research frontier. The lever is a containment layer that wraps the deployed chatbot and refuses to pass an ungrounded claim to a customer. In the case I am designing against, that layer is a thin disclaimer in the footer, and each incident is handled as a one-off remediation while the underlying posture stays unchanged.
 
-The pattern is well-documented across published BFSI incidents and CFPB complaint trends. The remediation cost adds up. The brand cost adds up faster. The product gap — a containment layer with a calibrated abstention threshold per intent — is what this PRD is designed against.
+Chatbot misstatements are a known exposure for banks. This repo holds no incident data, and its cost figures are modeled. The product gap — a containment layer with a calibrated abstention threshold per intent — is what this PRD is designed against.
 
 **Primary user:** Head of Digital Customer Experience (line 1, business owner).
 **Secondary user:** Trust & Safety / AI Risk lead (line 2).
@@ -20,12 +20,14 @@ The pattern is well-documented across published BFSI incidents and CFPB complain
 
 ## 2. Why now
 
-- Anthropic, OpenAI, and the broader research community have publicly stated factuality is unsolved. The frontier is not arriving in time for a 2026 chatbot launch.
-- Public bank-chatbot hallucination incidents are now quarterly news. CFPB attention is rising.
+- Model vendors and researchers describe factual accuracy as an open problem. I would not plan a 2026 chatbot launch around it being solved.
+- Regulators pay attention to chatbot statements about fees and rates. This repo cites no incident data.
 - Knowledge-graph and retrieval-grounded approaches are mature enough to deploy as a containment layer without model retraining.
-- The cost asymmetry is clear: a single rate-hallucination remediation cycle costs more than a year of containment-layer operation.
+- 🔴 Hypothesis, not measured here: a single rate-misstatement remediation cycle costs more than a year of containment-layer operation.
 
 ## 3. Goals (12-month horizon)
+
+These are design targets, not results. The README's pilot-targets table uses the same -71% and 67% to 64% figures and flags them for re-modeling. The README's satisfaction target (+9 points, post-chat) is a different measure from the NPS goal below.
 
 | Goal | Metric | Target |
 |------|--------|--------|
@@ -37,7 +39,7 @@ The pattern is well-documented across published BFSI incidents and CFPB complain
 ## 4. Non-goals
 
 - Not a chatbot. Wraps existing chatbots — vendor or in-house.
-- Not a model fine-tuner. No retraining.
+- Not a fine-tuner of the chatbot's model. No retraining of it (the README's verifier is a separate, smaller model).
 - Not a knowledge-graph platform. Consumes the existing product, rate, and reg KG.
 - Not the eval-first console (Project 04), but interlocks for probe authoring.
 
@@ -52,8 +54,10 @@ The pattern is well-documented across published BFSI incidents and CFPB complain
 
 A three-guard containment layer.
 
+> **Design note.** The README and ARCHITECTURE design Guard 1 as a fine-tuned grounding verifier that scores a draft against the retrieved rows (the prototype uses fixed mock scores). This PRD describes a claim-by-claim check against a knowledge graph. They are two candidate designs for the same guard, and the prototype implements neither. The README's three guards (verifier, abstention, vendor pinning and drift) correspond to Ground, Abstain, and Probe here.
+
 ### Guard 1 — Ground
-- Atomic-claim extractor (a hosted Anthropic model with constrained JSON output) parses every response candidate for rate, fee, term, regulation reference, and account-behavior claims.
+- Atomic-claim extractor (a hosted vendor model with constrained JSON output) parses every response candidate for rate, fee, term, regulation reference, and account-behavior claims.
 - Each atomic claim is checked against the authoritative knowledge graph: product catalog and rate sheet in Postgres, reg-claim graph in Neo4j.
 - Ungroundable or contradicted claims trigger rewrite-or-refuse.
 - Source citations attached to every response with a grounded claim.

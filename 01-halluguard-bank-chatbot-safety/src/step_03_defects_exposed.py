@@ -21,9 +21,9 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-# Comparative pass rates on the same query set, run against three models.
-# These numbers come from running the actual probe suite (1,260 examples
-# total; the 30-query CSV here is a slice).
+# Comparative pass rates for three models. These are stored values. The runs
+# behind them are not in this repo (it holds the 30-query CSV and 15 sample
+# probes), so they are illustrative and not measured here.
 MODEL_COMPARISON = {
     "paraphrase_blindness":  {"Vendor model": 0.88, "GPT-4o": 0.84, "Llama 3.1 70B": 0.79},
     "negation_flip":         {"Vendor model": 0.71, "GPT-4o": 0.68, "Llama 3.1 70B": 0.56},
@@ -85,7 +85,7 @@ def main():
 
     print(f"\n{'='*80}")
     print("Comparative pass rate across three foundation models")
-    print("(Same query set, zero-shot, no containment)")
+    print("(Stored values, no containment; the runs behind them are not in this repo)")
     print(f"{'='*80}\n")
     print(f"  {'Failure mode':<28} {'Vendor model':>17} {'GPT-4o':>10} {'Llama 3.1 70B':>16}")
     print(f"  {'-'*28} {'-'*17:>17} {'-'*10:>10} {'-'*16:>16}")
