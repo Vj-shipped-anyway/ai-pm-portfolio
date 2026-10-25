@@ -257,7 +257,7 @@ st.markdown(
 <div class='ll-hero'>
   <div class='brand'>🔍 LineageLog</div>
   <h1>Every regulated AI decision, traceable to its inputs, model snapshot, and downstream outcome in under a minute.</h1>
-  <div class='sub'>An immutable decision-grain composition layer that turns log fragments scattered across Cloud Logging, Cloud Audit Logs, Agent Identity Logs, and OpenTelemetry traces into a single record indexed by customer / decision / timestamp. Built against the Google Cloud secure-multi-agent reference architecture; mapped to <a href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj' target='_blank' style='color:#fff;text-decoration:underline;'>EU AI Act Article 12</a>, <a href='https://www.nist.gov/itl/ai-risk-management-framework' target='_blank' style='color:#fff;text-decoration:underline;'>NIST AI RMF</a>, and the <a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank' style='color:#fff;text-decoration:underline;'>SR 11-7 / OCC 2011-12</a> ongoing-monitoring expectation.</div>
+  <div class='sub'>An immutable decision-grain composition layer that turns log fragments scattered across Cloud Logging, Cloud Audit Logs, Agent Identity Logs, and OpenTelemetry traces into a single record indexed by customer / decision / timestamp. Built against the Google Cloud secure-multi-agent reference architecture; aligned to <a href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj' target='_blank' style='color:#fff;text-decoration:underline;'>EU AI Act Article 12</a>, <a href='https://www.nist.gov/itl/ai-risk-management-framework' target='_blank' style='color:#fff;text-decoration:underline;'>NIST AI RMF</a>, and the <a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank' style='color:#fff;text-decoration:underline;'>SR 11-7 / OCC 2011-12</a> ongoing-monitoring expectation.</div>
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
     <span class='pill'><a href='{LINKEDIN_URL}' target='_blank'>LinkedIn</a></span>
@@ -388,7 +388,7 @@ if st.session_state.step >= 2:
     <li>Feature-at-decision-time is recoverable from a temporal feature-store API. The demo synthesizes a deterministic feature vector per decision_id.</li>
     <li>Reviewer attribution distinguishes <code>human_user_delegated</code> from <code>agent_autonomous</code> via the Agent Identity Auth Manager pattern described in Google's <i>Building secure multi-agent systems</i> reference.</li>
     <li>Outcome data lives in three downstream systems (loss-event lake, complaint database, claims platform). LineageLog joins by decision_id, which is the contract.</li>
-    <li><a href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj' target='_blank'>EU AI Act Article 12</a> record-keeping requirements apply to this tier-{mrow['tier']} decision; <a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank'>SR 11-7</a> and <a href='https://www.nist.gov/itl/ai-risk-management-framework' target='_blank'>NIST AI RMF</a> apply alongside.</li>
+    <li><a href='https://eur-lex.europa.eu/eli/reg/2024/1689/oj' target='_blank'>EU AI Act Article 12</a> record-keeping requirements would apply if this tier-{mrow['tier']} decision were in a high-risk system; <a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank'>SR 11-7</a> and <a href='https://www.nist.gov/itl/ai-risk-management-framework' target='_blank'>NIST AI RMF</a> apply alongside.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='{confidence_class}'>{confidence}</div>
@@ -583,7 +583,7 @@ if st.session_state.step >= 4:
                 ("AI decision lineage", "The chain of facts about one AI decision: which prompt, which model snapshot, which documents, which features, who authorized it, what happened next."),
                 ("Decision-grain composition", "Joining log fragments at the decision_id level so one record carries every relevant fact about that decision."),
                 ("Cloud Logging", "Google Cloud's request/response log surface. Captures every API call but not business context."),
-                ("Cloud Audit Logs", "Separate audit-only log of who accessed which sensitive resource. Required by SR 11-7 and SOC 2."),
+                ("Cloud Audit Logs", "Separate audit-only log of who accessed which sensitive resource. A control the design relies on; SOC 2 and model-risk practice commonly expect one."),
                 ("Agent Identity Log", "Cryptographic record of when an AI agent acquired credentials. The trail that distinguishes 'human told the agent to act' from 'the agent acted on its own.'"),
                 ("OpenTelemetry trace (OTel)", "Industry-standard distributed tracing. Captures the AI agent's chain-of-thought as a waterfall."),
                 ("Model snapshot pin", "The exact version of the model that scored this decision. Without this, vendor silent updates are invisible."),
@@ -616,11 +616,11 @@ if st.session_state.step >= 4:
     with st.expander("Production stack reassessment - what this would look like as client-facing SaaS"):
         st.markdown(
             """
-            The Streamlit prototype here proves the *product mechanic* - that decision-grain composition can compress
-            audit-evidence assembly from 14 days to 12 minutes. **If LineageLog were a real product shipping to a Tier-1
+            The Streamlit prototype here shows the *product mechanic* on synthetic data - decision-grain composition of
+            six lineage fields in milliseconds. The 14 days to 12 minutes figure is a designed estimate, not a result. **If LineageLog were a real product shipping to a Tier-1
             bank's compliance and MRM organizations:**
 
-            - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's design system - JPMorgan Glaze, Capital One Cube) -
+            - **Frontend:** Next.js 15 + Tailwind + shadcn/ui (or the bank's own design system) -
               embedded as a panel inside the validator's existing MRM workbench (Archer, ServiceNow GRC, MetricStream), not a standalone app.
             - **Auth:** SAML / OIDC via the bank's IdP (Okta, ForgeRock, PingFederate); fine-grained RBAC mapping
               line-1 model-owner / line-2 validator / line-3 audit / regulator-facing roles.
@@ -634,8 +634,8 @@ if st.session_state.step >= 4:
               customer_id_hash, timestamp)` within a 5-minute composition SLO.
             - **Observability:** OpenTelemetry -> Datadog (the bank's standard) for the service traces;
               Langfuse for any GenAI-as-judge traces; PagerDuty for SLO breaches.
-            - **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it;
-              data residency configurable per region (US East, EU West, India for RBI compliance).
+            - **Control alignment (design intent, not audited):** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it;
+              data residency configurable per region (US East, EU West, India for RBI data localization).
             - **Governance:** Native integration with the bank's MRM workbench - each decision-lineage record gets a
               workflow ID, attestation routes to the line-2 validator's queue, audit-pack export is one click.
             - **Deployment:** Blue-green via Argo CD; canary rollout 1% -> 10% -> 50% -> 100% over 14 days;

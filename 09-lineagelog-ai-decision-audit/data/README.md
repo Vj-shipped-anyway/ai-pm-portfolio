@@ -1,6 +1,6 @@
 # Sample Data — LineageLog walkthrough
 
-Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and shipped as static CSVs (the generator script is not included in this repo). No customer data. No PII. Shapes are calibrated to what a Tier-1 retail bank's regulated-decision substrate actually looks like across loan approval, claims triage, KYC review, and fraud screening.
+Four CSVs drive Steps 1 through 4 of the walkthrough. Everything is synthetic and shipped as static CSVs (the generator script is not included in this repo). No customer data. No PII. Shapes follow an assumed Tier-1 retail bank regulated-decision setup across loan approval, claims triage, KYC review, and fraud screening.
 
 The headline decision the walkthrough resolves is `DEC_0150_20260312` — a `loan_pd_v3` denial of customer `CUST_851897` on March 12, 2026. The OCC opens an exam on May 8 asking for the full lineage. Today: 14 days. With LineageLog: 12 minutes.
 

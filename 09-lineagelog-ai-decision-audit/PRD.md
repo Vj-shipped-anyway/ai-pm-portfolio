@@ -16,13 +16,13 @@
 | **Owner** | Vijay Saharan, Sr PM (BFSI AI Platform). |
 | **Stage** | Portfolio prototype, designed for engagement. Synthetic data, no production deployment. |
 | **Users** | Primary: Head of Compliance, Internal Audit (L3). Secondary: CRO, Line-2 validators, MRM committee chairs, regulator-facing teams (OCC liaison, EU AI Act competent-authority liaison). Tertiary: line-1 model owners. |
-| **Problem** | Every regulator (OCC, Fed, EU AI Act Article 12, NIST AI RMF) asks the same question: "explain this AI decision for this customer on this date." Today: 14 days, paralegal-led, fragmented across 6 vendors + 4 cloud accounts. The lineage fragments exist; the composition does not. The bank produces a narrative for the OCC, not a record. Findings escalate. |
-| **Solution** | Decision-grain composition layer that binds Cloud Logging + Cloud Audit Logs + Agent Identity Logs + OpenTelemetry traces at `(decision_id, customer_id_hash, timestamp)`. Immutable record per decision. Six-deficiency taxonomy closed by design: prompt versioning, retrieval-set capture, model-snapshot pin, feature-at-decision-time, reviewer attribution, outcome backlink. Auto-assembled exam-pack export in sub-second on the prototype. |
+| **Problem** | Regulators and frameworks (OCC, Fed, EU AI Act Article 12, NIST AI RMF) push toward one capability: being able to answer "explain this AI decision for this customer on this date." Today: 14 days, paralegal-led, fragmented across 6 vendors + 4 cloud accounts. The lineage fragments exist; the composition does not. The bank produces a narrative for the OCC, not a record. Findings escalate. |
+| **Solution** | Decision-grain composition layer that binds Cloud Logging + Cloud Audit Logs + Agent Identity Logs + OpenTelemetry traces at `(decision_id, customer_id_hash, timestamp)`. Immutable record per decision. Six-deficiency taxonomy addressed by design: prompt versioning, retrieval-set capture, model-snapshot pin, feature-at-decision-time, reviewer attribution, outcome backlink. Auto-assembled exam-pack export in sub-second on the prototype. |
 | **North-star metric** | % of regulated AI decisions with complete six-deficiency lineage composed within 5 minutes of decision time, queryable by `(customer_id_hash, decision_id, timestamp)`. |
-| **Modeled metrics (12-month horizon)** | 🟡 Audit-pack assembly time: **3 weeks → 3 seconds** (assumes the synthetic 200-decision corpus and a Tier-1-style four-model fleet). 🟡 Exam-readiness coverage: **22% → 100%** (assumes published BFSI baseline for sample-driven readiness vs. continuous). 🔴 Time-to-decision-evidence: **14 days → 12 minutes** (designed against published OCC exam patterns; not yet tested in a real exam). |
+| **Modeled metrics (12-month horizon)** | 🟡 Audit-pack assembly time: **3 weeks → 3 seconds** (assumes the synthetic 200-decision corpus and a Tier-1-style four-model fleet). 🟡 Exam-readiness coverage: **22% → 100%** (assumes an unsourced 22% baseline for sample-driven readiness vs. continuous). 🔴 Time-to-decision-evidence: **14 days → 12 minutes** (designed against an assumed exam pattern, none cited; not yet tested in a real exam). |
 | **Modeled cost** | 🔴 ~$420k for a 90-day engagement in a real deployment (compute on existing Cloud Logging/Audit infra + 1 PM + 1.5 FTE engineers + 0.5 FTE compliance partner + WORM bucket storage) — designed, not executed. |
 | **Risk #1** | Composition latency under load. 50-200M decisions/yr means ~16-65 decisions/second peak. Solution: stateless composers + Pub/Sub sharded by `customer_id_hash`. |
-| **Risk #2** | Vendor snapshot pin verification gap. If the vendor (Anthropic, Azure OpenAI, Bedrock) silently rolls a snapshot, the registry's post-roll value is wrong for pre-roll decisions. Solution: interlock with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5 vendor-pin detector + daily diff job + response-header pin extraction. |
+| **Risk #2** | Vendor snapshot pin verification gap. If a hosted-model vendor silently rolls a snapshot, the registry's post-roll value is wrong for pre-roll decisions. Solution: interlock with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s vendor-version diff + daily diff job + response-header pin extraction. |
 | **Risk #3** | Compliance pushback on "auto-assembled" exam packs — regulators want a human in the loop. Solution: human-review-and-edit before WORM seal, never auto-attest; the bank's MRM workbench remains the system of record for sign-off. |
 | **Out of scope** | (1) Replacing the bank's existing logging vendors — we compose, we do not collect. (2) Adjudicating disputed decisions — we provide lineage, not adjudication. (3) Real-time decision blocking — we are off the request path. (4) Customer-facing surfaces — internal compliance tool only. (5) Building a new IdP — we integrate with the bank's existing Okta / Entra ID / Ping. |
 
@@ -60,7 +60,7 @@
 | 06 | **Feature-at-decision-time** — temporal feature-store API; composer calls it per decision; cached for 24h. | 100M | 3 | 0.7 | 21 | 10.0 | Sequenced for v0.3 |
 | 07 | **Reviewer attribution** — Agent Identity Auth Manager integration; distinguish `human_user_delegated` from `agent_autonomous`. | 100M | 3 | 0.8 | 8 | 30.0 | Sequenced for v0.4 |
 | 08 | **Outcome backlink ingester** — daily job that joins downstream-system outcomes back to `decision_id` via customer-hash + time window. | 100M | 3 | 0.65 | 13 | 15.0 | Sequenced for v0.4 |
-| 09 | **Vendor-pin verifier** — interlock with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5; response-header pin extraction; daily diff. | 50M | 3 | 0.7 | 8 | 13.1 | Sequenced for v0.5 |
+| 09 | **Vendor-pin verifier** — interlock with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s vendor-version diff; response-header pin extraction; daily diff. | 50M | 3 | 0.7 | 8 | 13.1 | Sequenced for v0.5 |
 | 10 | **Streamlit prototype** — single-decision drill-down, six-deficiency lineage card, exam-pack download. | 1k | 2 | 1.0 | 5 | 0.0004 | Sequenced for v0.1 (this repo) |
 | 11 | **MRM workbench integration** — push lineage record ID to Archer / ServiceNow GRC / MetricStream; bidirectional sync on attestation. | 100M | 2 | 0.6 | 13 | 9.2 | Sequenced for v0.6 |
 | 12 | **OPA policy gates** — RBAC matrix scoped per region; OPA evaluates every exam-pack export. | 100M | 2 | 0.8 | 8 | 20.0 | Sequenced for v0.5 |
@@ -71,11 +71,11 @@
 
 ## 4. Why now
 
-- **EU AI Act Article 12** is in effect. High-risk AI systems (which includes BFSI credit and insurance) must keep records that allow tracing of all events relevant to the system's operation. Banks operating in the EU need this on disk, not in narrative form, by the post-grace-period enforcement window.
-- **OCC exam cycles** are shifting toward sample-based decision lineage audits. The published shape of recent supervisory letters is increasingly granular: "show us this specific decision," not "show us your model risk framework."
-- **NIST AI RMF 1.0** is the federal-government reference framework. Federal counterparty work — Treasury, FHFA, Fannie/Freddie counterparties — is increasingly RMF-aligned.
-- **Vendor model silent updates** (Anthropic Feb 24, 2026 reference incident) make the model-snapshot-pin question harder every quarter.
-- **The substrate is finally there.** Cloud Logging + Cloud Audit Logs + Agent Identity Auth Manager + OpenTelemetry on ADK is published, productized, and adopted at most Tier-1 banks. The composition layer is the missing piece.
+- **EU AI Act Article 12** requires high-risk AI systems to keep records that allow tracing of events relevant to their operation. Annex III lists credit scoring and some insurance uses among the high-risk cases; whether a given system is in scope is a legal call. Banks operating in the EU need this on disk, not in narrative form, by the post-grace-period enforcement window.
+- **Decision-level exam requests.** I assume exams can ask "show us this specific decision" rather than "show us your model risk framework." I have not cited a specific letter.
+- **NIST AI RMF 1.0** is a voluntary federal reference framework. I use it as a design reference, not as a requirement.
+- **Vendor model silent updates** (the synthetic Feb 24, 2026 reference case in this prototype; no real incident is cited) make the model-snapshot-pin question harder over time.
+- **The substrate is finally there.** Cloud Logging + Cloud Audit Logs + Agent Identity Auth Manager + OpenTelemetry on ADK is published and productized; I assume many Tier-1 banks use most of it. The composition layer is the missing piece.
 
 ## 5. Goals (12-month horizon)
 
@@ -110,7 +110,7 @@ The product is a composition layer. Each deficiency maps to a specific source si
 | --- | --- | --- | --- |
 | 1 | Prompt versioning | Prompt-template registry table (`(model_id, template_id, effective_at)`) | Join by `(model_id, effective_at <= decision_timestamp)`, write `template_id` + `policy_hash` to the lineage record. |
 | 2 | Retrieval-set capture | RAG pipeline sidecar topic (Pub/Sub) | Subscribe; bind by `decision_id`; write retrieved doc list with versions to the lineage record. |
-| 3 | Model-snapshot pin | Model registry + vendor response headers | Join by `model_id`; cross-check vendor response header pin against registry; flag if mismatch (interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5). |
+| 3 | Model-snapshot pin | Model registry + vendor response headers | Join by `model_id`; cross-check vendor response header pin against registry; flag if mismatch (interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s vendor-version diff). |
 | 4 | Feature-at-decision-time | Feature store temporal API (Tecton / Databricks Feature Store / Vertex AI) | Call temporal API with `(customer_id, decision_timestamp)`; write feature vector with `feature_pipeline_version` to the lineage record. |
 | 5 | Reviewer attribution | Agent Identity Auth Manager logs | Distinguish `human_user_delegated` (with `delegation_token_id`) from `agent_autonomous` (with `agent_identity` SPIFFE ID); write to the lineage record. |
 | 6 | Outcome backlink | Daily ETL from loss-event lake, CFPB complaint system, claims platform | Match by `customer_id_hash` + time window (2-180 days post-decision); write outcome with `outcome_type` + `outcome_date` to the lineage record. |

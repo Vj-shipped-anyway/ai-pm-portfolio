@@ -200,7 +200,7 @@ def compose_lineage_record(decision_row: dict, corpus: dict) -> dict:
             "training_date": model.get("training_date"),
             "tier": int(model["tier"]) if model.get("tier") else None,
             "owner_team": model.get("owner_team"),
-            "vendor_pin_verified": True,  # interlocks with DriftSentinel v0.5
+            "vendor_pin_verified": True,  # interlocks with DriftSentinel's vendor-version diff
         },
         # Deficiency 4 — feature-at-decision-time
         "feature_at_decision_time": synthesize_feature_snapshot(decision_row),
@@ -211,7 +211,7 @@ def compose_lineage_record(decision_row: dict, corpus: dict) -> dict:
             "outcome_type": outcome.get("outcome_type"),
             "outcome_value": outcome.get("outcome_value"),
             "outcome_date": outcome.get("outcome_date"),
-            "observed": bool(outcome.get("outcome_type")),
+            "observed": outcome.get("outcome_type") not in (None, "", "none_observed"),
         },
         "audit_trail": {
             "cloud_logging_ref":   f"projects/bank-prod/logs/decisions/{decision_id}",
@@ -350,7 +350,7 @@ def main():
     for k, v in sorted(by_actor.items()):
         print(f"    {k:<28} {v:>4} decisions")
     backlinked = sum(1 for r in summary_rows if r["outcome_observed"] == "yes")
-    print(f"  Outcome-backlinked decisions: {backlinked} of {len(summary_rows)}")
+    print(f"  Decisions with an observed outcome: {backlinked} of {len(summary_rows)} (the rest are none_observed)")
 
     out_csv = OUT_DIR / "step_04_fleet_lineage_summary.csv"
     with open(out_csv, "w", newline="") as f:
@@ -361,7 +361,7 @@ def main():
 
     print()
     print("Compare to Steps 1, 2, 3:")
-    print("  Step 1 (paralegal):       14 days, 6 sources, 3 of 6 fields unrecoverable.")
+    print("  Step 1 (paralegal):       14 days, 6 sources, 4 of 6 fields unrecoverable.")
     print("  Step 2 (Cloud Logging):   0 of 6 deficiencies closed.")
     print("  Step 3 (named gaps):      6 exam questions, 6 dollar consequences.")
     print(f"  Step 4 (LineageLog):      6 of 6 closed; per-decision exam pack in {record['composition_seconds']*1000:.0f}ms.")

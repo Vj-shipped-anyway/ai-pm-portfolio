@@ -2,6 +2,8 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network topology, operational runbooks. What you would hand to your CISO and your platform engineering lead on day one.
 
+**This is a design, not a deployed system.** Nothing in this document has been built, audited or measured. The only measured numbers for LineageLog are the ones the step scripts print, summarized in the [README](./README.md); SLOs, retention periods and stack choices below are design intent.
+
 This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the *Building secure multi-agent systems on Google Cloud* reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline.
 
 ---
@@ -104,8 +106,8 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock):
 
 - **Primary:** US-East (us-east1 GCP / us-east-1 AWS / East US Azure)
 - **DR:** US-West (us-west1 / us-west-2 / West US 2). Active-passive. RTO 4h, RPO 5min for the `decision_lineage` table.
-- **EU instance:** Frankfurt (europe-west3 / eu-central-1 / Germany West Central). Required for EU AI Act and GDPR — lineage of EU customers cannot egress region.
-- **India instance:** Mumbai (asia-south1 / ap-south-1 / Central India). Required for RBI data localization on Indian retail arms.
+- **EU instance:** Frankfurt (europe-west3 / eu-central-1 / Germany West Central). Included for EU AI Act and GDPR data-residency expectations, so lineage of EU customers does not leave the region; whether a bank needs it is a legal question.
+- **India instance:** Mumbai (asia-south1 / ap-south-1 / Central India). Included for RBI data-localization expectations on Indian retail arms, to be confirmed with the bank's legal team.
 - Each regional instance has its own database, its own KMS key ring, its own Identity-Aware Proxy. **No cross-region replication for the `decision_lineage` table** — each region is sovereign for its own decisions. The WORM archive replicates cross-region within the same regulatory boundary only.
 
 ---
@@ -117,7 +119,7 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock):
 | Store | Purpose | Why this store |
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | `decision_lineage` immutable table, attestation history, audit log, legal-hold flags. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. Append-only via insert-only role + trigger guard. |
-| **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — composer latency, source-tail lag, composition-completeness time series. | 10-50x cheaper than Postgres for time-series at this volume. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse for shared drift-signal querying. |
+| **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — composer latency, source-tail lag, composition-completeness time series. | Assumed far cheaper than Postgres for time-series at this volume (not benchmarked). Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s ClickHouse for shared drift-signal querying. |
 | **Snowflake / Databricks** (read-only) | Inference logs, retrieval-set captures, feature-store temporal lookups. | Already exists at most Tier-1 BFSI shops. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (composer), rate-limit counters. | TTL-based eviction. Multi-AZ for high availability. |
 | **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of lineage records** + exam-pack PDFs + JSON + cross-region replication. | Object Lock = Write-Once-Read-Many for the SR 11-7 / EU AI Act seven-year retention. |
@@ -239,7 +241,7 @@ The table that compiles the composition contract. Every cell maps a deficiency t
 | --- | --- | --- | --- | --- |
 | 1 | Prompt versioning | Prompt-template registry (Postgres) | Cloud Logging request body | Join by `(model_id, effective_at <= decision_timestamp)`; write `template_id` + `policy_hash`. |
 | 2 | Retrieval-set capture | RAG sidecar Pub/Sub topic | Vector store retention | Subscribe; bind by `decision_id`; write retrieved doc list with versions. |
-| 3 | Model-snapshot pin | Vendor response headers | Model registry (MLflow / SageMaker / Vertex) | Extract header pin; cross-check vs registry; flag `model_pin_verified=false` on mismatch. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5. |
+| 3 | Model-snapshot pin | Vendor response headers | Model registry (MLflow / SageMaker / Vertex) | Extract header pin; cross-check vs registry; flag `model_pin_verified=false` on mismatch. Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s vendor-version diff. |
 | 4 | Feature-at-decision-time | Feature store temporal API (Tecton / Databricks / Vertex AI Feature Store) | Snowflake / Databricks point-in-time table | Call with `(customer_id, decision_timestamp)`; fall back to cached PIT if API down. |
 | 5 | Reviewer attribution | Agent Identity Auth Manager (SPIFFE) | Cloud Audit Log principal | Distinguish `human_user_delegated` (with `delegation_token_id`) from `agent_autonomous` (with SPIFFE ID). |
 | 6 | Outcome backlink | Daily ETL from loss-event lake | CFPB complaint system + claims platform + servicing platform | Match by `customer_id_hash` + time window; flag `outcome_observed=true` when match found. |
@@ -287,7 +289,7 @@ TTL composed_at + INTERVAL 730 DAY DELETE;   -- 2 years hot, archive to GCS ther
 
 ### Secrets management
 
-- **Primary store.** HashiCorp Vault (most BFSI shops already run it) or Cloud Secret Manager.
+- **Primary store.** HashiCorp Vault (which many BFSI shops already run) or Cloud Secret Manager.
 - **Application secrets** fetched at boot via Workload Identity Federation. No env-var secrets in container manifests. Rotation: 90 days, zero-downtime via dual-credential rolling.
 - **Service account keys.** None. Workload Identity (GCP) / IRSA (AWS) / Managed Identity (Azure). Aligns with Google's *Building secure multi-agent systems* guidance to never use long-lived service account keys.
 - **Row-hash signing key.** HSM-backed (Cloud HSM / CloudHSM / Azure Dedicated HSM).
@@ -328,7 +330,7 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 | Compromised API token | Short-lived tokens, mTLS service-to-service, IdP-side revocation propagates <=5 min |
 | Insider — auditor pulls all customer data | `customer_id_hash` (not raw IDs); RBAC limits validator to decision-grain scope, not customer-grain bulk queries |
 | Compromised lineage row (poisoning) | Row-hash HSM-signed at write; immutability trigger + insert-only role; periodic re-verification job |
-| Vendor model silent update | Snapshot pin tracked per decision; response-header pin extraction (interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) v0.5) |
+| Vendor model silent update | Snapshot pin tracked per decision; response-header pin extraction (interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/)'s vendor-version diff) |
 | Database exfiltration via SQL injection | Parameterized queries only; ORM-only (SQLAlchemy + Pydantic) at the API boundary; Cloud Armor WAF rule set |
 | Egress data exfiltration | VPC Service Controls + Secure Web Proxy allow-list |
 | Tampering with immutable history | Database trigger denies UPDATE/DELETE on immutable fields; row-hash mismatch detection job runs nightly |
@@ -375,19 +377,21 @@ Authorization implemented via Open Policy Agent (OPA) + Rego policies. Every API
 
 ---
 
-## 6. Compliance posture
+## 6. Control alignment (design intent)
+
+None of this has been audited, attested or formally assessed. Each row says what the design is meant to line up with.
 
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All six components in scope. Annual external audit. |
+| **SOC 2 Type II** | Design intent: all six components in the audit scope, with an annual external audit once deployed. |
 | **PCI-DSS** | In scope only when the underlying model touches cardholder data. LineageLog itself doesn't process card data; it composes lineage about decisions that may. PCI scope minimization via `customer_id_hash` + KMS pepper at the source. |
 | **GLBA** | Customer financial data handled with field-level hashing + access controls + audit trail. Right-to-be-forgotten cascades to lineage records via `customer_id_hash` deletion (with legal-hold override). |
 | **SR 11-7 / OCC Bulletin 2011-12** | The decision-grain lineage is the missing piece for "documented ongoing monitoring" of model decisions. PRD references the relevant supervisory expectations. |
-| **NIST AI RMF 1.0** | Decision-grain lineage maintained for the four model families (credit, claims, KYC, fraud). LineageLog is the implementation surface for the framework's "Map" + "Measure" functions. |
-| **EU AI Act Article 12** | Record-keeping requirement for high-risk AI systems. LineageLog is the explicit implementation surface. EU instance enforces data residency. |
+| **NIST AI RMF 1.0** | Decision-grain lineage maintained for the four model families (credit, claims, KYC, fraud). LineageLog is designed as an implementation surface for the framework's "Map" + "Measure" functions. |
+| **EU AI Act Article 12** | Record-keeping requirement for high-risk AI systems. LineageLog is designed as a record-keeping surface for any system the bank classes as high-risk. EU instance enforces data residency. |
 | **GDPR** | EU instance enforces data residency. Right-to-erasure cascades to `customer_id_hash` deletion with legal-hold override. DPO sign-off documented per region. |
 | **India RBI data localization** | Indian retail-arm fleet runs on the India regional instance only. No cross-border replication. |
-| **OCC / Fed / CFPB exam readiness** | Sub-minute query per `decision_id`; exam-pack export in seconds. Continuous, not annual. |
+| **OCC / Fed / CFPB exam readiness** | Design target: sub-minute query per `decision_id`; exam-pack export in seconds. Continuous, not annual. Not tested in an exam. |
 
 ---
 

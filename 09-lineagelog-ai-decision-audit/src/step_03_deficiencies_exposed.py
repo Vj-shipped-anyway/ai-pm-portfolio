@@ -82,11 +82,11 @@ DEFICIENCIES = [
             "The model registry shows the deployment window. It does NOT show the "
             "vendor's post-roll behavioral change. The bank's logs say one thing; "
             "the vendor's behavior may have changed without a registry write. "
-            "(See: Anthropic Feb 24, 2026 silent minor update — public reference incident.)"
+            "(Reference case: a synthetic Feb 24, 2026 silent minor update; no real incident is cited.)"
         ),
         "consequence": (
             "OCC asks 'is your model under change control.' Today the answer is 'mostly.' "
-            "The vendor-snapshot-pin gap interlocks with [DriftSentinel] v0.5 vendor-pin "
+            "The vendor-snapshot-pin gap interlocks with [DriftSentinel]'s vendor-version diff "
             "detector. Cost of missing this: a redo of the model risk attestation under "
             "SR 11-7 + a horizontal review."
         ),
