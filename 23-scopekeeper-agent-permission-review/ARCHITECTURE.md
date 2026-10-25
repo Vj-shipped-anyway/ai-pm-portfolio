@@ -107,7 +107,7 @@ Agent platform grant store (read-only)      Tool-call log (read-only view, count
 
 Out of band:
    [sk-console] behind the bank's SSO  ──►  [sk-review API] (role-checked by OPA)
-   Interlocks: AgentWatch (05), PromptShield (06), OversightOps (08), SchemaWatch (15) over service-to-service calls
+   Interlocks: AgentWatch (05), PromptShield (06), OversightOps (08), SchemaWatch (15) over service-to-service calls; ControlMap (16), ShadowScan (22) and KillSwitch (25) as drawn in the README
 ```
 
 ### Region & DR
@@ -380,7 +380,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 
 | Framework | How the design relates |
 | --- | --- |
-| **SR 26-2 / model risk management** (the 2011 predecessor was SR 11-7) | A record of what each deployed agent was allowed to do, what it did, and who approved the change is ongoing-monitoring evidence about how an agent is used. Paraphrase written for this exercise, not the text of the guidance. |
+| **SR 26-2 / model risk management** (the 2011 predecessor was SR 11-7) | A record of what each deployed agent was allowed to do, what it did, and who approved the change is ongoing-monitoring evidence about how an agent is used. Paraphrase written for this exercise, not the text of the guidance. SR 26-2 sets no enforceable standards and places generative AI and agentic AI outside its scope (see the README's regulatory note), so this row names a design basis and an analogy, not a requirement. |
 | **NIST SP 800-53 Rev 5, AC-6 least privilege** | The proposal is the least-privilege theme applied to agent scopes: give each account only the access its function needs. Paraphrase written for this exercise, not the text of the control. |
 | **NIST AI RMF** | The Measure and Manage functions map to the usage diff and the owner decision. |
 | **OWASP LLM Top 10, excessive agency** | Shrinking the scope set limits what an agent can be made to do. |

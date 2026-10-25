@@ -72,7 +72,7 @@
 1. **As an agent platform owner**, I want every agent's scope set compared with the last 90 days of calls, so I know which grants are used, which are not, and which wildcards are wider than the agent needs.
 2. **As an access-governance reviewer**, I want a proposed smaller set per agent with the replay result and the reason on every row, so I can clear the queue without opening the call log myself.
 3. **As an agent owner**, I want to mark a scope as periodic before it is removed, so a quarter-end job does not fail on a cut I could not see coming.
-4. **As a model risk reviewer**, I want the record of what each deployed agent was allowed to do, what it did, and who approved the change, so the ongoing-monitoring story under SR 26-2 and the NIST AI RMF is documented per review and not only at attestation time.
+4. **As a model risk reviewer**, I want the record of what each deployed agent was allowed to do, what it did, and who approved the change, so the ongoing-monitoring story is documented per review and not only at attestation time. SR 26-2 and the NIST AI RMF are the design basis here, as analogy, not a claim of coverage.
 
 ---
 
@@ -146,4 +146,4 @@
 
 ---
 
-*This PRD interlocks with [Project 05 (AgentWatch)](../05-agentwatch-agent-observability/), [Project 06 (PromptShield)](../06-promptshield-prompt-injection-defense/), [Project 08 (OversightOps)](../08-oversightops-hitl-workflow/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/); all interlocks are 🔴 designed, none built.*
+*This PRD interlocks with [Project 05 (AgentWatch)](../05-agentwatch-agent-observability/), [Project 06 (PromptShield)](../06-promptshield-prompt-injection-defense/), [Project 08 (OversightOps)](../08-oversightops-hitl-workflow/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/), and with [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [22 ShadowScan](../22-shadowscan-unsanctioned-ai-discovery/) and [25 KillSwitch](../25-killswitch-ai-fallback-drills/) as the README lists them; all interlocks are 🔴 designed, none built.*
