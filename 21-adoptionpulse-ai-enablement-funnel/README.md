@@ -86,7 +86,7 @@ The failure mode this prototype is built around: an enterprise licenses an AI as
 
 This is a prototype on synthetic data. I wrote the generator, the stage rules, the unit cuts, the ranking and the walkthrough. The usage counts are produced by a seeded script, not by people or a model, and no model is used anywhere in this repo. The truth is known because the data is synthetic: the generator decided each person's behavior type, so it can say whether the stage rules got a person right. A real estate does not hand you that, which is why the first job in a real deployment would be a real usage feed and a sample review of what staged users actually do. Nothing here is a real bank, employee, vendor, product or incident.
 
-Two effects are planted on purpose and labeled everywhere they are measured: units with a champion have more habitual users, and trained people have more habitual users. The generator assigns both independently of propensity, so a with-and-without comparison recovers them up to noise. In real data neither would hold: motivated people choose training and motivated units get champions. Treat those two reads as a demonstration of the mechanic, not as evidence that training or champions work.
+Two effects are planted on purpose and labeled everywhere they are measured: units with a champion have more habitual users, and trained people have more habitual users. The generator assigns both independently of propensity, so a with-and-without comparison recovers them only up to noise: over 20 units, the champion gap lands 9.2 points above its planted size. In real data neither would hold: motivated people choose training and motivated units get champions. Treat those two reads as a demonstration of the mechanic, not as evidence that training or champions work.
 
 A usage report about people is sensitive. The design reports by unit with a minimum group size and never as an individual ranking. One unit here (Internal Audit, 9 people) would fall under a 🔴 design target of 10 and be rolled up in production. That rule is designed, not built.
 
@@ -623,7 +623,7 @@ See [`assets/adoptionpulse-flow.svg`](./assets/adoptionpulse-flow.svg) for a sta
 
 - [12 ValueLedger](../12-valueledger-ai-benefit-tracking/) measures benefit against a holdout. AdoptionPulse is the upstream read: a benefit claim should follow habit, so ValueLedger would take habitual users by unit as its denominator. This is not a duplicate: AdoptionPulse measures usage, and ValueLedger measures what the usage was worth.
 - [11 TierGate](../11-tiergate-ai-usecase-intake/) decides which use cases to enable. AdoptionPulse can tell it where a use case, once enabled, is or is not becoming a habit.
-- 24 PortfolioBoard (not yet in this repo) would treat enablement as a program. AdoptionPulse supplies the stage counts and the ranked units it would report on.
+- [24 PortfolioBoard](../24-portfolioboard-ai-program-portfolio/) treats enablement as a program. AdoptionPulse would supply the stage counts and the ranked units it reports on.
 - [07 InferenceLens](../07-inferencelens-inference-finops/) reports spend. Joined to habitual users by unit, it would give cost per active user.
 
 ---
@@ -704,4 +704,4 @@ If you run it on a real program and get something useful, open an issue or send 
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Govern' function's attention to people, training and accountability is the theme behind measuring whether training and ownership change use. This is a paraphrase written for this exercise, not the text of the framework.
 - **Product analytics practice** — the activation, retention and funnel vocabulary the stages borrow. The thresholds here are assumptions of a modeled bank, not an industry standard.
-- **Sibling projects in this repo** — [12 ValueLedger](../12-valueledger-ai-benefit-tracking/), [11 TierGate](../11-tiergate-ai-usecase-intake/) and [07 InferenceLens](../07-inferencelens-inference-finops/), three of the four interlocks. The fourth, 24 PortfolioBoard, is not yet in the repo.
+- **Sibling projects in this repo** — [12 ValueLedger](../12-valueledger-ai-benefit-tracking/), [11 TierGate](../11-tiergate-ai-usecase-intake/), [07 InferenceLens](../07-inferencelens-inference-finops/) and [24 PortfolioBoard](../24-portfolioboard-ai-program-portfolio/), the four interlocks.

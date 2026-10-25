@@ -149,4 +149,4 @@
 
 ---
 
-*This PRD interlocks with [Project 12 (ValueLedger)](../12-valueledger-ai-benefit-tracking/), [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/) and [Project 07 (InferenceLens)](../07-inferencelens-inference-finops/), and with Project 24 (PortfolioBoard), which is not yet in this repo. All four interlocks are 🔴 designed, none built.*
+*This PRD interlocks with [Project 12 (ValueLedger)](../12-valueledger-ai-benefit-tracking/), [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/), [Project 07 (InferenceLens)](../07-inferencelens-inference-finops/) and [Project 24 (PortfolioBoard)](../24-portfolioboard-ai-program-portfolio/). All four interlocks are 🔴 designed, none built.*

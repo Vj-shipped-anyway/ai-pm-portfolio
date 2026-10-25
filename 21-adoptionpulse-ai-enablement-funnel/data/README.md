@@ -21,7 +21,7 @@ The headline scenario the walkthrough resolves: **a modeled bank licensed an AI 
 | `role` | string | `associate`, `specialist`, `analyst`, `engineer`, `relationship manager` or `manager`. Each unit has its own mix of roles. |
 | `licensed_week` | int | 1 to 4. Units were licensed in waves (units per wave: 8 in week 1, 6 in week 2, 4 in week 3, 2 in week 4); each person has a 20% chance of landing one week after their unit's wave, capped at week 4. |
 | `champion_in_unit` | yes/no | Whether the unit has an assigned champion. It is a property of the unit: 12 of 20 units have one. |
-| `trained_week` | int or empty | The week the person completed training, 0 to 5 weeks after licensing. Empty if not trained. Each unit has its own completion rate, between 25% and 90%. |
+| `trained_week` | int or empty | The week the person completed training, 0 to 5 weeks after licensing. Empty if not trained. The generator draws each unit's completion rate between 25% and 90%; the realized share runs from 22.7% to 90.0%. |
 
 ```
 user_id,org_unit,role,licensed_week,champion_in_unit,trained_week
