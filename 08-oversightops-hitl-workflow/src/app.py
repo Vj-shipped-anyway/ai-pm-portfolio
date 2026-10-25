@@ -584,14 +584,14 @@ if st.session_state.step >= 4:
         st.markdown(
             """
 - **HITL (Human-in-the-loop)** — A workflow step where an AI decision is paused for explicit human review before action. [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) names this as the human-oversight requirement for high-risk AI systems.
-- **Rubber-stamp** — A human review completed so fast (typically <10s on a Tier-1 case) that no real adjudication is plausible. Today most HITL surfaces in BFSI have no detector.
+- **Rubber-stamp** — A human review completed so fast (typically <10s on a Tier-1 case) that no real adjudication is plausible. Many HITL surfaces in BFSI have no detector.
 - **Calibration drift** — When two reviewers reviewing the same case mix arrive at materially different override rates. Surfaced via cohort comparison (typically &ge; 1.5 sigma off cohort mean).
 - **Tier-1 review SLA** — The procedure-manual floor for time-on-task. Private banking ~8 minutes; SME ~3 minutes; retail ~1 minute. Today the SLA is documented; enforcement is absent.
 - **Ground-truth backfill** — The lag-time signal that names a reviewer decision wrong. Sources: OFAC list matches, SAR filings, CFPB complaints, 30-day charge-offs, regulator findings.
-- **[NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)** — The federal-government reference framework for AI risk; the HITL section maps directly to OversightOps's calibration and escalation controls.
-- **[EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng)** — Human oversight requirement for high-risk AI. Names the four conditions human oversight must meet; OversightOps is the implementation surface.
-- **[OCC supervisory guidance on model risk management](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html)** — US bank supervisor's expectation that high-stakes AI decisions have effective, measured human oversight.
-- **[FRB supervisory letters (SR 11-7)](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm)** — Co-issued model risk management guidance from the Federal Reserve.
+- **[NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)** — The federal-government reference framework for AI risk; OversightOps uses it as a design reference for its calibration and escalation controls.
+- **[EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng)** — Human oversight requirement for high-risk AI. Sets out what human oversight must allow for high-risk AI; OversightOps is a design reference aligned to it, not a conformity tool.
+- **[OCC supervisory guidance on model risk management](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html)** — US bank supervisor's model risk management guidance; used here as an analogy for measured human oversight, not as a requirement that covers these AI decisions.
+- **[FRB supervisory letters (SR 11-7, replaced in April 2026 by SR 26-2)](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm)** — Co-issued model risk management guidance; see the README's regulatory note for its scope.
 """
         )
 
@@ -614,11 +614,11 @@ Streamlit was the right tool for this prototype. It would be the wrong tool for 
 - **Data plane:** Postgres for the reviewer decision store (row-level security, immutability trigger); ClickHouse for the high-cardinality reviewer-throughput time series; GCS / S3 Object Lock for the WORM evidence bundles.
 - **Event spine:** Kafka / Pub/Sub for case ingestion; Temporal for long-running review workflows with the 8-minute SLA timer.
 - **Observability:** OpenTelemetry -> Datadog (the bank's standard); PagerDuty for SLA breaches and calibration-drift outliers.
-- **Compliance:** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it.
+- **Control alignment (design intent, not audited):** SOC 2 Type II baseline; FedRAMP Moderate where federal counterparty work demands it.
 - **Governance:** Native integration with the bank's case management workflow (Pega, Appian, ServiceNow); the reviewer workbench remains the system of record; OversightOps is the routing + calibration + blocker layer that sits in front.
 - **Deployment:** Blue-green via Argo CD; canary rollout 1% -> 10% -> 50% -> 100% over 14 days; auto-rollback on rubber-stamp-rate regression or SLA-breach spike.
 
-The Streamlit prototype here proves the product mechanic — that difficulty-stratified routing + a rubber-stamp blocker + calibration drift + a ground-truth feedback loop closes the six HITL deficiencies on real-feeling data. The production architecture above is what the seat I'm pursuing actually delivers.
+The Streamlit prototype here shows the product mechanic on synthetic data — difficulty-stratified routing, a rubber-stamp blocker, calibration drift and a ground-truth feedback loop applied to the shipped reviews. It does not show effects in production. The production architecture above is what the seat I'm pursuing actually delivers.
 """
         )
 

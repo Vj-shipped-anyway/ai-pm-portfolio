@@ -16,10 +16,10 @@
 | **Owner** | Vijay Saharan, Sr PM (BFSI AI Platform). |
 | **Stage** | Portfolio prototype, designed for engagement. Synthetic data, no production deployment. |
 | **Users** | Primary: Head of Compliance, Reviewer Operations director. Secondary: MRM lead, Internal Audit (L3), CRO. Tertiary: Line-1 model owners, regulator-facing teams (OCC liaison, EU AI Act competent-authority liaison). |
-| **Problem** | Every Tier-1 bank's regulated AI workflow with a HITL step (KYC, fraud step-up, dispute, credit waterfall, claims SIU) routes to a flat reviewer queue with no SLA on review depth, no calibration measurement, and no signal back to the reviewer when outcomes contradict their decisions. 🟡 ~94% of Tier-1 KYC reviews complete in under 10 seconds. The HITL exists on paper to satisfy [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) and SR 11-7. It does not produce oversight. |
+| **Problem** | At many banks, a regulated AI workflow with a HITL step (KYC, fraud step-up, dispute, credit waterfall, claims SIU) routes to a flat reviewer queue with no SLA on review depth, no calibration measurement, and no signal back to the reviewer when outcomes contradict their decisions. 🟡 ~94% of Tier-1 KYC reviews complete in under 10 seconds (assumed, no source cited; the shipped corpus prints 41%). On paper the HITL step is there to meet human-oversight expectations such as [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) and model-risk guidance. It does not produce oversight. |
 | **Solution** | Six routing primitives composed in one workflow: (1) difficulty-stratified routing by AI confidence + customer tier + country risk, (2) rubber-stamp blocker that rejects sub-floor reviews on Tier-1 cases, (3) calibration drift detector that flags reviewer outliers vs cohort, (4) escalation path for hard cases, (5) tier-specific SLA timers (8m / 3m / 1m), (6) ground-truth backfill from downstream signals with a weekly reviewer calibration packet. |
 | **North-star metric** | Tier-1 rubber-stamp rate — % of Tier-1 review decisions completed below the procedure-manual time-on-task floor. Target: ≤ 4%. |
-| **Modeled metrics (12-month horizon)** | 🟡 Tier-1 rubber-stamp rate: **94% → 4%** (assumes the published BFSI baseline and the OversightOps blocker engaged on Tier-1 queues). 🟡 Reviewer-vs-ground-truth divergence: **38% → 8%** (assumes the published Tier-1 6-12-month tail and the calibration packet engaged weekly). 🔴 Review SLA on Tier-1 KYC: **9 seconds → 8 minutes** (designed against the bank's procedure manual; not yet tested in production). |
+| **Modeled metrics (12-month horizon)** | 🟡 Tier-1 rubber-stamp rate: **94% → 4%** (assumes an unsourced 94% baseline and the OversightOps blocker engaged on Tier-1 queues). 🟡 Reviewer-vs-ground-truth divergence: **38% → 8%** (assumes an unsourced 38% tail over 6-12 months and the calibration packet engaged weekly). 🔴 Review SLA on Tier-1 KYC: **9 seconds → 8 minutes** (designed against the bank's procedure manual; not yet tested in production). |
 | **Modeled cost** | 🔴 ~$380k for a 90-day engagement in a real deployment (compute on existing BPM infra + 1 PM + 1.5 FTE engineers + 0.5 FTE compliance partner + reviewer-ops co-design time) — designed, not executed. |
 | **Risk #1** | Reviewer operations pushback — leads will hate the blocker because their queue depth goes up. Solution: pair the blocker with a workforce-planning model that quantifies headcount needed for true 8-minute SLA on Tier-1; bring it to Reviewer Ops as a staffing case, not a discipline case. |
 | **Risk #2** | False-positive rubber-stamp blocks on genuinely easy cases. Solution: tier-specific floor (60s on private banking, 30s on SME, 8s on retail); a high-confidence-AI + easy-difficulty + low-country-risk case is allowed to clear at the retail-tier floor. |
@@ -47,7 +47,7 @@
 
 ## 3. RICE-prioritized backlog
 
-> RICE = (Reach × Impact × Confidence) ÷ Effort.
+> RICE = (Reach × Impact × Confidence) ÷ Effort. Reach is an assumed annual case count across all adopting banks (the headline KYC workflow alone is about 234,000 a year at 4,500 a week), and RICE is in millions.
 > Status: "Sequenced for v0.x" = committed to a release. "Queued" = will be sequenced after v0.5.
 
 | # | Item | Reach | Impact | Confidence | Effort | RICE | Status |
@@ -69,11 +69,11 @@
 
 ## 4. Why now
 
-- **EU AI Act Article 14** (human oversight) is in effect. High-risk AI systems (which includes BFSI credit, KYC, claims) must be designed so they can be effectively overseen by natural persons. Calibrated review — not the rubber-stamp queue — is the implementation surface.
-- **OCC supervisory letters** are shifting toward asking *how* the human oversight is calibrated, not just *whether* it exists. The published shape of recent letters increasingly asks for reviewer-quality measurement: override rates by reviewer, time-on-task distributions, ground-truth feedback evidence.
-- **NIST AI RMF 1.0** specifies the HITL section as a measurement requirement, not a checkbox.
-- **Anthropic's Constitutional AI** work and OpenAI's usage policy both name human oversight as the safety lever for high-stakes AI decisions — but neither names the calibration mechanism. OversightOps is the calibration mechanism.
-- **The substrate is finally there.** BPM platforms (Pega, Appian, ServiceNow Workflow) are productized at every Tier-1 bank, and ADK confirmation primitives are published. The calibration layer is the missing piece.
+- **EU AI Act Article 14** (human oversight) applies to high-risk AI systems, which must be designed so natural persons can oversee them effectively. Annex III lists credit scoring among the high-risk uses; whether a given KYC or claims review is in scope is a legal call. Where it is, calibrated review, not the rubber-stamp queue, is the implementation surface.
+- **Supervisory direction.** I read model-risk supervision as asking *how* human oversight is calibrated, not just *whether* it exists: override rates by reviewer, time-on-task distributions, ground-truth feedback evidence. I have not cited a specific letter for this.
+- **NIST AI RMF 1.0** is a voluntary framework whose Govern function covers human-AI oversight roles. I use it as a design reference, not as a requirement.
+- **No reference I have read specifies how to measure whether oversight is real.** The sources above ask for oversight to exist. OversightOps is my proposal for the measurement.
+- **The substrate is finally there.** BPM platforms (Pega, Appian, ServiceNow Workflow) are productized at most large banks, and ADK confirmation primitives are published. The calibration layer is the missing piece.
 
 ## 5. Goals (12-month horizon)
 
@@ -82,7 +82,7 @@
 | Reduce Tier-1 rubber-stamp rate | % of Tier-1 review decisions completed below the procedure-manual floor | 94% → 4% | 🟡 |
 | Reduce reviewer-vs-ground-truth divergence | % of reviewer decisions contradicted by downstream signals within 6-12 months | 38% → 8% | 🟡 |
 | Reduce review SLA breaches on Tier-1 | % of Tier-1 KYC reviews completed below the 8-minute SLA | 100% → < 5% | 🔴 |
-| Detect calibration drift | # of reviewer outliers flagged at ≥ 1.5 sigma off cohort, weekly | 0 → cohort-appropriate | 🟢 |
+| Detect calibration drift | # of reviewer outliers flagged at ≥ 1.5 sigma off cohort | 0 → 2 on the shipped corpus (one 90-day pass, not weekly) | 🟢 |
 
 ## 6. Non-goals
 

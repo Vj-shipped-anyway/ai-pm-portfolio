@@ -1,12 +1,12 @@
 # 👥 OversightOps — Calibrated HITL in 8 minutes, not 8 seconds
 
-**A portfolio prototype for a human-in-the-loop workflow designer that replaces rubber-stamp review with calibrated, role-aware oversight — modeled against [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) human-oversight requirements, the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) HITL section, and [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the Federal Reserve, OCC and FDIC model risk management guidance that replaced SR 11-7 in April 2026) supervisory expectations for "real oversight, not theatrical review."**
+**A portfolio prototype for a human-in-the-loop workflow designer that replaces rubber-stamp review with calibrated, role-aware oversight — modeled against [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) human-oversight requirements, the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) HITL section, and [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (the Federal Reserve, OCC and FDIC model risk management guidance that replaced SR 11-7 in April 2026) supervisory expectations that oversight be real rather than theatrical. These are reference frames; no audit or certification is claimed.**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/08-oversightops-hitl-workflow/demo.html)
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/08-oversightops-hitl-workflow/demo.html)
 
-**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; all three numbers are printed by `step_04_with_oversightops.py`):
 
 - 🟢 A verdict composed for all 1,000 cases in the shipped corpus (step 4 prints 714 APPROVED, 82 ESCALATED, 204 RUBBER_STAMPED_BLOCKED)
 - 🟢 Composition latency: under 1 ms per case measured on the prototype (`step_04_with_oversightops.py` prints the measured wall-clock for the 1,000-case fleet sweep; the figure varies from run to run)
@@ -63,7 +63,7 @@ streamlit run app.py
 
 The HITL space has vendors at every layer: BPM platforms (Pega, Appian, ServiceNow Workflow) handle case routing; reviewer-ops vendors (Persistent, Genpact) staff the queues; AI vendors (Vertex AI, Bedrock, Azure AI Studio) bolt on a "human review" checkbox. **The product gap they leave open is the calibration layer — the thing that turns a queue with people in it into oversight a regulator can audit.**
 
-| Capability | Single-queue BPM (Pega / Appian) | AI vendor HITL checkbox (ADK / Bedrock) | Reviewer-ops staffing | **OversightOps** |
+| Capability | Single-queue setup on a BPM platform (Pega / Appian) | AI vendor HITL checkbox (ADK / Bedrock) | Reviewer-ops staffing | **OversightOps** |
 | --- | --- | --- | --- | --- |
 | Case routed to a queue | ✅ | ✅ | ✅ | ✅ |
 | Per-case audit log | ✅ | ✅ | Partial | ✅ |
@@ -74,7 +74,9 @@ The HITL space has vendors at every layer: BPM platforms (Pega, Appian, ServiceN
 | SLA-by-tier with timer engagement | ❌ | ❌ | ❌ | ✅ |
 | Ground-truth feedback loop (reviewer-vs-truth) | ❌ | ❌ | ❌ | ✅ |
 | 🟡 Tier-1 rubber-stamp rate (modeled; assumed values, no cited source) | 94% | 80%+ | ~70% | **≤ 4%** |
-| 🔴 [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) ready (designed) | ❌ | Partial | ❌ | ✅ |
+| 🔴 Designed to line up with [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) (designed, not assessed) | ❌ | Partial | ❌ | ✅ |
+
+How to read the table: the ❌ / Partial / ✅ cells above the red and yellow rows are my qualitative reading of a single-queue configuration of each kind of tool, not a product test. BPM platforms can be configured for several of these. A ✅ in the OversightOps column means the design has a primitive for it and the prototype exercises it on synthetic data.
 
 **Position:** *OversightOps does not replace your case-management workflow. It sits on top of Pega / Appian / ServiceNow and does the calibration the regulator actually asks for.* A Head of Compliance can deploy this without ripping out their BPM platform.
 
@@ -82,9 +84,9 @@ The HITL space has vendors at every layer: BPM platforms (Pega, Appian, ServiceN
 
 ## The honest version (why this exists)
 
-The failure mode this product is designed against — a bank's regulated AI workflow (KYC, dispute resolution, fraud-step-up review, credit waterfall, claims SIU referral) routing 100% of contested cases to a flat human-review queue where, in the modeled baseline (🟡 an assumption, not measured; step 1 prints 41% under 10 seconds on the shipped corpus), ~94% complete in under 10 seconds — is the shape of what published [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) and OCC supervisory letters are increasingly catching. It is the kind of failure I track in industry research and the kind of product I want to own as a Sr / Principal PM.
+The failure mode this product is designed against — a bank's regulated AI workflow (KYC, dispute resolution, fraud-step-up review, credit waterfall, claims SIU referral) routing 100% of contested cases to a flat human-review queue where, in the modeled baseline (🟡 an assumption, not measured; step 1 prints 41% under 10 seconds on the shipped corpus), ~94% complete in under 10 seconds — is the kind of failure that human-oversight rules such as [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) are written to prevent. I have not cited a specific supervisory finding. It is the kind of product I want to own as a Sr / Principal PM.
 
-I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk through their own Head of Compliance with — to show how I'd reason about the problem, not to claim a deployment I haven't done.
+I built this prototype on the side over weekends. Synthetic data and a laptop. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk their own Head of Compliance through — to show how I'd reason about the problem, not to claim a deployment I haven't done.
 
 If you have run a HITL queue and watched it become a rubber-stamp factory under load, fork this. The taxonomy, the routing logic, and the backlog are the parts you're welcome to lift; the production validation is what the seat I'm pursuing actually delivers.
 
@@ -109,7 +111,7 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 
 ## Executive summary (90 seconds)
 
-**Problem.** A Tier-1 US retail bank's KYC AI flags 12% of new customer applications for human review. The reviewer queue is ~4,500 cases per week. 🟡 Modeled scenario inputs: average review time per case 9 seconds, override rate 6% (the shipped corpus prints a 32.4-second mean and a 9% override rate). The bank's MRM attestation reads: "All Tier-1 KYC decisions undergo human review." The reality, when you look at the audit log nobody reads, is that 🟡 ~94% of reviews complete in under 10 seconds (an assumed baseline, not measured; step 1 prints 41% on the shipped corpus) and the reviewer-vs-ground-truth divergence rate over a 6-12-month tail is ~38%. The HITL exists on paper. It does not produce review.
+**Problem.** A Tier-1 US retail bank's KYC AI flags 12% of new customer applications for human review. The reviewer queue is ~4,500 cases per week. 🟡 Modeled scenario inputs: average review time per case 9 seconds, override rate 6% (the shipped corpus prints a 32.4-second mean and a 9% override rate). The bank's MRM attestation reads: "All Tier-1 KYC decisions undergo human review." The reality, when you look at the audit log nobody reads, is that 🟡 ~94% of reviews complete in under 10 seconds (an assumed baseline, not measured; step 1 prints 41% on the shipped corpus) and the reviewer-vs-ground-truth divergence rate over a 6-12-month tail is ~38% (also assumed; the shipped ground-truth file flags 198 of 1,000 reviews, 20%, in a 90-day window). The HITL exists on paper. It does not produce review.
 
 **The use case the walkthrough resolves.** On May 12, 2026, the bank's `kyc_review_v4` model approves a private-banking application from a country-tier-4 jurisdiction at 0.62 AI confidence — `CASE_0317_20260512`. The case is routed to the next available reviewer (junior, basic-KYC training), rubber-stamped APPROVE in 8 seconds. 27 days later (June 8), the daily OFAC sanctions-list refresh surfaces a match. 🟡 Modeled bank exposure on this single case: ~$420k of MRA-and-remediation cost.
 
@@ -120,12 +122,12 @@ If any of this fails on your machine, that is a bug in this README. Open an issu
 - 🟢 **A verdict composed for all 1,000 cases** in the shipped corpus (step 4 prints 714 APPROVED, 82 ESCALATED, 204 RUBBER_STAMPED_BLOCKED). The "after" counts in the step 4 before/after table (0 rubber-stamps, 0 edge cases to junior) are set to 0 in the script by design, not simulated.
 - 🟢 **Composition latency: under 1 ms per case** measured on the prototype (`step_04_with_oversightops.py` prints the measured wall-clock for the 1,000-case fleet sweep; the figure varies from run to run).
 - 🟢 **Rubber-stamp blocker: 125 of 146 private-banking reviews under the 60-second floor → 0 ship** (the 0 is set in step 4 by design).
-- 🟡 **Rubber-stamp rate: 94% → 4%** on the synthetic data (modeled — assumes the published Tier-1 baseline and the OversightOps blocker engaged).
-- 🟡 **Reviewer-vs-ground-truth divergence: 38% → 8%** (modeled — assumes the published Tier-1 6-12-month tail and the calibration packet engaged weekly).
+- 🟡 **Rubber-stamp rate: 94% → 4%** on the synthetic data (modeled — assumes an unsourced 94% baseline and the OversightOps blocker engaged).
+- 🟡 **Reviewer-vs-ground-truth divergence: 38% → 8%** (modeled — assumes an unsourced 38% tail over 6-12 months and the calibration packet engaged weekly).
 - 🔴 **Review SLA: 9 seconds → 8 minutes on Tier-1 KYC** (designed against the bank's procedure manual; not yet tested in production).
 - 🟡 **Real oversight instead of theatrical** — at Tier-1 retail bank scale (typical 6-15 regulated AI workflows with HITL × thousands of high-stakes decisions per year per workflow).
 
-🔴 **Modeled cost.** ~$380k for a 90-day engagement in a real deployment (compute on existing BPM infra + 1 PM + 1.5 FTE engineers + 0.5 FTE compliance partner + reviewer-ops co-design time) — designed, not yet executed.
+🔴 **Hypothetical cost.** ~$380k for a 90-day engagement in a real deployment (compute on existing BPM infra + 1 PM + 1.5 FTE engineers + 0.5 FTE compliance partner + reviewer-ops co-design time) — designed, not yet executed.
 
 **Call to action.** Fork this repo. Swap the synthetic data in `data/` for your fleet's review logs. The four step scripts and the Streamlit prototype run on a laptop in 10 minutes. Walk it through your Head of Compliance and your Reviewer Operations lead together.
 
@@ -171,9 +173,9 @@ The numbers don't add up to oversight. They add up to clicking Approve.
 - **17:33:07 UTC.** Onboarding fires. Account funded the next morning.
 - **June 8, 2026.** The daily OFAC sanctions-list refresh surfaces a high-confidence match against `CUST_589852`'s underlying beneficial-owner record. Compliance opens a SAR and a Matter Requiring Attention preparation file. 🟡 Modeled exposure on this single case: ~$420k (MRA remediation cost + SAR-filing cost + reputational adjustment).
 
-**With OversightOps:** the case is auto-blocked at the rubber-stamp gate (8 seconds < 60-second floor on private banking), re-queued to the LEAD queue with the 8-minute SLA timer engaged. Reviewer D (a lead with full-AML training) takes the case, runs the OFAC re-check, rejects the application. The 🟡 $420k exposure is avoided. The bank's regulatory posture is calibrated, not theatrical.
+**With OversightOps:** the case is auto-blocked at the rubber-stamp gate (8 seconds < 60-second floor on private banking), re-queued to the LEAD queue with the 8-minute SLA timer engaged. Reviewer D (a lead with full-AML training) takes the case, runs the OFAC re-check, rejects the application. The 🟡 $420k exposure is avoided. The lead's review is narrated, not simulated: step 4 re-routes the recorded review and does not model what the lead would decide. The bank's regulatory posture is calibrated, not theatrical.
 
-The deployed AI workflow shape (synthetic but modeled on what a real $50B retail bank typically runs):
+The deployed AI workflow shape (synthetic; an assumed shape for a $50B retail bank):
 
 - **`kyc_review_v4`** — KYC document review (Azure OpenAI gpt-4o, Tier 1) [the walkthrough's focus]
 - The pattern generalizes to: dispute resolution AI, fraud step-up review, credit-waterfall human-gate, claims SIU referral, AML investigation triage — every regulated AI workflow with a HITL step.
@@ -295,10 +297,10 @@ The audit log captures everything. Nobody queries it until the exam letter shows
 | # | Deficiency | What single-queue HITL ships | What the synthetic data shows |
 | --- | --- | --- | --- |
 | 1 | **No review-difficulty stratification** | Every case routed to the same queue regardless of AI confidence, customer tier, or country risk. | 73 of 138 hard cases (difficulty 4 or 5 and AI confidence under 0.70) routed to junior reviewers (53%). |
-| 2 | **No reviewer calibration drift** | Reviewer A's override rate is 4.8% (junior). Reviewer H's is 24.5% (lead). Same case mix. Nobody is paged. | Override-rate spread across the 12-reviewer roster: 21.1 percentage points (3.4% to 24.5%). 2 leads flagged at ≥1.5 sigma vs cohort mean. |
+| 2 | **No reviewer calibration drift** | Reviewer A's override rate is 4.8% (junior). Reviewer H's is 24.5% (lead). Same case mix. Nobody is paged. | Override-rate spread across the 12-reviewer roster: 21.1 percentage points (3.4% to 24.5%). 2 leads flagged at ≥1.5 sigma vs cohort mean (the cohort mean includes the juniors, so the flags are the reviewers who override the AI most). |
 | 3 | **No rubber-stamp detection** | A 9-second review on a private-banking Tier-1 case is allowed to ship. The procedure manual says 8 minutes. | 125 of 146 private-banking reviews completed below the 60-second floor, and 59 of 146 (40%) in under 10 seconds. 100% completed below the 480-second SLA target. |
 | 4 | **No escalation path for hard cases** | Low AI confidence + edge-case features → still routed to whoever is next on shift. | 48% of edge cases (difficulty=5 + low conf or country tier≥3) handled by juniors. |
-| 5 | **No time-on-task SLA** | The procedure manual specifies an 8-minute Tier-1 KYC review. Nothing enforces it. | 100% of private-banking and SME reviews completed below the SLA target on the synthetic corpus. |
+| 5 | **No time-on-task SLA** | The procedure manual specifies an 8-minute Tier-1 KYC review (here the "SLA" is that expected review time, a target to meet, not a deadline). Nothing enforces it. | 100% of private-banking and SME reviews completed below the SLA target on the synthetic corpus. |
 | 6 | **No reviewer-vs-ground-truth feedback loop** | Downstream signals (OFAC matches, SAR filings, complaints, charge-offs) name decisions wrong. No signal goes back to the reviewer. | 198 wrong-decision signals across the 1,000 corpus cases (cases ingested over 90 days). 🟡 Modeled 38% reviewer-vs-truth divergence over the 6-12-month tail. None bound to reviewer for recalibration. |
 
 ```bash
@@ -361,6 +363,8 @@ Headline case — CASE_0317_20260512
   RUBBER_STAMPED_BLOCKED      204
 ```
 
+**What this does not show.** The after-column is routing rules applied to the same recorded reviews; no reviewer is re-run, so 0 rubber-stamps and 0 edge cases to junior hold by construction. The 204 RUBBER_STAMPED_BLOCKED verdicts are 125 private-banking reviews under the 60-second floor plus 79 SME reviews under the 30-second floor; the 8-second retail floor is in the design but is not enforced in step 4. The 2 flagged reviewers (D and H) are both leads, the slowest reviewers with the highest override rates: the drift check measures distance from the cohort mean, not error, so the ground-truth loop (deficiency #6) is what would say whether they or the cohort are wrong.
+
 The verdict is a JSON record per case in production. The CSV-based demo path is shipped so anyone can clone and run; the production architecture is in [`ARCHITECTURE.md`](./ARCHITECTURE.md).
 
 ---
@@ -374,13 +378,13 @@ Reducing the rubber-stamp rate by 96% is not an outcome. *Reducing the rubber-st
 | Term | Value |
 | --- | --- |
 | 🟡 Current SOTA rubber-stamp rate (single-queue Tier-1 HITL) | ~94% |
-| 🟢 OversightOps measured rubber-stamp rate on the synthetic fleet | 0% on Tier-1 (auto-blocked) |
+| 🟢 OversightOps rubber-stamp rate on the synthetic fleet | 0% on Tier-1 (set by design in step 4: blocked reviews are re-queued, not re-run) |
 | 🟡 OversightOps target rubber-stamp rate in production | ≤ 4% |
 | 🟡 Reviewer-vs-ground-truth divergence rate (modeled SOTA) | ~38% |
 | 🟡 OversightOps target divergence rate | ~8% |
 | Per-case lift (modeled at Tier-1 bank scale) | **rubber-stamp 94% → 4%** of Tier-1 reviews |
 | Affected population (Tier-1 retail bank) | **every regulated AI workflow with a HITL step; typical Tier-1: 6-15 such pipelines × thousands of high-stakes decisions per year per pipeline** |
-| 🟢 Rubber-stamps blocked on the synthetic 1,000-case corpus | 125 of 125 caught |
+| 🟢 Private-banking rubber-stamps blocked on the synthetic 1,000-case corpus | 125 of 125 caught (the blocker's own rule defines what counts as one) |
 | 🟢 Composition latency per case | under 1 ms on the prototype (step 4 prints the measured time; it varies by run) |
 | 🟡 Modeled $ exposure avoided per headline OFAC-match case | ~$420k |
 | 🔴 Review SLA on Tier-1 KYC | 9 seconds → 8 minutes (designed) |
@@ -543,9 +547,9 @@ The Warranty Claim System pattern branches on case shape:
 
 **The crawl/walk/run alignment.** **Crawl:** the bank can use ADK confirmation primitives directly today, with manual SLA tracking. **Walk:** OversightOps adds difficulty-stratified routing, a rubber-stamp blocker, and reviewer load balancing. **Run:** calibration-drift detection, queue-depth-aware escalation, and the ground-truth feedback loop wired into the MRM workbench (Archer, ServiceNow GRC, MetricStream — pick what your CRO already pays for).
 
-**The product opinion.** The paper's `require_human_approval=["generate_shipping_label"]` line is correct but insufficient. It guarantees the gate exists. It does not guarantee the review is real. OversightOps is the layer that measures whether the human in the loop is loop-closing or just clicking Approve. Most banks ship the gate without the measurement and call it oversight. It's theater until you measure it.
+**The product opinion.** The paper's `require_human_approval=["generate_shipping_label"]` line is correct but insufficient. It guarantees the gate exists. It does not guarantee the review is real. OversightOps is the layer that measures whether the human in the loop is loop-closing or just clicking Approve. Many banks ship the gate without the measurement and call it oversight. It's theater until you measure it.
 
-> Source: Anirudh Kannan, Christine Sizemore, Connor Herriford, et al., *Building secure multi-agent systems on Google Cloud*, Google Cloud (2025). Aligned to [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework), [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng), and Anthropic's Constitutional AI work on oversight as the safety lever for high-stakes AI decisions.
+> Source: Anirudh Kannan, Christine Sizemore, Connor Herriford, et al., *Building secure multi-agent systems on Google Cloud*, Google Cloud (2025). Aligned to [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) and [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng).
 
 ---
 
@@ -598,9 +602,9 @@ If you run it on real data and get something useful, open an issue or send me th
 ## 🙌 Acknowledgements
 
 - [Google Cloud — *Building secure multi-agent systems on Google Cloud*](https://services.google.com/fh/files/events/agent_security.pdf) (Anirudh Kannan, Christine Sizemore, Connor Herriford et al., 2025) — the ADK confirmation primitive OversightOps sits on top of.
-- [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) — the human-oversight requirement for high-risk AI systems. The regulatory existence-proof for this product.
+- [EU AI Act Article 14](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng) — the human-oversight requirement for high-risk AI systems. Background for this product, not a claim that any workflow here is in scope.
 - [NIST AI Risk Management Framework (AI RMF 1.0)](https://www.nist.gov/itl/ai-risk-management-framework) — the framework backbone, including the HITL section.
 - [Federal Reserve, OCC and FDIC — SR 26-2, Revised Guidance on Model Risk Management](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026; it replaced SR 11-7) and [Federal Reserve — Supervisory Letters](https://www.federalreserve.gov/supervisionreg/srletters/srletters.htm) — co-issued model-risk-management supervisory expectation.
 - SR 11-7 / OCC Bulletin 2011-12 (replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)) — the ongoing-monitoring requirement HITL satisfies on paper.
-- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) — names human oversight as the safety lever for high-stakes AI decisions.
+- [Anthropic's Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) — background reading on supervising model behavior; it is not a source for this project's oversight design.
 - [Pega](https://www.pega.com/), [Appian](https://appian.com/), [ServiceNow Workflow](https://www.servicenow.com/) — the BPM substrate OversightOps integrates into, not replaces.

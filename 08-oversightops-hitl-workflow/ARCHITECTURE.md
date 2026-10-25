@@ -2,6 +2,8 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network topology, operational runbooks. What you would hand to your CISO, your platform engineering lead, and your reviewer-operations director on day one.
 
+**This is a design, not a deployed system.** Nothing in this document has been built, audited or measured. The only measured numbers for OversightOps are the ones the step scripts print, summarized in the [README](./README.md); SLOs, retention periods and stack choices below are design intent.
+
 This doc is cloud-agnostic where the design allows it and explicit where it does not. Primary stack shown on Google Cloud because the design aligns directly with the *Building secure multi-agent systems on Google Cloud* reference paper (Kannan, Sizemore, Herriford et al., 2025); AWS and Azure equivalents are called out inline.
 
 ---
@@ -71,7 +73,7 @@ oversightops/
 | `ui` | Cloud Run | Static + SSR Next.js, embedded as iframe in BPM |
 | `drift` | Cloud Composer 3 (managed Airflow) | Daily DAGs; existing skill set in BFSI ops |
 | `backfill` | Cloud Composer 3 | Daily ETL DAGs |
-| `temporal` | Temporal Cloud (managed) | Battle-tested for long-running workflows with timers |
+| `temporal` | Temporal Cloud (managed) | Built for long-running workflows with timers |
 | `cli` | Local + Cloud Build for CI runs | Operator tool, not a service |
 
 **AWS equivalent:** ECS Fargate or EKS for `api`/`ui`; Lambda + EventBridge for `router` and `blocker`; MWAA for `drift` and `backfill`; Step Functions or Temporal on EKS for `temporal`.
@@ -112,8 +114,8 @@ Egress to BPM API (Pega / Appian / ServiceNow):
 
 - **Primary:** US-East (us-east1 GCP / us-east-1 AWS / East US Azure)
 - **DR:** US-West (us-west1 / us-west-2 / West US 2). Active-passive. RTO 4h, RPO 5min for the `oversight_decisions` table.
-- **EU instance:** Frankfurt (europe-west3 / eu-central-1 / Germany West Central). Required for EU AI Act Article 14 and GDPR — oversight records of EU customers cannot egress region.
-- **India instance:** Mumbai (asia-south1 / ap-south-1 / Central India). Required for RBI data localization on Indian retail arms.
+- **EU instance:** Frankfurt (europe-west3 / eu-central-1 / Germany West Central). Included for EU AI Act and GDPR data-residency expectations, so oversight records of EU customers do not leave the region; whether a bank needs it is a legal question.
+- **India instance:** Mumbai (asia-south1 / ap-south-1 / Central India). Included for RBI data-localization expectations on Indian retail arms, to be confirmed with the bank's legal team.
 - Each regional instance has its own database, KMS key ring, IAP, Temporal namespace. **No cross-region replication for the `oversight_decisions` table** — each region is sovereign for its own oversight evidence. The WORM archive replicates cross-region within the same regulatory boundary only.
 
 ---
@@ -127,7 +129,7 @@ Egress to BPM API (Pega / Appian / ServiceNow):
 | **PostgreSQL 15** (Cloud SQL / RDS) | `oversight_decisions` immutable table, queue claim state, calibration drift snapshots, legal-hold flags. | Relational integrity, joins, mature transactions, well-understood by BFSI ops. Append-only via insert-only role + trigger guard. |
 | **Temporal Cloud** | SLA timers; long-running review workflow state. | Mature long-running ops primitives; PagerDuty integration native; saves us from rebuilding the timer engine. |
 | **ClickHouse** (Aiven / Altinity managed) | High-cardinality observability — reviewer throughput, SLA breach time-series, drift signal series. | 🔴 Assumed 10-50x cheaper than Postgres for time-series at this volume (not benchmarked). Interlocks with [DriftSentinel](../02-driftsentinel-model-drift-monitoring/) for shared drift-signal querying. |
-| **Snowflake / Databricks** (read-only) | Downstream signals (SAR system, OFAC list, CFPB system, charge-off log, loss-event lake). | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
+| **Snowflake / Databricks** (read-only) | Downstream signals (SAR system, OFAC list, CFPB system, charge-off log, loss-event lake). | Already exists at most large banks. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (router), queue depth counters. | TTL-based eviction. Multi-AZ for HA. |
 | **GCS / S3 / Blob Storage with Object Lock** | **WORM archive of oversight records** + calibration packets + cross-region replication. | Object Lock = WORM for the SR 11-7 / EU AI Act seven-year retention. |
 | **Pub/Sub / Kinesis / Event Hubs** | "Case flagged for review" event spine; queue-claim event; decision-submit event. | Native to the cloud; ordered delivery within a partition; replay-able. |
@@ -258,7 +260,7 @@ CREATE TABLE reviewer_calibration_snapshots (
 - **Encryption:** TLS 1.3 in transit; KMS-backed AES-256 at rest on Postgres + GCS Object Lock + ClickHouse. The `customer_id_hash` column uses SHA-256 + KMS-managed pepper.
 - **RBAC:** OIDC role mapping `oo:reviewer_junior` → `oo:reviewer_senior` → `oo:reviewer_lead` → `oo:queue_admin` → `oo:compliance` → `oo:cro` → `oo:admin`. Each role's permissions defined in OPA bundles.
 - **Service account model:** Workload identity federation (no long-lived JSON keys). Per-component service account: `router_sa`, `blocker_sa`, `drift_sa`, `backfill_sa`, `temporal_sa`, `legal_hold_sa`. Cross-component calls via SPIFFE-identified mTLS.
-- **Threat model:** Reviewer tries to clear queue depth by bulk-approving — caught at the rubber-stamp blocker. Reviewer tries to game calibration drift by patterned overrides — caught by the ground-truth feedback loop on the 6-12-month tail. Insider tries to modify a decision after the fact — caught by the immutability trigger + row_hash chain.
+- **Threat model:** Reviewer tries to clear queue depth by bulk-approving — caught at the rubber-stamp blocker. Reviewer tries to game calibration drift by patterned overrides — the ground-truth feedback loop is designed to catch it on the 6-12-month tail. Insider tries to modify a decision after the fact — caught by the immutability trigger + row_hash chain.
 - **Audit:** Every read of an oversight record produces an audit-on-audit log row (Cloud Audit Logs / CloudTrail). Internal Audit (L3) has read access to the audit-on-audit feed.
 
 ---
@@ -279,7 +281,7 @@ CREATE TABLE reviewer_calibration_snapshots (
 
 ### Runbooks
 
-Each runbook is a one-page Markdown file in `docs/runbooks/`:
+Each runbook would be a one-page Markdown file in `docs/runbooks/` of the product repo (none are in this portfolio folder):
 
 - `runbook_router_down.md` — what to do when the router stops emitting routing decisions
 - `runbook_temporal_timer_storm.md` — what to do when the SLA-timer queue backs up

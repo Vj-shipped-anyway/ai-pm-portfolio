@@ -1,7 +1,8 @@
 """
 Step 4 — The fix: OversightOps difficulty-stratified routing + drift detection.
 
-Six deficiencies closed in one composition pass. The pieces are:
+Six deficiencies addressed in one composition pass. The "after" counts are rules applied to the
+recorded reviews (no reviewer is re-run), so zeros there hold by construction. The pieces are:
 
   1. Difficulty router      -> case_id, ai_confidence, customer_tier, country_risk
                                -> route to junior / senior / lead queue
@@ -306,7 +307,7 @@ def main() -> None:
     print(f"  🟡 Modeled loss surfaced via ground-truth loop:  ${losses_avoided:,.0f}")
     print(f"  🟢 Calibration-drift outliers detected:          {len(drift_flagged)}")
     print(f"  🟢 Composition latency per case:                 "
-          f"<{elapsed * 1000 / max(len(cases), 1):.1f}ms")
+          f"{elapsed * 1000 / max(len(cases), 1):.2f}ms")
     print()
 
     # Calibration drift table
