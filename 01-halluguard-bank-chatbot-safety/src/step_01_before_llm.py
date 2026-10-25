@@ -13,7 +13,6 @@ summary of how many queries actually got a real answer.
 """
 
 import csv
-import os
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
