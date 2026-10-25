@@ -39,9 +39,17 @@ class LintTests(unittest.TestCase):
     def test_incident_needs_a_reporter_but_an_exercise_does_not(self):
         d = good()
         del d["study"]["reporter"]
+        d["study"]["case-study-type"] = "incident"
         self.assertIn("study.reporter: required for an incident", problems(d))
         d["study"]["case-study-type"] = "exercise"
         self.assertEqual(problems(d), [])
+
+    def test_a_synthetic_run_is_typed_exercise_and_a_real_one_incident(self):
+        calls = storm(20, cost=6.0)
+        synthetic = bundle(calls)
+        real = dict(copy.deepcopy(synthetic), synthetic=False)
+        self.assertEqual(t.build_study(synthetic, reporter="Team A")[0]["study"]["case-study-type"], "exercise")
+        self.assertEqual(t.build_study(real, reporter="Team A")[0]["study"]["case-study-type"], "incident")
 
     def test_unknown_key_in_study_and_step(self):
         d = good()

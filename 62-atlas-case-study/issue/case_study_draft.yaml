@@ -3,7 +3,7 @@ study:
   summary: "On 2026-03-24, a dispute reconciliation agent made 61 tool calls in one run. From call 4 it called the txn_lookup tool 58 times in a row with the same argument shape, and 56 of those responses were not ok. Run cost reached 153.43 USD against a 150.00 USD cap. The upstream scanner flagged a response as instruction-like next to the loop; the trace does not show who wrote the record."
   incident-date: "2026-03-24"
   incident-date-granularity: "DATE"
-  case-study-type: "incident"
+  case-study-type: "exercise"
   reporter: "TODO(reporter): the person or team that submits this"
   target: "dispute reconciliation agent"
   actor: "TODO(actor): the trace does not show whether anyone caused the first bad response"

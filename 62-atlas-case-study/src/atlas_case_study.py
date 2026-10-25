@@ -195,7 +195,7 @@ def build_study(bundle: dict, reporter: str | None = None, loop_min: int = LOOP_
         "summary": summary,
         "incident-date": date,
         "incident-date-granularity": "DATE",
-        "case-study-type": "incident",
+        "case-study-type": "exercise" if bundle.get("synthetic", False) else "incident",
         "reporter": reporter if reporter else "TODO(reporter): the person or team that submits this",
         "target": role,
         "actor": "TODO(actor): the trace does not show whether anyone caused the first bad response",

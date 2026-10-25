@@ -64,7 +64,7 @@ Standard library only, Python 3.9 or newer. To draft from your own trace: `pytho
 - The ticket note is never copied, because notes carry names and identifiers. The cost is that the draft gives no root cause beyond what the trace shows.
 - Three techniques are mapped. AI Agent Tool Data Poisoning (AML.T0099) is not, because a trace cannot show who changed a record.
 - The lint applies the rules I read in the contribution schema. It is not a full JSON Schema validator and does not check the object forms of tactic and technique.
-- 🔴 A synthetic run is not an incident. ATLAS case studies are real incidents or exercises, so the staged draft is a format example. I have not submitted anything, and the contribution page returns HTTP 404 to a plain fetch, though it renders in a browser (see below).
+- 🔴 A synthetic run is not an incident. ATLAS case studies are real incidents or exercises, so the tool types a synthetic run as `exercise`, and the staged draft is a format example. I have not submitted anything, and the contribution page returns HTTP 404 to a plain fetch, though it renders in a browser (see below).
 
 ## How the four steps fit
 
@@ -189,7 +189,7 @@ The PM artifacts that show how I would run this product if I owned the seat. Thi
 - [`demo.html`](./demo.html): clickable, no-install walkthrough, built from the step outputs by `src/_build_demo.py`.
 - [`data/`](./data/): the 60 synthetic flagged runs, their 3591 calls, the planted truth, the identifier fields, the example bundle and the seeded generator. `data/README.md` explains how the truth is set.
 - [`src/`](./src/): `atlas_case_study.py`, `common.py`, the four step scripts and the demo builder.
-- [`tests/`](./tests/): 53 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
+- [`tests/`](./tests/): 54 unittest tests, including a golden test that pins the numbers above and tests for bad input and hostile strings.
 - [`issue/`](./issue/): a staged question for the catalog's maintainers (`ISSUE_DRAFT.md`) and the draft built from the demo run (`case_study_draft.yaml`). Not submitted.
 
 Run the four steps end to end:
