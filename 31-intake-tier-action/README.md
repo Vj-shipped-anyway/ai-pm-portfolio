@@ -188,7 +188,7 @@ sequenceDiagram
 **Interlocks (all red, designed, none built):**
 
 - [11 TierGate](../11-tiergate-ai-usecase-intake/) is where the rubric came from. The points are carried over as an assumption; this folder does not import or read 11's files.
-- [35 TierGate](../35-tiergate/) recomputes a tier from an intake CSV in a command and a staged skill. This folder does the same for an issue body, and the two would share one rubric file.
+- [35 TierGate Skill](../35-tiergate/) recomputes a tier from an intake CSV in a command and a staged skill. This folder does the same for an issue body, and the two would share one rubric file.
 - [24 PortfolioBoard](../24-portfolioboard-ai-program-portfolio/) runs a bank's AI programs on gate evidence. It is a possible consumer of a tier once a reviewer confirms it.
 - [44 Inventory Check](../44-inventory-check/) tests an inventory of generative and agentic systems. It is a possible home for an issue once its tier is confirmed.
 

@@ -136,4 +136,4 @@
 
 ---
 
-*This PRD names [11 TierGate](../11-tiergate-ai-usecase-intake/), [35 TierGate](../35-tiergate/), [24 PortfolioBoard](../24-portfolioboard-ai-program-portfolio/) and [44 Inventory Check](../44-inventory-check/) as designed interlocks (🔴 designed, none built). The rubric is carried over from 11 as an assumption, not read from its files.*
+*This PRD names [11 TierGate](../11-tiergate-ai-usecase-intake/), [35 TierGate Skill](../35-tiergate/), [24 PortfolioBoard](../24-portfolioboard-ai-program-portfolio/) and [44 Inventory Check](../44-inventory-check/) as designed interlocks (🔴 designed, none built). The rubric is carried over from 11 as an assumption, not read from its files.*
