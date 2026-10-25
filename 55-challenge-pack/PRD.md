@@ -135,4 +135,4 @@
 
 ---
 
-*This PRD names [11 TierGate](../11-tiergate-ai-usecase-intake/), [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [35 TierGate](../35-tiergate/) and [09 LineageLog](../09-lineagelog-ai-decision-audit/) as designed interlocks (🔴 designed, none built). The tier rubric comes from 11 and is re-implemented here; no code or file is imported from it.*
+*This PRD names [11 TierGate](../11-tiergate-ai-usecase-intake/), [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [35 TierGate Skill](../35-tiergate/) and [09 LineageLog](../09-lineagelog-ai-decision-audit/) as designed interlocks (🔴 designed, none built). The tier rubric comes from 11 and is re-implemented here; no code or file is imported from it.*

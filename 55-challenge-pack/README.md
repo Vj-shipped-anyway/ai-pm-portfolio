@@ -183,7 +183,7 @@ sequenceDiagram
 
 - [11 TierGate](../11-tiergate-ai-usecase-intake/) is where the tier rubric comes from. The points and cut-offs are re-implemented here; this folder does not import or read that project's files.
 - [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) is where the habit of dating evidence came from. A control crosswalk would name the obligation each plan item answers; that link is not wired.
-- [35 TierGate](../35-tiergate/) would check the tier against a data catalog and a vendor registry, which is the job this tool leaves to it. Not wired.
+- [35 TierGate Skill](../35-tiergate/) would check the tier against a data catalog and a vendor registry, which is the job this tool leaves to it. Not wired.
 - [09 LineageLog](../09-lineagelog-ai-decision-audit/) is a possible home for the pack record (`cp-ledger`).
 
 ---

@@ -135,7 +135,7 @@ Alignment, not certification. The README's "Aligned to" section cites one source
 ## 7. What is deliberately not here
 
 - **Hollow evidence.** 🟢 30 of 32 hollow items pass every check; the checks read dates, versions and units, never content (`step_04_with_the_pack.py`).
-- **A tier below the truth.** 🟢 16 of 150 use cases keep a low tier after the recompute and leave 68 defects unasked (`step_04_with_the_pack.py`). The form is the only source; a check against a data catalog and a vendor registry is [35 TierGate](../35-tiergate/)'s job, designed and not wired.
+- **A tier below the truth.** 🟢 16 of 150 use cases keep a low tier after the recompute and leave 68 defects unasked (`step_04_with_the_pack.py`). The form is the only source; a check against a data catalog and a vendor registry is [35 TierGate Skill](../35-tiergate/)'s job, designed and not wired.
 - **Gaps on items not owed.** 🟢 6 are raised, on use cases whose sponsor declared a tier above the truth; I kept the higher tier on purpose (`step_04_with_the_pack.py`).
 - **Who reaffirmed.** A reaffirmation counts if its date is inside the window and the version matches. The check does not ask who or what they looked at.
 - **A decision.** The pack lists what to ask for and what is wrong with what came back. A person challenges the content and signs the memo.
