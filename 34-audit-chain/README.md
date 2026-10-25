@@ -228,7 +228,7 @@ python3 step_04_chain_and_anchor.py
 
 ## Aligned to
 
-The [NIST AI Risk Management Framework 1.0](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) (2023), the MANAGE function. I read the Core page on NIST's AIRC site on 2026-10-23. Subcategory MANAGE 4.3 asks that incidents and errors are communicated to relevant AI actors and that the processes for tracking, responding to and recovering from them are followed and documented. The framework does not prescribe a log format or a hash chain. My reading is narrower: an incident record is only useful in review if the reviewer can tell it was not changed afterwards, and this tool is one way to give them that check. It is a prototype, aligned to that function. It makes no claim of conformity to that guidance.
+The [NIST AI Risk Management Framework 1.0](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/) (2023), the MANAGE function. I read the Core page on NIST's AIRC site on 2026-10-23; a banner on it says AI RMF 1.0 is being updated. Subcategory MANAGE 4.3 asks that incidents and errors are communicated to relevant AI actors and that the processes for tracking, responding to and recovering from them are followed and documented. The framework does not prescribe a log format or a hash chain. My reading is narrower: an incident record is only useful in review if the reviewer can tell it was not changed afterwards, and this tool is one way to give them that check. It is a prototype, aligned to that function. It makes no claim of conformity to that guidance.
 
 ## Data and limits
 
