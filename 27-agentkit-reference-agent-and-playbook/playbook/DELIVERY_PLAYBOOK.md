@@ -23,6 +23,8 @@
 | G6 | Hand-off and runbook | Owning team lead | Signed hand-off record, completed runbook | `handoff.build_runbook`, `monitoring_signals` |
 | G7 | Post-launch review | Program lead | Review record and the next brief version | Acceptance tests re-run on live data |
 
+The kit makes G0, G1, G3 and G4 checkable on synthetic data. The kit support listed for the other gates is code a team would reuse; their exit criteria need people or live data.
+
 A gate does not open because the calendar says so. It opens when its exit criteria are met and the artifact exists.
 
 ---
@@ -61,7 +63,7 @@ A gate does not open because the calendar says so. It opens when its exit criter
 
 **Work**
 - For each tool in the brief, create a credential with the least privilege that does the listed actions. A tool the brief calls `read` gets a read-only credential, so that a bug in the kit cannot write.
-- Name every action the kit must not be able to reach. In the sample brief those are editing the original payment, cancelling a payment, reading or changing the whole watch list, and approving a correction.
+- Name every action the kit must not be able to reach. In the sample brief those are editing the original payment, canceling a payment, reading or changing the whole watch list, and approving a correction.
 - Run the permissions review (23 ScopeKeeper) on the tool list.
 
 **Exit criteria**

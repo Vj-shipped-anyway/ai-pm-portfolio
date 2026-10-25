@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the mechanic as a prototype: a brief loader, a tool registry, an orchestrator, an append-only audit log, a shadow harness and a deterministic reasoning stub, in Python standard library only, over synthetic data, with 242 unit tests, four step scripts and a Streamlit app. Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so (🔴).
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most bank technology estates run on AWS, GCP or Azure, and some on two of the three. GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![AgentKit flow](./assets/agentkit-flow.svg)
 
@@ -213,7 +213,7 @@ CREATE TABLE audit_events (
     seq            BIGINT NOT NULL,
     case_id        TEXT NOT NULL,
     step           TEXT,
-    kind           TEXT NOT NULL,                 -- case_start / decision / tool_call / gate / approval / retry / fallback / kill_switch / route
+    kind           TEXT NOT NULL,                 -- case_start / decision / tool_call / gate / gate_violation / approval / retry / fallback / kill_switch / route
     actor          TEXT NOT NULL,
     detail         JSONB NOT NULL,
     prev_hash      CHAR(64) NOT NULL,
@@ -475,3 +475,5 @@ Holding that line is the scope discipline: each item above is something a team w
     "evidence_uri": "object-lock://agentkit/audit/..."
 }
 ```
+
+The case id, state, route, proposed outcome, event count and the digest are from the prototype's shadow run of case C-0001 (`step_04`). The events are trimmed to a few fields and most of the 20 are omitted. The brief version and the evidence URI are illustrative.

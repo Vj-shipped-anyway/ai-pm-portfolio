@@ -7,7 +7,7 @@ Streamlit walkthrough. Pick one scenario case, then step through the story:
   Step 4  Proof at scale - the 600 historical cases in shadow mode, the acceptance criteria, what it still gets wrong
 
 All data is synthetic (data/_generate.py, seeded). The reasoning stub is a deterministic template, not a
-language model: it is labelled STUB wherever it appears. There is no model in this app.
+language model: it is labeled STUB wherever it appears. There is no model in this app.
 """
 
 from __future__ import annotations

@@ -4,7 +4,7 @@ fallback to the human queue. Gates and four-eyes rules are read from the brief's
 Per case, in the brief's step order:
   * a skill step runs, is retried on a transient tool failure, and writes a decision to the audit log
   * S07 and S09 are gates: the kit stops and a person answers. In shadow mode, or with no provider, the
-    case parks at the gate. Nothing in this file can produce an S07 judgement or an S09 approval.
+    case parks at the gate. Nothing in this file can produce an S07 judgment or an S09 approval.
   * S10 resubmit runs only if an approval from a person, for this exact correction and from someone other
     than the S07 judge, is on the case. It is checked here and again in the tool registry.
   * the kill switch is checked before every step and every tool call; an engaged switch routes the case

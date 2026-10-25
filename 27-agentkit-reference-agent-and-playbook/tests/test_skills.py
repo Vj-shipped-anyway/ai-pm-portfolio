@@ -250,7 +250,7 @@ class TestS10(unittest.TestCase):
 
 
 class TestS11S12(unittest.TestCase):
-    def test_note_is_labelled_stub(self):
+    def test_note_is_labeled_stub(self):
         k, _ = support.kit(mode="live")
         ctx = upto(k, "G01", "S08")
         k.orchestrator.run_step("S11", ctx)

@@ -12,6 +12,8 @@
 - 🟢 Routes: 134 auto, 454 to a person (S07 40, S09 388, escalation 26), 12 back to the human queue (`step_04`)
 - 🟢 Known miss, left in on purpose: 15 of the 134 cases the kit finished on its own differ from the recorded outcome (9 ambiguous names scored as a mismatch and returned, 6 closed accounts whose advice carried a successor account) (`step_04`)
 
+_Shadow mode means the kit proposes an outcome for each of 600 historical cases with every write a dry run, and is scored against what a person recorded. S07 is the judgment on an ambiguous name match and S09 is the second person's approval; both are always a person._
+
 _A portfolio prototype on synthetic data, not a production case study. The framing and how to read the numbers are folded below._
 
 ![Synthetic cases: 600](https://img.shields.io/badge/synthetic%20cases-600-blue)
@@ -191,7 +193,7 @@ Four things happen in the synthetic 30 days:
 
 - **A clean repair, many times.** 🟢 210 cases have an account with two digits transposed and the right one in the advice; 90 are missing a bank code. The kit drafts the correction and a person approves it.
 - **A name that is not quite the same.** 🟢 14 cases are an affiliate entity (the name with a place or a numeral added), a different legal party that scores as a close match. 36 are ambiguous. 40 are a different company altogether.
-- **A closed account, and one that has moved.** 🟢 60 closed accounts have no repair. 6 carry a successor account in the advice, which the rule table ignores.
+- **A closed account, and one that has moved.** 🟢 60 closed accounts have no repair. 6 more closed accounts carry a successor account in the advice, which the rule table ignores.
 - **Records that should not go through.** 🟢 12 are malformed, 14 are a redelivery of a case already handled, 22 name a watch-list party exactly or as a variant, and 6 look like one and a person cleared them.
 
 ---

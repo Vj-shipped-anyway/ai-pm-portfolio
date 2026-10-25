@@ -1,6 +1,6 @@
 """Name and account matching used by S05 and S06. Plain rules, standard library only.
 
-Design parameters (not in the build-brief shape, so they live here and in ARCHITECTURE.md):
+Design parameters (not in the build-brief shape, so they live here and in data/README.md):
   CLOSE_AT      similarity at or above this is a close match
   AMBIGUOUS_AT  similarity at or above this, below CLOSE_AT, is ambiguous and goes to a person
   HIT_AT        watch-list similarity at or above this is a hit

@@ -8,6 +8,7 @@ Event kinds written by the kit:
   decision     a step finished (or was skipped) and says what it decided and why
   tool_call    one per call attempt, including blocked, dry-run, replayed and failed ones
   gate         a step was routed to a person (S07, S09)
+  gate_violation  a step was refused because the approval it needs was missing or did not match
   approval     a person answered a gate; the answer was accepted or rejected
   retry        a transient tool failure is being retried
   fallback     the kit gave up on a tool and sends the case back to the human queue

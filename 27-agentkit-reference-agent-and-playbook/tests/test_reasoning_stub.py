@@ -35,7 +35,7 @@ class TestStub(unittest.TestCase):
         self.assertNotEqual(a, correction_digest("P-1", "beneficiary_account", "2"))
         self.assertNotEqual(a, correction_digest("P-2", "beneficiary_account", "1"))
 
-    def test_case_note_is_labelled_and_names_the_hits(self):
+    def test_case_note_is_labeled_and_names_the_hits(self):
         note = self.stub.draft_case_note(case_id="C", kind="final", reason_code="RX01", disposition="ESCALATE_COMPLIANCE",
                                          name_class="EXACT", hits=[{"party_id": "W-001", "score": 0.97}], draft=None,
                                          gate=None)

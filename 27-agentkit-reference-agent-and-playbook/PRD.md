@@ -32,7 +32,7 @@
 
 ## RICE-prioritized backlog (sequenced for v0.x)
 
-> Scoring: Reach (R) × Impact (I) × Confidence (C) / Effort (E). Reach is workflows per year the pack would serve, as labeled. Effort in PM-weeks. All scores are 🔴 planning estimates. The top of the list is what gets built first.
+> Scoring: Reach (R) × Impact (I) × Confidence (C) / Effort (E). Reach is workflows per year the pack would serve, as labeled. Effort in PM-weeks. All scores are 🔴 planning estimates. Rows are in build order, so the scores are not sorted; the top of the list is what gets built first.
 
 | Rank | Item | R | I | C | E | RICE | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
