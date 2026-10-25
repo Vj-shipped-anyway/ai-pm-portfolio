@@ -147,4 +147,4 @@
 
 ---
 
-*This PRD interlocks with [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/) and [Project 12 (ValueLedger)](../12-valueledger-ai-benefit-tracking/), and with 16 ControlMap, 19 IncidentLedger and 21 AdoptionPulse (🔴 designed, none built).*
+*This PRD interlocks with [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/) and [Project 12 (ValueLedger)](../12-valueledger-ai-benefit-tracking/), and with [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [19 IncidentLedger](../19-incidentledger-ai-incident-response/) and [21 AdoptionPulse](../21-adoptionpulse-ai-enablement-funnel/) (all five interlocks 🔴 designed, none built).*

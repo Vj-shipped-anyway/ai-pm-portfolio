@@ -1,6 +1,6 @@
 # 🧭 PortfolioBoard — An AI Program Portfolio Run on Gate Evidence, Capacity and Dependencies
 
-**A portfolio prototype for running a bank's AI programs on gate evidence instead of owner-picked colors: an evidence status per program, a capacity grid for scarce reviewers, dependency propagation, a pull rule that suggests what to pause, and a benefit-at-risk rollup. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Govern' function and written against [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm), the current model risk guidance that replaced its 2011 predecessor (SR 11-7) in April 2026, as the model-risk guidance the work is compared with.**
+**A portfolio prototype for running a bank's AI programs on gate evidence instead of owner-picked colors: an evidence status per program, a capacity grid for scarce reviewers, dependency propagation, a pull rule that suggests what to pause, and a benefit-at-risk rollup. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Govern' function and compared with [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm), the model risk guidance that replaced its 2011 predecessor (SR 11-7) in April 2026.**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/24-portfolioboard-ai-program-portfolio/demo.html)
 
@@ -701,9 +701,9 @@ See [`assets/portfolioboard-flow.svg`](./assets/portfolioboard-flow.svg) for a s
 
 - [11 TierGate](../11-tiergate-ai-usecase-intake/) is intake and tiering. A program's risk tier (criterion K02) and its intake registration (K03) would come from TierGate instead of an owner's attestation, and intake would feed the portfolio.
 - [12 ValueLedger](../12-valueledger-ai-benefit-tracking/) measures benefit against a holdout. Its measured figure would replace the owner's estimate in the benefit rollup, and the rollup would stop being modeled.
-- 21 AdoptionPulse would supply adoption evidence for the scale gate (for example "pilot results reviewed").
-- 16 ControlMap would be the source of gate evidence for control criteria (for example "control evidence complete").
-- 19 IncidentLedger would feed incidents into a program's status.
+- [21 AdoptionPulse](../21-adoptionpulse-ai-enablement-funnel/) would supply adoption evidence for the scale gate (for example "pilot results reviewed").
+- [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) would be the source of gate evidence for control criteria (for example "control evidence complete").
+- [19 IncidentLedger](../19-incidentledger-ai-incident-response/) would feed incidents into a program's status.
 
 ---
 
@@ -783,4 +783,4 @@ If you run it on a real evidence feed and get something useful, open an issue or
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Govern' function maps onto the idea that accountability for AI programs sits with named owners and is checked against evidence, not asserted.
 - **[SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)**, which replaced its 2011 predecessor (SR 11-7) in April 2026 — the model-risk guidance the work is compared with. Any statement about its themes in this repo is a paraphrase written for this exercise, not the text of the rule.
 - **Stage-gate and work-in-progress limits** — general portfolio and flow methods the status rules and the pull rule borrow from. The relation used for the time-in-stage check (average time in stage equals work in progress divided by throughput) is the standard queueing result, applied here to the stage history.
-- **Sibling projects in this repo** — [11 TierGate](../11-tiergate-ai-usecase-intake/) and [12 ValueLedger](../12-valueledger-ai-benefit-tracking/), the two interlocks that exist; 16 ControlMap, 19 IncidentLedger and 21 AdoptionPulse are the other three, designed and none built.
+- **Sibling projects in this repo** — [11 TierGate](../11-tiergate-ai-usecase-intake/) and [12 ValueLedger](../12-valueledger-ai-benefit-tracking/), two of the five interlocks. [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [19 IncidentLedger](../19-incidentledger-ai-incident-response/) and [21 AdoptionPulse](../21-adoptionpulse-ai-enablement-funnel/) are the other three; all five interlocks are designed, none built.

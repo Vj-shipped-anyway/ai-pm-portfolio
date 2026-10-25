@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (evidence status rules, a capacity grid, dependency propagation, a pull rule and a benefit rollup, over synthetic data, with a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. GCP is shown as primary, with the AWS and Azure equivalents called out inline.
 
 ![PortfolioBoard flow](./assets/portfolioboard-flow.svg)
 
@@ -371,7 +371,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 
 | Framework | How the design relates |
 | --- | --- |
-| **SR 26-2 / model risk management** | The current model risk guidance (it replaced its 2011 predecessor, SR 11-7, in April 2026). The monthly snapshot and the audit sample are the record a program office would show for how AI programs are tracked and checked over time. This mapping is a paraphrase written for this exercise, not the text of the rule. |
+| **SR 26-2 / model risk management** | Model risk guidance that replaced its 2011 predecessor, SR 11-7, in April 2026. It sets no enforceable standards and places generative AI and agentic AI outside its scope (see the README's regulatory note), so it is a design basis and an analogy here, not a requirement. The monthly snapshot and the audit sample are the record a program office would show for how AI programs are tracked and checked over time. This mapping is a paraphrase written for this exercise, not the text of the rule. |
 | **NIST AI RMF** | The Govern function maps to named owners, attested gate evidence and a recorded decision on every pause. |
 | **Internal controls** | Computed statuses, append-only attestations and a recorded decider on every suggestion that is acted on. |
 
