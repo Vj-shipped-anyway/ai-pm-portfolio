@@ -235,7 +235,7 @@ CREATE TABLE audit_log (
 
 **What the decision record has to answer.** For any use case, an auditor can ask: which form version, which rubric version, which catalog and registry snapshots, which flags, who cleared them, and which evidence hashes were on file when approval was granted. Every one of those is a column above.
 
-### ClickHouse schema (the time-series tables)
+### Time-series tables (no ClickHouse in this design)
 
 Not in the reference design, on purpose. At the intake volume the model uses (375 submissions a year) the time series are small: queue age, flag counts by rule, tier changes by sponsor unit. They are a few Postgres tables and views. A columnar time-series store would add an operational burden with no query that needs it. The trigger to revisit is a register that grows to tens of thousands of use cases or per-event telemetry from many services; until then:
 

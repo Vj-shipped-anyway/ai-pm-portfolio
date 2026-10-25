@@ -9,8 +9,8 @@
 **What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Tier accuracy 69.3% → 86.0% (129 of 150 recomputed tiers equal the reference; `step_04`)
-- 🟢 Evidence-gap detection 51.5% → 95.5%; approvals granted with required evidence missing 32 of 116 → 3 of 76
-- 🟢 Known limit left in: 6 submissions where the form and the catalog both understate the data class
+- 🟢 Evidence-gap detection 51.5% → 95.5%; approvals granted with required evidence missing 32 of 116 → 3 of 76 (`step_02`, `step_04`)
+- 🟢 Known limit left in: 6 submissions where the form and the catalog both understate the data class (`step_04`)
 
 _A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
@@ -372,7 +372,7 @@ Confusion (rows are the reference tier, columns the recomputed tier):
 | `CUSTOMER_FACING_CUE` (text mentions customers, form says no) | 25 | 6 |
 | `CUSTOMER_FACING_AMBIGUOUS` (blank or "unsure") | 12 | 3 |
 
-The customer-facing checks are the weak spot: 9 of 12 ambiguous answers and 19 of 25 text cues were on cases that are not customer-facing. They are the reason for the 13 over-tiered cases. I kept them conservative on purpose, because the safe error for a governance gate is a tier too high and a reviewer who can clear a flag. The cost is on the page.
+The customer-facing checks are the weak spot: 9 of 12 ambiguous answers and 19 of 25 text cues were on cases that are not customer-facing. They are the main reason for the 13 over-tiered cases. I kept them conservative on purpose, because the safe error for a governance gate is a tier too high and a reviewer who can clear a flag. The cost is on the page.
 
 **Duplicate linking (🟢 `step_04`).** Jaccard overlap on the tokens of title plus description (standard library only), proposed link at 0.50. Of 10 true pairs, 9 are proposed and 1 is missed; 5 proposals are wrong (precision 0.64, recall 0.90). The 0.50 threshold is a fixed design value, not tuned on this run. The sweep shows what moving it does on this same set:
 

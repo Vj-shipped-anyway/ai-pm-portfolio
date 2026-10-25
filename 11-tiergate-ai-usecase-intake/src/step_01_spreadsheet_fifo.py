@@ -176,7 +176,7 @@ def _pct(values: list[float], q: float) -> float:
 def run_queue(cases: list[dict], service_hours: list[float],
               priority: list[int] | None = None, reps: int = REPLICATIONS,
               n_reviewers: int | None = None) -> dict:
-    """Replicate the queue and summarise waits (business days) by REFERENCE tier."""
+    """Replicate the queue and summarize waits (business days) by REFERENCE tier."""
     if n_reviewers is None:
         n_reviewers = N_REVIEWERS
     arrivals = [float(c["arrival_day"]) for c in cases]
