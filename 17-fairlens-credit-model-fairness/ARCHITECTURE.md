@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (a stub points scorecard, six tests, a seeded bootstrap and verdict rules, over synthetic data, with a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so and carries 🔴.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most bank platform teams run on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![FairLens flow](./assets/fairlens-flow.svg)
 
@@ -456,7 +456,7 @@ Holding that line is the scope discipline: each item above is something a team w
 }
 ```
 
-The verdicts and the numbers in the example are the prototype's `step_04` output on the synthetic data. The model name, the URI and the ids are illustrative.
+The verdicts and the numbers in the example are the prototype's `step_04` output on the synthetic data. The model name, the mode, the label source, the URI and the ids are illustrative.
 
 OpenAPI spec lives at `docs/api/openapi.yaml` and is the source of truth for the pipeline client and the console.
 

@@ -472,7 +472,7 @@ if st.session_state.step >= 4:
             "This is a prototype on synthetic data. The production shape is a scheduled job that reads decisions and outcomes from "
             "the model's scoring log, a group-inference step the prototype does not have, a test runner that writes verdicts and "
             "evidence to a store, and a review queue for REVIEW and FAIL. It is a design, not deployed; see `ARCHITECTURE.md`. "
-            "Related projects, all designed and none built: ControlMap (16), EvalForge (04), DriftSentinel (02) and TierGate (11)."
+            "Interlocks with other projects in this repo, all designed and none built: ControlMap (16), EvalForge (04), DriftSentinel (02) and TierGate (11)."
         )
     st.markdown(
         "<div class='fl-card muted'>Built as a portfolio prototype on synthetic data. Walkthrough, PRD and architecture in "

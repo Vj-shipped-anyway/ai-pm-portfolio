@@ -323,12 +323,12 @@ def build_html(p: dict) -> str:
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FairLens — Credit-Model Fairness Test Pack">
 <meta name="twitter:description" content="Tests a synthetic credit model for the gap overall accuracy hides: adverse impact by group, cutoff sweep, proxy and reason-code checks.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/17-fairlens-credit-model-fairness/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>{CSS}</style>
@@ -390,7 +390,7 @@ def build_html(p: dict) -> str:
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (fairness tests run with FairLens − with accuracy only) ÷ tests × credit decisions a year</p>
-    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> the accuracy-only view runs {m['u_base']} of {m['u_run']} fairness tests (by definition). The pack runs {m['u_run']} of {m['u_run']} and {m['flagged']} of {m['u_run']} return REVIEW or FAIL at the policy cutoff {m['policy']}. The lowest AIR is {m['min_air']} ({esc_py(m['min_group'])}) against {m['spread']} points of approval spread behind {m['model_acc']} accuracy. Neutralizing the postcode points lifts the lowest AIR from {m['lift_before']} to {m['lift_after']} and accuracy from {m['acc_before']} to {m['acc_after']}.</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> the accuracy-only view runs {m['u_base']} of {m['u_run']} fairness tests (by definition). The pack runs {m['u_run']} of {m['u_run']} and {m['flagged']} of {m['u_run']} return REVIEW or FAIL at the policy cutoff {m['policy']}. The lowest AIR is {m['min_air']} ({esc_py(m['min_group'])}), and approval rates sit {m['spread']} points apart behind a model-card accuracy of {m['model_acc']}. Neutralizing the postcode points lifts the lowest AIR from {m['lift_before']} to {m['lift_after']} and accuracy from {m['acc_before']} to {m['acc_after']}.</p>
     <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> {m['u_volume']} credit decisions a year under this scorecard (an assumption, not a statistic) gives {m['u_delta']} × {m['u_volume']} = <b>{m['u_total']} decisions a year</b> under a model with a full fairness test pack. {m['u_turn']} of {m['u_applicants']} test-set decisions ({m['u_turn_share']}) turn on the postcode points; at the same share the modeled volume would be about {m['u_turn_annual']}. The test set is dense on purpose, so that is not a frequency estimate.</p>
     <p style="margin: 8px 0 0;">🔴 <b>What it still gets wrong:</b> AIR is a screening statistic, and the search for less discriminatory alternatives is one ablation. Real credit data has no group labels: with {m['label_share']} of labels wrong at random the screen passes (lowest AIR {m['label_air']}) when it fails on the true labels ({m['label_true_air']}). The reason-code pair check passes ({m['t5_excess']} points against its control) while {m['t5_proxy']} declines are caused by the postcode points; with {m['reasons_listed']} reasons listed, {m['t5_unnamed']} of them omit the postcode reason.</p>
   </section>

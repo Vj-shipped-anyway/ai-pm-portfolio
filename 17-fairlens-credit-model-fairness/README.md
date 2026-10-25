@@ -1,6 +1,6 @@
 # ⚖️ FairLens — Fairness Test Pack for a Credit-Decision Model
 
-**A portfolio prototype for finding the gap that overall accuracy hides in a credit-decision model: approval rate and adverse impact ratio by group with a bootstrap interval, a cutoff sweep, a proxy ablation, a reason-code check and a PASS, REVIEW or FAIL verdict per test. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026; it replaced the 2011 predecessor, SR 11-7), with the reason-code test written against the adverse-action theme in [Regulation B](https://www.consumerfinance.gov/rules-policy/regulations/1002/).**
+**A portfolio prototype for finding the gap that overall accuracy hides in a credit-decision model: approval rate and adverse impact ratio (AIR) by group with a bootstrap interval, a cutoff sweep, a proxy ablation, a reason-code check and a PASS, REVIEW or FAIL verdict per test. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (April 2026; it replaced the 2011 predecessor, SR 11-7), with the reason-code test written against the adverse-action theme in [Regulation B](https://www.consumerfinance.gov/rules-policy/regulations/1002/).**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/17-fairlens-credit-model-fairness/demo.html)
 
@@ -9,10 +9,10 @@
 **What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 AIR by group: Group B 0.769 (interval 0.742 to 0.797), Group C 0.750 (interval 0.698 to 0.808) (`step_04`)
-- 🟢 Cutoff: the screen holds up to cutoff 185; the policy cutoff 190 is 5 points above (`step_03`, `step_04`)
+- 🟢 Cutoff: the AIR screen (0.80) holds up to cutoff 185; the policy cutoff 190 is 5 points above (`step_03`, `step_04`)
 - 🟢 Known limit, printed: with 14.8% of group labels wrong at random, the AIR screen passes (lowest AIR 0.817) when it fails on the true labels (0.750) (`step_04`)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+_Built for the model risk or fair-lending reviewer who is handed a model card with one accuracy figure and asked whether the model is fair. A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic applicants: 6,000](https://img.shields.io/badge/synthetic%20applicants-6000-blue)
 ![Synthetic groups: 3](https://img.shields.io/badge/synthetic%20groups-3-blue)
@@ -124,7 +124,7 @@ Each step script finishes in seconds and writes its CSV or JSON to `src/out/`. T
 - 🟡 **Utility: 1.00 × 20,000 = 20,000 decisions a year under a model with a full fairness test pack**, assuming 20,000 credit decisions a year (`step_04`).
 - 🔴 **Design target: the pack runs on every model release and cutoff change as a scheduled eval, with the verdicts filed to the model-risk record.** Designed in `ARCHITECTURE.md`, never built or timed.
 
-**Call to action.** Fork this repo. Swap [`data/applicants.csv`](./data/applicants.csv) for an export of your own scored decisions with the outcome and a group column, and call `run_pack` from `step_04`. The ledger-style truth is not needed: the only synthetic-only fact is `defaulted`, which a real export would take from your performance window.
+**Call to action.** Fork this repo. Swap [`data/applicants.csv`](./data/applicants.csv) for an export of your own scored decisions with the outcome and a group column, and call `run_pack` from `step_04`. No separate truth file is needed. `defaulted` is the outcome column, which a real export would take from your performance window; the group column is the hard part (see the known limits).
 
 ---
 
@@ -452,7 +452,7 @@ T5  REASON-CODE CONSISTENCY (principal reason = most points lost against the max
 
 - **T3 finds the cutoff, and prices it.** 🟢 The screen holds up to 185 and the policy cutoff is 190. Moving the cutoff is a credit-policy decision: the approved book gets riskier (8.2% to 10.1% default rate) in exchange for passing the screen. FairLens puts both numbers next to each other; it does not choose.
 - **T4 says what the gap is made of.** 🟢 With the postcode points neutral the lowest AIR is 0.871 and accuracy is 89.2%, so the points are not buying accuracy. The postcode points approve 200 applicants who default more often (56.5%) than the 295 they decline (32.5%). The truth is known because the data is synthetic.
-- **T5 passes, and that is a result.** 🟢 Matched cross-group pairs differ at 78.6% against 75.4% within Group A. Most of that is how a points scorecard works: two applicants with the same total can lose their points in different places. The test measures the excess over the control, +3.3 points. A PASS here means the reasons name the postcode band when the postcode points drove the decision; whether the postcode band should appear on a notice at all is the T4 question.
+- **T5 passes, and that is a result.** 🟢 Matched cross-group pairs differ at 78.6% against 75.4% within Group A. Most of that is how a points scorecard works: two applicants with the same total can lose their points in different places. The test measures the excess over the control, +3.3 points. A PASS here means that, with 4 reasons listed, the postcode band is named for 277 of the 295 declines the postcode points alone cause; with 2 listed it would be 59 (see the sensitivity line). Whether the postcode band should appear on a notice at all is the T4 question.
 - **T6 is a REVIEW, not a verdict on the group.** Group C's interval straddles the screen. A person decides, or someone collects more data.
 
 ### What it still gets wrong
@@ -608,7 +608,7 @@ See [`assets/fairlens-flow.svg`](./assets/fairlens-flow.svg) for a static visual
 
 **Interlocks (all 🔴 designed, none built):**
 
-- 16 ControlMap maps the obligations a credit decision carries, including the Regulation B adverse-action theme. FairLens supplies the evidence for the reason-code obligation: which reasons were given, and whether they match what drove the decision.
+- [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) maps the obligations a credit decision carries, including the Regulation B adverse-action theme. FairLens supplies the evidence for the reason-code obligation: which reasons were given, and whether they match what drove the decision.
 - [04 EvalForge](../04-evalforge-llm-eval-platform/) is the eval platform. The FairLens pack runs there as one more eval on every model release. FairLens is not a duplicate of it: EvalForge is a generic harness, and the fairness tests, the verdicts and the group handling are the content.
 - [02 DriftSentinel](../02-driftsentinel-model-drift-monitoring/) watches scores for drift. When the score distribution moves, it triggers a rerun of the pack, because AIR is a function of the score distribution and the cutoff. FairLens is not a duplicate of it: drift monitoring says the inputs moved, not who is approved.
 - [11 TierGate](../11-tiergate-ai-usecase-intake/) tiers use cases. A credit decision sits in the highest tier, which is what makes the full pack mandatory in the design rather than optional.
@@ -696,4 +696,4 @@ Obligation themes named below are a paraphrase written for this exercise, not th
 - **[Regulation B](https://www.consumerfinance.gov/rules-policy/regulations/1002/)** — the CFPB's rule on credit discrimination and notices to declined applicants. The theme the reason-code test maps to is that the reasons given should be the ones that drove the decision.
 - **[29 CFR 1607](https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1607)** — the employment guidance where the four-fifths convention comes from. It is used here only as a screening convention, not as a credit-law standard.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — lists the creditworthiness assessment of natural persons among its high-risk topics; named here, not quoted, as the reason the full pack belongs in the highest tier.
-- **Sibling projects in this repo** — 16 ControlMap, [04 EvalForge](../04-evalforge-llm-eval-platform/), [02 DriftSentinel](../02-driftsentinel-model-drift-monitoring/) and [11 TierGate](../11-tiergate-ai-usecase-intake/), the four interlocks.
+- **Sibling projects in this repo** — [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [04 EvalForge](../04-evalforge-llm-eval-platform/), [02 DriftSentinel](../02-driftsentinel-model-drift-monitoring/) and [11 TierGate](../11-tiergate-ai-usecase-intake/), the four interlocks.

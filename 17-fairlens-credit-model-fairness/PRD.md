@@ -146,4 +146,4 @@
 
 ---
 
-*This PRD interlocks with 16 ControlMap, [Project 04 (EvalForge)](../04-evalforge-llm-eval-platform/), [Project 02 (DriftSentinel)](../02-driftsentinel-model-drift-monitoring/) and [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/). All four interlocks are 🔴 designed, none built.*
+*This PRD names interlocks with [Project 16 (ControlMap)](../16-controlmap-ai-obligation-crosswalk/), [Project 04 (EvalForge)](../04-evalforge-llm-eval-platform/), [Project 02 (DriftSentinel)](../02-driftsentinel-model-drift-monitoring/) and [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/). All four interlocks are 🔴 designed, none built.*

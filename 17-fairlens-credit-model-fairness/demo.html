@@ -13,12 +13,12 @@
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FairLens — Credit-Model Fairness Test Pack">
 <meta name="twitter:description" content="Tests a synthetic credit model for the gap overall accuracy hides: adverse impact by group, cutoff sweep, proxy and reason-code checks.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/17-fairlens-credit-model-fairness/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
@@ -194,7 +194,7 @@
   <section class="utility-callout">
     <p style="margin: 0 0 6px;"><b>Utility delivered</b></p>
     <p class="formula">Utility = (fairness tests run with FairLens − with accuracy only) ÷ tests × credit decisions a year</p>
-    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> the accuracy-only view runs 0 of 6 fairness tests (by definition). The pack runs 6 of 6 and 5 of 6 return REVIEW or FAIL at the policy cutoff 190. The lowest AIR is 0.750 (Group C) against 20.9 points of approval spread behind 87.1% accuracy. Neutralizing the postcode points lifts the lowest AIR from 0.750 to 0.871 and accuracy from 87.1% to 89.2%.</p>
+    <p style="margin: 8px 0 0;">🟢 <b>Measured on this synthetic set:</b> the accuracy-only view runs 0 of 6 fairness tests (by definition). The pack runs 6 of 6 and 5 of 6 return REVIEW or FAIL at the policy cutoff 190. The lowest AIR is 0.750 (Group C), and approval rates sit 20.9 points apart behind a model-card accuracy of 87.1%. Neutralizing the postcode points lifts the lowest AIR from 0.750 to 0.871 and accuracy from 87.1% to 89.2%.</p>
     <p style="margin: 8px 0 0;">🟡 <b>Modeled:</b> 20,000 credit decisions a year under this scorecard (an assumption, not a statistic) gives 1.00 × 20,000 = <b>20,000 decisions a year</b> under a model with a full fairness test pack. 495 of 6,000 test-set decisions (8.25%) turn on the postcode points; at the same share the modeled volume would be about 1,650. The test set is dense on purpose, so that is not a frequency estimate.</p>
     <p style="margin: 8px 0 0;">🔴 <b>What it still gets wrong:</b> AIR is a screening statistic, and the search for less discriminatory alternatives is one ablation. Real credit data has no group labels: with 14.8% of labels wrong at random the screen passes (lowest AIR 0.817) when it fails on the true labels (0.750). The reason-code pair check passes (+3.3 points against its control) while 295 declines are caused by the postcode points; with 4 reasons listed, 18 of them omit the postcode reason.</p>
   </section>
