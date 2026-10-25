@@ -1,4 +1,4 @@
-# Architecture: controlmap
+# Architecture: ControlMap CLI
 
 > **Status.** This is the design for a production shape. The repo implements the product mechanic as a prototype: a command, `src/controlmap.py`, that reads an obligations file, a controls file and a theme dictionary, matches on phrases, checks scope and evidence age and prints COVERED, STALE, PARTIAL, UNCOVERED or UNMAPPED for each obligation, run here over 56 synthetic obligations and 55 controls. Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 

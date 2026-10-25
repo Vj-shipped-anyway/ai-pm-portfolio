@@ -12,7 +12,7 @@ with open(os.path.join(HERE, "out", "step_04_summary.json"), encoding="utf-8") a
 
 PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>controlmap: __N__ obligations, one status each</title>
+<title>ControlMap CLI: __N__ obligations, one status each</title>
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--mut:#5b6470;--line:#d9dde3;--ok:#1e6b3a;--warn:#8a5a00;--bad:#b3261e;--info:#1d4f91;--wrong:#fdf0ef}
 @media (prefers-color-scheme: dark){:root{--bg:#14161a;--fg:#e8eaed;--mut:#9aa3ad;--line:#2c3138;--ok:#7fd49a;--warn:#ffc266;--bad:#ff8a80;--info:#8ab4f8;--wrong:#2a1b1a}}
@@ -29,7 +29,7 @@ tr.wrong td{background:var(--wrong)}
 .COVERED{color:var(--ok);font-weight:600}.STALE,.PARTIAL{color:var(--warn);font-weight:600}.UNCOVERED{color:var(--bad);font-weight:600}.UNMAPPED{color:var(--info);font-weight:600}
 .wrap{overflow-x:auto}td.id{white-space:nowrap}small{color:var(--mut);display:block}
 </style></head><body><main>
-<h1>controlmap: __N__ obligations, one status each</h1>
+<h1>ControlMap CLI: __N__ obligations, one status each</h1>
 <p class="s">Synthetic data. Each row is an obligation. The truth column is what I planted; the other columns are what each method printed. Shaded rows are the ones ControlMap gets wrong.</p>
 <div class="k" id="k"></div>
 <div><label>ControlMap says <select id="d"><option value="">all</option><option>COVERED</option><option>STALE</option><option>PARTIAL</option><option>UNCOVERED</option><option>UNMAPPED</option></select></label>

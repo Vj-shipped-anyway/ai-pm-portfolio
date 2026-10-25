@@ -1,4 +1,4 @@
-# 🧭 controlmap: an obligation-to-control crosswalk that says when it cannot decide
+# 🧭 ControlMap CLI: an obligation-to-control crosswalk that says when it cannot decide
 
 **I wanted to know how far a short list of plain rules gets when someone has to say, for each AI obligation, which control meets it and whether the evidence is current, and which answers it still gets wrong without saying so. This is a command-line tool over an obligations CSV and a controls CSV: it matches on a phrase dictionary, ignores retired controls and denied phrases, checks scope and evidence age, and prints COVERED, STALE, PARTIAL, UNCOVERED or UNMAPPED for each obligation.** It extends [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), a four-step walkthrough with a Streamlit app, into a command-line tool you can point at your own files, and scores it against a hand-typed register column and a keyword sheet.
 

@@ -1,4 +1,4 @@
-# PRD: controlmap
+# PRD: ControlMap CLI
 
 **Author:** Vijay Saharan, Sr PM
 **Stage:** Portfolio prototype
