@@ -545,8 +545,8 @@ if st.session_state.step >= 4:
             "This is a prototype on synthetic data. The production shape is a vendor register fed by the contract "
             "system and the questionnaire tool, an evidence store with issue dates and scope, a fourth-party map "
             "maintained from vendor disclosures, and a scoring service that writes each decision with its reasons to "
-            "the third-party risk record. It is a design, not deployed; see `ARCHITECTURE.md`. Related projects "
-            "(designed, none built): InferenceLens (07) for spend per vendor, SwapBrief (13) for model swaps that "
+            "the third-party risk record. It is a design, not deployed; see `ARCHITECTURE.md`. Interlocks with "
+            "other projects in this repo (designed, none built): InferenceLens (07) for spend per vendor, SwapBrief (13) for model swaps that "
             "change the fourth party, ControlMap (16) for vendor-model obligations, SchemaWatch (15) for vendor API "
             "changes, KillSwitch (25) for exit and fallback drills."
         )

@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (an evidence rule, a concentration view, an exit score, a risk class and a cadence, over synthetic data, with a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most bank platform teams run on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![VendorLens flow](./assets/vendorlens-flow.svg)
 
@@ -14,7 +14,7 @@ This doc is cloud-agnostic where the design allows it and explicit where it does
 
 VendorLens is a decision-support layer on the vendor record. It does not replace the vendor register, the questionnaire tool, the contract repository or the third-party risk team's judgment. It reads them, scores what can be checked, and writes a decision with its reasons that a person accepts, changes or overrides.
 
-Nine components. Five are in the decision path; four are not.
+Nine components. Six are in the decision path; three are not.
 
 | Component | Responsibility | Language / framework | In the decision path? | Stateful? |
 | --- | --- | --- | --- | --- |

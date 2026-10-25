@@ -9,10 +9,10 @@
 **What it shows** (🟢 measured on synthetic data; the script is named in brackets):
 
 - 🟢 Questionnaire: 29 of 40 pass (72.5%); 6 of 10 truly high-risk vendors pass (`step_02`)
-- 🟢 Evidence: 27 of 29 passes have at least one missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions (58.4%) have no valid document (`step_03`)
+- 🟢 Evidence: 27 of 29 passes have at least one missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions, counted on passing vendors (58.4%), have no valid document (`step_03`)
 - 🟢 Known limit: 5 of 10 truly high-risk vendors are not rated HIGH, and 3 vendors rated HIGH are not truly high (`step_04`)
 
-_A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
+_Built for the third-party risk manager who has to decide which AI vendors get a deep review. A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
 ![Synthetic vendors: 40](https://img.shields.io/badge/synthetic%20vendors-40-blue)
 ![Questionnaire passes: 29 of 40](https://img.shields.io/badge/questionnaire%20passes-29%20of%2040-blue)
@@ -68,7 +68,7 @@ Teams that govern AI vendors usually start with two cheap tools: a register of v
 
 | Capability | Register and flat review cycle | Questionnaire at 85% yes | **VendorLens** |
 | --- | --- | --- | --- |
-| Checks an answer against a document or the contract | Only if a person does it | No: counts the word yes. 🟢 27 of 29 passes have a missing, stale or out-of-scope document | 🟢 Every answer is classed backed, unbacked, unverifiable or contradicted; 222 of 380 yes answers on evidence-backed questions (58.4%) among passes have no valid document |
+| Checks an answer against a document or the contract | Only if a person does it | No: counts the word yes. 🟢 27 of 29 passes have a missing, stale or out-of-scope document | 🟢 Every answer is classed backed, unbacked, unverifiable or contradicted; 222 of 380 yes answers on evidence-backed questions (58.4%) on passing vendors have no valid document |
 | Sees one upstream provider carrying many vendors | Only if the provider column is filled in: 🟢 5 of 40 are blank | 🟢 Asks in 0 of 20 questions; 10 of the 14 vendors on the top provider pass on their own | 🟢 MP-1 carries 42.9% of 56 critical use cases (HHI 3282) and is flagged |
 | Scores how the bank would leave | No | 🟢 Asks in 0 of 20 questions | 🟢 6 ready, 17 partial, 17 not ready of 40; 9 of 10 critical vendors not ready. 🟡 Modeled time to exit |
 | Weights by criticality and customer data | By hand | 🟢 The same 85% line for all: 9 of 15 PII vendors pass | Yes: risk is scaled by tier and data access |
@@ -115,7 +115,7 @@ Each step script finishes in seconds and writes its CSV or JSON to `src/out/`. T
 **Measured and modeled performance.**
 
 - 🟢 **Questionnaire: 29 of 40 pass (72.5%); 6 of 10 truly high-risk vendors pass** (`step_02`). 79 of 800 answers were over-claimed (said better than the truth); 70 of those sit on vendors that pass.
-- 🟢 **Evidence: 27 of 29 passes have at least one missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions (58.4%) have no valid document** (`step_03`). 15 yes answers on audit rights or model-change notice are contradicted by the vendor's own contract.
+- 🟢 **Evidence: 27 of 29 passes have at least one missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions, counted on passing vendors (58.4%), have no valid document** (`step_03`). 15 yes answers on audit rights or model-change notice are contradicted by the vendor's own contract.
 - 🟢 **Concentration: MP-1 carries 42.9% of 56 critical use cases across 14 vendors, HHI 3282** (`step_03`, `step_04`). 10 of those 14 vendors pass the questionnaire on their own.
 - 🟢 **HIGH detection: VendorLens rates 8 vendors HIGH and 5 are truly high risk (precision 62.5%, recall 50.0%); a failed questionnaire is 4 of 11 (precision 36.4%, recall 40.0%)** (`step_04`). At the same queue size of 11, VendorLens's top 11 hold 6 of 10 truly high-risk vendors against 4.
 - 🟢 **Exit: 6 vendors ready, 17 partial, 17 not ready; 9 of 10 critical vendors not ready** (`step_04`). 🟡 Modeled: 26 of 40 would take longer to exit than the allowed window (8 of 10 critical), assuming 180 days with no exit clause and 1.5 times the stated days for an untested plan.
@@ -302,7 +302,7 @@ RESULT
 
 | # | Deficiency | What goes wrong | Count in this dataset |
 | --- | --- | --- | --- |
-| 1 | **Self-declared answers over-claim** | A yes with no document behind it counts the same as a yes with one. | 🟢 27 of 29 passes have a missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions (58.4%) have no valid document |
+| 1 | **Self-declared answers over-claim** | A yes with no document behind it counts the same as a yes with one. | 🟢 27 of 29 passes have a missing, stale or out-of-scope document; 222 of 380 yes answers on evidence-backed questions, counted on passing vendors (58.4%), have no valid document |
 | 2 | **Concentration hidden vendor by vendor** | Each vendor looks fine alone; many share one upstream provider. | 🟢 MP-1 carries 42.9% of 56 critical use cases across 14 vendors; 10 of the 14 pass on their own; 0 of 20 questions ask; HHI 3282 |
 | 3 | **Exit readiness never asked** | No one knows if the bank can leave until it must. | 🟢 33 of 40 vendors have no tested exit; 9 of 10 critical. 🟡 Modeled: 26 of 40 would take longer than the allowed window |
 | 4 | **Data access not weighted** | A vendor holding customer data faces the same 85% line as one holding none. | 🟢 9 of 15 PII vendors pass (60.0%); 20 of 25 others pass (80.0%); 5 of the 9 are truly high risk |
@@ -620,8 +620,8 @@ See [`assets/vendorlens-flow.svg`](./assets/vendorlens-flow.svg) for a static vi
 - [07 InferenceLens](../07-inferencelens-inference-finops/) knows what each vendor costs. VendorLens can show the spend beside the risk class, so a HIGH vendor with a large bill is reviewed first.
 - [13 SwapBrief](../13-swapbrief-model-migration/) decides model swaps. A swap changes the upstream provider behind a use case, so it should reopen the concentration view for that vendor and for the estate.
 - [15 SchemaWatch](../15-schemawatch-tool-schema-drift/) watches vendor API changes. A vendor schema change is a trigger for an out-of-cycle evidence check.
-- **16 ControlMap** (vendor-model obligations) would map each obligation to the vendor control and document that evidences it, so the evidence rule reads from one crosswalk.
-- **25 KillSwitch** (exit and fallback) would run the drills that turn an untested exit into a tested one, which is the single largest lever on the exit score.
+- [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) (vendor-model obligations) would map each obligation to the vendor control and document that evidences it, so the evidence rule reads from one crosswalk.
+- [25 KillSwitch](../25-killswitch-ai-fallback-drills/) (exit and fallback) would run the drills that turn an untested exit into a tested one, which is the single largest lever on the exit score.
 
 ---
 
@@ -697,7 +697,7 @@ If you run it on a real register and get something useful, open an issue or send
 ## 🙌 Acknowledgements
 
 - **[NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework)** — the 'Govern' and 'Map' functions frame why a bank needs to know which third-party components an AI system depends on.
-- **[SR 23-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2304.htm)** — the interagency third-party risk guidance; the standard the due-diligence, contract and ongoing-monitoring work would have to meet.
+- **[SR 23-4](https://www.federalreserve.gov/supervisionreg/srletters/SR2304.htm)** — the interagency third-party risk guidance the due-diligence, contract and ongoing-monitoring work is written against.
 - **SR 11-7 (the 2011 predecessor), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A vendor's model is still a model the bank is accountable for.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the provider and deployer split is why the design records which upstream provider a vendor's system runs on.
-- **Sibling projects in this repo** — [07 InferenceLens](../07-inferencelens-inference-finops/), [13 SwapBrief](../13-swapbrief-model-migration/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), with 16 ControlMap and 25 KillSwitch, the five interlocks.
+- **Sibling projects in this repo** — [07 InferenceLens](../07-inferencelens-inference-finops/), [13 SwapBrief](../13-swapbrief-model-migration/) and [15 SchemaWatch](../15-schemawatch-tool-schema-drift/), with [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/) and [25 KillSwitch](../25-killswitch-ai-fallback-drills/), the five interlocks.

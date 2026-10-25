@@ -4,7 +4,7 @@
 **Stage:** Portfolio prototype — designed for a third-party-risk read in a real engagement
 **Date:** 2026-Q4
 
-> **Framing:** This PRD is the product I'd bring to a third-party risk review in the seat. It is not a record of a PRD landed at a named bank. The evidence rule, the scoring structure, the architecture and the rollout plan are mine; the numbers are measured on synthetic data I generated or modeled with the assumption named; the production validation is what the next role does. RICE scores and rollout durations below are planning estimates (🔴), not measurements. Obligation statements in this folder are paraphrases written for this exercise, not the text of any rule.
+> **Framing:** This PRD is the product I'd bring to a third-party risk review in the seat. It is not a record of a PRD landed at a named bank. The evidence rule, the scoring structure, the architecture and the rollout plan are mine; the numbers are measured on synthetic data I generated or modeled with the assumption named; the production validation is what the next role does. RICE scores and rollout durations below are planning estimates (🔴), not measurements.
 
 ---
 
@@ -71,7 +71,7 @@
 
 1. **As a third-party risk manager**, I want every AI vendor scored on what a document or the contract backs, so I can see which passes rest on a claim nobody checked.
 2. **As a business owner**, I want to see which upstream model provider my vendor runs on and how much of the bank's critical use depends on it, so a renewal decision includes the fourth party.
-3. **As a model risk reviewer**, I want each score to show its parts and the weights in force, so the ongoing-monitoring story under SR 26-2 and SR 23-4 is documented per vendor and not only at onboarding.
+3. **As a model risk reviewer**, I want each score to show its parts and the weights in force, so ongoing monitoring, a theme in SR 26-2 and SR 23-4, is documented per vendor and not only at onboarding.
 4. **As procurement**, I want a list of contract terms ranked by how much they would move the score, so negotiation time goes where it changes the risk.
 
 ---
@@ -147,4 +147,4 @@
 
 ---
 
-*This PRD interlocks with [Project 07 (InferenceLens)](../07-inferencelens-inference-finops/), [Project 13 (SwapBrief)](../13-swapbrief-model-migration/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/), and with Project 16 (ControlMap) and Project 25 (KillSwitch). All five links are 🔴 designed, none built.*
+*This PRD names interlocks with [Project 07 (InferenceLens)](../07-inferencelens-inference-finops/), [Project 13 (SwapBrief)](../13-swapbrief-model-migration/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/), and with [Project 16 (ControlMap)](../16-controlmap-ai-obligation-crosswalk/) and [Project 25 (KillSwitch)](../25-killswitch-ai-fallback-drills/). All five links are 🔴 designed, none built.*
