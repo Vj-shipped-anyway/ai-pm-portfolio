@@ -1,6 +1,6 @@
 # 🔭 SchemaWatch — Tool-Schema Drift Detection for Tool-Calling Agents
 
-**A portfolio prototype for catching tool-schema changes before an agent's calls fail, or quietly mean something else: a structural diff, a description heuristic, a replay of recorded calls, a blast-radius ranking and a release gate. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function and the ongoing-monitoring expectation in [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026).**
+**A portfolio prototype for catching tool-schema changes before an agent's calls fail, or quietly mean something else: a structural diff, a description heuristic, a replay of recorded calls, a blast-radius ranking and a release gate. Aligned to the [NIST AI RMF](https://www.nist.gov/itl/ai-risk-management-framework) 'Measure' function; [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm) (which replaced SR 11-7 in April 2026) is the model-risk guidance the work is compared with for ongoing monitoring.**
 
 **▶ Static demo, no install:** [open on GitHub Pages](https://vj-shipped-anyway.github.io/ai-pm-portfolio/15-schemawatch-tool-schema-drift/demo.html)
 
@@ -10,7 +10,7 @@
 
 - 🟢 Classification: 41 of 45 changes match the ledger (91.1%) (`step_04`)
 - 🟢 Replay: 742 calls predicted broken, 742 truly broken, 0 false positives, 0 misses (`step_04`)
-- 🟢 Gate: 17 BLOCK, 6 REVIEW, 8 ALLOW across 31 releases
+- 🟢 Gate: 17 BLOCK, 6 REVIEW, 8 ALLOW across 31 releases (`step_04`)
 
 _A portfolio prototype on synthetic data, not a production case study. The framing, how to read the numbers and the regulatory note are folded below._
 
@@ -525,7 +525,7 @@ See [`assets/schemawatch-flow.svg`](./assets/schemawatch-flow.svg) for a static 
 
 - [05 AgentWatch](../05-agentwatch-agent-observability/) sees the runtime failure. SchemaWatch is the pre-release side of the same problem: when AgentWatch sees a tool error, it can check whether SchemaWatch holds an open BLOCK or REVIEW for that tool, and label the failure as known drift instead of a new incident.
 - [06 PromptShield](../06-promptshield-prompt-injection-defense/) is the tool-call gate. SchemaWatch supplies the revision a call must validate against, and can route calls to a tool under BLOCK to a safe fallback instead of the changed API.
-- [09 LineageLog](../09-lineagelog-ai-decision-audit/) records tool-call lineage. Each recorded call carries the schema revision hash it ran under, so a reviewer can answer "which version of this tool did that decision use".
+- [09 LineageLog](../09-lineagelog-ai-decision-audit/) composes the decision-level audit record (prompt version, retrieval set, model snapshot, features). The designed extension adds the schema revision hash each tool call ran under, so a reviewer can answer "which version of this tool did that decision use". LineageLog does not record tool calls today.
 
 ---
 
@@ -603,6 +603,6 @@ If you run it on a real tool log and get something useful, open an issue or send
 - **SR 11-7 (OCC bulletin 2011-12), replaced in April 2026 by [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A tool whose meaning changes under a deployed agent is a change the ongoing-monitoring story has to account for.
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the excessive-agency theme behind treating tool schemas as a controlled interface.
 - **[OpenTelemetry](https://opentelemetry.io/)** — the telemetry standard the production design would emit to.
-- **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the Article 12 record-keeping expectation that the revision-hash lineage in the LineageLog interlock would have to meet.
+- **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — the Article 12 record-keeping vocabulary the revision-hash lineage in the LineageLog interlock is written toward. This is not a claim that the Act applies or that the design meets it.
 - **JSON Schema and semantic versioning** — the conventions the synthetic schemas imitate and the version strings that owners follow, or do not.
 - **Sibling projects in this repo** — [05 AgentWatch](../05-agentwatch-agent-observability/), [06 PromptShield](../06-promptshield-prompt-injection-defense/) and [09 LineageLog](../09-lineagelog-ai-decision-audit/), the three interlocks.

@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (a structural diff, a description heuristic, a strict validator and a gate, over synthetic data, with a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. The design assumes the bank runs on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
 
 ![SchemaWatch flow](./assets/schemawatch-flow.svg)
 
@@ -387,7 +387,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 | --- | --- |
 | **SR 11-7 / model risk management** | A tool whose meaning changes under a deployed agent is a change to a component the model's output depends on. The decision log and evidence bundles are the ongoing-monitoring record for that dependency. |
 | **NIST AI RMF** | The Measure and Manage functions map to replay, classification and the gate. |
-| **EU AI Act, Article 12 record-keeping** | The revision-hash stamp on tool-call lineage (LineageLog interlock) is the record-keeping hook; it would have to meet the standard the regulator sets. |
+| **EU AI Act, Article 12 record-keeping** | The revision-hash stamp on the decision lineage record (LineageLog interlock) is the record-keeping hook the design is written toward. This is not a claim that the Act applies or that the design meets it. |
 | **OWASP LLM Top 10, excessive agency** | Treating tool schemas as a controlled interface limits what an agent can be made to do by an uncontrolled change. |
 | **SOC 2 Type II, GDPR, India data localization** | Regional instances, tokenized call values, append-only audit. |
 

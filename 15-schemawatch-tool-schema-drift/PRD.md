@@ -26,13 +26,13 @@
 | **Risk #1** | Owners treat the gate as a speed bump and deploy around the registry. Mitigation: start advisory, count bypasses as a first-class metric, hold only what passes through a registry or pipeline the owners agreed to use. |
 | **Risk #2** | Replay runs on a stale or thin call log and gives false comfort. Mitigation: a minimum recorded-call count per tool; below it the gate says REVIEW, not ALLOW. |
 | **Risk #3** | The description heuristic gives false confidence. It reads numbers and units only; 🟢 0 of 3 meaning changes with no number or unit were flagged. Mitigation: an owner attestation field ("does this release change what any parameter means?") and a human read of description diffs for tools that move money. |
-| **Out of scope** | Runtime failure detection (AgentWatch, 05); the tool-call gate and prompt-injection defense (PromptShield, 06); tool-call lineage (LineageLog, 09); contract tests on the owner's side. |
+| **Out of scope** | Runtime failure detection (AgentWatch, 05); the tool-call gate and prompt-injection defense (PromptShield, 06); decision-level audit lineage (LineageLog, 09); contract tests on the owner's side. |
 
 ---
 
 ## RICE-prioritized backlog (sequenced for v0.x)
 
-> Scoring: Reach (R) × Impact (I) × Confidence (C) / Effort (E). Reach is tools or roles, as labeled. Effort in PM-weeks. All scores are 🔴 planning estimates. The top of the list is what gets built first.
+> Scoring: Reach (R) × Impact (I) × Confidence (C) / Effort (E). Reach is tools or roles, as labeled. Effort in PM-weeks. All scores are 🔴 planning estimates. Rows are grouped by the release that carries them (v0.1, v0.2, v0.3, then queued). In v0.1 the order is build order, because the diff, the replay and the gate read the collector's revisions; in the other groups it is RICE order.
 
 | Rank | Item | R | I | C | E | RICE | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -41,12 +41,12 @@
 | 3 | **Replay validator** (would-break count per tool from recorded calls) | 28 tools | 3 | 0.9 | 3 | 25.2 | Built in prototype; v0.1 |
 | 4 | **Release gate** (check API for the owner's pipeline, hold state in the registry) | 28 tools | 3 | 0.7 | 5 | 11.8 | Sequenced for v0.1 |
 | 5 | **Description heuristic** (numbers and units in descriptions) | 28 tools | 2 | 0.8 | 2 | 22.4 | Built in prototype; v0.2 |
-| 6 | **Owner attestation field** (does this release change what a parameter means?) | 28 tools | 3 | 0.5 | 2 | 21.0 | Sequenced for v0.2 |
-| 7 | **Blast-radius ranking** (by recorded calls hit) | 4 roles | 2 | 0.9 | 2 | 3.6 | Built in prototype; v0.2 |
-| 8 | **Revision-hash stamp on tool-call lineage** (LineageLog interlock) | 28 tools | 2 | 0.8 | 2 | 22.4 | Sequenced for v0.2 |
+| 6 | **Revision-hash stamp on the decision lineage record** (LineageLog interlock) | 28 tools | 2 | 0.8 | 2 | 22.4 | Sequenced for v0.2 |
+| 7 | **Owner attestation field** (does this release change what a parameter means?) | 28 tools | 3 | 0.5 | 2 | 21.0 | Sequenced for v0.2 |
+| 8 | **Blast-radius ranking** (by recorded calls hit) | 4 roles | 2 | 0.9 | 2 | 3.6 | Built in prototype; v0.2 |
 | 9 | **Constraint diff** (minimum, maximum, maxLength, pattern) | 28 tools | 2 | 0.8 | 3 | 14.9 | Sequenced for v0.3 |
-| 10 | **Replay calibration** against real server rejections | 28 tools | 3 | 0.6 | 4 | 12.6 | Sequenced for v0.3 |
-| 11 | **Known-drift label for runtime failures** (AgentWatch interlock) | 28 tools | 2 | 0.7 | 3 | 13.1 | Sequenced for v0.3 |
+| 10 | **Known-drift label for runtime failures** (AgentWatch interlock) | 28 tools | 2 | 0.7 | 3 | 13.1 | Sequenced for v0.3 |
+| 11 | **Replay calibration** against real server rejections | 28 tools | 3 | 0.6 | 4 | 12.6 | Sequenced for v0.3 |
 | 12 | **Evidence bundle exporter** to the model-risk record | 2 reviewers | 2 | 0.9 | 2 | 1.8 | Sequenced for v0.3 |
 | 13 | **Fallback routing for tools under BLOCK** (PromptShield interlock) | 28 tools | 2 | 0.5 | 4 | 7.0 | Queued |
 | 14 | **Nested objects, oneOf and anyOf in the validator** | 9 tools | 2 | 0.6 | 5 | 2.2 | Queued |
@@ -72,7 +72,7 @@
 1. **As an agent platform lead**, I want every tool-schema release scored against the calls my agent actually sends, so I know which releases break calls before they reach production and which only change meaning.
 2. **As a tool owner**, I want a verdict with reasons and example calls when I publish a schema revision, so I can fix a real break or mark a change cosmetic without a meeting.
 3. **As an SRE on call**, I want a runtime tool failure to carry the open SchemaWatch decision for that tool, so I can tell known drift from a new incident in the first minute.
-4. **As a model risk reviewer**, I want the schema revision each tool call ran under, with the gate decision that let it through, so the ongoing-monitoring story under SR 11-7 and the NIST AI RMF 'Measure' function is documented per release and not only at attestation time.
+4. **As a model risk reviewer**, I want the schema revision each tool call ran under, with the gate decision that let it through, so the ongoing-monitoring story is documented per release and not only at attestation time (SR 11-7 and the NIST AI RMF 'Measure' function are the guidance the work is compared with).
 
 ---
 
