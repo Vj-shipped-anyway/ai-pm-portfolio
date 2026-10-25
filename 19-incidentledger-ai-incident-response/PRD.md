@@ -25,7 +25,7 @@
 | **Cost** | 🔴 Not estimated. The prototype runs in seconds on a laptop; production cost depends on incident volume and the notification channels and has not been sized. |
 | **Risk #1** | Determination is delayed or never recorded, so the clock never starts. 🟢 5 incidents have none at the read date and 8 deadlines have not started. Mitigation: a named person must decide within a set time, and the tool shows hours since detection while it waits. |
 | **Risk #2** | The policy hours are wrong or out of date, which gives false comfort. Mitigation: hours live in a versioned policy file that counsel signs off, and every clock shows its hours and its basis. |
-| **Risk #3** | The classifier is wrong with no flag. 🟢 5 of 120 categories are wrong with no flag (an injection that exposes personal data is filed as data exposure). Mitigation: clocks run on rubric fields, not on category; a person reviews every S1 and S2 category. |
+| **Risk #3** | The classifier is wrong with no flag. 🟢 5 of 120 categories are wrong with no flag (for example, an injection that exposes personal data is filed as data exposure). Mitigation: clocks run on rubric fields, not on category; a person reviews every S1 and S2 category. |
 | **Out of scope** | Runtime detection (AgentWatch, 05); the human review workflow (OversightOps, 08); AI decision records (LineageLog, 09); change control (SchemaWatch, 15; SwapBrief, 13); mapping obligations to controls (ControlMap, 16); the fallback itself (KillSwitch, 25); sending the notices, which stay with people. |
 
 ---
@@ -71,7 +71,7 @@
 1. **As an AI incident manager**, I want every incident rated by rubric and every notification clock running with hours left, so I know which notices are owed and which are about to be missed without building a spreadsheet.
 2. **As an executive on call**, I want a countdown before a deadline passes, with the severity and the reason, so I am not the last to know.
 3. **As a regulatory liaison**, I want each clock to show its hours, its anchor and its basis in a policy file counsel has signed, so I can defend the number and change it in one place.
-4. **As a model risk reviewer**, I want the rating, the determination time, the notices sent and the follow-up evidence in one record, so the ongoing-monitoring story under SR 26-2 and the NIST AI RMF 'Manage' function is documented per incident and not rebuilt from tickets afterwards.
+4. **As a model risk reviewer**, I want the rating, the determination time, the notices sent and the follow-up evidence in one record, so ongoing monitoring (SR 26-2) and incident response (the NIST AI RMF 'Manage' function), the themes this work is written against, are documented per incident and not rebuilt from tickets afterwards.
 
 ---
 
@@ -146,4 +146,4 @@
 
 ---
 
-*This PRD interlocks with [Project 05 (AgentWatch)](../05-agentwatch-agent-observability/), [Project 08 (OversightOps)](../08-oversightops-hitl-workflow/), [Project 09 (LineageLog)](../09-lineagelog-ai-decision-audit/), [Project 13 (SwapBrief)](../13-swapbrief-model-migration/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/); 16 ControlMap and 25 KillSwitch are named as designed interlocks, none built.*
+*This PRD names interlocks with [Project 05 (AgentWatch)](../05-agentwatch-agent-observability/), [Project 08 (OversightOps)](../08-oversightops-hitl-workflow/), [Project 09 (LineageLog)](../09-lineagelog-ai-decision-audit/), [Project 13 (SwapBrief)](../13-swapbrief-model-migration/) and [Project 15 (SchemaWatch)](../15-schemawatch-tool-schema-drift/), [Project 16 (ControlMap)](../16-controlmap-ai-obligation-crosswalk/) and [Project 25 (KillSwitch)](../25-killswitch-ai-fallback-drills/). All seven are 🔴 designed, none built.*

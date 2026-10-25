@@ -15,7 +15,7 @@ One row per ticket, as a queue would hold it. Times are integer hours from `EPOC
 | Column | Type | What it is |
 | --- | --- | --- |
 | `incident_id` | string | `INC-0001` onward, in the order tickets were reported. |
-| `reported_at` | int (hours) | When the ticket was filed. Between hour 72 and hour 2290 (2026-07-04 to 2026-10-04). |
+| `reported_at` | int (hours) | When the ticket was filed. Between hour 88 and hour 2251 (2026-07-04 to 2026-10-02); the generator's window is hour 72 to hour 2290. |
 | `reporter_priority` | `P1` to `P4` | The priority the reporter picked. This is what the queue sorts on. |
 | `reporter_category` | free text | What the reporter typed in the category box: 81 distinct strings, with mixed case, stray spaces and question marks. |
 | `title`, `description` | text | Filled in from templates for the incident's true category. Some are written to be hard (below). |

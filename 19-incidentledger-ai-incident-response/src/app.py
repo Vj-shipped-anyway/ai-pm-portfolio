@@ -564,7 +564,7 @@ if st.session_state.step >= 4:
             "This is a prototype on synthetic data. The production shape is an intake service that classifies and "
             "rates each incident, a clock service that reads the policy and the determination time, a follow-up "
             "tracker that asks for evidence at closure, and a record written for the model-risk file. It is a design, "
-            "not deployed; see `ARCHITECTURE.md`. Related projects: AgentWatch (05) detects, OversightOps (08) "
+            "not deployed; see `ARCHITECTURE.md`. Interlocks with other projects in this repo: AgentWatch (05) detects, OversightOps (08) "
             "reviews, LineageLog (09) records the decisions, and SchemaWatch (15) and SwapBrief (13) supply the "
             "change ids. All interlocks are designed, none built."
         )
