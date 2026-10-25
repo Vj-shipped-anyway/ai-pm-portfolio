@@ -1,7 +1,7 @@
 """
 Step 1 — Before continuous monitoring: the quarterly Word-doc attestation.
 
-This is what most US banks still do under SR 11-7 today. A model is deployed
+This is the practice the walkthrough assumes under SR 11-7. A model is deployed
 in Q1, the model owner signs a 30-page attestation in Word, the document
 goes into a shared drive, and nobody opens it again until Q4 audit prep.
 

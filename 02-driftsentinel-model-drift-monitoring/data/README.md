@@ -1,6 +1,6 @@
 # Sample Data — DriftSentinel walkthrough
 
-Four CSVs that drive Steps 1 through 4 of the walkthrough. Everything here is synthetic, seeded, and reproducible. No customer data. No PII. The shapes are calibrated to what I have actually seen at Tier-1 BFSI shops.
+Four CSVs that drive Steps 1 through 4 of the walkthrough. Everything here is synthetic, seeded, and reproducible. No customer data. No PII. The shapes are modeled on the general layout of a Tier-1 BFSI model fleet, not on any bank's data.
 
 ---
 
@@ -82,7 +82,7 @@ The flight log for hosted-model snapshot IDs. The whole reason this file exists:
 | `announcement_status` | `announced` (vendor told us) / `silent_minor_update` (we found it via probe regression) / `acknowledged_post_hoc` (vendor confirmed after escalation). |
 | `notes` | Free-text. |
 
-The interesting row is the Feb 14 entry: `vendor-balanced-4-20260214` showed up with the same API contract but a +6.67pp shift in refusal rate. The Sentinel caught it via vendor-version diff plus refusal-rate proxy. Anthropic confirmed the weights update five days later. This is the failure mode that quarterly Word docs literally cannot represent.
+The interesting row is the Feb 14 entry: `vendor-balanced-4-20260214` showed up with the same API contract but a +6.67pp shift in refusal rate. The Sentinel caught it via vendor-version diff plus refusal-rate proxy. The file records the vendor confirming the weights update five days later (synthetic). This is the failure mode that quarterly Word docs literally cannot represent.
 
 ---
 
@@ -101,7 +101,9 @@ models.csv  ──┬──>  inference_logs.csv  (90 days × 8 models)
         vendor_snapshots.csv  (silent-update flight log)
 ```
 
-Reproducibility: `np.random.seed(42)` in the inference-log generator. Same seed, same rows, same statistics. Re-run `python src/step_02_basic_drift_detection.py` and it prints the same PSI/KS values every time.
+Timeline note: the vendor snapshot file dates the silent update 2026-02-14, which is day 44 of the logs, while the inference logs inject the `support_qa_v2` shift at day 60 (2026-03-02). The scripts join the two by model, not by date, so the gap changes no printed number.
+
+Reproducibility: the inference logs were generated with `np.random.seed(42)`. The generator script is not in this repo, so the committed CSV is the source of truth. The scripts only read it, so re-running `python src/step_02_basic_drift_detection.py` prints the same PSI/KS values every time.
 
 ## Model labels
 

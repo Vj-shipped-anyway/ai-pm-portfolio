@@ -3,9 +3,10 @@ Step 4 — The fix: Drift Sentinel three-loop (Detect / Diagnose / Decide).
 
 Same data, same models. Three loops added.
 
-  Loop 1 — Detect.  PSI/KS plus segment-aware noise floor, plus the GenAI
-  proxy portfolio (refusal rate, response length, groundedness), plus a
-  vendor-version diff that fires when a snapshot ID changes silently.
+  Loop 1 — Detect.  PSI/KS, plus the GenAI proxy portfolio (refusal rate,
+  response length, groundedness), plus a vendor-version diff that fires when
+  a snapshot ID changes silently. A segment-aware noise floor is part of the
+  design (see the PRD) and is not implemented in this script.
 
   Loop 2 — Diagnose.  Per-feature contribution bisect, segment slicer that
   separates aggregate from slice movement, and an upstream-lineage callout
@@ -246,7 +247,7 @@ def assemble_evidence_bundle(model: dict, classical: list[dict], segments: list[
         },
         "decide": decision,
         "validator_routing": "MRM L2 — Tier-1 queue",
-        "audit_trail_handoff": "Project 08 — lineage event emitted",
+        "audit_trail_handoff": "Project 09 — lineage event emitted",
         "attestation_template_prefilled": True,
         "human_edit_before_signoff": True,
     }

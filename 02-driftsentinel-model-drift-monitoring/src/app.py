@@ -7,7 +7,8 @@ Streamlit walkthrough:
   Step 4 - the vendor-snapshot surprise
   Step 5 - the audit pack
 
-The user's mentor flagged: exec summary first, trust signals, single CTA hero.
+Synthetic data. The per-model days-to-detect shown in Step 3 are modeled
+illustrations; no script prints a time to detect.
 """
 
 from __future__ import annotations
@@ -18,7 +19,7 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(
-    page_title="DriftSentinel - Catches model drift 69 days earlier",
+    page_title="DriftSentinel - Designed to catch model drift 69 days earlier (modeled)",
     page_icon="🛰️",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -116,7 +117,7 @@ MODELS = {
         "model_id": "credit_pd_v3",
         "tier": 1,
         "owner": "line1.credit-risk",
-        "narrative": "Subprime DTI distribution shifts at Day 60. Aggregate PSI is quiet; the slice cut shows it.",
+        "narrative": "Subprime DTI distribution shifts at Day 60. Aggregate PSI only reads YELLOW (0.22); the subprime slice reads 2.37.",
         "sota_caught_day": 78,
         "sentinel_caught_day": 9,
         "decision": "SHADOW",
@@ -126,28 +127,28 @@ MODELS = {
         "model_id": "fraud_card_v7",
         "tier": 1,
         "owner": "line1.fraud-ops",
-        "narrative": "POS velocity feature drifts after a national retailer rolled out Tap-to-Pay. Slice catches it on Day 11.",
+        "narrative": "Card-present velocity drifts after an adversary tactic shift (synthetic). The slice cut localizes it to card_present_pos.",
         "sota_caught_day": 64,
         "sentinel_caught_day": 11,
         "decision": "RETRAIN",
-        "rec_text": "Trigger weekly retrain on the velocity slice; add Tap-to-Pay channel feature; gate on validator review.",
+        "rec_text": "Retrain a candidate on recent velocity data; it must hold AUC within -0.5pp of the incumbent on backtest before promotion; gate on validator review.",
     },
     "AML SAR Triage (aml_sar_v2)": {
         "model_id": "aml_sar_v2",
         "tier": 1,
         "owner": "line1.financial-crimes",
-        "narrative": "Country-of-origin distribution shifts. Tier-1 AML model - regulator scrutiny means false-negatives are expensive.",
-        "sota_caught_day": 81,
-        "sentinel_caught_day": 12,
-        "decision": "SHADOW",
-        "rec_text": "Shadow-deploy retrained model; keep current model in primary; notify BSA officer of slice drift.",
+        "narrative": "No drift is injected for this model. Step 2 raises one YELLOW alert on the prediction column (PSI 0.1156), which is noise.",
+        "sota_caught_day": -1,
+        "sentinel_caught_day": -1,
+        "decision": "RETAIN",
+        "rec_text": "No action - continue monitoring; re-evaluate at the next window.",
     },
     "Customer Support Q&A GenAI (support_qa_v2)": {
         "model_id": "support_qa_v2",
         "tier": 1,
         "owner": "line1.servicing",
-        "narrative": "Anthropic silently updated the snapshot Feb 24. Refusal-rate spiked +40%. PSI/KS caught nothing.",
-        "sota_caught_day": 999,  # never caught
+        "narrative": "The hosted-model snapshot changed silently on Feb 14 (synthetic). Refusal rate moved from 4.5% to 11.17%. PSI/KS flags numeric columns RED but carries no label and no cause.",
+        "sota_caught_day": 999,  # PSI/KS alerts exist but explain nothing; no time to detect is modeled
         "sentinel_caught_day": 1,
         "decision": "ROLLBACK",
         "rec_text": "Roll back to the prior pinned snapshot; freeze new snapshot promotions until probe regression passes.",
@@ -156,7 +157,7 @@ MODELS = {
         "model_id": "heloc_pd_v1",
         "tier": 2,
         "owner": "line1.credit-risk",
-        "narrative": "Stable - no slice drift detected. Model retains.",
+        "narrative": "No drift is injected. Step 2 raises two YELLOW alerts (noise); Step 4 retains.",
         "sota_caught_day": -1,
         "sentinel_caught_day": -1,
         "decision": "RETAIN",
@@ -166,11 +167,11 @@ MODELS = {
         "model_id": "auto_pd_v4",
         "tier": 2,
         "owner": "line1.auto-lending",
-        "narrative": "Mild aggregate drift; slice cut shows it's confined to used-car segment.",
-        "sota_caught_day": 71,
-        "sentinel_caught_day": 14,
-        "decision": "SHADOW",
-        "rec_text": "Shadow-deploy v4.1 against used-car slice; retain v4 for new-car book.",
+        "narrative": "Stable - no drift is injected and every feature reads GREEN in Step 2. Model retains.",
+        "sota_caught_day": -1,
+        "sentinel_caught_day": -1,
+        "decision": "RETAIN",
+        "rec_text": "No action - continue monitoring; re-evaluate at the next window.",
     },
 }
 
@@ -195,7 +196,7 @@ st.markdown(
     f"""
 <div class='ds-hero'>
   <div class='brand'>🛰️ DriftSentinel</div>
-  <h1>Catches production model drift 69 days before quarterly attestation does.</h1>
+  <h1>Designed to catch production model drift 69 days before quarterly attestation does (modeled).</h1>
   <div class='sub'>Sits on top of your existing drift tooling (Evidently, Arize) and adds the diagnose-decide loop they leave to the validator (the independent reviewer who must approve a model before launch). Slice-aware, GenAI-aware, vendor-snapshot-aware - and outputs a bounded recommendation, not a chart.</div>
   <div class='pills'>
     <span class='pill'><a href='{GITHUB_URL}' target='_blank'>GitHub</a></span>
@@ -221,7 +222,7 @@ if st.session_state.step == 1:
 st.markdown(
     "<div class='ds-card'><span class='ds-step-label'>Step 1</span>"
     "<h3>Pick a model from the synthetic 8-model fleet</h3>"
-    "<p class='muted'>Mid-tier US bank shape: 8 production models across credit, fraud, AML, GenAI. "
+    "<p class='muted'>$50B-asset US retail bank shape: 8 synthetic production models across credit, fraud, AML, GenAI. "
     "Drift (model drift) is when an AI quietly stops working as well as it used to "
     "(because the world changed). Each one has a different drift story.</p></div>",
     unsafe_allow_html=True,
@@ -292,13 +293,14 @@ if st.session_state.step >= 3:
         risk = "HIGH"
         action = m["rec_text"]
         days_saved = 90
-        key_metric = f"Caught on Day {sentinel_day}; aggregate PSI/KS missed it entirely (vendor-snapshot blind)"
+        key_metric = "Flagged by the vendor-snapshot diff and the refusal-rate proxy; PSI/KS alone gives unlabeled numeric alerts"
         tldr = (
-            f"Anthropic silently updated the vendor snapshot (the exact pinned version of an outside AI). "
-            f"Aggregate PSI (Population Stability Index - detects when the AI is seeing different data than "
-            f"it was trained on) and KS (Kolmogorov-Smirnov test - another data-shift detector) saw nothing "
-            f"because the input distribution did not change - the model's behavior did. DriftSentinel "
-            f"caught it on Day {sentinel_day}."
+            f"The hosted vendor model's snapshot (the exact pinned version of an outside AI) changed without notice. "
+            f"PSI (Population Stability Index - detects when the AI is seeing different data than "
+            f"it was trained on) and KS (Kolmogorov-Smirnov test - another data-shift detector) do flag "
+            f"numeric columns here, but with no label, no cause and no action. The vendor-snapshot diff and the "
+            f"refusal-rate, response-length and groundedness proxies tie the shift to the snapshot change, "
+            f"and DriftSentinel recommends ROLLBACK."
         )
     else:
         days_saved = sota_day - sentinel_day
@@ -306,7 +308,7 @@ if st.session_state.step >= 3:
         verdict_word = decision
         risk = "MEDIUM" if decision in ("SHADOW", "RETAIN") else "HIGH"
         action = m["rec_text"]
-        key_metric = f"Caught on Day {sentinel_day} vs Day {sota_day} for SOTA tooling ({days_saved} days earlier)"
+        key_metric = f"Modeled: caught on Day {sentinel_day} vs Day {sota_day} for SOTA tooling ({days_saved} days earlier)"
         shadow_note = (
             " (SHADOW = shadow mode: run the new model alongside the old one without affecting customers, "
             "to see how it behaves)"
@@ -314,8 +316,8 @@ if st.session_state.step >= 3:
             else ""
         )
         tldr = (
-            f"DriftSentinel flagged a slice-confined drift on Day {sentinel_day}. "
-            f"Aggregate-only tooling would not have surfaced it until Day {sota_day}. "
+            f"In the model, DriftSentinel flags a slice-confined drift on Day {sentinel_day}. "
+            f"Aggregate-only tooling would not surface it until Day {sota_day}. "
             f"Bounded recommendation: {decision}.{shadow_note}"
         )
 
@@ -335,19 +337,19 @@ if st.session_state.step >= 3:
         unsafe_allow_html=True,
     )
 
-    confidence = "HIGH (>95%)" if is_drift else "HIGH (>95%) - no drift to flag"
+    confidence = "Not measured - seeded synthetic data, no confidence interval computed"
     st.markdown(
         f"""
 <div class='trust-card'>
   <h4>Assumptions and Trust Signals</h4>
   <span class='tlabel'>What we compared against</span>
-  <div>Compared input distributions and inference (the actual requests customers send to the AI in production) against the 90-day reference window from <code>inference_logs.csv</code>; vendor snapshots tracked from <code>vendor_snapshots.csv</code>.</div>
+  <div>Compared the current window (days 60 to 90) with the reference window (days 0 to 30) of the synthetic <code>inference_logs.csv</code>; vendor snapshots tracked from <code>vendor_snapshots.csv</code>.</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
-    <li>The 90-day reference window is representative of "stable" behavior.</li>
+    <li>The reference window (days 0 to 30 of the 90-day log) is representative of "stable" behavior.</li>
     <li>Slice cuts (subprime_650_680, card_present_pos, etc.) reflect the bank's actual operating segments.</li>
-    <li>For GenAI proxy metrics (refusal-rate, response-length, judge-drift), the human label set is balanced.</li>
-    <li><a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank'>SR 11-7</a> (Federal Reserve's 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring) ongoing-monitoring expectations apply to this tier-{mrow['tier']} model.</li>
+    <li>For GenAI proxy metrics (refusal-rate, response-length, groundedness), the synthetic columns stand in for real judge scores.</li>
+    <li><a href='https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html' target='_blank'>SR 11-7</a> (2011 supervisory guidance on model risk management; see the README's regulatory note) is the design basis for this tier-{mrow['tier']} model's ongoing monitoring.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
   <div class='confidence-high'>{confidence}</div>
@@ -370,9 +372,9 @@ if st.session_state.step >= 3:
             unsafe_allow_html=True,
         )
     else:
-        d1_caught = "Caught only aggregate PSI on Day " + str(sota_day) if sota_day != 999 else "Did NOT catch this drift (input distribution unchanged)"
+        d1_caught = "Caught only aggregate PSI, modeled at Day " + str(sota_day) if sota_day != 999 else "Raised unlabeled PSI/KS alerts only: no cause, no segment, no action"
         d2_caught = "Quarterly attestation passes - validator does not see the slice cut"
-        d3_caught = f"Slice-aware drift caught on Day {sentinel_day}; bounded recommendation: {decision}"
+        d3_caught = (f"Slice-aware drift caught, modeled at Day {sentinel_day}; bounded recommendation: {decision}" if sota_day != 999 else f"Vendor-snapshot diff plus proxy metrics; bounded recommendation: {decision}")
         st.markdown(
             f"<div class='door-card door-evidently'><b>Door 1 - Evidently / Arize (SOTA aggregate):</b> {d1_caught}</div>"
             f"<div class='door-card door-validator'><b>Door 2 - Quarterly validator attestation:</b> {d2_caught}</div>"
@@ -398,9 +400,9 @@ if st.session_state.step >= 3:
 if st.session_state.step >= 4:
     st.markdown(
         "<div class='ds-card'><span class='ds-step-label'>Step 4</span>"
-        "<h3>The vendor-snapshot surprise (Anthropic, Feb 24, 2026)</h3>"
-        "<p class='muted'>Vendor LLMs silently update snapshots. Aggregate PSI/KS sees nothing - "
-        "the input distribution didn't change. Refusal-rate, response-length, and groundedness all spiked.</p>"
+        "<h3>The vendor-snapshot surprise (synthetic, Feb 14, 2026)</h3>"
+        "<p class='muted'>Hosted models can change snapshot without notice. PSI/KS flags numeric columns but cannot say why. "
+        "In the synthetic data the refusal rate rose from 4.5% to 11.17%, responses got longer, and groundedness fell.</p>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -410,13 +412,13 @@ if st.session_state.step >= 4:
 <div class='verdict-card verdict-flag'>
   <div class='vlabel'>Vendor Snapshot Diff</div>
   <div class='vbig'>ROLLBACK</div>
-  <div class='vmetric'>Anthropic silently rolled the support_qa_v2 snapshot Feb 24, 2026</div>
+  <div class='vmetric'>The support_qa_v2 snapshot changed silently on Feb 14, 2026 (synthetic)</div>
   <div class='vrow'>
     <span class='vchip'>Risk: HIGH</span>
-    <span class='vchip'>SOTA tooling caught: nothing (input distribution unchanged)</span>
-    <span class='vchip'>DriftSentinel caught: Day 1, refusal-rate proxy</span>
+    <span class='vchip'>PSI/KS: RED on unlabeled numeric columns, no diagnosis</span>
+    <span class='vchip'>Step 4: ROLLBACK from the snapshot diff plus proxies</span>
   </div>
-  <div class='vtldr'><b>TL;DR:</b> Without vendor-snapshot diffing, this is the kind of drift no PSI dashboard will ever surface. The proxy metrics (refusal-rate, response-length, judge-drift) are the only signal.</div>
+  <div class='vtldr'><b>TL;DR:</b> A PSI dashboard shows unlabeled numeric alerts for this kind of drift. The snapshot diff and the proxy metrics (refusal-rate, response-length, groundedness) are what tie it to the vendor change.</div>
 </div>
 """,
         unsafe_allow_html=True,
@@ -434,7 +436,7 @@ if st.session_state.step >= 5:
     st.markdown(
         "<div class='ds-card'><span class='ds-step-label'>Step 5</span>"
         "<h3>MRM-ready audit pack</h3>"
-        "<p class='muted'>Every drift event auto-assembles an evidence bundle the validator can read in 5 minutes.</p>"
+        "<p class='muted'>Step 4 writes a sample evidence bundle. The 5-minute read time for a validator is a design target, not measured.</p>"
         "</div>",
         unsafe_allow_html=True,
     )
@@ -444,14 +446,14 @@ if st.session_state.step >= 5:
             f"- **Model:** {mrow['name']} ({mrow['model_id']})\n"
             f"- **Tier:** {mrow['tier']}, Owner: {mrow['owner']}\n"
             f"- **Decision:** {m['decision']}\n"
-            f"- **Drift signal:** captured in `out/step_04_evidence_bundle_credit_pd_v3.json`\n"
-            f"- **Reference window:** 90 days, `inference_logs.csv`\n"
+            f"- **Drift signal:** the sample bundle is `out/step_04_evidence_bundle_credit_pd_v3.json` (credit_pd_v3 only)\n"
+            f"- **Reference window:** days 0 to 30 of the 90-day `inference_logs.csv`\n"
             f"- **Vendor snapshot pin:** {mrow['snapshot_id']}\n"
-            f"- **Telemetry stack:** OpenTelemetry -> ClickHouse (drift events) + Datadog + Langfuse\n"
-            f"- **[SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) mapping:** ongoing monitoring + change management + escalation routing. "
-            f"[OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) (Office of the Comptroller of the Currency) and [FRB](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) (Federal Reserve Board) co-issued the rule.\n"
-            f"- **Validator workflow:** auto-routes to {mrow['owner']} (the line-2 validator - independent reviewer "
-            f"who must approve a model before launch) with the bounded recommendation pre-filled"
+            f"- **Telemetry stack (design):** OpenTelemetry -> ClickHouse (drift events) + Datadog + Langfuse\n"
+            f"- **[SR 11-7](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) design basis:** ongoing monitoring + change management + escalation routing. "
+            f"[OCC](https://www.occ.gov/topics/supervision-and-examination/model-risk-management.html) (Office of the Comptroller of the Currency) and [FRB](https://www.occ.gov/news-issuances/bulletins/2011/bulletin-2011-12.html) (Federal Reserve Board) co-issued the guidance.\n"
+            f"- **Validator workflow (design):** routes to the line-2 validator queue (the independent reviewer "
+            f"who approves a model before launch) with the bounded recommendation pre-filled. The line-1 owner is {mrow['owner']}."
         )
 
     # ---------------------------------------------------------------------------
@@ -463,15 +465,15 @@ if st.session_state.step >= 5:
                 ("Drift / model drift", "When an AI quietly stops working as well as it used to (because the world changed)."),
                 ("Silent decay", "Drift where nobody on the team has noticed yet."),
                 ("PSI", "Population Stability Index - a way to detect when the AI is seeing different kinds of data than it was trained on."),
-                ("KS", "Kolmogorov-Smirnov test - another way to detect data shift, more sensitive than PSI."),
+                ("KS", "Kolmogorov-Smirnov test - another way to detect data shift."),
                 ("MTTD", "Mean Time To Detect - how long it took to notice the model went bad."),
                 ("Vendor snapshot", "The exact version of an outside AI (e.g., Anthropic) you're using - pinned in writing."),
-                ("MRM", "Model Risk Management - the bank's internal team that approves every AI before deployment."),
+                ("MRM", "Model Risk Management - the bank's internal team that reviews and validates models."),
                 ("Three lines of defense", "Bank's standard model-risk structure: 1=builders, 2=reviewers, 3=auditors."),
-                ("SR 11-7", "Federal Reserve 2011 supervisory letter on model risk management - sets the bar banks must meet for ongoing AI/ML monitoring."),
-                ("OCC", "Office of the Comptroller of the Currency - federal banking regulator that audits AI safety practices."),
-                ("FRB", "Federal Reserve Board - central banking system; co-issues SR 11-7 with the OCC."),
-                ("Validator / line-2 validator", "Independent reviewer who must approve a model before launch and re-approve when it changes."),
+                ("SR 11-7", "Federal Reserve 2011 supervisory guidance on model risk management. This prototype uses its ongoing-monitoring expectations as a design basis (see the README's regulatory note on SR 26-2)."),
+                ("OCC", "Office of the Comptroller of the Currency - federal regulator that supervises national banks, including their model risk management."),
+                ("FRB", "Federal Reserve Board - central banking system; co-issued SR 11-7 with the OCC."),
+                ("Validator / line-2 validator", "Independent reviewer who validates a model before launch and again when it changes."),
                 ("Risk envelope", "Pre-agreed boundary for 'what we're allowed to do automatically' vs. 'what needs a human'."),
                 ("Shadow mode", "Running a new model alongside the old one without affecting customers, to see how it behaves."),
                 ("Inference", "The actual requests customers send to the AI in production."),

@@ -2,7 +2,9 @@
 
 The systems doc most PM writeups skip. Databases, where the code runs, encryption posture, user management, network, operational runbooks. What you'd hand to your CISO and your platform engineering lead on day one.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on either AWS, GCP, or Azure (or two of three). I'll show the GCP flavor as primary because it aligns with the *Building secure multi-agent systems on Google Cloud* reference architecture this portfolio cites elsewhere; AWS and Azure equivalents are called out inline.
+> **Status.** This is a design, not a deployed system. The repo's scripts and Streamlit app read CSVs in `data/`; none of the components, stores, or services below exists in it. Figures here are design targets or illustrations unless a script prints them, and none is measured.
+
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Most banks run on AWS, GCP, or Azure (or two of three). I'll show the GCP flavor as primary because it aligns with the *Building secure multi-agent systems on Google Cloud* reference architecture this portfolio cites elsewhere; AWS and Azure equivalents are called out inline.
 
 ---
 
@@ -103,8 +105,8 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock, etc.):
 
 - **Primary:** US-East (us-east1 GCP / us-east-1 AWS / East US Azure)
 - **DR:** US-West (us-west1 / us-west-2 / West US 2). Active-passive. RTO 4h, RPO 15min for Tier-1 fleet metadata.
-- **EU instance:** Frankfurt (europe-west3 / eu-central-1 / Germany West Central). Required for GDPR — feature distributions of EU customers cannot egress region.
-- **India instance:** Mumbai (asia-south1 / ap-south-1 / Central India). Required for RBI data localization on Indian retail arms.
+- **EU instance:** Frankfurt (europe-west3 / eu-central-1 / Germany West Central). Data-residency design choice for GDPR: feature distributions of EU customers stay in region.
+- **India instance:** Mumbai (asia-south1 / ap-south-1 / Central India). Design choice for RBI data-localization rules on Indian retail arms.
 - Each regional instance has its own database, its own KMS key ring, its own Identity-Aware Proxy. No cross-region database replication — each is sovereign.
 
 ---
@@ -117,9 +119,9 @@ Egress to vendor APIs (Anthropic, Azure OpenAI, Bedrock, etc.):
 | --- | --- | --- |
 | **PostgreSQL 15** (Cloud SQL / RDS) | Model metadata, drift events, recommendations, evidence bundles, attestations, validator activity, audit log | Relational integrity, joins, mature transactions, cheap at this scale. Bank ops teams know it. |
 | **ClickHouse** (Aiven / Altinity managed, or self-hosted open source) | Daily/hourly drift-signal time-series (PSI, KS, segment-level distributions). High-cardinality, append-only, queried by date range. | Cheaper than RDS for time-series at this volume (design expectation, not benchmarked). The Streamlit prototype reads the CSVs in `data/` and does not use ClickHouse. |
-| **Snowflake / Databricks** (read-only, no copy) | Inference logs, feature snapshots — owned by the existing data warehouse team | Already exists at every Tier-1 BFSI shop. We don't introduce a third lake. |
+| **Snowflake / Databricks** (read-only, no copy) | Inference logs, feature snapshots — owned by the existing data warehouse team | Already exists at most large banks. We don't introduce a third lake. |
 | **Redis** (Memorystore / ElastiCache) | Session cache (UI), idempotency keys (recommendation engine), rate-limiting counters | TTL-based eviction handles cleanup; multi-AZ for high availability |
-| **GCS / S3 / Blob Storage** (with Object Lock) | Immutable evidence bundles (PDF + JSON), audit log archive, model registry artifacts referenced by URI | Object Lock = WORM (write-once-read-many) for SR 11-7 7-year retention |
+| **GCS / S3 / Blob Storage** (with Object Lock) | Immutable evidence bundles (PDF + JSON), audit log archive, model registry artifacts referenced by URI | Object Lock = WORM (write-once-read-many) for a 7-year retention policy (a design default, not an SR 11-7 requirement) |
 
 ### PostgreSQL schema (the consequential tables)
 
@@ -249,9 +251,9 @@ TTL observed_at + INTERVAL 730 DAY DELETE;  -- 2-year retention; archive to GCS 
 | Data class | Retention | Storage | Justification |
 | --- | --- | --- | --- |
 | Model metadata | indefinite (while deployed) | PostgreSQL | Operational |
-| Drift events + bundles | 7 years | PostgreSQL hot for 90d, archive to GCS Object Lock | SR 11-7 |
-| Attestations | 7 years | PostgreSQL append-only + GCS Object Lock | SR 11-7 + audit |
-| Audit log | 7 years | PostgreSQL partitioned + GCS Object Lock | Audit |
+| Drift events + bundles | 7 years (design default; confirm against the bank's schedule) | PostgreSQL hot for 90d, archive to GCS Object Lock | Model documentation |
+| Attestations | 7 years (design default) | PostgreSQL append-only + GCS Object Lock | Model documentation + audit |
+| Audit log | 7 years (design default) | PostgreSQL partitioned + GCS Object Lock | Audit |
 | Drift time-series | 2 years hot | ClickHouse | Operational; aggregate longer history archived |
 | Inference logs | (existing warehouse retention) | Snowflake / Databricks | Read-only access; we don't own retention |
 | Validator session data | 8 hours | Redis | Operational |
@@ -341,7 +343,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 | **PagerDuty** | REST `/v2/incidents` | API key from Vault | Severity-1/2 alert routing | Slack-webhook fallback; manual paging if both fail |
 | **Slack** | Incoming webhook + Block Kit | Webhook URL from Vault | P3 alerts, daily digest, validator-channel notifications | Email digest as fallback |
 | **Archer / ServiceNow GRC / MetricStream** | REST (vendor-specific) | OIDC + per-vendor service principal | Write evidence-bundle metadata + attestation status into the bank's GRC tool | Local audit trail continues; GRC sync resumes when the dependency is back |
-| **Vendor model snapshot manifests** | REST (Anthropic public docs feed) + custom polling against `messages.create` response headers | API key | Daily diff job to detect silent vendor updates | If the manifest endpoint is down, snapshot diff continues from last known state; an unannounced update may still be flagged via response-header drift |
+| **Vendor model snapshot manifests** | REST (the vendor's published model list or release notes, where one exists) + custom polling of the model identifier returned in API responses | API key | Daily diff job to detect silent vendor updates | If the manifest endpoint is down, snapshot diff continues from last known state; an unannounced update may still be flagged by a change in the returned model identifier |
 
 ### APIs we expose (south-bound, what others call us)
 
@@ -376,7 +378,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 | Metrics | Prometheus + Grafana (or Datadog metrics) | RED-method dashboards per service |
 | LLM-specific traces | Langfuse (self-hosted) for the GenAI portion of the fleet only | Not used outside the GenAI proxy-metric path |
 | Drift-event high-cardinality store | ClickHouse (above) | Datadog rates would bankrupt this volume |
-| Audit log | PostgreSQL `audit_log` + GCS Object Lock | SR 11-7 retention |
+| Audit log | PostgreSQL `audit_log` + GCS Object Lock | Record-keeping |
 
 ### Alerting
 
@@ -394,7 +396,7 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 - **Object stores.** Object Lock + versioning + cross-region replication for evidence bundles and audit log.
 - **DR drill cadence.** Quarterly. Full failover to US-West, validate RTO 4h / RPO 15min, fail back. Documented runbook in `docs/runbooks/dr-failover.md`.
 
-### Runbooks (one paragraph each in the repo)
+### Runbooks (planned; one paragraph each)
 
 - `dr-failover.md` — full region failover
 - `vendor-silent-update.md` — when the daily diff job flags a new snapshot
@@ -406,14 +408,16 @@ The systems doc most people skip on. DriftSentinel is a glue product — it talk
 
 ## 6. Compliance posture
 
+Alignment, not certification. This is a design; none of the frameworks below has been assessed against it.
+
 | Framework | Posture |
 | --- | --- |
-| **SOC 2 Type II** | All six components in scope. Annual external audit. |
+| **SOC 2 Type II** | Design intent: all six components in scope of a SOC 2 Type II audit. No audit has been done. |
 | **PCI-DSS** | In scope only when the underlying model touches cardholder data. DriftSentinel itself doesn't process card data; it processes feature distributions. PCI scope minimization via field-level encryption and tokenization at the source. |
-| **GLBA** | Customer financial data handled with field-level encryption + access controls + audit trail. Right-to-be-forgotten cascades to drift events via customer-ID hash deletion. |
-| **SR 11-7** | This is the existence-proof regulation. DriftSentinel is the implementation surface for "ongoing monitoring" the SR letter has required since 2011. The PRD cites it as the existence proof; a paragraph-level mapping is not part of this prototype. |
-| **NIST AI RMF + EU AI Act Article 12** | Decision-grain lineage maintained for the recommendation engine. Interlocks with Project 09 (LineageLog) for the full lineage surface. |
-| **GDPR** | EU instance enforces data residency. Right-to-erasure handled via customer-hash deletion cascade. DPO sign-off documented. |
+| **GLBA** | Customer financial data handled with field-level encryption + access controls + audit trail. Deletion requests cascade to drift events via customer-ID hash deletion (design). |
+| **SR 11-7** | The design basis for the ongoing-monitoring features (see the README's regulatory note on SR 26-2). A paragraph-level mapping is not part of this prototype. |
+| **NIST AI RMF + EU AI Act Article 12** | Design: decision-grain lineage kept for the recommendation engine. Interlocks with Project 09 (LineageLog) for the full lineage surface. |
+| **GDPR** | EU instance keeps data in region. Erasure requests are handled by the customer-hash deletion cascade. DPO sign-off is a launch gate. |
 | **India RBI data localization** | Indian retail-arm fleet runs on the India regional instance only. No cross-border replication. |
 | **OCC / Fed / CFPB exam readiness** | 🔴 Design target: audit-pack export in under 12 minutes per decision, not yet measured. Continuous, not annual. |
 

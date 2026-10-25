@@ -8,9 +8,9 @@
 
 [![The demo, first screen](./assets/demo-first-screen.png)](https://vj-shipped-anyway.github.io/ai-pm-portfolio/02-driftsentinel-model-drift-monitoring/demo.html)
 
-**What it shows** (🟢 measured on synthetic data; the script is named in brackets):
+**What it shows** (🟢 measured on synthetic data; the step that prints each number is named):
 
-- 🟢 Alert volume (Step 2 → Step 4): 11 alerts (6 YELLOW, 5 RED) from 26 feature-level checks across the 8-model synthetic fleet become 3 non-RETAIN decisions (SHADOW, RETRAIN, ROLLBACK)
+- 🟢 Alert volume (Step 2, `step_02_basic_drift_detection.py`, → Step 4, `step_04_with_drift_sentinel.py`): 11 alerts (6 YELLOW, 5 RED) from 26 feature-level checks across the 8-model synthetic fleet become 3 non-RETAIN decisions (SHADOW, RETRAIN, ROLLBACK)
 - 🟢 MRM evidence bundle: Step 4 writes a sample bundle for credit_pd_v3 (`src/out/step_04_evidence_bundle_credit_pd_v3.json`); no script times the assembly, and human edit before sign-off is part of the design
 - 🟢 Vendor silent update caught: Step 4 flags the synthetic Feb-14 snapshot change on `support_qa_v2` (`vendor-balanced-4-20251101` to `vendor-balanced-4-20260214`) as a silent minor update and recommends ROLLBACK; no script measures detection latency
 
@@ -69,13 +69,15 @@ The drift-monitoring space has two well-known incumbents (Evidently AI, Arize). 
 | Capability | Evidently AI | Arize | **DriftSentinel** |
 | --- | --- | --- | --- |
 | PSI / KS / data-drift primitives | ✅ | ✅ | ✅ (designed to sit on Evidently; the step scripts hand-roll PSI/KS) |
-| Slice-aware noise floor (subprime, geography, channel) | ❌ | Partial | ✅ |
+| Slice-aware noise floor (subprime, geography, channel) | ❌ | Partial | ✅ (designed; Step 4 slices by segment, but no noise-floor logic is built) |
 | GenAI proxy metrics (refusal-rate, response-length, judge drift) | ❌ | Limited | ✅ |
-| Vendor-snapshot diff (catches Anthropic / Azure OpenAI silent updates) | ❌ | ❌ | ✅ |
+| Vendor-snapshot diff (flags a hosted model whose snapshot ID changed without notice; the synthetic Feb-14 case) | ❌ | ❌ | ✅ |
 | Bounded recommendation engine (RETAIN / SHADOW / RETRAIN / ROLLBACK) | ❌ | ❌ | ✅ |
 | Auto-assembled MRM evidence bundle | ❌ | ❌ | ✅ |
 | 🟡 MTTD on a Tier-1-shaped fleet (modeled) | ~78d | ~42d | **9d** |
-| 🔴 SR 11-7 attestation-ready (designed) | ❌ | Partial | ✅ |
+| 🔴 Evidence bundle written against SR 11-7 expectations (designed) | ❌ | Partial | ✅ |
+
+*The Evidently AI and Arize columns are my reading of their public descriptions, not something tested here. Check each vendor's current features before relying on them. The DriftSentinel column shows what the step scripts print or what the design intends.*
 
 **Position:** *DriftSentinel doesn't replace Evidently — it sits on top of it and does the diagnosis + decide loops Evidently leaves to the validator.* This framing matters because it tells a buyer they can deploy this **without ripping out** what their data-science team already runs.
 
@@ -83,7 +85,7 @@ The drift-monitoring space has two well-known incumbents (Evidently AI, Arize). 
 
 ## The honest version (why this exists)
 
-The failure mode this product is designed against — a credit decisioning model decaying for weeks while quarterly Word-doc attestation stays clean, and an OCC finding eventually surfacing it — is the published shape of what SR 11-7 ongoing-monitoring expectations are increasingly catching at Tier-1 BFSI shops. It's the kind of failure I track closely in industry research and the kind of product I want to own as a Sr / Principal PM.
+The failure mode this product is designed against — a credit decisioning model decaying for weeks while quarterly Word-doc attestation stays clean, and an OCC finding eventually surfacing it — is the shape of failure that SR 11-7's ongoing-monitoring expectations are written to catch. It's the kind of failure I track closely in industry research and the kind of product I want to own as a Sr / Principal PM.
 
 I built this prototype on the side over weekends. Synthetic data, a laptop, a few cloud credits. No insider data, no production systems touched. The point is to put the four-step product on disk in a form anyone can clone, run, and walk through their own CRO with — to show how I'd reason about the problem, not to claim a deployment I haven't done.
 
@@ -107,7 +109,7 @@ You don't need a cluster. You don't need a job at a bank. You need:
 - **Postgres — optional, only if you want to swap the demo's CSV-based store for a real DB.** Easiest option: Docker Desktop, then `docker run --name pg -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:15`. Free option: Supabase or Neon free tiers.
 - **ClickHouse — optional, only for the high-cardinality drift-signal store.** ClickHouse Cloud has a free tier; for the demo, the CSV path is fine.
 
-About 60 minutes from `git clone` to seeing the four-step walkthrough run end-to-end. The Streamlit prototype runs on the same setup. The clickable `demo.html` runs in any browser with zero install.
+Allow 10 to 60 minutes from `git clone` to seeing the four-step walkthrough run end-to-end, depending on whether Python and the packages are already installed. The Streamlit prototype runs on the same setup. The clickable `demo.html` runs in any browser with zero install.
 
 I'm a PM who follows this specific failure mode in industry research. The point of the prereq list above is to make sure that anyone who's curious — engineer, PM, validator, CRO who codes in their spare time — can replicate the result on a laptop in an afternoon. If you can't, that's a bug in the README. Open an issue.
 
@@ -115,7 +117,7 @@ I'm a PM who follows this specific failure mode in industry research. The point 
 
 ## Executive summary (90 seconds)
 
-**Problem.** A Tier-1 retail bank receives a draft OCC exam finding for inadequate ongoing monitoring under SR 11-7. Validators are attesting 8 production models with quarterly Word docs. A credit model decays for 11 weeks before a complaint volume report surfaces it. 🟡 Modeled exposure: **$14M/yr** in mispriced risk plus regulatory tail (assumes the $50B-asset retail-bank shape and the published loss-per-quarter-of-decay benchmarks). This is the framing this prototype is designed against — informed by published SR 11-7 expectations and the public shape of recent OCC and FRB supervisory letters on AI/ML ongoing monitoring.
+**Problem.** A Tier-1 retail bank receives a draft OCC exam finding for inadequate ongoing monitoring under SR 11-7. Validators are attesting 8 production models with quarterly Word docs. A credit model decays for 11 weeks before a complaint volume report surfaces it. 🟡 Modeled exposure: **$14M/yr** in mispriced risk plus regulatory tail (assumes the $50B-asset retail-bank shape and the published loss-per-quarter-of-decay benchmarks). This is the framing this prototype is designed against, informed by SR 11-7's ongoing-monitoring expectations.
 
 **Product.** DriftSentinel — a three-loop monitoring layer that sits on top of the existing model registry and feature store. **Detect** (PSI/KS plus GenAI proxy metrics plus vendor-snapshot diff) → **Diagnose** (feature bisect, segment slicer, upstream lineage, root-cause attribution) → **Decide** (RETAIN / SHADOW / RETRAIN / ROLLBACK with bounded risk envelope and auto-assembled MRM evidence bundle).
 
@@ -155,7 +157,7 @@ Total reading time: ~12 minutes deep, ~3 minutes if you skim.
 
 ## 🎯 The Use Case
 
-A modeled Tier-1 US retail bank ($50B-asset). 8 production ML models across credit, fraud, AML, and one customer-facing GenAI use case on a hosted Anthropic model. SR 11-7 ongoing-monitoring requirement met today via quarterly Word docs. Between attestations, drift is invisible. By the time a business KPI moves, two quarters have leaked.
+A modeled Tier-1 US retail bank ($50B-asset). 8 production ML models across credit, fraud, AML, and one customer-facing GenAI use case on a hosted vendor model. SR 11-7 ongoing-monitoring requirement met today via quarterly Word docs. Between attestations, drift is invisible. By the time a business KPI moves, two quarters have leaked.
 
 The design is anchored against an OCC draft finding pattern (not a Slack thread). The MRM committee has four weeks to show a remediation plan before the formal exam letter — that's the timebox the product is calibrated against.
 
@@ -181,7 +183,7 @@ Four CSVs in [`data/`](./data/). One preview here, the rest documented in [`data
 | 2026-03-02 | credit_pd_v3 | **0.4466** | 670.3 | 0.5951 |
 | 2026-03-02 | credit_pd_v3 | **0.4656** | 661.0 | 0.6079 |
 
-The four rows above are real rows from the `subprime_650_680` slice. The DTI distribution shifts up on day 60 in that slice; Step 4 traces it to a DTI normalization change deployed on day 58. Three sister CSVs (`models.csv`, `drift_events.csv`, `vendor_snapshots.csv`) have model metadata, flagged drift events, and the Anthropic snapshot history. See `data/README.md`.
+The four rows above are actual rows from the synthetic `subprime_650_680` slice. The DTI distribution shifts up on day 60 in that slice; Step 4 attaches a DTI normalization change deployed on day 58 as the likely cause. That note is a stored lookup, not something the script discovers. Three sister CSVs (`models.csv`, `drift_events.csv`, `vendor_snapshots.csv`) have model metadata, flagged drift events, and the vendor snapshot history. See `data/README.md`.
 
 ---
 
@@ -199,7 +201,7 @@ python src/step_01_quarterly_attestation.py
 
 ## 🤖 Step 2 — With Basic PSI/KS (the SOTA)
 
-PSI/KS sweep on every feature, comparing a current window (days 60 to 90) against a reference window (days 0 to 30). Most banks call this "continuous monitoring." Most use Evidently AI or NannyML.
+PSI/KS sweep on every feature, comparing a current window (days 60 to 90) against a reference window (days 0 to 30). Many teams call this "continuous monitoring," often built on open-source tools such as Evidently AI or NannyML.
 
 ```bash
 python src/step_02_basic_drift_detection.py
@@ -215,7 +217,7 @@ python src/step_02_basic_drift_detection.py
 
 Detection fires on all three drifting models (excerpt of the alert log above; `feature_dti` and `feature_fico` are repurposed per model, see `data/README.md`), but only as PSI numbers. **The validator's pager fires eleven times. They look at PSI=0.2204 on `feature_dti` and ask: so what?**
 
-What feature drove it. Which segment. Whether there was an upstream pipeline change. Whether to retrain, shadow, or rollback. The PSI tells you nothing about any of that. Most banks ignore alerts after the second false positive.
+What feature drove it. Which segment. Whether there was an upstream pipeline change. Whether to retrain, shadow, or rollback. The PSI tells you nothing about any of that. Validators learn to ignore a channel that keeps firing on models that have not drifted.
 
 **Step 2 alert log: 11 alerts (6 YELLOW, 5 RED) from 26 feature-level checks; 4 of the 11 land on models with no injected drift, and none comes with a diagnosis.**
 
@@ -228,7 +230,7 @@ What feature drove it. Which segment. Whether there was an upstream pipeline cha
 | 1 | **Aggregate PSI hides slice disasters** | Headline number is the average; the dangerous slice can be far worse (about 11x here) | `credit_pd_v3` agg PSI=0.220; subprime PSI=2.368 |
 | 2 | **No diagnosis routing** | Alert says "feature X drifted." Validator does the work by hand. | All 5 RED alerts in step 2 |
 | 3 | **GenAI proxy gap** | PSI has no notion of refusal rate, response length or groundedness. The shift shows up as unlabeled numeric drift. | `support_qa_v2` refusal: 4.5% → 11.17%; the refusal column itself reads PSI=0.0654, GREEN |
-| 4 | **Vendor-version blindness** | Snapshot ID changes are not part of the drift signal | Anthropic Feb-14 silent update (`vendor-balanced-4-20260214`) — no event |
+| 4 | **Vendor-version blindness** | Snapshot ID changes are not part of the drift signal | Synthetic Feb-14 silent vendor update (`vendor-balanced-4-20260214`) — no event |
 | 5 | **No bounded recommendation** | Alert fires; what should the model owner DO? | PSI alert in Slack, three days of back-and-forth, no agreed call |
 
 The basic approach catches the *easy* drift (DTI on a credit model) and misses the *hard* drift (vendor silent updates on GenAI). It also generates a noise floor that drives validators away from the channel. **The product is the diagnosis, not the detection.**
@@ -272,6 +274,8 @@ python src/step_04_with_drift_sentinel.py
 | fraud_ach_v3 | 1 | RETAIN |
 | aml_sar_v2 | 1 | RETAIN |
 | **support_qa_v2** | 1 | **ROLLBACK** (pin to the previous vendor snapshot) |
+
+What Step 4 computes from the data: the segment PSIs, the GenAI proxy deltas, and the decision, which comes from a short set of threshold rules. The upstream-lineage line (`feature_pipeline.dti_v2025_11 deployed Day 58`) is a stored note in `diagnose_upstream_lineage()`. Step 4 does not bisect features or learn the cause.
 
 `credit_loss_v2` prints PSI `nan` for `feature_dti` because that column is empty for the model in `inference_logs.csv`; its RETAIN rests on the other three features, all GREEN.
 
@@ -397,7 +401,7 @@ If you run it on real data and get something useful, open an issue or send me th
 
 **Vijay Saharan** — Sr Product / Program Manager · AI in BFSI · Enterprise AI Platforms · CRE as a study interest
 
-[LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Designs compliant AI under regulated constraint*
+[LinkedIn](https://www.linkedin.com/in/vijaysaharan/) · Tagline: *Fintech PM · Designs AI to fit regulated constraints*
 
 ---
 
@@ -406,5 +410,5 @@ If you run it on real data and get something useful, open an issue or send me th
 - [Chip Huyen](https://huyenchip.com/) — silent-decay framing
 - [Evidently AI](https://www.evidentlyai.com/) — open-source PSI/KS primitives this product sits on top of
 - [NannyML](https://www.nannyml.com/) — performance estimation under delayed ground truth
-- SR 11-7 (Federal Reserve SR letter) — the regulatory existence-proof for this product
+- SR 11-7 (Federal Reserve SR letter) — the supervisory guidance this design is written against
 - [Arize AI](https://arize.com/) — drift-monitoring vendor whose blog shaped how I think about diagnosis-as-product

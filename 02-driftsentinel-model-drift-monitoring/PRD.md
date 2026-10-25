@@ -10,9 +10,9 @@
 
 ## 1. Problem
 
-Production ML and GenAI models silently decay. Across the BFSI fleet — credit, fraud, AML, customer-facing GenAI — ground truth is delayed 30 to 180 days, vendor models update without notice, and the SR 11-7 ongoing-monitoring requirement is met today with quarterly Word docs. The result is structural blindness. By the time decay surfaces in a business KPI, two quarters of value have leaked.
+Production ML and GenAI models silently decay. Across a bank's model fleet — credit, fraud, AML, customer-facing GenAI — ground truth can be delayed 30 to 180 days, vendor models can update without notice, and in the case I am designing against the SR 11-7 ongoing-monitoring expectation is met with quarterly Word docs. The result is structural blindness. By the time decay surfaces in a business KPI, two quarters of value have leaked.
 
-The pattern is well-documented in industry research and recent supervisory writing. A credit model that drifts for 11 weeks before anyone notices. A fraud model that loses two recall points across a tactic shift and gets blamed on "campaign noise." A GenAI Q&A use case where the vendor pushes a minor update and the refusal rate doubles overnight (the Feb-14 snapshot change in this repo's synthetic data is the reference case for this last one). None of these are exotic. All of them are invisible to legacy MRM tooling.
+These patterns are widely discussed in industry writing; this repo cites no incident data. A credit model that drifts for 11 weeks before anyone notices. A fraud model that loses two recall points across a tactic shift and gets blamed on "campaign noise." A GenAI Q&A use case where the vendor pushes a minor update and the refusal rate doubles overnight (the Feb-14 snapshot change in this repo's synthetic data is the reference case for this last one). None of these are exotic. All of them are invisible to legacy MRM tooling.
 
 **Primary user:** Production ML/AI Operations Lead (line 1).
 **Secondary user:** Model Validator (line 2).
@@ -20,12 +20,14 @@ The pattern is well-documented in industry research and recent supervisory writi
 
 ## 2. Why now
 
-- GenAI is in production at every Tier-1 US bank, and a unified drift surface that covers it remains a published gap across the major MRM tool vendors.
-- OCC, Fed, and CFPB are signaling sharper expectations on ongoing monitoring of AI/ML in their published supervisory letters. The next exam cycle is where this becomes a finding.
-- Vendor model silent updates from Anthropic, Azure OpenAI, and AWS Bedrock can land without notice (the synthetic Feb-14, 2026 change to `vendor-balanced-4-20260214` in `data/vendor_snapshots.csv` is the reference case). Legacy MRM tooling does not see them.
+- GenAI is in production at many large US banks. In my reading, no MRM tool covers classical models and GenAI in one drift view; I have not surveyed the vendors.
+- Supervisory expectations for ongoing model monitoring are public (SR 11-7, and its April 2026 successor SR 26-2; see the README's regulatory note). I treat them as a design basis, not as a forecast of exam findings.
+- Hosted-model vendors can update a model snapshot without notice (the synthetic Feb-14, 2026 change to `vendor-balanced-4-20260214` in `data/vendor_snapshots.csv` is the reference case). A quarterly Word-doc process has no field for them.
 - The open-source drift primitives (Evidently, NannyML, Whylogs) are mature enough that the build is now about diagnosis and routing, not detection math.
 
 ## 3. Goals (12-month horizon)
+
+These are design targets, not results. The MTTD and loss figures are modeled.
 
 | Goal | Metric | Target |
 |------|--------|--------|
@@ -62,7 +64,7 @@ A three-loop product.
 - Feature-contribution bisect on a tripped alert.
 - Segment slicer by geography, channel, product, and customer cohort.
 - Upstream correlation: did a feature pipeline change land in the 48 hours before drift? Reads from Unity Catalog or Lake Formation lineage.
-- Vendor-version diff for GenAI: which Anthropic or Azure OpenAI snapshot was in flight when behavior changed?
+- Vendor-version diff for GenAI: which hosted-model snapshot was in flight when behavior changed?
 
 ### Loop 3 — Decide
 - Action recommendation engine with a bounded risk envelope:
@@ -115,15 +117,17 @@ A three-loop product.
 
 ## 11. Build & Scale Notes
 
+*The figures in this section (volumes, latency, SLOs) are sizing assumptions and design targets. None was measured or load-tested in this repo.*
+
 **Reference architecture.**
 - Drift compute: Spark on Snowflake (or Databricks if the bank's on Databricks) for the heavy aggregations. Python on a sidecar for diagnosis logic. Evidently AI for the open-source drift primitives. NannyML for performance estimation under delayed ground truth.
-- LLM-as-judge (GenAI portion only): a hosted Anthropic model primary, Azure OpenAI gpt-4o secondary for cross-judge reliability, fine-tuned Mistral 7B on Triton for fully-isolated workloads. Two judges, two vendors, by design — so one shifting under us is itself a detected event.
+- LLM-as-judge (GenAI portion only): a hosted vendor model primary, Azure OpenAI gpt-4o secondary for cross-judge reliability, fine-tuned Mistral 7B on Triton for fully-isolated workloads. Two judges, two vendors, by design — so one shifting under us is itself a detected event.
 - Storage: Snowflake for model output history and reference windows. Feature snapshots from existing feature store. Drift events on ClickHouse (high-cardinality, cheap-to-store).
 - Orchestration: Airflow for scheduled jobs. Temporal for the multi-day human-approval retraining workflow. Kafka or Kinesis for the model-output event spine — pick the one already in the bank.
 - Observability: OpenTelemetry as the substrate. Datadog for SOC. Langfuse for GenAI traces.
 - Compute: CPU-only for drift math. T4/L4 batch for LLM-as-judge. No A100s. The GPU spend belongs to the models being monitored, not the monitor.
 - Data plane: Unity Catalog (Databricks) or Lake Formation (AWS) for lineage — non-negotiable for the diagnose loop.
-- Security: SOC 2 Type II, GLBA, PCI-DSS where in scope. SR 11-7 alignment is the existence proof.
+- Security: SOC 2 Type II, GLBA, PCI-DSS where in scope. SR 11-7 is the design basis.
 
 **Throughput envelope and latency budget.**
 - Roughly 800 to 1,500 monitored models at a Tier-1 bank. 50,000 to 200,000 drift evaluations per day at full coverage.

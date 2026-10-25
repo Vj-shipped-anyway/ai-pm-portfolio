@@ -13,12 +13,12 @@
 <meta property="og:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta property="og:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DriftSentinel — Production Model Drift Dashboard">
 <meta name="twitter:description" content="Detect, diagnose and decide across a credit, fraud, AML and GenAI model fleet, with the evidence bundle assembled for the validator.">
 <meta name="twitter:image" content="https://vj-shipped-anyway.github.io/ai-pm-portfolio/assets/og-card.png">
-<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 27 runnable prototypes on synthetic data">
+<meta name="twitter:image:alt" content="AI PM portfolio card: How AI gets into bank operations, 77 runnable prototypes on synthetic data">
 <link rel="canonical" href="https://vj-shipped-anyway.github.io/ai-pm-portfolio/02-driftsentinel-model-drift-monitoring/demo.html">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAzMiAzMic+PHJlY3Qgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJyByeD0nNicgZmlsbD0nIzFjMjU0MScvPjx0ZXh0IHg9JzE2JyB5PScyMicgZm9udC1mYW1pbHk9J0FyaWFsJyBmb250LXNpemU9JzE1JyBmb250LXdlaWdodD0nNzAwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSd3aGl0ZSc+VlM8L3RleHQ+PC9zdmc+">
 <style>
@@ -140,7 +140,7 @@
     <p class="tagline">Pick a model. See how it's monitored at three maturity levels: quarterly attestation, basic PSI/KS, and DriftSentinel three-loop.</p>
     <p class="author">Project 02 · AI PM Portfolio · <a href="https://www.linkedin.com/in/vijaysaharan/" rel="noopener">Vijay Saharan</a></p>
     <div class="badges">
-      <span class="badge">8-model production fleet</span>
+      <span class="badge">8-model synthetic fleet</span>
       <span class="badge">5 named deficiencies</span>
       <span class="badge">SR 11-7 aligned</span>
       <span class="badge">90-day inference replay</span>
@@ -188,6 +188,8 @@
     <p class="formula">Utility = (basic-detector MTTD − DriftSentinel MTTD) × production model fleet</p>
     <p style="margin: 8px 0 0;">Per-model lift: <b>69 days</b> of decay caught earlier (78d basic → 9d DriftSentinel, modeled). Annualized at fleet scale (~1,200 production models for a Tier-1 BFSI shop): <b>~83,000 model-decay-days prevented per year</b>. Modeled prevented loss at the $50B-asset retail-bank shape: <b>$14M/yr</b>. At Tier-1 fleet scale: <b>~$45-90M/yr modeled</b>. Cost per dollar of prevented loss: about two cents ($280k modeled pilot cost against $14M/yr).</p>
   </section>
+
+  <p style="margin: 16px 0 0; font-size: 13px; color: var(--text-secondary);">Synthetic data. The PSI values, alert counts and decisions come from the step scripts run on a seeded 8-model fleet. The 78-day and 9-day detection times, the loss figures and the cost figure are modeled, not measured.</p>
 
   <footer class="footer-links">
     <a href="https://github.com/Vj-shipped-anyway/ai-pm-portfolio/blob/main/02-driftsentinel-model-drift-monitoring/README.md">Full walkthrough README</a>
@@ -292,7 +294,7 @@ const MODELS = [
     sota: { drifted: true, feature: "feature_fico (response length)", psi: 2.17, severity: "RED", alerts: 3,
             note: "RED on response length (PSI=2.17), groundedness (0.88) and prediction (0.88), but the columns carry no label. The refusal column alone reads PSI=0.0654 GREEN. No GenAI proxy metrics in pipeline. No vendor snapshot diff." },
     shield: { driver: "refusal-rate distribution", segment: "—",
-              lineage: "Anthropic snapshot changed Feb 14 (vendor-balanced-4-20260214 vs prior vendor-balanced-4-20251101) — silent minor update",
+              lineage: "Hosted-model snapshot changed Feb 14 (vendor-balanced-4-20260214 vs prior vendor-balanced-4-20251101), a silent minor update",
               rootCause: "vendor silent update — refusal rate jumped from 4.5% to 11.17%",
               recommendation: "ROLLBACK to the pre-Feb-14 snapshot pin until validated",
               envelope: "if the pinned snapshot fails the probe re-run, escalate to RETRAIN of the downstream RAG layer" }

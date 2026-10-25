@@ -1,10 +1,10 @@
 """
 Step 2 — With basic drift detection: PSI/KS pipeline (the SOTA).
 
-This is what most teams ship as 'continuous monitoring' today. A Python job
-runs nightly, computes Population Stability Index and Kolmogorov-Smirnov
-on each feature against a reference window, and pages the validator if any
-PSI crosses 0.25.
+This is a common way to build 'continuous monitoring'. A Python job runs
+nightly, computes Population Stability Index and Kolmogorov-Smirnov on each
+feature against a reference window, and lists a feature as YELLOW at PSI 0.10
+and RED at 0.25. The alert log below includes both.
 
 It catches the obvious moves. It also produces a steady stream of alerts
 on benign drift (seasonal patterns, week-over-week sample noise) and
