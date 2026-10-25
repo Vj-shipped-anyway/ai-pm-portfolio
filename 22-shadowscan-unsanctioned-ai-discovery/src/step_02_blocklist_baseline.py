@@ -7,8 +7,8 @@ many of the hits are unsanctioned AI sessions, how many are false alarms, and ho
 AI sessions the list never sees.
 
 The list is a stand-in written for this exercise: 13 exact entries and 2 keyword entries. Nothing
-here is a real product list. Bytes in the log are bytes the client sent, whether or not a block page
-came back; this prototype does not model blocking. No model is used anywhere in this repo.
+here is a real product list. Bytes out in the log are the bytes the client sent, whether or not a block
+page came back; this prototype does not model blocking. No model is used anywhere in this repo.
 
 Run (from src/):
     python3 step_02_blocklist_baseline.py

@@ -597,8 +597,8 @@ flowchart LR
 
     subgraph SS["ShadowScan - new layer"]
         COLLECT["ss-collector"]
-        CLASSIFY["ss-classifier"]
-        DISCOVER["ss-discover path and size rules"]
+        CLASSIFY["ss-classifier catalog and feed lookup"]
+        DISCOVER["ss-classifier path and size rules"]
         RANK["ss-ranker exposure index"]
         QUEUE["ss-review review queue"]
     end
@@ -661,10 +661,10 @@ See [`assets/shadowscan-flow.svg`](./assets/shadowscan-flow.svg) for a static vi
 **Interlocks (all 🔴 designed, none built):**
 
 - [11 TierGate](../11-tiergate-ai-usecase-intake/) is the path to sanction a tool. A `sanction` recommendation opens an intake there instead of a ticket, so the tool gets a tier and the evidence that tier requires.
-- 18 VendorLens: sanctioning a tool starts third-party due diligence before the tool enters the catalog.
-- 16 ControlMap: the acceptable-use obligations a block or a coaching note rests on, mapped to the bank's own policy.
+- [18 VendorLens](../18-vendorlens-ai-vendor-due-diligence/): sanctioning a tool starts third-party due diligence before the tool enters the catalog.
+- [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/): the acceptable-use obligations a block or a coaching note rests on, mapped to the bank's own policy.
 - [06 PromptShield](../06-promptshield-prompt-injection-defense/) is not a duplicate of this project. It defends a sanctioned model against injection and exfiltration; ShadowScan finds the tools nobody put behind it. Once a discovered tool is sanctioned, its traffic can be routed through PromptShield.
-- 23 ScopeKeeper: a discovered tool that acts as an agent, with permissions on bank systems, goes to a scope review.
+- [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/): a discovered tool that acts as an agent, with permissions on bank systems, goes to a scope review.
 
 ---
 
@@ -747,4 +747,4 @@ If you run it on a real log and get something useful, open an issue or send me w
 - **SR 11-7, the 2011 predecessor of [SR 26-2](https://www.federalreserve.gov/supervisionreg/srletters/SR2602.htm)** — the model-risk guidance the work is compared with. A model in use that nobody inventoried is a gap in any model inventory (a paraphrase written for this exercise, not the text of the guidance).
 - **[OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/)** — the sensitive-information-disclosure theme behind ranking tools by what staff send to them.
 - **[EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)** — a deployer has to know which AI systems it uses before it can meet obligations about them (a paraphrase written for this exercise, not the text of the regulation).
-- **Sibling projects in this repo** — [06 PromptShield](../06-promptshield-prompt-injection-defense/) and [11 TierGate](../11-tiergate-ai-usecase-intake/), two of the interlocks. 16 ControlMap, 18 VendorLens and 23 ScopeKeeper are the others, designed and not built.
+- **Sibling projects in this repo** — [06 PromptShield](../06-promptshield-prompt-injection-defense/) and [11 TierGate](../11-tiergate-ai-usecase-intake/), two of the interlocks. [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [18 VendorLens](../18-vendorlens-ai-vendor-due-diligence/) and [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/) are the others; those three interlocks are designed, not built.

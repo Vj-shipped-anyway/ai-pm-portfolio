@@ -411,7 +411,7 @@ if st.session_state.step >= 4:
             "resolvers, a classifier service that holds the catalog and feed, an exposure ranker, and a review queue "
             "that routes sanction requests to intake and due diligence. It is a design, not deployed; see `ARCHITECTURE.md`. "
             "Related projects: TierGate (11) is the path to sanction a tool, PromptShield (06) defends sanctioned models "
-            "from injection, VendorLens (18), ControlMap (16) and ScopeKeeper (23) are designed, none built."
+            "from injection. The interlocks with VendorLens (18), ControlMap (16) and ScopeKeeper (23) are designed, none built."
         )
     st.markdown(
         "<div class='ss-card muted'>Built as a portfolio prototype on synthetic data. Walkthrough, PRD and architecture in "

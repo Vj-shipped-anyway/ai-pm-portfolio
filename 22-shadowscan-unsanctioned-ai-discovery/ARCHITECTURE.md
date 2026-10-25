@@ -4,7 +4,7 @@ The systems doc most PM writeups skip. Databases, where the code runs, encryptio
 
 > **Status.** This is the design for the production shape. The repo implements the product mechanic as a prototype (a catalog and feed lookup, a path pattern and a size test, an exposure ranking and a next-action rule, over synthetic logs, with a Streamlit app). Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 
-This doc is cloud-agnostic where the design allows it and explicit where it doesn't. Every BFSI shop is on AWS, GCP or Azure (or two of three). GCP is shown as primary; AWS and Azure equivalents are called out inline.
+This doc is cloud-agnostic where the design allows it and explicit where it doesn't. GCP is shown as primary, with the AWS and Azure equivalents called out inline.
 
 ![ShadowScan flow](./assets/shadowscan-flow.svg)
 
@@ -381,7 +381,7 @@ Shadow first: collect and classify, show nothing to departments, and compare the
 
 ## 6. Compliance posture
 
-Alignment, not certification. These are the frameworks the design is written against. The statements below are paraphrases written for this exercise, not the text of any rule.
+Alignment, not certification. These are the frameworks the design is written against. The statements below are paraphrases written for this exercise, not the text of any rule. SR 26-2 sets no enforceable standards and places generative AI and agentic AI outside its scope (see the regulatory note in the README), so the SR rows name a design basis and an analogy, not a requirement.
 
 | Framework | How the design relates |
 | --- | --- |

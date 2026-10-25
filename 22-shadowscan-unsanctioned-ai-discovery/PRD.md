@@ -70,7 +70,7 @@
 1. **As an information-security lead**, I want the AI domains in our proxy and DNS logs ranked by how much sensitive data goes to them, so I look first at the tool receiving contracts and not the one receiving the most chat prompts.
 2. **As an AI governance lead**, I want a list of AI tools staff use that are not in the catalog, with the owning department and a recommended next step, so I can approve the ones the business needs and stop the ones it should not use.
 3. **As a department owner**, I want to know which tools my team uses outside the catalog and what approved tool does the same job, so a block does not stop the work.
-4. **As a model risk reviewer**, I want the discovered AI tools, with the evidence for each and the decision taken, so the AI inventory behind the model-risk record under SR 26-2 and the NIST AI RMF is complete and dated.
+4. **As a model risk reviewer**, I want the discovered AI tools, with the evidence for each and the decision taken, so the AI inventory behind the model-risk record is complete and dated. SR 11-7, SR 26-2 and the NIST AI RMF are the design basis here, as analogy, not a claim of coverage.
 
 ---
 
@@ -146,4 +146,4 @@
 
 ---
 
-*This PRD interlocks with [Project 06 (PromptShield)](../06-promptshield-prompt-injection-defense/) and [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/). Interlocks with 16 ControlMap, 18 VendorLens and 23 ScopeKeeper are 🔴 designed, none built.*
+*This PRD interlocks with [Project 06 (PromptShield)](../06-promptshield-prompt-injection-defense/) and [Project 11 (TierGate)](../11-tiergate-ai-usecase-intake/). Interlocks with [16 ControlMap](../16-controlmap-ai-obligation-crosswalk/), [18 VendorLens](../18-vendorlens-ai-vendor-due-diligence/) and [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/) are 🔴 designed, none built.*
