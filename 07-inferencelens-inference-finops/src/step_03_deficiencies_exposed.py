@@ -18,7 +18,6 @@ writes src/out/step_03_deficiency_examples.csv.
 """
 
 import csv
-from collections import defaultdict
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"

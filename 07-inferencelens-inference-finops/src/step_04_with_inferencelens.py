@@ -34,7 +34,6 @@ Output:
 import csv
 import time
 from collections import defaultdict
-from datetime import datetime
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
