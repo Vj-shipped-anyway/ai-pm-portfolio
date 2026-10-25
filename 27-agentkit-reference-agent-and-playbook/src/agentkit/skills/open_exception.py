@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from ..catalog import HUMAN_OUTCOMES
 from ..errors import RecordInvalid
 from .base import Skill, SkillResult
 

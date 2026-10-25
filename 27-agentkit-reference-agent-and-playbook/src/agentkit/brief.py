@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from .catalog import HUMAN_STEPS, STEP_ORDER, STEPS
+from .catalog import HUMAN_STEPS, STEPS
 from .errors import BriefError, UnsupportedStepError
 
 SCHEMA = "build-brief/v1"

@@ -2,7 +2,6 @@ import unittest
 
 import _bootstrap  # noqa: F401
 import support
-from agentkit.audit import AuditLog
 from agentkit.brief import acceptance_tests, derive_config, evaluate_acceptance
 from agentkit.handoff import build_runbook, exit_status, monitoring_signals, split_id
 

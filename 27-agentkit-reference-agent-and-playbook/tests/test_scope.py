@@ -4,7 +4,6 @@ import unittest
 import _bootstrap  # noqa: F401
 import support
 from agentkit.audit import AuditLog
-from agentkit.brief import derive_config
 from agentkit.environment import SimEnvironment
 from agentkit.errors import ScopeError
 from agentkit.kit import build_kit

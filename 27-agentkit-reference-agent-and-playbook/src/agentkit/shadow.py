@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from typing import Dict, Iterable, List, Optional
 
-from .catalog import DEFER, HUMAN_OUTCOMES, QUEUE
+from .catalog import DEFER, QUEUE
 
 
 def judge_pair(result, human: dict) -> str:

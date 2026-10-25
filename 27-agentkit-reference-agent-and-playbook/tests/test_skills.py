@@ -2,8 +2,7 @@ import unittest
 
 import _bootstrap  # noqa: F401
 import support
-from agentkit.approvers import ScriptedApprover
-from agentkit.errors import GateViolation, NotFoundError, RecordInvalid
+from agentkit.errors import GateViolation, RecordInvalid
 from agentkit.gates import Approval
 from agentkit.matching import AMBIGUOUS, CLOSE, EXACT, MISMATCH
 from agentkit.reasoning_stub import StubReasoner

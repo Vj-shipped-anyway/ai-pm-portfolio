@@ -2,7 +2,6 @@ import unittest
 
 import _bootstrap  # noqa: F401
 import support
-from agentkit import skills as skills_pkg
 from agentkit.skills import SKILLS, Skill
 from agentkit.skills.base import SkillResult
 
