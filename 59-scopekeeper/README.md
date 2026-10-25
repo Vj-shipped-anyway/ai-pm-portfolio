@@ -1,4 +1,4 @@
-# 🔑 scopekeeper: a usage-versus-grant diff for agent permissions
+# 🔑 ScopeKeeper CLI: a usage-versus-grant diff for agent permissions
 
 **I wanted to know how much of what an AI agent is allowed to do it ever does, and how much a command line tool can safely take away. `scopekeeper diff grants.csv calls.csv` reads who holds which scope and 90 days of calls, proposes removing the grants nobody used and narrowing group grants to the scopes that were called, then replays the proposal against the same calls before anyone applies it.** It rebuilds the diff from [23 ScopeKeeper](../23-scopekeeper-agent-permission-review/) as a command with exit codes, and scores it on a new synthetic estate of its own.
 

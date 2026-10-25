@@ -1,4 +1,4 @@
-# PRD: scopekeeper, a usage-versus-grant diff
+# PRD: ScopeKeeper CLI, a usage-versus-grant diff
 
 **Author:** Vijay Saharan, Sr PM
 **Stage:** Portfolio prototype

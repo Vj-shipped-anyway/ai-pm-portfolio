@@ -22,7 +22,7 @@ def embed(obj):
 
 page = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ScopeKeeper: every grant against every call</title>
+<title>ScopeKeeper CLI: every grant against every call</title>
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--mut:#5b6470;--line:#d9dde3;--remove:#b3261e;--narrow:#8a5a00;--keep:#1e6b3a}
 @media (prefers-color-scheme: dark){:root{--bg:#14161a;--fg:#e8eaed;--mut:#9aa3ad;--line:#2c3138;--remove:#ff8a80;--narrow:#ffc266;--keep:#7fd49a}}
@@ -40,7 +40,7 @@ th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertic
 .remove{color:var(--remove);font-weight:600}.narrow{color:var(--narrow);font-weight:600}.keep{color:var(--keep);font-weight:600}
 .wrap{overflow-x:auto}table.g{min-width:760px}td.n{white-space:nowrap}
 </style></head><body><main>
-<h1>ScopeKeeper: every grant against every call</h1>
+<h1>ScopeKeeper CLI: every grant against every call</h1>
 <p class="s">Synthetic data. Each row is one grant held by one agent. The diff column is what <code>scopekeeper diff</code> proposes after reading 90 days of calls; the truth column is what the data generator planted. The same author wrote both, so the numbers are a ceiling.</p>
 <div class="k" id="k"></div>
 <div><label>Diff <select id="a"><option value="">all</option><option>remove</option><option>narrow</option><option>keep</option></select></label>

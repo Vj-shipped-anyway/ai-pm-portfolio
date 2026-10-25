@@ -1,4 +1,4 @@
-# Architecture: scopekeeper
+# Architecture: ScopeKeeper CLI
 
 > **Status.** This is the design for a production shape. The repo implements the product mechanic as a prototype: `src/scopekeeper.py` reads a grant list and a call log, proposes removing unused grants and narrowing group grants, and replays the proposal against the same calls, on a synthetic estate of 14 agents, 167 grants and 5210 calls. It never applies a change. Nothing below is claimed as deployed or load-tested, and the tool has never been run on a real grant store. Where a figure is a design target, it says so.
 
