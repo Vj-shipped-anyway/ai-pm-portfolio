@@ -5,19 +5,20 @@ Runs every memo through the full DealSentry pipeline. Three independent
 verifier paths:
 
   Path 1 — Comp verification
-    Every comp cited gets dereferenced against sot_comps.csv. A comp is
-    PASS only if (a) the property name matches a SOT row, (b) the sale
-    date is within 30d of the SOT row, (c) the price/sf and cap rate are
-    within tolerance bands.
+    Every comp cited gets dereferenced against sot_comps.csv. In this
+    prototype a comp is PASS if its property name matches a SOT row (a
+    lowercase name lookup). Date, price/sf and cap-rate tolerance checks
+    are part of the production design, not of this script.
 
   Path 2 — Symbolic re-run (T-12, cap rate, occupancy)
-    Pandas re-sums the 12 monthly NOI rows. Recomputes cap = NOI / price.
-    Recomputes occupancy from rent-roll lines. Compares to the memo.
+    Re-sums the 12 monthly NOI rows (plain Python; the production design
+    uses pandas). Compares the stated cap rate and occupancy with the
+    recompute and rent-roll figures written into the memo text.
 
   Path 3 — Submarket stat cross-feed
     Every cited submarket stat is cross-checked against sot_stats.csv at
-    the latest quarter for that submarket / asset class. If the memo's
-    stat matches a prior quarter (CoStar 2024-Q3) it's flagged as stale.
+    the latest quarter for that submarket / asset class. In this prototype
+    the stale-stat flag fires on the memo's [NOTE: marker that mentions 2024.
 
 The three paths produce a unified findings list. A verdict is rendered:
   PASS    — all checks clean, safe for IC
@@ -33,6 +34,7 @@ from __future__ import annotations
 
 import csv
 import re
+import time
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -174,6 +176,7 @@ def main() -> None:
     print(f"{'=' * 80}\n")
 
     rows: list[dict] = []
+    t0 = time.perf_counter()
 
     with (DATA_DIR / "sample_memos.csv").open() as f:
         for r in csv.DictReader(f):
@@ -235,6 +238,7 @@ def main() -> None:
     print(f"  REVIEW: {review_n}")
     print(f"  FAIL:   {fail_n}")
     print(f"  Total bid risk caught (modeled): ${total_caught:,.0f}")
+    print(f"  Wall-clock for all six memos: {(time.perf_counter() - t0) * 1000:.1f}ms")
     print()
     print("  Path 1 caught: fabricated comps in MEMO_04 and MEMO_06")
     print("  Path 2 caught: T-12 drift in MEMO_03, cap-rate error in MEMO_06,")

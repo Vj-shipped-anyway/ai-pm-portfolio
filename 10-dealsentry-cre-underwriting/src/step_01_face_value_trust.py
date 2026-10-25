@@ -79,7 +79,7 @@ def main() -> None:
     print(f"{'=' * 80}\n")
     print("Operating mode: the AI copilot drafts the memo, the analyst skims it,")
     print("the memo lands in IC. No SOT dereference. No symbolic re-run.")
-    print("This is the baseline. It's what is shipping today at most CRE shops.\n")
+    print("This is the baseline. It's the assumed baseline at a CRE shop with no verification layer.\n")
 
     rows = []
     with memo_path.open() as f:

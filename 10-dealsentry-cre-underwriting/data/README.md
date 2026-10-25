@@ -2,7 +2,7 @@
 
 Four synthetic CSVs that drive the four-step walkthrough and the Streamlit app. These mirror the shape of a real CRE underwriting verification stack: a source-of-truth comp database, a source-of-truth submarket-stats feed (with quarterly versioning so staleness can be detected), six AI-drafted memos that exercise the named failure modes, and the deficiency-class taxonomy DealSentry checks against.
 
-All data is synthetic. Property names, addresses, and dollar figures are invented. The submarket boundaries, asset classes, and price/cap-rate bands are calibrated against publicly published [CoStar](https://www.costar.com/), [Reonomy](https://www.reonomy.com/), [Cherre](https://cherre.com/), and [NCREIF](https://www.ncreif.org/) industry research as of late 2025.
+All data is synthetic. Property names, addresses, and dollar figures are invented. The submarket boundaries, asset classes, and price/cap-rate bands are invented and are not drawn from [CoStar](https://www.costar.com/), [Reonomy](https://www.reonomy.com/), [Cherre](https://cherre.com/), or [NCREIF](https://www.ncreif.org/) research; those names appear only as feed labels.
 
 ## Files
 
@@ -15,7 +15,7 @@ All data is synthetic. Property names, addresses, and dollar figures are invente
 
 ## The 6 deficiency classes
 
-A CRE underwriting memo typically has 40-80 individually-verifiable claims (comp identity, comp economics, T-12 line items, submarket stats, IRR assumptions). DealSentry focuses on six classes because they are the ones that show up at IC as bad bids:
+A CRE underwriting memo has, by my assumption, 40-80 individually-verifiable claims (comp identity, comp economics, T-12 line items, submarket stats, IRR assumptions). DealSentry focuses on six classes because they are the ones that show up at IC as bad bids:
 
 1. **`comp_citation_fabrication`** — comp doesn't exist in any SOT feed.
 2. **`t12_noi_rollforward_error`** — arithmetic error in trailing-12-month NOI sum.
@@ -34,7 +34,7 @@ These six map directly to what an IC chair would flag in a senior-review pass, i
 | `MEMO_02` Phoenix North Residences | 240-unit garden multifamily | Clean — 6 comps verified, T-12 with vacancy adjustment shown, occupancy reconciles. Baseline pass. |
 | `MEMO_03` Dallas Uptown Tower | 320k sf Class-A office | T-12 math drift — sum of 12 monthly NOI rows is $5.10M; memo states $5.16M. $60K positive drift. |
 | `MEMO_04` Brickell Crossing Retail | 92k sf grocery-anchored retail | Fabricated comps — Comp 4 (Pinecrest Pavilion) and Comp 6 (South Bay Galleria) do not exist in SOT. Exit cap = going-in cap (flat). |
-| `MEMO_05` Bellevue MOB Plaza | 85k sf medical office | Stale submarket stat — memo cites 4.2% vacancy / $49.50 rent, which is 2024-Q3 CoStar; current Q4 2025 is 5.2% / $52.00. Also duplicate comp citation. |
+| `MEMO_05` Bellevue MOB Plaza | 85k sf medical office | Stale submarket stat — memo cites 4.2% vacancy / $49.50 rent, which is 2024-Q3 CoStar; the synthetic Q4 2025 reading is 5.2% / $52.00. Also duplicate comp citation. |
 | `MEMO_06` Chicago O'Hare Last-Mile | 410k sf last-mile industrial | Multi-fault — Comp 5 fabricated, cap-rate math wrong by 50 bps (memo says 5.50%, recompute = 6.00%), 4.5-point occupancy discrepancy, exit cap = going-in cap (flat). |
 
 ## How this maps to the walkthrough

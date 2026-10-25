@@ -649,9 +649,9 @@ h1, h2, h3 {color:#0f172a;}
     (quarterly versioning to catch staleness).</div>
   <span class='tlabel'>Assumptions we made</span>
   <ul>
-    <li>SOT comp coverage in the engaged operator's submarkets approximates public CoStar / Reonomy / Cherre coverage shape (calibrated against published <a href='https://www.ncreif.org/' target='_blank'>NCREIF</a> data).</li>
+    <li>The shipped SOT comp table and stats feed are invented for this prototype; it borrows the feed names (CoStar / Reonomy / Cherre) only, and no <a href='https://www.ncreif.org/' target='_blank'>NCREIF</a> or vendor data is used.</li>
     <li>Memos cite verifiable identifiers (property name, sale date, $/sf, cap rate) so a deterministic match is possible.</li>
-    <li>T-12 normalization rules follow standard CRE practice (vacancy adjustment, capex reserve, management fee) per <a href='https://www.icsc.com/' target='_blank'>ICSC</a> / NCREIF convention.</li>
+    <li>A production T-12 check would follow standard CRE practice (vacancy adjustment, capex reserve, management fee); the prototype only re-sums monthly rows and does not normalize line items.</li>
     <li>Dollar bid-risk numbers are modeled from finding severity counts; production tuning needed per operator.</li>
   </ul>
   <span class='tlabel'>Confidence level</span>
@@ -827,7 +827,7 @@ h1, h2, h3 {color:#0f172a;}
         # Why Streamlit / production stack reassessment
         with st.expander("Production stack reassessment - what this looks like as SaaS"):
             st.markdown(
-                "**Streamlit was the right tool for this prototype.** It proves the product mechanic - "
+                "**Streamlit was the right tool for this prototype.** It shows the product mechanic - "
                 "three independent verifier paths on a 6-memo eval set - in a free, single-page deploy "
                 "an acquisitions lead can walk in 10 minutes.\n\n"
                 "**If DealSentry shipped to a national CRE operator:**\n"
@@ -841,7 +841,7 @@ h1, h2, h3 {color:#0f172a;}
                 "- Symbolic math: sympy-based T-12 normalization that replays rent roll -> NOI -> cap rate.\n"
                 "- Observability: OpenTelemetry -> Datadog; Langfuse for LLM-verifier traces.\n"
                 "- Governance: every flagged comp produces a workpaper the senior analyst signs off on before IC.\n"
-                "- Compliance: SOC 2 Type II baseline; audit log of every fabrication decision retained for the hold period.\n"
+                "- Control alignment (design intent, not audited): SOC 2 Type II baseline; audit log of every fabrication decision retained for the hold period.\n"
             )
 
         st.markdown(

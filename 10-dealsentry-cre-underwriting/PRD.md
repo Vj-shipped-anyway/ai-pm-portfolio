@@ -18,12 +18,14 @@ Acquisitions teams now use AI copilots to draft underwriting memos: comp pulls, 
 
 ## 2. Why now
 
-- AI underwriting copilots are deployed at every institutional CRE shop. Almost none QA the output.
+- AI underwriting copilots are, I assume, widely deployed at institutional CRE shops, and I assume few verify the output deterministically. I cite no survey.
 - Capital markets are tight; mispricing on a single acquisition is now real money.
 - Source-of-truth databases (CoStar, Reonomy, Cherre, proprietary) are API-accessible — citation verification is technically feasible and low-cost.
 - LLM hallucination on numerical and citation-heavy work is a *known property*, not a bug. Mitigation has to be a product.
 
 ## 3. Goals (12-month horizon)
+
+Baselines and targets in this section are assumptions, not measurements. The only measured figures for DealSentry are the ones the step scripts print, summarized in the [README](./README.md).
 
 | Goal | Metric | Target |
 |------|--------|--------|
@@ -171,8 +173,8 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 - Senior Analysts are the daily users. Frame the sentinel as "defends the analyst in front of IC," never "checks the analyst."
 - Asset Management consumes the verified underwriting at post-close handoff.
 - Tech is builder. They don't own.
-- Project 09 (audit trail) consumes every override and verification as a lineage event.
-- Project 03 (lease abstraction detector) feeds the corrected lease abstractions into Check 2's rent-roll arithmetic. Without Project 03, Check 2 is materially weaker on portfolios with non-standard leases.
+- Project 09 (LineageLog) consumes every override and verification as a lineage event.
+- Project 03 (LeaseGuard) feeds the corrected lease abstractions into Check 2's rent-roll arithmetic. Without Project 03, Check 2 is materially weaker on portfolios with non-standard leases.
 
 ---
 
@@ -193,7 +195,7 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 | Spanish-language broker-OM ingestion | 200 cross-border deals/yr | 1 | 0.5 | 8 | 13 | v2 |
 | Post-close NOI variance feedback loop into tolerance recalibration | 220 closed deals/yr | 3 | 0.5 | 12 | 28 | v2 |
 
-(RICE = Reach × Impact × Confidence / Effort, with Impact on a 0-3 scale matching the standard convention.)
+(RICE = Reach × Impact × Confidence / Effort, with Impact on a 0-3 scale. Reach and Confidence are my assumptions.)
 
 ## 13. Stakeholder map
 
@@ -207,7 +209,7 @@ Per-section confidence + drill-in. Sectional pass/fail required to forward to IC
 | **CFO / Capital Markets** | Owns the capital deployment decision | Low (operational) / High (strategic) | Informed quarterly via the bid-risk-prevented dashboard |
 | **External Brokers** | Consumed by the verified-bids reputation | Low (decision) / High (relationship) | "Our offers are based on verifiable numbers" — relationship tail benefit |
 | **Acquisitions Tech / IT** | EKS deployment, SOT contracts, rate-limit governance | High (build) | Builder; not the owner of the policy |
-| **Project 08 (OversightOps)** | Consumes every override as a lineage event | Cross-project dependency | Shared interface contract |
+| **Project 08 (OversightOps)** | Consumes every override as a review-quality signal | Cross-project dependency | Shared interface contract |
 | **Project 09 (LineageLog)** | Consumes the verifier evidence bundle at decision-id grain | Cross-project dependency | Shared interface contract |
 | **Project 03 (LeaseGuard)** | Provides corrected lease abstractions to Path 2 arithmetic | Cross-project dependency | Without LeaseGuard, Path 2 is materially weaker on non-standard leases |
 

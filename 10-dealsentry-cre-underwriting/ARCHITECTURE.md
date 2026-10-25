@@ -4,7 +4,7 @@
 **Stage:** Portfolio prototype — designed for a pre-IC-steering read in a real engagement
 **Date:** 2026-Q2
 
-> This document describes the reference architecture for DealSentry. The prototype in `src/app.py` demonstrates the product mechanic. This is what the production build looks like when it ships to a national CRE operator.
+> This document describes the reference architecture for DealSentry. It is a design, not a deployed system: only the prototype in `src/app.py` and the step scripts exist, and the only measured numbers are the ones those scripts print. Latency budgets, SLOs and stack choices below are design intent.
 
 ---
 
@@ -91,7 +91,7 @@ See [`assets/dealsentry-flow.svg`](./assets/dealsentry-flow.svg) for the visual 
 
 | Component | Choice | Why |
 | --- | --- | --- |
-| Primary SOT | [CoStar Real Estate Manager API](https://www.costar.com/products) | Largest comp database; most operators have a CoStar license already |
+| Primary SOT | [CoStar Real Estate Manager API](https://www.costar.com/products) | A widely used comp database; assumes the operator already holds a license |
 | Secondary SOT | [Reonomy Properties API](https://www.reonomy.com/) | Stronger ownership data + private-trade coverage |
 | Tertiary SOT | [Cherre Property API](https://cherre.com/) | Integration layer that joins many vendors; useful for cross-checks |
 | Address normalization | `libpostal` (Python) + USAddress | CoStar / Reonomy / Cherre disagree on address strings; normalization is load-bearing |
@@ -133,7 +133,7 @@ See [`assets/dealsentry-flow.svg`](./assets/dealsentry-flow.svg) for the visual 
 | --- | --- | --- |
 | Severity weighting | per-deficiency-class weights tuned with VP Acquisitions + IC chair | High-severity (fabricated comp, T-12 drift, cap math) auto-FAIL; medium (occupancy, exit-cap, stale stat) → REVIEW |
 | Bid-risk dollar model | per-deficiency dollar impact × severity | Modeled tightly to operator's deal-size distribution; recalibrated quarterly against IC outcomes |
-| Override workflow | senior-analyst sign-off UI; write to audit ledger (Project 08 OversightOps) | Override-and-was-right rate is a recalibration input |
+| Override workflow | senior-analyst sign-off UI; write to audit ledger (Project 09 LineageLog) | Override-and-was-right rate is a recalibration input |
 | Tolerance recalibration | Quarterly review of override outcomes; tighten / loosen bands per-field | Tolerance bands too tight → analyst friction; too loose → hallucinations slip; recalibration is a load-bearing operating loop |
 
 ### 2.6 IC-ready workpaper export
@@ -158,7 +158,7 @@ See [`assets/dealsentry-flow.svg`](./assets/dealsentry-flow.svg) for the visual 
 | Batch refresh | Airflow | Nightly SOT cache refresh; quarterly tolerance recalibration jobs |
 | Event spine | Kafka | Verifier findings published to internal topics for Project 08 OversightOps + Project 09 LineageLog |
 | Cache | Postgres + Redis | SOT API response cache; 24-72h TTL tuned per stat-freshness requirement |
-| Compute | EKS (most CRE shops are AWS) | Microservice per verifier path; horizontal scale during peak weeks |
+| Compute | EKS (assumed AWS footprint) | Microservice per verifier path; horizontal scale during peak weeks |
 
 **Throughput envelope:**
 - Designed envelope: 1,200 IC memos / year. Peak 12 memos in the same week (Q1 / Q4 deal flow).
@@ -182,8 +182,8 @@ See [`assets/dealsentry-flow.svg`](./assets/dealsentry-flow.svg) for the visual 
 | **Acquisitions Tech / IT** | EKS deployment; SOT API contracts; cache + rate-limit governance | Verifier-runtime SLO + uptime metrics |
 
 DealSentry interlocks with:
-- **Project 08 OversightOps** — every override and verification is a decision-lineage event
-- **Project 09 LineageLog** — verifier evidence bundle is consumed at the `(decision_id, customer_id_hash, timestamp)` grain
+- **Project 08 OversightOps** — every override is a review-quality signal
+- **Project 09 LineageLog** — every override and verification is a decision-lineage event; the verifier evidence bundle is consumed at the `(decision_id, customer_id_hash, timestamp)` grain
 - **Project 03 LeaseGuard** — corrected lease abstractions feed Path 2's rent-roll arithmetic. Without LeaseGuard, Path 2 is materially weaker on portfolios with non-standard leases.
 
 ---
