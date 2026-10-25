@@ -143,7 +143,7 @@ Recovery is a re-run from the same versioned inputs and pin. The designed interl
 
 ## 6. Alignment and posture
 
-Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook/Measure), MEASURE 2.4, which I read on 2026-10-23 (the page shows no publication date). It covers monitoring AI systems once they are in production and suggests comparing production metrics with pre-deployment test results.
+Alignment, not certification. The README's "Aligned to" section cites one source, restated with the same wording about what was read: the [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook/Measure), MEASURE 2.4, which I read on 2026-10-23 (the page shows no publication date, and a banner says the Playbook will be updated after the AI RMF is revised). It covers monitoring AI systems once they are in production and suggests comparing production metrics with pre-deployment test results.
 
 - **What the design does.** It runs a related comparison earlier, on the candidate deploy: probe results against baselines measured on the pinned snapshot, with the decision recorded.
 - **What it does not claim.** It does no production monitoring. It is not compliant with the playbook or any other standard, holds no certification, and I have not read or mapped any other source.

@@ -223,7 +223,7 @@ python3 step_04_with_gate.py
 
 ## Aligned to
 
-The [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook/Measure), MEASURE 2.4, which I read on 2026-10-23 (the page shows no publication date). It covers monitoring AI systems once they are in production and suggests comparing production metrics with pre-deployment test results. This gate runs a related comparison earlier, on the candidate deploy, and does no production monitoring. It is a prototype, aligned to that guidance. It makes no claim of conformity to it.
+The [NIST AI RMF Playbook](https://airc.nist.gov/AI_RMF_Knowledge_Base/Playbook/Measure), MEASURE 2.4, which I read on 2026-10-23 (the page shows no publication date, and a banner says the Playbook will be updated after the AI RMF is revised). It covers monitoring AI systems once they are in production and suggests comparing production metrics with pre-deployment test results. This gate runs a related comparison earlier, on the candidate deploy, and does no production monitoring. It is a prototype, aligned to that guidance. It makes no claim of conformity to it.
 
 ## Data and limits
 
