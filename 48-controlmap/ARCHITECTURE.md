@@ -128,7 +128,7 @@ One short-lived process, run after an export lands or on a monthly schedule. The
 
 Alignment, not certification. The README's "Aligned to" section cites three sources, read on 2026-10-24 for the shape of the problem, not any identifier or text; the design makes no claim of conformity to any of the three.
 
-- **[NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework):** voluntary; AI RMF 1.0 released January 26, 2023. The themes in the sample register are my own labels, and I did not map any of them to a category or subcategory.
+- **[NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework):** voluntary; AI RMF 1.0 released January 26, 2023, and the page says it is being revised as part of the White House AI Action Plan. The themes in the sample register are my own labels, and I did not map any of them to a category or subcategory.
 - **[CSA AI Controls Matrix](https://cloudsecurityalliance.org/artifacts/ai-controls-matrix):** version 1 released 07/09/2025 and updated 10/30/2025 (the page says v1.1 is newer), with 243 control objectives in 18 domains. I read the landing page, not the spreadsheet.
 - **[FINOS AI Governance Framework](https://air-governance-framework.finos.org/):** version 2 dated October 20, 2025; a catalogue of risks and mitigations for generative AI in financial services. I read the first part of the page, not the mitigations.
 
