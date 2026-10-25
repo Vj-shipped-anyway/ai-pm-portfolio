@@ -380,7 +380,7 @@ Alignment, not certification. These are the frameworks the design is written aga
 
 | Framework | How the design relates |
 | --- | --- |
-| **SR 11-7 / model risk management** | An assistant that answers from policy is a model in use; ongoing monitoring has to show what was tested and what failed. The sweep, the matrix and the evidence bundle are that record. PolicyNeedle is also a tool the validator relies on, so the stub control set is re-run on every harness release. |
+| **SR 11-7 / model risk management** | By analogy, an assistant that answers from policy is treated as a model in use, and its ongoing monitoring would need to show what was tested and what failed. The sweep, the matrix and the evidence bundle are the record the design would keep. This is not a claim that SR 11-7 or its replacement governs the assistant. PolicyNeedle is also a tool the validator relies on, so the stub control set is re-run on every harness release. |
 | **NIST AI RMF** | The Measure function maps to the probe set, the scorer and the gate. |
 | **OWASP LLM Top 10, LLM09 (Misinformation)** | The framing for a confident answer taken from the wrong clause. |
 | **Bank record-retention schedule** | Retention periods above are defaults to be confirmed against it. |

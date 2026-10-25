@@ -32,7 +32,7 @@
 
 ## RICE-prioritized backlog (sequenced for v0.x)
 
-> Scoring: Reach (R, assistant launches per year affected) × Impact (I, 1-3) × Confidence (C) / Effort (E, PM-weeks). R uses the 🟡 assumption of 8 launches a year. All scores are my estimates (🔴), not measurements. The top of the list is what gets built first.
+> Scoring: Reach (R, assistant launches per year affected) × Impact (I, 1-3) × Confidence (C) / Effort (E, PM-weeks). R uses the 🟡 assumption of 8 launches a year. All scores are my estimates (🔴), not measurements. Rows are grouped by the release that carries them (v0.1, v0.2, v0.3, then queued) and ordered by RICE within each group, so the evidence bundle export (7.2) sits in v0.3 because it needs the items before it.
 
 | Rank | Item | R | I | C | E | RICE | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -45,9 +45,9 @@
 | 7 | **Probes from the bank's real manuals** with policy-owner-signed gold answers | 8 | 3 | 0.9 | 6 | 3.6 | Sequenced for v0.2 |
 | 8 | **Evidence bundle export** (probe-set version, reader version, matrix, flagged cells) to the model risk workflow | 8 | 2 | 0.9 | 2 | 7.2 | Sequenced for v0.3 |
 | 9 | **Results console** (slice list, manual viewer with the planted clause highlighted) | 4 | 2 | 0.8 | 4 | 1.6 | Sequenced for v0.3 |
-| 10 | **Retriever-versus-reader split** (probe the retrieval step and the reading step separately) | 8 | 2 | 0.7 | 5 | 2.2 | Queued |
-| 11 | **Multi-turn and follow-up probes** | 8 | 2 | 0.6 | 6 | 1.6 | Queued |
-| 12 | **Finer depth grid** (more than five depths, to place a limit more tightly) | 8 | 1 | 0.8 | 2 | 3.2 | Queued |
+| 10 | **Finer depth grid** (more than five depths, to place a limit more tightly) | 8 | 1 | 0.8 | 2 | 3.2 | Queued |
+| 11 | **Retriever-versus-reader split** (probe the retrieval step and the reading step separately) | 8 | 2 | 0.7 | 5 | 2.2 | Queued |
+| 12 | **Multi-turn and follow-up probes** | 8 | 2 | 0.6 | 6 | 1.6 | Queued |
 
 ---
 
@@ -69,7 +69,7 @@
 
 1. **As an AI platform lead**, I want the sweep to run on every release candidate and return a form-by-length-by-depth matrix, so I find out which slice broke before the release goes out.
 2. **As a policy owner**, I want each probe's expected answer to carry my sign-off and the manual version it was written against, so a changed policy updates the gold answer and not the test.
-3. **As a model risk reviewer**, I want an evidence bundle per release (probe-set version, reader version, matrix, flagged cells, overrides), so ongoing monitoring under SR 11-7 is documented continuously and not only at attestation time.
+3. **As a model risk reviewer**, I want an evidence bundle per release (probe-set version, reader version, matrix, flagged cells, overrides), so ongoing monitoring is documented continuously and not only at attestation time (SR 11-7 is the model-risk guidance the work is compared with).
 4. **As an assistant product owner**, I want the kind of wrong answer named (old version, missed exception, wrong column, one clause of two, sibling product), so I can tell a retrieval fix from a prompt fix.
 
 ---
