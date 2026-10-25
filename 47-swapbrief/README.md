@@ -1,4 +1,4 @@
-# 🧾 swapbrief: a go or no-go brief for a model migration, from two files
+# 🧾 SwapBrief CLI: a go or no-go brief for a model migration, from two files
 
 **A vendor retires the model behind a production feature. The successor scores higher on the team's evaluation set, so the team moves. I wanted one command that reads the evaluation results and the price table and says what the average does not: what a correct answer now costs, how bad the slow tail is, which slice fell, and what to write down as a rollback trigger before launch.** This is a command-line tool with a fixed two-file input contract. It extends [13 SwapBrief](../13-swapbrief-model-migration/), which walks the same idea through four scripts and a Streamlit app; here the idea is a tool you can point at your own export.
 

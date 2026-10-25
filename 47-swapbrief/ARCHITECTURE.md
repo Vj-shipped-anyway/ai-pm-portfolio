@@ -1,4 +1,4 @@
-# Architecture: swapbrief
+# Architecture: SwapBrief CLI
 
 > **Status.** This is the design for a production shape. The repo implements the product mechanic as a prototype: a command, `src/swapbrief.py`, that reads a results file and a prices file for a baseline and a candidate model, pairs the items, computes seeded paired bootstrap intervals, applies fixed thresholds and prints GO, GO WITH GUARDRAILS or NO-GO with rollback triggers, run here over a committed set of 600 paired items and 80 simulated migrations. Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 

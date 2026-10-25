@@ -1,4 +1,4 @@
-# PRD: swapbrief, a go or no-go brief for a model migration
+# PRD: SwapBrief CLI, a go or no-go brief for a model migration
 
 **Author:** Vijay Saharan, Sr PM
 **Stage:** Portfolio prototype

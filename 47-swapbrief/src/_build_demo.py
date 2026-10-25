@@ -14,7 +14,7 @@ with open(os.path.join(HERE, "out", "step_04_summary.json"), encoding="utf-8") a
 
 PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>swapbrief: the average says GO</title>
+<title>SwapBrief CLI: the average says GO</title>
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--mut:#5b6470;--line:#d9dde3;--bad:#b3261e;--mid:#8a5a00;--ok:#1e6b3a}
 @media (prefers-color-scheme: dark){:root{--bg:#14161a;--fg:#e8eaed;--mut:#9aa3ad;--line:#2c3138;--bad:#ff8a80;--mid:#ffc266;--ok:#7fd49a}}
@@ -30,7 +30,7 @@ th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertic
 .NOGO,.BLOCK,.REGRESSED{color:var(--bad);font-weight:600}.GUARD,.WATCH,.INCONCLUSIVE{color:var(--mid);font-weight:600}.GO,.OK,.IMPROVED{color:var(--ok);font-weight:600}
 ul{padding-left:20px;margin:6px 0}
 </style></head><body><main>
-<h1>swapbrief: the average says GO</h1>
+<h1>SwapBrief CLI: the average says GO</h1>
 <p class="s">Synthetic data. A model migration judged three ways. The committed set first, then 80 simulated migrations whose real problems I planted. Nothing here was measured on a real model.</p>
 <h2>The committed set (600 paired items)</h2>
 <div class="k" id="cards"></div>
