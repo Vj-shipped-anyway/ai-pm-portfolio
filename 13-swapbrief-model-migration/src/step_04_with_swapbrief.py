@@ -22,7 +22,7 @@ KNOWN LIMIT, left in on purpose: a slice with too few items cannot be resolved.
 SwapBrief marks it INCONCLUSIVE and lists it. A real regression inside such a
 slice can still pass. The script prints the slices and counts the misses.
 
-Run (standard library only, Python 3.9; about a minute):
+Run (standard library only, Python 3.9; about 40 seconds):
     python step_04_with_swapbrief.py
 
 Output: prints the brief and the decision-quality table; writes
@@ -653,7 +653,7 @@ def main() -> None:
     print("Step 4 - The fix: SwapBrief")
     print("=" * 80)
     print("SIMULATED results from a seeded generator (data/_generate.py). No model was called.\n")
-    print("Running 200 simulated migration scenarios (about a minute) ...")
+    print("Running 200 simulated migration scenarios (about 40 seconds) ...")
     out = run(progress=True, sensitivity=True)
     fair, scores, util = out["fair"], out["scores"], out["utility"]
     res = fair["retuned"]

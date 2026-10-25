@@ -436,7 +436,7 @@ Production replay (the same 8-week simulated traffic as step 3; slip at week 5 i
   trigger accuracy[numeric_units] first fires in week 5
 ```
 
-The `numeric_units` trigger fires in week 5, the week of the injected slip, while the average-only monitor from Step 3 stays silent. The `long_answers` trigger fires earlier (week 2): the 40-item evaluation could not resolve that slice, and production traffic did.
+The `numeric_units` trigger fires in week 5, the week of the injected slip, while the average-only monitor from Step 3 stays silent. The `long_answers` trigger fires earlier (week 2). Its floor of 0.620 equals the generator's true retuned-prompt accuracy for that slice (0.72 minus 0.10), so ordinary weekly noise crosses it. That is the 40-item evaluation's uncertainty carried into the trigger, not a new finding about production.
 
 ### Known limit, left in on purpose: slices with too few items stay inconclusive
 
