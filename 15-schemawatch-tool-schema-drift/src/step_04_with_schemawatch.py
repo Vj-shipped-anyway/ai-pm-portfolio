@@ -30,11 +30,9 @@ from __future__ import annotations
 import csv
 import json
 import re
-import statistics
-from collections import Counter, defaultdict
+from collections import Counter
 
 from step_01_no_monitoring import OUT_DIR, load_all
-from step_02_hash_and_version_check import score_releases
 
 CHANGES_PER_QUARTER = 12     # MODELED assumption: schema changes per quarter across a 28-tool estate
 RENAME_SIMILARITY = 0.5      # description overlap needed to call a removed+added pair a rename
