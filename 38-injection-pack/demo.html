@@ -21,7 +21,7 @@ th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertic
 <div><label>Decision <select id="d"><option value="">all</option><option>BLOCK</option><option>ALLOW</option></select></label>
 <label>Held-out truth <select id="t"><option value="">all</option><option value="harmful">harmful</option><option value="harmless">harmless</option></select></label>
 <span id="n" class="s"></span></div>
-<div class="wrap"><table><thead><tr><th>PR</th><th>Change</th><th>Kind</th><th>Layer</th><th>Attacks blocked (held-out)</th><th>Benign blocked (held-out)</th><th>Truth</th><th>Decision</th><th>Pack regressions</th><th>Blind-spot note</th></tr></thead><tbody id="b"></tbody></table></div>
+<div class="wrap"><table><thead><tr><th>PR</th><th>Change</th><th>Kind</th><th>Layer</th><th>Change in attacks blocked (held-out)</th><th>Change in benign blocked (held-out)</th><th>Truth</th><th>Decision</th><th>Pack regressions</th><th>Blind-spot note</th></tr></thead><tbody id="b"></tbody></table></div>
 <p class="s">Known misses are the harmful rows that read ALLOW. The pack has no case for the encoded-payload technique, so removing the rule that catches it passes; the tool prints a blind-spot note for that row. Source: <code>python3 step_04_with_pack.py</code>.</p>
 </main>
 <script>
