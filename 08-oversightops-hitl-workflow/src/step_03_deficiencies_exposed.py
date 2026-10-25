@@ -15,7 +15,7 @@ Output:
 import csv
 from collections import defaultdict
 from pathlib import Path
-from statistics import mean, stdev
+from statistics import mean
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 OUT_DIR = Path(__file__).parent / "out"

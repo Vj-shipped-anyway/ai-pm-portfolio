@@ -21,7 +21,7 @@ Output:
 """
 
 import csv
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 from statistics import mean
 
