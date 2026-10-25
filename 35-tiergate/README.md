@@ -1,4 +1,4 @@
-# 🚦 TierGate Intake Check: recompute the tier a sponsor declared
+# 🚦 TierGate Skill: recompute the tier a sponsor declared
 
 **I wanted to know how far a sponsor's own risk tier can be trusted at the front door of AI governance, and what a reviewer can recompute in a minute from files that already exist. This is a command-line check and a staged Agent Skill: it reads an intake CSV, recomputes the tier with a written rubric, cross-checks the data class against the data catalog and the vendor model against the vendor registry, and lists every form declared below its recomputed tier.** It lifts the recompute from [11 TierGate](../11-tiergate-ai-usecase-intake/) and adds a command line, an exit code, input checks, GitHub annotations and a skill file. On 200 synthetic forms the declared tier is wrong on 63.
 

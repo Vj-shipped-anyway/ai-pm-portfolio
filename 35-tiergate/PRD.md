@@ -1,4 +1,4 @@
-# PRD: TierGate Intake Check
+# PRD: TierGate Skill
 
 **Author:** Vijay Saharan, Sr PM
 **Stage:** Portfolio prototype

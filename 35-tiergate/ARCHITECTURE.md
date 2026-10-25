@@ -1,4 +1,4 @@
-# Architecture: TierGate Intake Check
+# Architecture: TierGate Skill
 
 > **Status.** This is the design for a production shape. The repo implements the product mechanic as a prototype: a command, `src/tiergate.py`, that reads an intake CSV, a data catalog and a vendor registry, recomputes the tier with a written rubric and lists every form declared below its recomputed tier, run here over 200 synthetic intake forms. An Agent Skill is staged in `skill/` and has not been published or loaded into an agent runtime. Nothing below is claimed as deployed or load-tested. Where a figure is a design target, it says so.
 

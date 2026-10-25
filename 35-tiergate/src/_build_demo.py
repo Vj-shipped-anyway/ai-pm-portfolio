@@ -16,7 +16,7 @@ with open(os.path.join(HERE, "out", "step_04_summary.json"), encoding="utf-8") a
 
 PAGE = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TierGate: 200 intake forms, one recompute</title>
+<title>TierGate Skill: 200 intake forms, one recompute</title>
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--mut:#5b6470;--line:#d9dde3;--bad:#b3261e;--warn:#8a5a00;--ok:#1e6b3a}
 @media (prefers-color-scheme: dark){:root{--bg:#14161a;--fg:#e8eaed;--mut:#9aa3ad;--line:#2c3138;--bad:#ff8a80;--warn:#ffc266;--ok:#7fd49a}}
@@ -33,7 +33,7 @@ th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertic
 .wrap{overflow-x:auto}
 .under{color:var(--bad);font-weight:600}.over{color:var(--warn);font-weight:600}.match{color:var(--ok);font-weight:600}
 </style></head><body><main>
-<h1>TierGate: 200 intake forms, one recompute</h1>
+<h1>TierGate Skill: 200 intake forms, one recompute</h1>
 <p class="s">Synthetic data. Each row is an AI use-case intake form. The reference tier is the written rubric applied to the true inputs, which the tool never sees. Same author wrote the data and the rules, so the numbers are a ceiling.</p>
 <div class="k" id="k"></div>
 <div class="f">
